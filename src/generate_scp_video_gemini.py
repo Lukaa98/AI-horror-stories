@@ -9,7 +9,23 @@ from global_style import GLOBAL_VIDEO_STYLE
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 # -----------------------------------------------------------
-# Extract Scene Prompt 1 + 2 from entry_text
+# Video Configuration (via ENV vars)
+# -----------------------------------------------------------
+VIDEO_ASPECT = os.getenv("VIDEO_ASPECT_RATIO", "9:16")
+VIDEO_RESOLUTION = os.getenv("VIDEO_RESOLUTION", "480p")   # cheap default
+VIDEO_DURATION = int(os.getenv("VIDEO_DURATION", "4"))      # cheap default
+NUM_CLIPS = int(os.getenv("VIDEO_NUM_CLIPS", "5"))          # 5 clips by default
+
+print("🎛 Video Configuration:")
+print(f"  Aspect Ratio : {VIDEO_ASPECT}")
+print(f"  Resolution   : {VIDEO_RESOLUTION}")
+print(f"  Duration     : {VIDEO_DURATION}s")
+print(f"  Num Clips    : {NUM_CLIPS}")
+print("------------------------------------------------------\n")
+
+
+# -----------------------------------------------------------
+# Extract Scene Prompts from entry_text
 # -----------------------------------------------------------
 def extract_scene_prompts(text):
     prompts = []
@@ -18,48 +34,52 @@ def extract_scene_prompts(text):
             cleaned = line.split(":", 1)[1].strip()
             prompts.append(cleaned)
 
+    # If fewer than NUM_CLIPS prompts, auto-generate variations
     if len(prompts) == 0:
         prompts = [
             "A gentle creature resting in its natural habitat",
-            "A slow pan reveal of the creature interacting with its environment"
+            "A slow pan reveal of the creature interacting with its environment",
         ]
 
-    return prompts[:2]
+    # Expand until we have enough
+    while len(prompts) < NUM_CLIPS:
+        prompts.append(prompts[-1] + " (alternate cinematic angle)")
+
+    return prompts[:NUM_CLIPS]
 
 
 # -----------------------------------------------------------
-# Generate a single vertical Veo video with Pokémon/NatGeo Style
+# Generate a single Veo video clip
 # -----------------------------------------------------------
 def generate_video(prompt, output_path):
 
-    # Combine prompt + global cinematic Pokémon Geographic style
     styled_prompt = (
         f"{prompt}. "
         f"{GLOBAL_VIDEO_STYLE}. "
-        "Wildlife documentary realism, natural habitat, gentle motion, "
+        "Wildlife documentary realism, natural habitat, gentle camera movement, "
         "soft sunlight, expressive eyes, grounded animal anatomy."
     )
 
-    print(f"🎥 Generating 8s Veo video for:\n{styled_prompt}\n")
+    print(f"🎥 Generating {VIDEO_DURATION}s clip:\n{styled_prompt}\n")
 
     operation = client.models.generate_videos(
         model="veo-3.1-generate-preview",
         prompt=styled_prompt,
         config=types.GenerateVideosConfig(
-            aspect_ratio="9:16",
-            resolution="720p",
-            duration_seconds="8",
+            aspect_ratio=VIDEO_ASPECT,
+            resolution=VIDEO_RESOLUTION,
+            duration_seconds=str(VIDEO_DURATION),
             person_generation="allow_all"
         )
     )
 
-    # Poll until done
+    # Poll for completion
     while not operation.done:
         print("⏳ Waiting for video generation...")
-        time.sleep(10)
+        time.sleep(8)
         operation = client.operations.get(operation)
 
-    # Download
+    # Download MP4
     video = operation.response.generated_videos[0].video
     client.files.download(file=video)
     video.save(output_path)
@@ -69,10 +89,10 @@ def generate_video(prompt, output_path):
 
 
 # -----------------------------------------------------------
-# Combine 2 clips into 1 final YouTube Short
+# Combine all clips into one final video
 # -----------------------------------------------------------
 def combine_videos(video_paths, output_path):
-    print("🎬 Combining clips...")
+    print("🎬 Combining all clips...")
     clips = [VideoFileClip(p) for p in video_paths]
     final = concatenate_videoclips(clips, method="compose")
     final.write_videofile(output_path, codec="libx264", fps=24)
@@ -80,7 +100,7 @@ def combine_videos(video_paths, output_path):
 
 
 # -----------------------------------------------------------
-# Main pipeline (still uses SCP files)
+# Main pipeline
 # -----------------------------------------------------------
 def make_videos_from_story(story_path):
     with open(story_path, "r", encoding="utf-8") as f:
@@ -101,8 +121,7 @@ def make_videos_from_story(story_path):
         generate_video(prompt, file_path)
         video_paths.append(file_path)
 
-    # final merged video
-    combined_path = os.path.join(output_dir, f"{scp_num}_short.mp4")
-    combine_videos(video_paths, combined_path)
+    final_path = os.path.join(output_dir, f"{scp_num}_short.mp4")
+    combine_videos(video_paths, final_path)
 
-    return combined_path
+    return final_path

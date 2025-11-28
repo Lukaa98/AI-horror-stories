@@ -1,5 +1,3 @@
-# scp_generator.py
-
 import os
 import json
 import time
@@ -10,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+
 def get_next_scp_number():
     os.makedirs("stories", exist_ok=True)
     files = [f for f in os.listdir("stories") if f.startswith("SCP-") and f.endswith(".json")]
@@ -17,6 +16,7 @@ def get_next_scp_number():
         return 1
     numbers = [int(f.split("-")[1].split(".")[0]) for f in files]
     return max(numbers) + 1
+
 
 def generate_short_scp(number: int):
     prompt = f"""
@@ -27,8 +27,9 @@ def generate_short_scp(number: int):
     - Line 1: Item #: and Object Class
     - 2 sentences describing containment or discovery
     - 2–3 sentences describing its anomaly or twist
-    End with 2 short scene prompts labeled "Scene Prompt 1:" and "Scene Prompt 2:".
-    These scene prompts must each be one sentence describing a creepy visual.
+    End with:
+    Scene Prompt 1: <one creepy visual>
+    Scene Prompt 2: <one creepy visual>
     """
 
     print(f"🧠 Generating SCP-{number:03d}...")
@@ -56,6 +57,7 @@ def generate_short_scp(number: int):
             "created": datetime.utcnow().isoformat(),
             "entry_text": f"SCP-{number:03d} — Fallback short entry.",
         }
+
 
 def save_entry(entry):
     os.makedirs("stories", exist_ok=True)
