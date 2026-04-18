@@ -9,13 +9,15 @@ from google import genai
 from google.genai import types
 from openai import OpenAI
 
-ENV_PATH = Path(__file__).resolve().with_name(".env")
+ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
 load_dotenv(ENV_PATH)
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 CHAR = os.getenv("CHARACTER_NAME", "Pikachu")
+CHARACTER_BIBLE = os.getenv("CHARACTER_BIBLE", "")
+STYLE_BIBLE = os.getenv("STYLE_BIBLE", "")
 THEME = os.getenv("THEME", "creepy forest mystery")
 TARGET_SECONDS = int(os.getenv("SHORT_TARGET_SECONDS", "30"))
 NUM_SCENES = int(os.getenv("SHORT_NUM_SCENES", "7"))
@@ -38,6 +40,8 @@ Theme: {THEME}
 Target runtime: about {TARGET_SECONDS} seconds
 Number of scenes: exactly {NUM_SCENES}
 Tone: {STORY_TONE}
+Character bible: {CHARACTER_BIBLE}
+Style bible: {STYLE_BIBLE}
 
 The short must follow this pacing:
 - 0-3s: hook
@@ -52,10 +56,25 @@ Requirements:
 - Keep it PG-13 and non-graphic.
 - Avoid copyrighted franchise names, logos, and exact branded character descriptions.
 - Prefer original character phrasing that feels familiar but not directly borrowed from existing IP.
+- The full narration should feel like a real 25 to 35 second short, about 70 to 110 words total.
 - Every scene needs one narration line, one short on-screen caption, and one cinematic image prompt.
 - Reuse one consistent visual identity string for the subject so image generations stay coherent.
+- Keep the same age, face shape, hoodie, headset, and palette in every scene.
+- Leo must remain visibly human in the artwork, especially in the first 6 scenes.
+- Any ghostly figures, glowing eyes, silhouettes, or supernatural distortion should belong to background entities, screens, shadows, or reflections, not Leo himself.
+- Avoid turning Leo into a ghost, skeleton, faceless mask, glowing-eyed monster, or undead figure.
+- Keep Leo's eyes natural and human, with readable brows, nose, and mouth.
 - The image prompts should describe a single strong frame, not camera instructions for a video model.
 - Keep captions short enough to read on a phone.
+- Use canonical scene stages in this exact order:
+  1. hook
+  2. setup
+  3. setup
+  4. escalation
+  5. escalation
+  6. payoff
+  7. cta
+- The top-level narration must be the full voiceover script, not a one-line summary.
 - Return JSON only.
 """
 
@@ -125,7 +144,26 @@ def _validate_storyboard(storyboard):
     return storyboard
 
 
+def _normalize_scenes(scenes):
+    expected_stages = ["hook", "setup", "setup", "escalation", "escalation", "payoff", "cta"]
+    normalized = []
+    for index, scene in enumerate(scenes):
+        normalized_scene = dict(scene)
+        normalized_scene["stage"] = expected_stages[index] if index < len(expected_stages) else "setup"
+        normalized_scene["narration"] = str(normalized_scene["narration"]).strip()
+        normalized_scene["caption"] = str(normalized_scene["caption"]).strip()
+        normalized_scene["image_prompt"] = str(normalized_scene["image_prompt"]).strip()
+        normalized.append(normalized_scene)
+    return normalized
+
+
 def _finalize_storyboard(storyboard, provider):
+    storyboard["scenes"] = _normalize_scenes(storyboard["scenes"])
+    scene_narration = " ".join(scene["narration"] for scene in storyboard["scenes"]).strip()
+    storyboard["narration"] = scene_narration
+    storyboard["hook"] = storyboard["scenes"][0]["narration"]
+    storyboard["cta"] = storyboard["scenes"][-1]["narration"]
+
     storyboard = _validate_storyboard(storyboard)
     storyboard["character_name"] = CHAR
     storyboard["theme"] = THEME

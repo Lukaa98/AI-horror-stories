@@ -9,7 +9,7 @@ from google.genai import types
 from openai import OpenAI
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-ENV_PATH = Path(__file__).resolve().with_name(".env")
+ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
 load_dotenv(ENV_PATH)
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -19,6 +19,9 @@ IMAGE_MODEL = os.getenv("IMAGE_MODEL", "imagen-4.0-generate-001")
 OPENAI_IMAGE_MODEL = os.getenv("OPENAI_IMAGE_MODEL", "gpt-image-1")
 OPENAI_IMAGE_SIZE = os.getenv("OPENAI_IMAGE_SIZE", "1024x1536")
 USE_GEMINI_IMAGES = os.getenv("USE_GEMINI_IMAGES", "0") == "1"
+FAST_MODE = os.getenv("FAST_MODE", "1") == "1"
+CHARACTER_BIBLE = os.getenv("CHARACTER_BIBLE", "")
+STYLE_BIBLE = os.getenv("STYLE_BIBLE", "")
 NEGATIVE_PROMPT = os.getenv(
     "IMAGE_NEGATIVE_PROMPT",
     (
@@ -39,7 +42,7 @@ def _safe_visual_subject(name):
         "mario": "an original cheerful mustached platform hero in a red cap and blue overalls",
         "kirby": "an original round pink star-powered creature mascot",
         "godzilla": "an original towering reptilian titan with massive scale and dorsal spines",
-        "last player leo": "an original teenage gamer in a worn hoodie with a glowing headset, blue screenlight on his face, and a lonely late-night multiplayer vibe",
+        "last player leo": "an original human teenage gamer with short dark brown hair, natural brown eyes, a worn charcoal hoodie, and a glowing amber-ring headset, lit by blue screenlight in a lonely late-night multiplayer world",
     }
     return aliases.get(lowered, name)
 
@@ -86,6 +89,15 @@ def _stage_visual_direction(stage):
     return directions.get(stage, "a cinematic story frame")
 
 
+def _human_face_guardrails():
+    return (
+        "Leo must remain a clearly human teenage boy with natural human eyes, visible eyebrows, a readable nose and mouth, and grounded facial anatomy. "
+        "Do not make Leo faceless, skull-like, undead, masked, hollow-eyed, alien, or ghostly. "
+        "Do not give Leo glowing eyes, blank white eyes, black void eyes, or a shadow-only face. "
+        "If supernatural elements appear, keep them in the background, reflections, screens, or separate ghost figures while Leo stays human in the foreground."
+    )
+
+
 def _build_scene_prompt(storyboard, scene):
     visual_subject = _safe_visual_subject(storyboard["character_name"])
     safe_theme = _sanitize_visual_text(storyboard["theme"])
@@ -97,14 +109,19 @@ def _build_scene_prompt(storyboard, scene):
         "Create a polished illustrated cinematic keyframe for a vertical YouTube Short. "
         f"Main subject: {visual_subject}. "
         f"Theme: {safe_theme}. "
+        f"Locked character bible: {_sanitize_visual_text(CHARACTER_BIBLE)}. "
+        f"Locked style bible: {_sanitize_visual_text(STYLE_BIBLE)}. "
         f"Consistent visual identity: {safe_identity}. "
         f"Scene stage: {scene['stage']}. "
         f"Stage direction: {stage_direction}. "
         f"Image brief: {safe_brief}. "
+        f"Human-face guardrails: {_human_face_guardrails()} "
         "Keep it PG-13, non-graphic, family-friendly, adventurous, mysterious, and stylized. "
         "Comic-inspired digital illustration, not a real person, not a real celebrity, not an existing franchise character. "
+        "Keep the same face shape, same headset design, same hoodie, same age, same brown eyes, and same core palette in every scene. "
         "Vertical composition, strong focal subject, clean readable shapes, dramatic lighting, rich atmosphere, "
-        "believable depth, no text in the image, no logos, no watermarks."
+        "believable depth, no text in the image, no logos, no watermarks. "
+        "Avoid ghost-Leo, monster-Leo, possession-face, empty eye sockets, glowing pupil-less eyes, and face-obscuring shadows on Leo."
     )
 
 
@@ -132,7 +149,7 @@ def _generate_with_openai(prompt, output_path):
         model=OPENAI_IMAGE_MODEL,
         prompt=prompt,
         size=OPENAI_IMAGE_SIZE,
-        quality="medium",
+        quality="low" if FAST_MODE else "medium",
         output_format="png",
     )
     first_image = response.data[0]

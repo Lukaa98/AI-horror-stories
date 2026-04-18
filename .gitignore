@@ -1,5 +1,5 @@
 src/output/*
 !src/output/.gitkeep
 
-src/__pycache__/
+**/__pycache__/
 *.pyc

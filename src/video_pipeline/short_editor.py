@@ -7,15 +7,18 @@ import numpy as np
 from moviepy.editor import (
     AudioFileClip,
     ColorClip,
+    CompositeAudioClip,
     CompositeVideoClip,
     ImageClip,
     VideoClip,
     concatenate_videoclips,
 )
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+import os
 
-CANVAS_SIZE = (1080, 1920)
-FPS = 24
+FAST_MODE = os.getenv("FAST_MODE", "1") == "1"
+CANVAS_SIZE = (540, 960) if FAST_MODE else (1080, 1920)
+FPS = 12 if FAST_MODE else 24
 FONT_PATH = "C:/Windows/Fonts/arialbd.ttf"
 
 
@@ -45,7 +48,8 @@ def _prepare_vertical_image(image_path):
     image = Image.open(image_path).convert("RGB")
     canvas_w, canvas_h = CANVAS_SIZE
 
-    bg = image.copy().resize(CANVAS_SIZE, Image.Resampling.LANCZOS).filter(ImageFilter.GaussianBlur(18))
+    blur_radius = 10 if FAST_MODE else 18
+    bg = image.copy().resize(CANVAS_SIZE, Image.Resampling.LANCZOS).filter(ImageFilter.GaussianBlur(blur_radius))
     bg = bg.point(lambda value: int(value * 0.45))
 
     fg = image.copy()
@@ -59,7 +63,7 @@ def _prepare_vertical_image(image_path):
     vignette = Image.new("L", CANVAS_SIZE, 0)
     draw = ImageDraw.Draw(vignette)
     draw.ellipse((-180, -80, canvas_w + 180, canvas_h + 160), fill=215)
-    vignette = vignette.filter(ImageFilter.GaussianBlur(180))
+    vignette = vignette.filter(ImageFilter.GaussianBlur(90 if FAST_MODE else 180))
     canvas = Image.composite(canvas, Image.new("RGB", CANVAS_SIZE, (8, 8, 12)), vignette)
     return np.array(canvas)
 
@@ -88,9 +92,10 @@ def _make_motion_clip(image_path, duration, seed):
     )
 
 
-def _make_particle_clip(duration, seed, particle_count=28):
+def _make_particle_clip(duration, seed, particle_count=None):
     rng = random.Random(seed)
     width, height = CANVAS_SIZE
+    particle_count = particle_count or (10 if FAST_MODE else 28)
     particles = []
     for _ in range(particle_count):
         particles.append(
@@ -118,7 +123,7 @@ def _make_particle_clip(duration, seed, particle_count=28):
             radius = particle["radius"] + 0.8 * math.sin((t * 1.5) + particle["phase"])
             alpha = int(255 * particle["alpha"])
             draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=alpha)
-        mask = mask.filter(ImageFilter.GaussianBlur(2))
+        mask = mask.filter(ImageFilter.GaussianBlur(1 if FAST_MODE else 2))
         return np.array(mask).astype(np.float32) / 255.0
 
     rgb_clip = VideoClip(make_rgb, duration=duration)
@@ -141,12 +146,15 @@ def _make_gradient_overlay(duration):
 
 def _fit_text(draw, text, font, max_width):
     lines = []
-    for candidate in textwrap.wrap(text, width=20):
-        bbox = draw.textbbox((0, 0), candidate, font=font, stroke_width=4)
+    wrap_width = 24 if FAST_MODE else 22
+    fallback_width = 19 if FAST_MODE else 18
+    stroke_width = 2 if FAST_MODE else 3
+    for candidate in textwrap.wrap(text, width=wrap_width):
+        bbox = draw.textbbox((0, 0), candidate, font=font, stroke_width=stroke_width)
         if bbox[2] - bbox[0] <= max_width:
             lines.append(candidate)
         else:
-            lines.extend(textwrap.wrap(candidate, width=16))
+            lines.extend(textwrap.wrap(candidate, width=fallback_width))
     return "\n".join(lines[:3])
 
 
@@ -154,24 +162,24 @@ def _make_caption_clip(text, duration):
     width, height = CANVAS_SIZE
     caption = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
     draw = ImageDraw.Draw(caption)
-    font = _load_font(76)
-    wrapped = _fit_text(draw, text.upper(), font, width - 160)
+    font = _load_font(34 if FAST_MODE else 62)
+    wrapped = _fit_text(draw, text.upper(), font, width - 120)
     bbox = draw.multiline_textbbox(
         (0, 0),
         wrapped,
         font=font,
-        spacing=8,
+        spacing=6 if FAST_MODE else 8,
         align="center",
-        stroke_width=4,
+        stroke_width=2 if FAST_MODE else 3,
     )
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
 
     panel_x1 = 80
     panel_x2 = width - 80
-    panel_y1 = height - text_h - 260
-    panel_y2 = height - 120
-    draw.rounded_rectangle((panel_x1, panel_y1, panel_x2, panel_y2), radius=36, fill=(0, 0, 0, 115))
+    panel_y1 = height - text_h - 230
+    panel_y2 = height - 110
+    draw.rounded_rectangle((panel_x1, panel_y1, panel_x2, panel_y2), radius=22 if FAST_MODE else 34, fill=(0, 0, 0, 105))
 
     text_x = (width - text_w) // 2
     text_y = panel_y1 + ((panel_y2 - panel_y1 - text_h) // 2) - 10
@@ -181,11 +189,52 @@ def _make_caption_clip(text, duration):
         font=font,
         fill=(248, 244, 230, 255),
         align="center",
-        spacing=8,
-        stroke_width=4,
+        spacing=6 if FAST_MODE else 8,
+        stroke_width=2 if FAST_MODE else 3,
         stroke_fill=(0, 0, 0, 255),
     )
     return ImageClip(np.array(caption)).set_duration(duration)
+
+
+def _split_subtitle_chunks(text):
+    words = text.split()
+    if not words:
+        return []
+
+    chunks = []
+    current = []
+    max_words = 8 if FAST_MODE else 10
+
+    for word in words:
+        current.append(word)
+        if len(current) >= max_words or word.endswith((".", "!", "?", ",")):
+            chunks.append(" ".join(current))
+            current = []
+
+    if current:
+        chunks.append(" ".join(current))
+
+    return chunks
+
+
+def _make_subtitle_sequence(text, duration, start_time=0.0):
+    chunks = _split_subtitle_chunks(text)
+    if not chunks:
+        return []
+
+    weights = [max(1, len(chunk.split())) for chunk in chunks]
+    total_weight = sum(weights)
+    current_start = start_time
+    clips = []
+    for index, chunk in enumerate(chunks):
+        chunk_duration = duration * (weights[index] / total_weight)
+        gap = 0.04 if FAST_MODE else 0.03
+        start = current_start
+        visible_duration = max(0.1, chunk_duration - gap)
+        clip = _make_caption_clip(chunk, visible_duration).set_start(start)
+        clips.append(clip)
+        current_start += chunk_duration
+    return clips
 
 
 def _make_scene_clip(image_path, scene, duration, index):
@@ -193,15 +242,23 @@ def _make_scene_clip(image_path, scene, duration, index):
     motion = _make_motion_clip(image_path, duration, seed=(index * 97) + 13)
     particles = _make_particle_clip(duration, seed=(index * 151) + 9)
     overlay = _make_gradient_overlay(duration)
-    caption = _make_caption_clip(scene["caption"], duration)
 
     return CompositeVideoClip(
-        [base, motion, particles, overlay, caption],
+        [base, motion, particles, overlay],
         size=CANVAS_SIZE,
     ).set_duration(duration)
 
 
-def build_short_video(storyboard, image_paths, narration_path, output_path):
+def _make_global_subtitle_clips(subtitles):
+    clips = []
+    for item in subtitles:
+        start = max(0.0, float(item["start"]))
+        end = max(start + 0.1, float(item["end"]))
+        clips.extend(_make_subtitle_sequence(item["text"], end - start, start_time=start))
+    return clips
+
+
+def build_short_video(storyboard, image_paths, narration_path, output_path, subtitles=None):
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -212,14 +269,19 @@ def build_short_video(storyboard, image_paths, narration_path, output_path):
     for index, (scene, image_path, duration) in enumerate(zip(storyboard["scenes"], image_paths, durations), start=1):
         clips.append(_make_scene_clip(str(image_path), scene, duration, index))
 
-    final_video = concatenate_videoclips(clips, method="compose").set_audio(narration_clip)
+    boosted_narration = narration_clip.volumex(1.8)
+    final_audio = CompositeAudioClip([boosted_narration]).set_duration(narration_clip.duration)
+    subtitle_clips = _make_global_subtitle_clips(subtitles or [])
+
+    base_video = concatenate_videoclips(clips, method="compose")
+    final_video = CompositeVideoClip([base_video, *subtitle_clips], size=CANVAS_SIZE).set_audio(final_audio)
     final_video = final_video.set_duration(narration_clip.duration)
     final_video.write_videofile(
         str(output_path),
         fps=FPS,
         codec="libx264",
         audio_codec="aac",
-        preset="medium",
+        preset="ultrafast" if FAST_MODE else "medium",
         threads=4,
     )
     return output_path

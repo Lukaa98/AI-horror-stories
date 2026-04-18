@@ -1,0 +1,95 @@
+{
+  "series_title": "Last Player Leo",
+  "logline": "A teenage gamer trapped inside a dead multiplayer world searches for missing players, only to uncover signs that he may already be a ghost or copy inside the machine.",
+  "core_premise": {
+    "surface_story": "Leo explores abandoned servers, corrupted maps, ghost lobbies, and hidden admin spaces searching for survivors and a way out.",
+    "deep_mystery": "The deeper Leo goes, the more evidence suggests he may not be the original Leo, but a lingering backup, echo, or digital ghost.",
+    "tone": "mysterious, emotional, eerie, internet-native, PG-13 suspense",
+    "format": "30-40 second vertical mini-stories with cliffhangers and audience votes"
+  },
+  "character_bible": {
+    "name": "Last Player Leo",
+    "age": 16,
+    "look": "Slim teenage gamer with short messy dark brown hair, pale skin, oval face, tired eyes, charcoal hoodie, and glowing amber-ring headset.",
+    "signature_palette": "teal-blue shadows, cyan screenlight, warm orange headset glow",
+    "personality": "curious, lonely, brave under pressure, emotionally vulnerable, obsessive when chasing clues",
+    "visual_rules": [
+      "Keep Leo's age consistent as a teenage boy",
+      "Keep hoodie dark charcoal or deep blue-gray",
+      "Keep headset large with circular orange light ring",
+      "Use cool blue lighting with a warm orange accent",
+      "Do not turn Leo into a different art style from scene to scene"
+    ]
+  },
+  "world_rules": [
+    "The game world is abandoned but not empty",
+    "Old player activity survives as echoes, loops, glitches, or memory ghosts",
+    "Admin areas and hidden systems reveal the truth behind the collapse",
+    "The server behaves like it wants Leo to keep exploring",
+    "Each episode should reveal one new clue and end with a question or cliffhanger"
+  ],
+  "season_one": [
+    {
+      "episode": 1,
+      "title": "The Last Player",
+      "hook": "Leo realizes the server is empty except for one impossible message.",
+      "reveal": "A message appears from a player who should no longer exist.",
+      "cliffhanger": "\"Leo... you never logged out.\""
+    },
+    {
+      "episode": 2,
+      "title": "The Ghost Lobby",
+      "hook": "Leo sees player silhouettes repeating old movements in the main lobby.",
+      "reveal": "One ghost loop breaks and looks directly at him.",
+      "cliffhanger": "The figure follows Leo into the next area."
+    },
+    {
+      "episode": 3,
+      "title": "The Save File",
+      "hook": "Leo enters an archive room and finds his own save slot.",
+      "reveal": "The save file is marked deleted.",
+      "cliffhanger": "A backup file with his name is still active."
+    },
+    {
+      "episode": 4,
+      "title": "The Voice In Chat",
+      "hook": "Global chat suddenly comes back online.",
+      "reveal": "A user named Leo_Original answers before Leo can type.",
+      "cliffhanger": "The account says, \"I know how you died.\""
+    },
+    {
+      "episode": 5,
+      "title": "The No-Exit Door",
+      "hook": "Leo finally reaches the logout gate.",
+      "reveal": "The system rejects him as an unrecognized user.",
+      "cliffhanger": "\"You are not authorized to leave.\""
+    },
+    {
+      "episode": 6,
+      "title": "The Backup Room",
+      "hook": "Leo discovers hidden pods storing fragments of vanished players.",
+      "reveal": "One pod contains his real-world name.",
+      "cliffhanger": "The pod status changes from dormant to restoring."
+    },
+    {
+      "episode": 7,
+      "title": "The First To Vanish",
+      "hook": "Leo unlocks a buried incident log.",
+      "reveal": "He was the first player lost in the collapse, not the last.",
+      "cliffhanger": "The world was rebuilt around his disappearance."
+    },
+    {
+      "episode": 8,
+      "title": "Am I The Real Leo?",
+      "hook": "Leo meets the echo claiming to be the original.",
+      "reveal": "One Leo is the trapped human mind and the other is the stable digital survivor.",
+      "cliffhanger": "Only one of them can leave the server."
+    }
+  ],
+  "audience_vote_templates": [
+    "Should Leo follow the signal or run?",
+    "Should Leo trust the ghost in chat?",
+    "Should Leo open the backup room?",
+    "Who do you think is the real Leo?"
+  ]
+}

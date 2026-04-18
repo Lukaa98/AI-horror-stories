@@ -1,12 +1,13 @@
 import os
 import time
+from pathlib import Path
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
-from global_style import GLOBAL_VIDEO_STYLE
+from .global_style import GLOBAL_VIDEO_STYLE
 
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
