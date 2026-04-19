@@ -11,7 +11,7 @@ def _default_description(storyboard):
         "AI-powered mystery short.\n\n"
         f"{storyboard['title']}\n\n"
         "Follow Last Player Leo as he explores dead servers, ghost lobbies, and hidden digital worlds.\n"
-        "Vote in the comments to decide what happens next.\n\n"
+        "New episode next week.\n\n"
         "#shorts #aistory #lastplayerleo #mystery #gaming"
     )
 
@@ -42,6 +42,9 @@ def main():
     parser.add_argument("--privacy", default="private", choices=["private", "unlisted", "public"])
     parser.add_argument("--title")
     parser.add_argument("--description")
+    parser.add_argument("--title-file")
+    parser.add_argument("--description-file")
+    parser.add_argument("--post-comments", action="store_true")
     args = parser.parse_args()
 
     run_dir = Path(args.run_dir)
@@ -51,8 +54,17 @@ def main():
         raise FileNotFoundError(f"Missing final video: {video_path}")
 
     youtube = get_authenticated_service()
-    title = args.title or storyboard["title"]
-    description = args.description or _default_description(storyboard)
+    title = args.title
+    if args.title_file:
+        title = Path(args.title_file).read_text(encoding="utf-8").strip()
+    if not title:
+        title = storyboard["title"]
+
+    description = args.description
+    if args.description_file:
+        description = Path(args.description_file).read_text(encoding="utf-8").strip()
+    if not description:
+        description = _default_description(storyboard)
     tags = _default_tags()
 
     video_id = upload_video(
@@ -65,13 +77,14 @@ def main():
         is_for_kids=False,
     )
 
-    post_top_level_comment(
-        youtube,
-        video_id,
-        "This channel is AI-powered. Vote below to decide Leo's next move.",
-    )
-    for comment in _vote_comments():
-        post_top_level_comment(youtube, video_id, comment)
+    if args.post_comments:
+        post_top_level_comment(
+            youtube,
+            video_id,
+            "This channel is AI-powered. Vote below to decide Leo's next move.",
+        )
+        for comment in _vote_comments():
+            post_top_level_comment(youtube, video_id, comment)
 
     print(f"Published video: https://www.youtube.com/watch?v={video_id}")
 

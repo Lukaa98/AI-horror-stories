@@ -1,13 +1,23 @@
 import os
 from base64 import b64decode
+import json
 from pathlib import Path
 import re
+import shutil
+import tempfile
 
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 from openai import OpenAI
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+
+from .consistency_reviewer import (
+    CONSISTENCY_MAX_RETRIES,
+    ENABLE_CONSISTENCY_REVIEW,
+    resolve_reference_image_path,
+    review_character_consistency,
+)
 
 ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
 load_dotenv(ENV_PATH)
@@ -18,8 +28,16 @@ openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 IMAGE_MODEL = os.getenv("IMAGE_MODEL", "imagen-4.0-generate-001")
 OPENAI_IMAGE_MODEL = os.getenv("OPENAI_IMAGE_MODEL", "gpt-image-1")
 OPENAI_IMAGE_SIZE = os.getenv("OPENAI_IMAGE_SIZE", "1024x1536")
+OPENAI_IMAGE_EDIT_MODEL = os.getenv("OPENAI_IMAGE_EDIT_MODEL", "dall-e-2")
+OPENAI_IMAGE_EDIT_SIZE = os.getenv("OPENAI_IMAGE_EDIT_SIZE", "1024x1024")
 USE_GEMINI_IMAGES = os.getenv("USE_GEMINI_IMAGES", "0") == "1"
 FAST_MODE = os.getenv("FAST_MODE", "1") == "1"
+OPENAI_IMAGE_QUALITY = os.getenv(
+    "OPENAI_IMAGE_QUALITY",
+    "medium" if FAST_MODE else "high",
+)
+OPENAI_IMAGE_EDIT_FIDELITY = os.getenv("OPENAI_IMAGE_EDIT_FIDELITY", "high")
+USE_OPENAI_REFERENCE_EDITS = os.getenv("USE_OPENAI_REFERENCE_EDITS", "1") == "1"
 CHARACTER_BIBLE = os.getenv("CHARACTER_BIBLE", "")
 STYLE_BIBLE = os.getenv("STYLE_BIBLE", "")
 NEGATIVE_PROMPT = os.getenv(
@@ -98,6 +116,14 @@ def _human_face_guardrails():
     )
 
 
+def _leo_face_lock():
+    return (
+        "Leo's face must stay consistent: slim teenage oval face, soft jawline, short side-swept dark brown hair, thick dark straight eyebrows, "
+        "calm almond-shaped brown eyes, small straight nose, thin neutral lips, pale natural skin, no facial hair, no exaggerated cheekbones, "
+        "no giant anime eyes, no sunken eyes, no hollow eyes, no older-looking rugged features, no baby-face distortion."
+    )
+
+
 def _build_scene_prompt(storyboard, scene):
     visual_subject = _safe_visual_subject(storyboard["character_name"])
     safe_theme = _sanitize_visual_text(storyboard["theme"])
@@ -115,6 +141,7 @@ def _build_scene_prompt(storyboard, scene):
         f"Scene stage: {scene['stage']}. "
         f"Stage direction: {stage_direction}. "
         f"Image brief: {safe_brief}. "
+        f"Locked facial identity: {_leo_face_lock()} "
         f"Human-face guardrails: {_human_face_guardrails()} "
         "Keep it PG-13, non-graphic, family-friendly, adventurous, mysterious, and stylized. "
         "Comic-inspired digital illustration, not a real person, not a real celebrity, not an existing franchise character. "
@@ -144,14 +171,7 @@ def _generate_with_gemini(prompt, output_path):
         f.write(generated.image_bytes)
 
 
-def _generate_with_openai(prompt, output_path):
-    response = openai_client.images.generate(
-        model=OPENAI_IMAGE_MODEL,
-        prompt=prompt,
-        size=OPENAI_IMAGE_SIZE,
-        quality="low" if FAST_MODE else "medium",
-        output_format="png",
-    )
+def _write_openai_image_response(response, output_path):
     first_image = response.data[0]
     b64_data = getattr(first_image, "b64_json", None)
     if b64_data:
@@ -163,6 +183,72 @@ def _generate_with_openai(prompt, output_path):
         raise RuntimeError("OpenAI returned an image URL instead of inline bytes")
 
     raise RuntimeError("OpenAI returned no image bytes")
+
+
+def _generate_with_openai(prompt, output_path, reference_image_path=None):
+    generate_request_args = {
+        "model": OPENAI_IMAGE_MODEL,
+        "prompt": prompt,
+        "size": OPENAI_IMAGE_SIZE,
+        "quality": OPENAI_IMAGE_QUALITY,
+        "output_format": "png",
+        "response_format": "b64_json",
+    }
+
+    if reference_image_path is not None:
+        edit_request_args = {
+            "model": OPENAI_IMAGE_EDIT_MODEL,
+            "prompt": prompt,
+            "size": OPENAI_IMAGE_EDIT_SIZE,
+            "quality": OPENAI_IMAGE_QUALITY,
+            "output_format": "png",
+            "response_format": "b64_json",
+        }
+        edit_request_args["input_fidelity"] = OPENAI_IMAGE_EDIT_FIDELITY
+        prepared_reference_path, temp_reference_path = _prepare_openai_edit_reference(reference_image_path)
+        try:
+            while True:
+                with open(prepared_reference_path, "rb") as reference_image:
+                    try:
+                        response = openai_client.images.edit(
+                            image=reference_image,
+                            **edit_request_args,
+                        )
+                        break
+                    except Exception as edit_exc:
+                        exc_text = str(edit_exc)
+                        removed_param = None
+                        for candidate_param in ("input_fidelity", "output_format", "quality", "response_format"):
+                            if f"Unknown parameter: '{candidate_param}'" in exc_text and candidate_param in edit_request_args:
+                                removed_param = candidate_param
+                                edit_request_args.pop(candidate_param, None)
+                                print(f"  OpenAI edit fallback: retrying without unsupported parameter '{candidate_param}'")
+                                break
+
+                        if removed_param is None:
+                            raise
+        finally:
+            if temp_reference_path is not None and temp_reference_path.exists():
+                temp_reference_path.unlink()
+    else:
+        while True:
+            try:
+                response = openai_client.images.generate(**generate_request_args)
+                break
+            except Exception as generate_exc:
+                exc_text = str(generate_exc)
+                removed_param = None
+                for candidate_param in ("output_format", "quality", "response_format"):
+                    if f"Unknown parameter: '{candidate_param}'" in exc_text and candidate_param in generate_request_args:
+                        removed_param = candidate_param
+                        generate_request_args.pop(candidate_param, None)
+                        print(f"  OpenAI generate fallback: retrying without unsupported parameter '{candidate_param}'")
+                        break
+
+                if removed_param is None:
+                    raise
+
+    _write_openai_image_response(response, output_path)
 
 
 def _generate_placeholder_image(storyboard, scene, output_path, index):
@@ -194,33 +280,137 @@ def _generate_placeholder_image(storyboard, scene, output_path, index):
     image.save(output_path)
 
 
+def _prepare_openai_edit_reference(reference_image_path):
+    with Image.open(reference_image_path) as reference_image:
+        if reference_image.mode in {"RGBA", "LA", "L"}:
+            return Path(reference_image_path), None
+
+        converted = reference_image.convert("RGBA")
+
+    temp_file = tempfile.NamedTemporaryFile(suffix=".png", delete=False)
+    temp_path = Path(temp_file.name)
+    temp_file.close()
+    converted.save(temp_path, format="PNG")
+    return temp_path, temp_path
+
+
+def _generate_single_scene_image(storyboard, scene, prompt, output_path, index, reference_image_path=None):
+    if USE_GEMINI_IMAGES:
+        try:
+            _generate_with_gemini(prompt, output_path)
+            return "Gemini"
+        except Exception as gemini_exc:
+            print(f"  Gemini image failed: {gemini_exc}")
+
+    try:
+        _generate_with_openai(prompt, output_path, reference_image_path=reference_image_path)
+        return "OpenAI edit" if reference_image_path is not None else "OpenAI"
+    except Exception as openai_exc:
+        print(f"  OpenAI image failed: {openai_exc}")
+        _generate_placeholder_image(storyboard, scene, output_path, index)
+        return "local placeholder"
+
+
+def _review_score(review):
+    if not review:
+        return -1.0
+    return float(review.get("score", -1.0))
+
+
 def generate_scene_images(storyboard, output_dir):
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    reference_image_path = resolve_reference_image_path()
+    generation_reference_image_path = (
+        reference_image_path
+        if USE_OPENAI_REFERENCE_EDITS and reference_image_path is not None and reference_image_path.exists()
+        else None
+    )
+    review_enabled = ENABLE_CONSISTENCY_REVIEW and reference_image_path is not None and reference_image_path.exists()
+    if ENABLE_CONSISTENCY_REVIEW and not review_enabled:
+        print("Consistency review skipped: reference image is not configured or missing.")
+    if generation_reference_image_path is not None:
+        print(f"Using OpenAI reference-image edits with: {generation_reference_image_path}")
+
     image_paths = []
+    review_report = []
     for index, scene in enumerate(storyboard["scenes"], start=1):
         prompt = _build_scene_prompt(storyboard, scene)
         print(f"Generating image {index}/{len(storyboard['scenes'])}...")
         image_path = output_dir / f"scene_{index:02d}.png"
+        max_attempts = CONSISTENCY_MAX_RETRIES if review_enabled else 1
+        best_attempt = None
+        temp_paths = []
 
-        if USE_GEMINI_IMAGES:
-            try:
-                _generate_with_gemini(prompt, image_path)
-                print("  image provider: Gemini")
-                image_paths.append(image_path)
-                continue
-            except Exception as gemini_exc:
-                print(f"  Gemini image failed: {gemini_exc}")
+        for attempt in range(1, max_attempts + 1):
+            attempt_path = image_path if max_attempts == 1 else output_dir / f"scene_{index:02d}_attempt_{attempt}.png"
+            provider = _generate_single_scene_image(
+                storyboard,
+                scene,
+                prompt,
+                attempt_path,
+                index,
+                reference_image_path=generation_reference_image_path,
+            )
+            review = None
 
-        try:
-            _generate_with_openai(prompt, image_path)
-            print("  image provider: OpenAI")
-        except Exception as openai_exc:
-            print(f"  OpenAI image failed: {openai_exc}")
-            _generate_placeholder_image(storyboard, scene, image_path, index)
-            print("  image provider: local placeholder")
+            if review_enabled:
+                try:
+                    review = review_character_consistency(reference_image_path, attempt_path, scene["stage"])
+                    reasons = "; ".join(review["reasons"][:2])
+                    print(f"  image provider: {provider}")
+                    print(f"  consistency score: {review['score']:.1f}/10")
+                    if reasons:
+                        print(f"  reviewer notes: {reasons}")
+                except Exception as review_exc:
+                    print(f"  consistency review failed: {review_exc}")
+            else:
+                print(f"  image provider: {provider}")
 
+            current_attempt = {
+                "path": attempt_path,
+                "provider": provider,
+                "review": review,
+                "attempt": attempt,
+            }
+            temp_paths.append(attempt_path)
+
+            if best_attempt is None or _review_score(review) > _review_score(best_attempt["review"]):
+                best_attempt = current_attempt
+
+            if not review_enabled or (review and review["passed"]):
+                best_attempt = current_attempt
+                break
+
+            if attempt < max_attempts:
+                print("  rerolling scene to improve Leo consistency...")
+
+        if best_attempt["path"] != image_path:
+            shutil.copy2(best_attempt["path"], image_path)
+
+        for temp_path in temp_paths:
+            if temp_path != image_path and temp_path.exists():
+                temp_path.unlink()
+
+        review_report.append(
+            {
+                "scene_index": index,
+                "stage": scene["stage"],
+                "provider": best_attempt["provider"],
+                "attempts": len(temp_paths),
+                "score": None if not best_attempt["review"] else best_attempt["review"]["score"],
+                "passed": None if not best_attempt["review"] else best_attempt["review"]["passed"],
+                "notes": [] if not best_attempt["review"] else best_attempt["review"]["reasons"],
+            }
+        )
         image_paths.append(image_path)
+
+    if review_report:
+        report_path = output_dir.parent / "consistency_report.json"
+        report_path.write_text(
+            json.dumps(review_report, indent=2),
+            encoding="utf-8",
+        )
 
     return image_paths
