@@ -26,19 +26,14 @@ jobs:
     uses: ./.github/workflows/upload-video.yml
     secrets: inherit
 
-  poll:
-    needs: upload
-    uses: ./.github/workflows/poll-results.yml
-    secrets: inherit
-
   commit-state:
     runs-on: ubuntu-latest
-    needs: poll
+    needs: upload
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
-          name: pipeline-state-final
+          name: pipeline-state-upload
           path: automation
       - name: Commit state
         run: |

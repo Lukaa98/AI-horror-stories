@@ -1,10 +1,19 @@
-name: Poll Results
+name: Poll Video Stats
 
 on:
-  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: "45 */12 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ai-horror-poll-only
+  cancel-in-progress: false
 
 jobs:
-  poll-results:
+  poll-history:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,16 +24,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: upload-result
-          path: automation
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: pipeline-state-upload
-          path: automation
 
       - name: Materialize YouTube auth files
         shell: bash
@@ -37,24 +36,26 @@ jobs:
           printf '%s' "$YOUTUBE_CLIENT_SECRET_JSON_B64" | base64 -d > "$RUNNER_TEMP/client_secret.json"
           printf '%s' "$YOUTUBE_TOKEN_PICKLE_B64" | base64 -d > "$RUNNER_TEMP/token.pickle"
 
-      - name: Poll latest stats
-        shell: bash
+      - name: Poll mature videos
         env:
           YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
           YOUTUBE_TOKEN_FILE: ${{ runner.temp }}/token.pickle
           PYTHONPATH: src
-        run: |
-          VIDEO_ID=$(python -c "import json; from pathlib import Path; data = json.loads(Path('automation/upload_result.json').read_text(encoding='utf-8')); print(data['video_id'])")
-          python src/automation/pull_video_stats.py --video-id "$VIDEO_ID" --out automation/video_stats.json
+        run: python src/automation/poll_history.py --out automation/polled_stats.json --min-age-hours 24 --repoll-after-hours 24 --limit 10
 
       - name: Update history
         env:
           PYTHONPATH: src
-        run: python src/automation/update_history.py --stats-metadata automation/video_stats.json
+        run: python src/automation/update_history.py --stats-batch-metadata automation/polled_stats.json
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: pipeline-state-final
-          path: |
-            automation/state.json
-            automation/history.json
+      - name: Commit updated history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automation/history.json
+          if git diff --cached --quiet; then
+            echo "No history changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: refresh video stats"
+          git push

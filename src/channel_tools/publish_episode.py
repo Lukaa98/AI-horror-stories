@@ -1,6 +1,7 @@
 import argparse
 import json
-from datetime import datetime
+import os
+from datetime import datetime, timezone
 from pathlib import Path
 
 from channel_tools.youtube_client import get_authenticated_service
@@ -135,7 +136,11 @@ def main():
                     "title": title,
                     "privacy": privacy,
                     "publish_at": publish_at,
+                    "uploaded_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
                     "run_dir": str(run_dir),
+                    "theme": storyboard.get("theme"),
+                    "story_provider": storyboard.get("story_provider"),
+                    "plan_index": os.getenv("PIPELINE_PLAN_INDEX"),
                 },
                 indent=2,
             ),

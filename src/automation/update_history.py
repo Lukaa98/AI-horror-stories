@@ -30,6 +30,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--upload-metadata")
     parser.add_argument("--stats-metadata")
+    parser.add_argument("--stats-batch-metadata")
     args = parser.parse_args()
 
     history = _load_history()
@@ -44,9 +45,22 @@ def main():
         stats_patch = {
             "video_id": stats["video_id"],
             "latest_stats": stats,
+            "last_polled_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
             "history_updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         }
         _upsert(history, stats["video_id"], stats_patch)
+
+    if args.stats_batch_metadata:
+        stats_batch = json.loads(Path(args.stats_batch_metadata).read_text(encoding="utf-8"))
+        now_value = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+        for stats in stats_batch:
+            stats_patch = {
+                "video_id": stats["video_id"],
+                "latest_stats": stats,
+                "last_polled_at": now_value,
+                "history_updated_at": now_value,
+            }
+            _upsert(history, stats["video_id"], stats_patch)
 
     _write_history(history)
     print(json.dumps(history, indent=2))

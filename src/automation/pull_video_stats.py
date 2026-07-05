@@ -5,24 +5,18 @@ from pathlib import Path
 from channel_tools.youtube_client import get_authenticated_service
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--video-id", required=True)
-    parser.add_argument("--out", required=True)
-    args = parser.parse_args()
-
-    youtube = get_authenticated_service()
+def fetch_video_stats(youtube, video_id):
     response = youtube.videos().list(
         part="snippet,statistics,status,processingDetails",
-        id=args.video_id,
+        id=video_id,
     ).execute()
     items = response.get("items", [])
     if not items:
-        raise RuntimeError(f"Video not found: {args.video_id}")
+        raise RuntimeError(f"Video not found: {video_id}")
 
     video = items[0]
-    payload = {
-        "video_id": args.video_id,
+    return {
+        "video_id": video_id,
         "title": video.get("snippet", {}).get("title"),
         "published_at": video.get("snippet", {}).get("publishedAt"),
         "privacy": video.get("status", {}).get("privacyStatus"),
@@ -32,6 +26,16 @@ def main():
         "comments": int(video.get("statistics", {}).get("commentCount", 0)),
         "processing_status": video.get("processingDetails", {}).get("processingStatus"),
     }
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--video-id", required=True)
+    parser.add_argument("--out", required=True)
+    args = parser.parse_args()
+
+    youtube = get_authenticated_service()
+    payload = fetch_video_stats(youtube, args.video_id)
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
