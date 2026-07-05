@@ -1,4 +1,5 @@
 import math
+import os
 import random
 import textwrap
 from pathlib import Path
@@ -14,16 +15,27 @@ from moviepy.editor import (
     concatenate_videoclips,
 )
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
-import os
 
 FAST_MODE = os.getenv("FAST_MODE", "1") == "1"
 CANVAS_SIZE = (540, 960) if FAST_MODE else (1080, 1920)
 FPS = 12 if FAST_MODE else 24
-FONT_PATH = "C:/Windows/Fonts/arialbd.ttf"
+DEFAULT_FONT_CANDIDATES = [
+    os.getenv("CAPTION_FONT_PATH", ""),
+    "C:/Windows/Fonts/arialbd.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf",
+]
 
 
 def _load_font(size):
-    return ImageFont.truetype(FONT_PATH, size=size)
+    for font_path in DEFAULT_FONT_CANDIDATES:
+        if not font_path:
+            continue
+        try:
+            return ImageFont.truetype(font_path, size=size)
+        except OSError:
+            continue
+    return ImageFont.load_default()
 
 
 def _scene_durations(scenes, target_duration):
