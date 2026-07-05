@@ -66,6 +66,17 @@ def _safe_visual_subject(name):
 
 
 def _sanitize_visual_text(text):
+    if text is None:
+        cleaned = ""
+    elif isinstance(text, str):
+        cleaned = text
+    elif isinstance(text, dict):
+        cleaned = ", ".join(f"{key}: {value}" for key, value in text.items())
+    elif isinstance(text, (list, tuple, set)):
+        cleaned = ", ".join(str(item) for item in text)
+    else:
+        cleaned = str(text)
+
     replacements = {
         r"\bspiderman\b": "masked city vigilante",
         r"\bspider-man\b": "masked city vigilante",
@@ -90,7 +101,6 @@ def _sanitize_visual_text(text):
         r"\bterror\b": "suspense",
         r"\bviolent\b": "intense",
     }
-    cleaned = text
     for pattern, replacement in replacements.items():
         cleaned = re.sub(pattern, replacement, cleaned, flags=re.IGNORECASE)
     return cleaned
