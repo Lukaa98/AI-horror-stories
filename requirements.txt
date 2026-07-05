@@ -1,7 +1,7 @@
 google-api-python-client
 google-auth-oauthlib
 google-genai
-moviepy
+moviepy<2
 openai
 Pillow
 python-dotenv
