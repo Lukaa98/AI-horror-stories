@@ -19,6 +19,7 @@ jobs:
   generate:
     needs: decide
     uses: ./.github/workflows/generate-video.yml
+    secrets: inherit
 
   upload:
     needs: generate
