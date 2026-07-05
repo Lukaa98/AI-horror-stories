@@ -49,6 +49,7 @@ jobs:
         env:
           YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
           YOUTUBE_TOKEN_FILE: ${{ runner.temp }}/token.pickle
+          PYTHONPATH: src
         run: |
           python src/publish_episode.py \
             --run-dir generated-run \
@@ -57,6 +58,8 @@ jobs:
             --metadata-out automation/upload_result.json
 
       - name: Update history
+        env:
+          PYTHONPATH: src
         run: python src/automation/update_history.py --upload-metadata automation/upload_result.json
 
       - uses: actions/upload-artifact@v4

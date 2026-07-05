@@ -42,11 +42,14 @@ jobs:
         env:
           YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
           YOUTUBE_TOKEN_FILE: ${{ runner.temp }}/token.pickle
+          PYTHONPATH: src
         run: |
           VIDEO_ID=$(python -c "import json; from pathlib import Path; data = json.loads(Path('automation/upload_result.json').read_text(encoding='utf-8')); print(data['video_id'])")
           python src/automation/pull_video_stats.py --video-id "$VIDEO_ID" --out automation/video_stats.json
 
       - name: Update history
+        env:
+          PYTHONPATH: src
         run: python src/automation/update_history.py --stats-metadata automation/video_stats.json
 
       - uses: actions/upload-artifact@v4
