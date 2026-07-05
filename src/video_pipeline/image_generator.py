@@ -107,6 +107,50 @@ def _stage_visual_direction(stage):
     return directions.get(stage, "a cinematic story frame")
 
 
+def _composition_direction(stage, scene_index, scene_count):
+    scene_number = scene_index + 1
+    if stage == "hook":
+        return (
+            "Favor a wide establishing composition. Keep Leo small-to-medium in frame, around 15 to 30 percent of the image height, "
+            "with the room, server, or environment carrying most of the visual weight."
+        )
+    if stage == "setup" and scene_number == 2:
+        return (
+            "Use an over-the-shoulder or rear three-quarter angle. The monitor, UI, and haunted environment should dominate the frame, "
+            "with Leo's face only partially visible or seen as a reflection."
+        )
+    if stage == "setup":
+        return (
+            "Use a medium-wide or wide shot that emphasizes space and scale. Avoid portrait-style framing and do not let Leo's face dominate."
+        )
+    if stage == "escalation":
+        return (
+            "Use a deep perspective shot with strong foreground and background separation. Leo should appear small within the environment, "
+            "as if he is being swallowed by the digital world."
+        )
+    if stage == "payoff":
+        return (
+            "Use a reveal composition driven by reflections, screens, or environmental distortion rather than a direct close-up. "
+            "Keep Leo partially obscured or off-center so the message or supernatural event becomes the focal point."
+        )
+    if stage == "cta":
+        return (
+            "End on a dramatic ultra-wide silhouette or rear-view composition. Leo should be very small in frame against a massive environment."
+        )
+    return (
+        "Prefer a medium-wide cinematic composition with environmental storytelling. Avoid face-dominant framing."
+    )
+
+
+def _framing_guardrails():
+    return (
+        "Avoid repeated close-ups and avoid centering Leo's face in most scenes. "
+        "Do not crop tightly on Leo's head or shoulders unless the brief explicitly demands it. "
+        "Across the sequence, vary the compositions with wide establishing shots, over-the-shoulder frames, silhouettes, reflections, "
+        "profile views, and environment-first staging."
+    )
+
+
 def _human_face_guardrails():
     return (
         "Leo must remain a clearly human teenage boy with natural human eyes, visible eyebrows, a readable nose and mouth, and grounded facial anatomy. "
@@ -130,6 +174,8 @@ def _build_scene_prompt(storyboard, scene):
     safe_identity = _sanitize_visual_text(storyboard["visual_identity"])
     safe_brief = _sanitize_visual_text(scene["image_prompt"])
     stage_direction = _stage_visual_direction(scene["stage"])
+    scene_index = storyboard["scenes"].index(scene)
+    composition_direction = _composition_direction(scene["stage"], scene_index, len(storyboard["scenes"]))
 
     return (
         "Create a polished illustrated cinematic keyframe for a vertical YouTube Short. "
@@ -140,14 +186,17 @@ def _build_scene_prompt(storyboard, scene):
         f"Consistent visual identity: {safe_identity}. "
         f"Scene stage: {scene['stage']}. "
         f"Stage direction: {stage_direction}. "
+        f"Composition direction: {composition_direction}. "
         f"Image brief: {safe_brief}. "
         f"Locked facial identity: {_leo_face_lock()} "
         f"Human-face guardrails: {_human_face_guardrails()} "
+        f"Framing guardrails: {_framing_guardrails()} "
         "Keep it PG-13, non-graphic, family-friendly, adventurous, mysterious, and stylized. "
         "Comic-inspired digital illustration, not a real person, not a real celebrity, not an existing franchise character. "
         "Keep the same face shape, same headset design, same hoodie, same age, same brown eyes, and same core palette in every scene. "
         "Vertical composition, strong focal subject, clean readable shapes, dramatic lighting, rich atmosphere, "
         "believable depth, no text in the image, no logos, no watermarks. "
+        "Use layered depth, negative space, reflections, silhouettes, and foreground elements when useful. "
         "Avoid ghost-Leo, monster-Leo, possession-face, empty eye sockets, glowing pupil-less eyes, and face-obscuring shadows on Leo."
     )
 

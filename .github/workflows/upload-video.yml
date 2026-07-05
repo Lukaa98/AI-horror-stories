@@ -1,0 +1,72 @@
+name: Upload Video
+
+on:
+  workflow_call:
+
+jobs:
+  upload-video:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: runtime-config
+          path: automation
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: pipeline-state-decide
+          path: automation
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: generated-run
+          path: generated-run
+
+      - name: Export runtime env
+        run: python src/automation/export_runtime_env.py >> "$GITHUB_ENV"
+
+      - name: Materialize YouTube auth files
+        shell: bash
+        env:
+          YOUTUBE_CLIENT_SECRET_JSON_B64: ${{ secrets.YOUTUBE_CLIENT_SECRET_JSON_B64 }}
+          YOUTUBE_TOKEN_PICKLE_B64: ${{ secrets.YOUTUBE_TOKEN_PICKLE_B64 }}
+        run: |
+          test -n "$YOUTUBE_CLIENT_SECRET_JSON_B64"
+          test -n "$YOUTUBE_TOKEN_PICKLE_B64"
+          printf '%s' "$YOUTUBE_CLIENT_SECRET_JSON_B64" | base64 -d > "$RUNNER_TEMP/client_secret.json"
+          printf '%s' "$YOUTUBE_TOKEN_PICKLE_B64" | base64 -d > "$RUNNER_TEMP/token.pickle"
+
+      - name: Upload to YouTube
+        env:
+          YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
+          YOUTUBE_TOKEN_FILE: ${{ runner.temp }}/token.pickle
+        run: |
+          python src/publish_episode.py \
+            --run-dir generated-run \
+            --privacy "$YOUTUBE_PRIVACY" \
+            --publish-at "$YOUTUBE_PUBLISH_AT" \
+            --metadata-out automation/upload_result.json
+
+      - name: Update history
+        run: python src/automation/update_history.py --upload-metadata automation/upload_result.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: upload-result
+          path: automation/upload_result.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-state-upload
+          path: |
+            automation/state.json
+            automation/history.json

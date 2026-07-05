@@ -1,0 +1,58 @@
+{
+  "title": "The Only Player Who Answered Leo | Last Player Leo Ep. 2",
+  "hook": "Leo typed hello in a dead lobby, and somebody typed back.",
+  "narration": "Leo typed hello in a dead lobby, and somebody typed back. The server still looked empty, but a new username appeared near the bottom of the screen: Mira_404. She said she had been waiting for him. Leo followed her marker into a hidden part of the map no one should have found. The deeper he went, the more old player tags flickered in the dark like trapped fireflies. Then Mira sent one last message. Leo... if you're still online, who's sitting in your room?",
+  "visual_identity": "Slim 16-year-old gamer with messy dark brown hair, pale skin, oval face, brown eyes, charcoal hoodie, and oversized glowing amber-ring gaming headset. Keep Leo clearly human and consistent, but frame him mostly in wide and medium compositions with the digital world and haunted environments taking up more space than his face.",
+  "music_mood": "Lonely digital suspense with ghostly pulses and rising mystery.",
+  "cta": "Leo... if you're still online, who's sitting in your room?",
+  "character_name": "Last Player Leo",
+  "theme": "abandoned multiplayer mystery with ghost chat contact",
+  "target_seconds": 30,
+  "scene_count": 7,
+  "run_slug": "last-player-leo-ep-2-ghost-player",
+  "story_provider": "manual",
+  "scenes": [
+    {
+      "stage": "hook",
+      "narration": "Leo typed hello in a dead lobby, and somebody typed back.",
+      "caption": "SOMEONE REPLIED",
+      "image_prompt": "Wide shot of Leo's dim bedroom gaming setup at night, Leo small in frame at his desk, abandoned multiplayer lobby glowing on a monitor, a fresh chat reply appearing on screen, teal screenlight, amber headset glow, eerie empty room, cinematic illustrated suspense"
+    },
+    {
+      "stage": "setup",
+      "narration": "The server still looked empty, but a new username appeared near the bottom of the screen: Mira_404.",
+      "caption": "MIRA_404 JOINED",
+      "image_prompt": "Over-the-shoulder medium shot from behind Leo, most of the frame filled by the game UI and a deserted digital plaza, only a small reflection of Leo's face in the monitor glass, lonely username Mira_404 visible in chat, wide composition, environment-first framing"
+    },
+    {
+      "stage": "setup",
+      "narration": "She said she had been waiting for him.",
+      "caption": "WAITING FOR HIM",
+      "image_prompt": "A vast abandoned in-game plaza with towering broken neon signs and empty spawn gates, Leo standing small in the foreground while a faint feminine ghost avatar flickers far across the map, dramatic scale, Leo not close to camera, mysterious digital ruins"
+    },
+    {
+      "stage": "escalation",
+      "narration": "Leo followed her marker into a hidden part of the map no one should have found.",
+      "caption": "A HIDDEN AREA",
+      "image_prompt": "Long corridor deep inside a secret server zone, layered perspective with floating UI fragments, Leo walking toward a distant glowing waypoint, parallax-friendly composition, strong depth, moody cyan shadows, wide shot with Leo occupying a small part of the frame"
+    },
+    {
+      "stage": "escalation",
+      "narration": "The deeper he went, the more old player tags flickered in the dark like trapped fireflies.",
+      "caption": "THEY NEVER LEFT",
+      "image_prompt": "Huge underground server chamber filled with hundreds of dim floating usernames and ghostly gamertags, Leo seen in profile at medium distance looking up, tiny against the scale of the chamber, drifting light particles, glitch haze, haunted multiplayer atmosphere"
+    },
+    {
+      "stage": "payoff",
+      "narration": "Then Mira sent one last message.",
+      "caption": "ONE LAST MESSAGE",
+      "image_prompt": "Monitor reflection reveal, Leo visible only partially in the dark screen while the chat window dominates the image, a final incoming message from Mira_404 lighting the room, subtle distortion in the glass, suspenseful composition, no oversized face close-up"
+    },
+    {
+      "stage": "cta",
+      "narration": "Leo... if you're still online, who's sitting in your room?",
+      "caption": "WHO'S IN HIS ROOM?",
+      "image_prompt": "Final cliffhanger frame inside Leo's bedroom at night, Leo frozen at his desk in the foreground while a second shadowy seated figure is barely visible behind him in the darkness near the doorway, monitor glow, strong negative space, suspenseful room-scale composition, Leo not oversized in frame, cinematic horror mystery ending"
+    }
+  ]
+}

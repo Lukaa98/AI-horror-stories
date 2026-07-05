@@ -1,0 +1,63 @@
+name: Poll Results
+
+on:
+  workflow_call:
+
+jobs:
+  poll-results:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: upload-result
+          path: automation
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: pipeline-state-upload
+          path: automation
+
+      - name: Materialize YouTube auth files
+        shell: bash
+        env:
+          YOUTUBE_CLIENT_SECRET_JSON_B64: ${{ secrets.YOUTUBE_CLIENT_SECRET_JSON_B64 }}
+          YOUTUBE_TOKEN_PICKLE_B64: ${{ secrets.YOUTUBE_TOKEN_PICKLE_B64 }}
+        run: |
+          test -n "$YOUTUBE_CLIENT_SECRET_JSON_B64"
+          test -n "$YOUTUBE_TOKEN_PICKLE_B64"
+          printf '%s' "$YOUTUBE_CLIENT_SECRET_JSON_B64" | base64 -d > "$RUNNER_TEMP/client_secret.json"
+          printf '%s' "$YOUTUBE_TOKEN_PICKLE_B64" | base64 -d > "$RUNNER_TEMP/token.pickle"
+
+      - name: Poll latest stats
+        shell: bash
+        env:
+          YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
+          YOUTUBE_TOKEN_FILE: ${{ runner.temp }}/token.pickle
+        run: |
+          VIDEO_ID=$(python - <<'PY'
+import json
+from pathlib import Path
+data = json.loads(Path("automation/upload_result.json").read_text(encoding="utf-8"))
+print(data["video_id"])
+PY
+)
+          python src/automation/pull_video_stats.py --video-id "$VIDEO_ID" --out automation/video_stats.json
+
+      - name: Update history
+        run: python src/automation/update_history.py --stats-metadata automation/video_stats.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-state-final
+          path: |
+            automation/state.json
+            automation/history.json

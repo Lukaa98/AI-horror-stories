@@ -10,6 +10,7 @@ def upload_video(
     description,
     tags,
     privacy="public",
+    publish_at=None,
     is_for_kids=False,
     category_id="24",
     contains_synthetic_media=True,
@@ -28,6 +29,8 @@ def upload_video(
             "containsSyntheticMedia": contains_synthetic_media,
         },
     }
+    if publish_at:
+        request_body["status"]["publishAt"] = publish_at
 
     media = MediaFileUpload(str(file_path), chunksize=-1, resumable=True, mimetype="video/mp4")
     request = youtube.videos().insert(

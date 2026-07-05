@@ -1,0 +1,111 @@
+[
+  {
+    "scene_index": 1,
+    "stage": "hook",
+    "provider": "OpenAI",
+    "attempts": 4,
+    "score": 7.0,
+    "passed": false,
+    "notes": [
+      "The candidate image shows Leo in profile, which is a significant angle change but allowed.",
+      "The face shape is somewhat consistent with the reference, maintaining a youthful and human look.",
+      "However, the facial features are less defined and appear more shadowed and somber, which causes some identity drift.",
+      "The headset and hoodie are consistent with the reference image.",
+      "The overall mood and lighting are darker and more atmospheric, which affects the clarity of Leo's face.",
+      "Due to the less clear facial definition and some drift in expression and mood, it does not fully pass as the same kid from the reference."
+    ]
+  },
+  {
+    "scene_index": 2,
+    "stage": "setup",
+    "provider": "OpenAI",
+    "attempts": 4,
+    "score": 7.0,
+    "passed": false,
+    "notes": [
+      "The candidate image shows Leo from a side profile, which makes it harder to fully assess face shape and features compared to the reference front-facing image.",
+      "The headset and hoodie are consistent with Leo's design, and the character remains a clearly human teenage boy.",
+      "However, the face shape appears slightly more mature and less youthful than the reference, with a more pronounced jawline and nose.",
+      "The lighting and angle obscure some facial details, making the character feel less like the same kid from the reference image.",
+      "Overall, the identity continuity is somewhat maintained but the face drift is significant enough to fail the strict criteria."
+    ]
+  },
+  {
+    "scene_index": 3,
+    "stage": "setup",
+    "provider": "OpenAI",
+    "attempts": 4,
+    "score": 8.0,
+    "passed": false,
+    "notes": [
+      "The candidate image depicts a clearly human teenage boy with a slim oval face and soft jawline, consistent with the reference.",
+      "The thick dark eyebrows, calm almond-shaped eyes, and small straight nose are well maintained.",
+      "The headset design and hoodie silhouette match the reference image.",
+      "The candidate shows a side profile, which is an allowed angle change.",
+      "The expression is neutral and does not cause major face drift.",
+      "The lighting and background are different but do not affect identity continuity.",
+      "Slightly more mature or serious expression and profile view, but still clearly the same kid."
+    ]
+  },
+  {
+    "scene_index": 4,
+    "stage": "escalation",
+    "provider": "OpenAI",
+    "attempts": 4,
+    "score": 3.0,
+    "passed": false,
+    "notes": [
+      "The candidate image shows Leo from behind, so the face is not visible for direct comparison.",
+      "While the headset and hoodie match, the key facial features required for identity confirmation are not visible.",
+      "The character remains clearly human and youthful, but the lack of face visibility means identity continuity cannot be confirmed.",
+      "Fails because the face shape, eyebrows, eyes, nose, and mouth cannot be evaluated."
+    ]
+  },
+  {
+    "scene_index": 5,
+    "stage": "escalation",
+    "provider": "OpenAI",
+    "attempts": 4,
+    "score": 8.0,
+    "passed": false,
+    "notes": [
+      "The candidate image depicts a clearly human teenage boy with a slim oval face and soft jawline, consistent with the reference.",
+      "The character has thick dark eyebrows, calm almond-shaped eyes, a small straight nose, and thin neutral lips, matching the reference's facial features.",
+      "The headset design and hoodie silhouette are consistent with the reference image.",
+      "The candidate shows a side profile with a slightly different expression and angle, which is allowed.",
+      "The character remains youthful and does not appear ghostly, monstrous, or corrupted.",
+      "Minor differences in lighting and shading do not affect identity continuity.",
+      "Slightly more dramatic lighting and background do not detract from the character's identity as Leo."
+    ]
+  },
+  {
+    "scene_index": 6,
+    "stage": "payoff",
+    "provider": "OpenAI",
+    "attempts": 4,
+    "score": 8.0,
+    "passed": false,
+    "notes": [
+      "The candidate image depicts a clearly human teenage boy with a slim oval face and soft jawline, consistent with the reference.",
+      "The character has thick dark eyebrows, calm almond-shaped eyes, a small straight nose, and thin neutral lips, matching the reference closely.",
+      "The headset and hoodie design are consistent with the reference image.",
+      "The candidate shows a side profile, which is an allowed angle change, and the expression is neutral, fitting the character's identity.",
+      "The lighting and background are different but do not affect identity continuity.",
+      "Minor differences in facial detail due to angle and lighting do not constitute major face drift.",
+      "The character does not appear ghostly, monster-like, or haunted; he remains a grounded, youthful human boy."
+    ]
+  },
+  {
+    "scene_index": 7,
+    "stage": "cta",
+    "provider": "OpenAI",
+    "attempts": 4,
+    "score": 0.0,
+    "passed": false,
+    "notes": [
+      "The candidate image does not clearly show Leo's face; it is a back view with no facial features visible.",
+      "Without a visible face, identity continuity cannot be confirmed.",
+      "The candidate image is more of a scene or environment shot rather than a character portrait."
+    ]
+  }
+]

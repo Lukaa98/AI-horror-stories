@@ -72,17 +72,51 @@ def _make_motion_clip(image_path, duration, seed):
     rng = random.Random(seed)
     prepared = _prepare_vertical_image(image_path)
 
-    start_scale = 1.02 + rng.random() * 0.03
-    end_scale = start_scale + 0.07 + rng.random() * 0.03
-    drift_x = rng.randint(-36, 36)
-    drift_y = rng.randint(-64, 64)
+    motion_styles = ["push_in", "drift_left", "drift_right", "rise", "pull_back", "float"]
+    style = motion_styles[seed % len(motion_styles)]
+
+    if style == "push_in":
+        start_scale = 1.01 + rng.random() * 0.02
+        end_scale = start_scale + 0.08 + rng.random() * 0.03
+        start_x, end_x = rng.randint(-28, 28), rng.randint(-46, 46)
+        start_y, end_y = rng.randint(-36, 24), rng.randint(-72, 42)
+    elif style == "pull_back":
+        end_scale = 1.01 + rng.random() * 0.02
+        start_scale = end_scale + 0.07 + rng.random() * 0.02
+        start_x, end_x = rng.randint(-52, 52), rng.randint(-18, 18)
+        start_y, end_y = rng.randint(-80, 40), rng.randint(-28, 22)
+    elif style == "drift_left":
+        start_scale = 1.05 + rng.random() * 0.02
+        end_scale = start_scale + 0.02
+        start_x, end_x = 18, -72
+        start_y, end_y = rng.randint(-44, 8), rng.randint(-62, 26)
+    elif style == "drift_right":
+        start_scale = 1.05 + rng.random() * 0.02
+        end_scale = start_scale + 0.02
+        start_x, end_x = -18, 72
+        start_y, end_y = rng.randint(-44, 8), rng.randint(-62, 26)
+    elif style == "rise":
+        start_scale = 1.04 + rng.random() * 0.02
+        end_scale = start_scale + 0.04
+        start_x, end_x = rng.randint(-18, 18), rng.randint(-30, 30)
+        start_y, end_y = 24, -94
+    else:
+        start_scale = 1.03 + rng.random() * 0.02
+        end_scale = start_scale + 0.03
+        start_x, end_x = rng.randint(-22, 22), rng.randint(-38, 38)
+        start_y, end_y = rng.randint(-32, 18), rng.randint(-54, 30)
 
     def scale_at(t):
-        return start_scale + (end_scale - start_scale) * (t / duration)
+        progress = min(1.0, max(0.0, t / duration))
+        eased = 0.5 - 0.5 * math.cos(progress * math.pi)
+        return start_scale + (end_scale - start_scale) * eased
 
     def position_at(t):
-        progress = t / duration
-        return drift_x * progress - 40, drift_y * progress - 60
+        progress = min(1.0, max(0.0, t / duration))
+        eased = 0.5 - 0.5 * math.cos(progress * math.pi)
+        x = start_x + ((end_x - start_x) * eased) - 40
+        y = start_y + ((end_y - start_y) * eased) - 60
+        return x, y
 
     return (
         ImageClip(prepared)
@@ -142,6 +176,61 @@ def _make_gradient_overlay(duration):
         if alpha:
             draw.line((0, index, width, index), fill=(0, 0, 0, alpha))
     return ImageClip(np.array(overlay)).set_duration(duration)
+
+
+def _make_scanline_overlay(duration):
+    width, height = CANVAS_SIZE
+    overlay = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    spacing = 5 if FAST_MODE else 7
+    alpha = 22 if FAST_MODE else 18
+    for y in range(0, height, spacing):
+        draw.line((0, y, width, y), fill=(110, 160, 180, alpha), width=1)
+    return ImageClip(np.array(overlay)).set_duration(duration)
+
+
+def _make_glitch_overlay(duration, seed):
+    rng = random.Random(seed)
+    width, height = CANVAS_SIZE
+    flash_times = sorted(rng.uniform(0.15, max(0.2, duration - 0.2)) for _ in range(3))
+
+    def make_frame(t):
+        frame = np.zeros((height, width, 3), dtype=np.uint8)
+        intensity = 0
+        for flash_time in flash_times:
+            distance = abs(t - flash_time)
+            if distance < 0.08:
+                intensity = max(intensity, int(140 * (1 - (distance / 0.08))))
+        if intensity:
+            for band in range(0, height, 48 if FAST_MODE else 64):
+                if (band // (48 if FAST_MODE else 64)) % 2 == 0:
+                    frame[band:band + 10, :, 1] = intensity // 2
+                    frame[band:band + 10, :, 2] = intensity
+        return frame
+
+    def make_mask(t):
+        mask = np.zeros((height, width), dtype=np.float32)
+        for flash_time in flash_times:
+            distance = abs(t - flash_time)
+            if distance < 0.08:
+                value = 0.24 * (1 - (distance / 0.08))
+                mask[:, :] = np.maximum(mask, value)
+        return mask
+
+    rgb_clip = VideoClip(make_frame, duration=duration)
+    mask_clip = VideoClip(make_mask, ismask=True, duration=duration)
+    return rgb_clip.set_mask(mask_clip)
+
+
+def _make_scene_overlays(scene, duration, seed):
+    overlays = [_make_gradient_overlay(duration)]
+    stage = scene.get("stage", "setup")
+
+    if stage in {"setup", "escalation", "payoff"}:
+        overlays.append(_make_scanline_overlay(duration).set_opacity(0.18 if FAST_MODE else 0.14))
+    if stage in {"escalation", "payoff", "cta"}:
+        overlays.append(_make_glitch_overlay(duration, seed + 41))
+    return overlays
 
 
 def _fit_text(draw, text, font, max_width):
@@ -241,10 +330,10 @@ def _make_scene_clip(image_path, scene, duration, index):
     base = ColorClip(CANVAS_SIZE, color=(8, 8, 10), duration=duration)
     motion = _make_motion_clip(image_path, duration, seed=(index * 97) + 13)
     particles = _make_particle_clip(duration, seed=(index * 151) + 9)
-    overlay = _make_gradient_overlay(duration)
+    overlays = _make_scene_overlays(scene, duration, seed=(index * 191) + 5)
 
     return CompositeVideoClip(
-        [base, motion, particles, overlay],
+        [base, motion, particles, *overlays],
         size=CANVAS_SIZE,
     ).set_duration(duration)
 

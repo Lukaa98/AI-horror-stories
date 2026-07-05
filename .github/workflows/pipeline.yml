@@ -1,0 +1,52 @@
+name: Content Pipeline
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ai-horror-content-pipeline
+  cancel-in-progress: false
+
+jobs:
+  decide:
+    uses: ./.github/workflows/decide-next.yml
+
+  generate:
+    needs: decide
+    uses: ./.github/workflows/generate-video.yml
+
+  upload:
+    needs: generate
+    uses: ./.github/workflows/upload-video.yml
+    secrets: inherit
+
+  poll:
+    needs: upload
+    uses: ./.github/workflows/poll-results.yml
+    secrets: inherit
+
+  commit-state:
+    runs-on: ubuntu-latest
+    needs: poll
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: pipeline-state-final
+          path: automation
+      - name: Commit state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automation/history.json automation/state.json
+          if git diff --cached --quiet; then
+            echo "No state changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update pipeline state"
+          git push

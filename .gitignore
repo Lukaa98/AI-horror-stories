@@ -1,5 +1,9 @@
 src/output/*
 !src/output/.gitkeep
+src/.env
+src/.env.local
+automation/runtime_config.json
+automation/*.tmp.json
 
 **/__pycache__/
 *.pyc
