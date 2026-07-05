@@ -1,6 +1,7 @@
 import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -9,6 +10,10 @@ PLAN_PATH = AUTOMATION_DIR / "content_plan.json"
 STATE_PATH = AUTOMATION_DIR / "state.json"
 RUNTIME_PATH = AUTOMATION_DIR / "runtime_config.json"
 HISTORY_PATH = AUTOMATION_DIR / "history.json"
+LOCAL_TZ = ZoneInfo("America/New_York")
+MIN_UPLOAD_GAP_HOURS = 24
+MAX_UPLOAD_GAP_HOURS = 48
+EARLY_RELEASE_SCORE = 150.0
 
 
 def _load_json(path, default):
@@ -18,8 +23,11 @@ def _load_json(path, default):
 
 
 def _next_publish_at():
-    publish_at = datetime.now(timezone.utc) + timedelta(hours=6)
-    return publish_at.replace(minute=0, second=0, microsecond=0).isoformat().replace("+00:00", "Z")
+    now_local = datetime.now(timezone.utc).astimezone(LOCAL_TZ)
+    publish_at_local = now_local.replace(hour=12, minute=0, second=0, microsecond=0)
+    if now_local >= publish_at_local:
+        publish_at_local = publish_at_local + timedelta(days=1)
+    return publish_at_local.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 def _parse_iso8601(value):
@@ -51,6 +59,39 @@ def _entry_score(entry):
     likes = float(latest_stats.get("likes") or 0)
     comments = float(latest_stats.get("comments") or 0)
     return views + (likes * 8.0) + (comments * 20.0)
+
+
+def _latest_video(history):
+    candidates = [entry for entry in history.get("videos", []) if _reference_time(entry) is not None]
+    if not candidates:
+        return None
+    return max(candidates, key=lambda entry: _reference_time(entry))
+
+
+def _publish_decision(history):
+    latest_entry = _latest_video(history)
+    if latest_entry is None:
+        return True, "No previous uploads in history."
+
+    reference_time = _reference_time(latest_entry)
+    age = datetime.now(timezone.utc) - reference_time
+    age_hours = age.total_seconds() / 3600.0
+    latest_score = _entry_score(latest_entry)
+    has_stats = bool(latest_entry.get("latest_stats"))
+
+    if age_hours < MIN_UPLOAD_GAP_HOURS:
+        return False, f"Latest upload is only {age_hours:.1f}h old."
+
+    if age_hours >= MAX_UPLOAD_GAP_HOURS:
+        return True, f"Latest upload is {age_hours:.1f}h old, forcing release by 48h cap."
+
+    if has_stats and latest_score >= EARLY_RELEASE_SCORE:
+        return True, f"Latest upload score {latest_score:.1f} cleared early-release threshold."
+
+    if not has_stats:
+        return False, "Latest upload has not accumulated enough stats yet."
+
+    return False, f"Latest upload score {latest_score:.1f} is below the early-release threshold."
 
 
 def _choose_plan_index(plan, state, history):
@@ -96,6 +137,7 @@ def main():
 
     index = _choose_plan_index(plan, state, history)
     entry = plan["entries"][index]
+    should_publish, publish_reason = _publish_decision(history)
 
     runtime_config = {
         "CHARACTER_NAME": plan.get("character_name", "Leo"),
@@ -108,13 +150,24 @@ def main():
         "PIPELINE_HISTORY_COUNT": str(len(history.get("videos", []))),
         "YOUTUBE_PRIVACY": "private",
         "YOUTUBE_PUBLISH_AT": _next_publish_at(),
+        "SHOULD_PUBLISH": "1" if should_publish else "0",
+        "PUBLISH_DECISION_REASON": publish_reason,
         "DECIDED_AT": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
     }
 
     AUTOMATION_DIR.mkdir(parents=True, exist_ok=True)
     RUNTIME_PATH.write_text(json.dumps(runtime_config, indent=2), encoding="utf-8")
+    next_plan_index = (index + 1) % len(plan["entries"]) if should_publish else int(state.get("next_plan_index", 0)) % len(plan["entries"])
     STATE_PATH.write_text(
-        json.dumps({"next_plan_index": (index + 1) % len(plan["entries"]), "last_selected_index": index}, indent=2),
+        json.dumps(
+            {
+                "next_plan_index": next_plan_index,
+                "last_selected_index": index,
+                "last_should_publish": should_publish,
+                "last_decision_reason": publish_reason,
+            },
+            indent=2,
+        ),
         encoding="utf-8",
     )
 

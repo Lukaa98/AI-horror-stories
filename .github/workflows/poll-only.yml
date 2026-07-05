@@ -3,7 +3,7 @@ name: Poll Video Stats
 on:
   workflow_dispatch:
   schedule:
-    - cron: "45 */12 * * *"
+    - cron: "15 */12 * * *"
 
 permissions:
   contents: write

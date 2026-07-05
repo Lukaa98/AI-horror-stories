@@ -2,10 +2,16 @@ name: Decide Next
 
 on:
   workflow_call:
+    outputs:
+      should_publish:
+        description: "Whether this decision cycle should generate and upload a new video."
+        value: ${{ jobs.decide-next.outputs.should_publish }}
 
 jobs:
   decide-next:
     runs-on: ubuntu-latest
+    outputs:
+      should_publish: ${{ steps.read-config.outputs.should_publish }}
     steps:
       - uses: actions/checkout@v4
 
@@ -15,6 +21,13 @@ jobs:
 
       - name: Decide next config
         run: python src/automation/decide_next.py
+
+      - name: Read decision outputs
+        id: read-config
+        shell: bash
+        run: |
+          SHOULD_PUBLISH=$(python -c "import json; from pathlib import Path; data = json.loads(Path('automation/runtime_config.json').read_text(encoding='utf-8')); print(data['SHOULD_PUBLISH'])")
+          echo "should_publish=$SHOULD_PUBLISH" >> "$GITHUB_OUTPUT"
 
       - uses: actions/upload-artifact@v4
         with:
