@@ -1,3 +1,24 @@
 {
-  "videos": []
+  "videos": [
+    {
+      "video_id": "Xdnzg0xfbng",
+      "url": "https://www.youtube.com/watch?v=Xdnzg0xfbng",
+      "title": "Echoes of the Forgotten Server",
+      "privacy": "private",
+      "publish_at": "2026-07-05T09:00:00Z",
+      "run_dir": "generated-run",
+      "history_updated_at": "2026-07-05T03:49:52.524669Z",
+      "latest_stats": {
+        "video_id": "Xdnzg0xfbng",
+        "title": "Echoes of the Forgotten Server",
+        "published_at": "2026-07-05T03:49:00Z",
+        "privacy": "private",
+        "upload_status": "processed",
+        "views": 0,
+        "likes": 0,
+        "comments": 0,
+        "processing_status": "succeeded"
+      }
+    }
+  ]
 }
