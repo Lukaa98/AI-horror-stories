@@ -2,6 +2,7 @@ faster-whisper
 google-api-python-client
 google-auth-oauthlib
 google-genai
+gTTS>=2.5,<3
 moviepy<2
 openai
 Pillow>=10.4,<11

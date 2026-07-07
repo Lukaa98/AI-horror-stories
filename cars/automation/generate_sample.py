@@ -1,6 +1,7 @@
 import argparse
 import json
 import math
+import os
 import sys
 import wave
 from datetime import datetime, timezone
@@ -26,6 +27,8 @@ OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"
 SAMPLE_SLUG = "mazda-mx5-miata-35th-anniversary"
 CANVAS = (1080, 1920)
 FAST_CANVAS = (540, 960)
+
+DEFAULT_SOURCE_TOPIC = "2025-mazda-mx5-miata-35th-anniversary"
 
 SOURCE_PACKET = {
     "topic_signal": {
@@ -61,7 +64,10 @@ SOURCE_PACKET = {
             ],
         },
     ],
-    "media_policy": "Sample uses generated text/shape cards only. Replace with allowed official screenshots/images after source rights are checked.",
+    "media_policy": (
+        "Sample prefers official-page screenshots from scraper/car-source-scraper output. "
+        "Falls back to generated text cards only when no approved local media is available."
+    ),
 }
 
 STORYBOARD = {
@@ -152,6 +158,90 @@ def _wrap(draw, text, font, max_width, max_lines=4):
     if current:
         lines.append(" ".join(current))
     return "\n".join(lines[:max_lines])
+
+
+def _cover_crop(image, size):
+    target_w, target_h = size
+    src_w, src_h = image.size
+    scale = max(target_w / src_w, target_h / src_h)
+    resized = image.resize((int(src_w * scale), int(src_h * scale)), Image.Resampling.LANCZOS)
+    left = (resized.width - target_w) // 2
+    top = (resized.height - target_h) // 2
+    return resized.crop((left, top, left + target_w, top + target_h))
+
+
+def _candidate_source_screenshots(source_topic=DEFAULT_SOURCE_TOPIC):
+    source_root = ROOT / "cars" / "output" / "sources"
+    candidates = [source_topic, SAMPLE_SLUG]
+    paths = []
+    for topic in candidates:
+        screenshot_dir = source_root / topic / "screenshots"
+        for name in ["viewport.png", "full-page.png"]:
+            path = screenshot_dir / name
+            if path.exists():
+                paths.append(path)
+    return paths
+
+
+def _draw_source_screenshot_scene(scene, index, out_path, source_image_path, fast=False):
+    size = FAST_CANVAS if fast else CANVAS
+    width, height = size
+    scale = width / 1080
+    base = Image.open(source_image_path).convert("RGB")
+    image = _cover_crop(base, size).filter(ImageFilter.GaussianBlur(radius=1.4 * scale))
+    overlay = Image.new("RGBA", size, (16, 8, 6, 125))
+    image = Image.alpha_composite(image.convert("RGBA"), overlay)
+    draw = ImageDraw.Draw(image)
+
+    title_font = _font(int(58 * scale))
+    small_font = _font(int(30 * scale))
+    body_font = _font(int(42 * scale))
+    badge_font = _font(int(28 * scale))
+    highlight = (236, 190, 145)
+
+    draw.rounded_rectangle(
+        (int(46 * scale), int(58 * scale), int(width - 46 * scale), int(170 * scale)),
+        radius=int(24 * scale),
+        fill=(0, 0, 0, 220),
+        outline=highlight,
+        width=max(1, int(3 * scale)),
+    )
+    draw.text((int(72 * scale), int(88 * scale)), "OFFICIAL SOURCE VISUAL", font=small_font, fill=highlight)
+    draw.text((int(width - 205 * scale), int(88 * scale)), f"SCENE {index}", font=badge_font, fill=(255, 235, 210))
+
+    caption = _wrap(draw, scene["caption"], title_font, int(width * 0.82), max_lines=3)
+    bbox = draw.multiline_textbbox((0, 0), caption, font=title_font, spacing=int(10 * scale))
+    caption_top = int(height * 0.49)
+    draw.rounded_rectangle(
+        (int(50 * scale), caption_top - int(36 * scale), int(width - 50 * scale), caption_top + (bbox[3] - bbox[1]) + int(50 * scale)),
+        radius=int(30 * scale),
+        fill=(0, 0, 0, 185),
+    )
+    draw.multiline_text(
+        (int((width - (bbox[2] - bbox[0])) / 2), caption_top),
+        caption,
+        font=title_font,
+        fill=(255, 240, 220),
+        spacing=int(10 * scale),
+        align="center",
+        stroke_width=max(1, int(3 * scale)),
+        stroke_fill=(0, 0, 0),
+    )
+
+    narration = _wrap(draw, scene["narration"], body_font, int(width * 0.82), max_lines=4)
+    draw.rounded_rectangle(
+        (int(58 * scale), int(height * 0.73), int(width - 58 * scale), int(height * 0.92)),
+        radius=int(28 * scale),
+        fill=(0, 0, 0, 225),
+    )
+    draw.multiline_text(
+        (int(95 * scale), int(height * 0.765)),
+        narration,
+        font=body_font,
+        fill=(255, 249, 235),
+        spacing=int(8 * scale),
+    )
+    image.convert("RGB").save(out_path)
 
 
 def _draw_card(scene, index, out_path, fast=False):
@@ -255,6 +345,64 @@ def _write_silent_wav(path, duration_seconds=24, sample_rate=44100):
             remaining -= n
 
 
+def _write_tone_wav(path, duration_seconds=24, sample_rate=44100):
+    # Last-resort audible placeholder so local renders are not silently confusing.
+    frame_count = int(duration_seconds * sample_rate)
+    amplitude = 6500
+    with wave.open(str(path), "w") as wav:
+        wav.setnchannels(1)
+        wav.setsampwidth(2)
+        wav.setframerate(sample_rate)
+        frames = bytearray()
+        for i in range(frame_count):
+            frequency = 220 + (i // sample_rate % 4) * 55
+            value = int(amplitude * math.sin(2 * math.pi * frequency * (i / sample_rate)))
+            frames.extend(value.to_bytes(2, byteorder="little", signed=True))
+        wav.writeframes(bytes(frames))
+
+
+def _write_gtts_audio(path, text):
+    try:
+        from gtts import gTTS
+    except ModuleNotFoundError as exc:
+        raise RuntimeError("gTTS is not installed. Run: pip install -r requirements.txt") from exc
+    gTTS(text=text, lang="en", tld="com", slow=False).save(str(path))
+
+
+def _write_openai_audio(path, text):
+    if not os.getenv("OPENAI_API_KEY"):
+        raise RuntimeError("OPENAI_API_KEY is not set for OpenAI TTS.")
+    from openai import OpenAI
+
+    client = OpenAI()
+    response = client.audio.speech.create(
+        model=os.getenv("OPENAI_TTS_MODEL", "gpt-4o-mini-tts"),
+        voice=os.getenv("OPENAI_TTS_VOICE", "alloy"),
+        input=text,
+    )
+    response.write_to_file(path)
+
+
+def _write_narration_audio(run_dir, storyboard, duration_seconds, provider="gtts"):
+    text = storyboard["narration"]
+    provider = provider.lower()
+    if provider == "openai":
+        path = run_dir / "narration.mp3"
+        _write_openai_audio(path, text)
+        return path, "openai"
+    if provider == "gtts":
+        path = run_dir / "narration.mp3"
+        _write_gtts_audio(path, text)
+        return path, "gtts"
+    if provider == "tone":
+        path = run_dir / "tone_placeholder.wav"
+        _write_tone_wav(path, duration_seconds=duration_seconds)
+        return path, "tone_placeholder"
+    path = run_dir / "silent_narration.wav"
+    _write_silent_wav(path, duration_seconds=duration_seconds)
+    return path, "silent"
+
+
 def _subtitles(storyboard, duration_seconds):
     per_scene = duration_seconds / len(storyboard["scenes"])
     subtitles = []
@@ -269,7 +417,15 @@ def _subtitles(storyboard, duration_seconds):
     return subtitles
 
 
-def generate_sample(output_root=OUTPUT_ROOT, slug=SAMPLE_SLUG, render_video=True, fast=True):
+def generate_sample(
+    output_root=OUTPUT_ROOT,
+    slug=SAMPLE_SLUG,
+    render_video=True,
+    fast=True,
+    tts_provider="gtts",
+    source_topic=DEFAULT_SOURCE_TOPIC,
+    require_real_media=False,
+):
     run_dir = Path(output_root) / slug
     images_dir = run_dir / "images"
     images_dir.mkdir(parents=True, exist_ok=True)
@@ -292,15 +448,51 @@ def generate_sample(output_root=OUTPUT_ROOT, slug=SAMPLE_SLUG, render_video=True
         encoding="utf-8",
     )
 
+    source_screenshots = _candidate_source_screenshots(source_topic=source_topic)
+    if require_real_media and not source_screenshots:
+        raise SystemExit(
+            "No official screenshots found. Run `cd scraper/car-source-scraper && npm run scrape:miata` first, "
+            "or omit --require-real-media to render generated fallback cards."
+        )
+    storyboard["visual_source"] = "official_source_screenshots" if source_screenshots else "generated_fallback_cards"
+    storyboard["source_screenshots_used"] = [str(path.relative_to(ROOT)) for path in source_screenshots]
+    (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
+
     image_paths = []
     for index, scene in enumerate(storyboard["scenes"], start=1):
         image_path = images_dir / f"scene_{index:02d}.png"
-        _draw_card(scene, index, image_path, fast=fast)
+        if source_screenshots:
+            _draw_source_screenshot_scene(
+                scene,
+                index,
+                image_path,
+                source_screenshots[(index - 1) % len(source_screenshots)],
+                fast=fast,
+            )
+        else:
+            _draw_card(scene, index, image_path, fast=fast)
         image_paths.append(image_path)
 
-    narration_path = run_dir / "silent_narration.wav"
     duration_seconds = int(storyboard.get("target_seconds", 24))
-    _write_silent_wav(narration_path, duration_seconds=duration_seconds)
+    try:
+        narration_path, audio_provider = _write_narration_audio(
+            run_dir, storyboard, duration_seconds=duration_seconds, provider=tts_provider
+        )
+    except Exception as exc:
+        if tts_provider.lower() in {"gtts", "openai"}:
+            print(
+                f"Voice provider {tts_provider!r} failed: {exc}. "
+                "Falling back to audible tone placeholder.",
+                file=sys.stderr,
+            )
+            narration_path, audio_provider = _write_narration_audio(
+                run_dir, storyboard, duration_seconds=duration_seconds, provider="tone"
+            )
+        else:
+            raise
+    storyboard["audio_provider"] = audio_provider
+    storyboard["narration_audio_path"] = narration_path.name
+    (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
 
     if render_video:
         build_short_video(
@@ -318,8 +510,21 @@ def main():
     parser = argparse.ArgumentParser(description="Generate a local dry-run car Short package/video.")
     parser.add_argument("--no-video", action="store_true", help="Only write storyboard/source/images/audio placeholders.")
     parser.add_argument("--output-root", type=Path, default=OUTPUT_ROOT)
+    parser.add_argument("--tts-provider", choices=["gtts", "openai", "tone", "silent"], default="gtts")
+    parser.add_argument("--source-topic", default=DEFAULT_SOURCE_TOPIC)
+    parser.add_argument(
+        "--require-real-media",
+        action="store_true",
+        help="Fail unless official scraper screenshots exist.",
+    )
     args = parser.parse_args()
-    run_dir = generate_sample(output_root=args.output_root, render_video=not args.no_video)
+    run_dir = generate_sample(
+        output_root=args.output_root,
+        render_video=not args.no_video,
+        tts_provider=args.tts_provider,
+        source_topic=args.source_topic,
+        require_real_media=args.require_real_media,
+    )
     print(run_dir)
 
 
