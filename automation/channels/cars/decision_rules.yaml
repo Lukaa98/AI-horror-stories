@@ -11,9 +11,10 @@ publishing_guardrails:
   min_sources_per_script: 2
   require_source_urls_in_description: true
   do_not_reupload_or_summarize_creator_video_only: true
+  creator_uploads_are_topic_signals_only: true
   transform_angle_required: true
   allowed_transform_angles:
-    - quick specs people will search after the creator review
+    - quick specs people will search after a creator mentions the car
     - quirks/features recap with official verification
     - price/context explainer
     - trim comparison or build/configurator takeaway
@@ -21,15 +22,15 @@ publishing_guardrails:
     - market/deal angle using live listing data
   media_policy:
     - Prefer official manufacturer media, press kits, configurators, and screenshots captured from official pages.
-    - Use creator uploads only as trend/discovery signals unless explicit reuse permission is available.
+    - Use creator uploads only to identify the car/topic people may search for; do not use the creator video as factual source material.
     - Giving credit alone is not enough for random copyrighted photos or video clips.
 
 creator_adjacent_strategy:
   enabled: true
   idea: >
-    When a major automotive creator publishes a new review, generate a separate original Short
-    about the same car or a closely related search intent so viewers searching that review may
-    also find our video.
+    When a major automotive creator publishes a new review, extract only the car/topic being discussed.
+    Then generate a separate original Short about that same car or closely related search intent
+    using independent sources, so viewers searching the topic may also find our video.
   timing:
     target_publish_window_hours_after_creator_upload: [1, 18]
     fallback_window_hours: 48
@@ -52,21 +53,21 @@ monitored_creators:
       - Tuesday
       - Thursday
     strategy_notes:
-      - Treat Doug uploads as a search-demand signal, not as a source to copy.
-      - Extract the reviewed vehicle/topic from the title.
-      - Verify specs, price, trims, and images with official manufacturer/configurator pages.
-      - Prefer original hooks like "3 quirks Doug's viewers will search next" or "Would you buy this trim?" without implying affiliation.
+      - Treat Doug uploads only as a signal for which car/topic people may search next.
+      - Extract the reviewed vehicle/topic from the title/feed metadata only.
+      - Verify specs, price, trims, and images with official manufacturer/configurator pages and reputable publications.
+      - Prefer original hooks about the car itself, such as "3 weird facts about this trim" or "Would you buy this spec?" without implying affiliation.
 
 format_selection:
-  - when: creator video is about a new/exotic car with unusual specs
+  - when: creator topic signal is about a new/exotic car with unusual specs
     prefer_format: 3 wild facts
-  - when: creator video is about a polarizing expensive car
+  - when: creator topic signal is about a polarizing expensive car
     prefer_format: would you buy this
-  - when: creator video mentions price, auction, depreciation, or used market context
+  - when: creator topic signal mentions price, auction, depreciation, or used market context
     prefer_format: car deal of the day
-  - when: creator video is about confusing trims, drivetrain, or tech
+  - when: creator topic signal is about confusing trims, drivetrain, or tech
     prefer_format: new car explained
-  - when: creator video triggers enthusiast disagreement
+  - when: creator topic signal triggers enthusiast disagreement
     prefer_format: rich people car drama
-  - when: creator video centers on an unusual visible feature
+  - when: creator topic signal centers on an unusual visible feature
     prefer_format: one feature nobody noticed

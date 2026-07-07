@@ -35,4 +35,4 @@ A future cars workflow should:
 
 ### Creator-adjacent car ideas
 
-`automation/channels/cars/decision_rules.yaml` documents future decision rules for creator-adjacent Shorts. For example, Doug DeMuro uploads can be used as a trend/search-demand signal, but the future pipeline should create an original Short about the same car or search intent, verify facts with official sources, and avoid copying creator footage or scripts.
+`automation/channels/cars/decision_rules.yaml` documents future decision rules for creator-adjacent Shorts. For example, Doug DeMuro uploads can be used only to identify what car/topic people may search for next. The future pipeline should then create an original Short about that same car or search intent, verify facts with independent official/reputable sources, and avoid using creator footage, scripts, or review content as source material.

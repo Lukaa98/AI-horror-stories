@@ -166,6 +166,7 @@ def _choose_format(title, summary, templates):
 def _candidate_from_item(item, templates, now, freshness_window_days):
     score, matched_keywords, age_days = _score_item(item, now, freshness_window_days)
     template = _choose_format(item["title"], item.get("summary", ""), templates)
+    is_creator_signal = item.get("source_type") == "youtube_rss"
     topic = {
         "format": template["format"],
         "theme": template["hook_template"].format(
@@ -177,14 +178,21 @@ def _candidate_from_item(item, templates, now, freshness_window_days):
         ),
         "story_tone": template["story_tone"],
         "research_need": template["research_need"],
-        "source_urls": [item["url"]],
+        "source_role": "topic_signal_only" if is_creator_signal else "research_source",
+        "trend_source_urls": [item["url"]] if is_creator_signal else [],
+        "research_source_urls": [] if is_creator_signal else [item["url"]],
         "source_titles": [item["title"]],
         "source_names": [item["source_name"]],
         "published_at": item.get("published_at"),
         "freshness_age_days": round(age_days, 2) if age_days is not None else None,
         "score": score,
         "matched_keywords": matched_keywords,
-        "notes": "Auto-discovered candidate. Add official manufacturer/configurator source before generating a car video when the format requires it.",
+        "notes": (
+            "Auto-discovered creator topic signal. Use only the car/topic idea; verify all facts with "
+            "official manufacturer/configurator pages and reputable publications before generating."
+            if is_creator_signal
+            else "Auto-discovered candidate. Add official manufacturer/configurator source before generating a car video when the format requires it."
+        ),
     }
     return topic
 
