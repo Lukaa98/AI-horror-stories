@@ -46,3 +46,7 @@ GPT should not be the source of current car topics by itself. The intended flow 
 ### Cars launch requirements
 
 To make the cars channel actually upload videos, we still need a separate cars YouTube channel, cars-specific YouTube OAuth credentials/secrets, and a separate cars workflow. `automation/channels/cars/launch_checklist.yaml` tracks those requirements. Browser automation is not needed for basic RSS/YouTube topic discovery, but it is needed for official configurators, build-and-price pages, and screenshot capture.
+
+### Local car video dry runs
+
+Use `python src/automation/generate_car_sample.py` to generate a local, non-uploaded Miata sample package under `src/output/car_samples/`. The current sample uses generated graphic cards and a silent placeholder narration track so we can judge pacing/layout without needing a new YouTube channel, car-channel credentials, or AI image/voice API calls.
