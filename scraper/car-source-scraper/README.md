@@ -15,11 +15,37 @@ Use this for official/reputable source pages only:
 
 Do **not** use it to scrape creator video content. Creator feeds are topic signals only.
 
+## Codespaces / Linux setup
+
+If Chrome fails with an error like `libatk-1.0.so.0: cannot open shared object file`, the browser downloaded correctly but the Linux image is missing Chrome runtime libraries.
+
+Run this once inside `scraper/car-source-scraper`:
+
+```bash
+npm install
+npm run setup:linux
+```
+
+You can also run a lightweight environment check:
+
+```bash
+npm run doctor
+```
+
+If you want to use a system Chrome/Chromium instead of Puppeteer's downloaded browser, set one of these before scraping:
+
+```bash
+export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+# or
+export CHROME_PATH=/usr/bin/google-chrome
+```
+
 ## Run
 
 ```bash
 cd scraper/car-source-scraper
 npm install
+npm run setup:linux
 npm run scrape:miata
 ```
 
@@ -31,4 +57,9 @@ cars/output/sources/<topic>/
   screenshots/*.png
 ```
 
-The Python sample renderer can then use the packet idea/facts to produce a local test Short.
+The Python sample renderer can then use these screenshots:
+
+```bash
+cd ../..
+FAST_MODE=1 python cars/automation/generate_sample.py --require-real-media
+```

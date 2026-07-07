@@ -9,6 +9,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, "../../..");
 
+function hasFlag(name) {
+  return process.argv.includes(`--${name}`);
+}
+
 function argValue(name, fallback = null) {
   const prefix = `--${name}=`;
   const match = process.argv.find((arg) => arg.startsWith(prefix));
@@ -67,6 +71,20 @@ async function extractPagePacket(page, source) {
 }
 
 async function main() {
+  if (hasFlag("doctor")) {
+    console.log(JSON.stringify({
+      ok: true,
+      node: process.version,
+      puppeteerExecutablePath: puppeteer.executablePath?.() || null,
+      executableOverride: process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_PATH || null,
+      notes: [
+        "If Chrome fails with missing .so libraries in Codespaces, run: npm run setup:linux",
+        "Then rerun: npm run scrape:miata",
+      ],
+    }, null, 2));
+    return;
+  }
+
   const url = argValue("url");
   if (!url) {
     throw new Error("Missing --url=https://...");
@@ -79,8 +97,14 @@ async function main() {
   const screenshotDir = path.join(outputRoot, "screenshots");
   await ensureDir(screenshotDir);
 
+  const executablePath =
+    process.env.PUPPETEER_EXECUTABLE_PATH ||
+    process.env.CHROME_PATH ||
+    undefined;
+
   const browser = await puppeteer.launch({
     headless: "new",
+    executablePath,
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
@@ -117,5 +141,11 @@ async function main() {
 
 main().catch((error) => {
   console.error(error);
+  if (String(error?.message || error).includes("Failed to launch the browser process")) {
+    console.error(
+      "\nChrome launched but the Linux image is missing runtime libraries. " +
+        "In Codespaces, run: npm run setup:linux\n"
+    );
+  }
   process.exit(1);
 });

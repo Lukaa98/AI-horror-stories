@@ -6,7 +6,9 @@
   "description": "Staged browser automation for car source packets and official-page screenshots.",
   "scripts": {
     "scrape": "node src/scrape-source-packet.js",
-    "scrape:miata": "node src/scrape-source-packet.js --topic=2025-mazda-mx5-miata-35th-anniversary --url=https://news.mazdausa.com/2025-01-24-Mazda-Announces-2025-MX-5-Miata-35th-Anniversary --source-name=Mazda-USA"
+    "scrape:miata": "node src/scrape-source-packet.js --topic=2025-mazda-mx5-miata-35th-anniversary --url=https://news.mazdausa.com/2025-01-24-Mazda-Announces-2025-MX-5-Miata-35th-Anniversary --source-name=Mazda-USA",
+    "setup:linux": "bash scripts/install-linux-deps.sh",
+    "doctor": "node src/scrape-source-packet.js --doctor"
   },
   "dependencies": {
     "puppeteer": "^24.22.3",
