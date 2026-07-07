@@ -7,3 +7,5 @@ automation/*.tmp.json
 
 **/__pycache__/
 *.pyc
+
+automation/channels/*/researched_topics.json

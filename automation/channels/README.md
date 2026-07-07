@@ -17,3 +17,17 @@ automation/channels/
 ```
 
 Each channel should eventually have its own YouTube credentials, upload cadence, content plan, history, and state. Do not mix unrelated niches on one YouTube channel; Fortnite subscribers, horror viewers, and car-news viewers should be treated as different audiences.
+
+## Cars channel staging
+
+The cars folder is intentionally **not** wired into the production upload workflow yet. The current production pipeline still uses the root horror plan.
+
+For cars, avoid hardcoded evergreen topics as the final source of truth. Use `automation/channels/cars/content_plan.json` as a research configuration: it defines source policy, RSS/news discovery sources, and reusable format templates. Run `python src/automation/discover_car_topics.py` to produce `automation/channels/cars/researched_topics.json` with fresh candidate topics before any future car-video generation step.
+
+A future cars workflow should:
+
+1. Discover current/viral topics from configured sources.
+2. Require enough source coverage for the selected format.
+3. Prefer official manufacturer/configurator pages for specs, pricing, trims, and screenshots.
+4. Store source URLs for the YouTube description.
+5. Only then generate script, voiceover, visuals, and upload to the separate cars channel.
