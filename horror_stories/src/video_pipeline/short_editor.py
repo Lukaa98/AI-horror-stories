@@ -5,6 +5,13 @@ import textwrap
 from pathlib import Path
 
 import numpy as np
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
+
+# MoviePy 1.x still references Image.ANTIALIAS, which Pillow 10 removed.
+# Keep the renderer compatible with Python 3.12-friendly Pillow wheels.
+if not hasattr(Image, "ANTIALIAS"):
+    Image.ANTIALIAS = Image.Resampling.LANCZOS
+
 from moviepy.editor import (
     AudioFileClip,
     ColorClip,
@@ -14,7 +21,6 @@ from moviepy.editor import (
     VideoClip,
     concatenate_videoclips,
 )
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 FAST_MODE = os.getenv("FAST_MODE", "1") == "1"
 CANVAS_SIZE = (540, 960) if FAST_MODE else (1080, 1920)
