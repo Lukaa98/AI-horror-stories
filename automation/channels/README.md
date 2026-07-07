@@ -31,3 +31,8 @@ A future cars workflow should:
 3. Prefer official manufacturer/configurator pages for specs, pricing, trims, and screenshots.
 4. Store source URLs for the YouTube description.
 5. Only then generate script, voiceover, visuals, and upload to the separate cars channel.
+
+
+### Creator-adjacent car ideas
+
+`automation/channels/cars/decision_rules.yaml` documents future decision rules for creator-adjacent Shorts. For example, Doug DeMuro uploads can be used as a trend/search-demand signal, but the future pipeline should create an original Short about the same car or search intent, verify facts with official sources, and avoid copying creator footage or scripts.

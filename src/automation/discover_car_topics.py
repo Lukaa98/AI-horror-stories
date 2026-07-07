@@ -67,7 +67,10 @@ def _parse_date(value):
     try:
         parsed = parsedate_to_datetime(value)
     except (TypeError, ValueError):
-        return None
+        try:
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except (TypeError, ValueError):
+            return None
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=timezone.utc)
     return parsed.astimezone(timezone.utc)
@@ -86,11 +89,31 @@ def _rss_items(source, timeout):
     raw = _fetch_rss(source, timeout)
     root = ET.fromstring(raw)
     items = []
+    atom_namespace = {"atom": "http://www.w3.org/2005/Atom"}
     for item in root.findall(".//item"):
         title = _strip_tags(item.findtext("title"))
         description = _strip_tags(item.findtext("description"))
         link = (item.findtext("link") or "").strip()
         published_at = _parse_date(item.findtext("pubDate"))
+        if not title or not link:
+            continue
+        items.append(
+            {
+                "title": title,
+                "summary": description,
+                "url": link,
+                "published_at": published_at.isoformat().replace("+00:00", "Z") if published_at else None,
+                "source_name": source["name"],
+                "source_type": source.get("type", "rss"),
+                "source_credibility": source.get("credibility", "unknown"),
+            }
+        )
+    for entry in root.findall(".//atom:entry", atom_namespace):
+        title = _strip_tags(entry.findtext("atom:title", default="", namespaces=atom_namespace))
+        description = _strip_tags(entry.findtext("atom:summary", default="", namespaces=atom_namespace))
+        link_element = entry.find("atom:link", atom_namespace)
+        link = link_element.attrib.get("href", "").strip() if link_element is not None else ""
+        published_at = _parse_date(entry.findtext("atom:published", default="", namespaces=atom_namespace))
         if not title or not link:
             continue
         items.append(
@@ -181,7 +204,7 @@ def discover_topics(config_path, out_path, limit, timeout):
     seen_urls = set()
 
     for source in config.get("discovery_sources", []):
-        if source.get("type") != "rss":
+        if source.get("type") not in {"rss", "youtube_rss"}:
             continue
         try:
             items = _rss_items(source, timeout)

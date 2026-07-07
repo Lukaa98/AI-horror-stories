@@ -25,6 +25,18 @@
   },
   "discovery_sources": [
     {
+      "name": "Doug DeMuro",
+      "type": "youtube_rss",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCsqjHFMB_JYTaEnf_vmTNqg",
+      "channel_url": "https://www.youtube.com/@DougDeMuro",
+      "expected_upload_days": [
+        "Tuesday",
+        "Thursday"
+      ],
+      "strategy": "creator_adjacent_relevance",
+      "credibility": "large automotive review channel; use as trend signal, then verify vehicle facts with official/manufacturer and reputable news sources"
+    },
+    {
       "name": "Car and Driver",
       "type": "rss",
       "url": "https://www.caranddriver.com/rss/all.xml",
