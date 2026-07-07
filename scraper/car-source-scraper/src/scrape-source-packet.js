@@ -8,6 +8,17 @@ puppeteer.use(StealthPlugin());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, "../../..");
+const LAUNCH_ARGS = [
+  "--no-sandbox",
+  "--disable-setuid-sandbox",
+  "--disable-blink-features=AutomationControlled",
+  "--disable-infobars",
+  "--window-size=1366,768",
+];
+
+function chromeExecutableOverride() {
+  return process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_PATH || undefined;
+}
 
 function hasFlag(name) {
   return process.argv.includes(`--${name}`);
@@ -72,16 +83,43 @@ async function extractPagePacket(page, source) {
 
 async function main() {
   if (hasFlag("doctor")) {
-    console.log(JSON.stringify({
-      ok: true,
-      node: process.version,
-      puppeteerExecutablePath: puppeteer.executablePath?.() || null,
-      executableOverride: process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_PATH || null,
-      notes: [
-        "If Chrome fails with missing .so libraries in Codespaces, run: npm run setup:linux",
-        "Then rerun: npm run scrape:miata",
-      ],
-    }, null, 2));
+    let browser;
+    try {
+      browser = await puppeteer.launch({
+        headless: "new",
+        executablePath: chromeExecutableOverride(),
+        args: LAUNCH_ARGS,
+      });
+      const version = await browser.version();
+      console.log(JSON.stringify({
+        ok: true,
+        node: process.version,
+        browserVersion: version,
+        puppeteerExecutablePath: puppeteer.executablePath?.() || null,
+        executableOverride: chromeExecutableOverride() || null,
+        notes: [
+          "Chrome launched successfully. You can run: npm run scrape:miata",
+        ],
+      }, null, 2));
+    } catch (error) {
+      console.error(JSON.stringify({
+        ok: false,
+        node: process.version,
+        puppeteerExecutablePath: puppeteer.executablePath?.() || null,
+        executableOverride: chromeExecutableOverride() || null,
+        error: String(error?.message || error),
+        next_steps: [
+          "Run: npm run setup:linux",
+          "Then rerun: npm run doctor",
+          "Then rerun: npm run scrape:miata",
+        ],
+      }, null, 2));
+      throw error;
+    } finally {
+      if (browser) {
+        await browser.close();
+      }
+    }
     return;
   }
 
@@ -97,21 +135,10 @@ async function main() {
   const screenshotDir = path.join(outputRoot, "screenshots");
   await ensureDir(screenshotDir);
 
-  const executablePath =
-    process.env.PUPPETEER_EXECUTABLE_PATH ||
-    process.env.CHROME_PATH ||
-    undefined;
-
   const browser = await puppeteer.launch({
     headless: "new",
-    executablePath,
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-blink-features=AutomationControlled",
-      "--disable-infobars",
-      "--window-size=1366,768",
-    ],
+    executablePath: chromeExecutableOverride(),
+    args: LAUNCH_ARGS,
   });
 
   try {

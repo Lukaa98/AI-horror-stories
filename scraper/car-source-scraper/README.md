@@ -26,11 +26,13 @@ npm install
 npm run setup:linux
 ```
 
-You can also run a lightweight environment check:
+Run `doctor` after setup. It now actually launches Chrome, so `ok: true` means Chrome can start in this container:
 
 ```bash
 npm run doctor
 ```
+
+If `doctor` returns `ok: false`, run `npm run setup:linux` again and check the missing-library error in the JSON output.
 
 If you want to use a system Chrome/Chromium instead of Puppeteer's downloaded browser, set one of these before scraping:
 
