@@ -12,8 +12,8 @@ RUNTIME_PATH = AUTOMATION_DIR / "runtime_config.json"
 HISTORY_PATH = AUTOMATION_DIR / "history.json"
 LOCAL_TZ = ZoneInfo("America/New_York")
 MIN_UPLOAD_GAP_HOURS = 24
-MAX_UPLOAD_GAP_HOURS = 48
-EARLY_RELEASE_SCORE = 150.0
+MAX_UPLOAD_GAP_HOURS = 72
+EARLY_RELEASE_SCORE = 75.0
 
 
 def _load_json(path, default):
@@ -79,11 +79,14 @@ def _publish_decision(history):
     latest_score = _entry_score(latest_entry)
     has_stats = bool(latest_entry.get("latest_stats"))
 
+    if age_hours < 0:
+        return False, f"Latest upload is scheduled {abs(age_hours):.1f}h from now."
+
     if age_hours < MIN_UPLOAD_GAP_HOURS:
         return False, f"Latest upload is only {age_hours:.1f}h old."
 
     if age_hours >= MAX_UPLOAD_GAP_HOURS:
-        return True, f"Latest upload is {age_hours:.1f}h old, forcing release by 48h cap."
+        return True, f"Latest upload is {age_hours:.1f}h old, forcing release by {MAX_UPLOAD_GAP_HOURS}h cap."
 
     if has_stats and latest_score >= EARLY_RELEASE_SCORE:
         return True, f"Latest upload score {latest_score:.1f} cleared early-release threshold."

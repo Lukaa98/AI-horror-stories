@@ -36,6 +36,13 @@ jobs:
           printf '%s' "$YOUTUBE_CLIENT_SECRET_JSON_B64" | base64 -d > "$RUNNER_TEMP/client_secret.json"
           printf '%s' "$YOUTUBE_TOKEN_PICKLE_B64" | base64 -d > "$RUNNER_TEMP/token.pickle"
 
+      - name: Poll early video pulse
+        env:
+          YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
+          YOUTUBE_TOKEN_FILE: ${{ runner.temp }}/token.pickle
+          PYTHONPATH: src
+        run: python src/automation/poll_history.py --out automation/polled_stats_early.json --min-age-hours 1 --repoll-after-hours 6 --limit 5
+
       - name: Poll mature videos
         env:
           YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
@@ -46,7 +53,9 @@ jobs:
       - name: Update history
         env:
           PYTHONPATH: src
-        run: python src/automation/update_history.py --stats-batch-metadata automation/polled_stats.json
+        run: |
+          python src/automation/update_history.py --stats-batch-metadata automation/polled_stats_early.json
+          python src/automation/update_history.py --stats-batch-metadata automation/polled_stats.json
 
       - name: Commit updated history
         run: |

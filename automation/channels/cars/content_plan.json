@@ -1,0 +1,44 @@
+{
+  "channel_name": "Car Shorts Lab",
+  "target_seconds": 30,
+  "scene_count": 7,
+  "source_policy": "Use official manufacturer pages, press kits, configurators, licensed/Creative Commons media, or screenshots captured from official pages. Do not scrape and reuse random copyrighted photos just by giving credit.",
+  "entries": [
+    {
+      "format": "3 wild facts",
+      "theme": "3 wild facts about Ferrari's first EV",
+      "story_tone": "fast, accurate, curious, premium-car drama",
+      "research_need": "Official Ferrari page or press release plus one reputable car-news source."
+    },
+    {
+      "format": "would you buy this",
+      "theme": "Ferrari made an ultra-expensive EV-looking flagship; would you buy it?",
+      "story_tone": "comment-bait but factual, no fake claims",
+      "research_need": "Official pricing/configurator if available; otherwise cite estimated price clearly as estimated."
+    },
+    {
+      "format": "car deal of the day",
+      "theme": "This used Lexus is cheaper than a new Corolla, but here's the catch",
+      "story_tone": "helpful, skeptical, price-aware",
+      "research_need": "Live listing data, mileage, title status, comparable market prices, and a disclaimer that prices change."
+    },
+    {
+      "format": "new car explained",
+      "theme": "The new Ferrari Manuale is not actually manual; here's how it works",
+      "story_tone": "clear explainer, enthusiast-friendly",
+      "research_need": "Official specs plus reputable automotive reporting."
+    },
+    {
+      "format": "rich people car drama",
+      "theme": "Why Ferrari fans are arguing about the Luce",
+      "story_tone": "dramatic but fair, no rage bait without source support",
+      "research_need": "Official model details plus community/review sentiment from reputable sources."
+    },
+    {
+      "format": "one feature nobody noticed",
+      "theme": "The fake clutch pedal feature people either love or hate",
+      "story_tone": "curious, visual, enthusiast detail",
+      "research_need": "Official feature description or credible hands-on reporting."
+    }
+  ]
+}
