@@ -18,7 +18,7 @@ Do **not** use it to scrape creator video content. Creator feeds are topic signa
 ## Run
 
 ```bash
-cd tools/car-source-scraper
+cd scraper/car-source-scraper
 npm install
 npm run scrape:miata
 ```
@@ -26,7 +26,7 @@ npm run scrape:miata
 Output goes to:
 
 ```text
-src/output/car_sources/<topic>/
+cars/output/sources/<topic>/
   source-packet.json
   screenshots/*.png
 ```

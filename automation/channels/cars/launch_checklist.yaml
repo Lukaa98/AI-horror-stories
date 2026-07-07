@@ -34,7 +34,7 @@ required_before_first_upload:
     reason: Official car configurators/build pages often require JavaScript and user interactions before prices, trims, packages, or screenshots are available.
     tasks:
       - Add browser automation dependency and CI browser install step.
-      - Use `tools/car-source-scraper` as the staged Puppeteer package for source packets/screenshots.
+      - Use `scraper/car-source-scraper` as the staged Puppeteer package for source packets/screenshots.
       - Build source-specific adapters only for allowed official/configurator pages.
       - Save screenshots with source URL, capture date, trim/options selected, and usage notes.
       - Keep creator video pages out of screenshot capture unless explicit permission exists.

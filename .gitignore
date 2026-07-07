@@ -9,3 +9,6 @@ automation/*.tmp.json
 *.pyc
 
 automation/channels/*/researched_topics.json
+
+cars/output/*
+!cars/output/.gitkeep

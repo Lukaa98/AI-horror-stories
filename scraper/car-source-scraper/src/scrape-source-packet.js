@@ -75,7 +75,7 @@ async function main() {
   const topic = slugify(argValue("topic", new URL(url).hostname));
   const sourceName = argValue("source-name", new URL(url).hostname);
   const role = argValue("role", "official_or_reputable_source");
-  const outputRoot = path.resolve(REPO_ROOT, "src/output/car_sources", topic);
+  const outputRoot = path.resolve(REPO_ROOT, "cars/output/sources", topic);
   const screenshotDir = path.join(outputRoot, "screenshots");
   await ensureDir(screenshotDir);
 

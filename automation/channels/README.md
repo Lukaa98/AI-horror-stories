@@ -49,4 +49,4 @@ To make the cars channel actually upload videos, we still need a separate cars Y
 
 ### Local car video dry runs
 
-Use `python src/automation/generate_car_sample.py` to generate a local, non-uploaded Miata sample package under `src/output/car_samples/`. The current sample uses generated graphic cards and a silent placeholder narration track so we can judge pacing/layout without needing a new YouTube channel, car-channel credentials, or AI image/voice API calls.
+Use `python src/automation/generate_car_sample.py` to generate a local, non-uploaded Miata sample package under `cars/output/samples/`. The current sample uses generated graphic cards and a silent placeholder narration track so we can judge pacing/layout without needing a new YouTube channel, car-channel credentials, or AI image/voice API calls.

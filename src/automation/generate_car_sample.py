@@ -6,7 +6,14 @@ import wave
 from datetime import datetime, timezone
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+try:
+    from PIL import Image, ImageDraw, ImageFilter, ImageFont
+except ModuleNotFoundError as exc:
+    if exc.name == "PIL":
+        raise SystemExit(
+            "Missing Pillow dependency. From the repo root, run: pip install -r requirements.txt"
+        ) from exc
+    raise
 
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "src"
@@ -15,7 +22,7 @@ if str(SRC) not in sys.path:
 
 from video_pipeline.short_editor import build_short_video  # noqa: E402
 
-OUTPUT_ROOT = SRC / "output" / "car_samples"
+OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"
 SAMPLE_SLUG = "mazda-mx5-miata-35th-anniversary"
 CANVAS = (1080, 1920)
 FAST_CANVAS = (540, 960)
