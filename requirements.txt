@@ -4,6 +4,6 @@ google-auth-oauthlib
 google-genai
 moviepy<2
 openai
-Pillow<10
+Pillow>=10.4,<11
 python-dotenv
 requests
