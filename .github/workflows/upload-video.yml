@@ -32,7 +32,7 @@ jobs:
           path: generated-run
 
       - name: Export runtime env
-        run: python src/automation/export_runtime_env.py >> "$GITHUB_ENV"
+        run: python horror_stories/src/automation/export_runtime_env.py >> "$GITHUB_ENV"
 
       - name: Materialize YouTube auth files
         shell: bash
@@ -49,9 +49,9 @@ jobs:
         env:
           YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
           YOUTUBE_TOKEN_FILE: ${{ runner.temp }}/token.pickle
-          PYTHONPATH: src
+          PYTHONPATH: horror_stories/src
         run: |
-          python src/publish_episode.py \
+          python horror_stories/src/publish_episode.py \
             --run-dir generated-run \
             --privacy "$YOUTUBE_PRIVACY" \
             --publish-at "$YOUTUBE_PUBLISH_AT" \
@@ -59,8 +59,8 @@ jobs:
 
       - name: Update history
         env:
-          PYTHONPATH: src
-        run: python src/automation/update_history.py --upload-metadata automation/upload_result.json
+          PYTHONPATH: horror_stories/src
+        run: python horror_stories/src/automation/update_history.py --upload-metadata automation/upload_result.json
 
       - uses: actions/upload-artifact@v4
         with:

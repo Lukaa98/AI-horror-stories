@@ -22,7 +22,7 @@ Each channel should eventually have its own YouTube credentials, upload cadence,
 
 The cars folder is intentionally **not** wired into the production upload workflow yet. The current production pipeline still uses the root horror plan.
 
-For cars, avoid hardcoded evergreen topics as the final source of truth. Use `automation/channels/cars/content_plan.json` as a research configuration: it defines source policy, RSS/news discovery sources, and reusable format templates. Run `python src/automation/discover_car_topics.py` to produce `automation/channels/cars/researched_topics.json` with fresh candidate topics before any future car-video generation step.
+For cars, avoid hardcoded evergreen topics as the final source of truth. Use `automation/channels/cars/content_plan.json` as a research configuration: it defines source policy, RSS/news discovery sources, and reusable format templates. Run `python cars/automation/discover_topics.py` to produce `automation/channels/cars/researched_topics.json` with fresh candidate topics before any future car-video generation step.
 
 A future cars workflow should:
 
@@ -39,7 +39,7 @@ A future cars workflow should:
 
 ### Source acquisition and scraping
 
-There is no full scraping/browser-capture pipeline wired in yet. Current implemented cars logic is limited to `src/automation/discover_car_topics.py`, which reads configured RSS/Atom feeds and emits topic candidates. `automation/channels/cars/source_acquisition.yaml` documents the future acquisition stages: feed discovery, independent source verification, optional Playwright/Puppeteer browser capture for official configurators, and GPT script generation from verified source packets.
+There is no full scraping/browser-capture pipeline wired in yet. Current implemented cars logic is limited to `cars/automation/discover_topics.py`, which reads configured RSS/Atom feeds and emits topic candidates. `automation/channels/cars/source_acquisition.yaml` documents the future acquisition stages: feed discovery, independent source verification, optional Playwright/Puppeteer browser capture for official configurators, and GPT script generation from verified source packets.
 
 GPT should not be the source of current car topics by itself. The intended flow is: discover fresh topic signals, verify with official/reputable sources, optionally capture allowed official screenshots, and only then ask GPT to write the Short from that source packet.
 
@@ -49,4 +49,4 @@ To make the cars channel actually upload videos, we still need a separate cars Y
 
 ### Local car video dry runs
 
-Use `python src/automation/generate_car_sample.py` to generate a local, non-uploaded Miata sample package under `cars/output/samples/`. The current sample uses generated graphic cards and a silent placeholder narration track so we can judge pacing/layout without needing a new YouTube channel, car-channel credentials, or AI image/voice API calls.
+Use `python cars/automation/generate_sample.py` to generate a local, non-uploaded Miata sample package under `cars/output/samples/`. The current sample uses generated graphic cards and a silent placeholder narration track so we can judge pacing/layout without needing a new YouTube channel, car-channel credentials, or AI image/voice API calls.

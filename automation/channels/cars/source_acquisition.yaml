@@ -4,7 +4,7 @@
 channel: cars
 status: staged_only_not_connected_to_production_uploads
 current_implementation:
-  topic_discovery: src/automation/discover_car_topics.py
+  topic_discovery: cars/automation/discover_topics.py
   implemented_methods:
     - rss_feeds
     - youtube_atom_feeds_as_topic_signals_only

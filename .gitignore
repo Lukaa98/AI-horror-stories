@@ -12,3 +12,8 @@ automation/channels/*/researched_topics.json
 
 cars/output/*
 !cars/output/.gitkeep
+
+horror_stories/src/output/*
+!horror_stories/src/output/.gitkeep
+horror_stories/src/.env
+horror_stories/src/.env.local

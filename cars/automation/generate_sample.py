@@ -16,9 +16,9 @@ except ModuleNotFoundError as exc:
     raise
 
 ROOT = Path(__file__).resolve().parents[2]
-SRC = ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
+HORROR_SRC = ROOT / "horror_stories" / "src"
+if str(HORROR_SRC) not in sys.path:
+    sys.path.insert(0, str(HORROR_SRC))
 
 from video_pipeline.short_editor import build_short_video  # noqa: E402
 

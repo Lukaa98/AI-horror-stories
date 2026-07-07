@@ -15,7 +15,7 @@ SCOPES = [
 
 def _default_client_secret():
     return (
-        Path(__file__).resolve().parents[3]
+        Path(__file__).resolve().parents[4]
         / "AutoShorts"
         / "AutoShorts"
         / "main"
@@ -26,7 +26,7 @@ def _default_client_secret():
 
 def _default_token_file():
     return (
-        Path(__file__).resolve().parents[3]
+        Path(__file__).resolve().parents[4]
         / "AutoShorts"
         / "AutoShorts"
         / "main"

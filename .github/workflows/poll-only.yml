@@ -40,22 +40,22 @@ jobs:
         env:
           YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
           YOUTUBE_TOKEN_FILE: ${{ runner.temp }}/token.pickle
-          PYTHONPATH: src
-        run: python src/automation/poll_history.py --out automation/polled_stats_early.json --min-age-hours 1 --repoll-after-hours 6 --limit 5
+          PYTHONPATH: horror_stories/src
+        run: python horror_stories/src/automation/poll_history.py --out automation/polled_stats_early.json --min-age-hours 1 --repoll-after-hours 6 --limit 5
 
       - name: Poll mature videos
         env:
           YOUTUBE_CLIENT_SECRET_FILE: ${{ runner.temp }}/client_secret.json
           YOUTUBE_TOKEN_FILE: ${{ runner.temp }}/token.pickle
-          PYTHONPATH: src
-        run: python src/automation/poll_history.py --out automation/polled_stats.json --min-age-hours 24 --repoll-after-hours 24 --limit 10
+          PYTHONPATH: horror_stories/src
+        run: python horror_stories/src/automation/poll_history.py --out automation/polled_stats.json --min-age-hours 24 --repoll-after-hours 24 --limit 10
 
       - name: Update history
         env:
-          PYTHONPATH: src
+          PYTHONPATH: horror_stories/src
         run: |
-          python src/automation/update_history.py --stats-batch-metadata automation/polled_stats_early.json
-          python src/automation/update_history.py --stats-batch-metadata automation/polled_stats.json
+          python horror_stories/src/automation/update_history.py --stats-batch-metadata automation/polled_stats_early.json
+          python horror_stories/src/automation/update_history.py --stats-batch-metadata automation/polled_stats.json
 
       - name: Commit updated history
         run: |

@@ -4,7 +4,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 AUTOMATION_DIR = ROOT / "automation"
 PLAN_PATH = AUTOMATION_DIR / "content_plan.json"
 STATE_PATH = AUTOMATION_DIR / "state.json"

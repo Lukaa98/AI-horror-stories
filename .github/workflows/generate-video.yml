@@ -25,19 +25,19 @@ jobs:
           path: automation
 
       - name: Export runtime env
-        run: python src/automation/export_runtime_env.py >> "$GITHUB_ENV"
+        run: python horror_stories/src/automation/export_runtime_env.py >> "$GITHUB_ENV"
 
       - name: Generate video
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          PYTHONPATH: src
-        run: python src/main.py
+          PYTHONPATH: horror_stories/src
+        run: python horror_stories/src/main.py
 
       - name: Find latest run
         id: latest-run
         run: |
-          echo "run_dir=$(python src/automation/find_latest_run.py)" >> "$GITHUB_OUTPUT"
+          echo "run_dir=$(python horror_stories/src/automation/find_latest_run.py)" >> "$GITHUB_OUTPUT"
 
       - uses: actions/upload-artifact@v4
         with:
