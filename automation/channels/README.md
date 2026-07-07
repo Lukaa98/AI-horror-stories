@@ -42,3 +42,7 @@ A future cars workflow should:
 There is no full scraping/browser-capture pipeline wired in yet. Current implemented cars logic is limited to `src/automation/discover_car_topics.py`, which reads configured RSS/Atom feeds and emits topic candidates. `automation/channels/cars/source_acquisition.yaml` documents the future acquisition stages: feed discovery, independent source verification, optional Playwright/Puppeteer browser capture for official configurators, and GPT script generation from verified source packets.
 
 GPT should not be the source of current car topics by itself. The intended flow is: discover fresh topic signals, verify with official/reputable sources, optionally capture allowed official screenshots, and only then ask GPT to write the Short from that source packet.
+
+### Cars launch requirements
+
+To make the cars channel actually upload videos, we still need a separate cars YouTube channel, cars-specific YouTube OAuth credentials/secrets, and a separate cars workflow. `automation/channels/cars/launch_checklist.yaml` tracks those requirements. Browser automation is not needed for basic RSS/YouTube topic discovery, but it is needed for official configurators, build-and-price pages, and screenshot capture.
