@@ -36,3 +36,9 @@ A future cars workflow should:
 ### Creator-adjacent car ideas
 
 `automation/channels/cars/decision_rules.yaml` documents future decision rules for creator-adjacent Shorts. For example, Doug DeMuro uploads can be used only to identify what car/topic people may search for next. The future pipeline should then create an original Short about that same car or search intent, verify facts with independent official/reputable sources, and avoid using creator footage, scripts, or review content as source material.
+
+### Source acquisition and scraping
+
+There is no full scraping/browser-capture pipeline wired in yet. Current implemented cars logic is limited to `src/automation/discover_car_topics.py`, which reads configured RSS/Atom feeds and emits topic candidates. `automation/channels/cars/source_acquisition.yaml` documents the future acquisition stages: feed discovery, independent source verification, optional Playwright/Puppeteer browser capture for official configurators, and GPT script generation from verified source packets.
+
+GPT should not be the source of current car topics by itself. The intended flow is: discover fresh topic signals, verify with official/reputable sources, optionally capture allowed official screenshots, and only then ask GPT to write the Short from that source packet.
