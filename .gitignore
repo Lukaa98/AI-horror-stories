@@ -20,3 +20,6 @@ horror_stories/src/.env.local
 
 node_modules/
 **/node_modules/
+
+# Local environment secrets
+.env
