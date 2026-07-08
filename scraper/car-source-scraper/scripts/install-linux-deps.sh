@@ -13,10 +13,26 @@ else
 fi
 
 $SUDO apt-get update
+
+choose_available_package() {
+  for package_name in "$@"; do
+    if apt-cache show "$package_name" >/dev/null 2>&1; then
+      printf '%s' "$package_name"
+      return 0
+    fi
+  done
+  echo "None of these packages are available: $*" >&2
+  return 1
+}
+
+# Ubuntu 24.04/Noble exposes libasound2 as a virtual package and requires libasound2t64.
+# Older Ubuntu images still use libasound2.
+ASOUND_PACKAGE="$(choose_available_package libasound2t64 libasound2)"
+
 $SUDO apt-get install -y \
   ca-certificates \
   fonts-liberation \
-  libasound2 \
+  "$ASOUND_PACKAGE" \
   libatk-bridge2.0-0 \
   libatk1.0-0 \
   libcairo2 \

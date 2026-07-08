@@ -32,7 +32,7 @@ Run `doctor` after setup. It now actually launches Chrome, so `ok: true` means C
 npm run doctor
 ```
 
-If `doctor` returns `ok: false`, run `npm run setup:linux` again and check the missing-library error in the JSON output.
+If `doctor` returns `ok: false`, run `npm run setup:linux` again and check the missing-library error in the JSON output. The setup helper handles Ubuntu Noble/Codespaces package renames such as `libasound2t64`.
 
 If you want to use a system Chrome/Chromium instead of Puppeteer's downloaded browser, set one of these before scraping:
 
