@@ -56,10 +56,11 @@ Output goes to:
 ```text
 cars/output/sources/<topic>/
   source-packet.json
+  images/source-image-*.jpg
   screenshots/*.png
 ```
 
-The Python sample renderer can then use these screenshots:
+The Python sample renderer prefers downloaded car/source images first, then falls back to screenshots:
 
 ```bash
 cd ../..

@@ -32,12 +32,12 @@ DEFAULT_SOURCE_TOPIC = "2025-mazda-mx5-miata-35th-anniversary"
 
 SOURCE_PACKET = {
     "topic_signal": {
-        "source_name": "Doug DeMuro",
+        "source_name": "automotive trend signal",
         "source_url": "https://www.youtube.com/watch?v=eU14d5BVmjM",
-        "role": "topic_signal_only",
-        "title": "The Mazda Miata 35th Anniversary Is as Good as Ever",
+        "role": "topic_signal_only_not_for_script",
+        "title": "Mazda MX-5 Miata 35th Anniversary search/topic signal",
         "observed_at": "2026-07-07T00:00:00Z",
-        "notes": "Used only to identify the car/topic people may search for; facts below come from independent sources.",
+        "notes": "Used only to identify a trending car/topic window; the generated video should not mention the creator.",
     },
     "verified_sources": [
         {
@@ -65,14 +65,14 @@ SOURCE_PACKET = {
         },
     ],
     "media_policy": (
-        "Sample prefers official-page screenshots from scraper/car-source-scraper output. "
+        "Sample prefers downloaded official/source car images from scraper output, then screenshots. "
         "Falls back to generated text cards only when no approved local media is available."
     ),
 }
 
 STORYBOARD = {
-    "title": "Should You Care About the Miata 35th Anniversary?",
-    "hook": "Doug just reviewed the Miata 35th Anniversary, but here is the real question: is this spec actually special?",
+    "title": "Is the Miata 35th Anniversary Actually Special?",
+    "hook": "The 2025 Mazda MX-5 Miata 35th Anniversary looks subtle, but the details matter.",
     "narration": "",
     "visual_identity": "Clean automotive short with deep red Mazda-inspired color palette, tan interior accents, source cards, no creator footage.",
     "music_mood": "upbeat car-news pulse, clean and premium",
@@ -81,48 +81,55 @@ STORYBOARD = {
     "scene_count": 7,
     "story_provider": "local-car-template",
     "character_name": "Mazda MX-5 Miata 35th Anniversary",
-    "theme": "Doug topic signal: Mazda MX-5 Miata 35th Anniversary",
+    "theme": "Mazda MX-5 Miata 35th Anniversary official-source sample",
     "scenes": [
         {
             "stage": "hook",
-            "narration": "Doug just put the Miata 35th Anniversary back in the spotlight.",
-            "caption": "MIATA IS TRENDING",
+            "narration": "The Miata 35th Anniversary is a collector-spec version of Mazda’s tiny roadster.",
+            "caption": "LIMITED MIATA",
+            "stat": "2025 MX-5 35TH",
             "image_prompt": "deep red roadster silhouette, search trend card, no creator footage",
         },
         {
             "stage": "setup",
-            "narration": "But the real story is not the review. It is what Mazda actually built.",
-            "caption": "NOT THE REVIEW — THE CAR",
+            "narration": "The point is not extra power. It is color, scarcity, and the exact spec Mazda chose.",
+            "caption": "THE SPEC IS THE STORY",
+            "stat": "ARTISAN RED + TAN",
             "image_prompt": "official-source style card showing Mazda newsroom and fact-check icons",
         },
         {
             "stage": "setup",
             "narration": "Mazda says only three hundred are coming to the U.S., all in Artisan Red with a tan cabin.",
             "caption": "300 FOR THE U.S.",
+            "stat": "300 UNITS",
             "image_prompt": "limited edition badge, red paint swatch, tan leather texture card",
         },
         {
             "stage": "escalation",
             "narration": "The price starts at thirty six thousand two fifty before destination and fees.",
             "caption": "$36,250 MSRP",
+            "stat": "BEFORE DESTINATION",
             "image_prompt": "price card comparing limited edition MSRP to regular Miata trims",
         },
         {
             "stage": "escalation",
-            "narration": "You get Nappa leather, serialized badging, special wheels, and a matching key sleeve.",
-            "caption": "SPECIAL, BUT SUBTLE",
+            "narration": "Inside, it gets tan Nappa leather, serialized badging, special wheels, and a matching key sleeve.",
+            "caption": "TAN NAPPA INTERIOR",
+            "stat": "Nappa + serialized badge",
             "image_prompt": "premium detail collage, badge, wheel, key sleeve, tan leather, abstract generated",
         },
         {
             "stage": "payoff",
-            "narration": "So this is not a faster Miata. It is a scarcity-and-spec Miata.",
-            "caption": "NOT FASTER. RARER.",
+            "narration": "The engine is the familiar one hundred eighty one horsepower Miata formula, not a power bump.",
+            "caption": "181 HP ROADSTER",
+            "stat": "151 LB-FT",
             "image_prompt": "split card: performance meter unchanged, rarity meter rising",
         },
         {
             "stage": "cta",
-            "narration": "Would you pay collector money for this one, or just buy the regular Miata?",
+            "narration": "Would you chase this limited spec, or buy a regular Miata and drive it every weekend?",
             "caption": "WOULD YOU BUY IT?",
+            "stat": "collector spec or driver?",
             "image_prompt": "comment prompt card with red roadster silhouette and question mark",
         },
     ],
@@ -181,6 +188,130 @@ def _candidate_source_screenshots(source_topic=DEFAULT_SOURCE_TOPIC):
             if path.exists():
                 paths.append(path)
     return paths
+
+
+def _source_root(source_topic=DEFAULT_SOURCE_TOPIC):
+    return ROOT / "cars" / "output" / "sources" / source_topic
+
+
+def _load_scraped_source_packet(source_topic=DEFAULT_SOURCE_TOPIC):
+    packet_path = _source_root(source_topic) / "source-packet.json"
+    if not packet_path.exists():
+        return None
+    try:
+        return json.loads(packet_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+
+
+def _candidate_source_images(source_topic=DEFAULT_SOURCE_TOPIC):
+    source_root = _source_root(source_topic)
+    images_dir = source_root / "images"
+    packet = _load_scraped_source_packet(source_topic) or {}
+    paths = []
+    for item in packet.get("downloaded_images", []):
+        rel = item.get("path")
+        if rel:
+            candidate = source_root / rel
+            if candidate.exists():
+                paths.append(candidate)
+    if images_dir.exists():
+        for pattern in ("*.jpg", "*.jpeg", "*.png", "*.webp"):
+            paths.extend(sorted(images_dir.glob(pattern)))
+    deduped = []
+    seen = set()
+    for path in paths:
+        if path not in seen:
+            seen.add(path)
+            deduped.append(path)
+    return deduped
+
+
+def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False):
+    size = FAST_CANVAS if fast else CANVAS
+    width, height = size
+    scale = width / 1080
+    base = Image.open(source_image_path).convert("RGB")
+    image = _cover_crop(base, size)
+    shade = Image.new("RGBA", size, (0, 0, 0, 70))
+    image = Image.alpha_composite(image.convert("RGBA"), shade)
+    draw = ImageDraw.Draw(image)
+
+    title_font = _font(int(58 * scale))
+    body_font = _font(int(42 * scale))
+    small_font = _font(int(30 * scale))
+    highlight = (236, 190, 145)
+
+    draw.rounded_rectangle(
+        (int(46 * scale), int(55 * scale), int(width - 46 * scale), int(152 * scale)),
+        radius=int(24 * scale),
+        fill=(0, 0, 0, 210),
+        outline=highlight,
+        width=max(1, int(3 * scale)),
+    )
+    draw.text((int(72 * scale), int(83 * scale)), "MAZDA MX-5 MIATA", font=small_font, fill=highlight)
+    draw.text((int(width - 190 * scale), int(83 * scale)), f"SCENE {index}", font=small_font, fill=(255, 235, 210))
+
+    caption = _wrap(draw, scene["caption"], title_font, int(width * 0.82), max_lines=2)
+    caption_bbox = draw.multiline_textbbox((0, 0), caption, font=title_font, spacing=int(10 * scale))
+    caption_top = int(height * 0.50)
+    draw.rounded_rectangle(
+        (
+            int(50 * scale),
+            caption_top - int(34 * scale),
+            int(width - 50 * scale),
+            caption_top + (caption_bbox[3] - caption_bbox[1]) + int(48 * scale),
+        ),
+        radius=int(30 * scale),
+        fill=(0, 0, 0, 205),
+    )
+    draw.multiline_text(
+        (int((width - (caption_bbox[2] - caption_bbox[0])) / 2), caption_top),
+        caption,
+        font=title_font,
+        fill=(255, 240, 220),
+        spacing=int(10 * scale),
+        align="center",
+        stroke_width=max(1, int(3 * scale)),
+        stroke_fill=(0, 0, 0),
+    )
+
+    stat = scene.get("stat")
+    if stat:
+        stat_font = _font(int(34 * scale))
+        stat_bbox = draw.textbbox((0, 0), stat, font=stat_font)
+        stat_w = stat_bbox[2] - stat_bbox[0]
+        stat_h = stat_bbox[3] - stat_bbox[1]
+        stat_x = int((width - stat_w) / 2)
+        stat_y = int(height * 0.64)
+        draw.rounded_rectangle(
+            (
+                stat_x - int(28 * scale),
+                stat_y - int(18 * scale),
+                stat_x + stat_w + int(28 * scale),
+                stat_y + stat_h + int(24 * scale),
+            ),
+            radius=int(22 * scale),
+            fill=(145, 22, 20, 225),
+            outline=highlight,
+            width=max(1, int(2 * scale)),
+        )
+        draw.text((stat_x, stat_y), stat, font=stat_font, fill=(255, 248, 230))
+
+    narration = _wrap(draw, scene["narration"], body_font, int(width * 0.82), max_lines=4)
+    draw.rounded_rectangle(
+        (int(58 * scale), int(height * 0.74), int(width - 58 * scale), int(height * 0.92)),
+        radius=int(28 * scale),
+        fill=(0, 0, 0, 220),
+    )
+    draw.multiline_text(
+        (int(95 * scale), int(height * 0.772)),
+        narration,
+        font=body_font,
+        fill=(255, 249, 235),
+        spacing=int(8 * scale),
+    )
+    image.convert("RGB").save(out_path)
 
 
 def _draw_source_screenshot_scene(scene, index, out_path, source_image_path, fast=False):
@@ -439,7 +570,6 @@ def generate_sample(
     (run_dir / "source_packet.json").write_text(json.dumps(SOURCE_PACKET, indent=2), encoding="utf-8")
     (run_dir / "youtube_title.txt").write_text("Is the Miata 35th Anniversary actually special?", encoding="utf-8")
     (run_dir / "youtube_description.txt").write_text(
-        "Topic signal: Doug DeMuro's Miata 35th Anniversary upload.\n"
         "Facts verified from Mazda USA Newsroom and Car and Driver.\n"
         "Sources:\n"
         "- https://news.mazdausa.com/2025-01-24-Mazda-Announces-2025-MX-5-Miata-35th-Anniversary\n"
@@ -448,20 +578,35 @@ def generate_sample(
         encoding="utf-8",
     )
 
+    source_images = _candidate_source_images(source_topic=source_topic)
     source_screenshots = _candidate_source_screenshots(source_topic=source_topic)
-    if require_real_media and not source_screenshots:
+    if require_real_media and not (source_images or source_screenshots):
         raise SystemExit(
-            "No official screenshots found. Run `cd scraper/car-source-scraper && npm run scrape:miata` first, "
+            "No official images/screenshots found. Run `cd scraper/car-source-scraper && npm run scrape:miata` first, "
             "or omit --require-real-media to render generated fallback cards."
         )
-    storyboard["visual_source"] = "official_source_screenshots" if source_screenshots else "generated_fallback_cards"
+    if source_images:
+        storyboard["visual_source"] = "official_source_images"
+    elif source_screenshots:
+        storyboard["visual_source"] = "official_source_screenshots"
+    else:
+        storyboard["visual_source"] = "generated_fallback_cards"
+    storyboard["source_images_used"] = [str(path.relative_to(ROOT)) for path in source_images]
     storyboard["source_screenshots_used"] = [str(path.relative_to(ROOT)) for path in source_screenshots]
     (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
 
     image_paths = []
     for index, scene in enumerate(storyboard["scenes"], start=1):
         image_path = images_dir / f"scene_{index:02d}.png"
-        if source_screenshots:
+        if source_images:
+            _draw_car_image_scene(
+                scene,
+                index,
+                image_path,
+                source_images[(index - 1) % len(source_images)],
+                fast=fast,
+            )
+        elif source_screenshots:
             _draw_source_screenshot_scene(
                 scene,
                 index,

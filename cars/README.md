@@ -15,7 +15,7 @@ cars/output/samples/<sample-slug>/
 
 ## Better local sample flow
 
-For real-looking visuals, capture official/reputable source screenshots first. For the current Miata test:
+For real-looking visuals, capture official/reputable source images/screenshots first. For the current Miata test:
 
 ```bash
 cd scraper/car-source-scraper
@@ -31,7 +31,7 @@ pip install -r requirements.txt
 FAST_MODE=1 python cars/automation/generate_sample.py --require-real-media
 ```
 
-The renderer uses official-page screenshots from `cars/output/sources/<topic>/screenshots/` when they exist. If you omit `--require-real-media`, it can still fall back to generated cards for layout testing.
+The renderer prefers downloaded official/source car images from `cars/output/sources/<topic>/images/`, then falls back to official-page screenshots from `cars/output/sources/<topic>/screenshots/`. If you omit `--require-real-media`, it can still fall back to generated cards for layout testing.
 
 ## Voice options
 

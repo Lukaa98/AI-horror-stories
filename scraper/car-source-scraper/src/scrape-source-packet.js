@@ -41,6 +41,53 @@ async function ensureDir(dir) {
   await fs.mkdir(dir, { recursive: true });
 }
 
+function extensionFromContentType(contentType) {
+  if (!contentType) return ".jpg";
+  if (contentType.includes("png")) return ".png";
+  if (contentType.includes("webp")) return ".webp";
+  if (contentType.includes("gif")) return ".gif";
+  return ".jpg";
+}
+
+async function downloadImageAssets(page, packet, outputRoot) {
+  const imagesDir = path.join(outputRoot, "images");
+  await ensureDir(imagesDir);
+  const urls = Array.from(new Set([packet.og_image, ...packet.image_urls].filter(Boolean))).slice(0, 12);
+  const downloaded = [];
+
+  for (const [index, imageUrl] of urls.entries()) {
+    try {
+      const response = await page.goto(imageUrl, { waitUntil: "networkidle2", timeout: 45000 });
+      if (!response || !response.ok()) {
+        continue;
+      }
+      const contentType = response.headers()["content-type"] || "";
+      if (!contentType.startsWith("image/")) {
+        continue;
+      }
+      const buffer = await response.buffer();
+      if (buffer.length < 10_000) {
+        continue;
+      }
+      const relativePath = path.join("images", `source-image-${String(index + 1).padStart(2, "0")}${extensionFromContentType(contentType)}`);
+      await fs.writeFile(path.join(outputRoot, relativePath), buffer);
+      downloaded.push({
+        source_url: imageUrl,
+        path: relativePath,
+        content_type: contentType,
+        bytes: buffer.length,
+      });
+    } catch (error) {
+      downloaded.push({
+        source_url: imageUrl,
+        error: String(error?.message || error),
+      });
+    }
+  }
+
+  return downloaded;
+}
+
 async function extractPagePacket(page, source) {
   return page.evaluate((sourceInput) => {
     const text = document.body?.innerText || "";
@@ -159,6 +206,11 @@ async function main() {
 
     await page.screenshot({ path: path.join(screenshotDir, "viewport.png"), fullPage: false });
     await page.screenshot({ path: path.join(screenshotDir, "full-page.png"), fullPage: true });
+
+    const assetPage = await browser.newPage();
+    packet.downloaded_images = await downloadImageAssets(assetPage, packet, outputRoot);
+    await assetPage.close();
+
     await fs.writeFile(path.join(outputRoot, "source-packet.json"), JSON.stringify(packet, null, 2));
     console.log(JSON.stringify(packet, null, 2));
   } finally {
