@@ -28,7 +28,7 @@ SAMPLE_SLUG = "mazda-mx5-miata-35th-anniversary"
 CANVAS = (1080, 1920)
 FAST_CANVAS = (540, 960)
 
-DEFAULT_SOURCE_TOPIC = "2025-mazda-mx5-miata-35th-anniversary"
+DEFAULT_SOURCE_TOPIC = "mazda-mx5-miata-official"
 
 SOURCE_PACKET = {
     "topic_signal": {
@@ -89,6 +89,7 @@ STORYBOARD = {
             "caption": "LIMITED MIATA",
             "stat": "2025 MX-5 35TH",
             "image_prompt": "deep red roadster silhouette, search trend card, no creator footage",
+            "media_tags": ["exterior", "hero"],
         },
         {
             "stage": "setup",
@@ -96,6 +97,7 @@ STORYBOARD = {
             "caption": "THE SPEC IS THE STORY",
             "stat": "ARTISAN RED + TAN",
             "image_prompt": "official-source style card showing Mazda newsroom and fact-check icons",
+            "media_tags": ["exterior", "gallery"],
         },
         {
             "stage": "setup",
@@ -103,6 +105,7 @@ STORYBOARD = {
             "caption": "300 FOR THE U.S.",
             "stat": "300 UNITS",
             "image_prompt": "limited edition badge, red paint swatch, tan leather texture card",
+            "media_tags": ["interior", "exterior"],
         },
         {
             "stage": "escalation",
@@ -110,6 +113,7 @@ STORYBOARD = {
             "caption": "$36,250 MSRP",
             "stat": "BEFORE DESTINATION",
             "image_prompt": "price card comparing limited edition MSRP to regular Miata trims",
+            "media_tags": ["exterior", "price"],
         },
         {
             "stage": "escalation",
@@ -117,6 +121,7 @@ STORYBOARD = {
             "caption": "TAN NAPPA INTERIOR",
             "stat": "Nappa + serialized badge",
             "image_prompt": "premium detail collage, badge, wheel, key sleeve, tan leather, abstract generated",
+            "media_tags": ["interior", "wheels"],
         },
         {
             "stage": "payoff",
@@ -124,6 +129,7 @@ STORYBOARD = {
             "caption": "181 HP ROADSTER",
             "stat": "151 LB-FT",
             "image_prompt": "split card: performance meter unchanged, rarity meter rising",
+            "media_tags": ["performance", "interior"],
         },
         {
             "stage": "cta",
@@ -131,6 +137,7 @@ STORYBOARD = {
             "caption": "WOULD YOU BUY IT?",
             "stat": "collector spec or driver?",
             "image_prompt": "comment prompt card with red roadster silhouette and question mark",
+            "media_tags": ["convertible_roof", "exterior"],
         },
     ],
 }
@@ -208,23 +215,66 @@ def _candidate_source_images(source_topic=DEFAULT_SOURCE_TOPIC):
     source_root = _source_root(source_topic)
     images_dir = source_root / "images"
     packet = _load_scraped_source_packet(source_topic) or {}
-    paths = []
+    assets = []
     for item in packet.get("downloaded_images", []):
+        if item.get("error"):
+            continue
         rel = item.get("path")
         if rel:
             candidate = source_root / rel
             if candidate.exists():
-                paths.append(candidate)
+                assets.append({
+                    "path": candidate,
+                    "labels": item.get("labels", []),
+                    "score": item.get("score", 0),
+                    "source_url": item.get("source_url"),
+                })
     if images_dir.exists():
+        known = {asset["path"] for asset in assets}
         for pattern in ("*.jpg", "*.jpeg", "*.png", "*.webp"):
-            paths.extend(sorted(images_dir.glob(pattern)))
+            for path in sorted(images_dir.glob(pattern)):
+                if path not in known:
+                    assets.append({"path": path, "labels": _labels_from_path(path), "score": 0, "source_url": None})
+                    known.add(path)
     deduped = []
     seen = set()
-    for path in paths:
-        if path not in seen:
-            seen.add(path)
-            deduped.append(path)
+    for asset in assets:
+        if asset["path"] not in seen:
+            seen.add(asset["path"])
+            deduped.append(asset)
     return deduped
+
+
+def _labels_from_path(path):
+    text = str(path).lower()
+    labels = []
+    for label, words in {
+        "interior": ["interior", "cabin", "seat", "leather", "nappa", "dashboard", "gauge"],
+        "exterior": ["exterior", "hero", "360", "soulred", "soul-red", "roadster"],
+        "wheels": ["wheel", "rim", "alloy"],
+        "convertible_roof": ["convertible", "soft-top", "hard-top", "roof", "rf"],
+        "performance": ["engine", "tach", "gauge", "instrument", "performance"],
+        "price": ["price", "msrp"],
+    }.items():
+        if any(word in text for word in words):
+            labels.append(label)
+    return labels or ["general"]
+
+
+def _select_source_image(scene, assets, used_paths):
+    if not assets:
+        return None
+    desired = set(scene.get("media_tags", []))
+    ranked = []
+    for asset in assets:
+        labels = set(asset.get("labels") or [])
+        match_score = len(desired & labels) * 100
+        reuse_penalty = 25 if asset["path"] in used_paths else 0
+        ranked.append((match_score + asset.get("score", 0) - reuse_penalty, asset))
+    ranked.sort(key=lambda item: item[0], reverse=True)
+    selected = ranked[0][1]
+    used_paths.add(selected["path"])
+    return selected
 
 
 def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False):
@@ -582,7 +632,7 @@ def generate_sample(
     source_screenshots = _candidate_source_screenshots(source_topic=source_topic)
     if require_real_media and not (source_images or source_screenshots):
         raise SystemExit(
-            "No official images/screenshots found. Run `cd scraper/car-source-scraper && npm run scrape:miata` first, "
+            "No official images/screenshots found. Run `cd scraper/car-source-scraper && npm run scrape:miata-official` first, "
             "or omit --require-real-media to render generated fallback cards."
         )
     if source_images:
@@ -591,19 +641,26 @@ def generate_sample(
         storyboard["visual_source"] = "official_source_screenshots"
     else:
         storyboard["visual_source"] = "generated_fallback_cards"
-    storyboard["source_images_used"] = [str(path.relative_to(ROOT)) for path in source_images]
+    storyboard["source_images_used"] = [str(asset["path"].relative_to(ROOT)) for asset in source_images]
     storyboard["source_screenshots_used"] = [str(path.relative_to(ROOT)) for path in source_screenshots]
     (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
 
     image_paths = []
+    used_source_paths = set()
     for index, scene in enumerate(storyboard["scenes"], start=1):
         image_path = images_dir / f"scene_{index:02d}.png"
         if source_images:
+            selected_asset = _select_source_image(scene, source_images, used_source_paths)
+            scene["selected_media"] = {
+                "path": str(selected_asset["path"].relative_to(ROOT)),
+                "labels": selected_asset.get("labels", []),
+                "source_url": selected_asset.get("source_url"),
+            }
             _draw_car_image_scene(
                 scene,
                 index,
                 image_path,
-                source_images[(index - 1) % len(source_images)],
+                selected_asset["path"],
                 fast=fast,
             )
         elif source_screenshots:
@@ -660,7 +717,7 @@ def main():
     parser.add_argument(
         "--require-real-media",
         action="store_true",
-        help="Fail unless official scraper screenshots exist.",
+        help="Fail unless official scraper images or screenshots exist.",
     )
     args = parser.parse_args()
     run_dir = generate_sample(

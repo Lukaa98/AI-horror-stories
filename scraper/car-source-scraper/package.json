@@ -6,9 +6,11 @@
   "description": "Staged browser automation for car source packets and official-page screenshots.",
   "scripts": {
     "scrape": "node src/scrape-source-packet.js",
-    "scrape:miata": "node src/scrape-source-packet.js --topic=2025-mazda-mx5-miata-35th-anniversary --url=https://news.mazdausa.com/2025-01-24-Mazda-Announces-2025-MX-5-Miata-35th-Anniversary --source-name=Mazda-USA",
+    "scrape:miata": "node src/scrape-source-packet.js --topic=mazda-mx5-miata-official --url=https://www.mazdausa.com/vehicles/mx-5-miata --extra-url=https://news.mazdausa.com/2025-01-24-Mazda-Announces-2025-MX-5-Miata-35th-Anniversary --source-name=Mazda-USA --seed-image=https://www.mazdausa.com/siteassets/vehicles/2026/mx-5-st/04_btv/004_exterior/ext.-360s/sport/46v-soul-red/e360-my26-mx-5-st-sport-soulred-023.jpg#default?w=1480::exterior,hero --seed-image=https://www.mazdausa.com/siteassets/vehicles/2026/mx-5-st/01_vlp/001_design/0002_gallery/desktop/2026-mx-5-miata-st-desktop-gallery-002.jpg?w=1480::interior,gallery --seed-video=https://www.mazdausa.com/siteassets/vehicles/2026/mx-5-st/01_vlp/002_crossover/2026-mazda-mx-5-miata-rf-hard-top-convertible-d.mp4::convertible_roof,video_broll",
     "setup:linux": "bash scripts/install-linux-deps.sh",
-    "doctor": "node src/scrape-source-packet.js --doctor"
+    "doctor": "node src/scrape-source-packet.js --doctor",
+    "scrape:miata-news": "node src/scrape-source-packet.js --topic=2025-mazda-mx5-miata-35th-anniversary --url=https://news.mazdausa.com/2025-01-24-Mazda-Announces-2025-MX-5-Miata-35th-Anniversary --source-name=Mazda-USA",
+    "scrape:miata-official": "node src/scrape-source-packet.js --topic=mazda-mx5-miata-official --url=https://www.mazdausa.com/vehicles/mx-5-miata --extra-url=https://news.mazdausa.com/2025-01-24-Mazda-Announces-2025-MX-5-Miata-35th-Anniversary --source-name=Mazda-USA --seed-image=https://www.mazdausa.com/siteassets/vehicles/2026/mx-5-st/04_btv/004_exterior/ext.-360s/sport/46v-soul-red/e360-my26-mx-5-st-sport-soulred-023.jpg#default?w=1480::exterior,hero --seed-image=https://www.mazdausa.com/siteassets/vehicles/2026/mx-5-st/01_vlp/001_design/0002_gallery/desktop/2026-mx-5-miata-st-desktop-gallery-002.jpg?w=1480::interior,gallery --seed-video=https://www.mazdausa.com/siteassets/vehicles/2026/mx-5-st/01_vlp/002_crossover/2026-mazda-mx-5-miata-rf-hard-top-convertible-d.mp4::convertible_roof,video_broll"
   },
   "dependencies": {
     "puppeteer": "^24.22.3",

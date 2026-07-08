@@ -20,7 +20,8 @@ For real-looking visuals, capture official/reputable source images/screenshots f
 ```bash
 cd scraper/car-source-scraper
 npm install
-npm run scrape:miata
+npm run setup:linux
+npm run scrape:miata-official
 cd ../..
 ```
 
@@ -31,7 +32,7 @@ pip install -r requirements.txt
 FAST_MODE=1 python cars/automation/generate_sample.py --require-real-media
 ```
 
-The renderer prefers downloaded official/source car images from `cars/output/sources/<topic>/images/`, then falls back to official-page screenshots from `cars/output/sources/<topic>/screenshots/`. If you omit `--require-real-media`, it can still fall back to generated cards for layout testing.
+The renderer prefers downloaded official/source car images from `cars/output/sources/<topic>/images/`, matches each scene to labels like `exterior`, `interior`, `wheels`, `performance`, or `convertible_roof`, then falls back to official-page screenshots from `cars/output/sources/<topic>/screenshots/`. If you omit `--require-real-media`, it can still fall back to generated cards for layout testing.
 
 ## Voice options
 

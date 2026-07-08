@@ -48,7 +48,7 @@ export CHROME_PATH=/usr/bin/google-chrome
 cd scraper/car-source-scraper
 npm install
 npm run setup:linux
-npm run scrape:miata
+npm run scrape:miata-official
 ```
 
 Output goes to:
@@ -56,11 +56,13 @@ Output goes to:
 ```text
 cars/output/sources/<topic>/
   source-packet.json
-  images/source-image-*.jpg
+  media-manifest.json
+  images/<label>-image-*.jpg
+  videos/<label>-video-*.mp4   # only when --download-videos is used
   screenshots/*.png
 ```
 
-The Python sample renderer prefers downloaded car/source images first, then falls back to screenshots:
+The Python sample renderer prefers downloaded car/source images first and matches them to storyboard tags before falling back to screenshots:
 
 ```bash
 cd ../..
