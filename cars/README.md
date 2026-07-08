@@ -25,14 +25,15 @@ npm run scrape:miata-official
 cd ../..
 ```
 
-Then generate the local test video from the repo root:
+Then review the scraped media and generate the local test video from the repo root:
 
 ```bash
 pip install -r requirements.txt
+python cars/automation/review_media.py --provider auto
 FAST_MODE=1 python cars/automation/generate_sample.py --require-real-media
 ```
 
-The renderer prefers downloaded official/source car images from `cars/output/sources/<topic>/images/`, matches each scene to labels like `exterior`, `interior`, `wheels`, `performance`, or `convertible_roof`, then falls back to official-page screenshots from `cars/output/sources/<topic>/screenshots/`. If you omit `--require-real-media`, it can still fall back to generated cards for layout testing.
+`review_media.py --provider auto` uses OpenAI vision review when `OPENAI_API_KEY` is set; otherwise it writes a local heuristic `media-review.json`. The renderer prefers downloaded official/source car images from `cars/output/sources/<topic>/images/`, applies the media review to reject blurry/off-topic/nav images, matches each scene to labels like `exterior`, `interior`, `wheels`, `performance`, or `convertible_roof`, then falls back to official-page screenshots from `cars/output/sources/<topic>/screenshots/`. If you omit `--require-real-media`, it can still fall back to generated cards for layout testing.
 
 ## Voice options
 

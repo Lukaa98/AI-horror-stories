@@ -62,9 +62,15 @@ cars/output/sources/<topic>/
   screenshots/*.png
 ```
 
-The Python sample renderer prefers downloaded car/source images first and matches them to storyboard tags before falling back to screenshots:
+The Python media reviewer can score the downloaded images before rendering. It uses OpenAI vision when `OPENAI_API_KEY` is available, otherwise it falls back to local heuristic checks:
 
 ```bash
 cd ../..
+python cars/automation/review_media.py --provider auto
+```
+
+The Python sample renderer then prefers downloaded car/source images first, applies `media-review.json` to reject blurry/off-topic/nav assets, and matches the approved images to storyboard tags before falling back to screenshots:
+
+```bash
 FAST_MODE=1 python cars/automation/generate_sample.py --require-real-media
 ```

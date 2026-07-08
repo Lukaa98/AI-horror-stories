@@ -211,10 +211,28 @@ def _load_scraped_source_packet(source_topic=DEFAULT_SOURCE_TOPIC):
         return None
 
 
+def _load_media_review(source_topic=DEFAULT_SOURCE_TOPIC):
+    review_path = _source_root(source_topic) / "media-review.json"
+    if not review_path.exists():
+        return {}
+    try:
+        payload = json.loads(review_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    reviews = {}
+    for item in payload.get("reviews", []):
+        rel_path = item.get("path")
+        if not rel_path:
+            continue
+        reviews[(ROOT / rel_path).resolve()] = item
+    return reviews
+
+
 def _candidate_source_images(source_topic=DEFAULT_SOURCE_TOPIC):
     source_root = _source_root(source_topic)
     images_dir = source_root / "images"
     packet = _load_scraped_source_packet(source_topic) or {}
+    review_by_path = _load_media_review(source_topic)
     assets = []
     for item in packet.get("downloaded_images", []):
         if item.get("error"):
@@ -242,6 +260,21 @@ def _candidate_source_images(source_topic=DEFAULT_SOURCE_TOPIC):
         if asset["path"] not in seen:
             seen.add(asset["path"])
             asset["quality"] = _inspect_source_image(asset)
+            review = review_by_path.get(asset["path"].resolve())
+            if review:
+                asset["ai_review"] = review
+                caption_labels = review.get("caption_match") or []
+                asset["labels"] = list(dict.fromkeys([*asset.get("labels", []), *caption_labels]))
+                if review.get("reject"):
+                    asset["quality"]["approved"] = False
+                    reason = str(review.get("reason") or "no reason supplied")
+                    asset["quality"].setdefault("flags", []).append(f"ai_rejected:{reason}")
+                else:
+                    asset["score"] = (
+                        asset.get("score", 0)
+                        + int(review.get("quality_score") or 0) * 5
+                        + int(review.get("composition_score") or 0) * 3
+                    )
             deduped.append(asset)
     return deduped
 
@@ -698,6 +731,7 @@ def generate_sample(
                 "labels": selected_asset.get("labels", []),
                 "source_url": selected_asset.get("source_url"),
                 "quality": selected_asset.get("quality", {}),
+                "ai_review": selected_asset.get("ai_review"),
             }
             _draw_car_image_scene(
                 scene,
