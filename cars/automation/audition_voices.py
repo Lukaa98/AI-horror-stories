@@ -108,8 +108,9 @@ def _write_html_index(out_dir, entries):
         rows.append(
             "\n".join(
                 [
-                    f"<section><h2>{entry['preset']}</h2>",
+                    f"<section><h2>{entry['script_style']} / {entry['preset']}</h2>",
                     f"<p><strong>voice:</strong> {entry['voice']} | <strong>speed:</strong> {entry['speed']}</p>",
+                    f"<p><strong>script:</strong> {entry['script']}</p>",
                     f"<p>{entry['instructions']}</p>",
                     f"<audio controls src=\"{Path(entry['file']).name}\"></audio></section>",
                 ]
@@ -126,7 +127,15 @@ def _write_html_index(out_dir, entries):
     (out_dir / "index.html").write_text(html, encoding="utf-8")
 
 
-def audition_voices(text, out_dir=DEFAULT_OUT_DIR, presets=None, model=DEFAULT_MODEL, response_format=DEFAULT_FORMAT, script_style="custom"):
+def _validate_presets(presets):
+    selected = presets or list(VOICE_PRESETS)
+    unknown = [name for name in selected if name not in VOICE_PRESETS]
+    if unknown:
+        raise SystemExit(f"Unknown voice preset(s): {', '.join(unknown)}. Available: {', '.join(VOICE_PRESETS)}")
+    return selected
+
+
+def _require_openai_key():
     api_key = os.getenv("OPENAI_API_KEY")
     if not _looks_like_real_openai_key(api_key):
         raise SystemExit(
@@ -134,19 +143,13 @@ def audition_voices(text, out_dir=DEFAULT_OUT_DIR, presets=None, model=DEFAULT_M
             "Complete .env before running voice auditions."
         )
 
-    selected = presets or list(VOICE_PRESETS)
-    unknown = [name for name in selected if name not in VOICE_PRESETS]
-    if unknown:
-        raise SystemExit(f"Unknown voice preset(s): {', '.join(unknown)}. Available: {', '.join(VOICE_PRESETS)}")
 
-    out_dir = Path(out_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
-    client = OpenAI()
+def _generate_entries(client, text, script_style, selected, out_dir, model, response_format):
     entries = []
     for name in selected:
         preset = VOICE_PRESETS[name]
         suffix = response_format.lstrip(".")
-        path = out_dir / f"{_slug(name)}-{preset['voice']}.{suffix}"
+        path = out_dir / f"{_slug(script_style)}-{_slug(name)}-{preset['voice']}.{suffix}"
         response = client.audio.speech.create(
             model=model,
             voice=preset["voice"],
@@ -156,14 +159,26 @@ def audition_voices(text, out_dir=DEFAULT_OUT_DIR, presets=None, model=DEFAULT_M
             response_format=response_format,
         )
         response.write_to_file(path)
-        entries.append({"preset": name, "file": str(path), "model": model, **preset})
+        entries.append({"script_style": script_style, "script": text, "preset": name, "file": str(path), "model": model, **preset})
+    return entries
+
+
+def audition_voice_matrix(scripts, out_dir=DEFAULT_OUT_DIR, presets=None, model=DEFAULT_MODEL, response_format=DEFAULT_FORMAT):
+    _require_openai_key()
+    selected = _validate_presets(presets)
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    client = OpenAI()
+    entries = []
+    for script_style, text in scripts.items():
+        entries.extend(_generate_entries(client, text, script_style, selected, out_dir, model, response_format))
 
     manifest = {
         "created_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "model": model,
         "response_format": response_format,
-        "script_style": script_style,
-        "script": text,
+        "script_styles": list(scripts),
+        "presets": selected,
         "entries": entries,
     }
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
@@ -171,11 +186,22 @@ def audition_voices(text, out_dir=DEFAULT_OUT_DIR, presets=None, model=DEFAULT_M
     return out_dir
 
 
+def audition_voices(text, out_dir=DEFAULT_OUT_DIR, presets=None, model=DEFAULT_MODEL, response_format=DEFAULT_FORMAT, script_style="custom"):
+    return audition_voice_matrix(
+        {script_style: text},
+        out_dir=out_dir,
+        presets=presets,
+        model=model,
+        response_format=response_format,
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generate several TTS voice auditions for the car Shorts narrator.")
     parser.add_argument("--text", default=None, help="Script text to read. Overrides --script-style.")
     parser.add_argument("--text-file", type=Path, default=None, help="Read script text from a file. Overrides --text and --script-style.")
-    parser.add_argument("--script-style", choices=sorted(SCRIPT_STYLES), default="casual_short")
+    parser.add_argument("--script-style", choices=sorted(SCRIPT_STYLES), default=None, help="Generate one script style only.")
+    parser.add_argument("--script-styles", default=",".join(SCRIPT_STYLES), help="Comma-separated script styles to generate when --text/--text-file are not used.")
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--format", choices=["mp3", "opus", "aac", "flac", "wav", "pcm"], default=DEFAULT_FORMAT)
@@ -186,16 +212,19 @@ def main():
     )
     args = parser.parse_args()
     if args.text_file:
-        text = args.text_file.read_text(encoding="utf-8").strip()
-        script_style = "text_file"
+        scripts = {"text_file": args.text_file.read_text(encoding="utf-8").strip()}
     elif args.text:
-        text = args.text
-        script_style = "custom_text"
+        scripts = {"custom_text": args.text}
+    elif args.script_style:
+        scripts = {args.script_style: SCRIPT_STYLES[args.script_style]}
     else:
-        text = SCRIPT_STYLES[args.script_style]
-        script_style = args.script_style
+        style_names = [item.strip() for item in args.script_styles.split(",") if item.strip()]
+        unknown_styles = [name for name in style_names if name not in SCRIPT_STYLES]
+        if unknown_styles:
+            raise SystemExit(f"Unknown script style(s): {', '.join(unknown_styles)}. Available: {', '.join(SCRIPT_STYLES)}")
+        scripts = {name: SCRIPT_STYLES[name] for name in style_names}
     presets = [item.strip() for item in args.presets.split(",") if item.strip()]
-    print(audition_voices(text=text, out_dir=args.out_dir, presets=presets, model=args.model, response_format=args.format, script_style=script_style))
+    print(audition_voice_matrix(scripts=scripts, out_dir=args.out_dir, presets=presets, model=args.model, response_format=args.format))
 
 
 if __name__ == "__main__":
