@@ -23,6 +23,13 @@ def _image_paths(topic):
     return paths
 
 
+def _looks_like_real_openai_key(value):
+    value = (value or "").strip()
+    if value in {"", "sk-proj", "sk-"}:
+        return False
+    return value.startswith(("sk-", "sk-proj-")) and len(value) > 30
+
+
 def _data_url(path):
     suffix = path.suffix.lower().lstrip(".") or "jpeg"
     if suffix == "jpg":
@@ -97,7 +104,14 @@ def _openai_review(path, model):
 def review_media(topic=DEFAULT_SOURCE_TOPIC, provider="auto", model=DEFAULT_MODEL, out=None):
     paths = _image_paths(topic)
     reviews = []
-    use_openai = provider == "openai" or (provider == "auto" and os.getenv("OPENAI_API_KEY"))
+    api_key = os.getenv("OPENAI_API_KEY")
+    has_real_key = _looks_like_real_openai_key(api_key)
+    if provider == "openai" and not has_real_key:
+        raise SystemExit(
+            "OPENAI_API_KEY is missing or still set to the placeholder value. "
+            "Complete .env before running --provider openai, or use --provider heuristic."
+        )
+    use_openai = provider == "openai" or (provider == "auto" and has_real_key)
     for path in paths:
         if use_openai:
             try:
@@ -113,7 +127,10 @@ def review_media(topic=DEFAULT_SOURCE_TOPIC, provider="auto", model=DEFAULT_MODE
 
     payload = {
         "topic": topic,
+        "requested_provider": provider,
         "provider": "openai" if use_openai else "heuristic",
+        "openai_enabled": use_openai,
+        "openai_disabled_reason": None if use_openai else "OPENAI_API_KEY missing or placeholder",
         "model": model if use_openai else None,
         "image_count": len(paths),
         "approved_count": sum(1 for item in reviews if not item.get("reject")),

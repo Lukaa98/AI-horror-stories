@@ -187,6 +187,32 @@ def _cover_crop(image, size):
     return resized.crop((left, top, left + target_w, top + target_h))
 
 
+def _blurred_fit_canvas(image, size, top_margin_ratio=0.12, max_height_ratio=0.52):
+    """Fill the vertical frame without cropping the car out of the source image."""
+    target_w, target_h = size
+    background = _cover_crop(image, size).filter(ImageFilter.GaussianBlur(radius=max(10, target_w // 45)))
+    background = Image.blend(background, Image.new("RGB", size, (8, 8, 10)), 0.25)
+
+    foreground = image.copy()
+    foreground.thumbnail((int(target_w * 0.94), int(target_h * max_height_ratio)), Image.Resampling.LANCZOS)
+    left = (target_w - foreground.width) // 2
+    top = int(target_h * top_margin_ratio)
+
+    shadow = Image.new("RGBA", size, (0, 0, 0, 0))
+    shadow_draw = ImageDraw.Draw(shadow)
+    shadow_draw.rounded_rectangle(
+        (left - 14, top - 14, left + foreground.width + 14, top + foreground.height + 14),
+        radius=28,
+        fill=(0, 0, 0, 120),
+    )
+    shadow = shadow.filter(ImageFilter.GaussianBlur(radius=16))
+
+    canvas = background.convert("RGBA")
+    canvas.alpha_composite(shadow)
+    canvas.alpha_composite(foreground.convert("RGBA"), (left, top))
+    return canvas
+
+
 def _candidate_source_screenshots(source_topic=DEFAULT_SOURCE_TOPIC):
     source_root = ROOT / "cars" / "output" / "sources"
     candidates = [source_topic, SAMPLE_SLUG]
@@ -286,11 +312,14 @@ def _labels_from_path(path):
     text = str(path).lower()
     labels = []
     for label, words in {
-        "interior": ["interior", "cabin", "seat", "leather", "nappa", "dashboard", "gauge"],
-        "exterior": ["exterior", "hero", "360", "soulred", "soul-red", "roadster"],
+        "hero": ["hero", "000_hero"],
+        "interior": ["interior", "cabin", "seat", "leather", "nappa", "dashboard", "gauge", "cockpit"],
+        "dashboard": ["dashboard", "gauge", "cockpit", "instrument"],
+        "exterior": ["exterior", "hero", "360", "soulred", "soul-red", "roadster", "gallery"],
         "wheels": ["wheel", "rim", "alloy"],
         "convertible_roof": ["convertible", "soft-top", "hard-top", "roof", "rf"],
-        "performance": ["engine", "tach", "gauge", "instrument", "performance"],
+        "engine": ["engine", "skyactiv"],
+        "performance": ["engine", "tach", "gauge", "instrument", "performance", "suspension", "brakes", "limited-slip", "5050", "50-50"],
         "price": ["price", "msrp"],
     }.items():
         if any(word in text for word in words):
@@ -324,6 +353,8 @@ def _inspect_source_image(asset):
         flags.append("low_resolution")
     if any(bad in text for bad in ["main-nav", "homepage", "global-nav", "shopping", "community", "owner", "national-geographic", "sensor-movie"]):
         flags.append("off_topic_navigation_or_promo_asset")
+    if "siteassets/vehicles/" not in text and "prnewswire" not in text:
+        flags.append("not_vehicle_media_path")
     blur_score = _blur_score(path)
     if blur_score < 8:
         flags.append("possibly_blurry_or_low_detail")
@@ -342,13 +373,25 @@ def _select_source_image(scene, assets, used_paths):
     desired = set(scene.get("media_tags", []))
     approved_assets = [asset for asset in assets if asset.get("quality", {}).get("approved", True)]
     candidate_pool = approved_assets or assets
+    matching_pool = [
+        asset for asset in candidate_pool
+        if desired & set(asset.get("labels") or [])
+    ]
+    if matching_pool:
+        candidate_pool = matching_pool
     ranked = []
     for asset in candidate_pool:
         labels = set(asset.get("labels") or [])
         match_score = len(desired & labels) * 100
-        reuse_penalty = 25 if asset["path"] in used_paths else 0
+        missing_match_penalty = 150 if desired and not (desired & labels) else 0
+        reuse_penalty = 80 if asset["path"] in used_paths else 0
         quality_penalty = 0 if asset.get("quality", {}).get("approved", True) else 120
-        ranked.append((match_score + asset.get("score", 0) - reuse_penalty - quality_penalty, asset))
+        ai = asset.get("ai_review") or {}
+        ai_score = int(ai.get("quality_score") or 0) * 8 + int(ai.get("composition_score") or 0) * 4
+        ranked.append((
+            match_score + asset.get("score", 0) + ai_score - reuse_penalty - quality_penalty - missing_match_penalty,
+            asset,
+        ))
     ranked.sort(key=lambda item: item[0], reverse=True)
     selected = ranked[0][1]
     used_paths.add(selected["path"])
@@ -360,9 +403,7 @@ def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False)
     width, height = size
     scale = width / 1080
     base = Image.open(source_image_path).convert("RGB")
-    image = _cover_crop(base, size)
-    shade = Image.new("RGBA", size, (0, 0, 0, 70))
-    image = Image.alpha_composite(image.convert("RGBA"), shade)
+    image = _blurred_fit_canvas(base, size)
     draw = ImageDraw.Draw(image)
 
     title_font = _font(int(58 * scale))
@@ -590,6 +631,45 @@ def _draw_card(scene, index, out_path, fast=False):
     image.save(out_path)
 
 
+def _write_contact_sheet(image_paths, out_path):
+    if not image_paths:
+        return
+    thumb_w, thumb_h = 216, 384
+    gutter = 18
+    width = (thumb_w * len(image_paths)) + (gutter * (len(image_paths) + 1))
+    height = thumb_h + 72
+    sheet = Image.new("RGB", (width, height), (18, 18, 22))
+    draw = ImageDraw.Draw(sheet)
+    label_font = _font(22)
+    for index, path in enumerate(image_paths, start=1):
+        image = Image.open(path).convert("RGB")
+        image.thumbnail((thumb_w, thumb_h), Image.Resampling.LANCZOS)
+        x = gutter + (index - 1) * (thumb_w + gutter) + (thumb_w - image.width) // 2
+        y = 42 + (thumb_h - image.height) // 2
+        sheet.paste(image, (x, y))
+        draw.text((gutter + (index - 1) * (thumb_w + gutter), 10), f"Scene {index}", font=label_font, fill=(245, 225, 205))
+    sheet.save(out_path)
+
+
+def _write_media_selection_report(storyboard, run_dir):
+    rows = []
+    for index, scene in enumerate(storyboard.get("scenes", []), start=1):
+        media = scene.get("selected_media") or {}
+        ai = media.get("ai_review") or {}
+        rows.append({
+            "scene": index,
+            "stage": scene.get("stage"),
+            "wanted_tags": scene.get("media_tags", []),
+            "selected_path": media.get("path"),
+            "selected_labels": media.get("labels", []),
+            "quality_flags": (media.get("quality") or {}).get("flags", []),
+            "ai_provider": ai.get("provider"),
+            "ai_reject": ai.get("reject"),
+            "ai_reason": ai.get("reason"),
+        })
+    (run_dir / "media_selection_report.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
+
+
 def _write_silent_wav(path, duration_seconds=24, sample_rate=44100):
     frame_count = int(duration_seconds * sample_rate)
     with wave.open(str(path), "w") as wav:
@@ -754,6 +834,9 @@ def generate_sample(
         else:
             _draw_card(scene, index, image_path, fast=fast)
         image_paths.append(image_path)
+    _write_contact_sheet(image_paths, run_dir / "scene_contact_sheet.jpg")
+    _write_media_selection_report(storyboard, run_dir)
+    (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
 
     duration_seconds = int(storyboard.get("target_seconds", 24))
     try:
