@@ -58,4 +58,13 @@ python cars/automation/audition_voices.py
 
 Auditions are written to `cars/output/voice_auditions/` with an `index.html` player and `manifest.json`. Presets include `car_host`, `deep_gravel`, `luxury_ai`, `warm_enthusiast`, `trailer_hype`, and `clean_news`. These are original style directions, not attempts to clone or imitate a real actor, celebrity, or copyrighted character.
 
+If the voices feel too similar, test different script modes too:
+
+```bash
+python cars/automation/audition_voices.py --script-style casual_short
+python cars/automation/audition_voices.py --script-style quirky_walkaround
+python cars/automation/audition_voices.py --script-style spec_punch
+python cars/automation/audition_voices.py --script-style hype_short
+```
+
 This output is ignored by git so it can be inspected in Codespaces without bloating the repository.
