@@ -150,6 +150,7 @@ def _generate_entries(client, text, script_style, selected, out_dir, model, resp
         preset = VOICE_PRESETS[name]
         suffix = response_format.lstrip(".")
         path = out_dir / f"{_slug(script_style)}-{_slug(name)}-{preset['voice']}.{suffix}"
+        path.parent.mkdir(parents=True, exist_ok=True)
         response = client.audio.speech.create(
             model=model,
             voice=preset["voice"],
@@ -158,7 +159,7 @@ def _generate_entries(client, text, script_style, selected, out_dir, model, resp
             speed=preset["speed"],
             response_format=response_format,
         )
-        response.write_to_file(path)
+        response.write_to_file(str(path))
         entries.append({"script_style": script_style, "script": text, "preset": name, "file": str(path), "model": model, **preset})
     return entries
 
