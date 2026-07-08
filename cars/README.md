@@ -50,4 +50,12 @@ FAST_MODE=1 python cars/automation/generate_sample.py --tts-provider tone
 
 `openai` requires `OPENAI_API_KEY`. `tone` is only a last-resort audible placeholder.
 
+To quickly compare narrator styles before rendering a full video, generate voice auditions:
+
+```bash
+python cars/automation/audition_voices.py
+```
+
+Auditions are written to `cars/output/voice_auditions/` with an `index.html` player and `manifest.json`. Presets include `car_host`, `deep_gravel`, `luxury_ai`, `warm_enthusiast`, `trailer_hype`, and `clean_news`. These are original style directions, not attempts to clone or imitate a real actor, celebrity, or copyrighted character.
+
 This output is ignored by git so it can be inspected in Codespaces without bloating the repository.
