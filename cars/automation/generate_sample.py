@@ -7,6 +7,8 @@ import wave
 from datetime import datetime, timezone
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 try:
     from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageStat
 except ModuleNotFoundError as exc:
@@ -17,6 +19,7 @@ except ModuleNotFoundError as exc:
     raise
 
 ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(ROOT / ".env")
 HORROR_SRC = ROOT / "horror_stories" / "src"
 if str(HORROR_SRC) not in sys.path:
     sys.path.insert(0, str(HORROR_SRC))
