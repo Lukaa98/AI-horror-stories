@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 try:
-    from PIL import Image, ImageDraw, ImageFilter, ImageFont
+    from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageStat
 except ModuleNotFoundError as exc:
     if exc.name == "PIL":
         raise SystemExit(
@@ -241,6 +241,7 @@ def _candidate_source_images(source_topic=DEFAULT_SOURCE_TOPIC):
     for asset in assets:
         if asset["path"] not in seen:
             seen.add(asset["path"])
+            asset["quality"] = _inspect_source_image(asset)
             deduped.append(asset)
     return deduped
 
@@ -261,16 +262,57 @@ def _labels_from_path(path):
     return labels or ["general"]
 
 
+def _blur_score(path):
+    try:
+        image = Image.open(path).convert("L")
+        image.thumbnail((360, 360), Image.Resampling.LANCZOS)
+        edges = image.filter(ImageFilter.FIND_EDGES)
+        stat = ImageStat.Stat(edges)
+        return round(sum(stat.var) / max(1, len(stat.var)), 2)
+    except Exception:
+        return 0.0
+
+
+def _inspect_source_image(asset):
+    path = asset["path"]
+    source_url = asset.get("source_url") or ""
+    text = f"{path} {source_url}".lower()
+    flags = []
+    try:
+        with Image.open(path) as image:
+            width, height = image.size
+    except Exception as exc:
+        return {"approved": False, "flags": [f"unreadable:{exc}"], "blur_score": 0, "width": 0, "height": 0}
+
+    if width < 700 or height < 420:
+        flags.append("low_resolution")
+    if any(bad in text for bad in ["main-nav", "homepage", "global-nav", "shopping", "community", "owner", "national-geographic", "sensor-movie"]):
+        flags.append("off_topic_navigation_or_promo_asset")
+    blur_score = _blur_score(path)
+    if blur_score < 8:
+        flags.append("possibly_blurry_or_low_detail")
+    return {
+        "approved": not flags,
+        "flags": flags,
+        "blur_score": blur_score,
+        "width": width,
+        "height": height,
+    }
+
+
 def _select_source_image(scene, assets, used_paths):
     if not assets:
         return None
     desired = set(scene.get("media_tags", []))
+    approved_assets = [asset for asset in assets if asset.get("quality", {}).get("approved", True)]
+    candidate_pool = approved_assets or assets
     ranked = []
-    for asset in assets:
+    for asset in candidate_pool:
         labels = set(asset.get("labels") or [])
         match_score = len(desired & labels) * 100
         reuse_penalty = 25 if asset["path"] in used_paths else 0
-        ranked.append((match_score + asset.get("score", 0) - reuse_penalty, asset))
+        quality_penalty = 0 if asset.get("quality", {}).get("approved", True) else 120
+        ranked.append((match_score + asset.get("score", 0) - reuse_penalty - quality_penalty, asset))
     ranked.sort(key=lambda item: item[0], reverse=True)
     selected = ranked[0][1]
     used_paths.add(selected["path"])
@@ -655,6 +697,7 @@ def generate_sample(
                 "path": str(selected_asset["path"].relative_to(ROOT)),
                 "labels": selected_asset.get("labels", []),
                 "source_url": selected_asset.get("source_url"),
+                "quality": selected_asset.get("quality", {}),
             }
             _draw_car_image_scene(
                 scene,

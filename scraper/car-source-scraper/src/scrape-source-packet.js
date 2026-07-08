@@ -102,6 +102,8 @@ function scoreMediaCandidate(candidate) {
   if (labels.has("gallery")) score += 4;
   if (/siteassets|mazdausa|porsche|audi|toyota|ford|chevrolet|bmwusa|mercedes/i.test(candidate.url)) score += 8;
   if (/logo|icon|favicon|sprite|badge/i.test(candidate.url)) score -= 20;
+  if (/main-nav|homepage|global-nav|shopping|community|owner|national-geographic|sensor-movie|recommended-search/i.test(candidate.url)) score -= 80;
+  if (/siteassets\/vehicles/i.test(candidate.url)) score += 10;
   if (/\.svg(\?|#|$)/i.test(candidate.url)) score -= 20;
   return score;
 }
