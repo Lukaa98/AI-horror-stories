@@ -70,6 +70,19 @@
         "processing_status": "succeeded"
       },
       "last_polled_at": "2026-07-10T04:15:58.183345Z"
+    },
+    {
+      "video_id": "s3PxJaF1hIo",
+      "url": "https://www.youtube.com/watch?v=s3PxJaF1hIo",
+      "title": "Echoes of the Lost Server",
+      "privacy": "private",
+      "publish_at": "2026-07-10T16:00:00Z",
+      "uploaded_at": "2026-07-10T12:43:29.020125Z",
+      "run_dir": "generated-run",
+      "theme": "abandoned game server horror",
+      "story_provider": "openai",
+      "plan_index": "0",
+      "history_updated_at": "2026-07-10T12:43:29.111046Z"
     }
   ]
 }

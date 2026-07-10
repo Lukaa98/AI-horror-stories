@@ -1,6 +1,6 @@
 {
-  "next_plan_index": 0,
+  "next_plan_index": 1,
   "last_selected_index": 0,
-  "last_should_publish": false,
-  "last_decision_reason": "Latest upload is only 20.0h old."
+  "last_should_publish": true,
+  "last_decision_reason": "Latest upload is 68.6h old, forcing release by 48h cap."
 }
