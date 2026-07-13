@@ -1,6 +1,6 @@
 {
-  "next_plan_index": 1,
+  "next_plan_index": 3,
   "last_selected_index": 2,
-  "last_should_publish": false,
-  "last_decision_reason": "Latest upload score 14.0 is below the early-release threshold."
+  "last_should_publish": true,
+  "last_decision_reason": "Latest upload is 68.7h old, forcing release by 48h cap."
 }
