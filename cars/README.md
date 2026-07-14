@@ -48,7 +48,7 @@ FAST_MODE=1 python cars/automation/generate_sample.py --tts-provider openai
 FAST_MODE=1 python cars/automation/generate_sample.py --tts-provider tone
 ```
 
-`openai` requires `OPENAI_API_KEY`. `tone` is only a last-resort audible placeholder.
+`openai` requires `OPENAI_API_KEY`. By default it uses the selected `spec_punch` / `trailer_hype` direction from the auditions: OpenAI voice `onyx`, punchy automotive instructions, and `OPENAI_TTS_SPEED=1.0`. Override with `OPENAI_TTS_VOICE`, `OPENAI_TTS_INSTRUCTIONS`, or `OPENAI_TTS_SPEED` if needed. `tone` is only a last-resort audible placeholder.
 
 To quickly compare narrator styles before rendering a full video, generate voice auditions:
 
@@ -56,7 +56,7 @@ To quickly compare narrator styles before rendering a full video, generate voice
 python cars/automation/audition_voices.py
 ```
 
-By default this creates a matrix of every built-in script style against every built-in voice preset. Auditions are written to `cars/output/voice_auditions/` with an `index.html` player and `manifest.json`. Presets include `car_host`, `deep_gravel`, `luxury_ai`, `warm_enthusiast`, `trailer_hype`, and `clean_news`. These are original style directions, not attempts to clone or imitate a real actor, celebrity, or copyrighted character.
+By default this now regenerates the selected audition direction: `spec_punch` script style with the `trailer_hype` voice preset, which writes `spec-punch-trailer-hype-onyx.mp3`. Auditions are written to `cars/output/voice_auditions/` with an `index.html` player and `manifest.json`. Other presets remain available when you explicitly request them.
 
 If the voices feel too similar, test different script modes too:
 
@@ -71,6 +71,12 @@ To limit the matrix to a couple scripts and voices:
 
 ```bash
 python cars/automation/audition_voices.py --script-styles casual_short,quirky_walkaround --presets car_host,deep_gravel,warm_enthusiast
+```
+
+To regenerate every built-in script/voice combo again:
+
+```bash
+python cars/automation/audition_voices.py --script-styles casual_short,quirky_walkaround,spec_punch,hype_short --presets car_host,deep_gravel,luxury_ai,warm_enthusiast,trailer_hype,clean_news
 ```
 
 This output is ignored by git so it can be inspected in Codespaces without bloating the repository.

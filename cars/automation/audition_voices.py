@@ -37,7 +37,9 @@ SCRIPT_STYLES = {
     ),
 }
 
-SAMPLE_SCRIPT = SCRIPT_STYLES["casual_short"]
+SELECTED_SCRIPT_STYLE = "spec_punch"
+SELECTED_VOICE_PRESET = "trailer_hype"
+SAMPLE_SCRIPT = SCRIPT_STYLES[SELECTED_SCRIPT_STYLE]
 
 VOICE_PRESETS = {
     "car_host": {
@@ -202,13 +204,13 @@ def main():
     parser.add_argument("--text", default=None, help="Script text to read. Overrides --script-style.")
     parser.add_argument("--text-file", type=Path, default=None, help="Read script text from a file. Overrides --text and --script-style.")
     parser.add_argument("--script-style", choices=sorted(SCRIPT_STYLES), default=None, help="Generate one script style only.")
-    parser.add_argument("--script-styles", default=",".join(SCRIPT_STYLES), help="Comma-separated script styles to generate when --text/--text-file are not used.")
+    parser.add_argument("--script-styles", default=SELECTED_SCRIPT_STYLE, help="Comma-separated script styles to generate when --text/--text-file are not used.")
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--format", choices=["mp3", "opus", "aac", "flac", "wav", "pcm"], default=DEFAULT_FORMAT)
     parser.add_argument(
         "--presets",
-        default=",".join(VOICE_PRESETS),
+        default=SELECTED_VOICE_PRESET,
         help=f"Comma-separated presets. Available: {', '.join(VOICE_PRESETS)}",
     )
     args = parser.parse_args()

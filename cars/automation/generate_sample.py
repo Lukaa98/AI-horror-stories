@@ -708,6 +708,13 @@ def _write_gtts_audio(path, text):
     gTTS(text=text, lang="en", tld="com", slow=False).save(str(path))
 
 
+CAR_TTS_INSTRUCTIONS = (
+    "Use a high-energy car trailer narrator style. Big and punchy, but still clear. "
+    "Sound like an original automotive Shorts narrator, not an imitation of any real actor, "
+    "franchise character, or celebrity voice."
+)
+
+
 def _write_openai_audio(path, text):
     if not os.getenv("OPENAI_API_KEY"):
         raise RuntimeError("OPENAI_API_KEY is not set for OpenAI TTS.")
@@ -716,10 +723,13 @@ def _write_openai_audio(path, text):
     client = OpenAI()
     response = client.audio.speech.create(
         model=os.getenv("OPENAI_TTS_MODEL", "gpt-4o-mini-tts"),
-        voice=os.getenv("OPENAI_TTS_VOICE", "alloy"),
+        voice=os.getenv("OPENAI_TTS_VOICE", "onyx"),
         input=text,
+        instructions=os.getenv("OPENAI_TTS_INSTRUCTIONS", CAR_TTS_INSTRUCTIONS),
+        speed=float(os.getenv("OPENAI_TTS_SPEED", "1.0")),
     )
-    response.write_to_file(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    response.write_to_file(str(path))
 
 
 def _write_narration_audio(run_dir, storyboard, duration_seconds, provider="gtts"):
