@@ -391,7 +391,7 @@ def _inspect_source_image(asset):
         flags.append("low_resolution")
     if any(bad in text for bad in ["main-nav", "homepage", "global-nav", "shopping", "community", "owner", "national-geographic", "sensor-movie"]):
         flags.append("off_topic_navigation_or_promo_asset")
-    if "siteassets/vehicles/" not in text and "prnewswire" not in text:
+    if source_url and "siteassets/vehicles/" not in source_url.lower() and "prnewswire" not in source_url.lower():
         flags.append("not_vehicle_media_path")
     blur_score = _blur_score(path)
     if blur_score < 8:
