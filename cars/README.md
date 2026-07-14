@@ -44,7 +44,7 @@ To explicitly render the AI/heuristic plan:
 FAST_MODE=1 python cars/automation/generate_sample.py --require-real-media --plan cars/output/sources/mazda-mx5-miata-official/short-plan.json
 ```
 
-After generation, inspect `scene_contact_sheet.jpg` for a fast visual overview and `media_selection_report.json` to see which asset was selected for each scene, which labels matched, and whether AI review approved or rejected it.
+After generation, inspect `scene_contact_sheet.jpg` for a fast visual overview, `media_selection_report.json` to see which asset was selected for each scene, and `edit_decision_report.json` to see the Milestone 3 edit choices: motion style, layout, crop focus, cut style, caption, and stat chip for each scene.
 
 ## Voice options
 

@@ -146,6 +146,34 @@ STORYBOARD = {
 }
 STORYBOARD["narration"] = " ".join(scene["narration"] for scene in STORYBOARD["scenes"])
 
+EDIT_STYLES = {
+    "hook": {"motion": "push_in", "layout": "thumbstop", "crop_focus": "hero", "accent": [255, 204, 92], "caption_top": 0.47, "stat_top": 0.63},
+    "performance": {"motion": "drift_left", "layout": "spec_punch", "crop_focus": "front_three_quarter", "accent": [255, 96, 72], "caption_top": 0.51, "stat_top": 0.66},
+    "interior": {"motion": "rise", "layout": "walkaround", "crop_focus": "dashboard", "accent": [118, 196, 255], "caption_top": 0.53, "stat_top": 0.67},
+    "roof": {"motion": "drift_right", "layout": "feature", "crop_focus": "roofline", "accent": [236, 190, 145], "caption_top": 0.50, "stat_top": 0.65},
+    "detail": {"motion": "pull_back", "layout": "feature", "crop_focus": "detail", "accent": [236, 190, 145], "caption_top": 0.50, "stat_top": 0.65},
+    "opinion": {"motion": "push_in", "layout": "verdict", "crop_focus": "hero", "accent": [255, 204, 92], "caption_top": 0.48, "stat_top": 0.64},
+    "score": {"motion": "push_in", "layout": "verdict", "crop_focus": "hero", "accent": [255, 204, 92], "caption_top": 0.48, "stat_top": 0.64},
+}
+
+
+def _edit_style_for_scene(scene, index):
+    style = dict(EDIT_STYLES.get(scene.get("stage"), EDIT_STYLES["detail"]))
+    style["beat"] = index
+    style["cut_style"] = "hard_cut" if index == 1 else "fast_match_cut"
+    return style
+
+
+def _apply_edit_styles(storyboard):
+    for index, scene in enumerate(storyboard.get("scenes", []), start=1):
+        scene.setdefault("edit_style", _edit_style_for_scene(scene, index))
+    storyboard["edit_style_version"] = "cars-milestone-3a"
+    storyboard["editor_notes"] = (
+        "Each planned scene now carries an edit_style with motion, layout, crop focus, "
+        "accent color, and cut style so the renderer can feel more like a paced car Short."
+    )
+    return storyboard
+
 
 def _font(size):
     for candidate in [
@@ -452,14 +480,19 @@ def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False)
     size = FAST_CANVAS if fast else CANVAS
     width, height = size
     scale = width / 1080
+    style = scene.get("edit_style") or _edit_style_for_scene(scene, index)
+    accent = tuple(style.get("accent") or [236, 190, 145])
+    layout = style.get("layout", "feature")
+    top_margin = 0.09 if layout in {"thumbstop", "spec_punch"} else 0.12
+    max_height = 0.56 if layout in {"thumbstop", "walkaround"} else 0.51
     base = Image.open(source_image_path).convert("RGB")
-    image = _blurred_fit_canvas(base, size)
+    image = _blurred_fit_canvas(base, size, top_margin_ratio=top_margin, max_height_ratio=max_height)
     draw = ImageDraw.Draw(image)
 
-    title_font = _font(int(58 * scale))
-    body_font = _font(int(42 * scale))
+    title_font = _font(int((68 if layout == "thumbstop" else 58) * scale))
+    body_font = _font(int(38 * scale))
     small_font = _font(int(30 * scale))
-    highlight = (236, 190, 145)
+    highlight = accent
 
     draw.rounded_rectangle(
         (int(46 * scale), int(55 * scale), int(width - 46 * scale), int(152 * scale)),
@@ -468,12 +501,20 @@ def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False)
         outline=highlight,
         width=max(1, int(3 * scale)),
     )
-    draw.text((int(72 * scale), int(83 * scale)), "MAZDA MX-5 MIATA", font=small_font, fill=highlight)
-    draw.text((int(width - 190 * scale), int(83 * scale)), f"SCENE {index}", font=small_font, fill=(255, 235, 210))
+    draw.text((int(72 * scale), int(83 * scale)), f"{scene.get('stage', 'scene').upper()} CUT", font=small_font, fill=highlight)
+    draw.text((int(width - 210 * scale), int(83 * scale)), f"BEAT {index}", font=small_font, fill=(255, 235, 210))
+
+    # A tiny progress strip makes the still frame feel intentionally edited, not like a raw scrape.
+    strip_y = int(164 * scale)
+    strip_x1 = int(58 * scale)
+    strip_x2 = int(width - 58 * scale)
+    draw.rounded_rectangle((strip_x1, strip_y, strip_x2, strip_y + int(10 * scale)), radius=int(8 * scale), fill=(255, 255, 255, 55))
+    progress_x = strip_x1 + int((strip_x2 - strip_x1) * min(1.0, index / max(1, scene.get("scene_count", 5))))
+    draw.rounded_rectangle((strip_x1, strip_y, progress_x, strip_y + int(10 * scale)), radius=int(8 * scale), fill=highlight)
 
     caption = _wrap(draw, scene["caption"], title_font, int(width * 0.82), max_lines=2)
     caption_bbox = draw.multiline_textbbox((0, 0), caption, font=title_font, spacing=int(10 * scale))
-    caption_top = int(height * 0.50)
+    caption_top = int(height * float(style.get("caption_top", 0.50)))
     draw.rounded_rectangle(
         (
             int(50 * scale),
@@ -502,7 +543,7 @@ def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False)
         stat_w = stat_bbox[2] - stat_bbox[0]
         stat_h = stat_bbox[3] - stat_bbox[1]
         stat_x = int((width - stat_w) / 2)
-        stat_y = int(height * 0.64)
+        stat_y = int(height * float(style.get("stat_top", 0.64)))
         draw.rounded_rectangle(
             (
                 stat_x - int(28 * scale),
@@ -519,12 +560,14 @@ def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False)
 
     narration = _wrap(draw, scene["narration"], body_font, int(width * 0.82), max_lines=4)
     draw.rounded_rectangle(
-        (int(58 * scale), int(height * 0.74), int(width - 58 * scale), int(height * 0.92)),
+        (int(58 * scale), int(height * 0.755), int(width - 58 * scale), int(height * 0.925)),
         radius=int(28 * scale),
-        fill=(0, 0, 0, 220),
+        fill=(0, 0, 0, 215),
+        outline=highlight if layout in {"spec_punch", "verdict"} else None,
+        width=max(1, int(2 * scale)),
     )
     draw.multiline_text(
-        (int(95 * scale), int(height * 0.772)),
+        (int(95 * scale), int(height * 0.785)),
         narration,
         font=body_font,
         fill=(255, 249, 235),
@@ -703,9 +746,11 @@ def _write_contact_sheet(image_paths, out_path):
 
 def _write_media_selection_report(storyboard, run_dir):
     rows = []
+    edit_rows = []
     for index, scene in enumerate(storyboard.get("scenes", []), start=1):
         media = scene.get("selected_media") or {}
         ai = media.get("ai_review") or {}
+        edit_style = scene.get("edit_style") or {}
         rows.append({
             "scene": index,
             "stage": scene.get("stage"),
@@ -717,7 +762,18 @@ def _write_media_selection_report(storyboard, run_dir):
             "ai_reject": ai.get("reject"),
             "ai_reason": ai.get("reason"),
         })
+        edit_rows.append({
+            "scene": index,
+            "stage": scene.get("stage"),
+            "motion": edit_style.get("motion"),
+            "layout": edit_style.get("layout"),
+            "crop_focus": edit_style.get("crop_focus"),
+            "cut_style": edit_style.get("cut_style"),
+            "caption": scene.get("caption"),
+            "stat": scene.get("stat"),
+        })
     (run_dir / "media_selection_report.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
+    (run_dir / "edit_decision_report.json").write_text(json.dumps(edit_rows, indent=2), encoding="utf-8")
 
 
 def _write_silent_wav(path, duration_seconds=24, sample_rate=44100):
@@ -834,6 +890,9 @@ def generate_sample(
     if short_plan and short_plan.get("source_topic"):
         source_topic = short_plan["source_topic"]
     storyboard = _storyboard_from_plan(short_plan) if short_plan else dict(STORYBOARD)
+    storyboard = _apply_edit_styles(storyboard)
+    for i, scene in enumerate(storyboard.get("scenes", []), start=1):
+        scene["scene_count"] = len(storyboard.get("scenes", []))
     storyboard["created_at"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     storyboard["run_slug"] = slug
     storyboard["source_packet_path"] = "source_packet.json"

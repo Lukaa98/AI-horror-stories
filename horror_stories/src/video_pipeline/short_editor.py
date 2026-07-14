@@ -47,11 +47,17 @@ def _load_font(size):
 def _scene_durations(scenes, target_duration):
     weights = []
     stage_bonus = {
-        "hook": 1.15,
         "setup": 1.0,
         "escalation": 1.08,
         "payoff": 1.1,
         "cta": 0.9,
+        "hook": 1.2,
+        "performance": 1.05,
+        "interior": 1.0,
+        "roof": 1.0,
+        "detail": 1.0,
+        "opinion": 0.95,
+        "score": 1.0,
     }
     for scene in scenes:
         word_count = max(4, len(scene["narration"].split()))
@@ -86,12 +92,12 @@ def _prepare_vertical_image(image_path):
     return np.array(canvas)
 
 
-def _make_motion_clip(image_path, duration, seed):
+def _make_motion_clip(image_path, duration, seed, style_override=None):
     rng = random.Random(seed)
     prepared = _prepare_vertical_image(image_path)
 
     motion_styles = ["push_in", "drift_left", "drift_right", "rise", "pull_back", "float"]
-    style = motion_styles[seed % len(motion_styles)]
+    style = style_override if style_override in motion_styles else motion_styles[seed % len(motion_styles)]
 
     if style == "push_in":
         start_scale = 1.01 + rng.random() * 0.02
@@ -244,10 +250,10 @@ def _make_scene_overlays(scene, duration, seed):
     overlays = [_make_gradient_overlay(duration)]
     stage = scene.get("stage", "setup")
 
-    if stage in {"setup", "escalation", "payoff"}:
-        overlays.append(_make_scanline_overlay(duration).set_opacity(0.18 if FAST_MODE else 0.14))
-    if stage in {"escalation", "payoff", "cta"}:
-        overlays.append(_make_glitch_overlay(duration, seed + 41))
+    if stage in {"setup", "escalation", "payoff", "performance", "interior", "roof", "detail", "score", "opinion"}:
+        overlays.append(_make_scanline_overlay(duration).set_opacity(0.12 if FAST_MODE else 0.10))
+    if stage in {"escalation", "payoff", "cta", "hook", "performance", "score", "opinion"}:
+        overlays.append(_make_glitch_overlay(duration, seed + 41).set_opacity(0.45 if FAST_MODE else 0.35))
     return overlays
 
 
@@ -346,7 +352,8 @@ def _make_subtitle_sequence(text, duration, start_time=0.0):
 
 def _make_scene_clip(image_path, scene, duration, index):
     base = ColorClip(CANVAS_SIZE, color=(8, 8, 10), duration=duration)
-    motion = _make_motion_clip(image_path, duration, seed=(index * 97) + 13)
+    edit_style = scene.get("edit_style") or {}
+    motion = _make_motion_clip(image_path, duration, seed=(index * 97) + 13, style_override=edit_style.get("motion"))
     particles = _make_particle_clip(duration, seed=(index * 151) + 9)
     overlays = _make_scene_overlays(scene, duration, seed=(index * 191) + 5)
 
