@@ -257,6 +257,44 @@ def _load_media_review(source_topic=DEFAULT_SOURCE_TOPIC):
     return reviews
 
 
+def _load_short_plan(plan_path):
+    if not plan_path:
+        return None
+    path = Path(plan_path)
+    if not path.exists():
+        raise SystemExit(f"Short plan not found: {path}")
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"Short plan is not valid JSON: {path}") from exc
+
+
+def _storyboard_from_plan(plan):
+    storyboard = dict(STORYBOARD)
+    storyboard["title"] = plan.get("title") or storyboard["title"]
+    storyboard["hook"] = plan.get("hook") or storyboard["hook"]
+    storyboard["theme"] = plan.get("angle") or storyboard["theme"]
+    storyboard["target_seconds"] = int(plan.get("target_seconds") or storyboard["target_seconds"])
+    storyboard["story_provider"] = f"short-plan:{plan.get('planner_provider', 'unknown')}"
+    scenes = []
+    for scene in plan.get("scenes", []):
+        scenes.append({
+            "stage": scene.get("stage", "scene"),
+            "narration": scene.get("narration", ""),
+            "caption": scene.get("caption") or scene.get("stage", "CAR SHORT").upper(),
+            "stat": scene.get("stat", ""),
+            "image_prompt": scene.get("visual_need", ""),
+            "media_tags": scene.get("media_tags", []),
+            "planned_media": scene.get("selected_media"),
+        })
+    if scenes:
+        storyboard["scenes"] = scenes
+        storyboard["scene_count"] = len(scenes)
+        storyboard["narration"] = " ".join(scene["narration"] for scene in scenes)
+    storyboard["short_plan"] = plan
+    return storyboard
+
+
 def _candidate_source_images(source_topic=DEFAULT_SOURCE_TOPIC):
     source_root = _source_root(source_topic)
     images_dir = source_root / "images"
@@ -396,6 +434,18 @@ def _select_source_image(scene, assets, used_paths):
     selected = ranked[0][1]
     used_paths.add(selected["path"])
     return selected
+
+
+def _planned_source_image(scene, assets):
+    planned = scene.get("planned_media") or {}
+    planned_path = planned.get("path")
+    if not planned_path:
+        return None
+    planned_abs = (ROOT / planned_path).resolve()
+    for asset in assets:
+        if asset["path"].resolve() == planned_abs and asset.get("quality", {}).get("approved", True):
+            return asset
+    return None
 
 
 def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False):
@@ -774,15 +824,21 @@ def generate_sample(
     tts_provider="gtts",
     source_topic=DEFAULT_SOURCE_TOPIC,
     require_real_media=False,
+    plan_path=None,
 ):
     run_dir = Path(output_root) / slug
     images_dir = run_dir / "images"
     images_dir.mkdir(parents=True, exist_ok=True)
 
-    storyboard = dict(STORYBOARD)
+    short_plan = _load_short_plan(plan_path)
+    if short_plan and short_plan.get("source_topic"):
+        source_topic = short_plan["source_topic"]
+    storyboard = _storyboard_from_plan(short_plan) if short_plan else dict(STORYBOARD)
     storyboard["created_at"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     storyboard["run_slug"] = slug
     storyboard["source_packet_path"] = "source_packet.json"
+    if plan_path:
+        storyboard["short_plan_path"] = str(Path(plan_path).relative_to(ROOT) if Path(plan_path).is_absolute() and ROOT in Path(plan_path).parents else plan_path)
 
     (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
     (run_dir / "source_packet.json").write_text(json.dumps(SOURCE_PACKET, indent=2), encoding="utf-8")
@@ -818,13 +874,15 @@ def generate_sample(
     for index, scene in enumerate(storyboard["scenes"], start=1):
         image_path = images_dir / f"scene_{index:02d}.png"
         if source_images:
-            selected_asset = _select_source_image(scene, source_images, used_source_paths)
+            selected_asset = _planned_source_image(scene, source_images) or _select_source_image(scene, source_images, used_source_paths)
+            used_source_paths.add(selected_asset["path"])
             scene["selected_media"] = {
                 "path": str(selected_asset["path"].relative_to(ROOT)),
                 "labels": selected_asset.get("labels", []),
                 "source_url": selected_asset.get("source_url"),
                 "quality": selected_asset.get("quality", {}),
                 "ai_review": selected_asset.get("ai_review"),
+                "planned_media": scene.get("planned_media"),
             }
             _draw_car_image_scene(
                 scene,
@@ -887,6 +945,7 @@ def main():
     parser.add_argument("--output-root", type=Path, default=OUTPUT_ROOT)
     parser.add_argument("--tts-provider", choices=["gtts", "openai", "tone", "silent"], default="gtts")
     parser.add_argument("--source-topic", default=DEFAULT_SOURCE_TOPIC)
+    parser.add_argument("--plan", type=Path, default=None, help="Render from an AI/heuristic short-plan.json.")
     parser.add_argument(
         "--require-real-media",
         action="store_true",
@@ -899,6 +958,7 @@ def main():
         tts_provider=args.tts_provider,
         source_topic=args.source_topic,
         require_real_media=args.require_real_media,
+        plan_path=args.plan,
     )
     print(run_dir)
 

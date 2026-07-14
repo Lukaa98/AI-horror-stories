@@ -32,10 +32,17 @@ Then review the scraped media and generate the local test video from the repo ro
 ```bash
 pip install -r requirements.txt
 python cars/automation/review_media.py --provider auto
-FAST_MODE=1 python cars/automation/generate_sample.py --require-real-media
+python cars/automation/plan_short.py --provider auto
+FAST_MODE=1 python cars/automation/generate_sample.py --require-real-media --plan cars/output/sources/mazda-mx5-miata-official/short-plan.json
 ```
 
-`review_media.py --provider auto` uses OpenAI vision review when `OPENAI_API_KEY` is set; otherwise it writes a local heuristic `media-review.json`. The renderer prefers downloaded official/source car images from `cars/output/sources/<topic>/images/`, applies the media review to reject blurry/off-topic/nav images, matches each scene to labels like `exterior`, `interior`, `wheels`, `performance`, or `convertible_roof`, then falls back to official-page screenshots from `cars/output/sources/<topic>/screenshots/`. If you omit `--require-real-media`, it can still fall back to generated cards for layout testing.
+`review_media.py --provider auto` uses OpenAI vision review when `OPENAI_API_KEY` is set; otherwise it writes a local heuristic `media-review.json`. `plan_short.py --provider auto` reads the scraped source packet plus media review and writes `short-plan.json`, including the 20-second angle, narration, scene overlays, and planned media for each scene. The renderer prefers downloaded official/source car images from `cars/output/sources/<topic>/images/`, applies the media review to reject blurry/off-topic/nav images, follows planned scene media when available, then falls back to label matching or official-page screenshots from `cars/output/sources/<topic>/screenshots/`. If you omit `--require-real-media`, it can still fall back to generated cards for layout testing.
+
+To explicitly render the AI/heuristic plan:
+
+```bash
+FAST_MODE=1 python cars/automation/generate_sample.py --require-real-media --plan cars/output/sources/mazda-mx5-miata-official/short-plan.json
+```
 
 After generation, inspect `scene_contact_sheet.jpg` for a fast visual overview and `media_selection_report.json` to see which asset was selected for each scene, which labels matched, and whether AI review approved or rejected it.
 
