@@ -215,6 +215,70 @@ def _cover_crop(image, size):
     return resized.crop((left, top, left + target_w, top + target_h))
 
 
+
+def _focus_fit_canvas(image, size, top_margin_ratio=0.06, max_height_ratio=0.50, max_horizontal_crop_ratio=0.34):
+    """Create a vertical Shorts frame that feels cropped-in while preserving the main subject.
+
+    For wide official car images, a pure 9:16 cover crop often cuts off the car. This
+    keeps a blurred full-frame cover background, then enlarges the source image into a
+    prominent foreground crop. Horizontal cropping is capped and audited so the subject
+    remains mostly visible.
+    """
+    target_w, target_h = size
+    background = _cover_crop(image, size).filter(ImageFilter.GaussianBlur(radius=max(12, target_w // 36)))
+    background = Image.blend(background, Image.new("RGB", size, (7, 8, 10)), 0.18)
+
+    desired_h = int(target_h * max_height_ratio)
+    scale = desired_h / image.height
+    resized = image.resize((max(1, int(image.width * scale)), desired_h), Image.Resampling.LANCZOS)
+
+    crop_box = (0, 0, resized.width, resized.height)
+    horizontal_crop_ratio = 0.0
+    if resized.width > target_w:
+        overflow = resized.width - target_w
+        max_crop_px = int(resized.width * max_horizontal_crop_ratio)
+        crop_width = resized.width - min(overflow, max_crop_px)
+        left = max(0, (resized.width - crop_width) // 2)
+        crop_box = (left, 0, left + crop_width, resized.height)
+        foreground = resized.crop(crop_box)
+        horizontal_crop_ratio = round((resized.width - crop_width) / max(1, resized.width), 3)
+    else:
+        foreground = resized
+
+    if foreground.width != target_w:
+        # Final resize keeps the foreground edge-to-edge after the visibility-safe crop.
+        foreground = foreground.resize((target_w, max(1, int(foreground.height * target_w / foreground.width))), Image.Resampling.LANCZOS)
+
+    if foreground.height > int(target_h * 0.62):
+        foreground = foreground.crop((0, 0, foreground.width, int(target_h * 0.62)))
+
+    left = (target_w - foreground.width) // 2
+    top = int(target_h * top_margin_ratio)
+
+    canvas = background.convert("RGBA")
+    shadow = Image.new("RGBA", size, (0, 0, 0, 0))
+    shadow_draw = ImageDraw.Draw(shadow)
+    shadow_draw.rounded_rectangle(
+        (left - 16, top - 16, left + foreground.width + 16, top + foreground.height + 16),
+        radius=30,
+        fill=(0, 0, 0, 145),
+    )
+    shadow = shadow.filter(ImageFilter.GaussianBlur(radius=18))
+    canvas.alpha_composite(shadow)
+    canvas.alpha_composite(foreground.convert("RGBA"), (left, top))
+
+    audit = {
+        "mode": "focus_fit_canvas",
+        "source_size": list(image.size),
+        "resized_size": [resized.width, resized.height],
+        "foreground_size": [foreground.width, foreground.height],
+        "foreground_top": top,
+        "crop_box": list(crop_box),
+        "horizontal_crop_ratio": horizontal_crop_ratio,
+        "subject_visibility": "capped horizontal crop; full image retained in blurred background",
+    }
+    return canvas, audit
+
 def _blurred_fit_canvas(image, size, top_margin_ratio=0.12, max_height_ratio=0.52):
     """Fill the vertical frame without cropping the car out of the source image."""
     target_w, target_h = size
@@ -483,10 +547,11 @@ def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False)
     style = scene.get("edit_style") or _edit_style_for_scene(scene, index)
     accent = tuple(style.get("accent") or [236, 190, 145])
     layout = style.get("layout", "feature")
-    top_margin = 0.09 if layout in {"thumbstop", "spec_punch"} else 0.12
-    max_height = 0.56 if layout in {"thumbstop", "walkaround"} else 0.51
+    top_margin = 0.045 if layout in {"thumbstop", "spec_punch"} else 0.06
+    max_height = 0.54 if layout in {"thumbstop", "walkaround"} else 0.50
     base = Image.open(source_image_path).convert("RGB")
-    image = _blurred_fit_canvas(base, size, top_margin_ratio=top_margin, max_height_ratio=max_height)
+    image, crop_audit = _focus_fit_canvas(base, size, top_margin_ratio=top_margin, max_height_ratio=max_height)
+    scene["crop_audit"] = crop_audit
     draw = ImageDraw.Draw(image)
 
     title_font = _font(int((68 if layout == "thumbstop" else 58) * scale))
@@ -771,6 +836,7 @@ def _write_media_selection_report(storyboard, run_dir):
             "cut_style": edit_style.get("cut_style"),
             "caption": scene.get("caption"),
             "stat": scene.get("stat"),
+            "crop_audit": scene.get("crop_audit"),
         })
     (run_dir / "media_selection_report.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
     (run_dir / "edit_decision_report.json").write_text(json.dumps(edit_rows, indent=2), encoding="utf-8")
