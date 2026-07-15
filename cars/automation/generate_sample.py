@@ -299,57 +299,40 @@ def _visibility_safe_foreground(image, target_w, target_h, max_horizontal_crop_r
 
 
 def _focus_fit_canvas(image, size, top_margin_ratio=0.06, max_height_ratio=0.50, max_horizontal_crop_ratio=0.52):
-    """Fill the 9:16 frame while keeping the full car photo readable.
+    """Fill the 9:16 frame with one subject-aware source crop.
 
-    A pure 9:16 cover crop fills the page but can cut a wide car in half. A pure
-    contain fit keeps the full car but looks like a tiny landscape strip. This hybrid
-    uses an unblurred subject-aware cover crop as the full-frame visual layer, then
-    places a larger visibility-safe foreground crop at the top for the actual car read.
+    This avoids the duplicated "full image on top plus zoomed image below" look. The
+    crop fills the entire Short frame and uses edge/color detail to bias the crop toward
+    the main subject instead of blindly cropping the exact center.
     """
     target_w, target_h = size
     source_w, source_h = image.size
-
     cover, cover_box = _subject_aware_cover_crop(image, size)
-    foreground, resized, foreground_box, horizontal_crop_ratio = _visibility_safe_foreground(
-        image, target_w, target_h, max_horizontal_crop_ratio=max_horizontal_crop_ratio
-    )
-
-    # Darken the cover just enough for text, but keep it recognizable as the source image.
     canvas = cover.convert("RGBA")
+
+    # Darken only the text-heavy regions; do not blur or duplicate the source image.
     shade = Image.new("RGBA", size, (0, 0, 0, 0))
     shade_draw = ImageDraw.Draw(shade)
     for y in range(target_h):
-        bottom = max(0, (y - int(target_h * 0.52)) / max(1, target_h * 0.48))
-        top_fade = max(0, (int(target_h * 0.13) - y) / max(1, target_h * 0.13))
-        alpha = int((bottom * 135) + (top_fade * 35))
+        top_fade = max(0, (int(target_h * 0.16) - y) / max(1, target_h * 0.16))
+        middle_band = 1.0 if int(target_h * 0.40) <= y <= int(target_h * 0.66) else 0.0
+        bottom = max(0, (y - int(target_h * 0.68)) / max(1, target_h * 0.32))
+        alpha = int((top_fade * 45) + (middle_band * 32) + (bottom * 145))
         if alpha:
             shade_draw.line((0, y, target_w, y), fill=(0, 0, 0, min(165, alpha)))
     canvas = Image.alpha_composite(canvas, shade)
 
-    # Top foreground has no inset/card border; it reads like part of the full-page image.
-    foreground_top = 0
-    canvas.alpha_composite(foreground.convert("RGBA"), (0, foreground_top))
-
-    # Soft fade into the cover layer instead of a harsh image-card edge.
-    fade_h = max(24, int(target_h * 0.045))
-    fade = Image.new("RGBA", (target_w, fade_h), (0, 0, 0, 0))
-    fade_draw = ImageDraw.Draw(fade)
-    for y in range(fade_h):
-        alpha = int(90 * (y / max(1, fade_h - 1)))
-        fade_draw.line((0, y, target_w, y), fill=(0, 0, 0, alpha))
-    canvas.alpha_composite(fade, (0, min(target_h - fade_h, foreground.height - fade_h // 2)))
-
+    crop_w = cover_box[2] - cover_box[0]
+    crop_h = cover_box[3] - cover_box[1]
     audit = {
-        "mode": "hybrid_full_frame_subject_fit",
+        "mode": "single_full_frame_subject_crop",
         "source_size": [source_w, source_h],
         "canvas_size": [target_w, target_h],
         "cover_crop_box": list(cover_box),
-        "foreground_resized_size": [resized.width, resized.height],
-        "foreground_size": [foreground.width, foreground.height],
-        "foreground_crop_box": list(foreground_box),
-        "foreground_top": foreground_top,
-        "foreground_horizontal_crop_ratio": horizontal_crop_ratio,
-        "subject_visibility": "full-frame source cover plus enlarged foreground crop; car remains visible even when the cover crop is tight",
+        "crop_coverage_ratio": round((crop_w * crop_h) / max(1, source_w * source_h), 3),
+        "horizontal_crop_ratio": round((source_w - crop_w) / max(1, source_w), 3),
+        "vertical_crop_ratio": round((source_h - crop_h) / max(1, source_h), 3),
+        "subject_visibility": "single full-frame crop; no duplicate foreground layer",
     }
     return canvas, audit
 
@@ -592,8 +575,9 @@ def _select_source_image(scene, assets, used_paths):
         quality_penalty = 0 if asset.get("quality", {}).get("approved", True) else 120
         ai = asset.get("ai_review") or {}
         ai_score = int(ai.get("quality_score") or 0) * 8 + int(ai.get("composition_score") or 0) * 4
+        people_penalty = 180 if ai.get("has_random_people") else 0
         ranked.append((
-            match_score + asset.get("score", 0) + ai_score - reuse_penalty - quality_penalty - missing_match_penalty,
+            match_score + asset.get("score", 0) + ai_score - reuse_penalty - quality_penalty - missing_match_penalty - people_penalty,
             asset,
         ))
     ranked.sort(key=lambda item: item[0], reverse=True)
@@ -610,6 +594,9 @@ def _planned_source_image(scene, assets):
     planned_abs = (ROOT / planned_path).resolve()
     for asset in assets:
         if asset["path"].resolve() == planned_abs and asset.get("quality", {}).get("approved", True):
+            ai = asset.get("ai_review") or {}
+            if ai.get("has_random_people"):
+                return None
             return asset
     return None
 
