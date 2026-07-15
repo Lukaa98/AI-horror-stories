@@ -216,19 +216,67 @@ def _cover_crop(image, size):
 
 
 
-def _focus_fit_canvas(image, size, top_margin_ratio=0.06, max_height_ratio=0.50, max_horizontal_crop_ratio=0.34):
-    """Create a vertical Shorts frame that feels cropped-in while preserving the main subject.
+def _focus_axis_center(image, axis="x"):
+    """Estimate a useful crop center from edges and color detail without needing AI."""
+    sample = image.copy().resize((360, 240), Image.Resampling.LANCZOS).convert("RGB")
+    edges = sample.convert("L").filter(ImageFilter.FIND_EDGES)
+    pixels = sample.load()
+    edge_pixels = edges.load()
+    if axis == "x":
+        weights = []
+        for x in range(sample.width):
+            total = 0.0
+            for y in range(int(sample.height * 0.18), int(sample.height * 0.88)):
+                r, g, b = pixels[x, y]
+                saturation = max(r, g, b) - min(r, g, b)
+                total += edge_pixels[x, y] + (saturation * 0.45)
+            weights.append(total)
+        total_weight = sum(weights)
+        if total_weight <= 0:
+            return image.width / 2
+        center = sum(i * weight for i, weight in enumerate(weights)) / total_weight
+        return center * (image.width / sample.width)
 
-    For wide official car images, a pure 9:16 cover crop often cuts off the car. This
-    keeps a blurred full-frame cover background, then enlarges the source image into a
-    prominent foreground crop. Horizontal cropping is capped and audited so the subject
-    remains mostly visible.
-    """
+    weights = []
+    for y in range(sample.height):
+        total = 0.0
+        for x in range(int(sample.width * 0.08), int(sample.width * 0.92)):
+            r, g, b = pixels[x, y]
+            saturation = max(r, g, b) - min(r, g, b)
+            total += edge_pixels[x, y] + (saturation * 0.45)
+        weights.append(total)
+    total_weight = sum(weights)
+    if total_weight <= 0:
+        return image.height / 2
+    center = sum(i * weight for i, weight in enumerate(weights)) / total_weight
+    return center * (image.height / sample.height)
+
+
+def _subject_aware_cover_crop(image, size):
     target_w, target_h = size
-    background = _cover_crop(image, size).filter(ImageFilter.GaussianBlur(radius=max(12, target_w // 36)))
-    background = Image.blend(background, Image.new("RGB", size, (7, 8, 10)), 0.18)
+    target_aspect = target_w / target_h
+    source_w, source_h = image.size
+    source_aspect = source_w / source_h
+    if source_aspect > target_aspect:
+        crop_h = source_h
+        crop_w = int(crop_h * target_aspect)
+        focus_x = _focus_axis_center(image, "x")
+        left = int(round(focus_x - (crop_w / 2)))
+        left = max(0, min(left, source_w - crop_w))
+        top = 0
+    else:
+        crop_w = source_w
+        crop_h = int(crop_w / target_aspect)
+        focus_y = _focus_axis_center(image, "y")
+        top = int(round(focus_y - (crop_h / 2)))
+        top = max(0, min(top, source_h - crop_h))
+        left = 0
+    crop_box = (left, top, left + crop_w, top + crop_h)
+    return image.crop(crop_box).resize(size, Image.Resampling.LANCZOS), crop_box
 
-    desired_h = int(target_h * max_height_ratio)
+
+def _visibility_safe_foreground(image, target_w, target_h, max_horizontal_crop_ratio=0.52):
+    desired_h = int(target_h * 0.48)
     scale = desired_h / image.height
     resized = image.resize((max(1, int(image.width * scale)), desired_h), Image.Resampling.LANCZOS)
 
@@ -246,36 +294,62 @@ def _focus_fit_canvas(image, size, top_margin_ratio=0.06, max_height_ratio=0.50,
         foreground = resized
 
     if foreground.width != target_w:
-        # Final resize keeps the foreground edge-to-edge after the visibility-safe crop.
         foreground = foreground.resize((target_w, max(1, int(foreground.height * target_w / foreground.width))), Image.Resampling.LANCZOS)
+    return foreground, resized, crop_box, horizontal_crop_ratio
 
-    if foreground.height > int(target_h * 0.62):
-        foreground = foreground.crop((0, 0, foreground.width, int(target_h * 0.62)))
 
-    left = (target_w - foreground.width) // 2
-    top = int(target_h * top_margin_ratio)
+def _focus_fit_canvas(image, size, top_margin_ratio=0.06, max_height_ratio=0.50, max_horizontal_crop_ratio=0.52):
+    """Fill the 9:16 frame while keeping the full car photo readable.
 
-    canvas = background.convert("RGBA")
-    shadow = Image.new("RGBA", size, (0, 0, 0, 0))
-    shadow_draw = ImageDraw.Draw(shadow)
-    shadow_draw.rounded_rectangle(
-        (left - 16, top - 16, left + foreground.width + 16, top + foreground.height + 16),
-        radius=30,
-        fill=(0, 0, 0, 145),
+    A pure 9:16 cover crop fills the page but can cut a wide car in half. A pure
+    contain fit keeps the full car but looks like a tiny landscape strip. This hybrid
+    uses an unblurred subject-aware cover crop as the full-frame visual layer, then
+    places a larger visibility-safe foreground crop at the top for the actual car read.
+    """
+    target_w, target_h = size
+    source_w, source_h = image.size
+
+    cover, cover_box = _subject_aware_cover_crop(image, size)
+    foreground, resized, foreground_box, horizontal_crop_ratio = _visibility_safe_foreground(
+        image, target_w, target_h, max_horizontal_crop_ratio=max_horizontal_crop_ratio
     )
-    shadow = shadow.filter(ImageFilter.GaussianBlur(radius=18))
-    canvas.alpha_composite(shadow)
-    canvas.alpha_composite(foreground.convert("RGBA"), (left, top))
+
+    # Darken the cover just enough for text, but keep it recognizable as the source image.
+    canvas = cover.convert("RGBA")
+    shade = Image.new("RGBA", size, (0, 0, 0, 0))
+    shade_draw = ImageDraw.Draw(shade)
+    for y in range(target_h):
+        bottom = max(0, (y - int(target_h * 0.52)) / max(1, target_h * 0.48))
+        top_fade = max(0, (int(target_h * 0.13) - y) / max(1, target_h * 0.13))
+        alpha = int((bottom * 135) + (top_fade * 35))
+        if alpha:
+            shade_draw.line((0, y, target_w, y), fill=(0, 0, 0, min(165, alpha)))
+    canvas = Image.alpha_composite(canvas, shade)
+
+    # Top foreground has no inset/card border; it reads like part of the full-page image.
+    foreground_top = 0
+    canvas.alpha_composite(foreground.convert("RGBA"), (0, foreground_top))
+
+    # Soft fade into the cover layer instead of a harsh image-card edge.
+    fade_h = max(24, int(target_h * 0.045))
+    fade = Image.new("RGBA", (target_w, fade_h), (0, 0, 0, 0))
+    fade_draw = ImageDraw.Draw(fade)
+    for y in range(fade_h):
+        alpha = int(90 * (y / max(1, fade_h - 1)))
+        fade_draw.line((0, y, target_w, y), fill=(0, 0, 0, alpha))
+    canvas.alpha_composite(fade, (0, min(target_h - fade_h, foreground.height - fade_h // 2)))
 
     audit = {
-        "mode": "focus_fit_canvas",
-        "source_size": list(image.size),
-        "resized_size": [resized.width, resized.height],
+        "mode": "hybrid_full_frame_subject_fit",
+        "source_size": [source_w, source_h],
+        "canvas_size": [target_w, target_h],
+        "cover_crop_box": list(cover_box),
+        "foreground_resized_size": [resized.width, resized.height],
         "foreground_size": [foreground.width, foreground.height],
-        "foreground_top": top,
-        "crop_box": list(crop_box),
-        "horizontal_crop_ratio": horizontal_crop_ratio,
-        "subject_visibility": "capped horizontal crop; full image retained in blurred background",
+        "foreground_crop_box": list(foreground_box),
+        "foreground_top": foreground_top,
+        "foreground_horizontal_crop_ratio": horizontal_crop_ratio,
+        "subject_visibility": "full-frame source cover plus enlarged foreground crop; car remains visible even when the cover crop is tight",
     }
     return canvas, audit
 
@@ -547,10 +621,8 @@ def _draw_car_image_scene(scene, index, out_path, source_image_path, fast=False)
     style = scene.get("edit_style") or _edit_style_for_scene(scene, index)
     accent = tuple(style.get("accent") or [236, 190, 145])
     layout = style.get("layout", "feature")
-    top_margin = 0.045 if layout in {"thumbstop", "spec_punch"} else 0.06
-    max_height = 0.54 if layout in {"thumbstop", "walkaround"} else 0.50
     base = Image.open(source_image_path).convert("RGB")
-    image, crop_audit = _focus_fit_canvas(base, size, top_margin_ratio=top_margin, max_height_ratio=max_height)
+    image, crop_audit = _focus_fit_canvas(base, size)
     scene["crop_audit"] = crop_audit
     draw = ImageDraw.Draw(image)
 
