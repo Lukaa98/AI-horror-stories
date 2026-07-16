@@ -120,6 +120,19 @@
         "processing_status": "succeeded"
       },
       "last_polled_at": "2026-07-16T03:37:38.168295Z"
+    },
+    {
+      "video_id": "-1GZ1jRWF18",
+      "url": "https://www.youtube.com/watch?v=-1GZ1jRWF18",
+      "title": "Ghost in the Co-Op",
+      "privacy": "private",
+      "publish_at": "2026-07-16T16:00:00Z",
+      "uploaded_at": "2026-07-16T12:00:26.564438Z",
+      "run_dir": "generated-run",
+      "theme": "lost co-op lobby ghost encounter",
+      "story_provider": "openai",
+      "plan_index": "2",
+      "history_updated_at": "2026-07-16T12:00:26.643500Z"
     }
   ]
 }
