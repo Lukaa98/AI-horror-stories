@@ -10,6 +10,32 @@ h1 {
   margin-bottom: 16px;
 }
 
+.hero { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.hero div { display: flex; align-items: center; gap: 10px; }
+.hero h1 { margin: 0; }
+.version { padding: 4px 8px; border-radius: 6px; background: #f3b51b; color: #17120a; font-weight: 900; font-size: .75rem; letter-spacing: .08em; }
+.live-state { border: 1px solid #555; border-radius: 999px; padding: 5px 10px; text-transform: capitalize; font-size: .78rem; }
+.live-state.researching, .live-state.generating { border-color: #f3b51b; color: #ffd56b; }
+.live-state.done { border-color: #46c983; color: #72e5a5; }
+.progress-panel { padding: 16px; margin-bottom: 20px; border: 1px solid #444; border-radius: 10px; background: rgba(255,255,255,.025); }
+.progress-steps { display: grid; grid-template-columns: repeat(4, 1fr); }
+.progress-step { position: relative; display: flex; flex-direction: column; align-items: center; gap: 7px; color: #777; font-size: .76rem; }
+.progress-step::before { content: ""; position: absolute; top: 14px; right: 50%; width: 100%; height: 2px; background: #444; z-index: 0; }
+.progress-step:first-child::before { display: none; }
+.progress-step span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #292929; border: 2px solid #555; position: relative; z-index: 1; }
+.progress-step.active, .progress-step.complete { color: #fff; }
+.progress-step.active span { color: #17120a; background: #f3b51b; border-color: #f3b51b; box-shadow: 0 0 0 4px rgba(243,181,27,.12); }
+.progress-step.complete span { background: #26794d; border-color: #46c983; }
+.progress-step.complete::before, .progress-step.active::before { background: #46c983; }
+.progress-detail { text-align: center; margin: 13px 0 0; font-size: .85rem; color: #bbb; }
+.build-link { display: flex; align-items: center; gap: 8px; max-width: 520px; margin: 12px auto 0; padding: 9px 12px; border: 1px solid #4d4d4d; border-radius: 8px; color: #ddd; background: #202024; font-size: .8rem; text-decoration: none; }
+.build-link:hover { border-color: #f3b51b; }
+.build-link strong { margin-left: auto; color: #ffd56b; white-space: nowrap; }
+.build-dot { width: 9px; height: 9px; border-radius: 50%; background: #888; flex: 0 0 auto; }
+.build-dot.queued, .build-dot.in_progress { background: #f3b51b; box-shadow: 0 0 0 3px rgba(243,181,27,.12); }
+.build-dot.success { background: #46c983; }
+.build-dot.failure, .build-dot.cancelled, .build-dot.timed_out { background: #ff6464; }
+
 .settings {
   border: 1px solid #444;
   border-radius: 8px;
@@ -173,4 +199,10 @@ h1 {
   margin-top: 24px;
   border-top: 1px solid #444;
   padding-top: 16px;
+}
+
+@media (max-width: 600px) {
+  .settings-grid { grid-template-columns: 1fr; }
+  .request-row { flex-direction: column; }
+  .progress-step strong { font-size: .68rem; }
 }
