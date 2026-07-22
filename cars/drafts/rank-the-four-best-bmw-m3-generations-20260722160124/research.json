@@ -1,0 +1,64 @@
+{
+  "request": "Rank the four best BMW M3 generations",
+  "draft_id": "rank-the-four-best-bmw-m3-generations-20260722160124",
+  "title": "RANKING THE BEST BMW M3 GENERATIONS",
+  "highlight_word": "M3",
+  "close_narration": "Which M3 generation is your favorite?",
+  "order_rationale": "Ordered from fourth to first based on performance, historical significance, and enthusiast acclaim.",
+  "entries": [
+    {
+      "name": "E92",
+      "years": "2007\u20132013",
+      "price_usd": 62000,
+      "horsepower": 414,
+      "label": "ONLY V8 M3",
+      "one_line_fact": "The E92 M3 is the only M3 generation powered by a naturally aspirated V8 engine.",
+      "search_hint": "BMW M3 E92",
+      "images": [
+        "images/e92/search-01.jpg",
+        "images/e92/search-02.jpg"
+      ],
+      "stat": "$62,000 - 414 HP"
+    },
+    {
+      "name": "F80",
+      "years": "2014\u20132018",
+      "price_usd": 65000,
+      "horsepower": 425,
+      "label": "TURBOCHARGED RETURN",
+      "one_line_fact": "The F80 M3 marked the return to a turbocharged inline-six engine, delivering 425 horsepower.",
+      "search_hint": "BMW M3 F80",
+      "images": [
+        "images/f80/search-01.jpg"
+      ],
+      "stat": "$65,000 - 425 HP"
+    },
+    {
+      "name": "E30",
+      "years": "1986\u20131991",
+      "price_usd": 35000,
+      "horsepower": 192,
+      "label": "HOMOLOGATION LEGEND",
+      "one_line_fact": "The E30 M3 was originally developed as a homologation model for Group A touring car racing.",
+      "search_hint": "BMW M3 E30",
+      "images": [
+        "images/e30/search-02.jpg"
+      ],
+      "stat": "$35,000 - 192 HP"
+    },
+    {
+      "name": "E46",
+      "years": "2000\u20132006",
+      "price_usd": 50000,
+      "horsepower": 333,
+      "label": "PERFECT BALANCE",
+      "one_line_fact": "The E46 M3 is renowned for its near-perfect chassis balance and high-revving inline-six engine.",
+      "search_hint": "BMW M3 E46",
+      "images": [
+        "images/e46/search-01.jpg"
+      ],
+      "stat": "$50,000 - 333 HP"
+    }
+  ],
+  "status": "researched"
+}
