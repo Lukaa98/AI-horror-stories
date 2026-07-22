@@ -1,0 +1,71 @@
+# Future cars-channel launch checklist.
+# Staged only: production horror uploads do not read this file.
+
+channel: cars
+status: staged_only_not_connected_to_production_uploads
+ready_to_upload: false
+
+required_before_first_upload:
+  youtube_channel:
+    required: true
+    reason: Cars should be a separate audience/channel from horror and old Fortnite subscribers.
+    tasks:
+      - Create or choose the dedicated cars YouTube channel.
+      - Create channel branding/profile/banner separately from horror.
+      - Decide default upload privacy and schedule.
+
+  youtube_credentials:
+    required: true
+    reason: Each channel needs separate upload authorization so cars do not publish to the horror channel.
+    secrets_needed:
+      - CARS_YOUTUBE_CLIENT_SECRET_JSON
+      - CARS_YOUTUBE_TOKEN_JSON
+    tasks:
+      - Create or reuse a Google Cloud OAuth client for YouTube Data API uploads.
+      - Authenticate the dedicated cars channel owner/account.
+      - Store cars-specific client secret and token as separate GitHub Actions secrets.
+      - Update future cars workflow to read cars secrets, not root horror secrets.
+
+  browser_automation:
+    required_for_configurators_and_screenshots: true
+    not_required_for_basic_feed_discovery: true
+    recommended_tool: Playwright
+    alternative_tool: Puppeteer
+    reason: Official car configurators/build pages often require JavaScript and user interactions before prices, trims, packages, or screenshots are available.
+    tasks:
+      - Add browser automation dependency and CI browser install step.
+      - Use `scraper/car-source-scraper` as the staged Puppeteer package for source packets/screenshots.
+      - Build source-specific adapters only for allowed official/configurator pages.
+      - Save screenshots with source URL, capture date, trim/options selected, and usage notes.
+      - Keep creator video pages out of screenshot capture unless explicit permission exists.
+
+  source_verification:
+    required: true
+    reason: GPT should write from verified source packets, not from memory or one creator title.
+    minimum_sources_per_script: 2
+    tasks:
+      - Use creator/RSS feeds only to identify the car/topic.
+      - Verify specs/prices/trims through official pages or reputable publications.
+      - Include source URLs in the generated YouTube description.
+
+  workflow_split:
+    required: true
+    reason: Cars should have its own cadence, history, state, credentials, and upload destination.
+    future_files:
+      - .github/workflows/cars-pipeline.yml
+      - automation/channels/cars/history.json
+      - automation/channels/cars/state.json
+      - automation/channels/cars/researched_topics.json
+    tasks:
+      - Add a separate cars workflow after the staged configs are proven.
+      - Keep the current production horror workflow unchanged until cars is ready.
+      - Add a dry-run mode before enabling uploads.
+
+minimum_viable_cars_pipeline:
+  - Discover topic signals from RSS/YouTube Atom feeds.
+  - Select a topic using decision rules.
+  - Verify facts with official/reputable sources.
+  - Optionally capture official screenshots with browser automation.
+  - Ask GPT to generate a script from the verified source packet.
+  - Render video with licensed/official/allowed visuals and voiceover.
+  - Upload to the separate cars YouTube channel using cars credentials.

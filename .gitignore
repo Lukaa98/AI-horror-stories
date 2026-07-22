@@ -7,3 +7,19 @@ automation/*.tmp.json
 
 **/__pycache__/
 *.pyc
+
+automation/channels/*/researched_topics.json
+
+cars/output/*
+!cars/output/.gitkeep
+
+horror_stories/src/output/*
+!horror_stories/src/output/.gitkeep
+horror_stories/src/.env
+horror_stories/src/.env.local
+
+node_modules/
+**/node_modules/
+
+# Local environment secrets
+.env

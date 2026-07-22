@@ -24,7 +24,7 @@ The YouTube secrets should be base64-encoded versions of:
 ## How It Works
 
 - The decision step rotates through entries in `automation/content_plan.json`.
-- The generation step exports that runtime config into environment variables and runs `python src/main.py`.
+- The generation step exports that runtime config into environment variables and runs `python horror_stories/src/main.py`.
 - The upload step posts the generated MP4 to YouTube and records upload metadata in `automation/history.json`.
 - The publish pipeline now makes a daily publish decision, targets noon New York time for scheduled release, and may skip a day when recent performance is too weak to justify a 24-hour turnaround.
 - The publish pipeline commits updated `automation/state.json` and `automation/history.json` back into the repo.

@@ -13,10 +13,10 @@ This project now builds cheap vertical Shorts with this flow:
 From the repo root:
 
 ```powershell
-python src/main.py
+python horror_stories/src/main.py
 ```
 
-Each run creates a folder under `src/output/` containing:
+Each run creates a folder under `horror_stories/src/output/` containing:
 
 - `storyboard.json`
 - `images/`
@@ -25,14 +25,14 @@ Each run creates a folder under `src/output/` containing:
 
 ## Project Layout
 
-- `src/video_pipeline/`: storyboard, image generation, narration, subtitles, editing
-- `src/channel_tools/`: YouTube upload, channel maintenance, and privacy tools
-- `src/assets/`: banner and profile art
-- `src/output/`: generated runs
+- `horror_stories/src/video_pipeline/`: storyboard, image generation, narration, subtitles, editing
+- `horror_stories/src/channel_tools/`: YouTube upload, channel maintenance, and privacy tools
+- `horror_stories/src/assets/`: banner and profile art
+- `horror_stories/src/output/`: generated runs
 
 ## Main Env Settings
 
-Set these in `src/.env`:
+Set these in `horror_stories/src/.env`:
 
 - `GEMINI_API_KEY`
 - `OPENAI_API_KEY`
@@ -55,19 +55,19 @@ This repo includes YouTube helpers that reuse the OAuth setup from the nearby `A
 Publish a generated episode:
 
 ```powershell
-python src/publish_episode.py --run-dir src/output/video_001 --privacy private
+python horror_stories/src/publish_episode.py --run-dir horror_stories/src/output/video_001 --privacy private
 ```
 
 Bulk hide old Fortnite videos:
 
 ```powershell
-python src/bulk_update_videos.py --query fortnite --privacy private
+python horror_stories/src/bulk_update_videos.py --query fortnite --privacy private
 ```
 
 Update channel description:
 
 ```powershell
-python src/manage_channel.py --description-file src/channel_description.txt
+python horror_stories/src/manage_channel.py --description-file horror_stories/src/channel_description.txt
 ```
 
 Note: YouTube does not let this repo rename the channel title or handle through the Data API, so those should be changed manually in YouTube Studio.
@@ -82,7 +82,7 @@ This repo also includes a starter GitHub Actions pipeline that can:
 4. poll the uploaded video's status and stats
 5. commit updated pipeline state back to the repo
 
-See [docs/github-actions-pipeline.md](/C:/Users/13477/Desktop/DevProjects/AI-horror-stories/docs/github-actions-pipeline.md) for the required secrets and workflow layout.
+See [docs/github-actions-pipeline.md](docs/github-actions-pipeline.md) for the required secrets and workflow layout.
 
 ## Recommended Workflow
 

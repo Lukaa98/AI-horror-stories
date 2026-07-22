@@ -1,0 +1,73 @@
+# Future cars-channel decision rules.
+# This file is staging documentation/config only; the production horror pipeline does not read it yet.
+
+channel: cars
+status: staged_only_not_connected_to_production_uploads
+primary_goal: >
+  Pick fresh, searchable, source-backed car Shorts ideas immediately before generation
+  instead of relying on a static content queue.
+
+publishing_guardrails:
+  min_sources_per_script: 2
+  require_source_urls_in_description: true
+  do_not_reupload_or_summarize_creator_video_only: true
+  creator_uploads_are_topic_signals_only: true
+  transform_angle_required: true
+  allowed_transform_angles:
+    - quick specs people will search after a creator mentions the car
+    - quirks/features recap with official verification
+    - price/context explainer
+    - trim comparison or build/configurator takeaway
+    - would-you-buy discussion prompt
+    - market/deal angle using live listing data
+  media_policy:
+    - Prefer official manufacturer media, press kits, configurators, and screenshots captured from official pages.
+    - Use creator uploads only to identify the car/topic people may search for; do not use the creator video as factual source material.
+    - Giving credit alone is not enough for random copyrighted photos or video clips.
+
+creator_adjacent_strategy:
+  enabled: true
+  idea: >
+    When a major automotive creator publishes a new review, extract only the car/topic being discussed.
+    Then generate a separate original Short about that same car or closely related search intent
+    using independent sources, so viewers searching the topic may also find our video.
+  timing:
+    target_publish_window_hours_after_creator_upload: [1, 18]
+    fallback_window_hours: 48
+  scoring:
+    creator_upload_recency: 35
+    recognizable_vehicle_or_brand: 25
+    official_specs_available: 20
+    clear_short_hook: 15
+    live_price_or_configurator_available: 10
+    saturated_topic_penalty: -10
+    weak_sources_penalty: -25
+  minimum_score_to_generate: 55
+
+monitored_creators:
+  - name: Doug DeMuro
+    channel_url: https://www.youtube.com/@DougDeMuro
+    youtube_channel_id: UCsqjHFMB_JYTaEnf_vmTNqg
+    feed_url: https://www.youtube.com/feeds/videos.xml?channel_id=UCsqjHFMB_JYTaEnf_vmTNqg
+    expected_upload_days:
+      - Tuesday
+      - Thursday
+    strategy_notes:
+      - Treat Doug uploads only as a signal for which car/topic people may search next.
+      - Extract the reviewed vehicle/topic from the title/feed metadata only.
+      - Verify specs, price, trims, and images with official manufacturer/configurator pages and reputable publications.
+      - Prefer original hooks about the car itself, such as "3 weird facts about this trim" or "Would you buy this spec?" without implying affiliation.
+
+format_selection:
+  - when: creator topic signal is about a new/exotic car with unusual specs
+    prefer_format: 3 wild facts
+  - when: creator topic signal is about a polarizing expensive car
+    prefer_format: would you buy this
+  - when: creator topic signal mentions price, auction, depreciation, or used market context
+    prefer_format: car deal of the day
+  - when: creator topic signal is about confusing trims, drivetrain, or tech
+    prefer_format: new car explained
+  - when: creator topic signal triggers enthusiast disagreement
+    prefer_format: rich people car drama
+  - when: creator topic signal centers on an unusual visible feature
+    prefer_format: one feature nobody noticed

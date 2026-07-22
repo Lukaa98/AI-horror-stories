@@ -1,0 +1,102 @@
+{
+  "channel_name": "Car Shorts Lab",
+  "target_seconds": 30,
+  "scene_count": 7,
+  "mode": "research_driven_staging",
+  "status": "staged_only_not_connected_to_production_uploads",
+  "source_policy": "Use official manufacturer pages, press kits, configurators, licensed/Creative Commons media, or screenshots captured from official pages. Do not scrape and reuse random copyrighted photos just by giving credit. Every generated topic must preserve source URLs for the eventual YouTube description.",
+  "research_pipeline": {
+    "goal": "Before each car video, discover current car news, viral enthusiast topics, configurator updates, pricing changes, or live market/deal angles, then choose the best format dynamically instead of publishing a hardcoded topic.",
+    "freshness_window_days": 14,
+    "minimum_sources_per_topic": 2,
+    "preferred_source_order": [
+      "official manufacturer pages or press releases",
+      "official configurator/build-and-price pages",
+      "reputable automotive publications",
+      "marketplace/listing pages for deal formats only"
+    ],
+    "avoid": [
+      "unsourced rumors presented as facts",
+      "copyrighted images copied from random websites",
+      "old topics unless they are newly viral again",
+      "price claims without date/source context"
+    ],
+    "output_file": "automation/channels/cars/researched_topics.json"
+  },
+  "discovery_sources": [
+    {
+      "name": "Doug DeMuro",
+      "type": "youtube_rss",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCsqjHFMB_JYTaEnf_vmTNqg",
+      "channel_url": "https://www.youtube.com/@DougDeMuro",
+      "expected_upload_days": [
+        "Tuesday",
+        "Thursday"
+      ],
+      "strategy": "topic_signal_only",
+      "credibility": "large automotive review channel; use only to identify trending car topics/search demand, then verify all vehicle facts with official/manufacturer and reputable news sources"
+    },
+    {
+      "name": "Car and Driver",
+      "type": "rss",
+      "url": "https://www.caranddriver.com/rss/all.xml",
+      "credibility": "reputable automotive publication"
+    },
+    {
+      "name": "Motor1",
+      "type": "rss",
+      "url": "https://www.motor1.com/rss/news/all/",
+      "credibility": "reputable automotive publication"
+    },
+    {
+      "name": "The Drive",
+      "type": "rss",
+      "url": "https://www.thedrive.com/feed",
+      "credibility": "reputable automotive publication"
+    }
+  ],
+  "format_templates": [
+    {
+      "format": "3 wild facts",
+      "selection_rule": "Use for newly announced cars, unusual specs, controversial design choices, or official model pages with three concrete sourced facts.",
+      "hook_template": "3 wild facts about {vehicle_or_topic}",
+      "story_tone": "fast, accurate, curious, premium-car drama",
+      "research_need": "Official manufacturer page or press release plus one reputable car-news source."
+    },
+    {
+      "format": "would you buy this",
+      "selection_rule": "Use for expensive, polarizing, strange, or highly commented vehicles where the question can drive discussion without inventing claims.",
+      "hook_template": "{vehicle_or_topic}: would you buy this?",
+      "story_tone": "comment-bait but factual, no fake claims",
+      "research_need": "Official pricing/configurator if available; otherwise cite estimated price clearly as estimated."
+    },
+    {
+      "format": "car deal of the day",
+      "selection_rule": "Use only when live listing data, mileage, title status, location, and comparable prices are available and can be dated.",
+      "hook_template": "This {used_vehicle} is cheaper than {comparison_vehicle}, but here's the catch",
+      "story_tone": "helpful, skeptical, price-aware",
+      "research_need": "Live listing data, mileage, title status, comparable market prices, and a disclaimer that prices change."
+    },
+    {
+      "format": "new car explained",
+      "selection_rule": "Use for confusing tech, trims, drivetrain changes, pricing updates, or features people misunderstand.",
+      "hook_template": "The new {vehicle_or_feature} explained in 30 seconds",
+      "story_tone": "clear explainer, enthusiast-friendly",
+      "research_need": "Official specs plus reputable automotive reporting."
+    },
+    {
+      "format": "rich people car drama",
+      "selection_rule": "Use for exotic/luxury brand controversy only when there is real sourced disagreement or a notable design/business decision.",
+      "hook_template": "Why {brand_or_fans} are arguing about {vehicle_or_topic}",
+      "story_tone": "dramatic but fair, no rage bait without source support",
+      "research_need": "Official model details plus community/review sentiment from reputable sources."
+    },
+    {
+      "format": "one feature nobody noticed",
+      "selection_rule": "Use for visual, specific, under-covered features from official specs, configurators, or credible hands-on reporting.",
+      "hook_template": "One feature nobody noticed on {vehicle_or_topic}",
+      "story_tone": "curious, visual, enthusiast detail",
+      "research_need": "Official feature description or credible hands-on reporting."
+    }
+  ]
+}

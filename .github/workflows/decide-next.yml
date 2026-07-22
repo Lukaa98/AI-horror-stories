@@ -20,7 +20,7 @@ jobs:
           python-version: "3.11"
 
       - name: Decide next config
-        run: python src/automation/decide_next.py
+        run: python horror_stories/src/automation/decide_next.py
 
       - name: Read decision outputs
         id: read-config

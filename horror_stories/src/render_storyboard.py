@@ -21,7 +21,7 @@ def main():
     parser.add_argument("storyboard_file", help="Path to a storyboard JSON file")
     parser.add_argument(
         "--output-root",
-        help="Optional output root directory. Defaults to src/output",
+        help="Optional output root directory. Defaults to horror_stories/src/output",
     )
     parser.add_argument(
         "--run-name",

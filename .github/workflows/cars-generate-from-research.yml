@@ -1,0 +1,57 @@
+name: Cars Ranking - Generate Video (Manual)
+
+# Stage 2 of 2. Manual only. Renders the video from an already-committed
+# cars/drafts/<draft_id>/research.json (see cars-research.yml) and commits
+# final_short.mp4 into the same folder. Does NOT upload/post anywhere.
+on:
+  workflow_dispatch:
+    inputs:
+      draft_id:
+        description: "Draft folder id from the research stage"
+        required: true
+        type: string
+      tts_provider:
+        description: "Voice provider"
+        required: false
+        type: choice
+        default: gtts
+        options:
+          - gtts
+          - openai
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Render video
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FAST_MODE: "0"
+        run: |
+          python cars/automation/generate_from_research.py \
+            --draft-id "${{ inputs.draft_id }}" \
+            --tts-provider "${{ inputs.tts_provider }}" \
+            --full-res
+
+      - name: Commit video
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "cars/drafts/${{ inputs.draft_id }}"
+          git commit -m "cars: generate video for draft ${{ inputs.draft_id }}"
+          git push
