@@ -1,0 +1,66 @@
+{
+  "request": "generate ranking video for audi q5",
+  "draft_id": "generate-ranking-video-for-audi-q5-20260722050820",
+  "title": "RANKING AUDI Q5 MODELS",
+  "highlight_word": "AUDI",
+  "close_narration": "Which Q5 model suits you best?",
+  "order_rationale": "Ordered from base model to high-performance variant.",
+  "entries": [
+    {
+      "name": "Premium",
+      "years": "2009\u2013present",
+      "price_usd": 45400,
+      "horsepower": 201,
+      "label": "BASE MODEL",
+      "one_line_fact": "The Premium is the entry-level Q5, offering essential luxury features.",
+      "search_hint": "Audi Q5 Premium",
+      "images": [
+        "images/premium/search-01.jpg",
+        "images/premium/search-02.jpg"
+      ],
+      "stat": "$45,400 - 201 HP"
+    },
+    {
+      "name": "Premium Plus",
+      "years": "2009\u2013present",
+      "price_usd": 50000,
+      "horsepower": 261,
+      "label": "MID-TIER LUXURY",
+      "one_line_fact": "Premium Plus adds advanced features like heated front seats and driver seat memory.",
+      "search_hint": "Audi Q5 Premium Plus",
+      "images": [
+        "images/premium-plus/search-01.jpg",
+        "images/premium-plus/search-02.jpg"
+      ],
+      "stat": "$50,000 - 261 HP"
+    },
+    {
+      "name": "Prestige",
+      "years": "2009\u2013present",
+      "price_usd": 55000,
+      "horsepower": 261,
+      "label": "TOP-TIER LUXURY",
+      "one_line_fact": "Prestige offers high-end features including adaptive xenon headlights and navigation.",
+      "search_hint": "Audi Q5 Prestige",
+      "images": [
+        "images/prestige/search-01.jpg"
+      ],
+      "stat": "$55,000 - 261 HP"
+    },
+    {
+      "name": "SQ5",
+      "years": "2013\u2013present",
+      "price_usd": 66700,
+      "horsepower": 349,
+      "label": "HIGH-PERFORMANCE",
+      "one_line_fact": "The SQ5 combines luxury with sportiness, featuring a 349-horsepower engine.",
+      "search_hint": "Audi SQ5",
+      "images": [
+        "images/sq5/search-01.jpg",
+        "images/sq5/search-02.jpg"
+      ],
+      "stat": "$66,700 - 349 HP"
+    }
+  ],
+  "status": "researched"
+}
