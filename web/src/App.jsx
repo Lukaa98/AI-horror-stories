@@ -3,11 +3,22 @@ import "./App.css";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
-const DEFAULT_BRANCH = "fetch-latest-github-actions-statistics";
+const DEFAULT_BRANCH = "fetch-latest-github-actions-status";
+// Bump this for every deployed UI change so the live site is easy to verify.
+const UI_VERSION = "V6";
+const SETTINGS_MIGRATION = "feature-branch-v6";
+const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 
 function loadSettings() {
   try {
-    return JSON.parse(localStorage.getItem("cars-ui-settings") || "{}");
+    const settings = JSON.parse(localStorage.getItem("cars-ui-settings") || "{}");
+    // V4 browsers retained `main` in localStorage even though this UI is being
+    // tested from the feature branch. Migrate once without discarding the PAT.
+    if (settings.settingsMigration !== SETTINGS_MIGRATION) {
+      settings.branch = DEFAULT_BRANCH;
+      settings.settingsMigration = SETTINGS_MIGRATION;
+    }
+    return settings;
   } catch {
     return {};
   }
@@ -58,6 +69,30 @@ async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 600
   throw new Error(`Timed out waiting for ${path}`);
 }
 
+async function trackWorkflowRun({ owner, repo, branch, token, workflow, startedAt, signal, onUpdate }) {
+  const endpoint = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow}/runs?branch=${encodeURIComponent(branch)}&event=workflow_dispatch&per_page=10`;
+  while (!signal.aborted) {
+    const res = await fetch(endpoint, {
+      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const run = data.workflow_runs?.find((item) => new Date(item.created_at).getTime() >= startedAt - 10000);
+      if (run) {
+        onUpdate({
+          url: run.html_url,
+          status: run.status,
+          conclusion: run.conclusion,
+          runNumber: run.run_number,
+        });
+        if (run.status === "completed") return;
+      }
+    }
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  }
+}
+
 export default function App() {
   const [settings, setSettings] = useState(() => ({
     token: "",
@@ -72,11 +107,33 @@ export default function App() {
   const [error, setError] = useState(null);
   const [research, setResearch] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
+  const [statusDetail, setStatusDetail] = useState("Ready for a new request");
+  const [actionRun, setActionRun] = useState(null);
   const abortRef = useRef(null);
+  const trackerIdRef = useRef(0);
 
   useEffect(() => saveSettings(settings), [settings]);
 
   const repoOk = settings.token && settings.owner && settings.repo && settings.branch;
+
+  function beginRunTracking(workflow, startedAt, signal) {
+    const trackerId = ++trackerIdRef.current;
+    setActionRun(null);
+    trackWorkflowRun({
+      owner: settings.owner,
+      repo: settings.repo,
+      branch: settings.branch,
+      token: settings.token,
+      workflow,
+      startedAt,
+      signal,
+      onUpdate: (run) => {
+        if (trackerIdRef.current === trackerId) setActionRun(run);
+      },
+    }).catch(() => {
+      // File polling remains the source of truth if Actions status is unavailable.
+    });
+  }
 
   async function handleResearch() {
     if (!repoOk) {
@@ -90,8 +147,10 @@ export default function App() {
     const id = makeDraftId(request);
     setDraftId(id);
     setStage("researching");
+    setStatusDetail("Dispatching the research workflow…");
     abortRef.current = new AbortController();
     try {
+      const startedAt = Date.now();
       await dispatchWorkflow({
         owner: settings.owner,
         repo: settings.repo,
@@ -100,6 +159,8 @@ export default function App() {
         workflow: "cars-research.yml",
         inputs: { request, draft_id: id },
       });
+      beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      setStatusDetail("Researching facts and sourcing exterior, rear, interior, and highlight photos…");
       const res = await pollForFile({
         owner: settings.owner,
         repo: settings.repo,
@@ -110,9 +171,11 @@ export default function App() {
       const data = await res.json();
       setResearch(data);
       setStage("researched");
+      setStatusDetail("Research ready for review");
     } catch (err) {
       setError(String(err.message || err));
       setStage("error");
+      setStatusDetail("Research failed — check the error below and try again");
     }
   }
 
@@ -120,16 +183,20 @@ export default function App() {
     if (!draftId) return;
     setError(null);
     setStage("generating");
+    setStatusDetail("Dispatching the Onyx render workflow…");
     abortRef.current = new AbortController();
     try {
+      const startedAt = Date.now();
       await dispatchWorkflow({
         owner: settings.owner,
         repo: settings.repo,
         branch: settings.branch,
         token: settings.token,
         workflow: "cars-generate-from-research.yml",
-        inputs: { draft_id: draftId },
+        inputs: { draft_id: draftId, tts_provider: "openai" },
       });
+      beginRunTracking("cars-generate-from-research.yml", startedAt, abortRef.current.signal);
+      setStatusDetail("Rendering video with the Onyx voice…");
       await pollForFile({
         owner: settings.owner,
         repo: settings.repo,
@@ -142,9 +209,11 @@ export default function App() {
         `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${settings.branch}/cars/drafts/${draftId}/final_short.mp4?_=${Date.now()}`
       );
       setStage("done");
+      setStatusDetail("Video complete");
     } catch (err) {
       setError(String(err.message || err));
       setStage("error");
+      setStatusDetail("Render failed — check the error below and try again");
     }
   }
 
@@ -152,9 +221,34 @@ export default function App() {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${settings.branch}/cars/drafts/${draftId}/${relativePath}`;
   }
 
+  const activeStep = stage === "idle" ? 0 : stage === "researching" ? 0 : stage === "researched" ? 1 : stage === "generating" ? 2 : stage === "done" ? 3 : 0;
+
   return (
     <div className="page">
-      <h1>Cars Ranking Video Generator</h1>
+      <header className="hero">
+        <div><span className="version">{UI_VERSION}</span><h1>Cars Ranking Studio</h1></div>
+        <span className={`live-state ${stage}`}>{stage === "idle" ? "Ready" : stage}</span>
+      </header>
+
+      <div className="progress-panel" aria-label="Generation progress">
+        <div className="progress-steps">
+          {PROGRESS_STEPS.map((label, index) => (
+            <div className={`progress-step ${index < activeStep ? "complete" : ""} ${index === activeStep ? "active" : ""}`} key={label}>
+              <span>{index < activeStep || stage === "done" ? "✓" : index + 1}</span>
+              <strong>{label}</strong>
+            </div>
+          ))}
+        </div>
+        <p className="progress-detail">{statusDetail}</p>
+        <p className="branch-target">Active branch: <code>{settings.branch}</code></p>
+        {actionRun && (
+          <a className="build-link" href={actionRun.url} target="_blank" rel="noreferrer">
+            <span className={`build-dot ${actionRun.conclusion || actionRun.status}`} />
+            GitHub build #{actionRun.runNumber}: {actionRun.conclusion || actionRun.status.replace("_", " ")}
+            <strong>View build ↗</strong>
+          </a>
+        )}
+      </div>
 
       <details className="settings" open={!repoOk}>
         <summary>GitHub settings {repoOk ? "✓" : "(required)"}</summary>
@@ -203,7 +297,7 @@ export default function App() {
       {error && <div className="error">{error}</div>}
 
       {stage === "researching" && (
-        <p className="status">AI is researching real facts + gathering photos. This can take a few minutes...</p>
+        <p className="status">AI is researching facts and gathering varied, verified model photos. This can take a few minutes...</p>
       )}
 
       {research && (
@@ -236,7 +330,7 @@ export default function App() {
             onClick={handleGenerate}
             disabled={stage === "generating" || research.entries.some((e) => !(e.images || []).length)}
           >
-            {stage === "generating" ? "Generating video…" : "Generate Video"}
+            {stage === "generating" ? "Generating with Onyx…" : "Generate Video with Onyx"}
           </button>
           {research.entries.some((e) => !(e.images || []).length) && (
             <p className="hint">Can't generate -- at least one entry has no images. Try a different request.</p>

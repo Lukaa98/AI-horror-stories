@@ -14,7 +14,7 @@ on:
         description: "Voice provider"
         required: false
         type: choice
-        default: gtts
+        default: openai
         options:
           - gtts
           - openai

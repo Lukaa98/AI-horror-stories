@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - fetch-latest-github-actions-status
   workflow_dispatch: # allow manual runs
 
 permissions:

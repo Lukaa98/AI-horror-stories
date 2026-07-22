@@ -15,6 +15,7 @@ import time
 from pathlib import Path
 
 from dotenv import load_dotenv
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
@@ -39,18 +40,25 @@ distinct/well-known ones rather than an internal trim-code breakdown.
 For each entry, give:
 - name: short identifier (e.g. "NA", "Z06", "2018")
 - years: production year range or single year as a string
-- price_usd: a representative price in USD as a number (starting MSRP if applicable), or null if not applicable
+- introduced_year: the year this exact generation/variant was introduced
+- price_usd: its ORIGINAL starting MSRP in its introduction year, in USD as a number, or null only if unavailable
 - horsepower: a representative horsepower number, or null if not applicable
 - label: a short (2-4 word) factual or reputation-based descriptor, e.g. "MOST UNLOVED" or "ENTRY POINT"
-- one_line_fact: ONE short spoken sentence (max 16 words) stating a real, specific fact or verified community
-  reputation point about this entry. No filler, no generic praise -- a concrete fact or citable claim.
+- one_line_fact: energetic spoken narration of 22-32 words. It MUST naturally mention the introduction year,
+  original starting price, horsepower, and one meaningful enthusiast detail. Write like a knowledgeable car-club
+  friend, not a brochure or AI summary. Use contractions and varied transitions. The first entry should open with
+  an enthusiastic ranking hook; later entries should flow with phrases such as "Then," "Next," and "At number one."
+  Do not use Markdown, emoji, headings, or stage directions because this text goes directly to text-to-speech.
 - search_hint: a short phrase to search Wikimedia Commons for photos of this specific thing
   (e.g. "Ford Mustang III GT", "Chevrolet Corvette Z06 C8")
+- visual_highlight: the most interesting model-specific visual detail to show, such as "quad exhaust",
+  "interior dashboard", "engine bay", or "rear light design"
 
 Also give:
 - title: a short ALL-CAPS-worthy video title, e.g. "RANKING EVERY CORVETTE GENERATION"
 - highlight_word: the single word in the title that should be color-highlighted (usually the car model name)
-- close_narration: a short closing question/line (max 10 words), e.g. "Which one would you actually buy?"
+- close_narration: an enthusiastic conversational choice question (max 16 words) naming the relevant lineup,
+  e.g. "So, which C5 are you taking home: Coupe, Convertible, FRC, or Z06?"
 - order_rationale: one sentence explaining why you ordered the 4 entries this way (worst-to-best, cheapest-to-priciest, etc)
 
 Order the 4 entries from what you determine is position 4 (first shown) to position 1 (last shown, the "best"/highest).
@@ -62,8 +70,8 @@ Return ONLY strict JSON, no markdown fences, no prose outside the JSON, matching
   "close_narration": "string",
   "order_rationale": "string",
   "entries": [
-    {{"name": "string", "years": "string", "price_usd": number_or_null, "horsepower": number_or_null,
-      "label": "string", "one_line_fact": "string", "search_hint": "string"}}
+    {{"name": "string", "years": "string", "introduced_year": number, "price_usd": number_or_null, "horsepower": number_or_null,
+      "label": "string", "one_line_fact": "string", "search_hint": "string", "visual_highlight": "string"}}
   ]
 }}
 Exactly 4 entries."""
@@ -103,11 +111,42 @@ def format_stat(entry):
     return " - ".join(parts) if parts else "SPEC UNAVAILABLE"
 
 
-def scrape_images(search_hint, topic_slug, draft_images_dir):
-    """Best effort: try the hint as an exact Commons category first (higher
-    quality when it hits -- classified by shot type). If that comes up empty
-    (AI-guessed category names are often close but not exact), fall back to a
-    free-text Commons file search, which isn't category-tree dependent."""
+IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
+
+
+def valid_images(directory):
+    """Return only complete images that Pillow can decode."""
+    valid = []
+    if not directory.exists():
+        return valid
+    for path in sorted(directory.iterdir()):
+        if path.suffix.lower() not in IMAGE_SUFFIXES:
+            continue
+        try:
+            with Image.open(path) as image:
+                image.verify()
+            valid.append(path)
+        except (OSError, ValueError):
+            print(f"[images] Removing unreadable download: {path}")
+            path.unlink(missing_ok=True)
+    return valid
+
+
+def run_image_search(query, dest, prefix, limit=1, min_width=900):
+    subprocess.run(
+        [
+            "node", "src/search-commons-media.js",
+            f"--query={query}", f"--out-dir={dest}", f"--prefix={prefix}",
+            f"--limit={limit}", f"--min-width={min_width}",
+        ],
+        cwd=SCRAPER_DIR,
+        check=False,
+    )
+    return valid_images(dest)
+
+
+def scrape_images(search_hint, topic_slug, draft_images_dir, visual_highlight=""):
+    """Build a varied, verified image set with thematic and general fallbacks."""
     dest = draft_images_dir / topic_slug
     subprocess.run(
         [
@@ -116,35 +155,47 @@ def scrape_images(search_hint, topic_slug, draft_images_dir):
             f"--topic=drafts-tmp/{topic_slug}",
             "--limit=4",
             "--pool-size=100",
+            "--target-front=1",
+            "--target-rear=1",
+            "--target-side=0",
+            "--target-interior=1",
+            "--target-engine=1",
+            "--target-wheel=0",
             "--download",
         ],
         cwd=SCRAPER_DIR,
         check=False,  # best effort -- a bad category name shouldn't kill the whole run
     )
     scraped_dir = ROOT / "cars" / "output" / "sources" / "drafts-tmp" / topic_slug / "images"
-    images = []
     if scraped_dir.exists():
-        for path in sorted(scraped_dir.glob("*.jpg"))[:2]:
+        for path in valid_images(scraped_dir)[:4]:
             dest.mkdir(parents=True, exist_ok=True)
             out_path = dest / path.name
             out_path.write_bytes(path.read_bytes())
-            images.append(f"images/{topic_slug}/{path.name}")
+    dest.mkdir(parents=True, exist_ok=True)
 
-    if not images:
-        print(f"[images] Category match empty, falling back to keyword search for {search_hint!r}")
-        dest.mkdir(parents=True, exist_ok=True)
-        subprocess.run(
-            [
-                "node", "src/search-commons-media.js",
-                f"--query={search_hint}",
-                f"--out-dir={dest}",
-                "--limit=2",
-            ],
-            cwd=SCRAPER_DIR,
-            check=False,
-        )
-        images = [f"images/{topic_slug}/{p.name}" for p in sorted(dest.glob("search-*"))]
-    return images
+    # Add deliberate visual variety instead of relying on whichever category
+    # files sort first. Each query has a distinct prefix so results coexist.
+    themed_queries = [
+        (f"{search_hint} rear", "rear"),
+        (f"{search_hint} interior dashboard", "interior"),
+    ]
+    if visual_highlight:
+        themed_queries.append((f"{search_hint} {visual_highlight}", "highlight"))
+    for query, prefix in themed_queries:
+        if len(valid_images(dest)) >= 6:
+            break
+        run_image_search(query, dest, prefix)
+
+    # General model images are the safe fallback. Retry at a lower resolution
+    # threshold when Commons has sparse coverage for an older model/year.
+    if len(valid_images(dest)) < 2:
+        print(f"[images] Adding general fallback images for {search_hint!r}")
+        run_image_search(search_hint, dest, "general", limit=3)
+    if not valid_images(dest):
+        run_image_search(search_hint, dest, "fallback", limit=3, min_width=600)
+
+    return [f"images/{topic_slug}/{path.name}" for path in valid_images(dest)[:6]]
 
 
 def main():
@@ -166,7 +217,9 @@ def main():
             time.sleep(5)  # let Wikimedia's rate limiter cool down between entries
         topic_slug = slugify(entry["name"])
         print(f"[images] {entry['name']} -> searching Commons for {entry['search_hint']!r}")
-        entry["images"] = scrape_images(entry["search_hint"], topic_slug, images_dir)
+        entry["images"] = scrape_images(
+            entry["search_hint"], topic_slug, images_dir, entry.get("visual_highlight", "")
+        )
         entry["stat"] = format_stat(entry)
         if not entry["images"]:
             print(f"[images] WARNING: no images found for {entry['name']}")
