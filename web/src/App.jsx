@@ -3,7 +3,7 @@ import "./App.css";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
-const DEFAULT_BRANCH = "main";
+const DEFAULT_BRANCH = "fetch-latest-github-actions-status";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 
 function loadSettings() {
