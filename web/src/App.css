@@ -1,0 +1,176 @@
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  text-align: left;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+}
+
+.settings {
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+
+.settings summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.settings-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.settings-grid input {
+  padding: 6px 8px;
+  font-size: 0.9rem;
+}
+
+.hint {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-top: 8px;
+}
+
+.request-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.request-input {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 1rem;
+}
+
+.request-row button,
+.generate-btn {
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.error {
+  background: #4a1414;
+  color: #ffb3b3;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+}
+
+.status {
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.research-panel {
+  margin-top: 24px;
+  border-top: 1px solid #444;
+  padding-top: 16px;
+}
+
+.rationale {
+  opacity: 0.75;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.entries {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.entry-card {
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 12px;
+  position: relative;
+}
+
+.entry-rank {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-weight: 700;
+  opacity: 0.5;
+}
+
+.entry-card h3 {
+  margin: 0 0 6px;
+}
+
+.entry-card .years {
+  font-weight: 400;
+  opacity: 0.6;
+  font-size: 0.85rem;
+}
+
+.entry-card .stat {
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+.entry-card .label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+  margin: 4px 0;
+}
+
+.entry-card .fact {
+  font-size: 0.9rem;
+  margin: 8px 0;
+}
+
+.thumbs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.thumbs img {
+  width: 90px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.no-images {
+  font-size: 0.8rem;
+  color: #ff9090;
+}
+
+.close-line {
+  margin-top: 16px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.generate-btn {
+  margin-top: 16px;
+}
+
+.video-panel {
+  margin-top: 24px;
+  border-top: 1px solid #444;
+  padding-top: 16px;
+}

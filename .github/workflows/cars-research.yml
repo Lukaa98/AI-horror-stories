@@ -1,0 +1,61 @@
+name: Cars Ranking - Research (Manual)
+
+# Stage 1 of 2. Manual only. Runs AI research (grounded web search, not just
+# model recall) + best-effort image sourcing for a free-text request, and
+# commits cars/drafts/<draft_id>/research.json for review. Does NOT render a
+# video and does NOT post/upload anywhere.
+on:
+  workflow_dispatch:
+    inputs:
+      request:
+        description: "What to research, e.g. 'ranking video of Corvette C8 trims'"
+        required: true
+        type: string
+      draft_id:
+        description: "Unique folder id (the UI generates this)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install scraper dependencies
+        working-directory: scraper/car-source-scraper
+        run: npm install
+
+      - name: Install Puppeteer Linux deps
+        working-directory: scraper/car-source-scraper
+        run: bash scripts/install-linux-deps.sh
+
+      - name: Run research
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python cars/automation/research_request.py \
+            --request "${{ inputs.request }}" \
+            --draft-id "${{ inputs.draft_id }}"
+
+      - name: Commit draft
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "cars/drafts/${{ inputs.draft_id }}"
+          git commit -m "cars: research draft ${{ inputs.draft_id }}"
+          git push
