@@ -1,0 +1,61 @@
+{
+  "request": "lets rank all audi q5 models ",
+  "draft_id": "lets-rank-all-audi-q5-models-20260722193934",
+  "title": "RANKING EVERY AUDI Q5 MODEL",
+  "highlight_word": "AUDI",
+  "close_narration": "Which Q5 model suits you best?",
+  "order_rationale": "Ordered from the most recent and advanced to the earliest and foundational models.",
+  "entries": [
+    {
+      "name": "Q5 Sportback",
+      "years": "2020\u2013present",
+      "price_usd": 56395,
+      "horsepower": 268,
+      "label": "SLEEK DESIGN",
+      "one_line_fact": "Introduced a coupe-like roofline for a sportier aesthetic.",
+      "search_hint": "Audi Q5 Sportback",
+      "images": [
+        "images/q5-sportback/search-01.jpg",
+        "images/q5-sportback/search-02.jpg"
+      ],
+      "stat": "$56,395 - 268 HP"
+    },
+    {
+      "name": "SQ5",
+      "years": "2013\u2013present",
+      "price_usd": 60995,
+      "horsepower": 362,
+      "label": "PERFORMANCE FOCUS",
+      "one_line_fact": "Features a turbocharged V6 engine for enhanced performance.",
+      "search_hint": "Audi SQ5",
+      "images": [],
+      "stat": "$60,995 - 362 HP"
+    },
+    {
+      "name": "Q5L",
+      "years": "2018\u20132020",
+      "price_usd": null,
+      "horsepower": 252,
+      "label": "EXTENDED SPACE",
+      "one_line_fact": "Offered an extended wheelbase for increased rear legroom.",
+      "search_hint": "Audi Q5L",
+      "images": [
+        "images/q5l/search-01.jpg",
+        "images/q5l/search-02.jpg"
+      ],
+      "stat": "252 HP"
+    },
+    {
+      "name": "Q5 8R",
+      "years": "2008\u20132017",
+      "price_usd": null,
+      "horsepower": 272,
+      "label": "FOUNDATIONAL MODEL",
+      "one_line_fact": "Launched as Audi's first compact luxury SUV.",
+      "search_hint": "Audi Q5 8R",
+      "images": [],
+      "stat": "272 HP"
+    }
+  ],
+  "status": "researched"
+}
