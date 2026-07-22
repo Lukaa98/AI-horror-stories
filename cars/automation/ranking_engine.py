@@ -143,38 +143,47 @@ def _draw_bottom_caption(draw, size, bar_h, photo_h, text):
     )
 
 
-def _draw_numbered_list(draw, size, bar_h, photo_h, current_rank, rank_labels):
+def _draw_numbered_list(draw, size, bar_h, _photo_h, current_rank, rank_labels):
+    """Draw a fixed ranking rail over the photo zone.
+
+    Its position and dimensions depend only on the output canvas, never on the
+    source photo's aspect ratio or the width of a label.
+    """
     width, height = size
     scale = width / 1080
-    list_font = _font(int(130 * scale))
-    current_font = _font(int(160 * scale))
-    small_font = _font(int(60 * scale))
-    list_x = int(24 * scale)
-    list_top = bar_h + int(20 * scale)
-    spacing = int(photo_h * 0.9 / 4)
+    number_font = _font(int(86 * scale))
+    small_font = _font(int(40 * scale))
+    rail_x = int(24 * scale)
+    rail_w = int(330 * scale)
+    list_top = bar_h + int(24 * scale)
+    row_h = int(112 * scale)
+    row_gap = int(16 * scale)
     for i, rank_num in enumerate([4, 3, 2, 1]):
-        y = list_top + i * spacing
+        y = list_top + i * (row_h + row_gap)
         is_current = rank_num == current_rank
         already_revealed = rank_num >= current_rank  # countdown runs 4 -> 1
         label = f"{rank_num}."
         color = RANK_COLORS[rank_num]
-        font = current_font if is_current else list_font
+        fill = (10, 10, 12, 230 if is_current else 190)
+        outline = color if is_current else (255, 255, 255, 80)
+        draw.rounded_rectangle(
+            (rail_x, y, rail_x + rail_w, y + row_h),
+            radius=int(18 * scale), fill=fill, outline=outline,
+            width=max(1, int((4 if is_current else 2) * scale)),
+        )
         draw.text(
-            (list_x, y),
+            (rail_x + int(18 * scale), y + int(5 * scale)),
             label,
-            font=font,
+            font=number_font,
             fill=color,
             stroke_width=max(2, int(3 * scale)),
             stroke_fill=(0, 0, 0),
         )
         rank_label = rank_labels.get(rank_num)
         if already_revealed and rank_label:
-            num_bbox = draw.textbbox((0, 0), label, font=font)
             label_bbox = draw.textbbox((0, 0), rank_label, font=small_font)
-            num_center = (num_bbox[1] + num_bbox[3]) / 2
-            label_center = (label_bbox[1] + label_bbox[3]) / 2
-            label_x = list_x + (num_bbox[2] - num_bbox[0]) + int(18 * scale)
-            label_y = y + (num_center - label_center)
+            label_x = rail_x + int(112 * scale)
+            label_y = y + (row_h - (label_bbox[3] - label_bbox[1])) / 2 - label_bbox[1]
             draw.text(
                 (label_x, label_y),
                 rank_label,
@@ -197,7 +206,7 @@ def _draw_rank_frame(config, entry, image_path, out_path, size):
 
     _draw_title_bar(draw, size, config.title, config.title_highlight_words)
     rank_labels = {e.rank: e.label for e in config.ranks}
-    _draw_numbered_list(draw, size, photo_top, photo_h, entry.rank, rank_labels)
+    _draw_numbered_list(draw, size, bar_h, int(height * PHOTO_H_RATIO), entry.rank, rank_labels)
 
     stat_font = _font(int(48 * scale))
     highlight = RANK_COLORS[entry.rank]

@@ -3,7 +3,8 @@ import "./App.css";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
-const DEFAULT_BRANCH = "fetch-latest-github-actions-statistics";
+const DEFAULT_BRANCH = "main";
+const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 
 function loadSettings() {
   try {
@@ -72,6 +73,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [research, setResearch] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
+  const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const abortRef = useRef(null);
 
   useEffect(() => saveSettings(settings), [settings]);
@@ -90,6 +92,7 @@ export default function App() {
     const id = makeDraftId(request);
     setDraftId(id);
     setStage("researching");
+    setStatusDetail("Dispatching the research workflow…");
     abortRef.current = new AbortController();
     try {
       await dispatchWorkflow({
@@ -100,6 +103,7 @@ export default function App() {
         workflow: "cars-research.yml",
         inputs: { request, draft_id: id },
       });
+      setStatusDetail("Research workflow started — gathering facts and photos…");
       const res = await pollForFile({
         owner: settings.owner,
         repo: settings.repo,
@@ -110,9 +114,11 @@ export default function App() {
       const data = await res.json();
       setResearch(data);
       setStage("researched");
+      setStatusDetail("Research ready for review");
     } catch (err) {
       setError(String(err.message || err));
       setStage("error");
+      setStatusDetail("Research failed — check the error below and try again");
     }
   }
 
@@ -120,6 +126,7 @@ export default function App() {
     if (!draftId) return;
     setError(null);
     setStage("generating");
+    setStatusDetail("Dispatching the Onyx render workflow…");
     abortRef.current = new AbortController();
     try {
       await dispatchWorkflow({
@@ -128,8 +135,9 @@ export default function App() {
         branch: settings.branch,
         token: settings.token,
         workflow: "cars-generate-from-research.yml",
-        inputs: { draft_id: draftId },
+        inputs: { draft_id: draftId, tts_provider: "openai" },
       });
+      setStatusDetail("Rendering video with the Onyx voice…");
       await pollForFile({
         owner: settings.owner,
         repo: settings.repo,
@@ -142,9 +150,11 @@ export default function App() {
         `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${settings.branch}/cars/drafts/${draftId}/final_short.mp4?_=${Date.now()}`
       );
       setStage("done");
+      setStatusDetail("Video complete");
     } catch (err) {
       setError(String(err.message || err));
       setStage("error");
+      setStatusDetail("Render failed — check the error below and try again");
     }
   }
 
@@ -152,9 +162,26 @@ export default function App() {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${settings.branch}/cars/drafts/${draftId}/${relativePath}`;
   }
 
+  const activeStep = stage === "idle" ? 0 : stage === "researching" ? 0 : stage === "researched" ? 1 : stage === "generating" ? 2 : stage === "done" ? 3 : 0;
+
   return (
     <div className="page">
-      <h1>Cars Ranking Video Generator</h1>
+      <header className="hero">
+        <div><span className="version">V3</span><h1>Cars Ranking Studio</h1></div>
+        <span className={`live-state ${stage}`}>{stage === "idle" ? "Ready" : stage}</span>
+      </header>
+
+      <div className="progress-panel" aria-label="Generation progress">
+        <div className="progress-steps">
+          {PROGRESS_STEPS.map((label, index) => (
+            <div className={`progress-step ${index < activeStep ? "complete" : ""} ${index === activeStep ? "active" : ""}`} key={label}>
+              <span>{index < activeStep || stage === "done" ? "✓" : index + 1}</span>
+              <strong>{label}</strong>
+            </div>
+          ))}
+        </div>
+        <p className="progress-detail">{statusDetail}</p>
+      </div>
 
       <details className="settings" open={!repoOk}>
         <summary>GitHub settings {repoOk ? "✓" : "(required)"}</summary>
@@ -236,7 +263,7 @@ export default function App() {
             onClick={handleGenerate}
             disabled={stage === "generating" || research.entries.some((e) => !(e.images || []).length)}
           >
-            {stage === "generating" ? "Generating video…" : "Generate Video"}
+            {stage === "generating" ? "Generating with Onyx…" : "Generate Video with Onyx"}
           </button>
           {research.entries.some((e) => !(e.images || []).length) && (
             <p className="hint">Can't generate -- at least one entry has no images. Try a different request.</p>
