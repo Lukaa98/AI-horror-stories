@@ -1,0 +1,64 @@
+{
+  "request": "rank all variants for c5 corvette ",
+  "draft_id": "rank-all-variants-for-c5-corvette-20260722170633",
+  "title": "RANKING EVERY C5 CORVETTE VARIANT",
+  "highlight_word": "CORVETTE",
+  "close_narration": "Which C5 variant is your favorite?",
+  "order_rationale": "Ordered from least to most performance-oriented variant.",
+  "entries": [
+    {
+      "name": "Base Coupe",
+      "years": "1997-2004",
+      "price_usd": 38700,
+      "horsepower": 345,
+      "label": "ENTRY LEVEL",
+      "one_line_fact": "The Base Coupe introduced the C5 generation with a 345-horsepower LS1 V8 engine.",
+      "search_hint": "Chevrolet Corvette C5 Coupe",
+      "images": [
+        "images/base-coupe/search-01.jpg",
+        "images/base-coupe/search-02.jpg"
+      ],
+      "stat": "$38,700 - 345 HP"
+    },
+    {
+      "name": "Convertible",
+      "years": "1998-2004",
+      "price_usd": 44525,
+      "horsepower": 345,
+      "label": "OPEN-AIR EXPERIENCE",
+      "one_line_fact": "The Convertible offered the same performance as the Coupe with the added thrill of open-top driving.",
+      "search_hint": "Chevrolet Corvette C5 Convertible",
+      "images": [
+        "images/convertible/search-01.jpg"
+      ],
+      "stat": "$44,525 - 345 HP"
+    },
+    {
+      "name": "Hardtop (FRC)",
+      "years": "1999-2000",
+      "price_usd": 39475,
+      "horsepower": 345,
+      "label": "LIGHTWEIGHT OPTION",
+      "one_line_fact": "The Fixed Roof Coupe (FRC) was the lightest C5 variant, setting the stage for the Z06.",
+      "search_hint": "Chevrolet Corvette C5 Hardtop",
+      "images": [
+        "images/hardtop-frc/search-01.jpg"
+      ],
+      "stat": "$39,475 - 345 HP"
+    },
+    {
+      "name": "Z06",
+      "years": "2001-2004",
+      "price_usd": 48500,
+      "horsepower": 405,
+      "label": "PERFORMANCE KING",
+      "one_line_fact": "The Z06 featured a 405-horsepower LS6 engine and track-focused enhancements.",
+      "search_hint": "Chevrolet Corvette Z06 C5",
+      "images": [
+        "images/z06/search-01.jpg"
+      ],
+      "stat": "$48,500 - 405 HP"
+    }
+  ],
+  "status": "researched"
+}
