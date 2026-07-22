@@ -3,11 +3,13 @@ import "./App.css";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
-const DEFAULT_BRANCH = "fetch-latest-github-actions-status";
+const DEFAULT_BRANCH = "v7";
 // Bump this for every deployed UI change so the live site is easy to verify.
-const UI_VERSION = "V6";
-const SETTINGS_MIGRATION = "feature-branch-v6";
+const UI_VERSION = "V7";
+const SETTINGS_MIGRATION = "feature-branch-v7";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
+const RESEARCH_TIMEOUT_MS = 20 * 60 * 1000;
+const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
 
 function loadSettings() {
   try {
@@ -57,7 +59,7 @@ async function dispatchWorkflow({ owner, repo, branch, token, workflow, inputs }
   }
 }
 
-async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 6000, timeoutMs = 8 * 60 * 1000 }) {
+async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 6000, timeoutMs }) {
   const start = Date.now();
   const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
   while (Date.now() - start < timeoutMs) {
@@ -66,7 +68,8 @@ async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 600
     if (res.ok) return res;
     await new Promise((resolve) => setTimeout(resolve, intervalMs));
   }
-  throw new Error(`Timed out waiting for ${path}`);
+  const timeoutMinutes = Math.round(timeoutMs / 60000);
+  throw new Error(`Timed out after ${timeoutMinutes} minutes waiting for ${path}`);
 }
 
 async function trackWorkflowRun({ owner, repo, branch, token, workflow, startedAt, signal, onUpdate }) {
@@ -167,6 +170,7 @@ export default function App() {
         branch: settings.branch,
         path: `cars/drafts/${id}/research.json`,
         signal: abortRef.current.signal,
+        timeoutMs: RESEARCH_TIMEOUT_MS,
       });
       const data = await res.json();
       setResearch(data);
@@ -203,7 +207,7 @@ export default function App() {
         branch: settings.branch,
         path: `cars/drafts/${draftId}/final_short.mp4`,
         signal: abortRef.current.signal,
-        timeoutMs: 12 * 60 * 1000,
+        timeoutMs: RENDER_TIMEOUT_MS,
       });
       setVideoUrl(
         `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${settings.branch}/cars/drafts/${draftId}/final_short.mp4?_=${Date.now()}`
