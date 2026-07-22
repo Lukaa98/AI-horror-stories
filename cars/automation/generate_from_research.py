@@ -31,7 +31,7 @@ def build_config(draft_dir, data):
             images=images,
             label=entry.get("label", ""),
             stat=entry.get("stat", ""),
-            narration=entry.get("one_line_fact", ""),
+            narration=entry.get("narration") or entry.get("one_line_fact", ""),
         ))
 
     return RankingConfig(

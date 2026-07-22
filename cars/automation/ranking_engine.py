@@ -143,23 +143,43 @@ def _draw_bottom_caption(draw, size, bar_h, photo_h, text):
     )
 
 
-def _draw_numbered_list(draw, size, bar_h, _photo_h, current_rank, rank_labels):
-    """Draw a fixed ranking rail over the photo zone.
-
-    Its position and dimensions depend only on the output canvas, never on the
-    source photo's aspect ratio or the width of a label.
-    """
+def _ranking_rail_layout(size):
+    """Return canvas-anchored rail geometry shared by every video frame."""
     width, height = size
     scale = width / 1080
-    number_font = _font(int(86 * scale))
-    small_font = _font(int(40 * scale))
+    bar_h = int(height * BAR_H_RATIO)
     rail_x = int(24 * scale)
     rail_w = int(330 * scale)
     list_top = bar_h + int(24 * scale)
     row_h = int(112 * scale)
     row_gap = int(16 * scale)
-    for i, rank_num in enumerate([4, 3, 2, 1]):
-        y = list_top + i * (row_h + row_gap)
+    return [
+        (rail_x, list_top + index * (row_h + row_gap), rail_x + rail_w, list_top + index * (row_h + row_gap) + row_h)
+        for index in range(4)
+    ]
+
+
+def _fit_rank_label_font(draw, text, max_width, scale):
+    """Shrink long labels inside the rail; never resize or move the rail."""
+    for base_size in range(40, 21, -2):
+        font = _font(int(base_size * scale))
+        bbox = draw.textbbox((0, 0), text, font=font)
+        if bbox[2] - bbox[0] <= max_width:
+            return font
+    return _font(int(20 * scale))
+
+
+def _draw_numbered_list(draw, size, current_rank, rank_labels):
+    """Draw a fixed ranking rail over the photo zone.
+
+    Its position and dimensions depend only on the output canvas, never on the
+    source photo's aspect ratio or the width of a label.
+    """
+    width, _ = size
+    scale = width / 1080
+    number_font = _font(int(86 * scale))
+    for rank_num, (rail_x, y, rail_right, row_bottom) in zip([4, 3, 2, 1], _ranking_rail_layout(size)):
+        row_h = row_bottom - y
         is_current = rank_num == current_rank
         already_revealed = rank_num >= current_rank  # countdown runs 4 -> 1
         label = f"{rank_num}."
@@ -167,7 +187,7 @@ def _draw_numbered_list(draw, size, bar_h, _photo_h, current_rank, rank_labels):
         fill = (10, 10, 12, 230 if is_current else 190)
         outline = color if is_current else (255, 255, 255, 80)
         draw.rounded_rectangle(
-            (rail_x, y, rail_x + rail_w, y + row_h),
+            (rail_x, y, rail_right, row_bottom),
             radius=int(18 * scale), fill=fill, outline=outline,
             width=max(1, int((4 if is_current else 2) * scale)),
         )
@@ -181,8 +201,11 @@ def _draw_numbered_list(draw, size, bar_h, _photo_h, current_rank, rank_labels):
         )
         rank_label = rank_labels.get(rank_num)
         if already_revealed and rank_label:
-            label_bbox = draw.textbbox((0, 0), rank_label, font=small_font)
             label_x = rail_x + int(112 * scale)
+            small_font = _fit_rank_label_font(
+                draw, rank_label, rail_right - label_x - int(14 * scale), scale
+            )
+            label_bbox = draw.textbbox((0, 0), rank_label, font=small_font)
             label_y = y + (row_h - (label_bbox[3] - label_bbox[1])) / 2 - label_bbox[1]
             draw.text(
                 (label_x, label_y),
@@ -206,7 +229,7 @@ def _draw_rank_frame(config, entry, image_path, out_path, size):
 
     _draw_title_bar(draw, size, config.title, config.title_highlight_words)
     rank_labels = {e.rank: e.label for e in config.ranks}
-    _draw_numbered_list(draw, size, bar_h, int(height * PHOTO_H_RATIO), entry.rank, rank_labels)
+    _draw_numbered_list(draw, size, entry.rank, rank_labels)
 
     stat_font = _font(int(48 * scale))
     highlight = RANK_COLORS[entry.rank]

@@ -39,18 +39,23 @@ distinct/well-known ones rather than an internal trim-code breakdown.
 For each entry, give:
 - name: short identifier (e.g. "NA", "Z06", "2018")
 - years: production year range or single year as a string
-- price_usd: a representative price in USD as a number (starting MSRP if applicable), or null if not applicable
+- introduced_year: the year this exact generation/variant was introduced
+- price_usd: its ORIGINAL starting MSRP in its introduction year, in USD as a number, or null only if unavailable
 - horsepower: a representative horsepower number, or null if not applicable
 - label: a short (2-4 word) factual or reputation-based descriptor, e.g. "MOST UNLOVED" or "ENTRY POINT"
-- one_line_fact: ONE short spoken sentence (max 16 words) stating a real, specific fact or verified community
-  reputation point about this entry. No filler, no generic praise -- a concrete fact or citable claim.
+- one_line_fact: energetic spoken narration of 22-32 words. It MUST naturally mention the introduction year,
+  original starting price, horsepower, and one meaningful enthusiast detail. Write like a knowledgeable car-club
+  friend, not a brochure or AI summary. Use contractions and varied transitions. The first entry should open with
+  an enthusiastic ranking hook; later entries should flow with phrases such as "Then," "Next," and "At number one."
+  Do not use Markdown, emoji, headings, or stage directions because this text goes directly to text-to-speech.
 - search_hint: a short phrase to search Wikimedia Commons for photos of this specific thing
   (e.g. "Ford Mustang III GT", "Chevrolet Corvette Z06 C8")
 
 Also give:
 - title: a short ALL-CAPS-worthy video title, e.g. "RANKING EVERY CORVETTE GENERATION"
 - highlight_word: the single word in the title that should be color-highlighted (usually the car model name)
-- close_narration: a short closing question/line (max 10 words), e.g. "Which one would you actually buy?"
+- close_narration: an enthusiastic conversational choice question (max 16 words) naming the relevant lineup,
+  e.g. "So, which C5 are you taking home: Coupe, Convertible, FRC, or Z06?"
 - order_rationale: one sentence explaining why you ordered the 4 entries this way (worst-to-best, cheapest-to-priciest, etc)
 
 Order the 4 entries from what you determine is position 4 (first shown) to position 1 (last shown, the "best"/highest).
@@ -62,7 +67,7 @@ Return ONLY strict JSON, no markdown fences, no prose outside the JSON, matching
   "close_narration": "string",
   "order_rationale": "string",
   "entries": [
-    {{"name": "string", "years": "string", "price_usd": number_or_null, "horsepower": number_or_null,
+    {{"name": "string", "years": "string", "introduced_year": number, "price_usd": number_or_null, "horsepower": number_or_null,
       "label": "string", "one_line_fact": "string", "search_hint": "string"}}
   ]
 }}
