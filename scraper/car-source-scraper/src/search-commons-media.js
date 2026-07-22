@@ -21,13 +21,17 @@ async function apiGet(params, retries = 4) {
   const url = new URL(API_ROOT);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
   for (let attempt = 0; attempt <= retries; attempt++) {
-    const response = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
-    if (response.ok) return response.json();
-    if (response.status === 429 && attempt < retries) {
-      await sleep(2000 * (attempt + 1));
-      continue;
+    try {
+      const response = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
+      if (response.ok) return response.json();
+      if (![429, 500, 502, 503, 504].includes(response.status) || attempt === retries) {
+        throw new Error(`API HTTP ${response.status} for ${url}`);
+      }
+    } catch (error) {
+      if (attempt === retries) throw error;
+      console.error(`Commons API attempt ${attempt + 1}/${retries + 1} failed: ${error.message}`);
     }
-    throw new Error(`API HTTP ${response.status} for ${url}`);
+    await sleep(1500 * (attempt + 1));
   }
 }
 
@@ -79,6 +83,7 @@ async function main() {
   if (!outDir) throw new Error("Missing --out-dir=path");
   const limit = Number(argValue("limit", "6"));
   const minWidth = Number(argValue("min-width", "1000"));
+  const prefix = argValue("prefix", "search").replace(/[^a-z0-9_-]+/gi, "-");
 
   const titles = await searchFiles(query, limit * 3);
   const infos = await fetchImageInfo(titles, 1600);
@@ -86,21 +91,27 @@ async function main() {
     .filter((i) => i.mime?.startsWith("image/"))
     .filter((i) => !i.restrictions)
     .filter((i) => (i.original_width || 0) >= minWidth)
-    .slice(0, limit);
+    .slice(0, limit * 3);
 
   await fs.mkdir(outDir, { recursive: true });
   const downloaded = [];
-  for (const [index, asset] of usable.entries()) {
-    try {
-      const response = await fetch(asset.url, { headers: { "User-Agent": USER_AGENT } });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const buffer = Buffer.from(await response.arrayBuffer());
-      const ext = asset.mime === "image/png" ? ".png" : ".jpg";
-      const filename = `search-${String(index + 1).padStart(2, "0")}${ext}`;
-      await fs.writeFile(path.join(outDir, filename), buffer);
-      downloaded.push(filename);
-    } catch (error) {
-      console.error(`Failed ${asset.title}: ${error.message}`);
+  for (const asset of usable) {
+    if (downloaded.length >= limit) break;
+    const ext = asset.mime === "image/png" ? ".png" : asset.mime === "image/webp" ? ".webp" : ".jpg";
+    const filename = `${prefix}-${String(downloaded.length + 1).padStart(2, "0")}${ext}`;
+    for (let attempt = 0; attempt < 4; attempt++) {
+      try {
+        const response = await fetch(asset.url, { headers: { "User-Agent": USER_AGENT } });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const buffer = Buffer.from(await response.arrayBuffer());
+        if (!buffer.length) throw new Error("empty response");
+        await fs.writeFile(path.join(outDir, filename), buffer);
+        downloaded.push(filename);
+        break;
+      } catch (error) {
+        console.error(`Failed ${asset.title} (attempt ${attempt + 1}/4): ${error.message}`);
+        if (attempt < 3) await sleep(1500 * (attempt + 1));
+      }
     }
     await sleep(700);
   }

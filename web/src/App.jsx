@@ -5,12 +5,20 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "fetch-latest-github-actions-status";
 // Bump this for every deployed UI change so the live site is easy to verify.
-const UI_VERSION = "V4";
+const UI_VERSION = "V6";
+const SETTINGS_MIGRATION = "feature-branch-v6";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 
 function loadSettings() {
   try {
-    return JSON.parse(localStorage.getItem("cars-ui-settings") || "{}");
+    const settings = JSON.parse(localStorage.getItem("cars-ui-settings") || "{}");
+    // V4 browsers retained `main` in localStorage even though this UI is being
+    // tested from the feature branch. Migrate once without discarding the PAT.
+    if (settings.settingsMigration !== SETTINGS_MIGRATION) {
+      settings.branch = DEFAULT_BRANCH;
+      settings.settingsMigration = SETTINGS_MIGRATION;
+    }
+    return settings;
   } catch {
     return {};
   }
@@ -152,7 +160,7 @@ export default function App() {
         inputs: { request, draft_id: id },
       });
       beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
-      setStatusDetail("Research workflow started — gathering facts and photos…");
+      setStatusDetail("Researching facts and sourcing exterior, rear, interior, and highlight photos…");
       const res = await pollForFile({
         owner: settings.owner,
         repo: settings.repo,
@@ -232,6 +240,7 @@ export default function App() {
           ))}
         </div>
         <p className="progress-detail">{statusDetail}</p>
+        <p className="branch-target">Active branch: <code>{settings.branch}</code></p>
         {actionRun && (
           <a className="build-link" href={actionRun.url} target="_blank" rel="noreferrer">
             <span className={`build-dot ${actionRun.conclusion || actionRun.status}`} />
@@ -288,7 +297,7 @@ export default function App() {
       {error && <div className="error">{error}</div>}
 
       {stage === "researching" && (
-        <p className="status">AI is researching real facts + gathering photos. This can take a few minutes...</p>
+        <p className="status">AI is researching facts and gathering varied, verified model photos. This can take a few minutes...</p>
       )}
 
       {research && (
