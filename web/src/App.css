@@ -28,6 +28,13 @@ h1 {
 .progress-step.complete span { background: #26794d; border-color: #46c983; }
 .progress-step.complete::before, .progress-step.active::before { background: #46c983; }
 .progress-detail { text-align: center; margin: 13px 0 0; font-size: .85rem; color: #bbb; }
+.build-link { display: flex; align-items: center; gap: 8px; max-width: 520px; margin: 12px auto 0; padding: 9px 12px; border: 1px solid #4d4d4d; border-radius: 8px; color: #ddd; background: #202024; font-size: .8rem; text-decoration: none; }
+.build-link:hover { border-color: #f3b51b; }
+.build-link strong { margin-left: auto; color: #ffd56b; white-space: nowrap; }
+.build-dot { width: 9px; height: 9px; border-radius: 50%; background: #888; flex: 0 0 auto; }
+.build-dot.queued, .build-dot.in_progress { background: #f3b51b; box-shadow: 0 0 0 3px rgba(243,181,27,.12); }
+.build-dot.success { background: #46c983; }
+.build-dot.failure, .build-dot.cancelled, .build-dot.timed_out { background: #ff6464; }
 
 .settings {
   border: 1px solid #444;

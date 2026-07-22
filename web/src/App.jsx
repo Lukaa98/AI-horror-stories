@@ -4,6 +4,8 @@ import "./App.css";
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "fetch-latest-github-actions-status";
+// Bump this for every deployed UI change so the live site is easy to verify.
+const UI_VERSION = "V4";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 
 function loadSettings() {
@@ -59,6 +61,30 @@ async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 600
   throw new Error(`Timed out waiting for ${path}`);
 }
 
+async function trackWorkflowRun({ owner, repo, branch, token, workflow, startedAt, signal, onUpdate }) {
+  const endpoint = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow}/runs?branch=${encodeURIComponent(branch)}&event=workflow_dispatch&per_page=10`;
+  while (!signal.aborted) {
+    const res = await fetch(endpoint, {
+      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const run = data.workflow_runs?.find((item) => new Date(item.created_at).getTime() >= startedAt - 10000);
+      if (run) {
+        onUpdate({
+          url: run.html_url,
+          status: run.status,
+          conclusion: run.conclusion,
+          runNumber: run.run_number,
+        });
+        if (run.status === "completed") return;
+      }
+    }
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  }
+}
+
 export default function App() {
   const [settings, setSettings] = useState(() => ({
     token: "",
@@ -74,11 +100,32 @@ export default function App() {
   const [research, setResearch] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
+  const [actionRun, setActionRun] = useState(null);
   const abortRef = useRef(null);
+  const trackerIdRef = useRef(0);
 
   useEffect(() => saveSettings(settings), [settings]);
 
   const repoOk = settings.token && settings.owner && settings.repo && settings.branch;
+
+  function beginRunTracking(workflow, startedAt, signal) {
+    const trackerId = ++trackerIdRef.current;
+    setActionRun(null);
+    trackWorkflowRun({
+      owner: settings.owner,
+      repo: settings.repo,
+      branch: settings.branch,
+      token: settings.token,
+      workflow,
+      startedAt,
+      signal,
+      onUpdate: (run) => {
+        if (trackerIdRef.current === trackerId) setActionRun(run);
+      },
+    }).catch(() => {
+      // File polling remains the source of truth if Actions status is unavailable.
+    });
+  }
 
   async function handleResearch() {
     if (!repoOk) {
@@ -95,6 +142,7 @@ export default function App() {
     setStatusDetail("Dispatching the research workflow…");
     abortRef.current = new AbortController();
     try {
+      const startedAt = Date.now();
       await dispatchWorkflow({
         owner: settings.owner,
         repo: settings.repo,
@@ -103,6 +151,7 @@ export default function App() {
         workflow: "cars-research.yml",
         inputs: { request, draft_id: id },
       });
+      beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
       setStatusDetail("Research workflow started — gathering facts and photos…");
       const res = await pollForFile({
         owner: settings.owner,
@@ -129,6 +178,7 @@ export default function App() {
     setStatusDetail("Dispatching the Onyx render workflow…");
     abortRef.current = new AbortController();
     try {
+      const startedAt = Date.now();
       await dispatchWorkflow({
         owner: settings.owner,
         repo: settings.repo,
@@ -137,6 +187,7 @@ export default function App() {
         workflow: "cars-generate-from-research.yml",
         inputs: { draft_id: draftId, tts_provider: "openai" },
       });
+      beginRunTracking("cars-generate-from-research.yml", startedAt, abortRef.current.signal);
       setStatusDetail("Rendering video with the Onyx voice…");
       await pollForFile({
         owner: settings.owner,
@@ -167,7 +218,7 @@ export default function App() {
   return (
     <div className="page">
       <header className="hero">
-        <div><span className="version">V3</span><h1>Cars Ranking Studio</h1></div>
+        <div><span className="version">{UI_VERSION}</span><h1>Cars Ranking Studio</h1></div>
         <span className={`live-state ${stage}`}>{stage === "idle" ? "Ready" : stage}</span>
       </header>
 
@@ -181,6 +232,13 @@ export default function App() {
           ))}
         </div>
         <p className="progress-detail">{statusDetail}</p>
+        {actionRun && (
+          <a className="build-link" href={actionRun.url} target="_blank" rel="noreferrer">
+            <span className={`build-dot ${actionRun.conclusion || actionRun.status}`} />
+            GitHub build #{actionRun.runNumber}: {actionRun.conclusion || actionRun.status.replace("_", " ")}
+            <strong>View build ↗</strong>
+          </a>
+        )}
       </div>
 
       <details className="settings" open={!repoOk}>
