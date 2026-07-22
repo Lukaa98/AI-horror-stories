@@ -2,8 +2,10 @@ name: Content Pipeline
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "15 10 * * *"
+  # Daily cron paused -- horror-stories channel is being retired, upload was
+  # failing anyway. Re-enable by uncommenting below if the channel resumes.
+  # schedule:
+  #   - cron: "15 10 * * *"
 
 permissions:
   contents: write

@@ -177,14 +177,21 @@ def _apply_edit_styles(storyboard):
 
 def _font(size):
     for candidate in [
+        os.getenv("CAPTION_FONT_PATH", ""),
+        "C:/Windows/Fonts/arialbd.ttf",
         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
         "/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf",
     ]:
+        if not candidate:
+            continue
         try:
             return ImageFont.truetype(candidate, size=size)
         except OSError:
             continue
-    return ImageFont.load_default()
+    try:
+        return ImageFont.load_default(size=size)
+    except TypeError:
+        return ImageFont.load_default()
 
 
 def _wrap(draw, text, font, max_width, max_lines=4):

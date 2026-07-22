@@ -1,0 +1,91 @@
+name: Cars Ranking - Generate (Manual)
+
+# Manual only -- no schedule. This does NOT upload anywhere; it commits the
+# rendered video + storyboard into cars/review/<topic>/<timestamp>/ so it can
+# be reviewed directly in the repo/GitHub UI. Nothing gets auto-published.
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Which ranking to generate"
+        required: true
+        type: choice
+        options:
+          - miata
+          - mustang
+      tts_provider:
+        description: "Voice provider"
+        required: false
+        type: choice
+        default: gtts
+        options:
+          - gtts
+          - openai
+      force_scrape:
+        description: "Re-scrape source images even if already present"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install scraper dependencies
+        working-directory: scraper/car-source-scraper
+        run: npm install
+
+      - name: Install Puppeteer Linux deps
+        working-directory: scraper/car-source-scraper
+        run: bash scripts/install-linux-deps.sh
+
+      - name: Generate ranking video
+        id: generate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FAST_MODE: "0"
+        run: |
+          FORCE_FLAG=""
+          if [ "${{ inputs.force_scrape }}" = "true" ]; then FORCE_FLAG="--force-scrape"; fi
+          RUN_DIR=$(python cars/automation/run_topic.py \
+            --topic "${{ inputs.topic }}" \
+            --tts-provider "${{ inputs.tts_provider }}" \
+            --full-res $FORCE_FLAG | tail -1)
+          echo "run_dir=$RUN_DIR" >> "$GITHUB_OUTPUT"
+
+      - name: Copy output into reviewable folder
+        id: copy
+        run: |
+          DEST="cars/review/${{ inputs.topic }}/$(date -u +%Y%m%d-%H%M%S)"
+          mkdir -p "$DEST"
+          cp "${{ steps.generate.outputs.run_dir }}/final_short.mp4" "$DEST/"
+          cp "${{ steps.generate.outputs.run_dir }}/scene_contact_sheet.jpg" "$DEST/"
+          cp "${{ steps.generate.outputs.run_dir }}/storyboard.json" "$DEST/"
+          echo "dest=$DEST" >> "$GITHUB_OUTPUT"
+
+      - name: Commit review output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${{ steps.copy.outputs.dest }}"
+          git commit -m "cars: generate ${{ inputs.topic }} ranking video for review"
+          git push
