@@ -28,6 +28,8 @@ h1 {
 .progress-step.complete span { background: #26794d; border-color: #46c983; }
 .progress-step.complete::before, .progress-step.active::before { background: #46c983; }
 .progress-detail { text-align: center; margin: 13px 0 0; font-size: .85rem; color: #bbb; }
+.branch-target { margin: 5px 0 0; text-align: center; color: #888; font-size: .72rem; }
+.branch-target code { color: #bbb; }
 .build-link { display: flex; align-items: center; gap: 8px; max-width: 520px; margin: 12px auto 0; padding: 9px 12px; border: 1px solid #4d4d4d; border-radius: 8px; color: #ddd; background: #202024; font-size: .8rem; text-decoration: none; }
 .build-link:hover { border-color: #f3b51b; }
 .build-link strong { margin-left: auto; color: #ffd56b; white-space: nowrap; }
