@@ -1,0 +1,288 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T11:50:50.719Z",
+  "query": "Toyota Supra A60",
+  "visual_highlight": "pop-up headlights",
+  "search_url": "https://carsandbids.com/search/toyota/supra?start_year=1982&end_year=1986&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rjRNMXbN/1982-toyota-celica-supra",
+      "title": "1982 Toyota Celica Supra",
+      "text": "Sold for $21,000",
+      "titleYear": null,
+      "score": 42
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMDBxPbZ/1985-toyota-supra",
+      "title": "1985 Toyota Supra",
+      "text": "Sold for $21,000",
+      "titleYear": null,
+      "score": 42
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9llQxy62/1982-toyota-celica-supra",
+      "title": "1982 Toyota Celica Supra",
+      "text": "Sold for $17,500",
+      "titleYear": null,
+      "score": 42
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BDNMAxd/1984-toyota-celica-supra-p-type",
+      "title": "1984 Toyota Celica Supra P Type",
+      "text": "Sold for $15,000",
+      "titleYear": null,
+      "score": 42
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9A41yvjv/1983-toyota-celica-supra",
+      "title": "1983 Toyota Celica Supra",
+      "text": "Sold for $13,000",
+      "titleYear": null,
+      "score": 42
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJlZQyaz/1982-toyota-celica-supra",
+      "title": "1982 Toyota Celica Supra",
+      "text": "Sold for $12,100",
+      "titleYear": null,
+      "score": 42
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rjRNMXbN/1982-toyota-celica-supra",
+      "title": "1982 Toyota Celica Supra",
+      "text": "Sold for $21,000",
+      "titleYear": null,
+      "score": 42,
+      "usable_image_count": 21,
+      "sale_price": 21000,
+      "sale_type": "sold",
+      "page_title": "1982 Toyota Celica Supra"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMDBxPbZ/1985-toyota-supra",
+      "title": "1985 Toyota Supra",
+      "text": "Sold for $21,000",
+      "titleYear": null,
+      "score": 42,
+      "usable_image_count": 35,
+      "sale_price": 21000,
+      "sale_type": "sold",
+      "page_title": "1985 Toyota Supra"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9llQxy62/1982-toyota-celica-supra",
+      "title": "1982 Toyota Celica Supra",
+      "text": "Sold for $17,500",
+      "titleYear": null,
+      "score": 42,
+      "usable_image_count": 30,
+      "sale_price": 17500,
+      "sale_type": "sold",
+      "page_title": "1982 Toyota Celica Supra"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BDNMAxd/1984-toyota-celica-supra-p-type",
+      "title": "1984 Toyota Celica Supra P Type",
+      "text": "Sold for $15,000",
+      "titleYear": null,
+      "score": 42,
+      "usable_image_count": 28,
+      "sale_price": 15000,
+      "sale_type": "sold",
+      "page_title": "1984 Toyota Celica Supra P Type"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rMDBxPbZ/1985-toyota-supra",
+    "title": "1985 Toyota Supra",
+    "text": "Sold for $21,000",
+    "titleYear": null,
+    "score": 42,
+    "sale_price": 21000,
+    "sale_type": "sold",
+    "page_title": "1985 Toyota Supra",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "front-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/9Xalykgx-4MutQlZvax-(edit).jpg?t=168502852719",
+      "labels": [
+        "front",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1982 Toyota Celica Supra",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 269517
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/3qXMBj7n-0qRlp2TRI8-(edit).jpg?t=168090804496",
+      "labels": [
+        "interior",
+        "front",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 11933 bytes"
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/3qXMBj7n-qtikKwf02F-(edit).jpg?t=168090940886",
+      "labels": [
+        "front",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1982 Toyota Celica Supra",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 314435
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/KYakzLwP-7jivgIi0Yv-(edit).jpg?t=172079785134",
+      "labels": [
+        "front",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1984 Toyota Celica Supra P Type",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 214819
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/mUfdjVnNCn2.hu0wlsc1Ok.jpg?t=159320480849",
+      "labels": [
+        "front",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1985 Toyota Supra",
+      "width": 1693,
+      "height": 1128,
+      "bytes": 303607
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/3qXMBj7n-csFIsu6xIB-(edit).jpg?t=168090808954",
+      "labels": [
+        "interior",
+        "front",
+        "detail",
+        "highlight"
+      ],
+      "section": "1982 Toyota Celica Supra",
+      "width": 542,
+      "height": 361,
+      "bytes": 36299
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 5,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "toyota",
+        "detected_model": "celica",
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 3,
+        "reject": true,
+        "reason": "Not the main subject (not a Supra)",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
