@@ -1,0 +1,171 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T03:53:56.163Z",
+  "query": "Chevrolet Corvette C8 Stingray",
+  "visual_highlight": "mid-engine layout",
+  "search_url": "https://carsandbids.com/search/chevrolet/corvette?start_year=2020&end_year=2020&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3ozoz8dV/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_1",
+      "title": "Sold for $92,700",
+      "text": "Sold for $92,700",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/Kma5LO2d/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_2",
+      "title": "Sold After for $90,000",
+      "text": "Sold After for $90,000",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vVOzx7N/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_3",
+      "title": "Sold for $90,000",
+      "text": "Sold for $90,000",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K1GPvywG/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_4",
+      "title": "Bid to $88,000",
+      "text": "Bid to $88,000",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lLeVNm9/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_5",
+      "title": "Bid to $88,000",
+      "text": "Bid to $88,000",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmVyB4Bd/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_6",
+      "title": "Sold for $85,500",
+      "text": "Sold for $85,500",
+      "titleYear": null,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3ozoz8dV/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_1",
+      "title": "Sold for $92,700",
+      "text": "Sold for $92,700",
+      "titleYear": null,
+      "score": 60,
+      "usable_image_count": 95
+    },
+    {
+      "url": "https://carsandbids.com/auctions/Kma5LO2d/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_2",
+      "title": "Sold After for $90,000",
+      "text": "Sold After for $90,000",
+      "titleYear": null,
+      "score": 60,
+      "usable_image_count": 91
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vVOzx7N/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_3",
+      "title": "Sold for $90,000",
+      "text": "Sold for $90,000",
+      "titleYear": null,
+      "score": 60,
+      "usable_image_count": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K1GPvywG/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_4",
+      "title": "Bid to $88,000",
+      "text": "Bid to $88,000",
+      "titleYear": null,
+      "score": 60,
+      "usable_image_count": 86
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vVOzx7N/2020-chevrolet-corvette-stingray-coupe?ss_id=347e8963-6e79-4bd8-9d6b-95c049d85b43&ref=pr_1_3",
+    "title": "Sold for $90,000",
+    "text": "Sold for $90,000",
+    "titleYear": null,
+    "score": 60
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/3odZMmqv.xKaiSjFqe-(edit).jpg?t=163223169884",
+      "labels": [
+        "interior",
+        "engine",
+        "highlight"
+      ],
+      "section": "2020 Chevrolet Corvette Stingray Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 23568
+    },
+    {
+      "path": "engine-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/3odZMmqv.nkYv7fYVW-(edit).jpg?t=163146240960",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "2020 Chevrolet Corvette Stingray Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 360052
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/361PazVl.NY3iFvUPg-(edit).jpg?t=163392327350",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "2020 Chevrolet Corvette Stingray Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 280253
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/3odZMmqv.tCzaTWyzq-(edit).jpg?t=163223181253",
+      "labels": [
+        "interior",
+        "engine",
+        "highlight"
+      ],
+      "section": "2020 Chevrolet Corvette Stingray Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 24076
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/3odZMmqv.crg6YfGhz-(edit).jpg?t=163146787318",
+      "labels": [
+        "interior",
+        "engine",
+        "highlight"
+      ],
+      "section": "2020 Chevrolet Corvette Stingray Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 25589
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/647dd90fc40610efeeaf6ee3efc14c41d211d580/photos/r4zGmVQg-P9Jz2Mca7a.JPG?t=162341789613",
+      "labels": [
+        "interior",
+        "engine",
+        "highlight"
+      ],
+      "section": "2020 Chevrolet Corvette Stingray Coupe",
+      "width": 542,
+      "height": 964,
+      "bytes": 46823
+    }
+  ]
+}
