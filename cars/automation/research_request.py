@@ -28,8 +28,9 @@ RESEARCH_PROMPT_TEMPLATE = """You are researching content for a short vertical "
 
 User request: "{request}"
 
-Use web search to find real, current, verifiable facts. Identify exactly 4 specific
-things to rank based on the request scope.
+Use web search to find 8 ranked candidate
+entries based on the request scope. We will keep the highest-ranked candidates that
+also have usable image coverage, so your ranking order matters.
 
 The request may explicitly ask for one of two workflows:
 1. best generations overall across the full production run of a model line
@@ -47,6 +48,10 @@ If the request is focused / in a range / generation-specific:
 - treat this as a VARIANT ranking within that constrained scope
 - all 4 entries may come from the same generation if that is what the request implies
 - example for Corvette C8: Stingray, E-Ray, Z06, ZR1 is valid
+
+Prefer candidates that are well-known, visually distinct, and likely to have strong
+auction/photo coverage. When two candidates are similarly deserving, favor the one
+more likely to have usable Cars & Bids or Commons imagery.
 
 IMPORTANT:
 - each entry still needs a clearly photographable subject
@@ -84,7 +89,9 @@ Also give:
   e.g. "So, which C5 are you taking home: Coupe, Convertible, FRC, or Z06?"
 - order_rationale: one sentence explaining why you ordered the 4 entries this way (worst-to-best, cheapest-to-priciest, etc)
 
-Order the 4 entries from what you determine is position 4 (first shown) to position 1 (last shown, the "best"/highest).
+Order the candidates from what you determine is position 8/7/etc. up to position 1, so the
+best candidate is last. The final video will keep the highest-ranked 4 candidates that
+have usable image coverage.
 
 Return ONLY strict JSON, no markdown fences, no prose outside the JSON, matching:
 {{
@@ -97,7 +104,7 @@ Return ONLY strict JSON, no markdown fences, no prose outside the JSON, matching
       "label": "string", "one_line_fact": "string", "search_hint": "string", "visual_highlight": "string"}}
   ]
 }}
-Exactly 4 entries."""
+Aim for exactly 8 entries."""
 
 
 def slugify(value):
@@ -120,8 +127,9 @@ def run_research(request_text):
         if text.lower().startswith("json"):
             text = text[4:].strip()
     data = json.loads(text)
-    if len(data.get("entries", [])) != 4:
-        raise SystemExit(f"Expected 4 entries from research, got {len(data.get('entries', []))}. Raw: {text[:500]}")
+    entry_count = len(data.get("entries", []))
+    if entry_count < 6:
+        raise SystemExit(f"Expected at least 6 entries from research, got {entry_count}. Raw: {text[:500]}")
     return data
 
 
@@ -223,6 +231,23 @@ def scrape_images(search_hint, topic_slug, draft_images_dir, visual_highlight=""
     return [f"images/{topic_slug}/{path.name}" for path in valid_images(dest)[:6]]
 
 
+def source_entry_images(entry, images_dir):
+    topic_slug = slugify(entry["name"])
+    print(f"[images] {entry['name']} -> trying Cars & Bids for {entry['search_hint']!r}")
+    cars_and_bids_images, cars_and_bids_manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
+    entry["images"] = cars_and_bids_images
+    enrich_entry_from_manifest(entry, cars_and_bids_manifest)
+    if not entry["images"]:
+        print(f"[images] Cars & Bids sparse for {entry['name']} -- falling back to Commons")
+        entry["images"] = scrape_images(
+            entry["search_hint"], topic_slug, images_dir, entry.get("visual_highlight", "")
+        )
+    entry["narration"] = augment_narration_with_current_value(entry)
+    entry["one_line_fact"] = entry["narration"]
+    entry["stat"] = format_stat(entry)
+    return entry
+
+
 def main():
     parser = argparse.ArgumentParser(description="AI-research a free-text car ranking request into a draft JSON + images.")
     parser.add_argument("--request", required=True)
@@ -237,24 +262,30 @@ def main():
     data = run_research(args.request)
     print(f"[research] Title: {data['title']}")
 
-    for i, entry in enumerate(data["entries"]):
+    selected_entries = []
+    skipped_entries = []
+    for i, candidate in enumerate(data["entries"]):
         if i > 0:
-            time.sleep(5)  # let Wikimedia's rate limiter cool down between entries
-        topic_slug = slugify(entry["name"])
-        print(f"[images] {entry['name']} -> trying Cars & Bids for {entry['search_hint']!r}")
-        cars_and_bids_images, cars_and_bids_manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
-        entry["images"] = cars_and_bids_images
-        enrich_entry_from_manifest(entry, cars_and_bids_manifest)
-        if not entry["images"]:
-            print(f"[images] Cars & Bids sparse for {entry['name']} -- falling back to Commons")
-            entry["images"] = scrape_images(
-                entry["search_hint"], topic_slug, images_dir, entry.get("visual_highlight", "")
-            )
-        entry["narration"] = augment_narration_with_current_value(entry)
-        entry["one_line_fact"] = entry["narration"]
-        entry["stat"] = format_stat(entry)
-        if not entry["images"]:
-            print(f"[images] WARNING: no images found for {entry['name']}")
+            time.sleep(5)  # let remote rate limiters cool down between entries
+        entry = source_entry_images(candidate, images_dir)
+        if entry["images"]:
+            selected_entries.append(entry)
+            print(f"[images] Selected {entry['name']} with {len(entry['images'])} image(s)")
+        else:
+            skipped_entries.append({
+                "name": entry["name"],
+                "years": entry.get("years", ""),
+                "reason": "no_images_found",
+            })
+            print(f"[images] Skipping {entry['name']} because no usable images were found")
+        if len(selected_entries) == 4:
+            break
+
+    if len(selected_entries) < 4:
+        raise SystemExit(
+            f"Only found {len(selected_entries)} image-backed entries out of {len(data['entries'])} researched candidates. "
+            "Try a broader request or improve source coverage."
+        )
 
     output = {
         "request": args.request,
@@ -263,7 +294,8 @@ def main():
         "highlight_word": data["highlight_word"],
         "close_narration": data["close_narration"],
         "order_rationale": data.get("order_rationale", ""),
-        "entries": data["entries"],
+        "entries": selected_entries,
+        "skipped_entries": skipped_entries,
         "status": "researched",  # -> "video_generated" after stage 2
     }
     (draft_dir / "research.json").write_text(json.dumps(output, indent=2), encoding="utf-8")
