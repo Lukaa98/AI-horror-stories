@@ -29,20 +29,35 @@ RESEARCH_PROMPT_TEMPLATE = """You are researching content for a short vertical "
 User request: "{request}"
 
 Use web search to find real, current, verifiable facts. Identify exactly 4 specific
-things to rank (e.g. 4 generations of one car, or 4 distinctly-named trims/models within
-one generation, or 4 specific model years -- whatever best matches the request).
+things to rank based on the request scope.
 
 The request may explicitly ask for one of two workflows:
-1. best versions overall across the full production run of a model line
+1. best generations overall across the full production run of a model line
 2. best versions within a specific year range, generation, or chassis focus
 Honor that scope strictly when choosing the 4 entries.
 
-IMPORTANT: each entry must be a distinctly NAMED model/trim that a photographer would
-tag as its own subject and that has its own dedicated Wikimedia Commons category --
-e.g. "Stingray", "Z06", "ZR1", "E-Ray" are good; internal option-package codes like
-"1LT", "2LT", "3LZ", "1LZ" are BAD (nobody photographs "a 2LT", they photograph "a Z06").
-If the request doesn't obviously split into 4 named variants, pick the 4 most
-distinct/well-known ones rather than an internal trim-code breakdown.
+If the request is overall / across the full production run / all generations:
+- treat this as a GENERATION ranking, not a trim ranking
+- choose 4 different generations or chassis families from across the model's history
+- use exactly one representative version for each chosen generation
+- do NOT let two entries come from the same generation unless the user explicitly asked for that
+- example for Corvette: C1, C4, C6, C8 is valid; Stingray, Z06, ZR1, ZR1X all from C8 is NOT valid
+
+If the request is focused / in a range / generation-specific:
+- treat this as a VARIANT ranking within that constrained scope
+- all 4 entries may come from the same generation if that is what the request implies
+- example for Corvette C8: Stingray, E-Ray, Z06, ZR1 is valid
+
+IMPORTANT:
+- each entry still needs a clearly photographable subject
+- for overall generation rankings, prefer names that combine generation plus representative trim when needed,
+  such as "C6 Z06", "C4 ZR-1", "First-Gen R8 V8", or "997 GT3 RS"
+- for focused rankings, each entry must be a distinctly NAMED model/trim that a photographer would
+  tag as its own subject and that has its own dedicated Wikimedia Commons category --
+  e.g. "Stingray", "Z06", "ZR1", "E-Ray" are good; internal option-package codes like
+  "1LT", "2LT", "3LZ", "1LZ" are BAD (nobody photographs "a 2LT", they photograph "a Z06")
+- if the request doesn't obviously split into 4 named variants, pick the 4 most
+  distinct/well-known ones rather than an internal trim-code breakdown
 
 For each entry, give:
 - name: short identifier (e.g. "NA", "Z06", "2018")

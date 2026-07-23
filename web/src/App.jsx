@@ -13,13 +13,13 @@ const YEAR_OPTIONS = Array.from({ length: new Date().getFullYear() - 1980 + 1 },
 const WORKFLOW_OPTIONS = [
   {
     id: "overall",
-    label: "Best Versions Overall",
-    description: "Find the 4 best known versions across the full model run.",
+    label: "Best Generations Overall",
+    description: "Find 4 different generations across the full model run, with one representative per generation.",
   },
   {
     id: "focused",
-    label: "Best Versions In A Range",
-    description: "Find the 4 best versions inside one generation, chassis, or year window.",
+    label: "Best Versions In One Range",
+    description: "Find the 4 best trims or variants inside one generation, chassis, or year window.",
   },
 ];
 
@@ -69,11 +69,11 @@ function buildStructuredRequest({ workflow, make, model, focus, startYear, endYe
     const yearRange = startYear && endYear ? `${startYear} to ${endYear}` : "";
     const scope = [focusLabel, yearRange].filter(Boolean).join(" ");
     return scope
-      ? `Rank the 4 best ${makeLabel} ${modelLabel} versions for ${scope}. Use distinctly named trims, variants, or special editions.`
-      : `Rank the 4 best ${makeLabel} ${modelLabel} versions in a specific generation or year range. Use distinctly named trims, variants, or special editions.`;
+      ? `Rank the 4 best ${makeLabel} ${modelLabel} versions for ${scope}. Keep all picks inside that one generation, chassis family, or year window. Use distinctly named trims, variants, or special editions.`
+      : `Rank the 4 best ${makeLabel} ${modelLabel} versions in one specific generation or year range. Use distinctly named trims, variants, or special editions.`;
   }
 
-  return `Rank the 4 best ${makeLabel} ${modelLabel} versions overall across the full production run. Use distinctly named trims, variants, or special editions.`;
+  return `Rank the 4 best ${makeLabel} ${modelLabel} generations overall across the full production run. Use 4 different generations, with one representative version from each generation.`;
 }
 
 async function dispatchWorkflow({ owner, repo, branch, token, workflow, inputs }) {
@@ -361,7 +361,7 @@ export default function App() {
               <input
                 value={focus}
                 onChange={(e) => setFocus(e.target.value)}
-                placeholder={workflow === "focused" ? "C6, first gen, B7, etc." : "Optional"}
+                placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : "Used only for focused mode"}
                 disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}
               />
             </label>
