@@ -1,0 +1,85 @@
+{
+  "request": "Rank the 4 best Mercedes Benz C Class generations overall across the full production run. Use 4 different generations when available, with one representative version from each generation. If the model has fewer than 4 true generations, use the most important era-defining versions across its history.",
+  "draft_id": "rank-the-4-best-mercedes-benz-c-class-ge-20260723050501",
+  "title": "RANKING THE BEST MERCEDES-BENZ C-CLASS GENERATIONS",
+  "highlight_word": "C-CLASS",
+  "close_narration": "So, which C-Class generation would you park in your garage?",
+  "order_rationale": "Ordered from the earliest to the latest generation to showcase the evolution of the C-Class over time.",
+  "entries": [
+    {
+      "name": "W202 C36 AMG",
+      "years": "1993\u20132000",
+      "introduced_year": 1993,
+      "price_usd": 52000,
+      "horsepower": 276,
+      "label": "FIRST AMG C-CLASS",
+      "one_line_fact": "Debuting in 1993 at $52,000, the W202 C36 AMG packed 276 horsepower, marking the first AMG-tuned C-Class and setting a high-performance precedent.",
+      "search_hint": "Mercedes-Benz C36 AMG W202",
+      "visual_highlight": "AMG body kit",
+      "images": [
+        "images/w202-c36-amg/general-01.jpg",
+        "images/w202-c36-amg/general-02.jpg",
+        "images/w202-c36-amg/general-03.jpg",
+        "images/w202-c36-amg/rear-01.jpg"
+      ],
+      "narration": "Debuting in 1993 at $52,000, the W202 C36 AMG packed 276 horsepower, marking the first AMG-tuned C-Class and setting a high-performance precedent.",
+      "stat": "MSRP $52,000 - 276 HP"
+    },
+    {
+      "name": "W203 C32 AMG",
+      "years": "2000\u20132007",
+      "introduced_year": 2001,
+      "price_usd": 51000,
+      "horsepower": 349,
+      "label": "SUPERCHARGED V6",
+      "one_line_fact": "In 2001, the W203 C32 AMG hit the scene at $51,000, boasting a supercharged V6 with 349 horsepower, blending luxury with exhilarating performance.",
+      "search_hint": "Mercedes-Benz C32 AMG W203",
+      "visual_highlight": "Supercharged engine bay",
+      "images": [
+        "images/w203-c32-amg/general-01.jpg",
+        "images/w203-c32-amg/general-02.jpg",
+        "images/w203-c32-amg/general-03.jpg",
+        "images/w203-c32-amg/rear-01.jpg"
+      ],
+      "narration": "In 2001, the W203 C32 AMG hit the scene at $51,000, boasting a supercharged V6 with 349 horsepower, blending luxury with exhilarating performance.",
+      "stat": "MSRP $51,000 - 349 HP"
+    },
+    {
+      "name": "W204 C63 AMG",
+      "years": "2007\u20132014",
+      "introduced_year": 2008,
+      "price_usd": 57000,
+      "horsepower": 451,
+      "label": "NATURALLY ASPIRATED V8",
+      "one_line_fact": "Launched in 2008 for $57,000, the W204 C63 AMG featured a 451-horsepower naturally aspirated V8, delivering raw power and a thrilling driving experience.",
+      "search_hint": "Mercedes-Benz C63 AMG W204",
+      "visual_highlight": "Quad exhaust tips",
+      "images": [
+        "images/w204-c63-amg/general-01.jpg",
+        "images/w204-c63-amg/general-02.jpg",
+        "images/w204-c63-amg/rear-01.jpg"
+      ],
+      "narration": "Launched in 2008 for $57,000, the W204 C63 AMG featured a 451-horsepower naturally aspirated V8, delivering raw power and a thrilling driving experience.",
+      "stat": "MSRP $57,000 - 451 HP"
+    },
+    {
+      "name": "W205 C63 S AMG",
+      "years": "2014\u20132021",
+      "introduced_year": 2015,
+      "price_usd": 72000,
+      "horsepower": 503,
+      "label": "TWIN-TURBO V8",
+      "one_line_fact": "In 2015, the W205 C63 S AMG arrived at $72,000, equipped with a 503-horsepower twin-turbo V8, offering a refined yet ferocious performance.",
+      "search_hint": "Mercedes-Benz C63 S AMG W205",
+      "visual_highlight": "Aggressive front grille",
+      "images": [
+        "images/w205-c63-s-amg/interior-01.jpg",
+        "images/w205-c63-s-amg/rear-01.jpg"
+      ],
+      "narration": "In 2015, the W205 C63 S AMG arrived at $72,000, equipped with a 503-horsepower twin-turbo V8, offering a refined yet ferocious performance.",
+      "stat": "MSRP $72,000 - 503 HP"
+    }
+  ],
+  "skipped_entries": [],
+  "status": "researched"
+}
