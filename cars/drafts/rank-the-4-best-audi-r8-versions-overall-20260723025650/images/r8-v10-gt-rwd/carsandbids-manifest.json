@@ -1,0 +1,157 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T03:00:40.002Z",
+  "query": "Audi R8 V10 GT RWD",
+  "visual_highlight": "red-accented wheels",
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2023&end_year=2023&csort=10",
+  "search_result_count": 4,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rMWa1xxo/2023-audi-r8-v10-performance-coupe-rwd?ss_id=17ee775f-ef03-4127-94ab-4306a7f4673d&ref=pr_1_3",
+      "title": "FEATURED Bid to $164,500",
+      "text": "FEATURED Bid to $164,500",
+      "titleYear": null,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KP0X0gbV/2023-audi-r8-v10-performance-spyder-rwd?ss_id=17ee775f-ef03-4127-94ab-4306a7f4673d&ref=pr_1_4",
+      "title": "FEATURED Bid to $153,000",
+      "text": "FEATURED Bid to $153,000",
+      "titleYear": null,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lvwPyO5/2023-audi-r8-gt-coupe?ss_id=17ee775f-ef03-4127-94ab-4306a7f4673d&ref=pr_1_1",
+      "title": "FEATURED Sold After for $274,000",
+      "text": "FEATURED Sold After for $274,000",
+      "titleYear": null,
+      "score": 40
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37Nxg5ZZ/2023-audi-r8-gt-coupe?ss_id=17ee775f-ef03-4127-94ab-4306a7f4673d&ref=pr_1_2",
+      "title": "FEATURED Bid to $251,000",
+      "text": "FEATURED Bid to $251,000",
+      "titleYear": null,
+      "score": 40
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rMWa1xxo/2023-audi-r8-v10-performance-coupe-rwd?ss_id=17ee775f-ef03-4127-94ab-4306a7f4673d&ref=pr_1_3",
+      "title": "FEATURED Bid to $164,500",
+      "text": "FEATURED Bid to $164,500",
+      "titleYear": null,
+      "score": 68,
+      "usable_image_count": 91
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KP0X0gbV/2023-audi-r8-v10-performance-spyder-rwd?ss_id=17ee775f-ef03-4127-94ab-4306a7f4673d&ref=pr_1_4",
+      "title": "FEATURED Bid to $153,000",
+      "text": "FEATURED Bid to $153,000",
+      "titleYear": null,
+      "score": 68,
+      "usable_image_count": 89
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lvwPyO5/2023-audi-r8-gt-coupe?ss_id=17ee775f-ef03-4127-94ab-4306a7f4673d&ref=pr_1_1",
+      "title": "FEATURED Sold After for $274,000",
+      "text": "FEATURED Sold After for $274,000",
+      "titleYear": null,
+      "score": 40,
+      "usable_image_count": 98
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37Nxg5ZZ/2023-audi-r8-gt-coupe?ss_id=17ee775f-ef03-4127-94ab-4306a7f4673d&ref=pr_1_2",
+      "title": "FEATURED Bid to $251,000",
+      "text": "FEATURED Bid to $251,000",
+      "titleYear": null,
+      "score": 40,
+      "usable_image_count": 100
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/37Nxg5ZZ/2023-audi-r8-gt-coupe?ss_id=17ee775f-ef03-4127-94ab-4306a7f4673d&ref=pr_1_2",
+    "title": "FEATURED Bid to $251,000",
+    "text": "FEATURED Bid to $251,000",
+    "titleYear": null,
+    "score": 40
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/rEDnDPga-31YLLZiHmK/edit/AKRUk.jpg?t=175070491572",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 V10 Performance Coupe RWD",
+      "width": 542,
+      "height": 361,
+      "bytes": 25672
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/rEDnDPga-n9V6XUX3dN.jpg?t=175095768797",
+      "labels": [
+        "wheel",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2023 Audi R8 V10 Performance Coupe RWD",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 363802
+    },
+    {
+      "path": "detail-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=768,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/interior/rGzaaNkd-rCxumWi/edit/vebZQ.jpg?t=178390492069",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Highlights",
+      "width": 768,
+      "height": 512,
+      "bytes": 55314
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/37N1ZBWv-bZpTzOp/edit/w1FaX.jpg?t=177798762448",
+      "labels": [
+        "wheel",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2023 Audi R8 V10 Performance Spyder RWD",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 222429
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/rEDnDPga-K8r9UdjgXh/edit/Y0io6.jpg?t=175070492897",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "error": "Too small: 19648 bytes"
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/rEDnDPga-gpLeS--VWP/edit/rqDmg.jpg?t=175070494168",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 V10 Performance Coupe RWD",
+      "width": 542,
+      "height": 361,
+      "bytes": 21865
+    }
+  ]
+}
