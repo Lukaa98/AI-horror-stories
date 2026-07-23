@@ -1,0 +1,296 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T12:36:16.968Z",
+  "query": "Toyota Supra A70 Turbo",
+  "visual_highlight": "turbocharged engine bay",
+  "search_url": "https://carsandbids.com/search/toyota/supra?start_year=1987&end_year=1992&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/K1yGn17d/1992-toyota-supra-twin-turbo-r",
+      "title": "1992 Toyota Supra Twin Turbo R",
+      "text": "Sold for $23,750",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BOkegbV/1989-toyota-supra-turbo",
+      "title": "1989 Toyota Supra Turbo",
+      "text": "Bid to $17,250",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEqmEoee/1990-toyota-supra-turbo",
+      "title": "1990 Toyota Supra Turbo",
+      "text": "Sold for $15,750",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkJVneyg/1992-toyota-supra-turbo",
+      "title": "1992 Toyota Supra Turbo",
+      "text": "Sold for $15,000",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGP0bOxX/1990-toyota-supra-twin-turbo-r",
+      "title": "1990 Toyota Supra Twin Turbo R",
+      "text": "Sold for $14,500",
+      "titleYear": null,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BjYvGwz/1990-toyota-supra-turbo",
+      "title": "1990 Toyota Supra Turbo",
+      "text": "Sold for $13,000",
+      "titleYear": null,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/K1yGn17d/1992-toyota-supra-twin-turbo-r",
+      "title": "1992 Toyota Supra Twin Turbo R",
+      "text": "Sold for $23,750",
+      "titleYear": null,
+      "score": 60,
+      "usable_image_count": 34,
+      "sale_price": 23750,
+      "sale_type": "sold",
+      "page_title": "1992 Toyota Supra Twin Turbo R"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BOkegbV/1989-toyota-supra-turbo",
+      "title": "1989 Toyota Supra Turbo",
+      "text": "Bid to $17,250",
+      "titleYear": null,
+      "score": 60,
+      "usable_image_count": 17,
+      "sale_price": 17250,
+      "sale_type": "bid_to",
+      "page_title": "1989 Toyota Supra Turbo"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEqmEoee/1990-toyota-supra-turbo",
+      "title": "1990 Toyota Supra Turbo",
+      "text": "Sold for $15,750",
+      "titleYear": null,
+      "score": 60,
+      "usable_image_count": 29,
+      "sale_price": 15750,
+      "sale_type": "sold",
+      "page_title": "1990 Toyota Supra Turbo"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkJVneyg/1992-toyota-supra-turbo",
+      "title": "1992 Toyota Supra Turbo",
+      "text": "Sold for $15,000",
+      "titleYear": null,
+      "score": 60,
+      "usable_image_count": 36,
+      "sale_price": 15000,
+      "sale_type": "sold",
+      "page_title": "1992 Toyota Supra Turbo"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rkJVneyg/1992-toyota-supra-turbo",
+    "title": "1992 Toyota Supra Turbo",
+    "text": "Sold for $15,000",
+    "titleYear": null,
+    "score": 60,
+    "sale_price": 15000,
+    "sale_type": "sold",
+    "page_title": "1992 Toyota Supra Turbo",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/f7335c9db98284f2edb0f42c2aa9f8252261472f/photos/O9xhyJfyfYB.jpg?t=161912610322",
+      "labels": [
+        "interior",
+        "engine",
+        "highlight"
+      ],
+      "section": "1992 Toyota Supra Turbo",
+      "width": 542,
+      "height": 406,
+      "bytes": 32235
+    },
+    {
+      "path": "engine-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/supra-crop-1.-S-AsSyCB.jpg?t=161959891640",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "1992 Toyota Supra Turbo",
+      "width": 1800,
+      "height": 1210,
+      "bytes": 250022
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/9XRP6277-I5mjqjnSHU/edit/Dfclq.jpg?t=173220259753",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "1992 Toyota Supra Twin Turbo R",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 402207
+    },
+    {
+      "path": "engine-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/rNdbXk8W-23hbel5/edit/HLGyZ.jpg?t=175446883804",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "1989 Toyota Supra Turbo",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 321339
+    },
+    {
+      "path": "engine-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c90d8216a8bf103048db7cf88cd07946ede17b22/photos/application/s-l6JuZE6/edit/HNJ17.jpg?t=177390599163",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "1990 Toyota Supra Turbo",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 225663
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/f7335c9db98284f2edb0f42c2aa9f8252261472f/photos/Kf6-QPeRS54.jpg?t=161912610322",
+      "labels": [
+        "interior",
+        "engine",
+        "highlight"
+      ],
+      "section": "1992 Toyota Supra Turbo",
+      "width": 542,
+      "height": 406,
+      "bytes": 28939
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 6,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Toyota",
+        "detected_model": "Supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Toyota",
+        "detected_model": "Supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "Target vehicle is not the main subject.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

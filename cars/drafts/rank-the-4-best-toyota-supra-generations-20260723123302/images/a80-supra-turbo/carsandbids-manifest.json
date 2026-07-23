@@ -1,0 +1,298 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T12:37:11.920Z",
+  "query": "Toyota Supra A80 Turbo",
+  "visual_highlight": "2JZ engine",
+  "search_url": "https://carsandbids.com/search/toyota/supra?start_year=1993&end_year=2002&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rJqQJkR2/1997-toyota-supra-turbo-15th-anniversary-edition",
+      "title": "1997 Toyota Supra Turbo 15th Anniversary Edition",
+      "text": "1997 Toyota Supra Turbo 15th Anniversary Edition",
+      "titleYear": 1997,
+      "score": 82
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3o01wZqV/1993-toyota-supra-turbo",
+      "title": "1993 Toyota Supra Turbo",
+      "text": "1993 Toyota Supra Turbo",
+      "titleYear": 1993,
+      "score": 82
+    },
+    {
+      "url": "https://carsandbids.com/auctions/Km2qdvw6/1995-toyota-supra-turbo",
+      "title": "1995 Toyota Supra Turbo",
+      "text": "1995 Toyota Supra Turbo",
+      "titleYear": 1995,
+      "score": 82
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98nJEvz0/1995-toyota-supra-turbo",
+      "title": "1995 Toyota Supra Turbo",
+      "text": "1995 Toyota Supra Turbo",
+      "titleYear": 1995,
+      "score": 82
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rN1Nodqb/1993-toyota-supra-turbo",
+      "title": "1993 Toyota Supra Turbo",
+      "text": "1993 Toyota Supra Turbo",
+      "titleYear": 1993,
+      "score": 82
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmJWgGzd/1994-toyota-supra-turbo",
+      "title": "1994 Toyota Supra Turbo",
+      "text": "1994 Toyota Supra Turbo",
+      "titleYear": 1994,
+      "score": 82
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rJqQJkR2/1997-toyota-supra-turbo-15th-anniversary-edition",
+      "title": "1997 Toyota Supra Turbo 15th Anniversary Edition",
+      "text": "1997 Toyota Supra Turbo 15th Anniversary Edition",
+      "titleYear": 1997,
+      "score": 82,
+      "usable_image_count": 17,
+      "sale_price": 79500,
+      "sale_type": "sold",
+      "page_title": "1997 Toyota Supra Turbo 15th Anniversary Edition"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3o01wZqV/1993-toyota-supra-turbo",
+      "title": "1993 Toyota Supra Turbo",
+      "text": "1993 Toyota Supra Turbo",
+      "titleYear": 1993,
+      "score": 82,
+      "usable_image_count": 20,
+      "sale_price": 48750,
+      "sale_type": "sold",
+      "page_title": "1993 Toyota Supra Turbo"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/Km2qdvw6/1995-toyota-supra-turbo",
+      "title": "1995 Toyota Supra Turbo",
+      "text": "1995 Toyota Supra Turbo",
+      "titleYear": 1995,
+      "score": 82,
+      "usable_image_count": 33,
+      "sale_price": 162000,
+      "sale_type": "sold",
+      "page_title": "1995 Toyota Supra Turbo"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98nJEvz0/1995-toyota-supra-turbo",
+      "title": "1995 Toyota Supra Turbo",
+      "text": "1995 Toyota Supra Turbo",
+      "titleYear": 1995,
+      "score": 82,
+      "usable_image_count": 25,
+      "sale_price": 43000,
+      "sale_type": "sold",
+      "page_title": "1995 Toyota Supra Turbo"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/Km2qdvw6/1995-toyota-supra-turbo",
+    "title": "1995 Toyota Supra Turbo",
+    "text": "1995 Toyota Supra Turbo",
+    "titleYear": 1995,
+    "score": 82,
+    "sale_price": 162000,
+    "sale_type": "sold",
+    "page_title": "1995 Toyota Supra Turbo",
+    "year": 1995,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/e97164ee86c3a6ee5aaab17d395d231e5ea329d3/photos/3yQRExlM-L3eQPK-E-Y.jpg?t=175976934081",
+      "labels": [
+        "interior",
+        "engine",
+        "highlight"
+      ],
+      "section": "1997 Toyota Supra Turbo 15th Anniversary Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 28218
+    },
+    {
+      "path": "engine-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e97164ee86c3a6ee5aaab17d395d231e5ea329d3/photos/3yQRExlM-AsdIDa9JEY.jpg?t=175976924048",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "1997 Toyota Supra Turbo 15th Anniversary Edition",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 277063
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/KZa6QeYk-PgbbkmkKH2-2-2-YXDeLeYKT8/edit/lzP8N.jpg?t=173502061294",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 249800
+    },
+    {
+      "path": "engine-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/9X64oZ7o-14mjbL7RGb-(edit)2-xMzzE2YT9K.jpg?t=171685144786",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "1995 Toyota Supra Turbo",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 273650
+    },
+    {
+      "path": "engine-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/59339d5e07287c702e69307de910cceaa69c1d04/photos/KY5L1v8x-4oRssBAKli-(edit).jpg?t=171608201255",
+      "labels": [
+        "engine",
+        "highlight"
+      ],
+      "section": "1995 Toyota Supra Turbo",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 322026
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/e97164ee86c3a6ee5aaab17d395d231e5ea329d3/photos/3yQRExlM-pwVERe9QfN.jpg?t=175976934977",
+      "labels": [
+        "interior",
+        "engine",
+        "highlight"
+      ],
+      "section": "1997 Toyota Supra Turbo 15th Anniversary Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 21695
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 6,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Toyota",
+        "detected_model": "Supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "engine-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "engine-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Toyota",
+        "detected_model": "Supra",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 4,
+        "composition_score": 5,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "Target vehicle not the main subject",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

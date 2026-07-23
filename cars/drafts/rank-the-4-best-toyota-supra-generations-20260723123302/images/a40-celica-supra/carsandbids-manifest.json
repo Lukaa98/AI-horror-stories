@@ -1,0 +1,205 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T12:34:28.403Z",
+  "query": "Toyota Celica Supra A40",
+  "visual_highlight": "classic liftback design",
+  "search_url": "https://carsandbids.com/search/toyota/celica?start_year=1979&end_year=1981&csort=10",
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KPmMZGP7/1981-toyota-celica-gt",
+      "title": "1981 Toyota Celica Gt",
+      "text": "Sold for $7,400",
+      "titleYear": null,
+      "score": 42
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KPmMZGP7/1981-toyota-celica-gt",
+      "title": "1981 Toyota Celica Gt",
+      "text": "Sold for $7,400",
+      "titleYear": null,
+      "score": 42,
+      "usable_image_count": 26,
+      "sale_price": 7400,
+      "sale_type": "sold",
+      "page_title": "1981 Toyota Celica GT"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KPmMZGP7/1981-toyota-celica-gt",
+    "title": "1981 Toyota Celica Gt",
+    "text": "Sold for $7,400",
+    "titleYear": null,
+    "score": 42,
+    "sale_price": 7400,
+    "sale_type": "sold",
+    "page_title": "1981 Toyota Celica GT",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "rear-01.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/KY5JWDwx-6j-Pf6tWleO.YdcztHdgOA.jpeg?t=164617131066",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1981 Toyota Celica GT",
+      "width": 1639,
+      "height": 1092,
+      "bytes": 459064
+    },
+    {
+      "path": "interior-02.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/KY5JWDwx-Iv595LH35Q.VfSHN8vqM.jpeg?t=164617157256",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "1981 Toyota Celica GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 30655
+    },
+    {
+      "path": "highlight-03.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/KY5JWDwx-eeobS8i6WMs.Ew3h7z7lR5.jpeg?t=164617155544",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "1981 Toyota Celica GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 24898
+    },
+    {
+      "path": "exterior-04.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/KY5JWDwx-YpbWRxPiwe.JCfH5LCNGR.jpeg?t=164617129361",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1981 Toyota Celica GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 34176
+    },
+    {
+      "path": "interior-05.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/KY5JWDwx-2nB3Y27ShK.EwjXkZBRPL.jpeg?t=164617155686",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "1981 Toyota Celica GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 20952
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/KY5JWDwx-W812UW7SJRp.4rvixRW5TL.jpeg?t=164617157284",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "error": "Too small: 18854 bytes"
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 5,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Toyota",
+        "detected_model": "Celica",
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Target vehicle not the main subject",
+        "path": "highlight-03.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 4,
+        "composition_score": 5,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "Target vehicle is not the main subject.",
+        "path": "interior-02.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 3,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle.",
+        "path": "interior-05.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "celica",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-01.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
