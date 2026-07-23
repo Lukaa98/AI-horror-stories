@@ -53,6 +53,7 @@ class RankingConfig:
     ranks: list  # list[RankEntry], must contain exactly ranks 4,3,2,1
     close_narration: str
     theme: str = ""
+    target_seconds: int = 35
 
 
 def _wrap_words(draw, words, font, max_width):
@@ -148,11 +149,11 @@ def _ranking_rail_layout(size):
     width, height = size
     scale = width / 1080
     bar_h = int(height * BAR_H_RATIO)
-    rail_x = int(24 * scale)
-    rail_w = int(330 * scale)
-    list_top = bar_h + int(24 * scale)
-    row_h = int(112 * scale)
-    row_gap = int(16 * scale)
+    rail_x = int(68 * scale)
+    rail_w = int(420 * scale)
+    list_top = bar_h + int(110 * scale)
+    row_h = int(152 * scale)
+    row_gap = int(46 * scale)
     return [
         (rail_x, list_top + index * (row_h + row_gap), rail_x + rail_w, list_top + index * (row_h + row_gap) + row_h)
         for index in range(4)
@@ -177,42 +178,50 @@ def _draw_numbered_list(draw, size, current_rank, rank_labels):
     """
     width, _ = size
     scale = width / 1080
-    number_font = _font(int(86 * scale))
+    number_font = _font(int(104 * scale))
     for rank_num, (rail_x, y, rail_right, row_bottom) in zip([4, 3, 2, 1], _ranking_rail_layout(size)):
         row_h = row_bottom - y
         is_current = rank_num == current_rank
         already_revealed = rank_num >= current_rank  # countdown runs 4 -> 1
         label = f"{rank_num}."
         color = RANK_COLORS[rank_num]
-        fill = (10, 10, 12, 230 if is_current else 190)
-        outline = color if is_current else (255, 255, 255, 80)
-        draw.rounded_rectangle(
-            (rail_x, y, rail_right, row_bottom),
-            radius=int(18 * scale), fill=fill, outline=outline,
-            width=max(1, int((4 if is_current else 2) * scale)),
-        )
+        number_bbox = draw.textbbox((0, 0), label, font=number_font)
+        number_y = y + int(4 * scale)
         draw.text(
-            (rail_x + int(18 * scale), y + int(5 * scale)),
+            (rail_x, number_y),
             label,
             font=number_font,
             fill=color,
-            stroke_width=max(2, int(3 * scale)),
+            stroke_width=max(2, int(5 * scale)),
             stroke_fill=(0, 0, 0),
         )
         rank_label = rank_labels.get(rank_num)
         if already_revealed and rank_label:
             label_x = rail_x + int(112 * scale)
             small_font = _fit_rank_label_font(
-                draw, rank_label, rail_right - label_x - int(14 * scale), scale
+                draw, rank_label, rail_right - label_x, scale
             )
             label_bbox = draw.textbbox((0, 0), rank_label, font=small_font)
-            label_y = y + (row_h - (label_bbox[3] - label_bbox[1])) / 2 - label_bbox[1]
+            label_y = y + (row_h - (label_bbox[3] - label_bbox[1])) / 2 - label_bbox[1] + int(8 * scale)
             draw.text(
                 (label_x, label_y),
                 rank_label,
                 font=small_font,
-                fill=color,
-                stroke_width=max(1, int(2 * scale)),
+                fill=(255, 255, 255) if not is_current else color,
+                stroke_width=max(1, int(4 * scale)),
+                stroke_fill=(0, 0, 0),
+            )
+        elif not already_revealed:
+            placeholder = "________"
+            placeholder_font = _font(int(36 * scale))
+            placeholder_bbox = draw.textbbox((0, 0), placeholder, font=placeholder_font)
+            placeholder_y = y + (row_h - (placeholder_bbox[3] - placeholder_bbox[1])) / 2 - placeholder_bbox[1] + int(12 * scale)
+            draw.text(
+                (rail_x + int(112 * scale), placeholder_y),
+                placeholder,
+                font=placeholder_font,
+                fill=(255, 255, 255, 150),
+                stroke_width=max(1, int(3 * scale)),
                 stroke_fill=(0, 0, 0),
             )
 
@@ -231,12 +240,12 @@ def _draw_rank_frame(config, entry, image_path, out_path, size):
     rank_labels = {e.rank: e.label for e in config.ranks}
     _draw_numbered_list(draw, size, entry.rank, rank_labels)
 
-    stat_font = _font(int(48 * scale))
+    stat_font = _font(int(46 * scale))
     highlight = RANK_COLORS[entry.rank]
     stat_text = f"{entry.name} ({entry.years})  |  {entry.stat}"
     stat_bbox = draw.textbbox((0, 0), stat_text, font=stat_font)
     stat_x = width / 2 - (stat_bbox[2] - stat_bbox[0]) / 2
-    stat_y = photo_top + photo_h - int(90 * scale)
+    stat_y = photo_top + photo_h - int(94 * scale)
     draw.rounded_rectangle(
         (
             stat_x - int(24 * scale), stat_y - int(14 * scale),
@@ -247,7 +256,14 @@ def _draw_rank_frame(config, entry, image_path, out_path, size):
         outline=highlight,
         width=max(1, int(2 * scale)),
     )
-    draw.text((stat_x, stat_y), stat_text, font=stat_font, fill=(255, 248, 230))
+    draw.text(
+        (stat_x, stat_y),
+        stat_text,
+        font=stat_font,
+        fill=(255, 248, 230),
+        stroke_width=max(1, int(2 * scale)),
+        stroke_fill=(0, 0, 0),
+    )
 
     nominal_zone_h = int(height * PHOTO_H_RATIO)
     _draw_bottom_caption(draw, size, bar_h, nominal_zone_h, entry.narration)
@@ -285,7 +301,7 @@ def render_ranking_video(config, output_root=OUTPUT_ROOT, render_video=True, fas
     }
 
     narration_path, audio_provider = _write_narration_audio(
-        run_dir, storyboard, duration_seconds=25, provider=tts_provider
+        run_dir, storyboard, duration_seconds=config.target_seconds, provider=tts_provider
     )
     storyboard["audio_provider"] = audio_provider
     audio_clip = AudioFileClip(str(narration_path))

@@ -70,6 +70,40 @@ function normalizeMediaUrl(rawUrl, baseUrl) {
   }
 }
 
+function normalizeAuctionUrl(rawUrl) {
+  try {
+    const url = new URL(String(rawUrl));
+    return `${url.origin}${url.pathname}`;
+  } catch {
+    return String(rawUrl || "");
+  }
+}
+
+function extractAuctionId(url) {
+  const match = normalizeAuctionUrl(url).match(/\/auctions\/([^/?#]+)/i);
+  return match ? match[1] : null;
+}
+
+function extractSearchTokens(value) {
+  return String(value || "")
+    .toLowerCase()
+    .split(/[^a-z0-9+.-]+/i)
+    .filter(Boolean);
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function humanizeAuctionUrl(url) {
+  const normalized = normalizeAuctionUrl(url);
+  const slug = normalized.split("/").filter(Boolean).pop() || "";
+  return slug
+    .split("-")
+    .map((part) => part ? part.charAt(0).toUpperCase() + part.slice(1) : part)
+    .join(" ");
+}
+
 function buildSearchUrl({ make, model, startYear, endYear, sort = "10" }) {
   const url = new URL(`https://carsandbids.com/search/${slugify(make)}/${slugify(model)}`);
   if (startYear) url.searchParams.set("start_year", String(startYear));
@@ -172,9 +206,10 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
     const results = [];
     const seen = new Set();
     for (const anchor of Array.from(document.querySelectorAll("a[href*='/auctions/']"))) {
-      const href = anchor.href.startsWith("http")
+      const rawHref = anchor.href.startsWith("http")
         ? anchor.href
         : `https://carsandbids.com${anchor.getAttribute("href")}`;
+      const href = rawHref ? rawHref.split("?")[0] : rawHref;
       if (seen.has(href)) continue;
       seen.add(href);
       const card = anchor.closest("article, li, div");
@@ -190,6 +225,7 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
     .map((entry) => {
       const haystack = `${entry.title} ${entry.text} ${entry.url}`.toLowerCase();
       const titleYear = Number((entry.title.match(/\b(19|20)\d{2}\b/) || [])[0] || 0);
+      const cleanedTitle = /sold for|bid to|featured/i.test(entry.title) ? humanizeAuctionUrl(entry.url) : entry.title;
       let score = 0;
       for (const token of tokens) {
         if (haystack.includes(token)) score += token.length > 2 ? 18 : 8;
@@ -198,7 +234,7 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
       if (titleYear && (!startYear || titleYear >= startYear) && (!endYear || titleYear <= endYear)) score += 28;
       if (/sold for|bid to|sold after|ended/i.test(entry.text)) score += 6;
       if (/spyder|convertible/i.test(haystack) && tokens.includes("coupe")) score -= 25;
-      return { ...entry, titleYear: titleYear || null, score };
+      return { ...entry, title: cleanedTitle, titleYear: titleYear || null, score };
     })
     .sort((a, b) => b.score - a.score)
     .slice(0, 6);
@@ -221,6 +257,26 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
       return "";
     };
 
+    const nextData = (() => {
+      const node = document.querySelector("#__NEXT_DATA__");
+      if (!node) return null;
+      try {
+        return JSON.parse(node.textContent || "{}");
+      } catch {
+        return null;
+      }
+    })();
+    const auction =
+      nextData?.props?.pageProps?.auction ||
+      nextData?.props?.pageProps?.listing ||
+      null;
+    const bodyText = document.body?.innerText || "";
+    let salePrice = auction?.salePrice || auction?.finalSalePrice || null;
+    if (!salePrice) {
+      const match = bodyText.match(/(?:Sold for|Bid to)\s+\$([\d,]+)/i);
+      if (match) salePrice = Number(match[1].replace(/,/g, ""));
+    }
+
     const candidates = [];
     const pushCandidate = (candidate) => {
       if (!candidate?.url || !/media\.carsandbids\.com|carsandbids\.com/i.test(candidate.url)) return;
@@ -237,6 +293,7 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
         url,
         alt: img.alt || "",
         anchorText: anchor.getAttribute("aria-label") || anchor.getAttribute("title") || anchor.innerText || "",
+        anchorHref: anchor.href || anchor.getAttribute("href") || "",
         context,
         section: headingText(container),
         width: img.naturalWidth || img.width || 0,
@@ -258,6 +315,7 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
         url,
         alt: img.alt || img.getAttribute("aria-label") || "",
         anchorText: img.closest("a")?.getAttribute("aria-label") || img.closest("a")?.getAttribute("title") || "",
+        anchorHref: img.closest("a")?.href || img.closest("a")?.getAttribute("href") || "",
         context,
         section: headingText(container),
         width: img.naturalWidth || img.width || 0,
@@ -267,14 +325,63 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
         title: document.querySelector("h1")?.innerText?.trim() || document.title,
       });
     }
-    return candidates;
+    return {
+      pageMeta: {
+        title: auction?.title || document.querySelector("h1")?.innerText?.trim() || document.title,
+        year: auction?.year || null,
+        make: auction?.make || null,
+        model: auction?.model || null,
+        salePrice: salePrice || null,
+        saleType: salePrice ? (/(sold for)/i.test(bodyText) ? "sold" : "bid_to") : null,
+        location: auction?.location || null,
+      },
+      candidates,
+    };
   });
 
-  return raw
-    .map((candidate) => ({ ...candidate, url: normalizeMediaUrl(candidate.url, auctionUrl) }))
-    .filter((candidate) => candidate.url)
-    .filter((candidate) => /media\.carsandbids\.com/i.test(candidate.url))
-    .map((candidate) => classifyCandidate(candidate, visualHighlight));
+  return {
+    pageMeta: raw.pageMeta,
+    candidates: raw.candidates
+      .map((candidate) => ({
+        ...candidate,
+        url: normalizeMediaUrl(candidate.url, auctionUrl),
+        anchorHref: normalizeAuctionUrl(candidate.anchorHref || ""),
+      }))
+      .filter((candidate) => candidate.url)
+      .filter((candidate) => /media\.carsandbids\.com/i.test(candidate.url))
+      .map((candidate) => classifyCandidate(candidate, visualHighlight)),
+  };
+}
+
+function candidateLooksRelevant(candidate, { auctionId, makeToken, modelToken, queryTokens }) {
+  const haystack = [
+    candidate.url,
+    candidate.alt,
+    candidate.anchorText,
+    candidate.anchorHref,
+    candidate.context,
+    candidate.section,
+    candidate.auctionTitle,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  const linkedAuctionId = extractAuctionId(candidate.anchorHref);
+  if (linkedAuctionId && auctionId && linkedAuctionId !== auctionId) return false;
+  if (/related listings|you may also like|recommended|more auctions/i.test(haystack)) return false;
+
+  const foreignMakes = ["acura", "alfa", "aston", "bentley", "bmw", "bugatti", "cadillac", "chevrolet", "ferrari", "ford", "honda", "hyundai", "jaguar", "lamborghini", "lexus", "lotus", "maserati", "mazda", "mclaren", "mercedes", "mini", "nissan", "porsche", "subaru", "tesla", "toyota", "volkswagen"];
+  for (const foreignMake of foreignMakes) {
+    if (foreignMake === makeToken) continue;
+    if (new RegExp(`\\b${escapeRegExp(foreignMake)}\\b`, "i").test(haystack)) return false;
+  }
+
+  if (makeToken && !new RegExp(`\\b${escapeRegExp(makeToken)}\\b`, "i").test(haystack)) return false;
+
+  const strongModelMatch = modelToken && new RegExp(`\\b${escapeRegExp(modelToken)}\\b`, "i").test(haystack);
+  const queryMatches = queryTokens.filter((token) => token.length >= 2 && haystack.includes(token)).length;
+  return Boolean(strongModelMatch || queryMatches >= 2);
 }
 
 function chooseImages(candidates, desiredLabels, queryTokens) {
@@ -328,6 +435,8 @@ async function main() {
     .split(/[^a-z0-9+.-]+/i)
     .filter(Boolean);
   const desiredLabels = queryTokens.filter((token) => ["coupe", "spyder", "convertible", "manual", "v8", "v10", "gt"].includes(token));
+  const makeToken = String(argValue("make", "")).toLowerCase();
+  const modelToken = String(argValue("model", "")).toLowerCase();
 
   await ensureDir(outDir);
   const browser = await puppeteer.launch({
@@ -355,16 +464,38 @@ async function main() {
     let bestGalleryCount = 0;
     for (const auction of auctions.slice(0, 4)) {
       const gallery = await extractAuctionGallery(page, auction.url, visualHighlight);
-      const usable = gallery.filter((candidate) => !/logo|icon|avatar|dougscore|shipping|carfax/i.test(
-        `${candidate.url} ${candidate.alt} ${candidate.anchorText} ${candidate.context} ${candidate.section}`.toLowerCase()
-      ));
+      const usable = gallery.candidates.filter((candidate) => {
+        const haystack = `${candidate.url} ${candidate.alt} ${candidate.anchorText} ${candidate.context} ${candidate.section}`.toLowerCase();
+        if (/logo|icon|avatar|dougscore|shipping|carfax/i.test(haystack)) return false;
+        return candidateLooksRelevant(candidate, {
+          auctionId: extractAuctionId(auction.url),
+          makeToken,
+          modelToken,
+          queryTokens,
+        });
+      });
       if (usable.length) {
-        auctionsUsed.push({ ...auction, usable_image_count: usable.length });
+        auctionsUsed.push({
+          ...auction,
+          usable_image_count: usable.length,
+          sale_price: gallery.pageMeta?.salePrice || null,
+          sale_type: gallery.pageMeta?.saleType || null,
+          page_title: gallery.pageMeta?.title || null,
+        });
         selectedCandidates.push(...usable);
       }
       if (usable.length > bestGalleryCount) {
         bestGalleryCount = usable.length;
-        selectedAuction = auction;
+        selectedAuction = {
+          ...auction,
+          sale_price: gallery.pageMeta?.salePrice || null,
+          sale_type: gallery.pageMeta?.saleType || null,
+          page_title: gallery.pageMeta?.title || null,
+          year: gallery.pageMeta?.year || auction.titleYear || null,
+          make: gallery.pageMeta?.make || null,
+          model: gallery.pageMeta?.model || null,
+          location: gallery.pageMeta?.location || null,
+        };
       }
     }
 

@@ -17,7 +17,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from PIL import Image
-from cars_and_bids import scrape_entry_images
+from cars_and_bids import augment_narration_with_current_value, enrich_entry_from_manifest, scrape_entry_images
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
@@ -51,11 +51,12 @@ For each entry, give:
 - price_usd: its ORIGINAL starting MSRP in its introduction year, in USD as a number, or null only if unavailable
 - horsepower: a representative horsepower number, or null if not applicable
 - label: a short (2-4 word) factual or reputation-based descriptor, e.g. "MOST UNLOVED" or "ENTRY POINT"
-- one_line_fact: energetic spoken narration of 22-32 words. It MUST naturally mention the introduction year,
-  original starting price, horsepower, and one meaningful enthusiast detail. Write like a knowledgeable car-club
-  friend, not a brochure or AI summary. Use contractions and varied transitions. The first entry should open with
-  an enthusiastic ranking hook; later entries should flow with phrases such as "Then," "Next," and "At number one."
-  Do not use Markdown, emoji, headings, or stage directions because this text goes directly to text-to-speech.
+- one_line_fact: energetic spoken narration of 16-24 words. It MUST naturally mention the introduction year,
+  original starting price, horsepower, and one meaningful enthusiast detail. Keep it to one punchy sentence.
+  Write like a knowledgeable car-club friend, not a brochure or AI summary. Use contractions and varied transitions.
+  The first entry should open with an enthusiastic ranking hook; later entries should flow with phrases such as
+  "Then," "Next," and "At number one." Do not use Markdown, emoji, headings, or stage directions because this text
+  goes directly to text-to-speech.
 - search_hint: a short phrase to search Wikimedia Commons for photos of this specific thing
   (e.g. "Ford Mustang III GT", "Chevrolet Corvette Z06 C8")
 - visual_highlight: the most interesting model-specific visual detail to show, such as "quad exhaust",
@@ -64,7 +65,7 @@ For each entry, give:
 Also give:
 - title: a short ALL-CAPS-worthy video title, e.g. "RANKING EVERY CORVETTE GENERATION"
 - highlight_word: the single word in the title that should be color-highlighted (usually the car model name)
-- close_narration: an enthusiastic conversational choice question (max 16 words) naming the relevant lineup,
+- close_narration: an enthusiastic conversational choice question (max 10 words) naming the relevant lineup,
   e.g. "So, which C5 are you taking home: Coupe, Convertible, FRC, or Z06?"
 - order_rationale: one sentence explaining why you ordered the 4 entries this way (worst-to-best, cheapest-to-priciest, etc)
 
@@ -112,9 +113,11 @@ def run_research(request_text):
 def format_stat(entry):
     parts = []
     if entry.get("price_usd"):
-        parts.append(f"${entry['price_usd']:,.0f}")
+        parts.append(f"MSRP ${entry['price_usd']:,.0f}")
     if entry.get("horsepower"):
         parts.append(f"{entry['horsepower']:.0f} HP")
+    if entry.get("current_value_display"):
+        parts.append(f"Now ~{entry['current_value_display']}")
     return " - ".join(parts) if parts else "SPEC UNAVAILABLE"
 
 
@@ -226,18 +229,14 @@ def main():
         print(f"[images] {entry['name']} -> trying Cars & Bids for {entry['search_hint']!r}")
         cars_and_bids_images, cars_and_bids_manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
         entry["images"] = cars_and_bids_images
-        if cars_and_bids_manifest.get("selected_auction"):
-            entry["image_source"] = {
-                "provider": "cars_and_bids",
-                "search_url": cars_and_bids_manifest.get("search_url"),
-                "auction_url": cars_and_bids_manifest.get("selected_auction", {}).get("url"),
-                "auction_title": cars_and_bids_manifest.get("selected_auction", {}).get("title"),
-            }
+        enrich_entry_from_manifest(entry, cars_and_bids_manifest)
         if not entry["images"]:
             print(f"[images] Cars & Bids sparse for {entry['name']} -- falling back to Commons")
             entry["images"] = scrape_images(
                 entry["search_hint"], topic_slug, images_dir, entry.get("visual_highlight", "")
             )
+        entry["narration"] = augment_narration_with_current_value(entry)
+        entry["one_line_fact"] = entry["narration"]
         entry["stat"] = format_stat(entry)
         if not entry["images"]:
             print(f"[images] WARNING: no images found for {entry['name']}")

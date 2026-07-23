@@ -947,9 +947,11 @@ def _write_gtts_audio(path, text):
 
 
 CAR_TTS_INSTRUCTIONS = (
-    "Use a high-energy car trailer narrator style. Big and punchy, but still clear. "
-    "Sound like an original automotive Shorts narrator, not an imitation of any real actor, "
-    "franchise character, or celebrity voice."
+    "Use an enthusiastic automotive Shorts narrator style with real momentum and personality. "
+    "Sound excited, confident, and conversational instead of robotic. Add brief natural pauses "
+    "after strong hooks, rank changes, and key numbers so the delivery breathes. Emphasize years, "
+    "prices, horsepower, and verdict phrases with extra energy, but stay clear and easy to follow. "
+    "Sound like an original narrator, not an imitation of any real actor, franchise character, or celebrity voice."
 )
 
 
@@ -964,7 +966,7 @@ def _write_openai_audio(path, text):
         voice=os.getenv("OPENAI_TTS_VOICE", "onyx"),
         input=text,
         instructions=os.getenv("OPENAI_TTS_INSTRUCTIONS", CAR_TTS_INSTRUCTIONS),
-        speed=float(os.getenv("OPENAI_TTS_SPEED", "1.0")),
+        speed=float(os.getenv("OPENAI_TTS_SPEED", "1.08")),
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     response.write_to_file(str(path))
