@@ -1,0 +1,69 @@
+{
+  "request": "Rank Audi R8 models from 2007 till 2025",
+  "draft_id": "rank-audi-r8-models-from-2007-till-2025-20260722235158",
+  "title": "RANKING AUDI R8 MODELS",
+  "highlight_word": "AUDI",
+  "close_narration": "So, which R8 would you park in your garage: V8, V10, GT, or V10 Plus?",
+  "order_rationale": "Ordered from the original V8 model to the high-performance V10 Plus, showcasing the evolution of the R8's power and exclusivity.",
+  "entries": [
+    {
+      "name": "V8",
+      "years": "2007-2012",
+      "introduced_year": 2007,
+      "price_usd": 109000,
+      "horsepower": 420,
+      "label": "THE ORIGINAL",
+      "one_line_fact": "Debuting in 2007 at $109,000, the R8 V8's 420 horsepower and mid-engine layout made it a game-changer, blending supercar performance with daily drivability.",
+      "search_hint": "Audi R8 V8",
+      "visual_highlight": "mid-engine layout",
+      "images": [
+        "images/v8/highlight-01.jpg",
+        "images/v8/interior-01.jpg",
+        "images/v8/rear-01.jpg"
+      ],
+      "stat": "$109,000 - 420 HP"
+    },
+    {
+      "name": "V10",
+      "years": "2009-2015",
+      "introduced_year": 2009,
+      "price_usd": 146000,
+      "horsepower": 525,
+      "label": "POWER BOOST",
+      "one_line_fact": "In 2009, the R8 V10 hit the scene at $146,000, packing 525 horsepower and a 5.2-liter engine, elevating the R8's performance to new heights.",
+      "search_hint": "Audi R8 V10",
+      "visual_highlight": "5.2-liter V10 engine",
+      "images": [
+        "images/v10/rear-01.jpg"
+      ],
+      "stat": "$146,000 - 525 HP"
+    },
+    {
+      "name": "GT",
+      "years": "2011-2013",
+      "introduced_year": 2011,
+      "price_usd": 196800,
+      "horsepower": 560,
+      "label": "LIMITED EDITION",
+      "one_line_fact": "Then came the 2011 R8 GT, a $196,800 limited edition with 560 horsepower, shedding weight and adding aero tweaks for track-focused enthusiasts.",
+      "search_hint": "Audi R8 GT",
+      "visual_highlight": "aerodynamic enhancements",
+      "images": [],
+      "stat": "$196,800 - 560 HP"
+    },
+    {
+      "name": "V10 Plus",
+      "years": "2013-2015",
+      "introduced_year": 2013,
+      "price_usd": 174795,
+      "horsepower": 550,
+      "label": "TOP PERFORMER",
+      "one_line_fact": "At number one, the 2013 R8 V10 Plus, starting at $174,795, delivered 550 horsepower, carbon-ceramic brakes, and a 0-60 time under 3.5 seconds.",
+      "search_hint": "Audi R8 V10 Plus",
+      "visual_highlight": "carbon-ceramic brakes",
+      "images": [],
+      "stat": "$174,795 - 550 HP"
+    }
+  ],
+  "status": "researched"
+}
