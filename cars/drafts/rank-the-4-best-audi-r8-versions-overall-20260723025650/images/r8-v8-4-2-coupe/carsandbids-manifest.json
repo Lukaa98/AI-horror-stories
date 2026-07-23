@@ -1,0 +1,168 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T02:58:37.400Z",
+  "query": "Audi R8 V8 4.2 Coupe",
+  "visual_highlight": "gated manual shifter",
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2007&end_year=2012&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3ojONe4g/2010-audi-r8-v10-coupe",
+      "title": "2010 Audi R8 V10 Coupe",
+      "text": "2010 Audi R8 V10 Coupe",
+      "titleYear": 2010,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdOlelDB/2011-audi-r8-v10-coupe",
+      "title": "2011 Audi R8 V10 Coupe",
+      "text": "2011 Audi R8 V10 Coupe",
+      "titleYear": 2011,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K1AJJOoM/2009-audi-r8-coupe",
+      "title": "2009 Audi R8 Coupe",
+      "text": "2009 Audi R8 Coupe",
+      "titleYear": 2009,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdZZPG51/2009-audi-r8-coupe",
+      "title": "2009 Audi R8 Coupe",
+      "text": "2009 Audi R8 Coupe",
+      "titleYear": 2009,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Rpba7GX/2012-audi-r8-coupe",
+      "title": "2012 Audi R8 Coupe",
+      "text": "2012 Audi R8 Coupe",
+      "titleYear": 2012,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K11Zgy1z/2009-audi-r8-coupe",
+      "title": "2009 Audi R8 Coupe",
+      "text": "2009 Audi R8 Coupe",
+      "titleYear": 2009,
+      "score": 72
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3ojONe4g/2010-audi-r8-v10-coupe",
+      "title": "2010 Audi R8 V10 Coupe",
+      "text": "2010 Audi R8 V10 Coupe",
+      "titleYear": 2010,
+      "score": 72,
+      "usable_image_count": 96
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdOlelDB/2011-audi-r8-v10-coupe",
+      "title": "2011 Audi R8 V10 Coupe",
+      "text": "2011 Audi R8 V10 Coupe",
+      "titleYear": 2011,
+      "score": 72,
+      "usable_image_count": 90
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K1AJJOoM/2009-audi-r8-coupe",
+      "title": "2009 Audi R8 Coupe",
+      "text": "2009 Audi R8 Coupe",
+      "titleYear": 2009,
+      "score": 72,
+      "usable_image_count": 91
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdZZPG51/2009-audi-r8-coupe",
+      "title": "2009 Audi R8 Coupe",
+      "text": "2009 Audi R8 Coupe",
+      "titleYear": 2009,
+      "score": 72,
+      "usable_image_count": 96
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3ojONe4g/2010-audi-r8-v10-coupe",
+    "title": "2010 Audi R8 V10 Coupe",
+    "text": "2010 Audi R8 V10 Coupe",
+    "titleYear": 2010,
+    "score": 72
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/rw0xw5dx-zGl9BaY/edit/q15XK.jpg?t=174162136554",
+      "labels": [
+        "interior",
+        "engine",
+        "highlight"
+      ],
+      "section": "2009 Audi R8 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 22706
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/exterior/3o07jGRo-_3bfqO_/edit/GVfnr.jpg?t=176954474929",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2010 Audi R8 V10 Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 324552
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/rw0xw5dx-u316Fug/edit/-xA7i.jpg?t=174162117517",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2009 Audi R8 Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 361754
+    },
+    {
+      "path": "highlight-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/rNb05lg5-1Q0l4j__G8/edit/sATQk.jpg?t=174742636450",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2011 Audi R8 V10 Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 393962
+    },
+    {
+      "path": "highlight-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/92D1Adkb-MCiDXg6cOa.jpg?t=171900348450",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2009 Audi R8 Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 324714
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/337d1a55b9e366666641a1e9c3fe28225540e1a0/photos/interior/3o07jGRo-IhIBKAV.jpg?t=176939558846",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2010 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 25142
+    }
+  ]
+}

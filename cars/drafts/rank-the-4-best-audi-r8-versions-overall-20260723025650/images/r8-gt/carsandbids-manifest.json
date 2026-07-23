@@ -1,0 +1,170 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T03:00:00.443Z",
+  "query": "Audi R8 GT",
+  "visual_highlight": "fixed rear wing",
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2011&end_year=2012&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3ONaXb2Y/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 GT Spyder",
+      "text": "2012 Audi R8 GT Spyder",
+      "titleYear": 2012,
+      "score": 107
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3y0QR8Ad/2012-audi-r8-gt-coupe",
+      "title": "2012 Audi R8 GT Coupe",
+      "text": "2012 Audi R8 GT Coupe",
+      "titleYear": 2012,
+      "score": 107
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdOlelDB/2011-audi-r8-v10-coupe",
+      "title": "2011 Audi R8 V10 Coupe",
+      "text": "2011 Audi R8 V10 Coupe",
+      "titleYear": 2011,
+      "score": 54
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPmDZYWQ/2012-audi-r8-v10-spyder",
+      "title": "2012 Audi R8 V10 Spyder",
+      "text": "2012 Audi R8 V10 Spyder",
+      "titleYear": 2012,
+      "score": 54
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Rpba7GX/2012-audi-r8-coupe",
+      "title": "2012 Audi R8 Coupe",
+      "text": "2012 Audi R8 Coupe",
+      "titleYear": 2012,
+      "score": 54
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AdNObw5/2012-audi-r8-v10-spyder",
+      "title": "2012 Audi R8 V10 Spyder",
+      "text": "2012 Audi R8 V10 Spyder",
+      "titleYear": 2012,
+      "score": 54
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3ONaXb2Y/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 GT Spyder",
+      "text": "2012 Audi R8 GT Spyder",
+      "titleYear": 2012,
+      "score": 107,
+      "usable_image_count": 95
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3y0QR8Ad/2012-audi-r8-gt-coupe",
+      "title": "2012 Audi R8 GT Coupe",
+      "text": "2012 Audi R8 GT Coupe",
+      "titleYear": 2012,
+      "score": 107,
+      "usable_image_count": 86
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdOlelDB/2011-audi-r8-v10-coupe",
+      "title": "2011 Audi R8 V10 Coupe",
+      "text": "2011 Audi R8 V10 Coupe",
+      "titleYear": 2011,
+      "score": 54,
+      "usable_image_count": 90
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPmDZYWQ/2012-audi-r8-v10-spyder",
+      "title": "2012 Audi R8 V10 Spyder",
+      "text": "2012 Audi R8 V10 Spyder",
+      "titleYear": 2012,
+      "score": 54,
+      "usable_image_count": 86
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3ONaXb2Y/2012-audi-r8-gt-spyder",
+    "title": "2012 Audi R8 GT Spyder",
+    "text": "2012 Audi R8 GT Spyder",
+    "titleYear": 2012,
+    "score": 107
+  },
+  "downloaded_images": [
+    {
+      "path": "rear-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-f-4AzpqjEc-(edit).jpg?t=167529742142",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 258155
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-YtWJBgKKjL-(edit).jpg?t=167529676436",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 25496
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/rbo012Pk-ktanq54lAm-(edit).jpg?t=165335913382",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 GT Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 210420
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/36WPnoGO-B-j75TTEny/edit/oc3dD.jpg?t=174549225838",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 V10 Spyder",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 308215
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-h0PpUCCd6V-(edit).jpg?t=167529719367",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 20865
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-JGrXw-iVhm-(edit).jpg?t=167529723248",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "error": "Too small: 10701 bytes"
+    }
+  ]
+}
