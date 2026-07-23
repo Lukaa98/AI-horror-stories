@@ -1,0 +1,302 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T04:52:28.358Z",
+  "query": "Audi R8 V10 Plus 2015",
+  "visual_highlight": "aggressive front grille",
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2015&end_year=2018&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/356kWxpP/2017-audi-r8-v10-plus",
+      "title": "2017 Audi R8 V10 Plus",
+      "text": "2017 Audi R8 V10 Plus",
+      "titleYear": 2017,
+      "score": 90
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rk6kddvg/2015-audi-r8-v10-plus-coupe",
+      "title": "2015 Audi R8 V10 Plus Coupe",
+      "text": "Sold for $261,000",
+      "titleYear": null,
+      "score": 86
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPAM7Q4L/2015-audi-r8-v10-plus-coupe",
+      "title": "2015 Audi R8 V10 Plus Coupe",
+      "text": "Sold for $112,500",
+      "titleYear": null,
+      "score": 86
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AN1016z/2015-audi-r8-v10-plus",
+      "title": "2015 Audi R8 V10 Plus",
+      "text": "Sold for $104,500",
+      "titleYear": null,
+      "score": 86
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMYMkvYR/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "text": "2018 Audi R8 V10 Coupe RWS",
+      "titleYear": 2018,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9X6kNN0x/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "text": "2018 Audi R8 V10 Coupe RWS",
+      "titleYear": 2018,
+      "score": 72
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/356kWxpP/2017-audi-r8-v10-plus",
+      "title": "2017 Audi R8 V10 Plus",
+      "text": "2017 Audi R8 V10 Plus",
+      "titleYear": 2017,
+      "score": 90,
+      "usable_image_count": 28,
+      "sale_price": 158000,
+      "sale_type": "sold",
+      "page_title": "2017 Audi R8 V10 Plus"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rk6kddvg/2015-audi-r8-v10-plus-coupe",
+      "title": "2015 Audi R8 V10 Plus Coupe",
+      "text": "Sold for $261,000",
+      "titleYear": null,
+      "score": 86,
+      "usable_image_count": 37,
+      "sale_price": 261000,
+      "sale_type": "sold",
+      "page_title": "2015 Audi R8 V10 Plus Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPAM7Q4L/2015-audi-r8-v10-plus-coupe",
+      "title": "2015 Audi R8 V10 Plus Coupe",
+      "text": "Sold for $112,500",
+      "titleYear": null,
+      "score": 86,
+      "usable_image_count": 27,
+      "sale_price": 112500,
+      "sale_type": "sold",
+      "page_title": "2015 Audi R8 V10 Plus Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AN1016z/2015-audi-r8-v10-plus",
+      "title": "2015 Audi R8 V10 Plus",
+      "text": "Sold for $104,500",
+      "titleYear": null,
+      "score": 86,
+      "usable_image_count": 26,
+      "sale_price": 104500,
+      "sale_type": "sold",
+      "page_title": "2015 Audi R8 V10 Plus"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rk6kddvg/2015-audi-r8-v10-plus-coupe",
+    "title": "2015 Audi R8 V10 Plus Coupe",
+    "text": "Sold for $261,000",
+    "titleYear": null,
+    "score": 86,
+    "sale_price": 261000,
+    "sale_type": "sold",
+    "page_title": "2015 Audi R8 V10 Plus Coupe",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "front-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9akZJo6X.KvTfQcDsT-(edit).jpg?t=164491900655",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2015 Audi R8 V10 Plus Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 426456
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rkdqjxLN-U6BxKq3/edit/1oAaC.jpg?t=176719598015",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2015 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 24061
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3qxNDa61-fqjO-5qc-7-(edit).jpg?t=166321381483",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2015 Audi R8 V10 Plus",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 152287
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/rkdqjxLN-cgrl4cbLAo/edit/6Ype3.jpg?t=176730112987",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2015 Audi R8 V10 Plus Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 166847
+    },
+    {
+      "path": "interior-05.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rkdqjxLN-cmDRr1unQM.jpeg?t=176723000164",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2015 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 25397
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/other/rkdqjxLN-SwC8s8d/edit/X80qb.jpg?t=176715714100",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2015 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 23132
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 6,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "R8",
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 4,
+        "composition_score": 5,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "Not the target vehicle; interior shot does not feature the main subject clearly.",
+        "path": "interior-05.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "Not the main subject; image focuses on interior detail, not the target vehicle.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

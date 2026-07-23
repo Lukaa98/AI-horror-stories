@@ -1,0 +1,307 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T04:51:31.854Z",
+  "query": "Audi R8 GT 2011",
+  "visual_highlight": "carbon fiber rear wing",
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2011&end_year=2012&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KdOlelDB/2011-audi-r8-v10-coupe",
+      "title": "2011 Audi R8 V10 Coupe",
+      "text": "2011 Audi R8 V10 Coupe",
+      "titleYear": 2011,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3ONaXb2Y/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 GT Spyder",
+      "text": "2012 Audi R8 GT Spyder",
+      "titleYear": 2012,
+      "score": 62
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3y0QR8Ad/2012-audi-r8-gt-coupe",
+      "title": "2012 Audi R8 GT Coupe",
+      "text": "2012 Audi R8 GT Coupe",
+      "titleYear": 2012,
+      "score": 62
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPmDZYWQ/2012-audi-r8-v10-spyder",
+      "title": "2012 Audi R8 V10 Spyder",
+      "text": "2012 Audi R8 V10 Spyder",
+      "titleYear": 2012,
+      "score": 54
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Rpba7GX/2012-audi-r8-coupe",
+      "title": "2012 Audi R8 Coupe",
+      "text": "2012 Audi R8 Coupe",
+      "titleYear": 2012,
+      "score": 54
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AdNObw5/2012-audi-r8-v10-spyder",
+      "title": "2012 Audi R8 V10 Spyder",
+      "text": "2012 Audi R8 V10 Spyder",
+      "titleYear": 2012,
+      "score": 54
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KdOlelDB/2011-audi-r8-v10-coupe",
+      "title": "2011 Audi R8 V10 Coupe",
+      "text": "2011 Audi R8 V10 Coupe",
+      "titleYear": 2011,
+      "score": 72,
+      "usable_image_count": 22,
+      "sale_price": 124500,
+      "sale_type": "sold",
+      "page_title": "2011 Audi R8 V10 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3ONaXb2Y/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 GT Spyder",
+      "text": "2012 Audi R8 GT Spyder",
+      "titleYear": 2012,
+      "score": 62,
+      "usable_image_count": 27,
+      "sale_price": 101500,
+      "sale_type": "sold",
+      "page_title": "2012 Audi R8 GT Spyder"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3y0QR8Ad/2012-audi-r8-gt-coupe",
+      "title": "2012 Audi R8 GT Coupe",
+      "text": "2012 Audi R8 GT Coupe",
+      "titleYear": 2012,
+      "score": 62,
+      "usable_image_count": 18,
+      "sale_price": 110000,
+      "sale_type": "sold",
+      "page_title": "2012 Audi R8 GT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPmDZYWQ/2012-audi-r8-v10-spyder",
+      "title": "2012 Audi R8 V10 Spyder",
+      "text": "2012 Audi R8 V10 Spyder",
+      "titleYear": 2012,
+      "score": 54,
+      "usable_image_count": 18,
+      "sale_price": 71000,
+      "sale_type": "sold",
+      "page_title": "2012 Audi R8 V10 Spyder"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3ONaXb2Y/2012-audi-r8-gt-spyder",
+    "title": "2012 Audi R8 GT Spyder",
+    "text": "2012 Audi R8 GT Spyder",
+    "titleYear": 2012,
+    "score": 62,
+    "sale_price": 101500,
+    "sale_type": "sold",
+    "page_title": "2012 Audi R8 GT Spyder",
+    "year": 2012,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "rear-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-f-4AzpqjEc-(edit).jpg?t=167529742142",
+      "labels": [
+        "rear",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 258155
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/rNb05lg5-hz_XWhYuTS/edit/MUd0o.jpg?t=174742625826",
+      "labels": [
+        "interior",
+        "rear",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 27428
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/rbo012Pk-ktanq54lAm-(edit).jpg?t=165335913382",
+      "labels": [
+        "rear",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 GT Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 210420
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/rNb05lg5-1Q0l4j__G8/edit/sATQk.jpg?t=174742636450",
+      "labels": [
+        "rear",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2011 Audi R8 V10 Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 393962
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/36WPnoGO-B-j75TTEny/edit/oc3dD.jpg?t=174549225838",
+      "labels": [
+        "rear",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 V10 Spyder",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 308215
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/rNb05lg5-zJqB6TWSDX/edit/jl-3Q.jpg?t=174742628643",
+      "labels": [
+        "interior",
+        "rear",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 24743
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 6,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 5,
+        "reject": true,
+        "reason": "Target car not the main subject; focus is on the interior.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-01.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
