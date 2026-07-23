@@ -1,5 +1,5 @@
 .page {
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
   padding: 24px 20px 60px;
   text-align: left;
@@ -79,12 +79,93 @@ h1 {
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
+  align-items: flex-start;
 }
 
-.request-input {
+.request-builder {
   flex: 1;
+  display: grid;
+  gap: 12px;
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.workflow-card {
+  padding: 14px;
+  border: 1px solid #444;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  color: #ddd;
+  text-align: left;
+  display: grid;
+  gap: 6px;
+}
+
+.workflow-card.active {
+  border-color: #f3b51b;
+  box-shadow: 0 0 0 1px rgba(243,181,27,.35);
+  background: linear-gradient(180deg, rgba(243,181,27,.14), rgba(255,255,255,.03));
+}
+
+.workflow-card strong {
+  font-size: .95rem;
+}
+
+.workflow-card span {
+  font-size: .82rem;
+  color: #a8a8a8;
+}
+
+.builder-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.builder-grid label,
+.request-preview,
+.custom-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.builder-grid input,
+.builder-grid select,
+.request-input {
   padding: 10px 12px;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #1d1d1f;
+  color: #f2f2f2;
+}
+
+.request-textarea {
+  min-height: 96px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.request-preview-box {
+  min-height: 56px;
+  padding: 12px 14px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  background: rgba(255,255,255,.03);
+  color: #ddd;
+}
+
+.preview-label {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #9f9f9f;
 }
 
 .request-row button,
@@ -206,5 +287,7 @@ h1 {
 @media (max-width: 600px) {
   .settings-grid { grid-template-columns: 1fr; }
   .request-row { flex-direction: column; }
+  .workflow-grid { grid-template-columns: 1fr; }
+  .builder-grid { grid-template-columns: 1fr; }
   .progress-step strong { font-size: .68rem; }
 }

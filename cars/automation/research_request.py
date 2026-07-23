@@ -1,7 +1,8 @@
 """Turn a free-text request ("ranking video of Corvettes", "Mustang generations
 2015-2024") into a research.json draft: an AI research pass (OpenAI Responses
 API with the hosted web_search tool, so facts are grounded/cited, not just
-model-recalled) plus best-effort image sourcing from Wikimedia Commons.
+model-recalled) plus best-effort image sourcing from Cars & Bids first and
+Wikimedia Commons as fallback.
 
 Writes cars/drafts/<draft-id>/research.json and cars/drafts/<draft-id>/images/.
 Does NOT render a video -- that's generate_from_research.py, a separate stage,
@@ -16,6 +17,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from PIL import Image
+from cars_and_bids import scrape_entry_images
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
@@ -29,6 +31,11 @@ User request: "{request}"
 Use web search to find real, current, verifiable facts. Identify exactly 4 specific
 things to rank (e.g. 4 generations of one car, or 4 distinctly-named trims/models within
 one generation, or 4 specific model years -- whatever best matches the request).
+
+The request may explicitly ask for one of two workflows:
+1. best versions overall across the full production run of a model line
+2. best versions within a specific year range, generation, or chassis focus
+Honor that scope strictly when choosing the 4 entries.
 
 IMPORTANT: each entry must be a distinctly NAMED model/trim that a photographer would
 tag as its own subject and that has its own dedicated Wikimedia Commons category --
@@ -216,10 +223,21 @@ def main():
         if i > 0:
             time.sleep(5)  # let Wikimedia's rate limiter cool down between entries
         topic_slug = slugify(entry["name"])
-        print(f"[images] {entry['name']} -> searching Commons for {entry['search_hint']!r}")
-        entry["images"] = scrape_images(
-            entry["search_hint"], topic_slug, images_dir, entry.get("visual_highlight", "")
-        )
+        print(f"[images] {entry['name']} -> trying Cars & Bids for {entry['search_hint']!r}")
+        cars_and_bids_images, cars_and_bids_manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
+        entry["images"] = cars_and_bids_images
+        if cars_and_bids_manifest.get("selected_auction"):
+            entry["image_source"] = {
+                "provider": "cars_and_bids",
+                "search_url": cars_and_bids_manifest.get("search_url"),
+                "auction_url": cars_and_bids_manifest.get("selected_auction", {}).get("url"),
+                "auction_title": cars_and_bids_manifest.get("selected_auction", {}).get("title"),
+            }
+        if not entry["images"]:
+            print(f"[images] Cars & Bids sparse for {entry['name']} -- falling back to Commons")
+            entry["images"] = scrape_images(
+                entry["search_hint"], topic_slug, images_dir, entry.get("visual_highlight", "")
+            )
         entry["stat"] = format_stat(entry)
         if not entry["images"]:
             print(f"[images] WARNING: no images found for {entry['name']}")
