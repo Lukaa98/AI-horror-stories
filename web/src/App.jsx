@@ -15,7 +15,7 @@ const WORKFLOW_OPTIONS = [
   {
     id: "overall",
     label: "Best Generations Overall",
-    description: "Find 4 different generations across the full model run, with one representative per generation.",
+    description: "Find 4 different generations across the full model run when available, with one representative per generation.",
   },
   {
     id: "focused",
@@ -74,7 +74,7 @@ function buildStructuredRequest({ workflow, make, model, focus, startYear, endYe
       : `Rank the 4 best ${makeLabel} ${modelLabel} versions in one specific generation or year range. Use distinctly named trims, variants, or special editions.`;
   }
 
-  return `Rank the 4 best ${makeLabel} ${modelLabel} generations overall across the full production run. Use 4 different generations, with one representative version from each generation.`;
+  return `Rank the 4 best ${makeLabel} ${modelLabel} generations overall across the full production run. Use 4 different generations when available, with one representative version from each generation. If the model has fewer than 4 true generations, use the most important era-defining versions across its history.`;
 }
 
 async function dispatchWorkflow({ owner, repo, branch, token, workflow, inputs }) {

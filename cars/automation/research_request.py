@@ -28,9 +28,10 @@ RESEARCH_PROMPT_TEMPLATE = """You are researching content for a short vertical "
 
 User request: "{request}"
 
-Use web search to find 8 ranked candidate
+Use web search to find up to 8 ranked candidate
 entries based on the request scope. We will keep the highest-ranked candidates that
-also have usable image coverage, so your ranking order matters.
+also have usable image coverage, so your ranking order matters. If the lineup only
+naturally supports 4 strong candidates, returning 4 is acceptable.
 
 The request may explicitly ask for one of two workflows:
 1. best generations overall across the full production run of a model line
@@ -43,6 +44,9 @@ If the request is overall / across the full production run / all generations:
 - use exactly one representative version for each chosen generation
 - do NOT let two entries come from the same generation unless the user explicitly asked for that
 - example for Corvette: C1, C4, C6, C8 is valid; Stingray, Z06, ZR1, ZR1X all from C8 is NOT valid
+- if the model line has fewer than 4 true generations, fall back to 4 era-defining versions across the full production run
+- in that fallback case, maximize generation diversity first, then use major facelifts, flagship trims, or historically important versions
+- if you use that fallback, make the order_rationale explicitly say that the model has fewer than 4 true generations
 
 If the request is focused / in a range / generation-specific:
 - treat this as a VARIANT ranking within that constrained scope
@@ -104,7 +108,7 @@ Return ONLY strict JSON, no markdown fences, no prose outside the JSON, matching
       "label": "string", "one_line_fact": "string", "search_hint": "string", "visual_highlight": "string"}}
   ]
 }}
-Aim for exactly 8 entries."""
+Aim for 8 entries when possible, but return at least 4."""
 
 
 def slugify(value):
@@ -128,8 +132,8 @@ def run_research(request_text):
             text = text[4:].strip()
     data = json.loads(text)
     entry_count = len(data.get("entries", []))
-    if entry_count < 6:
-        raise SystemExit(f"Expected at least 6 entries from research, got {entry_count}. Raw: {text[:500]}")
+    if entry_count < 4:
+        raise SystemExit(f"Expected at least 4 entries from research, got {entry_count}. Raw: {text[:500]}")
     return data
 
 
