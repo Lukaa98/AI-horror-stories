@@ -1,0 +1,110 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 6,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "q7",
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "q7",
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "q7",
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Audi",
+      "detected_model": "Q7",
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Audi",
+      "detected_model": "Q7",
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "q7",
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "side"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpeg",
+      "provider": "openai"
+    }
+  ]
+}

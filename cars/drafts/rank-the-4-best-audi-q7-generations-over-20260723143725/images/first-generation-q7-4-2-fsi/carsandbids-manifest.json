@@ -1,0 +1,249 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T14:38:51.066Z",
+  "query": "Audi Q7 4.2 FSI 2005",
+  "visual_highlight": "front grille design",
+  "search_url": "https://carsandbids.com/search/audi/q7?start_year=2005&end_year=2009&csort=10",
+  "search_result_count": 2,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3oR06Q8m/2007-audi-q7-premium",
+      "title": "2007 Audi Q7 Premium",
+      "text": "Bid to $12,500",
+      "titleYear": null,
+      "score": 32
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BDRRwpz/2007-audi-q7-premium",
+      "title": "2007 Audi Q7 Premium",
+      "text": "Sold for $9,300",
+      "titleYear": null,
+      "score": 32
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3oR06Q8m/2007-audi-q7-premium",
+      "title": "2007 Audi Q7 Premium",
+      "text": "Bid to $12,500",
+      "titleYear": null,
+      "score": 32,
+      "usable_image_count": 32,
+      "sale_price": 12500,
+      "sale_type": "bid_to",
+      "page_title": "2007 Audi Q7 Premium"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BDRRwpz/2007-audi-q7-premium",
+      "title": "2007 Audi Q7 Premium",
+      "text": "Sold for $9,300",
+      "titleYear": null,
+      "score": 32,
+      "usable_image_count": 23,
+      "sale_price": 9300,
+      "sale_type": "sold",
+      "page_title": "2007 Audi Q7 Premium"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3oR06Q8m/2007-audi-q7-premium",
+    "title": "2007 Audi Q7 Premium",
+    "text": "Bid to $12,500",
+    "titleYear": null,
+    "score": 32,
+    "sale_price": 12500,
+    "sale_type": "bid_to",
+    "page_title": "2007 Audi Q7 Premium",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "front-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/a76445f1c19fee0a3343d78af9706fd3fb29020b/photos/interior/37e8v640-Dh84rcF/edit/UtIkA.jpg?t=177126070267",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2007 Audi Q7 Premium",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 249280
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/interior/37e8v640-TdSfGLq/edit/yncFO.jpg?t=176822992149",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2007 Audi Q7 Premium",
+      "width": 542,
+      "height": 361,
+      "bytes": 30496
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/mechanical/37e8v640-dZ4zxHE/edit/l6Sg3.jpg?t=176841257847",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2007 Audi Q7 Premium",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 301090
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/mechanical/37e8v640-i1O9Tqy/edit/25egB.jpg?t=176822979518",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2007 Audi Q7 Premium",
+      "width": 542,
+      "height": 361,
+      "bytes": 26084
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/application/s-CvSYHAA/edit/8GVeG.jpg?t=176822969330",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2007 Audi Q7 Premium",
+      "width": 542,
+      "height": 361,
+      "bytes": 22599
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/other/37e8v640-4S_m75I/edit/q8rpq.jpg?t=176822961652",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2007 Audi Q7 Premium",
+      "width": 542,
+      "height": 361,
+      "bytes": 24951
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 6,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "q7",
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "q7",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 4,
+        "composition_score": 5,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "Target vehicle not the main subject",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

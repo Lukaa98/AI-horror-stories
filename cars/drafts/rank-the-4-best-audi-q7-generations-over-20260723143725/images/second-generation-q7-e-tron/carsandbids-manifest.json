@@ -1,0 +1,276 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T14:41:44.931Z",
+  "query": "Audi Q7 e-tron 2016",
+  "visual_highlight": "charging port",
+  "search_url": "https://carsandbids.com/search/audi/q7?start_year=2016&end_year=2019&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KV7W6GgM/2017-audi-q7-prestige",
+      "title": "2017 Audi Q7 Prestige",
+      "text": "Sold for $43,500",
+      "titleYear": null,
+      "score": 32
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3B0zBXPA/2018-audi-q7-prestige",
+      "title": "2018 Audi Q7 Prestige",
+      "text": "Sold for $30,250",
+      "titleYear": null,
+      "score": 32
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjqLX6Rl/2018-audi-q7-premium-plus",
+      "title": "2018 Audi Q7 Premium Plus",
+      "text": "Sold for $18,500",
+      "titleYear": null,
+      "score": 32
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9XaN4pGg/2018-audi-q7",
+      "title": "2018 Audi Q7",
+      "text": "Sold for $17,250",
+      "titleYear": null,
+      "score": 32
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rML1XWWo/2018-audi-q7-prestige",
+      "title": "2018 Audi Q7 Prestige",
+      "text": "Sold for $17,000",
+      "titleYear": null,
+      "score": 32
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3LMv2kRW/2017-audi-q7-prestige",
+      "title": "2017 Audi Q7 Prestige",
+      "text": "Bid to $16,300",
+      "titleYear": null,
+      "score": 32
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KV7W6GgM/2017-audi-q7-prestige",
+      "title": "2017 Audi Q7 Prestige",
+      "text": "Sold for $43,500",
+      "titleYear": null,
+      "score": 32,
+      "usable_image_count": 20,
+      "sale_price": 43500,
+      "sale_type": "sold",
+      "page_title": "2017 Audi Q7 Prestige"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3B0zBXPA/2018-audi-q7-prestige",
+      "title": "2018 Audi Q7 Prestige",
+      "text": "Sold for $30,250",
+      "titleYear": null,
+      "score": 32,
+      "usable_image_count": 15,
+      "sale_price": 30250,
+      "sale_type": "sold",
+      "page_title": "2018 Audi Q7 Prestige"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjqLX6Rl/2018-audi-q7-premium-plus",
+      "title": "2018 Audi Q7 Premium Plus",
+      "text": "Sold for $18,500",
+      "titleYear": null,
+      "score": 32,
+      "usable_image_count": 25,
+      "sale_price": 18500,
+      "sale_type": "sold",
+      "page_title": "2018 Audi Q7 Premium Plus"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9XaN4pGg/2018-audi-q7",
+      "title": "2018 Audi Q7",
+      "text": "Sold for $17,250",
+      "titleYear": null,
+      "score": 32,
+      "usable_image_count": 27,
+      "sale_price": 17250,
+      "sale_type": "sold",
+      "page_title": "2018 Audi Q7"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9XaN4pGg/2018-audi-q7",
+    "title": "2018 Audi Q7",
+    "text": "Sold for $17,250",
+    "titleYear": null,
+    "score": 32,
+    "sale_price": 17250,
+    "sale_type": "sold",
+    "page_title": "2018 Audi Q7",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/e4d937462c42fd537ba054dfbd7d922329ae4a3d/photos/9n2Oz4O2-x-udDn4G3vm.jpeg?t=162488657097",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2017 Audi Q7 Prestige",
+      "width": 542,
+      "height": 722,
+      "bytes": 30966
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/682ac96c5906006bfbf79553077fca160812e2de/photos/exterior/9XbBYLzq-CB4RkQV.jpg?t=178102800443",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Audi Q7 Prestige",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 155050
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=80,height=80,quality=70,fit=cover/d78808c0e4868e5691cc8c360a483065c650bb70/photos/9X68monx-KQF-Zce.jpeg",
+      "labels": [
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "error": "Too small: 1730 bytes"
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/exterior/9na2nen2-s7aUJv-/edit/beM1E.jpg?t=177564939273",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Audi Q7 Premium Plus",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 230379
+    },
+    {
+      "path": "highlight-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-8OdcN6q/edit/4U3OE.jpg?t=174795096880",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Audi Q7",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 319772
+    },
+    {
+      "path": "highlight-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/920963755cfa4ef7ca2e07a4e55fccf1cef04371/photos/9n2Oz4O2.Hb-MLKaPd-(edit).jpg?t=162512050566",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2017 Audi Q7 Prestige",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 410219
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 5,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "q7",
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "The target car is not the main subject; the image shows the interior seating area.",
+        "path": "interior-01.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
