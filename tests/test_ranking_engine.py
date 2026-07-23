@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path[:0] = [str(ROOT / "cars" / "automation"), str(ROOT / "horror_stories" / "src")]
+sys.path[:0] = [str(ROOT / "cars" / "automation")]
 
 from ranking_engine import _ranking_rail_layout  # noqa: E402
 

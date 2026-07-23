@@ -2,7 +2,6 @@ import argparse
 import json
 import math
 import os
-import sys
 import wave
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,11 +19,7 @@ except ModuleNotFoundError as exc:
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
-HORROR_SRC = ROOT / "horror_stories" / "src"
-if str(HORROR_SRC) not in sys.path:
-    sys.path.insert(0, str(HORROR_SRC))
-
-from video_pipeline.short_editor import build_short_video  # noqa: E402
+from video_editor import build_short_video  # noqa: E402
 
 OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"
 SAMPLE_SLUG = "mazda-mx5-miata-35th-anniversary"

@@ -21,7 +21,7 @@ from generate_sample import (
     _write_narration_audio,
     _write_contact_sheet,
 )
-from video_pipeline.short_editor import FPS, FAST_MODE
+from video_editor import FPS, FAST_MODE
 from moviepy.editor import AudioFileClip, ImageClip, concatenate_videoclips
 
 OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"

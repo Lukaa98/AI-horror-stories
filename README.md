@@ -1,89 +1,91 @@
-# AI Horror Stories
+# AI Car Ranking Shorts
 
-This project now builds cheap vertical Shorts with this flow:
+This repository researches, reviews, and renders vertical car-ranking videos. The
+active product is the Cars UI in `web/` and all automation is car-focused.
 
-1. Generate a `~30s` storyboard and narration
-2. Generate one AI image per scene
-3. Generate one narration track
-4. Turn images into motion shots with zoom, drift, particles, and caption overlays
-5. Export a final `1080x1920` narrated MP4
+## How it works
 
-## Run
+1. Enter a make, model, and ranking scope in the Cars UI.
+2. Dispatch the research workflow, which gathers grounded facts and usable photos.
+3. Review the generated `research.json` on the `cars-output` branch.
+4. Dispatch the render workflow to build a narrated `1080x1920` MP4.
+5. Review the video and, when ready, publish it with the reusable YouTube tools.
 
-From the repo root:
+Research and rendering are separate so a bad fact or image can be corrected before
+spending time and API credits on a full render.
 
-```powershell
-python horror_stories/src/main.py
+## Project layout
+
+- `cars/automation/` — topic research, image review, ranking, narration, and rendering
+- `cars/drafts/` — reviewable research and rendered draft artifacts
+- `cars/strategy/` — staged content, sourcing, and channel-launch policy
+- `scraper/car-source-scraper/` — Cars & Bids and Wikimedia image acquisition
+- `web/` — React/Vite control panel for the two-stage GitHub Actions flow
+- `youtube_tools/` — reusable upload, channel-management, and video-stat utilities
+- `.github/workflows/` — research, rendering, and GitHub Pages deployment
+
+## Local development
+
+Install Python dependencies and run the tests:
+
+```bash
+pip install -r requirements.txt
+python -m pytest -q
 ```
 
-Each run creates a folder under `horror_stories/src/output/` containing:
+Run the web application:
 
-- `storyboard.json`
-- `images/`
-- `narration.mp3`
-- `final_short.mp4`
-
-## Project Layout
-
-- `horror_stories/src/video_pipeline/`: storyboard, image generation, narration, subtitles, editing
-- `horror_stories/src/channel_tools/`: YouTube upload, channel maintenance, and privacy tools
-- `horror_stories/src/assets/`: banner and profile art
-- `horror_stories/src/output/`: generated runs
-
-## Main Env Settings
-
-Set these in `horror_stories/src/.env`:
-
-- `GEMINI_API_KEY`
-- `OPENAI_API_KEY`
-- `CHARACTER_NAME`
-- `THEME`
-
-Optional tuning:
-
-- `SHORT_TARGET_SECONDS=30`
-- `SHORT_NUM_SCENES=7`
-- `STORY_MODEL=gemini-2.0-flash`
-- `IMAGE_MODEL=imagen-4.0-generate-001`
-- `TTS_MODEL=gpt-4o-mini-tts`
-- `TTS_VOICE=verse`
-
-## YouTube Automation
-
-This repo includes YouTube helpers that reuse the OAuth setup from the nearby `AutoShorts` project by default.
-
-Publish a generated episode:
-
-```powershell
-python horror_stories/src/publish_episode.py --run-dir horror_stories/src/output/video_001 --privacy private
+```bash
+cd web
+npm ci
+npm run dev
 ```
 
-Bulk hide old Fortnite videos:
+See [`cars/README.md`](cars/README.md) for the local research and rendering flow.
 
-```powershell
-python horror_stories/src/bulk_update_videos.py --query fortnite --privacy private
+## GitHub Actions
+
+- `cars-research.yml` builds a reviewable draft and writes it to `cars-output`.
+- `cars-generate-from-research.yml` renders an approved draft from `cars-output`.
+- `cars-ranking-generate.yml` provides the older combined manual flow.
+- `deploy-pages.yml` publishes the Cars UI.
+
+The research/render workflows require the API secrets referenced in their YAML,
+including `OPENAI_API_KEY` for research and OpenAI narration.
+
+## YouTube tools
+
+YouTube support is intentionally retained as channel-neutral infrastructure. Put
+OAuth files in the ignored `youtube_tools/.credentials/` directory:
+
+```text
+youtube_tools/.credentials/client_secret.json
+youtube_tools/.credentials/token.pickle
 ```
 
-Update channel description:
+You can instead set `YOUTUBE_CLIENT_SECRET_FILE` and `YOUTUBE_TOKEN_FILE` to files
+outside the repository. The first local command opens Google's OAuth flow and saves
+the resulting token; CI never starts an interactive login.
 
-```powershell
-python horror_stories/src/manage_channel.py --description-file horror_stories/src/channel_description.txt
+Upload a reviewed car Short:
+
+```bash
+python -m youtube_tools.publish_video \
+  --video cars/drafts/example/final_short.mp4 \
+  --title "Ranking the Best Corvette Generations" \
+  --description-file description.txt \
+  --tags "cars,corvette,car rankings,shorts" \
+  --privacy private
 ```
 
-Note: YouTube does not let this repo rename the channel title or handle through the Data API, so those should be changed manually in YouTube Studio.
+Other retained utilities:
 
-## GitHub Actions Pipeline
+```bash
+python -m youtube_tools.pull_latest_video_stats
+python -m youtube_tools.manage_channel
+python -m youtube_tools.bulk_update_videos --query "old title" --dry-run
+python -m youtube_tools.keep_top_public --keep 10 --dry-run
+```
 
-This repo also includes a starter GitHub Actions pipeline that can:
-
-1. choose the next story theme from `automation/content_plan.json`
-2. generate a new short
-3. upload it to YouTube
-4. poll the uploaded video's status and stats
-5. commit updated pipeline state back to the repo
-
-See [docs/github-actions-pipeline.md](docs/github-actions-pipeline.md) for the required secrets and workflow layout.
-
-## Recommended Workflow
-
-Start with the image-first pipeline because it is much cheaper and more reliable than generating every second as video. Once the shorts are working, add video only for the highest-impact scenes.
+Keep uploads private until the title, description, thumbnail, facts, image licenses,
+and final render have been reviewed.

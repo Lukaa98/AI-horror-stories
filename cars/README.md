@@ -1,8 +1,8 @@
 # Cars workspace
 
-Top-level workspace for the future cars channel.
+Primary workspace for the car-ranking Shorts channel.
 
-Generated local dry runs go here instead of under `horror_stories/src/output`:
+Generated local dry runs are stored under the cars workspace:
 
 ```text
 cars/output/samples/<sample-slug>/
