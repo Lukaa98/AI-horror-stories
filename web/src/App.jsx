@@ -4,6 +4,7 @@ import "./App.css";
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v7";
+const OUTPUT_BRANCH = "cars-output";
 const UI_VERSION = "V9";
 const SETTINGS_MIGRATION = "feature-branch-v7";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -212,7 +213,7 @@ export default function App() {
       const res = await pollForFile({
         owner: settings.owner,
         repo: settings.repo,
-        branch: settings.branch,
+        branch: OUTPUT_BRANCH,
         path: `cars/drafts/${id}/research.json`,
         signal: abortRef.current.signal,
         timeoutMs: RESEARCH_TIMEOUT_MS,
@@ -249,13 +250,13 @@ export default function App() {
       await pollForFile({
         owner: settings.owner,
         repo: settings.repo,
-        branch: settings.branch,
+        branch: OUTPUT_BRANCH,
         path: `cars/drafts/${draftId}/final_short.mp4`,
         signal: abortRef.current.signal,
         timeoutMs: RENDER_TIMEOUT_MS,
       });
       setVideoUrl(
-        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${settings.branch}/cars/drafts/${draftId}/final_short.mp4?_=${Date.now()}`
+        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/final_short.mp4?_=${Date.now()}`
       );
       setStage("done");
       setStatusDetail("Video complete");
@@ -267,7 +268,7 @@ export default function App() {
   }
 
   function rawUrl(relativePath) {
-    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${settings.branch}/cars/drafts/${draftId}/${relativePath}`;
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/${relativePath}`;
   }
 
   const activeStep = stage === "idle" ? 0 : stage === "researching" ? 0 : stage === "researched" ? 1 : stage === "generating" ? 2 : stage === "done" ? 3 : 0;
@@ -290,6 +291,7 @@ export default function App() {
         </div>
         <p className="progress-detail">{statusDetail}</p>
         <p className="branch-target">Active branch: <code>{settings.branch}</code></p>
+        <p className="branch-target">Draft output branch: <code>{OUTPUT_BRANCH}</code></p>
         {actionRun && (
           <a className="build-link" href={actionRun.url} target="_blank" rel="noreferrer">
             <span className={`build-dot ${actionRun.conclusion || actionRun.status}`} />

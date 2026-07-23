@@ -22,6 +22,9 @@ on:
 permissions:
   contents: write
 
+env:
+  OUTPUT_BRANCH: cars-output
+
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -38,6 +41,17 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
+      - name: Load researched draft from output branch
+        run: |
+          set -euo pipefail
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git checkout "origin/${OUTPUT_BRANCH}" -- "cars/drafts/${{ inputs.draft_id }}"
+          else
+            echo "Output branch ${OUTPUT_BRANCH} does not exist yet."
+            exit 1
+          fi
+
       - name: Render video
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -50,8 +64,25 @@ jobs:
 
       - name: Commit video
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/drafts"
+          cp -R "cars/drafts/${{ inputs.draft_id }}" "$tmp_dir/cars/drafts/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p "cars/drafts"
+          rm -rf "cars/drafts/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/drafts/${{ inputs.draft_id }}" "cars/drafts/${{ inputs.draft_id }}"
+
           git add "cars/drafts/${{ inputs.draft_id }}"
-          git commit -m "cars: generate video for draft ${{ inputs.draft_id }}"
-          git push
+          git commit -m "cars: generate video for draft ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
