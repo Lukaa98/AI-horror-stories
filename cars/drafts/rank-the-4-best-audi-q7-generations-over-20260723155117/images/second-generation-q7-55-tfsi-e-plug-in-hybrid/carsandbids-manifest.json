@@ -1,0 +1,241 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T15:55:31.565Z",
+  "query": "Audi Q7 55 TFSI e 2020",
+  "visual_highlight": "charging port",
+  "search_url": "https://carsandbids.com/search/audi/q7?start_year=2020&end_year=2024&csort=10",
+  "search_result_count": 3,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rw2NbnYX/2020-audi-q7-progressiv-55-tfsi-quattro",
+      "title": "2020 Audi Q7 Progressiv 55 Tfsi Quattro",
+      "text": "Bid to $21,500",
+      "titleYear": null,
+      "score": 84
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3qoyjLme/2021-audi-q7-55-tfsi-quattro",
+      "title": "2021 Audi Q7 55 Tfsi Quattro",
+      "text": "Bid to $43,000",
+      "titleYear": null,
+      "score": 66
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KVDA0MO0/2021-audi-q7",
+      "title": "2021 Audi Q7",
+      "text": "Bid to $52,199 (Sold After)",
+      "titleYear": null,
+      "score": 40
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rw2NbnYX/2020-audi-q7-progressiv-55-tfsi-quattro",
+      "title": "2020 Audi Q7 Progressiv 55 Tfsi Quattro",
+      "text": "Bid to $21,500",
+      "titleYear": null,
+      "score": 84,
+      "usable_image_count": 14,
+      "sale_price": 21500,
+      "sale_type": "bid_to",
+      "page_title": "2020 Audi Q7 Progressiv 55 TFSI Quattro"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3qoyjLme/2021-audi-q7-55-tfsi-quattro",
+      "title": "2021 Audi Q7 55 Tfsi Quattro",
+      "text": "Bid to $43,000",
+      "titleYear": null,
+      "score": 66,
+      "usable_image_count": 21,
+      "sale_price": 43000,
+      "sale_type": "bid_to",
+      "page_title": "2021 Audi Q7 55 TFSI Quattro"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KVDA0MO0/2021-audi-q7",
+      "title": "2021 Audi Q7",
+      "text": "Bid to $52,199 (Sold After)",
+      "titleYear": null,
+      "score": 40,
+      "usable_image_count": 15,
+      "sale_price": 52199,
+      "sale_type": "bid_to",
+      "page_title": "2021 Audi Q7"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3qoyjLme/2021-audi-q7-55-tfsi-quattro",
+    "title": "2021 Audi Q7 55 Tfsi Quattro",
+    "text": "Bid to $43,000",
+    "titleYear": null,
+    "score": 66,
+    "sale_price": 43000,
+    "sale_type": "bid_to",
+    "page_title": "2021 Audi Q7 55 TFSI Quattro",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/75e337de993e22cb6bed7976534865a647875c8c/photos/9nXQy44l-4R60aiWCFj0.jpeg?t=170645732288",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2020 Audi Q7 Progressiv 55 TFSI Quattro",
+      "width": 542,
+      "height": 406,
+      "bytes": 29010
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/9nXQy44l-aAYgYMw5Ji-(edit).jpg?t=170750215443",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2020 Audi Q7 Progressiv 55 TFSI Quattro",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 404851
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/rk47QJGO-s_owD3Qgbi-(edit).jpg?t=171183696566",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2021 Audi Q7 55 TFSI Quattro",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 245778
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/9nXQy44l-2L8KPaaLb3-(edit).jpg?t=170750343949",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2020 Audi Q7 Progressiv 55 TFSI Quattro",
+      "width": 542,
+      "height": 361,
+      "bytes": 28350
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/9nXQy44l-xKHwkat19A-(edit).jpg?t=170750267308",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2020 Audi Q7 Progressiv 55 TFSI Quattro",
+      "width": 542,
+      "height": 361,
+      "bytes": 25625
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/9nXQy44l-eh1WceNPhp-(edit).jpg?t=170750535427",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "error": "Too small: 14412 bytes"
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 5,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 4,
+        "composition_score": 3,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "Target vehicle is not the main subject.",
+        "path": "interior-01.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

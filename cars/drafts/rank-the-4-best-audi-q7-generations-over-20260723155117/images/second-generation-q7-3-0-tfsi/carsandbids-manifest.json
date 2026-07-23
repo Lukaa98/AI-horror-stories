@@ -1,0 +1,298 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-23T15:54:42.432Z",
+  "query": "Audi Q7 3.0 TFSI 2015",
+  "visual_highlight": "interior dashboard",
+  "search_url": "https://carsandbids.com/search/audi/q7?start_year=2015&end_year=2019&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KZpAZMJo/2015-audi-q7-tdi-quattro",
+      "title": "2015 Audi Q7 Tdi Quattro",
+      "text": "Sold for $29,300",
+      "titleYear": null,
+      "score": 50
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9QVwA1LD/2015-audi-q7-tdi",
+      "title": "2015 Audi Q7 Tdi",
+      "text": "Sold for $20,500",
+      "titleYear": null,
+      "score": 50
+    },
+    {
+      "url": "https://carsandbids.com/auctions/30xz4111/2015-audi-q7-tdi",
+      "title": "2015 Audi Q7 Tdi",
+      "text": "Sold for $18,250",
+      "titleYear": null,
+      "score": 50
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36b6jWMB/2015-audi-q7-tdi-prestige",
+      "title": "2015 Audi Q7 Tdi Prestige",
+      "text": "Sold for $17,777",
+      "titleYear": null,
+      "score": 50
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjgL14g2/2015-audi-q7-tdi-prestige",
+      "title": "Sold After for $16,000",
+      "text": "Sold After for $16,000",
+      "titleYear": null,
+      "score": 50
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNqaGbeP/2015-audi-q7-tdi",
+      "title": "2015 Audi Q7 Tdi",
+      "text": "Sold for $16,000",
+      "titleYear": null,
+      "score": 50
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KZpAZMJo/2015-audi-q7-tdi-quattro",
+      "title": "2015 Audi Q7 Tdi Quattro",
+      "text": "Sold for $29,300",
+      "titleYear": null,
+      "score": 50,
+      "usable_image_count": 26,
+      "sale_price": 29300,
+      "sale_type": "sold",
+      "page_title": "2015 Audi Q7 TDI Quattro"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9QVwA1LD/2015-audi-q7-tdi",
+      "title": "2015 Audi Q7 Tdi",
+      "text": "Sold for $20,500",
+      "titleYear": null,
+      "score": 50,
+      "usable_image_count": 14,
+      "sale_price": 20500,
+      "sale_type": "sold",
+      "page_title": "2015 Audi Q7 TDI"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/30xz4111/2015-audi-q7-tdi",
+      "title": "2015 Audi Q7 Tdi",
+      "text": "Sold for $18,250",
+      "titleYear": null,
+      "score": 50,
+      "usable_image_count": 33,
+      "sale_price": 18250,
+      "sale_type": "sold",
+      "page_title": "2015 Audi Q7 TDI"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36b6jWMB/2015-audi-q7-tdi-prestige",
+      "title": "2015 Audi Q7 Tdi Prestige",
+      "text": "Sold for $17,777",
+      "titleYear": null,
+      "score": 50,
+      "usable_image_count": 20,
+      "sale_price": 17777,
+      "sale_type": "sold",
+      "page_title": "2015 Audi Q7 TDI Prestige"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/30xz4111/2015-audi-q7-tdi",
+    "title": "2015 Audi Q7 Tdi",
+    "text": "Sold for $18,250",
+    "titleYear": null,
+    "score": 50,
+    "sale_price": 18250,
+    "sale_type": "sold",
+    "page_title": "2015 Audi Q7 TDI",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/iiLTBk5YDmd2.FbdQ9Nniy.jpg?t=161699455967",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2015 Audi Q7 TDI Quattro",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 321633
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/224865fcf1349ec53e0faac653358675b6461a0e/photos/3REGWXaq-WgY9CQF_hC-(edit).jpg?t=171086695398",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2015 Audi Q7 TDI",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 528197
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/9X2MNdgq-p9Ay8G_/edit/bWtaP.jpg?t=177574284851",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2015 Audi Q7 TDI Prestige",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 353196
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4a2fc6c17db6945a4884754a119ce1416d70df61/photos/30MkjAY2-Z4sIz20/edit/TnUye.jpg?t=174551692957",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2015 Audi Q7 TDI",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 346750
+    },
+    {
+      "path": "interior-05.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/ebee46469445453b03701c3c4709626452110729/photos/bsFsX1tsZtH.jpeg?t=161576529314",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2015 Audi Q7 TDI Quattro",
+      "width": 542,
+      "height": 406,
+      "bytes": 27890
+    },
+    {
+      "path": "interior-06.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/ebee46469445453b03701c3c4709626452110729/photos/gbT6FxjvxOk.jpeg?t=161576531318",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2015 Audi Q7 TDI Quattro",
+      "width": 542,
+      "height": 406,
+      "bytes": 28723
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 6,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "q7",
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "Q7",
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "q7",
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
