@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v7";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V9";
+const UI_VERSION = "V10";
 const SETTINGS_MIGRATION = "feature-branch-v7";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 20 * 60 * 1000;
@@ -126,7 +126,15 @@ async function trackWorkflowRun({ owner, repo, branch, token, workflow, startedA
           conclusion: run.conclusion,
           runNumber: run.run_number,
         });
-        if (run.status === "completed") return;
+        if (run.status === "completed") {
+          if (run.conclusion !== "success") {
+            const detail = run.conclusion === "failure"
+              ? "The GitHub workflow failed. Open the build log for the exact error. If it reports OpenAI insufficient_quota, verify that the OPENAI_API_KEY secret belongs to a project with active API billing and available project limits."
+              : `The GitHub workflow ended with: ${run.conclusion || "unknown"}.`;
+            throw new Error(detail);
+          }
+          return run;
+        }
       }
     }
     await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -168,7 +176,7 @@ export default function App() {
   function beginRunTracking(runWorkflow, startedAt, signal) {
     const trackerId = ++trackerIdRef.current;
     setActionRun(null);
-    trackWorkflowRun({
+    return trackWorkflowRun({
       owner: settings.owner,
       repo: settings.repo,
       branch: settings.branch,
@@ -179,8 +187,6 @@ export default function App() {
       onUpdate: (run) => {
         if (trackerIdRef.current === trackerId) setActionRun(run);
       },
-    }).catch(() => {
-      // File polling remains the source of truth if Actions status is unavailable.
     });
   }
 
@@ -208,9 +214,9 @@ export default function App() {
         workflow: "cars-research.yml",
         inputs: { request: effectiveRequest, draft_id: id },
       });
-      beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
       setStatusDetail("Researching facts and sourcing exterior, rear, interior, and highlight photos...");
-      const res = await pollForFile({
+      const researchFile = pollForFile({
         owner: settings.owner,
         repo: settings.repo,
         branch: OUTPUT_BRANCH,
@@ -218,6 +224,7 @@ export default function App() {
         signal: abortRef.current.signal,
         timeoutMs: RESEARCH_TIMEOUT_MS,
       });
+      const res = await Promise.race([researchFile, workflowRun.then(() => researchFile)]);
       const data = await res.json();
       setResearch(data);
       setStage("researched");
@@ -245,9 +252,9 @@ export default function App() {
         workflow: "cars-generate-from-research.yml",
         inputs: { draft_id: draftId, tts_provider: "openai" },
       });
-      beginRunTracking("cars-generate-from-research.yml", startedAt, abortRef.current.signal);
+      const workflowRun = beginRunTracking("cars-generate-from-research.yml", startedAt, abortRef.current.signal);
       setStatusDetail("Rendering video with the Onyx voice...");
-      await pollForFile({
+      const renderedFile = pollForFile({
         owner: settings.owner,
         repo: settings.repo,
         branch: OUTPUT_BRANCH,
@@ -255,6 +262,7 @@ export default function App() {
         signal: abortRef.current.signal,
         timeoutMs: RENDER_TIMEOUT_MS,
       });
+      await Promise.race([renderedFile, workflowRun.then(() => renderedFile)]);
       setVideoUrl(
         `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/final_short.mp4?_=${Date.now()}`
       );

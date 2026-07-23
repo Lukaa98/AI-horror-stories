@@ -116,15 +116,30 @@ def slugify(value):
 
 
 def run_research(request_text):
-    from openai import OpenAI
+    from openai import OpenAI, RateLimitError
 
     client = OpenAI()
     prompt = RESEARCH_PROMPT_TEMPLATE.format(request=request_text)
-    response = client.responses.create(
-        model="gpt-4o",
-        tools=[{"type": "web_search_preview"}],
-        input=prompt,
-    )
+    try:
+        response = client.responses.create(
+            model="gpt-4o",
+            tools=[{"type": "web_search_preview"}],
+            input=prompt,
+        )
+    except RateLimitError as exc:
+        error_code = getattr(exc, "code", None)
+        if error_code == "insufficient_quota" or "insufficient_quota" in str(exc):
+            raise SystemExit(
+                "OpenAI rejected the research request because the API key has no available quota. "
+                "Verify that the GitHub OPENAI_API_KEY secret belongs to the intended OpenAI project, "
+                "that API billing/credits are active, and that the project's monthly budget or usage "
+                "limit has not been reached. ChatGPT subscriptions and unrelated projects do not fund "
+                "this API key."
+            ) from exc
+        raise SystemExit(
+            "OpenAI rate-limited the research request. Wait briefly and retry, or review the API "
+            "project's rate limits."
+        ) from exc
     text = response.output_text.strip()
     if text.startswith("```"):
         text = text.strip("`")
