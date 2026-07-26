@@ -998,5 +998,9 @@
     }
   ],
   "skipped_entries": [],
-  "status": "researched"
+  "status": "video_generated",
+  "latest_render": {
+    "quality": "quick",
+    "filename": "preview_short.mp4"
+  }
 }
