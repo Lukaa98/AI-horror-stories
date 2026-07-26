@@ -32,6 +32,7 @@ def build_config(draft_dir, data):
             label=entry.get("label", ""),
             stat=entry.get("stat", ""),
             narration=entry.get("narration") or entry.get("one_line_fact", ""),
+            performance_beats=entry.get("performance_beats", []),
         ))
 
     return RankingConfig(
@@ -48,7 +49,7 @@ def main():
     parser = argparse.ArgumentParser(description="Render a ranking video from a research.json draft.")
     parser.add_argument("--draft-id", required=True)
     parser.add_argument("--tts-provider", default="gtts", choices=["gtts", "openai", "tone", "silent"])
-    parser.add_argument("--tts-voice", default="marin")
+    parser.add_argument("--tts-voice", default="onyx")
     parser.add_argument("--full-res", action="store_true")
     args = parser.parse_args()
 

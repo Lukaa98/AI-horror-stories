@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.7";
+const UI_VERSION = "V10.8";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -158,7 +158,7 @@ export default function App() {
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
   const [useCustomRequest, setUseCustomRequest] = useState(false);
-  const [voice, setVoice] = useState("marin");
+  const [voice, setVoice] = useState("onyx");
   const [draftId, setDraftId] = useState(null);
   const [stage, setStage] = useState("idle");
   const [error, setError] = useState(null);

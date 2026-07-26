@@ -9,6 +9,8 @@ from ranking_engine import (  # noqa: E402
     _image_category,
     _narration_visual_cues,
     _order_images_for_narration,
+    _automatic_performance_beats,
+    _performance_instructions,
     _ranking_rail_layout,
 )
 
@@ -43,3 +45,21 @@ def test_matching_detail_images_are_prioritized_without_dropping_fallbacks():
     )
     assert ordered == [images[2], images[1], images[0]]
     assert [_image_category(path) for path in ordered] == ["interior", "wheel", "front"]
+
+
+def test_old_drafts_receive_automatic_performance_beats():
+    beats = _automatic_performance_beats(
+        "At number four, meet the R8. But the gated manual changes everything."
+    )
+    assert [beat["style"] for beat in beats] == ["energetic_reveal", "intrigued"]
+    assert beats[1]["visual_cue"] == "interior"
+
+
+def test_emphasis_words_become_acting_direction_without_text_misspelling():
+    beat = {
+        "style": "energetic_reveal",
+        "emphasis_words": ["legendary R8"],
+    }
+    instructions = _performance_instructions(beat)
+    assert "Slightly sustain" in instructions
+    assert "legendary R8" in instructions

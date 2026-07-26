@@ -952,7 +952,7 @@ CAR_TTS_INSTRUCTIONS = (
 )
 
 
-def _write_openai_audio(path, text):
+def _write_openai_audio(path, text, instructions=None, speed=None):
     if not os.getenv("OPENAI_API_KEY"):
         raise RuntimeError("OPENAI_API_KEY is not set for OpenAI TTS.")
     from openai import OpenAI
@@ -962,8 +962,8 @@ def _write_openai_audio(path, text):
         model=os.getenv("OPENAI_TTS_MODEL", "gpt-4o-mini-tts"),
         voice=os.getenv("OPENAI_TTS_VOICE", "onyx"),
         input=text,
-        instructions=os.getenv("OPENAI_TTS_INSTRUCTIONS", CAR_TTS_INSTRUCTIONS),
-        speed=float(os.getenv("OPENAI_TTS_SPEED", "1.02")),
+        instructions=instructions or os.getenv("OPENAI_TTS_INSTRUCTIONS", CAR_TTS_INSTRUCTIONS),
+        speed=float(speed if speed is not None else os.getenv("OPENAI_TTS_SPEED", "1.02")),
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     response.write_to_file(str(path))

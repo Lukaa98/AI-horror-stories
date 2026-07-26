@@ -22,7 +22,7 @@ on:
         description: "OpenAI narration voice"
         required: false
         type: choice
-        default: marin
+        default: onyx
         options:
           - marin
           - cedar

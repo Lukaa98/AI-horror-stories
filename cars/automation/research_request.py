@@ -224,15 +224,100 @@ STYLE RULES:
 - Include at least one memorable mechanical, visual, historical, or driving detail per entry.
 - Do not repeat "packed," "delivered," "boasting," or "Today, clean examples trade around."
 - Do not use Markdown, headings, stage directions, quotation marks, or emoji.
+- Divide each paragraph into 2-4 natural performance beats. Let meaning determine the
+  delivery: reveals can be energetic, context can be conversational, contrasts can be
+  intrigued, and verdicts can be confident. Do not make every beat energetic.
+- Add a real pause after important reveals, contrasts, and rank transitions. Use 0.12-0.55
+  seconds there, and 0 when no deliberate pause is needed.
+- Choose at most two emphasis_words per beat. These are words the narrator should stress
+  or slightly sustain naturally, such as "legendary", "manual", or "rear-wheel drive".
+  Never alter their spelling in the spoken text.
+- Give every beat the closest visual_cue so its matching photo can appear while it is spoken.
 
 Return ONLY strict JSON:
 {{
   "entries": [
-    {{"name": "exact supplied entry name", "narration": "spoken paragraph"}}
+    {{
+      "name": "exact supplied entry name",
+      "narration": "the exact spoken paragraph formed by the beats",
+      "performance_beats": [
+        {{
+          "text": "natural spoken phrase or sentence",
+          "style": "energetic_reveal|conversational|intrigued|confident|reflective",
+          "emphasis_words": ["zero to two words or short phrases copied from text"],
+          "pause_after": 0.25,
+          "visual_cue": "engine|wheel|interior|rear|front|side|exterior"
+        }}
+      ]
+    }}
   ],
   "close_narration": "spoken closing question"
 }}
 """
+
+NARRATION_OUTPUT_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": ["entries", "close_narration"],
+    "properties": {
+        "entries": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "required": ["name", "narration", "performance_beats"],
+                "properties": {
+                    "name": {"type": "string"},
+                    "narration": {"type": "string"},
+                    "performance_beats": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 4,
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": False,
+                            "required": [
+                                "text", "style", "emphasis_words",
+                                "pause_after", "visual_cue",
+                            ],
+                            "properties": {
+                                "text": {"type": "string"},
+                                "style": {
+                                    "type": "string",
+                                    "enum": [
+                                        "energetic_reveal", "conversational",
+                                        "intrigued", "confident", "reflective",
+                                    ],
+                                },
+                                "emphasis_words": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "maxItems": 2,
+                                    "items": {"type": "string"},
+                                },
+                                "pause_after": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 0.55,
+                                },
+                                "visual_cue": {
+                                    "type": "string",
+                                    "enum": [
+                                        "engine", "wheel", "interior", "rear",
+                                        "front", "side", "exterior",
+                                    ],
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        "close_narration": {"type": "string"},
+    },
+}
 
 
 def slugify(value):
@@ -468,7 +553,18 @@ def compose_final_narration(request_text, entries):
         request=request_text,
         entries_json=json.dumps(narration_inputs, indent=2),
     )
-    response = OpenAI().responses.create(model="gpt-4o", input=prompt)
+    response = OpenAI().responses.create(
+        model="gpt-4o",
+        input=prompt,
+        text={
+            "format": {
+                "type": "json_schema",
+                "name": "car_narration_performance",
+                "strict": True,
+                "schema": NARRATION_OUTPUT_SCHEMA,
+            }
+        },
+    )
     text = response.output_text.strip()
     if text.startswith("```"):
         text = text.strip("`")
@@ -477,15 +573,26 @@ def compose_final_narration(request_text, entries):
     result = json.loads(text)
     paragraphs = result.get("entries", [])
     by_name = {
-        item.get("name"): item.get("narration", "").strip()
+        item.get("name"): item
         for item in paragraphs
         if isinstance(item, dict)
     }
-    missing = [entry["name"] for entry in entries if not by_name.get(entry["name"])]
+    missing = [
+        entry["name"] for entry in entries
+        if not str(by_name.get(entry["name"], {}).get("narration", "")).strip()
+    ]
     if missing:
         raise SystemExit(f"Final narration omitted ranked entries: {', '.join(missing)}")
     for entry in entries:
-        entry["narration"] = by_name[entry["name"]]
+        narration_result = by_name[entry["name"]]
+        beats = narration_result.get("performance_beats", [])
+        beat_narration = " ".join(
+            str(beat.get("text", "")).strip()
+            for beat in beats
+            if isinstance(beat, dict) and str(beat.get("text", "")).strip()
+        )
+        entry["narration"] = beat_narration or narration_result["narration"].strip()
+        entry["performance_beats"] = beats
         entry["one_line_fact"] = entry["narration"]
     close = str(result.get("close_narration") or "").strip()
     if not close:
