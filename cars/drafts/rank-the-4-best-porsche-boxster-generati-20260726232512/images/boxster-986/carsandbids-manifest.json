@@ -1,0 +1,431 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-26T23:29:58.599Z",
+  "query": "Porsche Boxster 986",
+  "visual_highlight": "front view",
+  "search_url": "https://carsandbids.com/search/porsche/boxster?start_year=1996&end_year=2004&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rMNnYJgk/2002-porsche-boxster-s",
+      "title": "2002 Porsche Boxster S",
+      "text": "Bid to $22,986 (Sold After)",
+      "titleYear": 2002,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92Oe0YXW/2004-porsche-boxster-s",
+      "title": "2004 Porsche Boxster S",
+      "text": "Sold for $18,986",
+      "titleYear": 2004,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/35dgRylk/2004-porsche-boxster-s-550-anniversary-edition",
+      "title": "2004 Porsche Boxster S 550 Anniversary Edition",
+      "text": "Sold for $26,000",
+      "titleYear": 2004,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rN1Bzdgb/2001-porsche-boxster",
+      "title": "2001 Porsche Boxster",
+      "text": "Sold for $25,750",
+      "titleYear": 2001,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9a7NbPRE/1997-porsche-boxster",
+      "title": "1997 Porsche Boxster",
+      "text": "Sold for $25,500",
+      "titleYear": 1997,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3oMkb6L7/2004-porsche-boxster-s-550-anniversary-edition",
+      "title": "2004 Porsche Boxster S 550 Anniversary Edition",
+      "text": "Bid to $24,500",
+      "titleYear": 2004,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rMNnYJgk/2002-porsche-boxster-s",
+      "title": "2002 Porsche Boxster S",
+      "text": "Bid to $22,986 (Sold After)",
+      "titleYear": 2002,
+      "score": 88,
+      "usable_image_count": 20,
+      "sale_price": 22986,
+      "sale_type": "bid_to",
+      "page_title": "2002 Porsche Boxster S"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92Oe0YXW/2004-porsche-boxster-s",
+      "title": "2004 Porsche Boxster S",
+      "text": "Sold for $18,986",
+      "titleYear": 2004,
+      "score": 88,
+      "usable_image_count": 17,
+      "sale_price": 18986,
+      "sale_type": "sold",
+      "page_title": "2004 Porsche Boxster S"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/35dgRylk/2004-porsche-boxster-s-550-anniversary-edition",
+      "title": "2004 Porsche Boxster S 550 Anniversary Edition",
+      "text": "Sold for $26,000",
+      "titleYear": 2004,
+      "score": 70,
+      "usable_image_count": 14,
+      "sale_price": 26000,
+      "sale_type": "sold",
+      "page_title": "2004 Porsche Boxster S 550 Anniversary Edition"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rN1Bzdgb/2001-porsche-boxster",
+      "title": "2001 Porsche Boxster",
+      "text": "Sold for $25,750",
+      "titleYear": 2001,
+      "score": 70,
+      "usable_image_count": 19,
+      "sale_price": 25750,
+      "sale_type": "sold",
+      "page_title": "2001 Porsche Boxster"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rMNnYJgk/2002-porsche-boxster-s",
+    "title": "2002 Porsche Boxster S",
+    "text": "Bid to $22,986 (Sold After)",
+    "titleYear": 2002,
+    "score": 88,
+    "sale_price": 22986,
+    "sale_type": "bid_to",
+    "page_title": "2002 Porsche Boxster S",
+    "year": 2002,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "front-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/rGzMLdwO-nAFNlGfeJl-(edit).jpg?t=165850926446",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2002 Porsche Boxster S",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 179650
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/rGzMLdwO-xSCGpKzEol-(edit).jpg?t=165833724972",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2002 Porsche Boxster S",
+      "width": 542,
+      "height": 361,
+      "bytes": 244181
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/rGzMLdwO-R5VMcPVrXi-(edit).jpg?t=165833722846",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2002 Porsche Boxster S",
+      "width": 542,
+      "height": 361,
+      "bytes": 249069
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/rGzMLdwO-sZKo6bM3rH-(edit).jpg?t=165841925629",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2002 Porsche Boxster S",
+      "width": 542,
+      "height": 361,
+      "bytes": 245735
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/rGzMLdwO-EqqlYAo9BD-(edit).jpg?t=165833630644",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2002 Porsche Boxster S",
+      "width": 542,
+      "height": 361,
+      "bytes": 203885
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/rGzMLdwO-RQrI3eOwPv-(edit).jpg?t=165833574841",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2002 Porsche Boxster S",
+      "width": 542,
+      "height": 361,
+      "bytes": 133916
+    },
+    {
+      "path": "front-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/rGzMLdwO-jBWimJyATf-(edit).jpg?t=165841929154",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2002 Porsche Boxster S",
+      "width": 542,
+      "height": 361,
+      "bytes": 171543
+    },
+    {
+      "path": "front-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/rGzMLdwO-v_UWAV2pbP-(edit).jpg?t=165841933082",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2002 Porsche Boxster S",
+      "width": 542,
+      "height": 361,
+      "bytes": 168646
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "1996-2004",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "fried egg headlights",
+          "soft, curvy design",
+          "classic Porsche badge"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "1996\u20132004",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "fried egg headlights",
+          "soft curvy design",
+          "classic Porsche badge"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "1996\u20132004",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "fried egg headlights",
+          "soft, curvy design",
+          "mid-engine layout",
+          "classic Porsche badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "side"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "1996\u20132004",
+        "detected_variant_or_engine": "Boxster S",
+        "visible_match_evidence": [
+          "fried egg headlights",
+          "soft, curvy design",
+          "mid-engine layout",
+          "Porsche badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "1996\u20132004",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "black leather interior",
+          "mid-engine layout indications"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "1996\u20132004",
+        "detected_variant_or_engine": "Boxster S",
+        "visible_match_evidence": [
+          "classic Porsche badge",
+          "specific interior design",
+          "gauge layout",
+          "gear shifter"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "1996\u20132004",
+        "detected_variant_or_engine": "Boxster S",
+        "visible_match_evidence": [
+          "Boxster S badge",
+          "interior design",
+          "gear shifter"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle or identifiable features.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

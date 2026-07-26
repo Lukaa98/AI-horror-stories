@@ -1,0 +1,225 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "718",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": "Boxster Spyder",
+      "visible_match_evidence": [
+        "Porsche badge",
+        "distinctive front lights",
+        "body proportions",
+        "interior design",
+        "Spyder badging"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "718",
+      "detected_generation_or_year": "2020-2025",
+      "detected_variant_or_engine": "Spyder",
+      "visible_match_evidence": [
+        "Porsche badge",
+        "distinctive front design",
+        "Spyder branding on seats",
+        "modern LED headlights"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "718",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": "Boxster",
+      "visible_match_evidence": [
+        "Porsche badge",
+        "specific bodywork",
+        "drop-top configuration",
+        "modern design cues"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "718",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Porsche badge",
+        "718 bodywork",
+        "proportions consistent with Boxster"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "718",
+      "detected_generation_or_year": "2020-2025",
+      "detected_variant_or_engine": "Spyder",
+      "visible_match_evidence": [
+        "Spyder seats",
+        "interior design",
+        "modern materials"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 9,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "718",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": "Boxster 982",
+      "visible_match_evidence": [
+        "modern infotainment",
+        "sharper suspension tuning",
+        "stiffer chassis",
+        "Porsche interior design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "718",
+      "detected_generation_or_year": "2016\u20132025",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Porsche branding on dashboard",
+        "Modern infotainment system",
+        "Sporty interior design",
+        "Use of high-quality materials"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "718",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": "Boxster Spyder",
+      "visible_match_evidence": [
+        "turbocharged engine indicators",
+        "modern infotainment displays",
+        "sharper suspension tuning evidence",
+        "Spyder badge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}
