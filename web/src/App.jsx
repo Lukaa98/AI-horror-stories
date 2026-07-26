@@ -5,7 +5,8 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.6";
+const UI_VERSION = "V10.7";
+const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 20 * 60 * 1000;
@@ -157,6 +158,7 @@ export default function App() {
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
   const [useCustomRequest, setUseCustomRequest] = useState(false);
+  const [voice, setVoice] = useState("marin");
   const [draftId, setDraftId] = useState(null);
   const [stage, setStage] = useState("idle");
   const [error, setError] = useState(null);
@@ -240,7 +242,7 @@ export default function App() {
     if (!draftId) return;
     setError(null);
     setStage("generating");
-    setStatusDetail("Dispatching the Onyx render workflow...");
+    setStatusDetail(`Dispatching the ${voice} render workflow...`);
     abortRef.current = new AbortController();
     try {
       const startedAt = Date.now();
@@ -250,10 +252,10 @@ export default function App() {
         branch: settings.branch,
         token: settings.token,
         workflow: "cars-generate-from-research.yml",
-        inputs: { draft_id: draftId, tts_provider: "openai" },
+        inputs: { draft_id: draftId, tts_provider: "openai", tts_voice: voice },
       });
       const workflowRun = beginRunTracking("cars-generate-from-research.yml", startedAt, abortRef.current.signal);
-      setStatusDetail("Rendering video with the Onyx voice...");
+      setStatusDetail(`Rendering video with the ${voice} voice...`);
       const renderedFile = pollForFile({
         owner: settings.owner,
         repo: settings.repo,
@@ -462,12 +464,18 @@ export default function App() {
           </div>
           <p className="close-line">Closing line: "{research.close_narration}"</p>
 
+          <label>
+            Narration voice
+            <select value={voice} onChange={(event) => setVoice(event.target.value)} disabled={stage === "generating"}>
+              {VOICES.map((option) => <option key={option} value={option}>{titleCaseWords(option)}</option>)}
+            </select>
+          </label>
           <button
             className="generate-btn"
             onClick={handleGenerate}
             disabled={stage === "generating" || research.entries.some((entry) => !(entry.images || []).length)}
           >
-            {stage === "generating" ? "Generating with Onyx..." : "Generate Video with Onyx"}
+            {stage === "generating" ? `Generating with ${titleCaseWords(voice)}...` : `Generate Video with ${titleCaseWords(voice)}`}
           </button>
           {research.entries.some((entry) => !(entry.images || []).length) && (
             <p className="hint">Can&apos;t generate - at least one entry has no images. Try a different request.</p>

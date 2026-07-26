@@ -48,6 +48,7 @@ def main():
     parser = argparse.ArgumentParser(description="Render a ranking video from a research.json draft.")
     parser.add_argument("--draft-id", required=True)
     parser.add_argument("--tts-provider", default="gtts", choices=["gtts", "openai", "tone", "silent"])
+    parser.add_argument("--tts-voice", default="marin")
     parser.add_argument("--full-res", action="store_true")
     args = parser.parse_args()
 
@@ -58,7 +59,13 @@ def main():
     data = json.loads(research_path.read_text(encoding="utf-8"))
 
     config = build_config(draft_dir, data)
-    run_dir = render_ranking_video(config, output_root=DRAFTS_ROOT, tts_provider=args.tts_provider, fast=not args.full_res)
+    run_dir = render_ranking_video(
+        config,
+        output_root=DRAFTS_ROOT,
+        tts_provider=args.tts_provider,
+        tts_voice=args.tts_voice,
+        fast=not args.full_res,
+    )
 
     data["status"] = "video_generated"
     research_path.write_text(json.dumps(data, indent=2), encoding="utf-8")

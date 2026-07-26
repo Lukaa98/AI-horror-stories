@@ -18,6 +18,17 @@ on:
         options:
           - gtts
           - openai
+      tts_voice:
+        description: "OpenAI narration voice"
+        required: false
+        type: choice
+        default: marin
+        options:
+          - marin
+          - cedar
+          - coral
+          - verse
+          - onyx
 
 permissions:
   contents: write
@@ -60,6 +71,7 @@ jobs:
           python cars/automation/generate_from_research.py \
             --draft-id "${{ inputs.draft_id }}" \
             --tts-provider "${{ inputs.tts_provider }}" \
+            --tts-voice "${{ inputs.tts_voice }}" \
             --full-res
 
       - name: Commit video

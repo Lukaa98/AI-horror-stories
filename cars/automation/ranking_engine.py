@@ -6,6 +6,7 @@ call render_ranking_video(config). All the drawing/layout logic here is
 topic-agnostic; only the config content changes per video.
 """
 import json
+import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,7 +23,7 @@ from generate_sample import (
     _write_contact_sheet,
 )
 from video_editor import FPS, FAST_MODE
-from moviepy.editor import AudioFileClip, ImageClip, concatenate_videoclips
+from moviepy.editor import AudioFileClip, CompositeVideoClip, ImageClip, concatenate_videoclips
 
 OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"
 
@@ -274,7 +275,78 @@ def _word_weight(text):
     return max(3, len(text.split()))
 
 
-def render_ranking_video(config, output_root=OUTPUT_ROOT, render_video=True, fast=True, tts_provider="gtts"):
+VISUAL_CUES = {
+    "engine": ("engine", "v8", "v10", "horsepower", "hp", "power"),
+    "wheel": ("wheel", "wheels", "rim", "rims", "tire", "tires"),
+    "interior": ("interior", "dashboard", "cockpit", "steering", "instrument", "manual", "gated", "shifter"),
+    "rear": ("rear", "wing", "spoiler", "exhaust", "taillight"),
+    "front": ("front", "grille", "headlight"),
+    "side": ("side", "profile", "side blade"),
+}
+
+
+def _term_position(text, term):
+    match = re.search(rf"(?<!\w){re.escape(term)}(?!\w)", text)
+    return match.start() if match else -1
+
+
+def _image_category(path):
+    name = Path(path).stem.lower().replace("-", " ").replace("_", " ")
+    for category, terms in VISUAL_CUES.items():
+        if any(_term_position(name, term) >= 0 for term in terms):
+            return category
+    return "exterior"
+
+
+def _narration_visual_cues(text):
+    """Return visual subjects in the order they are mentioned by the narration."""
+    cues = []
+    lowered = text.lower()
+    for sentence in re.split(r"(?<=[.!?])\s+", lowered):
+        matches = []
+        for category, terms in VISUAL_CUES.items():
+            positions = [_term_position(sentence, term) for term in terms]
+            positions = [position for position in positions if position >= 0]
+            if positions:
+                matches.append((min(positions), category))
+        cues.extend(category for _, category in sorted(matches))
+    return list(dict.fromkeys(cues))
+
+
+def _order_images_for_narration(images, narration):
+    """Put detail shots near the spoken detail, then retain all remaining shots."""
+    remaining = list(images)
+    ordered = []
+    for cue in _narration_visual_cues(narration):
+        match = next((path for path in remaining if _image_category(path) == cue), None)
+        if match is not None:
+            ordered.append(match)
+            remaining.remove(match)
+    return [*ordered, *remaining]
+
+
+def _motion_clip(path, duration, index, size):
+    """Add a restrained alternating push/pull to still frames."""
+    base_scale = 1.0 if index % 2 == 0 else 1.045
+    direction = 1 if index % 2 == 0 else -1
+
+    def scale_at(t):
+        progress = min(1.0, max(0.0, t / max(duration, 0.001)))
+        return base_scale + direction * 0.045 * progress
+
+    moving = (
+        ImageClip(str(path))
+        .set_duration(duration)
+        .resize(lambda t: scale_at(t))
+        .set_position("center")
+    )
+    return CompositeVideoClip([moving], size=size).set_duration(duration)
+
+
+def render_ranking_video(
+    config, output_root=OUTPUT_ROOT, render_video=True, fast=True,
+    tts_provider="gtts", tts_voice=None,
+):
     ranks_by_num = {e.rank: e for e in config.ranks}
     if set(ranks_by_num) != {4, 3, 2, 1}:
         raise SystemExit(f"RankingConfig.ranks must cover ranks 4,3,2,1 exactly; got {sorted(ranks_by_num)}")
@@ -300,10 +372,23 @@ def render_ranking_video(config, output_root=OUTPUT_ROOT, render_video=True, fas
         "run_slug": config.slug,
     }
 
-    narration_path, audio_provider = _write_narration_audio(
-        run_dir, storyboard, duration_seconds=config.target_seconds, provider=tts_provider
-    )
+    previous_voice = None
+    if tts_voice:
+        import os
+        previous_voice = os.environ.get("OPENAI_TTS_VOICE")
+        os.environ["OPENAI_TTS_VOICE"] = tts_voice
+    try:
+        narration_path, audio_provider = _write_narration_audio(
+            run_dir, storyboard, duration_seconds=config.target_seconds, provider=tts_provider
+        )
+    finally:
+        if tts_voice:
+            if previous_voice is None:
+                os.environ.pop("OPENAI_TTS_VOICE", None)
+            else:
+                os.environ["OPENAI_TTS_VOICE"] = previous_voice
     storyboard["audio_provider"] = audio_provider
+    storyboard["tts_voice"] = tts_voice or "provider-default"
     audio_clip = AudioFileClip(str(narration_path))
     total_duration = audio_clip.duration
 
@@ -318,11 +403,12 @@ def render_ranking_video(config, output_root=OUTPUT_ROOT, render_video=True, fas
 
     for entry in ordered:
         rank_duration = segment_durations[f"rank_{entry.rank}"]
-        per_image = rank_duration / len(entry.images)
-        for i, image_path in enumerate(entry.images):
+        ordered_images = _order_images_for_narration(entry.images, entry.narration)
+        per_image = rank_duration / len(ordered_images)
+        for i, image_path in enumerate(ordered_images):
             out_path = images_dir / f"scene_rank_{entry.rank}_{i}.png"
             _draw_rank_frame(config, entry, image_path, out_path, size)
-            frame_entries.append((out_path, per_image))
+            frame_entries.append((out_path, per_image, _image_category(image_path)))
 
     close_path = images_dir / "scene_close.png"
     best = ordered[-1]
@@ -331,14 +417,20 @@ def render_ranking_video(config, output_root=OUTPUT_ROOT, render_video=True, fas
         label=best.label, stat=best.stat, narration=config.close_narration,
     )
     _draw_rank_frame(config, close_entry, best.images[0], close_path, size)
-    frame_entries.append((close_path, segment_durations["close"]))
+    frame_entries.append((close_path, segment_durations["close"], "exterior"))
 
-    _write_contact_sheet([p for p, _ in frame_entries], run_dir / "scene_contact_sheet.jpg")
-    storyboard["frames"] = [{"path": str(Path(p).relative_to(ROOT)), "duration": round(d, 3)} for p, d in frame_entries]
+    _write_contact_sheet([p for p, _, _ in frame_entries], run_dir / "scene_contact_sheet.jpg")
+    storyboard["frames"] = [
+        {"path": str(Path(p).relative_to(ROOT)), "duration": round(d, 3), "visual_cue": cue}
+        for p, d, cue in frame_entries
+    ]
     (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
 
     if render_video:
-        clips = [ImageClip(str(path)).set_duration(duration) for path, duration in frame_entries]
+        clips = [
+            _motion_clip(path, duration, index, size)
+            for index, (path, duration, _) in enumerate(frame_entries)
+        ]
         video = concatenate_videoclips(clips, method="compose").set_audio(audio_clip).set_duration(total_duration)
         video.write_videofile(
             str(run_dir / "final_short.mp4"),

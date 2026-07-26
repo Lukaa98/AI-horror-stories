@@ -5,7 +5,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "cars" / "automation")]
 
-from ranking_engine import _ranking_rail_layout  # noqa: E402
+from ranking_engine import (  # noqa: E402
+    _image_category,
+    _narration_visual_cues,
+    _order_images_for_narration,
+    _ranking_rail_layout,
+)
 
 
 def test_ranking_rail_is_fixed_for_every_source_photo_shape():
@@ -19,3 +24,22 @@ def test_ranking_rail_is_fixed_for_every_source_photo_shape():
     assert len(expected) == 4
     assert len({top for _, top, _, _ in expected}) == 4
     assert len({right - left for left, _, right, _ in expected}) == 1
+
+
+def test_visual_cues_follow_narration_order():
+    narration = "Inside, the gated manual steals the show. Then notice those unique wheels."
+    assert _narration_visual_cues(narration) == ["interior", "wheel"]
+
+
+def test_matching_detail_images_are_prioritized_without_dropping_fallbacks():
+    images = [
+        Path("front-left-exterior.jpg"),
+        Path("wheel-detail.jpg"),
+        Path("interior-dashboard.jpg"),
+    ]
+    ordered = _order_images_for_narration(
+        images,
+        "The gated shifter feels special. Its wheel design is unique.",
+    )
+    assert ordered == [images[2], images[1], images[0]]
+    assert [_image_category(path) for path in ordered] == ["interior", "wheel", "front"]
