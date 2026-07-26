@@ -1,0 +1,214 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "1997-2004",
+      "detected_variant_or_engine": "Boxster S",
+      "visible_match_evidence": [
+        "oval headlights",
+        "side air intakes",
+        "soft-top roof"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "1997-2004",
+      "detected_variant_or_engine": "Boxster S",
+      "visible_match_evidence": [
+        "oval headlights",
+        "side air intakes",
+        "soft-top roof",
+        "five-spoke wheels"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "1997-2004",
+      "detected_variant_or_engine": "Boxster S",
+      "visible_match_evidence": [
+        "oval headlights",
+        "side air intakes",
+        "soft-top roof",
+        "five-spoke wheels"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "1997-2004",
+      "detected_variant_or_engine": "Boxster S",
+      "visible_match_evidence": [
+        "oval headlights",
+        "side air intakes",
+        "soft-top roof",
+        "five-spoke wheels",
+        "Boxster S badge"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 10,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": null,
+      "path": "highlight-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "1997-2004",
+      "detected_variant_or_engine": "Boxster S",
+      "visible_match_evidence": [
+        "Porsche brand logo",
+        "three gauge cluster",
+        "specific interior layout",
+        "shift knob design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "1997\u20132004",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "leather seats"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "1997-2004",
+      "detected_variant_or_engine": "Boxster S",
+      "visible_match_evidence": [
+        "Boxster S badge",
+        "interior design consistent with 986 generation"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 9,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the exterior or recognizable features of the target vehicle.",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    }
+  ]
+}

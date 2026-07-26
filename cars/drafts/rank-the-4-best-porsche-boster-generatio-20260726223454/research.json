@@ -1,0 +1,1013 @@
+{
+  "request": "Rank the 4 best Porsche Boster generations overall across the full production run. Use 4 different generations when available, with one representative version from each generation. If the model has fewer than 4 true generations, use the most important era-defining versions across its history.",
+  "draft_id": "rank-the-4-best-porsche-boster-generatio-20260726223454",
+  "title": "RANKING THE BEST PORSCHE BOXSTER GENERATIONS",
+  "highlight_word": "BOXSTER",
+  "close_narration": "Which Boxster generation revs your engine: the original 986, the value-packed 987.2, the alluring 981 GTS, or the modern classic 718 GTS 4.0?",
+  "order_rationale": "Ranked by weighted enthusiast desirability, driving engagement, historical significance, performance, collectibility, and value\u2014not chronology.",
+  "entries": [
+    {
+      "name": "986 Boxster S",
+      "years": "1997\u20132004",
+      "introduced_year": 1997,
+      "price_usd": 50000,
+      "horsepower": 250,
+      "label": "THE ORIGINAL",
+      "one_line_fact": "Porsche's Boxster lineup is a fascinating journey of evolution and refinement. At number four, we have the 986 Boxster S. This was the one that started it all in 1997, introducing Porsche's mid-engine magic at $50,000. With its distinctive oval headlights and classic five-spoke wheels, it set a new benchmark for roadster design.",
+      "search_hint": "Porsche Boxster 986",
+      "chassis_code": "986",
+      "commons_search_terms": [
+        "Porsche Boxster 986",
+        "Porsche Boxster S 986",
+        "Porsche Boxster 1997"
+      ],
+      "visual_highlight": "side profile",
+      "visual_identifiers": [
+        "oval headlights",
+        "side air intakes",
+        "soft-top roof",
+        "five-spoke wheels"
+      ],
+      "ranking_scores": {
+        "enthusiast_desirability": 7,
+        "driving_engagement": 8,
+        "historical_significance": 9,
+        "performance": 7,
+        "collectibility": 6,
+        "value": 8
+      },
+      "ranking_case": "The 986 Boxster S is celebrated for introducing Porsche's mid-engine platform to a broader audience, offering a balanced driving experience.",
+      "research_sources": [
+        {
+          "url": "https://www.carsdirect.com/porsche/boxster/generations",
+          "title": "Porsche Boxster Generations",
+          "publisher": "CarsDirect",
+          "source_type": "automotive_publication",
+          "supports": [
+            "years",
+            "introduced_year",
+            "price_usd",
+            "horsepower"
+          ]
+        },
+        {
+          "url": "https://www.iseecars.com/car/porsche-boxster/generations",
+          "title": "Porsche Boxster Generations",
+          "publisher": "iSeeCars",
+          "source_type": "automotive_publication",
+          "supports": [
+            "years",
+            "introduced_year",
+            "price_usd",
+            "horsepower"
+          ]
+        }
+      ],
+      "ranking_total": 7.45,
+      "images": [
+        "images/986-boxster-s/exterior_side-01.jpg",
+        "images/986-boxster-s/exterior_front-01.jpg",
+        "images/986-boxster-s/exterior_rear-01.jpg",
+        "images/986-boxster-s/exterior_side-02.jpg",
+        "images/986-boxster-s/interior-01.jpg",
+        "images/986-boxster-s/interior-02.jpg"
+      ],
+      "current_value_usd": 22986,
+      "current_value_display": "$23K",
+      "current_value_note": "Recent Cars & Bids examples trade around $23K.",
+      "image_source": {
+        "provider": "cars_and_bids",
+        "search_url": "https://carsandbids.com/search/porsche/boxster?start_year=1997&end_year=2004&csort=10",
+        "auction_url": "https://carsandbids.com/auctions/rMNnYJgk/2002-porsche-boxster-s",
+        "auction_title": "2002 Porsche Boxster S"
+      },
+      "image_reviews": [
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_side",
+          "view_description": "front-right three-quarter exterior",
+          "visible_match_evidence": [
+            "oval headlights",
+            "side air intakes",
+            "soft-top roof",
+            "five-spoke wheels"
+          ],
+          "confidence": 0.95,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/986-boxster-s/highlight-02.jpg",
+          "path": "images/986-boxster-s/exterior_side-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "frontal exterior view",
+          "visible_match_evidence": [
+            "oval headlights",
+            "prominent front grille",
+            "soft-top roof visible",
+            "general shape and styling consistent with Boxster S"
+          ],
+          "confidence": 0.9,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/986-boxster-s/exterior-03.jpg",
+          "path": "images/986-boxster-s/exterior_front-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear-right three-quarter exterior",
+          "visible_match_evidence": [
+            "Porsche Boxster S badge",
+            "Oval taillights",
+            "Soft-top roof",
+            "Five-spoke wheels"
+          ],
+          "confidence": 0.95,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/986-boxster-s/highlight-08.jpg",
+          "path": "images/986-boxster-s/exterior_rear-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_side",
+          "view_description": "side exterior",
+          "visible_match_evidence": [
+            "soft-top roof",
+            "oval headlights",
+            "side air intake",
+            "five-spoke wheels"
+          ],
+          "confidence": 0.9,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/986-boxster-s/highlight-07.jpg",
+          "path": "images/986-boxster-s/exterior_side-02.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "interior view of the dashboard",
+          "visible_match_evidence": [],
+          "confidence": 0.0,
+          "usable": true,
+          "rejection_reason": "subject mismatch; the image shows the interior, not the expected exterior of the vehicle",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/986-boxster-s/interior-01.jpg",
+          "path": "images/986-boxster-s/interior-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "gear shift and interior detail",
+          "visible_match_evidence": [],
+          "confidence": 0.6,
+          "usable": true,
+          "rejection_reason": "image does not show expected vehicle model",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/986-boxster-s/interior-05.jpg",
+          "path": "images/986-boxster-s/interior-02.jpg"
+        }
+      ],
+      "image_review_provider": "openai",
+      "image_fallback_used": null,
+      "image_coverage": {
+        "approved_count": 6,
+        "target_count": 4,
+        "target_met": true
+      },
+      "stat": "MSRP $50,000 - 250 HP - Now ~$23K",
+      "narration": "Porsche's Boxster lineup is a fascinating journey of evolution and refinement. At number four, we have the 986 Boxster S. This was the one that started it all in 1997, introducing Porsche's mid-engine magic at $50,000. With its distinctive oval headlights and classic five-spoke wheels, it set a new benchmark for roadster design.",
+      "performance_beats": [
+        {
+          "text": "Porsche's Boxster lineup is a fascinating journey of evolution and refinement.",
+          "style": "reflective",
+          "emphasis_words": [
+            "fascinating",
+            "journey"
+          ],
+          "pause_after": 0.3,
+          "visual_cue": "exterior"
+        },
+        {
+          "text": "At number four, we have the 986 Boxster S.",
+          "style": "energetic_reveal",
+          "emphasis_words": [
+            "986 Boxster S"
+          ],
+          "pause_after": 0.25,
+          "visual_cue": "front"
+        },
+        {
+          "text": "This was the one that started it all in 1997, introducing Porsche's mid-engine magic at $50,000.",
+          "style": "conversational",
+          "emphasis_words": [
+            "started it all",
+            "mid-engine magic"
+          ],
+          "pause_after": 0,
+          "visual_cue": "side"
+        },
+        {
+          "text": "With its distinctive oval headlights and classic five-spoke wheels, it set a new benchmark for roadster design.",
+          "style": "confident",
+          "emphasis_words": [
+            "distinctive",
+            "benchmark"
+          ],
+          "pause_after": 0.25,
+          "visual_cue": "side"
+        }
+      ]
+    },
+    {
+      "name": "987.2 Boxster S",
+      "years": "2009\u20132012",
+      "introduced_year": 2009,
+      "price_usd": 58000,
+      "horsepower": 310,
+      "label": "BEST VALUE",
+      "one_line_fact": "Then came the 987.2 Boxster S, enhancing performance with 310 horsepower for $58,000. Featuring dual exhaust tips and revised taillights, its value proposition has aged well, with current values climbing to $56,000.",
+      "search_hint": "Porsche Boxster 987.2",
+      "chassis_code": "987.2",
+      "commons_search_terms": [
+        "Porsche Boxster 987.2",
+        "Porsche Boxster S 987.2",
+        "Porsche Boxster 2009"
+      ],
+      "visual_highlight": "rear view",
+      "visual_identifiers": [
+        "revised taillights",
+        "dual exhaust tips",
+        "updated front bumper",
+        "larger wheels"
+      ],
+      "ranking_scores": {
+        "enthusiast_desirability": 8,
+        "driving_engagement": 8,
+        "historical_significance": 7,
+        "performance": 8,
+        "collectibility": 7,
+        "value": 9
+      },
+      "ranking_case": "The 987.2 Boxster S is lauded for its improved engine reliability and performance enhancements, offering great value for enthusiasts.",
+      "research_sources": [
+        {
+          "url": "https://enginepatrol.com/porsche-boxster-best-and-worst-years/",
+          "title": "20 Best & Worst Porsche Boxster Years",
+          "publisher": "Engine Patrol",
+          "source_type": "automotive_publication",
+          "supports": [
+            "years",
+            "introduced_year",
+            "price_usd",
+            "horsepower"
+          ]
+        },
+        {
+          "url": "https://rerev.com/articles/porsche-boxster-years-to-avoid/",
+          "title": "Best and worst Porsche Boxster years \u2014 which to avoid",
+          "publisher": "REREV",
+          "source_type": "automotive_publication",
+          "supports": [
+            "years",
+            "introduced_year",
+            "price_usd",
+            "horsepower"
+          ]
+        }
+      ],
+      "ranking_total": 7.8,
+      "images": [
+        "images/987-2-boxster-s/exterior_front-01.jpg",
+        "images/987-2-boxster-s/interior-01.jpg",
+        "images/987-2-boxster-s/interior-02.jpg",
+        "images/987-2-boxster-s/interior-03.jpg"
+      ],
+      "current_value_usd": 55500,
+      "current_value_display": "$56K",
+      "current_value_note": "Recent Cars & Bids examples trade around $56K.",
+      "image_source": {
+        "provider": "cars_and_bids",
+        "search_url": "https://carsandbids.com/search/porsche/boxster?start_year=2009&end_year=2012&csort=10",
+        "auction_url": "https://carsandbids.com/auctions/KVxJ61Dl/2012-porsche-boxster-spyder",
+        "auction_title": "2012 Porsche Boxster Spyder"
+      },
+      "image_reviews": [
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "front-left three-quarter exterior",
+          "visible_match_evidence": [
+            "revised taillights",
+            "dual exhaust tips",
+            "updated front bumper",
+            "larger wheels"
+          ],
+          "confidence": 0.95,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/987-2-boxster-s/exterior-04.jpg",
+          "path": "images/987-2-boxster-s/exterior_front-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": true,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear exterior",
+          "visible_match_evidence": [],
+          "confidence": 0.7,
+          "usable": false,
+          "rejection_reason": "visible contradiction with expectation",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/987-2-boxster-s/rear-08.jpg",
+          "path": "images/987-2-boxster-s/rear-08.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "interior from driver's side",
+          "visible_match_evidence": [
+            "red leather upholstery",
+            "Porsche design elements",
+            "modern dashboard layout"
+          ],
+          "confidence": 0.85,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/987-2-boxster-s/interior-06.jpg",
+          "path": "images/987-2-boxster-s/interior-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "driver's side interior view",
+          "visible_match_evidence": [
+            "Porsche branding on steering wheel",
+            "three gauge cluster design",
+            "general layout consistent with Boxster S"
+          ],
+          "confidence": 0.8,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/987-2-boxster-s/highlight-03.jpg",
+          "path": "images/987-2-boxster-s/interior-02.jpg"
+        },
+        {
+          "original_path": "images/987-2-boxster-s/interior-02.jpg",
+          "path": "images/987-2-boxster-s/interior-02.jpg",
+          "provider": "fingerprint",
+          "usable": false,
+          "is_expected_vehicle": false,
+          "category": "other_detail",
+          "view_description": "duplicate image",
+          "confidence": 1.0,
+          "rejection_reason": "duplicate_or_near_duplicate",
+          "duplicate_of": "images/987-2-boxster-s/interior-02.jpg",
+          "duplicate_of_entry": "987.2 Boxster S",
+          "perceptual_distance": 0
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "dashboard close-up",
+          "visible_match_evidence": [],
+          "confidence": 0.2,
+          "usable": true,
+          "rejection_reason": "image does not show the exterior of the vehicle; only the interior dashboard",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/987-2-boxster-s/interior-05.jpg",
+          "path": "images/987-2-boxster-s/interior-03.jpg"
+        }
+      ],
+      "image_review_provider": "mixed_or_unverified",
+      "image_fallback_used": null,
+      "image_coverage": {
+        "approved_count": 4,
+        "target_count": 4,
+        "target_met": true
+      },
+      "stat": "MSRP $58,000 - 310 HP - Now ~$56K",
+      "narration": "Then came the 987.2 Boxster S, enhancing performance with 310 horsepower for $58,000. Featuring dual exhaust tips and revised taillights, its value proposition has aged well, with current values climbing to $56,000.",
+      "performance_beats": [
+        {
+          "text": "Then came the 987.2 Boxster S, enhancing performance with 310 horsepower for $58,000.",
+          "style": "conversational",
+          "emphasis_words": [
+            "enhancing",
+            "310 horsepower"
+          ],
+          "pause_after": 0.3,
+          "visual_cue": "rear"
+        },
+        {
+          "text": "Featuring dual exhaust tips and revised taillights, its value proposition has aged well,",
+          "style": "reflective",
+          "emphasis_words": [
+            "dual exhaust",
+            "value proposition"
+          ],
+          "pause_after": 0.2,
+          "visual_cue": "rear"
+        },
+        {
+          "text": "with current values climbing to $56,000.",
+          "style": "intrigued",
+          "emphasis_words": [
+            "current values",
+            "climbing"
+          ],
+          "pause_after": 0.25,
+          "visual_cue": "rear"
+        }
+      ]
+    },
+    {
+      "name": "981 Boxster GTS",
+      "years": "2014\u20132016",
+      "introduced_year": 2014,
+      "price_usd": 73000,
+      "horsepower": 330,
+      "label": "BEST OVERALL",
+      "one_line_fact": "The 981 Boxster GTS upped the ante in 2014. For $73,000, it offered 330 hp and a naturally aspirated engine that enthusiasts adore. Blackened headlights and GTS badging made it a standout, combining peak performance with a classy exterior.",
+      "search_hint": "Porsche Boxster 981 GTS",
+      "chassis_code": "981",
+      "commons_search_terms": [
+        "Porsche Boxster 981 GTS",
+        "Porsche Boxster GTS 981",
+        "Porsche Boxster 2014"
+      ],
+      "visual_highlight": "front fascia",
+      "visual_identifiers": [
+        "aggressive front bumper",
+        "blackened headlights",
+        "GTS badging",
+        "sport exhaust system"
+      ],
+      "ranking_scores": {
+        "enthusiast_desirability": 9,
+        "driving_engagement": 9,
+        "historical_significance": 8,
+        "performance": 9,
+        "collectibility": 8,
+        "value": 8
+      },
+      "ranking_case": "The 981 Boxster GTS is often regarded as the best overall due to its blend of performance, handling, and naturally aspirated engine character.",
+      "research_sources": [
+        {
+          "url": "https://pulserevops.com/cars/ca0670",
+          "title": "Best Porsche Boxster Model Years (Ranked)",
+          "publisher": "PulseRevOps",
+          "source_type": "automotive_publication",
+          "supports": [
+            "years",
+            "introduced_year",
+            "price_usd",
+            "horsepower"
+          ]
+        },
+        {
+          "url": "https://www.autodata1.com/en/car/porsche/boxster",
+          "title": "Porsche Boxster technical specifications and fuel economy",
+          "publisher": "Autodata1",
+          "source_type": "reference",
+          "supports": [
+            "years",
+            "introduced_year",
+            "price_usd",
+            "horsepower"
+          ]
+        }
+      ],
+      "ranking_total": 8.6,
+      "images": [
+        "images/981-boxster-gts/exterior_side-01.jpg",
+        "images/981-boxster-gts/exterior_side-02.jpg",
+        "images/981-boxster-gts/interior-01.jpg"
+      ],
+      "current_value_usd": 90981,
+      "current_value_display": "$91K",
+      "current_value_note": "Recent Cars & Bids examples trade around $91K.",
+      "image_source": {
+        "provider": "cars_and_bids",
+        "search_url": "https://carsandbids.com/search/porsche/boxster?start_year=2014&end_year=2016&csort=10",
+        "auction_url": "https://carsandbids.com/auctions/rGJlwggO/2016-porsche-boxster-spyder",
+        "auction_title": "2016 Porsche Boxster Spyder"
+      },
+      "image_reviews": [
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_side",
+          "view_description": "front-left three-quarter exterior",
+          "visible_match_evidence": [],
+          "confidence": 0.7,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/front-01.jpg",
+          "path": "images/981-boxster-gts/exterior_side-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": true,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "front view",
+          "visible_match_evidence": [],
+          "confidence": 0.2,
+          "usable": false,
+          "rejection_reason": "visible mismatch (not a Boxster GTS)",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/exterior-04.jpg",
+          "path": "images/981-boxster-gts/exterior-04.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": true,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear-right three-quarter exterior",
+          "visible_match_evidence": [],
+          "confidence": 0.6,
+          "usable": false,
+          "rejection_reason": "This image features a Porsche Boxster Spyder (not a GTS model).",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/front-08.jpg",
+          "path": "images/981-boxster-gts/front-08.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_side",
+          "view_description": "side exterior",
+          "visible_match_evidence": [
+            "Porsche design language",
+            "convertible body style",
+            "distinctive rear tail lights"
+          ],
+          "confidence": 0.8,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/front-07.jpg",
+          "path": "images/981-boxster-gts/exterior_side-02.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "front interior view",
+          "visible_match_evidence": [],
+          "confidence": 0.5,
+          "usable": true,
+          "rejection_reason": "image is of the interior instead of the expected exterior",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/interior-02.jpg",
+          "path": "images/981-boxster-gts/interior-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "driver side interior view",
+          "visible_match_evidence": [],
+          "confidence": 0.2,
+          "usable": false,
+          "rejection_reason": "image does not show the requested vehicle model",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/highlight-03.jpg",
+          "path": "images/981-boxster-gts/highlight-03.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "dashboard interior detail",
+          "visible_match_evidence": [],
+          "confidence": 0.3,
+          "usable": false,
+          "rejection_reason": "obvious subject mismatch",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/interior-05.jpg",
+          "path": "images/981-boxster-gts/interior-05.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": true,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "dashboard view",
+          "visible_match_evidence": [],
+          "confidence": 0.2,
+          "usable": false,
+          "rejection_reason": "subject mismatch",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/interior-06.jpg",
+          "path": "images/981-boxster-gts/interior-06.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": true,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear-left three-quarter exterior",
+          "visible_match_evidence": [],
+          "confidence": 0.2,
+          "usable": false,
+          "rejection_reason": "image shows an early generation Boxster, not the 981 GTS",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/precise-2-01.jpg",
+          "path": "images/981-boxster-gts/precise-2-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear-right exterior",
+          "visible_match_evidence": [],
+          "confidence": 0.7,
+          "usable": false,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/precise-3-01.jpg",
+          "path": "images/981-boxster-gts/precise-3-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": true,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear three-quarter exterior",
+          "visible_match_evidence": [],
+          "confidence": 0.3,
+          "usable": false,
+          "rejection_reason": "visible mismatch with expected vehicle model",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/981-boxster-gts/rear-01.jpg",
+          "path": "images/981-boxster-gts/rear-01.jpg"
+        }
+      ],
+      "image_review_provider": "openai",
+      "image_fallback_used": "wikimedia_commons",
+      "image_coverage": {
+        "approved_count": 3,
+        "target_count": 4,
+        "target_met": false
+      },
+      "stat": "MSRP $73,000 - 330 HP - Now ~$91K",
+      "narration": "The 981 Boxster GTS upped the ante in 2014. For $73,000, it offered 330 hp and a naturally aspirated engine that enthusiasts adore. Blackened headlights and GTS badging made it a standout, combining peak performance with a classy exterior.",
+      "performance_beats": [
+        {
+          "text": "The 981 Boxster GTS upped the ante in 2014.",
+          "style": "confident",
+          "emphasis_words": [
+            "upped the ante"
+          ],
+          "pause_after": 0.3,
+          "visual_cue": "front"
+        },
+        {
+          "text": "For $73,000, it offered 330 hp and a naturally aspirated engine that enthusiasts adore.",
+          "style": "energetic_reveal",
+          "emphasis_words": [
+            "330 hp",
+            "enthusiasts adore"
+          ],
+          "pause_after": 0.25,
+          "visual_cue": "engine"
+        },
+        {
+          "text": "Blackened headlights and GTS badging made it a standout,",
+          "style": "conversational",
+          "emphasis_words": [
+            "GTS badging",
+            "standout"
+          ],
+          "pause_after": 0.2,
+          "visual_cue": "front"
+        },
+        {
+          "text": "combining peak performance with a classy exterior.",
+          "style": "confident",
+          "emphasis_words": [
+            "peak performance",
+            "classy exterior"
+          ],
+          "pause_after": 0.25,
+          "visual_cue": "exterior"
+        }
+      ]
+    },
+    {
+      "name": "718 Boxster GTS 4.0",
+      "years": "2020\u20132025",
+      "introduced_year": 2020,
+      "price_usd": 90000,
+      "horsepower": 394,
+      "label": "MODERN CLASSIC",
+      "one_line_fact": "Taking the top spot is the 718 Boxster GTS 4.0\u2014a modern classic that reintroduced the flat-six engine in 2020 for $90,000. Its 394 horsepower and center-mounted exhaust encapsulate the perfect blend of power and Porsche legacy, now valued at $130,000.",
+      "search_hint": "Porsche 718 Boxster GTS 4.0",
+      "chassis_code": "982",
+      "commons_search_terms": [
+        "Porsche 718 Boxster GTS 4.0",
+        "Porsche Boxster GTS 4.0 982",
+        "Porsche Boxster 2020"
+      ],
+      "visual_highlight": "engine bay",
+      "visual_identifiers": [
+        "GTS 4.0 badging",
+        "center-mounted exhaust",
+        "LED headlights",
+        "sport design wheels"
+      ],
+      "ranking_scores": {
+        "enthusiast_desirability": 9,
+        "driving_engagement": 9,
+        "historical_significance": 8,
+        "performance": 9,
+        "collectibility": 9,
+        "value": 7
+      },
+      "ranking_case": "The 718 Boxster GTS 4.0 is celebrated for bringing back the naturally aspirated flat-six, offering a modern classic driving experience.",
+      "research_sources": [
+        {
+          "url": "https://www.carcollectorinternational.com/research/buyers-guides/porsche/boxster-718",
+          "title": "Porsche Boxster / 718 Boxster Buyer's Guide (2012\u20132025)",
+          "publisher": "Car Collector International",
+          "source_type": "automotive_publication",
+          "supports": [
+            "years",
+            "introduced_year",
+            "price_usd",
+            "horsepower"
+          ]
+        },
+        {
+          "url": "https://www.autodata1.com/en/car/porsche/boxster",
+          "title": "Porsche Boxster technical specifications and fuel economy",
+          "publisher": "Autodata1",
+          "source_type": "reference",
+          "supports": [
+            "years",
+            "introduced_year",
+            "price_usd",
+            "horsepower"
+          ]
+        }
+      ],
+      "ranking_total": 8.65,
+      "images": [
+        "images/718-boxster-gts-4-0/exterior_side-01.jpg",
+        "images/718-boxster-gts-4-0/exterior_side-02.jpg",
+        "images/718-boxster-gts-4-0/interior-01.jpg",
+        "images/718-boxster-gts-4-0/interior-02.jpg"
+      ],
+      "current_value_usd": 132000,
+      "current_value_display": "$130K",
+      "current_value_note": "Recent Cars & Bids examples trade around $130K.",
+      "image_source": {
+        "provider": "cars_and_bids",
+        "search_url": "https://carsandbids.com/search/porsche/718?start_year=2020&end_year=2025&csort=10",
+        "auction_url": "https://carsandbids.com/auctions/rwvGG5Xl/2022-porsche-718-boxster-spyder",
+        "auction_title": "2022 Porsche 718 Boxster Spyder"
+      },
+      "image_reviews": [
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_side",
+          "view_description": "rear-right three-quarter exterior",
+          "visible_match_evidence": [
+            "GTS 4.0 badging",
+            "center-mounted exhaust",
+            "LED headlights",
+            "sport design wheels"
+          ],
+          "confidence": 0.95,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/718-boxster-gts-4-0/engine-08.jpg",
+          "path": "images/718-boxster-gts-4-0/exterior_side-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_side",
+          "view_description": "side exterior",
+          "visible_match_evidence": [
+            "convertible body style",
+            "sport design wheels",
+            "prominent side air intake"
+          ],
+          "confidence": 0.85,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/718-boxster-gts-4-0/engine-07.jpg",
+          "path": "images/718-boxster-gts-4-0/exterior_side-02.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "front interior view",
+          "visible_match_evidence": [
+            "Porsche aesthetic with distinct dashboard design",
+            "Sports seats with contrasting stitching",
+            "Unique gear shifter style"
+          ],
+          "confidence": 0.85,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/718-boxster-gts-4-0/interior-01.jpg",
+          "path": "images/718-boxster-gts-4-0/interior-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "center console of the vehicle",
+          "visible_match_evidence": [],
+          "confidence": 0.5,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/718-boxster-gts-4-0/interior-04.jpg",
+          "path": "images/718-boxster-gts-4-0/interior-02.jpg"
+        }
+      ],
+      "image_review_provider": "openai",
+      "image_fallback_used": null,
+      "image_coverage": {
+        "approved_count": 4,
+        "target_count": 4,
+        "target_met": true
+      },
+      "stat": "MSRP $90,000 - 394 HP - Now ~$130K",
+      "narration": "Taking the top spot is the 718 Boxster GTS 4.0\u2014a modern classic that reintroduced the flat-six engine in 2020 for $90,000. Its 394 horsepower and center-mounted exhaust encapsulate the perfect blend of power and Porsche legacy, now valued at $130,000.",
+      "performance_beats": [
+        {
+          "text": "Taking the top spot is the 718 Boxster GTS 4.0\u2014a modern classic",
+          "style": "confident",
+          "emphasis_words": [
+            "top spot",
+            "modern classic"
+          ],
+          "pause_after": 0.3,
+          "visual_cue": "engine"
+        },
+        {
+          "text": "that reintroduced the flat-six engine in 2020 for $90,000.",
+          "style": "energetic_reveal",
+          "emphasis_words": [
+            "flat-six engine"
+          ],
+          "pause_after": 0.25,
+          "visual_cue": "engine"
+        },
+        {
+          "text": "Its 394 horsepower and center-mounted exhaust encapsulate",
+          "style": "conversational",
+          "emphasis_words": [
+            "394 horsepower",
+            "center-mounted exhaust"
+          ],
+          "pause_after": 0,
+          "visual_cue": "engine"
+        },
+        {
+          "text": "the perfect blend of power and Porsche legacy, now valued at $130,000.",
+          "style": "reflective",
+          "emphasis_words": [
+            "Porsche legacy"
+          ],
+          "pause_after": 0.25,
+          "visual_cue": "engine"
+        }
+      ]
+    }
+  ],
+  "skipped_entries": [],
+  "status": "researched"
+}
