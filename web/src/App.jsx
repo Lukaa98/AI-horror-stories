@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.8";
+const UI_VERSION = "V10.9";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -488,10 +488,31 @@ export default function App() {
       {videoUrl && (
         <div className="video-panel">
           <h2>Done</h2>
-          <video controls src={videoUrl} width="360" />
-          <p>
-            <a href={videoUrl} target="_blank" rel="noreferrer">Open video directly</a>
-          </p>
+          <div className="video-result">
+            <div className="video-player">
+              <video controls src={videoUrl} width="360" />
+              <p>
+                <a href={videoUrl} target="_blank" rel="noreferrer">Open video directly</a>
+              </p>
+            </div>
+            {research && (
+              <section className="narration-box" aria-labelledby="narration-title">
+                <h3 id="narration-title">Narration</h3>
+                <div className="narration-scroll">
+                  {research.entries.map((entry, index) => (
+                    <div className="narration-entry" key={entry.name}>
+                      <strong>#{4 - index} {entry.name}</strong>
+                      <p>{entry.narration || entry.one_line_fact}</p>
+                    </div>
+                  ))}
+                  <div className="narration-entry narration-close">
+                    <strong>Closing line</strong>
+                    <p>{research.close_narration}</p>
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
         </div>
       )}
     </div>
