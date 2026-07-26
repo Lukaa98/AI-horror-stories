@@ -1,0 +1,312 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-26T03:54:32.951Z",
+  "query": "Audi R8 V10 RWD 2017",
+  "visual_highlight": "rear-wheel-drive badge",
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2017&end_year=2021&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rbx0xzL3/2021-audi-r8-v10-spyder-rwd",
+      "title": "2021 Audi R8 V10 Spyder RWD",
+      "text": "2021 Audi R8 V10 Spyder RWD",
+      "titleYear": 2021,
+      "score": 90
+    },
+    {
+      "url": "https://carsandbids.com/auctions/356kWxpP/2017-audi-r8-v10-plus",
+      "title": "2017 Audi R8 V10 Plus",
+      "text": "2017 Audi R8 V10 Plus",
+      "titleYear": 2017,
+      "score": 90
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92WGDNMx/2020-audi-r8-v10-performance-coupe",
+      "title": "2020 Audi R8 V10 Performance Coupe",
+      "text": "2020 Audi R8 V10 Performance Coupe",
+      "titleYear": 2020,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37gk7E0x/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "text": "2018 Audi R8 V10 Coupe RWS",
+      "titleYear": 2018,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMYMkvYR/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "text": "2018 Audi R8 V10 Coupe RWS",
+      "titleYear": 2018,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9X6kNN0x/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "text": "2018 Audi R8 V10 Coupe RWS",
+      "titleYear": 2018,
+      "score": 72
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rbx0xzL3/2021-audi-r8-v10-spyder-rwd",
+      "title": "2021 Audi R8 V10 Spyder RWD",
+      "text": "2021 Audi R8 V10 Spyder RWD",
+      "titleYear": 2021,
+      "score": 90,
+      "usable_image_count": 29,
+      "sale_price": 147500,
+      "sale_type": "sold",
+      "page_title": "2021 Audi R8 V10 Spyder RWD"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/356kWxpP/2017-audi-r8-v10-plus",
+      "title": "2017 Audi R8 V10 Plus",
+      "text": "2017 Audi R8 V10 Plus",
+      "titleYear": 2017,
+      "score": 90,
+      "usable_image_count": 28,
+      "sale_price": 158000,
+      "sale_type": "sold",
+      "page_title": "2017 Audi R8 V10 Plus"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92WGDNMx/2020-audi-r8-v10-performance-coupe",
+      "title": "2020 Audi R8 V10 Performance Coupe",
+      "text": "2020 Audi R8 V10 Performance Coupe",
+      "titleYear": 2020,
+      "score": 72,
+      "usable_image_count": 21,
+      "sale_price": 172500,
+      "sale_type": "sold",
+      "page_title": "2020 Audi R8 V10 Performance Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37gk7E0x/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "text": "2018 Audi R8 V10 Coupe RWS",
+      "titleYear": 2018,
+      "score": 72,
+      "usable_image_count": 30,
+      "sale_price": 114611,
+      "sale_type": "sold",
+      "page_title": "2018 Audi R8 V10 Coupe RWS"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/37gk7E0x/2018-audi-r8-v10-coupe-rws",
+    "title": "2018 Audi R8 V10 Coupe RWS",
+    "text": "2018 Audi R8 V10 Coupe RWS",
+    "titleYear": 2018,
+    "score": 72,
+    "sale_price": 114611,
+    "sale_type": "sold",
+    "page_title": "2018 Audi R8 V10 Coupe RWS",
+    "year": 2018,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "rear-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/3gQBkYyR-bp99iLBKsX-(edit)2-8d_5L-lZaY.jpg?t=165127884406",
+      "labels": [
+        "rear",
+        "wheel",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2017 Audi R8 V10 Plus",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 274227
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/35XYQg5l-RYzi6ea_rQ-(edit).jpg?t=170819827724",
+      "labels": [
+        "interior",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2021 Audi R8 V10 Spyder RWD",
+      "width": 542,
+      "height": 361,
+      "bytes": 27270
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/59339d5e07287c702e69307de910cceaa69c1d04/photos/35XYQg5l-ym8As_yyI6-(edit).jpg?t=170839242505",
+      "labels": [
+        "rear",
+        "wheel",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2021 Audi R8 V10 Spyder RWD",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 543941
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/59339d5e07287c702e69307de910cceaa69c1d04/photos/35XYQg5l-diFx-JrK8E-(edit).jpg?t=170839264129",
+      "labels": [
+        "interior",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2021 Audi R8 V10 Spyder RWD",
+      "width": 542,
+      "height": 361,
+      "bytes": 24628
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/K14JPbdn-908eDSCer0-(edit).jpg?t=170862091552",
+      "labels": [
+        "rear",
+        "wheel",
+        "detail",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2020 Audi R8 V10 Performance Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 218711
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=542,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/35XYQg5l-Hq6c31wq0b-(edit).jpg?t=170819808103",
+      "labels": [
+        "interior",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2021 Audi R8 V10 Spyder RWD",
+      "width": 542,
+      "height": 361,
+      "bytes": 29849
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 6,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 6,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not the main subject; focuses on interior, not the target vehicle",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "rear-01.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
