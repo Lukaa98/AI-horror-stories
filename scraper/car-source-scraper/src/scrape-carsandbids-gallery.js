@@ -224,8 +224,10 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
   return entries
     .map((entry) => {
       const haystack = `${entry.title} ${entry.text} ${entry.url}`.toLowerCase();
-      const titleYear = Number((entry.title.match(/\b(19|20)\d{2}\b/) || [])[0] || 0);
       const cleanedTitle = /sold for|bid to|featured/i.test(entry.title) ? humanizeAuctionUrl(entry.url) : entry.title;
+      const titleYear = Number(
+        (`${cleanedTitle} ${entry.url}`.match(/\b(19|20)\d{2}\b/) || [])[0] || 0
+      );
       let score = 0;
       for (const token of tokens) {
         if (haystack.includes(token)) score += token.length > 2 ? 18 : 8;
@@ -234,7 +236,7 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
       if (titleYear && (!startYear || titleYear >= startYear) && (!endYear || titleYear <= endYear)) score += 28;
       if (titleYear && ((startYear && titleYear < startYear) || (endYear && titleYear > endYear))) score -= 180;
       const variantTokens = tokens.filter((token) =>
-        ["v6", "v8", "v10", "v12", "gt", "gts", "gt3", "gt4", "rs", "rwd", "awd", "quattro", "spyder", "coupe"].includes(token)
+        ["v6", "v8", "v10", "v12", "plus", "performance", "gt", "gts", "gt3", "gt4", "rs", "rwd", "rws", "awd", "quattro", "spyder", "coupe"].includes(token)
       );
       for (const token of variantTokens) {
         if (!haystack.includes(token)) score -= 90;

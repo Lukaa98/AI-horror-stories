@@ -583,7 +583,40 @@ def _find_duplicate(path, seen_images, max_distance=5):
     return None, exact, perceptual, None
 
 
-def _review_image_with_ai(path, entry, model=IMAGE_REVIEW_MODEL):
+def _auction_provenance_matches_entry(entry):
+    """Return true when one auction title coherently identifies the requested variant."""
+    source = entry.get("image_source") or {}
+    if source.get("provider") != "cars_and_bids":
+        return False
+    title = str(source.get("auction_title") or "").lower()
+    expected = f"{entry.get('name', '')} {entry.get('search_hint', '')}".lower()
+    if not title or "r8" not in title:
+        return False
+    if "v8" in expected and "v10" in title:
+        return False
+    if "v10" in expected and "v8" in title and "v10" not in title:
+        return False
+    for discriminator in ("plus", "performance", "rwd", "rws", "spyder", "gt"):
+        if re.search(rf"\b{discriminator}\b", expected) and not re.search(
+            rf"\b{discriminator}\b", title
+        ):
+            return False
+    start_year, end_year = None, None
+    years = [int(value) for value in re.findall(r"\b(?:19|20)\d{2}\b", str(entry.get("years", "")))]
+    if years:
+        start_year, end_year = min(years), max(years)
+    title_year_match = re.search(r"\b(?:19|20)\d{2}\b", title)
+    if title_year_match and start_year and not (start_year <= int(title_year_match.group()) <= end_year):
+        return False
+    return True
+
+
+def _review_image_with_ai(
+    path,
+    entry,
+    model=IMAGE_REVIEW_MODEL,
+    trusted_variant_provenance=False,
+):
     from openai import OpenAI
 
     client = OpenAI()
@@ -591,6 +624,7 @@ def _review_image_with_ai(path, entry, model=IMAGE_REVIEW_MODEL):
     prompt = f"""Inspect this downloaded car image using the pixels, not its filename.
 Expected subject: {entry['name']} ({entry.get('years', 'year unknown')}).
 Expected distinguishing visual identifiers: {identifiers or 'not provided'}.
+Trusted exact-variant gallery provenance: {trusted_variant_provenance}.
 Return ONLY strict JSON with:
 - is_expected_vehicle: boolean (false for a clearly different model/generation or no useful car)
 - exact_variant_visible: boolean
@@ -603,9 +637,11 @@ Return ONLY strict JSON with:
 - rejection_reason: string or null
 Mark usable false for page UI, severe blur, tiny vehicles, collages, watermarks dominating
 the frame, or an obvious subject mismatch. A visible full car is exterior_full even if
-the search or filename says engine, interior, wheel, or detail. Do not approve a generic
-make/model match. If this view cannot distinguish the requested generation or variant
-from the other ranked entries, set exact_variant_visible and usable to false."""
+the search or filename says engine, interior, wheel, or detail. When trusted exact-variant
+gallery provenance is false, do not approve a generic make/model match; an ambiguous view
+must set exact_variant_visible and usable false. When provenance is true, the image came
+from one exact auction gallery: it may remain usable even if this angle does not independently
+show the trim badge, unless the pixels contradict the expected vehicle."""
     response = client.responses.create(
         model=model,
         input=[{
@@ -629,9 +665,10 @@ from the other ranked entries, set exact_variant_visible and usable to false."""
     review["usable"] = (
         bool(review.get("usable"))
         and review["is_expected_vehicle"]
-        and review["exact_variant_visible"]
+        and (review["exact_variant_visible"] or trusted_variant_provenance)
         and review["confidence"] >= 0.7
     )
+    review["trusted_variant_provenance"] = trusted_variant_provenance
     review["provider"] = "openai"
     review["model"] = model
     return review
@@ -643,6 +680,7 @@ def review_and_rename_entry_images(
     require_ai=False,
     model=IMAGE_REVIEW_MODEL,
     seen_images=None,
+    trusted_variant_provenance=False,
 ):
     """Verify draft images from their pixels and give usable files truthful names."""
     if seen_images is None:
@@ -671,7 +709,12 @@ def review_and_rename_entry_images(
             })
             continue
         try:
-            review = _review_image_with_ai(path, entry, model=model)
+            review = _review_image_with_ai(
+                path,
+                entry,
+                model=model,
+                trusted_variant_provenance=trusted_variant_provenance,
+            )
         except Exception as exc:
             if require_ai:
                 raise SystemExit(f"AI image review failed for {path}: {exc}") from exc
@@ -813,6 +856,7 @@ def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_i
         images_dir,
         require_ai=require_ai_image_review,
         seen_images=seen_images,
+        trusted_variant_provenance=_auction_provenance_matches_entry(entry),
     )
     if len(entry["images"]) < 4:
         print(
@@ -842,6 +886,7 @@ def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_i
             images_dir,
             require_ai=require_ai_image_review,
             seen_images=seen_images,
+            trusted_variant_provenance=False,
         )
         entry["images"] = [*approved_images, *fallback_entry["images"]][:6]
         entry["image_reviews"] = [*initial_reviews, *fallback_entry["image_reviews"]]

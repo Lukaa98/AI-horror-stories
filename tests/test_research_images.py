@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "cars" / "automation"))
 
 from research_request import (  # noqa: E402
+    _auction_provenance_matches_entry,
     _normalized_image_category,
     review_and_rename_entry_images,
     valid_images,
@@ -66,6 +67,28 @@ def test_normalized_image_category_maps_loose_vision_labels():
     assert _normalized_image_category("unexpected") == "other_detail"
 
 
+def test_exact_auction_provenance_accepts_coherent_gallery_and_rejects_wrong_trim():
+    exact = {
+        "name": "Second-Gen R8 V10 Plus",
+        "search_hint": "Audi R8 V10 Plus Type 4S",
+        "years": "2015-2018",
+        "image_source": {
+            "provider": "cars_and_bids",
+            "auction_title": "2017 Audi R8 V10 Plus",
+        },
+    }
+    wrong = {
+        **exact,
+        "image_source": {
+            "provider": "cars_and_bids",
+            "auction_title": "2018 Audi R8 V10 Coupe RWS",
+        },
+    }
+
+    assert _auction_provenance_matches_entry(exact) is True
+    assert _auction_provenance_matches_entry(wrong) is False
+
+
 def test_review_renames_from_visual_category_and_rejects_mismatches(tmp_path, monkeypatch):
     images_dir = tmp_path / "images"
     car_dir = images_dir / "first-gen-r8-v10"
@@ -104,7 +127,7 @@ def test_review_renames_from_visual_category_and_rejects_mismatches(tmp_path, mo
     ])
     monkeypatch.setattr(
         "research_request._review_image_with_ai",
-        lambda path, candidate, model: next(reviews),
+        lambda path, candidate, model, **kwargs: next(reviews),
     )
 
     review_and_rename_entry_images(entry, images_dir, require_ai=True)
@@ -128,7 +151,7 @@ def test_review_rejects_near_duplicate_used_by_another_entry(tmp_path, monkeypat
     seen_images = []
     monkeypatch.setattr(
         "research_request._review_image_with_ai",
-        lambda path, candidate, model: {
+        lambda path, candidate, model, **kwargs: {
             "category": "exterior_full",
             "view_description": "side exterior",
             "confidence": 0.95,
