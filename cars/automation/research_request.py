@@ -506,6 +506,8 @@ def format_stat(entry):
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
 IMAGE_REVIEW_MODEL = os.getenv("OPENAI_MEDIA_REVIEW_MODEL", "gpt-4o-mini")
+TARGET_IMAGES_PER_ENTRY = 4
+MIN_IMAGES_PER_ENTRY = 2
 IMAGE_CATEGORIES = {
     "exterior_front",
     "exterior_rear",
@@ -611,6 +613,31 @@ def _auction_provenance_matches_entry(entry):
     return True
 
 
+def _finalize_image_review(review, trusted_variant_provenance=False):
+    review["category"] = _normalized_image_category(review.get("category"))
+    review["confidence"] = max(0.0, min(1.0, float(review.get("confidence", 0))))
+    review["is_expected_vehicle"] = bool(review.get("is_expected_vehicle"))
+    review["exact_variant_visible"] = bool(review.get("exact_variant_visible"))
+    review["has_visible_contradiction"] = bool(review.get("has_visible_contradiction", False))
+    review["image_quality_usable"] = bool(
+        review.get("image_quality_usable", True if trusted_variant_provenance else review.get("usable"))
+    )
+    if trusted_variant_provenance:
+        review["usable"] = (
+            review["image_quality_usable"]
+            and not review["has_visible_contradiction"]
+        )
+    else:
+        review["usable"] = (
+            bool(review.get("usable"))
+            and review["is_expected_vehicle"]
+            and review["exact_variant_visible"]
+            and review["confidence"] >= 0.7
+        )
+    review["trusted_variant_provenance"] = trusted_variant_provenance
+    return review
+
+
 def _review_image_with_ai(
     path,
     entry,
@@ -628,6 +655,8 @@ Trusted exact-variant gallery provenance: {trusted_variant_provenance}.
 Return ONLY strict JSON with:
 - is_expected_vehicle: boolean (false for a clearly different model/generation or no useful car)
 - exact_variant_visible: boolean
+- has_visible_contradiction: boolean (true only when pixels positively show the wrong vehicle)
+- image_quality_usable: boolean (judge blur, framing, page UI, collage, and resolution only)
 - category: exactly one of exterior_front, exterior_rear, exterior_side, exterior_full,
   interior, engine_bay, wheel_detail, other_detail
 - view_description: a precise phrase such as "front-left three-quarter exterior"
@@ -658,17 +687,7 @@ show the trim badge, unless the pixels contradict the expected vehicle."""
         if text.lower().startswith("json"):
             text = text[4:].strip()
     review = json.loads(text)
-    review["category"] = _normalized_image_category(review.get("category"))
-    review["confidence"] = max(0.0, min(1.0, float(review.get("confidence", 0))))
-    review["is_expected_vehicle"] = bool(review.get("is_expected_vehicle"))
-    review["exact_variant_visible"] = bool(review.get("exact_variant_visible"))
-    review["usable"] = (
-        bool(review.get("usable"))
-        and review["is_expected_vehicle"]
-        and (review["exact_variant_visible"] or trusted_variant_provenance)
-        and review["confidence"] >= 0.7
-    )
-    review["trusted_variant_provenance"] = trusted_variant_provenance
+    _finalize_image_review(review, trusted_variant_provenance)
     review["provider"] = "openai"
     review["model"] = model
     return review
@@ -715,6 +734,7 @@ def review_and_rename_entry_images(
                 model=model,
                 trusted_variant_provenance=trusted_variant_provenance,
             )
+            _finalize_image_review(review, trusted_variant_provenance)
         except Exception as exc:
             if require_ai:
                 raise SystemExit(f"AI image review failed for {path}: {exc}") from exc
@@ -858,7 +878,7 @@ def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_i
         seen_images=seen_images,
         trusted_variant_provenance=_auction_provenance_matches_entry(entry),
     )
-    if len(entry["images"]) < 4:
+    if len(entry["images"]) < TARGET_IMAGES_PER_ENTRY:
         print(
             f"[images] Cars & Bids yielded only {len(entry['images'])} verified unique "
             f"images for {entry['name']} -- adding chassis-aware Commons results"
@@ -941,17 +961,18 @@ def main():
             require_ai_image_review=args.require_ai_image_review,
             seen_images=seen_images,
         )
-        if len(entry["images"]) >= 4:
+        if len(entry["images"]) >= MIN_IMAGES_PER_ENTRY:
             selected_entries.append(entry)
             print(f"[images] Selected {entry['name']} with {len(entry['images'])} image(s)")
         else:
             skipped_entries.append({
                 "name": entry["name"],
                 "years": entry.get("years", ""),
-                "reason": "fewer_than_4_verified_unique_images",
+                "reason": f"fewer_than_{MIN_IMAGES_PER_ENTRY}_verified_unique_images",
             })
             print(
-                f"[images] Skipping {entry['name']} because fewer than 4 verified "
+                f"[images] Skipping {entry['name']} because fewer than "
+                f"{MIN_IMAGES_PER_ENTRY} verified "
                 "unique images were found"
             )
         if len(selected_entries) == 4:

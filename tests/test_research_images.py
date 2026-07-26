@@ -89,6 +89,42 @@ def test_exact_auction_provenance_accepts_coherent_gallery_and_rejects_wrong_tri
     assert _auction_provenance_matches_entry(wrong) is False
 
 
+def test_trusted_gallery_does_not_require_trim_to_be_visible(tmp_path, monkeypatch):
+    images_dir = tmp_path / "images"
+    car_dir = images_dir / "r8-plus"
+    car_dir.mkdir(parents=True)
+    Image.new("RGB", (80, 60), (20, 40, 70)).save(car_dir / "interior-01.jpg")
+    entry = {
+        "name": "R8 V10 Plus",
+        "images": ["images/r8-plus/interior-01.jpg"],
+    }
+    monkeypatch.setattr(
+        "research_request._review_image_with_ai",
+        lambda path, candidate, model, **kwargs: {
+            "category": "interior",
+            "view_description": "dashboard and seats",
+            "confidence": 0.6,
+            "is_expected_vehicle": False,
+            "exact_variant_visible": False,
+            "has_visible_contradiction": False,
+            "image_quality_usable": True,
+            "usable": False,
+            "rejection_reason": "trim badge is not visible",
+            "provider": "openai",
+        },
+    )
+
+    review_and_rename_entry_images(
+        entry,
+        images_dir,
+        require_ai=True,
+        trusted_variant_provenance=True,
+    )
+
+    assert entry["images"] == ["images/r8-plus/interior-01.jpg"]
+    assert entry["image_reviews"][0]["usable"] is True
+
+
 def test_review_renames_from_visual_category_and_rejects_mismatches(tmp_path, monkeypatch):
     images_dir = tmp_path / "images"
     car_dir = images_dir / "first-gen-r8-v10"
