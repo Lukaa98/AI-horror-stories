@@ -196,8 +196,9 @@ Write like a knowledgeable, opinionated car-club friend—not a specification sh
 press release, or generic AI summary.
 
 STRUCTURE AND VOICE:
-- The #4 paragraph must begin with a concise hook explaining why this lineup matters,
-  then flow naturally into "At number four..."
+- The first spoken words must immediately identify the video subject, for example
+  "Let's rank every Porsche Boxster generation." Then flow naturally into
+  "At number four..." Do not begin with a generic statement that could describe any car.
 - #3 must advance the story with a varied transition such as "Then..." or
   "[Manufacturer] turned up the volume."
 - #2 should explain the major evolution and may contrast what improved with what was lost.
@@ -227,8 +228,8 @@ STYLE RULES:
 - Divide each paragraph into 2-4 natural performance beats. Let meaning determine the
   delivery: reveals can be energetic, context can be conversational, contrasts can be
   intrigued, and verdicts can be confident. Do not make every beat energetic.
-- Add a real pause after important reveals, contrasts, and rank transitions. Use 0.12-0.55
-  seconds there, and 0 when no deliberate pause is needed.
+- Set pause_after to 0. The production narrator now reads one continuous script; performance
+  beats exist for visual synchronization and must not divide grammatical sentences.
 - Choose at most two emphasis_words per beat. These are words the narrator should stress
   or slightly sustain naturally, such as "legendary", "manual", or "rear-wheel drive".
   Never alter their spelling in the spoken text.
@@ -300,7 +301,7 @@ NARRATION_OUTPUT_SCHEMA = {
                                 "pause_after": {
                                     "type": "number",
                                     "minimum": 0,
-                                    "maximum": 0.55,
+                                    "maximum": 0,
                                 },
                                 "visual_cue": {
                                     "type": "string",

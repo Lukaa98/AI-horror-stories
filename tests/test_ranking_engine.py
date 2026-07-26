@@ -11,6 +11,7 @@ from ranking_engine import (  # noqa: E402
     _order_images_for_narration,
     _automatic_performance_beats,
     _performance_instructions,
+    _select_image_for_cue,
     _ranking_rail_layout,
 )
 
@@ -63,3 +64,21 @@ def test_emphasis_words_become_acting_direction_without_text_misspelling():
     instructions = _performance_instructions(beat)
     assert "Slightly sustain" in instructions
     assert "legendary R8" in instructions
+
+
+def test_plural_visual_terms_are_detected_in_spoken_order():
+    assert _narration_visual_cues(
+        "Its blackened headlights lead into five-spoke wheels and revised taillights."
+    ) == ["front", "wheel", "rear"]
+
+
+def test_missing_engine_shot_falls_back_to_exterior_not_interior():
+    images = [
+        Path("interior-dashboard-01.jpg"),
+        Path("side-exterior-01.jpg"),
+        Path("rear-exterior-01.jpg"),
+    ]
+
+    selected = _select_image_for_cue(images, "engine", set())
+
+    assert selected == images[1]

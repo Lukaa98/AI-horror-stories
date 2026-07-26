@@ -11,7 +11,6 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
-import numpy as np
 from PIL import Image, ImageDraw
 
 from generate_sample import (
@@ -25,14 +24,7 @@ from generate_sample import (
     _write_contact_sheet,
 )
 from video_editor import FPS, FAST_MODE
-from moviepy.editor import (
-    AudioClip,
-    AudioFileClip,
-    CompositeVideoClip,
-    ImageClip,
-    concatenate_audioclips,
-    concatenate_videoclips,
-)
+from moviepy.editor import AudioFileClip, ImageClip, concatenate_videoclips
 
 OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"
 
@@ -286,11 +278,11 @@ def _word_weight(text):
 
 
 VISUAL_CUES = {
-    "engine": ("engine", "v8", "v10", "horsepower", "hp", "power"),
+    "engine": ("engine", "engines", "engine bay", "flat-six", "flat six", "v8", "v10"),
     "wheel": ("wheel", "wheels", "rim", "rims", "tire", "tires"),
     "interior": ("interior", "dashboard", "cockpit", "steering", "instrument", "manual", "gated", "shifter"),
-    "rear": ("rear", "wing", "spoiler", "exhaust", "taillight"),
-    "front": ("front", "grille", "headlight"),
+    "rear": ("rear", "wing", "spoiler", "exhaust", "exhausts", "taillight", "taillights"),
+    "front": ("front", "grille", "headlight", "headlights"),
     "side": ("side", "profile", "side blade"),
 }
 
@@ -335,22 +327,9 @@ def _order_images_for_narration(images, narration):
     return [*ordered, *remaining]
 
 
-def _motion_clip(path, duration, index, size):
-    """Add a restrained alternating push/pull to still frames."""
-    base_scale = 1.0 if index % 2 == 0 else 1.045
-    direction = 1 if index % 2 == 0 else -1
-
-    def scale_at(t):
-        progress = min(1.0, max(0.0, t / max(duration, 0.001)))
-        return base_scale + direction * 0.045 * progress
-
-    moving = (
-        ImageClip(str(path))
-        .set_duration(duration)
-        .resize(lambda t: scale_at(t))
-        .set_position("center")
-    )
-    return CompositeVideoClip([moving], size=size).set_duration(duration)
+def _still_clip(path, duration):
+    """Keep reviewed photographs static; cuts provide the visual movement."""
+    return ImageClip(str(path)).set_duration(duration)
 
 
 STYLE_DIRECTIONS = {
@@ -378,14 +357,14 @@ def _automatic_performance_beats(text, default_visual="exterior"):
             "text": sentence,
             "style": style,
             "emphasis_words": [],
-            "pause_after": 0.35 if index == 0 else 0.22,
+            "pause_after": 0,
             "visual_cue": cues[0] if cues else default_visual,
         })
     return beats or [{
         "text": text,
         "style": "conversational",
         "emphasis_words": [],
-        "pause_after": 0.2,
+        "pause_after": 0,
         "visual_cue": default_visual,
     }]
 
@@ -404,11 +383,26 @@ def _performance_instructions(beat):
     )
 
 
+VISUAL_FALLBACKS = {
+    "engine": ("engine", "side", "exterior", "front", "rear"),
+    "wheel": ("wheel", "side", "exterior", "front", "rear"),
+    "rear": ("rear", "exterior", "side", "front"),
+    "front": ("front", "exterior", "side", "rear"),
+    "interior": ("interior", "exterior", "side"),
+    "side": ("side", "exterior", "front", "rear"),
+    "exterior": ("exterior", "front", "side", "rear"),
+}
+
+
 def _select_image_for_cue(images, cue, used):
-    match = next(
-        (path for path in images if _image_category(path) == cue and path not in used),
-        None,
-    )
+    match = None
+    for category in VISUAL_FALLBACKS.get(cue, VISUAL_FALLBACKS["exterior"]):
+        match = next(
+            (path for path in images if _image_category(path) == category and path not in used),
+            None,
+        )
+        if match is not None:
+            break
     if match is None:
         match = next((path for path in images if path not in used), images[0])
     used.add(match)
@@ -416,79 +410,80 @@ def _select_image_for_cue(images, cue, used):
 
 
 def _write_performance_audio(run_dir, ordered, close_narration):
-    """Generate directed utterances and concatenate them with guaranteed silence."""
-    clips = []
-    timings = []
-    audio_parts_dir = run_dir / "audio_parts"
-    audio_parts_dir.mkdir(parents=True, exist_ok=True)
-
-    all_segments = []
+    """Generate one continuous narration, then map its duration onto visual beats."""
+    rank_segments = []
     for entry in ordered:
         beats = entry.performance_beats or _automatic_performance_beats(entry.narration)
-        all_segments.append((f"rank_{entry.rank}", entry, beats))
-    close_entry = ordered[-1]
-    close_beats = [{
-        "text": close_narration,
-        "style": "conversational",
-        "emphasis_words": [],
-        "pause_after": 0.15,
-        "visual_cue": "exterior",
-    }]
-    all_segments.append(("close", close_entry, close_beats))
+        rank_segments.append((f"rank_{entry.rank}", entry, beats))
 
-    part_index = 0
-    for segment_name, entry, beats in all_segments:
+    narration_text = " ".join([
+        *(beat["text"] for _, _, beats in rank_segments for beat in beats),
+        close_narration,
+    ])
+    narration_path = run_dir / "narration.mp3"
+    _write_openai_audio(
+        narration_path,
+        narration_text,
+        instructions=(
+            "Use a low, warm masculine automotive-host voice. Read this as one continuous, "
+            "natural conversation with smooth sentence-to-sentence flow. Do not insert dramatic "
+            "silences or stop mid-sentence. Clearly emphasize rank numbers, model names, prices, "
+            "and important mechanical details without slowing down excessively."
+        ),
+        speed=1.02,
+    )
+    audio_probe = AudioFileClip(str(narration_path))
+    total_duration = audio_probe.duration
+    audio_probe.close()
+
+    weighted_items = [
+        (segment_name, entry, beat, _word_weight(beat["text"]))
+        for segment_name, entry, beats in rank_segments
+        for beat in beats
+    ]
+    close_weight = _word_weight(close_narration)
+    total_weight = sum(item[3] for item in weighted_items) + close_weight
+    timings = []
+
+    for segment_name, entry, beat, weight in weighted_items:
+        beat_duration = total_duration * weight / total_weight
         used_images = set()
-        for beat_index, beat in enumerate(beats):
-            part_path = audio_parts_dir / f"{part_index:02d}-{segment_name}-{beat_index}.mp3"
-            _write_openai_audio(
-                part_path,
-                beat["text"],
-                instructions=_performance_instructions(beat),
-                speed=1.0,
-            )
-            spoken = AudioFileClip(str(part_path))
-            pause = max(0.0, min(0.8, float(beat.get("pause_after", 0.2))))
-            silence = AudioClip(
-                lambda t: (
-                    np.zeros(2)
-                    if np.isscalar(t)
-                    else np.zeros((len(t), 2))
-                ),
-                duration=pause,
-                fps=44100,
-            )
-            clips.extend([spoken, silence])
+        text_cues = _narration_visual_cues(beat["text"])
+        cues = text_cues or [beat.get("visual_cue", "exterior")]
+        per_cue_duration = beat_duration / len(cues)
+        for cue in cues:
             image = _select_image_for_cue(
                 entry.images,
-                beat.get("visual_cue", "exterior"),
+                cue,
                 used_images,
             )
-            duration = spoken.duration + pause
             timings.append({
                 "segment": segment_name,
                 "entry": entry,
                 "text": beat["text"],
                 "style": beat.get("style", "conversational"),
                 "emphasis_words": beat.get("emphasis_words", []),
-                "pause_after": pause,
-                "visual_cue": beat.get("visual_cue", "exterior"),
+                "pause_after": 0,
+                "visual_cue": cue,
                 "image": image,
-                "duration": duration,
+                "duration": per_cue_duration,
             })
-            part_index += 1
 
-    narration_path = run_dir / "narration.mp3"
-    combined = concatenate_audioclips(clips)
-    combined.write_audiofile(
-        str(narration_path),
-        fps=44100,
-        codec="libmp3lame",
-        logger=None,
-    )
-    for clip in clips:
-        clip.close()
-    combined.close()
+    close_duration = total_duration * close_weight / total_weight
+    per_entry_close = close_duration / len(ordered)
+    for entry in ordered:
+        image = _select_image_for_cue(entry.images, "exterior", set())
+        timings.append({
+            "segment": "close",
+            "entry": entry,
+            "text": close_narration,
+            "style": "conversational",
+            "emphasis_words": [entry.name],
+            "pause_after": 0,
+            "visual_cue": "exterior",
+            "image": image,
+            "duration": per_entry_close,
+        })
     return narration_path, timings
 
 
@@ -603,10 +598,7 @@ def render_ranking_video(
     (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
 
     if render_video:
-        clips = [
-            _motion_clip(path, duration, index, size)
-            for index, (path, duration, _) in enumerate(frame_entries)
-        ]
+        clips = [_still_clip(path, duration) for path, duration, _ in frame_entries]
         video = concatenate_videoclips(clips, method="compose").set_audio(audio_clip).set_duration(total_duration)
         video.write_videofile(
             str(run_dir / output_filename),
