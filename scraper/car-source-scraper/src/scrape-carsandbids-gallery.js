@@ -64,7 +64,11 @@ function normalizeMediaUrl(rawUrl, baseUrl) {
   const value = String(rawUrl).trim().replace(/&amp;/g, "&");
   if (!value || value.startsWith("data:")) return null;
   try {
-    return new URL(value, baseUrl).href;
+    const normalized = new URL(value, baseUrl).href;
+    return normalized.replace(
+      /(cdn-cgi\/image\/[^/]*?)width=\d+/i,
+      "$1width=1800"
+    );
   } catch {
     return null;
   }
@@ -411,13 +415,13 @@ function chooseImages(candidates, desiredLabels, queryTokens) {
   }
 
   for (const candidate of ranked) {
-    if (chosen.length >= 6) break;
+    if (chosen.length >= 8) break;
     if (used.has(candidate.url)) continue;
     used.add(candidate.url);
     chosen.push({ ...candidate, primaryLabel: candidate.labels[0] || "exterior" });
   }
 
-  return chosen.slice(0, 6);
+  return chosen.slice(0, 8);
 }
 
 async function main() {

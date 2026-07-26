@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT / "cars" / "automation"))
 
 from research_request import (  # noqa: E402
     _auction_provenance_matches_entry,
+    _finalize_image_review,
     _normalized_image_category,
     review_and_rename_entry_images,
     valid_images,
@@ -123,6 +124,23 @@ def test_trusted_gallery_does_not_require_trim_to_be_visible(tmp_path, monkeypat
 
     assert entry["images"] == ["images/r8-plus/interior-01.jpg"]
     assert entry["image_reviews"][0]["usable"] is True
+
+
+def test_commons_image_needs_model_match_but_not_exact_trim_badge():
+    review = {
+        "category": "rear",
+        "confidence": 0.85,
+        "is_expected_vehicle": True,
+        "exact_variant_visible": False,
+        "has_visible_contradiction": False,
+        "image_quality_usable": True,
+        "usable": False,
+    }
+
+    _finalize_image_review(review, trusted_variant_provenance=False)
+
+    assert review["category"] == "exterior_rear"
+    assert review["usable"] is True
 
 
 def test_review_renames_from_visual_category_and_rejects_mismatches(tmp_path, monkeypatch):

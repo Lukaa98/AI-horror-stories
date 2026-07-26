@@ -280,6 +280,12 @@ h1 {
   white-space: nowrap;
 }
 
+.coverage-warning {
+  margin: 8px 0 0;
+  color: #ffd56b;
+  font-size: 0.75rem;
+}
+
 .no-images {
   font-size: 0.8rem;
   color: #ff9090;

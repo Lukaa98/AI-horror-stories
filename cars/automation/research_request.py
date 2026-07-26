@@ -629,10 +629,10 @@ def _finalize_image_review(review, trusted_variant_provenance=False):
         )
     else:
         review["usable"] = (
-            bool(review.get("usable"))
-            and review["is_expected_vehicle"]
-            and review["exact_variant_visible"]
-            and review["confidence"] >= 0.7
+            review["is_expected_vehicle"]
+            and review["image_quality_usable"]
+            and not review["has_visible_contradiction"]
+            and review["confidence"] >= 0.6
         )
     review["trusted_variant_provenance"] = trusted_variant_provenance
     return review
@@ -666,11 +666,11 @@ Return ONLY strict JSON with:
 - rejection_reason: string or null
 Mark usable false for page UI, severe blur, tiny vehicles, collages, watermarks dominating
 the frame, or an obvious subject mismatch. A visible full car is exterior_full even if
-the search or filename says engine, interior, wheel, or detail. When trusted exact-variant
-gallery provenance is false, do not approve a generic make/model match; an ambiguous view
-must set exact_variant_visible and usable false. When provenance is true, the image came
-from one exact auction gallery: it may remain usable even if this angle does not independently
-show the trim badge, unless the pixels contradict the expected vehicle."""
+the search or filename says engine, interior, wheel, or detail. Confirm the expected general
+model/generation when reasonably visible, but do not reject merely because a trim, package,
+badge, or engine designation cannot be proven from this angle. exact_variant_visible is useful
+metadata, not an approval requirement. When provenance is true, the image came from one exact
+auction gallery and remains usable unless the pixels contradict it."""
     response = client.responses.create(
         model=model,
         input=[{
@@ -919,6 +919,11 @@ def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_i
         entry["image_fallback_used"] = "wikimedia_commons"
     else:
         entry["image_fallback_used"] = None
+    entry["image_coverage"] = {
+        "approved_count": len(entry["images"]),
+        "target_count": TARGET_IMAGES_PER_ENTRY,
+        "target_met": len(entry["images"]) >= TARGET_IMAGES_PER_ENTRY,
+    }
     entry["stat"] = format_stat(entry)
     return entry
 

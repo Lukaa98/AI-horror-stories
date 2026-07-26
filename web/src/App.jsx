@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.5";
+const UI_VERSION = "V10.6";
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 20 * 60 * 1000;
@@ -452,6 +452,11 @@ export default function App() {
                     );
                   })}
                 </div>
+                {entry.image_coverage && !entry.image_coverage.target_met && (
+                  <p className="coverage-warning">
+                    Limited coverage: {entry.image_coverage.approved_count}/{entry.image_coverage.target_count} preferred unique photos.
+                  </p>
+                )}
               </div>
             ))}
           </div>
