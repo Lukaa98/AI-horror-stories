@@ -17,7 +17,9 @@ spending time and API credits on a full render.
 ## Project layout
 
 - `cars/automation/` — topic research, image review, ranking, narration, and rendering
-- `cars/drafts/` — reviewable research and rendered draft artifacts
+- `cars/drafts/` — reviewable workflow artifacts (kept empty on `v10`; generated files live on `cars-output`)
+- `cars/storage/images/` — empty tracked storage location for approved source images
+- `cars/storage/videos/` — empty tracked storage location for approved rendered videos
 - `cars/strategy/` — staged content, sourcing, and channel-launch policy
 - `scraper/car-source-scraper/` — Cars & Bids and Wikimedia image acquisition
 - `web/` — React/Vite control panel for the two-stage GitHub Actions flow
@@ -52,6 +54,9 @@ See [`cars/README.md`](cars/README.md) for the local research and rendering flow
 
 The research/render workflows require the API secrets referenced in their YAML,
 including `OPENAI_API_KEY` for research and OpenAI narration.
+
+The `v10` branch is the development and default branch. Generated research and
+renders belong on `cars-output`; the deployed site is published to `gh-pages`.
 
 ## YouTube tools
 

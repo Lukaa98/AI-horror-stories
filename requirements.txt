@@ -7,4 +7,5 @@ moviepy<2
 openai
 Pillow>=10.4,<11
 python-dotenv
+pytest>=8,<9
 requests
