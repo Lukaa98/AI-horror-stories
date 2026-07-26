@@ -29,6 +29,14 @@ on:
           - coral
           - verse
           - onyx
+      render_quality:
+        description: "Quick preview or final full-resolution export"
+        required: false
+        type: choice
+        default: quick
+        options:
+          - quick
+          - full
 
 permissions:
   contents: write
@@ -45,9 +53,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
 
       - name: Install ffmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
 
       - name: Install Python dependencies
         run: pip install -r requirements.txt
@@ -66,13 +80,20 @@ jobs:
       - name: Render video
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          FAST_MODE: "0"
+          FAST_MODE: ${{ inputs.render_quality == 'quick' && '1' || '0' }}
         run: |
+          QUALITY_FLAG=""
+          OUTPUT_NAME="preview_short.mp4"
+          if [ "${{ inputs.render_quality }}" = "full" ]; then
+            QUALITY_FLAG="--full-res"
+            OUTPUT_NAME="final_short.mp4"
+          fi
           python cars/automation/generate_from_research.py \
             --draft-id "${{ inputs.draft_id }}" \
             --tts-provider "${{ inputs.tts_provider }}" \
             --tts-voice "${{ inputs.tts_voice }}" \
-            --full-res
+            --output-name "$OUTPUT_NAME" \
+            $QUALITY_FLAG
 
       - name: Commit video
         run: |

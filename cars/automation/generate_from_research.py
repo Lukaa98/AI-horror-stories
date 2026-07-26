@@ -51,6 +51,7 @@ def main():
     parser.add_argument("--tts-provider", default="gtts", choices=["gtts", "openai", "tone", "silent"])
     parser.add_argument("--tts-voice", default="onyx")
     parser.add_argument("--full-res", action="store_true")
+    parser.add_argument("--output-name", default="final_short.mp4")
     args = parser.parse_args()
 
     draft_dir = DRAFTS_ROOT / args.draft_id
@@ -66,9 +67,14 @@ def main():
         tts_provider=args.tts_provider,
         tts_voice=args.tts_voice,
         fast=not args.full_res,
+        output_filename=args.output_name,
     )
 
     data["status"] = "video_generated"
+    data["latest_render"] = {
+        "quality": "full" if args.full_res else "quick",
+        "filename": args.output_name,
+    }
     research_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
     print(run_dir)

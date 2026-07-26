@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.10";
+const UI_VERSION = "V10.11";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -159,6 +159,7 @@ export default function App() {
   const [endYear, setEndYear] = useState("");
   const [useCustomRequest, setUseCustomRequest] = useState(false);
   const [voice, setVoice] = useState("onyx");
+  const [renderQuality, setRenderQuality] = useState(null);
   const [draftId, setDraftId] = useState(null);
   const [stage, setStage] = useState("idle");
   const [error, setError] = useState(null);
@@ -238,11 +239,14 @@ export default function App() {
     }
   }
 
-  async function handleGenerate() {
+  async function handleGenerate(quality) {
     if (!draftId) return;
+    const outputName = quality === "full" ? "final_short.mp4" : "preview_short.mp4";
+    const qualityLabel = quality === "full" ? "full-quality" : "quick preview";
     setError(null);
     setStage("generating");
-    setStatusDetail(`Dispatching the ${voice} render workflow...`);
+    setRenderQuality(quality);
+    setStatusDetail(`Dispatching the ${qualityLabel} ${voice} render workflow...`);
     abortRef.current = new AbortController();
     try {
       const startedAt = Date.now();
@@ -252,21 +256,26 @@ export default function App() {
         branch: settings.branch,
         token: settings.token,
         workflow: "cars-generate-from-research.yml",
-        inputs: { draft_id: draftId, tts_provider: "openai", tts_voice: voice },
+        inputs: {
+          draft_id: draftId,
+          tts_provider: "openai",
+          tts_voice: voice,
+          render_quality: quality,
+        },
       });
       const workflowRun = beginRunTracking("cars-generate-from-research.yml", startedAt, abortRef.current.signal);
-      setStatusDetail(`Rendering video with the ${voice} voice...`);
-      const renderedFile = pollForFile({
+      setStatusDetail(`Rendering ${qualityLabel} video with the ${voice} voice...`);
+      await workflowRun;
+      await pollForFile({
         owner: settings.owner,
         repo: settings.repo,
         branch: OUTPUT_BRANCH,
-        path: `cars/drafts/${draftId}/final_short.mp4`,
+        path: `cars/drafts/${draftId}/${outputName}`,
         signal: abortRef.current.signal,
         timeoutMs: RENDER_TIMEOUT_MS,
       });
-      await Promise.race([renderedFile, workflowRun.then(() => renderedFile)]);
       setVideoUrl(
-        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/final_short.mp4?_=${Date.now()}`
+        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/${outputName}?_=${Date.now()}`
       );
       setStage("done");
       setStatusDetail("Video complete");
@@ -470,13 +479,23 @@ export default function App() {
               {VOICES.map((option) => <option key={option} value={option}>{titleCaseWords(option)}</option>)}
             </select>
           </label>
-          <button
-            className="generate-btn"
-            onClick={handleGenerate}
-            disabled={stage === "generating" || research.entries.some((entry) => !(entry.images || []).length)}
-          >
-            {stage === "generating" ? `Generating with ${titleCaseWords(voice)}...` : `Generate Video with ${titleCaseWords(voice)}`}
-          </button>
+          <div className="render-actions">
+            <button
+              className="generate-btn"
+              onClick={() => handleGenerate("quick")}
+              disabled={stage === "generating" || research.entries.some((entry) => !(entry.images || []).length)}
+            >
+              {stage === "generating" && renderQuality === "quick" ? "Rendering Quick Preview..." : "Quick Preview"}
+            </button>
+            <button
+              className="generate-btn secondary"
+              onClick={() => handleGenerate("full")}
+              disabled={stage === "generating" || research.entries.some((entry) => !(entry.images || []).length)}
+            >
+              {stage === "generating" && renderQuality === "full" ? "Rendering Full Quality..." : "Full Quality Render"}
+            </button>
+          </div>
+          <p className="hint">Both modes use the same approved photos, script, performance beats, and Onyx-quality narration.</p>
           {research.entries.some((entry) => !(entry.images || []).length) && (
             <p className="hint">Can&apos;t generate - at least one entry has no images. Try a different request.</p>
           )}

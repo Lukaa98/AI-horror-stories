@@ -494,7 +494,7 @@ def _write_performance_audio(run_dir, ordered, close_narration):
 
 def render_ranking_video(
     config, output_root=OUTPUT_ROOT, render_video=True, fast=True,
-    tts_provider="gtts", tts_voice=None,
+    tts_provider="gtts", tts_voice=None, output_filename="final_short.mp4",
 ):
     ranks_by_num = {e.rank: e for e in config.ranks}
     if set(ranks_by_num) != {4, 3, 2, 1}:
@@ -609,7 +609,7 @@ def render_ranking_video(
         ]
         video = concatenate_videoclips(clips, method="compose").set_audio(audio_clip).set_duration(total_duration)
         video.write_videofile(
-            str(run_dir / "final_short.mp4"),
+            str(run_dir / output_filename),
             fps=FPS,
             codec="libx264",
             audio_codec="aac",

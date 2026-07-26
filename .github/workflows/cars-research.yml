@@ -31,17 +31,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
 
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: npm
+          cache-dependency-path: scraper/car-source-scraper/package-lock.json
 
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
       - name: Install scraper dependencies
         working-directory: scraper/car-source-scraper
-        run: npm install
+        run: npm ci
 
       - name: Install Puppeteer Linux deps
         working-directory: scraper/car-source-scraper
