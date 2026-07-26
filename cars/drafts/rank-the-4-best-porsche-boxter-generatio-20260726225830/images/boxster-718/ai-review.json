@@ -1,0 +1,225 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "2016\u20132025",
+      "detected_variant_or_engine": "Spyder",
+      "visible_match_evidence": [
+        "redesigned headlights",
+        "larger front air intakes",
+        "dual exhaust tips"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": "Spyder",
+      "visible_match_evidence": [
+        "redesigned headlights",
+        "larger front air intakes",
+        "new rear light design",
+        "dual exhaust tips",
+        "updated interior"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "front-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": "Spyder",
+      "visible_match_evidence": [
+        "redesigned headlights",
+        "larger front air intakes",
+        "new rear light design",
+        "dual exhaust tips"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "front-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Porsche branding",
+        "boxy shape with smooth contours",
+        "redesigned headlights",
+        "larger front air intakes",
+        "new rear light design",
+        "dual exhaust tips"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 6,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "front-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "2016\u20132025",
+      "detected_variant_or_engine": "Spyder",
+      "visible_match_evidence": [
+        "Spyder on seats",
+        "interior styling",
+        "specific seat design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Porsche badge",
+        "interior design",
+        "steering wheel design",
+        "dashboard layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Porsche branding on the console",
+        "Modern interior design",
+        "Shifter design consistent with 718"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 6,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Boxster",
+      "detected_generation_or_year": "2016-2025",
+      "detected_variant_or_engine": "Spyder",
+      "visible_match_evidence": [
+        "yellow gauges",
+        "Spyder badge",
+        "updated interior design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    }
+  ]
+}
