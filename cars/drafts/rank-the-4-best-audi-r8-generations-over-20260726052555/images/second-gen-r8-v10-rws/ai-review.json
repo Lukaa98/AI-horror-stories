@@ -1,0 +1,125 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 5,
+  "reviews": [
+    {
+      "is_target_vehicle": false,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "variant_match_confidence": 2,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 6,
+      "composition_score": 5,
+      "target_match_confidence": 3,
+      "reject": true,
+      "reason": "Insufficient evidence to confirm specific generation or variant; interior shot does not provide identifying features.",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017-2018",
+      "detected_variant_or_engine": "Second-Gen R8 V10 RWS",
+      "visible_match_evidence": [
+        "RWS badging",
+        "unique wheel design",
+        "simplified front splitter"
+      ],
+      "variant_match_confidence": 9,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the exterior of the target vehicle, lacks identifying features.",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017\u20132018",
+      "detected_variant_or_engine": "V10 RWS",
+      "visible_match_evidence": [
+        "steering wheel design",
+        "dashboard layout",
+        "red leather interior"
+      ],
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017\u20132018",
+      "detected_variant_or_engine": "V10 RWS",
+      "visible_match_evidence": [
+        "RWS badging",
+        "unique wheel design",
+        "V10 badge",
+        "simplified front splitter"
+      ],
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "rear-01.jpg",
+      "provider": "openai"
+    }
+  ]
+}

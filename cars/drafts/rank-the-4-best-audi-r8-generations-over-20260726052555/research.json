@@ -1,0 +1,888 @@
+{
+  "request": "Rank the 4 best Audi R8 generations overall across the full production run. Use 4 different generations when available, with one representative version from each generation. If the model has fewer than 4 true generations, use the most important era-defining versions across its history.",
+  "draft_id": "rank-the-4-best-audi-r8-generations-over-20260726052555",
+  "title": "RANKING THE BEST AUDI R8 GENERATIONS",
+  "highlight_word": "AUDI",
+  "close_narration": "So, which R8 would you choose to experience\u2014back to the roots with the V8, or all out with the V10 Plus?",
+  "order_rationale": "Ranked by weighted enthusiast desirability, driving engagement, historical significance, performance, collectibility, and value\u2014not chronology.",
+  "entries": [
+    {
+      "name": "Second-Gen R8 V10 RWS",
+      "years": "2017\u20132018",
+      "introduced_year": 2017,
+      "price_usd": 139900,
+      "horsepower": 540,
+      "label": "Rear-Wheel Rebel",
+      "one_line_fact": "In the world of supercars, the Audi R8 stands as an icon. At number four, the second-gen R8 V10 RWS enters the fray as a rear-wheel-drive rebel. Starting at $139,900 with 540 hp, it offers a purist twist, focusing on driver engagement. Its unique wheel design and RWS badging set it apart as Audi's daring deviation from the norm.",
+      "search_hint": "Audi R8 V10 RWS 2017",
+      "chassis_code": "Type 4S",
+      "commons_search_terms": [
+        "Audi R8 V10 RWS 2017",
+        "Audi R8 Type 4S RWS",
+        "Audi R8 second generation RWS"
+      ],
+      "visual_highlight": "rear-wheel-drive badge",
+      "visual_identifiers": [
+        "RWS badging",
+        "lack of front axle drive components",
+        "unique wheel design",
+        "simplified front splitter"
+      ],
+      "ranking_scores": {
+        "enthusiast_desirability": 8,
+        "driving_engagement": 9,
+        "historical_significance": 6,
+        "performance": 7,
+        "collectibility": 7,
+        "value": 7
+      },
+      "ranking_case": "As Audi's first rear-wheel-drive R8, it catered to driving purists seeking unfiltered engagement.",
+      "research_sources": [
+        {
+          "url": "https://www.audi.com/en/press-releases/the-audi-r8-a-captivating-legend-16374",
+          "title": "The Audi R8: a captivating legend",
+          "publisher": "Audi",
+          "source_type": "manufacturer",
+          "supports": [
+            "introduced_year",
+            "price_usd",
+            "horsepower",
+            "history"
+          ]
+        },
+        {
+          "url": "https://www.motortrend.com/features/audi-r8-history-generations-specifications-photos",
+          "title": "The Audi R8: Origins, Generations, Specifications",
+          "publisher": "MotorTrend",
+          "source_type": "automotive_publication",
+          "supports": [
+            "introduced_year",
+            "price_usd",
+            "horsepower",
+            "history"
+          ]
+        }
+      ],
+      "ranking_total": 7.5,
+      "images": [
+        "images/second-gen-r8-v10-rws/exterior_full-01.jpg",
+        "images/second-gen-r8-v10-rws/interior-01.jpg"
+      ],
+      "current_value_usd": 114611,
+      "current_value_display": "$110K",
+      "current_value_note": "Recent Cars & Bids examples trade around $110K.",
+      "image_source": {
+        "provider": "cars_and_bids",
+        "search_url": "https://carsandbids.com/search/audi/r8?start_year=2017&end_year=2018&csort=10",
+        "auction_url": "https://carsandbids.com/auctions/37gk7E0x/2018-audi-r8-v10-coupe-rws",
+        "auction_title": "2018 Audi R8 V10 Coupe RWS"
+      },
+      "image_reviews": [
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_full",
+          "view_description": "front-left three-quarter exterior",
+          "visible_match_evidence": [
+            "RWS badging",
+            "lack of front axle drive components",
+            "unique wheel design",
+            "simplified front splitter"
+          ],
+          "confidence": 0.95,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-rws/rear-01.jpg",
+          "path": "images/second-gen-r8-v10-rws/exterior_full-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": true,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "front exterior",
+          "visible_match_evidence": [],
+          "confidence": 0.2,
+          "usable": false,
+          "rejection_reason": "image shows a different model",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-rws/exterior-05.jpg",
+          "path": "images/second-gen-r8-v10-rws/exterior-05.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "interior view with steering wheel and dashboard",
+          "visible_match_evidence": [],
+          "confidence": 0.5,
+          "usable": true,
+          "rejection_reason": "view does not show exterior details or identify the vehicle as expected",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-rws/interior-02.jpg",
+          "path": "images/second-gen-r8-v10-rws/interior-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "interior view of front seats",
+          "visible_match_evidence": [],
+          "confidence": 0.5,
+          "usable": false,
+          "rejection_reason": "ambiguous view of interior without specific variant identifiers",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-rws/detail-04.jpg",
+          "path": "images/second-gen-r8-v10-rws/detail-04.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "driver side interior view",
+          "visible_match_evidence": [],
+          "confidence": 0.3,
+          "usable": false,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-rws/highlight-03.jpg",
+          "path": "images/second-gen-r8-v10-rws/highlight-03.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "front-left three-quarter exterior",
+          "visible_match_evidence": [
+            "audacious color scheme with red racing stripes",
+            "unique wheel design",
+            "clear view of front grille style"
+          ],
+          "confidence": 0.6,
+          "usable": false,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-rws/precise-3-01.jpg",
+          "path": "images/second-gen-r8-v10-rws/precise-3-01.jpg"
+        }
+      ],
+      "image_review_provider": "openai",
+      "image_fallback_used": "wikimedia_commons",
+      "stat": "MSRP $139,900 - 540 HP - Now ~$110K",
+      "narration": "In the world of supercars, the Audi R8 stands as an icon. At number four, the second-gen R8 V10 RWS enters the fray as a rear-wheel-drive rebel. Starting at $139,900 with 540 hp, it offers a purist twist, focusing on driver engagement. Its unique wheel design and RWS badging set it apart as Audi's daring deviation from the norm."
+    },
+    {
+      "name": "First-Gen R8 V8",
+      "years": "2007\u20132012",
+      "introduced_year": 2007,
+      "price_usd": 109000,
+      "horsepower": 420,
+      "label": "The Original",
+      "one_line_fact": "Then Audi introduced the R8 V8 in 2007, turning heads with its iconic side blades and mid-engine layout. At $109,000, this 420 hp marvel laid the foundation for what an Audi supercar could be. Even today, its allure endures, with classic LED headlights and dual exhaust tips defining 'The Original.'",
+      "search_hint": "Audi R8 V8 2007",
+      "chassis_code": "Type 42",
+      "commons_search_terms": [
+        "Audi R8 V8 2007",
+        "Audi R8 Type 42",
+        "Audi R8 first generation"
+      ],
+      "visual_highlight": "side blades",
+      "visual_identifiers": [
+        "distinctive side blades",
+        "LED headlights",
+        "mid-engine layout",
+        "dual exhaust tips"
+      ],
+      "ranking_scores": {
+        "enthusiast_desirability": 8,
+        "driving_engagement": 7,
+        "historical_significance": 9,
+        "performance": 7,
+        "collectibility": 8,
+        "value": 7
+      },
+      "ranking_case": "As the pioneer, it introduced Audi to the supercar realm with a balanced performance and iconic design.",
+      "research_sources": [
+        {
+          "url": "https://www.audi.com/en/press-releases/the-audi-r8-a-captivating-legend-16374",
+          "title": "The Audi R8: a captivating legend",
+          "publisher": "Audi",
+          "source_type": "manufacturer",
+          "supports": [
+            "introduced_year",
+            "price_usd",
+            "horsepower",
+            "history"
+          ]
+        },
+        {
+          "url": "https://www.motortrend.com/features/audi-r8-history-generations-specifications-photos",
+          "title": "The Audi R8: Origins, Generations, Specifications",
+          "publisher": "MotorTrend",
+          "source_type": "automotive_publication",
+          "supports": [
+            "introduced_year",
+            "price_usd",
+            "horsepower",
+            "history"
+          ]
+        }
+      ],
+      "ranking_total": 7.7,
+      "images": [
+        "images/first-gen-r8-v8/exterior_side-01.jpg",
+        "images/first-gen-r8-v8/exterior_front-01.jpg"
+      ],
+      "current_value_usd": 85500,
+      "current_value_display": "$86K",
+      "current_value_note": "Recent Cars & Bids examples trade around $86K.",
+      "image_source": {
+        "provider": "cars_and_bids",
+        "search_url": "https://carsandbids.com/search/audi/r8?start_year=2007&end_year=2012&csort=10",
+        "auction_url": "https://carsandbids.com/auctions/3LeBAV8W/2012-audi-r8-coupe",
+        "auction_title": "2012 Audi R8 Coupe"
+      },
+      "image_reviews": [
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_side",
+          "view_description": "right side exterior",
+          "visible_match_evidence": [
+            "distinctive side blades",
+            "LED headlights",
+            "mid-engine layout",
+            "dual exhaust tips"
+          ],
+          "confidence": 0.95,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v8/highlight-02.jpg",
+          "path": "images/first-gen-r8-v8/exterior_side-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "front interior view",
+          "visible_match_evidence": [],
+          "confidence": 0.5,
+          "usable": false,
+          "rejection_reason": "image does not show the expected vehicle",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v8/detail-03.jpg",
+          "path": "images/first-gen-r8-v8/detail-03.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": true,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "interior detail of car",
+          "visible_match_evidence": [],
+          "confidence": 0.1,
+          "usable": false,
+          "rejection_reason": "image does not show expected vehicle, only interior detail",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v8/interior-01.jpg",
+          "path": "images/first-gen-r8-v8/interior-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "front-left three-quarter exterior",
+          "visible_match_evidence": [
+            "distinctive side blades",
+            "LED headlights",
+            "mid-engine layout"
+          ],
+          "confidence": 0.85,
+          "usable": false,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v8/precise-2-01.jpg",
+          "path": "images/first-gen-r8-v8/precise-2-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "front-left three-quarter exterior",
+          "visible_match_evidence": [
+            "distinctive side blades",
+            "LED headlights",
+            "mid-engine layout",
+            "dual exhaust tips"
+          ],
+          "confidence": 0.9,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v8/precise-3-01.jpg",
+          "path": "images/first-gen-r8-v8/exterior_front-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear-left exterior",
+          "visible_match_evidence": [
+            "distinctive side blades",
+            "LED headlights",
+            "dual exhaust tips"
+          ],
+          "confidence": 0.85,
+          "usable": false,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v8/rear-01.jpg",
+          "path": "images/first-gen-r8-v8/rear-01.jpg"
+        }
+      ],
+      "image_review_provider": "openai",
+      "image_fallback_used": "wikimedia_commons",
+      "stat": "MSRP $109,000 - 420 HP - Now ~$86K",
+      "narration": "Then Audi introduced the R8 V8 in 2007, turning heads with its iconic side blades and mid-engine layout. At $109,000, this 420 hp marvel laid the foundation for what an Audi supercar could be. Even today, its allure endures, with classic LED headlights and dual exhaust tips defining 'The Original.'"
+    },
+    {
+      "name": "First-Gen R8 V10",
+      "years": "2009\u20132012",
+      "introduced_year": 2009,
+      "price_usd": 146000,
+      "horsepower": 525,
+      "label": "V10 Powerhouse",
+      "one_line_fact": "Audi turned up the volume with the first-gen R8 V10, delivering 525 hp by 2009. Priced at $146,000, it was a leap forward in performance, though some missed the pure V8 charm. With V10 badging and carbon fiber side blades, it cemented Audi\u2019s place in the supercar league.",
+      "search_hint": "Audi R8 V10 2009",
+      "chassis_code": "Type 42",
+      "commons_search_terms": [
+        "Audi R8 V10 2009",
+        "Audi R8 Type 42 V10",
+        "Audi R8 first generation V10"
+      ],
+      "visual_highlight": "V10 engine bay",
+      "visual_identifiers": [
+        "V10 badging",
+        "larger side intakes",
+        "dual oval exhaust tips",
+        "carbon fiber side blades"
+      ],
+      "ranking_scores": {
+        "enthusiast_desirability": 9,
+        "driving_engagement": 8,
+        "historical_significance": 8,
+        "performance": 8,
+        "collectibility": 8,
+        "value": 6
+      },
+      "ranking_case": "The V10 variant enhanced the R8's appeal with greater power and a thrilling driving experience.",
+      "research_sources": [
+        {
+          "url": "https://www.audi.com/en/press-releases/the-audi-r8-a-captivating-legend-16374",
+          "title": "The Audi R8: a captivating legend",
+          "publisher": "Audi",
+          "source_type": "manufacturer",
+          "supports": [
+            "introduced_year",
+            "price_usd",
+            "horsepower",
+            "history"
+          ]
+        },
+        {
+          "url": "https://www.motortrend.com/features/audi-r8-history-generations-specifications-photos",
+          "title": "The Audi R8: Origins, Generations, Specifications",
+          "publisher": "MotorTrend",
+          "source_type": "automotive_publication",
+          "supports": [
+            "introduced_year",
+            "price_usd",
+            "horsepower",
+            "history"
+          ]
+        }
+      ],
+      "ranking_total": 8.05,
+      "images": [
+        "images/first-gen-r8-v10/exterior_front-01.jpg",
+        "images/first-gen-r8-v10/interior-01.jpg",
+        "images/first-gen-r8-v10/interior-02.jpg",
+        "images/first-gen-r8-v10/exterior_side-01.jpg"
+      ],
+      "current_value_usd": 105000,
+      "current_value_display": "$100K",
+      "current_value_note": "Recent Cars & Bids examples trade around $100K.",
+      "image_source": {
+        "provider": "cars_and_bids",
+        "search_url": "https://carsandbids.com/search/audi/r8?start_year=2009&end_year=2012&csort=10",
+        "auction_url": "https://carsandbids.com/auctions/rjg5PyAY/2009-audi-r8-v10-coupe",
+        "auction_title": "2009 Audi R8 V10 Coupe"
+      },
+      "image_reviews": [
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "front-left three-quarter exterior",
+          "visible_match_evidence": [
+            "V10 badging",
+            "larger side intakes",
+            "dual oval exhaust tips",
+            "carbon fiber side blades"
+          ],
+          "confidence": 0.95,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v10/engine-02.jpg",
+          "path": "images/first-gen-r8-v10/exterior_front-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "front interior view",
+          "visible_match_evidence": [],
+          "confidence": 0.2,
+          "usable": true,
+          "rejection_reason": "image does not show the expected vehicle exterior or specific features",
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v10/highlight-03.jpg",
+          "path": "images/first-gen-r8-v10/interior-01.jpg"
+        },
+        {
+          "original_path": "images/first-gen-r8-v10/interior-01.jpg",
+          "path": "images/first-gen-r8-v10/interior-01.jpg",
+          "provider": "fingerprint",
+          "usable": false,
+          "is_expected_vehicle": false,
+          "category": "other_detail",
+          "view_description": "duplicate image",
+          "confidence": 1.0,
+          "rejection_reason": "duplicate_or_near_duplicate",
+          "duplicate_of": "images/first-gen-r8-v10/interior-01.jpg",
+          "duplicate_of_entry": "First-Gen R8 V10",
+          "perceptual_distance": 0
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "instrument cluster",
+          "visible_match_evidence": [
+            "V10 badging",
+            "R8 branding",
+            "specific layout of gauges typical to First-Gen R8 V10"
+          ],
+          "confidence": 0.95,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v10/interior-05.jpg",
+          "path": "images/first-gen-r8-v10/interior-02.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "top view of gear shifter",
+          "visible_match_evidence": [],
+          "confidence": 0.5,
+          "usable": false,
+          "rejection_reason": "image does not show expected vehicle",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v10/interior-04.jpg",
+          "path": "images/first-gen-r8-v10/interior-04.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_side",
+          "view_description": "left side exterior",
+          "visible_match_evidence": [
+            "V10 badging",
+            "larger side intakes",
+            "carbon fiber side blades"
+          ],
+          "confidence": 0.9,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v10/precise-2-01.jpg",
+          "path": "images/first-gen-r8-v10/exterior_side-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_side",
+          "view_description": "rear-left three-quarter exterior",
+          "visible_match_evidence": [
+            "V10 badging not visible",
+            "larger side intakes partially visible",
+            "dual oval exhaust tips visible",
+            "carbon fiber side blades visible"
+          ],
+          "confidence": 0.8,
+          "usable": false,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v10/precise-3-01.jpg",
+          "path": "images/first-gen-r8-v10/precise-3-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear exterior view",
+          "visible_match_evidence": [
+            "Audi R8 badging",
+            "dual oval exhaust tips",
+            "distinctive rear light design"
+          ],
+          "confidence": 0.8,
+          "usable": false,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/first-gen-r8-v10/rear-01.jpg",
+          "path": "images/first-gen-r8-v10/rear-01.jpg"
+        }
+      ],
+      "image_review_provider": "mixed_or_unverified",
+      "image_fallback_used": "wikimedia_commons",
+      "stat": "MSRP $146,000 - 525 HP - Now ~$100K",
+      "narration": "Audi turned up the volume with the first-gen R8 V10, delivering 525 hp by 2009. Priced at $146,000, it was a leap forward in performance, though some missed the pure V8 charm. With V10 badging and carbon fiber side blades, it cemented Audi\u2019s place in the supercar league."
+    },
+    {
+      "name": "Second-Gen R8 V10 Plus",
+      "years": "2015\u20132018",
+      "introduced_year": 2015,
+      "price_usd": 189900,
+      "horsepower": 610,
+      "label": "Performance Pinnacle",
+      "one_line_fact": "Topping our list, the second-gen R8 V10 Plus is a masterpiece of engineering. With 610 hp and starting at $189,900, it\u2019s not just about raw power\u2014it\u2019s the driving experience. Its aggressive front grille and fixed rear wing embody the essence of performance. Currently valued at $260K, it's an appreciating blend of speed and sophistication.",
+      "search_hint": "Audi R8 V10 Plus 2015",
+      "chassis_code": "Type 4S",
+      "commons_search_terms": [
+        "Audi R8 V10 Plus 2015",
+        "Audi R8 Type 4S",
+        "Audi R8 second generation V10 Plus"
+      ],
+      "visual_highlight": "aggressive front grille",
+      "visual_identifiers": [
+        "sharper front grille",
+        "redesigned LED headlights",
+        "fixed rear wing",
+        "larger air intakes"
+      ],
+      "ranking_scores": {
+        "enthusiast_desirability": 9,
+        "driving_engagement": 9,
+        "historical_significance": 7,
+        "performance": 9,
+        "collectibility": 7,
+        "value": 6
+      },
+      "ranking_case": "This model combined cutting-edge technology with exhilarating performance, solidifying the R8's supercar status.",
+      "research_sources": [
+        {
+          "url": "https://www.audi.com/en/press-releases/the-audi-r8-a-captivating-legend-16374",
+          "title": "The Audi R8: a captivating legend",
+          "publisher": "Audi",
+          "source_type": "manufacturer",
+          "supports": [
+            "introduced_year",
+            "price_usd",
+            "horsepower",
+            "history"
+          ]
+        },
+        {
+          "url": "https://www.motortrend.com/features/audi-r8-history-generations-specifications-photos",
+          "title": "The Audi R8: Origins, Generations, Specifications",
+          "publisher": "MotorTrend",
+          "source_type": "automotive_publication",
+          "supports": [
+            "introduced_year",
+            "price_usd",
+            "horsepower",
+            "history"
+          ]
+        }
+      ],
+      "ranking_total": 8.1,
+      "images": [
+        "images/second-gen-r8-v10-plus/interior-01.jpeg",
+        "images/second-gen-r8-v10-plus/exterior_front-01.jpg",
+        "images/second-gen-r8-v10-plus/exterior_front-02.jpg",
+        "images/second-gen-r8-v10-plus/exterior_rear-01.jpg",
+        "images/second-gen-r8-v10-plus/exterior_rear-02.jpg"
+      ],
+      "current_value_usd": 261000,
+      "current_value_display": "$260K",
+      "current_value_note": "Recent Cars & Bids examples trade around $260K.",
+      "image_source": {
+        "provider": "cars_and_bids",
+        "search_url": "https://carsandbids.com/search/audi/r8?start_year=2015&end_year=2018&csort=10",
+        "auction_url": "https://carsandbids.com/auctions/rk6kddvg/2015-audi-r8-v10-plus-coupe",
+        "auction_title": "2015 Audi R8 V10 Plus Coupe"
+      },
+      "image_reviews": [
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "dashboard instrumentation",
+          "visible_match_evidence": [],
+          "confidence": 0.5,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": true,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-plus/interior-06.jpeg",
+          "path": "images/second-gen-r8-v10-plus/interior-01.jpeg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "front view",
+          "visible_match_evidence": [
+            "sharper front grille",
+            "redesigned LED headlights",
+            "fixed rear wing",
+            "larger air intakes"
+          ],
+          "confidence": 0.9,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-plus/exterior-04.jpg",
+          "path": "images/second-gen-r8-v10-plus/exterior_front-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_front",
+          "view_description": "front-left three-quarter exterior",
+          "visible_match_evidence": [
+            "sharper front grille",
+            "redesigned LED headlights",
+            "fixed rear wing",
+            "larger air intakes"
+          ],
+          "confidence": 0.9,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-plus/front-01.jpg",
+          "path": "images/second-gen-r8-v10-plus/exterior_front-02.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "driver's side interior view",
+          "visible_match_evidence": [],
+          "confidence": 0.2,
+          "usable": false,
+          "rejection_reason": "Not a full car view; image is of the interior.",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-plus/highlight-03.jpeg",
+          "path": "images/second-gen-r8-v10-plus/highlight-03.jpeg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "interior dashboard view",
+          "visible_match_evidence": [],
+          "confidence": 0.6,
+          "usable": false,
+          "rejection_reason": "ambiguous view",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-plus/interior-02.jpg",
+          "path": "images/second-gen-r8-v10-plus/interior-02.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "interior",
+          "view_description": "center console detail",
+          "visible_match_evidence": [],
+          "confidence": 0.3,
+          "usable": false,
+          "rejection_reason": "ambiguous view",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-plus/interior-05.jpg",
+          "path": "images/second-gen-r8-v10-plus/interior-05.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear-right exterior",
+          "visible_match_evidence": [
+            "R8 V10 plus badge",
+            "sharp LED tail lights",
+            "fixed rear wing",
+            "large air intakes"
+          ],
+          "confidence": 0.95,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-plus/precise-2-01.jpg",
+          "path": "images/second-gen-r8-v10-plus/exterior_rear-01.jpg"
+        },
+        {
+          "is_expected_vehicle": false,
+          "exact_variant_visible": false,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear-right three-quarter exterior",
+          "visible_match_evidence": [],
+          "confidence": 0.5,
+          "usable": false,
+          "rejection_reason": "ambiguous view",
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-plus/precise-3-01.jpg",
+          "path": "images/second-gen-r8-v10-plus/precise-3-01.jpg"
+        },
+        {
+          "is_expected_vehicle": true,
+          "exact_variant_visible": true,
+          "has_visible_contradiction": false,
+          "image_quality_usable": true,
+          "category": "exterior_rear",
+          "view_description": "rear-right three-quarter exterior",
+          "visible_match_evidence": [
+            "fixed rear wing",
+            "sharper back grille",
+            "distinct LED taillights",
+            "larger air intakes"
+          ],
+          "confidence": 0.9,
+          "usable": true,
+          "rejection_reason": null,
+          "trusted_variant_provenance": false,
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "original_path": "images/second-gen-r8-v10-plus/rear-01.jpg",
+          "path": "images/second-gen-r8-v10-plus/exterior_rear-02.jpg"
+        }
+      ],
+      "image_review_provider": "openai",
+      "image_fallback_used": "wikimedia_commons",
+      "stat": "MSRP $189,900 - 610 HP - Now ~$260K",
+      "narration": "Topping our list, the second-gen R8 V10 Plus is a masterpiece of engineering. With 610 hp and starting at $189,900, it\u2019s not just about raw power\u2014it\u2019s the driving experience. Its aggressive front grille and fixed rear wing embody the essence of performance. Currently valued at $260K, it's an appreciating blend of speed and sophistication."
+    }
+  ],
+  "skipped_entries": [],
+  "status": "researched"
+}
