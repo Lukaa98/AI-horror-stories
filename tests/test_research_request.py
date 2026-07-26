@@ -105,6 +105,43 @@ def test_run_research_preserves_source_metadata(monkeypatch):
     assert result["entries"][0]["research_sources"][0]["source_type"] == "specialist"
 
 
+def test_run_research_requests_strict_schema_and_retries_incomplete_json(monkeypatch):
+    payload = {
+        "title": "RANKING R8S",
+        "highlight_word": "R8S",
+        "close_narration": "Which one?",
+        "order_rationale": "Ranked by enthusiast merit.",
+        "entries": [{"name": f"R8 {index}", "research_sources": []} for index in range(4)],
+    }
+    calls = []
+
+    def create(**kwargs):
+        calls.append(kwargs)
+        if len(calls) == 1:
+            return SimpleNamespace(
+                status="incomplete",
+                incomplete_details=SimpleNamespace(reason="max_output_tokens"),
+                output_text='{"entries": [{"name": "unfinished',
+            )
+        return SimpleNamespace(status="completed", output_text=__import__("json").dumps(payload))
+
+    class FakeClient:
+        responses = SimpleNamespace(create=create)
+
+    fake_openai = SimpleNamespace(OpenAI=FakeClient, RateLimitError=FakeRateLimitError)
+    monkeypatch.setitem(sys.modules, "openai", fake_openai)
+
+    result = research_request.run_research("Rank Audi R8s")
+
+    assert len(calls) == 2
+    assert calls[0]["max_output_tokens"] == 12000
+    assert calls[1]["max_output_tokens"] == 10000
+    assert calls[0]["text"]["format"]["type"] == "json_schema"
+    assert calls[0]["text"]["format"]["strict"] is True
+    assert "RETRY MODE" in calls[1]["input"]
+    assert len(result["entries"]) == 4
+
+
 def test_compose_final_narration_updates_each_entry(monkeypatch):
     entries = [
         {

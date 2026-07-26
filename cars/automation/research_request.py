@@ -248,6 +248,105 @@ RANKING_WEIGHTS = {
     "value": 0.10,
 }
 
+RESEARCH_OUTPUT_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": [
+        "title",
+        "highlight_word",
+        "close_narration",
+        "order_rationale",
+        "entries",
+    ],
+    "properties": {
+        "title": {"type": "string"},
+        "highlight_word": {"type": "string"},
+        "close_narration": {"type": "string"},
+        "order_rationale": {"type": "string"},
+        "entries": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 8,
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "required": [
+                    "name", "years", "introduced_year", "price_usd", "horsepower",
+                    "label", "one_line_fact", "search_hint", "chassis_code",
+                    "commons_search_terms", "visual_highlight", "visual_identifiers",
+                    "ranking_scores", "ranking_case", "research_sources",
+                ],
+                "properties": {
+                    "name": {"type": "string"},
+                    "years": {"type": "string"},
+                    "introduced_year": {"type": "number"},
+                    "price_usd": {"type": ["number", "null"]},
+                    "horsepower": {"type": ["number", "null"]},
+                    "label": {"type": "string"},
+                    "one_line_fact": {"type": "string"},
+                    "search_hint": {"type": "string"},
+                    "chassis_code": {"type": ["string", "null"]},
+                    "commons_search_terms": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 4,
+                        "items": {"type": "string"},
+                    },
+                    "visual_highlight": {"type": "string"},
+                    "visual_identifiers": {
+                        "type": "array",
+                        "minItems": 3,
+                        "maxItems": 6,
+                        "items": {"type": "string"},
+                    },
+                    "ranking_scores": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "required": list(RANKING_WEIGHTS),
+                        "properties": {
+                            category: {"type": "number", "minimum": 0, "maximum": 10}
+                            for category in RANKING_WEIGHTS
+                        },
+                    },
+                    "ranking_case": {"type": "string"},
+                    "research_sources": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 5,
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": False,
+                            "required": ["url", "title", "publisher", "source_type", "supports"],
+                            "properties": {
+                                "url": {"type": "string"},
+                                "title": {"type": "string"},
+                                "publisher": {"type": "string"},
+                                "source_type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "manufacturer", "heritage_archive", "specialist",
+                                        "automotive_publication", "auction_result", "reference",
+                                    ],
+                                },
+                                "supports": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "enum": [
+                                            "years", "introduced_year", "price_usd",
+                                            "horsepower", "history", "reputation", "market_value",
+                                        ],
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
+}
+
 
 def calculate_ranking_total(entry):
     scores = entry.get("ranking_scores") or {}
@@ -261,17 +360,65 @@ def calculate_ranking_total(entry):
     return round(total, 3)
 
 
+def _research_response(client, prompt, max_output_tokens):
+    return client.responses.create(
+        model="gpt-4o",
+        tools=[{"type": "web_search_preview"}],
+        input=prompt,
+        max_output_tokens=max_output_tokens,
+        text={
+            "format": {
+                "type": "json_schema",
+                "name": "car_ranking_research",
+                "strict": True,
+                "schema": RESEARCH_OUTPUT_SCHEMA,
+            }
+        },
+    )
+
+
+def _parse_research_response(response):
+    status = getattr(response, "status", "completed")
+    if status == "incomplete":
+        details = getattr(response, "incomplete_details", None)
+        reason = getattr(details, "reason", None) or "unknown reason"
+        raise ValueError(f"OpenAI response was incomplete: {reason}")
+    text = str(getattr(response, "output_text", "") or "").strip()
+    if not text:
+        raise ValueError("OpenAI response contained no structured research output")
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise ValueError(
+            f"OpenAI returned invalid research JSON at line {exc.lineno}, "
+            f"column {exc.colno}: {exc.msg}"
+        ) from exc
+
+
 def run_research(request_text):
     from openai import OpenAI, RateLimitError
 
     client = OpenAI()
     prompt = RESEARCH_PROMPT_TEMPLATE.format(request=request_text)
     try:
-        response = client.responses.create(
-            model="gpt-4o",
-            tools=[{"type": "web_search_preview"}],
-            input=prompt,
-        )
+        response = _research_response(client, prompt, max_output_tokens=12000)
+        try:
+            data = _parse_research_response(response)
+        except ValueError as first_error:
+            print(f"[research] First structured response failed: {first_error}")
+            retry_prompt = (
+                f"{prompt}\n\nRETRY MODE: Return exactly 4 candidates, not 8. "
+                "Keep descriptions and source titles concise while preserving every "
+                "required schema field. Complete the JSON response."
+            )
+            retry_response = _research_response(client, retry_prompt, max_output_tokens=10000)
+            try:
+                data = _parse_research_response(retry_response)
+            except ValueError as retry_error:
+                raise SystemExit(
+                    "OpenAI could not produce complete structured research after two attempts. "
+                    f"First attempt: {first_error}. Retry: {retry_error}."
+                ) from retry_error
     except RateLimitError as exc:
         error_code = getattr(exc, "code", None)
         if error_code == "insufficient_quota" or "insufficient_quota" in str(exc):
@@ -286,15 +433,9 @@ def run_research(request_text):
             "OpenAI rate-limited the research request. Wait briefly and retry, or review the API "
             "project's rate limits."
         ) from exc
-    text = response.output_text.strip()
-    if text.startswith("```"):
-        text = text.strip("`")
-        if text.lower().startswith("json"):
-            text = text[4:].strip()
-    data = json.loads(text)
     entry_count = len(data.get("entries", []))
     if entry_count < 4:
-        raise SystemExit(f"Expected at least 4 entries from research, got {entry_count}. Raw: {text[:500]}")
+        raise SystemExit(f"Expected at least 4 entries from research, got {entry_count}.")
     for entry in data["entries"]:
         sources = entry.get("research_sources")
         if not isinstance(sources, list):
