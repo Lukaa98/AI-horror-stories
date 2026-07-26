@@ -3,7 +3,7 @@ name: Deploy Cars UI to GitHub Pages
 on:
   push:
     branches:
-      - v10
+      - main
   workflow_dispatch: # allow manual runs
 
 permissions:

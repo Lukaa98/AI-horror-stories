@@ -55,7 +55,7 @@ See [`cars/README.md`](cars/README.md) for the local research and rendering flow
 The research/render workflows require the API secrets referenced in their YAML,
 including `OPENAI_API_KEY` for research and OpenAI narration.
 
-The `v10` branch is the development and default branch. Generated research and
+The `main` branch is the development and default branch. Generated research and
 renders belong on `cars-output`; the deployed site is published to `gh-pages`.
 
 ## YouTube tools

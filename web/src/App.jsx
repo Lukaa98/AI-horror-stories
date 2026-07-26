@@ -3,10 +3,10 @@ import "./App.css";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
-const DEFAULT_BRANCH = "v10";
+const DEFAULT_BRANCH = "main";
 const OUTPUT_BRANCH = "cars-output";
 const UI_VERSION = "V10";
-const SETTINGS_MIGRATION = "default-branch-v10";
+const SETTINGS_MIGRATION = "default-branch-main";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 20 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
