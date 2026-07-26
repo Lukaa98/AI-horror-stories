@@ -232,6 +232,13 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
       }
       if (tokens.length && haystack.includes(tokens.join(" "))) score += 45;
       if (titleYear && (!startYear || titleYear >= startYear) && (!endYear || titleYear <= endYear)) score += 28;
+      if (titleYear && ((startYear && titleYear < startYear) || (endYear && titleYear > endYear))) score -= 180;
+      const variantTokens = tokens.filter((token) =>
+        ["v6", "v8", "v10", "v12", "gt", "gts", "gt3", "gt4", "rs", "rwd", "awd", "quattro", "spyder", "coupe"].includes(token)
+      );
+      for (const token of variantTokens) {
+        if (!haystack.includes(token)) score -= 90;
+      }
       if (/sold for|bid to|sold after|ended/i.test(entry.text)) score += 6;
       if (/spyder|convertible/i.test(haystack) && tokens.includes("coupe")) score -= 25;
       return { ...entry, title: cleanedTitle, titleYear: titleYear || null, score };
@@ -461,7 +468,7 @@ async function main() {
     let selectedAuction = auctions[0];
     let selectedCandidates = [];
     const auctionsUsed = [];
-    let bestGalleryCount = 0;
+    let bestSelectionScore = Number.NEGATIVE_INFINITY;
     for (const auction of auctions.slice(0, 4)) {
       const gallery = await extractAuctionGallery(page, auction.url, visualHighlight);
       const usable = gallery.candidates.filter((candidate) => {
@@ -482,10 +489,13 @@ async function main() {
           sale_type: gallery.pageMeta?.saleType || null,
           page_title: gallery.pageMeta?.title || null,
         });
-        selectedCandidates.push(...usable);
       }
-      if (usable.length > bestGalleryCount) {
-        bestGalleryCount = usable.length;
+      // Keep one coherent auction gallery per entry. Pooling several auctions
+      // can silently mix generations or trims that share the same make/model.
+      const selectionScore = (Number(auction.score) || 0) * 100 + Math.min(usable.length, 50);
+      if (usable.length && selectionScore > bestSelectionScore) {
+        bestSelectionScore = selectionScore;
+        selectedCandidates = usable;
         selectedAuction = {
           ...auction,
           sale_price: gallery.pageMeta?.salePrice || null,

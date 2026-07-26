@@ -106,12 +106,19 @@ def _openai_review(path, entry, model):
     prompt = (
         "Review this car photo for a short-form ranking video. Return ONLY compact JSON with keys: "
         "is_target_vehicle boolean, detected_make string_or_null, detected_model string_or_null, "
+        "detected_generation_or_year string_or_null, detected_variant_or_engine string_or_null, "
+        "visible_match_evidence array of short strings, variant_match_confidence 1-10, "
         "shot_type string from [front, rear, side, front_3q, rear_3q, interior, engine, wheel, detail, exterior, other], "
         "scene_fit_tags array from [hero, exterior, interior, engine, detail, wheel, front, rear], "
         "quality_score 1-10, composition_score 1-10, target_match_confidence 1-10, reject boolean, reason string. "
         f"Target vehicle make: {search.get('make') or 'unknown'}. "
         f"Target vehicle model: {search.get('model') or 'unknown'}. "
         f"Specific variant context: {entry.get('name', '')}. "
+        f"Target production years: {entry.get('years', 'unknown')}. "
+        f"Expected visual identifiers: {', '.join(entry.get('visual_identifiers') or []) or 'not provided'}. "
+        "Do not approve merely because the make/model matches. Look for generation-specific bodywork, lights, "
+        "badges, engine markings, exhaust layout, interior design, or source-year evidence. If the exact "
+        "generation/engine/trim cannot be distinguished from this view, reject it as variant-ambiguous. "
         "Reject wrong cars, collages, ads, screenshots with unrelated cars, or images where the target car is not the main subject."
     )
     response = client.responses.create(
@@ -189,8 +196,14 @@ def _desired_shot_types(entry):
 def choose_reviewed_images(dest, entry, review_payload, limit=6):
     reviews = review_payload.get("reviews", [])
     desired_order = _desired_shot_types(entry)
-    approved = [item for item in reviews if not item.get("reject") and (dest / item["path"]).exists()]
-    pool = approved or [item for item in reviews if (dest / item["path"]).exists()]
+    approved = [
+        item for item in reviews
+        if not item.get("reject")
+        and item.get("is_target_vehicle")
+        and int(item.get("variant_match_confidence") or item.get("target_match_confidence") or 0) >= 7
+        and (dest / item["path"]).exists()
+    ]
+    pool = approved
     if not pool:
         return []
 

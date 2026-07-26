@@ -2,14 +2,18 @@
 2015-2024") into a research.json draft: an AI research pass (OpenAI Responses
 API with the hosted web_search tool, so facts are grounded/cited, not just
 model-recalled) plus best-effort image sourcing from Cars & Bids first and
-Wikimedia Commons as fallback.
+Wikimedia Commons as fallback. Factual research is deliberately independent
+from image availability, so cars with weak US-auction coverage are not omitted.
 
 Writes cars/drafts/<draft-id>/research.json and cars/drafts/<draft-id>/images/.
 Does NOT render a video -- that's generate_from_research.py, a separate stage,
 so a human can review facts/photos before committing to a render.
 """
 import argparse
+import base64
+import hashlib
 import json
+import os
 import re
 import subprocess
 import time
@@ -17,7 +21,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from PIL import Image
-from cars_and_bids import augment_narration_with_current_value, enrich_entry_from_manifest, scrape_entry_images
+from cars_and_bids import enrich_entry_from_manifest, scrape_entry_images
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
@@ -53,9 +57,45 @@ If the request is focused / in a range / generation-specific:
 - all 4 entries may come from the same generation if that is what the request implies
 - example for Corvette C8: Stingray, E-Ray, Z06, ZR1 is valid
 
-Prefer candidates that are well-known, visually distinct, and likely to have strong
-auction/photo coverage. When two candidates are similarly deserving, favor the one
-more likely to have usable Cars & Bids or Commons imagery.
+Choose and rank candidates on factual merit within the user's requested scope.
+Do NOT prefer or exclude a candidate merely because it appears (or does not appear)
+on Cars & Bids, a US auction site, or Wikimedia Commons. European-market, Japanese-
+market, homologation, low-volume, and older cars must receive equal consideration.
+Image availability is evaluated later by a separate pipeline.
+
+RANKING POLICY:
+- "Best" does not mean newest, most powerful, most expensive, or chronological.
+- Score every candidate from 0-10 in each category:
+  enthusiast_desirability, driving_engagement, historical_significance,
+  performance, collectibility, and value.
+- Treat attributes such as a gated manual, naturally aspirated engine, low production,
+  homologation significance, distinctive design, critical acclaim, and sustained
+  enthusiast demand as meaningful evidence—not decorative trivia.
+- Use this weighting: enthusiast desirability 25%, driving engagement 20%,
+  historical significance 15%, performance 15%, collectibility 15%, value 10%.
+- Recency has no independent score. A newer car wins only when its merits earn it.
+- Do not rank chronologically unless the user explicitly requests chronological order.
+- Use auction results as market evidence, not as the entire definition of "best."
+- Sort the returned candidates from lowest weighted score to highest weighted score.
+- The order_rationale must state the decisive enthusiast criteria and must never merely
+  say "oldest to newest," "earliest to latest," or "by model year" for a best ranking.
+
+RESEARCH SOURCE POLICY:
+- Use broad web search; do not treat Cars & Bids as the default factual authority.
+- For specifications, dates, trims, and original pricing, prefer primary sources:
+  manufacturer press rooms, heritage archives, brochures, homologation documents,
+  owner's manuals, and reputable auction-house documentation.
+- For history, reputation, and market context, corroborate with established
+  automotive sources such as Hagerty, marque clubs/registries, major automotive
+  publications, and reputable auction results.
+- Wikipedia may help discover terminology and references, but should not be the
+  sole source for a factual claim when a primary or specialist source is available.
+- Cars & Bids, Bring a Trailer, Collecting Cars, and similar listings may support
+  condition-specific sale/value claims, but a single listing is not authoritative
+  for production history or specifications.
+- Cross-check important numbers. Use at least two independent source URLs per entry
+  when possible, including at least one primary or specialist source.
+- Never invent a URL, price, horsepower figure, production year, or citation.
 
 IMPORTANT:
 - each entry still needs a clearly photographable subject
@@ -83,8 +123,28 @@ For each entry, give:
   goes directly to text-to-speech.
 - search_hint: a short phrase to search Wikimedia Commons for photos of this specific thing
   (e.g. "Ford Mustang III GT", "Chevrolet Corvette Z06 C8")
+- chassis_code: the recognized platform/generation code when one exists, such as
+  "Type 42", "Type 4S", "997", "C6", or "E46"; otherwise null
+- commons_search_terms: 2-4 precise Wikimedia-oriented searches combining make,
+  model, chassis code, generation, trim, body style, and facelift era as applicable
 - visual_highlight: the most interesting model-specific visual detail to show, such as "quad exhaust",
   "interior dashboard", "engine bay", or "rear light design"
+- visual_identifiers: 3-6 visible features that distinguish this exact generation/variant
+  from the other ranked entries, such as headlight shape, side-blade design, exhaust
+  layout, grille, badge, dashboard, engine cover, or facelift bodywork
+- ranking_scores: an object containing 0-10 numeric scores for enthusiast_desirability,
+  driving_engagement, historical_significance, performance, collectibility, and value
+- ranking_case: one concise sentence explaining the evidence behind this candidate's
+  score and what could make an enthusiast choose it over newer or faster alternatives
+- research_sources: 2-5 pages that directly support this entry's facts. Each item must include:
+  - url: the exact page URL returned by web search
+  - title: concise page/source title
+  - publisher: organization or site name
+  - source_type: one of "manufacturer", "heritage_archive", "specialist",
+    "automotive_publication", "auction_result", or "reference"
+  - supports: a short list using only these values when applicable:
+    "years", "introduced_year", "price_usd", "horsepower", "history",
+    "reputation", "market_value"
 
 Also give:
 - title: a short ALL-CAPS-worthy video title, e.g. "RANKING EVERY CORVETTE GENERATION"
@@ -105,14 +165,100 @@ Return ONLY strict JSON, no markdown fences, no prose outside the JSON, matching
   "order_rationale": "string",
   "entries": [
     {{"name": "string", "years": "string", "introduced_year": number, "price_usd": number_or_null, "horsepower": number_or_null,
-      "label": "string", "one_line_fact": "string", "search_hint": "string", "visual_highlight": "string"}}
+      "label": "string", "one_line_fact": "string", "search_hint": "string",
+      "chassis_code": "string_or_null", "commons_search_terms": ["string"],
+      "visual_highlight": "string",
+      "visual_identifiers": ["string"],
+      "ranking_scores": {{
+        "enthusiast_desirability": number, "driving_engagement": number,
+        "historical_significance": number, "performance": number,
+        "collectibility": number, "value": number
+      }},
+      "ranking_case": "string",
+      "research_sources": [
+        {{"url": "https://...", "title": "string", "publisher": "string",
+          "source_type": "manufacturer|heritage_archive|specialist|automotive_publication|auction_result|reference",
+          "supports": ["years", "horsepower"]}}
+      ]}}
   ]
 }}
 Aim for 8 entries when possible, but return at least 4."""
 
+NARRATION_PROMPT_TEMPLATE = """Write the final spoken narration for a short car-ranking video.
+
+User request:
+{request}
+
+Final ranked entries are supplied below in countdown order from #4 to #1:
+{entries_json}
+
+Write like a knowledgeable, opinionated car-club friend—not a specification sheet,
+press release, or generic AI summary.
+
+STRUCTURE AND VOICE:
+- The #4 paragraph must begin with a concise hook explaining why this lineup matters,
+  then flow naturally into "At number four..."
+- #3 must advance the story with a varied transition such as "Then..." or
+  "[Manufacturer] turned up the volume."
+- #2 should explain the major evolution and may contrast what improved with what was lost.
+- #1 must clearly explain why it wins using character, experience, or significance,
+  rather than declaring it best only because it has the largest number.
+- End with a conversational choice question naming recognizable versions from the lineup.
+- Use contractions and natural connective language. Mild enthusiast opinion is encouraged
+  when framed as opinion.
+
+FACT AND PRICE RULES:
+- Preserve the supplied years, horsepower, original MSRP, and current value exactly.
+- Never invent or silently alter a number.
+- Mention every entry's original price naturally.
+- Mention a current value only when current_value_display is present.
+- Connect price to meaning: entry point, expensive upgrade, appreciating collectible,
+  depreciation, or value—not four repetitions of "Today, examples trade around..."
+- Use at most three numerical facts in any one entry.
+- Facts visible on screen do not all need to be spoken.
+
+STYLE RULES:
+- Give each entry roughly 28-42 spoken words, except #4 may be slightly longer for the hook.
+- Keep the complete script around 140-180 words.
+- Vary sentence openings and rhythm.
+- Include at least one memorable mechanical, visual, historical, or driving detail per entry.
+- Do not repeat "packed," "delivered," "boasting," or "Today, clean examples trade around."
+- Do not use Markdown, headings, stage directions, quotation marks, or emoji.
+
+Return ONLY strict JSON:
+{{
+  "entries": [
+    {{"name": "exact supplied entry name", "narration": "spoken paragraph"}}
+  ],
+  "close_narration": "spoken closing question"
+}}
+"""
+
 
 def slugify(value):
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-") or "draft"
+
+
+RANKING_WEIGHTS = {
+    "enthusiast_desirability": 0.25,
+    "driving_engagement": 0.20,
+    "historical_significance": 0.15,
+    "performance": 0.15,
+    "collectibility": 0.15,
+    "value": 0.10,
+}
+
+
+def calculate_ranking_total(entry):
+    scores = entry.get("ranking_scores") or {}
+    total = 0.0
+    for category, weight in RANKING_WEIGHTS.items():
+        try:
+            score = float(scores.get(category, 0))
+        except (TypeError, ValueError):
+            score = 0.0
+        total += max(0.0, min(10.0, score)) * weight
+    return round(total, 3)
 
 
 def run_research(request_text):
@@ -149,7 +295,61 @@ def run_research(request_text):
     entry_count = len(data.get("entries", []))
     if entry_count < 4:
         raise SystemExit(f"Expected at least 4 entries from research, got {entry_count}. Raw: {text[:500]}")
+    for entry in data["entries"]:
+        sources = entry.get("research_sources")
+        if not isinstance(sources, list):
+            entry["research_sources"] = []
+        entry["ranking_total"] = calculate_ranking_total(entry)
+    data["entries"].sort(key=lambda entry: entry["ranking_total"])
     return data
+
+
+def compose_final_narration(request_text, entries):
+    """Turn four researched records into one connected, human-sounding countdown."""
+    from openai import OpenAI
+
+    narration_inputs = []
+    for rank, entry in zip((4, 3, 2, 1), entries):
+        narration_inputs.append({
+            "rank": rank,
+            "name": entry["name"],
+            "years": entry.get("years"),
+            "introduced_year": entry.get("introduced_year"),
+            "price_usd": entry.get("price_usd"),
+            "horsepower": entry.get("horsepower"),
+            "current_value_display": entry.get("current_value_display"),
+            "label": entry.get("label"),
+            "visual_highlight": entry.get("visual_highlight"),
+            "visual_identifiers": entry.get("visual_identifiers", []),
+            "researched_fact": entry.get("one_line_fact"),
+        })
+    prompt = NARRATION_PROMPT_TEMPLATE.format(
+        request=request_text,
+        entries_json=json.dumps(narration_inputs, indent=2),
+    )
+    response = OpenAI().responses.create(model="gpt-4o", input=prompt)
+    text = response.output_text.strip()
+    if text.startswith("```"):
+        text = text.strip("`")
+        if text.lower().startswith("json"):
+            text = text[4:].strip()
+    result = json.loads(text)
+    paragraphs = result.get("entries", [])
+    by_name = {
+        item.get("name"): item.get("narration", "").strip()
+        for item in paragraphs
+        if isinstance(item, dict)
+    }
+    missing = [entry["name"] for entry in entries if not by_name.get(entry["name"])]
+    if missing:
+        raise SystemExit(f"Final narration omitted ranked entries: {', '.join(missing)}")
+    for entry in entries:
+        entry["narration"] = by_name[entry["name"]]
+        entry["one_line_fact"] = entry["narration"]
+    close = str(result.get("close_narration") or "").strip()
+    if not close:
+        raise SystemExit("Final narration omitted close_narration.")
+    return close
 
 
 def format_stat(entry):
@@ -164,6 +364,17 @@ def format_stat(entry):
 
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
+IMAGE_REVIEW_MODEL = os.getenv("OPENAI_MEDIA_REVIEW_MODEL", "gpt-4o-mini")
+IMAGE_CATEGORIES = {
+    "exterior_front",
+    "exterior_rear",
+    "exterior_side",
+    "exterior_full",
+    "interior",
+    "engine_bay",
+    "wheel_detail",
+    "other_detail",
+}
 
 
 def valid_images(directory):
@@ -184,6 +395,185 @@ def valid_images(directory):
     return valid
 
 
+def _image_data_url(path):
+    media_type = "jpeg" if path.suffix.lower() in {".jpg", ".jpeg"} else path.suffix.lower().lstrip(".")
+    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
+    return f"data:image/{media_type};base64,{encoded}"
+
+
+def _normalized_image_category(value):
+    value = re.sub(r"[^a-z]+", "_", str(value or "").lower()).strip("_")
+    aliases = {
+        "front": "exterior_front",
+        "rear": "exterior_rear",
+        "side": "exterior_side",
+        "exterior": "exterior_full",
+        "full_body": "exterior_full",
+        "three_quarter": "exterior_full",
+        "engine": "engine_bay",
+        "wheel": "wheel_detail",
+        "detail": "other_detail",
+    }
+    value = aliases.get(value, value)
+    return value if value in IMAGE_CATEGORIES else "other_detail"
+
+
+def _image_fingerprints(path):
+    """Return exact and perceptual fingerprints for duplicate detection."""
+    exact = hashlib.sha256(path.read_bytes()).hexdigest()
+    with Image.open(path) as image:
+        grayscale = image.convert("L").resize((9, 8), Image.Resampling.LANCZOS)
+        pixels = list(grayscale.getdata())
+    bits = 0
+    for row in range(8):
+        for column in range(8):
+            bits = (bits << 1) | int(
+                pixels[row * 9 + column] > pixels[row * 9 + column + 1]
+            )
+    return exact, bits
+
+
+def _find_duplicate(path, seen_images, max_distance=5):
+    exact, perceptual = _image_fingerprints(path)
+    for seen in seen_images:
+        distance = (perceptual ^ seen["perceptual_hash"]).bit_count()
+        if exact == seen["sha256"] or distance <= max_distance:
+            return seen, exact, perceptual, distance
+    return None, exact, perceptual, None
+
+
+def _review_image_with_ai(path, entry, model=IMAGE_REVIEW_MODEL):
+    from openai import OpenAI
+
+    client = OpenAI()
+    identifiers = ", ".join(entry.get("visual_identifiers") or [])
+    prompt = f"""Inspect this downloaded car image using the pixels, not its filename.
+Expected subject: {entry['name']} ({entry.get('years', 'year unknown')}).
+Expected distinguishing visual identifiers: {identifiers or 'not provided'}.
+Return ONLY strict JSON with:
+- is_expected_vehicle: boolean (false for a clearly different model/generation or no useful car)
+- exact_variant_visible: boolean
+- category: exactly one of exterior_front, exterior_rear, exterior_side, exterior_full,
+  interior, engine_bay, wheel_detail, other_detail
+- view_description: a precise phrase such as "front-left three-quarter exterior"
+- visible_match_evidence: array of short descriptions of generation/variant-specific details
+- confidence: number from 0 to 1
+- usable: boolean
+- rejection_reason: string or null
+Mark usable false for page UI, severe blur, tiny vehicles, collages, watermarks dominating
+the frame, or an obvious subject mismatch. A visible full car is exterior_full even if
+the search or filename says engine, interior, wheel, or detail. Do not approve a generic
+make/model match. If this view cannot distinguish the requested generation or variant
+from the other ranked entries, set exact_variant_visible and usable to false."""
+    response = client.responses.create(
+        model=model,
+        input=[{
+            "role": "user",
+            "content": [
+                {"type": "input_text", "text": prompt},
+                {"type": "input_image", "image_url": _image_data_url(path)},
+            ],
+        }],
+    )
+    text = response.output_text.strip()
+    if text.startswith("```"):
+        text = text.strip("`")
+        if text.lower().startswith("json"):
+            text = text[4:].strip()
+    review = json.loads(text)
+    review["category"] = _normalized_image_category(review.get("category"))
+    review["confidence"] = max(0.0, min(1.0, float(review.get("confidence", 0))))
+    review["is_expected_vehicle"] = bool(review.get("is_expected_vehicle"))
+    review["exact_variant_visible"] = bool(review.get("exact_variant_visible"))
+    review["usable"] = (
+        bool(review.get("usable"))
+        and review["is_expected_vehicle"]
+        and review["exact_variant_visible"]
+        and review["confidence"] >= 0.7
+    )
+    review["provider"] = "openai"
+    review["model"] = model
+    return review
+
+
+def review_and_rename_entry_images(
+    entry,
+    images_dir,
+    require_ai=False,
+    model=IMAGE_REVIEW_MODEL,
+    seen_images=None,
+):
+    """Verify draft images from their pixels and give usable files truthful names."""
+    if seen_images is None:
+        seen_images = []
+    reviewed = []
+    approved = []
+    category_counts = {}
+    for relative_image in entry.get("images", []):
+        path = images_dir.parent / relative_image
+        original_relative = relative_image
+        duplicate, sha256, perceptual_hash, duplicate_distance = _find_duplicate(path, seen_images)
+        if duplicate:
+            reviewed.append({
+                "original_path": original_relative,
+                "path": original_relative,
+                "provider": "fingerprint",
+                "usable": False,
+                "is_expected_vehicle": False,
+                "category": "other_detail",
+                "view_description": "duplicate image",
+                "confidence": 1.0,
+                "rejection_reason": "duplicate_or_near_duplicate",
+                "duplicate_of": duplicate["path"],
+                "duplicate_of_entry": duplicate["entry"],
+                "perceptual_distance": duplicate_distance,
+            })
+            continue
+        try:
+            review = _review_image_with_ai(path, entry, model=model)
+        except Exception as exc:
+            if require_ai:
+                raise SystemExit(f"AI image review failed for {path}: {exc}") from exc
+            review = {
+                "category": "other_detail",
+                "view_description": "unverified image",
+                "confidence": 0.0,
+                "is_expected_vehicle": True,
+                "usable": True,
+                "rejection_reason": None,
+                "provider": "unverified",
+                "error": str(exc),
+            }
+
+        review["original_path"] = original_relative
+        if review["usable"]:
+            category = review["category"]
+            category_counts[category] = category_counts.get(category, 0) + 1
+            renamed = path.with_name(f"{category}-{category_counts[category]:02d}{path.suffix.lower()}")
+            if renamed != path:
+                path.rename(renamed)
+            current_relative = f"images/{renamed.parent.name}/{renamed.name}"
+            review["path"] = current_relative
+            approved.append(current_relative)
+            seen_images.append({
+                "path": current_relative,
+                "entry": entry["name"],
+                "sha256": sha256,
+                "perceptual_hash": perceptual_hash,
+            })
+        else:
+            review["path"] = original_relative
+        reviewed.append(review)
+
+    entry["images"] = approved
+    entry["image_reviews"] = reviewed
+    entry["image_review_provider"] = (
+        "openai" if reviewed and all(item.get("provider") == "openai" for item in reviewed)
+        else "mixed_or_unverified"
+    )
+    return entry
+
+
 def run_image_search(query, dest, prefix, limit=1, min_width=900):
     subprocess.run(
         [
@@ -197,13 +587,30 @@ def run_image_search(query, dest, prefix, limit=1, min_width=900):
     return valid_images(dest)
 
 
-def scrape_images(search_hint, topic_slug, draft_images_dir, visual_highlight=""):
+def scrape_images(
+    search_hint,
+    topic_slug,
+    draft_images_dir,
+    visual_highlight="",
+    commons_search_terms=None,
+):
     """Build a varied, verified image set with thematic and general fallbacks."""
     dest = draft_images_dir / topic_slug
+    existing_names = {path.name for path in valid_images(dest)}
+
+    def new_images():
+        return [path for path in valid_images(dest) if path.name not in existing_names]
+
+    precise_terms = [
+        str(term).strip()
+        for term in (commons_search_terms or [])
+        if str(term).strip()
+    ]
+    category_hint = precise_terms[0] if precise_terms else search_hint
     subprocess.run(
         [
             "node", "src/scrape-commons-category.js",
-            f"--category={search_hint}",
+            f"--category={category_hint}",
             f"--topic=drafts-tmp/{topic_slug}",
             "--limit=4",
             "--pool-size=100",
@@ -228,41 +635,84 @@ def scrape_images(search_hint, topic_slug, draft_images_dir, visual_highlight=""
 
     # Add deliberate visual variety instead of relying on whichever category
     # files sort first. Each query has a distinct prefix so results coexist.
+    query_base = precise_terms[0] if precise_terms else search_hint
     themed_queries = [
-        (f"{search_hint} rear", "rear"),
-        (f"{search_hint} interior dashboard", "interior"),
+        (f"{query_base} rear", "rear"),
+        (f"{query_base} interior dashboard", "interior"),
     ]
     if visual_highlight:
-        themed_queries.append((f"{search_hint} {visual_highlight}", "highlight"))
+        themed_queries.append((f"{query_base} {visual_highlight}", "highlight"))
+    for index, term in enumerate(precise_terms[1:], start=2):
+        themed_queries.append((term, f"precise-{index}"))
     for query, prefix in themed_queries:
-        if len(valid_images(dest)) >= 6:
+        if len(new_images()) >= 6:
             break
         run_image_search(query, dest, prefix)
 
     # General model images are the safe fallback. Retry at a lower resolution
     # threshold when Commons has sparse coverage for an older model/year.
-    if len(valid_images(dest)) < 2:
+    if len(new_images()) < 2:
         print(f"[images] Adding general fallback images for {search_hint!r}")
         run_image_search(search_hint, dest, "general", limit=3)
-    if not valid_images(dest):
+    if not new_images():
         run_image_search(search_hint, dest, "fallback", limit=3, min_width=600)
 
-    return [f"images/{topic_slug}/{path.name}" for path in valid_images(dest)[:6]]
+    return [f"images/{topic_slug}/{path.name}" for path in valid_images(dest)[:12]]
 
 
-def source_entry_images(entry, images_dir):
+def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_images=None):
     topic_slug = slugify(entry["name"])
     print(f"[images] {entry['name']} -> trying Cars & Bids for {entry['search_hint']!r}")
     cars_and_bids_images, cars_and_bids_manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
     entry["images"] = cars_and_bids_images
     enrich_entry_from_manifest(entry, cars_and_bids_manifest)
-    if not entry["images"]:
-        print(f"[images] Cars & Bids sparse for {entry['name']} -- falling back to Commons")
-        entry["images"] = scrape_images(
-            entry["search_hint"], topic_slug, images_dir, entry.get("visual_highlight", "")
+    initial_images = list(entry["images"])
+    review_and_rename_entry_images(
+        entry,
+        images_dir,
+        require_ai=require_ai_image_review,
+        seen_images=seen_images,
+    )
+    if len(entry["images"]) < 4:
+        print(
+            f"[images] Cars & Bids yielded only {len(entry['images'])} verified unique "
+            f"images for {entry['name']} -- adding chassis-aware Commons results"
         )
-    entry["narration"] = augment_narration_with_current_value(entry)
-    entry["one_line_fact"] = entry["narration"]
+        approved_images = list(entry["images"])
+        initial_reviews = list(entry.get("image_reviews", []))
+        commons_candidates = scrape_images(
+            entry["search_hint"],
+            topic_slug,
+            images_dir,
+            entry.get("visual_highlight", ""),
+            entry.get("commons_search_terms"),
+        )
+        already_considered = set(initial_images) | set(approved_images)
+        already_considered.update(
+            review.get("original_path") for review in initial_reviews if review.get("original_path")
+        )
+        fallback_entry = dict(entry)
+        fallback_entry["images"] = [
+            image for image in commons_candidates if image not in already_considered
+        ]
+        fallback_entry["image_reviews"] = []
+        review_and_rename_entry_images(
+            fallback_entry,
+            images_dir,
+            require_ai=require_ai_image_review,
+            seen_images=seen_images,
+        )
+        entry["images"] = [*approved_images, *fallback_entry["images"]][:6]
+        entry["image_reviews"] = [*initial_reviews, *fallback_entry["image_reviews"]]
+        entry["image_review_provider"] = (
+            "openai"
+            if entry["image_reviews"]
+            and all(review.get("provider") == "openai" for review in entry["image_reviews"])
+            else "mixed_or_unverified"
+        )
+        entry["image_fallback_used"] = "wikimedia_commons"
+    else:
+        entry["image_fallback_used"] = None
     entry["stat"] = format_stat(entry)
     return entry
 
@@ -271,6 +721,11 @@ def main():
     parser = argparse.ArgumentParser(description="AI-research a free-text car ranking request into a draft JSON + images.")
     parser.add_argument("--request", required=True)
     parser.add_argument("--draft-id", required=True)
+    parser.add_argument(
+        "--require-ai-image-review",
+        action="store_true",
+        help="Fail instead of publishing unverified image labels when vision review is unavailable.",
+    )
     args = parser.parse_args()
 
     draft_dir = DRAFTS_ROOT / args.draft_id
@@ -283,20 +738,36 @@ def main():
 
     selected_entries = []
     skipped_entries = []
-    for i, candidate in enumerate(data["entries"]):
+    seen_images = []
+    # Source the strongest candidates first. Once four have verified images,
+    # restore ascending order so the UI/video reads #4 through #1.
+    ranked_candidates = sorted(
+        data["entries"],
+        key=lambda entry: entry.get("ranking_total", 0),
+        reverse=True,
+    )
+    for i, candidate in enumerate(ranked_candidates):
         if i > 0:
             time.sleep(5)  # let remote rate limiters cool down between entries
-        entry = source_entry_images(candidate, images_dir)
-        if entry["images"]:
+        entry = source_entry_images(
+            candidate,
+            images_dir,
+            require_ai_image_review=args.require_ai_image_review,
+            seen_images=seen_images,
+        )
+        if len(entry["images"]) >= 4:
             selected_entries.append(entry)
             print(f"[images] Selected {entry['name']} with {len(entry['images'])} image(s)")
         else:
             skipped_entries.append({
                 "name": entry["name"],
                 "years": entry.get("years", ""),
-                "reason": "no_images_found",
+                "reason": "fewer_than_4_verified_unique_images",
             })
-            print(f"[images] Skipping {entry['name']} because no usable images were found")
+            print(
+                f"[images] Skipping {entry['name']} because fewer than 4 verified "
+                "unique images were found"
+            )
         if len(selected_entries) == 4:
             break
 
@@ -305,6 +776,14 @@ def main():
             f"Only found {len(selected_entries)} image-backed entries out of {len(data['entries'])} researched candidates. "
             "Try a broader request or improve source coverage."
         )
+
+    selected_entries.sort(key=lambda entry: entry.get("ranking_total", 0))
+    data["order_rationale"] = (
+        "Ranked by weighted enthusiast desirability, driving engagement, historical "
+        "significance, performance, collectibility, and value—not chronology."
+    )
+    print("[research] Composing connected final narration from the four selected entries")
+    data["close_narration"] = compose_final_narration(args.request, selected_entries)
 
     output = {
         "request": args.request,

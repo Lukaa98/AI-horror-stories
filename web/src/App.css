@@ -256,11 +256,28 @@ h1 {
   flex-wrap: wrap;
 }
 
+.thumbs a {
+  display: grid;
+  gap: 3px;
+  width: 90px;
+  color: inherit;
+  text-decoration: none;
+}
+
 .thumbs img {
   width: 90px;
   height: 60px;
   object-fit: cover;
   border-radius: 4px;
+}
+
+.image-label {
+  overflow: hidden;
+  color: #aaa;
+  font-size: 0.68rem;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .no-images {

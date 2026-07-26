@@ -7,7 +7,11 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "cars" / "automation"))
 
-from research_request import valid_images  # noqa: E402
+from research_request import (  # noqa: E402
+    _normalized_image_category,
+    review_and_rename_entry_images,
+    valid_images,
+)
 from cars_and_bids import (  # noqa: E402
     augment_narration_with_current_value,
     format_current_value,
@@ -54,3 +58,95 @@ def test_augment_narration_with_current_value_adds_cars_and_bids_context():
     text = augment_narration_with_current_value(entry)
     assert "Today, clean examples trade around" in text
     assert "$110K" in text
+
+
+def test_normalized_image_category_maps_loose_vision_labels():
+    assert _normalized_image_category("engine") == "engine_bay"
+    assert _normalized_image_category("three-quarter") == "exterior_full"
+    assert _normalized_image_category("unexpected") == "other_detail"
+
+
+def test_review_renames_from_visual_category_and_rejects_mismatches(tmp_path, monkeypatch):
+    images_dir = tmp_path / "images"
+    car_dir = images_dir / "first-gen-r8-v10"
+    car_dir.mkdir(parents=True)
+    Image.new("RGB", (40, 30), (30, 60, 90)).save(car_dir / "engine-05.jpg")
+    Image.new("RGB", (40, 30), (90, 20, 20)).save(car_dir / "rear-01.jpg")
+    entry = {
+        "name": "First-Gen R8 V10",
+        "years": "2009-2015",
+        "images": [
+            "images/first-gen-r8-v10/engine-05.jpg",
+            "images/first-gen-r8-v10/rear-01.jpg",
+        ],
+    }
+    reviews = iter([
+        {
+            "category": "exterior_full",
+            "view_description": "front-left three-quarter exterior",
+            "confidence": 0.98,
+            "is_expected_vehicle": True,
+            "exact_variant_visible": True,
+            "usable": True,
+            "rejection_reason": None,
+            "provider": "openai",
+        },
+        {
+            "category": "exterior_rear",
+            "view_description": "different car",
+            "confidence": 0.99,
+            "is_expected_vehicle": False,
+            "exact_variant_visible": False,
+            "usable": False,
+            "rejection_reason": "wrong generation",
+            "provider": "openai",
+        },
+    ])
+    monkeypatch.setattr(
+        "research_request._review_image_with_ai",
+        lambda path, candidate, model: next(reviews),
+    )
+
+    review_and_rename_entry_images(entry, images_dir, require_ai=True)
+
+    assert entry["images"] == ["images/first-gen-r8-v10/exterior_full-01.jpg"]
+    assert (car_dir / "exterior_full-01.jpg").exists()
+    assert not (car_dir / "engine-05.jpg").exists()
+    assert len(entry["image_reviews"]) == 2
+    assert entry["image_reviews"][1]["usable"] is False
+
+
+def test_review_rejects_near_duplicate_used_by_another_entry(tmp_path, monkeypatch):
+    images_dir = tmp_path / "images"
+    first_dir = images_dir / "r8-v8"
+    second_dir = images_dir / "r8-v10"
+    first_dir.mkdir(parents=True)
+    second_dir.mkdir(parents=True)
+    source = Image.new("RGB", (80, 60), (40, 70, 100))
+    source.save(first_dir / "detail-03.jpg")
+    source.resize((120, 90)).save(second_dir / "highlight-03.jpg")
+    seen_images = []
+    monkeypatch.setattr(
+        "research_request._review_image_with_ai",
+        lambda path, candidate, model: {
+            "category": "exterior_full",
+            "view_description": "side exterior",
+            "confidence": 0.95,
+            "is_expected_vehicle": True,
+            "exact_variant_visible": True,
+            "usable": True,
+            "rejection_reason": None,
+            "provider": "openai",
+        },
+    )
+    first = {"name": "R8 V8", "images": ["images/r8-v8/detail-03.jpg"]}
+    second = {"name": "R8 V10", "images": ["images/r8-v10/highlight-03.jpg"]}
+
+    review_and_rename_entry_images(first, images_dir, require_ai=True, seen_images=seen_images)
+    review_and_rename_entry_images(second, images_dir, require_ai=True, seen_images=seen_images)
+
+    assert first["images"] == ["images/r8-v8/exterior_full-01.jpg"]
+    assert second["images"] == []
+    duplicate_review = second["image_reviews"][0]
+    assert duplicate_review["rejection_reason"] == "duplicate_or_near_duplicate"
+    assert duplicate_review["duplicate_of_entry"] == "R8 V8"

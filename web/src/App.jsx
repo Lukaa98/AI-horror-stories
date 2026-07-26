@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.1";
+const UI_VERSION = "V10.2";
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 20 * 60 * 1000;
@@ -441,11 +441,16 @@ export default function App() {
                 <p className="fact">{entry.one_line_fact}</p>
                 <div className="thumbs">
                   {(entry.images || []).length === 0 && <span className="no-images">no images found</span>}
-                  {(entry.images || []).map((img, j) => (
-                    <a key={j} href={rawUrl(img)} target="_blank" rel="noreferrer">
-                      <img src={rawUrl(img)} alt={entry.name} />
-                    </a>
-                  ))}
+                  {(entry.images || []).map((img, j) => {
+                    const review = (entry.image_reviews || []).find((item) => item.path === img);
+                    const description = review?.view_description || review?.category || "verified car image";
+                    return (
+                      <a key={j} href={rawUrl(img)} target="_blank" rel="noreferrer" title={description}>
+                        <img src={rawUrl(img)} alt={`${entry.name} — ${description}`} />
+                        <span className="image-label">{description}</span>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             ))}
