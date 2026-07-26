@@ -21,7 +21,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from PIL import Image
-from cars_and_bids import enrich_entry_from_manifest, scrape_entry_images
+from cars_and_bids import enrich_entry_from_manifest, infer_search_params, scrape_entry_images
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
@@ -693,23 +693,20 @@ def _find_duplicate(path, seen_images, max_distance=5):
 
 
 def _auction_provenance_matches_entry(entry):
-    """Return true when one auction title coherently identifies the requested variant."""
+    """Return true when one auction title coherently identifies the generation."""
     source = entry.get("image_source") or {}
     if source.get("provider") != "cars_and_bids":
         return False
     title = str(source.get("auction_title") or "").lower()
-    expected = f"{entry.get('name', '')} {entry.get('search_hint', '')}".lower()
-    if not title or "r8" not in title:
+    params = infer_search_params(entry.get("search_hint", "")) or {}
+    make = str(params.get("make") or "").lower()
+    model = str(params.get("model") or "").lower()
+    if not title or not make or not model:
         return False
-    if "v8" in expected and "v10" in title:
+    if not re.search(rf"\b{re.escape(make)}\b", title):
         return False
-    if "v10" in expected and "v8" in title and "v10" not in title:
+    if not re.search(rf"\b{re.escape(model)}\b", title):
         return False
-    for discriminator in ("plus", "performance", "rwd", "rws", "spyder", "gt"):
-        if re.search(rf"\b{discriminator}\b", expected) and not re.search(
-            rf"\b{discriminator}\b", title
-        ):
-            return False
     start_year, end_year = None, None
     years = [int(value) for value in re.findall(r"\b(?:19|20)\d{2}\b", str(entry.get("years", "")))]
     if years:
@@ -718,6 +715,21 @@ def _auction_provenance_matches_entry(entry):
     if title_year_match and start_year and not (start_year <= int(title_year_match.group()) <= end_year):
         return False
     return True
+
+
+def _generation_commons_terms(entry):
+    """Prefer broad generation/chassis discovery before sparse exact-trim searches."""
+    params = infer_search_params(entry.get("search_hint", "")) or {}
+    make = str(params.get("make") or "").strip()
+    model = str(params.get("model") or "").strip()
+    chassis = str(entry.get("chassis_code") or "").strip()
+    terms = []
+    if make and model and chassis:
+        terms.append(f"{make} {model} {chassis}")
+    if make and model:
+        terms.append(f"{make} {model}")
+    terms.extend(entry.get("commons_search_terms") or [])
+    return list(dict.fromkeys(term for term in terms if str(term).strip()))
 
 
 def _finalize_image_review(review, trusted_variant_provenance=False):
@@ -997,7 +1009,7 @@ def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_i
             topic_slug,
             images_dir,
             entry.get("visual_highlight", ""),
-            entry.get("commons_search_terms"),
+            _generation_commons_terms(entry),
         )
         already_considered = set(initial_images) | set(approved_images)
         already_considered.update(

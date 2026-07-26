@@ -107,7 +107,8 @@ def _openai_review(path, entry, model):
         "Review this car photo for a short-form ranking video. Return ONLY compact JSON with keys: "
         "is_target_vehicle boolean, detected_make string_or_null, detected_model string_or_null, "
         "detected_generation_or_year string_or_null, detected_variant_or_engine string_or_null, "
-        "visible_match_evidence array of short strings, variant_match_confidence 1-10, "
+        "visible_match_evidence array of short strings, generation_match_confidence 1-10, "
+        "variant_match_confidence 1-10, "
         "shot_type string from [front, rear, side, front_3q, rear_3q, interior, engine, wheel, detail, exterior, other], "
         "scene_fit_tags array from [hero, exterior, interior, engine, detail, wheel, front, rear], "
         "quality_score 1-10, composition_score 1-10, target_match_confidence 1-10, reject boolean, reason string. "
@@ -116,9 +117,11 @@ def _openai_review(path, entry, model):
         f"Specific variant context: {entry.get('name', '')}. "
         f"Target production years: {entry.get('years', 'unknown')}. "
         f"Expected visual identifiers: {', '.join(entry.get('visual_identifiers') or []) or 'not provided'}. "
-        "Do not approve merely because the make/model matches. Look for generation-specific bodywork, lights, "
-        "badges, engine markings, exhaust layout, interior design, or source-year evidence. If the exact "
-        "generation/engine/trim cannot be distinguished from this view, reject it as variant-ambiguous. "
+        "The approval priority is the correct make, model, and generation/chassis. Look for generation-specific "
+        "bodywork, lights, proportions, interior design, or source-year evidence. Record exact trim or engine "
+        "confidence when visible, but DO NOT reject an otherwise correct-generation photo merely because an S, "
+        "GTS, Spyder, engine, package, or badge cannot be proven from this angle. Reject a visibly wrong "
+        "generation or a visibly contradictory variant. "
         "Reject wrong cars, collages, ads, screenshots with unrelated cars, or images where the target car is not the main subject."
     )
     response = client.responses.create(
@@ -200,7 +203,12 @@ def choose_reviewed_images(dest, entry, review_payload, limit=6):
         item for item in reviews
         if not item.get("reject")
         and item.get("is_target_vehicle")
-        and int(item.get("variant_match_confidence") or item.get("target_match_confidence") or 0) >= 7
+        and int(
+            item.get("generation_match_confidence")
+            or item.get("target_match_confidence")
+            or item.get("variant_match_confidence")
+            or 0
+        ) >= 6
         and (dest / item["path"]).exists()
     ]
     pool = approved

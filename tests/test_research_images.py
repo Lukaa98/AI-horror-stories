@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "cars" / "automation"))
 from research_request import (  # noqa: E402
     _auction_provenance_matches_entry,
     _finalize_image_review,
+    _generation_commons_terms,
     _normalized_image_category,
     review_and_rename_entry_images,
     valid_images,
@@ -68,7 +69,7 @@ def test_normalized_image_category_maps_loose_vision_labels():
     assert _normalized_image_category("unexpected") == "other_detail"
 
 
-def test_exact_auction_provenance_accepts_coherent_gallery_and_rejects_wrong_trim():
+def test_generation_gallery_provenance_accepts_related_trim_but_rejects_wrong_year():
     exact = {
         "name": "Second-Gen R8 V10 Plus",
         "search_hint": "Audi R8 V10 Plus Type 4S",
@@ -78,16 +79,24 @@ def test_exact_auction_provenance_accepts_coherent_gallery_and_rejects_wrong_tri
             "auction_title": "2017 Audi R8 V10 Plus",
         },
     }
-    wrong = {
+    related_trim = {
         **exact,
         "image_source": {
             "provider": "cars_and_bids",
             "auction_title": "2018 Audi R8 V10 Coupe RWS",
         },
     }
+    wrong_generation = {
+        **exact,
+        "image_source": {
+            "provider": "cars_and_bids",
+            "auction_title": "2012 Audi R8 V10 Coupe",
+        },
+    }
 
     assert _auction_provenance_matches_entry(exact) is True
-    assert _auction_provenance_matches_entry(wrong) is False
+    assert _auction_provenance_matches_entry(related_trim) is True
+    assert _auction_provenance_matches_entry(wrong_generation) is False
 
 
 def test_trusted_gallery_does_not_require_trim_to_be_visible(tmp_path, monkeypatch):
@@ -141,6 +150,30 @@ def test_commons_image_needs_model_match_but_not_exact_trim_badge():
 
     assert review["category"] == "exterior_rear"
     assert review["usable"] is True
+
+
+def test_porsche_gallery_provenance_matches_generation_without_exact_trim():
+    entry = {
+        "name": "Boxster 987 S",
+        "search_hint": "Porsche Boxster 987 S",
+        "years": "2005-2012",
+        "image_source": {
+            "provider": "cars_and_bids",
+            "auction_title": "2012 Porsche Boxster Spyder",
+        },
+    }
+
+    assert _auction_provenance_matches_entry(entry) is True
+
+
+def test_commons_terms_put_generation_before_trim():
+    terms = _generation_commons_terms({
+        "search_hint": "Porsche Boxster 987 S",
+        "chassis_code": "987",
+        "commons_search_terms": ["Porsche Boxster 987 S"],
+    })
+
+    assert terms[:2] == ["porsche boxster 987", "porsche boxster"]
 
 
 def test_review_renames_from_visual_category_and_rejects_mismatches(tmp_path, monkeypatch):
