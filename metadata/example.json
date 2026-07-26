@@ -1,0 +1,21 @@
+{
+  "draft_id": "example",
+  "request": "Example ranking request",
+  "status": "research",
+  "images": [
+    {
+      "path": "images/example/source-01.jpg",
+      "source_url": "https://example.com/source",
+      "license": "Review before publishing",
+      "attribution": "Source owner"
+    }
+  ],
+  "video": {
+    "path": "videos/example/final_short.mp4"
+  },
+  "research": {
+    "sources": [
+      "https://example.com/research-source"
+    ]
+  }
+}

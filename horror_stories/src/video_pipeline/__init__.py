@@ -1,1 +1,0 @@
-"""Video generation pipeline package."""
