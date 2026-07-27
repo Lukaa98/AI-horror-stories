@@ -1,0 +1,136 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-27T01:14:59.035Z",
+  "query": "Audi sq5",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/audi/sq5?csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/36baG7aP/2022-audi-sq5",
+      "title": "2022 Audi Sq5",
+      "text": "Bid to $64,500",
+      "titleYear": 2022,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/Kmoy6Dkm/2021-audi-sq5",
+      "title": "2021 Audi Sq5",
+      "text": "Sold for $62,500",
+      "titleYear": 2021,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4dP4PRP/2021-audi-sq5",
+      "title": "2021 Audi Sq5",
+      "text": "Sold for $50,000",
+      "titleYear": 2021,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEVLAyak/2018-audi-sq5",
+      "title": "2018 Audi Sq5",
+      "text": "Sold for $35,000",
+      "titleYear": 2018,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yl4pazM/2022-audi-sq5-sportback",
+      "title": "2022 Audi Sq5 Sportback",
+      "text": "Bid to $34,250",
+      "titleYear": 2022,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37eym7kA/2018-audi-sq5",
+      "title": "2018 Audi Sq5",
+      "text": "Sold for $33,750",
+      "titleYear": 2018,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/36baG7aP/2022-audi-sq5",
+      "title": "2022 Audi Sq5",
+      "text": "Bid to $64,500",
+      "titleYear": 2022,
+      "score": 70,
+      "usable_image_count": 33,
+      "sale_price": 64500,
+      "sale_type": "bid_to",
+      "page_title": "2022 Audi SQ5"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/Kmoy6Dkm/2021-audi-sq5",
+      "title": "2021 Audi Sq5",
+      "text": "Sold for $62,500",
+      "titleYear": 2021,
+      "score": 70,
+      "usable_image_count": 31,
+      "sale_price": 62500,
+      "sale_type": "sold",
+      "page_title": "2021 Audi SQ5"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4dP4PRP/2021-audi-sq5",
+      "title": "2021 Audi Sq5",
+      "text": "Sold for $50,000",
+      "titleYear": 2021,
+      "score": 70,
+      "usable_image_count": 25,
+      "sale_price": 50000,
+      "sale_type": "sold",
+      "page_title": "2021 Audi SQ5"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEVLAyak/2018-audi-sq5",
+      "title": "2018 Audi Sq5",
+      "text": "Sold for $35,000",
+      "titleYear": 2018,
+      "score": 70,
+      "usable_image_count": 16,
+      "sale_price": 35000,
+      "sale_type": "sold",
+      "page_title": "2018 Audi SQ5"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yl4pazM/2022-audi-sq5-sportback",
+      "title": "2022 Audi Sq5 Sportback",
+      "text": "Bid to $34,250",
+      "titleYear": 2022,
+      "score": 70,
+      "usable_image_count": 11,
+      "sale_price": 34250,
+      "sale_type": "bid_to",
+      "page_title": "2022 Audi SQ5 Sportback"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37eym7kA/2018-audi-sq5",
+      "title": "2018 Audi Sq5",
+      "text": "Sold for $33,750",
+      "titleYear": 2018,
+      "score": 70,
+      "usable_image_count": 32,
+      "sale_price": 33750,
+      "sale_type": "sold",
+      "page_title": "2018 Audi SQ5"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/36baG7aP/2022-audi-sq5",
+    "title": "2022 Audi Sq5",
+    "text": "Bid to $64,500",
+    "titleYear": 2022,
+    "score": 70,
+    "sale_price": 64500,
+    "sale_type": "bid_to",
+    "page_title": "2022 Audi SQ5",
+    "year": 2022,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": []
+}
