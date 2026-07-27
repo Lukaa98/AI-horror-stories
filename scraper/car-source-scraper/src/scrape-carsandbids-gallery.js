@@ -201,10 +201,14 @@ async function downloadImage(candidate, outDir, filenamePrefix) {
   };
 }
 
-async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, endYear) {
+async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, endYear, limit = 6) {
   await page.goto(searchUrl, { waitUntil: "networkidle2", timeout: 90000 });
   await page.waitForSelector("a[href*='/auctions/']", { timeout: 30000 });
-  await autoScroll(page, 6, 400);
+  // Cars & Bids search results load via infinite scroll, so a shallow scroll
+  // only surfaces a handful of cards. Whether a same-relevance batch of
+  // listings happens to have any seller-uploaded videos varies a lot, so
+  // widening the pool (deeper scroll, higher limit) matters for video tests.
+  await autoScroll(page, limit > 6 ? 14 : 6, 400);
 
   const entries = await page.evaluate(() => {
     const results = [];
@@ -250,7 +254,7 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
       return { ...entry, title: cleanedTitle, titleYear: titleYear || null, score };
     })
     .sort((a, b) => b.score - a.score)
-    .slice(0, 6);
+    .slice(0, limit);
 }
 
 async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
@@ -544,7 +548,9 @@ async function main() {
     await page.setExtraHTTPHeaders({ "Accept-Language": "en-US,en;q=0.9" });
     await page.setViewport({ width: 1440, height: 1200, deviceScaleFactor: 1 });
 
-    const auctions = await collectAuctionEntries(page, searchUrl, queryTokens, startYear, endYear);
+    const auctions = await collectAuctionEntries(
+      page, searchUrl, queryTokens, startYear, endYear, skipImages ? 12 : 6
+    );
     if (!auctions.length) {
       throw new Error(`No auction links found at ${searchUrl}`);
     }
