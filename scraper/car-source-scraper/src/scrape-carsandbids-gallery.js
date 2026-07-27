@@ -377,15 +377,44 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
     }
 
     // Some Cars & Bids players are hydrated only after interaction. Their
-    // Cloudflare Stream IDs still appear in the serialized page markup.
+    // Cloudflare Stream IDs still appear in the serialized page markup, with
+    // multiple videos' JSON objects (each carrying its own "title") packed
+    // close together. A fixed character window around the match can span
+    // into a neighboring video's title, mislabeling e.g. an "Interior
+    // Walkaround" clip as "Engine Start" just because it sits next to one.
+    // Scope the context to the single JSON object enclosing the match
+    // instead, by walking brace balance outward from the match position.
+    const findEnclosingObject = (text, index) => {
+      let start = index;
+      let depth = 0;
+      while (start > 0) {
+        const ch = text[start];
+        if (ch === "}") depth++;
+        else if (ch === "{") {
+          if (depth === 0) break;
+          depth--;
+        }
+        start--;
+      }
+      let end = index;
+      depth = 0;
+      while (end < text.length) {
+        const ch = text[end];
+        if (ch === "{") depth++;
+        else if (ch === "}") {
+          if (depth === 0) { end++; break; }
+          depth--;
+        }
+        end++;
+      }
+      return text.slice(start, end);
+    };
     const markup = document.documentElement.innerHTML;
     const streamPattern = /https?:\\?\/\\?\/[^"'\\\s<>]*(?:cloudflarestream\.com|videodelivery\.net)[^"'\\\s<>]*/gi;
     for (const match of markup.matchAll(streamPattern)) {
       const rawUrl = match[0].replace(/\\u002F/gi, "/").replace(/\\\//g, "/").replace(/&amp;/g, "&");
-      const contextStart = Math.max(0, match.index - 700);
-      const contextEnd = Math.min(markup.length, match.index + match[0].length + 700);
-      const context = markup
-        .slice(contextStart, contextEnd)
+      const enclosing = findEnclosingObject(markup, match.index);
+      const context = (enclosing.length <= 4000 ? enclosing : match[0])
         .replace(/<[^>]+>/g, " ")
         .replace(/\\u002F/gi, "/")
         .replace(/\\\//g, "/")
