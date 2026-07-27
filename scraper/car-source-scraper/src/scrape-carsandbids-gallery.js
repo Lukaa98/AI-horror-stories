@@ -511,12 +511,19 @@ async function main() {
   const query = argValue("query", "");
   const visualHighlight = argValue("visual-highlight", "");
   const skipImages = argValue("skip-images", "false") === "true";
+  // csort=10 sorts by highest price/bid first, which the main pipeline wants
+  // for photo quality but which starves video discovery: the SQ5 test kept
+  // finding 0 videos across 12 listings because every one of the top-priced
+  // matches (all FEATURED/high-bid auctions) happened to lack a seller
+  // video, while cheaper listings the user found by normal browsing had
+  // clearly labeled Cold Start/Engine Start videos. Video-only tests drop
+  // the forced price sort and use the site's own default ordering instead.
   const searchUrl = argValue("search-url") || buildSearchUrl({
     make: argValue("make"),
     model: argValue("model"),
     startYear: argValue("start-year"),
     endYear: argValue("end-year"),
-    sort: argValue("sort", "10"),
+    sort: argValue("sort", skipImages ? "" : "10"),
   });
 
   if (!searchUrl || !/^https:\/\/carsandbids\.com\/search\//i.test(searchUrl)) {
