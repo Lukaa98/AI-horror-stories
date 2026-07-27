@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.23";
+const UI_VERSION = "V10.24";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -623,6 +623,8 @@ export default function App() {
           <h2>Video Test: {videoProbe.query}</h2>
           <p className="rationale">
             Found {videoProbe.videos_discovered} video embeds across {videoProbe.listings_considered?.length || 0} matching listings.
+            {" "}Approved {(videoProbe.clips || []).length} clip{(videoProbe.clips || []).length === 1 ? "" : "s"} after checking {videoProbe.attempts_made ?? (videoProbe.clips || []).length} listing video{(videoProbe.attempts_made ?? 0) === 1 ? "" : "s"}
+            {videoProbe.listings_with_video_attempted ? ` across ${videoProbe.listings_with_video_attempted} listings` : ""}.
           </p>
           <div className="video-probe-grid">
             {(videoProbe.clips || []).map((clip) => (
@@ -649,7 +651,13 @@ export default function App() {
               </article>
             ))}
           </div>
-          {(videoProbe.clips || []).length === 0 && <p>No embedded listing videos were discovered.</p>}
+          {(videoProbe.clips || []).length === 0 && (
+            <p>
+              {videoProbe.videos_discovered
+                ? `No engine-relevant clip was approved out of ${videoProbe.attempts_made ?? videoProbe.videos_discovered} listing videos checked.`
+                : "No embedded listing videos were discovered."}
+            </p>
+          )}
         </section>
       )}
     </div>

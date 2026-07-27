@@ -208,7 +208,7 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
   // only surfaces a handful of cards. Whether a same-relevance batch of
   // listings happens to have any seller-uploaded videos varies a lot, so
   // widening the pool (deeper scroll, higher limit) matters for video tests.
-  await autoScroll(page, limit > 6 ? 14 : 6, 400);
+  await autoScroll(page, limit > 6 ? 20 : 6, 400);
 
   const entries = await page.evaluate(() => {
     const results = [];
@@ -585,7 +585,7 @@ async function main() {
     await page.setViewport({ width: 1440, height: 1200, deviceScaleFactor: 1 });
 
     const auctions = await collectAuctionEntries(
-      page, searchUrl, queryTokens, startYear, endYear, skipImages ? 12 : 6
+      page, searchUrl, queryTokens, startYear, endYear, skipImages ? 20 : 6
     );
     if (!auctions.length) {
       throw new Error(`No auction links found at ${searchUrl}`);
