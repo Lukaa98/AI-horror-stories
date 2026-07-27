@@ -4,6 +4,7 @@ import json
 import math
 import os
 import subprocess
+import time
 import wave
 from pathlib import Path
 
@@ -14,6 +15,36 @@ from PIL import Image
 # rear-exterior or cockpit shot during a rev). Chosen from observed data:
 # real events have cleared 4x, while roof/interior/ambient noise stays <2x.
 STRONG_AUDIO_OVERRIDE_SCORE = 3.0
+
+# Cabin audio (cockpit gauges, generic interior shots) is muffled compared to
+# an exterior mic catching the same engine event, so a raw event-score race
+# lets a middling interior clip beat a genuinely better exterior one. Scale
+# interior candidates down for *selection* only (not for the approval bar)
+# so a real standout interior recording can still win, but a marginal one
+# loses to an exterior clip with a similar audio jump.
+INTERIOR_SCENE_TYPES = {"cockpit", "interior_detail"}
+INTERIOR_SELECTION_PENALTY = 1.6
+
+
+def _create_with_retry(call, max_retries=4, initial_delay=1.0, backoff=2.0):
+    """Retry an OpenAI call through transient rate limits (429s).
+
+    Running several video tests concurrently shares the same org-level
+    tokens-per-minute budget, so a 429 here is routine load, not a real
+    failure - retrying briefly avoids silently falling back to a tolerant
+    "assume relevant" review that can let a weak candidate through.
+    """
+    delay = initial_delay
+    for attempt in range(max_retries + 1):
+        try:
+            return call()
+        except Exception as exc:
+            message = str(exc)
+            if attempt < max_retries and ("rate_limit" in message or "429" in message):
+                time.sleep(delay)
+                delay *= backoff
+                continue
+            raise
 
 
 def choose_video_candidate(candidates):
@@ -78,13 +109,13 @@ def _classify_scene_image(image_ref, entry):
 
     vehicle_line = f"The expected vehicle family is {entry.name} ({entry.years}), but " if entry else ""
     prompt = _SCENE_PROMPT.format(vehicle_line=vehicle_line)
-    response = OpenAI().responses.create(
+    response = _create_with_retry(lambda: OpenAI().responses.create(
         model=os.getenv("OPENAI_CAR_VIDEO_REVIEW_MODEL", "gpt-4o-mini"),
         input=[{"role": "user", "content": [
             {"type": "input_text", "text": prompt},
             {"type": "input_image", "image_url": image_ref},
         ]}],
-    )
+    ))
     text = response.output_text.strip().removeprefix("```json").removesuffix("```").strip()
     result = json.loads(text)
     result["provider"] = "openai"
@@ -219,13 +250,13 @@ def _verify_frames(contact_sheet, entry):
         "Exact trim, engine, package, or model year does not need to match. Reject only a clearly "
         "different make/model, unrelated footage, or unusable frames."
     )
-    response = OpenAI().responses.create(
+    response = _create_with_retry(lambda: OpenAI().responses.create(
         model=os.getenv("OPENAI_CAR_VIDEO_REVIEW_MODEL", "gpt-4o-mini"),
         input=[{"role": "user", "content": [
             {"type": "input_text", "text": prompt},
             {"type": "input_image", "image_url": f"data:image/jpeg;base64,{encoded}"},
         ]}],
-    )
+    ))
     text = response.output_text.strip().removeprefix("```json").removesuffix("```").strip()
     result = json.loads(text)
     result["provider"] = "openai"
@@ -294,7 +325,14 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
                 continue
         if not analyses:
             return {"approved": False, "error": "No discovered video had usable audio", "source": candidates[0]}
-        chosen = max(analyses, key=lambda item: item["event_score"])
+
+        def _selection_rank(item):
+            score = item["event_score"]
+            if item["scene_review"].get("scene_type") in INTERIOR_SCENE_TYPES:
+                score /= INTERIOR_SELECTION_PENALTY
+            return score
+
+        chosen = max(analyses, key=_selection_rank)
         for item in analyses:
             if item is not chosen:
                 item["probe_wav"].unlink(missing_ok=True)

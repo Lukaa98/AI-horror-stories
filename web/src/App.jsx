@@ -5,13 +5,13 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.24";
+const UI_VERSION = "V10.25";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 20 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
-const VIDEO_TEST_TIMEOUT_MS = 12 * 60 * 1000;
+const VIDEO_TEST_TIMEOUT_MS = 60 * 60 * 1000;
 const YEAR_OPTIONS = Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => String(new Date().getFullYear() - index));
 const WORKFLOW_OPTIONS = [
   {
