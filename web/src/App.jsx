@@ -259,17 +259,19 @@ export default function App() {
         repo: settings.repo,
         branch: settings.branch,
         token: settings.token,
-        workflow: "cars-video-probe.yml",
+        workflow: "cars-research.yml",
         inputs: {
+          request: `Video test for ${make.trim()} ${model.trim()}`,
+          draft_id: id,
+          mode: "video",
           make: make.trim(),
           model: model.trim(),
           query: [make, model, focus].filter(Boolean).join(" "),
           start_year: startYear,
           end_year: endYear,
-          test_id: id,
         },
       });
-      const workflowRun = beginRunTracking("cars-video-probe.yml", startedAt, abortRef.current.signal);
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
       const resultFile = pollForFile({
         owner: settings.owner,
         repo: settings.repo,

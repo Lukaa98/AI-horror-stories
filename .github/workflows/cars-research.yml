@@ -15,6 +15,34 @@ on:
         description: "Unique folder id (the UI generates this)"
         required: true
         type: string
+      mode:
+        description: "Full ranking research or standalone video test"
+        required: false
+        type: choice
+        default: research
+        options:
+          - research
+          - video
+      make:
+        description: "Vehicle make for video mode"
+        required: false
+        type: string
+      model:
+        description: "Vehicle model for video mode"
+        required: false
+        type: string
+      query:
+        description: "Search text for video mode"
+        required: false
+        type: string
+      start_year:
+        description: "Optional video-mode start year"
+        required: false
+        type: string
+      end_year:
+        description: "Optional video-mode end year"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -41,7 +69,12 @@ jobs:
           cache-dependency-path: scraper/car-source-scraper/package-lock.json
 
       - name: Install Python dependencies
+        if: ${{ inputs.mode != 'video' }}
         run: pip install -r requirements.txt
+
+      - name: Install lightweight video-test dependencies
+        if: ${{ inputs.mode == 'video' }}
+        run: pip install Pillow openai
 
       - name: Install scraper dependencies
         working-directory: scraper/car-source-scraper
@@ -52,6 +85,7 @@ jobs:
         run: bash scripts/install-linux-deps.sh
 
       - name: Run research
+        if: ${{ inputs.mode != 'video' }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
@@ -60,7 +94,31 @@ jobs:
             --draft-id "${{ inputs.draft_id }}" \
             --require-ai-image-review
 
+      - name: Install ffmpeg for video test
+        if: ${{ inputs.mode == 'video' }}
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+
+      - name: Run standalone video test
+        if: ${{ inputs.mode == 'video' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          YEAR_ARGS=()
+          if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
+          if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
+          python cars/automation/video_probe.py \
+            --make "${{ inputs.make }}" \
+            --model "${{ inputs.model }}" \
+            --query "${{ inputs.query }}" \
+            --test-id "${{ inputs.draft_id }}" \
+            "${YEAR_ARGS[@]}"
+
       - name: Commit draft
+        if: ${{ inputs.mode != 'video' }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -82,5 +140,30 @@ jobs:
 
           git add "cars/drafts/${{ inputs.draft_id }}"
           git commit -m "cars: research draft ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit video test
+        if: ${{ inputs.mode == 'video' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/video-tests"
+          cp -R "cars/video-tests/${{ inputs.draft_id }}" "$tmp_dir/cars/video-tests/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p cars/video-tests
+          rm -rf "cars/video-tests/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/video-tests/${{ inputs.draft_id }}" "cars/video-tests/${{ inputs.draft_id }}"
+          git add "cars/video-tests/${{ inputs.draft_id }}"
+          git commit -m "cars: video test ${{ inputs.draft_id }}" || exit 0
           git pull --rebase origin "${OUTPUT_BRANCH}" || true
           git push origin "${OUTPUT_BRANCH}"
