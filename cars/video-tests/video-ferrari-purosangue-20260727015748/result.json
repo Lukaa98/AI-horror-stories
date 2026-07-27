@@ -1,0 +1,140 @@
+{
+  "test_id": "video-ferrari-purosangue-20260727015748",
+  "query": "ferrari Purosangue",
+  "make": "ferrari",
+  "model": "Purosangue",
+  "start_year": null,
+  "end_year": null,
+  "listings_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/Kmm8jqp0/2024-ferrari-purosangue",
+      "title": "2024 Ferrari Purosangue",
+      "text": "FEATURED Bid to $415,000",
+      "titleYear": 2024,
+      "score": 70
+    }
+  ],
+  "videos_discovered": 7,
+  "clips": [
+    {
+      "index": 1,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/Kmm8jqp0/2024-ferrari-purosangue",
+      "source_title": "2024 Ferrari Purosangue",
+      "source_year": 2024,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23b5e8f598ba9b11956a48771e73116a/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 3,
+        "likely_engine_audio": false,
+        "reason": "The scene shows the rear exterior of the vehicle, which is not highly relevant for engine audio or startup footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 13.25,
+      "engine_event_score": 2.092,
+      "secondary_event_seconds": 15.85,
+      "secondary_event_score": 0.892,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Ferrari Purosangue",
+        "confidence": 10,
+        "reason": "Frames show a vehicle that matches the design language and features of the Ferrari Purosangue, confirming consistency across shots.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-1-engine.mp4"
+    },
+    {
+      "index": 2,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/Kmm8jqp0/2024-ferrari-purosangue",
+      "source_title": "2024 Ferrari Purosangue",
+      "source_year": 2024,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b24bc91315abc6776e4474387445f5fe/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "interior_detail",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The scene shows an interior detail with no engine audio or relevant engine views.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 8.05,
+      "engine_event_score": 1.7,
+      "secondary_event_seconds": 6.45,
+      "secondary_event_score": 1.813,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Ferrari Purosangue",
+        "confidence": 10,
+        "reason": "Frames show interior elements and design consistent with Ferrari Purosangue.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-2-engine.mp4"
+    },
+    {
+      "index": 3,
+      "approved": false,
+      "clip_extracted": false,
+      "source_listing": "https://carsandbids.com/auctions/Kmm8jqp0/2024-ferrari-purosangue",
+      "source_title": "2024 Ferrari Purosangue",
+      "source_year": 2024,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/be4ba8f6ead469d67fa558e41639a163/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "cockpit",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The shot focuses on the interior of the car without any engine audio, startup, or exhaust details.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "secondary_event_seconds": null,
+      "secondary_event_score": null,
+      "review": {
+        "approved": false,
+        "detected_vehicle": "N/A",
+        "confidence": 1,
+        "reason": "Clear different make/model; unrelated footage.",
+        "provider": "openai"
+      },
+      "error": null
+    },
+    {
+      "index": 4,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/Kmm8jqp0/2024-ferrari-purosangue",
+      "source_title": "2024 Ferrari Purosangue",
+      "source_year": 2024,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cab1b1b3338f8637dba855c37216568a/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "interior_detail",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The footage shows the interior of the vehicle without any engine sound or relevant engine visuals.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 9.45,
+      "engine_event_score": 3.302,
+      "secondary_event_seconds": 18.45,
+      "secondary_event_score": 1.17,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Ferrari Purosangue",
+        "confidence": 9,
+        "reason": "The frames show interior features consistent with the Ferrari Purosangue, such as the distinct dashboard layout and steering wheel design.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-4-engine.mp4"
+    }
+  ],
+  "status": "complete"
+}
