@@ -1,0 +1,168 @@
+{
+  "test_id": "video-porsche-911-20260727011713",
+  "query": "porsche 911",
+  "make": "porsche",
+  "model": "911",
+  "start_year": null,
+  "end_year": null,
+  "listings_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3ybWvVy7/1997-porsche-911-turbo-s-coupe",
+      "title": "1997 Porsche 911 Turbo S Coupe",
+      "text": "Sold for $550,000",
+      "titleYear": 1997,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "title": "2019 Porsche 911 Speedster",
+      "text": "FEATURED Sold for $525,000",
+      "titleYear": 2019,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lBOVdB2/2023-porsche-911-gt3-rs-weissach",
+      "title": "2023 Porsche 911 Gt3 Rs Weissach",
+      "text": "FEATURED Sold for $420,696",
+      "titleYear": 2023,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4RG2VjA/2018-porsche-911-gt2-rs-weissach",
+      "title": "2018 Porsche 911 Gt2 Rs Weissach",
+      "text": "Bid to $405,911",
+      "titleYear": 2018,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rb1D4lwQ/2024-porsche-911-gt3-rs-weissach",
+      "title": "2024 Porsche 911 Gt3 Rs Weissach",
+      "text": "FEATURED Bid to $392,000",
+      "titleYear": 2024,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZB8oVXk/2026-porsche-911-gt3-touring",
+      "title": "2026 Porsche 911 Gt3 Touring",
+      "text": "FEATURED Bid to $356,000",
+      "titleYear": 2026,
+      "score": 70
+    }
+  ],
+  "videos_discovered": 9,
+  "clips": [
+    {
+      "index": 1,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "source_title": "2019 Porsche 911 Speedster",
+      "source_year": 2019,
+      "source_type": "cold_start",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4942eeeca72dda256d86ff744e46783a/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "cockpit",
+        "engine_relevance": 3,
+        "likely_engine_audio": false,
+        "reason": "The scene displays the interior cockpit but lacks any relevant engine audio or cold-start footage, making it less pertinent to engine operations.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 4.45,
+      "engine_event_score": 1.191,
+      "secondary_event_seconds": 15.45,
+      "secondary_event_score": 1.062,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche 911",
+        "confidence": 9,
+        "reason": "The interior design, steering wheel, and overall layout match the characteristics of a Porsche 911.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-1-engine.mp4"
+    },
+    {
+      "index": 2,
+      "approved": false,
+      "clip_extracted": false,
+      "source_listing": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "source_title": "2019 Porsche 911 Speedster",
+      "source_year": 2019,
+      "source_type": "cold_start",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de81462bb125e968c23d436be07c9b9f/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "hood_or_trunk_operation",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The scene shows the trunk area with controls, but it lacks engine audio and doesn't directly relate to exhaust or engine startup footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "secondary_event_seconds": null,
+      "secondary_event_score": null,
+      "review": {
+        "approved": false,
+        "detected_vehicle": "unknown",
+        "confidence": 1,
+        "reason": "The frames do not provide sufficient information to identify a vehicle and do not appear to show a Porsche 911 or any related model.",
+        "provider": "openai"
+      },
+      "error": null
+    },
+    {
+      "index": 3,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "source_title": "2019 Porsche 911 Speedster",
+      "source_year": 2019,
+      "source_type": "cold_start",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aad91c157a66b2b8952ae7d76b856f87/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "exhaust_closeup",
+        "engine_relevance": 8,
+        "likely_engine_audio": true,
+        "reason": "The frame shows the exhaust tips of a car, indicating potential sound from the engine during cold-start or revving.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 0.65,
+      "engine_event_score": 4.515,
+      "secondary_event_seconds": 8.85,
+      "secondary_event_score": 1.24,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche 911",
+        "confidence": 8,
+        "reason": "The frames show characteristics that are consistent with the Porsche 911, such as the rear design and exhaust configuration.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-3-engine.mp4"
+    },
+    {
+      "index": 4,
+      "approved": false,
+      "clip_extracted": false,
+      "source_listing": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "source_title": "2019 Porsche 911 Speedster",
+      "source_year": 2019,
+      "source_type": "cold_start",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8f196db6738e2860c0ca809beddb0b84/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "full_exterior",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The frame captures the exterior of a Porsche 911 but does not include any engine audio or relevant engine-focused footage such as exhaust closeups or cockpit views.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "secondary_event_seconds": null,
+      "secondary_event_score": null,
+      "review": null,
+      "error": "No discovered video had usable audio"
+    }
+  ],
+  "status": "complete"
+}

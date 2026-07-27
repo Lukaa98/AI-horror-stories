@@ -1,0 +1,254 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-27T01:18:58.349Z",
+  "query": "porsche 911",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/porsche/911?csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3ybWvVy7/1997-porsche-911-turbo-s-coupe",
+      "title": "1997 Porsche 911 Turbo S Coupe",
+      "text": "Sold for $550,000",
+      "titleYear": 1997,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "title": "2019 Porsche 911 Speedster",
+      "text": "FEATURED Sold for $525,000",
+      "titleYear": 2019,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lBOVdB2/2023-porsche-911-gt3-rs-weissach",
+      "title": "2023 Porsche 911 Gt3 Rs Weissach",
+      "text": "FEATURED Sold for $420,696",
+      "titleYear": 2023,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4RG2VjA/2018-porsche-911-gt2-rs-weissach",
+      "title": "2018 Porsche 911 Gt2 Rs Weissach",
+      "text": "Bid to $405,911",
+      "titleYear": 2018,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rb1D4lwQ/2024-porsche-911-gt3-rs-weissach",
+      "title": "2024 Porsche 911 Gt3 Rs Weissach",
+      "text": "FEATURED Bid to $392,000",
+      "titleYear": 2024,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZB8oVXk/2026-porsche-911-gt3-touring",
+      "title": "2026 Porsche 911 Gt3 Touring",
+      "text": "FEATURED Bid to $356,000",
+      "titleYear": 2026,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3ybWvVy7/1997-porsche-911-turbo-s-coupe",
+      "title": "1997 Porsche 911 Turbo S Coupe",
+      "text": "Sold for $550,000",
+      "titleYear": 1997,
+      "score": 70,
+      "usable_image_count": 27,
+      "sale_price": 550000,
+      "sale_type": "sold",
+      "page_title": "1997 Porsche 911 Turbo S Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "title": "2019 Porsche 911 Speedster",
+      "text": "FEATURED Sold for $525,000",
+      "titleYear": 2019,
+      "score": 70,
+      "usable_image_count": 26,
+      "sale_price": 525000,
+      "sale_type": "sold",
+      "page_title": "2019 Porsche 911 Speedster"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lBOVdB2/2023-porsche-911-gt3-rs-weissach",
+      "title": "2023 Porsche 911 Gt3 Rs Weissach",
+      "text": "FEATURED Sold for $420,696",
+      "titleYear": 2023,
+      "score": 70,
+      "usable_image_count": 37,
+      "sale_price": 420696,
+      "sale_type": "sold",
+      "page_title": "2023 Porsche 911 GT3 RS Weissach"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4RG2VjA/2018-porsche-911-gt2-rs-weissach",
+      "title": "2018 Porsche 911 Gt2 Rs Weissach",
+      "text": "Bid to $405,911",
+      "titleYear": 2018,
+      "score": 70,
+      "usable_image_count": 29,
+      "sale_price": 405911,
+      "sale_type": "sold",
+      "page_title": "2018 Porsche 911 GT2 RS Weissach"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rb1D4lwQ/2024-porsche-911-gt3-rs-weissach",
+      "title": "2024 Porsche 911 Gt3 Rs Weissach",
+      "text": "FEATURED Bid to $392,000",
+      "titleYear": 2024,
+      "score": 70,
+      "usable_image_count": 29,
+      "sale_price": 392000,
+      "sale_type": "sold",
+      "page_title": "2024 Porsche 911 GT3 RS Weissach"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZB8oVXk/2026-porsche-911-gt3-touring",
+      "title": "2026 Porsche 911 Gt3 Touring",
+      "text": "FEATURED Bid to $356,000",
+      "titleYear": 2026,
+      "score": 70,
+      "usable_image_count": 20,
+      "sale_price": 356000,
+      "sale_type": "sold",
+      "page_title": "2026 Porsche 911 GT3 Touring"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9lBOVdB2/2023-porsche-911-gt3-rs-weissach",
+    "title": "2023 Porsche 911 Gt3 Rs Weissach",
+    "text": "FEATURED Sold for $420,696",
+    "titleYear": 2023,
+    "score": 70,
+    "sale_price": 420696,
+    "sale_type": "sold",
+    "page_title": "2023 Porsche 911 GT3 RS Weissach",
+    "year": 2023,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4942eeeca72dda256d86ff744e46783a/thumbnails/thumbnail.jpg",
+      "context": "ing Video Exterior Walkaround Interior Walkaround Engine Start <div class=\"cn",
+      "section": "",
+      "title": "2019 Porsche 911 Speedster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4942eeeca72dda256d86ff744e46783a/thumbnails/thumbnail.jpg",
+      "type": "cold_start",
+      "auction_url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4942eeeca72dda256d86ff744e46783a/manifest/video.m3u8",
+      "auction_title": "2019 Porsche 911 Speedster",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de81462bb125e968c23d436be07c9b9f/thumbnails/thumbnail.jpg",
+      "context": "nail\"> Exterior Walkaround Interior Walkaround Engine Start Engine Start #2 <div class=\"cnb-pr",
+      "section": "",
+      "title": "2019 Porsche 911 Speedster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de81462bb125e968c23d436be07c9b9f/thumbnails/thumbnail.jpg",
+      "type": "cold_start",
+      "auction_url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de81462bb125e968c23d436be07c9b9f/manifest/video.m3u8",
+      "auction_title": "2019 Porsche 911 Speedster",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aad91c157a66b2b8952ae7d76b856f87/thumbnails/thumbnail.jpg",
+      "context": "=\"thumbnail\"> Interior Walkaround Engine Start Engine Start #2 <img src=\"",
+      "section": "",
+      "title": "2019 Porsche 911 Speedster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aad91c157a66b2b8952ae7d76b856f87/thumbnails/thumbnail.jpg",
+      "type": "cold_start",
+      "auction_url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aad91c157a66b2b8952ae7d76b856f87/manifest/video.m3u8",
+      "auction_title": "2019 Porsche 911 Speedster",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8f196db6738e2860c0ca809beddb0b84/thumbnails/thumbnail.jpg",
+      "context": "prop=\"thumbnail\"> Engine Start Engine Start #2 <img src=\"https://customer-cuf69xprmkaqooxd.cloudfla",
+      "section": "",
+      "title": "2019 Porsche 911 Speedster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8f196db6738e2860c0ca809beddb0b84/thumbnails/thumbnail.jpg",
+      "type": "cold_start",
+      "auction_url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8f196db6738e2860c0ca809beddb0b84/manifest/video.m3u8",
+      "auction_title": "2019 Porsche 911 Speedster",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/da0b37d25cca7d108de3c293cbd4eac8/thumbnails/thumbnail.jpg",
+      "context": "\" alt=\"2019 Porsche 911 Speedster\" itemprop=\"thumbnail\"> Engine Start #2 Similar Auctions Next <ul clas",
+      "section": "",
+      "title": "2019 Porsche 911 Speedster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/da0b37d25cca7d108de3c293cbd4eac8/thumbnails/thumbnail.jpg",
+      "type": "cold_start",
+      "auction_url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/da0b37d25cca7d108de3c293cbd4eac8/manifest/video.m3u8",
+      "auction_title": "2019 Porsche 911 Speedster",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/63475546e5daf785ec68e0545b8dda6b/thumbnails/thumbnail.jpg",
+      "context": "ll be stored at Sonoma Raceway for up to two weeks following the auction. Transportation from Sonoma Raceway is the buyer’s responsibility. The seller states that paint protection film and IGL Kenzo ceramic coating have been applied to the exterior surfaces. View the entire listing Video Exterior Walkaround Interior Walkaround <div cl",
+      "section": "",
+      "title": "2019 Porsche 911 Speedster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/63475546e5daf785ec68e0545b8dda6b/thumbnails/thumbnail.jpg",
+      "type": "walkaround",
+      "auction_url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/63475546e5daf785ec68e0545b8dda6b/manifest/video.m3u8",
+      "auction_title": "2019 Porsche 911 Speedster",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/71ab1c9d03ef7bce4141b1ffb4d47ac7/thumbnails/thumbnail.jpg",
+      "context": "0c0ca809beddb0b84/thumbnails/thumbnail.jpg\" alt=\"2019 Porsche 911 Speedster\" itemprop=\"thumbnail\"> Similar Auctions Next <img src=\"https://media.carsandbids.com/cdn-cgi/image/width=712,quality=70/9004500a220bf3a3d455",
+      "section": "",
+      "title": "2019 Porsche 911 Speedster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/71ab1c9d03ef7bce4141b1ffb4d47ac7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/71ab1c9d03ef7bce4141b1ffb4d47ac7/manifest/video.m3u8",
+      "auction_title": "2019 Porsche 911 Speedster",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0310de4d2bae62d3f0d59eada84df400/thumbnails/thumbnail.jpg",
+      "context": "class=\"detail-body\"> 2 keys Owner's manual Build sheet Ownership History The selling dealer reportedly acquired this 911 earlier in 2025. View the entire listing Video Similar Auctions Next <ul",
+      "section": "",
+      "title": "2026 Porsche 911 GT3 Touring",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0310de4d2bae62d3f0d59eada84df400/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KZB8oVXk/2026-porsche-911-gt3-touring",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0310de4d2bae62d3f0d59eada84df400/manifest/video.m3u8",
+      "auction_title": "2026 Porsche 911 GT3 Touring",
+      "auction_year": 2026,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23582627543403f7f87bf90d1116a938/thumbnails/thumbnail.jpg",
+      "context": "lass=\"btn btn-link rb \">View the entire listing Video Similar Auctions Next <img src=\"https://media.carsandbids.com/cdn-cgi/image/width=712,quality=70/4822e9034b0b6b357b3f73fa",
+      "section": "",
+      "title": "2026 Porsche 911 GT3 Touring",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23582627543403f7f87bf90d1116a938/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KZB8oVXk/2026-porsche-911-gt3-touring",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23582627543403f7f87bf90d1116a938/manifest/video.m3u8",
+      "auction_title": "2026 Porsche 911 GT3 Touring",
+      "auction_year": 2026,
+      "search_score": 70
+    }
+  ]
+}
