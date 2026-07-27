@@ -1,0 +1,87 @@
+{
+  "test_id": "v1014-smoke-boxster",
+  "query": "Porsche 718 Boxster",
+  "make": "Porsche",
+  "model": "Boxster",
+  "start_year": 2016,
+  "end_year": 2025,
+  "listings_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3RpLb17N/2024-porsche-718-boxster-spyder-rs",
+      "title": "2024 Porsche 718 Boxster Spyder Rs",
+      "text": "FEATURED Sold for $221,000",
+      "titleYear": 2024,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4Jan4kk/2023-porsche-718-boxster-spyder",
+      "title": "2023 Porsche 718 Boxster Spyder",
+      "text": "FEATURED Sold for $160,000",
+      "titleYear": 2023,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rwvGG5Xl/2022-porsche-718-boxster-spyder",
+      "title": "2022 Porsche 718 Boxster Spyder",
+      "text": "FEATURED Sold for $132,000",
+      "titleYear": 2022,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gg8ypB1/2020-porsche-718-boxster-spyder",
+      "title": "2020 Porsche 718 Boxster Spyder",
+      "text": "Sold for $125,000",
+      "titleYear": 2020,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmRBWad6/2023-porsche-718-boxster-spyder",
+      "title": "2023 Porsche 718 Boxster Spyder",
+      "text": "FEATURED Bid to $117,000",
+      "titleYear": 2023,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92XeMVlQ/2022-porsche-718-boxster-spyder",
+      "title": "2022 Porsche 718 Boxster Spyder",
+      "text": "Sold for $115,000",
+      "titleYear": 2022,
+      "score": 88
+    }
+  ],
+  "videos_discovered": 2,
+  "clips": [
+    {
+      "index": 1,
+      "approved": false,
+      "source_listing": "https://carsandbids.com/auctions/rwvGG5Xl/2022-porsche-718-boxster-spyder",
+      "source_title": "2022 Porsche 718 Boxster Spyder",
+      "source_year": 2022,
+      "source_type": "video",
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "review": null,
+      "error": "Command '['ffmpeg', '-y', '-ss', '0.2', '-i', '/home/runner/work/AI-horror-stories/AI-horror-stories/cars/video-tests/v1014-smoke-boxster/clips/rank-1-engine.mp4', '-frames:v', '1', '/home/runner/work/AI-horror-stories/AI-horror-stories/cars/video-tests/v1014-smoke-boxster/clips/rank-1-verify-0.jpg']' returned non-zero exit status 234."
+    },
+    {
+      "index": 2,
+      "approved": true,
+      "source_listing": "https://carsandbids.com/auctions/rwvGG5Xl/2022-porsche-718-boxster-spyder",
+      "source_title": "2022 Porsche 718 Boxster Spyder",
+      "source_year": 2022,
+      "source_type": "video",
+      "detected_onset_seconds": 2.85,
+      "engine_event_score": 8.426,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche Boxster",
+        "confidence": 9,
+        "reason": "The frames show the interior of a car with a steering wheel and dashboard design consistent with the Porsche Boxster (2016\u20132025) model.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-2-engine.mp4"
+    }
+  ],
+  "status": "complete"
+}
