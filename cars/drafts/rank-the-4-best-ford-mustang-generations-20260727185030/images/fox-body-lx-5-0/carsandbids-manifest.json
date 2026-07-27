@@ -1,0 +1,443 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-27T18:57:15.896Z",
+  "query": "Ford Mustang Fox Body",
+  "visual_highlight": "boxy design",
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=1979&end_year=1993&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rbe5Y4nw/1993-ford-mustang-svt-cobra",
+      "title": "1993 Ford Mustang Svt Cobra",
+      "text": "Bid to $34,250",
+      "titleYear": 1993,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vEDLQnN/1990-ford-mustang-saleen-impressor-stage-ii",
+      "title": "1990 Ford Mustang Saleen Impressor Stage Ii",
+      "text": "Sold for $33,000",
+      "titleYear": 1990,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3z7zBeM1/1991-ford-mustang-lx-50-coupe",
+      "title": "1991 Ford Mustang Lx 50 Coupe",
+      "text": "Sold for $26,750",
+      "titleYear": 1991,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPQm1lZ2/1985-ford-mustang-gt",
+      "title": "1985 Ford Mustang Gt",
+      "text": "Sold for $24,750",
+      "titleYear": 1985,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AA8EGOJ/1989-ford-mustang-lx-50-coupe",
+      "title": "1989 Ford Mustang Lx 50 Coupe",
+      "text": "Bid to $24,500",
+      "titleYear": 1989,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K1yV8lnn/1988-ford-mustang-saleen-coupe",
+      "title": "Sold After for $23,500",
+      "text": "Sold After for $23,500",
+      "titleYear": 1988,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rbe5Y4nw/1993-ford-mustang-svt-cobra",
+      "title": "1993 Ford Mustang Svt Cobra",
+      "text": "Bid to $34,250",
+      "titleYear": 1993,
+      "score": 70,
+      "usable_image_count": 26,
+      "sale_price": 34250,
+      "sale_type": "sold",
+      "page_title": "1993 Ford Mustang SVT Cobra"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vEDLQnN/1990-ford-mustang-saleen-impressor-stage-ii",
+      "title": "1990 Ford Mustang Saleen Impressor Stage Ii",
+      "text": "Sold for $33,000",
+      "titleYear": 1990,
+      "score": 70,
+      "usable_image_count": 26,
+      "sale_price": 33000,
+      "sale_type": "sold",
+      "page_title": "1990 Ford Mustang Saleen Impressor Stage II"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3z7zBeM1/1991-ford-mustang-lx-50-coupe",
+      "title": "1991 Ford Mustang Lx 50 Coupe",
+      "text": "Sold for $26,750",
+      "titleYear": 1991,
+      "score": 70,
+      "usable_image_count": 18,
+      "sale_price": 26750,
+      "sale_type": "sold",
+      "page_title": "1991 Ford Mustang LX 5.0 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPQm1lZ2/1985-ford-mustang-gt",
+      "title": "1985 Ford Mustang Gt",
+      "text": "Sold for $24,750",
+      "titleYear": 1985,
+      "score": 70,
+      "usable_image_count": 18,
+      "sale_price": 24750,
+      "sale_type": "sold",
+      "page_title": "1985 Ford Mustang GT"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rbe5Y4nw/1993-ford-mustang-svt-cobra",
+    "title": "1993 Ford Mustang Svt Cobra",
+    "text": "Bid to $34,250",
+    "titleYear": 1993,
+    "score": 70,
+    "sale_price": 34250,
+    "sale_type": "sold",
+    "page_title": "1993 Ford Mustang SVT Cobra",
+    "year": 1993,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/KmZGlzwY-smpyHhNN2d-(edit).jpg?t=166362241213",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1993 Ford Mustang SVT Cobra",
+      "width": 542,
+      "height": 361,
+      "bytes": 284566
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/KmZGlzwY-zLILVrG1xS-(edit).jpg?t=166362217434",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1993 Ford Mustang SVT Cobra",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 413234
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/KmZGlzwY-XQGST3rzHh-(edit).jpg?t=166362213689",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1993 Ford Mustang SVT Cobra",
+      "width": 542,
+      "height": 361,
+      "bytes": 264053
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/KmZGlzwY-6IMCThtWwj-(edit).jpg?t=166362246408",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1993 Ford Mustang SVT Cobra",
+      "width": 542,
+      "height": 361,
+      "bytes": 210643
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/KmZGlzwY-e_jglPBAWd-(edit).jpg?t=166362248928",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1993 Ford Mustang SVT Cobra",
+      "width": 542,
+      "height": 361,
+      "bytes": 225832
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/KmZGlzwY--5PDPbFiLF-(edit).jpg?t=166362251537",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1993 Ford Mustang SVT Cobra",
+      "width": 542,
+      "height": 361,
+      "bytes": 139591
+    },
+    {
+      "path": "highlight-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/KmZGlzwY-Bk9ueGCYgj-(edit).jpg?t=166362230448",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1993 Ford Mustang SVT Cobra",
+      "width": 542,
+      "height": 361,
+      "bytes": 628044
+    },
+    {
+      "path": "highlight-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/KmZGlzwY-Dr80YgEvq_-(edit).jpg?t=166362220361",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1993 Ford Mustang SVT Cobra",
+      "width": 542,
+      "height": 361,
+      "bytes": 336640
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/028b22ecb5384a43df6cc6b8af5a1136/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/028b22ecb5384a43df6cc6b8af5a1136/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1985 Ford Mustang GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/028b22ecb5384a43df6cc6b8af5a1136/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KPQm1lZ2/1985-ford-mustang-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/028b22ecb5384a43df6cc6b8af5a1136/manifest/video.m3u8",
+      "auction_title": "1985 Ford Mustang GT",
+      "auction_year": 1985,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/635fd1b3b36b9be5b6a594ed730862d7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/635fd1b3b36b9be5b6a594ed730862d7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1985 Ford Mustang GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/635fd1b3b36b9be5b6a594ed730862d7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KPQm1lZ2/1985-ford-mustang-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/635fd1b3b36b9be5b6a594ed730862d7/manifest/video.m3u8",
+      "auction_title": "1985 Ford Mustang GT",
+      "auction_year": 1985,
+      "search_score": 70
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "1987-1993",
+        "detected_variant_or_engine": "5.0",
+        "visible_match_evidence": [
+          "boxy shape",
+          "single headlight housing",
+          "simple grille",
+          "5.0 badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "1987-1993",
+        "detected_variant_or_engine": "5.0",
+        "visible_match_evidence": [
+          "boxy shape",
+          "single headlight housing",
+          "clean tail",
+          "5.0 badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "1987-1993",
+        "detected_variant_or_engine": "5.0",
+        "visible_match_evidence": [
+          "boxy shape",
+          "simple grille",
+          "5.0 badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1987-1993",
+        "detected_variant_or_engine": "5.0",
+        "visible_match_evidence": [
+          "boxy shape",
+          "clean tail",
+          "5.0 badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1979-1993",
+        "detected_variant_or_engine": "5.0",
+        "visible_match_evidence": [
+          "ford badge",
+          "interior design",
+          "typical Fox Body layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1979-1993",
+        "detected_variant_or_engine": "5.0",
+        "visible_match_evidence": [
+          "interior design",
+          "seat pattern",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 5,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle; it depicts an interior dashboard instead.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

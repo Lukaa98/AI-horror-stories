@@ -1,0 +1,602 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-27T18:54:55.715Z",
+  "query": "Ford Mustang Fastback 1965",
+  "visual_highlight": "fastback roofline",
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=1965&end_year=1973&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "title": "1965 Ford Mustang Fastback",
+      "text": "Sold for $58,000",
+      "titleYear": 1965,
+      "score": 106
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+      "title": "1965 Ford Mustang Fastback",
+      "text": "Bid to $36,000",
+      "titleYear": 1965,
+      "score": 106
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkew4DvQ/1968-ford-mustang-fastback",
+      "title": "1968 Ford Mustang Fastback",
+      "text": "Bid to $48,250",
+      "titleYear": 1968,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BwewD2b/1967-ford-mustang-fastback",
+      "title": "1967 Ford Mustang Fastback",
+      "text": "FEATURED Bid to $35,000",
+      "titleYear": 1967,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rN0aepMW/1969-ford-mustang-fastback",
+      "title": "1969 Ford Mustang Fastback",
+      "text": "Bid to $21,750",
+      "titleYear": 1969,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9Al8PaD5/1965-ford-mustang-coupe",
+      "title": "1965 Ford Mustang Coupe",
+      "text": "Bid to $20,250",
+      "titleYear": 1965,
+      "score": 88
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "title": "1965 Ford Mustang Fastback",
+      "text": "Sold for $58,000",
+      "titleYear": 1965,
+      "score": 106,
+      "usable_image_count": 21,
+      "sale_price": 58000,
+      "sale_type": "sold",
+      "page_title": "1965 Ford Mustang Fastback"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+      "title": "1965 Ford Mustang Fastback",
+      "text": "Bid to $36,000",
+      "titleYear": 1965,
+      "score": 106,
+      "usable_image_count": 26,
+      "sale_price": 36000,
+      "sale_type": "sold",
+      "page_title": "1965 Ford Mustang Fastback"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkew4DvQ/1968-ford-mustang-fastback",
+      "title": "1968 Ford Mustang Fastback",
+      "text": "Bid to $48,250",
+      "titleYear": 1968,
+      "score": 88,
+      "usable_image_count": 20,
+      "sale_price": 48250,
+      "sale_type": "sold",
+      "page_title": "1968 Ford Mustang Fastback"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BwewD2b/1967-ford-mustang-fastback",
+      "title": "1967 Ford Mustang Fastback",
+      "text": "FEATURED Bid to $35,000",
+      "titleYear": 1967,
+      "score": 88,
+      "usable_image_count": 19,
+      "sale_price": 35000,
+      "sale_type": "sold",
+      "page_title": "1967 Ford Mustang Fastback"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+    "title": "1965 Ford Mustang Fastback",
+    "text": "Bid to $36,000",
+    "titleYear": 1965,
+    "score": 106,
+    "sale_price": 36000,
+    "sale_type": "sold",
+    "page_title": "1965 Ford Mustang Fastback",
+    "year": 1965,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "rear-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rMjNz7RL-azD_GgO/edit/Uf_Rh.jpg?t=177762755298",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1965 Ford Mustang Fastback",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 381253
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rMjNz7RL-nZ5_XvY/edit/qHcPn.jpg?t=177762793620",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "1965 Ford Mustang Fastback",
+      "width": 542,
+      "height": 361,
+      "bytes": 296265
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rMjNz7RL-p_LeSkE/edit/bXr1J.jpg?t=177762794930",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "1965 Ford Mustang Fastback",
+      "width": 542,
+      "height": 361,
+      "bytes": 359999
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rMjNz7RL-fRttDL-/edit/UCfjH.jpg?t=177762791755",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1965 Ford Mustang Fastback",
+      "width": 542,
+      "height": 361,
+      "bytes": 350973
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rMjNz7RL-ToGkgod/edit/-su36.jpg?t=177762796002",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "1965 Ford Mustang Fastback",
+      "width": 542,
+      "height": 361,
+      "bytes": 279588
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rMjNz7RL-ogWPdy8/edit/40prG.jpg?t=177766330300",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "1965 Ford Mustang Fastback",
+      "width": 542,
+      "height": 361,
+      "bytes": 306490
+    },
+    {
+      "path": "rear-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rMjNz7RL-VZBFPnn/edit/HnMwE.jpg?t=177762784914",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1965 Ford Mustang Fastback",
+      "width": 542,
+      "height": 361,
+      "bytes": 523927
+    },
+    {
+      "path": "rear-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rMjNz7RL-8GtAljx/edit/-5bDe.jpg?t=177762781522",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1965 Ford Mustang Fastback",
+      "width": 542,
+      "height": 361,
+      "bytes": 376848
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d6ec9e1def617cab11c22ff143dbdb1a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d6ec9e1def617cab11c22ff143dbdb1a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d6ec9e1def617cab11c22ff143dbdb1a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d6ec9e1def617cab11c22ff143dbdb1a/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cbad4f61209fec5b4efff12484fccb03/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cbad4f61209fec5b4efff12484fccb03/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cbad4f61209fec5b4efff12484fccb03/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cbad4f61209fec5b4efff12484fccb03/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c03f307d483b70bb668bae37fdd43986/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c03f307d483b70bb668bae37fdd43986/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c03f307d483b70bb668bae37fdd43986/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c03f307d483b70bb668bae37fdd43986/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8ddefbea4ef3f7de9cd8620c9012eb55/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8ddefbea4ef3f7de9cd8620c9012eb55/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8ddefbea4ef3f7de9cd8620c9012eb55/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8ddefbea4ef3f7de9cd8620c9012eb55/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4bc005af3dd833a32c7125ffaecf174a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4bc005af3dd833a32c7125ffaecf174a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4bc005af3dd833a32c7125ffaecf174a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4bc005af3dd833a32c7125ffaecf174a/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1a775305846ea6ff20f0d8231918106/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1a775305846ea6ff20f0d8231918106/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1a775305846ea6ff20f0d8231918106/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1a775305846ea6ff20f0d8231918106/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 106
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/96102cb536742975fb040e9d26ae2bdb/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/96102cb536742975fb040e9d26ae2bdb/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1968 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/96102cb536742975fb040e9d26ae2bdb/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rkew4DvQ/1968-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/96102cb536742975fb040e9d26ae2bdb/manifest/video.m3u8",
+      "auction_title": "1968 Ford Mustang Fastback",
+      "auction_year": 1968,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4b8f86b1906c52e43a09619604402068/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4b8f86b1906c52e43a09619604402068/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1967 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4b8f86b1906c52e43a09619604402068/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3BwewD2b/1967-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4b8f86b1906c52e43a09619604402068/manifest/video.m3u8",
+      "auction_title": "1967 Ford Mustang Fastback",
+      "auction_year": 1967,
+      "search_score": 88
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "fastback roofline",
+          "tri-bar taillights",
+          "pony grille badge",
+          "chrome accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965-1973",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "bucket seats",
+          "chrome accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": null,
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965-1973",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ford Mustang badge",
+          "Classic interior design",
+          "Steering wheel style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965-1973",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "fastback roofline",
+          "interior design consistent with first generation Mustang",
+          "bucket seats"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the target vehicle.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "fastback roofline",
+          "tri-bar taillights",
+          "pony's grille badge",
+          "chrome accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "First Generation (1965-1973)",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "fastback roofline",
+          "tri-bar taillights",
+          "simulated side vents",
+          "pony grille badge",
+          "chrome accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965-1973",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "fastback roofline",
+          "tri-bar taillights",
+          "chrome accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-08.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
