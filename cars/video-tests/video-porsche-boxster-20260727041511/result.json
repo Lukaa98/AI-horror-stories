@@ -1,0 +1,218 @@
+{
+  "test_id": "video-porsche-boxster-20260727041511",
+  "query": "Porsche  Boxster",
+  "make": "Porsche",
+  "model": "Boxster",
+  "start_year": null,
+  "end_year": null,
+  "listings_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3yL17nkR/2001-porsche-boxster-s",
+      "title": "Sold After for $18,500",
+      "text": "Sold After for $18,500",
+      "titleYear": 2001,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9QamNDzn/2005-porsche-boxster-s",
+      "title": "2005 Porsche Boxster S",
+      "text": "Bid to $19,000",
+      "titleYear": 2005,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3OYGy6xz/2017-porsche-718-boxster-s",
+      "title": "Sold After for $46,000",
+      "text": "Sold After for $46,000",
+      "titleYear": 2017,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3R4NaJq8/2001-porsche-boxster-s",
+      "title": "2001 Porsche Boxster S",
+      "text": "Sold for $10,100",
+      "titleYear": 2001,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjgV0R6N/2000-porsche-boxster-s",
+      "title": "2000 Porsche Boxster S",
+      "text": "Sold for $9,800",
+      "titleYear": 2000,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkwwYeyb/2004-porsche-boxster-s",
+      "title": "2004 Porsche Boxster S",
+      "text": "Sold for $21,500",
+      "titleYear": 2004,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/35DvpvR9/2025-porsche-718-boxster-gts-40",
+      "title": "Sold After for $72,000",
+      "text": "Sold After for $72,000",
+      "titleYear": 2025,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmnbqELY/2007-porsche-boxster",
+      "title": "2007 Porsche Boxster",
+      "text": "Bid to $17,750",
+      "titleYear": 2007,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rbyGzAVl/1999-porsche-boxster",
+      "title": "1999 Porsche Boxster",
+      "text": "Bid to $14,250",
+      "titleYear": 1999,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/30GpOGP1/2005-porsche-boxster-s",
+      "title": "2005 Porsche Boxster S",
+      "text": "Sold for $26,500",
+      "titleYear": 2005,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9edZpyqk/2005-porsche-boxster-s",
+      "title": "2005 Porsche Boxster S",
+      "text": "Sold for $23,000",
+      "titleYear": 2005,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3z70l20B/2006-porsche-boxster",
+      "title": "2006 Porsche Boxster",
+      "text": "Sold for $15,500",
+      "titleYear": 2006,
+      "score": 70
+    }
+  ],
+  "videos_discovered": 40,
+  "clips": [
+    {
+      "index": 1,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/3yL17nkR/2001-porsche-boxster-s",
+      "source_title": "2001 Porsche Boxster S",
+      "source_year": 2001,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4ad20a1c170bbb6d2a1e96e96c03ed92/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "cockpit",
+        "engine_relevance": 3,
+        "likely_engine_audio": false,
+        "reason": "The scene shows the cockpit with gauges, but does not include engine startup, cold-start, or exhaust footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 7.05,
+      "engine_event_score": 2.364,
+      "secondary_event_seconds": 13.05,
+      "secondary_event_score": 3.028,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche Boxster",
+        "confidence": 9,
+        "reason": "The frames showcase a consistent dashboard design and instrument cluster characteristic of the Porsche Boxster.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-1-engine.mp4"
+    },
+    {
+      "index": 2,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/3yL17nkR/2001-porsche-boxster-s",
+      "source_title": "2001 Porsche Boxster S",
+      "source_year": 2001,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d8ea09bae36126b251b6805098a3c5c2/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 3,
+        "likely_engine_audio": false,
+        "reason": "The scene shows a rear view of the vehicle but lacks any indication of cold-start, startup, exhaust, or revving footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 41.25,
+      "engine_event_score": 1.117,
+      "secondary_event_seconds": 42.85,
+      "secondary_event_score": 1.057,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche Boxster",
+        "confidence": 9,
+        "reason": "The frames clearly show a convertible sports car with design elements consistent with the Porsche Boxster, including its rear shape and taillights.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-2-engine.mp4"
+    },
+    {
+      "index": 3,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/3yL17nkR/2001-porsche-boxster-s",
+      "source_title": "2001 Porsche Boxster S",
+      "source_year": 2001,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5c9fafa607eae4c42f4a1004e56cd8b0/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "interior_detail",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The scene shows the interior of the vehicle, which is not highly relevant for startup, exhaust, or revving footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 20.25,
+      "engine_event_score": 1.591,
+      "secondary_event_seconds": 13.85,
+      "secondary_event_score": 1.362,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche Boxster",
+        "confidence": 9,
+        "reason": "The frames show an interior of a vehicle that matches the design elements and features typical of the Porsche Boxster.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-3-engine.mp4"
+    },
+    {
+      "index": 4,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/3yL17nkR/2001-porsche-boxster-s",
+      "source_title": "2001 Porsche Boxster S",
+      "source_year": 2001,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/928c4a5f3d2e28a72d75e32739fd322a/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "cockpit",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The footage shows the interior of the vehicle with no engine sounds or relevant engine visuals, focusing instead on the driver's actions and surroundings.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 0.45,
+      "engine_event_score": 1.449,
+      "secondary_event_seconds": 16.25,
+      "secondary_event_score": 1.067,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche Boxster",
+        "confidence": 7,
+        "reason": "The interior design and layout are consistent with the Porsche Boxster.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-4-engine.mp4"
+    }
+  ],
+  "status": "complete"
+}
