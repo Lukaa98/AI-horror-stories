@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.14";
+const UI_VERSION = "V10.15";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -628,16 +628,21 @@ export default function App() {
             {(videoProbe.clips || []).map((clip) => (
               <article className="video-probe-card" key={clip.index}>
                 <h3>Candidate {clip.index}: {clip.source_title || "Listing video"}</h3>
+                {clip.thumbnail_url && (
+                  <img className="video-probe-thumb" src={clip.thumbnail_url} alt={`Candidate ${clip.index} source thumbnail`} />
+                )}
                 {clip.clip ? (
                   <video controls src={rawVideoTestUrl(clip.clip)} preload="metadata" />
                 ) : (
                   <p className="error">No usable clip: {clip.error || "verification rejected it"}</p>
                 )}
                 <dl>
+                  <div><dt>Scene</dt><dd>{clip.scene_review?.scene_type?.replaceAll("_", " ") || "unknown"}</dd></div>
                   <div><dt>Detected event</dt><dd>{clip.detected_onset_seconds ?? "?"}s</dd></div>
-                  <div><dt>Audio jump</dt><dd>{clip.engine_event_score ? `${clip.engine_event_score}×` : "n/a"}</dd></div>
-                  <div><dt>AI review</dt><dd>{clip.approved ? "Approved" : "Rejected"}</dd></div>
+                  <div><dt>Audio jump</dt><dd>{clip.engine_event_score !== null && clip.engine_event_score !== undefined ? `${clip.engine_event_score}×` : "n/a"}</dd></div>
+                  <div><dt>Engine candidate</dt><dd>{clip.approved ? "Yes" : "No"}</dd></div>
                 </dl>
+                {clip.scene_review?.reason && <p className="hint">{clip.scene_review.reason}</p>}
                 {clip.source_listing && (
                   <a href={clip.source_listing} target="_blank" rel="noreferrer">Open source listing</a>
                 )}

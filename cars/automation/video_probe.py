@@ -6,7 +6,7 @@ import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 
-from engine_video import prepare_engine_clip
+from engine_video import classify_video_thumbnail, prepare_engine_clip
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -71,14 +71,31 @@ def main():
             years=years,
             engine_videos=[candidate],
         )
-        result = prepare_engine_clip(entry, clips_dir)
+        try:
+            thumbnail_review = classify_video_thumbnail(candidate, entry)
+        except Exception as exc:
+            thumbnail_review = {
+                "scene_type": "unknown",
+                "engine_relevance": 5,
+                "likely_engine_audio": True,
+                "reason": f"Thumbnail review failed open: {exc}",
+            }
+        candidate["scene_review"] = thumbnail_review
+        result = prepare_engine_clip(entry, clips_dir, allow_irrelevant=True)
+        engine_relevant = (
+            int(thumbnail_review.get("engine_relevance") or 0) >= 5
+            and thumbnail_review.get("scene_type") not in {"roof_operation", "hood_or_trunk_operation"}
+        )
         item = {
             "index": index,
-            "approved": bool(result and result.get("approved")),
+            "approved": bool(result and result.get("approved") and engine_relevant),
+            "clip_extracted": bool(result and result.get("path")),
             "source_listing": candidate.get("auction_url"),
             "source_title": candidate.get("auction_title") or candidate.get("title"),
             "source_year": candidate.get("auction_year"),
             "source_type": candidate.get("type"),
+            "thumbnail_url": candidate.get("thumbnail_url") or candidate.get("url"),
+            "scene_review": thumbnail_review,
             "detected_onset_seconds": result.get("detected_onset_seconds") if result else None,
             "engine_event_score": result.get("engine_event_score") if result else None,
             "review": result.get("review") if result else None,

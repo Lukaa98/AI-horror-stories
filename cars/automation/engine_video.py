@@ -29,6 +29,54 @@ def _run(command):
     return subprocess.run(command, check=True, capture_output=True, text=True)
 
 
+def _media_duration(source):
+    result = _run([
+        "ffprobe", "-v", "error", "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1", source,
+    ])
+    return max(0.0, float(result.stdout.strip()))
+
+
+def classify_video_thumbnail(candidate, entry):
+    """Classify what the listing-video thumbnail is actually showing."""
+    if candidate.get("scene_review"):
+        return candidate["scene_review"]
+    key = (os.getenv("OPENAI_API_KEY") or "").strip()
+    thumbnail_url = candidate.get("thumbnail_url") or candidate.get("url")
+    if not key.startswith("sk-") or len(key) < 30 or not thumbnail_url:
+        return {
+            "scene_type": "unknown",
+            "engine_relevance": 5,
+            "likely_engine_audio": True,
+            "reason": "Vision classification unavailable; kept as a tolerant candidate",
+            "provider": "metadata_fallback",
+        }
+    from openai import OpenAI
+
+    prompt = (
+        "Classify this thumbnail from a car-auction video. Return only JSON with keys: "
+        "scene_type (one of exhaust_closeup, rear_exterior, cockpit, engine_bay, full_exterior, "
+        "roof_operation, hood_or_trunk_operation, interior_detail, walkaround, unknown), "
+        "engine_relevance integer 1-10, likely_engine_audio boolean, reason string. "
+        "We want cold-start, startup, exhaust, or revving footage. Exhaust closeups, rear views, "
+        "cockpit views with gauges, and engine-bay views are highly relevant. Convertible roof "
+        "movement, hood/trunk operation, silent interior details, and generic walkarounds are not. "
+        f"The expected vehicle family is {entry.name} ({entry.years}), but classify scene purpose "
+        "separately from whether the vehicle identity matches."
+    )
+    response = OpenAI().responses.create(
+        model=os.getenv("OPENAI_CAR_VIDEO_REVIEW_MODEL", "gpt-4o-mini"),
+        input=[{"role": "user", "content": [
+            {"type": "input_text", "text": prompt},
+            {"type": "input_image", "image_url": thumbnail_url},
+        ]}],
+    )
+    text = response.output_text.strip().removeprefix("```json").removesuffix("```").strip()
+    result = json.loads(text)
+    result["provider"] = "openai"
+    return result
+
+
 def _extract_analysis_audio(source, wav_path):
     _run([
         "ffmpeg", "-y", "-i", source, "-t", "45", "-vn",
@@ -113,7 +161,7 @@ def _verify_frames(contact_sheet, entry):
     return result
 
 
-def prepare_engine_clip(entry, output_dir, duration=3.0):
+def prepare_engine_clip(entry, output_dir, duration=3.0, allow_irrelevant=False):
     candidates = [item for item in entry.engine_videos if item.get("playback_url") or item.get("url")]
     if not candidates:
         return None
@@ -123,10 +171,40 @@ def prepare_engine_clip(entry, output_dir, duration=3.0):
         # Labeled cold starts win immediately. When labels are hidden by the
         # site's player, compare up to three embeds and choose the strongest
         # starter/rev-like jump in audio energy.
-        labeled = [item for item in candidates if item.get("type") == "cold_start"]
-        probe_candidates = labeled[:1] or candidates[:3]
+        classified = []
+        for candidate in candidates[:4]:
+            try:
+                scene_review = classify_video_thumbnail(candidate, entry)
+            except Exception as exc:
+                scene_review = {
+                    "scene_type": "unknown",
+                    "engine_relevance": 5,
+                    "likely_engine_audio": True,
+                    "reason": f"Thumbnail review failed open: {exc}",
+                    "provider": "fallback_after_error",
+                }
+            classified.append((candidate, scene_review))
+        labeled = [
+            item for item in classified
+            if item[0].get("type") == "cold_start"
+        ]
+        relevant = [
+            item for item in classified
+            if int(item[1].get("engine_relevance") or 0) >= 5
+            and item[1].get("scene_type") not in {"roof_operation", "hood_or_trunk_operation"}
+        ]
+        probe_candidates = labeled[:1] or relevant[:3]
+        if not probe_candidates and allow_irrelevant:
+            probe_candidates = classified[:3]
+        if not probe_candidates:
+            return {
+                "approved": False,
+                "error": "No engine-relevant video thumbnail found",
+                "scene_reviews": [review for _, review in classified],
+                "source": candidates[0],
+            }
         analyses = []
-        for index, candidate in enumerate(probe_candidates):
+        for index, (candidate, scene_review) in enumerate(probe_candidates):
             probe_wav = output_dir / f"rank-{entry.rank}-engine-probe-{index}.wav"
             try:
                 source = candidate.get("playback_url") or candidate.get("url")
@@ -134,6 +212,7 @@ def prepare_engine_clip(entry, output_dir, duration=3.0):
                 onset = detect_engine_onset(probe_wav)
                 analyses.append({
                     "candidate": candidate,
+                    "scene_review": scene_review,
                     "onset": onset,
                     "event_score": _engine_event_score(probe_wav, onset),
                 })
@@ -146,16 +225,28 @@ def prepare_engine_clip(entry, output_dir, duration=3.0):
         chosen = max(analyses, key=lambda item: item["event_score"])
         candidate = chosen["candidate"]
         source = candidate.get("playback_url") or candidate.get("url")
-        onset = chosen["onset"]
+        source_duration = _media_duration(source)
+        onset = min(chosen["onset"], max(0.0, source_duration - duration))
         _run([
             "ffmpeg", "-y", "-ss", f"{onset:.3f}", "-i", source, "-t", str(duration),
             "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-preset", "veryfast",
             "-c:a", "aac", "-movflags", "+faststart", str(clip_path),
         ])
+        clip_duration = min(duration, _media_duration(str(clip_path)))
+        if clip_duration < 0.35:
+            raise RuntimeError(f"Extracted clip is too short ({clip_duration:.2f}s)")
         frame_paths = []
-        for index, moment in enumerate((0.2, duration / 2, max(0.2, duration - 0.2))):
+        frame_moments = (
+            min(0.1, clip_duration / 4),
+            clip_duration / 2,
+            max(0.05, clip_duration - 0.1),
+        )
+        for index, moment in enumerate(frame_moments):
             frame_path = output_dir / f"rank-{entry.rank}-verify-{index}.jpg"
-            _run(["ffmpeg", "-y", "-ss", str(moment), "-i", str(clip_path), "-frames:v", "1", str(frame_path)])
+            _run([
+                "ffmpeg", "-y", "-i", str(clip_path), "-ss", str(moment),
+                "-frames:v", "1", "-update", "1", str(frame_path),
+            ])
             frame_paths.append(frame_path)
         contact_sheet = output_dir / f"rank-{entry.rank}-video-review.jpg"
         _contact_sheet(frame_paths, contact_sheet)
@@ -169,6 +260,7 @@ def prepare_engine_clip(entry, output_dir, duration=3.0):
             "duration": duration,
             "detected_onset_seconds": round(onset, 3),
             "engine_event_score": round(chosen["event_score"], 3),
+            "scene_review": chosen["scene_review"],
             "review": review,
             "source": candidate,
         }

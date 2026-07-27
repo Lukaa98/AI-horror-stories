@@ -424,6 +424,7 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
         return {
           ...candidate,
           url: String(candidate.url || "").replace(/\\u002F/gi, "/").replace(/\\\//g, "/"),
+          thumbnail_url: String(candidate.url || "").replace(/\\u002F/gi, "/").replace(/\\\//g, "/"),
           type,
           auction_url: auctionUrl,
         };
