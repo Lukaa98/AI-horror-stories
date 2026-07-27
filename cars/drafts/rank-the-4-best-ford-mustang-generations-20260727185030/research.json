@@ -1547,5 +1547,127 @@
     }
   ],
   "skipped_entries": [],
-  "status": "researched"
+  "status": "video_generated",
+  "latest_render": {
+    "quality": "quick",
+    "filename": "preview_short.mp4"
+  },
+  "engine_clips": [
+    {
+      "rank": 4,
+      "approved": true,
+      "duration": 5.0,
+      "detected_onset_seconds": 1.65,
+      "engine_event_score": 14.582,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Ford Mustang",
+        "confidence": 9,
+        "reason": "The frames show a vehicle that resembles the Fifth Generation GT (2005-2014) with identifiable features such as the rear design and the GT emblem.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0cc7ca82f316df455af9abf7ae8d00b6/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0cc7ca82f316df455af9abf7ae8d00b6/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2005 Ford Mustang GT Deluxe Convertible",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0cc7ca82f316df455af9abf7ae8d00b6/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/K1LDjvL4/2005-ford-mustang-gt-deluxe-convertible",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0cc7ca82f316df455af9abf7ae8d00b6/manifest/video.m3u8",
+        "auction_title": "2005 Ford Mustang GT Deluxe Convertible",
+        "auction_year": 2005,
+        "search_score": 90
+      },
+      "error": null,
+      "callout_text": "Let's hear it come to life."
+    },
+    {
+      "rank": 3,
+      "approved": true,
+      "duration": 5.0,
+      "detected_onset_seconds": 5.65,
+      "engine_event_score": 4.223,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Fox Body LX 5.0",
+        "confidence": 7,
+        "reason": "The dashboard layout and instrumentation are consistent with the Fox Body generation, suggesting it is from the same make/model family.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/635fd1b3b36b9be5b6a594ed730862d7/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/635fd1b3b36b9be5b6a594ed730862d7/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "1985 Ford Mustang GT",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/635fd1b3b36b9be5b6a594ed730862d7/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/KPQm1lZ2/1985-ford-mustang-gt",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/635fd1b3b36b9be5b6a594ed730862d7/manifest/video.m3u8",
+        "auction_title": "1985 Ford Mustang GT",
+        "auction_year": 1985,
+        "search_score": 70
+      },
+      "error": null,
+      "callout_text": "Let's hear the 5.0 come to life."
+    },
+    {
+      "rank": 2,
+      "approved": true,
+      "duration": 5.0,
+      "detected_onset_seconds": 14.05,
+      "engine_event_score": 2.995,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Ford Mustang",
+        "confidence": 9,
+        "reason": "The vehicle shown appears to be a First Generation Fastback, reflecting the design characteristics typical of models from 1965-1973.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "1965 Ford Mustang Fastback",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/manifest/video.m3u8",
+        "auction_title": "1965 Ford Mustang Fastback",
+        "auction_year": 1965,
+        "search_score": 106
+      },
+      "error": null,
+      "callout_text": "Let's hear the Hi-Po come to life."
+    },
+    {
+      "rank": 1,
+      "approved": true,
+      "duration": 5.0,
+      "detected_onset_seconds": 2.65,
+      "engine_event_score": 5.454,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Ford Mustang Shelby GT350",
+        "confidence": 9,
+        "reason": "The frames depict a vehicle with distinctive styling and features consistent with the Sixth Generation Shelby GT350.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a1821bea956602cb121964f5ba9837ce/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a1821bea956602cb121964f5ba9837ce/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2017 Ford Mustang Shelby GT350R",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a1821bea956602cb121964f5ba9837ce/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/9eDYGPjN/2017-ford-mustang-shelby-gt350r",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a1821bea956602cb121964f5ba9837ce/manifest/video.m3u8",
+        "auction_title": "2017 Ford Mustang Shelby GT350R",
+        "auction_year": 2017,
+        "search_score": 145
+      },
+      "error": null,
+      "callout_text": "Let's hear the Voodoo come to life."
+    }
+  ]
 }
