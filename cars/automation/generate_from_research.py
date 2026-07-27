@@ -34,6 +34,7 @@ def build_config(draft_dir, data):
             narration=entry.get("narration") or entry.get("one_line_fact", ""),
             performance_beats=entry.get("performance_beats", []),
             engine_videos=entry.get("engine_videos", []),
+            engine_nickname=entry.get("engine_nickname"),
         ))
 
     return RankingConfig(

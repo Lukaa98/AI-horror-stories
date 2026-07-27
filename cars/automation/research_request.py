@@ -132,6 +132,9 @@ For each entry, give:
 - visual_identifiers: 3-6 visible features that distinguish this exact generation/variant
   from the other ranked entries, such as headlight shape, side-blade design, exhaust
   layout, grille, badge, dashboard, engine cover, or facelift bodywork
+- engine_nickname: the widely-recognized enthusiast or manufacturer nickname for this
+  specific engine, if one genuinely exists, e.g. "Hemi", "Coyote", "LS7", "Boxer",
+  "Flat-plane V8", "2JZ"; use null if this engine has no popular nickname -- do not invent one
 - ranking_scores: an object containing 0-10 numeric scores for enthusiast_desirability,
   driving_engagement, historical_significance, performance, collectibility, and value
 - ranking_case: one concise sentence explaining the evidence behind this candidate's
@@ -169,6 +172,7 @@ Return ONLY strict JSON, no markdown fences, no prose outside the JSON, matching
       "chassis_code": "string_or_null", "commons_search_terms": ["string"],
       "visual_highlight": "string",
       "visual_identifiers": ["string"],
+      "engine_nickname": "string_or_null",
       "ranking_scores": {{
         "enthusiast_desirability": number, "driving_engagement": number,
         "historical_significance": number, "performance": number,
@@ -360,7 +364,7 @@ RESEARCH_OUTPUT_SCHEMA = {
                     "name", "years", "introduced_year", "price_usd", "horsepower",
                     "label", "one_line_fact", "search_hint", "chassis_code",
                     "commons_search_terms", "visual_highlight", "visual_identifiers",
-                    "ranking_scores", "ranking_case", "research_sources",
+                    "engine_nickname", "ranking_scores", "ranking_case", "research_sources",
                 ],
                 "properties": {
                     "name": {"type": "string"},
@@ -385,6 +389,7 @@ RESEARCH_OUTPUT_SCHEMA = {
                         "maxItems": 6,
                         "items": {"type": "string"},
                     },
+                    "engine_nickname": {"type": ["string", "null"]},
                     "ranking_scores": {
                         "type": "object",
                         "additionalProperties": False,

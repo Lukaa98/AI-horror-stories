@@ -6,6 +6,7 @@ call render_ranking_video(config). All the drawing/layout logic here is
 topic-agnostic; only the config content changes per video.
 """
 import json
+import os
 import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -48,6 +49,7 @@ class RankEntry:
     narration: str  # spoken line for this rank (keep short -- see module docstring)
     performance_beats: list = field(default_factory=list)
     engine_videos: list = field(default_factory=list)
+    engine_nickname: str = None
 
 
 @dataclass
@@ -411,6 +413,38 @@ def _select_image_for_cue(images, cue, used):
     return match
 
 
+def _engine_callout_line(entry):
+    """A short spoken cue right before an entry's engine clip plays.
+
+    Named after the engine's own enthusiast nickname when research found one
+    (e.g. "Hemi", "Coyote") so the callout feels specific to that car rather
+    than a generic transition.
+    """
+    if entry.engine_nickname:
+        return f"Let's hear the {entry.engine_nickname} come to life."
+    return "Let's hear it come to life."
+
+
+def _engine_callout_clip(entry, still_image_path, engine_dir):
+    """Build a short narrated still-frame clip introducing the engine clip.
+
+    Reuses the OpenAI TTS voice used for the main narration; skipped
+    entirely (returns None) when no OpenAI key is configured or synthesis
+    fails, since the engine clip itself still plays fine without it.
+    """
+    if not os.getenv("OPENAI_API_KEY"):
+        return None, None
+    text = _engine_callout_line(entry)
+    try:
+        audio_path = engine_dir / f"rank-{entry.rank}-engine-callout.mp3"
+        _write_openai_audio(audio_path, text)
+        callout_audio = AudioFileClip(str(audio_path))
+        callout_clip = _still_clip(still_image_path, callout_audio.duration).set_audio(callout_audio)
+        return callout_clip, text
+    except Exception:
+        return None, None
+
+
 def _write_performance_audio(run_dir, ordered, close_narration):
     """Generate one continuous narration, then map its duration onto visual beats."""
     rank_segments = []
@@ -609,6 +643,7 @@ def render_ranking_video(
                 engine_results[entry.rank] = result
 
         clips = []
+        callout_texts = {}
         narration_offset = 0.0
         for index, (path, duration, _, entry) in enumerate(frame_entries):
             still = _still_clip(path, duration)
@@ -622,6 +657,10 @@ def render_ranking_video(
             entry_finished = entry is not None and (next_entry is None or next_entry.rank != entry.rank)
             engine_result = engine_results.get(entry.rank) if entry_finished else None
             if engine_result and engine_result.get("approved") and engine_result.get("path"):
+                callout_clip, callout_text = _engine_callout_clip(entry, path, engine_dir)
+                if callout_clip is not None:
+                    clips.append(callout_clip)
+                    callout_texts[entry.rank] = callout_text
                 raw_engine = VideoFileClip(str(engine_result["path"]))
                 scale = min(size[0] / raw_engine.w, size[1] / raw_engine.h)
                 fitted = raw_engine.resize(scale).on_color(
@@ -650,6 +689,7 @@ def render_ranking_video(
                 "review": result.get("review"),
                 "source": result.get("source"),
                 "error": result.get("error"),
+                "callout_text": callout_texts.get(rank),
             }
             for rank, result in sorted(engine_results.items(), reverse=True)
         ]
