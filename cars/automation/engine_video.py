@@ -322,20 +322,26 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
         finally:
             onset_frame_path.unlink(missing_ok=True)
         # The site itself labels some videos "Cold Start"/"Engine Start" - trust
-        # that over guessing from pixels or audio. Otherwise, vision can only
-        # judge what a frame shows, not what it sounds like: a rear-exterior or
-        # cockpit shot during a real rev looks the same as one during silence,
-        # so a strong audio rise is allowed to override a low vision score for
-        # scene types where the sound plausibly comes from the engine. Scenes
-        # whose sound is clearly unrelated to the engine (roof motors,
-        # hood/trunk latches, cabin rustling, footsteps) never get the
-        # audio override.
+        # that over guessing from pixels, but only once the audio actually
+        # shows something happening. A labeled clip caught mid-idle-drive or
+        # over background noise (wind, insects, footsteps) can still read as
+        # a weak ~1-2x rise with nothing engine-related in it, so the label
+        # alone is not enough - it must clear the same bar as an unlabeled
+        # clip winning purely on audio. Vision can only judge what a frame
+        # shows, not what it sounds like: a rear-exterior or cockpit shot
+        # during a real rev looks the same as one during silence, so a strong
+        # audio rise is allowed to override a low vision score for scene
+        # types where the sound plausibly comes from the engine. Scenes whose
+        # sound is clearly unrelated to the engine (roof motors, hood/trunk
+        # latches, cabin rustling, footsteps) never get the audio override.
         scene_type = onset_scene_review.get("scene_type")
-        engine_relevant = candidate.get("type") in {"cold_start", "engine_sound"} or (
+        has_strong_audio = chosen["event_score"] >= STRONG_AUDIO_OVERRIDE_SCORE
+        platform_labeled = candidate.get("type") in {"cold_start", "engine_sound"}
+        engine_relevant = (platform_labeled and has_strong_audio) or (
             scene_type not in {"roof_operation", "hood_or_trunk_operation", "interior_detail", "walkaround"}
             and (
                 int(onset_scene_review.get("engine_relevance") or 0) >= 5
-                or chosen["event_score"] >= STRONG_AUDIO_OVERRIDE_SCORE
+                or has_strong_audio
             )
         )
         _run([
