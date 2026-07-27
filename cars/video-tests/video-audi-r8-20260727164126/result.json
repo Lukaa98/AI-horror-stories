@@ -1,0 +1,217 @@
+{
+  "test_id": "video-audi-r8-20260727164126",
+  "query": "Audi R8",
+  "make": "Audi",
+  "model": "R8",
+  "start_year": null,
+  "end_year": null,
+  "listings_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 GT Spyder",
+      "text": "2012 Audi R8 GT Spyder",
+      "titleYear": 2012,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJABOeGv/2012-audi-r8-v10-coupe",
+      "title": "2012 Audi R8 V10 Coupe",
+      "text": "2012 Audi R8 V10 Coupe",
+      "titleYear": 2012,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lvwPyO5/2023-audi-r8-gt-coupe",
+      "title": "2023 Audi R8 GT Coupe",
+      "text": "2023 Audi R8 GT Coupe",
+      "titleYear": 2023,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3ojONe4g/2010-audi-r8-v10-coupe",
+      "title": "2010 Audi R8 V10 Coupe",
+      "text": "2010 Audi R8 V10 Coupe",
+      "titleYear": 2010,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV1PzBwP/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "text": "2018 Audi R8 V10 Coupe RWS",
+      "titleYear": 2018,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rk6kddvg/2015-audi-r8-v10-plus-coupe",
+      "title": "2015 Audi R8 V10 Plus Coupe",
+      "text": "2015 Audi R8 V10 Plus Coupe",
+      "titleYear": 2015,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEnO5dLR/2011-audi-r8-v10-spyder",
+      "title": "2011 Audi R8 V10 Spyder",
+      "text": "2011 Audi R8 V10 Spyder",
+      "titleYear": 2011,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98QqP4XY/2022-audi-r8-v10-performance-coupe-quattro",
+      "title": "2022 Audi R8 V10 Performance Coupe Quattro",
+      "text": "2022 Audi R8 V10 Performance Coupe Quattro",
+      "titleYear": 2022,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdlPeW7B/2014-audi-r8-coupe",
+      "title": "2014 Audi R8 Coupe",
+      "text": "2014 Audi R8 Coupe",
+      "titleYear": 2014,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3RaRADe8/2014-audi-r8-coupe",
+      "title": "2014 Audi R8 Coupe",
+      "text": "2014 Audi R8 Coupe",
+      "titleYear": 2014,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdOlelDB/2011-audi-r8-v10-coupe",
+      "title": "2011 Audi R8 V10 Coupe",
+      "text": "2011 Audi R8 V10 Coupe",
+      "titleYear": 2011,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPmDZYWQ/2012-audi-r8-v10-spyder",
+      "title": "2012 Audi R8 V10 Spyder",
+      "text": "2012 Audi R8 V10 Spyder",
+      "titleYear": 2012,
+      "score": 99
+    }
+  ],
+  "videos_discovered": 18,
+  "clips": [
+    {
+      "index": 1,
+      "approved": false,
+      "clip_extracted": false,
+      "source_listing": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "source_title": "2012 Audi R8 GT Spyder",
+      "source_year": 2012,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ffd3f075cd660785cb806c1557a4a649/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "unknown",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The frame shows an unclear view of suspension components with no visible engine, exhaust, or relevant gauges.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "secondary_event_seconds": null,
+      "secondary_event_score": null,
+      "review": {
+        "approved": false,
+        "detected_vehicle": "",
+        "confidence": 1,
+        "reason": "Frames do not clearly show a vehicle or related components identifiable as Audi R8.",
+        "provider": "openai"
+      },
+      "error": null
+    },
+    {
+      "index": 2,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "source_title": "2012 Audi R8 GT Spyder",
+      "source_year": 2012,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/61ee3e356a88241432328871720e014b/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The frame shows a rear view of the Audi R8 but lacks any indication of engine sound or operation, fitting a low relevance for engine activity.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 5.25,
+      "engine_event_score": 5.647,
+      "secondary_event_seconds": 35.85,
+      "secondary_event_score": 1.275,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi R8",
+        "confidence": 10,
+        "reason": "Frames show a car that is identifiable as an Audi R8 due to its distinctive design features.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-2-engine.mp4"
+    },
+    {
+      "index": 3,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/9lvwPyO5/2023-audi-r8-gt-coupe",
+      "source_title": "2023 Audi R8 GT Coupe",
+      "source_year": 2023,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ce47066f646e52c97bcfab5da5325b55/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 4,
+        "likely_engine_audio": false,
+        "reason": "The shot depicts a rear view of the vehicle but lacks any engine audio or activity demonstrating cold-start, startup, exhaust, or revving.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 2.05,
+      "engine_event_score": 9.886,
+      "secondary_event_seconds": 11.05,
+      "secondary_event_score": 1.292,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi R8",
+        "confidence": 10,
+        "reason": "The frames show a vehicle that matches the design and characteristics of the Audi R8.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-3-engine.mp4"
+    },
+    {
+      "index": 4,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/3ojONe4g/2010-audi-r8-v10-coupe",
+      "source_title": "2010 Audi R8 V10 Coupe",
+      "source_year": 2010,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5b568a03c7cb0285b89b0b1f9695b7f5/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "cockpit",
+        "engine_relevance": 4,
+        "likely_engine_audio": false,
+        "reason": "The scene shows the cockpit with gauges but does not indicate a cold-start, startup, exhaust, or revving action.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 11.25,
+      "engine_event_score": 4.076,
+      "secondary_event_seconds": 25.05,
+      "secondary_event_score": 0.906,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi R8",
+        "confidence": 9,
+        "reason": "The frames clearly show the interior of an Audi vehicle with the recognizable steering wheel and dashboard design consistent with the Audi R8 model.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-4-engine.mp4"
+    }
+  ],
+  "status": "complete"
+}
