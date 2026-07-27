@@ -14,6 +14,7 @@ from ranking_engine import (  # noqa: E402
     _select_image_for_cue,
     _ranking_rail_layout,
 )
+from engine_video import choose_video_candidate  # noqa: E402
 
 
 def test_ranking_rail_is_fixed_for_every_source_photo_shape():
@@ -82,3 +83,14 @@ def test_missing_engine_shot_falls_back_to_exterior_not_interior():
     selected = _select_image_for_cue(images, "engine", set())
 
     assert selected == images[1]
+
+
+def test_cold_start_video_is_preferred_over_other_listing_video():
+    candidates = [
+        {"type": "walkaround", "playback_url": "https://example.com/walk.m3u8", "search_score": 50},
+        {"type": "cold_start", "playback_url": "https://example.com/start.m3u8", "search_score": 10},
+    ]
+
+    selected = choose_video_candidate(candidates)
+
+    assert selected["playback_url"].endswith("start.m3u8")

@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.12";
+const UI_VERSION = "V10.13";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -274,6 +274,11 @@ export default function App() {
         signal: abortRef.current.signal,
         timeoutMs: RENDER_TIMEOUT_MS,
       });
+      const refreshedResearch = await fetch(
+        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/research.json?_=${Date.now()}`,
+        { cache: "no-store" },
+      );
+      if (refreshedResearch.ok) setResearch(await refreshedResearch.json());
       setVideoUrl(
         `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/${outputName}?_=${Date.now()}`
       );
@@ -468,6 +473,9 @@ export default function App() {
                     Limited coverage: {entry.image_coverage.approved_count}/{entry.image_coverage.target_count} preferred unique photos.
                   </p>
                 )}
+                <p className="hint">
+                  Engine video candidates: {(entry.engine_videos || []).length}
+                </p>
               </div>
             ))}
           </div>
@@ -495,7 +503,9 @@ export default function App() {
               {stage === "generating" && renderQuality === "full" ? "Rendering Full Quality..." : "Full Quality Render"}
             </button>
           </div>
-          <p className="hint">Both modes use the same approved photos, script, performance beats, and Onyx-quality narration.</p>
+          <p className="hint">
+            Both modes use the same approved photos, script, Onyx narration, and verified cold-start clips when available.
+          </p>
           {research.entries.some((entry) => !(entry.images || []).length) && (
             <p className="hint">Can&apos;t generate - at least one entry has no images. Try a different request.</p>
           )}
@@ -517,6 +527,11 @@ export default function App() {
             {research && (
               <section className="narration-box" aria-labelledby="narration-title">
                 <h3 id="narration-title">Narration</h3>
+                {(research.engine_clips || []).length > 0 && (
+                  <p className="hint">
+                    Engine clips inserted: {(research.engine_clips || []).filter((clip) => clip.approved).length}
+                  </p>
+                )}
                 <div className="narration-scroll">
                   {research.entries.map((entry, index) => (
                     <div className="narration-entry" key={entry.name}>

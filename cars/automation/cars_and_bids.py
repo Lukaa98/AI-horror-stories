@@ -284,6 +284,7 @@ def enrich_entry_from_manifest(entry, manifest):
             "auction_url": selected.get("url"),
             "auction_title": selected.get("page_title") or selected.get("title"),
         }
+    entry["engine_videos"] = manifest.get("videos", [])
     return entry
 
 

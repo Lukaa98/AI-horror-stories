@@ -33,6 +33,7 @@ def build_config(draft_dir, data):
             stat=entry.get("stat", ""),
             narration=entry.get("narration") or entry.get("one_line_fact", ""),
             performance_beats=entry.get("performance_beats", []),
+            engine_videos=entry.get("engine_videos", []),
         ))
 
     return RankingConfig(
@@ -75,6 +76,10 @@ def main():
         "quality": "full" if args.full_res else "quick",
         "filename": args.output_name,
     }
+    storyboard_path = run_dir / "storyboard.json"
+    if storyboard_path.exists():
+        storyboard = json.loads(storyboard_path.read_text(encoding="utf-8"))
+        data["engine_clips"] = storyboard.get("engine_clips", [])
     research_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
     print(run_dir)

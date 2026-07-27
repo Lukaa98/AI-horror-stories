@@ -291,6 +291,7 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
     }
 
     const candidates = [];
+    const videoCandidates = [];
     const pushCandidate = (candidate) => {
       if (!candidate?.url || !/media\.carsandbids\.com|carsandbids\.com/i.test(candidate.url)) return;
       candidates.push(candidate);
@@ -338,6 +339,55 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
         title: document.querySelector("h1")?.innerText?.trim() || document.title,
       });
     }
+
+    const videoUrls = new Set();
+    const addVideo = (url, node = null, contextOverride = "") => {
+      if (!url || videoUrls.has(url)) return;
+      if (!/cloudflarestream\.com|videodelivery\.net|\.m3u8(?:\?|$)|\.mp4(?:\?|$)/i.test(url)) return;
+      videoUrls.add(url);
+      const container = node?.closest?.("section, article, li, div") || node?.parentElement;
+      const context = (
+        contextOverride ||
+        container?.innerText ||
+        node?.getAttribute?.("title") ||
+        node?.getAttribute?.("aria-label") ||
+        ""
+      ).replace(/\s+/g, " ").trim().slice(0, 500);
+      videoCandidates.push({
+        url,
+        context,
+        section: headingText(container),
+        title: document.querySelector("h1")?.innerText?.trim() || document.title,
+      });
+    };
+
+    for (const node of Array.from(document.querySelectorAll(
+      "iframe[src], video[src], video source[src], a[href], [data-video-id], [data-video-uid]"
+    ))) {
+      const url = node.src || node.href || node.getAttribute("src");
+      addVideo(url, node);
+      const uid = node.getAttribute("data-video-id") || node.getAttribute("data-video-uid");
+      if (uid && /^[a-f0-9]{32}$/i.test(uid)) {
+        addVideo(`https://videodelivery.net/${uid}/manifest/video.m3u8`, node);
+      }
+    }
+
+    // Some Cars & Bids players are hydrated only after interaction. Their
+    // Cloudflare Stream IDs still appear in the serialized page markup.
+    const markup = document.documentElement.innerHTML;
+    const streamPattern = /https?:\\?\/\\?\/[^"'\\\s<>]*(?:cloudflarestream\.com|videodelivery\.net)[^"'\\\s<>]*/gi;
+    for (const match of markup.matchAll(streamPattern)) {
+      const rawUrl = match[0].replace(/\\u002F/gi, "/").replace(/\\\//g, "/").replace(/&amp;/g, "&");
+      const contextStart = Math.max(0, match.index - 700);
+      const contextEnd = Math.min(markup.length, match.index + match[0].length + 700);
+      const context = markup
+        .slice(contextStart, contextEnd)
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\\u002F/gi, "/")
+        .replace(/\\\//g, "/")
+        .replace(/\s+/g, " ");
+      addVideo(rawUrl, null, context);
+    }
     return {
       pageMeta: {
         title: auction?.title || document.querySelector("h1")?.innerText?.trim() || document.title,
@@ -349,6 +399,7 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
         location: auction?.location || null,
       },
       candidates,
+      videoCandidates,
     };
   });
 
@@ -363,7 +414,32 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
       .filter((candidate) => candidate.url)
       .filter((candidate) => /media\.carsandbids\.com/i.test(candidate.url))
       .map((candidate) => classifyCandidate(candidate, visualHighlight)),
+    videoCandidates: raw.videoCandidates
+      .map((candidate) => {
+        const haystack = `${candidate.section || ""} ${candidate.context || ""}`.toLowerCase();
+        let type = "video";
+        if (/cold\s*start|coldstart|start(?:up)?\s*(?:video|sound)/i.test(haystack)) type = "cold_start";
+        else if (/\b(?:rev|revving|exhaust|engine sound)\b/i.test(haystack)) type = "engine_sound";
+        else if (/walkaround|walk-around/i.test(haystack)) type = "walkaround";
+        return {
+          ...candidate,
+          url: String(candidate.url || "").replace(/\\u002F/gi, "/").replace(/\\\//g, "/"),
+          type,
+          auction_url: auctionUrl,
+        };
+      })
+      .filter((candidate) => candidate.url),
   };
+}
+
+function playbackUrl(candidate) {
+  const raw = String(candidate?.url || "").replace(/&amp;/g, "&");
+  if (/\.m3u8(?:\?|$)/i.test(raw) || /\.mp4(?:\?|$)/i.test(raw)) return raw;
+  const uidMatch = raw.match(/(?:cloudflarestream\.com|videodelivery\.net)\/([a-f0-9]{32})/i);
+  if (!uidMatch) return raw;
+  const originMatch = raw.match(/^(https?:\/\/[^/]+)/i);
+  const origin = originMatch?.[1] || "https://videodelivery.net";
+  return `${origin}/${uidMatch[1]}/manifest/video.m3u8`;
 }
 
 function candidateLooksRelevant(candidate, { auctionId, makeToken, modelToken, queryTokens }) {
@@ -474,9 +550,19 @@ async function main() {
     let selectedAuction = auctions[0];
     let selectedCandidates = [];
     const auctionsUsed = [];
+    const discoveredVideos = [];
     let bestSelectionScore = Number.NEGATIVE_INFINITY;
     for (const auction of auctions.slice(0, 4)) {
       const gallery = await extractAuctionGallery(page, auction.url, visualHighlight);
+      for (const video of gallery.videoCandidates || []) {
+        discoveredVideos.push({
+          ...video,
+          playback_url: playbackUrl(video),
+          auction_title: gallery.pageMeta?.title || auction.title,
+          auction_year: gallery.pageMeta?.year || auction.titleYear || null,
+          search_score: auction.score,
+        });
+      }
       const usable = gallery.candidates.filter((candidate) => {
         const haystack = `${candidate.url} ${candidate.alt} ${candidate.anchorText} ${candidate.context} ${candidate.section}`.toLowerCase();
         if (/logo|icon|avatar|dougscore|shipping|carfax/i.test(haystack)) return false;
@@ -545,6 +631,14 @@ async function main() {
       auctions_used: auctionsUsed,
       selected_auction: selectedAuction,
       downloaded_images: downloaded,
+      videos: discoveredVideos
+        .sort((a, b) => {
+          const typeScore = (item) => item.type === "cold_start" ? 1000 : item.type === "engine_sound" ? 500 : 0;
+          return (typeScore(b) + Number(b.search_score || 0)) - (typeScore(a) + Number(a.search_score || 0));
+        })
+        .filter((video, index, all) =>
+          index === all.findIndex((other) => other.playback_url === video.playback_url)
+        ),
     };
     await fs.writeFile(outJson, JSON.stringify(manifest, null, 2));
     console.log(JSON.stringify(manifest, null, 2));

@@ -24,7 +24,8 @@ from generate_sample import (
     _write_contact_sheet,
 )
 from video_editor import FPS, FAST_MODE
-from moviepy.editor import AudioFileClip, ImageClip, concatenate_videoclips
+from moviepy.editor import AudioFileClip, CompositeVideoClip, ImageClip, VideoFileClip, concatenate_videoclips
+from engine_video import prepare_engine_clip
 
 OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"
 
@@ -46,6 +47,7 @@ class RankEntry:
     stat: str  # short stat chip text
     narration: str  # spoken line for this rank (keep short -- see module docstring)
     performance_beats: list = field(default_factory=list)
+    engine_videos: list = field(default_factory=list)
 
 
 @dataclass
@@ -543,7 +545,7 @@ def render_ranking_video(
     audio_clip = AudioFileClip(str(narration_path))
     total_duration = audio_clip.duration
 
-    frame_entries = []  # (image_path_out, duration)
+    frame_entries = []  # (image_path_out, duration, visual_cue, ranked entry)
 
     if performance_timings:
         for index, timing in enumerate(performance_timings):
@@ -556,7 +558,7 @@ def render_ranking_video(
                 )
             out_path = images_dir / f"scene_beat_{index:02d}.png"
             _draw_rank_frame(config, frame_entry, timing["image"], out_path, size)
-            frame_entries.append((out_path, timing["duration"], timing["visual_cue"]))
+            frame_entries.append((out_path, timing["duration"], timing["visual_cue"], entry))
         storyboard["performance_beats"] = [
             {
                 key: value for key, value in timing.items()
@@ -579,7 +581,7 @@ def render_ranking_video(
             for i, image_path in enumerate(ordered_images):
                 out_path = images_dir / f"scene_rank_{entry.rank}_{i}.png"
                 _draw_rank_frame(config, entry, image_path, out_path, size)
-                frame_entries.append((out_path, per_image, _image_category(image_path)))
+                frame_entries.append((out_path, per_image, _image_category(image_path), entry))
 
         close_path = images_dir / "scene_close.png"
         best = ordered[-1]
@@ -588,18 +590,48 @@ def render_ranking_video(
             label=best.label, stat=best.stat, narration=config.close_narration,
         )
         _draw_rank_frame(config, close_entry, best.images[0], close_path, size)
-        frame_entries.append((close_path, segment_durations["close"], "exterior"))
+        frame_entries.append((close_path, segment_durations["close"], "exterior", None))
 
-    _write_contact_sheet([p for p, _, _ in frame_entries], run_dir / "scene_contact_sheet.jpg")
+    _write_contact_sheet([p for p, _, _, _ in frame_entries], run_dir / "scene_contact_sheet.jpg")
     storyboard["frames"] = [
         {"path": str(Path(p).relative_to(ROOT)), "duration": round(d, 3), "visual_cue": cue}
-        for p, d, cue in frame_entries
+        for p, d, cue, _ in frame_entries
     ]
-    (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
 
     if render_video:
-        clips = [_still_clip(path, duration) for path, duration, _ in frame_entries]
-        video = concatenate_videoclips(clips, method="compose").set_audio(audio_clip).set_duration(total_duration)
+        engine_dir = run_dir / "engine_clips"
+        engine_results = {}
+        for entry in ordered:
+            if not entry.engine_videos:
+                continue
+            result = prepare_engine_clip(entry, engine_dir)
+            if result:
+                engine_results[entry.rank] = result
+
+        clips = []
+        narration_offset = 0.0
+        for index, (path, duration, _, entry) in enumerate(frame_entries):
+            still = _still_clip(path, duration)
+            narration_end = min(total_duration, narration_offset + duration)
+            if narration_end > narration_offset:
+                still = still.set_audio(audio_clip.subclip(narration_offset, narration_end))
+            clips.append(still)
+            narration_offset = narration_end
+
+            next_entry = frame_entries[index + 1][3] if index + 1 < len(frame_entries) else None
+            entry_finished = entry is not None and (next_entry is None or next_entry.rank != entry.rank)
+            engine_result = engine_results.get(entry.rank) if entry_finished else None
+            if engine_result and engine_result.get("approved") and engine_result.get("path"):
+                raw_engine = VideoFileClip(str(engine_result["path"]))
+                scale = min(size[0] / raw_engine.w, size[1] / raw_engine.h)
+                fitted = raw_engine.resize(scale).on_color(
+                    size=size,
+                    color=(0, 0, 0),
+                    pos=("center", "center"),
+                )
+                clips.append(fitted)
+
+        video = concatenate_videoclips(clips, method="compose")
         video.write_videofile(
             str(run_dir / output_filename),
             fps=FPS,
@@ -608,5 +640,20 @@ def render_ranking_video(
             preset="ultrafast" if FAST_MODE else "medium",
             threads=4,
         )
+        storyboard["engine_clips"] = [
+            {
+                "rank": rank,
+                "approved": bool(result.get("approved")),
+                "duration": result.get("duration"),
+                "detected_onset_seconds": result.get("detected_onset_seconds"),
+                "engine_event_score": result.get("engine_event_score"),
+                "review": result.get("review"),
+                "source": result.get("source"),
+                "error": result.get("error"),
+            }
+            for rank, result in sorted(engine_results.items(), reverse=True)
+        ]
+
+    (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
 
     return run_dir
