@@ -1,0 +1,238 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-27T04:08:16.107Z",
+  "query": "Audi Q8",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/audi/q8",
+  "search_result_count": 8,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KYDmaWAx/2019-audi-q8-premium-plus",
+      "title": "2019 Audi Q8 Premium Plus",
+      "text": "Sold for $18,750",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "title": "2019 Audi Q8 Prestige",
+      "text": "Sold for $29,000",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yZ7AveR/2019-audi-q8-prestige",
+      "title": "2019 Audi Q8 Prestige",
+      "text": "Bid to $24,900",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZRw4NER/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $30,090",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KYdR7p0J/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $39,000",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/35WzgAWB/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $39,250",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KDZdjO1p/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $31,500",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/361E8A1Z/2022-audi-q8",
+      "title": "2022 Audi Q8",
+      "text": "Sold for $52,000",
+      "titleYear": 2022,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KYDmaWAx/2019-audi-q8-premium-plus",
+      "title": "2019 Audi Q8 Premium Plus",
+      "text": "Sold for $18,750",
+      "titleYear": 2019,
+      "score": 60,
+      "usable_image_count": 28,
+      "sale_price": 18750,
+      "sale_type": "sold",
+      "page_title": "2019 Audi Q8 Premium Plus"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "title": "2019 Audi Q8 Prestige",
+      "text": "Sold for $29,000",
+      "titleYear": 2019,
+      "score": 60,
+      "usable_image_count": 27,
+      "sale_price": 29000,
+      "sale_type": "sold",
+      "page_title": "2019 Audi Q8 Prestige"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yZ7AveR/2019-audi-q8-prestige",
+      "title": "2019 Audi Q8 Prestige",
+      "text": "Bid to $24,900",
+      "titleYear": 2019,
+      "score": 60,
+      "usable_image_count": 18,
+      "sale_price": 24900,
+      "sale_type": "bid_to",
+      "page_title": "2019 Audi Q8 Prestige"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZRw4NER/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $30,090",
+      "titleYear": 2019,
+      "score": 60,
+      "usable_image_count": 9,
+      "sale_price": 30090,
+      "sale_type": "sold",
+      "page_title": "2019 Audi Q8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KYdR7p0J/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $39,000",
+      "titleYear": 2019,
+      "score": 60,
+      "usable_image_count": 19,
+      "sale_price": 39000,
+      "sale_type": "sold",
+      "page_title": "2019 Audi Q8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/35WzgAWB/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $39,250",
+      "titleYear": 2019,
+      "score": 60,
+      "usable_image_count": 10,
+      "sale_price": 39250,
+      "sale_type": "sold",
+      "page_title": "2019 Audi Q8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KDZdjO1p/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $31,500",
+      "titleYear": 2019,
+      "score": 60,
+      "usable_image_count": 16,
+      "sale_price": 31500,
+      "sale_type": "sold",
+      "page_title": "2019 Audi Q8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/361E8A1Z/2022-audi-q8",
+      "title": "2022 Audi Q8",
+      "text": "Sold for $52,000",
+      "titleYear": 2022,
+      "score": 60,
+      "usable_image_count": 21,
+      "sale_price": 52000,
+      "sale_type": "sold",
+      "page_title": "2022 Audi Q8"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KYDmaWAx/2019-audi-q8-premium-plus",
+    "title": "2019 Audi Q8 Premium Plus",
+    "text": "Sold for $18,750",
+    "titleYear": 2019,
+    "score": 60,
+    "sale_price": 18750,
+    "sale_type": "sold",
+    "page_title": "2019 Audi Q8 Premium Plus",
+    "year": 2019,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05f76a201326c0c6a3254ed47f348420/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05f76a201326c0c6a3254ed47f348420/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Audi Q8 Premium Plus",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05f76a201326c0c6a3254ed47f348420/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KYDmaWAx/2019-audi-q8-premium-plus",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05f76a201326c0c6a3254ed47f348420/manifest/video.m3u8",
+      "auction_title": "2019 Audi Q8 Premium Plus",
+      "auction_year": 2019,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43f4e06ddaa0b1cb611fafb78f309cc5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43f4e06ddaa0b1cb611fafb78f309cc5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Audi Q8 Prestige",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43f4e06ddaa0b1cb611fafb78f309cc5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43f4e06ddaa0b1cb611fafb78f309cc5/manifest/video.m3u8",
+      "auction_title": "2019 Audi Q8 Prestige",
+      "auction_year": 2019,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/afd7a7e8faaeb4adcae2188dc04b3d6f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/afd7a7e8faaeb4adcae2188dc04b3d6f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Audi Q8 Prestige",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/afd7a7e8faaeb4adcae2188dc04b3d6f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/afd7a7e8faaeb4adcae2188dc04b3d6f/manifest/video.m3u8",
+      "auction_title": "2019 Audi Q8 Prestige",
+      "auction_year": 2019,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0e03c0818f4acf39778ebb3069067c8c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0e03c0818f4acf39778ebb3069067c8c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Audi Q8 Prestige",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0e03c0818f4acf39778ebb3069067c8c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0e03c0818f4acf39778ebb3069067c8c/manifest/video.m3u8",
+      "auction_title": "2019 Audi Q8 Prestige",
+      "auction_year": 2019,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5e6333e5ac1be1c887d7452b9507f616/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5e6333e5ac1be1c887d7452b9507f616/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Audi Q8 Prestige",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5e6333e5ac1be1c887d7452b9507f616/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5e6333e5ac1be1c887d7452b9507f616/manifest/video.m3u8",
+      "auction_title": "2019 Audi Q8 Prestige",
+      "auction_year": 2019,
+      "search_score": 60
+    }
+  ]
+}

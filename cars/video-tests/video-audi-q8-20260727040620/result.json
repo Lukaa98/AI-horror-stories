@@ -1,0 +1,190 @@
+{
+  "test_id": "video-audi-q8-20260727040620",
+  "query": "Audi Q8",
+  "make": "Audi",
+  "model": "Q8",
+  "start_year": null,
+  "end_year": null,
+  "listings_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KYDmaWAx/2019-audi-q8-premium-plus",
+      "title": "2019 Audi Q8 Premium Plus",
+      "text": "Sold for $18,750",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "title": "2019 Audi Q8 Prestige",
+      "text": "Sold for $29,000",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yZ7AveR/2019-audi-q8-prestige",
+      "title": "2019 Audi Q8 Prestige",
+      "text": "Bid to $24,900",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZRw4NER/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $30,090",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KYdR7p0J/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $39,000",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/35WzgAWB/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $39,250",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KDZdjO1p/2019-audi-q8",
+      "title": "2019 Audi Q8",
+      "text": "Sold for $31,500",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/361E8A1Z/2022-audi-q8",
+      "title": "2022 Audi Q8",
+      "text": "Sold for $52,000",
+      "titleYear": 2022,
+      "score": 60
+    }
+  ],
+  "videos_discovered": 5,
+  "clips": [
+    {
+      "index": 1,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/KYDmaWAx/2019-audi-q8-premium-plus",
+      "source_title": "2019 Audi Q8 Premium Plus",
+      "source_year": 2019,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05f76a201326c0c6a3254ed47f348420/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "cockpit",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The focus is on the cockpit with gauges visible, but there is no exhaust, startup, or engine audio relevance.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 2.25,
+      "engine_event_score": 4.531,
+      "secondary_event_seconds": 4.25,
+      "secondary_event_score": 1.152,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi Q8",
+        "confidence": 10,
+        "reason": "The frames show the interior of an Audi vehicle, identifiable by the steering wheel emblem and dashboard design consistent with the Audi Q8 model.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-1-engine.mp4"
+    },
+    {
+      "index": 2,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "source_title": "2019 Audi Q8 Prestige",
+      "source_year": 2019,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43f4e06ddaa0b1cb611fafb78f309cc5/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "full_exterior",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The frame shows a full exterior view of the car without any engine activity or close-up focus.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 25.0,
+      "engine_event_score": 2.48,
+      "secondary_event_seconds": 28.65,
+      "secondary_event_score": 3.28,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi Q8",
+        "confidence": 10,
+        "reason": "The frames clearly show an Audi Q8 from different angles, confirming the make and model.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-2-engine.mp4"
+    },
+    {
+      "index": 3,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "source_title": "2019 Audi Q8 Prestige",
+      "source_year": 2019,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/afd7a7e8faaeb4adcae2188dc04b3d6f/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "full_exterior",
+        "engine_relevance": 3,
+        "likely_engine_audio": false,
+        "reason": "The footage shows a side view of the vehicle without any engine sound, cold-start sequence, or specific engine details.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 2.45,
+      "engine_event_score": 1.293,
+      "secondary_event_seconds": 0.65,
+      "secondary_event_score": 1.694,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi Q8",
+        "confidence": 9,
+        "reason": "The frames show the same make/model or generation family as Audi Q8, including the distinct interior and exterior features.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-3-engine.mp4"
+    },
+    {
+      "index": 4,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/KV7oQ8ak/2019-audi-q8-prestige",
+      "source_title": "2019 Audi Q8 Prestige",
+      "source_year": 2019,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0e03c0818f4acf39778ebb3069067c8c/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 3,
+        "likely_engine_audio": false,
+        "reason": "The scene shows the rear exterior of the vehicle without any audio or visible exhaust activity.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 12.05,
+      "engine_event_score": 1.4,
+      "secondary_event_seconds": 16.25,
+      "secondary_event_score": 1.357,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi Q8",
+        "confidence": 9,
+        "reason": "Frames show a vehicle with design elements consistent with the Audi Q8.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-4-engine.mp4"
+    }
+  ],
+  "status": "complete"
+}
