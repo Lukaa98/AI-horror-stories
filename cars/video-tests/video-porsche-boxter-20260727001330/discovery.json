@@ -1,0 +1,111 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-27T00:14:56.387Z",
+  "query": "Porsche Boxter",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/porsche/boxter?csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3RpLb17N/2024-porsche-718-boxster-spyder-rs",
+      "title": "2024 Porsche 718 Boxster Spyder Rs",
+      "text": "FEATURED Sold for $221,000",
+      "titleYear": 2024,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "title": "2025 Porsche 718 Spyder Rs",
+      "text": "FEATURED Bid to $188,088",
+      "titleYear": 2025,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gg8ypB1/2020-porsche-718-boxster-spyder",
+      "title": "2020 Porsche 718 Boxster Spyder",
+      "text": "Sold for $125,000",
+      "titleYear": 2020,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9ezAMDdd/2021-porsche-718-boxster-25-years-edition",
+      "title": "Sold After for $114,300",
+      "text": "Sold After for $114,300",
+      "titleYear": 2021,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92XDMOBJ/2016-porsche-boxster-spyder",
+      "title": "2016 Porsche Boxster Spyder",
+      "text": "FEATURED Sold for $103,000",
+      "titleYear": 2016,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3oOkRn2a/2016-porsche-boxster-spyder",
+      "title": "2016 Porsche Boxster Spyder",
+      "text": "Sold for $92,000",
+      "titleYear": 2016,
+      "score": 52
+    }
+  ],
+  "auctions_used": [],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3RpLb17N/2024-porsche-718-boxster-spyder-rs",
+    "title": "2024 Porsche 718 Boxster Spyder Rs",
+    "text": "FEATURED Sold for $221,000",
+    "titleYear": 2024,
+    "score": 52
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a1a9d0111da88d61aa0912fa24a54756/thumbnails/thumbnail.jpg",
+      "context": "has added about 800 miles to it since. Seller Notes The seller states that the windows have a 20% ceramic tint, and that XPEL ceramic coating has been applied to the exterior. View the entire listing Video <img src=\"https://customer-cuf69xprmkaqooxd.cloudfla",
+      "section": "",
+      "title": "2025 Porsche 718 Spyder RS",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a1a9d0111da88d61aa0912fa24a54756/manifest/video.m3u8",
+      "auction_title": "2025 Porsche 718 Spyder RS",
+      "auction_year": 2025,
+      "search_score": 52
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f718e3ce554bc609f43f9b15532a1def/thumbnails/thumbnail.jpg",
+      "context": "class=\"btn btn-link rb \">View the entire listing Video <img src=\"https://customer-cuf69xprmkaqooxd.cloudfla",
+      "section": "",
+      "title": "2025 Porsche 718 Spyder RS",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f718e3ce554bc609f43f9b15532a1def/manifest/video.m3u8",
+      "auction_title": "2025 Porsche 718 Spyder RS",
+      "auction_year": 2025,
+      "search_score": 52
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/22b1c84ab0e18b35f725e185dc761374/thumbnails/thumbnail.jpg",
+      "context": "1aa0912fa24a54756/thumbnails/thumbnail.jpg\" alt=\"2025 Porsche 718 Spyder RS\" itemprop=\"thumbnail\"> Similar Auctions Next <ul clas",
+      "section": "",
+      "title": "2025 Porsche 718 Spyder RS",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/22b1c84ab0e18b35f725e185dc761374/manifest/video.m3u8",
+      "auction_title": "2025 Porsche 718 Spyder RS",
+      "auction_year": 2025,
+      "search_score": 52
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/48748aea0a2922255731392677cc0b16/thumbnails/thumbnail.jpg",
+      "context": "9f43f9b15532a1def/thumbnails/thumbnail.jpg\" alt=\"2025 Porsche 718 Spyder RS\" itemprop=\"thumbnail\"> Similar Auctions Next <img src=\"https://media.carsandbids.com/cdn-cgi/image/width=712,quality=70/1477bbe21e8d6b5e719c7c3ccab577",
+      "section": "",
+      "title": "2025 Porsche 718 Spyder RS",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/48748aea0a2922255731392677cc0b16/manifest/video.m3u8",
+      "auction_title": "2025 Porsche 718 Spyder RS",
+      "auction_year": 2025,
+      "search_score": 52
+    }
+  ]
+}
