@@ -1,0 +1,137 @@
+{
+  "test_id": "video-lamborghini-urus-20260727024658",
+  "query": "Lamborghini Urus",
+  "make": "Lamborghini",
+  "model": "Urus",
+  "start_year": null,
+  "end_year": null,
+  "listings_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KY5DAvMM/2022-lamborghini-urus",
+      "title": "2022 Lamborghini Urus",
+      "text": "FEATURED Bid to $203,000",
+      "titleYear": 2022,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMMXM78p/2020-lamborghini-urus",
+      "title": "2020 Lamborghini Urus",
+      "text": "FEATURED Bid to $142,000",
+      "titleYear": 2020,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGqzGbRO/2022-lamborghini-urus",
+      "title": "Sold After for $210,000",
+      "text": "Sold After for $210,000",
+      "titleYear": 2022,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rbo2Y1mQ/2019-lamborghini-urus",
+      "title": "2019 Lamborghini Urus",
+      "text": "Bid to $150,000",
+      "titleYear": 2019,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkVNEDpk/2020-lamborghini-urus",
+      "title": "2020 Lamborghini Urus",
+      "text": "Bid to $163,500",
+      "titleYear": 2020,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9adLvXaP/2019-lamborghini-urus",
+      "title": "2019 Lamborghini Urus",
+      "text": "Bid to $162,500",
+      "titleYear": 2019,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjoPZNX2/2020-lamborghini-urus",
+      "title": "2020 Lamborghini Urus",
+      "text": "Sold for $188,500",
+      "titleYear": 2020,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3zJRQYaP/2019-lamborghini-urus",
+      "title": "2019 Lamborghini Urus",
+      "text": "Sold for $184,000",
+      "titleYear": 2019,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gqwoo0G/2021-lamborghini-urus",
+      "title": "2021 Lamborghini Urus",
+      "text": "Bid to $222,000",
+      "titleYear": 2021,
+      "score": 70
+    }
+  ],
+  "videos_discovered": 2,
+  "clips": [
+    {
+      "index": 1,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/KY5DAvMM/2022-lamborghini-urus",
+      "source_title": "2022 Lamborghini Urus",
+      "source_year": 2022,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c9a60a7ab755f26f28a0ba0f2face20f/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "hood_or_trunk_operation",
+        "engine_relevance": 3,
+        "likely_engine_audio": false,
+        "reason": "The scene shows the hood of the vehicle being opened, but there is no engine start or revving audio.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 7.45,
+      "engine_event_score": 1.692,
+      "secondary_event_seconds": 4.65,
+      "secondary_event_score": 2.108,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Lamborghini Urus",
+        "confidence": 10,
+        "reason": "The frames show a vehicle that is clearly a Lamborghini Urus, as evidenced by its distinct design features and color.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-1-engine.mp4"
+    },
+    {
+      "index": 2,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/KY5DAvMM/2022-lamborghini-urus",
+      "source_title": "2022 Lamborghini Urus",
+      "source_year": 2022,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e134ffe9586947eac8b4764c1d7c721f/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "engine_bay",
+        "engine_relevance": 9,
+        "likely_engine_audio": false,
+        "reason": "The scene shows the engine bay of the vehicle, which is relevant for understanding the vehicle's capabilities, but does not include any audio or startup footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 0.25,
+      "engine_event_score": 3.723,
+      "secondary_event_seconds": 23.05,
+      "secondary_event_score": 1.935,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Lamborghini Urus",
+        "confidence": 10,
+        "reason": "Frames clearly show the engine compartment of a Lamborghini Urus.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-2-engine.mp4"
+    }
+  ],
+  "status": "complete"
+}
