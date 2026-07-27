@@ -34,7 +34,15 @@ def _media_duration(source):
         "ffprobe", "-v", "error", "-show_entries", "format=duration",
         "-of", "default=noprint_wrappers=1:nokey=1", source,
     ])
-    return max(0.0, float(result.stdout.strip()))
+    value = result.stdout.strip()
+    if not value or value.upper() == "N/A":
+        return 0.0
+    return max(0.0, float(value))
+
+
+def _wav_duration(path):
+    with wave.open(str(path), "rb") as stream:
+        return stream.getnframes() / max(1, stream.getframerate())
 
 
 def classify_video_thumbnail(candidate, entry):
@@ -215,6 +223,7 @@ def prepare_engine_clip(entry, output_dir, duration=3.0, allow_irrelevant=False)
                     "scene_review": scene_review,
                     "onset": onset,
                     "event_score": _engine_event_score(probe_wav, onset),
+                    "audio_duration": _wav_duration(probe_wav),
                 })
             except Exception:
                 continue
@@ -225,12 +234,15 @@ def prepare_engine_clip(entry, output_dir, duration=3.0, allow_irrelevant=False)
         chosen = max(analyses, key=lambda item: item["event_score"])
         candidate = chosen["candidate"]
         source = candidate.get("playback_url") or candidate.get("url")
-        source_duration = _media_duration(source)
+        source_duration = _media_duration(source) or chosen["audio_duration"]
         onset = min(chosen["onset"], max(0.0, source_duration - duration))
         _run([
-            "ffmpeg", "-y", "-ss", f"{onset:.3f}", "-i", source, "-t", str(duration),
+            # Seek after opening the HLS input. This is slower than input-side
+            # seeking but does not jump past the final video keyframe when the
+            # interesting exhaust event occurs at the end of the source.
+            "ffmpeg", "-y", "-i", source, "-ss", f"{onset:.3f}", "-t", str(duration),
             "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-preset", "veryfast",
-            "-c:a", "aac", "-movflags", "+faststart", str(clip_path),
+            "-c:a", "aac", "-avoid_negative_ts", "make_zero", "-movflags", "+faststart", str(clip_path),
         ])
         clip_duration = min(duration, _media_duration(str(clip_path)))
         if clip_duration < 0.35:
