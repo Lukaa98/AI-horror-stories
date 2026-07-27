@@ -1,0 +1,154 @@
+{
+  "test_id": "v1015-boxter-scene-smoke",
+  "query": "Porsche Boxter",
+  "make": "Porsche",
+  "model": "Boxter",
+  "start_year": null,
+  "end_year": null,
+  "listings_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3RpLb17N/2024-porsche-718-boxster-spyder-rs",
+      "title": "2024 Porsche 718 Boxster Spyder Rs",
+      "text": "FEATURED Sold for $221,000",
+      "titleYear": 2024,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "title": "2025 Porsche 718 Spyder Rs",
+      "text": "FEATURED Bid to $188,088",
+      "titleYear": 2025,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gg8ypB1/2020-porsche-718-boxster-spyder",
+      "title": "2020 Porsche 718 Boxster Spyder",
+      "text": "Sold for $125,000",
+      "titleYear": 2020,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9ezAMDdd/2021-porsche-718-boxster-25-years-edition",
+      "title": "Sold After for $114,300",
+      "text": "Sold After for $114,300",
+      "titleYear": 2021,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92XDMOBJ/2016-porsche-boxster-spyder",
+      "title": "2016 Porsche Boxster Spyder",
+      "text": "FEATURED Sold for $103,000",
+      "titleYear": 2016,
+      "score": 52
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3oOkRn2a/2016-porsche-boxster-spyder",
+      "title": "2016 Porsche Boxster Spyder",
+      "text": "Sold for $92,000",
+      "titleYear": 2016,
+      "score": 52
+    }
+  ],
+  "videos_discovered": 4,
+  "clips": [
+    {
+      "index": 1,
+      "approved": false,
+      "clip_extracted": false,
+      "source_listing": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "source_title": "2025 Porsche 718 Spyder RS",
+      "source_year": 2025,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a1a9d0111da88d61aa0912fa24a54756/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "full_exterior",
+        "engine_relevance": 4,
+        "likely_engine_audio": false,
+        "reason": "The scene features a full view of the car, but lacks audio and specific closeups of the engine or exhaust, indicating lower relevance to cold-start, startup, exhaust, or revving footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "review": null,
+      "error": "could not convert string to float: 'N/A'"
+    },
+    {
+      "index": 2,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "source_title": "2025 Porsche 718 Spyder RS",
+      "source_year": 2025,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f718e3ce554bc609f43f9b15532a1def/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "roof_operation",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The scene shows the convertible roof, which is not directly related to engine sounds or exhaust footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 0.25,
+      "engine_event_score": 0.0,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche Boxster",
+        "confidence": 9,
+        "reason": "The frames show a vehicle that is visually consistent with the Porsche Boxster's design, specifically the convertible roof and profile.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-2-engine.mp4"
+    },
+    {
+      "index": 3,
+      "approved": false,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "source_title": "2025 Porsche 718 Spyder RS",
+      "source_year": 2025,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/22b1c84ab0e18b35f725e185dc761374/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "interior_detail",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "reason": "The scene focuses on the car's interior door, which does not provide cold-start, startup, or exhaust footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 0.25,
+      "engine_event_score": 0.0,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche Boxster",
+        "confidence": 9,
+        "reason": "The frames show the door interior of a vehicle that resembles the design elements of the Porsche Boxster, particularly the styling and materials used.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-3-engine.mp4"
+    },
+    {
+      "index": 4,
+      "approved": false,
+      "clip_extracted": false,
+      "source_listing": "https://carsandbids.com/auctions/rGY72w0N/2025-porsche-718-spyder-rs",
+      "source_title": "2025 Porsche 718 Spyder RS",
+      "source_year": 2025,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/48748aea0a2922255731392677cc0b16/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "exhaust_closeup",
+        "engine_relevance": 8,
+        "likely_engine_audio": true,
+        "reason": "The thumbnail features a close-up view of the exhaust, which is highly relevant for cold-start, startup, or revving footage.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "review": null,
+      "error": "Command '['ffmpeg', '-y', '-i', '/home/runner/work/AI-horror-stories/AI-horror-stories/cars/video-tests/v1015-boxter-scene-smoke/clips/rank-4-engine.mp4', '-ss', '0.1', '-frames:v', '1', '-update', '1', '/home/runner/work/AI-horror-stories/AI-horror-stories/cars/video-tests/v1015-boxter-scene-smoke/clips/rank-4-verify-0.jpg']' returned non-zero exit status 234."
+    }
+  ],
+  "status": "complete"
+}
