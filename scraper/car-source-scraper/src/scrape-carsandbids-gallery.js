@@ -418,7 +418,7 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
       .map((candidate) => {
         const haystack = `${candidate.section || ""} ${candidate.context || ""}`.toLowerCase();
         let type = "video";
-        if (/cold\s*start|coldstart|start(?:up)?\s*(?:video|sound)/i.test(haystack)) type = "cold_start";
+        if (/cold\s*start|coldstart|engine\s*start|\bstartup\b|start(?:up)?\s*(?:video|sound)/i.test(haystack)) type = "cold_start";
         else if (/\b(?:rev|revving|exhaust|engine sound)\b/i.test(haystack)) type = "engine_sound";
         else if (/walkaround|walk-around/i.test(haystack)) type = "walkaround";
         return {
@@ -554,7 +554,12 @@ async function main() {
     const auctionsUsed = [];
     const discoveredVideos = [];
     let bestSelectionScore = Number.NEGATIVE_INFINITY;
-    for (const auction of auctions.slice(0, 4)) {
+    // Video-only test runs skip image downloads entirely, so the only cost
+    // of visiting more candidate auctions is page-load time - worth it,
+    // since videos are unevenly distributed across same-score listings and
+    // limiting to the first 4 of 6 was silently missing real cold-start clips.
+    const auctionsToVisit = skipImages ? auctions : auctions.slice(0, 4);
+    for (const auction of auctionsToVisit) {
       const gallery = await extractAuctionGallery(page, auction.url, visualHighlight);
       for (const video of gallery.videoCandidates || []) {
         discoveredVideos.push({

@@ -321,15 +321,17 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
             onset_scene_review = chosen["scene_review"]
         finally:
             onset_frame_path.unlink(missing_ok=True)
-        # Vision can only judge what a frame shows, not what it sounds like.
-        # A rear-exterior or cockpit shot during a real rev looks the same as
-        # one during silence, so a strong audio rise is allowed to override a
-        # low vision score for scene types where the sound plausibly comes
-        # from the engine. Scenes whose sound is clearly unrelated to the
-        # engine (roof motors, hood/trunk latches, cabin rustling, footsteps)
-        # never get the audio override.
+        # The site itself labels some videos "Cold Start"/"Engine Start" - trust
+        # that over guessing from pixels or audio. Otherwise, vision can only
+        # judge what a frame shows, not what it sounds like: a rear-exterior or
+        # cockpit shot during a real rev looks the same as one during silence,
+        # so a strong audio rise is allowed to override a low vision score for
+        # scene types where the sound plausibly comes from the engine. Scenes
+        # whose sound is clearly unrelated to the engine (roof motors,
+        # hood/trunk latches, cabin rustling, footsteps) never get the
+        # audio override.
         scene_type = onset_scene_review.get("scene_type")
-        engine_relevant = (
+        engine_relevant = candidate.get("type") in {"cold_start", "engine_sound"} or (
             scene_type not in {"roof_operation", "hood_or_trunk_operation", "interior_detail", "walkaround"}
             and (
                 int(onset_scene_review.get("engine_relevance") or 0) >= 5
