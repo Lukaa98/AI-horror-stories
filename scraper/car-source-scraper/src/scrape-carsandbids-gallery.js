@@ -451,7 +451,7 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
       .map((candidate) => {
         const haystack = `${candidate.section || ""} ${candidate.context || ""}`.toLowerCase();
         let type = "video";
-        if (/cold\s*start|coldstart|engine\s*start|\bstartup\b|start(?:up)?\s*(?:video|sound)/i.test(haystack)) type = "cold_start";
+        if (/cold\s*start|coldstart|engine\s*start|start[\s-]?up|start(?:up)?\s*(?:video|sound)/i.test(haystack)) type = "cold_start";
         else if (/\b(?:rev|revving|exhaust|engine sound)\b/i.test(haystack)) type = "engine_sound";
         else if (/walkaround|walk-around/i.test(haystack)) type = "walkaround";
         return {
