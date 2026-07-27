@@ -9,6 +9,12 @@ from pathlib import Path
 
 from PIL import Image
 
+# Audio-rise multiplier strong enough to count as a real engine event even
+# when the frame at that moment doesn't visually confirm it (e.g. a plain
+# rear-exterior or cockpit shot during a rev). Chosen from observed data:
+# real events have cleared 4x, while roof/interior/ambient noise stays <2x.
+STRONG_AUDIO_OVERRIDE_SCORE = 3.0
+
 
 def choose_video_candidate(candidates):
     """Prefer labeled cold starts, but tolerate any same-search engine video."""
@@ -315,9 +321,20 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
             onset_scene_review = chosen["scene_review"]
         finally:
             onset_frame_path.unlink(missing_ok=True)
+        # Vision can only judge what a frame shows, not what it sounds like.
+        # A rear-exterior or cockpit shot during a real rev looks the same as
+        # one during silence, so a strong audio rise is allowed to override a
+        # low vision score for scene types where the sound plausibly comes
+        # from the engine. Scenes whose sound is clearly unrelated to the
+        # engine (roof motors, hood/trunk latches, cabin rustling, footsteps)
+        # never get the audio override.
+        scene_type = onset_scene_review.get("scene_type")
         engine_relevant = (
-            int(onset_scene_review.get("engine_relevance") or 0) >= 5
-            and onset_scene_review.get("scene_type") not in {"roof_operation", "hood_or_trunk_operation"}
+            scene_type not in {"roof_operation", "hood_or_trunk_operation", "interior_detail", "walkaround"}
+            and (
+                int(onset_scene_review.get("engine_relevance") or 0) >= 5
+                or chosen["event_score"] >= STRONG_AUDIO_OVERRIDE_SCORE
+            )
         )
         _run([
             # Seek after opening the HLS input. This is slower than input-side
