@@ -45,13 +45,22 @@ def _wav_duration(path):
         return stream.getnframes() / max(1, stream.getframerate())
 
 
-def classify_video_thumbnail(candidate, entry):
-    """Classify what the listing-video thumbnail is actually showing."""
-    if candidate.get("scene_review"):
-        return candidate["scene_review"]
+_SCENE_PROMPT = (
+    "Classify this frame from a car-auction video. Return only JSON with keys: "
+    "scene_type (one of exhaust_closeup, rear_exterior, cockpit, engine_bay, full_exterior, "
+    "roof_operation, hood_or_trunk_operation, interior_detail, walkaround, unknown), "
+    "engine_relevance integer 1-10, likely_engine_audio boolean, reason string. "
+    "We want cold-start, startup, exhaust, or revving footage. Exhaust closeups, rear views, "
+    "cockpit views with gauges, and engine-bay views are highly relevant. Convertible roof "
+    "movement, hood/trunk operation, silent interior details, and generic walkarounds are not. "
+    "{vehicle_line}classify scene purpose separately from whether the vehicle identity matches."
+)
+
+
+def _classify_scene_image(image_ref, entry):
+    """Send one frame (URL or data URI) to vision review for scene purpose."""
     key = (os.getenv("OPENAI_API_KEY") or "").strip()
-    thumbnail_url = candidate.get("thumbnail_url") or candidate.get("url")
-    if not key.startswith("sk-") or len(key) < 30 or not thumbnail_url:
+    if not key.startswith("sk-") or len(key) < 30 or not image_ref:
         return {
             "scene_type": "unknown",
             "engine_relevance": 5,
@@ -61,28 +70,49 @@ def classify_video_thumbnail(candidate, entry):
         }
     from openai import OpenAI
 
-    prompt = (
-        "Classify this thumbnail from a car-auction video. Return only JSON with keys: "
-        "scene_type (one of exhaust_closeup, rear_exterior, cockpit, engine_bay, full_exterior, "
-        "roof_operation, hood_or_trunk_operation, interior_detail, walkaround, unknown), "
-        "engine_relevance integer 1-10, likely_engine_audio boolean, reason string. "
-        "We want cold-start, startup, exhaust, or revving footage. Exhaust closeups, rear views, "
-        "cockpit views with gauges, and engine-bay views are highly relevant. Convertible roof "
-        "movement, hood/trunk operation, silent interior details, and generic walkarounds are not. "
-        f"The expected vehicle family is {entry.name} ({entry.years}), but classify scene purpose "
-        "separately from whether the vehicle identity matches."
-    )
+    vehicle_line = f"The expected vehicle family is {entry.name} ({entry.years}), but " if entry else ""
+    prompt = _SCENE_PROMPT.format(vehicle_line=vehicle_line)
     response = OpenAI().responses.create(
         model=os.getenv("OPENAI_CAR_VIDEO_REVIEW_MODEL", "gpt-4o-mini"),
         input=[{"role": "user", "content": [
             {"type": "input_text", "text": prompt},
-            {"type": "input_image", "image_url": thumbnail_url},
+            {"type": "input_image", "image_url": image_ref},
         ]}],
     )
     text = response.output_text.strip().removeprefix("```json").removesuffix("```").strip()
     result = json.loads(text)
     result["provider"] = "openai"
     return result
+
+
+def classify_video_thumbnail(candidate, entry):
+    """Classify what the listing-video thumbnail is actually showing.
+
+    This is a cheap upfront filter only. The thumbnail is a single fixed
+    platform-generated frame (usually near t=0) and may not depict whatever
+    is happening at the actual audio event, so it must not be the final
+    word on engine relevance - see classify_scene_at_time for that.
+    """
+    if candidate.get("scene_review"):
+        return candidate["scene_review"]
+    thumbnail_url = candidate.get("thumbnail_url") or candidate.get("url")
+    return _classify_scene_image(thumbnail_url, entry)
+
+
+def classify_scene_at_time(source, timestamp, entry, frame_path):
+    """Grab a frame at `timestamp` from `source` and classify what it shows.
+
+    Unlike the platform thumbnail, this looks at the moment the audio engine
+    detected, so a rear-exterior or cockpit shot caught mid-rev is judged on
+    what it actually shows during the event instead of on an unrelated
+    earlier frame.
+    """
+    _run([
+        "ffmpeg", "-y", "-i", source, "-ss", f"{max(0.0, timestamp):.3f}",
+        "-frames:v", "1", "-update", "1", str(frame_path),
+    ])
+    encoded = base64.b64encode(Path(frame_path).read_bytes()).decode("ascii")
+    return _classify_scene_image(f"data:image/jpeg;base64,{encoded}", entry)
 
 
 def _extract_analysis_audio(source, wav_path):
@@ -92,8 +122,7 @@ def _extract_analysis_audio(source, wav_path):
     ])
 
 
-def detect_engine_onset(wav_path):
-    """Find the strongest sustained audio rise, normally the starter/ignition."""
+def _rise_series(wav_path):
     with wave.open(str(wav_path), "rb") as stream:
         rate = stream.getframerate()
         samples = stream.readframes(stream.getnframes())
@@ -104,14 +133,42 @@ def detect_engine_onset(wav_path):
         chunk = values[offset:offset + window]
         if chunk:
             rms.append(math.sqrt(sum(value * value for value in chunk) / len(chunk)))
-    if len(rms) < 4:
+    rises = [
+        (rms[index] + rms[index + 1]) / 2 - sum(rms[max(0, index - 3):index]) / 3
+        for index in range(3, len(rms) - 1)
+    ] if len(rms) >= 4 else []
+    return rises
+
+
+def detect_engine_onset(wav_path):
+    """Find the strongest sustained audio rise, normally the starter/ignition or a rev."""
+    rises = _rise_series(wav_path)
+    if not rises:
         return 0.0
     # Ignore the opening half-second, where player/container noise can dominate.
-    best_index = max(
-        range(3, len(rms) - 1),
-        key=lambda index: (rms[index] + rms[index + 1]) / 2 - sum(rms[max(0, index - 3):index]) / 3,
-    )
-    return max(0.0, best_index * 0.2 - 0.35)
+    best_offset = max(range(len(rises)), key=lambda index: rises[index])
+    return max(0.0, (best_offset + 3) * 0.2 - 0.35)
+
+
+def detect_secondary_event(wav_path, primary_onset, min_gap=1.5):
+    """Find a second distinct audio rise (e.g. a rev after a cold-start idle).
+
+    Returns None when no other rise is at least `min_gap` seconds away from
+    the primary onset, or when it is too weak to be worth surfacing.
+    """
+    rises = _rise_series(wav_path)
+    if not rises:
+        return None
+    candidates = [
+        (index, value) for index, value in enumerate(rises)
+        if abs(((index + 3) * 0.2 - 0.35) - primary_onset) >= min_gap
+    ]
+    if not candidates:
+        return None
+    best_index, best_value = max(candidates, key=lambda item: item[1])
+    if best_value <= 0:
+        return None
+    return max(0.0, (best_index + 3) * 0.2 - 0.35)
 
 
 def _engine_event_score(wav_path, onset):
@@ -169,7 +226,7 @@ def _verify_frames(contact_sheet, entry):
     return result
 
 
-def prepare_engine_clip(entry, output_dir, duration=3.0, allow_irrelevant=False):
+def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False):
     candidates = [item for item in entry.engine_videos if item.get("playback_url") or item.get("url")]
     if not candidates:
         return None
@@ -224,18 +281,44 @@ def prepare_engine_clip(entry, output_dir, duration=3.0, allow_irrelevant=False)
                     "onset": onset,
                     "event_score": _engine_event_score(probe_wav, onset),
                     "audio_duration": _wav_duration(probe_wav),
+                    "probe_wav": probe_wav,
                 })
             except Exception:
-                continue
-            finally:
                 probe_wav.unlink(missing_ok=True)
+                continue
         if not analyses:
             return {"approved": False, "error": "No discovered video had usable audio", "source": candidates[0]}
         chosen = max(analyses, key=lambda item: item["event_score"])
+        for item in analyses:
+            if item is not chosen:
+                item["probe_wav"].unlink(missing_ok=True)
         candidate = chosen["candidate"]
         source = candidate.get("playback_url") or candidate.get("url")
         source_duration = _media_duration(source) or chosen["audio_duration"]
         onset = min(chosen["onset"], max(0.0, source_duration - duration))
+
+        # The platform thumbnail is a fixed early frame and can miss whatever
+        # is actually happening at the detected audio event (e.g. a rev
+        # caught from a rear-exterior shot). Re-classify using a frame taken
+        # at the real onset before making the final relevance call.
+        secondary_onset = detect_secondary_event(chosen["probe_wav"], chosen["onset"])
+        secondary_event_score = (
+            _engine_event_score(chosen["probe_wav"], secondary_onset)
+            if secondary_onset is not None else None
+        )
+        chosen["probe_wav"].unlink(missing_ok=True)
+
+        onset_frame_path = output_dir / f"rank-{entry.rank}-onset-frame.jpg"
+        try:
+            onset_scene_review = classify_scene_at_time(source, onset, entry, onset_frame_path)
+        except Exception:
+            onset_scene_review = chosen["scene_review"]
+        finally:
+            onset_frame_path.unlink(missing_ok=True)
+        engine_relevant = (
+            int(onset_scene_review.get("engine_relevance") or 0) >= 5
+            and onset_scene_review.get("scene_type") not in {"roof_operation", "hood_or_trunk_operation"}
+        )
         _run([
             # Seek after opening the HLS input. This is slower than input-side
             # seeking but does not jump past the final video keyframe when the
@@ -265,14 +348,18 @@ def prepare_engine_clip(entry, output_dir, duration=3.0, allow_irrelevant=False)
         review = _verify_frames(contact_sheet, entry)
         if not review.get("approved"):
             clip_path.unlink(missing_ok=True)
-            return {"approved": False, "review": review, "source": candidate}
+            return {"approved": False, "review": review, "scene_review": onset_scene_review, "source": candidate}
         return {
-            "approved": True,
+            "approved": bool(review.get("approved") and engine_relevant),
             "path": clip_path,
             "duration": duration,
             "detected_onset_seconds": round(onset, 3),
             "engine_event_score": round(chosen["event_score"], 3),
-            "scene_review": chosen["scene_review"],
+            "scene_review": onset_scene_review,
+            "thumbnail_scene_review": chosen["scene_review"],
+            "engine_relevant": engine_relevant,
+            "secondary_event_seconds": round(secondary_onset, 3) if secondary_onset is not None else None,
+            "secondary_event_score": round(secondary_event_score, 3) if secondary_event_score is not None else None,
             "review": review,
             "source": candidate,
         }

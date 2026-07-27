@@ -82,22 +82,25 @@ def main():
             }
         candidate["scene_review"] = thumbnail_review
         result = prepare_engine_clip(entry, clips_dir, allow_irrelevant=True)
-        engine_relevant = (
-            int(thumbnail_review.get("engine_relevance") or 0) >= 5
-            and thumbnail_review.get("scene_type") not in {"roof_operation", "hood_or_trunk_operation"}
-        )
+        # prepare_engine_clip re-classifies scene purpose from a frame taken
+        # at the actual detected audio event when a clip was extracted, which
+        # is far more reliable than the static platform thumbnail used above
+        # for the initial cheap filter - prefer that verdict when available.
+        scene_review = (result.get("scene_review") if result else None) or thumbnail_review
         item = {
             "index": index,
-            "approved": bool(result and result.get("approved") and engine_relevant),
+            "approved": bool(result and result.get("approved")),
             "clip_extracted": bool(result and result.get("path")),
             "source_listing": candidate.get("auction_url"),
             "source_title": candidate.get("auction_title") or candidate.get("title"),
             "source_year": candidate.get("auction_year"),
             "source_type": candidate.get("type"),
             "thumbnail_url": candidate.get("thumbnail_url") or candidate.get("url"),
-            "scene_review": thumbnail_review,
+            "scene_review": scene_review,
             "detected_onset_seconds": result.get("detected_onset_seconds") if result else None,
             "engine_event_score": result.get("engine_event_score") if result else None,
+            "secondary_event_seconds": result.get("secondary_event_seconds") if result else None,
+            "secondary_event_score": result.get("secondary_event_score") if result else None,
             "review": result.get("review") if result else None,
             "error": result.get("error") if result else "No result",
         }
