@@ -1,0 +1,213 @@
+{
+  "test_id": "video-audi-sq8-20260727174850",
+  "query": "Audi SQ8",
+  "make": "Audi",
+  "model": "SQ8",
+  "start_year": null,
+  "end_year": null,
+  "listings_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rwWmmdmp/2020-audi-sq8-prestige",
+      "title": "2020 Audi Sq8 Prestige",
+      "text": "Bid to $41,500",
+      "titleYear": 2020,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMjX81X4/2021-audi-sq8-prestige",
+      "title": "2021 Audi Sq8 Prestige",
+      "text": "Bid to $28,600",
+      "titleYear": 2021,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vBW0L0d/2022-audi-sq8-prestige",
+      "title": "2022 Audi Sq8 Prestige",
+      "text": "Bid to $58,500",
+      "titleYear": 2022,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkqOqxl3/2022-audi-sq8-prestige",
+      "title": "2022 Audi Sq8 Prestige",
+      "text": "Sold for $70,000",
+      "titleYear": 2022,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rN5Dy4yP/2021-audi-sq8-prestige",
+      "title": "2021 Audi Sq8 Prestige",
+      "text": "Bid to $55,555",
+      "titleYear": 2021,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9Ab4b4EA/2020-audi-sq8-prestige",
+      "title": "2020 Audi Sq8 Prestige",
+      "text": "Sold for $48,500",
+      "titleYear": 2020,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/30bDnkVr/2021-audi-sq8-prestige",
+      "title": "Sold After for $55,000",
+      "text": "Sold After for $55,000",
+      "titleYear": 2021,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/30RbnxyL/2021-audi-sq8-premium-plus",
+      "title": "2021 Audi Sq8 Premium Plus",
+      "text": "Bid to $39,000",
+      "titleYear": 2021,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9Ax1Vodw/2021-audi-sq8",
+      "title": "2021 Audi Sq8",
+      "text": "Sold for $80,111",
+      "titleYear": 2021,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3zL1Aybd/2020-audi-sq8",
+      "title": "2020 Audi Sq8",
+      "text": "Sold for $90,000",
+      "titleYear": 2020,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98wBJg1X/2020-audi-sq8",
+      "title": "2020 Audi Sq8",
+      "text": "Sold for $95,250",
+      "titleYear": 2020,
+      "score": 70
+    }
+  ],
+  "videos_discovered": 20,
+  "listings_with_video_attempted": 7,
+  "attempts_made": 7,
+  "declined_count": 3,
+  "clips": [
+    {
+      "index": 1,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/rwWmmdmp/2020-audi-sq8-prestige",
+      "source_title": "2020 Audi SQ8 Prestige",
+      "source_year": 2020,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/edbb962f5684ffe6f3597dab097d33a9/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 4,
+        "likely_engine_audio": false,
+        "reason": "The shot focuses on the rear exterior of the vehicle, which could be relevant but does not clearly provide insight about engine sounds or activity such as exhaust, startup, or revving.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 1.85,
+      "engine_event_score": 7.793,
+      "secondary_event_seconds": 38.25,
+      "secondary_event_score": 1.135,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi SQ8",
+        "confidence": 9,
+        "reason": "The frames consistently show a vehicle that resembles the Audi SQ8 in design, features, and overall styling.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-1-engine.mp4"
+    },
+    {
+      "index": 2,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/rMjX81X4/2021-audi-sq8-prestige",
+      "source_title": "2021 Audi SQ8 Prestige",
+      "source_year": 2021,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7874fea4abbe5f8513c4878e79af81a6/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "cockpit",
+        "engine_relevance": 3,
+        "likely_engine_audio": false,
+        "reason": "The footage shows a view of the cockpit with controls and gauges, but there are no indicators of engine audio or activity such as cold-start or revving.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 1.65,
+      "engine_event_score": 4.503,
+      "secondary_event_seconds": 7.65,
+      "secondary_event_score": 1.311,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi SQ8",
+        "confidence": 9,
+        "reason": "The frames show an interior consistent with the design elements of the Audi SQ8, including the steering wheel, dashboard layout, and center console features.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-2-engine.mp4"
+    },
+    {
+      "index": 3,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/30bDnkVr/2021-audi-sq8-prestige",
+      "source_title": "2021 Audi SQ8 Prestige",
+      "source_year": 2021,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/21154b5b060f8eb42b2c3c263b17ad4c/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "unknown",
+        "engine_relevance": 5,
+        "likely_engine_audio": true,
+        "reason": "Thumbnail review failed open: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-100wRAu7bdYN19ulS3raH79q on tokens per min (TPM): Limit 200000, Used 200000, Requested 765. Please try again in 229ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}"
+      },
+      "detected_onset_seconds": 2.45,
+      "engine_event_score": 30.663,
+      "secondary_event_seconds": 6.85,
+      "secondary_event_score": 3.052,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi SQ8",
+        "confidence": 9,
+        "reason": "The frames show a vehicle that presents similar characteristics and design features to the Audi SQ8, including the rear light design and overall shape.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-6-engine.mp4"
+    },
+    {
+      "index": 4,
+      "approved": true,
+      "clip_extracted": true,
+      "source_listing": "https://carsandbids.com/auctions/30RbnxyL/2021-audi-sq8-premium-plus",
+      "source_title": "2021 Audi SQ8 Premium Plus",
+      "source_year": 2021,
+      "source_type": "video",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3eb1203a15aa3f5c8a6cd6a19c9518e8/thumbnails/thumbnail.jpg",
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 3,
+        "likely_engine_audio": false,
+        "reason": "The shot is focused on the rear exterior of the vehicle without any visible action indicating startup or exhaust sound.",
+        "provider": "openai"
+      },
+      "detected_onset_seconds": 1.85,
+      "engine_event_score": 14.35,
+      "secondary_event_seconds": 9.45,
+      "secondary_event_score": 1.887,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Audi SQ8",
+        "confidence": 9,
+        "reason": "The frames consistently show the rear of the vehicle with distinctive features such as tail lights and exhaust layout that resemble the Audi SQ8.",
+        "provider": "openai"
+      },
+      "error": null,
+      "clip": "clips/rank-7-engine.mp4"
+    }
+  ],
+  "status": "complete"
+}
