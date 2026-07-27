@@ -17,13 +17,23 @@ from PIL import Image
 STRONG_AUDIO_OVERRIDE_SCORE = 3.0
 
 # Cabin audio (cockpit gauges, generic interior shots) is muffled compared to
-# an exterior mic catching the same engine event, so a raw event-score race
-# lets a middling interior clip beat a genuinely better exterior one. Scale
-# interior candidates down for *selection* only (not for the approval bar)
-# so a real standout interior recording can still win, but a marginal one
-# loses to an exterior clip with a similar audio jump.
+# a mic outside the car catching the same engine event, so a raw event-score
+# race can let a middling interior clip beat a genuinely better exterior one.
+# Rank candidates by scene tier first (exhaust/rear shots catch the real
+# exhaust note best, other exterior views next, cabin shots last) and only
+# compare audio scores *within* the best available tier, so interior only
+# wins when literally nothing exterior was found - not just when it happens
+# to be louder.
+EXHAUST_SCENE_TYPES = {"exhaust_closeup", "rear_exterior"}
 INTERIOR_SCENE_TYPES = {"cockpit", "interior_detail"}
-INTERIOR_SELECTION_PENALTY = 1.6
+
+
+def _selection_tier(scene_type):
+    if scene_type in EXHAUST_SCENE_TYPES:
+        return 0
+    if scene_type in INTERIOR_SCENE_TYPES:
+        return 2
+    return 1
 
 
 def _create_with_retry(call, max_retries=4, initial_delay=1.0, backoff=2.0):
@@ -326,13 +336,12 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
         if not analyses:
             return {"approved": False, "error": "No discovered video had usable audio", "source": candidates[0]}
 
-        def _selection_rank(item):
-            score = item["event_score"]
-            if item["scene_review"].get("scene_type") in INTERIOR_SCENE_TYPES:
-                score /= INTERIOR_SELECTION_PENALTY
-            return score
-
-        chosen = max(analyses, key=_selection_rank)
+        best_tier = min(_selection_tier(item["scene_review"].get("scene_type")) for item in analyses)
+        tier_candidates = [
+            item for item in analyses
+            if _selection_tier(item["scene_review"].get("scene_type")) == best_tier
+        ]
+        chosen = max(tier_candidates, key=lambda item: item["event_score"])
         for item in analyses:
             if item is not chosen:
                 item["probe_wav"].unlink(missing_ok=True)

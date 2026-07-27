@@ -25,7 +25,10 @@ from generate_sample import (
     _write_contact_sheet,
 )
 from video_editor import FPS, FAST_MODE
-from moviepy.editor import AudioFileClip, CompositeVideoClip, ImageClip, VideoFileClip, concatenate_videoclips
+from moviepy.editor import (
+    AudioFileClip, CompositeVideoClip, ImageClip, VideoFileClip,
+    concatenate_audioclips, concatenate_videoclips,
+)
 from engine_video import prepare_engine_clip
 
 OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"
@@ -445,81 +448,86 @@ def _engine_callout_clip(entry, still_image_path, engine_dir):
         return None, None
 
 
+_PERFORMANCE_VOICE_INSTRUCTIONS = (
+    "Use a low, warm masculine automotive-host voice. Read this as one continuous, "
+    "natural sentence with smooth internal flow. Do not insert dramatic silences or "
+    "stop mid-sentence. Clearly emphasize rank numbers, model names, prices, and "
+    "important mechanical details without slowing down excessively."
+)
+
+
 def _write_performance_audio(run_dir, ordered, close_narration):
-    """Generate one continuous narration, then map its duration onto visual beats."""
-    rank_segments = []
-    for entry in ordered:
-        beats = entry.performance_beats or _automatic_performance_beats(entry.narration)
-        rank_segments.append((f"rank_{entry.rank}", entry, beats))
+    """Synthesize each entry's narration as its own TTS clip, then map real
+    (measured) durations onto visual beats.
 
-    narration_text = " ".join([
-        *(beat["text"] for _, _, beats in rank_segments for beat in beats),
-        close_narration,
-    ])
+    A single combined TTS call split by word-count heuristics drifts as it
+    accumulates across entries - by the last entry the estimated boundary
+    can land mid-word, which is especially jarring once an engine clip is
+    anchored to that same drifted boundary. Synthesizing per entry gives an
+    exact, measured duration for each entry's speech, so the cut to the next
+    entry (or to an engine clip) always lands where the real audio actually
+    ends.
+    """
+    segment_dir = run_dir / "narration_segments"
+    segment_dir.mkdir(parents=True, exist_ok=True)
+    segments = [(f"rank_{entry.rank}", entry, entry.narration) for entry in ordered]
+    segments.append(("close", None, close_narration))
+
+    segment_clips = []
+    for name, entry, text in segments:
+        path = segment_dir / f"{name}.mp3"
+        _write_openai_audio(path, text, instructions=_PERFORMANCE_VOICE_INSTRUCTIONS, speed=1.02)
+        segment_clips.append((name, entry, text, AudioFileClip(str(path))))
+
     narration_path = run_dir / "narration.mp3"
-    _write_openai_audio(
-        narration_path,
-        narration_text,
-        instructions=(
-            "Use a low, warm masculine automotive-host voice. Read this as one continuous, "
-            "natural conversation with smooth sentence-to-sentence flow. Do not insert dramatic "
-            "silences or stop mid-sentence. Clearly emphasize rank numbers, model names, prices, "
-            "and important mechanical details without slowing down excessively."
-        ),
-        speed=1.02,
-    )
-    audio_probe = AudioFileClip(str(narration_path))
-    total_duration = audio_probe.duration
-    audio_probe.close()
+    combined = concatenate_audioclips([clip for *_, clip in segment_clips])
+    combined.write_audiofile(str(narration_path), logger=None)
+    combined.close()
 
-    weighted_items = [
-        (segment_name, entry, beat, _word_weight(beat["text"]))
-        for segment_name, entry, beats in rank_segments
-        for beat in beats
-    ]
-    close_weight = _word_weight(close_narration)
-    total_weight = sum(item[3] for item in weighted_items) + close_weight
     timings = []
+    for name, entry, text, clip in segment_clips:
+        duration = clip.duration
+        clip.close()
 
-    for segment_name, entry, beat, weight in weighted_items:
-        beat_duration = total_duration * weight / total_weight
+        if name == "close":
+            per_entry_close = duration / len(ordered)
+            for close_entry in ordered:
+                image = _select_image_for_cue(close_entry.images, "exterior", set())
+                timings.append({
+                    "segment": "close",
+                    "entry": close_entry,
+                    "text": text,
+                    "style": "conversational",
+                    "emphasis_words": [close_entry.name],
+                    "pause_after": 0,
+                    "visual_cue": "exterior",
+                    "image": image,
+                    "duration": per_entry_close,
+                })
+            continue
+
+        beats = entry.performance_beats or _automatic_performance_beats(entry.narration)
+        weights = [_word_weight(beat["text"]) for beat in beats]
+        total_weight = sum(weights) or 1
         used_images = set()
-        text_cues = _narration_visual_cues(beat["text"])
-        cues = text_cues or [beat.get("visual_cue", "exterior")]
-        per_cue_duration = beat_duration / len(cues)
-        for cue in cues:
-            image = _select_image_for_cue(
-                entry.images,
-                cue,
-                used_images,
-            )
-            timings.append({
-                "segment": segment_name,
-                "entry": entry,
-                "text": beat["text"],
-                "style": beat.get("style", "conversational"),
-                "emphasis_words": beat.get("emphasis_words", []),
-                "pause_after": 0,
-                "visual_cue": cue,
-                "image": image,
-                "duration": per_cue_duration,
-            })
+        for beat, weight in zip(beats, weights):
+            beat_duration = duration * weight / total_weight
+            cues = _narration_visual_cues(beat["text"]) or [beat.get("visual_cue", "exterior")]
+            per_cue_duration = beat_duration / len(cues)
+            for cue in cues:
+                image = _select_image_for_cue(entry.images, cue, used_images)
+                timings.append({
+                    "segment": name,
+                    "entry": entry,
+                    "text": beat["text"],
+                    "style": beat.get("style", "conversational"),
+                    "emphasis_words": beat.get("emphasis_words", []),
+                    "pause_after": 0,
+                    "visual_cue": cue,
+                    "image": image,
+                    "duration": per_cue_duration,
+                })
 
-    close_duration = total_duration * close_weight / total_weight
-    per_entry_close = close_duration / len(ordered)
-    for entry in ordered:
-        image = _select_image_for_cue(entry.images, "exterior", set())
-        timings.append({
-            "segment": "close",
-            "entry": entry,
-            "text": close_narration,
-            "style": "conversational",
-            "emphasis_words": [entry.name],
-            "pause_after": 0,
-            "visual_cue": "exterior",
-            "image": image,
-            "duration": per_entry_close,
-        })
     return narration_path, timings
 
 
@@ -644,6 +652,7 @@ def render_ranking_video(
 
         clips = []
         callout_texts = {}
+        used_engine_ranks = set()
         narration_offset = 0.0
         for index, (path, duration, _, entry) in enumerate(frame_entries):
             still = _still_clip(path, duration)
@@ -655,8 +664,16 @@ def render_ranking_video(
 
             next_entry = frame_entries[index + 1][3] if index + 1 < len(frame_entries) else None
             entry_finished = entry is not None and (next_entry is None or next_entry.rank != entry.rank)
-            engine_result = engine_results.get(entry.rank) if entry_finished else None
+            # An entry's rank can recur later (e.g. a closing "which one would you
+            # pick" card revisits every rank), which would otherwise replay that
+            # rank's engine clip a second time - only ever insert it once.
+            engine_result = (
+                engine_results.get(entry.rank)
+                if entry_finished and entry.rank not in used_engine_ranks
+                else None
+            )
             if engine_result and engine_result.get("approved") and engine_result.get("path"):
+                used_engine_ranks.add(entry.rank)
                 callout_clip, callout_text = _engine_callout_clip(entry, path, engine_dir)
                 if callout_clip is not None:
                     clips.append(callout_clip)

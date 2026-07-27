@@ -22,6 +22,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from PIL import Image
 from cars_and_bids import enrich_entry_from_manifest, infer_search_params, scrape_entry_images
+from plate_blur import blur_license_plates
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
@@ -1050,6 +1051,15 @@ def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_i
         "target_met": len(entry["images"]) >= TARGET_IMAGES_PER_ENTRY,
     }
     entry["stat"] = format_stat(entry)
+
+    # Real listing photos carry real, current license plates. Blur any that
+    # are visible in the final chosen images before they reach the video;
+    # this only ever runs on the handful of images an entry actually keeps,
+    # not every scraped candidate.
+    draft_dir = images_dir.parent
+    for relative_path in entry["images"]:
+        blur_license_plates(draft_dir / relative_path)
+
     return entry
 
 
