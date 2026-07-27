@@ -1,0 +1,462 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-27T20:17:40.930Z",
+  "query": "Ford Mustang 5.0 LX 1979",
+  "visual_highlight": "boxy design",
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=1979&end_year=1993&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3z7zBeM1/1991-ford-mustang-lx-50-coupe",
+      "title": "1991 Ford Mustang Lx 50 Coupe",
+      "text": "Sold for $26,750",
+      "titleYear": 1991,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AA8EGOJ/1989-ford-mustang-lx-50-coupe",
+      "title": "1989 Ford Mustang Lx 50 Coupe",
+      "text": "Bid to $24,500",
+      "titleYear": 1989,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3pR0Y8Lg/1990-ford-mustang-lx-50-coupe",
+      "title": "1990 Ford Mustang Lx 50 Coupe",
+      "text": "Sold for $22,000",
+      "titleYear": 1990,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/35O0dBOP/1989-ford-mustang-lx-50-coupe",
+      "title": "1989 Ford Mustang Lx 50 Coupe",
+      "text": "Bid to $20,500",
+      "titleYear": 1989,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gN8pGxe/1993-ford-mustang-lx-50-convertible",
+      "title": "1993 Ford Mustang Lx 50 Convertible",
+      "text": "Sold for $18,000",
+      "titleYear": 1993,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMPXAoNm/1992-ford-mustang-lx-50-convertible-summer-edition",
+      "title": "1992 Ford Mustang Lx 50 Convertible Summer Edition",
+      "text": "Sold for $17,250",
+      "titleYear": 1992,
+      "score": 78
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3z7zBeM1/1991-ford-mustang-lx-50-coupe",
+      "title": "1991 Ford Mustang Lx 50 Coupe",
+      "text": "Sold for $26,750",
+      "titleYear": 1991,
+      "score": 78,
+      "usable_image_count": 18,
+      "sale_price": 26750,
+      "sale_type": "sold",
+      "page_title": "1991 Ford Mustang LX 5.0 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AA8EGOJ/1989-ford-mustang-lx-50-coupe",
+      "title": "1989 Ford Mustang Lx 50 Coupe",
+      "text": "Bid to $24,500",
+      "titleYear": 1989,
+      "score": 78,
+      "usable_image_count": 23,
+      "sale_price": 24500,
+      "sale_type": "sold",
+      "page_title": "1989 Ford Mustang LX 5.0 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3pR0Y8Lg/1990-ford-mustang-lx-50-coupe",
+      "title": "1990 Ford Mustang Lx 50 Coupe",
+      "text": "Sold for $22,000",
+      "titleYear": 1990,
+      "score": 78,
+      "usable_image_count": 18,
+      "sale_price": 22000,
+      "sale_type": "sold",
+      "page_title": "1990 Ford Mustang LX 5.0 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/35O0dBOP/1989-ford-mustang-lx-50-coupe",
+      "title": "1989 Ford Mustang Lx 50 Coupe",
+      "text": "Bid to $20,500",
+      "titleYear": 1989,
+      "score": 78,
+      "usable_image_count": 22,
+      "sale_price": 20500,
+      "sale_type": "sold",
+      "page_title": "1989 Ford Mustang LX 5.0 Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9AA8EGOJ/1989-ford-mustang-lx-50-coupe",
+    "title": "1989 Ford Mustang Lx 50 Coupe",
+    "text": "Bid to $24,500",
+    "titleYear": 1989,
+    "score": 78,
+    "sale_price": 24500,
+    "sale_type": "sold",
+    "page_title": "1989 Ford Mustang LX 5.0 Coupe",
+    "year": 1989,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/interior/9nbjyRQv-MFAi7c0/edit/VFIUh.jpg?t=177202807265",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1989 Ford Mustang LX 5.0 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 221707
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/59339d5e07287c702e69307de910cceaa69c1d04/photos/exterior/9nbjyRQv-KzgThrG/edit/aoauK.jpg?t=177220807803",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1989 Ford Mustang LX 5.0 Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 159869
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/exterior/9nbjyRQv-07U0rg-/edit/xBY-g.jpg?t=177202825978",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1989 Ford Mustang LX 5.0 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 152838
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/interior/9nbjyRQv-GV6q-N0/edit/giL0u.jpg?t=177202810549",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1989 Ford Mustang LX 5.0 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 175642
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/interior/9nbjyRQv-XCU2vvB/edit/k0kkf.jpg?t=177202812396",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1989 Ford Mustang LX 5.0 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 140969
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/interior/9nbjyRQv-jgbY_79/edit/P1eZX.jpg?t=177202814439",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1989 Ford Mustang LX 5.0 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 140871
+    },
+    {
+      "path": "highlight-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/exterior/9nbjyRQv-qx4VW4M/edit/1wXYW.jpg?t=177202828325",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1989 Ford Mustang LX 5.0 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 156572
+    },
+    {
+      "path": "highlight-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/exterior/9nbjyRQv-YZnWRo4/edit/pTG_X.jpg?t=177202837886",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1989 Ford Mustang LX 5.0 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 162564
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c9f87cf8e685534fd483d5fd86e4e829/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c9f87cf8e685534fd483d5fd86e4e829/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1989 Ford Mustang LX 5.0 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c9f87cf8e685534fd483d5fd86e4e829/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AA8EGOJ/1989-ford-mustang-lx-50-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c9f87cf8e685534fd483d5fd86e4e829/manifest/video.m3u8",
+      "auction_title": "1989 Ford Mustang LX 5.0 Coupe",
+      "auction_year": 1989,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a35fa35a851b3a63b4aa3616bbee6daa/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a35fa35a851b3a63b4aa3616bbee6daa/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1989 Ford Mustang LX 5.0 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a35fa35a851b3a63b4aa3616bbee6daa/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AA8EGOJ/1989-ford-mustang-lx-50-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a35fa35a851b3a63b4aa3616bbee6daa/manifest/video.m3u8",
+      "auction_title": "1989 Ford Mustang LX 5.0 Coupe",
+      "auction_year": 1989,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/633f1ebfb6b10beacc07b899dbe7c834/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/633f1ebfb6b10beacc07b899dbe7c834/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1989 Ford Mustang LX 5.0 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/633f1ebfb6b10beacc07b899dbe7c834/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AA8EGOJ/1989-ford-mustang-lx-50-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/633f1ebfb6b10beacc07b899dbe7c834/manifest/video.m3u8",
+      "auction_title": "1989 Ford Mustang LX 5.0 Coupe",
+      "auction_year": 1989,
+      "search_score": 78
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1987\u20131993",
+        "detected_variant_or_engine": "5.0 LX",
+        "visible_match_evidence": [
+          "boxy design",
+          "quad headlights",
+          "5.0 badging",
+          "simple interior"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "Third Generation",
+        "detected_variant_or_engine": "5.0 LX",
+        "visible_match_evidence": [
+          "boxy design",
+          "quad headlights",
+          "5.0 badging",
+          "louvered taillights",
+          "simple interior"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "Third Generation (1979\u20131993)",
+        "detected_variant_or_engine": "5.0 LX",
+        "visible_match_evidence": [
+          "boxy design",
+          "quad headlights",
+          "5.0 badging",
+          "louvered taillights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1987-1993",
+        "detected_variant_or_engine": "5.0 LX",
+        "visible_match_evidence": [
+          "boxy design",
+          "quad headlights",
+          "5.0 badging",
+          "louvered taillights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "1980s",
+        "detected_variant_or_engine": "5.0 LX",
+        "visible_match_evidence": [
+          "Ford badging",
+          "boxy dashboard design",
+          "interior layout",
+          "simple interior controls"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "Third Generation (1979\u20131993)",
+        "detected_variant_or_engine": "5.0 LX",
+        "visible_match_evidence": [
+          "simple interior",
+          "gray upholstery",
+          "boxy design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 6,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 4,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the vehicle itself, only the interior.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image shows a speedometer, not a car.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

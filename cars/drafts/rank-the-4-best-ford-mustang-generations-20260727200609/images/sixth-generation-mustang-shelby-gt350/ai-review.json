@@ -1,0 +1,188 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 7,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "Sixth Generation",
+      "detected_variant_or_engine": "Shelby GT350",
+      "visible_match_evidence": [
+        "Shelby badging",
+        "vented hood",
+        "quad exhaust tips",
+        "unique front fascia",
+        "aggressive aerodynamics"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 9,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "sixth generation",
+      "detected_variant_or_engine": "Shelby GT350",
+      "visible_match_evidence": [
+        "aggressive aerodynamics",
+        "Shelby badging",
+        "vented hood",
+        "quad exhaust tips",
+        "unique front fascia"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 10,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 9,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2015\u20132023",
+      "detected_variant_or_engine": "Shelby GT350",
+      "visible_match_evidence": [
+        "Shelby badging",
+        "vented hood",
+        "quad exhaust tips",
+        "unique front fascia"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "2015-2023",
+      "detected_variant_or_engine": "Shelby GT350",
+      "visible_match_evidence": [
+        "Shelby badging on steering wheel",
+        "vented hood design",
+        "aggressive interior styling",
+        "unique steering wheel",
+        "red accents"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "sixth generation",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "R badging on seats",
+        "sporty interior design"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle.",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 4,
+      "composition_score": 3,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle.",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    }
+  ]
+}
