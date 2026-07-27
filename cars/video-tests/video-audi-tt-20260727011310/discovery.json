@@ -1,0 +1,136 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-27T01:14:58.493Z",
+  "query": "audi tt",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/audi/tt?csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rjj0JJDX/2001-audi-tt-quattro-roadster",
+      "title": "2001 Audi Tt Quattro Roadster",
+      "text": "Sold for $7,500",
+      "titleYear": 2001,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9eOR2nD8/2004-audi-tt-32-quattro-coupe",
+      "title": "2004 Audi Tt 32 Quattro Coupe",
+      "text": "Sold for $8,800",
+      "titleYear": 2004,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r47XjQYg/2008-audi-tt-quattro-roadster",
+      "title": "2008 Audi Tt Quattro Roadster",
+      "text": "Sold for $11,701",
+      "titleYear": 2008,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9a0l7bzE/2018-audi-tt-coupe",
+      "title": "2018 Audi Tt Coupe",
+      "text": "Sold for $40,000",
+      "titleYear": 2018,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KD1RV2Zp/2013-audi-tt-20t-quattro-coupe",
+      "title": "2013 Audi Tt 20t Quattro Coupe",
+      "text": "Sold for $38,000",
+      "titleYear": 2013,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vBEjgGm/2019-audi-tt-20th-anniversary-roadster",
+      "title": "2019 Audi Tt 20th Anniversary Roadster",
+      "text": "Bid to $35,090",
+      "titleYear": 2019,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rjj0JJDX/2001-audi-tt-quattro-roadster",
+      "title": "2001 Audi Tt Quattro Roadster",
+      "text": "Sold for $7,500",
+      "titleYear": 2001,
+      "score": 60,
+      "usable_image_count": 11,
+      "sale_price": 7500,
+      "sale_type": "sold",
+      "page_title": "2001 Audi TT Quattro Roadster"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9eOR2nD8/2004-audi-tt-32-quattro-coupe",
+      "title": "2004 Audi Tt 32 Quattro Coupe",
+      "text": "Sold for $8,800",
+      "titleYear": 2004,
+      "score": 60,
+      "usable_image_count": 17,
+      "sale_price": 8800,
+      "sale_type": "sold",
+      "page_title": "2004 Audi TT 3.2 Quattro Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r47XjQYg/2008-audi-tt-quattro-roadster",
+      "title": "2008 Audi Tt Quattro Roadster",
+      "text": "Sold for $11,701",
+      "titleYear": 2008,
+      "score": 60,
+      "usable_image_count": 25,
+      "sale_price": 11701,
+      "sale_type": "sold",
+      "page_title": "2008 Audi TT Quattro Roadster"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9a0l7bzE/2018-audi-tt-coupe",
+      "title": "2018 Audi Tt Coupe",
+      "text": "Sold for $40,000",
+      "titleYear": 2018,
+      "score": 60,
+      "usable_image_count": 17,
+      "sale_price": 40000,
+      "sale_type": "sold",
+      "page_title": "2018 Audi TT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KD1RV2Zp/2013-audi-tt-20t-quattro-coupe",
+      "title": "2013 Audi Tt 20t Quattro Coupe",
+      "text": "Sold for $38,000",
+      "titleYear": 2013,
+      "score": 60,
+      "usable_image_count": 15,
+      "sale_price": 38000,
+      "sale_type": "sold",
+      "page_title": "2013 Audi TT 2.0T Quattro Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vBEjgGm/2019-audi-tt-20th-anniversary-roadster",
+      "title": "2019 Audi Tt 20th Anniversary Roadster",
+      "text": "Bid to $35,090",
+      "titleYear": 2019,
+      "score": 60,
+      "usable_image_count": 32,
+      "sale_price": 35090,
+      "sale_type": "bid_to",
+      "page_title": "2019 Audi TT 20th Anniversary Roadster"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vBEjgGm/2019-audi-tt-20th-anniversary-roadster",
+    "title": "2019 Audi Tt 20th Anniversary Roadster",
+    "text": "Bid to $35,090",
+    "titleYear": 2019,
+    "score": 60,
+    "sale_price": 35090,
+    "sale_type": "bid_to",
+    "page_title": "2019 Audi TT 20th Anniversary Roadster",
+    "year": 2019,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": []
+}
