@@ -5,12 +5,13 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.13";
+const UI_VERSION = "V10.14";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 20 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
+const VIDEO_TEST_TIMEOUT_MS = 12 * 60 * 1000;
 const YEAR_OPTIONS = Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => String(new Date().getFullYear() - index));
 const WORKFLOW_OPTIONS = [
   {
@@ -165,6 +166,8 @@ export default function App() {
   const [error, setError] = useState(null);
   const [research, setResearch] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
+  const [videoTestId, setVideoTestId] = useState(null);
+  const [videoProbe, setVideoProbe] = useState(null);
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
   const abortRef = useRef(null);
@@ -239,6 +242,53 @@ export default function App() {
     }
   }
 
+  async function handleVideoTest() {
+    if (!repoOk || !make.trim() || !model.trim()) return;
+    setError(null);
+    setVideoProbe(null);
+    setVideoUrl(null);
+    const id = makeDraftId(`video-${make}-${model}`);
+    setVideoTestId(id);
+    setStage("video-testing");
+    setStatusDetail(`Searching matching ${titleCaseWords(make)} ${titleCaseWords(model)} listings for engine videos...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-video-probe.yml",
+        inputs: {
+          make: make.trim(),
+          model: model.trim(),
+          query: [make, model, focus].filter(Boolean).join(" "),
+          start_year: startYear,
+          end_year: endYear,
+          test_id: id,
+        },
+      });
+      const workflowRun = beginRunTracking("cars-video-probe.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/video-tests/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: VIDEO_TEST_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setVideoProbe(await response.json());
+      setStage("video-done");
+      setStatusDetail("Video extraction test complete");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Video extraction test failed - open the build log for details");
+    }
+  }
+
   async function handleGenerate(quality) {
     if (!draftId) return;
     const outputName = quality === "full" ? "final_short.mp4" : "preview_short.mp4";
@@ -293,6 +343,10 @@ export default function App() {
 
   function rawUrl(relativePath) {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/${relativePath}`;
+  }
+
+  function rawVideoTestUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/video-tests/${videoTestId}/${relativePath}`;
   }
 
   const activeStep = stage === "idle" ? 0 : stage === "researching" ? 0 : stage === "researched" ? 1 : stage === "generating" ? 2 : stage === "done" ? 3 : 0;
@@ -432,9 +486,18 @@ export default function App() {
             )}
           </div>
         </div>
-        <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating"}>
-          {stage === "researching" ? "Researching..." : "Research"}
-        </button>
+        <div className="request-actions">
+          <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating" || stage === "video-testing"}>
+            {stage === "researching" ? "Researching..." : "Research"}
+          </button>
+          <button
+            className="secondary"
+            onClick={handleVideoTest}
+            disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing"}
+          >
+            {stage === "video-testing" ? "Testing Videos..." : "Test Videos Only"}
+          </button>
+        </div>
       </div>
 
       {error && <div className="error">{error}</div>}
@@ -548,6 +611,39 @@ export default function App() {
             )}
           </div>
         </div>
+      )}
+      {stage === "video-testing" && (
+        <p className="status">Discovering listing videos, detecting engine events, and cutting short previews...</p>
+      )}
+
+      {videoProbe && (
+        <section className="video-probe-panel">
+          <h2>Video Test: {videoProbe.query}</h2>
+          <p className="rationale">
+            Found {videoProbe.videos_discovered} video embeds across {videoProbe.listings_considered?.length || 0} matching listings.
+          </p>
+          <div className="video-probe-grid">
+            {(videoProbe.clips || []).map((clip) => (
+              <article className="video-probe-card" key={clip.index}>
+                <h3>Candidate {clip.index}: {clip.source_title || "Listing video"}</h3>
+                {clip.clip ? (
+                  <video controls src={rawVideoTestUrl(clip.clip)} preload="metadata" />
+                ) : (
+                  <p className="error">No usable clip: {clip.error || "verification rejected it"}</p>
+                )}
+                <dl>
+                  <div><dt>Detected event</dt><dd>{clip.detected_onset_seconds ?? "?"}s</dd></div>
+                  <div><dt>Audio jump</dt><dd>{clip.engine_event_score ? `${clip.engine_event_score}×` : "n/a"}</dd></div>
+                  <div><dt>AI review</dt><dd>{clip.approved ? "Approved" : "Rejected"}</dd></div>
+                </dl>
+                {clip.source_listing && (
+                  <a href={clip.source_listing} target="_blank" rel="noreferrer">Open source listing</a>
+                )}
+              </article>
+            ))}
+          </div>
+          {(videoProbe.clips || []).length === 0 && <p>No embedded listing videos were discovered.</p>}
+        </section>
       )}
     </div>
   );

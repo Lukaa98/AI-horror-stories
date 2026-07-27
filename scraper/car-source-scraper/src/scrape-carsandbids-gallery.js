@@ -505,6 +505,7 @@ async function main() {
   const outJson = argValue("out-json", path.join(outDir, "carsandbids-manifest.json"));
   const query = argValue("query", "");
   const visualHighlight = argValue("visual-highlight", "");
+  const skipImages = argValue("skip-images", "false") === "true";
   const searchUrl = argValue("search-url") || buildSearchUrl({
     make: argValue("make"),
     model: argValue("model"),
@@ -601,11 +602,11 @@ async function main() {
       }
     }
 
-    if (!selectedAuction || !selectedCandidates.length) {
+    if (!skipImages && (!selectedAuction || !selectedCandidates.length)) {
       throw new Error("No usable Cars & Bids gallery images found.");
     }
 
-    const chosen = chooseImages(selectedCandidates, desiredLabels, queryTokens);
+    const chosen = skipImages ? [] : chooseImages(selectedCandidates, desiredLabels, queryTokens);
     const downloaded = [];
     for (const [index, candidate] of chosen.entries()) {
       try {

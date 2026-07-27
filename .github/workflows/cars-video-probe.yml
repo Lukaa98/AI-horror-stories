@@ -1,0 +1,107 @@
+name: Cars Ranking - Video Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      make:
+        description: "Vehicle make"
+        required: true
+        type: string
+      model:
+        description: "Vehicle model"
+        required: true
+        type: string
+      query:
+        description: "Optional broader search text"
+        required: false
+        type: string
+      start_year:
+        description: "Optional generation start year"
+        required: false
+        type: string
+      end_year:
+        description: "Optional generation end year"
+        required: false
+        type: string
+      test_id:
+        description: "Unique output folder id"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  OUTPUT_BRANCH: cars-output
+
+jobs:
+  video-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: scraper/car-source-scraper/package-lock.json
+
+      - name: Install lightweight probe dependencies
+        run: pip install Pillow openai
+
+      - name: Install scraper dependencies
+        working-directory: scraper/car-source-scraper
+        run: npm ci
+
+      - name: Install browser and ffmpeg dependencies
+        working-directory: scraper/car-source-scraper
+        run: |
+          bash scripts/install-linux-deps.sh
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+
+      - name: Discover and cut video candidates
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          YEAR_ARGS=()
+          if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
+          if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
+          python cars/automation/video_probe.py \
+            --make "${{ inputs.make }}" \
+            --model "${{ inputs.model }}" \
+            --query "${{ inputs.query }}" \
+            --test-id "${{ inputs.test_id }}" \
+            "${YEAR_ARGS[@]}"
+
+      - name: Commit video test
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/video-tests"
+          cp -R "cars/video-tests/${{ inputs.test_id }}" "$tmp_dir/cars/video-tests/${{ inputs.test_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p cars/video-tests
+          rm -rf "cars/video-tests/${{ inputs.test_id }}"
+          cp -R "$tmp_dir/cars/video-tests/${{ inputs.test_id }}" "cars/video-tests/${{ inputs.test_id }}"
+          git add "cars/video-tests/${{ inputs.test_id }}"
+          git commit -m "cars: video test ${{ inputs.test_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
