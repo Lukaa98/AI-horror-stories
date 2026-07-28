@@ -109,6 +109,15 @@ IMPORTANT:
   "1LT", "2LT", "3LZ", "1LZ" are BAD (nobody photographs "a 2LT", they photograph "a Z06")
 - if the request doesn't obviously split into 4 named variants, pick the 4 most
   distinct/well-known ones rather than an internal trim-code breakdown
+- do not stretch a model's history to force 4 distinct generations when only 1-2 true
+  generations actually exist. A rare badge-engineered rebadge, an obscure gap-era
+  import, or a name reused for an unrelated car (e.g. a captive import sold under the
+  same nameplate during a production gap) will have essentially no real-world auction
+  or enthusiast photo coverage even though it technically existed -- prefer widely
+  recognized era-defining trims/years within the real generation(s) instead
+- provide at least 6 candidates (aim for 8), not just 4 -- image sourcing later drops
+  any candidate with too few verified photos, and without extra candidates beyond the
+  final 4 there is no backup when one turns out to be poorly photographed
 
 For each entry, give:
 - name: short identifier (e.g. "NA", "Z06", "2018")
@@ -188,7 +197,8 @@ Return ONLY strict JSON, no markdown fences, no prose outside the JSON, matching
       ]}}
   ]
 }}
-Aim for 8 entries when possible, but return at least 4."""
+Return at least 6 candidates, ideally 8, so weakly-photographed candidates can be
+skipped later in favor of better-covered ones."""
 
 NARRATION_PROMPT_TEMPLATE = """Write the final spoken narration for a short car-ranking video.
 
@@ -357,7 +367,7 @@ RESEARCH_OUTPUT_SCHEMA = {
         "order_rationale": {"type": "string"},
         "entries": {
             "type": "array",
-            "minItems": 4,
+            "minItems": 6,
             "maxItems": 8,
             "items": {
                 "type": "object",
