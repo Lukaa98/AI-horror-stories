@@ -350,12 +350,26 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
       if (!/cloudflarestream\.com|videodelivery\.net|\.m3u8(?:\?|$)|\.mp4(?:\?|$)/i.test(url)) return;
       videoUrls.add(url);
       const container = node?.closest?.("section, article, li, div") || node?.parentElement;
+      // A player's own title/aria-label (or a sibling tab/caption element,
+      // since Cars & Bids' video gallery is a tabbed list where each tab's
+      // visible label sits next to, not inside, the active player) is far
+      // more likely to carry the real clip label ("Cold Start", "Engine
+      // Start") than the whole container's rendered text, which is often
+      // just the listing's title repeated. Collect every specific signal
+      // first and only fall back to the broader container text.
+      const specificLabel = [
+        node?.getAttribute?.("title"),
+        node?.getAttribute?.("aria-label"),
+        node?.getAttribute?.("alt"),
+        node?.closest?.("a")?.getAttribute?.("title"),
+        node?.closest?.("a")?.getAttribute?.("aria-label"),
+        node?.closest?.("button")?.getAttribute?.("aria-label"),
+        node?.previousElementSibling?.textContent,
+        node?.nextElementSibling?.textContent,
+      ].filter(Boolean).join(" ");
       const context = (
         contextOverride ||
-        container?.innerText ||
-        node?.getAttribute?.("title") ||
-        node?.getAttribute?.("aria-label") ||
-        ""
+        [specificLabel, container?.innerText].filter(Boolean).join(" | ")
       ).replace(/\s+/g, " ").trim().slice(0, 500);
       videoCandidates.push({
         url,

@@ -254,6 +254,18 @@ def detect_secondary_event(wav_path, primary_onset, min_gap=1.5):
 
 
 def _engine_event_score(wav_path, onset):
+    """Ratio of energy after the onset vs before it, discounted when that
+    rise doesn't sustain.
+
+    A real engine start or idle stays elevated for as long as it plays; a
+    one-off mechanical noise (a door slam, a convertible-top motor engaging
+    then stopping) spikes once and decays within about a second. Averaging
+    the whole 2-second "after" window can still let a loud-but-brief spike
+    read as a strong event, so energy late in that window is also compared
+    against energy right at its start - a rise that has basically vanished
+    by the second half gets scaled down instead of scoring the same as a
+    genuinely sustained one.
+    """
     with wave.open(str(wav_path), "rb") as stream:
         rate = stream.getframerate()
         samples = stream.readframes(stream.getnframes())
@@ -262,7 +274,16 @@ def _engine_event_score(wav_path, onset):
     before = values[max(0, center - rate):max(1, center - rate // 4)]
     after = values[center:min(len(values), center + rate * 2)]
     rms = lambda chunk: math.sqrt(sum(value * value for value in chunk) / max(1, len(chunk)))
-    return rms(after) / max(1.0, rms(before))
+    raw_score = rms(after) / max(1.0, rms(before))
+
+    early_after = values[center:min(len(values), center + rate // 2)]
+    late_after = values[center + rate:min(len(values), center + rate * 2)]
+    if len(late_after) < rate // 4:
+        return raw_score  # Clip too short to judge sustain; don't penalize for it.
+    early_rms = rms(early_after)
+    late_rms = rms(late_after)
+    sustain = min(1.0, late_rms / early_rms) if early_rms > 0 else 1.0
+    return raw_score * sustain
 
 
 def _contact_sheet(frame_paths, output_path):
