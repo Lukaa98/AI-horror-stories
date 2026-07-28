@@ -3536,5 +3536,127 @@
     }
   ],
   "skipped_entries": [],
-  "status": "researched"
+  "status": "video_generated",
+  "latest_render": {
+    "quality": "quick",
+    "filename": "preview_short.mp4"
+  },
+  "engine_clips": [
+    {
+      "rank": 4,
+      "approved": true,
+      "duration": null,
+      "detected_onset_seconds": 1.65,
+      "engine_event_score": 2.022,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche 911 Type 991",
+        "confidence": 9,
+        "reason": "The frames show a rear view with characteristic design elements and exhaust layout consistent with the Porsche 911 Type 991.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0417d885db55ba12fdaeea5dbbd69b99/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0417d885db55ba12fdaeea5dbbd69b99/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2015 Porsche 911 Carrera 4S Cabriolet",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0417d885db55ba12fdaeea5dbbd69b99/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/3O7wmym6/2015-porsche-911-carrera-4s-cabriolet",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0417d885db55ba12fdaeea5dbbd69b99/manifest/video.m3u8",
+        "auction_title": "2015 Porsche 911 Carrera 4S Cabriolet",
+        "auction_year": 2015,
+        "search_score": 88
+      },
+      "error": null,
+      "callout_text": "Let's hear it come to life."
+    },
+    {
+      "rank": 3,
+      "approved": true,
+      "duration": null,
+      "detected_onset_seconds": 0.45,
+      "engine_event_score": 10.326,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche 911 Type 930",
+        "confidence": 9,
+        "reason": "The frames show a Porsche 911 engine bay, consistent with Type 930 characteristics.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b2d89ab108298b4318d678324bfeca48/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b2d89ab108298b4318d678324bfeca48/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "1981 Porsche 911 SC Coupe",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b2d89ab108298b4318d678324bfeca48/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/3qo8Vad5/1981-porsche-911-sc-coupe",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b2d89ab108298b4318d678324bfeca48/manifest/video.m3u8",
+        "auction_title": "1981 Porsche 911 SC Coupe",
+        "auction_year": 1981,
+        "search_score": 70
+      },
+      "error": null,
+      "callout_text": "Let's hear the Turbo come to life."
+    },
+    {
+      "rank": 2,
+      "approved": true,
+      "duration": null,
+      "detected_onset_seconds": 4.45,
+      "engine_event_score": 10.311,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche 911 GT3 (Type 991.2)",
+        "confidence": 9,
+        "reason": "The frames depict a Porsche 911 GT3, which shares the same generation as the Type 991.2.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a76ede2094ff2abb58584f67c9fe73f4/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a76ede2094ff2abb58584f67c9fe73f4/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2019 Porsche 911 GT3 RS Weissach",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a76ede2094ff2abb58584f67c9fe73f4/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/r4Dax78g/2019-porsche-911-gt3-rs-weissach",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a76ede2094ff2abb58584f67c9fe73f4/manifest/video.m3u8",
+        "auction_title": "2019 Porsche 911 GT3 RS Weissach",
+        "auction_year": 2019,
+        "search_score": 88
+      },
+      "error": null,
+      "callout_text": "Let's hear the Flat-Six come to life."
+    },
+    {
+      "rank": 1,
+      "approved": false,
+      "duration": 5.0,
+      "detected_onset_seconds": 30.05,
+      "engine_event_score": 2.921,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Porsche 911",
+        "confidence": 9,
+        "reason": "The vehicle shown shares design elements and characteristics consistent with the Porsche 911 family, specifically resembling a vintage model, likely inspired by the 911 Carrera RS 2.7.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e428d512153305f68d7db49d02b5062/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e428d512153305f68d7db49d02b5062/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "Porsche 911-Style Go-Kart",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e428d512153305f68d7db49d02b5062/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/KZDxejNG/porsche-911-style-go-kart",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e428d512153305f68d7db49d02b5062/manifest/video.m3u8",
+        "auction_title": "Porsche 911-Style Go-Kart",
+        "auction_year": null,
+        "search_score": 50
+      },
+      "error": null,
+      "callout_text": null
+    }
+  ]
 }
