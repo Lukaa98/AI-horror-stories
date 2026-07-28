@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.30";
+const UI_VERSION = "V10.31";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -540,7 +540,26 @@ export default function App() {
                 )}
                 <p className="hint">
                   Engine video candidates: {(entry.engine_videos || []).length}
+                  {(entry.engine_videos || []).length > 0 && " (best match is chosen and verified at render time)"}
                 </p>
+                {(entry.engine_videos || []).length > 0 && (
+                  <div className="thumbs video-candidate-thumbs">
+                    {(entry.engine_videos || []).slice(0, 3).map((video, j) => (
+                      <a
+                        key={j}
+                        href={video.auction_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={video.auction_title || video.title || "Listing video"}
+                      >
+                        {video.thumbnail_url && (
+                          <img src={video.thumbnail_url} alt={`${entry.name} — engine video candidate`} />
+                        )}
+                        <span className="image-label">{video.type === "cold_start" ? "labeled cold start" : video.type === "engine_sound" ? "labeled engine sound" : "listing video"}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
