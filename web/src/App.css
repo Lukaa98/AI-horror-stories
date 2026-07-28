@@ -378,6 +378,10 @@ button.secondary {
   margin: 0;
 }
 
+.entry-engine-clip {
+  margin-top: 12px;
+}
+
 .video-panel {
   margin-top: 24px;
   border-top: 1px solid #444;

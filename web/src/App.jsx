@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.31";
+const UI_VERSION = "V10.32";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -540,25 +540,39 @@ export default function App() {
                 )}
                 <p className="hint">
                   Engine video candidates: {(entry.engine_videos || []).length}
-                  {(entry.engine_videos || []).length > 0 && " (best match is chosen and verified at render time)"}
                 </p>
                 {(entry.engine_videos || []).length > 0 && (
-                  <div className="thumbs video-candidate-thumbs">
-                    {(entry.engine_videos || []).slice(0, 3).map((video, j) => (
-                      <a
-                        key={j}
-                        href={video.auction_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        title={video.auction_title || video.title || "Listing video"}
-                      >
-                        {video.thumbnail_url && (
-                          <img src={video.thumbnail_url} alt={`${entry.name} — engine video candidate`} />
-                        )}
-                        <span className="image-label">{video.type === "cold_start" ? "labeled cold start" : video.type === "engine_sound" ? "labeled engine sound" : "listing video"}</span>
+                  <article className="video-probe-card entry-engine-clip">
+                    <h3>{entry.name} engine clip</h3>
+                    {entry.engine_clip_preview?.source?.thumbnail_url && (
+                      <img
+                        className="video-probe-thumb"
+                        src={entry.engine_clip_preview.source.thumbnail_url}
+                        alt={`${entry.name} engine clip source thumbnail`}
+                      />
+                    )}
+                    {entry.engine_clip_preview?.approved && entry.engine_clip_preview?.path ? (
+                      <video controls src={rawUrl(entry.engine_clip_preview.path)} preload="metadata" />
+                    ) : (
+                      <p className="error">
+                        No usable clip: {entry.engine_clip_preview?.error || "verification rejected it"}
+                      </p>
+                    )}
+                    <dl>
+                      <div><dt>Scene</dt><dd>{entry.engine_clip_preview?.scene_review?.scene_type?.replaceAll("_", " ") || "unknown"}</dd></div>
+                      <div><dt>Detected event</dt><dd>{entry.engine_clip_preview?.detected_onset_seconds ?? "?"}s</dd></div>
+                      <div><dt>Audio jump</dt><dd>{entry.engine_clip_preview?.engine_event_score !== null && entry.engine_clip_preview?.engine_event_score !== undefined ? `${entry.engine_clip_preview.engine_event_score}×` : "n/a"}</dd></div>
+                      <div><dt>Engine candidate</dt><dd>{entry.engine_clip_preview?.approved ? "Yes" : "No"}</dd></div>
+                    </dl>
+                    {entry.engine_clip_preview?.scene_review?.reason && (
+                      <p className="hint">{entry.engine_clip_preview.scene_review.reason}</p>
+                    )}
+                    {entry.engine_clip_preview?.source?.auction_url && (
+                      <a href={entry.engine_clip_preview.source.auction_url} target="_blank" rel="noreferrer">
+                        Open source listing
                       </a>
-                    ))}
-                  </div>
+                    )}
+                  </article>
                 )}
               </div>
             ))}

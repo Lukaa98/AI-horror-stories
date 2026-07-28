@@ -53,6 +53,7 @@ class RankEntry:
     performance_beats: list = field(default_factory=list)
     engine_videos: list = field(default_factory=list)
     engine_nickname: str = None
+    engine_clip_preview: dict = None
 
 
 @dataclass
@@ -646,6 +647,16 @@ def render_ranking_video(
         for entry in ordered:
             if not entry.engine_videos:
                 continue
+            # Research already extracted and verified a preview clip for
+            # review before this render was ever requested - reuse it
+            # instead of re-running ffmpeg extraction and vision
+            # verification a second time for the same entry.
+            preview = entry.engine_clip_preview
+            if preview and preview.get("approved") and preview.get("path"):
+                preview_path = run_dir / preview["path"]
+                if preview_path.exists():
+                    engine_results[entry.rank] = {**preview, "path": preview_path}
+                    continue
             result = prepare_engine_clip(entry, engine_dir)
             if result:
                 engine_results[entry.rank] = result

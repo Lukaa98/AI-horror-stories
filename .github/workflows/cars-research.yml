@@ -84,6 +84,13 @@ jobs:
         working-directory: scraper/car-source-scraper
         run: bash scripts/install-linux-deps.sh
 
+      - name: Install ffmpeg
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+
       - name: Run research
         if: ${{ inputs.mode != 'video' }}
         env:
@@ -93,14 +100,6 @@ jobs:
             --request "${{ inputs.request }}" \
             --draft-id "${{ inputs.draft_id }}" \
             --require-ai-image-review
-
-      - name: Install ffmpeg for video test
-        if: ${{ inputs.mode == 'video' }}
-        run: |
-          if ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install -y ffmpeg
-          fi
 
       - name: Run standalone video test
         if: ${{ inputs.mode == 'video' }}

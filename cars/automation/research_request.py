@@ -18,6 +18,7 @@ import re
 import subprocess
 import time
 from pathlib import Path
+from types import SimpleNamespace
 
 from dotenv import load_dotenv
 from PIL import Image
@@ -27,6 +28,7 @@ from cars_and_bids import (
     infer_search_params,
     scrape_entry_images,
 )
+from engine_video import prepare_engine_clip
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
 
@@ -1006,6 +1008,45 @@ def scrape_images(
     return [f"images/{topic_slug}/{path.name}" for path in valid_images(dest)[:12]]
 
 
+def build_engine_clip_preview(entry, images_dir, topic_slug):
+    """Extract and verify a real short engine-clip preview during research.
+
+    Without this, the research review step could only show a static
+    thumbnail linking out to the source listing - not the actual
+    startup/rev clip a viewer would want to check before committing to a
+    render. Cached under the draft's own directory (keyed by this entry's
+    topic slug) so the later render step can reuse this exact clip instead
+    of re-extracting and re-verifying it a second time.
+    """
+    if not entry.get("engine_videos"):
+        return None
+    preview_dir = images_dir.parent / "engine_preview"
+    pseudo_entry = SimpleNamespace(
+        rank=topic_slug,
+        name=entry["name"],
+        years=entry.get("years", ""),
+        engine_videos=entry["engine_videos"],
+    )
+    try:
+        result = prepare_engine_clip(pseudo_entry, preview_dir)
+    except Exception as exc:
+        return {"approved": False, "error": str(exc)}
+    if not result:
+        return None
+    preview = {
+        "approved": bool(result.get("approved")),
+        "detected_onset_seconds": result.get("detected_onset_seconds"),
+        "engine_event_score": result.get("engine_event_score"),
+        "scene_review": result.get("scene_review"),
+        "review": result.get("review"),
+        "source": result.get("source"),
+        "error": result.get("error"),
+    }
+    if result.get("path"):
+        preview["path"] = str(Path(result["path"]).relative_to(images_dir.parent)).replace("\\", "/")
+    return preview
+
+
 def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_images=None):
     topic_slug = slugify(entry["name"])
     print(f"[images] {entry['name']} -> trying Cars & Bids for {entry['search_hint']!r}")
@@ -1021,6 +1062,8 @@ def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_i
     broader_videos = discover_entry_engine_videos(SCRAPER_DIR, images_dir, entry)
     if broader_videos:
         entry["engine_videos"] = broader_videos
+    print(f"[videos] {entry['name']} -> extracting and verifying an engine-clip preview")
+    entry["engine_clip_preview"] = build_engine_clip_preview(entry, images_dir, topic_slug)
     initial_images = list(entry["images"])
     review_and_rename_entry_images(
         entry,
