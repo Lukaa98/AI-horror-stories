@@ -1,0 +1,596 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T05:17:44.601Z",
+  "query": "Ford Mustang GT 1965",
+  "visual_highlight": "front grille with galloping horse emblem",
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=1965&end_year=1973&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9AAJPp05/1969-ford-mustang-gt",
+      "title": "1969 Ford Mustang Gt",
+      "text": "Sold for $41,500",
+      "titleYear": 1969,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4J1nnjy/1966-ford-mustang-gt350-tribute",
+      "title": "1966 Ford Mustang Gt350 Tribute",
+      "text": "Bid to $30,500",
+      "titleYear": 1966,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGJY7o0N/1968-ford-shelby-gt500-kr",
+      "title": "1968 Ford Shelby Gt500 Kr",
+      "text": "FEATURED Bid to $120,000",
+      "titleYear": 1968,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "title": "1965 Ford Mustang Fastback",
+      "text": "Sold for $58,000",
+      "titleYear": 1965,
+      "score": -2
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3zbwxV8J/1965-ford-mustang-fastback",
+      "title": "1965 Ford Mustang Fastback",
+      "text": "Bid to $36,000",
+      "titleYear": 1965,
+      "score": -2
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9Al8PaD5/1965-ford-mustang-coupe",
+      "title": "1965 Ford Mustang Coupe",
+      "text": "Bid to $20,250",
+      "titleYear": 1965,
+      "score": -2
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9AAJPp05/1969-ford-mustang-gt",
+      "title": "1969 Ford Mustang Gt",
+      "text": "Sold for $41,500",
+      "titleYear": 1969,
+      "score": 78,
+      "usable_image_count": 17,
+      "sale_price": 41500,
+      "sale_type": "sold",
+      "page_title": "1969 Ford Mustang GT"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4J1nnjy/1966-ford-mustang-gt350-tribute",
+      "title": "1966 Ford Mustang Gt350 Tribute",
+      "text": "Bid to $30,500",
+      "titleYear": 1966,
+      "score": 78,
+      "usable_image_count": 26,
+      "sale_price": 30500,
+      "sale_type": "sold",
+      "page_title": "1966 Ford Mustang GT350 Tribute"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGJY7o0N/1968-ford-shelby-gt500-kr",
+      "title": "1968 Ford Shelby Gt500 Kr",
+      "text": "FEATURED Bid to $120,000",
+      "titleYear": 1968,
+      "score": 60,
+      "usable_image_count": 22,
+      "sale_price": 120000,
+      "sale_type": "sold",
+      "page_title": "1968 Ford Shelby GT500 KR"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "title": "1965 Ford Mustang Fastback",
+      "text": "Sold for $58,000",
+      "titleYear": 1965,
+      "score": -2,
+      "usable_image_count": 21,
+      "sale_price": 58000,
+      "sale_type": "sold",
+      "page_title": "1965 Ford Mustang Fastback"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/r4J1nnjy/1966-ford-mustang-gt350-tribute",
+    "title": "1966 Ford Mustang Gt350 Tribute",
+    "text": "Bid to $30,500",
+    "titleYear": 1966,
+    "score": 78,
+    "sale_price": 30500,
+    "sale_type": "sold",
+    "page_title": "1966 Ford Mustang GT350 Tribute",
+    "year": 1966,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "front-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3p5kAZMl-B3dKDBJQ7P/edit/TzGqu.jpg?t=176881885455",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1966 Ford Mustang GT350 Tribute",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 240502
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3p5kAZMl-EfUy8c1J78/edit/1zVO7.jpg?t=176881875578",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "1966 Ford Mustang GT350 Tribute",
+      "width": 542,
+      "height": 361,
+      "bytes": 241592
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3p5kAZMl-jv5j0QlPx1/edit/mdRZY.jpg?t=176881979164",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "1966 Ford Mustang GT350 Tribute",
+      "width": 542,
+      "height": 361,
+      "bytes": 251868
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3p5kAZMl-FnM9uPLfrF/edit/QBd6X.jpg?t=176881922679",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1966 Ford Mustang GT350 Tribute",
+      "width": 542,
+      "height": 361,
+      "bytes": 220155
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3p5kAZMl-SK0YrBGNTN/edit/0W6sX.jpg?t=176881849881",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "1966 Ford Mustang GT350 Tribute",
+      "width": 542,
+      "height": 361,
+      "bytes": 135956
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3p5kAZMl-2OWsSzKAD3/edit/sQU6x.jpg?t=176882004044",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "1966 Ford Mustang GT350 Tribute",
+      "width": 542,
+      "height": 361,
+      "bytes": 173874
+    },
+    {
+      "path": "front-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3p5kAZMl-z3FviPh3Ly/edit/D3IL_.jpg?t=176882178435",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1966 Ford Mustang GT350 Tribute",
+      "width": 542,
+      "height": 361,
+      "bytes": 259612
+    },
+    {
+      "path": "front-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3p5kAZMl-IHgziyZypk/edit/-l73y.jpg?t=176882151109",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "1966 Ford Mustang GT350 Tribute",
+      "width": 542,
+      "height": 361,
+      "bytes": 313753
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd9535ec24a071782dfd277e0b333dfa/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd9535ec24a071782dfd277e0b333dfa/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd9535ec24a071782dfd277e0b333dfa/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AAJPp05/1969-ford-mustang-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd9535ec24a071782dfd277e0b333dfa/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang GT",
+      "auction_year": 1969,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/644d72b4fda6c5faab153dc2d969fafc/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/644d72b4fda6c5faab153dc2d969fafc/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/644d72b4fda6c5faab153dc2d969fafc/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AAJPp05/1969-ford-mustang-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/644d72b4fda6c5faab153dc2d969fafc/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang GT",
+      "auction_year": 1969,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c5d27931323613929a38d0a577ed5e28/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c5d27931323613929a38d0a577ed5e28/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c5d27931323613929a38d0a577ed5e28/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AAJPp05/1969-ford-mustang-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c5d27931323613929a38d0a577ed5e28/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang GT",
+      "auction_year": 1969,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb6a3e90321d371e08956be680c9ccff/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb6a3e90321d371e08956be680c9ccff/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb6a3e90321d371e08956be680c9ccff/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AAJPp05/1969-ford-mustang-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb6a3e90321d371e08956be680c9ccff/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang GT",
+      "auction_year": 1969,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/58d2a9e951715d31484198fb05696ec4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/58d2a9e951715d31484198fb05696ec4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/58d2a9e951715d31484198fb05696ec4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AAJPp05/1969-ford-mustang-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/58d2a9e951715d31484198fb05696ec4/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang GT",
+      "auction_year": 1969,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7877b4971d2a27f721330b4f58917bc0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7877b4971d2a27f721330b4f58917bc0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7877b4971d2a27f721330b4f58917bc0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AAJPp05/1969-ford-mustang-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7877b4971d2a27f721330b4f58917bc0/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang GT",
+      "auction_year": 1969,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/18a6f86fa1dd22bcfc8145b405effaa3/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/18a6f86fa1dd22bcfc8145b405effaa3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1966 Ford Mustang GT350 Tribute",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/18a6f86fa1dd22bcfc8145b405effaa3/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4J1nnjy/1966-ford-mustang-gt350-tribute",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/18a6f86fa1dd22bcfc8145b405effaa3/manifest/video.m3u8",
+      "auction_title": "1966 Ford Mustang GT350 Tribute",
+      "auction_year": 1966,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": -2
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": -2
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": -2
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": -2
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": -2
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "1965",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "long hood",
+          "short deck proportions",
+          "tri-bar taillights",
+          "side scoops",
+          "chrome bumpers"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965",
+        "detected_variant_or_engine": "GT350",
+        "visible_match_evidence": [
+          "long hood",
+          "short deck proportions",
+          "tri-bar taillights",
+          "side scoops",
+          "chrome bumpers",
+          "fastback roofline"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965",
+        "detected_variant_or_engine": "GT350",
+        "visible_match_evidence": [
+          "long hood",
+          "short deck proportions",
+          "tri-bar taillights",
+          "side scoops",
+          "chrome bumpers",
+          "fastback roofline"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "1965",
+        "detected_variant_or_engine": "GT350",
+        "visible_match_evidence": [
+          "long hood",
+          "short deck proportions",
+          "tri-bar taillights",
+          "side scoops",
+          "fastback roofline",
+          "chrome bumpers"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "The photo focuses on the interior seat and does not clearly show the target vehicle (Ford Mustang).",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "First Generation (1965-1973)",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "classic steering wheel",
+          "dashboard design",
+          "gauge layout",
+          "interior styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 6,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle; it is a close-up of a gear shifter.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965-1973",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "classic dashboard design",
+          "analog gauges",
+          "vintage styling",
+          "Ford branding"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
