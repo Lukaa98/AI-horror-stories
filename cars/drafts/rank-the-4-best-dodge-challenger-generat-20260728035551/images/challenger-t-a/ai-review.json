@@ -1,0 +1,201 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Challenger",
+      "detected_generation_or_year": "1970",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "hood scoop",
+        "distinctive front grille",
+        "striping on hood"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "Dodge",
+      "detected_model": "Challenger",
+      "detected_generation_or_year": "1970",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "hood scoop",
+        "striping",
+        "bold rear spoiler"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 7,
+      "reject": true,
+      "reason": "Convertible variant not consistent with target vehicle specification",
+      "path": "highlight-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "Dodge",
+      "detected_model": "Challenger",
+      "detected_generation_or_year": "1970",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Challenger badge"
+      ],
+      "generation_match_confidence": 7,
+      "variant_match_confidence": 1,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior"
+      ],
+      "quality_score": 6,
+      "composition_score": 7,
+      "target_match_confidence": 5,
+      "reject": true,
+      "reason": "Incorrect variant; this is not the Challenger T/A.",
+      "path": "highlight-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "Dodge",
+      "detected_model": "Challenger",
+      "detected_generation_or_year": "1970",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "bold rear spoiler",
+        "distinctive rear lights"
+      ],
+      "generation_match_confidence": 7,
+      "variant_match_confidence": null,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 6,
+      "composition_score": 7,
+      "target_match_confidence": 5,
+      "reject": true,
+      "reason": "Target vehicle is not the correct variant (Challenger T/A).",
+      "path": "highlight-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Challenger",
+      "detected_generation_or_year": "1970",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design matching 1970 Challenger",
+        "dashboard layout",
+        "steering wheel"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Challenger",
+      "detected_generation_or_year": "1970",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design consistent with 1970s Dodge",
+        "bucket seats with distinctive stitching"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Photo does not feature the target vehicle; it shows only the interior transmission area.",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 3,
+      "composition_score": 2,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not feature the target vehicle; it shows only the dashboard.",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    }
+  ]
+}

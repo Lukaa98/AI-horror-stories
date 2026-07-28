@@ -1,0 +1,415 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T04:05:18.511Z",
+  "query": "2008 Dodge Challenger SRT-8",
+  "visual_highlight": "retro styling",
+  "search_url": "https://carsandbids.com/search/2008/dodge?start_year=2008&end_year=2014&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/K1w8PXYG/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Sold for $44,444",
+      "titleYear": 2008,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Rv61O01/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Bid to $35,000",
+      "titleYear": 2008,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Bj2malA/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Bid to $34,500 (Sold After)",
+      "titleYear": 2008,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkONd27N/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Bid to $32,250",
+      "titleYear": 2008,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4k7DqMD/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Sold for $22,000",
+      "titleYear": 2008,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rbqnvp1g/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Bid to $20,000",
+      "titleYear": 2008,
+      "score": 88
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/K1w8PXYG/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Sold for $44,444",
+      "titleYear": 2008,
+      "score": 88,
+      "usable_image_count": 22,
+      "sale_price": 44444,
+      "sale_type": "sold",
+      "page_title": "2008 Dodge Challenger SRT8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Rv61O01/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Bid to $35,000",
+      "titleYear": 2008,
+      "score": 88,
+      "usable_image_count": 35,
+      "sale_price": 35000,
+      "sale_type": "sold",
+      "page_title": "2008 Dodge Challenger SRT8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Bj2malA/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Bid to $34,500 (Sold After)",
+      "titleYear": 2008,
+      "score": 88,
+      "usable_image_count": 43,
+      "sale_price": 34500,
+      "sale_type": "sold",
+      "page_title": "2008 Dodge Challenger SRT8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkONd27N/2008-dodge-challenger-srt8",
+      "title": "2008 Dodge Challenger Srt8",
+      "text": "Bid to $32,250",
+      "titleYear": 2008,
+      "score": 88,
+      "usable_image_count": 15,
+      "sale_price": 32250,
+      "sale_type": "sold",
+      "page_title": "2008 Dodge Challenger SRT8"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3Bj2malA/2008-dodge-challenger-srt8",
+    "title": "2008 Dodge Challenger Srt8",
+    "text": "Bid to $34,500 (Sold After)",
+    "titleYear": 2008,
+    "score": 88,
+    "sale_price": 34500,
+    "sale_type": "sold",
+    "page_title": "2008 Dodge Challenger SRT8",
+    "year": 2008,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f889874c89f41a21e650683ff1c0d2f88e21fceb/photos/s-GjUdwXHChW.JPEG?t=162500286778",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2008 Dodge Challenger SRT8",
+      "width": 542,
+      "height": 457,
+      "bytes": 305959
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3vLMqmDR.zA0bLT3cF-(edit).jpg?t=162615857796",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2008 Dodge Challenger SRT8",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 310556
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3vLMqmDR.vKFX0jxiM-(edit).jpg?t=162610214549",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2008 Dodge Challenger SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 232820
+    },
+    {
+      "path": "interior-04.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f889874c89f41a21e650683ff1c0d2f88e21fceb/photos/3vLMqmDR-roLCWQ93xC.JPEG?t=162585713129",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2008 Dodge Challenger SRT8",
+      "width": 542,
+      "height": 431,
+      "bytes": 248718
+    },
+    {
+      "path": "interior-05.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f889874c89f41a21e650683ff1c0d2f88e21fceb/photos/s-ZXlXL9uWV.JPEG?t=162500286778",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2008 Dodge Challenger SRT8",
+      "width": 542,
+      "height": 406,
+      "bytes": 293928
+    },
+    {
+      "path": "interior-06.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f889874c89f41a21e650683ff1c0d2f88e21fceb/photos/3vLMqmDR-Qh934Kykacv.JPEG?t=162585722717",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2008 Dodge Challenger SRT8",
+      "width": 542,
+      "height": 406,
+      "bytes": 160697
+    },
+    {
+      "path": "highlight-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3vLMqmDR.hTjPX9_es-(edit).jpg?t=162610256235",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2008 Dodge Challenger SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 329331
+    },
+    {
+      "path": "highlight-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3vLMqmDR.K7pXZcpuA-(edit).jpg?t=162610279115",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2008 Dodge Challenger SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 336960
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2008-2014",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "retro body",
+          "dual exhaust",
+          "Hemi hood",
+          "muscular stance"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 7,
+        "reject": true,
+        "reason": "Wrong generation/vehicle variant",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "dodge",
+        "detected_model": "challenger",
+        "detected_generation_or_year": "2008-2014",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "retro body",
+          "dual exhaust",
+          "Hemi hood"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 3,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 5,
+        "reject": true,
+        "reason": "Visibly modified and does not match target vehicle's specific variant context.",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "dodge",
+        "detected_model": "challenger",
+        "detected_generation_or_year": "2008-2014",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "retro body",
+          "muscular stance"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior"
+        ],
+        "quality_score": 6,
+        "composition_score": 7,
+        "target_match_confidence": 4,
+        "reject": true,
+        "reason": "visibly wrong generation or variant",
+        "path": "highlight-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2008-2014",
+        "detected_variant_or_engine": "SRT-8",
+        "visible_match_evidence": [
+          "retro body",
+          "dual exhaust",
+          "muscular stance"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Charger",
+        "detected_generation_or_year": "2008",
+        "detected_variant_or_engine": "SRT-8",
+        "visible_match_evidence": [
+          "Dodge badge on the steering wheel",
+          "SRT-8 interior design",
+          "Red and black leather seats"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2008-2014",
+        "detected_variant_or_engine": "SRT-8",
+        "visible_match_evidence": [
+          "retro body",
+          "dual exhaust",
+          "Hemi hood",
+          "muscular stance",
+          "modern tech",
+          "red and black interior"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "interior-05.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "The image shows an interior speedometer and does not feature the target vehicle.",
+        "path": "interior-06.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
