@@ -336,3 +336,48 @@ def scrape_entry_images(scraper_dir, draft_images_dir, entry):
     manifest["ai_review"] = review_payload
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return images, manifest
+
+
+def discover_entry_engine_videos(scraper_dir, draft_images_dir, entry):
+    """Run a video-only Cars & Bids search for this entry's engine clips.
+
+    scrape_entry_images visits only the top few price-sorted listings so its
+    photo galleries stay high quality, but that same narrow, price-sorted
+    pool routinely misses real seller-uploaded engine videos that happen to
+    sit in cheaper listings - the standalone video-test tool searches up to
+    20 listings in the site's default order specifically to avoid that, and
+    this mirrors it so the main pipeline finds engine clips just as
+    reliably. Fails open (returns []) on any error since a missing engine
+    clip is optional, not a reason to fail the whole research run.
+    """
+    params = infer_search_params(entry.get("search_hint", ""))
+    if not params:
+        return []
+
+    start_year, end_year = parse_year_range(entry.get("years"))
+    topic_slug = re.sub(r"[^a-z0-9]+", "-", entry["name"].lower()).strip("-") or "entry"
+    dest = draft_images_dir / topic_slug
+    manifest_path = dest / "carsandbids-video-manifest.json"
+    dest.mkdir(parents=True, exist_ok=True)
+
+    cmd = [
+        "node",
+        "src/scrape-carsandbids-gallery.js",
+        f"--make={params['make']}",
+        f"--model={params['model']}",
+        f"--query={entry.get('search_hint', '')}",
+        f"--out-dir={dest}",
+        f"--out-json={manifest_path}",
+        "--skip-images=true",
+    ]
+    if start_year:
+        cmd.append(f"--start-year={start_year}")
+    if end_year:
+        cmd.append(f"--end-year={end_year}")
+
+    try:
+        subprocess.run(cmd, cwd=scraper_dir, check=False, timeout=240)
+        manifest = load_manifest(manifest_path)
+    except Exception:
+        return []
+    return manifest.get("videos", [])

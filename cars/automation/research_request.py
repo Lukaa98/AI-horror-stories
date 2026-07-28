@@ -21,7 +21,12 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from PIL import Image
-from cars_and_bids import enrich_entry_from_manifest, infer_search_params, scrape_entry_images
+from cars_and_bids import (
+    discover_entry_engine_videos,
+    enrich_entry_from_manifest,
+    infer_search_params,
+    scrape_entry_images,
+)
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
 
@@ -1007,6 +1012,15 @@ def source_entry_images(entry, images_dir, require_ai_image_review=False, seen_i
     cars_and_bids_images, cars_and_bids_manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
     entry["images"] = cars_and_bids_images
     enrich_entry_from_manifest(entry, cars_and_bids_manifest)
+    # The photo scrape above only visits the top few price-sorted listings,
+    # which is fine for photo quality but routinely misses engine videos
+    # sitting in cheaper listings. Run the same wider, video-only search the
+    # standalone video-test tool uses so engine clips are found just as
+    # reliably here as they are there.
+    print(f"[videos] {entry['name']} -> searching Cars & Bids for engine videos")
+    broader_videos = discover_entry_engine_videos(SCRAPER_DIR, images_dir, entry)
+    if broader_videos:
+        entry["engine_videos"] = broader_videos
     initial_images = list(entry["images"])
     review_and_rename_entry_images(
         entry,
