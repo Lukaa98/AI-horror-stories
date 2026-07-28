@@ -1,0 +1,469 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T17:52:58.771Z",
+  "query": "Audi R8 V10 RWS 2017",
+  "visual_highlight": "red stripe decal",
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2017&end_year=2018&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KV1PzBwP/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "Sold for $117,000",
+      "titleYear": 2018,
+      "score": 96
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37gk7E0x/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "Sold for $114,611",
+      "titleYear": 2018,
+      "score": 96
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMYMkvYR/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "Sold for $122,500",
+      "titleYear": 2018,
+      "score": 96
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9X6kNN0x/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "Sold for $135,000",
+      "titleYear": 2018,
+      "score": 96
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9nVMB0Nn/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "FEATURED Sold After for $125,000",
+      "titleYear": 2018,
+      "score": 96
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AWlD1jK/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "FEATURED Sold for $92,000",
+      "titleYear": 2018,
+      "score": 96
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KV1PzBwP/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "Sold for $117,000",
+      "titleYear": 2018,
+      "score": 96,
+      "usable_image_count": 13,
+      "sale_price": 117000,
+      "sale_type": "sold",
+      "page_title": "2018 Audi R8 V10 Coupe RWS"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37gk7E0x/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "Sold for $114,611",
+      "titleYear": 2018,
+      "score": 96,
+      "usable_image_count": 30,
+      "sale_price": 114611,
+      "sale_type": "sold",
+      "page_title": "2018 Audi R8 V10 Coupe RWS"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMYMkvYR/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "Sold for $122,500",
+      "titleYear": 2018,
+      "score": 96,
+      "usable_image_count": 13,
+      "sale_price": 122500,
+      "sale_type": "sold",
+      "page_title": "2018 Audi R8 V10 Coupe RWS"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9X6kNN0x/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe Rws",
+      "text": "Sold for $135,000",
+      "titleYear": 2018,
+      "score": 96,
+      "usable_image_count": 22,
+      "sale_price": 135000,
+      "sale_type": "sold",
+      "page_title": "2018 Audi R8 V10 Coupe RWS"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/37gk7E0x/2018-audi-r8-v10-coupe-rws",
+    "title": "2018 Audi R8 V10 Coupe Rws",
+    "text": "Sold for $114,611",
+    "titleYear": 2018,
+    "score": 96,
+    "sale_price": 114611,
+    "sale_type": "sold",
+    "page_title": "2018 Audi R8 V10 Coupe RWS",
+    "year": 2018,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/KP7P6oPq-VY1dACI6Bh-(edit).jpg?t=169336228604",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2018 Audi R8 V10 Coupe RWS",
+      "width": 542,
+      "height": 361,
+      "bytes": 203612
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/KP7P6oPq-O-s6-ZzCuL-(edit).jpg?t=169336200491",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Audi R8 V10 Coupe RWS",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 347192
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/KP7P6oPq-ch91xDLtHw-(edit).jpg?t=169336216590",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Audi R8 V10 Coupe RWS",
+      "width": 542,
+      "height": 361,
+      "bytes": 370327
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/KP7P6oPq-HIWGU27NVT-(edit).jpg?t=169336208013",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2018 Audi R8 V10 Coupe RWS",
+      "width": 542,
+      "height": 361,
+      "bytes": 197466
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/KP7P6oPq-SZj7PLf1M8-(edit).jpg?t=169336240083",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2018 Audi R8 V10 Coupe RWS",
+      "width": 542,
+      "height": 361,
+      "bytes": 209883
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/KP7P6oPq-h86YbBPNyu-(edit).jpg?t=169336233860",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "2018 Audi R8 V10 Coupe RWS",
+      "width": 542,
+      "height": 361,
+      "bytes": 154593
+    },
+    {
+      "path": "highlight-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/KP7P6oPq-_E002ISAwE-(edit).jpg?t=169336220072",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Audi R8 V10 Coupe RWS",
+      "width": 542,
+      "height": 361,
+      "bytes": 356520
+    },
+    {
+      "path": "highlight-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/KP7P6oPq-PFRcRU8_CB-(edit).jpg?t=169336204463",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Audi R8 V10 Coupe RWS",
+      "width": 542,
+      "height": 361,
+      "bytes": 334310
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d298dcdfb02ac96ed9aec563fc1dc029/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d298dcdfb02ac96ed9aec563fc1dc029/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d298dcdfb02ac96ed9aec563fc1dc029/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV1PzBwP/2018-audi-r8-v10-coupe-rws",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d298dcdfb02ac96ed9aec563fc1dc029/manifest/video.m3u8",
+      "auction_title": "2018 Audi R8 V10 Coupe RWS",
+      "auction_year": 2018,
+      "search_score": 96
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0bdc5cbffb894d371c66d24ab136f99/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0bdc5cbffb894d371c66d24ab136f99/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0bdc5cbffb894d371c66d24ab136f99/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV1PzBwP/2018-audi-r8-v10-coupe-rws",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0bdc5cbffb894d371c66d24ab136f99/manifest/video.m3u8",
+      "auction_title": "2018 Audi R8 V10 Coupe RWS",
+      "auction_year": 2018,
+      "search_score": 96
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9c3932f7f520f4fe518a276ee7319519/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9c3932f7f520f4fe518a276ee7319519/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9c3932f7f520f4fe518a276ee7319519/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV1PzBwP/2018-audi-r8-v10-coupe-rws",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9c3932f7f520f4fe518a276ee7319519/manifest/video.m3u8",
+      "auction_title": "2018 Audi R8 V10 Coupe RWS",
+      "auction_year": 2018,
+      "search_score": 96
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017-2018",
+        "detected_variant_or_engine": "V10 RWS",
+        "visible_match_evidence": [
+          "red stripe along side",
+          "black grille",
+          "honeycomb front grille"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017-2018",
+        "detected_variant_or_engine": "V10 RWS",
+        "visible_match_evidence": [
+          "red stripe along side",
+          "black grille",
+          "unique wheels"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017-2018",
+        "detected_variant_or_engine": "V10 RWS",
+        "visible_match_evidence": [
+          "V10 badging",
+          "body styling indicative of R8",
+          "sport wheels"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017\u20132018",
+        "detected_variant_or_engine": "V10 RWS",
+        "visible_match_evidence": [
+          "red stripe along side",
+          "rear-wheel-drive badging",
+          "unique wheels",
+          "black grille",
+          "matte paint options"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017\u20132018",
+        "detected_variant_or_engine": "V10 RWS",
+        "visible_match_evidence": [
+          "Audi branding on steering wheel",
+          "Carbon fiber accents",
+          "Red leather interior",
+          "Digital instrument cluster"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017\u20132018",
+        "detected_variant_or_engine": "V10 RWS",
+        "visible_match_evidence": [
+          "red leather interior",
+          "audi design features",
+          "modern interior layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017\u20132018",
+        "detected_variant_or_engine": "V10 RWS",
+        "visible_match_evidence": [
+          "red seats",
+          "r8 interior design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 6,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017-2018",
+        "detected_variant_or_engine": "V10 RWS",
+        "visible_match_evidence": [
+          "cr8 badge",
+          "digital display",
+          "g meter"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
