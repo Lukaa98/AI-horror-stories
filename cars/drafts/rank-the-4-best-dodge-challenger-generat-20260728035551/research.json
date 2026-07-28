@@ -1363,5 +1363,69 @@
     }
   ],
   "skipped_entries": [],
-  "status": "researched"
+  "status": "video_generated",
+  "latest_render": {
+    "quality": "quick",
+    "filename": "preview_short.mp4"
+  },
+  "engine_clips": [
+    {
+      "rank": 4,
+      "approved": true,
+      "duration": 5.0,
+      "detected_onset_seconds": 19.85,
+      "engine_event_score": 1.13,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Dodge Challenger",
+        "confidence": 8,
+        "reason": "The frames show components consistent with classic muscle cars, particularly features resembling the engine configuration used in the 1970 Challenger T/A.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "1970 Dodge Challenger Convertible",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/manifest/video.m3u8",
+        "auction_title": "1970 Dodge Challenger Convertible",
+        "auction_year": 1970,
+        "search_score": 104
+      },
+      "error": null,
+      "callout_text": "Let's hear the Six-Pack come to life."
+    },
+    {
+      "rank": 2,
+      "approved": true,
+      "duration": 5.0,
+      "detected_onset_seconds": 19.85,
+      "engine_event_score": 1.13,
+      "review": {
+        "approved": true,
+        "detected_vehicle": "Dodge Charger",
+        "confidence": 8,
+        "reason": "The frames show components indicative of a muscle car engine, similar to those found in the First Gen R/T (1970-1974) like the Dodge Charger.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "1970 Dodge Challenger Convertible",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/manifest/video.m3u8",
+        "auction_title": "1970 Dodge Challenger Convertible",
+        "auction_year": 1970,
+        "search_score": 104
+      },
+      "error": null,
+      "callout_text": "Let's hear the Hemi come to life."
+    }
+  ]
 }
