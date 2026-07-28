@@ -14,6 +14,8 @@ from pathlib import Path
 
 from PIL import Image, ImageFilter
 
+from openai_retry import with_openai_retry
+
 _PLATE_PROMPT = (
     "Look at this car photo for any visible license plate (front or rear, "
     "straight-on or angled, fully or partially in frame). Return only JSON "
@@ -32,13 +34,13 @@ def _detect_plate_boxes(image_path):
     from openai import OpenAI
 
     encoded = base64.b64encode(Path(image_path).read_bytes()).decode("ascii")
-    response = OpenAI().responses.create(
+    response = with_openai_retry(lambda: OpenAI().responses.create(
         model=os.getenv("OPENAI_CAR_VIDEO_REVIEW_MODEL", "gpt-4o-mini"),
         input=[{"role": "user", "content": [
             {"type": "input_text", "text": _PLATE_PROMPT},
             {"type": "input_image", "image_url": f"data:image/jpeg;base64,{encoded}"},
         ]}],
-    )
+    ))
     text = response.output_text.strip().removeprefix("```json").removesuffix("```").strip()
     result = json.loads(text)
     if not result.get("has_plate"):

@@ -5,6 +5,8 @@ import re
 import subprocess
 from pathlib import Path
 
+from openai_retry import with_openai_retry
+
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
 DEFAULT_REVIEW_MODEL = os.getenv("OPENAI_CAR_IMAGE_REVIEW_MODEL", "gpt-4o-mini")
@@ -124,7 +126,7 @@ def _openai_review(path, entry, model):
         "generation or a visibly contradictory variant. "
         "Reject wrong cars, collages, ads, screenshots with unrelated cars, or images where the target car is not the main subject."
     )
-    response = client.responses.create(
+    response = with_openai_retry(lambda: client.responses.create(
         model=model,
         input=[
             {
@@ -135,7 +137,7 @@ def _openai_review(path, entry, model):
                 ],
             }
         ],
-    )
+    ))
     text = response.output_text.strip()
     if text.startswith("```"):
         text = text.strip("`")

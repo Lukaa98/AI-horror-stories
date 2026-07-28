@@ -22,6 +22,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from PIL import Image
 from cars_and_bids import enrich_entry_from_manifest, infer_search_params, scrape_entry_images
+from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -453,7 +454,7 @@ def calculate_ranking_total(entry):
 
 
 def _research_response(client, prompt, max_output_tokens):
-    return client.responses.create(
+    return with_openai_retry(lambda: client.responses.create(
         model="gpt-4o",
         tools=[{"type": "web_search_preview"}],
         input=prompt,
@@ -466,7 +467,7 @@ def _research_response(client, prompt, max_output_tokens):
                 "schema": RESEARCH_OUTPUT_SCHEMA,
             }
         },
-    )
+    ))
 
 
 def _parse_research_response(response):
@@ -560,7 +561,7 @@ def compose_final_narration(request_text, entries):
         request=request_text,
         entries_json=json.dumps(narration_inputs, indent=2),
     )
-    response = OpenAI().responses.create(
+    response = with_openai_retry(lambda: OpenAI().responses.create(
         model="gpt-4o",
         input=prompt,
         text={
@@ -571,7 +572,7 @@ def compose_final_narration(request_text, entries):
                 "schema": NARRATION_OUTPUT_SCHEMA,
             }
         },
-    )
+    ))
     text = response.output_text.strip()
     if text.startswith("```"):
         text = text.strip("`")
@@ -797,7 +798,7 @@ model/generation when reasonably visible, but do not reject merely because a tri
 badge, or engine designation cannot be proven from this angle. exact_variant_visible is useful
 metadata, not an approval requirement. When provenance is true, the image came from one exact
 auction gallery and remains usable unless the pixels contradict it."""
-    response = client.responses.create(
+    response = with_openai_retry(lambda: client.responses.create(
         model=model,
         input=[{
             "role": "user",
@@ -806,7 +807,7 @@ auction gallery and remains usable unless the pixels contradict it."""
                 {"type": "input_image", "image_url": _image_data_url(path)},
             ],
         }],
-    )
+    ))
     text = response.output_text.strip()
     if text.startswith("```"):
         text = text.strip("`")

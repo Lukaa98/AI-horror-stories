@@ -20,6 +20,7 @@ except ModuleNotFoundError as exc:
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
 from video_editor import build_short_video  # noqa: E402
+from openai_retry import with_openai_retry  # noqa: E402
 
 OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"
 SAMPLE_SLUG = "mazda-mx5-miata-35th-anniversary"
@@ -958,13 +959,13 @@ def _write_openai_audio(path, text, instructions=None, speed=None):
     from openai import OpenAI
 
     client = OpenAI()
-    response = client.audio.speech.create(
+    response = with_openai_retry(lambda: client.audio.speech.create(
         model=os.getenv("OPENAI_TTS_MODEL", "gpt-4o-mini-tts"),
         voice=os.getenv("OPENAI_TTS_VOICE", "onyx"),
         input=text,
         instructions=instructions or os.getenv("OPENAI_TTS_INSTRUCTIONS", CAR_TTS_INSTRUCTIONS),
         speed=float(speed if speed is not None else os.getenv("OPENAI_TTS_SPEED", "1.02")),
-    )
+    ))
     path.parent.mkdir(parents=True, exist_ok=True)
     response.write_to_file(str(path))
 

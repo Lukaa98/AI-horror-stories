@@ -4,11 +4,12 @@ import json
 import math
 import os
 import subprocess
-import time
 import wave
 from pathlib import Path
 
 from PIL import Image
+
+from openai_retry import with_openai_retry
 
 # Audio-rise multiplier strong enough to count as a real engine event even
 # when the frame at that moment doesn't visually confirm it (e.g. a plain
@@ -34,27 +35,6 @@ def _selection_tier(scene_type):
     if scene_type in INTERIOR_SCENE_TYPES:
         return 2
     return 1
-
-
-def _create_with_retry(call, max_retries=4, initial_delay=1.0, backoff=2.0):
-    """Retry an OpenAI call through transient rate limits (429s).
-
-    Running several video tests concurrently shares the same org-level
-    tokens-per-minute budget, so a 429 here is routine load, not a real
-    failure - retrying briefly avoids silently falling back to a tolerant
-    "assume relevant" review that can let a weak candidate through.
-    """
-    delay = initial_delay
-    for attempt in range(max_retries + 1):
-        try:
-            return call()
-        except Exception as exc:
-            message = str(exc)
-            if attempt < max_retries and ("rate_limit" in message or "429" in message):
-                time.sleep(delay)
-                delay *= backoff
-                continue
-            raise
 
 
 def choose_video_candidate(candidates):
@@ -119,7 +99,7 @@ def _classify_scene_image(image_ref, entry):
 
     vehicle_line = f"The expected vehicle family is {entry.name} ({entry.years}), but " if entry else ""
     prompt = _SCENE_PROMPT.format(vehicle_line=vehicle_line)
-    response = _create_with_retry(lambda: OpenAI().responses.create(
+    response = with_openai_retry(lambda: OpenAI().responses.create(
         model=os.getenv("OPENAI_CAR_VIDEO_REVIEW_MODEL", "gpt-4o-mini"),
         input=[{"role": "user", "content": [
             {"type": "input_text", "text": prompt},
@@ -260,7 +240,7 @@ def _verify_frames(contact_sheet, entry):
         "Exact trim, engine, package, or model year does not need to match. Reject only a clearly "
         "different make/model, unrelated footage, or unusable frames."
     )
-    response = _create_with_retry(lambda: OpenAI().responses.create(
+    response = with_openai_retry(lambda: OpenAI().responses.create(
         model=os.getenv("OPENAI_CAR_VIDEO_REVIEW_MODEL", "gpt-4o-mini"),
         input=[{"role": "user", "content": [
             {"type": "input_text", "text": prompt},
