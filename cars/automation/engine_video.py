@@ -371,7 +371,15 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
                 and scene_review.get("scene_type") not in {"roof_operation", "hood_or_trunk_operation"}
             ):
                 relevant.append((candidate, scene_review))
-            if labeled or len(relevant) >= MAX_PROBE_CANDIDATES:
+            # A genuine label (platform type or AI-read text) is trusted
+            # immediately and stops the search. A thumbnail-only relevance
+            # guess is a much weaker signal, so hitting MAX_PROBE_CANDIDATES
+            # of those must NOT cut the search short - a listing's actual
+            # "Cold Start" tab can sit later in this same listing's own
+            # video order, after an earlier "Exterior Walkaround" entry that
+            # merely looked plausible enough to count as "relevant". Keep
+            # scanning the full budget for a real label unless one is found.
+            if labeled:
                 break
         probe_candidates = labeled[:1] or relevant[:MAX_PROBE_CANDIDATES]
         if not probe_candidates and allow_irrelevant:
