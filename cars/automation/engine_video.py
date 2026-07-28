@@ -110,15 +110,34 @@ _SCENE_PROMPT = (
     "Classify this frame from a car-auction video. Return only JSON with keys: "
     "scene_type (one of exhaust_closeup, rear_exterior, cockpit, engine_bay, full_exterior, "
     "roof_operation, hood_or_trunk_operation, interior_detail, walkaround, unknown), "
-    "engine_relevance integer 1-10, likely_engine_audio boolean, reason string. "
+    "engine_relevance integer 1-10, likely_engine_audio boolean, "
+    "text_indicates_engine_event boolean, reason string. "
     "We want cold-start, startup, exhaust, or revving footage. Exhaust closeups, rear views, "
     "cockpit views with gauges, and engine-bay views are highly relevant. Convertible roof "
     "movement, hood/trunk operation, silent interior details, and generic walkarounds are not. "
-    "{vehicle_line}classify scene purpose separately from whether the vehicle identity matches."
+    "{vehicle_line}classify scene purpose separately from whether the vehicle identity matches. "
+    "{text_line}"
+    "Set text_indicates_engine_event true only if that text explicitly names a cold start, "
+    "engine start, startup, exhaust, or revving clip - a keyword scan on this same text may have "
+    "already missed a real label due to wording or formatting, so read it yourself rather than "
+    "assuming it was already checked. Do not set it true just because the video is of a car."
 )
 
 
-def _classify_scene_image(image_ref, entry):
+def _candidate_text_context(candidate):
+    """Whatever raw title/section/context text was scraped for this video.
+
+    A fixed keyword regex on this same text (done upstream, in the scraper)
+    can miss a real "Cold Start"/"Engine Start" label due to wording or
+    formatting quirks, so this is handed to the vision model too - it can
+    read the text itself rather than trust only the regex's verdict.
+    """
+    parts = [candidate.get("section"), candidate.get("context")]
+    text = " | ".join(part for part in parts if part)
+    return text[:600] if text else None
+
+
+def _classify_scene_image(image_ref, entry, text_context=None):
     """Send one frame (URL or data URI) to vision review for scene purpose."""
     key = (os.getenv("OPENAI_API_KEY") or "").strip()
     if not key.startswith("sk-") or len(key) < 30 or not image_ref:
@@ -126,13 +145,15 @@ def _classify_scene_image(image_ref, entry):
             "scene_type": "unknown",
             "engine_relevance": 5,
             "likely_engine_audio": True,
+            "text_indicates_engine_event": False,
             "reason": "Vision classification unavailable; kept as a tolerant candidate",
             "provider": "metadata_fallback",
         }
     from openai import OpenAI
 
     vehicle_line = f"The expected vehicle family is {entry.name} ({entry.years}), but " if entry else ""
-    prompt = _SCENE_PROMPT.format(vehicle_line=vehicle_line)
+    text_line = f"The video's own scraped title/section/context text is: {text_context!r}. " if text_context else ""
+    prompt = _SCENE_PROMPT.format(vehicle_line=vehicle_line, text_line=text_line)
     response = with_openai_retry(lambda: OpenAI().responses.create(
         model=os.getenv("OPENAI_CAR_VIDEO_REVIEW_MODEL", "gpt-4o-mini"),
         input=[{"role": "user", "content": [
@@ -157,10 +178,10 @@ def classify_video_thumbnail(candidate, entry):
     if candidate.get("scene_review"):
         return candidate["scene_review"]
     thumbnail_url = candidate.get("thumbnail_url") or candidate.get("url")
-    return _classify_scene_image(thumbnail_url, entry)
+    return _classify_scene_image(thumbnail_url, entry, text_context=_candidate_text_context(candidate))
 
 
-def classify_scene_at_time(source, timestamp, entry, frame_path):
+def classify_scene_at_time(source, timestamp, entry, frame_path, text_context=None):
     """Grab a frame at `timestamp` from `source` and classify what it shows.
 
     Unlike the platform thumbnail, this looks at the moment the audio engine
@@ -173,7 +194,7 @@ def classify_scene_at_time(source, timestamp, entry, frame_path):
         "-frames:v", "1", "-update", "1", str(frame_path),
     ])
     encoded = base64.b64encode(Path(frame_path).read_bytes()).decode("ascii")
-    return _classify_scene_image(f"data:image/jpeg;base64,{encoded}", entry)
+    return _classify_scene_image(f"data:image/jpeg;base64,{encoded}", entry, text_context=text_context)
 
 
 def _extract_analysis_audio(source, wav_path):
@@ -313,11 +334,16 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
                     "scene_type": "unknown",
                     "engine_relevance": 5,
                     "likely_engine_audio": True,
+                    "text_indicates_engine_event": False,
                     "reason": f"Thumbnail review failed open: {exc}",
                     "provider": "fallback_after_error",
                 }
             classified.append((candidate, scene_review))
-            if candidate.get("type") == "cold_start":
+            # Trust either signal as a "labeled" candidate: the scraper's own
+            # regex-based type, or the vision model independently reading the
+            # same scraped text - the regex can miss a real label due to
+            # wording/formatting, so neither alone should be the only check.
+            if candidate.get("type") == "cold_start" or scene_review.get("text_indicates_engine_event"):
                 labeled.append((candidate, scene_review))
             elif (
                 int(scene_review.get("engine_relevance") or 0) >= 5
@@ -384,7 +410,10 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
 
         onset_frame_path = output_dir / f"rank-{entry.rank}-onset-frame.jpg"
         try:
-            onset_scene_review = classify_scene_at_time(source, onset, entry, onset_frame_path)
+            onset_scene_review = classify_scene_at_time(
+                source, onset, entry, onset_frame_path,
+                text_context=_candidate_text_context(candidate),
+            )
         except Exception:
             onset_scene_review = chosen["scene_review"]
         finally:
@@ -404,7 +433,10 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
         # latches, cabin rustling, footsteps) never get the audio override.
         scene_type = onset_scene_review.get("scene_type")
         has_strong_audio = chosen["event_score"] >= STRONG_AUDIO_OVERRIDE_SCORE
-        platform_labeled = candidate.get("type") in {"cold_start", "engine_sound"}
+        platform_labeled = (
+            candidate.get("type") in {"cold_start", "engine_sound"}
+            or bool(onset_scene_review.get("text_indicates_engine_event"))
+        )
         engine_relevant = (platform_labeled and has_strong_audio) or (
             scene_type not in {"roof_operation", "hood_or_trunk_operation", "interior_detail", "walkaround"}
             and (
