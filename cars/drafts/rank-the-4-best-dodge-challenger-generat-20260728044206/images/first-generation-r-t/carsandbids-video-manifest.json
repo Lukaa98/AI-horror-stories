@@ -1,0 +1,112 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T04:55:29.984Z",
+  "query": "1970 Dodge Challenger R/T",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/1970/dodge?start_year=1970&end_year=1974",
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+      "title": "1970 Dodge Challenger Convertible",
+      "text": "Sold for $32,250",
+      "titleYear": 1970,
+      "score": 104
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+      "title": "1970 Dodge Challenger Convertible",
+      "text": "Sold for $32,250",
+      "titleYear": 1970,
+      "score": 104,
+      "usable_image_count": 13,
+      "sale_price": 32250,
+      "sale_type": "sold",
+      "page_title": "1970 Dodge Challenger Convertible"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+    "title": "1970 Dodge Challenger Convertible",
+    "text": "Sold for $32,250",
+    "titleYear": 1970,
+    "score": 104,
+    "sale_price": 32250,
+    "sale_type": "sold",
+    "page_title": "1970 Dodge Challenger Convertible",
+    "year": 1970,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/16f497d2b7d9fd2de641445687122c7b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/16f497d2b7d9fd2de641445687122c7b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1970 Dodge Challenger Convertible",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/16f497d2b7d9fd2de641445687122c7b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/16f497d2b7d9fd2de641445687122c7b/manifest/video.m3u8",
+      "auction_title": "1970 Dodge Challenger Convertible",
+      "auction_year": 1970,
+      "search_score": 104
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1970 Dodge Challenger Convertible",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/65f2a8d149bf043b134cf46eb976b362/manifest/video.m3u8",
+      "auction_title": "1970 Dodge Challenger Convertible",
+      "auction_year": 1970,
+      "search_score": 104
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6321db16687fc2138991a59758656e67/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6321db16687fc2138991a59758656e67/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1970 Dodge Challenger Convertible",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6321db16687fc2138991a59758656e67/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6321db16687fc2138991a59758656e67/manifest/video.m3u8",
+      "auction_title": "1970 Dodge Challenger Convertible",
+      "auction_year": 1970,
+      "search_score": 104
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1a2a19df58afab475fd686df41f2f01c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1a2a19df58afab475fd686df41f2f01c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1970 Dodge Challenger Convertible",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1a2a19df58afab475fd686df41f2f01c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1a2a19df58afab475fd686df41f2f01c/manifest/video.m3u8",
+      "auction_title": "1970 Dodge Challenger Convertible",
+      "auction_year": 1970,
+      "search_score": 104
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ae17ecb93f15b1dbd87250f0c19d5391/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ae17ecb93f15b1dbd87250f0c19d5391/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1970 Dodge Challenger Convertible",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ae17ecb93f15b1dbd87250f0c19d5391/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9A4BB6av/1970-dodge-challenger-convertible",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ae17ecb93f15b1dbd87250f0c19d5391/manifest/video.m3u8",
+      "auction_title": "1970 Dodge Challenger Convertible",
+      "auction_year": 1970,
+      "search_score": 104
+    }
+  ]
+}

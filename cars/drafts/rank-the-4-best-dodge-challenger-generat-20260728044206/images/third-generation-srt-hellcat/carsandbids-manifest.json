@@ -1,0 +1,437 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T04:58:18.336Z",
+  "query": "2015 Dodge Challenger SRT Hellcat",
+  "visual_highlight": "front grille",
+  "search_url": "https://carsandbids.com/search/2015/dodge?start_year=2015&end_year=2023&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3yypkwjM/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Sold for $53,500",
+      "titleYear": 2015,
+      "score": 124
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV2moakQ/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Sold for $47,000",
+      "titleYear": 2015,
+      "score": 124
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9XaQQlgj/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Sold for $46,000",
+      "titleYear": 2015,
+      "score": 124
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNAqLzp4/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Sold for $41,500",
+      "titleYear": 2015,
+      "score": 124
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4Z6bQAn/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Bid to $40,250",
+      "titleYear": 2015,
+      "score": 124
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9WapP1lM/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Bid to $39,250",
+      "titleYear": 2015,
+      "score": 124
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3yypkwjM/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Sold for $53,500",
+      "titleYear": 2015,
+      "score": 124,
+      "usable_image_count": 38,
+      "sale_price": 53500,
+      "sale_type": "sold",
+      "page_title": "2015 Dodge Challenger SRT Hellcat"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV2moakQ/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Sold for $47,000",
+      "titleYear": 2015,
+      "score": 124,
+      "usable_image_count": 23,
+      "sale_price": 47000,
+      "sale_type": "sold",
+      "page_title": "2015 Dodge Challenger SRT Hellcat"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9XaQQlgj/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Sold for $46,000",
+      "titleYear": 2015,
+      "score": 124,
+      "usable_image_count": 28,
+      "sale_price": 46000,
+      "sale_type": "sold",
+      "page_title": "2015 Dodge Challenger SRT Hellcat"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNAqLzp4/2015-dodge-challenger-srt-hellcat",
+      "title": "2015 Dodge Challenger Srt Hellcat",
+      "text": "Sold for $41,500",
+      "titleYear": 2015,
+      "score": 124,
+      "usable_image_count": 35,
+      "sale_price": 41500,
+      "sale_type": "sold",
+      "page_title": "2015 Dodge Challenger SRT Hellcat"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3yypkwjM/2015-dodge-challenger-srt-hellcat",
+    "title": "2015 Dodge Challenger Srt Hellcat",
+    "text": "Sold for $53,500",
+    "titleYear": 2015,
+    "score": 124,
+    "sale_price": 53500,
+    "sale_type": "sold",
+    "page_title": "2015 Dodge Challenger SRT Hellcat",
+    "year": 2015,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "front-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/Screen.iTaTA6gSE.jpg?t=161316309869",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2015 Dodge Challenger SRT Hellcat",
+      "width": 1294,
+      "height": 863,
+      "bytes": 83682
+    },
+    {
+      "path": "interior-02.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ce0e5b6b3224572bf6d6cb625a00345efd49b358/photos/V7e9CclnPHP.jpeg?t=161265795439",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2015 Dodge Challenger SRT Hellcat",
+      "width": 542,
+      "height": 406,
+      "bytes": 206688
+    },
+    {
+      "path": "highlight-03.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ce0e5b6b3224572bf6d6cb625a00345efd49b358/photos/NtXV7E10mMw.jpeg?t=161290940625",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2015 Dodge Challenger SRT Hellcat",
+      "width": 542,
+      "height": 406,
+      "bytes": 239868
+    },
+    {
+      "path": "exterior-04.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ce0e5b6b3224572bf6d6cb625a00345efd49b358/photos/JdDjxOJ8xND.jpeg?t=161290941484",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2015 Dodge Challenger SRT Hellcat",
+      "width": 542,
+      "height": 406,
+      "bytes": 316788
+    },
+    {
+      "path": "interior-05.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ce0e5b6b3224572bf6d6cb625a00345efd49b358/photos/f-GB_d7uc1G.jpeg?t=161290940482",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2015 Dodge Challenger SRT Hellcat",
+      "width": 542,
+      "height": 406,
+      "bytes": 186109
+    },
+    {
+      "path": "interior-06.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ce0e5b6b3224572bf6d6cb625a00345efd49b358/photos/FQCTeakXkhn.jpeg?t=161290940545",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2015 Dodge Challenger SRT Hellcat",
+      "width": 542,
+      "height": 406,
+      "bytes": 211743
+    },
+    {
+      "path": "front-07.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/5KtzUDg1Ak.X3fIzS4P2.jpeg?t=161307357037",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2015 Dodge Challenger SRT Hellcat",
+      "width": 542,
+      "height": 363,
+      "bytes": 360658
+    },
+    {
+      "path": "front-08.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/2r_gwKBWF-.lYuRdrASmL.jpeg?t=161307356950",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2015 Dodge Challenger SRT Hellcat",
+      "width": 542,
+      "height": 361,
+      "bytes": 368822
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": "SRT Hellcat",
+        "visible_match_evidence": [
+          "dual hood scoops",
+          "Hellcat badging",
+          "widebody stance",
+          "LED halo headlights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "Third Generation (2015-2023)",
+        "detected_variant_or_engine": "SRT Hellcat",
+        "visible_match_evidence": [
+          "Hellcat badging",
+          "dual hood scoops",
+          "widebody stance",
+          "LED halo headlights",
+          "quad exhaust tips"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": "SRT Hellcat",
+        "visible_match_evidence": [
+          "SRT badging",
+          "widebody stance",
+          "dual hood scoops",
+          "quad exhaust tips"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "front-07.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": "SRT Hellcat",
+        "visible_match_evidence": [
+          "SRT badging",
+          "widebody stance",
+          "dual hood scoops",
+          "LED halo headlights",
+          "quad exhaust tips"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-08.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": "SRT Hellcat",
+        "visible_match_evidence": [
+          "SRT badging",
+          "specific interior design",
+          "performance-oriented features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": "SRT Hellcat",
+        "visible_match_evidence": [
+          "SRT badging",
+          "interior design",
+          "performance seats"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": null,
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": "SRT Hellcat",
+        "visible_match_evidence": [
+          "SRT badging",
+          "sporty seating",
+          "interior design features"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "dodge",
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image focuses on interior gauges, lacks exterior view and visual identifiers for the target vehicle.",
+        "path": "interior-06.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

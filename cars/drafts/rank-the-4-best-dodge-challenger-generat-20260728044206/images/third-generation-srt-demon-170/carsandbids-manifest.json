@@ -1,0 +1,430 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T04:48:57.809Z",
+  "query": "2023 Dodge Challenger SRT Demon 170",
+  "visual_highlight": "front fascia",
+  "search_url": "https://carsandbids.com/search/2023/dodge?start_year=2023&end_year=2023&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rE61gARe/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "FEATURED Sold for $184,000",
+      "titleYear": 2023,
+      "score": 142
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZ5Nko4k/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "Sold for $174,000",
+      "titleYear": 2023,
+      "score": 142
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9Q20WwDx/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "Bid to $173,000",
+      "titleYear": 2023,
+      "score": 142
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3o2gQRY2/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "FEATURED Sold for $165,000",
+      "titleYear": 2023,
+      "score": 142
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gj8oRpz/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "FEATURED Bid to $146,000",
+      "titleYear": 2023,
+      "score": 142
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9aVmN7P8/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "FEATURED Bid to $142,500",
+      "titleYear": 2023,
+      "score": 142
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rE61gARe/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "FEATURED Sold for $184,000",
+      "titleYear": 2023,
+      "score": 142,
+      "usable_image_count": 31,
+      "sale_price": 184000,
+      "sale_type": "sold",
+      "page_title": "2023 Dodge Challenger SRT Demon 170"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZ5Nko4k/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "Sold for $174,000",
+      "titleYear": 2023,
+      "score": 142,
+      "usable_image_count": 26,
+      "sale_price": 174000,
+      "sale_type": "sold",
+      "page_title": "2023 Dodge Challenger SRT Demon 170"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9Q20WwDx/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "Bid to $173,000",
+      "titleYear": 2023,
+      "score": 142,
+      "usable_image_count": 25,
+      "sale_price": 173000,
+      "sale_type": "sold",
+      "page_title": "2023 Dodge Challenger SRT Demon 170"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3o2gQRY2/2023-dodge-challenger-srt-demon-170",
+      "title": "2023 Dodge Challenger Srt Demon 170",
+      "text": "FEATURED Sold for $165,000",
+      "titleYear": 2023,
+      "score": 142,
+      "usable_image_count": 31,
+      "sale_price": 165000,
+      "sale_type": "sold",
+      "page_title": "2023 Dodge Challenger SRT Demon 170"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rE61gARe/2023-dodge-challenger-srt-demon-170",
+    "title": "2023 Dodge Challenger Srt Demon 170",
+    "text": "FEATURED Sold for $184,000",
+    "titleYear": 2023,
+    "score": 142,
+    "sale_price": 184000,
+    "sale_type": "sold",
+    "page_title": "2023 Dodge Challenger SRT Demon 170",
+    "year": 2023,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "front-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rxMzw71V-u_og-doDnW-(edit).jpg?t=170183040120",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2023 Dodge Challenger SRT Demon 170",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 209436
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rxMzw71V-blN8atMh_a-(edit).jpg?t=170183064979",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2023 Dodge Challenger SRT Demon 170",
+      "width": 542,
+      "height": 361,
+      "bytes": 204164
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/56de5a2660c5f2ca817bdd09b707544974a43521/photos/s-51WTDBqLqA.jpg?t=170181421256",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2023 Dodge Challenger SRT Demon 170",
+      "width": 542,
+      "height": 361,
+      "bytes": 163380
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rxMzw71V-EA7G09EoXV-(edit).jpg?t=170183054932",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2023 Dodge Challenger SRT Demon 170",
+      "width": 542,
+      "height": 361,
+      "bytes": 191439
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/56de5a2660c5f2ca817bdd09b707544974a43521/photos/s-13LZ76BlBU.jpg?t=170181420929",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2023 Dodge Challenger SRT Demon 170",
+      "width": 542,
+      "height": 361,
+      "bytes": 153714
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rxMzw71V-X7sXSfh4Gc-(edit).jpg?t=170183084859",
+      "labels": [
+        "interior",
+        "front",
+        "highlight"
+      ],
+      "section": "2023 Dodge Challenger SRT Demon 170",
+      "width": 542,
+      "height": 361,
+      "bytes": 132590
+    },
+    {
+      "path": "front-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rxMzw71V-xLEcIbEl2q-(edit).jpg?t=170183045459",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2023 Dodge Challenger SRT Demon 170",
+      "width": 542,
+      "height": 361,
+      "bytes": 208338
+    },
+    {
+      "path": "front-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rxMzw71V-Z5CfLh5xll-(edit).jpg?t=170183051604",
+      "labels": [
+        "front",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2023 Dodge Challenger SRT Demon 170",
+      "width": 542,
+      "height": 361,
+      "bytes": 196374
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "SRT Demon 170",
+        "visible_match_evidence": [
+          "SRT badging",
+          "widebody design",
+          "air-grabber hood"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Demon",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "SRT Demon 170",
+        "visible_match_evidence": [
+          "widebody design",
+          "Demon 170 badging",
+          "air-grabber hood",
+          "lightweight wheels"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Demon 170",
+        "visible_match_evidence": [
+          "widebody design",
+          "Demon 170 badging",
+          "drag radial tires"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "front-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "SRT Demon 170",
+        "visible_match_evidence": [
+          "widebody design",
+          "Demon 170 badging",
+          "drag radial tires"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "front-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": null,
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Demon 170",
+        "visible_match_evidence": [
+          "Demon badging",
+          "sport seat design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Challenger",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "SRT Demon 170",
+        "visible_match_evidence": [
+          "SRT badging",
+          "interior design style",
+          "specific layout and controls of racing model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image is of the interior of a car and does not feature the target vehicle.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Demon",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "SRT Demon 170",
+        "visible_match_evidence": [
+          "Demon 170 badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
