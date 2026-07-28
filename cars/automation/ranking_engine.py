@@ -657,7 +657,10 @@ def render_ranking_video(
                 if preview_path.exists():
                     engine_results[entry.rank] = {**preview, "path": preview_path}
                     continue
-            result = prepare_engine_clip(entry, engine_dir)
+            # allow_irrelevant matches the standalone video-test tool and the
+            # research-time preview: always try real audio on a candidate
+            # rather than giving up purely on thumbnail-guessing.
+            result = prepare_engine_clip(entry, engine_dir, allow_irrelevant=True)
             if result:
                 engine_results[entry.rank] = result
 

@@ -1028,7 +1028,13 @@ def build_engine_clip_preview(entry, images_dir, topic_slug):
         engine_videos=entry["engine_videos"],
     )
     try:
-        result = prepare_engine_clip(pseudo_entry, preview_dir)
+        # Match the standalone video-test tool's tolerance: it always tries
+        # real audio on a candidate even when its static thumbnail looked
+        # mediocre. Without allow_irrelevant here, this call could give up
+        # purely on thumbnail-guessing, never checking audio on anything,
+        # and miss a genuinely good exhaust/cold-start clip whose thumbnail
+        # just happened to be a plain frame.
+        result = prepare_engine_clip(pseudo_entry, preview_dir, allow_irrelevant=True)
     except Exception as exc:
         return {"approved": False, "error": str(exc)}
     if not result:
