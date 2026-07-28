@@ -1,0 +1,60 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T19:01:06.436Z",
+  "query": "Porsche 911 Carrera RS 2.7",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/porsche/911?start_year=1973&end_year=1974",
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KZDxejNG/porsche-911-style-go-kart",
+      "title": "Porsche 911 Style Go Kart",
+      "text": "Sold for $8,500",
+      "titleYear": null,
+      "score": 50
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KZDxejNG/porsche-911-style-go-kart",
+      "title": "Porsche 911 Style Go Kart",
+      "text": "Sold for $8,500",
+      "titleYear": null,
+      "score": 50,
+      "usable_image_count": 22,
+      "sale_price": 8500,
+      "sale_type": "sold",
+      "page_title": "Porsche 911-Style Go-Kart"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KZDxejNG/porsche-911-style-go-kart",
+    "title": "Porsche 911 Style Go Kart",
+    "text": "Sold for $8,500",
+    "titleYear": null,
+    "score": 50,
+    "sale_price": 8500,
+    "sale_type": "sold",
+    "page_title": "Porsche 911-Style Go-Kart",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e428d512153305f68d7db49d02b5062/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e428d512153305f68d7db49d02b5062/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "Porsche 911-Style Go-Kart",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e428d512153305f68d7db49d02b5062/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KZDxejNG/porsche-911-style-go-kart",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e428d512153305f68d7db49d02b5062/manifest/video.m3u8",
+      "auction_title": "Porsche 911-Style Go-Kart",
+      "auction_year": null,
+      "search_score": 50
+    }
+  ]
+}

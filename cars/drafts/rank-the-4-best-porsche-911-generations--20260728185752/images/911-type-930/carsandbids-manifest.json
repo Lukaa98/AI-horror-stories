@@ -1,0 +1,459 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T19:15:18.101Z",
+  "query": "Porsche 911 930",
+  "visual_highlight": "iconic whale tail",
+  "search_url": "https://carsandbids.com/search/porsche/911?start_year=1975&end_year=1989&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9WabkM2M/1982-porsche-911-turbo-coupe",
+      "title": "1982 Porsche 911 Turbo Coupe",
+      "text": "FEATURED Sold for $104,930",
+      "titleYear": 1982,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPGjg8mN/1984-porsche-911-turbo-special-wishes-slant-nose-coupe",
+      "title": "1984 Porsche 911 Turbo Special Wishes Slant Nose Coupe",
+      "text": "FEATURED Sold After for $195,000",
+      "titleYear": 1984,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KP8xByNZ/rauh-welt-begriff-1989-porsche-911-carrera-4-coupe",
+      "title": "Rauh Welt Begriff 1989 Porsche 911 Carrera 4 Coupe",
+      "text": "FEATURED Sold for $171,500",
+      "titleYear": 1989,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37gPJ4gD/1987-porsche-911-turbo-coupe",
+      "title": "1987 Porsche 911 Turbo Coupe",
+      "text": "FEATURED Sold for $169,500",
+      "titleYear": 1987,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkJwwyLQ/1989-porsche-911-narrow-body-speedster",
+      "title": "1989 Porsche 911 Narrow Body Speedster",
+      "text": "FEATURED Bid to $166,000",
+      "titleYear": 1989,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9n0v05G2/1987-porsche-911-turbo-coupe",
+      "title": "1987 Porsche 911 Turbo Coupe",
+      "text": "FEATURED Sold for $151,000",
+      "titleYear": 1987,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9WabkM2M/1982-porsche-911-turbo-coupe",
+      "title": "1982 Porsche 911 Turbo Coupe",
+      "text": "FEATURED Sold for $104,930",
+      "titleYear": 1982,
+      "score": 88,
+      "usable_image_count": 26,
+      "sale_price": 104930,
+      "sale_type": "sold",
+      "page_title": "1982 Porsche 911 Turbo Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPGjg8mN/1984-porsche-911-turbo-special-wishes-slant-nose-coupe",
+      "title": "1984 Porsche 911 Turbo Special Wishes Slant Nose Coupe",
+      "text": "FEATURED Sold After for $195,000",
+      "titleYear": 1984,
+      "score": 70,
+      "usable_image_count": 37,
+      "sale_price": 151000,
+      "sale_type": "sold",
+      "page_title": "1984 Porsche 911 Turbo Special Wishes Slant Nose Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KP8xByNZ/rauh-welt-begriff-1989-porsche-911-carrera-4-coupe",
+      "title": "Rauh Welt Begriff 1989 Porsche 911 Carrera 4 Coupe",
+      "text": "FEATURED Sold for $171,500",
+      "titleYear": 1989,
+      "score": 70,
+      "usable_image_count": 46,
+      "sale_price": 171500,
+      "sale_type": "sold",
+      "page_title": "RAUH-Welt BEGRIFF 1989 Porsche 911 Carrera 4 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37gPJ4gD/1987-porsche-911-turbo-coupe",
+      "title": "1987 Porsche 911 Turbo Coupe",
+      "text": "FEATURED Sold for $169,500",
+      "titleYear": 1987,
+      "score": 70,
+      "usable_image_count": 33,
+      "sale_price": 169500,
+      "sale_type": "sold",
+      "page_title": "1987 Porsche 911 Turbo Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9WabkM2M/1982-porsche-911-turbo-coupe",
+    "title": "1982 Porsche 911 Turbo Coupe",
+    "text": "FEATURED Sold for $104,930",
+    "titleYear": 1982,
+    "score": 88,
+    "sale_price": 104930,
+    "sale_type": "sold",
+    "page_title": "1982 Porsche 911 Turbo Coupe",
+    "year": 1982,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/interior/3gvXBLdR-VLaaUDr/edit/Qqo2F.jpg?t=174894776309",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1982 Porsche 911 Turbo Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 194173
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/3gvXBLdR-jHnAud-/edit/7uhwx.jpg?t=174894200025",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1982 Porsche 911 Turbo Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 246807
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/3gvXBLdR-qZX0O34/edit/GNTV5.jpg?t=174894769021",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1982 Porsche 911 Turbo Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 242118
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/interior/3gvXBLdR-GH0uDU7/edit/uQ3zH.jpg?t=174894751805",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1982 Porsche 911 Turbo Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 246783
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/mechanical/3gvXBLdR-2JnTB8w/edit/hYxYQ.jpg?t=174894779815",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1982 Porsche 911 Turbo Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 153323
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/interior/3gvXBLdR-KzJFm-U/edit/SmZ8w.jpg?t=174894771763",
+      "labels": [
+        "interior",
+        "highlight"
+      ],
+      "section": "1982 Porsche 911 Turbo Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 145828
+    },
+    {
+      "path": "highlight-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/application/s-SS_dvaT/edit/Chq2U.jpg?t=174894739582",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1982 Porsche 911 Turbo Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 226082
+    },
+    {
+      "path": "highlight-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/3gvXBLdR-zq46_24/edit/9wnP3.jpg?t=174894287267",
+      "labels": [
+        "highlight",
+        "exterior"
+      ],
+      "section": "1982 Porsche 911 Turbo Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 294860
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fcd25ac703a0cb72e6889d86db986601/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fcd25ac703a0cb72e6889d86db986601/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1987 Porsche 911 Turbo Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fcd25ac703a0cb72e6889d86db986601/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/37gPJ4gD/1987-porsche-911-turbo-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fcd25ac703a0cb72e6889d86db986601/manifest/video.m3u8",
+      "auction_title": "1987 Porsche 911 Turbo Coupe",
+      "auction_year": 1987,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/db300dccbd6eadb97190b4f8d2ddf1a7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/db300dccbd6eadb97190b4f8d2ddf1a7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1987 Porsche 911 Turbo Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/db300dccbd6eadb97190b4f8d2ddf1a7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/37gPJ4gD/1987-porsche-911-turbo-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/db300dccbd6eadb97190b4f8d2ddf1a7/manifest/video.m3u8",
+      "auction_title": "1987 Porsche 911 Turbo Coupe",
+      "auction_year": 1987,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/54e5287703b26f38a267a5bb9a522054/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/54e5287703b26f38a267a5bb9a522054/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1987 Porsche 911 Turbo Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/54e5287703b26f38a267a5bb9a522054/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/37gPJ4gD/1987-porsche-911-turbo-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/54e5287703b26f38a267a5bb9a522054/manifest/video.m3u8",
+      "auction_title": "1987 Porsche 911 Turbo Coupe",
+      "auction_year": 1987,
+      "search_score": 70
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "1975-1989",
+        "detected_variant_or_engine": "Type 930",
+        "visible_match_evidence": [
+          "wide body",
+          "flared rear arches",
+          "whale tail",
+          "black impact bumpers"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "1975-1989",
+        "detected_variant_or_engine": "911 Type 930",
+        "visible_match_evidence": [
+          "wide body",
+          "flared rear arches",
+          "whale tail",
+          "black impact bumpers"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "1980s",
+        "detected_variant_or_engine": "Type 930",
+        "visible_match_evidence": [
+          "wide body",
+          "flared rear arches",
+          "whale tail",
+          "black impact bumpers"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "1975-1989",
+        "detected_variant_or_engine": "911 Type 930",
+        "visible_match_evidence": [
+          "wide body",
+          "flared rear arches",
+          "whale tail",
+          "black impact bumpers"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "1975-1989",
+        "detected_variant_or_engine": "Type 930",
+        "visible_match_evidence": [
+          "classic dashboard",
+          "5 gauges",
+          "manual transmission"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "1975-1989",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design consistent with 911 Type 930",
+          "classic seating and dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image is of the interior and does not clearly show the target vehicle or any target vehicle identifiers.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle; it focuses on the interior dashboard.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

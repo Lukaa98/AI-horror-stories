@@ -1,0 +1,463 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T19:05:21.515Z",
+  "query": "Porsche 911 991 GT3",
+  "visual_highlight": "large rear wing",
+  "search_url": "https://carsandbids.com/search/porsche/911?start_year=2017&end_year=2019&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/36EV6MMn/2018-porsche-911-gt3",
+      "title": "2018 Porsche 911 Gt3",
+      "text": "Sold for $130,991",
+      "titleYear": 2018,
+      "score": 106
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3B0aZJR6/2019-porsche-911-gt3-rs",
+      "title": "2019 Porsche 911 Gt3 Rs",
+      "text": "Sold for $247,000",
+      "titleYear": 2019,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4Dax78g/2019-porsche-911-gt3-rs-weissach",
+      "title": "2019 Porsche 911 Gt3 Rs Weissach",
+      "text": "FEATURED Sold After for $242,000",
+      "titleYear": 2019,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9eXmLglq/2019-porsche-911-gt3-rs",
+      "title": "2019 Porsche 911 Gt3 Rs",
+      "text": "FEATURED Sold for $220,995",
+      "titleYear": 2019,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BGwl0n6/2019-porsche-911-gt3-rs-weissach",
+      "title": "2019 Porsche 911 Gt3 Rs Weissach",
+      "text": "FEATURED Sold for $218,000",
+      "titleYear": 2019,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3OqX7Jvv/2018-porsche-911-gt3",
+      "title": "2018 Porsche 911 Gt3",
+      "text": "FEATURED Sold for $211,000",
+      "titleYear": 2018,
+      "score": 88
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/36EV6MMn/2018-porsche-911-gt3",
+      "title": "2018 Porsche 911 Gt3",
+      "text": "Sold for $130,991",
+      "titleYear": 2018,
+      "score": 106,
+      "usable_image_count": 17,
+      "sale_price": 130991,
+      "sale_type": "sold",
+      "page_title": "2018 Porsche 911 GT3"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3B0aZJR6/2019-porsche-911-gt3-rs",
+      "title": "2019 Porsche 911 Gt3 Rs",
+      "text": "Sold for $247,000",
+      "titleYear": 2019,
+      "score": 88,
+      "usable_image_count": 32,
+      "sale_price": 247000,
+      "sale_type": "sold",
+      "page_title": "2019 Porsche 911 GT3 RS"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4Dax78g/2019-porsche-911-gt3-rs-weissach",
+      "title": "2019 Porsche 911 Gt3 Rs Weissach",
+      "text": "FEATURED Sold After for $242,000",
+      "titleYear": 2019,
+      "score": 88,
+      "usable_image_count": 25,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2019 Porsche 911 GT3 RS Weissach"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9eXmLglq/2019-porsche-911-gt3-rs",
+      "title": "2019 Porsche 911 Gt3 Rs",
+      "text": "FEATURED Sold for $220,995",
+      "titleYear": 2019,
+      "score": 88,
+      "usable_image_count": 13,
+      "sale_price": 220995,
+      "sale_type": "sold",
+      "page_title": "2019 Porsche 911 GT3 RS"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/36EV6MMn/2018-porsche-911-gt3",
+    "title": "2018 Porsche 911 Gt3",
+    "text": "Sold for $130,991",
+    "titleYear": 2018,
+    "score": 106,
+    "sale_price": 130991,
+    "sale_type": "sold",
+    "page_title": "2018 Porsche 911 GT3",
+    "year": 2018,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "rear-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/KmOwqpMm-y1uufUrUUA-(edit).jpg?t=167219352382",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Porsche 911 GT3",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 204396
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/KmOwqpMm-3n9hH7r281-(edit).jpg?t=167219348407",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2018 Porsche 911 GT3",
+      "width": 542,
+      "height": 361,
+      "bytes": 243552
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/KmOwqpMm-MLsYboPgan-(edit).jpg?t=167219345140",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2018 Porsche 911 GT3",
+      "width": 542,
+      "height": 361,
+      "bytes": 275275
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/KmOwqpMm-b_iaZY5i15-(edit).jpg?t=167219379580",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Porsche 911 GT3",
+      "width": 542,
+      "height": 361,
+      "bytes": 197487
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/KmOwqpMm-itWDbIifv8-(edit).jpg?t=167219308065",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2018 Porsche 911 GT3",
+      "width": 542,
+      "height": 361,
+      "bytes": 151441
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/KmOwqpMm-xSSRY3B5vI-(edit).jpg?t=167219337224",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2018 Porsche 911 GT3",
+      "width": 542,
+      "height": 361,
+      "bytes": 135224
+    },
+    {
+      "path": "rear-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/KmOwqpMm-yWpCSFyrqr-(edit).jpg?t=167219371494",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Porsche 911 GT3",
+      "width": 542,
+      "height": 361,
+      "bytes": 223440
+    },
+    {
+      "path": "rear-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/KmOwqpMm-nVMpzEjTwX-(edit).jpg?t=167219382631",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2018 Porsche 911 GT3",
+      "width": 542,
+      "height": 361,
+      "bytes": 170545
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a76ede2094ff2abb58584f67c9fe73f4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a76ede2094ff2abb58584f67c9fe73f4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Porsche 911 GT3 RS Weissach",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a76ede2094ff2abb58584f67c9fe73f4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4Dax78g/2019-porsche-911-gt3-rs-weissach",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a76ede2094ff2abb58584f67c9fe73f4/manifest/video.m3u8",
+      "auction_title": "2019 Porsche 911 GT3 RS Weissach",
+      "auction_year": 2019,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a9ab1131c9077d1f9ec27a1a571d5c86/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a9ab1131c9077d1f9ec27a1a571d5c86/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Porsche 911 GT3 RS Weissach",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a9ab1131c9077d1f9ec27a1a571d5c86/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4Dax78g/2019-porsche-911-gt3-rs-weissach",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a9ab1131c9077d1f9ec27a1a571d5c86/manifest/video.m3u8",
+      "auction_title": "2019 Porsche 911 GT3 RS Weissach",
+      "auction_year": 2019,
+      "search_score": 88
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017-2019",
+        "detected_variant_or_engine": "911 Type 991.2 GT3",
+        "visible_match_evidence": [
+          "big rear wing",
+          "center-exit exhaust",
+          "GT3 badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017-2019",
+        "detected_variant_or_engine": "GT3",
+        "visible_match_evidence": [
+          "Porsche interior design",
+          "sport seats",
+          "manual transmission",
+          "GT3 badging",
+          "modern dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017-2019",
+        "detected_variant_or_engine": "GT3",
+        "visible_match_evidence": [
+          "GT3 badging",
+          "interior design consistent with 911 Type 991.2"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017-2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "Porsche branding"
+        ],
+        "generation_match_confidence": 6,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 5,
+        "target_match_confidence": 5,
+        "reject": true,
+        "reason": "Insufficient evidence of the specific variant; primarily interior shot without specific variant identifiers.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017-2019",
+        "detected_variant_or_engine": "GT3",
+        "visible_match_evidence": [
+          "GT3 badge",
+          "center-exit exhaust gauge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017-2019",
+        "detected_variant_or_engine": "GT3",
+        "visible_match_evidence": [
+          "big rear wing",
+          "center-exit exhaust",
+          "lightweight wheels",
+          "GT3 badging"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "rear-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017-2019",
+        "detected_variant_or_engine": "GT3",
+        "visible_match_evidence": [
+          "big rear wing",
+          "center-exit exhaust",
+          "lightweight wheels",
+          "GT3 badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017-2019",
+        "detected_variant_or_engine": "GT3",
+        "visible_match_evidence": [
+          "big rear wing",
+          "center-exit exhaust",
+          "lightweight wheels",
+          "GT3 badging"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 10,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 10,
+        "composition_score": 9,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "rear-08.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

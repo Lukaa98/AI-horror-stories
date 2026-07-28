@@ -1,0 +1,217 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2017-2019",
+      "detected_variant_or_engine": "911 Type 991.2 GT3",
+      "visible_match_evidence": [
+        "big rear wing",
+        "center-exit exhaust",
+        "GT3 badging"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2017-2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "Porsche interior design",
+        "sport seats",
+        "manual transmission",
+        "GT3 badging",
+        "modern dashboard layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 7,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2017-2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "GT3 badging",
+        "interior design consistent with 911 Type 991.2"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2017-2019",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "Porsche branding"
+      ],
+      "generation_match_confidence": 6,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 7,
+      "composition_score": 5,
+      "target_match_confidence": 5,
+      "reject": true,
+      "reason": "Insufficient evidence of the specific variant; primarily interior shot without specific variant identifiers.",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2017-2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "GT3 badge",
+        "center-exit exhaust gauge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2017-2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "big rear wing",
+        "center-exit exhaust",
+        "lightweight wheels",
+        "GT3 badging"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 9,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "rear-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2017-2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "big rear wing",
+        "center-exit exhaust",
+        "lightweight wheels",
+        "GT3 badging"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "rear-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2017-2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "big rear wing",
+        "center-exit exhaust",
+        "lightweight wheels",
+        "GT3 badging"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 10,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 10,
+      "composition_score": 9,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "rear-08.jpg",
+      "provider": "openai"
+    }
+  ]
+}
