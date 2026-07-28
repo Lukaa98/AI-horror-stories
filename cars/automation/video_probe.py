@@ -3,40 +3,15 @@ import argparse
 import json
 import re
 import subprocess
-from itertools import zip_longest
 from pathlib import Path
 from types import SimpleNamespace
 
-from engine_video import classify_video_thumbnail, prepare_engine_clip
+from engine_video import classify_video_thumbnail, interleave_by_listing, prepare_engine_clip
 
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRAPER_DIR = ROOT / "scraper" / "car-source-scraper"
 OUTPUT_ROOT = ROOT / "cars" / "video-tests"
-
-
-def _interleave_by_listing(videos):
-    """Cycle across distinct listings instead of taking the global top-N.
-
-    Discovered videos are pre-sorted labeled-first, but a single listing with
-    several unlabeled video embeds and a high search score can otherwise fill
-    every slot before a different listing is ever tried, which is why the
-    same car kept coming back across an entire test run. Grouping by listing
-    and round-robining preserves that ranking within each listing while
-    guaranteeing every discovered listing gets a turn.
-    """
-    groups = {}
-    order = []
-    for video in videos:
-        key = video.get("auction_url") or video.get("url")
-        if key not in groups:
-            groups[key] = []
-            order.append(key)
-        groups[key].append(video)
-    interleaved = []
-    for row in zip_longest(*(groups[key] for key in order)):
-        interleaved.extend(item for item in row if item is not None)
-    return interleaved
 
 
 def _slug(value):
@@ -87,7 +62,7 @@ def main():
     # Cycle across listings rather than taking a flat top-N slice, so one
     # listing with several unlabeled video embeds and a high search score
     # can't fill every attempt before a different listing is ever tried.
-    candidates = _interleave_by_listing(deduped)[: args.max_attempts]
+    candidates = interleave_by_listing(deduped)[: args.max_attempts]
 
     clips = []
     declined = 0

@@ -5,11 +5,45 @@ import math
 import os
 import subprocess
 import wave
+from itertools import zip_longest
 from pathlib import Path
 
 from PIL import Image
 
 from openai_retry import with_openai_retry
+
+# How many discovered videos prepare_engine_clip will classify by thumbnail
+# before giving up, and how many of those it will fully probe with real
+# audio extraction. Classifying only ever the first few candidates meant an
+# entry with dozens of discovered videos could still come back with "no
+# engine-relevant video thumbnail found" if none of those first few happened
+# to have a good-looking static thumbnail - even with plenty of good clips
+# sitting further down the list.
+MAX_THUMBNAIL_CLASSIFICATIONS = 20
+MAX_PROBE_CANDIDATES = 3
+
+
+def interleave_by_listing(videos):
+    """Cycle across distinct listings instead of taking a flat top-N slice.
+
+    Discovered videos are pre-sorted labeled-first, but a single listing with
+    several unlabeled video embeds and a high search score can otherwise fill
+    every slot before a different listing is ever tried. Grouping by listing
+    and round-robining preserves that ranking within each listing while
+    guaranteeing every discovered listing gets a turn.
+    """
+    groups = {}
+    order = []
+    for video in videos:
+        key = video.get("auction_url") or video.get("url")
+        if key not in groups:
+            groups[key] = []
+            order.append(key)
+        groups[key].append(video)
+    interleaved = []
+    for row in zip_longest(*(groups[key] for key in order)):
+        interleaved.extend(item for item in row if item is not None)
+    return interleaved
 
 # Audio-rise multiplier strong enough to count as a real engine event even
 # when the frame at that moment doesn't visually confirm it (e.g. a plain
@@ -260,11 +294,18 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
     output_dir.mkdir(parents=True, exist_ok=True)
     clip_path = output_dir / f"rank-{entry.rank}-engine.mp4"
     try:
-        # Labeled cold starts win immediately. When labels are hidden by the
-        # site's player, compare up to three embeds and choose the strongest
-        # starter/rev-like jump in audio energy.
+        # Labeled cold starts win immediately. Otherwise, classify thumbnails
+        # progressively - round-robining across listings so one listing's
+        # several embeds can't crowd out every other listing - stopping as
+        # soon as we have enough good candidates instead of paying for
+        # classifications we no longer need, but still willing to go through
+        # MAX_THUMBNAIL_CLASSIFICATIONS candidates if the early ones aren't
+        # usable rather than giving up after only the first few.
+        ordered_candidates = interleave_by_listing(candidates)
         classified = []
-        for candidate in candidates[:4]:
+        labeled = []
+        relevant = []
+        for candidate in ordered_candidates[:MAX_THUMBNAIL_CLASSIFICATIONS]:
             try:
                 scene_review = classify_video_thumbnail(candidate, entry)
             except Exception as exc:
@@ -276,18 +317,18 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
                     "provider": "fallback_after_error",
                 }
             classified.append((candidate, scene_review))
-        labeled = [
-            item for item in classified
-            if item[0].get("type") == "cold_start"
-        ]
-        relevant = [
-            item for item in classified
-            if int(item[1].get("engine_relevance") or 0) >= 5
-            and item[1].get("scene_type") not in {"roof_operation", "hood_or_trunk_operation"}
-        ]
-        probe_candidates = labeled[:1] or relevant[:3]
+            if candidate.get("type") == "cold_start":
+                labeled.append((candidate, scene_review))
+            elif (
+                int(scene_review.get("engine_relevance") or 0) >= 5
+                and scene_review.get("scene_type") not in {"roof_operation", "hood_or_trunk_operation"}
+            ):
+                relevant.append((candidate, scene_review))
+            if labeled or len(relevant) >= MAX_PROBE_CANDIDATES:
+                break
+        probe_candidates = labeled[:1] or relevant[:MAX_PROBE_CANDIDATES]
         if not probe_candidates and allow_irrelevant:
-            probe_candidates = classified[:3]
+            probe_candidates = classified[:MAX_PROBE_CANDIDATES]
         if not probe_candidates:
             return {
                 "approved": False,
