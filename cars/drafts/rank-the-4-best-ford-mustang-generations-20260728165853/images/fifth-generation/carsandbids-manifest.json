@@ -1,0 +1,637 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T17:19:48.456Z",
+  "query": "Ford Mustang S197",
+  "visual_highlight": "fastback profile",
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=2005&end_year=2014&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "title": "2007 Ford Mustang Gt Premium Coupe",
+      "text": "Sold for $12,700",
+      "titleYear": 2007,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "title": "2013 Ford Mustang Gt Premium Coupe",
+      "text": "Sold for $15,000",
+      "titleYear": 2013,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3LwVJnqG/2013-ford-mustang-gt-premium-coupe",
+      "title": "Sold After for $14,000",
+      "text": "Sold After for $14,000",
+      "titleYear": 2013,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZQkywWb/2012-ford-mustang-shelby-gt500-coupe",
+      "title": "2012 Ford Mustang Shelby Gt500 Coupe",
+      "text": "Sold for $44,000",
+      "titleYear": 2012,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KVWRA5dP/2012-ford-mustang-boss-302-laguna-seca",
+      "title": "2012 Ford Mustang Boss 302 Laguna Seca",
+      "text": "Sold for $28,000",
+      "titleYear": 2012,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98nZqvbe/2012-ford-mustang-shelby-gt500-super-snake-50th-anniversary-wide-body",
+      "title": "2012 Ford Mustang Shelby Gt500 Super Snake 50th Anniversary Wide Body",
+      "text": "FEATURED Bid to $122,000",
+      "titleYear": 2012,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "title": "2007 Ford Mustang Gt Premium Coupe",
+      "text": "Sold for $12,700",
+      "titleYear": 2007,
+      "score": 70,
+      "usable_image_count": 29,
+      "sale_price": 12700,
+      "sale_type": "sold",
+      "page_title": "2007 Ford Mustang GT Premium Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "title": "2013 Ford Mustang Gt Premium Coupe",
+      "text": "Sold for $15,000",
+      "titleYear": 2013,
+      "score": 70,
+      "usable_image_count": 16,
+      "sale_price": 15000,
+      "sale_type": "sold",
+      "page_title": "2013 Ford Mustang GT Premium Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3LwVJnqG/2013-ford-mustang-gt-premium-coupe",
+      "title": "Sold After for $14,000",
+      "text": "Sold After for $14,000",
+      "titleYear": 2013,
+      "score": 70,
+      "usable_image_count": 18,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2013 Ford Mustang GT Premium Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZQkywWb/2012-ford-mustang-shelby-gt500-coupe",
+      "title": "2012 Ford Mustang Shelby Gt500 Coupe",
+      "text": "Sold for $44,000",
+      "titleYear": 2012,
+      "score": 70,
+      "usable_image_count": 29,
+      "sale_price": 44000,
+      "sale_type": "sold",
+      "page_title": "2012 Ford Mustang Shelby GT500 Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+    "title": "2007 Ford Mustang Gt Premium Coupe",
+    "text": "Sold for $12,700",
+    "titleYear": 2007,
+    "score": 70,
+    "sale_price": 12700,
+    "sale_type": "sold",
+    "page_title": "2007 Ford Mustang GT Premium Coupe",
+    "year": 2007,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "rear-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/application/s-lL1ASbt/edit/e2WWW.jpg?t=177731683694",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2007 Ford Mustang GT Premium Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 329466
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/application/s-SXmZ2DU/edit/1OF5l.jpg?t=177731683694",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2007 Ford Mustang GT Premium Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 197989
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/application/s-cEAXstv/edit/8Rp5o.jpg?t=177731683694",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2007 Ford Mustang GT Premium Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 213775
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/application/s-5h6OGnP/edit/3hqrc.jpg?t=177731683694",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2007 Ford Mustang GT Premium Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 248297
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/application/s--BI-mc6/edit/jC1pe.jpg?t=177731683694",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2007 Ford Mustang GT Premium Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 106049
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/application/s-FQfBLoe/edit/h2m2c.jpg?t=177731683694",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2007 Ford Mustang GT Premium Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 117566
+    },
+    {
+      "path": "rear-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/application/s-TRiq0qn/edit/zD_YR.jpg?t=177731683694",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2007 Ford Mustang GT Premium Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 299530
+    },
+    {
+      "path": "rear-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/application/s-XWhdb48/edit/BEsk0.jpg?t=177731683694",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2007 Ford Mustang GT Premium Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 327956
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/19221cc68a891ba9c2f44214baa2e28e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/19221cc68a891ba9c2f44214baa2e28e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/19221cc68a891ba9c2f44214baa2e28e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/19221cc68a891ba9c2f44214baa2e28e/manifest/video.m3u8",
+      "auction_title": "2007 Ford Mustang GT Premium Coupe",
+      "auction_year": 2007,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/915615d671e83f8417a049c1538ee12b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/915615d671e83f8417a049c1538ee12b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/915615d671e83f8417a049c1538ee12b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/915615d671e83f8417a049c1538ee12b/manifest/video.m3u8",
+      "auction_title": "2007 Ford Mustang GT Premium Coupe",
+      "auction_year": 2007,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/566a92462844ed46864c6e72d7e9c8fb/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/566a92462844ed46864c6e72d7e9c8fb/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/566a92462844ed46864c6e72d7e9c8fb/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/566a92462844ed46864c6e72d7e9c8fb/manifest/video.m3u8",
+      "auction_title": "2007 Ford Mustang GT Premium Coupe",
+      "auction_year": 2007,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/45432bff8ea881994ebd9fe1069dcf10/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/45432bff8ea881994ebd9fe1069dcf10/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/45432bff8ea881994ebd9fe1069dcf10/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/45432bff8ea881994ebd9fe1069dcf10/manifest/video.m3u8",
+      "auction_title": "2007 Ford Mustang GT Premium Coupe",
+      "auction_year": 2007,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a53731503434bace0381be998ec49161/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a53731503434bace0381be998ec49161/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a53731503434bace0381be998ec49161/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a53731503434bace0381be998ec49161/manifest/video.m3u8",
+      "auction_title": "2007 Ford Mustang GT Premium Coupe",
+      "auction_year": 2007,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5306ffc8af3319fb91999366d8c9ac4a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5306ffc8af3319fb91999366d8c9ac4a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5306ffc8af3319fb91999366d8c9ac4a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5306ffc8af3319fb91999366d8c9ac4a/manifest/video.m3u8",
+      "auction_title": "2007 Ford Mustang GT Premium Coupe",
+      "auction_year": 2007,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5cf07de7fa5e5b550cc858fc33577199/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5cf07de7fa5e5b550cc858fc33577199/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5cf07de7fa5e5b550cc858fc33577199/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5cf07de7fa5e5b550cc858fc33577199/manifest/video.m3u8",
+      "auction_title": "2007 Ford Mustang GT Premium Coupe",
+      "auction_year": 2007,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62f2a8b191f45ea9ab650679d2ad219a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62f2a8b191f45ea9ab650679d2ad219a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62f2a8b191f45ea9ab650679d2ad219a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62f2a8b191f45ea9ab650679d2ad219a/manifest/video.m3u8",
+      "auction_title": "2007 Ford Mustang GT Premium Coupe",
+      "auction_year": 2007,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7e32230684ed2c46dac9d4d970c31f67/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7e32230684ed2c46dac9d4d970c31f67/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7e32230684ed2c46dac9d4d970c31f67/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3q58GYNN/2007-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7e32230684ed2c46dac9d4d970c31f67/manifest/video.m3u8",
+      "auction_title": "2007 Ford Mustang GT Premium Coupe",
+      "auction_year": 2007,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/974fc9b0c581c401c4bbc21a0a68e7bd/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/974fc9b0c581c401c4bbc21a0a68e7bd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/974fc9b0c581c401c4bbc21a0a68e7bd/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/974fc9b0c581c401c4bbc21a0a68e7bd/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang GT Premium Coupe",
+      "auction_year": 2013,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7bec2cb447dec699f8f87178a8823c83/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7bec2cb447dec699f8f87178a8823c83/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7bec2cb447dec699f8f87178a8823c83/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7bec2cb447dec699f8f87178a8823c83/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang GT Premium Coupe",
+      "auction_year": 2013,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea055d54c806b164e8326d92da7311ec/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea055d54c806b164e8326d92da7311ec/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea055d54c806b164e8326d92da7311ec/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea055d54c806b164e8326d92da7311ec/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang GT Premium Coupe",
+      "auction_year": 2013,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/747086c3fe2bbc980b73ddac9e9e59cb/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/747086c3fe2bbc980b73ddac9e9e59cb/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/747086c3fe2bbc980b73ddac9e9e59cb/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3LwVJnqG/2013-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/747086c3fe2bbc980b73ddac9e9e59cb/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang GT Premium Coupe",
+      "auction_year": 2013,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c334ae81c6050ab7956db8abf8697db0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c334ae81c6050ab7956db8abf8697db0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Ford Mustang Shelby GT500 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c334ae81c6050ab7956db8abf8697db0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KZQkywWb/2012-ford-mustang-shelby-gt500-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c334ae81c6050ab7956db8abf8697db0/manifest/video.m3u8",
+      "auction_title": "2012 Ford Mustang Shelby GT500 Coupe",
+      "auction_year": 2012,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/895afe2c9df03e0ad530b16e1d44278f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/895afe2c9df03e0ad530b16e1d44278f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Ford Mustang Shelby GT500 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/895afe2c9df03e0ad530b16e1d44278f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KZQkywWb/2012-ford-mustang-shelby-gt500-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/895afe2c9df03e0ad530b16e1d44278f/manifest/video.m3u8",
+      "auction_title": "2012 Ford Mustang Shelby GT500 Coupe",
+      "auction_year": 2012,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/808c00f69c150f322e0c1223aff4c0a3/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/808c00f69c150f322e0c1223aff4c0a3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Ford Mustang Shelby GT500 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/808c00f69c150f322e0c1223aff4c0a3/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KZQkywWb/2012-ford-mustang-shelby-gt500-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/808c00f69c150f322e0c1223aff4c0a3/manifest/video.m3u8",
+      "auction_title": "2012 Ford Mustang Shelby GT500 Coupe",
+      "auction_year": 2012,
+      "search_score": 70
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "Fifth Generation",
+        "detected_variant_or_engine": "Roush",
+        "visible_match_evidence": [
+          "retro grille",
+          "hood scoop",
+          "muscular fenders"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2005-2014",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "two-tone leather seats",
+          "layout of center console"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2005-2014",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design matches Mustang style",
+          "shifter design is consistent with manual Mustang variants"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2005-2014",
+        "detected_variant_or_engine": "roush",
+        "visible_match_evidence": [
+          "interior design typical for fifth generation Mustang",
+          "Roush shift knob",
+          "layout consistent with Mustang controls"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 2,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the car body, only the instrument cluster.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "fifth generation",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "retro grille",
+          "muscular fenders"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "rear-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "Fifth Generation",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "retro grille",
+          "hood scoop",
+          "muscular fenders"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "Fifth Generation",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "sequential taillights",
+          "muscular fenders",
+          "retro grille"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-08.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
