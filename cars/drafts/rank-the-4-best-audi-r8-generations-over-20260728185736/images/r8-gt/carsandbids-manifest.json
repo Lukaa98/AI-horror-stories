@@ -1,0 +1,464 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-28T19:30:16.093Z",
+  "query": "Audi R8 GT",
+  "visual_highlight": "fixed rear wing",
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2011&end_year=2012&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3ONaXb2Y/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 GT Spyder",
+      "text": "2012 Audi R8 GT Spyder",
+      "titleYear": 2012,
+      "score": 107
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3y0QR8Ad/2012-audi-r8-gt-coupe",
+      "title": "2012 Audi R8 GT Coupe",
+      "text": "2012 Audi R8 GT Coupe",
+      "titleYear": 2012,
+      "score": 107
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "title": "Sold After for $99,000",
+      "text": "Sold After for $99,000",
+      "titleYear": 2012,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJykAVkN/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 Gt Spyder",
+      "text": "FEATURED Sold for $107,000",
+      "titleYear": 2012,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9ldRDDWN/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 Gt Spyder",
+      "text": "Bid to $90,000",
+      "titleYear": 2012,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/30p28jV1/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 Gt Spyder",
+      "text": "FEATURED Sold for $83,000",
+      "titleYear": 2012,
+      "score": 68
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3ONaXb2Y/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 GT Spyder",
+      "text": "2012 Audi R8 GT Spyder",
+      "titleYear": 2012,
+      "score": 107,
+      "usable_image_count": 27,
+      "sale_price": 101500,
+      "sale_type": "sold",
+      "page_title": "2012 Audi R8 GT Spyder"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3y0QR8Ad/2012-audi-r8-gt-coupe",
+      "title": "2012 Audi R8 GT Coupe",
+      "text": "2012 Audi R8 GT Coupe",
+      "titleYear": 2012,
+      "score": 107,
+      "usable_image_count": 18,
+      "sale_price": 110000,
+      "sale_type": "sold",
+      "page_title": "2012 Audi R8 GT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "title": "Sold After for $99,000",
+      "text": "Sold After for $99,000",
+      "titleYear": 2012,
+      "score": 68,
+      "usable_image_count": 26,
+      "sale_price": 65000,
+      "sale_type": "sold",
+      "page_title": "2012 Audi R8 GT Spyder"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJykAVkN/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 Gt Spyder",
+      "text": "FEATURED Sold for $107,000",
+      "titleYear": 2012,
+      "score": 68,
+      "usable_image_count": 24,
+      "sale_price": 107000,
+      "sale_type": "sold",
+      "page_title": "2012 Audi R8 GT Spyder"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3ONaXb2Y/2012-audi-r8-gt-spyder",
+    "title": "2012 Audi R8 GT Spyder",
+    "text": "2012 Audi R8 GT Spyder",
+    "titleYear": 2012,
+    "score": 107,
+    "sale_price": 101500,
+    "sale_type": "sold",
+    "page_title": "2012 Audi R8 GT Spyder",
+    "year": 2012,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "rear-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-f-4AzpqjEc-(edit).jpg?t=167529742142",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 258155
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-YtWJBgKKjL-(edit).jpg?t=167529676436",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 191844
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-h0PpUCCd6V-(edit).jpg?t=167529719367",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 165202
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-d_0Wt-bDUb-(edit).jpg?t=167529755295",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 187570
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-JGrXw-iVhm-(edit).jpg?t=167529723248",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 78386
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-NJL2aTsBkM-(edit).jpg?t=167529703002",
+      "labels": [
+        "interior",
+        "rear",
+        "highlight"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 162776
+    },
+    {
+      "path": "rear-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-6PwN0SYxXz-(edit).jpg?t=167529771692",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 308980
+    },
+    {
+      "path": "rear-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/9AWv8y2e-Hb_ZQyeJwK-(edit).jpg?t=167529778610",
+      "labels": [
+        "rear",
+        "highlight",
+        "exterior"
+      ],
+      "section": "2012 Audi R8 GT Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 294901
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ffd3f075cd660785cb806c1557a4a649/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ffd3f075cd660785cb806c1557a4a649/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Audi R8 GT Spyder",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ffd3f075cd660785cb806c1557a4a649/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ffd3f075cd660785cb806c1557a4a649/manifest/video.m3u8",
+      "auction_title": "2012 Audi R8 GT Spyder",
+      "auction_year": 2012,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/61ee3e356a88241432328871720e014b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/61ee3e356a88241432328871720e014b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Audi R8 GT Spyder",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/61ee3e356a88241432328871720e014b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/61ee3e356a88241432328871720e014b/manifest/video.m3u8",
+      "auction_title": "2012 Audi R8 GT Spyder",
+      "auction_year": 2012,
+      "search_score": 68
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2011-2012",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "audi badge",
+          "R8 design",
+          "aggressive body kit",
+          "large air intakes"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2011-2012",
+        "detected_variant_or_engine": "R8 GT",
+        "visible_match_evidence": [
+          "R8 GT branding on seats",
+          "interior design consistent with R8 GT",
+          "sporty seat design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2011-2012",
+        "detected_variant_or_engine": "R8 GT",
+        "visible_match_evidence": [
+          "interior design",
+          "sports gauges",
+          "GT stitching",
+          "shifter",
+          "steering wheel"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2011-2012",
+        "detected_variant_or_engine": "R8 GT",
+        "visible_match_evidence": [
+          "R8 GT badge on gear knob"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 10,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2011-2012",
+        "detected_variant_or_engine": "R8 GT",
+        "visible_match_evidence": [
+          "R8 GT label on dashboard",
+          "V10 indication on gauges"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2011-2012",
+        "detected_variant_or_engine": "R8 GT",
+        "visible_match_evidence": [
+          "aggressive body kit",
+          "large air intakes",
+          "carbon fiber spoiler"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "rear-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2011-2012",
+        "detected_variant_or_engine": "R8 GT",
+        "visible_match_evidence": [
+          "lightweight design",
+          "carbon fiber spoiler",
+          "large air intakes",
+          "aggressive body kit"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "rear-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2011-2012",
+        "detected_variant_or_engine": "R8 GT",
+        "visible_match_evidence": [
+          "lightweight design",
+          "aggressive body kit",
+          "carbon fiber spoiler",
+          "large air intakes"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-08.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

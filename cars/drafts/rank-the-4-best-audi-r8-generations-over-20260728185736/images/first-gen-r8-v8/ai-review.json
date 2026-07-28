@@ -1,0 +1,217 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2006-2015",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "brown leather seats",
+        "sporty interior layout"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 7,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "detail-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2006-2015",
+      "detected_variant_or_engine": "V10",
+      "visible_match_evidence": [
+        "side blades",
+        "single-frame grille",
+        "LED headlights",
+        "mid-engine layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "side"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2006-2015",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "side blades",
+        "single-frame grille",
+        "LED headlights",
+        "mid-engine layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "detail-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Audi",
+      "detected_model": "R8",
+      "detected_generation_or_year": "2006-2015",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "single-frame grille",
+        "LED headlights",
+        "proportions consistent with R8"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2006-2015",
+      "detected_variant_or_engine": "First-Gen R8 V8",
+      "visible_match_evidence": [
+        "side blades",
+        "single-frame grille",
+        "LED headlights",
+        "mid-engine layout"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2006-2015",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "steering wheel design",
+        "gauge cluster shape",
+        "gear shifter style"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 7,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2006-2015",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "audi badge",
+        "mid-engine layout",
+        "interior design consistent with R8"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2006-2015",
+      "detected_variant_or_engine": "V10",
+      "visible_match_evidence": [
+        "R8 badge",
+        "V10 gauge"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 9,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    }
+  ]
+}
