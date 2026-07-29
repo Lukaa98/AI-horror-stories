@@ -38,6 +38,116 @@ h1 {
 .build-dot.success { background: #46c983; }
 .build-dot.failure, .build-dot.cancelled, .build-dot.timed_out { background: #ff6464; }
 
+.view-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.view-tabs button {
+  padding: 8px 16px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #1d1d1f;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.view-tabs button.active {
+  border-color: #f3b51b;
+  color: #ffd56b;
+  background: rgba(243,181,27,.1);
+}
+
+.dashboard-panel {
+  margin-bottom: 24px;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dashboard-header h2 {
+  margin: 0 0 4px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.dashboard-card {
+  border: 1px solid #444;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.dashboard-card img {
+  display: block;
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+
+.dashboard-card-body {
+  padding: 12px;
+}
+
+.dashboard-card-body h3 {
+  margin: 4px 0;
+  font-size: .95rem;
+}
+
+.dashboard-type {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  border: 1px solid #666;
+  color: #ccc;
+}
+
+.dashboard-type.draft { border-color: #46c983; color: #72e5a5; }
+.dashboard-type.video-test { border-color: #6ea8ff; color: #a9c8ff; }
+
+.dashboard-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+button.danger {
+  background: #7a1f1f;
+  border-color: #a83232;
+  color: #ffd6d6;
+}
+
+.dashboard-detail {
+  display: grid;
+  gap: 16px;
+}
+
+.raw-json {
+  max-height: 400px;
+  overflow: auto;
+  padding: 10px;
+  border-radius: 6px;
+  background: #111;
+  color: #ccc;
+  font-size: .75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .settings {
   border: 1px solid #444;
   border-radius: 8px;

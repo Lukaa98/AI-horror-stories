@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.37";
+const UI_VERSION = "V10.38";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -143,6 +143,157 @@ async function trackWorkflowRun({ owner, repo, branch, token, workflow, startedA
   }
 }
 
+function parseIdTimestamp(id) {
+  const match = String(id || "").match(/(\d{14})$/);
+  if (!match) return null;
+  const s = match[1];
+  const iso = `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}T${s.slice(8, 10)}:${s.slice(10, 12)}:${s.slice(12, 14)}Z`;
+  const date = new Date(iso);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function ghHeaders(token) {
+  return { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" };
+}
+
+async function ghJson(url, options) {
+  const res = await fetch(url, options);
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`GitHub API ${res.status}: ${body.slice(0, 300)}`);
+  }
+  return res.json();
+}
+
+async function fetchOutputTree({ owner, repo, token }) {
+  const ref = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${OUTPUT_BRANCH}`,
+    { headers: ghHeaders(token) }
+  );
+  const commitSha = ref.object.sha;
+  const commit = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/commits/${commitSha}`,
+    { headers: ghHeaders(token) }
+  );
+  const treeData = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/trees/${commit.tree.sha}?recursive=1`,
+    { headers: ghHeaders(token) }
+  );
+  return { commitSha, treeSha: commit.tree.sha, entries: treeData.tree || [] };
+}
+
+function groupDashboardEntries(entries) {
+  const drafts = new Map();
+  const tests = new Map();
+  for (const item of entries) {
+    if (item.type !== "blob") continue;
+    let m = item.path.match(/^cars\/drafts\/([^/]+)\/(.+)$/);
+    if (m) {
+      const [, id, rest] = m;
+      if (!drafts.has(id)) drafts.set(id, []);
+      drafts.get(id).push(rest);
+      continue;
+    }
+    m = item.path.match(/^cars\/video-tests\/([^/]+)\/(.+)$/);
+    if (m) {
+      const [, id, rest] = m;
+      if (!tests.has(id)) tests.set(id, []);
+      tests.get(id).push(rest);
+    }
+  }
+  const items = [];
+  for (const [id, files] of drafts) {
+    items.push({
+      type: "draft",
+      id,
+      files,
+      timestamp: parseIdTimestamp(id),
+      hasResearch: files.includes("research.json"),
+      hasFinal: files.includes("final_short.mp4"),
+      hasPreview: files.includes("preview_short.mp4"),
+    });
+  }
+  for (const [id, files] of tests) {
+    items.push({
+      type: "video-test",
+      id,
+      files,
+      timestamp: parseIdTimestamp(id),
+      hasResult: files.includes("result.json"),
+    });
+  }
+  items.sort((a, b) => (b.timestamp?.getTime() || 0) - (a.timestamp?.getTime() || 0));
+  return items;
+}
+
+async function attachDashboardPreviews(items, owner, repo) {
+  await Promise.allSettled(
+    items.map(async (item) => {
+      const folder = item.type === "draft" ? "drafts" : "video-tests";
+      const file = item.type === "draft" ? "research.json" : "result.json";
+      if (item.type === "draft" && !item.hasResearch) return;
+      if (item.type === "video-test" && !item.hasResult) return;
+      const res = await fetch(
+        `https://raw.githubusercontent.com/${owner}/${repo}/${OUTPUT_BRANCH}/cars/${folder}/${item.id}/${file}?_=${Date.now()}`,
+        { cache: "no-store" }
+      );
+      if (res.ok) item.preview = await res.json();
+    })
+  );
+  return items;
+}
+
+async function loadDashboardEntries({ owner, repo, token }) {
+  const { entries } = await fetchOutputTree({ owner, repo, token });
+  const items = groupDashboardEntries(entries);
+  await attachDashboardPreviews(items, owner, repo);
+  return items;
+}
+
+async function deleteDashboardItem({ owner, repo, token, type, id }) {
+  const prefix = type === "draft" ? `cars/drafts/${id}/` : `cars/video-tests/${id}/`;
+  const ref = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${OUTPUT_BRANCH}`,
+    { headers: ghHeaders(token) }
+  );
+  const latestCommitSha = ref.object.sha;
+  const commit = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/commits/${latestCommitSha}`,
+    { headers: ghHeaders(token) }
+  );
+  const baseTreeSha = commit.tree.sha;
+  const treeData = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/trees/${baseTreeSha}?recursive=1`,
+    { headers: ghHeaders(token) }
+  );
+  const toRemove = (treeData.tree || []).filter(
+    (entry) => entry.type === "blob" && entry.path.startsWith(prefix)
+  );
+  if (toRemove.length === 0) throw new Error("No files found to delete (already removed?).");
+  const newTree = await ghJson(`https://api.github.com/repos/${owner}/${repo}/git/trees`, {
+    method: "POST",
+    headers: { ...ghHeaders(token), "Content-Type": "application/json" },
+    body: JSON.stringify({
+      base_tree: baseTreeSha,
+      tree: toRemove.map((entry) => ({ path: entry.path, mode: entry.mode, type: entry.type, sha: null })),
+    }),
+  });
+  const newCommit = await ghJson(`https://api.github.com/repos/${owner}/${repo}/git/commits`, {
+    method: "POST",
+    headers: { ...ghHeaders(token), "Content-Type": "application/json" },
+    body: JSON.stringify({
+      message: `Delete ${type} ${id}`,
+      tree: newTree.sha,
+      parents: [latestCommitSha],
+    }),
+  });
+  await ghJson(`https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${OUTPUT_BRANCH}`, {
+    method: "PATCH",
+    headers: { ...ghHeaders(token), "Content-Type": "application/json" },
+    body: JSON.stringify({ sha: newCommit.sha }),
+  });
+}
+
 export default function App() {
   const [settings, setSettings] = useState(() => ({
     token: "",
@@ -170,10 +321,22 @@ export default function App() {
   const [videoProbe, setVideoProbe] = useState(null);
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
+  const [view, setView] = useState("create");
+  const [dashboardItems, setDashboardItems] = useState([]);
+  const [dashboardLoading, setDashboardLoading] = useState(false);
+  const [dashboardError, setDashboardError] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const abortRef = useRef(null);
   const trackerIdRef = useRef(0);
 
   useEffect(() => saveSettings(settings), [settings]);
+
+  useEffect(() => {
+    if (view === "dashboard") loadDashboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view]);
 
   const repoOk = settings.token && settings.owner && settings.repo && settings.branch;
   const builtRequest = buildStructuredRequest({ workflow, make, model, focus, startYear, endYear });
@@ -351,6 +514,43 @@ export default function App() {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/video-tests/${videoTestId}/${relativePath}`;
   }
 
+  function dashboardRawUrl(item, relativePath) {
+    const folder = item.type === "draft" ? "drafts" : "video-tests";
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/${folder}/${item.id}/${relativePath}`;
+  }
+
+  async function loadDashboard() {
+    if (!repoOk) {
+      setDashboardError("Fill in your GitHub token + repo settings first.");
+      return;
+    }
+    setDashboardLoading(true);
+    setDashboardError(null);
+    try {
+      const items = await loadDashboardEntries({ owner: settings.owner, repo: settings.repo, token: settings.token });
+      setDashboardItems(items);
+    } catch (err) {
+      setDashboardError(String(err.message || err));
+    } finally {
+      setDashboardLoading(false);
+    }
+  }
+
+  async function handleDeleteItem(item) {
+    setDeletingId(`${item.type}:${item.id}`);
+    setDashboardError(null);
+    try {
+      await deleteDashboardItem({ owner: settings.owner, repo: settings.repo, token: settings.token, type: item.type, id: item.id });
+      setDashboardItems((prev) => prev.filter((entry) => !(entry.type === item.type && entry.id === item.id)));
+      setSelectedItem((current) => (current && current.type === item.type && current.id === item.id ? null : current));
+    } catch (err) {
+      setDashboardError(String(err.message || err));
+    } finally {
+      setDeletingId(null);
+      setConfirmDeleteId(null);
+    }
+  }
+
   const activeStep = stage === "idle" ? 0 : stage === "researching" ? 0 : stage === "researched" ? 1 : stage === "generating" ? 2 : stage === "done" ? 3 : 0;
 
   return (
@@ -360,6 +560,234 @@ export default function App() {
         <span className={`live-state ${stage}`}>{stage === "idle" ? "Ready" : stage}</span>
       </header>
 
+      <nav className="view-tabs">
+        <button type="button" className={view === "create" ? "active" : ""} onClick={() => setView("create")}>
+          Create
+        </button>
+        <button type="button" className={view === "dashboard" ? "active" : ""} onClick={() => setView("dashboard")}>
+          Dashboard
+        </button>
+      </nav>
+
+      {view === "dashboard" && (
+        <section className="dashboard-panel">
+          <div className="dashboard-header">
+            <div>
+              <h2>Generated Drafts &amp; Video Tests</h2>
+              <p className="hint">
+                Reads directly from the <code>{OUTPUT_BRANCH}</code> branch, so results survive a refresh. Deleting
+                an item commits a removal of its files to that branch.
+              </p>
+            </div>
+            <button type="button" className="secondary" onClick={loadDashboard} disabled={dashboardLoading}>
+              {dashboardLoading ? "Loading..." : "Refresh"}
+            </button>
+          </div>
+
+          {dashboardError && <div className="error">{dashboardError}</div>}
+          {!repoOk && <p className="hint">Fill in your GitHub token + repo settings above to load the dashboard.</p>}
+
+          {!selectedItem && (
+            <div className="dashboard-grid">
+              {dashboardItems.map((item) => {
+                const key = `${item.type}:${item.id}`;
+                const title =
+                  item.type === "draft"
+                    ? item.preview?.title || item.id
+                    : `Video test: ${item.preview?.query || item.id}`;
+                const thumb =
+                  item.type === "draft"
+                    ? item.preview?.entries?.find((entry) => (entry.images || []).length)?.images?.[0]
+                    : item.preview?.clips?.find((clip) => clip.thumbnail_url)?.thumbnail_url;
+                const thumbUrl = item.type === "draft" && thumb ? dashboardRawUrl(item, thumb) : thumb;
+                return (
+                  <article className="dashboard-card" key={key}>
+                    {thumbUrl && <img src={thumbUrl} alt={title} />}
+                    <div className="dashboard-card-body">
+                      <span className={`dashboard-type ${item.type}`}>{item.type === "draft" ? "Draft" : "Video Test"}</span>
+                      <h3>{title}</h3>
+                      <p className="hint">{item.timestamp ? item.timestamp.toLocaleString() : item.id}</p>
+                      {item.type === "draft" && (
+                        <p className="hint">
+                          {item.hasFinal ? "Full render ready" : item.hasPreview ? "Preview render ready" : "No render yet"}
+                        </p>
+                      )}
+                      <div className="dashboard-card-actions">
+                        <button type="button" onClick={() => setSelectedItem({ type: item.type, id: item.id })}>
+                          View
+                        </button>
+                        {confirmDeleteId === key ? (
+                          <>
+                            <button
+                              type="button"
+                              className="danger"
+                              onClick={() => handleDeleteItem(item)}
+                              disabled={deletingId === key}
+                            >
+                              {deletingId === key ? "Deleting..." : "Confirm delete"}
+                            </button>
+                            <button type="button" className="secondary" onClick={() => setConfirmDeleteId(null)}>
+                              Cancel
+                            </button>
+                          </>
+                        ) : (
+                          <button type="button" className="secondary" onClick={() => setConfirmDeleteId(key)}>
+                            Delete
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+              {!dashboardLoading && dashboardItems.length === 0 && !dashboardError && repoOk && (
+                <p className="hint">Nothing generated yet. Research or test a video from the Create tab.</p>
+              )}
+            </div>
+          )}
+
+          {selectedItem && (() => {
+            const item = dashboardItems.find((entry) => entry.type === selectedItem.type && entry.id === selectedItem.id);
+            if (!item) {
+              return (
+                <div>
+                  <button type="button" className="secondary" onClick={() => setSelectedItem(null)}>Back</button>
+                  <p className="hint">This item is no longer available.</p>
+                </div>
+              );
+            }
+            const key = `${item.type}:${item.id}`;
+            return (
+              <div className="dashboard-detail">
+                <button type="button" className="secondary" onClick={() => setSelectedItem(null)}>Back to list</button>
+
+                {item.type === "draft" && item.preview && (
+                  <div className="research-panel">
+                    <h2>{item.preview.title}</h2>
+                    <p className="rationale">{item.preview.order_rationale}</p>
+                    {(item.hasFinal || item.hasPreview) && (
+                      <div className="video-player">
+                        <video controls src={dashboardRawUrl(item, item.hasFinal ? "final_short.mp4" : "preview_short.mp4")} width="360" />
+                      </div>
+                    )}
+                    <div className="entries">
+                      {(item.preview.entries || []).map((entry, i) => (
+                        <div key={i} className="entry-card">
+                          <div className="entry-rank">#{(item.preview.entries.length) - i}</div>
+                          <h3>{entry.name} <span className="years">({entry.years})</span></h3>
+                          <p className="stat">{entry.stat}</p>
+                          <p className="label">{entry.label}</p>
+                          <p className="fact">{entry.one_line_fact}</p>
+                          <div className="thumbs">
+                            {(entry.images || []).length === 0 && <span className="no-images">no images found</span>}
+                            {(entry.images || []).map((img, j) => {
+                              const review = (entry.image_reviews || []).find((r) => r.path === img);
+                              const description = review?.view_description || review?.category || "verified car image";
+                              return (
+                                <a key={j} href={dashboardRawUrl(item, img)} target="_blank" rel="noreferrer" title={description}>
+                                  <img src={dashboardRawUrl(item, img)} alt={`${entry.name} — ${description}`} />
+                                  <span className="image-label">{description}</span>
+                                </a>
+                              );
+                            })}
+                          </div>
+                          {(entry.engine_videos || []).length > 0 && (
+                            <article className="video-probe-card entry-engine-clip">
+                              <h3>{entry.name} engine clip</h3>
+                              {entry.engine_clip_preview?.source?.thumbnail_url && (
+                                <img
+                                  className="video-probe-thumb"
+                                  src={entry.engine_clip_preview.source.thumbnail_url}
+                                  alt={`${entry.name} engine clip source thumbnail`}
+                                />
+                              )}
+                              {entry.engine_clip_preview?.approved && entry.engine_clip_preview?.path ? (
+                                <video controls src={dashboardRawUrl(item, entry.engine_clip_preview.path)} preload="metadata" />
+                              ) : (
+                                <p className="error">No usable clip: {entry.engine_clip_preview?.error || "verification rejected it"}</p>
+                              )}
+                              {entry.engine_clip_preview?.source?.auction_url && (
+                                <a href={entry.engine_clip_preview.source.auction_url} target="_blank" rel="noreferrer">
+                                  Open source listing
+                                </a>
+                              )}
+                            </article>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <p className="close-line">Closing line: "{item.preview.close_narration}"</p>
+                    {item.preview.research_sources && (
+                      <details className="settings">
+                        <summary>Research sources</summary>
+                        <pre className="raw-json">{JSON.stringify(item.preview.research_sources, null, 2)}</pre>
+                      </details>
+                    )}
+                    <details className="settings">
+                      <summary>Full research.json</summary>
+                      <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
+                    </details>
+                  </div>
+                )}
+
+                {item.type === "video-test" && item.preview && (
+                  <section className="video-probe-panel">
+                    <h2>Video Test: {item.preview.query}</h2>
+                    <p className="rationale">
+                      Found {item.preview.videos_discovered} video embeds across {item.preview.listings_considered?.length || 0} matching listings.
+                    </p>
+                    <div className="video-probe-grid">
+                      {(item.preview.clips || []).map((clip) => (
+                        <article className="video-probe-card" key={clip.index}>
+                          <h3>Candidate {clip.index}: {clip.source_title || "Listing video"}</h3>
+                          {clip.thumbnail_url && (
+                            <img className="video-probe-thumb" src={clip.thumbnail_url} alt={`Candidate ${clip.index} source thumbnail`} />
+                          )}
+                          {clip.clip ? (
+                            <video controls src={dashboardRawUrl(item, clip.clip)} preload="metadata" />
+                          ) : (
+                            <p className="error">No usable clip: {clip.error || "verification rejected it"}</p>
+                          )}
+                          <dl>
+                            <div><dt>Scene</dt><dd>{clip.scene_review?.scene_type?.replaceAll("_", " ") || "unknown"}</dd></div>
+                            <div><dt>Detected event</dt><dd>{clip.detected_onset_seconds ?? "?"}s</dd></div>
+                            <div><dt>Engine candidate</dt><dd>{clip.approved ? "Yes" : "No"}</dd></div>
+                          </dl>
+                          {clip.source_listing && (
+                            <a href={clip.source_listing} target="_blank" rel="noreferrer">Open source listing</a>
+                          )}
+                        </article>
+                      ))}
+                    </div>
+                    <details className="settings">
+                      <summary>Full result.json</summary>
+                      <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
+                    </details>
+                  </section>
+                )}
+
+                {!item.preview && <p className="hint">No JSON data found for this item (files: {item.files.join(", ")}).</p>}
+
+                <div className="dashboard-card-actions">
+                  {confirmDeleteId === key ? (
+                    <>
+                      <button type="button" className="danger" onClick={() => handleDeleteItem(item)} disabled={deletingId === key}>
+                        {deletingId === key ? "Deleting..." : "Confirm delete"}
+                      </button>
+                      <button type="button" className="secondary" onClick={() => setConfirmDeleteId(null)}>Cancel</button>
+                    </>
+                  ) : (
+                    <button type="button" className="secondary" onClick={() => setConfirmDeleteId(key)}>Delete this item</button>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
+        </section>
+      )}
+
+      {view === "create" && (
+      <>
       <div className="progress-panel" aria-label="Generation progress">
         <div className="progress-steps">
           {PROGRESS_STEPS.map((label, index) => (
@@ -692,6 +1120,8 @@ export default function App() {
             </p>
           )}
         </section>
+      )}
+      </>
       )}
     </div>
   );
