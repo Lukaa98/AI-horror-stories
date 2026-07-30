@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.47";
+const UI_VERSION = "V10.48";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1319,6 +1319,12 @@ export default function App() {
                                   ? `Revving detected: peak ~${car.rev_events[0].peak_hz}Hz over baseline ~${car.rev_events[0].baseline_hz}Hz`
                                   : "No revving pattern detected (best-effort pitch check; may miss broadband exhaust notes)"}
                               </p>
+                              {car.rev_clip_path && (
+                                <p className="hint">
+                                  Distant rev found at ~{car.rev_clip_onset_seconds}s after a long idle -- cut and
+                                  stitched on right after the startup clip (+{car.rev_clip_duration}s) in the render.
+                                </p>
+                              )}
                             </article>
                           ) : (
                             <>
@@ -1740,6 +1746,12 @@ export default function App() {
                         ? `Revving detected: peak ~${car.rev_events[0].peak_hz}Hz over baseline ~${car.rev_events[0].baseline_hz}Hz`
                         : "No revving pattern detected (best-effort pitch check; may miss broadband exhaust notes)"}
                     </p>
+                    {car.rev_clip_path && (
+                      <p className="hint">
+                        Distant rev found at ~{car.rev_clip_onset_seconds}s after a long idle -- cut and stitched on
+                        right after the startup clip (+{car.rev_clip_duration}s) in the render.
+                      </p>
+                    )}
                   </article>
                 ) : (
                   <>

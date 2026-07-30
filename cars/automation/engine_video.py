@@ -197,9 +197,9 @@ def classify_scene_at_time(source, timestamp, entry, frame_path, text_context=No
     return _classify_scene_image(f"data:image/jpeg;base64,{encoded}", entry, text_context=text_context)
 
 
-def _extract_analysis_audio(source, wav_path):
+def _extract_analysis_audio(source, wav_path, duration=45):
     _run([
-        "ffmpeg", "-y", "-i", source, "-t", "45", "-vn",
+        "ffmpeg", "-y", "-i", source, "-t", str(duration), "-vn",
         "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le", str(wav_path),
     ])
 
@@ -371,6 +371,54 @@ def detect_rev_events(wav_path, rise_ratio=1.25, fall_ratio=1.1, max_span=3.5):
     return events
 
 
+def find_distant_rev_clip(source, primary_onset, primary_duration, output_path, search_seconds=300.0):
+    """Look well beyond the already-extracted startup clip for a genuine
+    rev after a long idle (e.g. the car idles for a minute, then revs), and
+    cut a short separate clip around it if one turns up.
+
+    Unlike the startup clip, this only needs to be a couple of seconds long
+    and doesn't need to preserve any particular start point - it exists to
+    be stitched on right after the startup clip, not to stand alone.
+    Returns None (not an error) when nothing distant and clearly separate
+    from the startup event is found; this is an optional bonus, not a
+    requirement.
+    """
+    wav_path = output_path.with_suffix(".search.wav")
+    try:
+        _extract_analysis_audio(source, wav_path, duration=search_seconds)
+        min_gap = max(8.0, primary_duration + 3.0)
+        distant_onset = detect_secondary_event(wav_path, primary_onset, min_gap=min_gap)
+        if distant_onset is None:
+            return None
+        event_score = _engine_event_score(wav_path, distant_onset)
+        rev_duration = _detect_natural_duration(wav_path, distant_onset, min_duration=2.5, max_duration=4.5)
+        cut_start = max(0.0, distant_onset - 0.3)
+        _run([
+            "ffmpeg", "-y", "-i", source, "-ss", f"{cut_start:.3f}", "-t", str(rev_duration),
+            "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-preset", "veryfast",
+            "-c:a", "aac", "-avoid_negative_ts", "make_zero", "-movflags", "+faststart", str(output_path),
+        ])
+        actual_duration = min(rev_duration, _media_duration(str(output_path)))
+        if actual_duration < 1.0:
+            output_path.unlink(missing_ok=True)
+            return None
+        try:
+            rev_events = detect_rev_events(wav_path)
+        except Exception:
+            rev_events = []
+        return {
+            "path": output_path,
+            "duration": round(actual_duration, 3),
+            "onset_seconds": round(distant_onset, 3),
+            "event_score": round(event_score, 3),
+            "rev_events": rev_events,
+        }
+    except Exception:
+        return None
+    finally:
+        wav_path.unlink(missing_ok=True)
+
+
 def _contact_sheet(frame_paths, output_path):
     images = [Image.open(path).convert("RGB") for path in frame_paths]
     width = 480
@@ -468,6 +516,7 @@ def prepare_engine_clip(
     entry, output_dir, duration=5.0, allow_irrelevant=False,
     exterior_only=False, min_duration=3.0, max_duration=8.0,
     max_thumbnail_classifications=MAX_THUMBNAIL_CLASSIFICATIONS,
+    search_distant_rev=False, distant_rev_search_seconds=300.0,
 ):
     candidates = [item for item in entry.engine_videos if item.get("playback_url") or item.get("url")]
     if not candidates:
@@ -678,8 +727,22 @@ def prepare_engine_clip(
         finally:
             rev_wav.unlink(missing_ok=True)
 
+        approved = bool(review.get("approved") and engine_relevant)
+
+        # Optional bonus: search well beyond the startup clip for a distant
+        # rev (e.g. after a long idle) and cut it separately, so a caller
+        # can stitch "startup -> [skip the idle] -> rev" instead of either
+        # missing the rev entirely or including the whole idle to reach it.
+        distant_rev = None
+        if approved and search_distant_rev:
+            distant_rev = find_distant_rev_clip(
+                source, onset, clip_duration,
+                output_dir / f"rank-{entry.rank}-engine-rev.mp4",
+                search_seconds=distant_rev_search_seconds,
+            )
+
         return {
-            "approved": bool(review.get("approved") and engine_relevant),
+            "approved": approved,
             "path": clip_path,
             "duration": clip_duration,
             "detected_onset_seconds": round(onset, 3),
@@ -691,6 +754,10 @@ def prepare_engine_clip(
             "secondary_event_score": round(secondary_event_score, 3) if secondary_event_score is not None else None,
             "rev_events": rev_events,
             "rev_detected": bool(rev_events),
+            "distant_rev_path": distant_rev["path"] if distant_rev else None,
+            "distant_rev_duration": distant_rev["duration"] if distant_rev else None,
+            "distant_rev_onset_seconds": distant_rev["onset_seconds"] if distant_rev else None,
+            "distant_rev_events": distant_rev["rev_events"] if distant_rev else [],
             "review": review,
             "source": candidate,
         }

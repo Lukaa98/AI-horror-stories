@@ -44,6 +44,10 @@ MAX_CONCURRENT_CARS = 3
 # bit of that thoroughness for speed matches this format's "quick" premise,
 # and matters more here since a trim fallback can pay this cost 2-4x over.
 BATTLE_MAX_THUMBNAIL_CLASSIFICATIONS = 8
+# How far into the source video to search for a distant rev after a long
+# idle (e.g. cold start at 0:10, revs at 1:00) -- if found, it's cut as a
+# separate short clip and stitched on right after the startup clip.
+DISTANT_REV_SEARCH_SECONDS = 300.0
 
 GENERATION_SCHEMA = {
     "type": "object",
@@ -185,6 +189,8 @@ def build_startup_clip(car_entry, images_dir):
         min_duration=MIN_CLIP_SECONDS,
         max_duration=MAX_CLIP_SECONDS,
         max_thumbnail_classifications=BATTLE_MAX_THUMBNAIL_CLASSIFICATIONS,
+        search_distant_rev=True,
+        distant_rev_search_seconds=DISTANT_REV_SEARCH_SECONDS,
     )
     result = result or {"approved": False, "error": "No usable engine video found for this car/generation"}
     result["listing_urls"] = listing_urls
@@ -220,13 +226,16 @@ def process_car(car_entry, images_dir):
         )
         if variant_clip.get("path"):
             attempted_clip_paths.append(Path(variant_clip["path"]))
+        if variant_clip.get("distant_rev_path"):
+            attempted_clip_paths.append(Path(variant_clip["distant_rev_path"]))
         photos, clip_result, matched_trim = variant_photos, variant_clip, trim_variant
         if bool(variant_clip.get("approved")) and len(variant_photos) >= 2:
             break
 
     final_path = clip_result.get("path")
+    final_rev_path = clip_result.get("distant_rev_path")
     for path in attempted_clip_paths:
-        if path != final_path:
+        if path != final_path and path != final_rev_path:
             path.unlink(missing_ok=True)
 
     approved = bool(clip_result.get("approved")) and len(photos) >= 2
@@ -262,6 +271,15 @@ def process_car(car_entry, images_dir):
     else:
         entry["clip_path"] = None
         entry["clip_duration"] = None
+    if approved and final_rev_path:
+        relative_rev = Path(final_rev_path).relative_to(images_dir.parent)
+        entry["rev_clip_path"] = str(relative_rev).replace("\\", "/")
+        entry["rev_clip_duration"] = round(float(clip_result.get("distant_rev_duration") or 0), 3)
+        entry["rev_clip_onset_seconds"] = clip_result.get("distant_rev_onset_seconds")
+    else:
+        entry["rev_clip_path"] = None
+        entry["rev_clip_duration"] = None
+        entry["rev_clip_onset_seconds"] = None
     entry["error"] = None if approved else (
         clip_result.get("error")
         or ("Not enough verified exterior photos found" if len(photos) < 2 else "Startup clip rejected")

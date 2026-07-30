@@ -89,8 +89,24 @@ def _car_segment(battle_dir, car, size):
 
     clip_path = battle_dir / car["clip_path"]
     raw_video = VideoFileClip(str(clip_path))
-    duration = min(float(car.get("clip_duration") or raw_video.duration), raw_video.duration)
-    video_clip = _fit_content(raw_video.subclip(0, duration), (width, max_video_h))
+    startup_duration = min(float(car.get("clip_duration") or raw_video.duration), raw_video.duration)
+    video_segments = [raw_video.subclip(0, startup_duration)]
+
+    # If a distant rev (after a long idle) was found and cut separately, cut
+    # straight from the startup clip to it -- skipping the idle in between
+    # entirely -- rather than either missing the rev or padding the segment
+    # with a minute of idling to reach it.
+    if car.get("rev_clip_path"):
+        raw_rev = VideoFileClip(str(battle_dir / car["rev_clip_path"]))
+        rev_duration = min(float(car.get("rev_clip_duration") or raw_rev.duration), raw_rev.duration)
+        video_segments.append(raw_rev.subclip(0, rev_duration))
+
+    combined_video = (
+        concatenate_videoclips(video_segments, method="compose")
+        if len(video_segments) > 1 else video_segments[0]
+    )
+    duration = combined_video.duration
+    video_clip = _fit_content(combined_video, (width, max_video_h))
 
     photo_paths = [battle_dir / p for p in car["photos"]]
     per_photo = max(MIN_PHOTO_SECONDS, min(MAX_PHOTO_SECONDS, duration / max(1, len(photo_paths))))
