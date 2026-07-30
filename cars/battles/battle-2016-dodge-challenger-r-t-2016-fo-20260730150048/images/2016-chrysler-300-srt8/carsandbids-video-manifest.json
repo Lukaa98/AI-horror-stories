@@ -1,0 +1,233 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-30T15:46:08.997Z",
+  "query": "Chrysler 300 SRT8",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/chrysler/300?start_year=2011&end_year=2023",
+  "search_result_count": 7,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KVGPLEGx/2013-chrysler-300-srt8",
+      "title": "2013 Chrysler 300 Srt8",
+      "text": "Bid to $10,100",
+      "titleYear": 2013,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMZzXa04/2013-chrysler-300-srt8",
+      "title": "2013 Chrysler 300 Srt8",
+      "text": "Sold for $23,250",
+      "titleYear": 2013,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98VRNj22/2012-chrysler-300c-srt8",
+      "title": "2012 Chrysler 300c Srt8",
+      "text": "Bid to $22,000 (Sold After)",
+      "titleYear": 2012,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vpQ2Wjk/2023-chrysler-300c",
+      "title": "2023 Chrysler 300c",
+      "text": "Bid to $42,500",
+      "titleYear": 2023,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmAqEeZY/2011-chrysler-300c",
+      "title": "2011 Chrysler 300c",
+      "text": "Bid to $15,015",
+      "titleYear": 2011,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BpaLJdX/2023-chrysler-300c",
+      "title": "2023 Chrysler 300c",
+      "text": "Bid to $47,350",
+      "titleYear": 2023,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3qJlyjYE/2014-chrysler-300-srt",
+      "title": "2014 Chrysler 300 Srt",
+      "text": "Bid to $16,000",
+      "titleYear": 2014,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KVGPLEGx/2013-chrysler-300-srt8",
+      "title": "2013 Chrysler 300 Srt8",
+      "text": "Bid to $10,100",
+      "titleYear": 2013,
+      "score": 88,
+      "usable_image_count": 27,
+      "sale_price": 10100,
+      "sale_type": "sold",
+      "page_title": "2013 Chrysler 300 SRT8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMZzXa04/2013-chrysler-300-srt8",
+      "title": "2013 Chrysler 300 Srt8",
+      "text": "Sold for $23,250",
+      "titleYear": 2013,
+      "score": 88,
+      "usable_image_count": 17,
+      "sale_price": 23250,
+      "sale_type": "sold",
+      "page_title": "2013 Chrysler 300 SRT8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98VRNj22/2012-chrysler-300c-srt8",
+      "title": "2012 Chrysler 300c Srt8",
+      "text": "Bid to $22,000 (Sold After)",
+      "titleYear": 2012,
+      "score": 88,
+      "usable_image_count": 26,
+      "sale_price": 22000,
+      "sale_type": "sold",
+      "page_title": "2012 Chrysler 300C SRT8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vpQ2Wjk/2023-chrysler-300c",
+      "title": "2023 Chrysler 300c",
+      "text": "Bid to $42,500",
+      "titleYear": 2023,
+      "score": 70,
+      "usable_image_count": 25,
+      "sale_price": 42500,
+      "sale_type": "bid_to",
+      "page_title": "2023 Chrysler 300C"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmAqEeZY/2011-chrysler-300c",
+      "title": "2011 Chrysler 300c",
+      "text": "Bid to $15,015",
+      "titleYear": 2011,
+      "score": 70,
+      "usable_image_count": 15,
+      "sale_price": 15015,
+      "sale_type": "sold",
+      "page_title": "2011 Chrysler 300C"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BpaLJdX/2023-chrysler-300c",
+      "title": "2023 Chrysler 300c",
+      "text": "Bid to $47,350",
+      "titleYear": 2023,
+      "score": 70,
+      "usable_image_count": 23,
+      "sale_price": 47350,
+      "sale_type": "bid_to",
+      "page_title": "2023 Chrysler 300C"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3qJlyjYE/2014-chrysler-300-srt",
+      "title": "2014 Chrysler 300 Srt",
+      "text": "Bid to $16,000",
+      "titleYear": 2014,
+      "score": 70,
+      "usable_image_count": 24,
+      "sale_price": 16000,
+      "sale_type": "sold",
+      "page_title": "2014 Chrysler 300 SRT"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KVGPLEGx/2013-chrysler-300-srt8",
+    "title": "2013 Chrysler 300 Srt8",
+    "text": "Bid to $10,100",
+    "titleYear": 2013,
+    "score": 88,
+    "sale_price": 10100,
+    "sale_type": "sold",
+    "page_title": "2013 Chrysler 300 SRT8",
+    "year": 2013,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6beef371a1052802041536173621cc24/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6beef371a1052802041536173621cc24/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Chrysler 300 SRT8",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6beef371a1052802041536173621cc24/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVGPLEGx/2013-chrysler-300-srt8",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6beef371a1052802041536173621cc24/manifest/video.m3u8",
+      "auction_title": "2013 Chrysler 300 SRT8",
+      "auction_year": 2013,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cafb65dc850119071410a2363d17d86d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cafb65dc850119071410a2363d17d86d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Chrysler 300 SRT8",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cafb65dc850119071410a2363d17d86d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVGPLEGx/2013-chrysler-300-srt8",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cafb65dc850119071410a2363d17d86d/manifest/video.m3u8",
+      "auction_title": "2013 Chrysler 300 SRT8",
+      "auction_year": 2013,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0c663ddf795db51f94364d1f92e9fca/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0c663ddf795db51f94364d1f92e9fca/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Chrysler 300 SRT8",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0c663ddf795db51f94364d1f92e9fca/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVGPLEGx/2013-chrysler-300-srt8",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0c663ddf795db51f94364d1f92e9fca/manifest/video.m3u8",
+      "auction_title": "2013 Chrysler 300 SRT8",
+      "auction_year": 2013,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62113cc80f97c45386ba40de1ca7e39e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62113cc80f97c45386ba40de1ca7e39e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Chrysler 300 SRT8",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62113cc80f97c45386ba40de1ca7e39e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVGPLEGx/2013-chrysler-300-srt8",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62113cc80f97c45386ba40de1ca7e39e/manifest/video.m3u8",
+      "auction_title": "2013 Chrysler 300 SRT8",
+      "auction_year": 2013,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/27c1b5e49c60357968c646ef817b0301/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/27c1b5e49c60357968c646ef817b0301/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Chrysler 300 SRT8",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/27c1b5e49c60357968c646ef817b0301/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVGPLEGx/2013-chrysler-300-srt8",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/27c1b5e49c60357968c646ef817b0301/manifest/video.m3u8",
+      "auction_title": "2013 Chrysler 300 SRT8",
+      "auction_year": 2013,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/92732f45e9222988e1d92443230d616d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/92732f45e9222988e1d92443230d616d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Chrysler 300 SRT8",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/92732f45e9222988e1d92443230d616d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVGPLEGx/2013-chrysler-300-srt8",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/92732f45e9222988e1d92443230d616d/manifest/video.m3u8",
+      "auction_title": "2013 Chrysler 300 SRT8",
+      "auction_year": 2013,
+      "search_score": 88
+    }
+  ]
+}

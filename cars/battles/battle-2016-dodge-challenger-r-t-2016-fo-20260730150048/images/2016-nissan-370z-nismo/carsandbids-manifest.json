@@ -1,0 +1,392 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-30T15:32:54.785Z",
+  "query": "Nissan 370Z Nismo",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/nissan/370z?start_year=2009&end_year=2020&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3zWy1a74/2020-nissan-370z-nismo-coupe",
+      "title": "2020 Nissan 370z Nismo Coupe",
+      "text": "Bid to $39,260",
+      "titleYear": 2020,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KVbjzj6L/2019-nissan-370z-nismo-coupe",
+      "title": "2019 Nissan 370z Nismo Coupe",
+      "text": "Sold for $33,750",
+      "titleYear": 2019,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yGkoO5p/2016-nissan-370z-nismo-coupe",
+      "title": "2016 Nissan 370z Nismo Coupe",
+      "text": "Sold for $32,000",
+      "titleYear": 2016,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNA2qlkk/2018-nissan-370z-nismo-coupe",
+      "title": "2018 Nissan 370z Nismo Coupe",
+      "text": "Bid to $32,000",
+      "titleYear": 2018,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV6wxaYQ/2018-nissan-370z-nismo-coupe",
+      "title": "2018 Nissan 370z Nismo Coupe",
+      "text": "Sold for $31,000",
+      "titleYear": 2018,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3oOzay4g/2015-nissan-370z-nismo-coupe",
+      "title": "2015 Nissan 370z Nismo Coupe",
+      "text": "Sold for $30,400",
+      "titleYear": 2015,
+      "score": 88
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3zWy1a74/2020-nissan-370z-nismo-coupe",
+      "title": "2020 Nissan 370z Nismo Coupe",
+      "text": "Bid to $39,260",
+      "titleYear": 2020,
+      "score": 88,
+      "usable_image_count": 20,
+      "sale_price": 39260,
+      "sale_type": "sold",
+      "page_title": "2020 Nissan 370Z NISMO Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KVbjzj6L/2019-nissan-370z-nismo-coupe",
+      "title": "2019 Nissan 370z Nismo Coupe",
+      "text": "Sold for $33,750",
+      "titleYear": 2019,
+      "score": 88,
+      "usable_image_count": 13,
+      "sale_price": 33750,
+      "sale_type": "sold",
+      "page_title": "2019 Nissan 370Z NISMO Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yGkoO5p/2016-nissan-370z-nismo-coupe",
+      "title": "2016 Nissan 370z Nismo Coupe",
+      "text": "Sold for $32,000",
+      "titleYear": 2016,
+      "score": 88,
+      "usable_image_count": 20,
+      "sale_price": 32000,
+      "sale_type": "sold",
+      "page_title": "2016 Nissan 370Z NISMO Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNA2qlkk/2018-nissan-370z-nismo-coupe",
+      "title": "2018 Nissan 370z Nismo Coupe",
+      "text": "Bid to $32,000",
+      "titleYear": 2018,
+      "score": 88,
+      "usable_image_count": 32,
+      "sale_price": 32000,
+      "sale_type": "sold",
+      "page_title": "2018 Nissan 370Z NISMO Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rNA2qlkk/2018-nissan-370z-nismo-coupe",
+    "title": "2018 Nissan 370z Nismo Coupe",
+    "text": "Bid to $32,000",
+    "titleYear": 2018,
+    "score": 88,
+    "sale_price": 32000,
+    "sale_type": "sold",
+    "page_title": "2018 Nissan 370Z NISMO Coupe",
+    "year": 2018,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/KYEoB1jx.icSgfBo9Z-(edit).jpg?t=163968244012",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Nissan 370Z NISMO Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 199066
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/49d44cb9184451257fe53278ba3b8c32f12775da/photos/CWxK9kLpS.jpg",
+      "labels": [
+        "detail",
+        "exterior"
+      ],
+      "error": "Too small: 9874 bytes"
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/KYEoB1jx.vd5LXvGuu-(edit).jpg?t=163968219523",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Nissan 370Z NISMO Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 313800
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/KYEoB1jx.QTo9ofbzD-(edit).jpg?t=163968166932",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Nissan 370Z NISMO Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 151193
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/KYEoB1jx.neoaDtCyf-(edit).jpg?t=163968251260",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Nissan 370Z NISMO Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 115208
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/KYEoB1jx.4-j4suJ3--(edit).jpg?t=163968160500",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Nissan 370Z NISMO Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 123529
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/KYEoB1jx.OuHs2lRiV-(edit).jpg?t=163968236829",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Nissan 370Z NISMO Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 245391
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/KYEoB1jx.-Heyj0AEU-(edit).jpg?t=163968211066",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Nissan 370Z NISMO Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 178599
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 7,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "nissan",
+        "detected_model": "370z",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "Nissan badge",
+          "370Z graphics",
+          "bodywork design characteristic of the 370Z"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "370Z",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "Nissan badge",
+          "370Z side graphics",
+          "Nismo front bumper"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "370Z",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "Nismo badging on the side",
+          "Distinctive Z design language",
+          "Body proportions consistent with 370Z"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "side"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "370Z",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "interior design",
+          "Nismo floor mats",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "nissan",
+        "detected_model": "370z",
+        "detected_generation_or_year": "2009-2020",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "distinctive Nismo seats",
+          "Nismo floor mat",
+          "cockpit layout matches 370Z"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "nissan",
+        "detected_model": "370Z",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "interior design",
+          "Nismo badge",
+          "gear shifter"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "370Z",
+        "detected_generation_or_year": "2009-2020",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "Nismo badge",
+          "370Z gauges"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

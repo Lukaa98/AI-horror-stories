@@ -1,0 +1,209 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chrysler",
+      "detected_model": "300",
+      "detected_generation_or_year": "2016",
+      "detected_variant_or_engine": "SRT8",
+      "visible_match_evidence": [
+        "Chrysler badge",
+        "distinctive grille",
+        "body shape"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chrysler",
+      "detected_model": "300",
+      "detected_generation_or_year": "2015-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinctive front grille",
+        "headlight design",
+        "overall body proportions"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chrysler",
+      "detected_model": "300",
+      "detected_generation_or_year": "2011-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "body shape",
+        "side profile",
+        "design features"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chrysler",
+      "detected_model": "300",
+      "detected_generation_or_year": "2016",
+      "detected_variant_or_engine": "SRT8",
+      "visible_match_evidence": [
+        "Rear badge shows SR8",
+        "Chrysler 300 body style",
+        "Generation-specific bodywork"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chrysler",
+      "detected_model": "300",
+      "detected_generation_or_year": "2011-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Chrysler logo on steering wheel",
+        "Interior design consistent with Chrysler 300",
+        "Dashboard layout matches known Chrysler 300 designs"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chrysler",
+      "detected_model": "300",
+      "detected_generation_or_year": "2016",
+      "detected_variant_or_engine": "SRT8",
+      "visible_match_evidence": [
+        "SRT badge on seat",
+        "interior design matches Chrysler 300 SRT8"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 0,
+      "variant_match_confidence": 0,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 4,
+      "target_match_confidence": 0,
+      "reject": true,
+      "reason": "Not the target vehicle and lacks identifiable features.",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chrysler",
+      "detected_model": "300",
+      "detected_generation_or_year": "2011-2023",
+      "detected_variant_or_engine": "SRT8",
+      "visible_match_evidence": [
+        "SRT8 badge",
+        "instrument cluster design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 9,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}

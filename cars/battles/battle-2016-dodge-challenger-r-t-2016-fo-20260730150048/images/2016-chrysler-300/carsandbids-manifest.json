@@ -1,0 +1,409 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-30T15:47:55.535Z",
+  "query": "Chrysler 300",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/chrysler/300?start_year=2011&end_year=2023&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3BpaLJdX/2023-chrysler-300c",
+      "title": "2023 Chrysler 300c",
+      "text": "Bid to $47,350",
+      "titleYear": 2023,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vpQ2Wjk/2023-chrysler-300c",
+      "title": "2023 Chrysler 300c",
+      "text": "Bid to $42,500",
+      "titleYear": 2023,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMZzXa04/2013-chrysler-300-srt8",
+      "title": "2013 Chrysler 300 Srt8",
+      "text": "Sold for $23,250",
+      "titleYear": 2013,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98VRNj22/2012-chrysler-300c-srt8",
+      "title": "2012 Chrysler 300c Srt8",
+      "text": "Bid to $22,000 (Sold After)",
+      "titleYear": 2012,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3qJlyjYE/2014-chrysler-300-srt",
+      "title": "2014 Chrysler 300 Srt",
+      "text": "Bid to $16,000",
+      "titleYear": 2014,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmAqEeZY/2011-chrysler-300c",
+      "title": "2011 Chrysler 300c",
+      "text": "Bid to $15,015",
+      "titleYear": 2011,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3BpaLJdX/2023-chrysler-300c",
+      "title": "2023 Chrysler 300c",
+      "text": "Bid to $47,350",
+      "titleYear": 2023,
+      "score": 70,
+      "usable_image_count": 23,
+      "sale_price": 47350,
+      "sale_type": "bid_to",
+      "page_title": "2023 Chrysler 300C"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vpQ2Wjk/2023-chrysler-300c",
+      "title": "2023 Chrysler 300c",
+      "text": "Bid to $42,500",
+      "titleYear": 2023,
+      "score": 70,
+      "usable_image_count": 25,
+      "sale_price": 42500,
+      "sale_type": "bid_to",
+      "page_title": "2023 Chrysler 300C"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMZzXa04/2013-chrysler-300-srt8",
+      "title": "2013 Chrysler 300 Srt8",
+      "text": "Sold for $23,250",
+      "titleYear": 2013,
+      "score": 70,
+      "usable_image_count": 17,
+      "sale_price": 23250,
+      "sale_type": "sold",
+      "page_title": "2013 Chrysler 300 SRT8"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98VRNj22/2012-chrysler-300c-srt8",
+      "title": "2012 Chrysler 300c Srt8",
+      "text": "Bid to $22,000 (Sold After)",
+      "titleYear": 2012,
+      "score": 70,
+      "usable_image_count": 26,
+      "sale_price": 22000,
+      "sale_type": "sold",
+      "page_title": "2012 Chrysler 300C SRT8"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/98VRNj22/2012-chrysler-300c-srt8",
+    "title": "2012 Chrysler 300c Srt8",
+    "text": "Bid to $22,000 (Sold After)",
+    "titleYear": 2012,
+    "score": 70,
+    "sale_price": 22000,
+    "sale_type": "sold",
+    "page_title": "2012 Chrysler 300C SRT8",
+    "year": 2012,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/9WLOMA2q.PnzvnkmTI-(edit).jpg?t=163761983745",
+      "labels": [
+        "interior"
+      ],
+      "section": "2012 Chrysler 300C SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 263075
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/9WLOMA2q.D5KBc1OZh-(edit).jpg?t=163761923398",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2012 Chrysler 300C SRT8",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 323521
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/9WLOMA2q.vFzja_-Eh-(edit).jpg?t=163768652037",
+      "labels": [
+        "interior"
+      ],
+      "section": "2012 Chrysler 300C SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 223837
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/9WLOMA2q.KMt0NjlSf-(edit).jpg?t=163780284730",
+      "labels": [
+        "interior"
+      ],
+      "section": "2012 Chrysler 300C SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 246937
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/9WLOMA2q.5cmoy5mNO-(edit).jpg?t=163761642064",
+      "labels": [
+        "interior"
+      ],
+      "section": "2012 Chrysler 300C SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 213086
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/9WLOMA2q.jyf4xa8Jd-(edit).jpg?t=163761963868",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2012 Chrysler 300C SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 302865
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/9WLOMA2q.NDMOR1M1E-(edit).jpg?t=163761909879",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2012 Chrysler 300C SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 331519
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/9WLOMA2q._62e7tVUa-(edit).jpg?t=163761971330",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2012 Chrysler 300C SRT8",
+      "width": 542,
+      "height": 361,
+      "bytes": 312728
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chrysler",
+        "detected_model": "300",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive front grille",
+          "LED daytime running lights",
+          "overall body shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chrysler",
+        "detected_model": "300",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinct grille",
+          "headlight shape",
+          "overall proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "N/A",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chrysler",
+        "detected_model": "300",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork shape",
+          "proportions",
+          "fender and headlight design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chrysler",
+        "detected_model": "300",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "SRT",
+        "visible_match_evidence": [
+          "rear design",
+          "SRT badge",
+          "taillights"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chrysler",
+        "detected_model": "300",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Chrysler logo on steering wheel",
+          "Interior design matches Chrysler 300"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chrysler",
+        "detected_model": "300",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "SRT",
+        "visible_match_evidence": [
+          "SRT seats",
+          "interior design characteristic to 300"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not a valid target vehicle image.",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 4,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Interior shot does not show the exterior of the target vehicle; insufficient evidence for identification.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
