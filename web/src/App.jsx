@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.44";
+const UI_VERSION = "V10.45";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -210,6 +210,77 @@ async function dispatchWorkflow({ owner, repo, branch, token, workflow, inputs }
     const body = await res.text();
     throw new Error(`Dispatch failed (${res.status}): ${body}`);
   }
+}
+
+const RIVAL_SUGGESTIONS_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  required: ["rivals"],
+  properties: {
+    rivals: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["make", "model", "trim", "year", "reason"],
+        properties: {
+          make: { type: "string" },
+          model: { type: "string" },
+          trim: { type: "string" },
+          year: { type: "string" },
+          reason: { type: "string" },
+        },
+      },
+    },
+  },
+};
+
+function extractResponseText(data) {
+  if (typeof data.output_text === "string") return data.output_text;
+  const parts = [];
+  for (const item of data.output || []) {
+    for (const content of item.content || []) {
+      if (content.type === "output_text" && content.text) parts.push(content.text);
+    }
+  }
+  return parts.join("");
+}
+
+// Direct browser -> OpenAI call, so suggestions come back in a couple
+// seconds instead of paying for a GitHub Actions runner cold-start just to
+// make one API call. Requires the user's own OpenAI key (stored the same
+// way the GitHub token is, in localStorage) rather than the repo secret.
+async function fetchRivalsDirect({ apiKey, make, model, trim, year, count }) {
+  const baseLabel = `${year} ${make} ${model} ${trim}`.trim();
+  const prompt = (
+    `Suggest ${count} rival/competitor cars for a head-to-head cold-start-sound comparison video ` +
+    `against the ${baseLabel}. Pick cars from roughly the same era (within a few model years), a ` +
+    "similar price bracket, and a similar performance/segment -- genuine rivals a car enthusiast " +
+    "would cross-shop or compare, not random unrelated cars. Prefer cars with well-known, distinct " +
+    "exhaust notes or cold-start sounds, and avoid suggesting the same make and model as the base " +
+    "car. For each rival return make, model, trim (the best-known trim/variant for that " +
+    "price/performance tier, empty string if not applicable), year (a specific model year, not a " +
+    "range), and a one-sentence reason it is a fair rival to the base car."
+  );
+  const res = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      input: prompt,
+      text: { format: { type: "json_schema", name: "rival_suggestions", strict: true, schema: RIVAL_SUGGESTIONS_SCHEMA } },
+    }),
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`OpenAI request failed (${res.status}): ${body.slice(0, 300)}`);
+  }
+  const data = await res.json();
+  const parsed = JSON.parse(extractResponseText(data));
+  return (parsed.rivals || []).slice(0, count);
 }
 
 async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 6000, timeoutMs }) {
@@ -445,6 +516,7 @@ export default function App() {
     owner: DEFAULT_OWNER,
     repo: DEFAULT_REPO,
     branch: DEFAULT_BRANCH,
+    openaiKey: "",
     ...loadSettings(),
   }));
   const [request, setRequest] = useState("");
@@ -697,11 +769,37 @@ export default function App() {
   const baseCarValid = Boolean(baseCar.make && baseCar.model && baseCar.year);
 
   async function handleSuggestRivals() {
-    if (!repoOk || !baseCarValid) return;
+    if (!baseCarValid) return;
     setRivalSuggestError(null);
     setRivalSuggestLoading(true);
     setRivalSuggestions(null);
     setAddedRivalIndexes(new Set());
+    const count = Math.max(1, MAX_BATTLE_CARS - 1);
+
+    if (settings.openaiKey) {
+      try {
+        const rivals = await fetchRivalsDirect({
+          apiKey: settings.openaiKey,
+          make: baseCar.make,
+          model: baseCar.model,
+          trim: baseCar.trim,
+          year: baseCar.year,
+          count,
+        });
+        setRivalSuggestions(rivals);
+      } catch (err) {
+        setRivalSuggestError(String(err.message || err));
+      } finally {
+        setRivalSuggestLoading(false);
+      }
+      return;
+    }
+
+    if (!repoOk) {
+      setRivalSuggestError("Fill in your GitHub token + repo settings, or add an OpenAI API key for instant suggestions.");
+      setRivalSuggestLoading(false);
+      return;
+    }
     const id = makeDraftId(`rivals-${baseCar.year}-${baseCar.make}-${baseCar.model}`);
     abortRef.current = new AbortController();
     try {
@@ -720,7 +818,7 @@ export default function App() {
           base_model: baseCar.model,
           base_trim: baseCar.trim,
           base_year: baseCar.year,
-          rival_count: String(Math.max(1, MAX_BATTLE_CARS - 1)),
+          rival_count: String(count),
         },
       });
       const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
@@ -1297,10 +1395,25 @@ export default function App() {
             Branch
             <input value={settings.branch} onChange={(e) => setSettings({ ...settings, branch: e.target.value })} />
           </label>
+          <label>
+            OpenAI API Key (optional)
+            <input
+              type="password"
+              placeholder="sk-..."
+              value={settings.openaiKey}
+              onChange={(e) => setSettings({ ...settings, openaiKey: e.target.value })}
+            />
+          </label>
         </div>
         <p className="hint">
           Token needs "repo" + "workflow" scope (fine-grained: Contents + Actions read/write on this repo only).
           Stored only in this browser&apos;s localStorage.
+        </p>
+        <p className="hint">
+          The OpenAI key is only used for "Suggest rivals" in Startup Sound Battle, called directly from this
+          browser so suggestions come back in seconds instead of waiting on a GitHub Actions run. It is stored in
+          this browser&apos;s localStorage like the token above -- leave it blank to fall back to the (slower)
+          workflow-based suggestion instead.
         </p>
       </details>
 
@@ -1442,7 +1555,7 @@ export default function App() {
                   type="button"
                   className="secondary"
                   onClick={handleSuggestRivals}
-                  disabled={!repoOk || !baseCarValid || rivalSuggestLoading || stage === "researching" || stage === "generating"}
+                  disabled={(!repoOk && !settings.openaiKey) || !baseCarValid || rivalSuggestLoading || stage === "researching" || stage === "generating"}
                 >
                   {rivalSuggestLoading ? "Asking AI for rivals..." : "Suggest rivals for car #1"}
                 </button>
