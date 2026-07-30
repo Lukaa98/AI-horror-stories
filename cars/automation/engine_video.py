@@ -414,12 +414,19 @@ def _verify_frames(contact_sheet, entry):
     return result
 
 
-def _detect_natural_duration(wav_path, onset, min_duration, max_duration):
-    """How long the engine event stays audibly elevated after onset.
+def _detect_natural_duration(wav_path, onset, min_duration, max_duration, quiet_hold_seconds=0.8):
+    """How long the engine event -- including any rev shortly after the
+    initial idle settles -- stays audibly active after onset.
 
     Used by exterior-only "battle" clips, which should run exactly as long as
     the real startup/idle lasts (a 4s event stays 4s, a 6s one stays 6s)
-    instead of always being cut to one fixed length.
+    instead of always being cut to one fixed length. Cutting at the very
+    first moment energy dips near baseline would chop off a rev that
+    follows a second or two after the cold-start idle settles, since that
+    dip is often just the trough between the two, not the end of the clip -
+    only a *sustained* quiet stretch (quiet_hold_seconds) confirms the
+    event actually ended, so a rev inside the max_duration budget rides
+    through instead of getting cut off.
     """
     with wave.open(str(wav_path), "rb") as stream:
         rate = stream.getframerate()
@@ -433,16 +440,27 @@ def _detect_natural_duration(wav_path, onset, min_duration, max_duration):
     threshold = max(baseline_rms * 1.4, 1.0)
     window = max(1, rate // 5)
     start_sample = int(onset * rate)
+    quiet_run = 0.0
     for offset in range(start_sample, len(values), window):
         chunk = values[offset:offset + window]
         if not chunk:
             break
         elapsed = (offset - start_sample) / rate
+        if elapsed >= max_duration:
+            break
+        chunk_rms = math.sqrt(sum(v * v for v in chunk) / len(chunk))
         if elapsed < min_duration:
             continue
-        chunk_rms = math.sqrt(sum(v * v for v in chunk) / len(chunk))
         if chunk_rms <= threshold:
-            return max(min_duration, min(max_duration, elapsed))
+            quiet_run += len(chunk) / rate
+            if quiet_run >= quiet_hold_seconds:
+                # Cut right after the quiet stretch that confirmed the event
+                # is over, not at the moment it merely dipped -- that's what
+                # lets a rev inside this same quiet-then-loud-then-quiet
+                # pattern ride through instead of being chopped mid-event.
+                return max(min_duration, min(max_duration, elapsed + len(chunk) / rate))
+        else:
+            quiet_run = 0.0
     return max(min_duration, min(max_duration, max(0.0, total_seconds - onset)))
 
 

@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.46";
+const UI_VERSION = "V10.47";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1321,7 +1321,20 @@ export default function App() {
                               </p>
                             </article>
                           ) : (
-                            <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>
+                            <>
+                              <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>
+                              {(car.listings_considered || []).length > 0 && (
+                                <p className="hint">
+                                  Listings checked:{" "}
+                                  {car.listings_considered.map((url, j) => (
+                                    <span key={url}>
+                                      {j > 0 && ", "}
+                                      <a href={url} target="_blank" rel="noreferrer">#{j + 1}</a>
+                                    </span>
+                                  ))}
+                                </p>
+                              )}
+                            </>
                           )}
                         </div>
                       ))}
@@ -1729,7 +1742,20 @@ export default function App() {
                     </p>
                   </article>
                 ) : (
-                  <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>
+                  <>
+                    <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>
+                    {(car.listings_considered || []).length > 0 && (
+                      <p className="hint">
+                        Listings checked:{" "}
+                        {car.listings_considered.map((url, j) => (
+                          <span key={url}>
+                            {j > 0 && ", "}
+                            <a href={url} target="_blank" rel="noreferrer">#{j + 1}</a>
+                          </span>
+                        ))}
+                      </p>
+                    )}
+                  </>
                 )}
               </div>
             ))}

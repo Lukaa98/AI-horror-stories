@@ -137,14 +137,29 @@ def build_search_variant(car_entry, trim_variant):
     }
 
 
-def gather_exterior_photos(car_entry, images_dir, limit=PHOTOS_PER_CAR):
+def gather_exterior_photos(car_entry, images_dir, limit=PHOTOS_PER_CAR, prefer_section=None):
+    """Fetch exterior photos, preferring the same listing (`prefer_section`,
+    the winning clip's auction title) so the photos shown for a car depict
+    the same physical vehicle as its engine clip instead of two different
+    auctions. Falls back to other listings' photos if that one doesn't have
+    enough clean exterior shots on its own."""
     images, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, car_entry)
     reviews = (manifest.get("ai_review") or {}).get("reviews", [])
     by_name = {review.get("path"): review for review in reviews}
+    sections = {item.get("path"): item.get("section") for item in manifest.get("downloaded_images", [])}
     exterior = [
         relative for relative in images
         if by_name.get(Path(relative).name, {}).get("shot_type", "exterior") in EXTERIOR_SHOT_TYPES
-    ][:limit]
+    ]
+    if prefer_section:
+        needle = str(prefer_section).strip().lower()
+
+        def same_listing(relative):
+            section = str(sections.get(Path(relative).name, "")).strip().lower()
+            return bool(section) and bool(needle) and (needle in section or section in needle)
+
+        exterior = [r for r in exterior if same_listing(r)] + [r for r in exterior if not same_listing(r)]
+    exterior = exterior[:limit]
     for relative in exterior:
         blur_license_plates(images_dir.parent / relative)
     return exterior
@@ -152,8 +167,9 @@ def gather_exterior_photos(car_entry, images_dir, limit=PHOTOS_PER_CAR):
 
 def build_startup_clip(car_entry, images_dir):
     videos = discover_entry_engine_videos(SCRAPER_DIR, images_dir, car_entry)
+    listing_urls = sorted({v["auction_url"] for v in videos if v.get("auction_url")})
     if not videos:
-        return {"approved": False, "error": "No listing videos discovered for this car/generation"}
+        return {"approved": False, "error": "No listing videos discovered for this car/generation", "listing_urls": []}
     pseudo_entry = SimpleNamespace(
         rank=slugify(car_entry["name"]),
         name=car_entry["name"],
@@ -170,7 +186,9 @@ def build_startup_clip(car_entry, images_dir):
         max_duration=MAX_CLIP_SECONDS,
         max_thumbnail_classifications=BATTLE_MAX_THUMBNAIL_CLASSIFICATIONS,
     )
-    return result or {"approved": False, "error": "No usable engine video found for this car/generation"}
+    result = result or {"approved": False, "error": "No usable engine video found for this car/generation"}
+    result["listing_urls"] = listing_urls
+    return result
 
 
 def process_car(car_entry, images_dir):
@@ -178,16 +196,27 @@ def process_car(car_entry, images_dir):
     ladder = trim_fallback_ladder(requested_trim or "")
     photos, clip_result, matched_trim = [], {"approved": False}, ladder[-1]
     attempted_clip_paths = []
+    all_listing_urls = set()
     for trim_variant in ladder:
         variant = build_search_variant(car_entry, trim_variant)
         rung_started = time.monotonic()
         print(f"[battle] Car #{car_entry['index']}: trying '{variant['search_hint']}' ({variant['years']})")
-        variant_photos = gather_exterior_photos(variant, images_dir)
+        # Find the clip first, then scope the photo search to the same
+        # listing it came from -- otherwise photos and video can end up
+        # showing two different physical cars. Skips the photo scrape
+        # entirely when no clip is approved, since that rung is going to be
+        # discarded anyway.
         variant_clip = build_startup_clip(variant, images_dir)
+        all_listing_urls.update(variant_clip.get("listing_urls") or [])
+        variant_photos = []
+        if variant_clip.get("approved"):
+            source = variant_clip.get("source") or {}
+            prefer_section = source.get("auction_title") or source.get("title")
+            variant_photos = gather_exterior_photos(variant, images_dir, prefer_section=prefer_section)
         rung_seconds = round(time.monotonic() - rung_started, 1)
         print(
             f"[battle] Car #{car_entry['index']}: '{variant['search_hint']}' took {rung_seconds}s "
-            f"-> {len(variant_photos)} photos, clip approved={bool(variant_clip.get('approved'))}"
+            f"-> clip approved={bool(variant_clip.get('approved'))}, {len(variant_photos)} photos"
         )
         if variant_clip.get("path"):
             attempted_clip_paths.append(Path(variant_clip["path"]))
@@ -224,6 +253,7 @@ def process_car(car_entry, images_dir):
         "rev_detected": bool(clip_result.get("rev_detected")),
         "rev_events": clip_result.get("rev_events") or [],
         "source": clip_result.get("source"),
+        "listings_considered": sorted(all_listing_urls),
     }
     if final_path:
         relative_clip = Path(final_path).relative_to(images_dir.parent)
