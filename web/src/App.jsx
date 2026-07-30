@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.40";
+const UI_VERSION = "V10.41";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -38,54 +38,43 @@ const WORKFLOW_OPTIONS = [
 function makeBattleCarRow() {
   return {
     make: "", model: "", trim: "", year: "",
-    models: [], trims: [], modelsLoading: false, trimsLoading: false, fieldError: null,
+    models: [], modelsLoading: false, fieldError: null,
   };
 }
 
 const VPIC_BASE = "https://vpic.nhtsa.dot.gov/api/vehicles";
-const CARQUERY_BASE = "https://www.carqueryapi.com/api/0.3/";
+
+// Default Make filter: NHTSA's full car-make list includes hundreds of
+// obscure, foreign-market-only, or kit-car manufacturers that just add noise
+// for this project. This is a filter over live API data, not a source of
+// truth -- "Show all manufacturers" bypasses it entirely for anything not on
+// this list.
+const NORTH_AMERICA_MAKES = new Set([
+  "ACURA", "ALFA ROMEO", "AMC", "ASTON MARTIN", "AUDI", "BENTLEY", "BMW",
+  "BUICK", "CADILLAC", "CHEVROLET", "CHRYSLER", "DATSUN", "DODGE", "EAGLE",
+  "FERRARI", "FIAT", "FORD", "GENESIS", "GMC", "HONDA", "HUMMER", "HYUNDAI",
+  "INFINITI", "JAGUAR", "JEEP", "KIA", "LAMBORGHINI", "LAND ROVER", "LEXUS",
+  "LINCOLN", "LOTUS", "LUCID", "MASERATI", "MAZDA", "MCLAREN",
+  "MERCEDES-BENZ", "MERCURY", "MINI", "MITSUBISHI", "NISSAN", "OLDSMOBILE",
+  "PLYMOUTH", "POLESTAR", "PONTIAC", "PORSCHE", "RAM", "RIVIAN",
+  "ROLLS-ROYCE", "SAAB", "SATURN", "SCION", "SUBARU", "TESLA", "TOYOTA",
+  "VOLKSWAGEN", "VOLVO",
+]);
 
 async function fetchJsonLenient(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Request failed (${res.status})`);
-  const text = await res.text();
-  try {
-    return JSON.parse(text);
-  } catch {
-    // CarQuery sometimes wraps its JSON in a JSONP-style callback comment.
-    const match = text.match(/\((.*)\)/s);
-    if (match) return JSON.parse(match[1]);
-    throw new Error("Unexpected response format");
-  }
+  return res.json();
 }
 
 async function fetchCarMakes() {
   const data = await fetchJsonLenient(`${VPIC_BASE}/GetMakesForVehicleType/car?format=json`);
-  return Array.from(new Set((data.Results || []).map((item) => item.MakeName))).sort();
+  return Array.from(new Set((data.Results || []).map((item) => item.MakeName))).filter(Boolean).sort();
 }
 
 async function fetchCarModels(make) {
   const data = await fetchJsonLenient(`${VPIC_BASE}/GetModelsForMake/${encodeURIComponent(make)}?format=json`);
   return Array.from(new Set((data.Results || []).map((item) => item.Model_Name))).filter(Boolean).sort();
-}
-
-async function fetchCarTrims(make, model) {
-  const data = await fetchJsonLenient(
-    `${CARQUERY_BASE}?cmd=getTrims&make=${encodeURIComponent(make)}&model=${encodeURIComponent(model)}`
-  );
-  const rows = data.Trims || [];
-  const byTrim = new Map();
-  for (const row of rows) {
-    const trimName = String(row.model_trim || "").trim();
-    const yearValue = String(row.model_year || "").trim();
-    const key = trimName || "(base model)";
-    if (!byTrim.has(key)) byTrim.set(key, new Set());
-    if (yearValue) byTrim.get(key).add(yearValue);
-  }
-  return Array.from(byTrim.entries()).map(([trim, years]) => ({
-    trim,
-    years: Array.from(years).sort(),
-  }));
 }
 
 function loadSettings() {
@@ -417,6 +406,7 @@ export default function App() {
   const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
   const [carMakes, setCarMakes] = useState([]);
   const [carMakesError, setCarMakesError] = useState(null);
+  const [showAllMakes, setShowAllMakes] = useState(false);
   const [battleId, setBattleId] = useState(null);
   const [battle, setBattle] = useState(null);
   const [battleVideoUrl, setBattleVideoUrl] = useState(null);
@@ -626,7 +616,7 @@ export default function App() {
   async function handleBattleMakeChange(index, make) {
     setBattleCars((prev) => prev.map((car, i) => (
       i === index
-        ? { ...car, make, model: "", trim: "", year: "", models: [], trims: [], modelsLoading: !!make, fieldError: null }
+        ? { ...car, make, model: "", trim: "", year: "", models: [], modelsLoading: !!make, fieldError: null }
         : car
     )));
     if (!make) return;
@@ -642,35 +632,7 @@ export default function App() {
     }
   }
 
-  async function handleBattleModelChange(index, model) {
-    setBattleCars((prev) => prev.map((car, i) => (
-      i === index ? { ...car, model, trim: "", year: "", trims: [], trimsLoading: !!model, fieldError: null } : car
-    )));
-    if (!model) return;
-    const make = battleCars[index].make;
-    try {
-      const trims = await fetchCarTrims(make, model);
-      setBattleCars((prev) => prev.map((car, i) => (
-        i === index && car.model === model ? { ...car, trims, trimsLoading: false } : car
-      )));
-    } catch (err) {
-      setBattleCars((prev) => prev.map((car, i) => (
-        i === index ? { ...car, trimsLoading: false, fieldError: `Could not load trims: ${err.message}` } : car
-      )));
-    }
-  }
-
-  function handleBattleTrimChange(index, trim) {
-    setBattleCars((prev) => prev.map((car, i) => (i === index ? { ...car, trim, year: "" } : car)));
-  }
-
-  function battleYearOptions(car) {
-    if (car.trim) {
-      const match = car.trims.find((item) => item.trim === car.trim);
-      if (match && match.years.length) return match.years;
-    }
-    return YEAR_OPTIONS;
-  }
+  const visibleMakes = showAllMakes ? carMakes : carMakes.filter((name) => NORTH_AMERICA_MAKES.has(name.toUpperCase()));
 
   function addBattleCar() {
     setBattleCars((prev) => (prev.length >= MAX_BATTLE_CARS ? prev : [...prev, makeBattleCarRow()]));
@@ -1183,6 +1145,16 @@ export default function App() {
                   entry below.
                 </p>
               )}
+              {!carMakesError && (
+                <label className="custom-toggle">
+                  <input
+                    type="checkbox"
+                    checked={showAllMakes}
+                    onChange={(e) => setShowAllMakes(e.target.checked)}
+                  />
+                  Show all manufacturers (worldwide list, not just North America)
+                </label>
+              )}
               {battleCars.map((car, index) => {
                 const disabled = stage === "researching" || stage === "generating";
                 return (
@@ -1203,7 +1175,7 @@ export default function App() {
                           disabled={disabled || carMakes.length === 0}
                         >
                           <option value="">{carMakes.length ? "Choose make" : "Loading makes..."}</option>
-                          {carMakes.map((name) => <option key={name} value={name}>{name}</option>)}
+                          {visibleMakes.map((name) => <option key={name} value={name}>{name}</option>)}
                         </select>
                       )}
                     </label>
@@ -1229,23 +1201,12 @@ export default function App() {
                     </label>
                     <label>
                       Trim
-                      {carMakesError ? (
-                        <input
-                          value={car.trim}
-                          onChange={(e) => updateBattleCar(index, "trim", e.target.value)}
-                          placeholder="GT350 (optional)"
-                          disabled={disabled}
-                        />
-                      ) : (
-                        <select
-                          value={car.trim}
-                          onChange={(e) => handleBattleTrimChange(index, e.target.value)}
-                          disabled={disabled || !car.model || car.trimsLoading}
-                        >
-                          <option value="">{car.trimsLoading ? "Loading trims..." : "Any / base"}</option>
-                          {car.trims.map((item) => <option key={item.trim} value={item.trim}>{item.trim}</option>)}
-                        </select>
-                      )}
+                      <input
+                        value={car.trim}
+                        onChange={(e) => updateBattleCar(index, "trim", e.target.value)}
+                        placeholder="GT350 (optional)"
+                        disabled={disabled}
+                      />
                     </label>
                     <label>
                       Year
@@ -1255,7 +1216,7 @@ export default function App() {
                         disabled={disabled}
                       >
                         <option value="">Year</option>
-                        {battleYearOptions(car).map((year) => <option key={year} value={year}>{year}</option>)}
+                        {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
                       </select>
                     </label>
                     <button
@@ -1279,9 +1240,10 @@ export default function App() {
                 + Add another car
               </button>
               <p className="hint">
-                Model list comes from NHTSA's vPIC API; trims (GT350, GT500, Shelby, etc.) and their production years
-                come from CarQuery. Picking a trim narrows Year to only the years it actually existed. Cars & Bids
-                listings without an exterior-filmed cold start are skipped either way.
+                Make and Model come from NHTSA's vPIC API, filtered to common North American makes by default (toggle
+                above to see every manufacturer vPIC knows). Trim is free text (GT350, GT500, Shelby, etc.) since no
+                free API reliably covers trim-level detail. Cars & Bids listings without an exterior-filmed cold
+                start are skipped either way.
               </p>
             </div>
           ) : (
