@@ -280,10 +280,16 @@ def process_car(car_entry, images_dir):
         entry["rev_clip_path"] = None
         entry["rev_clip_duration"] = None
         entry["rev_clip_onset_seconds"] = None
-    entry["error"] = None if approved else (
-        clip_result.get("error")
-        or ("Not enough verified exterior photos found" if len(photos) < 2 else "Startup clip rejected")
-    )
+    if approved:
+        entry["error"] = None
+    elif not clip_result.get("approved"):
+        # Photos are only fetched once a clip is approved (see the loop
+        # above), so if the clip itself never got approved, that's always
+        # the real reason -- blaming "not enough photos" here would be
+        # misleading since photos were never even searched for.
+        entry["error"] = clip_result.get("error") or "No usable exterior startup clip found"
+    else:
+        entry["error"] = "Not enough verified exterior photos found for the matched listing"
     return entry
 
 

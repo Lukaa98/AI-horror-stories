@@ -236,7 +236,11 @@ def detect_secondary_event(wav_path, primary_onset, min_gap=1.5):
     """Find a second distinct audio rise (e.g. a rev after a cold-start idle).
 
     Returns None when no other rise is at least `min_gap` seconds away from
-    the primary onset, or when it is too weak to be worth surfacing.
+    the primary onset, or when it is too weak to be worth surfacing. This
+    looks both before and after the primary onset (it's used elsewhere just
+    to flag "is there another distinct event nearby at all") -- for finding
+    a rev that specifically comes *after* a long idle, see
+    detect_forward_event, which only looks forward in time.
     """
     rises = _rise_series(wav_path)
     if not rises:
@@ -244,6 +248,29 @@ def detect_secondary_event(wav_path, primary_onset, min_gap=1.5):
     candidates = [
         (index, value) for index, value in enumerate(rises)
         if abs(((index + 3) * 0.2 - 0.35) - primary_onset) >= min_gap
+    ]
+    if not candidates:
+        return None
+    best_index, best_value = max(candidates, key=lambda item: item[1])
+    if best_value <= 0:
+        return None
+    return max(0.0, (best_index + 3) * 0.2 - 0.35)
+
+
+def detect_forward_event(wav_path, after_seconds):
+    """Find the strongest audio rise strictly after `after_seconds`.
+
+    Unlike detect_secondary_event, this never looks backward in time -- a
+    noise blip before the startup (wind, footsteps, camera handling as
+    someone walks up to the car) is temporally "distant" from the onset too,
+    but it isn't a rev *after* the car started, so it must never qualify.
+    """
+    rises = _rise_series(wav_path)
+    if not rises:
+        return None
+    candidates = [
+        (index, value) for index, value in enumerate(rises)
+        if ((index + 3) * 0.2 - 0.35) >= after_seconds
     ]
     if not candidates:
         return None
@@ -387,7 +414,7 @@ def find_distant_rev_clip(source, primary_onset, primary_duration, output_path, 
     try:
         _extract_analysis_audio(source, wav_path, duration=search_seconds)
         min_gap = max(8.0, primary_duration + 3.0)
-        distant_onset = detect_secondary_event(wav_path, primary_onset, min_gap=min_gap)
+        distant_onset = detect_forward_event(wav_path, primary_onset + min_gap)
         if distant_onset is None:
             return None
         event_score = _engine_event_score(wav_path, distant_onset)
