@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.43";
+const UI_VERSION = "V10.44";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -481,6 +481,8 @@ export default function App() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [dashboardRenderingId, setDashboardRenderingId] = useState(null);
+  const dashboardAbortRef = useRef(null);
   const abortRef = useRef(null);
   const trackerIdRef = useRef(0);
 
@@ -894,6 +896,57 @@ export default function App() {
     }
   }
 
+  async function handleDashboardBattleRender(item) {
+    if (!repoOk) return;
+    const key = `${item.type}:${item.id}`;
+    setDashboardRenderingId(key);
+    setDashboardError(null);
+    dashboardAbortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-generate-from-research.yml",
+        inputs: {
+          draft_id: item.id,
+          mode: "battle",
+          tts_provider: "openai",
+          tts_voice: "onyx",
+          render_quality: "full",
+        },
+      });
+      const workflowRun = trackWorkflowRun({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-generate-from-research.yml",
+        startedAt,
+        signal: dashboardAbortRef.current.signal,
+        onUpdate: () => {},
+      });
+      const videoFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/battles/${item.id}/battle_short.mp4`,
+        signal: dashboardAbortRef.current.signal,
+        timeoutMs: BATTLE_RENDER_TIMEOUT_MS,
+      });
+      await Promise.race([videoFile, workflowRun.then(() => videoFile)]);
+      setDashboardItems((prev) => prev.map((entry) => (
+        entry.type === item.type && entry.id === item.id ? { ...entry, hasVideo: true } : entry
+      )));
+    } catch (err) {
+      setDashboardError(String(err.message || err));
+    } finally {
+      setDashboardRenderingId(null);
+    }
+  }
+
   const activeStep = stage === "idle" ? 0 : stage === "researching" ? 0 : stage === "researched" ? 1 : stage === "generating" ? 2 : stage === "done" ? 3 : 0;
 
   return (
@@ -1121,9 +1174,23 @@ export default function App() {
                     <p className="rationale">
                       Found usable exterior startup clips for {item.preview.approved_count} of {item.preview.total_count} cars.
                     </p>
-                    {item.hasVideo && (
+                    {item.hasVideo ? (
                       <div className="video-player">
                         <video controls src={dashboardRawUrl(item, "battle_short.mp4")} width="360" />
+                      </div>
+                    ) : (
+                      <div className="render-actions">
+                        <button
+                          type="button"
+                          className="generate-btn"
+                          onClick={() => handleDashboardBattleRender(item)}
+                          disabled={dashboardRenderingId === key || item.preview.approved_count < 2}
+                        >
+                          {dashboardRenderingId === key ? "Rendering..." : "Generate Full Battle Video"}
+                        </button>
+                        {item.preview.approved_count < 2 && (
+                          <p className="hint">Need at least 2 approved cars to render.</p>
+                        )}
                       </div>
                     )}
                     <div className="entries">

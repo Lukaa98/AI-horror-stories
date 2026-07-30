@@ -215,6 +215,36 @@ def process_car(car_entry, images_dir):
     return entry
 
 
+def generate_intro_question(entries):
+    """A short, category-aware on-screen question for the intro card, e.g.
+    "Which modern muscle car sounds best?" for a Mustang/Challenger/Camaro
+    battle, or "Which entry-level supercar sounds best?" for a 911/Supra/
+    GT-R one -- instead of always showing the same generic line."""
+    approved = [entry for entry in entries if entry.get("approved")] or entries
+    labels = [entry["label"] for entry in approved]
+    fallback = "Which one sounds best?"
+    if not labels:
+        return fallback
+    try:
+        from openai import OpenAI
+
+        prompt = (
+            "These cars are being compared by their cold-start/exhaust sound in a short video: "
+            + ", ".join(labels) + ". Write ONE short, punchy on-screen question (6 words or fewer "
+            "after \"Which\") asking viewers which one sounds best, naming an accurate category for "
+            "these specific cars -- e.g. \"Which modern muscle car sounds best?\", \"Which "
+            "entry-level supercar sounds best?\", \"Which JDM legend sounds best?\". If they don't "
+            "share an obvious category, use \"Which one sounds best?\". Return only the question "
+            "text, no quotes, no extra commentary."
+        )
+        response = with_openai_retry(lambda: OpenAI().responses.create(model="gpt-4o-mini", input=prompt))
+        text = response.output_text.strip().strip('"').strip()
+        return text or fallback
+    except Exception as exc:
+        print(f"[battle] Intro question generation failed: {exc}")
+        return fallback
+
+
 def main():
     parser = argparse.ArgumentParser(description="Research a startup-sound battle between 3-5 user-specified cars.")
     parser.add_argument("--cars", required=True, help="JSON array of {make, model, trim, year}")
@@ -241,10 +271,12 @@ def main():
         entries.append(process_car(car_entry, images_dir))
 
     approved_count = sum(1 for entry in entries if entry["approved"])
+    intro_question = generate_intro_question(entries)
     output = {
         "battle_id": args.battle_id,
         "cars": entries,
-        "title": "WHICH ONE SOUNDS BEST?",
+        "title": intro_question.upper(),
+        "intro_question": intro_question,
         "status": "researched",
         "approved_count": approved_count,
         "total_count": len(entries),

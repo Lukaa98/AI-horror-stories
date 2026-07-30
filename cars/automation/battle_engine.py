@@ -66,9 +66,10 @@ def _intro_frame(size, text, out_path):
     canvas.save(out_path)
 
 
-def _intro_clip(battle_dir, size):
+def _intro_clip(battle_dir, size, intro_question):
     frame_path = battle_dir / "_frames" / "intro.png"
-    _intro_frame(size, "WHICH ONE SOUNDS BEST?\nLET ME KNOW BELOW", frame_path)
+    question = (intro_question or "Which one sounds best?").rstrip("?").upper() + "?"
+    _intro_frame(size, f"{question}\nLET ME KNOW BELOW", frame_path)
     return ImageClip(str(frame_path)).set_duration(INTRO_SECONDS)
 
 
@@ -109,7 +110,7 @@ def render_battle_video(battle_dir, data, output_filename="battle_short.mp4"):
             "clip; need at least 2 to render a battle."
         )
 
-    clips = [_intro_clip(battle_dir, size)]
+    clips = [_intro_clip(battle_dir, size, data.get("intro_question"))]
     clips.extend(_car_segment(battle_dir, car, size) for car in approved_cars)
 
     video = concatenate_videoclips(clips, method="compose")
