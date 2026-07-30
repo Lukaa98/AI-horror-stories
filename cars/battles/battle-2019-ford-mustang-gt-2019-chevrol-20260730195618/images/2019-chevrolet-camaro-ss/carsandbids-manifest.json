@@ -1,0 +1,471 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-30T20:05:54.905Z",
+  "query": "Chevrolet Camaro SS",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/chevrolet/camaro?start_year=2016&end_year=2023&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KDvjlWzy/2017-chevrolet-camaro-ss",
+      "title": "2017 Chevrolet Camaro SS",
+      "text": "2017 Chevrolet Camaro SS",
+      "titleYear": 2017,
+      "score": 117
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36Mp4xkB/2019-chevrolet-camaro-ss-coupe",
+      "title": "2019 Chevrolet Camaro SS Coupe",
+      "text": "2019 Chevrolet Camaro SS Coupe",
+      "titleYear": 2019,
+      "score": 117
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3oy7vkp1/2017-chevrolet-camaro-1ss-coupe",
+      "title": "2017 Chevrolet Camaro 1ss Coupe",
+      "text": "Sold for $37,750",
+      "titleYear": 2017,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEGdNalP/2023-chevrolet-camaro-1ss-1le-yenko-sc-stage-ii-coupe",
+      "title": "2023 Chevrolet Camaro 1ss 1le Yenko Sc Stage Ii Coupe",
+      "text": "FEATURED Bid to $79,500",
+      "titleYear": 2023,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9QZP2lkd/2018-chevrolet-camaro-2ss-convertible",
+      "title": "Time Left 23:12:36 Bid $30,000",
+      "text": "Time Left 23:12:36 Bid $30,000",
+      "titleYear": 2018,
+      "score": 72
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMV6dbmZ/2017-chevrolet-camaro-1ss-coupe",
+      "title": "Time Left 4 Days Bid $3,000",
+      "text": "Time Left 4 Days Bid $3,000",
+      "titleYear": 2017,
+      "score": 72
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KDvjlWzy/2017-chevrolet-camaro-ss",
+      "title": "2017 Chevrolet Camaro SS",
+      "text": "2017 Chevrolet Camaro SS",
+      "titleYear": 2017,
+      "score": 117,
+      "usable_image_count": 16,
+      "sale_price": 70000,
+      "sale_type": "sold",
+      "page_title": "2017 Chevrolet Camaro SS"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36Mp4xkB/2019-chevrolet-camaro-ss-coupe",
+      "title": "2019 Chevrolet Camaro SS Coupe",
+      "text": "2019 Chevrolet Camaro SS Coupe",
+      "titleYear": 2019,
+      "score": 117,
+      "usable_image_count": 19,
+      "sale_price": 32500,
+      "sale_type": "sold",
+      "page_title": "2019 Chevrolet Camaro SS Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3oy7vkp1/2017-chevrolet-camaro-1ss-coupe",
+      "title": "2017 Chevrolet Camaro 1ss Coupe",
+      "text": "Sold for $37,750",
+      "titleYear": 2017,
+      "score": 78,
+      "usable_image_count": 27,
+      "sale_price": 37750,
+      "sale_type": "sold",
+      "page_title": "2017 Chevrolet Camaro 1SS Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEGdNalP/2023-chevrolet-camaro-1ss-1le-yenko-sc-stage-ii-coupe",
+      "title": "2023 Chevrolet Camaro 1ss 1le Yenko Sc Stage Ii Coupe",
+      "text": "FEATURED Bid to $79,500",
+      "titleYear": 2023,
+      "score": 78,
+      "usable_image_count": 26,
+      "sale_price": 79500,
+      "sale_type": "bid_to",
+      "page_title": "2023 Chevrolet Camaro 1SS 1LE Yenko/SC Stage II Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/36Mp4xkB/2019-chevrolet-camaro-ss-coupe",
+    "title": "2019 Chevrolet Camaro SS Coupe",
+    "text": "2019 Chevrolet Camaro SS Coupe",
+    "titleYear": 2019,
+    "score": 117,
+    "sale_price": 32500,
+    "sale_type": "sold",
+    "page_title": "2019 Chevrolet Camaro SS Coupe",
+    "year": 2019,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/3501lEDR-DkdUpW6IIl-(edit).jpg?t=168239575724",
+      "labels": [
+        "interior"
+      ],
+      "section": "2019 Chevrolet Camaro SS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 236189
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/3501lEDR-pP0AyOwvxE-(edit).jpg?t=168239551582",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2019 Chevrolet Camaro SS Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 398756
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/3501lEDR-l2MhhPY2f_-(edit).jpg?t=168239582945",
+      "labels": [
+        "interior"
+      ],
+      "section": "2019 Chevrolet Camaro SS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 276721
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/3501lEDR-qgYcbvLme6-(edit).jpg?t=168239579777",
+      "labels": [
+        "interior"
+      ],
+      "section": "2019 Chevrolet Camaro SS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 270873
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/3501lEDR-grIOvmzFe9-(edit).jpg?t=168239588884",
+      "labels": [
+        "interior"
+      ],
+      "section": "2019 Chevrolet Camaro SS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 174012
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/3501lEDR-NV2cYQAdPA-(edit).jpg?t=168239557735",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2019 Chevrolet Camaro SS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 365639
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/3501lEDR-wcRmovMACh-(edit).jpg?t=168239563696",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2019 Chevrolet Camaro SS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 413815
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/360d4748cf103ccc8156a0d94596456ca0512c29/photos/3501lEDR-XfoHOk_nas-(edit).jpg?t=168239566476",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2019 Chevrolet Camaro SS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 360614
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9022a53fb0b88345d0f15fe891f9470a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9022a53fb0b88345d0f15fe891f9470a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Chevrolet Camaro 1SS 1LE Yenko/SC Stage II Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9022a53fb0b88345d0f15fe891f9470a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEGdNalP/2023-chevrolet-camaro-1ss-1le-yenko-sc-stage-ii-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9022a53fb0b88345d0f15fe891f9470a/manifest/video.m3u8",
+      "auction_title": "2023 Chevrolet Camaro 1SS 1LE Yenko/SC Stage II Coupe",
+      "auction_year": 2023,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ff4d9c04a937ab842b12ffdb23cc7e7f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ff4d9c04a937ab842b12ffdb23cc7e7f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Chevrolet Camaro 1SS 1LE Yenko/SC Stage II Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ff4d9c04a937ab842b12ffdb23cc7e7f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEGdNalP/2023-chevrolet-camaro-1ss-1le-yenko-sc-stage-ii-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ff4d9c04a937ab842b12ffdb23cc7e7f/manifest/video.m3u8",
+      "auction_title": "2023 Chevrolet Camaro 1SS 1LE Yenko/SC Stage II Coupe",
+      "auction_year": 2023,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41a86064164fe633d9549057077f0ae3/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41a86064164fe633d9549057077f0ae3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Chevrolet Camaro 1SS 1LE Yenko/SC Stage II Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41a86064164fe633d9549057077f0ae3/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEGdNalP/2023-chevrolet-camaro-1ss-1le-yenko-sc-stage-ii-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41a86064164fe633d9549057077f0ae3/manifest/video.m3u8",
+      "auction_title": "2023 Chevrolet Camaro 1SS 1LE Yenko/SC Stage II Coupe",
+      "auction_year": 2023,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/79164dc6c15a268db467f62a147de14d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/79164dc6c15a268db467f62a147de14d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Chevrolet Camaro 1SS 1LE Yenko/SC Stage II Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/79164dc6c15a268db467f62a147de14d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEGdNalP/2023-chevrolet-camaro-1ss-1le-yenko-sc-stage-ii-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/79164dc6c15a268db467f62a147de14d/manifest/video.m3u8",
+      "auction_title": "2023 Chevrolet Camaro 1SS 1LE Yenko/SC Stage II Coupe",
+      "auction_year": 2023,
+      "search_score": 78
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "SS",
+        "visible_match_evidence": [
+          "distinctive front fascia",
+          "scooped hood",
+          "wider body proportions",
+          "rear wing",
+          "black wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "SS",
+        "visible_match_evidence": [
+          "SS badge",
+          "front styling",
+          "body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "camaro",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "SS",
+        "visible_match_evidence": [
+          "side profile and design",
+          "bodywork characteristics",
+          "rear wing and rims indicative of SS variant"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "SS",
+        "visible_match_evidence": [
+          "distinctive rear lights",
+          "body proportions",
+          "spoiler design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "SS",
+        "visible_match_evidence": [
+          "steering wheel design",
+          "interior layout",
+          "digital display",
+          "gear shifter style"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "camaro",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "SS",
+        "visible_match_evidence": [
+          "interior design",
+          "seat design",
+          "color scheme"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "camaro",
+        "detected_generation_or_year": "2016-2023",
+        "detected_variant_or_engine": "SS",
+        "visible_match_evidence": [
+          "sports seats",
+          "carbon fiber elements",
+          "green safety harnesses"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle; it is an interior shot with no clear make or model evidence.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
