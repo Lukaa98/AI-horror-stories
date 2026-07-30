@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.39";
+const UI_VERSION = "V10.40";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -36,7 +36,56 @@ const WORKFLOW_OPTIONS = [
 ];
 
 function makeBattleCarRow() {
-  return { make: "", model: "", year: "" };
+  return {
+    make: "", model: "", trim: "", year: "",
+    models: [], trims: [], modelsLoading: false, trimsLoading: false, fieldError: null,
+  };
+}
+
+const VPIC_BASE = "https://vpic.nhtsa.dot.gov/api/vehicles";
+const CARQUERY_BASE = "https://www.carqueryapi.com/api/0.3/";
+
+async function fetchJsonLenient(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Request failed (${res.status})`);
+  const text = await res.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    // CarQuery sometimes wraps its JSON in a JSONP-style callback comment.
+    const match = text.match(/\((.*)\)/s);
+    if (match) return JSON.parse(match[1]);
+    throw new Error("Unexpected response format");
+  }
+}
+
+async function fetchCarMakes() {
+  const data = await fetchJsonLenient(`${VPIC_BASE}/GetMakesForVehicleType/car?format=json`);
+  return Array.from(new Set((data.Results || []).map((item) => item.MakeName))).sort();
+}
+
+async function fetchCarModels(make) {
+  const data = await fetchJsonLenient(`${VPIC_BASE}/GetModelsForMake/${encodeURIComponent(make)}?format=json`);
+  return Array.from(new Set((data.Results || []).map((item) => item.Model_Name))).filter(Boolean).sort();
+}
+
+async function fetchCarTrims(make, model) {
+  const data = await fetchJsonLenient(
+    `${CARQUERY_BASE}?cmd=getTrims&make=${encodeURIComponent(make)}&model=${encodeURIComponent(model)}`
+  );
+  const rows = data.Trims || [];
+  const byTrim = new Map();
+  for (const row of rows) {
+    const trimName = String(row.model_trim || "").trim();
+    const yearValue = String(row.model_year || "").trim();
+    const key = trimName || "(base model)";
+    if (!byTrim.has(key)) byTrim.set(key, new Set());
+    if (yearValue) byTrim.get(key).add(yearValue);
+  }
+  return Array.from(byTrim.entries()).map(([trim, years]) => ({
+    trim,
+    years: Array.from(years).sort(),
+  }));
 }
 
 function loadSettings() {
@@ -366,6 +415,8 @@ export default function App() {
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
   const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
+  const [carMakes, setCarMakes] = useState([]);
+  const [carMakesError, setCarMakesError] = useState(null);
   const [battleId, setBattleId] = useState(null);
   const [battle, setBattle] = useState(null);
   const [battleVideoUrl, setBattleVideoUrl] = useState(null);
@@ -385,6 +436,12 @@ export default function App() {
     if (view === "dashboard") loadDashboard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view]);
+
+  useEffect(() => {
+    fetchCarMakes()
+      .then(setCarMakes)
+      .catch((err) => setCarMakesError(String(err.message || err)));
+  }, []);
 
   const repoOk = settings.token && settings.owner && settings.repo && settings.branch;
   const builtRequest = buildStructuredRequest({ workflow, make, model, focus, startYear, endYear });
@@ -566,6 +623,55 @@ export default function App() {
     setBattleCars((prev) => prev.map((car, i) => (i === index ? { ...car, [field]: value } : car)));
   }
 
+  async function handleBattleMakeChange(index, make) {
+    setBattleCars((prev) => prev.map((car, i) => (
+      i === index
+        ? { ...car, make, model: "", trim: "", year: "", models: [], trims: [], modelsLoading: !!make, fieldError: null }
+        : car
+    )));
+    if (!make) return;
+    try {
+      const models = await fetchCarModels(make);
+      setBattleCars((prev) => prev.map((car, i) => (
+        i === index && car.make === make ? { ...car, models, modelsLoading: false } : car
+      )));
+    } catch (err) {
+      setBattleCars((prev) => prev.map((car, i) => (
+        i === index ? { ...car, modelsLoading: false, fieldError: `Could not load models: ${err.message}` } : car
+      )));
+    }
+  }
+
+  async function handleBattleModelChange(index, model) {
+    setBattleCars((prev) => prev.map((car, i) => (
+      i === index ? { ...car, model, trim: "", year: "", trims: [], trimsLoading: !!model, fieldError: null } : car
+    )));
+    if (!model) return;
+    const make = battleCars[index].make;
+    try {
+      const trims = await fetchCarTrims(make, model);
+      setBattleCars((prev) => prev.map((car, i) => (
+        i === index && car.model === model ? { ...car, trims, trimsLoading: false } : car
+      )));
+    } catch (err) {
+      setBattleCars((prev) => prev.map((car, i) => (
+        i === index ? { ...car, trimsLoading: false, fieldError: `Could not load trims: ${err.message}` } : car
+      )));
+    }
+  }
+
+  function handleBattleTrimChange(index, trim) {
+    setBattleCars((prev) => prev.map((car, i) => (i === index ? { ...car, trim, year: "" } : car)));
+  }
+
+  function battleYearOptions(car) {
+    if (car.trim) {
+      const match = car.trims.find((item) => item.trim === car.trim);
+      if (match && match.years.length) return match.years;
+    }
+    return YEAR_OPTIONS;
+  }
+
   function addBattleCar() {
     setBattleCars((prev) => (prev.length >= MAX_BATTLE_CARS ? prev : [...prev, makeBattleCarRow()]));
   }
@@ -581,8 +687,13 @@ export default function App() {
     setError(null);
     setBattle(null);
     setBattleVideoUrl(null);
-    const carsList = battleCars.map((car) => ({ make: car.make.trim(), model: car.model.trim(), year: car.year.trim() }));
-    const summary = carsList.map((car) => `${car.year} ${car.make} ${car.model}`).join(", ");
+    const carsList = battleCars.map((car) => ({
+      make: car.make.trim(),
+      model: car.model.trim(),
+      trim: (car.trim || "").trim(),
+      year: car.year.trim(),
+    }));
+    const summary = carsList.map((car) => `${car.year} ${car.make} ${[car.model, car.trim].filter(Boolean).join(" ")}`).join(", ");
     const id = makeDraftId(`battle-${summary}`);
     setBattleId(id);
     setStage("researching");
@@ -1066,47 +1177,99 @@ export default function App() {
 
           {workflow === "battle" ? (
             <div className="battle-cars">
-              {battleCars.map((car, index) => (
-                <div className="battle-car-row" key={index}>
-                  <label>
-                    Make
-                    <input
-                      value={car.make}
-                      onChange={(e) => updateBattleCar(index, "make", e.target.value)}
-                      placeholder="Ford"
-                      disabled={stage === "researching" || stage === "generating"}
-                    />
-                  </label>
-                  <label>
-                    Model
-                    <input
-                      value={car.model}
-                      onChange={(e) => updateBattleCar(index, "model", e.target.value)}
-                      placeholder="Mustang GT"
-                      disabled={stage === "researching" || stage === "generating"}
-                    />
-                  </label>
-                  <label>
-                    Year
-                    <select
-                      value={car.year}
-                      onChange={(e) => updateBattleCar(index, "year", e.target.value)}
-                      disabled={stage === "researching" || stage === "generating"}
+              {carMakesError && (
+                <p className="hint">
+                  Could not load the make list from NHTSA's vPIC API ({carMakesError}). Falling back to free-text
+                  entry below.
+                </p>
+              )}
+              {battleCars.map((car, index) => {
+                const disabled = stage === "researching" || stage === "generating";
+                return (
+                  <div className="battle-car-row" key={index}>
+                    <label>
+                      Make
+                      {carMakesError ? (
+                        <input
+                          value={car.make}
+                          onChange={(e) => updateBattleCar(index, "make", e.target.value)}
+                          placeholder="Ford"
+                          disabled={disabled}
+                        />
+                      ) : (
+                        <select
+                          value={car.make}
+                          onChange={(e) => handleBattleMakeChange(index, e.target.value)}
+                          disabled={disabled || carMakes.length === 0}
+                        >
+                          <option value="">{carMakes.length ? "Choose make" : "Loading makes..."}</option>
+                          {carMakes.map((name) => <option key={name} value={name}>{name}</option>)}
+                        </select>
+                      )}
+                    </label>
+                    <label>
+                      Model
+                      {carMakesError ? (
+                        <input
+                          value={car.model}
+                          onChange={(e) => updateBattleCar(index, "model", e.target.value)}
+                          placeholder="Mustang"
+                          disabled={disabled}
+                        />
+                      ) : (
+                        <select
+                          value={car.model}
+                          onChange={(e) => handleBattleModelChange(index, e.target.value)}
+                          disabled={disabled || !car.make || car.modelsLoading}
+                        >
+                          <option value="">{car.modelsLoading ? "Loading models..." : "Choose model"}</option>
+                          {car.models.map((name) => <option key={name} value={name}>{name}</option>)}
+                        </select>
+                      )}
+                    </label>
+                    <label>
+                      Trim
+                      {carMakesError ? (
+                        <input
+                          value={car.trim}
+                          onChange={(e) => updateBattleCar(index, "trim", e.target.value)}
+                          placeholder="GT350 (optional)"
+                          disabled={disabled}
+                        />
+                      ) : (
+                        <select
+                          value={car.trim}
+                          onChange={(e) => handleBattleTrimChange(index, e.target.value)}
+                          disabled={disabled || !car.model || car.trimsLoading}
+                        >
+                          <option value="">{car.trimsLoading ? "Loading trims..." : "Any / base"}</option>
+                          {car.trims.map((item) => <option key={item.trim} value={item.trim}>{item.trim}</option>)}
+                        </select>
+                      )}
+                    </label>
+                    <label>
+                      Year
+                      <select
+                        value={car.year}
+                        onChange={(e) => updateBattleCar(index, "year", e.target.value)}
+                        disabled={disabled}
+                      >
+                        <option value="">Year</option>
+                        {battleYearOptions(car).map((year) => <option key={year} value={year}>{year}</option>)}
+                      </select>
+                    </label>
+                    <button
+                      type="button"
+                      className="secondary battle-car-remove"
+                      onClick={() => removeBattleCar(index)}
+                      disabled={battleCars.length <= MIN_BATTLE_CARS || disabled}
                     >
-                      <option value="">Year</option>
-                      {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
-                    </select>
-                  </label>
-                  <button
-                    type="button"
-                    className="secondary battle-car-remove"
-                    onClick={() => removeBattleCar(index)}
-                    disabled={battleCars.length <= MIN_BATTLE_CARS || stage === "researching" || stage === "generating"}
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
+                      Remove
+                    </button>
+                    {car.fieldError && <p className="error battle-car-error">{car.fieldError}</p>}
+                  </div>
+                );
+              })}
               <button
                 type="button"
                 className="secondary"
@@ -1116,8 +1279,9 @@ export default function App() {
                 + Add another car
               </button>
               <p className="hint">
-                Entering a year searches that car's whole generation/body-style production run, not just that one
-                model year. Cars & Bids listings without an exterior-filmed cold start are skipped.
+                Model list comes from NHTSA's vPIC API; trims (GT350, GT500, Shelby, etc.) and their production years
+                come from CarQuery. Picking a trim narrows Year to only the years it actually existed. Cars & Bids
+                listings without an exterior-filmed cold start are skipped either way.
               </p>
             </div>
           ) : (

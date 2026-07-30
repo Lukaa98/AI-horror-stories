@@ -81,21 +81,23 @@ def lookup_generation_range(make, model, year):
     return int(year), int(year), ""
 
 
-def build_car_entry(make, model, year, index):
+def build_car_entry(make, model, year, index, trim=""):
     start_year, end_year, generation_label = lookup_generation_range(make, model, year)
-    label = f"{year} {make} {model}".strip()
+    model_display = f"{model} {trim}".strip() if trim else model
+    label = f"{year} {make} {model_display}".strip()
     return {
         "index": index,
         "label": label,
         "make": make,
         "model": model,
+        "trim": trim or None,
         "year": year,
         "generation_start": start_year,
         "generation_end": end_year,
         "generation_label": generation_label,
         "name": label,
         "years": f"{start_year}-{end_year}" if start_year != end_year else str(start_year),
-        "search_hint": f"{make} {model}",
+        "search_hint": f"{make} {model_display}",
         "visual_highlight": "",
         "commons_search_terms": [],
     }
@@ -146,6 +148,7 @@ def process_car(car_entry, images_dir):
         "label": car_entry["label"],
         "make": car_entry["make"],
         "model": car_entry["model"],
+        "trim": car_entry["trim"],
         "year": car_entry["year"],
         "generation_start": car_entry["generation_start"],
         "generation_end": car_entry["generation_end"],
@@ -173,7 +176,7 @@ def process_car(car_entry, images_dir):
 
 def main():
     parser = argparse.ArgumentParser(description="Research a startup-sound battle between 3-5 user-specified cars.")
-    parser.add_argument("--cars", required=True, help="JSON array of {make, model, year}")
+    parser.add_argument("--cars", required=True, help="JSON array of {make, model, trim, year}")
     parser.add_argument("--battle-id", required=True)
     args = parser.parse_args()
 
@@ -189,10 +192,11 @@ def main():
     for index, car in enumerate(cars, start=1):
         make = str(car.get("make", "")).strip()
         model = str(car.get("model", "")).strip()
+        trim = str(car.get("trim", "")).strip()
         year = str(car.get("year", "")).strip()
         if not make or not model or not year:
             raise SystemExit(f"Car #{index} is missing make/model/year")
-        car_entry = build_car_entry(make, model, year, index)
+        car_entry = build_car_entry(make, model, year, index, trim=trim)
         entries.append(process_car(car_entry, images_dir))
 
     approved_count = sum(1 for entry in entries if entry["approved"])
