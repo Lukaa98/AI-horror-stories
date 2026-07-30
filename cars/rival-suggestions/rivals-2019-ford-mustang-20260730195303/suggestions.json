@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2019-ford-mustang-20260730195303",
+  "base_car": {
+    "make": "Ford",
+    "model": "Mustang",
+    "trim": "GT",
+    "year": "2019"
+  },
+  "rivals": [
+    {
+      "make": "Chevrolet",
+      "model": "Camaro SS",
+      "trim": "1SS",
+      "year": "2019",
+      "reason": "The 2019 Camaro SS competes directly with the Mustang GT, offering a powerful V8 engine and a distinctive aggressive exhaust note."
+    },
+    {
+      "make": "Dodge",
+      "model": "Challenger R/T",
+      "trim": "",
+      "year": "2019",
+      "reason": "The Challenger R/T features a similar muscle car ethos with a robust V8 engine and a celebrated rumble, making it a lovable rival."
+    },
+    {
+      "make": "BMW",
+      "model": "M4",
+      "trim": "Competition",
+      "year": "2019",
+      "reason": "The M4 Competition presents a luxury performance alternative to the Mustang GT, known for its distinctive inline-six engine sound and refinement."
+    },
+    {
+      "make": "Nissan",
+      "model": "370Z",
+      "trim": "Nismo",
+      "year": "2019",
+      "reason": "The 370Z Nismo, while different in body style, delivers a sporty driving experience with a unique V6 exhaust note, appealing to enthusiasts who appreciate performance and sound."
+    }
+  ]
+}
