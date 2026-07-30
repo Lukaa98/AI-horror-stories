@@ -1,0 +1,138 @@
+{
+  "battle_id": "battle-2015-ford-mustang-2016-dodge-chal-20260730032137",
+  "cars": [
+    {
+      "index": 1,
+      "label": "2015 Ford Mustang",
+      "make": "Ford",
+      "model": "Mustang",
+      "year": "2015",
+      "generation_start": 2015,
+      "generation_end": 2023,
+      "generation_label": "S550",
+      "photos": [
+        "images/2015-ford-mustang/exterior-02.jpg",
+        "images/2015-ford-mustang/exterior-06.jpg",
+        "images/2015-ford-mustang/exterior-08.jpg",
+        "images/2015-ford-mustang/exterior-07.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 14.25,
+      "engine_event_score": 3.503,
+      "scene_review": {
+        "scene_type": "exhaust_closeup",
+        "engine_relevance": 8,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The frame shows a close-up of the exhaust, which is relevant for exhaust sounds, though there is no indication of actual engine activity in the text.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9e02207185d46a0706bb12bb04529e27/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9e02207185d46a0706bb12bb04529e27/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9e02207185d46a0706bb12bb04529e27/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/KZm8XVJG/2022-ford-mustang-shelby-gt500-heritage-edition",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9e02207185d46a0706bb12bb04529e27/manifest/video.m3u8",
+        "auction_title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+        "auction_year": 2022,
+        "search_score": 109
+      },
+      "clip_path": "engine_clips/rank-2015-ford-mustang-engine.mp4",
+      "clip_duration": 8.0,
+      "error": null
+    },
+    {
+      "index": 2,
+      "label": "2016 Dodge Challenger",
+      "make": "Dodge",
+      "model": "Challenger",
+      "year": "2016",
+      "generation_start": 2008,
+      "generation_end": 2023,
+      "generation_label": "Second generation",
+      "photos": [
+        "images/2016-dodge-challenger/exterior-02.jpeg",
+        "images/2016-dodge-challenger/exterior-06.jpg",
+        "images/2016-dodge-challenger/exterior-08.jpg",
+        "images/2016-dodge-challenger/exterior-07.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 9.85,
+      "engine_event_score": 1.107,
+      "scene_review": {
+        "scene_type": "engine_bay",
+        "engine_relevance": 7,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The frame shows a close-up of the engine bay, which is relevant for engine details, but there are no indications of event-based audio or a specific engine event in the title or context text.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0ef5abc254246d8b6eb757dc9447a999/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0ef5abc254246d8b6eb757dc9447a999/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2017 Dodge Challenger SRT Hellcat",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0ef5abc254246d8b6eb757dc9447a999/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/KmnGpb60/2017-dodge-challenger-srt-hellcat",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0ef5abc254246d8b6eb757dc9447a999/manifest/video.m3u8",
+        "auction_title": "2017 Dodge Challenger SRT Hellcat",
+        "auction_year": 2017,
+        "search_score": 70
+      },
+      "clip_path": "engine_clips/rank-2016-dodge-challenger-engine.mp4",
+      "clip_duration": 8.0,
+      "error": null
+    },
+    {
+      "index": 3,
+      "label": "2016 Chevrolet Camaro",
+      "make": "Chevrolet",
+      "model": "Camaro",
+      "year": "2016",
+      "generation_start": 2016,
+      "generation_end": 2023,
+      "generation_label": "Sixth generation",
+      "photos": [
+        "images/2016-chevrolet-camaro/exterior-02.jpg",
+        "images/2016-chevrolet-camaro/exterior-06.jpg",
+        "images/2016-chevrolet-camaro/exterior-08.jpg",
+        "images/2016-chevrolet-camaro/exterior-07.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 9.05,
+      "engine_event_score": 7.797,
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 2,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The footage shows a rear view of the vehicle without any engine audio or specific engine-related events indicated.",
+        "provider": "openai"
+      },
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0a69c1037293fe0f41be1f1f7ac07c4/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0a69c1037293fe0f41be1f1f7ac07c4/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2017 Chevrolet Camaro 2SS Coupe",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0a69c1037293fe0f41be1f1f7ac07c4/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/9nVE86lv/2017-chevrolet-camaro-2ss-coupe",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0a69c1037293fe0f41be1f1f7ac07c4/manifest/video.m3u8",
+        "auction_title": "2017 Chevrolet Camaro 2SS Coupe",
+        "auction_year": 2017,
+        "search_score": 70
+      },
+      "clip_path": "engine_clips/rank-2016-chevrolet-camaro-engine.mp4",
+      "clip_duration": 8.0,
+      "error": null
+    }
+  ],
+  "title": "WHICH ONE SOUNDS BEST?",
+  "status": "researched",
+  "approved_count": 3,
+  "total_count": 3
+}
