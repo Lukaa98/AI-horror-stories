@@ -117,6 +117,40 @@ h1 {
 
 .dashboard-type.draft { border-color: #46c983; color: #72e5a5; }
 .dashboard-type.video-test { border-color: #6ea8ff; color: #a9c8ff; }
+.dashboard-type.battle { border-color: #f3b51b; color: #ffd56b; }
+
+.battle-cars {
+  display: grid;
+  gap: 10px;
+}
+
+.battle-car-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.7fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.battle-car-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.battle-car-row input,
+.battle-car-row select {
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #1d1d1f;
+  color: #f2f2f2;
+}
+
+.battle-car-remove {
+  height: fit-content;
+}
 
 .dashboard-card-actions {
   display: flex;
@@ -566,6 +600,7 @@ button.secondary {
   .request-row { flex-direction: column; }
   .workflow-grid { grid-template-columns: 1fr; }
   .builder-grid { grid-template-columns: 1fr; }
+  .battle-car-row { grid-template-columns: 1fr; }
   .progress-step strong { font-size: .68rem; }
   .video-result { grid-template-columns: 1fr; }
   .narration-box { max-height: none; }

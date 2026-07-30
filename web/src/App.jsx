@@ -5,13 +5,17 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.38";
+const UI_VERSION = "V10.39";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
 const VIDEO_TEST_TIMEOUT_MS = 60 * 60 * 1000;
+const BATTLE_RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
+const BATTLE_RENDER_TIMEOUT_MS = 20 * 60 * 1000;
+const MIN_BATTLE_CARS = 3;
+const MAX_BATTLE_CARS = 5;
 const YEAR_OPTIONS = Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => String(new Date().getFullYear() - index));
 const WORKFLOW_OPTIONS = [
   {
@@ -24,7 +28,16 @@ const WORKFLOW_OPTIONS = [
     label: "Best Versions In One Range",
     description: "Find the 4 best trims or variants inside one generation, chassis, or year window.",
   },
+  {
+    id: "battle",
+    label: "Startup Sound Battle",
+    description: "You name 3-5 specific cars; we find each one's exterior-only cold-start clip and cut them together back to back, numbered, no narration.",
+  },
 ];
+
+function makeBattleCarRow() {
+  return { make: "", model: "", year: "" };
+}
 
 function loadSettings() {
   try {
@@ -182,9 +195,16 @@ async function fetchOutputTree({ owner, repo, token }) {
   return { commitSha, treeSha: commit.tree.sha, entries: treeData.tree || [] };
 }
 
+const DASHBOARD_FOLDERS = {
+  draft: { prefix: "cars/drafts", file: "research.json" },
+  "video-test": { prefix: "cars/video-tests", file: "result.json" },
+  battle: { prefix: "cars/battles", file: "battle.json" },
+};
+
 function groupDashboardEntries(entries) {
   const drafts = new Map();
   const tests = new Map();
+  const battles = new Map();
   for (const item of entries) {
     if (item.type !== "blob") continue;
     let m = item.path.match(/^cars\/drafts\/([^/]+)\/(.+)$/);
@@ -199,6 +219,14 @@ function groupDashboardEntries(entries) {
       const [, id, rest] = m;
       if (!tests.has(id)) tests.set(id, []);
       tests.get(id).push(rest);
+      continue;
+    }
+    m = item.path.match(/^cars\/battles\/([^/]+)\/(.+)$/);
+    if (m) {
+      const [, id, rest] = m;
+      if (id === "_frames") continue;
+      if (!battles.has(id)) battles.set(id, []);
+      battles.get(id).push(rest);
     }
   }
   const items = [];
@@ -222,6 +250,16 @@ function groupDashboardEntries(entries) {
       hasResult: files.includes("result.json"),
     });
   }
+  for (const [id, files] of battles) {
+    items.push({
+      type: "battle",
+      id,
+      files,
+      timestamp: parseIdTimestamp(id),
+      hasBattle: files.includes("battle.json"),
+      hasVideo: files.includes("battle_short.mp4"),
+    });
+  }
   items.sort((a, b) => (b.timestamp?.getTime() || 0) - (a.timestamp?.getTime() || 0));
   return items;
 }
@@ -229,12 +267,12 @@ function groupDashboardEntries(entries) {
 async function attachDashboardPreviews(items, owner, repo) {
   await Promise.allSettled(
     items.map(async (item) => {
-      const folder = item.type === "draft" ? "drafts" : "video-tests";
-      const file = item.type === "draft" ? "research.json" : "result.json";
+      const { prefix, file } = DASHBOARD_FOLDERS[item.type];
       if (item.type === "draft" && !item.hasResearch) return;
       if (item.type === "video-test" && !item.hasResult) return;
+      if (item.type === "battle" && !item.hasBattle) return;
       const res = await fetch(
-        `https://raw.githubusercontent.com/${owner}/${repo}/${OUTPUT_BRANCH}/cars/${folder}/${item.id}/${file}?_=${Date.now()}`,
+        `https://raw.githubusercontent.com/${owner}/${repo}/${OUTPUT_BRANCH}/${prefix}/${item.id}/${file}?_=${Date.now()}`,
         { cache: "no-store" }
       );
       if (res.ok) item.preview = await res.json();
@@ -250,8 +288,14 @@ async function loadDashboardEntries({ owner, repo, token }) {
   return items;
 }
 
+function dashboardFolderName(type) {
+  if (type === "draft") return "drafts";
+  if (type === "battle") return "battles";
+  return "video-tests";
+}
+
 async function deleteDashboardItem({ owner, repo, token, type, id }) {
-  const prefix = type === "draft" ? `cars/drafts/${id}/` : `cars/video-tests/${id}/`;
+  const prefix = `cars/${dashboardFolderName(type)}/${id}/`;
   const ref = await ghJson(
     `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${OUTPUT_BRANCH}`,
     { headers: ghHeaders(token) }
@@ -321,6 +365,10 @@ export default function App() {
   const [videoProbe, setVideoProbe] = useState(null);
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
+  const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
+  const [battleId, setBattleId] = useState(null);
+  const [battle, setBattle] = useState(null);
+  const [battleVideoUrl, setBattleVideoUrl] = useState(null);
   const [view, setView] = useState("create");
   const [dashboardItems, setDashboardItems] = useState([]);
   const [dashboardLoading, setDashboardLoading] = useState(false);
@@ -510,13 +558,123 @@ export default function App() {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/${relativePath}`;
   }
 
+  function battleRawUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/battles/${battleId}/${relativePath}`;
+  }
+
+  function updateBattleCar(index, field, value) {
+    setBattleCars((prev) => prev.map((car, i) => (i === index ? { ...car, [field]: value } : car)));
+  }
+
+  function addBattleCar() {
+    setBattleCars((prev) => (prev.length >= MAX_BATTLE_CARS ? prev : [...prev, makeBattleCarRow()]));
+  }
+
+  function removeBattleCar(index) {
+    setBattleCars((prev) => (prev.length <= MIN_BATTLE_CARS ? prev : prev.filter((_, i) => i !== index)));
+  }
+
+  const battleCarsValid = battleCars.every((car) => car.make.trim() && car.model.trim() && car.year.trim());
+
+  async function handleBattleResearch() {
+    if (!repoOk || !battleCarsValid) return;
+    setError(null);
+    setBattle(null);
+    setBattleVideoUrl(null);
+    const carsList = battleCars.map((car) => ({ make: car.make.trim(), model: car.model.trim(), year: car.year.trim() }));
+    const summary = carsList.map((car) => `${car.year} ${car.make} ${car.model}`).join(", ");
+    const id = makeDraftId(`battle-${summary}`);
+    setBattleId(id);
+    setStage("researching");
+    setStatusDetail(`Finding exterior cold-start clips for: ${summary}...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Startup sound battle: ${summary}`,
+          draft_id: id,
+          mode: "battle",
+          cars: JSON.stringify(carsList),
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const battleFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/battles/${id}/battle.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: BATTLE_RESEARCH_TIMEOUT_MS,
+      });
+      const res = await Promise.race([battleFile, workflowRun.then(() => battleFile)]);
+      const data = await res.json();
+      setBattle(data);
+      setStage("researched");
+      setStatusDetail(`Found clips for ${data.approved_count}/${data.total_count} cars`);
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Battle research failed - check the error below and try again");
+    }
+  }
+
+  async function handleBattleRender() {
+    if (!battleId) return;
+    setError(null);
+    setStage("generating");
+    setStatusDetail("Dispatching the battle render workflow...");
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-generate-from-research.yml",
+        inputs: {
+          draft_id: battleId,
+          mode: "battle",
+          tts_provider: "openai",
+          tts_voice: voice,
+          render_quality: "full",
+        },
+      });
+      const workflowRun = beginRunTracking("cars-generate-from-research.yml", startedAt, abortRef.current.signal);
+      setStatusDetail("Rendering the battle video...");
+      await workflowRun;
+      await pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/battles/${battleId}/battle_short.mp4`,
+        signal: abortRef.current.signal,
+        timeoutMs: BATTLE_RENDER_TIMEOUT_MS,
+      });
+      setBattleVideoUrl(
+        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/battles/${battleId}/battle_short.mp4?_=${Date.now()}`
+      );
+      setStage("done");
+      setStatusDetail("Battle video complete");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Battle render failed - check the error below and try again");
+    }
+  }
+
   function rawVideoTestUrl(relativePath) {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/video-tests/${videoTestId}/${relativePath}`;
   }
 
   function dashboardRawUrl(item, relativePath) {
-    const folder = item.type === "draft" ? "drafts" : "video-tests";
-    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/${folder}/${item.id}/${relativePath}`;
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/${dashboardFolderName(item.type)}/${item.id}/${relativePath}`;
   }
 
   async function loadDashboard() {
@@ -573,7 +731,7 @@ export default function App() {
         <section className="dashboard-panel">
           <div className="dashboard-header">
             <div>
-              <h2>Generated Drafts &amp; Video Tests</h2>
+              <h2>Generated Drafts, Video Tests &amp; Battles</h2>
               <p className="hint">
                 Reads directly from the <code>{OUTPUT_BRANCH}</code> branch, so results survive a refresh. Deleting
                 an item commits a removal of its files to that branch.
@@ -592,24 +750,30 @@ export default function App() {
               {dashboardItems.map((item) => {
                 const key = `${item.type}:${item.id}`;
                 const title =
-                  item.type === "draft"
-                    ? item.preview?.title || item.id
-                    : `Video test: ${item.preview?.query || item.id}`;
+                  item.type === "draft" ? item.preview?.title || item.id
+                  : item.type === "battle" ? item.preview?.title || `Battle: ${item.id}`
+                  : `Video test: ${item.preview?.query || item.id}`;
                 const thumb =
-                  item.type === "draft"
-                    ? item.preview?.entries?.find((entry) => (entry.images || []).length)?.images?.[0]
-                    : item.preview?.clips?.find((clip) => clip.thumbnail_url)?.thumbnail_url;
-                const thumbUrl = item.type === "draft" && thumb ? dashboardRawUrl(item, thumb) : thumb;
+                  item.type === "draft" ? item.preview?.entries?.find((entry) => (entry.images || []).length)?.images?.[0]
+                  : item.type === "battle" ? item.preview?.cars?.find((car) => (car.photos || []).length)?.photos?.[0]
+                  : item.preview?.clips?.find((clip) => clip.thumbnail_url)?.thumbnail_url;
+                const thumbUrl = item.type === "video-test" ? thumb : (thumb ? dashboardRawUrl(item, thumb) : null);
+                const typeLabel = item.type === "draft" ? "Draft" : item.type === "battle" ? "Battle" : "Video Test";
                 return (
                   <article className="dashboard-card" key={key}>
                     {thumbUrl && <img src={thumbUrl} alt={title} />}
                     <div className="dashboard-card-body">
-                      <span className={`dashboard-type ${item.type}`}>{item.type === "draft" ? "Draft" : "Video Test"}</span>
+                      <span className={`dashboard-type ${item.type}`}>{typeLabel}</span>
                       <h3>{title}</h3>
                       <p className="hint">{item.timestamp ? item.timestamp.toLocaleString() : item.id}</p>
                       {item.type === "draft" && (
                         <p className="hint">
                           {item.hasFinal ? "Full render ready" : item.hasPreview ? "Preview render ready" : "No render yet"}
+                        </p>
+                      )}
+                      {item.type === "battle" && (
+                        <p className="hint">
+                          {item.hasVideo ? "Battle video ready" : `${item.preview?.approved_count ?? "?"}/${item.preview?.total_count ?? "?"} clips found`}
                         </p>
                       )}
                       <div className="dashboard-card-actions">
@@ -766,6 +930,49 @@ export default function App() {
                   </section>
                 )}
 
+                {item.type === "battle" && item.preview && (
+                  <div className="research-panel">
+                    <h2>{item.preview.title}</h2>
+                    <p className="rationale">
+                      Found usable exterior startup clips for {item.preview.approved_count} of {item.preview.total_count} cars.
+                    </p>
+                    {item.hasVideo && (
+                      <div className="video-player">
+                        <video controls src={dashboardRawUrl(item, "battle_short.mp4")} width="360" />
+                      </div>
+                    )}
+                    <div className="entries">
+                      {(item.preview.cars || []).map((car) => (
+                        <div key={car.index} className="entry-card">
+                          <div className="entry-rank">#{car.index}</div>
+                          <h3>{car.label}</h3>
+                          <p className="label">{car.generation_label || `Generation range ${car.generation_start}-${car.generation_end}`}</p>
+                          <div className="thumbs">
+                            {(car.photos || []).length === 0 && <span className="no-images">no exterior photos found</span>}
+                            {(car.photos || []).map((img, j) => (
+                              <a key={j} href={dashboardRawUrl(item, img)} target="_blank" rel="noreferrer">
+                                <img src={dashboardRawUrl(item, img)} alt={`${car.label} exterior`} />
+                              </a>
+                            ))}
+                          </div>
+                          {car.approved && car.clip_path ? (
+                            <article className="video-probe-card entry-engine-clip">
+                              <video controls src={dashboardRawUrl(item, car.clip_path)} preload="metadata" />
+                              <p className="hint">Clip length: {car.clip_duration}s</p>
+                            </article>
+                          ) : (
+                            <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <details className="settings">
+                      <summary>Full battle.json</summary>
+                      <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
+                    </details>
+                  </div>
+                )}
+
                 {!item.preview && <p className="hint">No JSON data found for this item (files: {item.files.join(", ")}).</p>}
 
                 <div className="dashboard-card-actions">
@@ -857,83 +1064,213 @@ export default function App() {
             ))}
           </div>
 
-          <div className="builder-grid">
-            <label>
-              Make
-              <input value={make} onChange={(e) => setMake(e.target.value)} placeholder="Audi" disabled={stage === "researching" || stage === "generating"} />
-            </label>
-            <label>
-              Model
-              <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="R8" disabled={stage === "researching" || stage === "generating"} />
-            </label>
-            <label>
-              Focus
-              <input
-                value={focus}
-                onChange={(e) => setFocus(e.target.value)}
-                placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : "Used only for focused mode"}
-                disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}
-              />
-            </label>
-            <label>
-              Start Year
-              <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}>
-                <option value="">Any</option>
-                {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
-              </select>
-            </label>
-            <label>
-              End Year
-              <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}>
-                <option value="">Any</option>
-                {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
-              </select>
-            </label>
-          </div>
+          {workflow === "battle" ? (
+            <div className="battle-cars">
+              {battleCars.map((car, index) => (
+                <div className="battle-car-row" key={index}>
+                  <label>
+                    Make
+                    <input
+                      value={car.make}
+                      onChange={(e) => updateBattleCar(index, "make", e.target.value)}
+                      placeholder="Ford"
+                      disabled={stage === "researching" || stage === "generating"}
+                    />
+                  </label>
+                  <label>
+                    Model
+                    <input
+                      value={car.model}
+                      onChange={(e) => updateBattleCar(index, "model", e.target.value)}
+                      placeholder="Mustang GT"
+                      disabled={stage === "researching" || stage === "generating"}
+                    />
+                  </label>
+                  <label>
+                    Year
+                    <select
+                      value={car.year}
+                      onChange={(e) => updateBattleCar(index, "year", e.target.value)}
+                      disabled={stage === "researching" || stage === "generating"}
+                    >
+                      <option value="">Year</option>
+                      {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
+                    </select>
+                  </label>
+                  <button
+                    type="button"
+                    className="secondary battle-car-remove"
+                    onClick={() => removeBattleCar(index)}
+                    disabled={battleCars.length <= MIN_BATTLE_CARS || stage === "researching" || stage === "generating"}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                className="secondary"
+                onClick={addBattleCar}
+                disabled={battleCars.length >= MAX_BATTLE_CARS || stage === "researching" || stage === "generating"}
+              >
+                + Add another car
+              </button>
+              <p className="hint">
+                Entering a year searches that car's whole generation/body-style production run, not just that one
+                model year. Cars & Bids listings without an exterior-filmed cold start are skipped.
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="builder-grid">
+                <label>
+                  Make
+                  <input value={make} onChange={(e) => setMake(e.target.value)} placeholder="Audi" disabled={stage === "researching" || stage === "generating"} />
+                </label>
+                <label>
+                  Model
+                  <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="R8" disabled={stage === "researching" || stage === "generating"} />
+                </label>
+                <label>
+                  Focus
+                  <input
+                    value={focus}
+                    onChange={(e) => setFocus(e.target.value)}
+                    placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : "Used only for focused mode"}
+                    disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}
+                  />
+                </label>
+                <label>
+                  Start Year
+                  <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}>
+                    <option value="">Any</option>
+                    {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
+                  </select>
+                </label>
+                <label>
+                  End Year
+                  <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}>
+                    <option value="">Any</option>
+                    {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
+                  </select>
+                </label>
+              </div>
 
-          <label className="custom-toggle">
-            <input
-              type="checkbox"
-              checked={useCustomRequest}
-              onChange={(e) => setUseCustomRequest(e.target.checked)}
-              disabled={stage === "researching" || stage === "generating"}
-            />
-            Use custom request text instead of the structured builder
-          </label>
+              <label className="custom-toggle">
+                <input
+                  type="checkbox"
+                  checked={useCustomRequest}
+                  onChange={(e) => setUseCustomRequest(e.target.checked)}
+                  disabled={stage === "researching" || stage === "generating"}
+                />
+                Use custom request text instead of the structured builder
+              </label>
 
-          <div className="request-preview">
-            <span className="preview-label">{useCustomRequest ? "Custom request" : "Generated request"}</span>
-            {useCustomRequest ? (
-              <textarea
-                className="request-input request-textarea"
-                placeholder='e.g. "Rank the 4 best Audi R8 versions overall"'
-                value={request}
-                onChange={(e) => setRequest(e.target.value)}
-                disabled={stage === "researching" || stage === "generating"}
-              />
-            ) : (
-              <div className="request-preview-box">{builtRequest || "Choose a workflow, then enter at least make and model."}</div>
-            )}
-          </div>
+              <div className="request-preview">
+                <span className="preview-label">{useCustomRequest ? "Custom request" : "Generated request"}</span>
+                {useCustomRequest ? (
+                  <textarea
+                    className="request-input request-textarea"
+                    placeholder='e.g. "Rank the 4 best Audi R8 versions overall"'
+                    value={request}
+                    onChange={(e) => setRequest(e.target.value)}
+                    disabled={stage === "researching" || stage === "generating"}
+                  />
+                ) : (
+                  <div className="request-preview-box">{builtRequest || "Choose a workflow, then enter at least make and model."}</div>
+                )}
+              </div>
+            </>
+          )}
         </div>
         <div className="request-actions">
-          <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating" || stage === "video-testing"}>
-            {stage === "researching" ? "Researching..." : "Research"}
-          </button>
-          <button
-            className="secondary"
-            onClick={handleVideoTest}
-            disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing"}
-          >
-            {stage === "video-testing" ? "Testing Videos..." : "Test Videos Only"}
-          </button>
+          {workflow === "battle" ? (
+            <button
+              onClick={handleBattleResearch}
+              disabled={!repoOk || !battleCarsValid || stage === "researching" || stage === "generating" || stage === "video-testing"}
+            >
+              {stage === "researching" ? "Finding Clips..." : "Find Startup Clips"}
+            </button>
+          ) : (
+            <>
+              <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating" || stage === "video-testing"}>
+                {stage === "researching" ? "Researching..." : "Research"}
+              </button>
+              <button
+                className="secondary"
+                onClick={handleVideoTest}
+                disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing"}
+              >
+                {stage === "video-testing" ? "Testing Videos..." : "Test Videos Only"}
+              </button>
+            </>
+          )}
         </div>
       </div>
 
       {error && <div className="error">{error}</div>}
 
-      {stage === "researching" && (
+      {stage === "researching" && workflow === "battle" && (
+        <p className="status">Searching each car's generation for an exterior-filmed cold-start clip and exterior photos. This can take a few minutes...</p>
+      )}
+      {stage === "researching" && workflow !== "battle" && (
         <p className="status">AI is researching facts and gathering varied, verified model photos. This can take a few minutes...</p>
+      )}
+
+      {battle && (
+        <div className="research-panel">
+          <h2>{battle.title}</h2>
+          <p className="rationale">
+            Found usable exterior startup clips for {battle.approved_count} of {battle.total_count} cars.
+          </p>
+          <div className="entries">
+            {battle.cars.map((car) => (
+              <div key={car.index} className="entry-card">
+                <div className="entry-rank">#{car.index}</div>
+                <h3>{car.label}</h3>
+                <p className="label">{car.generation_label || `Generation range ${car.generation_start}-${car.generation_end}`}</p>
+                <div className="thumbs">
+                  {(car.photos || []).length === 0 && <span className="no-images">no exterior photos found</span>}
+                  {(car.photos || []).map((img, j) => (
+                    <a key={j} href={battleRawUrl(img)} target="_blank" rel="noreferrer">
+                      <img src={battleRawUrl(img)} alt={`${car.label} exterior`} />
+                    </a>
+                  ))}
+                </div>
+                {car.approved && car.clip_path ? (
+                  <article className="video-probe-card entry-engine-clip">
+                    <video controls src={battleRawUrl(car.clip_path)} preload="metadata" />
+                    <p className="hint">Clip length: {car.clip_duration}s</p>
+                  </article>
+                ) : (
+                  <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="render-actions">
+            <button
+              className="generate-btn"
+              onClick={handleBattleRender}
+              disabled={stage === "generating" || battle.approved_count < 2}
+            >
+              {stage === "generating" ? "Rendering Battle..." : "Render Battle Video"}
+            </button>
+          </div>
+          {battle.approved_count < 2 && (
+            <p className="hint">Need at least 2 approved cars to render. Try different years/models for the failed ones.</p>
+          )}
+        </div>
+      )}
+
+      {battleVideoUrl && (
+        <div className="video-panel">
+          <h2>Done</h2>
+          <div className="video-player">
+            <video controls src={battleVideoUrl} width="360" />
+            <p><a href={battleVideoUrl} target="_blank" rel="noreferrer">Open video directly</a></p>
+          </div>
+        </div>
       )}
 
       {research && (

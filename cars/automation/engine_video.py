@@ -329,7 +329,42 @@ def _verify_frames(contact_sheet, entry):
     return result
 
 
-def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False):
+def _detect_natural_duration(wav_path, onset, min_duration, max_duration):
+    """How long the engine event stays audibly elevated after onset.
+
+    Used by exterior-only "battle" clips, which should run exactly as long as
+    the real startup/idle lasts (a 4s event stays 4s, a 6s one stays 6s)
+    instead of always being cut to one fixed length.
+    """
+    with wave.open(str(wav_path), "rb") as stream:
+        rate = stream.getframerate()
+        samples = stream.readframes(stream.getnframes())
+    values = [int.from_bytes(samples[i:i + 2], "little", signed=True) for i in range(0, len(samples), 2)]
+    total_seconds = len(values) / rate
+    baseline_start = max(0, int((onset - 1.0) * rate))
+    baseline_end = max(baseline_start + 1, int(onset * rate))
+    baseline = values[baseline_start:baseline_end]
+    baseline_rms = math.sqrt(sum(v * v for v in baseline) / max(1, len(baseline))) if baseline else 0.0
+    threshold = max(baseline_rms * 1.4, 1.0)
+    window = max(1, rate // 5)
+    start_sample = int(onset * rate)
+    for offset in range(start_sample, len(values), window):
+        chunk = values[offset:offset + window]
+        if not chunk:
+            break
+        elapsed = (offset - start_sample) / rate
+        if elapsed < min_duration:
+            continue
+        chunk_rms = math.sqrt(sum(v * v for v in chunk) / len(chunk))
+        if chunk_rms <= threshold:
+            return max(min_duration, min(max_duration, elapsed))
+    return max(min_duration, min(max_duration, max(0.0, total_seconds - onset)))
+
+
+def prepare_engine_clip(
+    entry, output_dir, duration=5.0, allow_irrelevant=False,
+    exterior_only=False, min_duration=3.0, max_duration=8.0,
+):
     candidates = [item for item in entry.engine_videos if item.get("playback_url") or item.get("url")]
     if not candidates:
         return None
@@ -412,6 +447,19 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
         if not analyses:
             return {"approved": False, "error": "No discovered video had usable audio", "source": candidates[0]}
 
+        if exterior_only:
+            exterior_analyses = [
+                item for item in analyses
+                if item["scene_review"].get("scene_type") not in INTERIOR_SCENE_TYPES
+            ]
+            if not exterior_analyses:
+                return {
+                    "approved": False,
+                    "error": "Only interior/cockpit startup footage found; exterior-only mode requires an outside view",
+                    "source": candidates[0],
+                }
+            analyses = exterior_analyses
+
         best_tier = min(_selection_tier(item["scene_review"].get("scene_type")) for item in analyses)
         tier_candidates = [
             item for item in analyses
@@ -424,7 +472,11 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
         candidate = chosen["candidate"]
         source = candidate.get("playback_url") or candidate.get("url")
         source_duration = _media_duration(source) or chosen["audio_duration"]
-        onset = min(chosen["onset"], max(0.0, source_duration - duration))
+        effective_duration = (
+            _detect_natural_duration(chosen["probe_wav"], chosen["onset"], min_duration, max_duration)
+            if duration is None else duration
+        )
+        onset = min(chosen["onset"], max(0.0, source_duration - effective_duration))
 
         # The platform thumbnail is a fixed early frame and can miss whatever
         # is actually happening at the detected audio event (e.g. a rev
@@ -473,15 +525,20 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
                 or has_strong_audio
             )
         )
+        if exterior_only and scene_type in INTERIOR_SCENE_TYPES:
+            # A hard override, not just a preference: exterior-only battle
+            # clips must never approve a cockpit/interior view even if the
+            # platform label and audio otherwise look convincing.
+            engine_relevant = False
         _run([
             # Seek after opening the HLS input. This is slower than input-side
             # seeking but does not jump past the final video keyframe when the
             # interesting exhaust event occurs at the end of the source.
-            "ffmpeg", "-y", "-i", source, "-ss", f"{onset:.3f}", "-t", str(duration),
+            "ffmpeg", "-y", "-i", source, "-ss", f"{onset:.3f}", "-t", str(effective_duration),
             "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-preset", "veryfast",
             "-c:a", "aac", "-avoid_negative_ts", "make_zero", "-movflags", "+faststart", str(clip_path),
         ])
-        clip_duration = min(duration, _media_duration(str(clip_path)))
+        clip_duration = min(effective_duration, _media_duration(str(clip_path)))
         if clip_duration < 0.35:
             raise RuntimeError(f"Extracted clip is too short ({clip_duration:.2f}s)")
         frame_paths = []
@@ -506,7 +563,7 @@ def prepare_engine_clip(entry, output_dir, duration=5.0, allow_irrelevant=False)
         return {
             "approved": bool(review.get("approved") and engine_relevant),
             "path": clip_path,
-            "duration": duration,
+            "duration": clip_duration,
             "detected_onset_seconds": round(onset, 3),
             "engine_event_score": round(chosen["event_score"], 3),
             "scene_review": onset_scene_review,

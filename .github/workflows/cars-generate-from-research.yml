@@ -10,6 +10,14 @@ on:
         description: "Draft folder id from the research stage"
         required: true
         type: string
+      mode:
+        description: "Ranking video (narrated countdown) or startup battle"
+        required: false
+        type: choice
+        default: ranking
+        options:
+          - ranking
+          - battle
       tts_provider:
         description: "Voice provider"
         required: false
@@ -67,6 +75,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Load researched draft from output branch
+        if: ${{ inputs.mode == 'ranking' }}
         run: |
           set -euo pipefail
           git fetch origin "${OUTPUT_BRANCH}" || true
@@ -77,7 +86,20 @@ jobs:
             exit 1
           fi
 
+      - name: Load researched battle from output branch
+        if: ${{ inputs.mode == 'battle' }}
+        run: |
+          set -euo pipefail
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git checkout "origin/${OUTPUT_BRANCH}" -- "cars/battles/${{ inputs.draft_id }}"
+          else
+            echo "Output branch ${OUTPUT_BRANCH} does not exist yet."
+            exit 1
+          fi
+
       - name: Render video
+        if: ${{ inputs.mode == 'ranking' }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           FAST_MODE: ${{ inputs.render_quality == 'quick' && '1' || '0' }}
@@ -95,7 +117,18 @@ jobs:
             --output-name "$OUTPUT_NAME" \
             $QUALITY_FLAG
 
+      - name: Render battle video
+        if: ${{ inputs.mode == 'battle' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FAST_MODE: "0"
+        run: |
+          python cars/automation/battle_engine.py \
+            --battle-id "${{ inputs.draft_id }}" \
+            --output-name "battle_short.mp4"
+
       - name: Commit video
+        if: ${{ inputs.mode == 'ranking' }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -117,5 +150,31 @@ jobs:
 
           git add "cars/drafts/${{ inputs.draft_id }}"
           git commit -m "cars: generate video for draft ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit battle video
+        if: ${{ inputs.mode == 'battle' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/battles"
+          cp -R "cars/battles/${{ inputs.draft_id }}" "$tmp_dir/cars/battles/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p "cars/battles"
+          rm -rf "cars/battles/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/battles/${{ inputs.draft_id }}" "cars/battles/${{ inputs.draft_id }}"
+
+          git add "cars/battles/${{ inputs.draft_id }}"
+          git commit -m "cars: generate battle video ${{ inputs.draft_id }}" || exit 0
           git pull --rebase origin "${OUTPUT_BRANCH}" || true
           git push origin "${OUTPUT_BRANCH}"
