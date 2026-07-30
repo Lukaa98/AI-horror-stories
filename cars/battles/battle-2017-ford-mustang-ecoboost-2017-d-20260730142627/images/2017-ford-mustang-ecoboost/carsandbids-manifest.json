@@ -1,0 +1,661 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-30T14:28:19.835Z",
+  "query": "Ford Mustang EcoBoost",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=2015&end_year=2023&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9n1voWBJ/2020-ford-mustang-ecoboost-coupe",
+      "title": "Time Left 4 Days Bid $15,000",
+      "text": "Time Left 4 Days Bid $15,000",
+      "titleYear": 2020,
+      "score": 82
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "title": "2019 Ford Mustang Shelby Gt350",
+      "text": "Sold for $59,500",
+      "titleYear": 2019,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "title": "2015 Ford Mustang Gt Premium Convertible Neiman Marcus Edition",
+      "text": "Sold for $48,750",
+      "titleYear": 2015,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "title": "2017 Ford Mustang Shelby Gt350r",
+      "text": "Sold for $70,000",
+      "titleYear": 2017,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yYYRalo/2019-ford-mustang-shelby-gt350r",
+      "title": "2019 Ford Mustang Shelby Gt350r",
+      "text": "Sold for $73,500",
+      "titleYear": 2019,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rG1nXQAd/2019-ford-mustang-shelby-gt350",
+      "title": "2019 Ford Mustang Shelby Gt350",
+      "text": "Sold for $64,500",
+      "titleYear": 2019,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9n1voWBJ/2020-ford-mustang-ecoboost-coupe",
+      "title": "Time Left 4 Days Bid $15,000",
+      "text": "Time Left 4 Days Bid $15,000",
+      "titleYear": 2020,
+      "score": 82,
+      "usable_image_count": 24,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2020 Ford Mustang EcoBoost Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "title": "2019 Ford Mustang Shelby Gt350",
+      "text": "Sold for $59,500",
+      "titleYear": 2019,
+      "score": 70,
+      "usable_image_count": 18,
+      "sale_price": 59500,
+      "sale_type": "sold",
+      "page_title": "2019 Ford Mustang Shelby GT350"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "title": "2015 Ford Mustang Gt Premium Convertible Neiman Marcus Edition",
+      "text": "Sold for $48,750",
+      "titleYear": 2015,
+      "score": 70,
+      "usable_image_count": 21,
+      "sale_price": 48750,
+      "sale_type": "sold",
+      "page_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "title": "2017 Ford Mustang Shelby Gt350r",
+      "text": "Sold for $70,000",
+      "titleYear": 2017,
+      "score": 70,
+      "usable_image_count": 27,
+      "sale_price": 70000,
+      "sale_type": "sold",
+      "page_title": "2017 Ford Mustang Shelby GT350R"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9n1voWBJ/2020-ford-mustang-ecoboost-coupe",
+    "title": "Time Left 4 Days Bid $15,000",
+    "text": "Time Left 4 Days Bid $15,000",
+    "titleYear": 2020,
+    "score": 82,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2020 Ford Mustang EcoBoost Coupe",
+    "year": 2020,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/interior/r4pO2NbV-r-Lz3r6/edit/n-j3g.jpg?t=178475870772",
+      "labels": [
+        "interior"
+      ],
+      "section": "2020 Ford Mustang EcoBoost Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 374292
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/exterior/r4pO2NbV-B6W6aIl/edit/tGg0u.jpg?t=178475867917",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2020 Ford Mustang EcoBoost Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 368335
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/interior/r4pO2NbV-RfowCC8/edit/aJZdw.jpg?t=178475917199",
+      "labels": [
+        "interior"
+      ],
+      "section": "2020 Ford Mustang EcoBoost Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 213679
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/r4pO2NbV-G7Iox3b/edit/oSHXP.jpg?t=178477414764",
+      "labels": [
+        "interior"
+      ],
+      "section": "2020 Ford Mustang EcoBoost Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 227663
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/r4pO2NbV-UCWeO52/edit/V5Pjq.jpg?t=178477418000",
+      "labels": [
+        "interior"
+      ],
+      "section": "2020 Ford Mustang EcoBoost Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 223599
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/interior/r4pO2NbV-L-LN0f_/edit/S18Iv.jpg?t=178475923711",
+      "labels": [
+        "interior"
+      ],
+      "section": "2020 Ford Mustang EcoBoost Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 142983
+    },
+    {
+      "path": "exterior-07.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/r4pO2NbV-RHAzOMBvfP.jpeg?t=178475892754",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2020 Ford Mustang EcoBoost Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 291937
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/exterior/r4pO2NbV-M14eXz0/edit/wpM9D.jpg?t=178475857680",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2020 Ford Mustang EcoBoost Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 388582
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f93f0827fcca9475f5c62ffdf39d728e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f93f0827fcca9475f5c62ffdf39d728e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Ford Mustang EcoBoost Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f93f0827fcca9475f5c62ffdf39d728e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9n1voWBJ/2020-ford-mustang-ecoboost-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f93f0827fcca9475f5c62ffdf39d728e/manifest/video.m3u8",
+      "auction_title": "2020 Ford Mustang EcoBoost Coupe",
+      "auction_year": 2020,
+      "search_score": 82
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1fbd3fd746ec09f21ae8a4916255ec6/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1fbd3fd746ec09f21ae8a4916255ec6/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Ford Mustang EcoBoost Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1fbd3fd746ec09f21ae8a4916255ec6/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9n1voWBJ/2020-ford-mustang-ecoboost-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1fbd3fd746ec09f21ae8a4916255ec6/manifest/video.m3u8",
+      "auction_title": "2020 Ford Mustang EcoBoost Coupe",
+      "auction_year": 2020,
+      "search_score": 82
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3cbe6fcfd121480f5c090475eafab069/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3cbe6fcfd121480f5c090475eafab069/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Ford Mustang EcoBoost Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3cbe6fcfd121480f5c090475eafab069/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9n1voWBJ/2020-ford-mustang-ecoboost-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3cbe6fcfd121480f5c090475eafab069/manifest/video.m3u8",
+      "auction_title": "2020 Ford Mustang EcoBoost Coupe",
+      "auction_year": 2020,
+      "search_score": 82
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9a72aafe47ad41429c1904bf976686a2/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9a72aafe47ad41429c1904bf976686a2/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Ford Mustang EcoBoost Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9a72aafe47ad41429c1904bf976686a2/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9n1voWBJ/2020-ford-mustang-ecoboost-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9a72aafe47ad41429c1904bf976686a2/manifest/video.m3u8",
+      "auction_title": "2020 Ford Mustang EcoBoost Coupe",
+      "auction_year": 2020,
+      "search_score": 82
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/93c2dc5ff1987507f852998bff8035bd/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/93c2dc5ff1987507f852998bff8035bd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Ford Mustang EcoBoost Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/93c2dc5ff1987507f852998bff8035bd/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9n1voWBJ/2020-ford-mustang-ecoboost-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/93c2dc5ff1987507f852998bff8035bd/manifest/video.m3u8",
+      "auction_title": "2020 Ford Mustang EcoBoost Coupe",
+      "auction_year": 2020,
+      "search_score": 82
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5988b5646ccad43fa29a7ab161a5968e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5988b5646ccad43fa29a7ab161a5968e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5988b5646ccad43fa29a7ab161a5968e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5988b5646ccad43fa29a7ab161a5968e/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8a4077fcd8de7f237c8956d4d1357e2a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8a4077fcd8de7f237c8956d4d1357e2a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8a4077fcd8de7f237c8956d4d1357e2a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8a4077fcd8de7f237c8956d4d1357e2a/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7fadb46b691002270d84bde57d3b5ae4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7fadb46b691002270d84bde57d3b5ae4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7fadb46b691002270d84bde57d3b5ae4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7fadb46b691002270d84bde57d3b5ae4/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d74209e46651d92fe08a3f25f6c4af52/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d74209e46651d92fe08a3f25f6c4af52/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d74209e46651d92fe08a3f25f6c4af52/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d74209e46651d92fe08a3f25f6c4af52/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1ab0264c21f1a1204f4d9a19a22b548e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1ab0264c21f1a1204f4d9a19a22b548e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1ab0264c21f1a1204f4d9a19a22b548e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1ab0264c21f1a1204f4d9a19a22b548e/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/manifest/video.m3u8",
+      "auction_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "auction_year": 2015,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/manifest/video.m3u8",
+      "auction_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "auction_year": 2015,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/manifest/video.m3u8",
+      "auction_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "auction_year": 2015,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2ffd758f131d8492141d6f4bf43e86ce/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2ffd758f131d8492141d6f4bf43e86ce/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2ffd758f131d8492141d6f4bf43e86ce/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2ffd758f131d8492141d6f4bf43e86ce/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c4952e618aa38b0188c2c633d7e47bc2/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c4952e618aa38b0188c2c633d7e47bc2/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c4952e618aa38b0188c2c633d7e47bc2/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c4952e618aa38b0188c2c633d7e47bc2/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fc1e3bf3219e0bd276873c585b86c772/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fc1e3bf3219e0bd276873c585b86c772/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fc1e3bf3219e0bd276873c585b86c772/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fc1e3bf3219e0bd276873c585b86c772/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/757d09f46792bcea1f5b7663a7ea9ff4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/757d09f46792bcea1f5b7663a7ea9ff4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/757d09f46792bcea1f5b7663a7ea9ff4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/757d09f46792bcea1f5b7663a7ea9ff4/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c52804bb0eaaff1246b9b751fe2174c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c52804bb0eaaff1246b9b751fe2174c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c52804bb0eaaff1246b9b751fe2174c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c52804bb0eaaff1246b9b751fe2174c/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c94b3f061b9f0aef0f43bcb4733df3a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c94b3f061b9f0aef0f43bcb4733df3a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c94b3f061b9f0aef0f43bcb4733df3a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c94b3f061b9f0aef0f43bcb4733df3a/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 70
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "green color",
+          "hockey stick lights",
+          "vented hood",
+          "GT badge"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2018-2023",
+        "detected_variant_or_engine": "EcoBoost",
+        "visible_match_evidence": [
+          "make logo",
+          "body shape",
+          "front design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "body shape",
+          "rear lights",
+          "spoiler design"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ford emblem",
+          "Mustang badge",
+          "Body style consistent with Mustang",
+          "Headlight design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2015-2023",
+        "detected_variant_or_engine": "EcoBoost",
+        "visible_match_evidence": [
+          "Mustang logo on steering wheel",
+          "Interior design consistent with Ford Mustang",
+          "Dashboard layout aligns with 2017 Mustang"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2015-2023",
+        "detected_variant_or_engine": "EcoBoost",
+        "visible_match_evidence": [
+          "Ford badge on steering wheel",
+          "Interior design matches Mustang style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "EcoBoost",
+        "visible_match_evidence": [
+          "gear shifter",
+          "controls layout",
+          "interior design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the exterior of the vehicle, which is required for correct identification.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

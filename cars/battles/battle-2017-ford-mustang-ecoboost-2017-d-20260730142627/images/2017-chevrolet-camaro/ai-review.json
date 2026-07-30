@@ -1,0 +1,216 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Camaro",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": "ZL1",
+      "visible_match_evidence": [
+        "specific bodywork",
+        "proportions",
+        "design features",
+        "ZL1 badge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Camaro",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": "ZL1",
+      "visible_match_evidence": [
+        "Chevrolet badge",
+        "front fascia design",
+        "hood vents",
+        "headlight shape",
+        "overall proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "bodywork",
+        "proportions",
+        "lighting",
+        "trim design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "side"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2016-2023",
+      "detected_variant_or_engine": "ZL1",
+      "visible_match_evidence": [
+        "distinctive rear tail lights",
+        "ZL1 badge",
+        "body styling consistent with Camaro"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": null,
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "dash layout",
+        "steering wheel"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": "ZL1",
+      "visible_match_evidence": [
+        "interior design",
+        "ZL1 badge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "shifter style",
+        "interior design",
+        "red stitching"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 2,
+      "composition_score": 3,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image is of the dashboard/instrument cluster, not the vehicle exterior.",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}
