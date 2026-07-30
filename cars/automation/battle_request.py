@@ -81,13 +81,21 @@ def lookup_generation_range(make, model, year):
     return int(year), int(year), ""
 
 
+def trim_fallback_ladder(trim):
+    """Progressively broaden a trim by dropping its last word, e.g.
+    "GT4 RS" -> ["GT4 RS", "GT4", ""] -- the last rung is always the bare
+    model with no trim at all, so there's always somewhere to land."""
+    words = trim.split()
+    ladder = [" ".join(words[:i]) for i in range(len(words), 0, -1)]
+    if not ladder or ladder[-1] != "":
+        ladder.append("")
+    return ladder
+
+
 def build_car_entry(make, model, year, index, trim=""):
     start_year, end_year, generation_label = lookup_generation_range(make, model, year)
-    model_display = f"{model} {trim}".strip() if trim else model
-    label = f"{year} {make} {model_display}".strip()
     return {
         "index": index,
-        "label": label,
         "make": make,
         "model": model,
         "trim": trim or None,
@@ -95,9 +103,20 @@ def build_car_entry(make, model, year, index, trim=""):
         "generation_start": start_year,
         "generation_end": end_year,
         "generation_label": generation_label,
-        "name": label,
         "years": f"{start_year}-{end_year}" if start_year != end_year else str(start_year),
-        "search_hint": f"{make} {model_display}",
+    }
+
+
+def build_search_variant(car_entry, trim_variant):
+    """A make/model/(optional trim) combination to actually search for --
+    one rung of the trim fallback ladder."""
+    model_display = f"{car_entry['model']} {trim_variant}".strip() if trim_variant else car_entry["model"]
+    label = f"{car_entry['year']} {car_entry['make']} {model_display}".strip()
+    return {
+        "name": label,
+        "label": label,
+        "years": car_entry["years"],
+        "search_hint": f"{car_entry['make']} {model_display}",
         "visual_highlight": "",
         "commons_search_terms": [],
     }
@@ -139,16 +158,38 @@ def build_startup_clip(car_entry, images_dir):
 
 
 def process_car(car_entry, images_dir):
-    print(f"[battle] {car_entry['label']} -> generation range {car_entry['years']}")
-    photos = gather_exterior_photos(car_entry, images_dir)
-    clip_result = build_startup_clip(car_entry, images_dir)
+    requested_trim = car_entry["trim"]
+    ladder = trim_fallback_ladder(requested_trim or "")
+    photos, clip_result, matched_trim = [], {"approved": False}, ladder[-1]
+    attempted_clip_paths = []
+    for trim_variant in ladder:
+        variant = build_search_variant(car_entry, trim_variant)
+        print(f"[battle] Trying '{variant['search_hint']}' -> generation range {variant['years']}")
+        variant_photos = gather_exterior_photos(variant, images_dir)
+        variant_clip = build_startup_clip(variant, images_dir)
+        if variant_clip.get("path"):
+            attempted_clip_paths.append(Path(variant_clip["path"]))
+        photos, clip_result, matched_trim = variant_photos, variant_clip, trim_variant
+        if bool(variant_clip.get("approved")) and len(variant_photos) >= 2:
+            break
+
+    final_path = clip_result.get("path")
+    for path in attempted_clip_paths:
+        if path != final_path:
+            path.unlink(missing_ok=True)
+
     approved = bool(clip_result.get("approved")) and len(photos) >= 2
+    matched_trim = matched_trim or None
+    model_display = f"{car_entry['model']} {matched_trim}".strip() if matched_trim else car_entry["model"]
+    label = f"{car_entry['year']} {car_entry['make']} {model_display}".strip()
     entry = {
         "index": car_entry["index"],
-        "label": car_entry["label"],
+        "label": label,
         "make": car_entry["make"],
         "model": car_entry["model"],
-        "trim": car_entry["trim"],
+        "trim_requested": requested_trim,
+        "trim_used": matched_trim if approved else None,
+        "fallback_applied": bool(approved and requested_trim and matched_trim != requested_trim),
         "year": car_entry["year"],
         "generation_start": car_entry["generation_start"],
         "generation_end": car_entry["generation_end"],
@@ -160,8 +201,8 @@ def process_car(car_entry, images_dir):
         "scene_review": clip_result.get("scene_review"),
         "source": clip_result.get("source"),
     }
-    if clip_result.get("path"):
-        relative_clip = Path(clip_result["path"]).relative_to(images_dir.parent)
+    if final_path:
+        relative_clip = Path(final_path).relative_to(images_dir.parent)
         entry["clip_path"] = str(relative_clip).replace("\\", "/")
         entry["clip_duration"] = round(float(clip_result.get("duration") or MIN_CLIP_SECONDS), 3)
     else:

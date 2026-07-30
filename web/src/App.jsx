@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.41";
+const UI_VERSION = "V10.42";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -35,46 +35,108 @@ const WORKFLOW_OPTIONS = [
   },
 ];
 
+// Curated instead of API-driven: live make/model APIs either return
+// thousands of irrelevant entries (vPIC) or have dead endpoints for trims
+// (CarQuery). This covers mainstream muscle/sports cars plus the enthusiast
+// exotics people actually put in a startup battle. "Other (type manually)"
+// on every level is the escape hatch for anything not listed here.
+const OTHER_VALUE = "__other__";
+const ENTHUSIAST_CARS = {
+  Ford: {
+    Mustang: ["V6", "EcoBoost", "GT", "Mach 1", "Bullitt", "Boss 302", "GT350", "GT350R", "Shelby GT500"],
+    Focus: ["ST", "RS"],
+    "Ford GT": [],
+  },
+  Chevrolet: {
+    Camaro: ["LT1", "SS", "1LE", "ZL1", "ZL1 1LE", "Z/28"],
+    Corvette: ["Stingray", "Z51", "Grand Sport", "Z06", "ZR1"],
+  },
+  Dodge: {
+    Challenger: ["SXT", "R/T", "R/T Scat Pack", "SRT 392", "SRT Hellcat", "SRT Hellcat Redeye", "SRT Demon", "SRT Demon 170", "SRT Super Stock"],
+    Charger: ["R/T", "Scat Pack", "SRT Hellcat", "SRT Hellcat Redeye"],
+    Viper: ["SRT", "GTS", "ACR", "GTC"],
+  },
+  Porsche: {
+    "911": ["Carrera", "Carrera S", "Carrera 4S", "Targa", "Turbo", "Turbo S", "GT3", "GT3 RS", "GT2 RS", "Speedster", "Sport Classic"],
+    Cayman: ["S", "GTS", "GT4", "GT4 RS"],
+    Boxster: ["S", "GTS", "Spyder"],
+  },
+  Ferrari: {
+    "458": ["Italia", "Spider", "Speciale", "Speciale Aperta"],
+    "488": ["GTB", "Spider", "Pista", "Pista Spider"],
+    F8: ["Tributo", "Spider"],
+    "812": ["Superfast", "GTS", "Competizione"],
+    Roma: [],
+    Portofino: [],
+    SF90: ["Stradale", "Spider"],
+    "296": ["GTB", "GTS"],
+  },
+  Lamborghini: {
+    Huracan: ["LP580-2", "LP610-4", "Performante", "EVO", "EVO Spyder", "STO", "Tecnica"],
+    Aventador: ["LP700-4", "SV", "SVJ", "Ultimae"],
+    Gallardo: ["LP560-4", "Superleggera", "LP570-4"],
+    Urus: ["S", "Performante"],
+  },
+  Nissan: {
+    "GT-R": ["Premium", "Track Edition", "Nismo", "Black Edition", "T-spec"],
+    "370Z": ["Base", "Touring", "Nismo"],
+    Z: ["Sport", "Performance", "Nismo"],
+  },
+  Toyota: {
+    Supra: ["2.0", "3.0", "3.0 Premium", "A90 Edition"],
+    GR86: ["Base", "Premium"],
+    "GR Corolla": ["Core", "Circuit", "Morizo"],
+  },
+  BMW: {
+    M2: ["Base", "Competition", "CS"],
+    M3: ["Base", "Competition", "CS", "GTS"],
+    M4: ["Base", "Competition", "CS", "CSL"],
+    M5: ["Base", "Competition", "CS"],
+  },
+  "Mercedes-Benz": {
+    "AMG GT": ["Base", "S", "R", "C", "Black Series"],
+    "C63 AMG": ["S", "Black Series"],
+    "E63 AMG": ["S"],
+  },
+  Audi: {
+    R8: ["V8", "V10", "V10 Plus", "V10 Performance", "V10 Decennium"],
+    RS3: [],
+    RS6: [],
+    RS7: [],
+    "TT RS": [],
+  },
+  Acura: { NSX: ["Base", "Type S"] },
+  Subaru: { "WRX STI": [], BRZ: ["Base", "tS"] },
+  Mazda: { "MX-5 Miata": ["Base", "Club", "RF"], "RX-7": ["Base", "Turbo"] },
+  Honda: { "Civic Type R": [], S2000: [] },
+  Mitsubishi: { "Lancer Evolution": ["VIII", "IX", "X", "X Final Edition"] },
+  McLaren: { "570S": [], "720S": [], "765LT": [], Artura: [] },
+  "Aston Martin": { Vantage: [], DB11: [], DBS: [] },
+};
+
 function makeBattleCarRow() {
+  return { make: "", model: "", trim: "", year: "", makeCustom: "", modelCustom: "", trimCustom: "" };
+}
+
+function battleModelOptions(car) {
+  return ENTHUSIAST_CARS[car.make] ? Object.keys(ENTHUSIAST_CARS[car.make]) : [];
+}
+
+function battleTrimOptions(car) {
+  return (ENTHUSIAST_CARS[car.make] && ENTHUSIAST_CARS[car.make][car.model]) || [];
+}
+
+function resolveBattleCarField(selected, custom) {
+  return (selected === OTHER_VALUE ? custom : selected).trim();
+}
+
+function resolveBattleCar(car) {
   return {
-    make: "", model: "", trim: "", year: "",
-    models: [], modelsLoading: false, fieldError: null,
+    make: resolveBattleCarField(car.make, car.makeCustom),
+    model: resolveBattleCarField(car.model, car.modelCustom),
+    trim: resolveBattleCarField(car.trim, car.trimCustom),
+    year: car.year.trim(),
   };
-}
-
-const VPIC_BASE = "https://vpic.nhtsa.dot.gov/api/vehicles";
-
-// Default Make filter: NHTSA's full car-make list includes hundreds of
-// obscure, foreign-market-only, or kit-car manufacturers that just add noise
-// for this project. This is a filter over live API data, not a source of
-// truth -- "Show all manufacturers" bypasses it entirely for anything not on
-// this list.
-const NORTH_AMERICA_MAKES = new Set([
-  "ACURA", "ALFA ROMEO", "AMC", "ASTON MARTIN", "AUDI", "BENTLEY", "BMW",
-  "BUICK", "CADILLAC", "CHEVROLET", "CHRYSLER", "DATSUN", "DODGE", "EAGLE",
-  "FERRARI", "FIAT", "FORD", "GENESIS", "GMC", "HONDA", "HUMMER", "HYUNDAI",
-  "INFINITI", "JAGUAR", "JEEP", "KIA", "LAMBORGHINI", "LAND ROVER", "LEXUS",
-  "LINCOLN", "LOTUS", "LUCID", "MASERATI", "MAZDA", "MCLAREN",
-  "MERCEDES-BENZ", "MERCURY", "MINI", "MITSUBISHI", "NISSAN", "OLDSMOBILE",
-  "PLYMOUTH", "POLESTAR", "PONTIAC", "PORSCHE", "RAM", "RIVIAN",
-  "ROLLS-ROYCE", "SAAB", "SATURN", "SCION", "SUBARU", "TESLA", "TOYOTA",
-  "VOLKSWAGEN", "VOLVO",
-]);
-
-async function fetchJsonLenient(url) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Request failed (${res.status})`);
-  return res.json();
-}
-
-async function fetchCarMakes() {
-  const data = await fetchJsonLenient(`${VPIC_BASE}/GetMakesForVehicleType/car?format=json`);
-  return Array.from(new Set((data.Results || []).map((item) => item.MakeName))).filter(Boolean).sort();
-}
-
-async function fetchCarModels(make) {
-  const data = await fetchJsonLenient(`${VPIC_BASE}/GetModelsForMake/${encodeURIComponent(make)}?format=json`);
-  return Array.from(new Set((data.Results || []).map((item) => item.Model_Name))).filter(Boolean).sort();
 }
 
 function loadSettings() {
@@ -404,9 +466,6 @@ export default function App() {
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
   const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
-  const [carMakes, setCarMakes] = useState([]);
-  const [carMakesError, setCarMakesError] = useState(null);
-  const [showAllMakes, setShowAllMakes] = useState(false);
   const [battleId, setBattleId] = useState(null);
   const [battle, setBattle] = useState(null);
   const [battleVideoUrl, setBattleVideoUrl] = useState(null);
@@ -427,11 +486,6 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view]);
 
-  useEffect(() => {
-    fetchCarMakes()
-      .then(setCarMakes)
-      .catch((err) => setCarMakesError(String(err.message || err)));
-  }, []);
 
   const repoOk = settings.token && settings.owner && settings.repo && settings.branch;
   const builtRequest = buildStructuredRequest({ workflow, make, model, focus, startYear, endYear });
@@ -610,29 +664,14 @@ export default function App() {
   }
 
   function updateBattleCar(index, field, value) {
-    setBattleCars((prev) => prev.map((car, i) => (i === index ? { ...car, [field]: value } : car)));
+    setBattleCars((prev) => prev.map((car, i) => {
+      if (i !== index) return car;
+      if (field === "make") return { ...car, make: value, makeCustom: "", model: "", modelCustom: "", trim: "", trimCustom: "" };
+      if (field === "model") return { ...car, model: value, modelCustom: "", trim: "", trimCustom: "" };
+      if (field === "trim") return { ...car, trim: value, trimCustom: "" };
+      return { ...car, [field]: value };
+    }));
   }
-
-  async function handleBattleMakeChange(index, make) {
-    setBattleCars((prev) => prev.map((car, i) => (
-      i === index
-        ? { ...car, make, model: "", trim: "", year: "", models: [], modelsLoading: !!make, fieldError: null }
-        : car
-    )));
-    if (!make) return;
-    try {
-      const models = await fetchCarModels(make);
-      setBattleCars((prev) => prev.map((car, i) => (
-        i === index && car.make === make ? { ...car, models, modelsLoading: false } : car
-      )));
-    } catch (err) {
-      setBattleCars((prev) => prev.map((car, i) => (
-        i === index ? { ...car, modelsLoading: false, fieldError: `Could not load models: ${err.message}` } : car
-      )));
-    }
-  }
-
-  const visibleMakes = showAllMakes ? carMakes : carMakes.filter((name) => NORTH_AMERICA_MAKES.has(name.toUpperCase()));
 
   function addBattleCar() {
     setBattleCars((prev) => (prev.length >= MAX_BATTLE_CARS ? prev : [...prev, makeBattleCarRow()]));
@@ -642,19 +681,17 @@ export default function App() {
     setBattleCars((prev) => (prev.length <= MIN_BATTLE_CARS ? prev : prev.filter((_, i) => i !== index)));
   }
 
-  const battleCarsValid = battleCars.every((car) => car.make.trim() && car.model.trim() && car.year.trim());
+  const battleCarsValid = battleCars.every((car) => {
+    const resolved = resolveBattleCar(car);
+    return resolved.make && resolved.model && resolved.year;
+  });
 
   async function handleBattleResearch() {
     if (!repoOk || !battleCarsValid) return;
     setError(null);
     setBattle(null);
     setBattleVideoUrl(null);
-    const carsList = battleCars.map((car) => ({
-      make: car.make.trim(),
-      model: car.model.trim(),
-      trim: (car.trim || "").trim(),
-      year: car.year.trim(),
-    }));
+    const carsList = battleCars.map(resolveBattleCar);
     const summary = carsList.map((car) => `${car.year} ${car.make} ${[car.model, car.trim].filter(Boolean).join(" ")}`).join(", ");
     const id = makeDraftId(`battle-${summary}`);
     setBattleId(id);
@@ -1028,6 +1065,11 @@ export default function App() {
                               </a>
                             ))}
                           </div>
+                          {car.fallback_applied && (
+                            <p className="hint">
+                              Requested trim &quot;{car.trim_requested}&quot; not found; used &quot;{car.trim_used || "base model"}&quot; instead.
+                            </p>
+                          )}
                           {car.approved && car.clip_path ? (
                             <article className="video-probe-card entry-engine-clip">
                               <video controls src={dashboardRawUrl(item, car.clip_path)} preload="metadata" />
@@ -1139,74 +1181,89 @@ export default function App() {
 
           {workflow === "battle" ? (
             <div className="battle-cars">
-              {carMakesError && (
-                <p className="hint">
-                  Could not load the make list from NHTSA's vPIC API ({carMakesError}). Falling back to free-text
-                  entry below.
-                </p>
-              )}
-              {!carMakesError && (
-                <label className="custom-toggle">
-                  <input
-                    type="checkbox"
-                    checked={showAllMakes}
-                    onChange={(e) => setShowAllMakes(e.target.checked)}
-                  />
-                  Show all manufacturers (worldwide list, not just North America)
-                </label>
-              )}
               {battleCars.map((car, index) => {
                 const disabled = stage === "researching" || stage === "generating";
+                const modelOptions = battleModelOptions(car);
+                const trimOptions = battleTrimOptions(car);
                 return (
                   <div className="battle-car-row" key={index}>
                     <label>
                       Make
-                      {carMakesError ? (
+                      <select value={car.make} onChange={(e) => updateBattleCar(index, "make", e.target.value)} disabled={disabled}>
+                        <option value="">Choose make</option>
+                        {Object.keys(ENTHUSIAST_CARS).map((name) => <option key={name} value={name}>{name}</option>)}
+                        <option value={OTHER_VALUE}>Other (type manually)</option>
+                      </select>
+                      {car.make === OTHER_VALUE && (
                         <input
-                          value={car.make}
-                          onChange={(e) => updateBattleCar(index, "make", e.target.value)}
-                          placeholder="Ford"
+                          value={car.makeCustom}
+                          onChange={(e) => updateBattleCar(index, "makeCustom", e.target.value)}
+                          placeholder="Make"
                           disabled={disabled}
                         />
-                      ) : (
-                        <select
-                          value={car.make}
-                          onChange={(e) => handleBattleMakeChange(index, e.target.value)}
-                          disabled={disabled || carMakes.length === 0}
-                        >
-                          <option value="">{carMakes.length ? "Choose make" : "Loading makes..."}</option>
-                          {visibleMakes.map((name) => <option key={name} value={name}>{name}</option>)}
-                        </select>
                       )}
                     </label>
                     <label>
                       Model
-                      {carMakesError ? (
-                        <input
-                          value={car.model}
-                          onChange={(e) => updateBattleCar(index, "model", e.target.value)}
-                          placeholder="Mustang"
-                          disabled={disabled}
-                        />
+                      {car.make && car.make !== OTHER_VALUE ? (
+                        <>
+                          <select
+                            value={car.model}
+                            onChange={(e) => updateBattleCar(index, "model", e.target.value)}
+                            disabled={disabled}
+                          >
+                            <option value="">Choose model</option>
+                            {modelOptions.map((name) => <option key={name} value={name}>{name}</option>)}
+                            <option value={OTHER_VALUE}>Other (type manually)</option>
+                          </select>
+                          {car.model === OTHER_VALUE && (
+                            <input
+                              value={car.modelCustom}
+                              onChange={(e) => updateBattleCar(index, "modelCustom", e.target.value)}
+                              placeholder="Model"
+                              disabled={disabled}
+                            />
+                          )}
+                        </>
                       ) : (
-                        <select
-                          value={car.model}
-                          onChange={(e) => handleBattleModelChange(index, e.target.value)}
-                          disabled={disabled || !car.make || car.modelsLoading}
-                        >
-                          <option value="">{car.modelsLoading ? "Loading models..." : "Choose model"}</option>
-                          {car.models.map((name) => <option key={name} value={name}>{name}</option>)}
-                        </select>
+                        <input
+                          value={car.modelCustom}
+                          onChange={(e) => updateBattleCar(index, "modelCustom", e.target.value)}
+                          placeholder="Model"
+                          disabled={disabled || !car.make}
+                        />
                       )}
                     </label>
                     <label>
                       Trim
-                      <input
-                        value={car.trim}
-                        onChange={(e) => updateBattleCar(index, "trim", e.target.value)}
-                        placeholder="GT350 (optional)"
-                        disabled={disabled}
-                      />
+                      {car.model && car.model !== OTHER_VALUE && trimOptions.length > 0 ? (
+                        <>
+                          <select
+                            value={car.trim}
+                            onChange={(e) => updateBattleCar(index, "trim", e.target.value)}
+                            disabled={disabled}
+                          >
+                            <option value="">Any / base</option>
+                            {trimOptions.map((name) => <option key={name} value={name}>{name}</option>)}
+                            <option value={OTHER_VALUE}>Other (type manually)</option>
+                          </select>
+                          {car.trim === OTHER_VALUE && (
+                            <input
+                              value={car.trimCustom}
+                              onChange={(e) => updateBattleCar(index, "trimCustom", e.target.value)}
+                              placeholder="Trim"
+                              disabled={disabled}
+                            />
+                          )}
+                        </>
+                      ) : (
+                        <input
+                          value={car.trimCustom}
+                          onChange={(e) => updateBattleCar(index, "trimCustom", e.target.value)}
+                          placeholder="GT350 (optional)"
+                          disabled={disabled}
+                        />
+                      )}
                     </label>
                     <label>
                       Year
@@ -1227,7 +1284,6 @@ export default function App() {
                     >
                       Remove
                     </button>
-                    {car.fieldError && <p className="error battle-car-error">{car.fieldError}</p>}
                   </div>
                 );
               })}
@@ -1240,10 +1296,9 @@ export default function App() {
                 + Add another car
               </button>
               <p className="hint">
-                Make and Model come from NHTSA's vPIC API, filtered to common North American makes by default (toggle
-                above to see every manufacturer vPIC knows). Trim is free text (GT350, GT500, Shelby, etc.) since no
-                free API reliably covers trim-level detail. Cars & Bids listings without an exterior-filmed cold
-                start are skipped either way.
+                Make/Model/Trim are curated (mainstream muscle + sports cars plus common exotics). Pick "Other" at
+                any level to type something not listed. If an exact trim like GT4 RS isn't found on Cars &amp; Bids,
+                the search automatically broadens (GT4 RS &rarr; GT4 &rarr; base Cayman) until it finds a listing.
               </p>
             </div>
           ) : (
@@ -1363,6 +1418,11 @@ export default function App() {
                     </a>
                   ))}
                 </div>
+                {car.fallback_applied && (
+                  <p className="hint">
+                    Requested trim &quot;{car.trim_requested}&quot; not found; used &quot;{car.trim_used || "base model"}&quot; instead.
+                  </p>
+                )}
                 {car.approved && car.clip_path ? (
                   <article className="video-probe-card entry-engine-clip">
                     <video controls src={battleRawUrl(car.clip_path)} preload="metadata" />

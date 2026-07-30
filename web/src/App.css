@@ -131,11 +131,6 @@ h1 {
   align-items: end;
 }
 
-.battle-car-error {
-  grid-column: 1 / -1;
-  margin: 0;
-}
-
 .battle-car-row label {
   display: flex;
   flex-direction: column;
