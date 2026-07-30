@@ -9,6 +9,8 @@ finds media for them. Writes cars/battles/<battle-id>/battle.json.
 import argparse
 import json
 import re
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -29,6 +31,19 @@ MIN_CLIP_SECONDS = 3.0
 MAX_CLIP_SECONDS = 8.0
 PHOTOS_PER_CAR = 4
 EXTERIOR_SHOT_TYPES = {"front", "rear", "side", "front_3q", "rear_3q", "exterior", "detail", "wheel"}
+# Each car's search+scrape+classify pipeline is I/O-bound (network, ffmpeg,
+# OpenAI calls) and fully independent of the others, so running them
+# concurrently is a real wall-clock win. Capped modestly since a trim
+# fallback can multiply one car's own work 2-4x and each attempt already
+# makes many sequential OpenAI calls -- too much parallelism just trades
+# wall-clock time for API rate-limit backoff instead of avoiding the cost.
+MAX_CONCURRENT_CARS = 3
+# Battle mode's own search is already a wide, unsorted video-only pass (see
+# discover_entry_engine_videos), so it doesn't need the flagship ranking
+# pipeline's full 20-thumbnail budget to find a usable clip -- trading a
+# bit of that thoroughness for speed matches this format's "quick" premise,
+# and matters more here since a trim fallback can pay this cost 2-4x over.
+BATTLE_MAX_THUMBNAIL_CLASSIFICATIONS = 8
 
 GENERATION_SCHEMA = {
     "type": "object",
@@ -153,6 +168,7 @@ def build_startup_clip(car_entry, images_dir):
         exterior_only=True,
         min_duration=MIN_CLIP_SECONDS,
         max_duration=MAX_CLIP_SECONDS,
+        max_thumbnail_classifications=BATTLE_MAX_THUMBNAIL_CLASSIFICATIONS,
     )
     return result or {"approved": False, "error": "No usable engine video found for this car/generation"}
 
@@ -164,9 +180,15 @@ def process_car(car_entry, images_dir):
     attempted_clip_paths = []
     for trim_variant in ladder:
         variant = build_search_variant(car_entry, trim_variant)
-        print(f"[battle] Trying '{variant['search_hint']}' -> generation range {variant['years']}")
+        rung_started = time.monotonic()
+        print(f"[battle] Car #{car_entry['index']}: trying '{variant['search_hint']}' ({variant['years']})")
         variant_photos = gather_exterior_photos(variant, images_dir)
         variant_clip = build_startup_clip(variant, images_dir)
+        rung_seconds = round(time.monotonic() - rung_started, 1)
+        print(
+            f"[battle] Car #{car_entry['index']}: '{variant['search_hint']}' took {rung_seconds}s "
+            f"-> {len(variant_photos)} photos, clip approved={bool(variant_clip.get('approved'))}"
+        )
         if variant_clip.get("path"):
             attempted_clip_paths.append(Path(variant_clip["path"]))
         photos, clip_result, matched_trim = variant_photos, variant_clip, trim_variant
@@ -261,7 +283,7 @@ def main():
     images_dir = battle_dir / "images"
     battle_dir.mkdir(parents=True, exist_ok=True)
 
-    entries = []
+    parsed_cars = []
     for index, car in enumerate(cars, start=1):
         make = str(car.get("make", "")).strip()
         model = str(car.get("model", "")).strip()
@@ -269,8 +291,24 @@ def main():
         year = str(car.get("year", "")).strip()
         if not make or not model or not year:
             raise SystemExit(f"Car #{index} is missing make/model/year")
+        parsed_cars.append((index, make, model, trim, year))
+
+    def run_car(index, make, model, trim, year):
         car_entry = build_car_entry(make, model, year, index, trim=trim)
-        entries.append(process_car(car_entry, images_dir))
+        return process_car(car_entry, images_dir)
+
+    # Each car's pipeline (generation lookup, search, scrape, clip
+    # extraction) is independent and I/O-bound, so running them concurrently
+    # instead of one at a time is a direct wall-clock win -- see
+    # MAX_CONCURRENT_CARS.
+    started_at = time.monotonic()
+    results_by_index = {}
+    with ThreadPoolExecutor(max_workers=min(MAX_CONCURRENT_CARS, len(parsed_cars))) as pool:
+        futures = {pool.submit(run_car, *args): args[0] for args in parsed_cars}
+        for future in as_completed(futures):
+            results_by_index[futures[future]] = future.result()
+    entries = [results_by_index[index] for index, *_ in parsed_cars]
+    print(f"[battle] All {len(entries)} cars processed in {round(time.monotonic() - started_at, 1)}s total")
 
     approved_count = sum(1 for entry in entries if entry["approved"])
     intro_question = generate_intro_question(entries)

@@ -449,6 +449,7 @@ def _detect_natural_duration(wav_path, onset, min_duration, max_duration):
 def prepare_engine_clip(
     entry, output_dir, duration=5.0, allow_irrelevant=False,
     exterior_only=False, min_duration=3.0, max_duration=8.0,
+    max_thumbnail_classifications=MAX_THUMBNAIL_CLASSIFICATIONS,
 ):
     candidates = [item for item in entry.engine_videos if item.get("playback_url") or item.get("url")]
     if not candidates:
@@ -461,13 +462,13 @@ def prepare_engine_clip(
         # several embeds can't crowd out every other listing - stopping as
         # soon as we have enough good candidates instead of paying for
         # classifications we no longer need, but still willing to go through
-        # MAX_THUMBNAIL_CLASSIFICATIONS candidates if the early ones aren't
+        # max_thumbnail_classifications candidates if the early ones aren't
         # usable rather than giving up after only the first few.
         ordered_candidates = interleave_by_listing(candidates)
         classified = []
         labeled = []
         relevant = []
-        for candidate in ordered_candidates[:MAX_THUMBNAIL_CLASSIFICATIONS]:
+        for candidate in ordered_candidates[:max_thumbnail_classifications]:
             try:
                 scene_review = classify_video_thumbnail(candidate, entry)
             except Exception as exc:
