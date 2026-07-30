@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.45";
+const UI_VERSION = "V10.46";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1314,6 +1314,11 @@ export default function App() {
                             <article className="video-probe-card entry-engine-clip">
                               <video controls src={dashboardRawUrl(item, car.clip_path)} preload="metadata" />
                               <p className="hint">Clip length: {car.clip_duration}s</p>
+                              <p className="hint">
+                                {car.rev_detected
+                                  ? `Revving detected: peak ~${car.rev_events[0].peak_hz}Hz over baseline ~${car.rev_events[0].baseline_hz}Hz`
+                                  : "No revving pattern detected (best-effort pitch check; may miss broadband exhaust notes)"}
+                              </p>
                             </article>
                           ) : (
                             <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>
@@ -1717,6 +1722,11 @@ export default function App() {
                   <article className="video-probe-card entry-engine-clip">
                     <video controls src={battleRawUrl(car.clip_path)} preload="metadata" />
                     <p className="hint">Clip length: {car.clip_duration}s</p>
+                    <p className="hint">
+                      {car.rev_detected
+                        ? `Revving detected: peak ~${car.rev_events[0].peak_hz}Hz over baseline ~${car.rev_events[0].baseline_hz}Hz`
+                        : "No revving pattern detected (best-effort pitch check; may miss broadband exhaust notes)"}
+                    </p>
                   </article>
                 ) : (
                   <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>

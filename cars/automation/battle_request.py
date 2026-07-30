@@ -199,6 +199,8 @@ def process_car(car_entry, images_dir):
         "detected_onset_seconds": clip_result.get("detected_onset_seconds"),
         "engine_event_score": clip_result.get("engine_event_score"),
         "scene_review": clip_result.get("scene_review"),
+        "rev_detected": bool(clip_result.get("rev_detected")),
+        "rev_events": clip_result.get("rev_events") or [],
         "source": clip_result.get("source"),
     }
     if final_path:

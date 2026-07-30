@@ -8,21 +8,30 @@ import json
 from pathlib import Path
 
 from PIL import Image, ImageDraw
-from moviepy.editor import CompositeVideoClip, ImageClip, VideoFileClip, concatenate_videoclips
+from moviepy.editor import ColorClip, CompositeVideoClip, ImageClip, VideoFileClip, concatenate_videoclips
 
 from generate_sample import ROOT, CANVAS, _font, _wrap
 
 ROOT = ROOT  # re-exported for clarity
 BATTLES_ROOT = ROOT / "cars" / "battles"
 INTRO_SECONDS = 2.5
-TOP_RATIO = 1 / 3
+# Caps, not fixed zones: video and photo are stacked directly against each
+# other (no gap between them) and the whole block is centered vertically, so
+# any leftover space splits evenly above and below instead of each getting
+# its own independent letterboxed zone (which doubled the visible black gap).
+MAX_VIDEO_RATIO = 0.30
+MAX_PHOTO_RATIO = 0.42
 MIN_PHOTO_SECONDS = 1.0
 MAX_PHOTO_SECONDS = 1.5
 
 
-def _fit_on_color(clip, size):
-    scale = min(size[0] / clip.w, size[1] / clip.h)
-    return clip.resize(scale).on_color(size=size, color=(0, 0, 0), pos=("center", "center"))
+def _fit_content(clip, max_size):
+    """Scale to fit within max_size, preserving aspect, no cropping and no
+    padding -- unlike _fit_on_color, the returned clip's own w/h shrink to
+    match its content so callers can stack multiple pieces tightly."""
+    max_w, max_h = max_size
+    scale = min(max_w / clip.w, max_h / clip.h)
+    return clip.resize(scale)
 
 
 def _label_frame(size, text, out_path):
@@ -75,30 +84,43 @@ def _intro_clip(battle_dir, size, intro_question):
 
 def _car_segment(battle_dir, car, size):
     width, height = size
-    top_h = int(height * TOP_RATIO)
-    bottom_h = height - top_h
+    max_video_h = int(height * MAX_VIDEO_RATIO)
+    max_photo_h = int(height * MAX_PHOTO_RATIO)
 
     clip_path = battle_dir / car["clip_path"]
     raw_video = VideoFileClip(str(clip_path))
     duration = min(float(car.get("clip_duration") or raw_video.duration), raw_video.duration)
-    video_clip = _fit_on_color(raw_video.subclip(0, duration), (width, top_h)).set_position((0, 0))
+    video_clip = _fit_content(raw_video.subclip(0, duration), (width, max_video_h))
 
     photo_paths = [battle_dir / p for p in car["photos"]]
     per_photo = max(MIN_PHOTO_SECONDS, min(MAX_PHOTO_SECONDS, duration / max(1, len(photo_paths))))
     photo_count = max(1, min(len(photo_paths), round(duration / per_photo)))
     chosen_photos = photo_paths[:photo_count]
     per_photo = duration / len(chosen_photos)
+    # Every photo is boxed to the same fixed (width, max_photo_h) size so the
+    # stacked block's total height stays constant across cuts -- otherwise
+    # each photo's own aspect ratio would shift the video's position and the
+    # composition would jitter every second or so.
     photo_clips = [
-        _fit_on_color(ImageClip(str(path)).set_duration(per_photo), (width, bottom_h))
+        _fit_content(ImageClip(str(path)).set_duration(per_photo), (width, max_photo_h))
+        .on_color(size=(width, max_photo_h), color=(0, 0, 0), pos=("center", "center"))
         for path in chosen_photos
     ]
-    photos_track = concatenate_videoclips(photo_clips, method="compose").set_position((0, top_h))
+    photos_track = concatenate_videoclips(photo_clips, method="compose")
+
+    content_h = video_clip.h + max_photo_h
+    top_margin = max(0, (height - content_h) // 2)
+    background = ColorClip(size=size, color=(0, 0, 0)).set_duration(duration)
+    video_positioned = video_clip.set_position(("center", top_margin))
+    photos_positioned = photos_track.set_position(("center", top_margin + video_clip.h))
 
     label_path = battle_dir / "_frames" / f"label-{car['index']}.png"
     _label_frame(size, f"{car['index']}. {car['label']}", label_path)
     label_clip = ImageClip(str(label_path)).set_duration(duration).set_position((0, 0))
 
-    return CompositeVideoClip([video_clip, photos_track, label_clip], size=size).set_duration(duration)
+    return CompositeVideoClip(
+        [background, video_positioned, photos_positioned, label_clip], size=size
+    ).set_duration(duration)
 
 
 def render_battle_video(battle_dir, data, output_filename="battle_short.mp4"):

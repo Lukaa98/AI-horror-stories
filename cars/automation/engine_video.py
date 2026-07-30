@@ -286,6 +286,91 @@ def _engine_event_score(wav_path, onset):
     return raw_score * sustain
 
 
+def _pitch_track(wav_path, window_seconds=0.25, fmin=70, fmax=500):
+    """Rough fundamental-frequency-over-time track via autocorrelation.
+
+    Deliberately coarse: this is only meant to catch a rev's characteristic
+    pitch rise-then-fall, not to give a precise musical pitch. Windows too
+    quiet to trust get a None entry rather than a noisy guess.
+    """
+    with wave.open(str(wav_path), "rb") as stream:
+        rate = stream.getframerate()
+        samples = stream.readframes(stream.getnframes())
+    values = [int.from_bytes(samples[i:i + 2], "little", signed=True) for i in range(0, len(samples), 2)]
+    window = max(1, int(rate * window_seconds))
+    min_lag = max(1, int(rate / fmax))
+    max_lag = max(min_lag + 1, int(rate / fmin))
+    track = []
+    for offset in range(0, len(values) - window, window):
+        chunk = values[offset:offset + window]
+        mean = sum(chunk) / len(chunk)
+        signal = [value - mean for value in chunk]
+        energy = sum(value * value for value in signal)
+        timestamp = offset / rate
+        if energy < 2_000_000:
+            track.append((timestamp, None))
+            continue
+        limit = min(max_lag, len(signal) - 1)
+        best_lag, best_corr = None, 0.0
+        for lag in range(min_lag, limit, 2):
+            corr = sum(signal[i] * signal[i + lag] for i in range(0, len(signal) - lag, 3))
+            if corr > best_corr:
+                best_corr, best_lag = corr, lag
+        track.append((timestamp, rate / best_lag if best_lag else None))
+    return track
+
+
+def detect_rev_events(wav_path, rise_ratio=1.25, fall_ratio=1.1, max_span=3.5):
+    """Find rev-like pitch rise-then-fall patterns in an engine clip.
+
+    A rev's pitch climbs well above its recent baseline and then comes back
+    down within a few seconds, repeating the same shape if revved again -- a
+    cold start's pitch, by contrast, typically climbs once and holds. This
+    is best-effort only: many V8s and other broadband/percussive exhausts
+    don't carry a clean autocorrelation-trackable pitch, so an empty result
+    here does not mean the clip has no revving in it, just that this method
+    couldn't confirm one.
+    """
+    try:
+        track = _pitch_track(wav_path)
+    except Exception:
+        return []
+    events = []
+    index = 0
+    while index < len(track):
+        timestamp, pitch = track[index]
+        if pitch is None:
+            index += 1
+            continue
+        recent = [p for _, p in track[max(0, index - 4):index] if p]
+        baseline = sum(recent) / len(recent) if recent else pitch
+        if baseline > 0 and pitch >= baseline * rise_ratio:
+            peak_pitch, peak_time = pitch, timestamp
+            probe = index + 1
+            fell_back = False
+            while probe < len(track) and track[probe][0] - timestamp <= max_span:
+                probe_time, probe_pitch = track[probe]
+                if probe_pitch:
+                    if probe_pitch > peak_pitch:
+                        peak_pitch, peak_time = probe_pitch, probe_time
+                    if probe_pitch <= baseline * fall_ratio:
+                        fell_back = True
+                        break
+                probe += 1
+            if fell_back:
+                events.append({
+                    "start_seconds": round(timestamp, 2),
+                    "peak_seconds": round(peak_time, 2),
+                    "end_seconds": round(track[probe][0], 2),
+                    "baseline_hz": round(baseline, 1),
+                    "peak_hz": round(peak_pitch, 1),
+                })
+                index = probe
+                continue
+        index += 1
+    return events
+
+
 def _contact_sheet(frame_paths, output_path):
     images = [Image.open(path).convert("RGB") for path in frame_paths]
     width = 480
@@ -560,6 +645,20 @@ def prepare_engine_clip(
         if not review.get("approved"):
             clip_path.unlink(missing_ok=True)
             return {"approved": False, "review": review, "scene_review": onset_scene_review, "source": candidate}
+
+        # Best-effort rev detection on the final clip. Informational only --
+        # it never affects approval, since pitch tracking misses plenty of
+        # real revs (broadband V8 exhaust notes especially).
+        rev_events = []
+        rev_wav = output_dir / f"rank-{entry.rank}-rev-audio.wav"
+        try:
+            _extract_analysis_audio(str(clip_path), rev_wav)
+            rev_events = detect_rev_events(rev_wav)
+        except Exception:
+            rev_events = []
+        finally:
+            rev_wav.unlink(missing_ok=True)
+
         return {
             "approved": bool(review.get("approved") and engine_relevant),
             "path": clip_path,
@@ -571,6 +670,8 @@ def prepare_engine_clip(
             "engine_relevant": engine_relevant,
             "secondary_event_seconds": round(secondary_onset, 3) if secondary_onset is not None else None,
             "secondary_event_score": round(secondary_event_score, 3) if secondary_event_score is not None else None,
+            "rev_events": rev_events,
+            "rev_detected": bool(rev_events),
             "review": review,
             "source": candidate,
         }
