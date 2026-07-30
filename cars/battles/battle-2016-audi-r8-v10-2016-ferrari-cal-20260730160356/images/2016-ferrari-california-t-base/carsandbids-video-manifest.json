@@ -1,0 +1,453 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-30T16:19:56.898Z",
+  "query": "Ferrari California T Base",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/ferrari/california?start_year=2014&end_year=2019",
+  "search_result_count": 12,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3zObVzXP/2017-ferrari-california-t",
+      "title": "2017 Ferrari California T",
+      "text": "Sold for $128,000",
+      "titleYear": 2017,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9ayVWjdl/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "Sold for $86,500",
+      "titleYear": 2015,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yMWVkDM/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "Sold for $115,000",
+      "titleYear": 2015,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9nm8ZdRl/2017-ferrari-california-t",
+      "title": "2017 Ferrari California T",
+      "text": "Bid to $107,500",
+      "titleYear": 2017,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMPAJlXG/2017-ferrari-california-t-70th-anniversary",
+      "title": "2017 Ferrari California T 70th Anniversary",
+      "text": "FEATURED Bid to $195,000",
+      "titleYear": 2017,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV7QVOYk/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "Sold for $95,000",
+      "titleYear": 2015,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEWdP8yR/2014-ferrari-california",
+      "title": "Sold After for $83,000",
+      "text": "Sold After for $83,000",
+      "titleYear": 2014,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9nan6RMl/2014-ferrari-california",
+      "title": "2014 Ferrari California",
+      "text": "Sold for $89,000",
+      "titleYear": 2014,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkna25pN/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "FEATURED Bid to $102,005",
+      "titleYear": 2015,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rwvjGQbw/2015-ferrari-california-t",
+      "title": "Sold After for $100,000",
+      "text": "Sold After for $100,000",
+      "titleYear": 2015,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3047y7wP/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "FEATURED Bid to $97,000",
+      "titleYear": 2015,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9A4Dgamj/2017-ferrari-california-t",
+      "title": "2017 Ferrari California T",
+      "text": "Sold for $129,999",
+      "titleYear": 2017,
+      "score": 78
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3zObVzXP/2017-ferrari-california-t",
+      "title": "2017 Ferrari California T",
+      "text": "Sold for $128,000",
+      "titleYear": 2017,
+      "score": 78,
+      "usable_image_count": 28,
+      "sale_price": 128000,
+      "sale_type": "sold",
+      "page_title": "2017 Ferrari California T"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9ayVWjdl/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "Sold for $86,500",
+      "titleYear": 2015,
+      "score": 78,
+      "usable_image_count": 34,
+      "sale_price": 86500,
+      "sale_type": "sold",
+      "page_title": "2015 Ferrari California T"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yMWVkDM/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "Sold for $115,000",
+      "titleYear": 2015,
+      "score": 78,
+      "usable_image_count": 16,
+      "sale_price": 115000,
+      "sale_type": "sold",
+      "page_title": "2015 Ferrari California T"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9nm8ZdRl/2017-ferrari-california-t",
+      "title": "2017 Ferrari California T",
+      "text": "Bid to $107,500",
+      "titleYear": 2017,
+      "score": 78,
+      "usable_image_count": 19,
+      "sale_price": 107500,
+      "sale_type": "sold",
+      "page_title": "2017 Ferrari California T"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMPAJlXG/2017-ferrari-california-t-70th-anniversary",
+      "title": "2017 Ferrari California T 70th Anniversary",
+      "text": "FEATURED Bid to $195,000",
+      "titleYear": 2017,
+      "score": 78,
+      "usable_image_count": 34,
+      "sale_price": 195000,
+      "sale_type": "sold",
+      "page_title": "2017 Ferrari California T 70th Anniversary"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV7QVOYk/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "Sold for $95,000",
+      "titleYear": 2015,
+      "score": 78,
+      "usable_image_count": 28,
+      "sale_price": 95000,
+      "sale_type": "sold",
+      "page_title": "2015 Ferrari California T"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEWdP8yR/2014-ferrari-california",
+      "title": "Sold After for $83,000",
+      "text": "Sold After for $83,000",
+      "titleYear": 2014,
+      "score": 78,
+      "usable_image_count": 24,
+      "sale_price": 95000,
+      "sale_type": "sold",
+      "page_title": "2014 Ferrari California"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9nan6RMl/2014-ferrari-california",
+      "title": "2014 Ferrari California",
+      "text": "Sold for $89,000",
+      "titleYear": 2014,
+      "score": 78,
+      "usable_image_count": 32,
+      "sale_price": 89000,
+      "sale_type": "sold",
+      "page_title": "2014 Ferrari California"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkna25pN/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "FEATURED Bid to $102,005",
+      "titleYear": 2015,
+      "score": 78,
+      "usable_image_count": 11,
+      "sale_price": 102005,
+      "sale_type": "sold",
+      "page_title": "2015 Ferrari California T"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rwvjGQbw/2015-ferrari-california-t",
+      "title": "Sold After for $100,000",
+      "text": "Sold After for $100,000",
+      "titleYear": 2015,
+      "score": 78,
+      "usable_image_count": 15,
+      "sale_price": 95000,
+      "sale_type": "sold",
+      "page_title": "2015 Ferrari California T"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3047y7wP/2015-ferrari-california-t",
+      "title": "2015 Ferrari California T",
+      "text": "FEATURED Bid to $97,000",
+      "titleYear": 2015,
+      "score": 78,
+      "usable_image_count": 13,
+      "sale_price": 97000,
+      "sale_type": "sold",
+      "page_title": "2015 Ferrari California T"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9A4Dgamj/2017-ferrari-california-t",
+      "title": "2017 Ferrari California T",
+      "text": "Sold for $129,999",
+      "titleYear": 2017,
+      "score": 78,
+      "usable_image_count": 35,
+      "sale_price": 129999,
+      "sale_type": "sold",
+      "page_title": "2017 Ferrari California T"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9A4Dgamj/2017-ferrari-california-t",
+    "title": "2017 Ferrari California T",
+    "text": "Sold for $129,999",
+    "titleYear": 2017,
+    "score": 78,
+    "sale_price": 129999,
+    "sale_type": "sold",
+    "page_title": "2017 Ferrari California T",
+    "year": 2017,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/15d44b0bd1df60cc87973568756009b8/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/15d44b0bd1df60cc87973568756009b8/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ferrari California T",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/15d44b0bd1df60cc87973568756009b8/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9nm8ZdRl/2017-ferrari-california-t",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/15d44b0bd1df60cc87973568756009b8/manifest/video.m3u8",
+      "auction_title": "2017 Ferrari California T",
+      "auction_year": 2017,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/392d1dc6e5a8e35b788866e8125f614c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/392d1dc6e5a8e35b788866e8125f614c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ferrari California T",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/392d1dc6e5a8e35b788866e8125f614c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9nm8ZdRl/2017-ferrari-california-t",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/392d1dc6e5a8e35b788866e8125f614c/manifest/video.m3u8",
+      "auction_title": "2017 Ferrari California T",
+      "auction_year": 2017,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b05202f9840b220d226bdb4d17e79a41/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b05202f9840b220d226bdb4d17e79a41/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ferrari California T",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b05202f9840b220d226bdb4d17e79a41/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV7QVOYk/2015-ferrari-california-t",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b05202f9840b220d226bdb4d17e79a41/manifest/video.m3u8",
+      "auction_title": "2015 Ferrari California T",
+      "auction_year": 2015,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2e920dc263c0e35347301324445d9c14/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2e920dc263c0e35347301324445d9c14/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ferrari California T",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2e920dc263c0e35347301324445d9c14/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV7QVOYk/2015-ferrari-california-t",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2e920dc263c0e35347301324445d9c14/manifest/video.m3u8",
+      "auction_title": "2015 Ferrari California T",
+      "auction_year": 2015,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e744a77985c903f66ccc7a83e3776b0d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e744a77985c903f66ccc7a83e3776b0d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ferrari California T",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e744a77985c903f66ccc7a83e3776b0d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV7QVOYk/2015-ferrari-california-t",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e744a77985c903f66ccc7a83e3776b0d/manifest/video.m3u8",
+      "auction_title": "2015 Ferrari California T",
+      "auction_year": 2015,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/50ebb772ed38493bfb36e6cc46ae223f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/50ebb772ed38493bfb36e6cc46ae223f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ferrari California T",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/50ebb772ed38493bfb36e6cc46ae223f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV7QVOYk/2015-ferrari-california-t",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/50ebb772ed38493bfb36e6cc46ae223f/manifest/video.m3u8",
+      "auction_title": "2015 Ferrari California T",
+      "auction_year": 2015,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7ba2ee66377a93c84dcf7d936c2dcd51/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7ba2ee66377a93c84dcf7d936c2dcd51/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7ba2ee66377a93c84dcf7d936c2dcd51/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEWdP8yR/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7ba2ee66377a93c84dcf7d936c2dcd51/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e6af5b21cd4432e97d8fc41866f5386c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e6af5b21cd4432e97d8fc41866f5386c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e6af5b21cd4432e97d8fc41866f5386c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEWdP8yR/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e6af5b21cd4432e97d8fc41866f5386c/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e03cac6305ee14ce28c13f362d67f374/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e03cac6305ee14ce28c13f362d67f374/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e03cac6305ee14ce28c13f362d67f374/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEWdP8yR/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e03cac6305ee14ce28c13f362d67f374/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/772ae2d3432a283a3bfdc52c15f8c178/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/772ae2d3432a283a3bfdc52c15f8c178/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/772ae2d3432a283a3bfdc52c15f8c178/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEWdP8yR/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/772ae2d3432a283a3bfdc52c15f8c178/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0994c22f766e2acf5f59170bd004ac7c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0994c22f766e2acf5f59170bd004ac7c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0994c22f766e2acf5f59170bd004ac7c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEWdP8yR/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0994c22f766e2acf5f59170bd004ac7c/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d0012f1f6690061323fc4deb2c5615c5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d0012f1f6690061323fc4deb2c5615c5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d0012f1f6690061323fc4deb2c5615c5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9nan6RMl/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d0012f1f6690061323fc4deb2c5615c5/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/67bba482074bbca3bfc3f05f87e638c5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/67bba482074bbca3bfc3f05f87e638c5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/67bba482074bbca3bfc3f05f87e638c5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9nan6RMl/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/67bba482074bbca3bfc3f05f87e638c5/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41eb816a8951d1304d72999e1b12e7d4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41eb816a8951d1304d72999e1b12e7d4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41eb816a8951d1304d72999e1b12e7d4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9nan6RMl/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41eb816a8951d1304d72999e1b12e7d4/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b120e01176367a1f3400236fd96a177e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b120e01176367a1f3400236fd96a177e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b120e01176367a1f3400236fd96a177e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9nan6RMl/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b120e01176367a1f3400236fd96a177e/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd449e7bd666876498cd868490099095/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd449e7bd666876498cd868490099095/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2014 Ferrari California",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd449e7bd666876498cd868490099095/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9nan6RMl/2014-ferrari-california",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd449e7bd666876498cd868490099095/manifest/video.m3u8",
+      "auction_title": "2014 Ferrari California",
+      "auction_year": 2014,
+      "search_score": 78
+    }
+  ]
+}

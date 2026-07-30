@@ -1,0 +1,522 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-30T16:24:30.698Z",
+  "query": "Porsche 911 Carrera S",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/porsche/911?start_year=2012&end_year=2019&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9XNqB8Ep/2016-porsche-911-carrera-gts-club-coupe",
+      "title": "2016 Porsche 911 Carrera Gts Club Coupe",
+      "text": "FEATURED Sold for $183,000",
+      "titleYear": 2016,
+      "score": 96
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGJXGPE4/2016-porsche-911-carrera-gts-coupe",
+      "title": "2016 Porsche 911 Carrera Gts Coupe",
+      "text": "Sold for $162,000",
+      "titleYear": 2016,
+      "score": 96
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yp1Le6w/2016-porsche-911-carrera-gts-coupe",
+      "title": "Time Left 1 Day Bid $85,991",
+      "text": "Time Left 1 Day Bid $85,991",
+      "titleYear": 2016,
+      "score": 90
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9QAP5lPn/2012-porsche-911-carrera-s-cabriolet",
+      "title": "Time Left 5 Days Bid $32,999",
+      "text": "Time Left 5 Days Bid $32,999",
+      "titleYear": 2012,
+      "score": 90
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92QQP77x/2019-porsche-911-speedster",
+      "title": "2019 Porsche 911 Speedster",
+      "text": "FEATURED Sold for $525,000",
+      "titleYear": 2019,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4RG2VjA/2018-porsche-911-gt2-rs-weissach",
+      "title": "2018 Porsche 911 Gt2 Rs Weissach",
+      "text": "Bid to $405,911",
+      "titleYear": 2018,
+      "score": 78
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9XNqB8Ep/2016-porsche-911-carrera-gts-club-coupe",
+      "title": "2016 Porsche 911 Carrera Gts Club Coupe",
+      "text": "FEATURED Sold for $183,000",
+      "titleYear": 2016,
+      "score": 96,
+      "usable_image_count": 23,
+      "sale_price": 183000,
+      "sale_type": "sold",
+      "page_title": "2016 Porsche 911 Carrera GTS Club Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGJXGPE4/2016-porsche-911-carrera-gts-coupe",
+      "title": "2016 Porsche 911 Carrera Gts Coupe",
+      "text": "Sold for $162,000",
+      "titleYear": 2016,
+      "score": 96,
+      "usable_image_count": 25,
+      "sale_price": 162000,
+      "sale_type": "sold",
+      "page_title": "2016 Porsche 911 Carrera GTS Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yp1Le6w/2016-porsche-911-carrera-gts-coupe",
+      "title": "Time Left 1 Day Bid $85,991",
+      "text": "Time Left 1 Day Bid $85,991",
+      "titleYear": 2016,
+      "score": 90,
+      "usable_image_count": 48,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2016 Porsche 911 Carrera GTS Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9QAP5lPn/2012-porsche-911-carrera-s-cabriolet",
+      "title": "Time Left 5 Days Bid $32,999",
+      "text": "Time Left 5 Days Bid $32,999",
+      "titleYear": 2012,
+      "score": 90,
+      "usable_image_count": 15,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2012 Porsche 911 Carrera S Cabriolet"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rGJXGPE4/2016-porsche-911-carrera-gts-coupe",
+    "title": "2016 Porsche 911 Carrera Gts Coupe",
+    "text": "Sold for $162,000",
+    "titleYear": 2016,
+    "score": 96,
+    "sale_price": 162000,
+    "sale_type": "sold",
+    "page_title": "2016 Porsche 911 Carrera GTS Coupe",
+    "year": 2016,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/3RDnGnRN-R76QYfaF6u-(edit).jpg?t=169671015387",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Porsche 911 Carrera GTS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 236544
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/59339d5e07287c702e69307de910cceaa69c1d04/photos/3RDnGnRN--nu0KgD681-(edit).jpg?t=169695318636",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Porsche 911 Carrera GTS Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 330067
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/59339d5e07287c702e69307de910cceaa69c1d04/photos/3RDnGnRN-7qK51I-5Rd-(edit).jpg?t=169689551566",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Porsche 911 Carrera GTS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 233854
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/59339d5e07287c702e69307de910cceaa69c1d04/photos/3RDnGnRN-IM47BEMOsT-(edit).jpg?t=169689539399",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Porsche 911 Carrera GTS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 254880
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/3RDnGnRN-3i1AFDknOF-(edit).jpg?t=169671021307",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Porsche 911 Carrera GTS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 198080
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/3RDnGnRN-1t5mUQgs3k-(edit).jpg?t=169670887511",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Porsche 911 Carrera GTS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 300816
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/3RDnGnRN-QsiEXMhRT6-(edit).jpg?t=169670892424",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Porsche 911 Carrera GTS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 403068
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/3RDnGnRN-49wlc9T6B1-(edit).jpg?t=169670901910",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Porsche 911 Carrera GTS Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 338742
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd223c0cd478c4f2be21d9eba99e7b21/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd223c0cd478c4f2be21d9eba99e7b21/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Porsche 911 Carrera GTS Club Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd223c0cd478c4f2be21d9eba99e7b21/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9XNqB8Ep/2016-porsche-911-carrera-gts-club-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cd223c0cd478c4f2be21d9eba99e7b21/manifest/video.m3u8",
+      "auction_title": "2016 Porsche 911 Carrera GTS Club Coupe",
+      "auction_year": 2016,
+      "search_score": 96
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05ce815f63aee1c2f87e2a7bdc0e4b42/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05ce815f63aee1c2f87e2a7bdc0e4b42/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Porsche 911 Carrera GTS Club Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05ce815f63aee1c2f87e2a7bdc0e4b42/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9XNqB8Ep/2016-porsche-911-carrera-gts-club-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05ce815f63aee1c2f87e2a7bdc0e4b42/manifest/video.m3u8",
+      "auction_title": "2016 Porsche 911 Carrera GTS Club Coupe",
+      "auction_year": 2016,
+      "search_score": 96
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e2dff692b7f468b2dbc8884a7c7115b5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e2dff692b7f468b2dbc8884a7c7115b5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Porsche 911 Carrera GTS Club Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e2dff692b7f468b2dbc8884a7c7115b5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9XNqB8Ep/2016-porsche-911-carrera-gts-club-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e2dff692b7f468b2dbc8884a7c7115b5/manifest/video.m3u8",
+      "auction_title": "2016 Porsche 911 Carrera GTS Club Coupe",
+      "auction_year": 2016,
+      "search_score": 96
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8088838673b28ae6b37cd5514a399506/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8088838673b28ae6b37cd5514a399506/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Porsche 911 Carrera GTS Club Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8088838673b28ae6b37cd5514a399506/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9XNqB8Ep/2016-porsche-911-carrera-gts-club-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8088838673b28ae6b37cd5514a399506/manifest/video.m3u8",
+      "auction_title": "2016 Porsche 911 Carrera GTS Club Coupe",
+      "auction_year": 2016,
+      "search_score": 96
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c0b8498896f86d0314e2fe59635093c2/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c0b8498896f86d0314e2fe59635093c2/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Porsche 911 Carrera GTS Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c0b8498896f86d0314e2fe59635093c2/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yp1Le6w/2016-porsche-911-carrera-gts-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c0b8498896f86d0314e2fe59635093c2/manifest/video.m3u8",
+      "auction_title": "2016 Porsche 911 Carrera GTS Coupe",
+      "auction_year": 2016,
+      "search_score": 90
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/564de12e26f95ebe7e0810c95f944037/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/564de12e26f95ebe7e0810c95f944037/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Porsche 911 Carrera GTS Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/564de12e26f95ebe7e0810c95f944037/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yp1Le6w/2016-porsche-911-carrera-gts-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/564de12e26f95ebe7e0810c95f944037/manifest/video.m3u8",
+      "auction_title": "2016 Porsche 911 Carrera GTS Coupe",
+      "auction_year": 2016,
+      "search_score": 90
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4900901eff65c49f9e552b3d2e420cef/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4900901eff65c49f9e552b3d2e420cef/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Porsche 911 Carrera GTS Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4900901eff65c49f9e552b3d2e420cef/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yp1Le6w/2016-porsche-911-carrera-gts-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4900901eff65c49f9e552b3d2e420cef/manifest/video.m3u8",
+      "auction_title": "2016 Porsche 911 Carrera GTS Coupe",
+      "auction_year": 2016,
+      "search_score": 90
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/73820585c82f7138e9b913c654b172d4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/73820585c82f7138e9b913c654b172d4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche 911 Carrera S Cabriolet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/73820585c82f7138e9b913c654b172d4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9QAP5lPn/2012-porsche-911-carrera-s-cabriolet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/73820585c82f7138e9b913c654b172d4/manifest/video.m3u8",
+      "auction_title": "2012 Porsche 911 Carrera S Cabriolet",
+      "auction_year": 2012,
+      "search_score": 90
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "Carrera S",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 silhouette",
+          "headlight design",
+          "rear quarter shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "Carrera S",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "shape and proportions of the 911",
+          "distinctive headlights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2012-2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 body shape",
+          "proportions consistent with 2012-2019 generation"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": null,
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "Carrera S",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 body shape",
+          "rear light design",
+          "dual exhaust"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2012-2019",
+        "detected_variant_or_engine": "Carrera S",
+        "visible_match_evidence": [
+          "interior design similarities",
+          "Porsche branding on steering wheel",
+          "specific layout of controls"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2012-2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche interior design",
+          "sporty seats"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2012-2019",
+        "detected_variant_or_engine": "Carrera S",
+        "visible_match_evidence": [
+          "gear shift with Carrera badge",
+          "Porsche interior design elements"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Porsche",
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": "GTS",
+        "visible_match_evidence": [
+          "GTS badge"
+        ],
+        "generation_match_confidence": 3,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 4,
+        "reject": true,
+        "reason": "Not a 911 and therefore not the target vehicle.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

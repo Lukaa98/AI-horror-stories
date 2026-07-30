@@ -1,0 +1,310 @@
+{
+  "battle_id": "battle-2016-audi-r8-v10-2016-ferrari-cal-20260730160356",
+  "cars": [
+    {
+      "index": 1,
+      "label": "2016 Audi R8",
+      "make": "Audi",
+      "model": "R8",
+      "trim_requested": "V10",
+      "trim_used": null,
+      "fallback_applied": false,
+      "year": "2016",
+      "generation_start": 2015,
+      "generation_end": 2022,
+      "generation_label": "Second generation",
+      "photos": [
+        "images/2016-audi-r8/exterior-02.jpg",
+        "images/2016-audi-r8/exterior-06.jpg",
+        "images/2016-audi-r8/exterior-08.jpg",
+        "images/2016-audi-r8/exterior-07.jpg"
+      ],
+      "approved": false,
+      "detected_onset_seconds": 8.85,
+      "engine_event_score": 3.753,
+      "scene_review": {
+        "scene_type": "cockpit",
+        "engine_relevance": 4,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The scene shows the cockpit with the dashboard and controls but lacks direct indication of cold start, startup, exhaust, or revving. The focus is on interior details.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 3.25,
+          "peak_seconds": 3.25,
+          "end_seconds": 4.0,
+          "baseline_hz": 99.5,
+          "peak_hz": 177.8
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/739a42d44c917d5e283cf02764dcff52/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/739a42d44c917d5e283cf02764dcff52/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2022 Audi R8 V10 Performance Coupe Quattro",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/739a42d44c917d5e283cf02764dcff52/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/98QqP4XY/2022-audi-r8-v10-performance-coupe-quattro",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/739a42d44c917d5e283cf02764dcff52/manifest/video.m3u8",
+        "auction_title": "2022 Audi R8 V10 Performance Coupe Quattro",
+        "auction_year": 2022,
+        "search_score": 60
+      },
+      "clip_path": "engine_clips/rank-2016-audi-r8-engine.mp4",
+      "clip_duration": 8.0,
+      "error": "Startup clip rejected"
+    },
+    {
+      "index": 2,
+      "label": "2016 Ferrari California T",
+      "make": "Ferrari",
+      "model": "California T",
+      "trim_requested": "Base",
+      "trim_used": null,
+      "fallback_applied": false,
+      "year": "2016",
+      "generation_start": 2014,
+      "generation_end": 2019,
+      "generation_label": "California T",
+      "photos": [
+        "images/2016-ferrari-california-t/exterior-02.jpg",
+        "images/2016-ferrari-california-t/exterior-06.jpg",
+        "images/2016-ferrari-california-t/exterior-08.jpg",
+        "images/2016-ferrari-california-t/exterior-07.jpg"
+      ],
+      "approved": false,
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "scene_review": null,
+      "rev_detected": false,
+      "rev_events": [],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/15d44b0bd1df60cc87973568756009b8/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/15d44b0bd1df60cc87973568756009b8/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2017 Ferrari California T",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/15d44b0bd1df60cc87973568756009b8/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/9nm8ZdRl/2017-ferrari-california-t",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/15d44b0bd1df60cc87973568756009b8/manifest/video.m3u8",
+        "auction_title": "2017 Ferrari California T",
+        "auction_year": 2017,
+        "search_score": 78
+      },
+      "clip_path": null,
+      "clip_duration": null,
+      "error": "Only interior/cockpit startup footage found; exterior-only mode requires an outside view"
+    },
+    {
+      "index": 3,
+      "label": "2016 Porsche 911 Carrera S",
+      "make": "Porsche",
+      "model": "911",
+      "trim_requested": "Carrera S",
+      "trim_used": "Carrera S",
+      "fallback_applied": false,
+      "year": "2016",
+      "generation_start": 2012,
+      "generation_end": 2019,
+      "generation_label": "991",
+      "photos": [
+        "images/2016-porsche-911-carrera-s/exterior-02.jpg",
+        "images/2016-porsche-911-carrera-s/exterior-06.jpg",
+        "images/2016-porsche-911-carrera-s/exterior-08.jpg",
+        "images/2016-porsche-911-carrera-s/exterior-07.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 1.65,
+      "engine_event_score": 2.022,
+      "scene_review": {
+        "scene_type": "exhaust_closeup",
+        "engine_relevance": 8,
+        "likely_engine_audio": true,
+        "text_indicates_engine_event": false,
+        "reason": "The frame features a close-up of the exhaust of a Porsche 911, which is relevant for engine-related content. No text explicitly indicates an engine event.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 3.25,
+          "peak_seconds": 3.25,
+          "end_seconds": 5.75,
+          "baseline_hz": 73.8,
+          "peak_hz": 500.0
+        },
+        {
+          "start_seconds": 6.0,
+          "peak_seconds": 6.0,
+          "end_seconds": 6.5,
+          "baseline_hz": 394.2,
+          "peak_hz": 500.0
+        },
+        {
+          "start_seconds": 6.75,
+          "peak_seconds": 6.75,
+          "end_seconds": 7.0,
+          "baseline_hz": 286.9,
+          "peak_hz": 500.0
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0417d885db55ba12fdaeea5dbbd69b99/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0417d885db55ba12fdaeea5dbbd69b99/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2015 Porsche 911 Carrera 4S Cabriolet",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0417d885db55ba12fdaeea5dbbd69b99/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/3O7wmym6/2015-porsche-911-carrera-4s-cabriolet",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0417d885db55ba12fdaeea5dbbd69b99/manifest/video.m3u8",
+        "auction_title": "2015 Porsche 911 Carrera 4S Cabriolet",
+        "auction_year": 2015,
+        "search_score": 96
+      },
+      "clip_path": "engine_clips/rank-2016-porsche-911-carrera-s-engine.mp4",
+      "clip_duration": 8.0,
+      "error": null
+    },
+    {
+      "index": 4,
+      "label": "2016 McLaren 570S",
+      "make": "McLaren",
+      "model": "570S",
+      "trim_requested": null,
+      "trim_used": null,
+      "fallback_applied": false,
+      "year": "2016",
+      "generation_start": 2015,
+      "generation_end": 2021,
+      "generation_label": "First generation",
+      "photos": [
+        "images/2016-mclaren-570s/exterior-02.jpg",
+        "images/2016-mclaren-570s/exterior-06.jpg",
+        "images/2016-mclaren-570s/exterior-08.jpg",
+        "images/2016-mclaren-570s/exterior-07.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 3.25,
+      "engine_event_score": 5.217,
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 5,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The scene features a rear view of the vehicle, but lacks any indication of an engine start, cold start, or revving events in the provided text or footage. The engine relevance is moderate.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 0.5,
+          "peak_seconds": 0.5,
+          "end_seconds": 1.0,
+          "baseline_hz": 88.2,
+          "peak_hz": 200.0
+        },
+        {
+          "start_seconds": 2.75,
+          "peak_seconds": 3.5,
+          "end_seconds": 4.0,
+          "baseline_hz": 86.0,
+          "peak_hz": 111.1
+        },
+        {
+          "start_seconds": 4.5,
+          "peak_seconds": 4.5,
+          "end_seconds": 5.25,
+          "baseline_hz": 90.7,
+          "peak_hz": 121.2
+        },
+        {
+          "start_seconds": 6.5,
+          "peak_seconds": 6.5,
+          "end_seconds": 7.75,
+          "baseline_hz": 92.2,
+          "peak_hz": 205.1
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0f8b7c9e23513900330f2b96df044a2e/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0f8b7c9e23513900330f2b96df044a2e/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2018 McLaren 570S Spider",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0f8b7c9e23513900330f2b96df044a2e/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/9X2ak5Px/2018-mclaren-570s-spider",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0f8b7c9e23513900330f2b96df044a2e/manifest/video.m3u8",
+        "auction_title": "2018 McLaren 570S Spider",
+        "auction_year": 2018,
+        "search_score": 70
+      },
+      "clip_path": "engine_clips/rank-2016-mclaren-570s-engine.mp4",
+      "clip_duration": 8.0,
+      "error": null
+    },
+    {
+      "index": 5,
+      "label": "2017 Nissan GT-R",
+      "make": "Nissan",
+      "model": "GT-R",
+      "trim_requested": "Nismo",
+      "trim_used": null,
+      "fallback_applied": false,
+      "year": "2017",
+      "generation_start": 2007,
+      "generation_end": 2023,
+      "generation_label": "R35",
+      "photos": [
+        "images/2017-nissan-gt-r/exterior-02.jpg",
+        "images/2017-nissan-gt-r/exterior-06.jpg",
+        "images/2017-nissan-gt-r/exterior-08.jpg",
+        "images/2017-nissan-gt-r/exterior-07.jpg"
+      ],
+      "approved": false,
+      "detected_onset_seconds": 42.45,
+      "engine_event_score": 3.574,
+      "scene_review": {
+        "scene_type": "cockpit",
+        "engine_relevance": 5,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The scene shows a cockpit with gauges indicating RPM, but there is no evidence of an engine event from the text or visual context.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 2.5,
+          "peak_seconds": 2.5,
+          "end_seconds": 2.75,
+          "baseline_hz": 83.8,
+          "peak_hz": 500.0
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/51fb0fbf788ed288e3f2e43710514afd/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/51fb0fbf788ed288e3f2e43710514afd/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2010 Nissan GT-R Premium",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/51fb0fbf788ed288e3f2e43710514afd/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/36O5dA2x/2010-nissan-gt-r-premium",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/51fb0fbf788ed288e3f2e43710514afd/manifest/video.m3u8",
+        "auction_title": "2010 Nissan GT-R Premium",
+        "auction_year": 2010,
+        "search_score": 109
+      },
+      "clip_path": "engine_clips/rank-2017-nissan-gt-r-engine.mp4",
+      "clip_duration": 3.0,
+      "error": "Startup clip rejected"
+    }
+  ],
+  "title": "WHICH SUPERCAR SOUNDS BEST?",
+  "intro_question": "Which supercar sounds best?",
+  "status": "researched",
+  "approved_count": 2,
+  "total_count": 5
+}

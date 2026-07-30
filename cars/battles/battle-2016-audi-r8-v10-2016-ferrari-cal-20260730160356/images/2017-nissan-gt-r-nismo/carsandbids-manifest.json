@@ -1,0 +1,451 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-30T16:35:18.738Z",
+  "query": "Nissan GT-R Nismo",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/nissan/gt-r?start_year=2007&end_year=2023&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9llQNBL5/2016-nissan-gt-r-nismo",
+      "title": "2016 Nissan GT-R NISMO",
+      "text": "2016 Nissan GT-R NISMO",
+      "titleYear": 2016,
+      "score": 127
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9ldBWaa2/2015-nissan-gt-r-nismo",
+      "title": "2015 Nissan Gt R Nismo",
+      "text": "Sold for $145,535",
+      "titleYear": 2015,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmqOAqN0/2017-nissan-gt-r-nismo",
+      "title": "2017 Nissan Gt R Nismo",
+      "text": "Bid to $141,500",
+      "titleYear": 2017,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNJDQE6X/2015-nissan-gt-r-nismo",
+      "title": "2015 Nissan Gt R Nismo",
+      "text": "FEATURED Bid to $126,500",
+      "titleYear": 2015,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rbnNGLnk/2016-nissan-gt-r-nismo",
+      "title": "2016 Nissan Gt R Nismo",
+      "text": "FEATURED Bid to $110,000",
+      "titleYear": 2016,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdA4YE5B/2014-nissan-gt-r-track-edition",
+      "title": "2014 Nissan Gt R Track Edition",
+      "text": "Sold for $110,500",
+      "titleYear": 2014,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9llQNBL5/2016-nissan-gt-r-nismo",
+      "title": "2016 Nissan GT-R NISMO",
+      "text": "2016 Nissan GT-R NISMO",
+      "titleYear": 2016,
+      "score": 127,
+      "usable_image_count": 24,
+      "sale_price": 163500,
+      "sale_type": "sold",
+      "page_title": "2016 Nissan GT-R NISMO"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9ldBWaa2/2015-nissan-gt-r-nismo",
+      "title": "2015 Nissan Gt R Nismo",
+      "text": "Sold for $145,535",
+      "titleYear": 2015,
+      "score": 88,
+      "usable_image_count": 27,
+      "sale_price": 145535,
+      "sale_type": "sold",
+      "page_title": "2015 Nissan GT-R NISMO"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmqOAqN0/2017-nissan-gt-r-nismo",
+      "title": "2017 Nissan Gt R Nismo",
+      "text": "Bid to $141,500",
+      "titleYear": 2017,
+      "score": 88,
+      "usable_image_count": 26,
+      "sale_price": 141500,
+      "sale_type": "sold",
+      "page_title": "2017 Nissan GT-R NISMO"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNJDQE6X/2015-nissan-gt-r-nismo",
+      "title": "2015 Nissan Gt R Nismo",
+      "text": "FEATURED Bid to $126,500",
+      "titleYear": 2015,
+      "score": 88,
+      "usable_image_count": 19,
+      "sale_price": 126500,
+      "sale_type": "sold",
+      "page_title": "2015 Nissan GT-R NISMO"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9llQNBL5/2016-nissan-gt-r-nismo",
+    "title": "2016 Nissan GT-R NISMO",
+    "text": "2016 Nissan GT-R NISMO",
+    "titleYear": 2016,
+    "score": 127,
+    "sale_price": 163500,
+    "sale_type": "sold",
+    "page_title": "2016 Nissan GT-R NISMO",
+    "year": 2016,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9WDdyead-fVlKk3t6LF-(edit).jpg?t=165783505954",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Nissan GT-R NISMO",
+      "width": 542,
+      "height": 361,
+      "bytes": 211206
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9WDdyead-mm3Xn0K_Hy-(edit).jpg?t=165783479183",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Nissan GT-R NISMO",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 254437
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9WDdyead-85JbN0lW6I-(edit).jpg?t=165783509493",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Nissan GT-R NISMO",
+      "width": 542,
+      "height": 361,
+      "bytes": 185583
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9WDdyead-LOpdsIWZru-(edit).jpg?t=165783513235",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Nissan GT-R NISMO",
+      "width": 542,
+      "height": 361,
+      "bytes": 216039
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9WDdyead-C3efxDIM7A-(edit).jpg?t=165783516642",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Nissan GT-R NISMO",
+      "width": 542,
+      "height": 361,
+      "bytes": 133880
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9WDdyead-FeYCVbuvuz-(edit).jpg?t=165783484309",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Nissan GT-R NISMO",
+      "width": 542,
+      "height": 361,
+      "bytes": 273188
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9WDdyead-6elH4j-Bfe-(edit).jpg?t=165783490057",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Nissan GT-R NISMO",
+      "width": 542,
+      "height": 361,
+      "bytes": 347583
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9WDdyead-8jkta1Bulw-(edit).jpg?t=165783495027",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Nissan GT-R NISMO",
+      "width": 542,
+      "height": 361,
+      "bytes": 214548
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cba8dcd2713b8f9504662bd841f2e4bf/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cba8dcd2713b8f9504662bd841f2e4bf/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Nissan GT-R NISMO",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cba8dcd2713b8f9504662bd841f2e4bf/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rNJDQE6X/2015-nissan-gt-r-nismo",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cba8dcd2713b8f9504662bd841f2e4bf/manifest/video.m3u8",
+      "auction_title": "2015 Nissan GT-R NISMO",
+      "auction_year": 2015,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1967a8e7a81f91a86ba5cfca0e95143d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1967a8e7a81f91a86ba5cfca0e95143d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Nissan GT-R NISMO",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1967a8e7a81f91a86ba5cfca0e95143d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rNJDQE6X/2015-nissan-gt-r-nismo",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1967a8e7a81f91a86ba5cfca0e95143d/manifest/video.m3u8",
+      "auction_title": "2015 Nissan GT-R NISMO",
+      "auction_year": 2015,
+      "search_score": 88
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "GT-R",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "bodywork design",
+          "GT-R badge",
+          "Nismo front splitter",
+          "proportions consistent with 2017 GT-R"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "nissan",
+        "detected_model": "gt-r",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "distinctive front fascia",
+          "Nismo badge",
+          "bodywork design aligned with GT-R",
+          "headlight shape and placement"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "nissan",
+        "detected_model": "gt-r",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "distinctive rear wing",
+          "body kit and trim details",
+          "Nismo branding on side"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "GT-R",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "bodywork design",
+          "rear lights",
+          "spoiler style",
+          "badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "GT-R",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "GT-R badge on steering wheel",
+          "interior design with red accents",
+          "specific layout of dashboard controls"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "GT-R",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "Nismo seats",
+          "interior design",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "nissan",
+        "detected_model": "GT-R",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "interior design",
+          "steering wheel branding",
+          "seats with red accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "nissan",
+        "detected_model": "gt-r",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "Nismo branding on gauge",
+          "Instrumentation design matches GT-R",
+          "Yearly mileage compatible with model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

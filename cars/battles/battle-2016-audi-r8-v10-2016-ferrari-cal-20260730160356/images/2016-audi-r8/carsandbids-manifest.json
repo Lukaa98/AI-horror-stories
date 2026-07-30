@@ -1,0 +1,419 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-07-30T16:11:49.809Z",
+  "query": "Audi R8",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2015&end_year=2022&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/36BbGj8x/2020-audi-r8-v10-coupe",
+      "title": "2020 Audi R8 V10 Coupe",
+      "text": "2020 Audi R8 V10 Coupe",
+      "titleYear": 2020,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98EXyaY3/2015-audi-r8-v10-spyder",
+      "title": "2015 Audi R8 V10 Spyder",
+      "text": "2015 Audi R8 V10 Spyder",
+      "titleYear": 2015,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rbmDaVD2/2017-audi-r8-v10-coupe",
+      "title": "2017 Audi R8 V10 Coupe",
+      "text": "2017 Audi R8 V10 Coupe",
+      "titleYear": 2017,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGeyXanO/2020-audi-r8-v10-performance-coupe",
+      "title": "2020 Audi R8 V10 Performance Coupe",
+      "text": "2020 Audi R8 V10 Performance Coupe",
+      "titleYear": 2020,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92WGDNMx/2020-audi-r8-v10-performance-coupe",
+      "title": "2020 Audi R8 V10 Performance Coupe",
+      "text": "2020 Audi R8 V10 Performance Coupe",
+      "titleYear": 2020,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rbx0xzL3/2021-audi-r8-v10-spyder-rwd",
+      "title": "2021 Audi R8 V10 Spyder RWD",
+      "text": "2021 Audi R8 V10 Spyder RWD",
+      "titleYear": 2021,
+      "score": 99
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/36BbGj8x/2020-audi-r8-v10-coupe",
+      "title": "2020 Audi R8 V10 Coupe",
+      "text": "2020 Audi R8 V10 Coupe",
+      "titleYear": 2020,
+      "score": 99,
+      "usable_image_count": 30,
+      "sale_price": 143000,
+      "sale_type": "sold",
+      "page_title": "2020 Audi R8 V10 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98EXyaY3/2015-audi-r8-v10-spyder",
+      "title": "2015 Audi R8 V10 Spyder",
+      "text": "2015 Audi R8 V10 Spyder",
+      "titleYear": 2015,
+      "score": 99,
+      "usable_image_count": 17,
+      "sale_price": 87500,
+      "sale_type": "sold",
+      "page_title": "2015 Audi R8 V10 Spyder"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rbmDaVD2/2017-audi-r8-v10-coupe",
+      "title": "2017 Audi R8 V10 Coupe",
+      "text": "2017 Audi R8 V10 Coupe",
+      "titleYear": 2017,
+      "score": 99,
+      "usable_image_count": 22,
+      "sale_price": 115500,
+      "sale_type": "sold",
+      "page_title": "2017 Audi R8 V10 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGeyXanO/2020-audi-r8-v10-performance-coupe",
+      "title": "2020 Audi R8 V10 Performance Coupe",
+      "text": "2020 Audi R8 V10 Performance Coupe",
+      "titleYear": 2020,
+      "score": 99,
+      "usable_image_count": 18,
+      "sale_price": 163000,
+      "sale_type": "sold",
+      "page_title": "2020 Audi R8 V10 Performance Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/36BbGj8x/2020-audi-r8-v10-coupe",
+    "title": "2020 Audi R8 V10 Coupe",
+    "text": "2020 Audi R8 V10 Coupe",
+    "titleYear": 2020,
+    "score": 99,
+    "sale_price": 143000,
+    "sale_type": "sold",
+    "page_title": "2020 Audi R8 V10 Coupe",
+    "year": 2020,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c0e0b49cebf82e921ca5759358df78af5ff1dab5/photos/interior/rEWZlLpV-N-cH6ls.jpg?t=174417691180",
+      "labels": [
+        "interior"
+      ],
+      "section": "2020 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 171152
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/exterior/rEWZlLpV-p4B0J7j/edit/UKbPu.jpg?t=174467785731",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2020 Audi R8 V10 Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 185172
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/interior/rEWZlLpV-wdlcz3c/edit/j6Y5O.jpg?t=174467842321",
+      "labels": [
+        "interior"
+      ],
+      "section": "2020 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 149137
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/interior/rEWZlLpV-o4hcmXv/edit/yX5to.jpg?t=174467840317",
+      "labels": [
+        "interior"
+      ],
+      "section": "2020 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 160836
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/interior/rEWZlLpV-NgrxMPb/edit/pM7_f.jpg?t=174467843803",
+      "labels": [
+        "interior"
+      ],
+      "section": "2020 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 135542
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/exterior/rEWZlLpV-sm5V8va/edit/6xuT5.jpg?t=174533971310",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2020 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 169885
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/exterior/rEWZlLpV-vLcfq29/edit/3nXTi.jpg?t=174467804217",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2020 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 175407
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/exterior/rEWZlLpV-PIoIju-/edit/LBvR_.jpg?t=174467807002",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2020 Audi R8 V10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 203932
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork",
+          "lights",
+          "proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front view",
+          "characteristic grille shape",
+          "split headlights design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "body shape",
+          "lighting design",
+          "proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork design",
+          "lights configuration",
+          "proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design matches R8",
+          "steering wheel design",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "red leather seats",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "dashboard layout",
+          "red seats"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "R8 badge",
+          "dashboard design",
+          "year recognizing features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
