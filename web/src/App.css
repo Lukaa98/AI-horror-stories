@@ -152,6 +152,39 @@ h1 {
   height: fit-content;
 }
 
+.battle-cars-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rival-suggestions {
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: rgba(243, 181, 27, 0.04);
+}
+
+.rival-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.rival-card {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #1a1a1a;
+}
+
+.rival-card strong {
+  font-size: 0.9rem;
+}
+
 .dashboard-card-actions {
   display: flex;
   flex-wrap: wrap;

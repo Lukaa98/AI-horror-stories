@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.42";
+const UI_VERSION = "V10.43";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -14,6 +14,7 @@ const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
 const VIDEO_TEST_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RENDER_TIMEOUT_MS = 20 * 60 * 1000;
+const RIVAL_SUGGEST_TIMEOUT_MS = 5 * 60 * 1000;
 const MIN_BATTLE_CARS = 3;
 const MAX_BATTLE_CARS = 5;
 const YEAR_OPTIONS = Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => String(new Date().getFullYear() - index));
@@ -466,6 +467,10 @@ export default function App() {
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
   const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
+  const [rivalSuggestions, setRivalSuggestions] = useState(null);
+  const [rivalSuggestLoading, setRivalSuggestLoading] = useState(false);
+  const [rivalSuggestError, setRivalSuggestError] = useState(null);
+  const [addedRivalIndexes, setAddedRivalIndexes] = useState(() => new Set());
   const [battleId, setBattleId] = useState(null);
   const [battle, setBattle] = useState(null);
   const [battleVideoUrl, setBattleVideoUrl] = useState(null);
@@ -685,6 +690,76 @@ export default function App() {
     const resolved = resolveBattleCar(car);
     return resolved.make && resolved.model && resolved.year;
   });
+
+  const baseCar = resolveBattleCar(battleCars[0]);
+  const baseCarValid = Boolean(baseCar.make && baseCar.model && baseCar.year);
+
+  async function handleSuggestRivals() {
+    if (!repoOk || !baseCarValid) return;
+    setRivalSuggestError(null);
+    setRivalSuggestLoading(true);
+    setRivalSuggestions(null);
+    setAddedRivalIndexes(new Set());
+    const id = makeDraftId(`rivals-${baseCar.year}-${baseCar.make}-${baseCar.model}`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Suggest rivals for ${baseCar.year} ${baseCar.make} ${baseCar.model} ${baseCar.trim}`.trim(),
+          draft_id: id,
+          mode: "suggest_rivals",
+          base_make: baseCar.make,
+          base_model: baseCar.model,
+          base_trim: baseCar.trim,
+          base_year: baseCar.year,
+          rival_count: String(Math.max(1, MAX_BATTLE_CARS - 1)),
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const suggestionFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/rival-suggestions/${id}/suggestions.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: RIVAL_SUGGEST_TIMEOUT_MS,
+      });
+      const res = await Promise.race([suggestionFile, workflowRun.then(() => suggestionFile)]);
+      const data = await res.json();
+      setRivalSuggestions(data.rivals || []);
+    } catch (err) {
+      setRivalSuggestError(String(err.message || err));
+    } finally {
+      setRivalSuggestLoading(false);
+    }
+  }
+
+  function addRivalAsBattleCar(rival, rivalIndex) {
+    const filled = {
+      make: OTHER_VALUE,
+      makeCustom: rival.make || "",
+      model: OTHER_VALUE,
+      modelCustom: rival.model || "",
+      trim: rival.trim ? OTHER_VALUE : "",
+      trimCustom: rival.trim || "",
+      year: rival.year || "",
+    };
+    setBattleCars((prev) => {
+      const emptyIndex = prev.findIndex((car, i) => i > 0 && !resolveBattleCar(car).make);
+      if (emptyIndex !== -1) {
+        return prev.map((car, i) => (i === emptyIndex ? { ...car, ...filled } : car));
+      }
+      if (prev.length >= MAX_BATTLE_CARS) return prev;
+      return [...prev, { ...makeBattleCarRow(), ...filled }];
+    });
+    setAddedRivalIndexes((prev) => new Set(prev).add(rivalIndex));
+  }
 
   async function handleBattleResearch() {
     if (!repoOk || !battleCarsValid) return;
@@ -1287,14 +1362,49 @@ export default function App() {
                   </div>
                 );
               })}
-              <button
-                type="button"
-                className="secondary"
-                onClick={addBattleCar}
-                disabled={battleCars.length >= MAX_BATTLE_CARS || stage === "researching" || stage === "generating"}
-              >
-                + Add another car
-              </button>
+              <div className="battle-cars-buttons">
+                <button
+                  type="button"
+                  className="secondary"
+                  onClick={addBattleCar}
+                  disabled={battleCars.length >= MAX_BATTLE_CARS || stage === "researching" || stage === "generating"}
+                >
+                  + Add another car
+                </button>
+                <button
+                  type="button"
+                  className="secondary"
+                  onClick={handleSuggestRivals}
+                  disabled={!repoOk || !baseCarValid || rivalSuggestLoading || stage === "researching" || stage === "generating"}
+                >
+                  {rivalSuggestLoading ? "Asking AI for rivals..." : "Suggest rivals for car #1"}
+                </button>
+              </div>
+              {rivalSuggestError && <div className="error">{rivalSuggestError}</div>}
+              {rivalSuggestions && (
+                <div className="rival-suggestions">
+                  <p className="hint">
+                    AI-suggested rivals for {baseCar.year} {baseCar.make} {baseCar.model} {baseCar.trim}. Click one to
+                    drop it into an open car slot below.
+                  </p>
+                  <div className="rival-grid">
+                    {rivalSuggestions.map((rival, index) => (
+                      <div className="rival-card" key={index}>
+                        <strong>{rival.year} {rival.make} {rival.model} {rival.trim}</strong>
+                        <p className="hint">{rival.reason}</p>
+                        <button
+                          type="button"
+                          className="secondary"
+                          onClick={() => addRivalAsBattleCar(rival, index)}
+                          disabled={addedRivalIndexes.has(index) || battleCars.length >= MAX_BATTLE_CARS}
+                        >
+                          {addedRivalIndexes.has(index) ? "Added" : "Add to battle"}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <p className="hint">
                 Make/Model/Trim are curated (mainstream muscle + sports cars plus common exotics). Pick "Other" at
                 any level to type something not listed. If an exact trim like GT4 RS isn't found on Cars &amp; Bids,
