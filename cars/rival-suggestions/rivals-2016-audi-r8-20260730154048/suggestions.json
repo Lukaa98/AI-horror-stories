@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2016-audi-r8-20260730154048",
+  "base_car": {
+    "make": "Audi",
+    "model": "R8",
+    "trim": "V10",
+    "year": "2016"
+  },
+  "rivals": [
+    {
+      "make": "Ferrari",
+      "model": "California T",
+      "trim": "Base",
+      "year": "2016",
+      "reason": "The California T offers a potent turbocharged V8 and a sophisticated exhaust note that set it apart as a refined alternative to the R8."
+    },
+    {
+      "make": "Porsche",
+      "model": "911",
+      "trim": "Carrera S",
+      "year": "2016",
+      "reason": "The 2016 Carrera S delivers iconic flat-six sound and performance, making it a direct competitor in the luxury sports car segment."
+    },
+    {
+      "make": "McLaren",
+      "model": "570S",
+      "trim": "",
+      "year": "2016",
+      "reason": "With its turbocharged V8 and distinctive exhaust note, the 570S positions itself as a thrilling competitor to the R8's engaging driving experience."
+    },
+    {
+      "make": "Nissan",
+      "model": "GT-R",
+      "trim": "Nismo",
+      "year": "2017",
+      "reason": "The GT-R Nismo features a unique twin-turbo V6 and a legendary reputation for performance, making it a formidable rival in the supercar arena."
+    }
+  ]
+}
