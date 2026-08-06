@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.48";
+const UI_VERSION = "V10.49";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -14,7 +14,7 @@ const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
 const VIDEO_TEST_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RENDER_TIMEOUT_MS = 20 * 60 * 1000;
-const RIVAL_SUGGEST_TIMEOUT_MS = 5 * 60 * 1000;
+const RIVAL_SUGGEST_TIMEOUT_MS = 8 * 60 * 1000;
 const MIN_BATTLE_CARS = 3;
 const MAX_BATTLE_CARS = 5;
 const YEAR_OPTIONS = Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => String(new Date().getFullYear() - index));
@@ -290,6 +290,32 @@ async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 600
     if (signal.aborted) throw new Error("Cancelled");
     const res = await fetch(`${url}?_=${Date.now()}`, { cache: "no-store" });
     if (res.ok) return res;
+    await new Promise((resolve) => setTimeout(resolve, intervalMs));
+  }
+  const timeoutMinutes = Math.round(timeoutMs / 60000);
+  throw new Error(`Timed out after ${timeoutMinutes} minutes waiting for ${path}`);
+}
+
+// raw.githubusercontent.com is CDN-fronted and can lag behind a fresh commit
+// by more than a couple minutes on an infrequently-touched branch -- fine for
+// the other polls in this app (their timeouts are 20-60 minutes), but too
+// slow for a poll meant to resolve in under a minute. The Contents API reads
+// straight from GitHub's backend with no caching layer, so it reflects a
+// commit as soon as the ref updates.
+async function pollForFileViaApi({ owner, repo, branch, path, token, signal, intervalMs = 5000, timeoutMs }) {
+  const start = Date.now();
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
+  while (Date.now() - start < timeoutMs) {
+    if (signal.aborted) throw new Error("Cancelled");
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, "")), (c) => c.charCodeAt(0));
+      return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+    }
     await new Promise((resolve) => setTimeout(resolve, intervalMs));
   }
   const timeoutMinutes = Math.round(timeoutMs / 60000);
@@ -822,16 +848,16 @@ export default function App() {
         },
       });
       const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
-      const suggestionFile = pollForFile({
+      const suggestionFile = pollForFileViaApi({
         owner: settings.owner,
         repo: settings.repo,
         branch: OUTPUT_BRANCH,
         path: `cars/rival-suggestions/${id}/suggestions.json`,
+        token: settings.token,
         signal: abortRef.current.signal,
         timeoutMs: RIVAL_SUGGEST_TIMEOUT_MS,
       });
-      const res = await Promise.race([suggestionFile, workflowRun.then(() => suggestionFile)]);
-      const data = await res.json();
+      const data = await Promise.race([suggestionFile, workflowRun.then(() => suggestionFile)]);
       setRivalSuggestions(data.rivals || []);
     } catch (err) {
       setRivalSuggestError(String(err.message || err));
