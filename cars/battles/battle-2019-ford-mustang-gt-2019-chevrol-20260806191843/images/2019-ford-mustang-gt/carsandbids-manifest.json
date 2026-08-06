@@ -1,0 +1,569 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-06T19:24:38.565Z",
+  "query": "Ford Mustang GT",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=2015&end_year=2023&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rxXjzkn8/2022-ford-mustang-shelby-gt500",
+      "title": "Sold After for $99,000",
+      "text": "Sold After for $99,000",
+      "titleYear": 2022,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "title": "2019 Ford Mustang Shelby Gt350",
+      "text": "Sold for $59,500",
+      "titleYear": 2019,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "title": "2015 Ford Mustang Gt Premium Convertible Neiman Marcus Edition",
+      "text": "Sold for $48,750",
+      "titleYear": 2015,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "title": "2017 Ford Mustang Shelby Gt350r",
+      "text": "Sold for $70,000",
+      "titleYear": 2017,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yYYRalo/2019-ford-mustang-shelby-gt350r",
+      "title": "2019 Ford Mustang Shelby Gt350r",
+      "text": "Sold for $73,500",
+      "titleYear": 2019,
+      "score": 78
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rN42XlBE/2020-ford-mustang-shelby-gt350r",
+      "title": "2020 Ford Mustang Shelby Gt350r",
+      "text": "Sold for $136,000",
+      "titleYear": 2020,
+      "score": 78
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rxXjzkn8/2022-ford-mustang-shelby-gt500",
+      "title": "Sold After for $99,000",
+      "text": "Sold After for $99,000",
+      "titleYear": 2022,
+      "score": 78,
+      "usable_image_count": 16,
+      "sale_price": 59500,
+      "sale_type": "sold",
+      "page_title": "2022 Ford Mustang Shelby GT500"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "title": "2019 Ford Mustang Shelby Gt350",
+      "text": "Sold for $59,500",
+      "titleYear": 2019,
+      "score": 78,
+      "usable_image_count": 18,
+      "sale_price": 59500,
+      "sale_type": "sold",
+      "page_title": "2019 Ford Mustang Shelby GT350"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "title": "2015 Ford Mustang Gt Premium Convertible Neiman Marcus Edition",
+      "text": "Sold for $48,750",
+      "titleYear": 2015,
+      "score": 78,
+      "usable_image_count": 21,
+      "sale_price": 48750,
+      "sale_type": "sold",
+      "page_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "title": "2017 Ford Mustang Shelby Gt350r",
+      "text": "Sold for $70,000",
+      "titleYear": 2017,
+      "score": 78,
+      "usable_image_count": 27,
+      "sale_price": 70000,
+      "sale_type": "sold",
+      "page_title": "2017 Ford Mustang Shelby GT350R"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+    "title": "2017 Ford Mustang Shelby Gt350r",
+    "text": "Sold for $70,000",
+    "titleYear": 2017,
+    "score": 78,
+    "sale_price": 70000,
+    "sale_type": "sold",
+    "page_title": "2017 Ford Mustang Shelby GT350R",
+    "year": 2017,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cb54af7f8989a50f7aa2671261d39db860e83ece/photos/3BY0NyXB-FlSL48d.jpg?t=178216288053",
+      "labels": [
+        "interior"
+      ],
+      "section": "2017 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 291982
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/cb54af7f8989a50f7aa2671261d39db860e83ece/photos/3pqmOGOg-P0ktztGfrYF.jpg",
+      "labels": [
+        "detail",
+        "exterior"
+      ],
+      "error": "Too small: 3692 bytes"
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cb54af7f8989a50f7aa2671261d39db860e83ece/photos/3BY0NyXB-8cSs2Mr.jpg?t=178216288053",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2017 Ford Mustang Shelby GT350R",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 411308
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cb54af7f8989a50f7aa2671261d39db860e83ece/photos/3BY0NyXB-0aJpH_O.jpg?t=178216288053",
+      "labels": [
+        "interior"
+      ],
+      "section": "2017 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 294789
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cb54af7f8989a50f7aa2671261d39db860e83ece/photos/3BY0NyXB-ZOjaKKJ.jpg?t=178216288053",
+      "labels": [
+        "interior"
+      ],
+      "section": "2017 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 253902
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cb54af7f8989a50f7aa2671261d39db860e83ece/photos/3BY0NyXB-4lP_4uw.jpg?t=178216288053",
+      "labels": [
+        "interior"
+      ],
+      "section": "2017 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 147747
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cb54af7f8989a50f7aa2671261d39db860e83ece/photos/3BY0NyXB-fb22jIn.jpg?t=178216288053",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2017 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 375412
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cb54af7f8989a50f7aa2671261d39db860e83ece/photos/3BY0NyXB-fJJN-c6.jpg?t=178216288053",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2017 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 401170
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5988b5646ccad43fa29a7ab161a5968e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5988b5646ccad43fa29a7ab161a5968e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5988b5646ccad43fa29a7ab161a5968e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5988b5646ccad43fa29a7ab161a5968e/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8a4077fcd8de7f237c8956d4d1357e2a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8a4077fcd8de7f237c8956d4d1357e2a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8a4077fcd8de7f237c8956d4d1357e2a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8a4077fcd8de7f237c8956d4d1357e2a/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7fadb46b691002270d84bde57d3b5ae4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7fadb46b691002270d84bde57d3b5ae4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7fadb46b691002270d84bde57d3b5ae4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7fadb46b691002270d84bde57d3b5ae4/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d74209e46651d92fe08a3f25f6c4af52/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d74209e46651d92fe08a3f25f6c4af52/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d74209e46651d92fe08a3f25f6c4af52/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d74209e46651d92fe08a3f25f6c4af52/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1ab0264c21f1a1204f4d9a19a22b548e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1ab0264c21f1a1204f4d9a19a22b548e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Ford Mustang Shelby GT350",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1ab0264c21f1a1204f4d9a19a22b548e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1ab0264c21f1a1204f4d9a19a22b548e/manifest/video.m3u8",
+      "auction_title": "2019 Ford Mustang Shelby GT350",
+      "auction_year": 2019,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/manifest/video.m3u8",
+      "auction_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "auction_year": 2015,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/manifest/video.m3u8",
+      "auction_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "auction_year": 2015,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/manifest/video.m3u8",
+      "auction_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "auction_year": 2015,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2ffd758f131d8492141d6f4bf43e86ce/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2ffd758f131d8492141d6f4bf43e86ce/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2ffd758f131d8492141d6f4bf43e86ce/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2ffd758f131d8492141d6f4bf43e86ce/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c4952e618aa38b0188c2c633d7e47bc2/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c4952e618aa38b0188c2c633d7e47bc2/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c4952e618aa38b0188c2c633d7e47bc2/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c4952e618aa38b0188c2c633d7e47bc2/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fc1e3bf3219e0bd276873c585b86c772/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fc1e3bf3219e0bd276873c585b86c772/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fc1e3bf3219e0bd276873c585b86c772/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fc1e3bf3219e0bd276873c585b86c772/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/757d09f46792bcea1f5b7663a7ea9ff4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/757d09f46792bcea1f5b7663a7ea9ff4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/757d09f46792bcea1f5b7663a7ea9ff4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/757d09f46792bcea1f5b7663a7ea9ff4/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c52804bb0eaaff1246b9b751fe2174c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c52804bb0eaaff1246b9b751fe2174c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c52804bb0eaaff1246b9b751fe2174c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c52804bb0eaaff1246b9b751fe2174c/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 78
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c94b3f061b9f0aef0f43bcb4733df3a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c94b3f061b9f0aef0f43bcb4733df3a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c94b3f061b9f0aef0f43bcb4733df3a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7c94b3f061b9f0aef0f43bcb4733df3a/manifest/video.m3u8",
+      "auction_title": "2017 Ford Mustang Shelby GT350R",
+      "auction_year": 2017,
+      "search_score": 78
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 7,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "Shelby badge",
+          "front fascia design",
+          "overall proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2015-2023",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "Ford logo on grill",
+          "Mustang Shelby front fascia",
+          "Distinctive hood vents",
+          "LED headlights"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "bodywork and proportions match Mustang",
+          "distinctive rear design",
+          "specific wheels and brakes"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "interior design matches 2019 Mustang",
+          "steering wheel has GT specific features",
+          "instrument cluster design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2015-2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior shot",
+          "race seats"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 6,
+        "reject": true,
+        "reason": "interior image lacks clear evidence of specific model variant",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "center console design",
+          "gear shifter style",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 4,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "The image does not feature the target vehicle.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

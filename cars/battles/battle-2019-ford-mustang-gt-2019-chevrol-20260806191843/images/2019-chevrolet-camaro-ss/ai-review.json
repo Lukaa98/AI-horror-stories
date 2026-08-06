@@ -1,0 +1,221 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "distinctive bodywork",
+        "front fascia design",
+        "hood design",
+        "wheel design",
+        "exhaust layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "front design match",
+        "SS badge visible",
+        "body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Camaro",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "Distinct Camaro body shape",
+        "Rear wing design",
+        "Black wheels with green accents"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "body style",
+        "rear taillamps",
+        "spoiler design",
+        "exhaust configuration"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "interior design",
+        "steering wheel",
+        "dashboard layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "racing seats",
+        "interior design",
+        "gear shift design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "dashboard shape",
+        "steering wheel design",
+        "racing seats",
+        "green accents"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "instrument cluster design",
+        "RPM gauge",
+        "speedometer layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}
