@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2018-ford-mustang-20260806190001",
+  "base_car": {
+    "make": "Ford",
+    "model": "Mustang",
+    "trim": "GT",
+    "year": "2018"
+  },
+  "rivals": [
+    {
+      "make": "Chevrolet",
+      "model": "Camaro SS",
+      "trim": "1SS",
+      "year": "2018",
+      "reason": "The 2018 Camaro SS features a powerful 6.2L V8 engine, delivering a distinctly throaty exhaust note that makes it a formidable rival to the Mustang GT."
+    },
+    {
+      "make": "Dodge",
+      "model": "Challenger",
+      "trim": "R/T",
+      "year": "2018",
+      "reason": "With its iconic HEMI V8 engine, the 2018 Challenger R/T offers a deep, rumbling cold-start sound that appeals to muscle car enthusiasts, making it a direct competitor of the Mustang."
+    },
+    {
+      "make": "Subaru",
+      "model": "BRZ",
+      "trim": "",
+      "year": "2018",
+      "reason": "While not a V8, the 2018 BRZ's naturally aspirated flat-four engine provides a unique exhaust note and exceptional handling, attracting those who appreciate a sportier, more agile alternative."
+    },
+    {
+      "make": "Nissan",
+      "model": "370Z",
+      "trim": "Sport",
+      "year": "2018",
+      "reason": "The 2018 Nissan 370Z, with its potent V6 engine and distinctive raw exhaust growl, stands shoulder to shoulder with the Mustang in terms of performance and driving fun."
+    }
+  ]
+}
