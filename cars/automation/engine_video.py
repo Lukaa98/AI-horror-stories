@@ -544,6 +544,7 @@ def prepare_engine_clip(
     exterior_only=False, min_duration=3.0, max_duration=8.0,
     max_thumbnail_classifications=MAX_THUMBNAIL_CLASSIFICATIONS,
     search_distant_rev=False, distant_rev_search_seconds=300.0,
+    rear_shot_only=False,
 ):
     candidates = [item for item in entry.engine_videos if item.get("playback_url") or item.get("url")]
     if not candidates:
@@ -640,6 +641,25 @@ def prepare_engine_clip(
                 }
             analyses = exterior_analyses
 
+        if rear_shot_only:
+            # Front/engine-bay/full-exterior shots are wind-exposed enough
+            # that the engine note often gets buried under wind noise; a
+            # rear/exhaust-view mic pickup is reliably cleaner. This is a
+            # hard requirement, not just a preference, so a car with only
+            # windy front-facing footage fails outright rather than settling
+            # for a clip that's technically exterior but hard to hear.
+            rear_analyses = [
+                item for item in analyses
+                if item["scene_review"].get("scene_type") in EXHAUST_SCENE_TYPES
+            ]
+            if not rear_analyses:
+                return {
+                    "approved": False,
+                    "error": "No rear-of-car (exhaust-view) startup clip found; other angles are too wind-exposed to hear clearly",
+                    "source": candidates[0],
+                }
+            analyses = rear_analyses
+
         best_tier = min(_selection_tier(item["scene_review"].get("scene_type")) for item in analyses)
         tier_candidates = [
             item for item in analyses
@@ -709,6 +729,12 @@ def prepare_engine_clip(
             # A hard override, not just a preference: exterior-only battle
             # clips must never approve a cockpit/interior view even if the
             # platform label and audio otherwise look convincing.
+            engine_relevant = False
+        if rear_shot_only and scene_type not in EXHAUST_SCENE_TYPES:
+            # Same hard-override idea: the onset-time reclassification can
+            # land on a different scene_type than the thumbnail-time one
+            # that got this candidate into rear_analyses above, so re-check
+            # here too rather than trusting the earlier filter alone.
             engine_relevant = False
         _run([
             # Seek after opening the HLS input. This is slower than input-side

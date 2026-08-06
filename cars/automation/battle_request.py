@@ -142,11 +142,13 @@ def build_search_variant(car_entry, trim_variant):
 
 
 def gather_exterior_photos(car_entry, images_dir, limit=PHOTOS_PER_CAR, prefer_section=None):
-    """Fetch exterior photos, preferring the same listing (`prefer_section`,
+    """Fetch exterior photos, matched to the same listing (`prefer_section`,
     the winning clip's auction title) so the photos shown for a car depict
-    the same physical vehicle as its engine clip instead of two different
-    auctions. Falls back to other listings' photos if that one doesn't have
-    enough clean exterior shots on its own."""
+    the same physical vehicle as its engine clip, not a different auction.
+    This only falls back to other listings' photos when the matching one
+    has *none* at all -- a partial match (fewer than `limit`) still uses
+    only that listing's own photos rather than topping up with a different
+    car's."""
     images, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, car_entry)
     reviews = (manifest.get("ai_review") or {}).get("reviews", [])
     by_name = {review.get("path"): review for review in reviews}
@@ -162,7 +164,9 @@ def gather_exterior_photos(car_entry, images_dir, limit=PHOTOS_PER_CAR, prefer_s
             section = str(sections.get(Path(relative).name, "")).strip().lower()
             return bool(section) and bool(needle) and (needle in section or section in needle)
 
-        exterior = [r for r in exterior if same_listing(r)] + [r for r in exterior if not same_listing(r)]
+        same = [r for r in exterior if same_listing(r)]
+        if same:
+            exterior = same
     exterior = exterior[:limit]
     for relative in exterior:
         blur_license_plates(images_dir.parent / relative)
@@ -186,6 +190,7 @@ def build_startup_clip(car_entry, images_dir):
         duration=None,
         allow_irrelevant=True,
         exterior_only=True,
+        rear_shot_only=True,
         min_duration=MIN_CLIP_SECONDS,
         max_duration=MAX_CLIP_SECONDS,
         max_thumbnail_classifications=BATTLE_MAX_THUMBNAIL_CLASSIFICATIONS,
