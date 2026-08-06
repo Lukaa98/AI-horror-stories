@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2019-ford-mustang-20260806191611",
+  "base_car": {
+    "make": "Ford",
+    "model": "Mustang",
+    "trim": "GT",
+    "year": "2019"
+  },
+  "rivals": [
+    {
+      "make": "Chevrolet",
+      "model": "Camaro SS",
+      "trim": "1SS",
+      "year": "2019",
+      "reason": "The Camaro SS offers similar muscle car performance and a distinct exhaust note that car enthusiasts admire."
+    },
+    {
+      "make": "Dodge",
+      "model": "Challenger R/T",
+      "trim": "R/T",
+      "year": "2019",
+      "reason": "With its iconic styling and powerful HEMI V8, the Challenger R/T delivers a legendary cold-start sound comparable to the Mustang GT."
+    },
+    {
+      "make": "Nissan",
+      "model": "370Z",
+      "trim": "Nismo",
+      "year": "2019",
+      "reason": "The 370Z Nismo combines sporty handling and a throaty exhaust note, appealing to those who enjoy performance coupes like the Mustang."
+    },
+    {
+      "make": "Subaru",
+      "model": "BRZ",
+      "trim": "Limited",
+      "year": "2019",
+      "reason": "The BRZ's boxer engine provides a unique sound, making it an intriguing contrast in a cold-start comparison with the American muscle of the Mustang."
+    }
+  ]
+}
