@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2018-ford-mustang-20260806200755",
+  "base_car": {
+    "make": "Ford",
+    "model": "Mustang",
+    "trim": "GT",
+    "year": "2018"
+  },
+  "rivals": [
+    {
+      "make": "Chevrolet",
+      "model": "Camaro SS",
+      "trim": "1LE",
+      "year": "2018",
+      "reason": "The Camaro SS 1LE offers a powerful V8 engine and an aggressive exhaust note, making it a direct competitor in performance and sound."
+    },
+    {
+      "make": "Dodge",
+      "model": "Challenger",
+      "trim": "R/T",
+      "year": "2018",
+      "reason": "The Challenger R/T features a muscular HEMI V8 that delivers a distinctive rumble, appealing to the same performance-oriented crowd."
+    },
+    {
+      "make": "Nissan",
+      "model": "370Z",
+      "trim": "Nismo",
+      "year": "2018",
+      "reason": "The 370Z Nismo, with its V6 and tuned exhaust, provides a sportier sound profile and handling dynamics that attract enthusiasts looking for a spirited drive."
+    },
+    {
+      "make": "Subaru",
+      "model": "BRZ",
+      "trim": "Limited",
+      "year": "2018",
+      "reason": "The BRZ Limited, while less powerful, offers a unique flat-four engine sound and sharp responsiveness that makes it a desirable choice among performance enthusiasts."
+    }
+  ]
+}
