@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2022-audi-r8-20260807031454",
+  "base_car": {
+    "make": "Audi",
+    "model": "R8",
+    "trim": "V10",
+    "year": "2022"
+  },
+  "rivals": [
+    {
+      "make": "Lamborghini",
+      "model": "Hurac\u00e1n",
+      "trim": "LP 610-4",
+      "year": "2022",
+      "reason": "With a similar V10 engine and Italian flair, the Hurac\u00e1n is a prime competitor known for its distinctive and aggressive exhaust note."
+    },
+    {
+      "make": "Ferrari",
+      "model": "F8 Tributo",
+      "trim": "",
+      "year": "2020",
+      "reason": "This mid-engined sports car offers a thrilling twin-turbo V8 with a unique sound signature, making it a desirable rival for enthusiasts comparing Italian performance."
+    },
+    {
+      "make": "McLaren",
+      "model": "570S",
+      "trim": "",
+      "year": "2021",
+      "reason": "The 570S provides British engineering with a twin-turbo V8 and a distinct exhaust growl, appealing to those who appreciate sharp handling and performance."
+    },
+    {
+      "make": "Porsche",
+      "model": "911 GT3",
+      "trim": "",
+      "year": "2021",
+      "reason": "Renowned for its naturally aspirated flat-six engine, the 911 GT3 delivers an iconic sound and remarkable performance, making it a classic rival in the supercar segment."
+    }
+  ]
+}
