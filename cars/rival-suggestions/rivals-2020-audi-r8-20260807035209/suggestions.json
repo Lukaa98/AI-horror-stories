@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2020-audi-r8-20260807035209",
+  "base_car": {
+    "make": "Audi",
+    "model": "R8",
+    "trim": "V10",
+    "year": "2020"
+  },
+  "rivals": [
+    {
+      "make": "McLaren",
+      "model": "570S",
+      "trim": "Coupe",
+      "year": "2020",
+      "reason": "The McLaren 570S offers a thrilling driving experience with a distinct exhaust note that rivals the R8's tenacity and performance."
+    },
+    {
+      "make": "Chevrolet",
+      "model": "Corvette",
+      "trim": "Stingray",
+      "year": "2020",
+      "reason": "The C8 Corvette features an iconic V8 soundtrack and exceptional performance that positions it as a strong competitor to the Audi R8."
+    },
+    {
+      "make": "Porsche",
+      "model": "911",
+      "trim": "Carrera S",
+      "year": "2020",
+      "reason": "With its legendary flat-six engine, the 911 Carrera S is known for its exhilarating sound and performance that directly competes with the R8 V10."
+    },
+    {
+      "make": "Mercedes-AMG",
+      "model": "GT",
+      "trim": "C",
+      "year": "2020",
+      "reason": "The Mercedes-AMG GT C boasts a powerful V8 engine with a standout exhaust note, making it a worthy challenger to the Audi R8."
+    }
+  ]
+}
