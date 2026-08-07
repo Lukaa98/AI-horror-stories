@@ -1,0 +1,338 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-07T02:19:02.040Z",
+  "query": "Ford Mustang GT",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9lvA7w1E/2018-ford-mustang-shelby-gt350r",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9lvA7w1E/2018-ford-mustang-shelby-gt350r",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 23,
+      "sale_price": 63500,
+      "sale_type": "sold",
+      "page_title": "2018 Ford Mustang Shelby GT350R"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9lvA7w1E/2018-ford-mustang-shelby-gt350r",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 63500,
+    "sale_type": "sold",
+    "page_title": "2018 Ford Mustang Shelby GT350R",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/36kojJqy-c7PYD6C/edit/hTiTx.jpg?t=177934327802",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 230891
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/96088d8b6f6e133c95ff598522ddb6cc48395ced/photos/3OpqA4Aj-fP4lzLD.jpeg",
+      "labels": [
+        "detail",
+        "exterior"
+      ],
+      "error": "Too small: 10171 bytes"
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/36kojJqy-Bo55E_g/edit/4MzCf.jpg?t=177934265991",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Ford Mustang Shelby GT350R",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 478552
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/36kojJqy-GAZC7uX/edit/Zboa1.jpg?t=177934329712",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 289900
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/36kojJqy-mzv3nXn/edit/2i2mE.jpg?t=177934331834",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 239939
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/other/36kojJqy-4gH75BT/edit/N3apZ.jpg?t=177934334880",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 85019
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/36kojJqy-ji_CxZD/edit/BQ_4T.jpg?t=177934272250",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 369049
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/36kojJqy-aFk02kw/edit/6rAQP.jpg?t=177934274637",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Ford Mustang Shelby GT350R",
+      "width": 542,
+      "height": 361,
+      "bytes": 485731
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/75761bf5471591810916104174737b82/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/75761bf5471591810916104174737b82/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/75761bf5471591810916104174737b82/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9lvA7w1E/2018-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/75761bf5471591810916104174737b82/manifest/video.m3u8",
+      "auction_title": "2018 Ford Mustang Shelby GT350R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f2d2d535df3d4d0d73bd4e317f855ab8/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f2d2d535df3d4d0d73bd4e317f855ab8/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Ford Mustang Shelby GT350R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f2d2d535df3d4d0d73bd4e317f855ab8/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9lvA7w1E/2018-ford-mustang-shelby-gt350r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f2d2d535df3d4d0d73bd4e317f855ab8/manifest/video.m3u8",
+      "auction_title": "2018 Ford Mustang Shelby GT350R",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 7,
+    "reviews": [
+      {
+        "is_target_vehicle": false,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2015-2023",
+        "detected_variant_or_engine": "GT350",
+        "visible_match_evidence": [
+          "Ford badge",
+          "Mustang body style",
+          "Distinctive front grille design",
+          "Shelby stripes"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 5,
+        "reject": true,
+        "reason": "Detected variant is a Shelby GT350, not a GT, hence not the correct target vehicle.",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "Shelby badging",
+          "Stripes",
+          "Body design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "side profile",
+          "shark fin antenna",
+          "rear spoiler",
+          "brake calipers visible"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "null",
+        "detected_variant_or_engine": "null",
+        "visible_match_evidence": [
+          "steering wheel with S emblem",
+          "interior layout aligns with Mustang generation"
+        ],
+        "generation_match_confidence": 6,
+        "variant_match_confidence": 4,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 5,
+        "reject": true,
+        "reason": "not visibly matching target year or variant",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "Recaro seats",
+          "interior layout",
+          "steering wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict a vehicle; it's a close-up of an odometer.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

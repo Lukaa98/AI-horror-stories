@@ -1,0 +1,390 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-07T02:28:48.865Z",
+  "query": "Nissan 370Z Nismo",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3zLwgVJN/2009-nissan-370z-touring-coupe",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3zLwgVJN/2009-nissan-370z-touring-coupe",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 22,
+      "sale_price": 22500,
+      "sale_type": "sold",
+      "page_title": "2009 Nissan 370Z Touring Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3zLwgVJN/2009-nissan-370z-touring-coupe",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 22500,
+    "sale_type": "sold",
+    "page_title": "2009 Nissan 370Z Touring Coupe",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c1b7e4f36036ea0f2e402ec53bba23d08ceec24c/photos/Nissan370ZTouringCoupe2009058.jpg?t=177714719148",
+      "labels": [
+        "interior"
+      ],
+      "section": "2009 Nissan 370Z Touring Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 227090
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c90d8216a8bf103048db7cf88cd07946ede17b22/photos/Nissan370ZTouringCoupe2009007/edit/NH2ko.jpg?t=177726813311",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2009 Nissan 370Z Touring Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 365506
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c1b7e4f36036ea0f2e402ec53bba23d08ceec24c/photos/Nissan370ZTouringCoupe2009066.jpg?t=177714719148",
+      "labels": [
+        "interior"
+      ],
+      "section": "2009 Nissan 370Z Touring Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 297080
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c90d8216a8bf103048db7cf88cd07946ede17b22/photos/Nissan370ZTouringCoupe2009071/edit/dwC2g.jpg?t=177726775113",
+      "labels": [
+        "interior"
+      ],
+      "section": "2009 Nissan 370Z Touring Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 306129
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c1b7e4f36036ea0f2e402ec53bba23d08ceec24c/photos/Nissan370ZTouringCoupe2009062.jpg?t=177714719148",
+      "labels": [
+        "interior"
+      ],
+      "section": "2009 Nissan 370Z Touring Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 161677
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c90d8216a8bf103048db7cf88cd07946ede17b22/photos/Nissan370ZTouringCoupe2009001/edit/5JLI7.jpg?t=177726815093",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2009 Nissan 370Z Touring Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 305122
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c90d8216a8bf103048db7cf88cd07946ede17b22/photos/Nissan370ZTouringCoupe2009003/edit/IOxDC.jpg?t=177726817221",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2009 Nissan 370Z Touring Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 396723
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c90d8216a8bf103048db7cf88cd07946ede17b22/photos/Nissan370ZTouringCoupe2009004/edit/LRuHj.jpg?t=177726819285",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2009 Nissan 370Z Touring Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 450233
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0b90095fd0b7561e869bcc0c02746de/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0b90095fd0b7561e869bcc0c02746de/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2009 Nissan 370Z Touring Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0b90095fd0b7561e869bcc0c02746de/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zLwgVJN/2009-nissan-370z-touring-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0b90095fd0b7561e869bcc0c02746de/manifest/video.m3u8",
+      "auction_title": "2009 Nissan 370Z Touring Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a01e9e53169c0800dcde4b63ff4752bf/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a01e9e53169c0800dcde4b63ff4752bf/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2009 Nissan 370Z Touring Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a01e9e53169c0800dcde4b63ff4752bf/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zLwgVJN/2009-nissan-370z-touring-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a01e9e53169c0800dcde4b63ff4752bf/manifest/video.m3u8",
+      "auction_title": "2009 Nissan 370Z Touring Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52efa55dcb258d9a60df94b34a680f13/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52efa55dcb258d9a60df94b34a680f13/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2009 Nissan 370Z Touring Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52efa55dcb258d9a60df94b34a680f13/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zLwgVJN/2009-nissan-370z-touring-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52efa55dcb258d9a60df94b34a680f13/manifest/video.m3u8",
+      "auction_title": "2009 Nissan 370Z Touring Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5e4e5567f68097f0e0f2983f332be959/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5e4e5567f68097f0e0f2983f332be959/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2009 Nissan 370Z Touring Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5e4e5567f68097f0e0f2983f332be959/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zLwgVJN/2009-nissan-370z-touring-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5e4e5567f68097f0e0f2983f332be959/manifest/video.m3u8",
+      "auction_title": "2009 Nissan 370Z Touring Coupe",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "370Z",
+        "detected_generation_or_year": "2008-2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Nissan badge",
+          "370Z bodywork",
+          "sports car characteristics"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "nissan",
+        "detected_model": "370z",
+        "detected_generation_or_year": "2008-2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front fascia design",
+          "headlight shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "nissan",
+        "detected_model": "370z",
+        "detected_generation_or_year": "2008-2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive 370Z body shape",
+          "wide rear fenders",
+          "Nismo badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "370Z",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "Body styling consistent with 370Z",
+          "Rear design matches 2018 Nissan 370Z",
+          "Nismo badge visibly present"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Nissan",
+        "detected_model": "370Z",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "Nismo",
+        "visible_match_evidence": [
+          "Z logo on the steering wheel",
+          "Interior detailing consistent with 370Z",
+          "Instrumentation layout matches 2018 model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "exterior",
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 3,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not prominently show the target vehicle; focus is on the interior.",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "The image shows only the interior details and does not provide a clear view of the target vehicle.",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "detail",
+        "scene_fit_tags": [
+          "detail"
+        ],
+        "quality_score": 5,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

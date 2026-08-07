@@ -1,0 +1,178 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 7,
+  "reviews": [
+    {
+      "is_target_vehicle": false,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "2015-2023",
+      "detected_variant_or_engine": "GT350",
+      "visible_match_evidence": [
+        "Ford badge",
+        "Mustang body style",
+        "Distinctive front grille design",
+        "Shelby stripes"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 5,
+      "reject": true,
+      "reason": "Detected variant is a Shelby GT350, not a GT, hence not the correct target vehicle.",
+      "path": "exterior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2020",
+      "detected_variant_or_engine": "GT",
+      "visible_match_evidence": [
+        "Shelby badging",
+        "Stripes",
+        "Body design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": "GT",
+      "visible_match_evidence": [
+        "side profile",
+        "shark fin antenna",
+        "rear spoiler",
+        "brake calipers visible"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "null",
+      "detected_variant_or_engine": "null",
+      "visible_match_evidence": [
+        "steering wheel with S emblem",
+        "interior layout aligns with Mustang generation"
+      ],
+      "generation_match_confidence": 6,
+      "variant_match_confidence": 4,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 5,
+      "reject": true,
+      "reason": "not visibly matching target year or variant",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": "GT",
+      "visible_match_evidence": [
+        "Recaro seats",
+        "interior layout",
+        "steering wheel design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle.",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 1,
+      "composition_score": 1,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not depict a vehicle; it's a close-up of an odometer.",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    }
+  ]
+}

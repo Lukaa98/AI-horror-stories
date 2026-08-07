@@ -1,0 +1,347 @@
+{
+  "battle_id": "battle-2018-ford-mustang-gt-2018-chevrol-20260807021056",
+  "cars": [
+    {
+      "index": 1,
+      "label": "2018 Ford Mustang GT",
+      "make": "Ford",
+      "model": "Mustang",
+      "trim_requested": "GT",
+      "trim_used": "GT",
+      "fallback_applied": false,
+      "year": "2018",
+      "generation_start": 2015,
+      "generation_end": 2023,
+      "generation_label": "S550",
+      "photos": [
+        "images/2018-ford-mustang-gt/exterior-07.jpg",
+        "images/2018-ford-mustang-gt/exterior-08.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 0.85,
+      "engine_event_score": 2.778,
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 5,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The frame captures a rear view of a vehicle, but there is no evidence of engine activity or relevant audio indicators.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 2.25,
+          "peak_seconds": 2.25,
+          "end_seconds": 2.75,
+          "baseline_hz": 76.9,
+          "peak_hz": 500.0
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/75761bf5471591810916104174737b82/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/75761bf5471591810916104174737b82/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2018 Ford Mustang Shelby GT350R",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/75761bf5471591810916104174737b82/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/9lvA7w1E/2018-ford-mustang-shelby-gt350r",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/75761bf5471591810916104174737b82/manifest/video.m3u8",
+        "auction_title": "2018 Ford Mustang Shelby GT350R",
+        "auction_year": 2018,
+        "search_score": 78
+      },
+      "listings_considered": [
+        "https://carsandbids.com/auctions/35NDJpml/2017-ford-mustang-shelby-gt350",
+        "https://carsandbids.com/auctions/3LNWgpqG/2017-ford-mustang-shelby-gt350",
+        "https://carsandbids.com/auctions/3gA2kQEG/2020-ford-mustang-shelby-gt350r-fathouse-performance-1000r-twin-turbo",
+        "https://carsandbids.com/auctions/3oOLy4Bo/2023-ford-mustang-gt-coupe-premium",
+        "https://carsandbids.com/auctions/3ojx4Xm9/2018-ford-mustang-shelby-gt350",
+        "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+        "https://carsandbids.com/auctions/3zxAOzG1/2018-ford-mustang-shelby-gt350",
+        "https://carsandbids.com/auctions/98QdpMxQ/2019-ford-mustang-shelby-gt350",
+        "https://carsandbids.com/auctions/9AQmqEk8/2017-ford-mustang-shelby-gt350r",
+        "https://carsandbids.com/auctions/9XRqGZeO/2016-ford-mustang-gt-coupe-premium",
+        "https://carsandbids.com/auctions/9lkGjAGr/2015-ford-mustang-gt-50-years-limited-edition-coupe",
+        "https://carsandbids.com/auctions/9lvA7w1E/2018-ford-mustang-shelby-gt350r",
+        "https://carsandbids.com/auctions/rJYAkjwX/2021-ford-mustang-shelby-gt500",
+        "https://carsandbids.com/auctions/rJzO1oa2/2017-ford-mustang-shelby-gt350",
+        "https://carsandbids.com/auctions/rkG4l7Pb/2020-ford-mustang-gt-coupe-premium",
+        "https://carsandbids.com/auctions/rkw0xO4r/2016-ford-mustang-shelby-gt350",
+        "https://carsandbids.com/auctions/rwPmYp85/2020-ford-mustang-gt-premium-convertible"
+      ],
+      "clip_path": "engine_clips/rank-2018-ford-mustang-gt-engine.mp4",
+      "clip_duration": 4.8,
+      "rev_clip_path": null,
+      "rev_clip_duration": null,
+      "rev_clip_onset_seconds": null,
+      "error": null
+    },
+    {
+      "index": 2,
+      "label": "2018 Chevrolet Camaro SS 1SS",
+      "make": "Chevrolet",
+      "model": "Camaro SS",
+      "trim_requested": "1SS",
+      "trim_used": "1SS",
+      "fallback_applied": false,
+      "year": "2018",
+      "generation_start": 2016,
+      "generation_end": 2023,
+      "generation_label": "Sixth generation",
+      "photos": [
+        "images/2018-chevrolet-camaro-ss-1ss/exterior-07.jpg",
+        "images/2018-chevrolet-camaro-ss-1ss/exterior-03.jpg",
+        "images/2018-chevrolet-camaro-ss-1ss/exterior-08.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 9.05,
+      "engine_event_score": 7.797,
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 7,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The shot is focused on the rear of the car, which includes the exhaust tips, making it relevant to exhaust sound, even though there's no indication of audio or specific engine event in the text.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 4.25,
+          "peak_seconds": 4.25,
+          "end_seconds": 4.75,
+          "baseline_hz": 73.6,
+          "peak_hz": 500.0
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0a69c1037293fe0f41be1f1f7ac07c4/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0a69c1037293fe0f41be1f1f7ac07c4/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2017 Chevrolet Camaro 2SS Coupe",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0a69c1037293fe0f41be1f1f7ac07c4/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/9nVE86lv/2017-chevrolet-camaro-2ss-coupe",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0a69c1037293fe0f41be1f1f7ac07c4/manifest/video.m3u8",
+        "auction_title": "2017 Chevrolet Camaro 2SS Coupe",
+        "auction_year": 2017,
+        "search_score": 78
+      },
+      "listings_considered": [
+        "https://carsandbids.com/auctions/30BlmyEM/2018-chevrolet-camaro-2ss-coupe",
+        "https://carsandbids.com/auctions/3LoW0ZmW/2021-chevrolet-camaro-2ss-coupe",
+        "https://carsandbids.com/auctions/3R646ovN/2017-chevrolet-camaro-1ss-1le-coupe",
+        "https://carsandbids.com/auctions/3gY0vdYo/2020-chevrolet-camaro-2ss-convertible",
+        "https://carsandbids.com/auctions/3yqY55WM/2019-chevrolet-camaro-2ss-convertible",
+        "https://carsandbids.com/auctions/9QZP2lkd/2018-chevrolet-camaro-2ss-convertible",
+        "https://carsandbids.com/auctions/9Xa2DRz3/2022-chevrolet-camaro-ss-coupe",
+        "https://carsandbids.com/auctions/9aq6eJBP/2020-chevrolet-camaro-1ss-coupe",
+        "https://carsandbids.com/auctions/9nVE86lv/2017-chevrolet-camaro-2ss-coupe",
+        "https://carsandbids.com/auctions/KVo8gl6r/2018-chevrolet-camaro-1ss-coupe",
+        "https://carsandbids.com/auctions/KYxL7D2A/2022-chevrolet-camaro-ss-convertible",
+        "https://carsandbids.com/auctions/r4GA5vaL/2022-chevrolet-camaro-1ss-coupe",
+        "https://carsandbids.com/auctions/rEGdNalP/2023-chevrolet-camaro-1ss-1le-yenko-sc-stage-ii-coupe",
+        "https://carsandbids.com/auctions/rJ2Y8YbO/2017-chevrolet-camaro-1ss-coupe",
+        "https://carsandbids.com/auctions/rMV6dbmZ/2017-chevrolet-camaro-1ss-coupe",
+        "https://carsandbids.com/auctions/rNGYZnWX/2020-chevrolet-camaro-1ss-coupe",
+        "https://carsandbids.com/auctions/rkbkaOEb/2017-chevrolet-camaro-1ss-coupe",
+        "https://carsandbids.com/auctions/rkyqR1zg/2023-chevrolet-camaro-2ss-coupe"
+      ],
+      "clip_path": "engine_clips/rank-2018-chevrolet-camaro-ss-1ss-engine.mp4",
+      "clip_duration": 8.0,
+      "rev_clip_path": "engine_clips/rank-2018-chevrolet-camaro-ss-1ss-engine-rev.mp4",
+      "rev_clip_duration": 4.2,
+      "rev_clip_onset_seconds": 66.65,
+      "error": null
+    },
+    {
+      "index": 3,
+      "label": "2018 Dodge Challenger",
+      "make": "Dodge",
+      "model": "Challenger",
+      "trim_requested": "R/T",
+      "trim_used": null,
+      "fallback_applied": true,
+      "year": "2018",
+      "generation_start": 2008,
+      "generation_end": 2023,
+      "generation_label": "Second generation",
+      "photos": [
+        "images/2018-dodge-challenger/exterior-02.jpg",
+        "images/2018-dodge-challenger/exterior-06.jpg",
+        "images/2018-dodge-challenger/exterior-08.jpg",
+        "images/2018-dodge-challenger/exterior-07.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 4.25,
+      "engine_event_score": 2.366,
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 6,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The frame focuses on the rear of the car, showing the exhaust area, but does not indicate any engine event or sound.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 0.25,
+          "peak_seconds": 0.25,
+          "end_seconds": 1.25,
+          "baseline_hz": 71.4,
+          "peak_hz": 500.0
+        },
+        {
+          "start_seconds": 1.5,
+          "peak_seconds": 1.5,
+          "end_seconds": 1.75,
+          "baseline_hz": 85.7,
+          "peak_hz": 500.0
+        },
+        {
+          "start_seconds": 2.75,
+          "peak_seconds": 4.5,
+          "end_seconds": 5.0,
+          "baseline_hz": 89.9,
+          "peak_hz": 235.3
+        },
+        {
+          "start_seconds": 6.5,
+          "peak_seconds": 6.5,
+          "end_seconds": 7.0,
+          "baseline_hz": 79.9,
+          "peak_hz": 135.6
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3264d53a8625d4fe9a520ec83ee08f3e/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3264d53a8625d4fe9a520ec83ee08f3e/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2012 Dodge Challenger SRT8 392",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3264d53a8625d4fe9a520ec83ee08f3e/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/rkqwNxYW/2012-dodge-challenger-srt8-392",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3264d53a8625d4fe9a520ec83ee08f3e/manifest/video.m3u8",
+        "auction_title": "2012 Dodge Challenger SRT8 392",
+        "auction_year": 2012,
+        "search_score": 70
+      },
+      "listings_considered": [
+        "https://carsandbids.com/auctions/3BqzgXB4/2021-dodge-challenger-r-t-scat-pack",
+        "https://carsandbids.com/auctions/3L6WOy27/2019-dodge-challenger-srt-hellcat-redeye-widebody",
+        "https://carsandbids.com/auctions/3R2aDeM8/2020-dodge-challenger-r-t-scat-pack-1320",
+        "https://carsandbids.com/auctions/3R4gx6eN/2023-dodge-challenger-swinger-special-edition",
+        "https://carsandbids.com/auctions/92DBNqYA/2018-dodge-challenger-392-hemi-scat-pack-shaker",
+        "https://carsandbids.com/auctions/9WY8Y211/2016-dodge-challenger-srt-hellcat",
+        "https://carsandbids.com/auctions/9lMkyORz/2015-dodge-challenger-srt-hellcat",
+        "https://carsandbids.com/auctions/KV1o1bDM/2010-dodge-challenger-srt8",
+        "https://carsandbids.com/auctions/KYlLnDGJ/2015-dodge-challenger-srt-hellcat",
+        "https://carsandbids.com/auctions/KdDk7Ej5/2015-dodge-challenger-srt-hellcat",
+        "https://carsandbids.com/auctions/KmabAER6/2023-dodge-challenger-r-t-scat-pack-widebody-last-call-edition",
+        "https://carsandbids.com/auctions/KmnGpb60/2017-dodge-challenger-srt-hellcat",
+        "https://carsandbids.com/auctions/r4JYozmD/2021-dodge-challenger-r-t-scat-pack",
+        "https://carsandbids.com/auctions/rkp4xnzW/2010-dodge-challenger-r-t",
+        "https://carsandbids.com/auctions/rkqwNxYW/2012-dodge-challenger-srt8-392"
+      ],
+      "clip_path": "engine_clips/rank-2018-dodge-challenger-engine.mp4",
+      "clip_duration": 7.4,
+      "rev_clip_path": null,
+      "rev_clip_duration": null,
+      "rev_clip_onset_seconds": null,
+      "error": null
+    },
+    {
+      "index": 4,
+      "label": "2018 Nissan 370Z Nismo",
+      "make": "Nissan",
+      "model": "370Z",
+      "trim_requested": "Nismo",
+      "trim_used": "Nismo",
+      "fallback_applied": false,
+      "year": "2018",
+      "generation_start": 2008,
+      "generation_end": 2020,
+      "generation_label": "Z34",
+      "photos": [
+        "images/2018-nissan-370z-nismo/exterior-02.jpg",
+        "images/2018-nissan-370z-nismo/exterior-06.jpg",
+        "images/2018-nissan-370z-nismo/exterior-08.jpg",
+        "images/2018-nissan-370z-nismo/exterior-07.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 2.05,
+      "engine_event_score": 3.042,
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 5,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The focus is on the rear of the vehicle, and while it may imply exhaust presence, it lacks explicit audio or an event indicating cold start, startup, exhaust, or revving.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 0.25,
+          "peak_seconds": 0.25,
+          "end_seconds": 0.5,
+          "baseline_hz": 76.2,
+          "peak_hz": 150.9
+        },
+        {
+          "start_seconds": 1.25,
+          "peak_seconds": 1.25,
+          "end_seconds": 1.75,
+          "baseline_hz": 94.9,
+          "peak_hz": 142.9
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0b90095fd0b7561e869bcc0c02746de/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0b90095fd0b7561e869bcc0c02746de/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2009 Nissan 370Z Touring Coupe",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0b90095fd0b7561e869bcc0c02746de/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/3zLwgVJN/2009-nissan-370z-touring-coupe",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0b90095fd0b7561e869bcc0c02746de/manifest/video.m3u8",
+        "auction_title": "2009 Nissan 370Z Touring Coupe",
+        "auction_year": 2009,
+        "search_score": 70
+      },
+      "listings_considered": [
+        "https://carsandbids.com/auctions/35pEJLyR/2016-nissan-370z-nismo-coupe",
+        "https://carsandbids.com/auctions/37NOYGvD/2013-nissan-370z-nismo-coupe",
+        "https://carsandbids.com/auctions/3OjGEvZz/2020-nissan-370z-sport-touring-coupe",
+        "https://carsandbids.com/auctions/3RboXWlR/2013-nissan-370z-nismo-coupe",
+        "https://carsandbids.com/auctions/3q2NREAn/2018-nissan-370z-sport-tech-coupe",
+        "https://carsandbids.com/auctions/3qq8Nnqy/2009-nissan-370z-touring-coupe",
+        "https://carsandbids.com/auctions/3zLwgVJN/2009-nissan-370z-touring-coupe",
+        "https://carsandbids.com/auctions/9WdwROXq/2011-nissan-370z-nismo-coupe",
+        "https://carsandbids.com/auctions/9alBBwVQ/2009-nissan-370z-coupe",
+        "https://carsandbids.com/auctions/KPeEOZ5a/2010-nissan-370z-touring-roadster",
+        "https://carsandbids.com/auctions/KPyobd0Z/2012-nissan-370z-roadster",
+        "https://carsandbids.com/auctions/KVQo1E63/2009-nissan-370z-touring-coupe",
+        "https://carsandbids.com/auctions/KVzQgmA0/2009-nissan-370z-nismo-coupe",
+        "https://carsandbids.com/auctions/KYyDZBav/2015-nissan-370z-coupe",
+        "https://carsandbids.com/auctions/KYzDOekJ/2012-nissan-370z-touring-coupe",
+        "https://carsandbids.com/auctions/Kdl4AAD5/2010-nissan-370z-touring-roadster",
+        "https://carsandbids.com/auctions/r4VRBRoD/2020-nissan-370z-coupe",
+        "https://carsandbids.com/auctions/rblkglVd/2010-nissan-370z-coupe"
+      ],
+      "clip_path": "engine_clips/rank-2018-nissan-370z-nismo-engine.mp4",
+      "clip_duration": 8.0,
+      "rev_clip_path": "engine_clips/rank-2018-nissan-370z-nismo-engine-rev.mp4",
+      "rev_clip_duration": 3.4,
+      "rev_clip_onset_seconds": 19.25,
+      "error": null
+    }
+  ],
+  "title": "WHICH MODERN AMERICAN MUSCLE CAR SOUNDS BEST?",
+  "intro_question": "Which modern American muscle car sounds best?",
+  "status": "researched",
+  "approved_count": 4,
+  "total_count": 4
+}

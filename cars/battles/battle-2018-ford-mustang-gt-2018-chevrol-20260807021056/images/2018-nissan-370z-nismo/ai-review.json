@@ -1,0 +1,202 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Nissan",
+      "detected_model": "370Z",
+      "detected_generation_or_year": "2008-2020",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Nissan badge",
+        "370Z bodywork",
+        "sports car characteristics"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "nissan",
+      "detected_model": "370z",
+      "detected_generation_or_year": "2008-2020",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "front fascia design",
+        "headlight shape"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior"
+      ],
+      "quality_score": 8,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "nissan",
+      "detected_model": "370z",
+      "detected_generation_or_year": "2008-2020",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinctive 370Z body shape",
+        "wide rear fenders",
+        "Nismo badge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Nissan",
+      "detected_model": "370Z",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": "Nismo",
+      "visible_match_evidence": [
+        "Body styling consistent with 370Z",
+        "Rear design matches 2018 Nissan 370Z",
+        "Nismo badge visibly present"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Nissan",
+      "detected_model": "370Z",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": "Nismo",
+      "visible_match_evidence": [
+        "Z logo on the steering wheel",
+        "Interior detailing consistent with 370Z",
+        "Instrumentation layout matches 2018 model"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "exterior",
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 3,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not prominently show the target vehicle; focus is on the interior.",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 5,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "The image shows only the interior details and does not provide a clear view of the target vehicle.",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "detail",
+      "scene_fit_tags": [
+        "detail"
+      ],
+      "quality_score": 5,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not feature the target vehicle.",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}
