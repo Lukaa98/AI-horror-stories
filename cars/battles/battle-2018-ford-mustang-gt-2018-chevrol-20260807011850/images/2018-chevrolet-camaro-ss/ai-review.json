@@ -1,0 +1,220 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2019-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Camaro bodywork and proportions",
+        "Front styling",
+        "Overall silhouette"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "chevrolet badge",
+        "front fascia design",
+        "hood scoop",
+        "SS badge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "bodywork style",
+        "rear wing",
+        "wheel design",
+        "side profile"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Camaro",
+      "detected_generation_or_year": "2016-2023",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "distinctive rear tail lights",
+        "quad exhaust tips",
+        "prominent rear wing",
+        "muscular proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": "SS",
+      "visible_match_evidence": [
+        "interior design",
+        "dashboard layout",
+        "steering wheel styling"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2016-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "sport seats",
+        "center console"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2016-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Chevrolet logo on interior",
+        "Sport seats typical of Camaro",
+        "Interior layout consistent with Camaro"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "camaro",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "dashboard design",
+        "gauge layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": null,
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}
