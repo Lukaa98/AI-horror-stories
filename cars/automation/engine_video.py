@@ -655,6 +655,8 @@ def prepare_engine_clip(
                 return {
                     "approved": False,
                     "error": "Only interior/cockpit startup footage found; exterior-only mode requires an outside view",
+                    "scene_types_seen": sorted({item["scene_review"].get("scene_type") or "unknown" for item in analyses}),
+                    "candidates_classified": len(classified),
                     "source": candidates[0],
                 }
             analyses = exterior_analyses
@@ -671,9 +673,18 @@ def prepare_engine_clip(
                 if item["scene_review"].get("scene_type") in EXHAUST_SCENE_TYPES
             ]
             if not rear_analyses:
+                # Self-diagnosing: record what scene types actually got
+                # classified (and how many candidates total) so a failure
+                # here doesn't require re-deriving it by hand later - e.g.
+                # seeing only engine_bay/full_exterior confirms no rear shot
+                # was even in the examined pool, while an empty pool at all
+                # means the budget or discovery, not this filter, is the
+                # thing to look at.
                 return {
                     "approved": False,
                     "error": "No rear-of-car (exhaust-view) startup clip found; other angles are too wind-exposed to hear clearly",
+                    "scene_types_seen": sorted({item["scene_review"].get("scene_type") or "unknown" for item in analyses}),
+                    "candidates_classified": len(classified),
                     "source": candidates[0],
                 }
             analyses = rear_analyses

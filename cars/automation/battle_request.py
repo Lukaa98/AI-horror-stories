@@ -271,6 +271,8 @@ def process_car(car_entry, images_dir):
         "rev_events": clip_result.get("rev_events") or [],
         "source": clip_result.get("source"),
         "listings_considered": sorted(all_listing_urls),
+        "scene_types_seen": clip_result.get("scene_types_seen") or [],
+        "candidates_classified": clip_result.get("candidates_classified"),
     }
     if final_path:
         relative_clip = Path(final_path).relative_to(images_dir.parent)
