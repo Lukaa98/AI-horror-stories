@@ -338,6 +338,39 @@ def scrape_entry_images(scraper_dir, draft_images_dir, entry):
     return images, manifest
 
 
+def scrape_auction_images(scraper_dir, draft_images_dir, entry, auction_url):
+    """Like scrape_entry_images, but fetches one already-known listing
+    directly instead of searching and picking from the top results --
+    guarantees the photos come from the exact same car as a video already
+    found on this auction, rather than whichever listing a separate,
+    independently-ranked photo search happened to land on."""
+    params = infer_search_params(entry.get("search_hint", "")) or {"make": "", "model": ""}
+    topic_slug = re.sub(r"[^a-z0-9]+", "-", entry["name"].lower()).strip("-") or "entry"
+    dest = draft_images_dir / topic_slug
+    manifest_path = dest / "carsandbids-manifest.json"
+    dest.mkdir(parents=True, exist_ok=True)
+
+    cmd = [
+        "node",
+        "src/scrape-carsandbids-gallery.js",
+        f"--auction-url={auction_url}",
+        f"--make={params['make']}",
+        f"--model={params['model']}",
+        f"--query={entry.get('search_hint', '')}",
+        f"--out-dir={dest}",
+        f"--out-json={manifest_path}",
+        f"--visual-highlight={entry.get('visual_highlight', '')}",
+    ]
+
+    subprocess.run(cmd, cwd=scraper_dir, check=False)
+    manifest = load_manifest(manifest_path)
+    review_payload = review_draft_images(dest, entry)
+    images = choose_reviewed_images(dest, entry, review_payload, limit=6)
+    manifest["ai_review"] = review_payload
+    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    return images, manifest
+
+
 def discover_entry_engine_videos(scraper_dir, draft_images_dir, entry):
     """Run a video-only Cars & Bids search for this entry's engine clips.
 

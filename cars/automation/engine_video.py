@@ -115,6 +115,12 @@ _SCENE_PROMPT = (
     "We want cold-start, startup, exhaust, or revving footage. Exhaust closeups, rear views, "
     "cockpit views with gauges, and engine-bay views are highly relevant. Convertible roof "
     "movement, hood/trunk operation, silent interior details, and generic walkarounds are not. "
+    "rear_exterior includes any framing where the back of the car (exhaust tips, rear bumper, "
+    "taillights) is the visible or implied focus, even at an angle - straight-on rear, "
+    "rear-quarter, and side-rear/three-quarter-rear shots (e.g. filmed from the rear side corner "
+    "looking toward the tailpipes) all count as rear_exterior, not full_exterior. Only use "
+    "full_exterior for a front, front-quarter, or pure side-profile framing where the rear/exhaust "
+    "isn't the visible focus at all. "
     "{vehicle_line}classify scene purpose separately from whether the vehicle identity matches. "
     "{text_line}"
     "Set text_indicates_engine_event true only if that text explicitly names a cold start, "
@@ -559,7 +565,19 @@ def prepare_engine_clip(
         # classifications we no longer need, but still willing to go through
         # max_thumbnail_classifications candidates if the early ones aren't
         # usable rather than giving up after only the first few.
-        ordered_candidates = interleave_by_listing(candidates)
+        #
+        # A candidate the scraper's own title regex already tagged
+        # cold_start/engine_sound (e.g. "Engine Start - Exhaust") is a much
+        # stronger signal than round-robin position, so those go first
+        # regardless of how many listings there are or which video number
+        # they are on their own listing page - with many listings and a
+        # bounded budget, round-robin alone can starve a listing's 2nd/3rd
+        # video (where the actual labeled clip often sits) before the
+        # budget ever reaches it.
+        interleaved = interleave_by_listing(candidates)
+        pre_labeled = [c for c in interleaved if c.get("type") in {"cold_start", "engine_sound"}]
+        rest = [c for c in interleaved if c.get("type") not in {"cold_start", "engine_sound"}]
+        ordered_candidates = pre_labeled + rest
         classified = []
         labeled = []
         relevant = []

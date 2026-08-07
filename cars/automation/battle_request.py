@@ -15,8 +15,8 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from dotenv import load_dotenv
-from cars_and_bids import discover_entry_engine_videos, scrape_entry_images
-from engine_video import prepare_engine_clip
+from cars_and_bids import discover_entry_engine_videos, scrape_auction_images, scrape_entry_images
+from engine_video import MAX_THUMBNAIL_CLASSIFICATIONS, prepare_engine_clip
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
 
@@ -38,12 +38,16 @@ EXTERIOR_SHOT_TYPES = {"front", "rear", "side", "front_3q", "rear_3q", "exterior
 # makes many sequential OpenAI calls -- too much parallelism just trades
 # wall-clock time for API rate-limit backoff instead of avoiding the cost.
 MAX_CONCURRENT_CARS = 3
-# Battle mode's own search is already a wide, unsorted video-only pass (see
-# discover_entry_engine_videos), so it doesn't need the flagship ranking
-# pipeline's full 20-thumbnail budget to find a usable clip -- trading a
-# bit of that thoroughness for speed matches this format's "quick" premise,
-# and matters more here since a trim fallback can pay this cost 2-4x over.
-BATTLE_MAX_THUMBNAIL_CLASSIFICATIONS = 8
+# Was cut to 8 to speed battle mode up, but a real run showed multiple
+# clearly-labeled, clean rear-shot startup videos (e.g. titled "Engine
+# Start - Exhaust") sitting later in the interleaved candidate order than
+# an 8-classification budget ever reached, so cars with real good clips
+# were failing outright. rear_shot_only also means fewer of any given
+# batch of classified candidates survive to begin with, so a small budget
+# now costs accuracy more than it used to. Concurrent car processing
+# already covers most of the wall-clock win this was trying to buy, so
+# restored to the flagship pipeline's own budget.
+BATTLE_MAX_THUMBNAIL_CLASSIFICATIONS = MAX_THUMBNAIL_CLASSIFICATIONS
 # How far into the source video to search for a distant rev after a long
 # idle (e.g. cold start at 0:10, revs at 1:00) -- if found, it's cut as a
 # separate short clip and stitched on right after the startup clip.
@@ -141,32 +145,31 @@ def build_search_variant(car_entry, trim_variant):
     }
 
 
-def gather_exterior_photos(car_entry, images_dir, limit=PHOTOS_PER_CAR, prefer_section=None):
-    """Fetch exterior photos, matched to the same listing (`prefer_section`,
-    the winning clip's auction title) so the photos shown for a car depict
-    the same physical vehicle as its engine clip, not a different auction.
-    This only falls back to other listings' photos when the matching one
-    has *none* at all -- a partial match (fewer than `limit`) still uses
-    only that listing's own photos rather than topping up with a different
-    car's."""
-    images, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, car_entry)
+def _filter_exterior(images, manifest):
     reviews = (manifest.get("ai_review") or {}).get("reviews", [])
     by_name = {review.get("path"): review for review in reviews}
-    sections = {item.get("path"): item.get("section") for item in manifest.get("downloaded_images", [])}
-    exterior = [
+    return [
         relative for relative in images
         if by_name.get(Path(relative).name, {}).get("shot_type", "exterior") in EXTERIOR_SHOT_TYPES
     ]
-    if prefer_section:
-        needle = str(prefer_section).strip().lower()
 
-        def same_listing(relative):
-            section = str(sections.get(Path(relative).name, "")).strip().lower()
-            return bool(section) and bool(needle) and (needle in section or section in needle)
 
-        same = [r for r in exterior if same_listing(r)]
-        if same:
-            exterior = same
+def gather_exterior_photos(car_entry, images_dir, limit=PHOTOS_PER_CAR, auction_url=None):
+    """Fetch exterior photos. When `auction_url` is given (the winning
+    clip's own source listing), fetch directly from that specific listing
+    so the photos depict the same physical car as the video -- a separate,
+    independently-ranked search for photos routinely lands on a different
+    auction entirely (photo search only ever visits the top 4 by price;
+    video search casts a much wider net), so matching by title after the
+    fact was a coincidence at best. Only falls back to a broader search
+    when that exact listing has no usable exterior photos of its own."""
+    exterior = []
+    if auction_url:
+        images, manifest = scrape_auction_images(SCRAPER_DIR, images_dir, car_entry, auction_url)
+        exterior = _filter_exterior(images, manifest)
+    if not exterior:
+        images, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, car_entry)
+        exterior = _filter_exterior(images, manifest)
     exterior = exterior[:limit]
     for relative in exterior:
         blur_license_plates(images_dir.parent / relative)
@@ -222,8 +225,8 @@ def process_car(car_entry, images_dir):
         variant_photos = []
         if variant_clip.get("approved"):
             source = variant_clip.get("source") or {}
-            prefer_section = source.get("auction_title") or source.get("title")
-            variant_photos = gather_exterior_photos(variant, images_dir, prefer_section=prefer_section)
+            auction_url = source.get("auction_url")
+            variant_photos = gather_exterior_photos(variant, images_dir, auction_url=auction_url)
         rung_seconds = round(time.monotonic() - rung_started, 1)
         print(
             f"[battle] Car #{car_entry['index']}: '{variant['search_hint']}' took {rung_seconds}s "

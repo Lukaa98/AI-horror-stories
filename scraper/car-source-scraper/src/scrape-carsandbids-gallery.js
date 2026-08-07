@@ -561,16 +561,26 @@ async function main() {
   // video, while cheaper listings the user found by normal browsing had
   // clearly labeled Cold Start/Engine Start videos. Video-only tests drop
   // the forced price sort and use the site's own default ordering instead.
-  const searchUrl = argValue("search-url") || buildSearchUrl({
+  // Fetching one already-known listing directly (rather than searching and
+  // picking from the top results) guarantees the photos come from the exact
+  // same physical car as a previously-found video -- the photo search's own
+  // top-4-by-price picks and the video search's much wider unsorted pool
+  // otherwise routinely land on two different auctions entirely.
+  const auctionUrl = argValue("auction-url");
+
+  const searchUrl = auctionUrl ? null : (argValue("search-url") || buildSearchUrl({
     make: argValue("make"),
     model: argValue("model"),
     startYear: argValue("start-year"),
     endYear: argValue("end-year"),
     sort: argValue("sort", skipImages ? "" : "10"),
-  });
+  }));
 
-  if (!searchUrl || !/^https:\/\/carsandbids\.com\/search\//i.test(searchUrl)) {
-    throw new Error("Provide --search-url or --make/--model for a Cars & Bids search page.");
+  if (!auctionUrl && (!searchUrl || !/^https:\/\/carsandbids\.com\/search\//i.test(searchUrl))) {
+    throw new Error("Provide --auction-url, --search-url, or --make/--model for a Cars & Bids search page.");
+  }
+  if (auctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl)) {
+    throw new Error("--auction-url must be a carsandbids.com/auctions/... listing URL.");
   }
 
   const startYear = Number(argValue("start-year", "0")) || null;
@@ -598,9 +608,9 @@ async function main() {
     await page.setExtraHTTPHeaders({ "Accept-Language": "en-US,en;q=0.9" });
     await page.setViewport({ width: 1440, height: 1200, deviceScaleFactor: 1 });
 
-    const auctions = await collectAuctionEntries(
-      page, searchUrl, queryTokens, startYear, endYear, skipImages ? 20 : 6
-    );
+    const auctions = auctionUrl
+      ? [{ url: auctionUrl, title: "", text: "", titleYear: null, score: 100 }]
+      : await collectAuctionEntries(page, searchUrl, queryTokens, startYear, endYear, skipImages ? 20 : 6);
     if (!auctions.length) {
       throw new Error(`No auction links found at ${searchUrl}`);
     }
