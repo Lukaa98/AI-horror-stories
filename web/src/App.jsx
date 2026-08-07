@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.51";
+const UI_VERSION = "V10.52";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -302,20 +302,28 @@ async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 600
 // slow for a poll meant to resolve in under a minute. The Contents API reads
 // straight from GitHub's backend with no caching layer, so it reflects a
 // commit as soon as the ref updates.
+// Reads a committed file straight from GitHub's Contents API instead of the
+// CDN-fronted raw.githubusercontent.com, which can lag behind a fresh commit
+// by more than expected on an infrequently-touched branch. Returns null
+// (not an error) when the file isn't there yet/at all, so callers can poll
+// or treat it as "no preview" as appropriate.
+async function fetchFileViaApi(owner, repo, branch, path, token) {
+  const res = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`,
+    { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" }, cache: "no-store" }
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, "")), (c) => c.charCodeAt(0));
+  return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+}
+
 async function pollForFileViaApi({ owner, repo, branch, path, token, signal, intervalMs = 5000, timeoutMs }) {
   const start = Date.now();
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
   while (Date.now() - start < timeoutMs) {
     if (signal.aborted) throw new Error("Cancelled");
-    const res = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
-      cache: "no-store",
-    });
-    if (res.ok) {
-      const data = await res.json();
-      const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, "")), (c) => c.charCodeAt(0));
-      return JSON.parse(new TextDecoder("utf-8").decode(bytes));
-    }
+    const data = await fetchFileViaApi(owner, repo, branch, path, token);
+    if (data) return data;
     await new Promise((resolve) => setTimeout(resolve, intervalMs));
   }
   const timeoutMinutes = Math.round(timeoutMs / 60000);
@@ -462,18 +470,15 @@ function groupDashboardEntries(entries) {
   return items;
 }
 
-async function attachDashboardPreviews(items, owner, repo) {
+async function attachDashboardPreviews(items, owner, repo, token) {
   await Promise.allSettled(
     items.map(async (item) => {
       const { prefix, file } = DASHBOARD_FOLDERS[item.type];
       if (item.type === "draft" && !item.hasResearch) return;
       if (item.type === "video-test" && !item.hasResult) return;
       if (item.type === "battle" && !item.hasBattle) return;
-      const res = await fetch(
-        `https://raw.githubusercontent.com/${owner}/${repo}/${OUTPUT_BRANCH}/${prefix}/${item.id}/${file}?_=${Date.now()}`,
-        { cache: "no-store" }
-      );
-      if (res.ok) item.preview = await res.json();
+      const preview = await fetchFileViaApi(owner, repo, OUTPUT_BRANCH, `${prefix}/${item.id}/${file}`, token);
+      if (preview) item.preview = preview;
     })
   );
   return items;
@@ -482,7 +487,7 @@ async function attachDashboardPreviews(items, owner, repo) {
 async function loadDashboardEntries({ owner, repo, token }) {
   const { entries } = await fetchOutputTree({ owner, repo, token });
   const items = groupDashboardEntries(entries);
-  await attachDashboardPreviews(items, owner, repo);
+  await attachDashboardPreviews(items, owner, repo, token);
   return items;
 }
 
