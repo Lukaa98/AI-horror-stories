@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2018-ford-mustang-20260807011624",
+  "base_car": {
+    "make": "Ford",
+    "model": "Mustang",
+    "trim": "GT",
+    "year": "2018"
+  },
+  "rivals": [
+    {
+      "make": "Chevrolet",
+      "model": "Camaro SS",
+      "trim": "1SS",
+      "year": "2018",
+      "reason": "The Camaro SS features a powerful V8 engine and aggressive styling, making it a direct competitor to the Mustang GT with a distinctive, throaty exhaust note."
+    },
+    {
+      "make": "Dodge",
+      "model": "Challenger R/T",
+      "trim": "",
+      "year": "2018",
+      "reason": "The Challenger R/T offers classic muscle car aesthetics and a robust V8 engine, providing an equally iconic cold start sound that rivals the Mustang."
+    },
+    {
+      "make": "Subaru",
+      "model": "WRX STI",
+      "trim": "",
+      "year": "2018",
+      "reason": "While not a traditional muscle car, the WRX STI combines performance and a unique turbocharged rumble that appeals to enthusiasts looking for alternatives in the segment."
+    },
+    {
+      "make": "BMW",
+      "model": "M4",
+      "trim": "",
+      "year": "2018",
+      "reason": "The M4 blends luxury with high-performance engineering, offering a sophisticated exhaust note that provides a stark contrast yet a fair comparison to the Mustang GT's raw power."
+    }
+  ]
+}
