@@ -1,0 +1,334 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-07T02:50:27.088Z",
+  "query": "Ferrari 488 GTB",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/ferrari/488?start_year=2015&end_year=2019",
+  "search_result_count": 9,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "title": "2016 Ferrari 488 Gtb",
+      "text": "FEATURED Sold for $162,300",
+      "titleYear": 2016,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3q1e6OV1/2016-ferrari-488-gtb-coupe",
+      "title": "2016 Ferrari 488 Gtb Coupe",
+      "text": "FEATURED Sold for $194,000",
+      "titleYear": 2016,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmaL0zw6/2018-ferrari-488-gtb",
+      "title": "2018 Ferrari 488 Gtb",
+      "text": "FEATURED Sold for $244,500",
+      "titleYear": 2018,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92DV5Al6/2019-ferrari-488-gtb",
+      "title": "2019 Ferrari 488 Gtb",
+      "text": "FEATURED Bid to $174,500",
+      "titleYear": 2019,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3ozMogg2/2016-ferrari-488-gtb",
+      "title": "2016 Ferrari 488 Gtb",
+      "text": "Bid to $188,000",
+      "titleYear": 2016,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3z2OLREN/2017-ferrari-488-gtb",
+      "title": "2017 Ferrari 488 Gtb",
+      "text": "Bid to $179,179",
+      "titleYear": 2017,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3o046oQ7/2016-ferrari-488-spider",
+      "title": "2016 Ferrari 488 Spider",
+      "text": "FEATURED Sold for $220,000",
+      "titleYear": 2016,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3R0G8GmN/2017-ferrari-488-challenge",
+      "title": "2017 Ferrari 488 Challenge",
+      "text": "FEATURED Bid to $102,000",
+      "titleYear": 2017,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4vWzZn3/2018-ferrari-488-spider",
+      "title": "2018 Ferrari 488 Spider",
+      "text": "Bid to $234,000",
+      "titleYear": 2018,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "title": "2016 Ferrari 488 Gtb",
+      "text": "FEATURED Sold for $162,300",
+      "titleYear": 2016,
+      "score": 88,
+      "usable_image_count": 33,
+      "sale_price": 162300,
+      "sale_type": "sold",
+      "page_title": "2016 Ferrari 488 GTB"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3q1e6OV1/2016-ferrari-488-gtb-coupe",
+      "title": "2016 Ferrari 488 Gtb Coupe",
+      "text": "FEATURED Sold for $194,000",
+      "titleYear": 2016,
+      "score": 88,
+      "usable_image_count": 34,
+      "sale_price": 194000,
+      "sale_type": "sold",
+      "page_title": "2016 Ferrari 488 GTB Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmaL0zw6/2018-ferrari-488-gtb",
+      "title": "2018 Ferrari 488 Gtb",
+      "text": "FEATURED Sold for $244,500",
+      "titleYear": 2018,
+      "score": 88,
+      "usable_image_count": 20,
+      "sale_price": 244500,
+      "sale_type": "sold",
+      "page_title": "2018 Ferrari 488 GTB"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92DV5Al6/2019-ferrari-488-gtb",
+      "title": "2019 Ferrari 488 Gtb",
+      "text": "FEATURED Bid to $174,500",
+      "titleYear": 2019,
+      "score": 88,
+      "usable_image_count": 13,
+      "sale_price": 174500,
+      "sale_type": "sold",
+      "page_title": "2019 Ferrari 488 GTB"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3ozMogg2/2016-ferrari-488-gtb",
+      "title": "2016 Ferrari 488 Gtb",
+      "text": "Bid to $188,000",
+      "titleYear": 2016,
+      "score": 88,
+      "usable_image_count": 34,
+      "sale_price": 188000,
+      "sale_type": "sold",
+      "page_title": "2016 Ferrari 488 GTB"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3z2OLREN/2017-ferrari-488-gtb",
+      "title": "2017 Ferrari 488 Gtb",
+      "text": "Bid to $179,179",
+      "titleYear": 2017,
+      "score": 88,
+      "usable_image_count": 23,
+      "sale_price": 179179,
+      "sale_type": "sold",
+      "page_title": "2017 Ferrari 488 GTB"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3o046oQ7/2016-ferrari-488-spider",
+      "title": "2016 Ferrari 488 Spider",
+      "text": "FEATURED Sold for $220,000",
+      "titleYear": 2016,
+      "score": 70,
+      "usable_image_count": 22,
+      "sale_price": 220000,
+      "sale_type": "sold",
+      "page_title": "2016 Ferrari 488 Spider"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3R0G8GmN/2017-ferrari-488-challenge",
+      "title": "2017 Ferrari 488 Challenge",
+      "text": "FEATURED Bid to $102,000",
+      "titleYear": 2017,
+      "score": 70,
+      "usable_image_count": 32,
+      "sale_price": 102000,
+      "sale_type": "sold",
+      "page_title": "2017 Ferrari 488 Challenge"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4vWzZn3/2018-ferrari-488-spider",
+      "title": "2018 Ferrari 488 Spider",
+      "text": "Bid to $234,000",
+      "titleYear": 2018,
+      "score": 70,
+      "usable_image_count": 26,
+      "sale_price": 234000,
+      "sale_type": "sold",
+      "page_title": "2018 Ferrari 488 Spider"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3q1e6OV1/2016-ferrari-488-gtb-coupe",
+    "title": "2016 Ferrari 488 Gtb Coupe",
+    "text": "FEATURED Sold for $194,000",
+    "titleYear": 2016,
+    "score": 88,
+    "sale_price": 194000,
+    "sale_type": "sold",
+    "page_title": "2016 Ferrari 488 GTB Coupe",
+    "year": 2016,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f8954352f924b1edfd796167e7f5824/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f8954352f924b1edfd796167e7f5824/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f8954352f924b1edfd796167e7f5824/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f8954352f924b1edfd796167e7f5824/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": 2016,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d45b0d156f4724c44dba76b8d994123e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d45b0d156f4724c44dba76b8d994123e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d45b0d156f4724c44dba76b8d994123e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d45b0d156f4724c44dba76b8d994123e/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": 2016,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/42bfb2b071f81b9f2e482c22cd87e430/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/42bfb2b071f81b9f2e482c22cd87e430/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/42bfb2b071f81b9f2e482c22cd87e430/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/42bfb2b071f81b9f2e482c22cd87e430/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": 2016,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb2c41405561a6d6153102ffb700d737/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb2c41405561a6d6153102ffb700d737/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb2c41405561a6d6153102ffb700d737/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb2c41405561a6d6153102ffb700d737/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": 2016,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/554115f69ba7a24688db5cc00c95cf76/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/554115f69ba7a24688db5cc00c95cf76/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/554115f69ba7a24688db5cc00c95cf76/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/554115f69ba7a24688db5cc00c95cf76/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": 2016,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": 2016,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d155601546d5003504766aa577a9ebcd/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d155601546d5003504766aa577a9ebcd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d155601546d5003504766aa577a9ebcd/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d155601546d5003504766aa577a9ebcd/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": 2016,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3e5f3a2ca902ea9a4baa4c111029f33b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3e5f3a2ca902ea9a4baa4c111029f33b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3e5f3a2ca902ea9a4baa4c111029f33b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3e5f3a2ca902ea9a4baa4c111029f33b/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": 2016,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0548e2b4c5ef82f615540b1929d24364/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0548e2b4c5ef82f615540b1929d24364/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 Spider",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0548e2b4c5ef82f615540b1929d24364/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3o046oQ7/2016-ferrari-488-spider",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0548e2b4c5ef82f615540b1929d24364/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 Spider",
+      "auction_year": 2016,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1155d900ce70b1e10233125af694365a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1155d900ce70b1e10233125af694365a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 Spider",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1155d900ce70b1e10233125af694365a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3o046oQ7/2016-ferrari-488-spider",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1155d900ce70b1e10233125af694365a/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 Spider",
+      "auction_year": 2016,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/84c6736c248ed6fa243fc320d6cd3751/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/84c6736c248ed6fa243fc320d6cd3751/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 Spider",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/84c6736c248ed6fa243fc320d6cd3751/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3o046oQ7/2016-ferrari-488-spider",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/84c6736c248ed6fa243fc320d6cd3751/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 Spider",
+      "auction_year": 2016,
+      "search_score": 70
+    }
+  ]
+}

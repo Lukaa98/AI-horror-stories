@@ -1,0 +1,451 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-07T02:51:55.939Z",
+  "query": "Ferrari 488 GTB",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 33,
+      "sale_price": 162300,
+      "sale_type": "sold",
+      "page_title": "2016 Ferrari 488 GTB"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 162300,
+    "sale_type": "sold",
+    "page_title": "2016 Ferrari 488 GTB",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/64fee798e0ee4cb8e9b6766c5cb6ea3711dbfe18/photos/Ferrari488GTB2016076.jpg?t=178092865682",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 198177
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/Ferrari488GTB2016002/edit/a6sSO.jpg?t=178103366503",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Ferrari 488 GTB",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 299947
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/64fee798e0ee4cb8e9b6766c5cb6ea3711dbfe18/photos/Ferrari488GTB2016094.jpg?t=178092865682",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 115224
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/64fee798e0ee4cb8e9b6766c5cb6ea3711dbfe18/photos/Ferrari488GTB2016092.jpg?t=178092865682",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 196772
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/64fee798e0ee4cb8e9b6766c5cb6ea3711dbfe18/photos/Ferrari488GTB2016083.jpg?t=178092865682",
+      "labels": [
+        "interior"
+      ],
+      "section": "2016 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 124157
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/Ferrari488GTB2016070/edit/TYSet.jpg?t=178103418593",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 168206
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/Ferrari488GTB2016007/edit/inUlB.jpg?t=178103427770",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 325285
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/Ferrari488GTB2016004/edit/wvKez.jpg?t=178103425036",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2016 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 306388
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f8954352f924b1edfd796167e7f5824/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f8954352f924b1edfd796167e7f5824/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f8954352f924b1edfd796167e7f5824/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f8954352f924b1edfd796167e7f5824/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d45b0d156f4724c44dba76b8d994123e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d45b0d156f4724c44dba76b8d994123e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d45b0d156f4724c44dba76b8d994123e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d45b0d156f4724c44dba76b8d994123e/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/42bfb2b071f81b9f2e482c22cd87e430/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/42bfb2b071f81b9f2e482c22cd87e430/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/42bfb2b071f81b9f2e482c22cd87e430/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/42bfb2b071f81b9f2e482c22cd87e430/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb2c41405561a6d6153102ffb700d737/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb2c41405561a6d6153102ffb700d737/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb2c41405561a6d6153102ffb700d737/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bb2c41405561a6d6153102ffb700d737/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/554115f69ba7a24688db5cc00c95cf76/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/554115f69ba7a24688db5cc00c95cf76/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/554115f69ba7a24688db5cc00c95cf76/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/554115f69ba7a24688db5cc00c95cf76/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d155601546d5003504766aa577a9ebcd/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d155601546d5003504766aa577a9ebcd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d155601546d5003504766aa577a9ebcd/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d155601546d5003504766aa577a9ebcd/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3e5f3a2ca902ea9a4baa4c111029f33b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3e5f3a2ca902ea9a4baa4c111029f33b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2016 Ferrari 488 GTB",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3e5f3a2ca902ea9a4baa4c111029f33b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3e5f3a2ca902ea9a4baa4c111029f33b/manifest/video.m3u8",
+      "auction_title": "2016 Ferrari 488 GTB",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2015-2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork design",
+          "front fascia",
+          "wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "488 body shape",
+          "headlight design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "general Ferrari design cues"
+        ],
+        "generation_match_confidence": 5,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "side"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 6,
+        "reject": true,
+        "reason": "Not obviously a 2018 488 GTB, evidence insufficient for specific variant.",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2015-2019",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "distinctive rear tail lights",
+          "exhaust layout",
+          "body proportions",
+          "Ferrari badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "488 GTB badge",
+          "Ferrari interior design",
+          "sporty steering wheel"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "ferrari logo",
+          "sports seats design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "interior design",
+          "seats",
+          "model badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle; it's an interior dashboard view with no visible car identifiers.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

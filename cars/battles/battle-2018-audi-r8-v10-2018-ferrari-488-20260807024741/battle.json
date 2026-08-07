@@ -1,0 +1,245 @@
+{
+  "battle_id": "battle-2018-audi-r8-v10-2018-ferrari-488-20260807024741",
+  "cars": [
+    {
+      "index": 1,
+      "label": "2018 Audi R8",
+      "make": "Audi",
+      "model": "R8",
+      "trim_requested": "V10",
+      "trim_used": null,
+      "fallback_applied": false,
+      "year": "2018",
+      "generation_start": 2015,
+      "generation_end": 2022,
+      "generation_label": "Second generation",
+      "photos": [],
+      "approved": false,
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "scene_review": null,
+      "rev_detected": false,
+      "rev_events": [],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9417351a984ef3e7feff6c6912b9bed1/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9417351a984ef3e7feff6c6912b9bed1/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2022 Audi R8 V10 Performance Coupe RWD",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9417351a984ef3e7feff6c6912b9bed1/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/rxPeJ06B/2022-audi-r8-v10-performance-coupe-rwd",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9417351a984ef3e7feff6c6912b9bed1/manifest/video.m3u8",
+        "auction_title": "2022 Audi R8 V10 Performance Coupe RWD",
+        "auction_year": 2022,
+        "search_score": 60
+      },
+      "listings_considered": [
+        "https://carsandbids.com/auctions/35Ln5xdB/2020-audi-r8-v10-coupe",
+        "https://carsandbids.com/auctions/3yX7Yymy/2020-audi-r8-v10-coupe",
+        "https://carsandbids.com/auctions/98QqP4XY/2022-audi-r8-v10-performance-coupe-quattro",
+        "https://carsandbids.com/auctions/9ANkwwme/2020-audi-r8-v10-performance-coupe",
+        "https://carsandbids.com/auctions/9AWlD1jK/2018-audi-r8-v10-coupe-rws",
+        "https://carsandbids.com/auctions/9nVMB0Nn/2018-audi-r8-v10-coupe-rws",
+        "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+        "https://carsandbids.com/auctions/KV1PzBwP/2018-audi-r8-v10-coupe-rws",
+        "https://carsandbids.com/auctions/rk6kddvg/2015-audi-r8-v10-plus-coupe",
+        "https://carsandbids.com/auctions/rxPeJ06B/2022-audi-r8-v10-performance-coupe-rwd"
+      ],
+      "clip_path": null,
+      "clip_duration": null,
+      "rev_clip_path": null,
+      "rev_clip_duration": null,
+      "rev_clip_onset_seconds": null,
+      "error": "No rear-of-car (exhaust-view) startup clip found; other angles are too wind-exposed to hear clearly"
+    },
+    {
+      "index": 2,
+      "label": "2018 Ferrari 488 GTB",
+      "make": "Ferrari",
+      "model": "488 GTB",
+      "trim_requested": null,
+      "trim_used": null,
+      "fallback_applied": false,
+      "year": "2018",
+      "generation_start": 2015,
+      "generation_end": 2019,
+      "generation_label": "F142",
+      "photos": [
+        "images/2018-ferrari-488-gtb/exterior-02.jpg",
+        "images/2018-ferrari-488-gtb/exterior-06.jpg",
+        "images/2018-ferrari-488-gtb/exterior-08.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 8.45,
+      "engine_event_score": 0.775,
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 8,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The shot captures the rear of the car, focusing on exhaust components, which is relevant for exhaust sound but does not indicate an engine event.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 0.5,
+          "peak_seconds": 1.0,
+          "end_seconds": 1.25,
+          "baseline_hz": 84.2,
+          "peak_hz": 181.8
+        },
+        {
+          "start_seconds": 1.75,
+          "peak_seconds": 1.75,
+          "end_seconds": 2.0,
+          "baseline_hz": 131.2,
+          "peak_hz": 470.6
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2016 Ferrari 488 GTB",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/672ea6a9a4f0944c4fcdce664b94f84d/manifest/video.m3u8",
+        "auction_title": "2016 Ferrari 488 GTB",
+        "auction_year": 2016,
+        "search_score": 88
+      },
+      "listings_considered": [
+        "https://carsandbids.com/auctions/3o046oQ7/2016-ferrari-488-spider",
+        "https://carsandbids.com/auctions/rwMmGd7y/2016-ferrari-488-gtb"
+      ],
+      "clip_path": "engine_clips/rank-2018-ferrari-488-gtb-engine.mp4",
+      "clip_duration": 3.8,
+      "rev_clip_path": null,
+      "rev_clip_duration": null,
+      "rev_clip_onset_seconds": null,
+      "error": null
+    },
+    {
+      "index": 3,
+      "label": "2018 McLaren 570S",
+      "make": "McLaren",
+      "model": "570S",
+      "trim_requested": null,
+      "trim_used": null,
+      "fallback_applied": false,
+      "year": "2018",
+      "generation_start": 2015,
+      "generation_end": 2021,
+      "generation_label": "Sports Series",
+      "photos": [
+        "images/2018-mclaren-570s/exterior-02.jpg",
+        "images/2018-mclaren-570s/exterior-06.jpg",
+        "images/2018-mclaren-570s/exterior-08.jpg",
+        "images/2018-mclaren-570s/exterior-07.jpg"
+      ],
+      "approved": true,
+      "detected_onset_seconds": 3.25,
+      "engine_event_score": 5.217,
+      "scene_review": {
+        "scene_type": "rear_exterior",
+        "engine_relevance": 7,
+        "likely_engine_audio": false,
+        "text_indicates_engine_event": false,
+        "reason": "The shot focuses on the rear of the car, capturing aspects that may relate to exhaust, but there is no sound or explicit indication that it features a cold start, startup, exhaust sound, or revving.",
+        "provider": "openai"
+      },
+      "rev_detected": true,
+      "rev_events": [
+        {
+          "start_seconds": 0.5,
+          "peak_seconds": 0.5,
+          "end_seconds": 1.0,
+          "baseline_hz": 88.2,
+          "peak_hz": 200.0
+        },
+        {
+          "start_seconds": 2.75,
+          "peak_seconds": 3.5,
+          "end_seconds": 4.0,
+          "baseline_hz": 86.0,
+          "peak_hz": 111.1
+        },
+        {
+          "start_seconds": 4.5,
+          "peak_seconds": 4.5,
+          "end_seconds": 5.25,
+          "baseline_hz": 90.7,
+          "peak_hz": 121.2
+        },
+        {
+          "start_seconds": 6.5,
+          "peak_seconds": 6.5,
+          "end_seconds": 7.75,
+          "baseline_hz": 92.2,
+          "peak_hz": 205.1
+        }
+      ],
+      "source": {
+        "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0f8b7c9e23513900330f2b96df044a2e/thumbnails/thumbnail.jpg",
+        "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0f8b7c9e23513900330f2b96df044a2e/thumbnails/thumbnail.jpg",
+        "section": "",
+        "title": "2018 McLaren 570S Spider",
+        "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0f8b7c9e23513900330f2b96df044a2e/thumbnails/thumbnail.jpg",
+        "type": "video",
+        "auction_url": "https://carsandbids.com/auctions/9X2ak5Px/2018-mclaren-570s-spider",
+        "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0f8b7c9e23513900330f2b96df044a2e/manifest/video.m3u8",
+        "auction_title": "2018 McLaren 570S Spider",
+        "auction_year": 2018,
+        "search_score": 70
+      },
+      "listings_considered": [
+        "https://carsandbids.com/auctions/3OpG06Ym/2018-mclaren-570s-spider",
+        "https://carsandbids.com/auctions/3g16b7by/2017-mclaren-570s",
+        "https://carsandbids.com/auctions/3ggx8OP3/2018-mclaren-570s-spider",
+        "https://carsandbids.com/auctions/9X2ak5Px/2018-mclaren-570s-spider",
+        "https://carsandbids.com/auctions/Kmvdz2Jx/2019-mclaren-570s-spider"
+      ],
+      "clip_path": "engine_clips/rank-2018-mclaren-570s-engine.mp4",
+      "clip_duration": 8.0,
+      "rev_clip_path": "engine_clips/rank-2018-mclaren-570s-engine-rev.mp4",
+      "rev_clip_duration": 3.4,
+      "rev_clip_onset_seconds": 70.45,
+      "error": null
+    },
+    {
+      "index": 4,
+      "label": "2017 Lamborghini Hurac\u00e1n LP 580-2",
+      "make": "Lamborghini",
+      "model": "Hurac\u00e1n LP 580-2",
+      "trim_requested": null,
+      "trim_used": null,
+      "fallback_applied": false,
+      "year": "2017",
+      "generation_start": 2014,
+      "generation_end": 2021,
+      "generation_label": "LP 580-2",
+      "photos": [],
+      "approved": false,
+      "detected_onset_seconds": null,
+      "engine_event_score": null,
+      "scene_review": null,
+      "rev_detected": false,
+      "rev_events": [],
+      "source": null,
+      "listings_considered": [],
+      "clip_path": null,
+      "clip_duration": null,
+      "rev_clip_path": null,
+      "rev_clip_duration": null,
+      "rev_clip_onset_seconds": null,
+      "error": "No listing videos discovered for this car/generation"
+    }
+  ],
+  "title": "WHICH MODERN SUPERCAR SOUNDS BEST?",
+  "intro_question": "Which modern supercar sounds best?",
+  "status": "researched",
+  "approved_count": 2,
+  "total_count": 4
+}
