@@ -1,0 +1,422 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-11T20:10:04.973Z",
+  "query": "Nissan Z",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/nissan/z?start_year=2023&end_year=2028",
+  "search_result_count": 11,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/30npMDYR/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Sold for $31,700",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3zJ0ExJP/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Bid to $38,500",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vGznLJB/2023-nissan-z-performance",
+      "title": "2023 Nissan Z Performance",
+      "text": "Sold for $40,000",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3LwGdlby/2023-nissan-z-sport",
+      "title": "2023 Nissan Z Sport",
+      "text": "Bid to $31,750",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3R4lYkBD/2023-nissan-z-performance",
+      "title": "2023 Nissan Z Performance",
+      "text": "Bid to $35,000",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vpqv04N/2023-nissan-z-performance",
+      "title": "2023 Nissan Z Performance",
+      "text": "Sold for $37,750",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36YeN0x9/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Sold for $41,194",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3O1y7qBj/2023-nissan-z-performance",
+      "title": "2023 Nissan Z Performance",
+      "text": "Bid to $51,500",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rxq5lZjQ/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Bid to $54,000 (Sold After)",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vp8VO2b/2023-nissan-z-sport",
+      "title": "2023 Nissan Z Sport",
+      "text": "Bid to $44,000",
+      "titleYear": 2023,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36ekWOAx/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Sold for $70,000",
+      "titleYear": 2023,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/30npMDYR/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Sold for $31,700",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 21,
+      "sale_price": 31700,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Proto Spec"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3zJ0ExJP/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Bid to $38,500",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 21,
+      "sale_price": 38500,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Proto Spec"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vGznLJB/2023-nissan-z-performance",
+      "title": "2023 Nissan Z Performance",
+      "text": "Sold for $40,000",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 40,
+      "sale_price": 40000,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Performance"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3LwGdlby/2023-nissan-z-sport",
+      "title": "2023 Nissan Z Sport",
+      "text": "Bid to $31,750",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 15,
+      "sale_price": 31750,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Sport"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3R4lYkBD/2023-nissan-z-performance",
+      "title": "2023 Nissan Z Performance",
+      "text": "Bid to $35,000",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 22,
+      "sale_price": 35000,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Performance"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vpqv04N/2023-nissan-z-performance",
+      "title": "2023 Nissan Z Performance",
+      "text": "Sold for $37,750",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 26,
+      "sale_price": 37750,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Performance"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36YeN0x9/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Sold for $41,194",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 28,
+      "sale_price": 41194,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Proto Spec"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3O1y7qBj/2023-nissan-z-performance",
+      "title": "2023 Nissan Z Performance",
+      "text": "Bid to $51,500",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 17,
+      "sale_price": 51500,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Performance"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rxq5lZjQ/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Bid to $54,000 (Sold After)",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 32,
+      "sale_price": 54000,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Proto Spec"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vp8VO2b/2023-nissan-z-sport",
+      "title": "2023 Nissan Z Sport",
+      "text": "Bid to $44,000",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 25,
+      "sale_price": 44000,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Sport"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36ekWOAx/2023-nissan-z-proto-spec",
+      "title": "2023 Nissan Z Proto Spec",
+      "text": "Sold for $70,000",
+      "titleYear": 2023,
+      "score": 60,
+      "usable_image_count": 25,
+      "sale_price": 70000,
+      "sale_type": "sold",
+      "page_title": "2023 Nissan Z Proto Spec"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vGznLJB/2023-nissan-z-performance",
+    "title": "2023 Nissan Z Performance",
+    "text": "Sold for $40,000",
+    "titleYear": 2023,
+    "score": 60,
+    "sale_price": 40000,
+    "sale_type": "sold",
+    "page_title": "2023 Nissan Z Performance",
+    "year": 2023,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d02cd99606edb31cd5a92562eb7c0599/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d02cd99606edb31cd5a92562eb7c0599/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Proto Spec",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d02cd99606edb31cd5a92562eb7c0599/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/30npMDYR/2023-nissan-z-proto-spec",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d02cd99606edb31cd5a92562eb7c0599/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Proto Spec",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/280d53457f126e48a5ed3e089f3ebf57/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/280d53457f126e48a5ed3e089f3ebf57/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Proto Spec",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/280d53457f126e48a5ed3e089f3ebf57/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/30npMDYR/2023-nissan-z-proto-spec",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/280d53457f126e48a5ed3e089f3ebf57/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Proto Spec",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1c569d36ae8cd6f04a7ff8aa6d42a2b5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1c569d36ae8cd6f04a7ff8aa6d42a2b5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Proto Spec",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1c569d36ae8cd6f04a7ff8aa6d42a2b5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/30npMDYR/2023-nissan-z-proto-spec",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1c569d36ae8cd6f04a7ff8aa6d42a2b5/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Proto Spec",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ef63ba2b1404be717dda8d06ba826f42/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ef63ba2b1404be717dda8d06ba826f42/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Proto Spec",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ef63ba2b1404be717dda8d06ba826f42/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zJ0ExJP/2023-nissan-z-proto-spec",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ef63ba2b1404be717dda8d06ba826f42/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Proto Spec",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/493bb941ab65205bb8f5b83c23d20c91/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/493bb941ab65205bb8f5b83c23d20c91/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Proto Spec",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/493bb941ab65205bb8f5b83c23d20c91/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3zJ0ExJP/2023-nissan-z-proto-spec",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/493bb941ab65205bb8f5b83c23d20c91/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Proto Spec",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5db17d0018a838e76b8637a08c5f878f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5db17d0018a838e76b8637a08c5f878f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Performance",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5db17d0018a838e76b8637a08c5f878f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vGznLJB/2023-nissan-z-performance",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5db17d0018a838e76b8637a08c5f878f/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Performance",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3a09785db51c5c3cb70d6d52a517535f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3a09785db51c5c3cb70d6d52a517535f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Performance",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3a09785db51c5c3cb70d6d52a517535f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vGznLJB/2023-nissan-z-performance",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3a09785db51c5c3cb70d6d52a517535f/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Performance",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c437b1eef64ac92935a682b8930509ac/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c437b1eef64ac92935a682b8930509ac/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Performance",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c437b1eef64ac92935a682b8930509ac/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vGznLJB/2023-nissan-z-performance",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c437b1eef64ac92935a682b8930509ac/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Performance",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/49660a93c7e866b0bed17745ff045792/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/49660a93c7e866b0bed17745ff045792/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Performance",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/49660a93c7e866b0bed17745ff045792/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vGznLJB/2023-nissan-z-performance",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/49660a93c7e866b0bed17745ff045792/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Performance",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/421ef6f4e770fd13f05b21d9ce887104/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/421ef6f4e770fd13f05b21d9ce887104/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Performance",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/421ef6f4e770fd13f05b21d9ce887104/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vGznLJB/2023-nissan-z-performance",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/421ef6f4e770fd13f05b21d9ce887104/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Performance",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8cc444c81fc1727941f48bca68636cd/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8cc444c81fc1727941f48bca68636cd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Performance",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8cc444c81fc1727941f48bca68636cd/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vGznLJB/2023-nissan-z-performance",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8cc444c81fc1727941f48bca68636cd/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Performance",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c1dc15cd7e4eec3540e0b082841eed03/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c1dc15cd7e4eec3540e0b082841eed03/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Sport",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c1dc15cd7e4eec3540e0b082841eed03/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3LwGdlby/2023-nissan-z-sport",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c1dc15cd7e4eec3540e0b082841eed03/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Sport",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/688ad2648f8c9eb22dbd6e00984d98b5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/688ad2648f8c9eb22dbd6e00984d98b5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Sport",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/688ad2648f8c9eb22dbd6e00984d98b5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3LwGdlby/2023-nissan-z-sport",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/688ad2648f8c9eb22dbd6e00984d98b5/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Sport",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5b790d498ade637fb8af851c402953bf/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5b790d498ade637fb8af851c402953bf/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Performance",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5b790d498ade637fb8af851c402953bf/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3R4lYkBD/2023-nissan-z-performance",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5b790d498ade637fb8af851c402953bf/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Performance",
+      "auction_year": 2023,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee8dc80e99593af4e349bf5b5455b186/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee8dc80e99593af4e349bf5b5455b186/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Nissan Z Performance",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee8dc80e99593af4e349bf5b5455b186/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3R4lYkBD/2023-nissan-z-performance",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee8dc80e99593af4e349bf5b5455b186/manifest/video.m3u8",
+      "auction_title": "2023 Nissan Z Performance",
+      "auction_year": 2023,
+      "search_score": 60
+    }
+  ]
+}

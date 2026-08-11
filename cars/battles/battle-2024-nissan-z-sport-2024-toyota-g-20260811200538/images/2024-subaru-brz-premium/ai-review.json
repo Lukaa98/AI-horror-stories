@@ -1,0 +1,207 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Subaru",
+      "detected_model": "BRZ",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Premium",
+      "visible_match_evidence": [
+        "front design",
+        "side profile",
+        "lights design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Subaru",
+      "detected_model": "BRZ",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Premium",
+      "visible_match_evidence": [
+        "Subaru emblem",
+        "distinctive front design",
+        "specific headlight shape"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "visibly wrong generation or model",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "subaru",
+      "detected_model": "brz",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Premium",
+      "visible_match_evidence": [
+        "bodywork",
+        "proportions",
+        "lights"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Subaru",
+      "detected_model": "BRZ",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Premium",
+      "visible_match_evidence": [
+        "Subaru logo",
+        "BRZ badge",
+        "interior design"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Subaru",
+      "detected_model": "BRZ",
+      "detected_generation_or_year": "2022-2026",
+      "detected_variant_or_engine": "Premium",
+      "visible_match_evidence": [
+        "interior layout",
+        "sports seats with red accents",
+        "gear shift",
+        "dashboard design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "subaru",
+      "detected_model": "brz",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Premium",
+      "visible_match_evidence": [
+        "interior design",
+        "gear shift",
+        "BRZ branding"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 4,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Interior shot with no visible target vehicle.",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}

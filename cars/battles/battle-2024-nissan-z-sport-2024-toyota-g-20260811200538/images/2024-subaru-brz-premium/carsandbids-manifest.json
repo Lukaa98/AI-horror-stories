@@ -1,0 +1,356 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-11T20:12:34.573Z",
+  "query": "Subaru BRZ Premium",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KVxPABOQ/2023-subaru-brz-limited",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KVxPABOQ/2023-subaru-brz-limited",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 15,
+      "sale_price": 23250,
+      "sale_type": "sold",
+      "page_title": "2023 Subaru BRZ Limited"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KVxPABOQ/2023-subaru-brz-limited",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 23250,
+    "sale_type": "sold",
+    "page_title": "2023 Subaru BRZ Limited",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/interior/rwYkdbx5-wlPq-Tj/edit/lPhYT.jpg?t=176809613317",
+      "labels": [
+        "interior"
+      ],
+      "section": "2023 Subaru BRZ Limited",
+      "width": 542,
+      "height": 361,
+      "bytes": 267381
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rwYkdbx5-ul9ueQy/edit/yYoSR.jpg?t=176809628071",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2023 Subaru BRZ Limited",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 341096
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rwYkdbx5-R6aendu/edit/xqxXi.jpg?t=176809615041",
+      "labels": [
+        "interior"
+      ],
+      "section": "2023 Subaru BRZ Limited",
+      "width": 542,
+      "height": 361,
+      "bytes": 205830
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rwYkdbx5-nNNQNLZ/edit/y6c_6.jpg?t=176809624561",
+      "labels": [
+        "interior"
+      ],
+      "section": "2023 Subaru BRZ Limited",
+      "width": 542,
+      "height": 361,
+      "bytes": 164314
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/interior/rwYkdbx5-TZjedQ1/edit/EuRRe.jpg?t=176809617682",
+      "labels": [
+        "interior"
+      ],
+      "section": "2023 Subaru BRZ Limited",
+      "width": 542,
+      "height": 361,
+      "bytes": 158456
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/exterior/rwYkdbx5-a4bav6e/edit/9srCA.jpg?t=176809653431",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2023 Subaru BRZ Limited",
+      "width": 542,
+      "height": 361,
+      "bytes": 287454
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rwYkdbx5-FGNrPJW/edit/ZOkwE.jpg?t=176809634187",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2023 Subaru BRZ Limited",
+      "width": 542,
+      "height": 361,
+      "bytes": 346735
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rwYkdbx5-IemwPaa/edit/5r6HM.jpg?t=176809631804",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2023 Subaru BRZ Limited",
+      "width": 542,
+      "height": 361,
+      "bytes": 369629
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/edd5208f1c38fc563407a4e60e60ccd2/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/edd5208f1c38fc563407a4e60e60ccd2/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Subaru BRZ Limited",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/edd5208f1c38fc563407a4e60e60ccd2/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVxPABOQ/2023-subaru-brz-limited",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/edd5208f1c38fc563407a4e60e60ccd2/manifest/video.m3u8",
+      "auction_title": "2023 Subaru BRZ Limited",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Subaru",
+        "detected_model": "BRZ",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Premium",
+        "visible_match_evidence": [
+          "front design",
+          "side profile",
+          "lights design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Subaru",
+        "detected_model": "BRZ",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Premium",
+        "visible_match_evidence": [
+          "Subaru emblem",
+          "distinctive front design",
+          "specific headlight shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "visibly wrong generation or model",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "subaru",
+        "detected_model": "brz",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Premium",
+        "visible_match_evidence": [
+          "bodywork",
+          "proportions",
+          "lights"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Subaru",
+        "detected_model": "BRZ",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Premium",
+        "visible_match_evidence": [
+          "Subaru logo",
+          "BRZ badge",
+          "interior design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Subaru",
+        "detected_model": "BRZ",
+        "detected_generation_or_year": "2022-2026",
+        "detected_variant_or_engine": "Premium",
+        "visible_match_evidence": [
+          "interior layout",
+          "sports seats with red accents",
+          "gear shift",
+          "dashboard design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "subaru",
+        "detected_model": "brz",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Premium",
+        "visible_match_evidence": [
+          "interior design",
+          "gear shift",
+          "BRZ branding"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 4,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Interior shot with no visible target vehicle.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
