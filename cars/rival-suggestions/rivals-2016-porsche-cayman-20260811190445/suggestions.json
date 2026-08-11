@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2016-porsche-cayman-20260811190445",
+  "base_car": {
+    "make": "Porsche",
+    "model": "Cayman",
+    "trim": "S",
+    "year": "2016"
+  },
+  "rivals": [
+    {
+      "make": "BMW",
+      "model": "M2",
+      "trim": "Competition",
+      "year": "2016",
+      "reason": "The BMW M2 Competition offers a thrilling exhaust note from its turbocharged inline-six, making it a direct competitor in the sports coupe segment with a similar price and performance profile."
+    },
+    {
+      "make": "Chevrolet",
+      "model": "Camaro",
+      "trim": "SS",
+      "year": "2017",
+      "reason": "With its robust V8 engine, the Camaro SS delivers a distinctive growl that rivals the Cayman S, appealing to enthusiasts seeking performance and style."
+    },
+    {
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "trim": "",
+      "year": "2015",
+      "reason": "The lightweight Alfa Romeo 4C features an exhilarating exhaust sound and agile handling, positioning it as a compelling alternative for buyers looking at the Cayman S."
+    },
+    {
+      "make": "Ford",
+      "model": "Mustang",
+      "trim": "GT",
+      "year": "2016",
+      "reason": "The Mustang GT's iconic Coyote V8 engine provides an unmistakable and aggressive exhaust note, making it a classic rival in the sports car arena."
+    }
+  ]
+}
