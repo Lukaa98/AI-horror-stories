@@ -1,0 +1,181 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 7,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Cayman",
+      "detected_generation_or_year": "2012-2016",
+      "detected_variant_or_engine": "S",
+      "visible_match_evidence": [
+        "Porsche badge",
+        "Cayman body shape",
+        "Specific headlight design"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Cayman",
+      "detected_generation_or_year": "2012-2016",
+      "detected_variant_or_engine": "S",
+      "visible_match_evidence": [
+        "Porsche badge",
+        "Cayman bodywork",
+        "front shape and lights"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Cayman",
+      "detected_generation_or_year": "2012-2016",
+      "detected_variant_or_engine": "Cayman S",
+      "visible_match_evidence": [
+        "Porsche branding",
+        "Cayman specific bodywork",
+        "Generation-specific proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "porsche",
+      "detected_model": "cayman",
+      "detected_generation_or_year": "2012-2016",
+      "detected_variant_or_engine": "S",
+      "visible_match_evidence": [
+        "interior design",
+        "gauge layout",
+        "Porsche branding"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "Cayman",
+      "detected_generation_or_year": "2016",
+      "detected_variant_or_engine": "S",
+      "visible_match_evidence": [
+        "interior design",
+        "dashboard layout",
+        "seats style",
+        "Cayman S badge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 4,
+      "composition_score": 3,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle.",
+      "path": "interior-05.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not depict the target vehicle.",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    }
+  ]
+}

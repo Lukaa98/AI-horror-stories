@@ -1,0 +1,471 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-11T19:15:45.331Z",
+  "query": "Porsche Cayman S",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 22,
+      "sale_price": 63114,
+      "sale_type": "sold",
+      "page_title": "2012 Porsche Cayman R"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 63114,
+    "sale_type": "sold",
+    "page_title": "2012 Porsche Cayman R",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/interior/3g17QgLP-miFkMEr/edit/p4UDl.jpg?t=178007405657",
+      "labels": [
+        "interior"
+      ],
+      "section": "2012 Porsche Cayman R",
+      "width": 542,
+      "height": 361,
+      "bytes": 228045
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/98dc47a773ad09df9bddbcd5f90dfbc3185725d9/photos/KmJRLxwN-q5SnfX5.jpeg",
+      "labels": [
+        "detail",
+        "exterior"
+      ],
+      "error": "Too small: 16522 bytes"
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/exterior/3g17QgLP-qYd-8nT/edit/qSHqk.jpg?t=178051803693",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2012 Porsche Cayman R",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 246776
+    },
+    {
+      "path": "interior-04.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/98dc47a773ad09df9bddbcd5f90dfbc3185725d9/photos/interior/3g17QgLP-e_ukn1q.jpeg?t=177990727308",
+      "labels": [
+        "interior"
+      ],
+      "section": "2012 Porsche Cayman R",
+      "width": 542,
+      "height": 361,
+      "bytes": 197079
+    },
+    {
+      "path": "interior-05.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/98dc47a773ad09df9bddbcd5f90dfbc3185725d9/photos/interior/3g17QgLP-S1jCwcH.jpeg?t=177990727308",
+      "labels": [
+        "interior"
+      ],
+      "section": "2012 Porsche Cayman R",
+      "width": 542,
+      "height": 361,
+      "bytes": 164938
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/interior/3g17QgLP-gQ6jfNU/edit/L6IzI.jpg?t=178007406840",
+      "labels": [
+        "interior"
+      ],
+      "section": "2012 Porsche Cayman R",
+      "width": 542,
+      "height": 361,
+      "bytes": 153590
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/exterior/3g17QgLP-oKe1GDG/edit/GVxGO.jpg?t=178051803693",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2012 Porsche Cayman R",
+      "width": 542,
+      "height": 361,
+      "bytes": 224615
+    },
+    {
+      "path": "exterior-08.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/98dc47a773ad09df9bddbcd5f90dfbc3185725d9/photos/exterior/3g17QgLP-5QD8NeO.jpeg?t=177990727308",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2012 Porsche Cayman R",
+      "width": 542,
+      "height": 361,
+      "bytes": 212430
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/31279ad9b834d71d31b42babaff14085/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/31279ad9b834d71d31b42babaff14085/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/31279ad9b834d71d31b42babaff14085/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/31279ad9b834d71d31b42babaff14085/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/37f7db6333851be092c646dd27a9b93e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/37f7db6333851be092c646dd27a9b93e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/37f7db6333851be092c646dd27a9b93e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/37f7db6333851be092c646dd27a9b93e/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ed98bc859c7d6fae8cee430ecf5477f7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ed98bc859c7d6fae8cee430ecf5477f7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ed98bc859c7d6fae8cee430ecf5477f7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ed98bc859c7d6fae8cee430ecf5477f7/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee4cb8090bda6b48f80bec4b2bfe6f90/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee4cb8090bda6b48f80bec4b2bfe6f90/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee4cb8090bda6b48f80bec4b2bfe6f90/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee4cb8090bda6b48f80bec4b2bfe6f90/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/32cf41322cff8c2d96ac794ccfd40dcc/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/32cf41322cff8c2d96ac794ccfd40dcc/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/32cf41322cff8c2d96ac794ccfd40dcc/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/32cf41322cff8c2d96ac794ccfd40dcc/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4acac7e17d7403c97713ad6694edcaf8/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4acac7e17d7403c97713ad6694edcaf8/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4acac7e17d7403c97713ad6694edcaf8/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4acac7e17d7403c97713ad6694edcaf8/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1afc479ad0e25b83c856b08304ac04b7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1afc479ad0e25b83c856b08304ac04b7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1afc479ad0e25b83c856b08304ac04b7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1afc479ad0e25b83c856b08304ac04b7/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bd95ad11d3913e3aa544aead81ba94ea/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bd95ad11d3913e3aa544aead81ba94ea/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bd95ad11d3913e3aa544aead81ba94ea/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bd95ad11d3913e3aa544aead81ba94ea/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8472b858b6f24f27c3c0b62432bdce01/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8472b858b6f24f27c3c0b62432bdce01/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8472b858b6f24f27c3c0b62432bdce01/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8472b858b6f24f27c3c0b62432bdce01/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/08dd64b3b47674540ce18ccbd36bb6fc/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/08dd64b3b47674540ce18ccbd36bb6fc/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/08dd64b3b47674540ce18ccbd36bb6fc/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/08dd64b3b47674540ce18ccbd36bb6fc/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/99d67a0d0d9600997327efe57a77dd2a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/99d67a0d0d9600997327efe57a77dd2a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/99d67a0d0d9600997327efe57a77dd2a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/99d67a0d0d9600997327efe57a77dd2a/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3bdbe5b7da152319cefde2705c034592/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3bdbe5b7da152319cefde2705c034592/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Porsche Cayman R",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3bdbe5b7da152319cefde2705c034592/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9emlynRj/2012-porsche-cayman-r",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3bdbe5b7da152319cefde2705c034592/manifest/video.m3u8",
+      "auction_title": "2012 Porsche Cayman R",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 7,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Cayman",
+        "detected_generation_or_year": "2012-2016",
+        "detected_variant_or_engine": "S",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "Cayman body shape",
+          "Specific headlight design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Cayman",
+        "detected_generation_or_year": "2012-2016",
+        "detected_variant_or_engine": "S",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "Cayman bodywork",
+          "front shape and lights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Cayman",
+        "detected_generation_or_year": "2012-2016",
+        "detected_variant_or_engine": "Cayman S",
+        "visible_match_evidence": [
+          "Porsche branding",
+          "Cayman specific bodywork",
+          "Generation-specific proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "porsche",
+        "detected_model": "cayman",
+        "detected_generation_or_year": "2012-2016",
+        "detected_variant_or_engine": "S",
+        "visible_match_evidence": [
+          "interior design",
+          "gauge layout",
+          "Porsche branding"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Cayman",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": "S",
+        "visible_match_evidence": [
+          "interior design",
+          "dashboard layout",
+          "seats style",
+          "Cayman S badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 4,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "interior-05.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the target vehicle.",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

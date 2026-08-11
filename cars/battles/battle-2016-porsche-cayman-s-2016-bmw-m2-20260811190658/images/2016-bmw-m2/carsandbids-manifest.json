@@ -1,0 +1,393 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-11T19:21:42.183Z",
+  "query": "BMW M2",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/92pXpj0E/2021-bmw-m2-competition",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/92pXpj0E/2021-bmw-m2-competition",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 21,
+      "sale_price": 50500,
+      "sale_type": "sold",
+      "page_title": "2021 BMW M2 Competition"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/92pXpj0E/2021-bmw-m2-competition",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 50500,
+    "sale_type": "sold",
+    "page_title": "2021 BMW M2 Competition",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37fdf520667029de05e5527a7b895db92a05cabc/photos/BMWM22021059.jpg?t=178430572451",
+      "labels": [
+        "interior"
+      ],
+      "section": "2021 BMW M2 Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 296915
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/BMWM22021002/edit/z3QIg.jpg?t=178456666140",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2021 BMW M2 Competition",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 367503
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37fdf520667029de05e5527a7b895db92a05cabc/photos/BMWM22021069.jpg?t=178430572451",
+      "labels": [
+        "interior"
+      ],
+      "section": "2021 BMW M2 Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 291940
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/BMWM22021063/edit/yOuk9.jpg?t=178456669939",
+      "labels": [
+        "interior"
+      ],
+      "section": "2021 BMW M2 Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 320552
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37fdf520667029de05e5527a7b895db92a05cabc/photos/BMWM22021061.jpg?t=178430572451",
+      "labels": [
+        "interior"
+      ],
+      "section": "2021 BMW M2 Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 341990
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37fdf520667029de05e5527a7b895db92a05cabc/photos/BMWM22021001.jpg?t=178430572451",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2021 BMW M2 Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 258934
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37fdf520667029de05e5527a7b895db92a05cabc/photos/BMWM22021007.jpg?t=178430572451",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2021 BMW M2 Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 368604
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37fdf520667029de05e5527a7b895db92a05cabc/photos/BMWM22021004.jpg?t=178430572451",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2021 BMW M2 Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 278599
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ada83e640f15d1b6e5a84892f66d24ab/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ada83e640f15d1b6e5a84892f66d24ab/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2021 BMW M2 Competition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ada83e640f15d1b6e5a84892f66d24ab/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92pXpj0E/2021-bmw-m2-competition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ada83e640f15d1b6e5a84892f66d24ab/manifest/video.m3u8",
+      "auction_title": "2021 BMW M2 Competition",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee3146082f8436b3ad2dba285a554c0a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee3146082f8436b3ad2dba285a554c0a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2021 BMW M2 Competition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee3146082f8436b3ad2dba285a554c0a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92pXpj0E/2021-bmw-m2-competition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee3146082f8436b3ad2dba285a554c0a/manifest/video.m3u8",
+      "auction_title": "2021 BMW M2 Competition",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e850d5c8e06f113892fb1959da9ef8db/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e850d5c8e06f113892fb1959da9ef8db/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2021 BMW M2 Competition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e850d5c8e06f113892fb1959da9ef8db/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92pXpj0E/2021-bmw-m2-competition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e850d5c8e06f113892fb1959da9ef8db/manifest/video.m3u8",
+      "auction_title": "2021 BMW M2 Competition",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW badge",
+          "M2 specific front fascia",
+          "body proportions consistent with M2",
+          "LED headlights typical for 2016 M2"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Front view",
+          "Distinctive kidney grille",
+          "M badge",
+          "Aggressive front bumper"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork",
+          "proportions",
+          "design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW badge",
+          "M2 badge",
+          "Rear bumper design",
+          "Quad exhaust"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 0,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "bmw",
+        "detected_model": "m2",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bmw logo on steering wheel",
+          "interior design matches M2"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M2 badge on the seat",
+          "Interior design consistent with M2",
+          "Sport seats characteristic of M models"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": null,
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M badge on gear shift",
+          "interior design elements consistent with BMW M2",
+          "carbon fiber trim"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2016",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M2 badge present",
+          "dashboard design typical of M2",
+          "year-specific elements in design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
