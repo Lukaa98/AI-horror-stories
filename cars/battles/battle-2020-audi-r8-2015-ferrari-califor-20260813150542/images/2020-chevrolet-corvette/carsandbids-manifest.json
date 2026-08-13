@@ -1,0 +1,364 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-13T15:12:40.031Z",
+  "query": "Chevrolet Corvette",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KV682vQP/2022-chevrolet-corvette-stingray-coupe-3lt",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KV682vQP/2022-chevrolet-corvette-stingray-coupe-3lt",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 19,
+      "sale_price": 61000,
+      "sale_type": "sold",
+      "page_title": "2022 Chevrolet Corvette Stingray Coupe 3LT"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KV682vQP/2022-chevrolet-corvette-stingray-coupe-3lt",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 61000,
+    "sale_type": "sold",
+    "page_title": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/interior/98ZdYOpQ-fAY6OfZ/edit/DKAZi.jpg?t=177023586366",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "width": 542,
+      "height": 361,
+      "bytes": 248003
+    },
+    {
+      "path": "exterior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/exterior/98ZdYOpQ-numj92L/edit/gMp0J.jpg?t=177021931355",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 279661
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/interior/98ZdYOpQ-bmrW9ka/edit/CRGwN.jpg?t=177023586366",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "width": 542,
+      "height": 361,
+      "bytes": 249684
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/interior/98ZdYOpQ-sPg0gLW/edit/tPswT.jpg?t=177023586366",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "width": 542,
+      "height": 361,
+      "bytes": 180466
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/interior/98ZdYOpQ-ualH8Td/edit/ktsaf.jpg?t=177019767116",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "width": 542,
+      "height": 361,
+      "bytes": 161888
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/98ZdYOpQ-aciAS3Q/edit/sCv03.jpg?t=177021933869",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "width": 542,
+      "height": 361,
+      "bytes": 176647
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/98ZdYOpQ-qb3oAzB/edit/nUQF4.jpg?t=177021942168",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "width": 542,
+      "height": 361,
+      "bytes": 264217
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/98ZdYOpQ-dAy15hn/edit/7SqSy.jpg?t=177021958159",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "width": 542,
+      "height": 361,
+      "bytes": 237996
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1ab109cc003959e0a8a6a9034970993/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1ab109cc003959e0a8a6a9034970993/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1ab109cc003959e0a8a6a9034970993/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KV682vQP/2022-chevrolet-corvette-stingray-coupe-3lt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1ab109cc003959e0a8a6a9034970993/manifest/video.m3u8",
+      "auction_title": "2022 Chevrolet Corvette Stingray Coupe 3LT",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Bodywork design matches 2020 Corvette",
+          "Distinctive front headlights",
+          "Proportions consistent with Corvette"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive Corvette front fascia",
+          "sharp lines and aggressive styling",
+          "modern headlights design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork design",
+          "proportions",
+          "lights",
+          "interior design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "shape and bodywork consistent with Corvette",
+          "distinctive rear tail lights",
+          "overall silhouette matches Corvette generation"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "steering wheel",
+          "dashboard layout",
+          "trimming details"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "sport seats",
+          "color scheme"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "exterior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "steering wheel",
+          "trim details"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "digital gauge cluster",
+          " Corvette logo"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
