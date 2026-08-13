@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2020-audi-r8-20260813150302",
+  "base_car": {
+    "make": "Audi",
+    "model": "R8",
+    "trim": "",
+    "year": "2020"
+  },
+  "rivals": [
+    {
+      "make": "Ferrari",
+      "model": "California T",
+      "trim": "Base",
+      "year": "2015",
+      "reason": "The California T offers a turbocharged V8 with a distinct Ferrari exhaust note, making it a compelling alternative to the R8."
+    },
+    {
+      "make": "Chevrolet",
+      "model": "Corvette",
+      "trim": "Stingray",
+      "year": "2020",
+      "reason": "The C8 Corvette features a mid-engine design and a powerful V8 that produces a loud, aggressive sound, positioning it as a direct rival to the R8."
+    },
+    {
+      "make": "Porsche",
+      "model": "718 Cayman",
+      "trim": "GTS 4.0",
+      "year": "2020",
+      "reason": "The 718 Cayman GTS 4.0 brings a naturally aspirated flat-six engine with a unique exhaust note that car enthusiasts will appreciate alongside the R8."
+    },
+    {
+      "make": "Mercedes-Benz",
+      "model": "AMG GT",
+      "trim": "Base",
+      "year": "2020",
+      "reason": "The AMG GT pairs a powerful V8 engine with a ferocious exhaust sound, making it a worthy competitor to the R8 in performance and aural appeal."
+    }
+  ]
+}
