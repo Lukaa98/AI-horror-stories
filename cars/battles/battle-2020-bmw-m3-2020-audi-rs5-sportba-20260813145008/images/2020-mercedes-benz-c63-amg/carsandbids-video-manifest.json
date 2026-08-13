@@ -1,0 +1,67 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-13T14:52:37.210Z",
+  "query": "Mercedes-Benz C63 AMG",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/mercedes-benz/c63-amg?start_year=2015&end_year=2021",
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3ojamw22/2019-mercedes-amg-c63-s-sedan",
+      "title": "2019 Mercedes Amg C63 S Sedan",
+      "text": "Sold for $35,000",
+      "titleYear": 2019,
+      "score": 70
+    }
+  ],
+  "auctions_used": [],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3ojamw22/2019-mercedes-amg-c63-s-sedan",
+    "title": "2019 Mercedes Amg C63 S Sedan",
+    "text": "Sold for $35,000",
+    "titleYear": 2019,
+    "score": 70
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5dd0c4005c9624758fc6ba6bd4cee88a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5dd0c4005c9624758fc6ba6bd4cee88a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Mercedes-AMG C63 S Sedan",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5dd0c4005c9624758fc6ba6bd4cee88a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3ojamw22/2019-mercedes-amg-c63-s-sedan",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5dd0c4005c9624758fc6ba6bd4cee88a/manifest/video.m3u8",
+      "auction_title": "2019 Mercedes-AMG C63 S Sedan",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52ee66621eb80e08cd8ac39ca06b09f4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52ee66621eb80e08cd8ac39ca06b09f4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Mercedes-AMG C63 S Sedan",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52ee66621eb80e08cd8ac39ca06b09f4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3ojamw22/2019-mercedes-amg-c63-s-sedan",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52ee66621eb80e08cd8ac39ca06b09f4/manifest/video.m3u8",
+      "auction_title": "2019 Mercedes-AMG C63 S Sedan",
+      "auction_year": 2019,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d11174a0fa96888c7850b7af821a2752/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d11174a0fa96888c7850b7af821a2752/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Mercedes-AMG C63 S Sedan",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d11174a0fa96888c7850b7af821a2752/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3ojamw22/2019-mercedes-amg-c63-s-sedan",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d11174a0fa96888c7850b7af821a2752/manifest/video.m3u8",
+      "auction_title": "2019 Mercedes-AMG C63 S Sedan",
+      "auction_year": 2019,
+      "search_score": 70
+    }
+  ]
+}

@@ -1,0 +1,353 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-13T14:56:06.640Z",
+  "query": "BMW M3",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3y87QZME/2022-bmw-m3",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3y87QZME/2022-bmw-m3",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 30,
+      "sale_price": 57300,
+      "sale_type": "sold",
+      "page_title": "2022 BMW M3"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3y87QZME/2022-bmw-m3",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 57300,
+    "sale_type": "sold",
+    "page_title": "2022 BMW M3",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/9X2pGQyl-3lTm2ik/edit/fUH4Z.jpg?t=177441739308",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 BMW M3",
+      "width": 542,
+      "height": 361,
+      "bytes": 228789
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/478a28275dbf3ed03ef632fdb372c3084f98a2cd/photos/rbLGj12L-UU5uU2c.jpeg",
+      "labels": [
+        "detail",
+        "exterior"
+      ],
+      "error": "Too small: 17703 bytes"
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/9X2pGQyl-1Qlp4o2/edit/MBxMa.jpg?t=177441692235",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 BMW M3",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 182526
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/9X2pGQyl-HGAne1n/edit/2VXBe.jpg?t=177441740772",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 BMW M3",
+      "width": 542,
+      "height": 361,
+      "bytes": 182730
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/9X2pGQyl-WFm7PN4/edit/kHDoK.jpg?t=177441742527",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 BMW M3",
+      "width": 542,
+      "height": 361,
+      "bytes": 187948
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/9X2pGQyl-Qo-GE9F/edit/HmZBy.jpg?t=177441744456",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 BMW M3",
+      "width": 542,
+      "height": 361,
+      "bytes": 125343
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/9X2pGQyl-MHtFDHN/edit/qaVSV.jpg?t=177441694387",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 BMW M3",
+      "width": 542,
+      "height": 361,
+      "bytes": 165009
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/9X2pGQyl-aJerRNx/edit/U1onm.jpg?t=177441696430",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 BMW M3",
+      "width": 542,
+      "height": 361,
+      "bytes": 156440
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d8e881f0e1ffdfa5a0912d3e497b635/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d8e881f0e1ffdfa5a0912d3e497b635/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 BMW M3",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d8e881f0e1ffdfa5a0912d3e497b635/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3y87QZME/2022-bmw-m3",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d8e881f0e1ffdfa5a0912d3e497b635/manifest/video.m3u8",
+      "auction_title": "2022 BMW M3",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/396d70724db1a0de7aa40b823e16257c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/396d70724db1a0de7aa40b823e16257c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 BMW M3",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/396d70724db1a0de7aa40b823e16257c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3y87QZME/2022-bmw-m3",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/396d70724db1a0de7aa40b823e16257c/manifest/video.m3u8",
+      "auction_title": "2022 BMW M3",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 7,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M3",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "kidney grille",
+          "bodywork design",
+          "overall proportions",
+          "M badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M3",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front design",
+          "grille shape",
+          "headlight design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M3",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW badge",
+          "M3 styling",
+          "2020 model features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M3",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M steering wheel",
+          "Interior design characteristic of M3",
+          "Infotainment layout common to 2020 models"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": null,
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "bmw",
+        "detected_model": "M3",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M3 seat badge",
+          "interior design",
+          "specific color",
+          "sport seats"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": null,
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M3",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "gear knob with M colors",
+          "carbon fiber trim"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "bmw",
+        "detected_model": "m3",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M3 badge on display",
+          "2020 model year indicators"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

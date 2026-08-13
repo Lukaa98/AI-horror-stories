@@ -1,0 +1,429 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-08-13T14:58:27.617Z",
+  "query": "Audi RS5",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 25,
+      "sale_price": 32000,
+      "sale_type": "bid_to",
+      "page_title": "2018 Audi RS5 Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 32000,
+    "sale_type": "bid_to",
+    "page_title": "2018 Audi RS5 Coupe",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/98V1LBWX--fjuhm_/edit/f3FoO.jpg?t=178115767565",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Audi RS5 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 202909
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/471b918ee077ff0c88ce381f7bb609a83f85d9eb/photos/9ldYxEzG-TDOQzXM.jpeg",
+      "labels": [
+        "detail",
+        "exterior"
+      ],
+      "error": "Too small: 13805 bytes"
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/98V1LBWX-hx5v3Cc/edit/PZfFu.jpg?t=178115738913",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Audi RS5 Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 230045
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/98V1LBWX-23YO512/edit/It0Iv.jpg?t=178115768972",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Audi RS5 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 179297
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/98V1LBWX-KFlYW9B/edit/xuVVJ.jpg?t=178115770269",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Audi RS5 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 233175
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/98V1LBWX-mWg0Q88/edit/u9gIS.jpg?t=178115772705",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Audi RS5 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 245844
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/98V1LBWX-YRZrBP6/edit/biz8T.jpg?t=178115740342",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Audi RS5 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 281739
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/98V1LBWX-tBNcBG-/edit/eU6PH.jpg?t=178115747117",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Audi RS5 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 241881
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43cb41381b70b623790954bec8c842e7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43cb41381b70b623790954bec8c842e7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi RS5 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43cb41381b70b623790954bec8c842e7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43cb41381b70b623790954bec8c842e7/manifest/video.m3u8",
+      "auction_title": "2018 Audi RS5 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e5363341ad300c8d3c98cff54ffac967/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e5363341ad300c8d3c98cff54ffac967/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi RS5 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e5363341ad300c8d3c98cff54ffac967/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e5363341ad300c8d3c98cff54ffac967/manifest/video.m3u8",
+      "auction_title": "2018 Audi RS5 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/930ac8ede28aa6866f67a03f2918c0c0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/930ac8ede28aa6866f67a03f2918c0c0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi RS5 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/930ac8ede28aa6866f67a03f2918c0c0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/930ac8ede28aa6866f67a03f2918c0c0/manifest/video.m3u8",
+      "auction_title": "2018 Audi RS5 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3711777a5219265f93f818153610cb75/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3711777a5219265f93f818153610cb75/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi RS5 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3711777a5219265f93f818153610cb75/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3711777a5219265f93f818153610cb75/manifest/video.m3u8",
+      "auction_title": "2018 Audi RS5 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0b54c0bdbd68b33065ac77aea09be275/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0b54c0bdbd68b33065ac77aea09be275/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi RS5 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0b54c0bdbd68b33065ac77aea09be275/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0b54c0bdbd68b33065ac77aea09be275/manifest/video.m3u8",
+      "auction_title": "2018 Audi RS5 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/dbe1afb46fc860eef54056dd055ceef8/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/dbe1afb46fc860eef54056dd055ceef8/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi RS5 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/dbe1afb46fc860eef54056dd055ceef8/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/dbe1afb46fc860eef54056dd055ceef8/manifest/video.m3u8",
+      "auction_title": "2018 Audi RS5 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5897e19f38a779949caa841a2dbdcf42/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5897e19f38a779949caa841a2dbdcf42/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi RS5 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5897e19f38a779949caa841a2dbdcf42/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5897e19f38a779949caa841a2dbdcf42/manifest/video.m3u8",
+      "auction_title": "2018 Audi RS5 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0e994fb41216b2146cbf3349b3dfaad/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0e994fb41216b2146cbf3349b3dfaad/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 Audi RS5 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0e994fb41216b2146cbf3349b3dfaad/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3yYNjoMa/2018-audi-rs5-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e0e994fb41216b2146cbf3349b3dfaad/manifest/video.m3u8",
+      "auction_title": "2018 Audi RS5 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 7,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front fascia design",
+          "RS specific grille",
+          "wheels style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "RS5 badge",
+          "honeycomb grille",
+          "quattro badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "design aligns with Audi RS5 characteristics",
+          "proportions consistent with 2020 model",
+          "RS5 detailing and bodywork features visible"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi branding on steering wheel",
+          "RS model-specific interior design",
+          "Modern dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "RS logo on seat",
+          "sports seat design",
+          "color scheme matches RS5"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design with honeycomb stitching",
+          "specific seat design indicative of RS5",
+          "overall modern Audi interior aesthetic"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "RS5 badge",
+          "digital instrument cluster features specific to RS5",
+          "interior design consistent with 2020 Audi RS5"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
