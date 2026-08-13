@@ -21,7 +21,11 @@ def infer_search_params(search_hint):
     if len(tokens) < 2:
         return None
     make = tokens[0].lower()
-    model = tokens[1].lower()
+    # Join every remaining token as the model, not just tokens[1] -- a
+    # multi-word model like "GR Supra" or "GR Corolla" used to collapse to
+    # just "gr", which searched Toyota's whole GR sub-brand (GR86, GR
+    # Corolla, GR Supra all together) instead of the specific model.
+    model = " ".join(tokens[1:]).lower()
     return {"make": make, "model": model}
 
 

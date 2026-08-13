@@ -578,6 +578,14 @@ def prepare_engine_clip(
         pre_labeled = [c for c in interleaved if c.get("type") in {"cold_start", "engine_sound"}]
         rest = [c for c in interleaved if c.get("type") not in {"cold_start", "engine_sound"}]
         ordered_candidates = pre_labeled + rest
+        def _thumbnail_passes_hard_filters(scene_review):
+            scene_type = scene_review.get("scene_type")
+            if exterior_only and scene_type in INTERIOR_SCENE_TYPES:
+                return False
+            if rear_shot_only and scene_type not in EXHAUST_SCENE_TYPES:
+                return False
+            return True
+
         classified = []
         labeled = []
         relevant = []
@@ -605,17 +613,20 @@ def prepare_engine_clip(
                 and scene_review.get("scene_type") not in {"roof_operation", "hood_or_trunk_operation"}
             ):
                 relevant.append((candidate, scene_review))
-            # A genuine label (platform type or AI-read text) is trusted
-            # immediately and stops the search. A thumbnail-only relevance
-            # guess is a much weaker signal, so hitting MAX_PROBE_CANDIDATES
-            # of those must NOT cut the search short - a listing's actual
-            # "Cold Start" tab can sit later in this same listing's own
-            # video order, after an earlier "Exterior Walkaround" entry that
-            # merely looked plausible enough to count as "relevant". Keep
-            # scanning the full budget for a real label unless one is found.
-            if labeled:
+            # A genuine label (platform type or AI-read text) is trusted and
+            # stops the search -- but only once one has actually been seen
+            # from an angle this call requires (exterior_only/rear_shot_only).
+            # A listing's own "Cold Start" video is sometimes filmed from the
+            # cockpit, and stopping on that alone used to mean a later
+            # listing's genuine rear-view cold-start clip was never even
+            # looked at. A thumbnail-only relevance guess is a weaker signal
+            # still, so hitting MAX_PROBE_CANDIDATES of those must NOT cut the
+            # search short either -- keep scanning the full budget until a
+            # label from a usable angle is found.
+            if any(_thumbnail_passes_hard_filters(review) for _, review in labeled):
                 break
-        probe_candidates = labeled[:1] or relevant[:MAX_PROBE_CANDIDATES]
+        qualifying_labeled = [item for item in labeled if _thumbnail_passes_hard_filters(item[1])]
+        probe_candidates = qualifying_labeled[:1] or labeled[:1] or relevant[:MAX_PROBE_CANDIDATES]
         if not probe_candidates and allow_irrelevant:
             probe_candidates = classified[:MAX_PROBE_CANDIDATES]
         if not probe_candidates:
@@ -810,6 +821,30 @@ def prepare_engine_clip(
             rev_wav.unlink(missing_ok=True)
 
         approved = bool(review.get("approved") and engine_relevant)
+        rejection_error = None
+        if not approved:
+            # engine_relevant can go False here even after a candidate passed
+            # every earlier filter, because this re-classifies the frame at
+            # the actual audio onset rather than trusting the thumbnail -- a
+            # thumbnail can look like a rear/exterior shot while the camera
+            # has actually cut to the cockpit by the time the engine event
+            # happens. Without an explicit error here this used to surface as
+            # a generic "no usable clip" message even though a clip file was
+            # cut, hiding the real reason from the battle.json.
+            if not review.get("approved"):
+                rejection_error = "Final clip failed visual verification"
+            elif exterior_only and scene_type in INTERIOR_SCENE_TYPES:
+                rejection_error = (
+                    "The actual startup moment (not just the thumbnail) turned out to be an "
+                    "interior/cockpit view; exterior-only mode requires an outside view at that moment"
+                )
+            elif rear_shot_only and scene_type not in EXHAUST_SCENE_TYPES:
+                rejection_error = (
+                    f"The actual startup moment (not just the thumbnail) turned out to be a "
+                    f"{scene_type or 'non-rear'} view, not a rear-of-car/exhaust view"
+                )
+            else:
+                rejection_error = "Startup clip found but did not score as engine-relevant"
 
         # Optional bonus: search well beyond the startup clip for a distant
         # rev (e.g. after a long idle) and cut it separately, so a caller
@@ -825,6 +860,7 @@ def prepare_engine_clip(
 
         return {
             "approved": approved,
+            "error": rejection_error,
             "path": clip_path,
             "duration": clip_duration,
             "detected_onset_seconds": round(onset, 3),
