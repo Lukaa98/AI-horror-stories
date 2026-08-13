@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-2020-bmw-m3-20260813144720",
+  "base_car": {
+    "make": "BMW",
+    "model": "M3",
+    "trim": "",
+    "year": "2020"
+  },
+  "rivals": [
+    {
+      "make": "Audi",
+      "model": "RS5",
+      "trim": "Sportback",
+      "year": "2020",
+      "reason": "The Audi RS5 offers a twin-turbo V6 with a distinctive and aggressive exhaust note, making it a strong competitor to the M3 in both performance and sound."
+    },
+    {
+      "make": "Mercedes-Benz",
+      "model": "C63 AMG",
+      "trim": "S",
+      "year": "2020",
+      "reason": "The C63 AMG S features a powerful V8 engine that produces a signature growl, providing a compelling alternative for enthusiasts seeking a raucous exhaust note."
+    },
+    {
+      "make": "Ford",
+      "model": "Mustang",
+      "trim": "Shelby GT350",
+      "year": "2020",
+      "reason": "With its naturally aspirated V8 and iconic flat-plane crank sound, the Shelby GT350 delivers an unmistakable auditory experience that rivals the M3."
+    },
+    {
+      "make": "Porsche",
+      "model": "718 Cayman",
+      "trim": "GTS 4.0",
+      "year": "2020",
+      "reason": "The 718 Cayman GTS 4.0 offers a unique flat-six engine note that offers a distinctive contrast to the M3's sound, appealing to those who appreciate precision and performance."
+    }
+  ]
+}
