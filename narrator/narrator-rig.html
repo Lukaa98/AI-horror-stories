@@ -1,0 +1,560 @@
+<title>Narrator Rig</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f5f2ea;
+    --panel: #eae5d8;
+    --panel-2: #ded7c5;
+    --border: #d3cab4;
+    --ink: #211d17;
+    --ink-soft: #5c5344;
+    --accent: #c1391f;
+    --accent-ink: #fff6ee;
+    --stage-a: #efece4;
+    --stage-b: #e2ddd0;
+    --ok: #3f6b3a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17140f;
+      --panel: #221e17;
+      --panel-2: #2b261d;
+      --border: #3a3427;
+      --ink: #f1ece1;
+      --ink-soft: #b8ae9a;
+      --accent: #e2603f;
+      --accent-ink: #1c0d07;
+      --ok: #7cb26f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17140f;
+    --panel: #221e17;
+    --panel-2: #2b261d;
+    --border: #3a3427;
+    --ink: #f1ece1;
+    --ink-soft: #b8ae9a;
+    --accent: #e2603f;
+    --accent-ink: #1c0d07;
+    --ok: #7cb26f;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    margin: 0;
+    padding: 32px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+
+  header {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  h1 {
+    font-family: "Archivo", sans-serif;
+    font-weight: 800;
+    font-size: clamp(24px, 3.6vw, 34px);
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  header p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 13px;
+    max-width: 46ch;
+  }
+
+  .rig {
+    width: 100%;
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 1fr);
+    gap: 18px;
+    align-items: start;
+  }
+  @media (max-width: 780px) {
+    .rig { grid-template-columns: 1fr; }
+  }
+
+  .stage {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background:
+      linear-gradient(45deg, var(--stage-a) 25%, transparent 25%) -20px 0/40px 40px,
+      linear-gradient(-45deg, var(--stage-a) 25%, transparent 25%) -20px 0/40px 40px,
+      linear-gradient(45deg, transparent 75%, var(--stage-a) 75%) -20px 0/40px 40px,
+      linear-gradient(-45deg, transparent 75%, var(--stage-a) 75%) -20px 0/40px 40px,
+      var(--stage-b);
+    transition: background 0.2s;
+  }
+  .stage.solid {
+    background: var(--stage-b);
+  }
+  .stage-label {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: color-mix(in srgb, var(--stage-b) 70%, transparent);
+    padding: 3px 8px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+  }
+  .stage svg { display: block; width: 100%; height: auto; }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .card h2 {
+    font-family: "Archivo", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+  .readout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 10px;
+    font-size: 12.5px;
+  }
+  .readout dt { color: var(--ink-soft); }
+  .readout dd { margin: 0; color: var(--ink); text-align: right; }
+  .readout dd.on { color: var(--ok); }
+
+  .btn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  button {
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--border);
+    background: var(--panel-2);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 9px 10px;
+    cursor: pointer;
+  }
+  button:hover { border-color: var(--ink-soft); }
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  button.active {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+  button.wide { grid-column: 1 / -1; }
+
+  .hint {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  footer {
+    width: 100%;
+    max-width: 960px;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+  }
+
+  /* left arm is bent with the hand resting on the hip, so it only gets a
+     tiny idle shift instead of a full swing -- a hip-resting arm swinging
+     like a hanging one would look broken */
+  .arm-left {
+    transform-origin: 142px 308px;
+    animation: armSettleLeft 3.4s ease-in-out infinite;
+  }
+  .arm-right {
+    transform-origin: 258px 308px;
+    animation: armSwingRight 2.4s ease-in-out infinite;
+  }
+  @keyframes armSettleLeft {
+    0%, 100% { transform: rotate(-1deg); }
+    50% { transform: rotate(1deg); }
+  }
+  @keyframes armSwingRight {
+    0%, 100% { transform: rotate(3deg); }
+    50% { transform: rotate(-3deg); }
+  }
+  #headGroup {
+    transform-origin: 200px 300px;
+    animation: headBob 4.2s ease-in-out infinite;
+  }
+  @keyframes headBob {
+    0%   { transform: rotate(-1.5deg) translateY(0px); }
+    50%  { transform: rotate(1.5deg) translateY(-4px); }
+    100% { transform: rotate(-1.5deg) translateY(0px); }
+  }
+</style>
+
+<header>
+  <div>
+    <h1>Narrator Rig</h1>
+    <p>Plain average face, no beard -- and a slimmer, taller build copied from a reference pose: one arm hanging with the hand open, the other bent with a hand on the hip.</p>
+  </div>
+</header>
+
+<div class="rig">
+  <div class="stage" id="stage">
+    <span class="stage-label" id="stageLabel">transparent stage</span>
+    <svg id="charSvg" viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="wobble" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence id="turb" type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="3" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+
+      <g id="character" filter="url(#wobble)" fill="none" stroke="#1c1712" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+
+        <!-- neck: short, meeting the head's own bottom edge (284) -->
+        <path d="M 172 284 L 170 306 C 188 314 212 314 230 306 L 228 284" fill="#ffffff" stroke="none"/>
+        <path d="M 172 284 L 170 306 M 228 284 L 228 306" stroke-width="4"/>
+
+        <!-- body: slimmer, taller build with a V-neck and diagonal
+             stripes, copying this reference's proportions instead of the
+             bulkier one before -->
+        <path d="M 140 306 C 118 340 108 400 116 460
+                 L 284 460 C 292 400 282 340 260 306
+                 C 248 316 232 322 216 320 L 200 336 L 184 320
+                 C 168 322 152 316 140 306 Z" fill="#ffffff" stroke="#1c1712"/>
+        <path d="M 150 328 L 250 405 M 138 352 L 238 429 M 126 376 L 226 453"
+              stroke-width="3" opacity="0.55"/>
+
+        <!-- legs: shortened -->
+        <path d="M 150 460 L 142 740 L 178 740 L 184 460 Z" fill="#ffffff" stroke="#1c1712"/>
+        <path d="M 164 470 L 160 730" stroke-width="2.5" opacity="0.5"/>
+        <path d="M 250 460 L 258 740 L 222 740 L 216 460 Z" fill="#ffffff" stroke="#1c1712"/>
+        <path d="M 236 470 L 240 730" stroke-width="2.5" opacity="0.5"/>
+
+        <!-- shoes -->
+        <path d="M 136 740 C 128 758 150 766 176 760 C 182 752 180 742 174 738 Z" fill="#ffffff" stroke="#1c1712"/>
+        <path d="M 264 740 C 272 758 250 766 224 760 C 218 752 220 742 226 738 Z" fill="#ffffff" stroke="#1c1712"/>
+
+        <!-- arms: one hangs with the hand open and fingers spread, the
+             other bends to rest a hand on the hip -- matching the
+             reference's pose instead of two mirrored hanging arms -->
+        <g class="arm arm-right">
+          <path d="M 258 308 C 284 334 300 378 300 428
+                   C 300 446 296 460 288 470
+                   L 268 460 C 274 428 272 378 254 338 Z" fill="#ffffff"/>
+          <path d="M 288 468 L 272 484 M 292 472 L 280 490 M 296 474 L 288 494
+                   M 300 472 L 298 494 M 302 468 L 306 488" stroke-width="3"/>
+        </g>
+        <g class="arm arm-left">
+          <path d="M 142 308 C 112 326 92 360 100 394
+                   C 106 418 128 432 150 432
+                   L 158 412 C 138 406 118 390 116 366
+                   C 114 346 128 328 148 318 Z" fill="#ffffff"/>
+          <ellipse cx="162" cy="430" rx="14" ry="13" fill="#ffffff"/>
+          <path d="M 152 424 L 144 432 M 156 434 L 150 444" stroke-width="3"/>
+        </g>
+        <!-- head group: everything from here down bobs/tilts together as
+             one idle unit, pivoting from the base of the neck, so the head
+             isn't frozen while the arms sway -->
+        <g id="headGroup">
+        <!-- ears -->
+        <ellipse cx="122" cy="200" rx="14" ry="20" fill="#ffffff"/>
+        <ellipse cx="278" cy="200" rx="14" ry="20" fill="#ffffff"/>
+
+        <!-- head -->
+        <ellipse cx="200" cy="192" rx="82" ry="92" fill="#ffffff"/>
+
+        <!-- no beard -- plain average face per feedback -->
+
+        <!-- hair: plain, neat, unremarkable -- short all around with a
+             small forward flick, nothing wavy or wild -->
+        <path d="M 126 176
+                 C 116 138 130 100 160 88
+                 C 180 80 220 80 240 88
+                 C 270 100 284 138 274 176
+                 C 268 158 264 150 258 152
+                 C 250 138 236 132 220 134
+                 C 210 122 190 122 180 134
+                 C 164 132 150 138 142 152
+                 C 136 150 132 158 126 176 Z"
+              fill="#1c1712" stroke="none"/>
+
+        <!-- eyebrows: neutral vs raised, for emphasis beats -->
+        <g class="brows brows-neutral">
+          <path d="M 146 164 C 156 156 174 156 184 163" stroke-width="4"/>
+          <path d="M 216 163 C 226 156 244 156 254 164" stroke-width="4"/>
+        </g>
+        <g class="brows brows-raised" style="display:none">
+          <path d="M 146 154 C 156 144 174 144 184 152" stroke-width="4"/>
+          <path d="M 216 152 C 226 144 244 144 254 154" stroke-width="4"/>
+        </g>
+
+        <!-- glasses -->
+        <rect x="136" y="172" width="60" height="48" rx="18" fill="#ffffff" fill-opacity="0.0" stroke-width="5"/>
+        <rect x="204" y="172" width="60" height="48" rx="18" fill="#ffffff" fill-opacity="0.0" stroke-width="5"/>
+        <path d="M 196 196 L 204 196 M 136 198 L 118 202 M 264 198 L 282 202" stroke-width="4.5"/>
+
+        <!-- eyes: open -->
+        <g class="eyes eyes-open">
+          <circle cx="166" cy="197" r="5.5" fill="#1c1712" stroke="none"/>
+          <circle cx="234" cy="197" r="5.5" fill="#1c1712" stroke="none"/>
+        </g>
+        <!-- eyes: blink -->
+        <g class="eyes eyes-blink" style="display:none">
+          <path d="M 158 197 L 174 197" stroke-width="4"/>
+          <path d="M 226 197 L 242 197" stroke-width="4"/>
+        </g>
+
+        <!-- nose -->
+        <path d="M 200 202 C 198 214 194 222 190 228 C 194 232 202 232 206 228" />
+
+        <!-- mouth states: each carries its own skin patch sized to how
+             open it is, so "closed" doesn't show the same pale window a
+             wide-open mouth would. -->
+        <g class="mouth mouth-closed">
+          <path d="M 182 261 C 182 254 190 250 200 250 C 210 250 218 254 218 261
+                   C 218 264 210 266 200 266 C 190 266 182 264 182 261 Z" fill="#ffffff" stroke="none"/>
+          <path d="M 184 261 C 192 265 208 265 216 261" stroke-width="5"/>
+        </g>
+        <g class="mouth mouth-small" style="display:none">
+          <ellipse cx="200" cy="263" rx="14" ry="9" fill="#ffffff" stroke="none"/>
+          <ellipse cx="200" cy="263" rx="11" ry="7" fill="#1c1712" stroke="none"/>
+        </g>
+        <g class="mouth mouth-wide" style="display:none">
+          <ellipse cx="200" cy="266" rx="20" ry="16" fill="#ffffff" stroke="none"/>
+          <ellipse cx="200" cy="266" rx="17" ry="13" fill="#1c1712" stroke="none"/>
+          <path d="M 184 261 L 216 261" stroke-width="3" opacity="0.6" stroke="#ffffff"/>
+        </g>
+        <g class="mouth mouth-smile" style="display:none">
+          <path d="M 180 250 C 180 258 188 268 200 268 C 212 268 220 258 220 250
+                   C 220 260 210 264 200 264 C 190 264 180 260 180 250 Z" fill="#ffffff" stroke="none"/>
+          <path d="M 180 259 C 190 270 210 270 220 259" stroke-width="5"/>
+        </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="panel">
+    <div class="card">
+      <h2>State</h2>
+      <dl class="readout">
+        <dt>mouth</dt><dd id="roMouth">closed</dd>
+        <dt>eyes</dt><dd id="roEyes">open</dd>
+        <dt>talking</dt><dd id="roTalk">off</dd>
+        <dt>wobble</dt><dd id="roWobble" class="on">on</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>Mouth</h2>
+      <div class="btn-grid">
+        <button data-mouth="closed" class="active">Closed</button>
+        <button data-mouth="smile">Smile</button>
+        <button data-mouth="small">Talk&nbsp;— small</button>
+        <button data-mouth="wide">Talk&nbsp;— wide</button>
+        <button class="wide" id="talkToggle">Auto‑talk: off</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Eyes &amp; line</h2>
+      <div class="btn-grid">
+        <button id="blinkOnce">Blink once</button>
+        <button id="blinkToggle">Auto‑blink: on</button>
+        <button id="wobbleToggle" class="wide">Wobble: on</button>
+        <button id="stageToggle" class="wide">Stage: transparent</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Expression</h2>
+      <div class="btn-grid">
+        <button id="browsOnce">Raise brows once</button>
+        <button id="browsToggle">Auto‑expression: on</button>
+      </div>
+    </div>
+
+    <p class="hint">Auto‑talk cycles the three talking mouths on a random clock, the way the reference channel's frames never quite line up with the words. Auto‑blink fires every 2.5–5s, and roughly every third blink also raises the brows for a beat -- a natural pairing rather than two clocks running independently. The head itself has a slow idle bob/tilt so it isn't frozen while the arms sway. Wobble redraws the turbulence seed a few times a second for the slight hand‑jitter on the outline.</p>
+  </div>
+</div>
+
+<footer>
+  No beard, plain neat hair, glasses. Body proportions and pose copied from the reference photo -- slimmer/taller build, one hand open at the side, the other resting on the hip -- instead of the earlier bulkier symmetric-arms build.
+</footer>
+
+<script>
+  const charEl = document.getElementById('character');
+  const mouths = charEl.querySelectorAll('.mouth');
+  const eyeOpen = charEl.querySelector('.eyes-open');
+  const eyeBlink = charEl.querySelector('.eyes-blink');
+  const roMouth = document.getElementById('roMouth');
+  const roEyes = document.getElementById('roEyes');
+  const roTalk = document.getElementById('roTalk');
+  const roWobble = document.getElementById('roWobble');
+  const stage = document.getElementById('stage');
+  const stageLabel = document.getElementById('stageLabel');
+  const turb = document.getElementById('turb');
+
+  function setMouth(name) {
+    mouths.forEach(m => { m.style.display = m.classList.contains('mouth-' + name) ? '' : 'none'; });
+    roMouth.textContent = name;
+    document.querySelectorAll('[data-mouth]').forEach(b => b.classList.toggle('active', b.dataset.mouth === name));
+  }
+  document.querySelectorAll('[data-mouth]').forEach(b => {
+    b.addEventListener('click', () => { stopTalk(); setMouth(b.dataset.mouth); });
+  });
+
+  let talkTimer = null;
+  const talkFrames = ['closed', 'small', 'wide', 'small'];
+  function talkTick() {
+    const frame = talkFrames[Math.floor(Math.random() * talkFrames.length)];
+    setMouth(frame);
+    talkTimer = setTimeout(talkTick, 90 + Math.random() * 130);
+  }
+  function startTalk() {
+    if (talkTimer) return;
+    talkBtn.textContent = 'Auto‑talk: on';
+    talkBtn.classList.add('active');
+    roTalk.textContent = 'on';
+    talkTick();
+  }
+  function stopTalk() {
+    if (!talkTimer) return;
+    clearTimeout(talkTimer);
+    talkTimer = null;
+    talkBtn.textContent = 'Auto‑talk: off';
+    talkBtn.classList.remove('active');
+    roTalk.textContent = 'off';
+  }
+  const talkBtn = document.getElementById('talkToggle');
+  talkBtn.addEventListener('click', () => talkTimer ? stopTalk() : startTalk());
+
+  function blinkOnce() {
+    eyeOpen.style.display = 'none';
+    eyeBlink.style.display = '';
+    roEyes.textContent = 'blink';
+    setTimeout(() => {
+      eyeOpen.style.display = '';
+      eyeBlink.style.display = 'none';
+      roEyes.textContent = 'open';
+    }, 130);
+  }
+  document.getElementById('blinkOnce').addEventListener('click', blinkOnce);
+
+  const browNeutral = charEl.querySelector('.brows-neutral');
+  const browRaised = charEl.querySelector('.brows-raised');
+  function browsOnce() {
+    browNeutral.style.display = 'none';
+    browRaised.style.display = '';
+    setTimeout(() => {
+      browNeutral.style.display = '';
+      browRaised.style.display = 'none';
+    }, 550 + Math.random() * 250);
+  }
+  document.getElementById('browsOnce').addEventListener('click', browsOnce);
+  let browsEnabled = true;
+  const browsBtn = document.getElementById('browsToggle');
+  browsBtn.addEventListener('click', () => {
+    browsEnabled = !browsEnabled;
+    browsBtn.textContent = 'Auto‑expression: ' + (browsEnabled ? 'on' : 'off');
+    browsBtn.classList.toggle('active', browsEnabled);
+  });
+
+  let blinkTimer = null;
+  const blinkBtn = document.getElementById('blinkToggle');
+  function scheduleBlink() {
+    blinkTimer = setTimeout(() => {
+      blinkOnce();
+      // Pair brow raises with roughly a third of blinks instead of running
+      // a second independent clock -- reads as one natural expression
+      // beat rather than two separate tics firing at random.
+      if (browsEnabled && Math.random() < 0.33) browsOnce();
+      scheduleBlink();
+    }, 2500 + Math.random() * 2500);
+  }
+  function startBlink() {
+    blinkBtn.textContent = 'Auto‑blink: on';
+    blinkBtn.classList.add('active');
+    scheduleBlink();
+  }
+  function stopBlink() {
+    clearTimeout(blinkTimer);
+    blinkTimer = null;
+    blinkBtn.textContent = 'Auto‑blink: off';
+    blinkBtn.classList.remove('active');
+  }
+  blinkBtn.addEventListener('click', () => blinkTimer ? stopBlink() : startBlink());
+  startBlink();
+
+  let wobbleTimer = null;
+  const wobbleBtn = document.getElementById('wobbleToggle');
+  function wobbleTick() {
+    turb.setAttribute('seed', String(Math.floor(Math.random() * 1000)));
+    wobbleTimer = setTimeout(wobbleTick, 280 + Math.random() * 220);
+  }
+  function startWobble() {
+    wobbleBtn.textContent = 'Wobble: on';
+    wobbleBtn.classList.add('active');
+    roWobble.textContent = 'on';
+    roWobble.classList.add('on');
+    charEl.setAttribute('filter', 'url(#wobble)');
+    wobbleTick();
+  }
+  function stopWobble() {
+    clearTimeout(wobbleTimer);
+    wobbleTimer = null;
+    wobbleBtn.textContent = 'Wobble: off';
+    wobbleBtn.classList.remove('active');
+    roWobble.textContent = 'off';
+    roWobble.classList.remove('on');
+    charEl.removeAttribute('filter');
+  }
+  wobbleBtn.addEventListener('click', () => wobbleTimer ? stopWobble() : startWobble());
+  startWobble();
+
+  let solidStage = false;
+  document.getElementById('stageToggle').addEventListener('click', () => {
+    solidStage = !solidStage;
+    stage.classList.toggle('solid', solidStage);
+    stageLabel.textContent = solidStage ? 'solid stage' : 'transparent stage';
+    document.getElementById('stageToggle').textContent = solidStage ? 'Stage: solid' : 'Stage: transparent';
+  });
+</script>
