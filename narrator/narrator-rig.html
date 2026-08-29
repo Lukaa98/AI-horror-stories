@@ -247,9 +247,10 @@
 
       <g id="character" filter="url(#wobble)" fill="none" stroke="#1c1712" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
 
-        <!-- neck: short, meeting the head's own bottom edge (284) -->
-        <path d="M 172 284 L 170 306 C 188 314 212 314 230 306 L 228 284" fill="#ffffff" stroke="none"/>
-        <path d="M 172 284 L 170 306 M 228 284 L 228 306" stroke-width="4"/>
+        <!-- neck: short, meeting the head's own bottom edge (294, now that
+             the head is taller) -->
+        <path d="M 172 294 L 170 306 C 188 314 212 314 230 306 L 228 294" fill="#ffffff" stroke="none"/>
+        <path d="M 172 294 L 170 306 M 228 294 L 228 306" stroke-width="4"/>
 
         <!-- body: squared-off, straight-sided torso instead of the curvy
              bulge from before -- matching a plain reference figure, just
@@ -294,36 +295,30 @@
              one idle unit, pivoting from the base of the neck, so the head
              isn't frozen while the arms sway -->
         <g id="headGroup">
-        <!-- ears -->
-        <ellipse cx="122" cy="200" rx="14" ry="20" fill="#ffffff"/>
-        <ellipse cx="278" cy="200" rx="14" ry="20" fill="#ffffff"/>
+        <!-- ears: open outline instead of a filled shape -->
+        <path d="M 128 190 C 120 194 118 206 126 214" fill="none"/>
+        <path d="M 272 190 C 280 194 282 206 274 214" fill="none"/>
 
-        <!-- head -->
-        <ellipse cx="200" cy="192" rx="82" ry="92" fill="#ffffff"/>
+        <!-- head: longer/more oval instead of round -->
+        <ellipse cx="200" cy="192" rx="72" ry="102" fill="#ffffff"/>
 
         <!-- no beard -- plain average face per feedback -->
 
-        <!-- hair: swept-up textured quiff, per the new reference -->
-        <path d="M 124 178
-                 C 114 140 124 104 152 88
-                 C 158 100 168 96 172 84
-                 C 182 96 196 92 202 78
-                 C 210 92 224 90 232 76
-                 C 244 92 258 92 264 106
-                 C 278 98 288 112 284 130
-                 C 292 142 288 158 276 168
-                 C 272 150 266 156 262 144
-                 C 254 156 244 150 240 136
-                 C 230 148 216 142 212 128
-                 C 200 140 186 134 180 120
-                 C 168 130 154 126 146 136
-                 C 138 124 128 132 122 148
-                 C 116 158 118 170 124 178 Z"
-              fill="#1c1712" stroke="none"/>
-        <!-- a couple of loose strands over the fringe, matching the
-             reference's few flowing lines instead of a flat cap -->
-        <path d="M 168 118 C 176 108 186 104 196 108" stroke-width="2.5" opacity="0.6"/>
-        <path d="M 208 106 C 218 98 230 96 240 102" stroke-width="2.5" opacity="0.6"/>
+        <!-- hair: line art only, no fill -- an outline plus a few flowing
+             strand lines instead of a solid black shape -->
+        <path d="M 132 168
+                 C 122 130 134 96 160 82
+                 C 168 92 178 90 184 80
+                 C 192 92 204 90 210 78
+                 C 220 90 232 88 238 76
+                 C 250 90 262 90 268 102
+                 C 278 96 286 108 282 124
+                 C 288 134 284 148 274 158" fill="none"/>
+        <path d="M 150 130 C 158 112 170 104 182 106" fill="none" stroke-width="3"/>
+        <path d="M 178 116 C 186 100 200 94 212 98" fill="none" stroke-width="3"/>
+        <path d="M 208 104 C 218 90 232 86 244 92" fill="none" stroke-width="3"/>
+        <path d="M 238 112 C 248 100 260 98 268 108" fill="none" stroke-width="3"/>
+        <path d="M 145 150 C 152 138 160 130 170 128" fill="none" stroke-width="3"/>
 
         <!-- eyebrows: neutral vs raised, for emphasis beats -->
         <g class="brows brows-neutral">
@@ -335,11 +330,7 @@
           <path d="M 216 152 C 226 144 244 144 254 154" stroke-width="4"/>
         </g>
 
-        <!-- glasses -->
-        <rect x="136" y="172" width="60" height="48" rx="18" fill="#ffffff" fill-opacity="0.0" stroke-width="5"/>
-        <rect x="204" y="172" width="60" height="48" rx="18" fill="#ffffff" fill-opacity="0.0" stroke-width="5"/>
-        <path d="M 196 196 L 204 196 M 136 198 L 118 202 M 264 198 L 282 202" stroke-width="4.5"/>
-
+        <!-- no glasses -- matching the plain reference face -->
         <!-- eyes: open -->
         <g class="eyes eyes-open">
           <circle cx="166" cy="197" r="5.5" fill="#1c1712" stroke="none"/>
