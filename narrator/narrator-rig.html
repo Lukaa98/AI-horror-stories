@@ -333,6 +333,12 @@
           <path d="M 146 172 C 156 162 174 162 184 170" stroke-width="4"/>
           <path d="M 216 170 C 226 162 244 162 254 172" stroke-width="4"/>
         </g>
+        <!-- a smaller lift than brows-raised, pulsed along with talking so
+             the face isn't just a moving mouth -->
+        <g class="brows brows-talk" style="display:none">
+          <path d="M 146 178 C 156 170 174 170 184 177" stroke-width="4"/>
+          <path d="M 216 177 C 226 170 244 170 254 178" stroke-width="4"/>
+        </g>
 
         <!-- no glasses -- matching the plain reference face -->
         <!-- eyes: open -->
@@ -416,7 +422,7 @@
       </div>
     </div>
 
-    <p class="hint">Auto‑talk cycles the three talking mouths on a random clock, the way the reference channel's frames never quite line up with the words. Auto‑blink fires every 2.5–5s, and roughly every third blink also raises the brows for a beat -- a natural pairing rather than two clocks running independently. The head itself has a slow idle bob/tilt so it isn't frozen while the arms sway. Wobble redraws the turbulence seed a few times a second for the slight hand‑jitter on the outline.</p>
+    <p class="hint">Auto‑talk cycles the three talking mouths on a random clock, the way the reference channel's frames never quite line up with the words, and now occasionally gives the brows a small lift on a wide-open frame too. Auto‑blink fires every 2.5–5s, and roughly every third blink also raises the brows for a bigger beat -- a natural pairing rather than three clocks running independently. The head itself has a slow idle bob/tilt so it isn't frozen while the arms sway. Wobble redraws the turbulence seed a few times a second for the slight hand‑jitter on the outline.</p>
   </div>
 </div>
 
@@ -451,6 +457,10 @@
   function talkTick() {
     const frame = talkFrames[Math.floor(Math.random() * talkFrames.length)];
     setMouth(frame);
+    // A little brow movement riding along with the talking, not just the
+    // mouth on its own -- small and infrequent so it reads as natural
+    // emphasis rather than a constant twitch.
+    if (browsEnabled && frame === 'wide' && Math.random() < 0.35) browsTalkPulse();
     talkTimer = setTimeout(talkTick, 90 + Math.random() * 130);
   }
   function startTalk() {
@@ -485,6 +495,7 @@
 
   const browNeutral = charEl.querySelector('.brows-neutral');
   const browRaised = charEl.querySelector('.brows-raised');
+  const browTalk = charEl.querySelector('.brows-talk');
   function browsOnce() {
     browNeutral.style.display = 'none';
     browRaised.style.display = '';
@@ -494,6 +505,18 @@
     }, 550 + Math.random() * 250);
   }
   document.getElementById('browsOnce').addEventListener('click', browsOnce);
+
+  function browsTalkPulse() {
+    // Only the small talk-lift, and only from neutral -- skip it if a
+    // full blink-paired raise is already mid-pulse so the two don't fight.
+    if (browNeutral.style.display === 'none') return;
+    browNeutral.style.display = 'none';
+    browTalk.style.display = '';
+    setTimeout(() => {
+      browTalk.style.display = 'none';
+      browNeutral.style.display = '';
+    }, 180 + Math.random() * 100);
+  }
   let browsEnabled = true;
   const browsBtn = document.getElementById('browsToggle');
   browsBtn.addEventListener('click', () => {
