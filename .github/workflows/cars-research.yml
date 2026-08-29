@@ -16,7 +16,7 @@ on:
         required: true
         type: string
       mode:
-        description: "Full ranking research, standalone video test, startup battle, or rival suggestion"
+        description: "Full ranking research, standalone video test, startup battle, rival suggestion, or narrator preview"
         required: false
         type: choice
         default: research
@@ -25,6 +25,7 @@ on:
           - video
           - battle
           - suggest_rivals
+          - narrator_preview
       make:
         description: "Vehicle make for video mode"
         required: false
@@ -172,6 +173,21 @@ jobs:
             --test-id "${{ inputs.draft_id }}" \
             "${YEAR_ARGS[@]}"
 
+      - name: Run narrator preview
+        if: ${{ inputs.mode == 'narrator_preview' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          YEAR_ARGS=()
+          if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
+          if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
+          python cars/automation/narrator_preview.py \
+            --make "${{ inputs.make }}" \
+            --model "${{ inputs.model }}" \
+            --query "${{ inputs.query }}" \
+            --test-id "${{ inputs.draft_id }}" \
+            "${YEAR_ARGS[@]}"
+
       - name: Commit draft
         if: ${{ inputs.mode == 'research' }}
         run: |
@@ -272,5 +288,30 @@ jobs:
           cp -R "$tmp_dir/cars/video-tests/${{ inputs.draft_id }}" "cars/video-tests/${{ inputs.draft_id }}"
           git add "cars/video-tests/${{ inputs.draft_id }}"
           git commit -m "cars: video test ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit narrator preview
+        if: ${{ inputs.mode == 'narrator_preview' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/narrator-previews"
+          cp -R "cars/narrator-previews/${{ inputs.draft_id }}" "$tmp_dir/cars/narrator-previews/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p cars/narrator-previews
+          rm -rf "cars/narrator-previews/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/narrator-previews/${{ inputs.draft_id }}" "cars/narrator-previews/${{ inputs.draft_id }}"
+          git add "cars/narrator-previews/${{ inputs.draft_id }}"
+          git commit -m "cars: narrator preview ${{ inputs.draft_id }}" || exit 0
           git pull --rebase origin "${OUTPUT_BRANCH}" || true
           git push origin "${OUTPUT_BRANCH}"

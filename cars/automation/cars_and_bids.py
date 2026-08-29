@@ -16,16 +16,27 @@ def _tokenize(value):
     return re.findall(r"[A-Za-z0-9]+(?:-[A-Za-z0-9]+)?", str(value or ""))
 
 
+MULTI_WORD_MODEL_PREFIXES = {"gr"}
+
+
 def infer_search_params(search_hint):
     tokens = _tokenize(search_hint)
     if len(tokens) < 2:
         return None
     make = tokens[0].lower()
-    # Join every remaining token as the model, not just tokens[1] -- a
-    # multi-word model like "GR Supra" or "GR Corolla" used to collapse to
-    # just "gr", which searched Toyota's whole GR sub-brand (GR86, GR
-    # Corolla, GR Supra all together) instead of the specific model.
-    model = " ".join(tokens[1:]).lower()
+    model = tokens[1].lower()
+    # Toyota's GR sub-brand (GR86, GR Corolla, GR Supra) shares "GR" as a
+    # prefix, so taking just tokens[1] collapsed every one of them to the
+    # same "gr" model and searched the whole sub-brand instead of the
+    # specific car -- that's why a "Toyota GR Supra" search surfaced GR
+    # Corolla listings first. Earlier this joined *every* remaining token
+    # into the model to fix that, but the generation/provenance matching
+    # elsewhere in this pipeline (_auction_provenance_matches_entry,
+    # _generation_commons_terms) depends on model being exactly one word,
+    # with trim/generation words handled separately -- so this only merges
+    # the next word in for this one known prefix, not generally.
+    if model in MULTI_WORD_MODEL_PREFIXES and len(tokens) > 2:
+        model = f"{model} {tokens[2].lower()}"
     return {"make": make, "model": model}
 
 

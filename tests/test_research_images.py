@@ -41,6 +41,17 @@ def test_infer_search_params_uses_make_and_model_from_search_hint():
     assert infer_search_params("Chevrolet Corvette C5 Z06") == {"make": "chevrolet", "model": "corvette"}
 
 
+def test_infer_search_params_keeps_toyota_gr_sub_brand_specific():
+    """"GR" alone matches Toyota's whole GR sub-brand (GR86, GR Corolla, GR
+    Supra), so a bare "gr" model used to search all of them instead of the
+    one actually requested -- but this must stay a one-word model for every
+    other make/model, since generation/provenance matching elsewhere
+    depends on that."""
+    assert infer_search_params("Toyota GR Supra 3.0") == {"make": "toyota", "model": "gr supra"}
+    assert infer_search_params("Toyota GR Corolla Circuit Edition") == {"make": "toyota", "model": "gr corolla"}
+    assert infer_search_params("Toyota GR86 Premium") == {"make": "toyota", "model": "gr86"}
+
+
 def test_parse_year_range_handles_ranges_and_single_years():
     assert parse_year_range("2007-2012") == (2007, 2012)
     assert parse_year_range("2014") == (2014, 2014)

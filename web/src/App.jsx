@@ -5,13 +5,14 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.54";
+const UI_VERSION = "V10.55";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
 const VIDEO_TEST_TIMEOUT_MS = 60 * 60 * 1000;
+const NARRATOR_PREVIEW_TIMEOUT_MS = 20 * 60 * 1000;
 const BATTLE_RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RENDER_TIMEOUT_MS = 20 * 60 * 1000;
 const RIVAL_SUGGEST_TIMEOUT_MS = 8 * 60 * 1000;
@@ -33,6 +34,11 @@ const WORKFLOW_OPTIONS = [
     id: "battle",
     label: "Startup Sound Battle",
     description: "You name 3-5 specific cars; we find each one's exterior-only cold-start clip and cut them together back to back, numbered, no narration.",
+  },
+  {
+    id: "narrator_preview",
+    label: "Narrator Preview",
+    description: "Stills only, no video: find one exterior photo for a car and composite it with our narrator character in a few poses, to check how the pairing looks before building the full talking video.",
   },
 ];
 
@@ -567,6 +573,8 @@ export default function App() {
   const [videoUrl, setVideoUrl] = useState(null);
   const [videoTestId, setVideoTestId] = useState(null);
   const [videoProbe, setVideoProbe] = useState(null);
+  const [narratorPreviewId, setNarratorPreviewId] = useState(null);
+  const [narratorPreview, setNarratorPreview] = useState(null);
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
   const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
@@ -710,6 +718,54 @@ export default function App() {
       setError(String(err.message || err));
       setStage("error");
       setStatusDetail("Video extraction test failed - open the build log for details");
+    }
+  }
+
+  async function handleNarratorPreview() {
+    if (!repoOk || !make.trim() || !model.trim()) return;
+    setError(null);
+    setNarratorPreview(null);
+    const id = makeDraftId(`narrator-${make}-${model}`);
+    setNarratorPreviewId(id);
+    setStage("narrator-preview-testing");
+    setStatusDetail(`Finding an exterior photo for ${titleCaseWords(make)} ${titleCaseWords(model)} and compositing the narrator...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Narrator preview for ${make.trim()} ${model.trim()}`,
+          draft_id: id,
+          mode: "narrator_preview",
+          make: make.trim(),
+          model: model.trim(),
+          query: [make, model, focus].filter(Boolean).join(" "),
+          start_year: startYear,
+          end_year: endYear,
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/narrator-previews/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: NARRATOR_PREVIEW_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setNarratorPreview(await response.json());
+      setStage("narrator-preview-done");
+      setStatusDetail("Narrator preview ready");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Narrator preview failed - open the build log for details");
     }
   }
 
@@ -987,6 +1043,10 @@ export default function App() {
 
   function rawVideoTestUrl(relativePath) {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/video-tests/${videoTestId}/${relativePath}`;
+  }
+
+  function rawNarratorPreviewUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/narrator-previews/${narratorPreviewId}/${relativePath}`;
   }
 
   function dashboardRawUrl(item, relativePath) {
@@ -1669,20 +1729,20 @@ export default function App() {
                   <input
                     value={focus}
                     onChange={(e) => setFocus(e.target.value)}
-                    placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : "Used only for focused mode"}
-                    disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}
+                    placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : workflow === "narrator_preview" ? "Trim/notes (optional)" : "Used only for focused mode"}
+                    disabled={stage === "researching" || stage === "generating" || (workflow !== "focused" && workflow !== "narrator_preview")}
                   />
                 </label>
                 <label>
                   Start Year
-                  <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}>
+                  <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || (workflow !== "focused" && workflow !== "narrator_preview")}>
                     <option value="">Any</option>
                     {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
                   </select>
                 </label>
                 <label>
                   End Year
-                  <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}>
+                  <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || (workflow !== "focused" && workflow !== "narrator_preview")}>
                     <option value="">Any</option>
                     {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
                   </select>
@@ -1720,19 +1780,26 @@ export default function App() {
           {workflow === "battle" ? (
             <button
               onClick={handleBattleResearch}
-              disabled={!repoOk || !battleCarsValid || stage === "researching" || stage === "generating" || stage === "video-testing"}
+              disabled={!repoOk || !battleCarsValid || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}
             >
               {stage === "researching" ? "Finding Clips..." : "Find Startup Clips"}
             </button>
+          ) : workflow === "narrator_preview" ? (
+            <button
+              onClick={handleNarratorPreview}
+              disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}
+            >
+              {stage === "narrator-preview-testing" ? "Rendering Preview..." : "Generate Narrator Preview"}
+            </button>
           ) : (
             <>
-              <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating" || stage === "video-testing"}>
+              <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}>
                 {stage === "researching" ? "Researching..." : "Research"}
               </button>
               <button
                 className="secondary"
                 onClick={handleVideoTest}
-                disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing"}
+                disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}
               >
                 {stage === "video-testing" ? "Testing Videos..." : "Test Videos Only"}
               </button>
@@ -1984,6 +2051,9 @@ export default function App() {
       {stage === "video-testing" && (
         <p className="status">Discovering listing videos, detecting engine events, and cutting short previews...</p>
       )}
+      {stage === "narrator-preview-testing" && (
+        <p className="status">Finding an exterior photo and compositing the narrator over it -- stills only, no video...</p>
+      )}
 
       {videoProbe && (
         <section className="video-probe-panel">
@@ -2025,6 +2095,24 @@ export default function App() {
                 : "No embedded listing videos were discovered."}
             </p>
           )}
+        </section>
+      )}
+
+      {narratorPreview && (
+        <section className="video-probe-panel">
+          <h2>Narrator Preview: {narratorPreview.label || narratorPreview.query}</h2>
+          <p className="rationale">
+            {narratorPreview.photos_found
+              ? `Found ${narratorPreview.photos_found} exterior photo${narratorPreview.photos_found === 1 ? "" : "s"}; composited the narrator over the first one in ${(narratorPreview.previews || []).length} pose${(narratorPreview.previews || []).length === 1 ? "" : "s"}.`
+              : "No exterior photo was found for this search, so nothing was composited."}
+          </p>
+          <div className="video-probe-grid">
+            {(narratorPreview.previews || []).map((relativePath) => (
+              <article className="video-probe-card" key={relativePath}>
+                <img src={rawNarratorPreviewUrl(relativePath)} alt="Narrator preview composite" />
+              </article>
+            ))}
+          </div>
         </section>
       )}
       </>
