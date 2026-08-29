@@ -303,18 +303,27 @@
 
         <!-- no beard -- plain average face per feedback -->
 
-        <!-- hair: plain, neat, unremarkable -- short all around with a
-             small forward flick, nothing wavy or wild -->
-        <path d="M 126 176
-                 C 116 138 130 100 160 88
-                 C 180 80 220 80 240 88
-                 C 270 100 284 138 274 176
-                 C 268 158 264 150 258 152
-                 C 250 138 236 132 220 134
-                 C 210 122 190 122 180 134
-                 C 164 132 150 138 142 152
-                 C 136 150 132 158 126 176 Z"
+        <!-- hair: swept-up textured quiff, per the new reference -->
+        <path d="M 124 178
+                 C 114 140 124 104 152 88
+                 C 158 100 168 96 172 84
+                 C 182 96 196 92 202 78
+                 C 210 92 224 90 232 76
+                 C 244 92 258 92 264 106
+                 C 278 98 288 112 284 130
+                 C 292 142 288 158 276 168
+                 C 272 150 266 156 262 144
+                 C 254 156 244 150 240 136
+                 C 230 148 216 142 212 128
+                 C 200 140 186 134 180 120
+                 C 168 130 154 126 146 136
+                 C 138 124 128 132 122 148
+                 C 116 158 118 170 124 178 Z"
               fill="#1c1712" stroke="none"/>
+        <!-- a couple of loose strands over the fringe, matching the
+             reference's few flowing lines instead of a flat cap -->
+        <path d="M 168 118 C 176 108 186 104 196 108" stroke-width="2.5" opacity="0.6"/>
+        <path d="M 208 106 C 218 98 230 96 240 102" stroke-width="2.5" opacity="0.6"/>
 
         <!-- eyebrows: neutral vs raised, for emphasis beats -->
         <g class="brows brows-neutral">
@@ -342,16 +351,15 @@
           <path d="M 226 197 L 242 197" stroke-width="4"/>
         </g>
 
-        <!-- nose -->
-        <path d="M 200 202 C 198 214 194 222 190 228 C 194 232 202 232 206 228" />
+        <!-- nose: a small tick, per the new reference, not a long curved line -->
+        <path d="M 199 206 L 197 220" stroke-width="3"/>
+        <circle cx="196" cy="223" r="1.8" fill="#1c1712" stroke="none"/>
 
         <!-- mouth states: each carries its own skin patch sized to how
              open it is, so "closed" doesn't show the same pale window a
              wide-open mouth would. -->
         <g class="mouth mouth-closed">
-          <path d="M 182 261 C 182 254 190 250 200 250 C 210 250 218 254 218 261
-                   C 218 264 210 266 200 266 C 190 266 182 264 182 261 Z" fill="#ffffff" stroke="none"/>
-          <path d="M 184 261 C 192 265 208 265 216 261" stroke-width="5"/>
+          <path d="M 182 258 C 190 267 210 267 218 258" stroke-width="5"/>
         </g>
         <g class="mouth mouth-small" style="display:none">
           <ellipse cx="200" cy="263" rx="14" ry="9" fill="#ffffff" stroke="none"/>
