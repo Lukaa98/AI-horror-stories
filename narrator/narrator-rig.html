@@ -295,6 +295,10 @@
              one idle unit, pivoting from the base of the neck, so the head
              isn't frozen while the arms sway -->
         <g id="headGroup">
+        <!-- shrink the whole head+face down a bit, anchored at the neck
+             join (200,294) so it doesn't pull away from the body while it
+             shrinks -- the head was reading as almost as wide as the torso -->
+        <g transform="translate(200,294) scale(0.82) translate(-200,-294)">
         <!-- ears: open outline instead of a filled shape -->
         <path d="M 128 190 C 120 194 118 206 126 214" fill="none"/>
         <path d="M 272 190 C 280 194 282 206 274 214" fill="none"/>
@@ -304,21 +308,31 @@
 
         <!-- no beard -- plain average face per feedback -->
 
-        <!-- hair: line art only, no fill -- an outline plus a few flowing
-             strand lines instead of a solid black shape -->
-        <path d="M 132 168
-                 C 122 130 134 96 160 82
+        <!-- hair: line art only, no fill -- closed silhouette down to the
+             temples plus enough strand density to read as hair, not a few
+             stray squiggles on a bald head -->
+        <path d="M 128 176
+                 C 120 132 134 96 160 82
                  C 168 92 178 90 184 80
                  C 192 92 204 90 210 78
                  C 220 90 232 88 238 76
                  C 250 90 262 90 268 102
                  C 278 96 286 108 282 124
-                 C 288 134 284 148 274 158" fill="none"/>
+                 C 290 136 286 152 272 164
+                 C 268 148 264 158 258 146
+                 C 250 158 240 150 236 138
+                 C 226 150 212 144 208 130
+                 C 196 142 182 136 176 122
+                 C 164 132 150 128 142 138
+                 C 134 128 126 150 128 176 Z" fill="none" stroke-width="4"/>
         <path d="M 150 130 C 158 112 170 104 182 106" fill="none" stroke-width="3"/>
         <path d="M 178 116 C 186 100 200 94 212 98" fill="none" stroke-width="3"/>
         <path d="M 208 104 C 218 90 232 86 244 92" fill="none" stroke-width="3"/>
         <path d="M 238 112 C 248 100 260 98 268 108" fill="none" stroke-width="3"/>
         <path d="M 145 150 C 152 138 160 130 170 128" fill="none" stroke-width="3"/>
+        <path d="M 158 106 C 164 92 174 84 186 82" fill="none" stroke-width="3"/>
+        <path d="M 222 100 C 232 86 246 82 258 88" fill="none" stroke-width="3"/>
+        <path d="M 136 158 C 140 144 148 134 158 130" fill="none" stroke-width="3"/>
 
         <!-- eyebrows: neutral vs raised, for emphasis beats -->
         <g class="brows brows-neutral">
@@ -365,6 +379,7 @@
           <path d="M 180 250 C 180 258 188 268 200 268 C 212 268 220 258 220 250
                    C 220 260 210 264 200 264 C 190 264 180 260 180 250 Z" fill="#ffffff" stroke="none"/>
           <path d="M 180 259 C 190 270 210 270 220 259" stroke-width="5"/>
+        </g>
         </g>
         </g>
       </g>
