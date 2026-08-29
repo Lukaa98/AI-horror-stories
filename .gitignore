@@ -9,5 +9,8 @@ youtube_tools/.credentials/
 node_modules/
 **/node_modules/
 
+# Generated sprite exports (regenerate with narrator/render/export-sprites.js)
+narrator/render/sprites/
+
 # Local environment secrets
 .env
