@@ -308,9 +308,9 @@
 
         <!-- no beard -- plain average face per feedback -->
 
-        <!-- hair: line art only, no fill -- closed silhouette down to the
-             temples plus enough strand density to read as hair, not a few
-             stray squiggles on a bald head -->
+        <!-- hair: full solid fill -- the line-art version kept reading as
+             sparse/bald no matter how many strands were added, so back to
+             an actual filled head of hair -->
         <path d="M 128 176
                  C 120 132 134 96 160 82
                  C 168 92 178 90 184 80
@@ -324,15 +324,11 @@
                  C 226 150 212 144 208 130
                  C 196 142 182 136 176 122
                  C 164 132 150 128 142 138
-                 C 134 128 126 150 128 176 Z" fill="none" stroke-width="4"/>
-        <path d="M 150 130 C 158 112 170 104 182 106" fill="none" stroke-width="3"/>
-        <path d="M 178 116 C 186 100 200 94 212 98" fill="none" stroke-width="3"/>
-        <path d="M 208 104 C 218 90 232 86 244 92" fill="none" stroke-width="3"/>
-        <path d="M 238 112 C 248 100 260 98 268 108" fill="none" stroke-width="3"/>
-        <path d="M 145 150 C 152 138 160 130 170 128" fill="none" stroke-width="3"/>
-        <path d="M 158 106 C 164 92 174 84 186 82" fill="none" stroke-width="3"/>
-        <path d="M 222 100 C 232 86 246 82 258 88" fill="none" stroke-width="3"/>
-        <path d="M 136 158 C 140 144 148 134 158 130" fill="none" stroke-width="3"/>
+                 C 134 128 126 150 128 176 Z" fill="#1c1712" stroke="none"/>
+        <!-- a couple of parting/texture lines on top of the fill, for a
+             little shape without going back to sparse line-only hair -->
+        <path d="M 168 100 C 178 92 190 88 202 90" stroke-width="2.5" opacity="0.4" stroke="#ffffff"/>
+        <path d="M 212 92 C 224 88 238 90 248 98" stroke-width="2.5" opacity="0.4" stroke="#ffffff"/>
 
         <!-- eyebrows: neutral vs raised, for emphasis beats -->
         <g class="brows brows-neutral">
