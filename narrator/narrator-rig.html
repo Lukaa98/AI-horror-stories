@@ -198,24 +198,23 @@
     * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
   }
 
-  /* left arm is bent with the hand resting on the hip, so it only gets a
-     tiny idle shift instead of a full swing -- a hip-resting arm swinging
-     like a hanging one would look broken */
+  /* both arms hang straight now, so they get the same gentle idle sway,
+     just out of phase with each other */
   .arm-left {
-    transform-origin: 142px 308px;
-    animation: armSettleLeft 3.4s ease-in-out infinite;
+    transform-origin: 140px 306px;
+    animation: armSwingLeft 2.8s ease-in-out infinite;
   }
   .arm-right {
-    transform-origin: 258px 308px;
+    transform-origin: 260px 306px;
     animation: armSwingRight 2.4s ease-in-out infinite;
   }
-  @keyframes armSettleLeft {
-    0%, 100% { transform: rotate(-1deg); }
-    50% { transform: rotate(1deg); }
+  @keyframes armSwingLeft {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
   }
   @keyframes armSwingRight {
-    0%, 100% { transform: rotate(3deg); }
-    50% { transform: rotate(-3deg); }
+    0%, 100% { transform: rotate(2deg); }
+    50% { transform: rotate(-2deg); }
   }
   #headGroup {
     transform-origin: 200px 300px;
@@ -231,14 +230,14 @@
 <header>
   <div>
     <h1>Narrator Rig</h1>
-    <p>Plain average face, no beard -- and a slimmer, taller build copied from a reference pose: one arm hanging with the hand open, the other bent with a hand on the hip.</p>
+    <p>Plain average face, no beard -- squared torso, straight legs, both arms hanging with open hands, copying a plain reference figure with a shirt added.</p>
   </div>
 </header>
 
 <div class="rig">
   <div class="stage" id="stage">
     <span class="stage-label" id="stageLabel">transparent stage</span>
-    <svg id="charSvg" viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg">
+    <svg id="charSvg" viewBox="0 0 400 730" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <filter id="wobble" x="-20%" y="-20%" width="140%" height="140%">
           <feTurbulence id="turb" type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="3" result="noise"/>
@@ -252,46 +251,44 @@
         <path d="M 172 284 L 170 306 C 188 314 212 314 230 306 L 228 284" fill="#ffffff" stroke="none"/>
         <path d="M 172 284 L 170 306 M 228 284 L 228 306" stroke-width="4"/>
 
-        <!-- body: slimmer, taller build with a V-neck and diagonal
-             stripes, copying this reference's proportions instead of the
-             bulkier one before -->
-        <path d="M 140 306 C 118 340 108 400 116 460
-                 L 284 460 C 292 400 282 340 260 306
-                 C 248 316 232 322 216 320 L 200 336 L 184 320
-                 C 168 322 152 316 140 306 Z" fill="#ffffff" stroke="#1c1712"/>
-        <path d="M 150 328 L 250 405 M 138 352 L 238 429 M 126 376 L 226 453"
+        <!-- body: squared-off, straight-sided torso instead of the curvy
+             bulge from before -- matching a plain reference figure, just
+             with a shirt on it -->
+        <path d="M 140 306 L 130 340
+                 C 126 380 126 420 132 460
+                 L 268 460
+                 C 274 420 274 380 270 340
+                 L 260 306
+                 C 248 314 232 318 216 316 L 200 330 L 184 316
+                 C 168 318 152 314 140 306 Z" fill="#ffffff" stroke="#1c1712"/>
+        <path d="M 148 328 L 242 400 M 138 350 L 232 422 M 128 372 L 222 444"
               stroke-width="3" opacity="0.55"/>
 
-        <!-- legs: shortened -->
-        <path d="M 150 460 L 142 740 L 178 740 L 184 460 Z" fill="#ffffff" stroke="#1c1712"/>
-        <path d="M 164 470 L 160 730" stroke-width="2.5" opacity="0.5"/>
-        <path d="M 250 460 L 258 740 L 222 740 L 216 460 Z" fill="#ffffff" stroke="#1c1712"/>
-        <path d="M 236 470 L 240 730" stroke-width="2.5" opacity="0.5"/>
+        <!-- legs: shorter, straight -->
+        <path d="M 150 460 L 144 680 L 178 680 L 184 460 Z" fill="#ffffff" stroke="#1c1712"/>
+        <path d="M 164 470 L 160 670" stroke-width="2.5" opacity="0.5"/>
+        <path d="M 250 460 L 256 680 L 222 680 L 216 460 Z" fill="#ffffff" stroke="#1c1712"/>
+        <path d="M 236 470 L 240 670" stroke-width="2.5" opacity="0.5"/>
 
         <!-- shoes -->
-        <path d="M 136 740 C 128 758 150 766 176 760 C 182 752 180 742 174 738 Z" fill="#ffffff" stroke="#1c1712"/>
-        <path d="M 264 740 C 272 758 250 766 224 760 C 218 752 220 742 226 738 Z" fill="#ffffff" stroke="#1c1712"/>
+        <path d="M 136 680 C 128 698 150 706 176 700 C 182 692 180 682 174 678 Z" fill="#ffffff" stroke="#1c1712"/>
+        <path d="M 264 680 C 272 698 250 706 224 700 C 218 692 220 682 226 678 Z" fill="#ffffff" stroke="#1c1712"/>
 
-        <!-- arms: one hangs with the hand open and fingers spread, the
-             other bends to rest a hand on the hip -- matching the
-             reference's pose instead of two mirrored hanging arms -->
+        <!-- arms: both hang straight at the sides with open, spread-finger
+             hands -- a plain symmetric pose instead of one bent on the hip -->
         <g class="arm arm-right">
-          <path d="M 258 308 C 284 334 300 378 300 428
-                   C 300 446 296 460 288 470
-                   L 268 460 C 274 428 272 378 254 338 Z" fill="#ffffff"/>
-          <path d="M 288 468 L 272 484 M 292 472 L 280 490 M 296 474 L 288 494
-                   M 300 472 L 298 494 M 302 468 L 306 488" stroke-width="3"/>
+          <path d="M 260 306 C 286 332 302 374 302 422
+                   C 302 440 298 454 290 464
+                   L 270 454 C 276 422 274 374 256 336 Z" fill="#ffffff"/>
+          <path d="M 290 462 L 274 478 M 294 466 L 282 484 M 298 468 L 290 488
+                   M 302 466 L 300 488 M 304 462 L 308 482" stroke-width="3"/>
         </g>
         <g class="arm arm-left">
-          <path d="M 142 308 C 112 326 92 360 100 394
-                   C 106 418 128 432 150 432
-                   L 158 412 C 138 406 118 390 116 366
-                   C 114 346 128 328 148 318 Z" fill="#ffffff"/>
-          <!-- same open, spread-finger hand as the right arm, just
-               mirrored and anchored to this arm's own wrist point (150,432)
-               instead of a separate fist shape -->
-          <path d="M 138 426 L 122 440 M 142 430 L 128 448 M 146 432 L 138 452
-                   M 150 430 L 150 452 M 154 427 L 160 446" stroke-width="3"/>
+          <path d="M 140 306 C 114 332 98 374 98 422
+                   C 98 440 102 454 110 464
+                   L 130 454 C 124 422 126 374 144 336 Z" fill="#ffffff"/>
+          <path d="M 110 462 L 126 478 M 106 466 L 118 484 M 102 468 L 110 488
+                   M 98 466 L 100 488 M 96 462 L 92 482" stroke-width="3"/>
         </g>
         <!-- head group: everything from here down bobs/tilts together as
              one idle unit, pivoting from the base of the neck, so the head
@@ -420,7 +417,7 @@
 </div>
 
 <footer>
-  No beard, plain neat hair, glasses. Body proportions and pose copied from the reference photo -- slimmer/taller build, one hand open at the side, the other resting on the hip -- instead of the earlier bulkier symmetric-arms build.
+  No beard, plain neat hair, glasses. Body squared off (straight sides instead of the curvy bulge), legs shortened, and both arms back to hanging symmetrically with open hands -- matching a plain reference figure with just a shirt added.
 </footer>
 
 <script>
