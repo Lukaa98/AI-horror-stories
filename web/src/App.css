@@ -769,6 +769,22 @@ button.secondary {
   font-size: .85rem;
 }
 
+.jobs-alumni {
+  margin: 10px 0 0;
+  font-size: .8rem;
+  line-height: 1.5;
+  color: #bbb;
+}
+
+.jobs-alum-current {
+  color: #ffcc5c;
+  font-weight: 600;
+}
+
+.jobs-alum-previous {
+  color: #999;
+}
+
 @media (max-width: 600px) {
   .settings-grid { grid-template-columns: 1fr; }
   .request-row { flex-direction: column; }

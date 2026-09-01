@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.62";
+const UI_VERSION = "V10.63";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1258,7 +1258,7 @@ export default function App() {
                 <span className="preview-label">One-time official-site snapshot</span>
                 <h2>Employer Careers &amp; Recommended Jobs</h2>
                 <p className="hint">
-                  {jobsData.peopleFromCsv} people map to {jobsData.companiesFromCsv} unique current employers. {jobsData.recommendations.length} resume-aligned jobs were individually verified. Checked {jobsData.checkedAt}.
+                  {jobsData.peopleFromCsv} alumni map to {jobsData.companiesFromCsv} unique employers, current and past — a past employer still means an alum who may be able to refer Khatia in. {jobsData.recommendations.length} resume-aligned jobs were individually verified so far ({jobsData.companiesResearched} of {jobsData.companiesFromCsv} companies researched). Checked {jobsData.checkedAt}.
                 </p>
               </div>
               <input
@@ -1315,6 +1315,15 @@ export default function App() {
                       <span className="jobs-unavailable">No public careers page located</span>
                     )}
                   </div>
+                  {!!company.alumni?.length && (
+                    <p className="jobs-alumni">
+                      {company.alumni.map((alum, index) => (
+                        <span key={alum.name} className={alum.current ? "jobs-alum-current" : "jobs-alum-previous"}>
+                          {alum.name}{alum.current ? "" : " (past)"}{index < company.alumni.length - 1 ? ", " : ""}
+                        </span>
+                      ))}
+                    </p>
+                  )}
                 </article>
               ))}
               {!companies.length && <p className="hint">No employer matches that filter.</p>}
