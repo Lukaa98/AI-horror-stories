@@ -2120,11 +2120,21 @@
           "name": "Katie Rogers",
           "current": false
         }
+      ],
+      "openRoles": [
+        {
+          "title": "Project Manager, Enterprise Events",
+          "url": "https://careers.cvent.com/jobs/7755?lang=en-us"
+        },
+        {
+          "title": "Project Manager, Events",
+          "url": "https://careers.cvent.com/jobs/10074?lang=en-us"
+        }
       ]
     },
     {
       "name": "Danaher Corporation",
-      "careersUrl": null,
+      "careersUrl": "https://jobs.danaher.com/global/en/c/projectprogram-management-jobs",
       "alumniCount": 1,
       "hasCurrentAlum": false,
       "alumni": [
@@ -2179,6 +2189,20 @@
         {
           "name": "Jeremy Holtzman",
           "current": false
+        }
+      ],
+      "openRoles": [
+        {
+          "title": "Talent Operations Manager",
+          "url": "https://builtin.com/job/talent-operations-manager/6345119"
+        },
+        {
+          "title": "Partner Operations Manager",
+          "url": "https://builtin.com/job/partner-operations-manager/2342685"
+        },
+        {
+          "title": "Program Manager, Scaled Success",
+          "url": "https://www.linkedin.com/jobs/view/program-manager-scaled-success-at-dbt-labs-4384845239"
         }
       ]
     },
@@ -2316,7 +2340,7 @@
     },
     {
       "name": "DTE Energy",
-      "careersUrl": null,
+      "careersUrl": "https://careers.dteenergy.com/",
       "alumniCount": 1,
       "hasCurrentAlum": false,
       "alumni": [
@@ -9585,5 +9609,5 @@
       ]
     }
   ],
-  "companiesResearched": 100
+  "companiesResearched": 102
 }
