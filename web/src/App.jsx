@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.67";
+const UI_VERSION = "V10.68";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1323,6 +1323,15 @@ export default function App() {
                         </span>
                       ))}
                     </p>
+                  )}
+                  {!!company.openRoles?.length && (
+                    <ul className="jobs-open-roles">
+                      {company.openRoles.map((role) => (
+                        <li key={role.url}>
+                          <a href={role.url} target="_blank" rel="noreferrer">{role.title}</a>
+                        </li>
+                      ))}
+                    </ul>
                   )}
                 </article>
               ))}

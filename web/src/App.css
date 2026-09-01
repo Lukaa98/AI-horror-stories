@@ -785,6 +785,17 @@ button.secondary {
   color: #999;
 }
 
+.jobs-open-roles {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  font-size: .85rem;
+  line-height: 1.6;
+}
+
+.jobs-open-roles a {
+  color: #ffcc5c;
+}
+
 @media (max-width: 600px) {
   .settings-grid { grid-template-columns: 1fr; }
   .request-row { flex-direction: column; }

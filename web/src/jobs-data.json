@@ -1064,7 +1064,7 @@
     },
     {
       "name": "Butter Payments",
-      "careersUrl": null,
+      "careersUrl": "https://www.butterpayments.com/join-our-team",
       "alumniCount": 1,
       "hasCurrentAlum": true,
       "alumni": [
@@ -1728,7 +1728,7 @@
     },
     {
       "name": "Convo Communications",
-      "careersUrl": null,
+      "careersUrl": "https://ats.rippling.com/convo-communications-llc/jobs",
       "alumniCount": 1,
       "hasCurrentAlum": true,
       "alumni": [
@@ -4572,13 +4572,19 @@
     },
     {
       "name": "Lucid Bots",
-      "careersUrl": null,
+      "careersUrl": "https://job-boards.greenhouse.io/lucidbots",
       "alumniCount": 1,
       "hasCurrentAlum": true,
       "alumni": [
         {
           "name": "Constantine Desjardins",
           "current": true
+        }
+      ],
+      "openRoles": [
+        {
+          "title": "Project Manager - Software & Robotics Team",
+          "url": "https://job-boards.greenhouse.io/lucidbots/jobs/4494679008"
         }
       ]
     },
@@ -9411,5 +9417,5 @@
       ]
     }
   ],
-  "companiesResearched": 90
+  "companiesResearched": 93
 }
