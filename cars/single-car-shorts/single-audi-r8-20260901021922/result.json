@@ -1,0 +1,2143 @@
+{
+  "car": {
+    "make": "Audi",
+    "model": "R8",
+    "trim": null
+  },
+  "title": "Audi R8: First-Gen V8 Performance",
+  "script": "Looking for supercar thrills without breaking the bank? The first-generation Audi R8 with its 4.2-liter V8 might be your perfect match. This naturally aspirated engine delivers 420 horsepower, launching you from 0 to 60 mph in just 4.6 seconds. ([ru.wikipedia.org](https://ru.wikipedia.org/wiki/Audi_R8?utm_source=openai)) Paired with Audi's quattro all-wheel-drive system, it ensures exceptional grip and handling. Compared to its V10 sibling, the V8 offers a more affordable entry into the R8 lineup, providing 90% of the experience at 60% of the price. ([automonitor.io](https://automonitor.io/blog/is-a-audi-r8-worth-buying/?utm_source=openai)) Plus, the V8's reliability and lower maintenance costs make it a practical choice for enthusiasts. With tuning, you can even push the V8's performance closer to the V10's territory. ([westracingshop.com](https://westracingshop.com/products/audi-r8-stage-1-tune?utm_source=openai)) So, would you choose the V8's value or the V10's raw power?",
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "First-Gen Audi R8 V8",
+      "fact": "The first-generation Audi R8 features a 4.2-liter V8 engine."
+    },
+    {
+      "media_type": "engine",
+      "headline": "4.2-Liter V8 Engine",
+      "fact": "This naturally aspirated engine delivers 420 horsepower."
+    },
+    {
+      "media_type": "wheel",
+      "headline": "quattro All-Wheel Drive",
+      "fact": "Audi's quattro system ensures exceptional grip and handling."
+    },
+    {
+      "media_type": "detail",
+      "headline": "V8 vs. V10 Price Gap",
+      "fact": "The V8 offers 90% of the experience at 60% of the price."
+    },
+    {
+      "media_type": "detail",
+      "headline": "Tuning Potential",
+      "fact": "With tuning, the V8's performance can approach that of the V10."
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "fact": "So, would you choose the V8's value or the V10's raw power?"
+    }
+  ],
+  "sources": [
+    "https://ru.wikipedia.org/wiki/Audi_R8",
+    "https://automonitor.io/blog/is-a-audi-r8-worth-buying/",
+    "https://westracingshop.com/products/audi-r8-stage-1-tune"
+  ],
+  "word_count": 149,
+  "voice_preset": "onyx",
+  "tts_speed": 1.12,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 58.0,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-audi-r8-20260901021922/narration.mp3",
+  "duration_seconds": 58.05,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.36,
+      "end": 1.26,
+      "mouth": "small"
+    },
+    {
+      "start": 1.26,
+      "end": 1.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.35,
+      "end": 1.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.53,
+      "end": 1.71,
+      "mouth": "small"
+    },
+    {
+      "start": 1.71,
+      "end": 1.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.8,
+      "end": 2.61,
+      "mouth": "small"
+    },
+    {
+      "start": 2.61,
+      "end": 3.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.15,
+      "end": 3.24,
+      "mouth": "small"
+    },
+    {
+      "start": 3.24,
+      "end": 3.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.33,
+      "end": 3.51,
+      "mouth": "small"
+    },
+    {
+      "start": 3.51,
+      "end": 3.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.69,
+      "end": 4.59,
+      "mouth": "small"
+    },
+    {
+      "start": 4.59,
+      "end": 4.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.68,
+      "end": 4.86,
+      "mouth": "small"
+    },
+    {
+      "start": 4.86,
+      "end": 4.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.95,
+      "end": 5.31,
+      "mouth": "small"
+    },
+    {
+      "start": 5.31,
+      "end": 5.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.4,
+      "end": 6.03,
+      "mouth": "small"
+    },
+    {
+      "start": 6.03,
+      "end": 6.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.21,
+      "end": 6.39,
+      "mouth": "small"
+    },
+    {
+      "start": 6.39,
+      "end": 6.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.48,
+      "end": 6.93,
+      "mouth": "small"
+    },
+    {
+      "start": 6.93,
+      "end": 7.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.02,
+      "end": 7.2,
+      "mouth": "small"
+    },
+    {
+      "start": 7.2,
+      "end": 7.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.92,
+      "end": 8.19,
+      "mouth": "small"
+    },
+    {
+      "start": 8.19,
+      "end": 8.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.28,
+      "end": 8.37,
+      "mouth": "small"
+    },
+    {
+      "start": 8.37,
+      "end": 8.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.64,
+      "end": 8.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.73,
+      "end": 9.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.09,
+      "end": 9.36,
+      "mouth": "small"
+    },
+    {
+      "start": 9.36,
+      "end": 9.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.45,
+      "end": 9.54,
+      "mouth": "small"
+    },
+    {
+      "start": 9.54,
+      "end": 9.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.72,
+      "end": 9.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.9,
+      "end": 10.17,
+      "mouth": "small"
+    },
+    {
+      "start": 10.17,
+      "end": 10.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.26,
+      "end": 10.35,
+      "mouth": "small"
+    },
+    {
+      "start": 10.35,
+      "end": 10.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.44,
+      "end": 10.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.53,
+      "end": 10.8,
+      "mouth": "small"
+    },
+    {
+      "start": 10.8,
+      "end": 11.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.16,
+      "end": 11.25,
+      "mouth": "small"
+    },
+    {
+      "start": 11.25,
+      "end": 11.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.34,
+      "end": 11.43,
+      "mouth": "small"
+    },
+    {
+      "start": 11.43,
+      "end": 11.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.52,
+      "end": 11.88,
+      "mouth": "small"
+    },
+    {
+      "start": 11.88,
+      "end": 12.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.06,
+      "end": 12.78,
+      "mouth": "small"
+    },
+    {
+      "start": 12.78,
+      "end": 12.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.96,
+      "end": 13.05,
+      "mouth": "small"
+    },
+    {
+      "start": 13.05,
+      "end": 13.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.23,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.59,
+      "end": 13.68,
+      "mouth": "small"
+    },
+    {
+      "start": 13.68,
+      "end": 13.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.77,
+      "end": 13.95,
+      "mouth": "small"
+    },
+    {
+      "start": 13.95,
+      "end": 14.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.04,
+      "end": 14.13,
+      "mouth": "small"
+    },
+    {
+      "start": 14.13,
+      "end": 14.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.22,
+      "end": 14.4,
+      "mouth": "small"
+    },
+    {
+      "start": 14.4,
+      "end": 15.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.03,
+      "end": 15.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.21,
+      "end": 15.3,
+      "mouth": "small"
+    },
+    {
+      "start": 15.3,
+      "end": 15.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.39,
+      "end": 15.48,
+      "mouth": "small"
+    },
+    {
+      "start": 15.48,
+      "end": 15.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.57,
+      "end": 16.47,
+      "mouth": "small"
+    },
+    {
+      "start": 16.47,
+      "end": 16.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.83,
+      "end": 17.19,
+      "mouth": "small"
+    },
+    {
+      "start": 17.19,
+      "end": 17.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.28,
+      "end": 17.37,
+      "mouth": "small"
+    },
+    {
+      "start": 17.37,
+      "end": 17.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.46,
+      "end": 17.73,
+      "mouth": "small"
+    },
+    {
+      "start": 17.73,
+      "end": 18.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.0,
+      "end": 18.54,
+      "mouth": "small"
+    },
+    {
+      "start": 18.54,
+      "end": 18.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.63,
+      "end": 18.81,
+      "mouth": "small"
+    },
+    {
+      "start": 18.81,
+      "end": 19.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.08,
+      "end": 19.35,
+      "mouth": "small"
+    },
+    {
+      "start": 19.35,
+      "end": 19.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.44,
+      "end": 19.53,
+      "mouth": "small"
+    },
+    {
+      "start": 19.53,
+      "end": 19.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.62,
+      "end": 20.43,
+      "mouth": "small"
+    },
+    {
+      "start": 20.43,
+      "end": 20.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.79,
+      "end": 20.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.88,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.51,
+      "end": 21.6,
+      "mouth": "small"
+    },
+    {
+      "start": 21.6,
+      "end": 21.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.69,
+      "end": 21.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.78,
+      "end": 22.68,
+      "mouth": "small"
+    },
+    {
+      "start": 22.68,
+      "end": 22.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.77,
+      "end": 22.95,
+      "mouth": "small"
+    },
+    {
+      "start": 22.95,
+      "end": 23.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.22,
+      "end": 23.49,
+      "mouth": "small"
+    },
+    {
+      "start": 23.49,
+      "end": 23.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.58,
+      "end": 24.84,
+      "mouth": "small"
+    },
+    {
+      "start": 24.84,
+      "end": 25.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.38,
+      "end": 25.56,
+      "mouth": "small"
+    },
+    {
+      "start": 25.56,
+      "end": 25.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.65,
+      "end": 26.73,
+      "mouth": "small"
+    },
+    {
+      "start": 26.73,
+      "end": 27.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.0,
+      "end": 27.09,
+      "mouth": "small"
+    },
+    {
+      "start": 27.09,
+      "end": 27.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.27,
+      "end": 27.81,
+      "mouth": "small"
+    },
+    {
+      "start": 27.81,
+      "end": 27.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.9,
+      "end": 27.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.99,
+      "end": 28.08,
+      "mouth": "small"
+    },
+    {
+      "start": 28.08,
+      "end": 28.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.17,
+      "end": 28.98,
+      "mouth": "small"
+    },
+    {
+      "start": 28.98,
+      "end": 29.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.07,
+      "end": 29.52,
+      "mouth": "small"
+    },
+    {
+      "start": 29.52,
+      "end": 29.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.97,
+      "end": 30.06,
+      "mouth": "small"
+    },
+    {
+      "start": 30.06,
+      "end": 30.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.15,
+      "end": 30.33,
+      "mouth": "small"
+    },
+    {
+      "start": 30.33,
+      "end": 30.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.42,
+      "end": 31.05,
+      "mouth": "small"
+    },
+    {
+      "start": 31.05,
+      "end": 31.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.14,
+      "end": 31.5,
+      "mouth": "small"
+    },
+    {
+      "start": 31.5,
+      "end": 31.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.59,
+      "end": 31.68,
+      "mouth": "small"
+    },
+    {
+      "start": 31.68,
+      "end": 31.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.77,
+      "end": 32.22,
+      "mouth": "small"
+    },
+    {
+      "start": 32.22,
+      "end": 32.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.31,
+      "end": 32.49,
+      "mouth": "small"
+    },
+    {
+      "start": 32.49,
+      "end": 32.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.94,
+      "end": 33.03,
+      "mouth": "small"
+    },
+    {
+      "start": 33.03,
+      "end": 33.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.21,
+      "end": 34.11,
+      "mouth": "small"
+    },
+    {
+      "start": 34.11,
+      "end": 34.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.47,
+      "end": 34.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.65,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 34.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.83,
+      "end": 35.73,
+      "mouth": "small"
+    },
+    {
+      "start": 35.73,
+      "end": 36.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.09,
+      "end": 37.53,
+      "mouth": "small"
+    },
+    {
+      "start": 37.53,
+      "end": 37.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.62,
+      "end": 38.34,
+      "mouth": "small"
+    },
+    {
+      "start": 38.34,
+      "end": 38.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.88,
+      "end": 38.97,
+      "mouth": "small"
+    },
+    {
+      "start": 38.97,
+      "end": 39.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.06,
+      "end": 39.33,
+      "mouth": "small"
+    },
+    {
+      "start": 39.33,
+      "end": 39.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.51,
+      "end": 39.69,
+      "mouth": "small"
+    },
+    {
+      "start": 39.69,
+      "end": 39.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.78,
+      "end": 39.96,
+      "mouth": "small"
+    },
+    {
+      "start": 39.96,
+      "end": 40.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.05,
+      "end": 40.32,
+      "mouth": "small"
+    },
+    {
+      "start": 40.32,
+      "end": 40.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.41,
+      "end": 40.77,
+      "mouth": "small"
+    },
+    {
+      "start": 40.77,
+      "end": 40.86,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.86,
+      "end": 41.04,
+      "mouth": "small"
+    },
+    {
+      "start": 41.04,
+      "end": 41.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.49,
+      "end": 41.85,
+      "mouth": "small"
+    },
+    {
+      "start": 41.85,
+      "end": 41.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.94,
+      "end": 43.02,
+      "mouth": "small"
+    },
+    {
+      "start": 43.02,
+      "end": 43.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.65,
+      "end": 43.74,
+      "mouth": "small"
+    },
+    {
+      "start": 43.74,
+      "end": 43.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.83,
+      "end": 44.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.1,
+      "end": 44.19,
+      "mouth": "small"
+    },
+    {
+      "start": 44.19,
+      "end": 44.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.37,
+      "end": 44.55,
+      "mouth": "small"
+    },
+    {
+      "start": 44.55,
+      "end": 44.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.64,
+      "end": 44.91,
+      "mouth": "small"
+    },
+    {
+      "start": 44.91,
+      "end": 45.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.0,
+      "end": 45.09,
+      "mouth": "small"
+    },
+    {
+      "start": 45.09,
+      "end": 45.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.18,
+      "end": 45.36,
+      "mouth": "small"
+    },
+    {
+      "start": 45.36,
+      "end": 45.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.45,
+      "end": 45.54,
+      "mouth": "small"
+    },
+    {
+      "start": 45.54,
+      "end": 45.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.63,
+      "end": 45.72,
+      "mouth": "small"
+    },
+    {
+      "start": 45.72,
+      "end": 45.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.81,
+      "end": 46.53,
+      "mouth": "small"
+    },
+    {
+      "start": 46.53,
+      "end": 46.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.62,
+      "end": 46.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.71,
+      "end": 46.8,
+      "mouth": "small"
+    },
+    {
+      "start": 46.8,
+      "end": 46.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.89,
+      "end": 47.07,
+      "mouth": "small"
+    },
+    {
+      "start": 47.07,
+      "end": 47.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.61,
+      "end": 47.7,
+      "mouth": "small"
+    },
+    {
+      "start": 47.7,
+      "end": 47.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.79,
+      "end": 47.88,
+      "mouth": "small"
+    },
+    {
+      "start": 47.88,
+      "end": 48.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.06,
+      "end": 48.33,
+      "mouth": "small"
+    },
+    {
+      "start": 48.33,
+      "end": 48.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.42,
+      "end": 48.51,
+      "mouth": "small"
+    },
+    {
+      "start": 48.51,
+      "end": 48.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.6,
+      "end": 48.78,
+      "mouth": "small"
+    },
+    {
+      "start": 48.78,
+      "end": 48.87,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.87,
+      "end": 48.96,
+      "mouth": "small"
+    },
+    {
+      "start": 48.96,
+      "end": 49.32,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.32,
+      "end": 49.5,
+      "mouth": "small"
+    },
+    {
+      "start": 49.5,
+      "end": 49.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.59,
+      "end": 49.77,
+      "mouth": "small"
+    },
+    {
+      "start": 49.77,
+      "end": 49.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.86,
+      "end": 50.4,
+      "mouth": "small"
+    },
+    {
+      "start": 50.4,
+      "end": 50.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.49,
+      "end": 51.03,
+      "mouth": "small"
+    },
+    {
+      "start": 51.03,
+      "end": 51.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.12,
+      "end": 51.21,
+      "mouth": "small"
+    },
+    {
+      "start": 51.21,
+      "end": 51.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.3,
+      "end": 51.39,
+      "mouth": "small"
+    },
+    {
+      "start": 51.39,
+      "end": 51.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.66,
+      "end": 51.75,
+      "mouth": "small"
+    },
+    {
+      "start": 51.75,
+      "end": 51.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.84,
+      "end": 52.2,
+      "mouth": "small"
+    },
+    {
+      "start": 52.2,
+      "end": 52.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.29,
+      "end": 52.47,
+      "mouth": "small"
+    },
+    {
+      "start": 52.47,
+      "end": 52.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.56,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 53.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.01,
+      "end": 53.19,
+      "mouth": "small"
+    },
+    {
+      "start": 53.19,
+      "end": 53.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.28,
+      "end": 53.46,
+      "mouth": "small"
+    },
+    {
+      "start": 53.46,
+      "end": 53.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.55,
+      "end": 54.18,
+      "mouth": "small"
+    },
+    {
+      "start": 54.18,
+      "end": 54.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.63,
+      "end": 54.72,
+      "mouth": "small"
+    },
+    {
+      "start": 54.72,
+      "end": 54.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.81,
+      "end": 54.9,
+      "mouth": "small"
+    },
+    {
+      "start": 54.9,
+      "end": 54.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.99,
+      "end": 55.26,
+      "mouth": "small"
+    },
+    {
+      "start": 55.26,
+      "end": 55.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.35,
+      "end": 55.62,
+      "mouth": "small"
+    },
+    {
+      "start": 55.62,
+      "end": 55.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.71,
+      "end": 55.89,
+      "mouth": "small"
+    },
+    {
+      "start": 55.89,
+      "end": 56.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.25,
+      "end": 56.34,
+      "mouth": "small"
+    },
+    {
+      "start": 56.34,
+      "end": 56.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 56.52,
+      "end": 56.79,
+      "mouth": "small"
+    },
+    {
+      "start": 56.79,
+      "end": 56.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.88,
+      "end": 56.97,
+      "mouth": "small"
+    },
+    {
+      "start": 56.97,
+      "end": 57.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 57.06,
+      "end": 57.15,
+      "mouth": "small"
+    },
+    {
+      "start": 57.15,
+      "end": 57.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 57.33,
+      "end": 57.69,
+      "mouth": "small"
+    },
+    {
+      "start": 57.69,
+      "end": 58.05,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "Looking",
+      "start": 0.0,
+      "end": 0.5600000023841858
+    },
+    {
+      "word": "for",
+      "start": 0.5600000023841858,
+      "end": 0.8199999928474426
+    },
+    {
+      "word": "supercar",
+      "start": 0.8199999928474426,
+      "end": 1.2799999713897705
+    },
+    {
+      "word": "thrills",
+      "start": 1.2799999713897705,
+      "end": 1.5199999809265137
+    },
+    {
+      "word": "without",
+      "start": 1.5199999809265137,
+      "end": 1.840000033378601
+    },
+    {
+      "word": "breaking",
+      "start": 1.840000033378601,
+      "end": 2.180000066757202
+    },
+    {
+      "word": "the",
+      "start": 2.180000066757202,
+      "end": 2.4000000953674316
+    },
+    {
+      "word": "bank",
+      "start": 2.4000000953674316,
+      "end": 2.619999885559082
+    },
+    {
+      "word": "The",
+      "start": 3.240000009536743,
+      "end": 3.2799999713897705
+    },
+    {
+      "word": "first",
+      "start": 3.2799999713897705,
+      "end": 3.4600000381469727
+    },
+    {
+      "word": "generation",
+      "start": 3.4600000381469727,
+      "end": 3.940000057220459
+    },
+    {
+      "word": "Audi",
+      "start": 3.940000057220459,
+      "end": 4.199999809265137
+    },
+    {
+      "word": "R8",
+      "start": 4.199999809265137,
+      "end": 4.559999942779541
+    },
+    {
+      "word": "with",
+      "start": 4.559999942779541,
+      "end": 4.820000171661377
+    },
+    {
+      "word": "its",
+      "start": 4.820000171661377,
+      "end": 4.980000019073486
+    },
+    {
+      "word": "4",
+      "start": 4.980000019073486,
+      "end": 5.199999809265137
+    },
+    {
+      "word": "2",
+      "start": 5.199999809265137,
+      "end": 5.579999923706055
+    },
+    {
+      "word": "liter",
+      "start": 5.579999923706055,
+      "end": 5.739999771118164
+    },
+    {
+      "word": "V8",
+      "start": 5.739999771118164,
+      "end": 6.099999904632568
+    },
+    {
+      "word": "might",
+      "start": 6.099999904632568,
+      "end": 6.420000076293945
+    },
+    {
+      "word": "be",
+      "start": 6.420000076293945,
+      "end": 6.559999942779541
+    },
+    {
+      "word": "your",
+      "start": 6.559999942779541,
+      "end": 6.739999771118164
+    },
+    {
+      "word": "perfect",
+      "start": 6.739999771118164,
+      "end": 7.039999961853027
+    },
+    {
+      "word": "match",
+      "start": 7.039999961853027,
+      "end": 7.380000114440918
+    },
+    {
+      "word": "This",
+      "start": 8.100000381469727,
+      "end": 8.140000343322754
+    },
+    {
+      "word": "naturally",
+      "start": 8.140000343322754,
+      "end": 8.5
+    },
+    {
+      "word": "aspirated",
+      "start": 8.5,
+      "end": 8.960000038146973
+    },
+    {
+      "word": "engine",
+      "start": 8.960000038146973,
+      "end": 9.260000228881836
+    },
+    {
+      "word": "delivers",
+      "start": 9.260000228881836,
+      "end": 9.5600004196167
+    },
+    {
+      "word": "420",
+      "start": 9.5600004196167,
+      "end": 10.279999732971191
+    },
+    {
+      "word": "horsepower",
+      "start": 10.279999732971191,
+      "end": 10.779999732971191
+    },
+    {
+      "word": "launching",
+      "start": 11.279999732971191,
+      "end": 11.4399995803833
+    },
+    {
+      "word": "you",
+      "start": 11.4399995803833,
+      "end": 11.640000343322754
+    },
+    {
+      "word": "from",
+      "start": 11.640000343322754,
+      "end": 11.779999732971191
+    },
+    {
+      "word": "0",
+      "start": 11.779999732971191,
+      "end": 12.020000457763672
+    },
+    {
+      "word": "to",
+      "start": 12.020000457763672,
+      "end": 12.140000343322754
+    },
+    {
+      "word": "60",
+      "start": 12.140000343322754,
+      "end": 12.420000076293945
+    },
+    {
+      "word": "mph",
+      "start": 12.420000076293945,
+      "end": 12.920000076293945
+    },
+    {
+      "word": "in",
+      "start": 12.920000076293945,
+      "end": 13.399999618530273
+    },
+    {
+      "word": "just",
+      "start": 13.399999618530273,
+      "end": 13.619999885559082
+    },
+    {
+      "word": "4",
+      "start": 13.619999885559082,
+      "end": 13.84000015258789
+    },
+    {
+      "word": "6",
+      "start": 13.84000015258789,
+      "end": 14.239999771118164
+    },
+    {
+      "word": "seconds",
+      "start": 14.239999771118164,
+      "end": 14.600000381469727
+    },
+    {
+      "word": "R",
+      "start": 14.84000015258789,
+      "end": 15.279999732971191
+    },
+    {
+      "word": "u",
+      "start": 15.279999732971191,
+      "end": 15.380000114440918
+    },
+    {
+      "word": "dot",
+      "start": 15.380000114440918,
+      "end": 15.619999885559082
+    },
+    {
+      "word": "wikipedia",
+      "start": 15.619999885559082,
+      "end": 16.020000457763672
+    },
+    {
+      "word": "dot",
+      "start": 16.020000457763672,
+      "end": 16.34000015258789
+    },
+    {
+      "word": "org",
+      "start": 16.34000015258789,
+      "end": 16.559999465942383
+    },
+    {
+      "word": "wikipedia",
+      "start": 16.8799991607666,
+      "end": 17.239999771118164
+    },
+    {
+      "word": "dot",
+      "start": 17.239999771118164,
+      "end": 17.540000915527344
+    },
+    {
+      "word": "org",
+      "start": 17.540000915527344,
+      "end": 17.780000686645508
+    },
+    {
+      "word": "wiki",
+      "start": 18.020000457763672,
+      "end": 18.260000228881836
+    },
+    {
+      "word": "Audi",
+      "start": 18.260000228881836,
+      "end": 18.479999542236328
+    },
+    {
+      "word": "R8",
+      "start": 18.479999542236328,
+      "end": 18.8799991607666
+    },
+    {
+      "word": "UTM",
+      "start": 19.18000030517578,
+      "end": 19.579999923706055
+    },
+    {
+      "word": "source",
+      "start": 19.579999923706055,
+      "end": 19.81999969482422
+    },
+    {
+      "word": "OpenAI",
+      "start": 19.81999969482422,
+      "end": 20.3799991607666
+    },
+    {
+      "word": "paired",
+      "start": 20.899999618530273,
+      "end": 20.940000534057617
+    },
+    {
+      "word": "with",
+      "start": 20.940000534057617,
+      "end": 21.200000762939453
+    },
+    {
+      "word": "Audi's",
+      "start": 21.200000762939453,
+      "end": 21.559999465942383
+    },
+    {
+      "word": "Quattro",
+      "start": 21.559999465942383,
+      "end": 21.8799991607666
+    },
+    {
+      "word": "all",
+      "start": 21.8799991607666,
+      "end": 22.18000030517578
+    },
+    {
+      "word": "wheel",
+      "start": 22.18000030517578,
+      "end": 22.280000686645508
+    },
+    {
+      "word": "drive",
+      "start": 22.280000686645508,
+      "end": 22.579999923706055
+    },
+    {
+      "word": "system",
+      "start": 22.579999923706055,
+      "end": 22.8799991607666
+    },
+    {
+      "word": "it",
+      "start": 23.239999771118164,
+      "end": 23.440000534057617
+    },
+    {
+      "word": "ensures",
+      "start": 23.440000534057617,
+      "end": 23.639999389648438
+    },
+    {
+      "word": "exceptional",
+      "start": 23.639999389648438,
+      "end": 24.1200008392334
+    },
+    {
+      "word": "grip",
+      "start": 24.1200008392334,
+      "end": 24.360000610351562
+    },
+    {
+      "word": "and",
+      "start": 24.360000610351562,
+      "end": 24.940000534057617
+    },
+    {
+      "word": "handling",
+      "start": 24.940000534057617,
+      "end": 24.940000534057617
+    },
+    {
+      "word": "Compared",
+      "start": 24.940000534057617,
+      "end": 25.6200008392334
+    },
+    {
+      "word": "to",
+      "start": 25.6200008392334,
+      "end": 25.81999969482422
+    },
+    {
+      "word": "its",
+      "start": 25.81999969482422,
+      "end": 25.959999084472656
+    },
+    {
+      "word": "V10",
+      "start": 25.959999084472656,
+      "end": 26.280000686645508
+    },
+    {
+      "word": "sibling",
+      "start": 26.280000686645508,
+      "end": 26.6200008392334
+    },
+    {
+      "word": "the",
+      "start": 27.059999465942383,
+      "end": 27.200000762939453
+    },
+    {
+      "word": "V8",
+      "start": 27.200000762939453,
+      "end": 27.34000015258789
+    },
+    {
+      "word": "offers",
+      "start": 27.34000015258789,
+      "end": 27.6200008392334
+    },
+    {
+      "word": "a",
+      "start": 27.6200008392334,
+      "end": 27.780000686645508
+    },
+    {
+      "word": "more",
+      "start": 27.780000686645508,
+      "end": 27.959999084472656
+    },
+    {
+      "word": "affordable",
+      "start": 27.959999084472656,
+      "end": 28.260000228881836
+    },
+    {
+      "word": "entry",
+      "start": 28.260000228881836,
+      "end": 28.600000381469727
+    },
+    {
+      "word": "into",
+      "start": 28.600000381469727,
+      "end": 28.799999237060547
+    },
+    {
+      "word": "the",
+      "start": 28.799999237060547,
+      "end": 29.040000915527344
+    },
+    {
+      "word": "R8",
+      "start": 29.040000915527344,
+      "end": 29.219999313354492
+    },
+    {
+      "word": "lineup",
+      "start": 29.219999313354492,
+      "end": 29.579999923706055
+    },
+    {
+      "word": "providing",
+      "start": 30.0,
+      "end": 30.239999771118164
+    },
+    {
+      "word": "90",
+      "start": 30.239999771118164,
+      "end": 30.600000381469727
+    },
+    {
+      "word": "of",
+      "start": 30.81999969482422,
+      "end": 30.959999084472656
+    },
+    {
+      "word": "the",
+      "start": 30.959999084472656,
+      "end": 31.059999465942383
+    },
+    {
+      "word": "experience",
+      "start": 31.059999465942383,
+      "end": 31.420000076293945
+    },
+    {
+      "word": "at",
+      "start": 31.420000076293945,
+      "end": 31.600000381469727
+    },
+    {
+      "word": "60",
+      "start": 31.600000381469727,
+      "end": 31.8799991607666
+    },
+    {
+      "word": "of",
+      "start": 32.099998474121094,
+      "end": 32.2599983215332
+    },
+    {
+      "word": "the",
+      "start": 32.2599983215332,
+      "end": 32.619998931884766
+    },
+    {
+      "word": "price",
+      "start": 32.619998931884766,
+      "end": 32.619998931884766
+    },
+    {
+      "word": "Automonitor",
+      "start": 33.0,
+      "end": 33.560001373291016
+    },
+    {
+      "word": "io",
+      "start": 33.560001373291016,
+      "end": 34.099998474121094
+    },
+    {
+      "word": "blog",
+      "start": 34.099998474121094,
+      "end": 34.7599983215332
+    },
+    {
+      "word": "is",
+      "start": 34.7599983215332,
+      "end": 35.02000045776367
+    },
+    {
+      "word": "an",
+      "start": 35.02000045776367,
+      "end": 35.2400016784668
+    },
+    {
+      "word": "Audi",
+      "start": 35.2400016784668,
+      "end": 35.400001525878906
+    },
+    {
+      "word": "R8",
+      "start": 35.400001525878906,
+      "end": 35.7599983215332
+    },
+    {
+      "word": "worth",
+      "start": 36.040000915527344,
+      "end": 36.34000015258789
+    },
+    {
+      "word": "buying",
+      "start": 36.34000015258789,
+      "end": 36.599998474121094
+    },
+    {
+      "word": "wiki",
+      "start": 36.599998474121094,
+      "end": 37.119998931884766
+    },
+    {
+      "word": "UTM",
+      "start": 37.119998931884766,
+      "end": 37.560001373291016
+    },
+    {
+      "word": "source",
+      "start": 37.560001373291016,
+      "end": 37.81999969482422
+    },
+    {
+      "word": "OpenAI",
+      "start": 37.81999969482422,
+      "end": 38.31999969482422
+    },
+    {
+      "word": "Plus",
+      "start": 38.68000030517578,
+      "end": 39.13999938964844
+    },
+    {
+      "word": "the",
+      "start": 39.13999938964844,
+      "end": 39.279998779296875
+    },
+    {
+      "word": "V8's",
+      "start": 39.279998779296875,
+      "end": 39.63999938964844
+    },
+    {
+      "word": "reliability",
+      "start": 39.63999938964844,
+      "end": 40.08000183105469
+    },
+    {
+      "word": "and",
+      "start": 40.08000183105469,
+      "end": 40.31999969482422
+    },
+    {
+      "word": "lower",
+      "start": 40.31999969482422,
+      "end": 40.52000045776367
+    },
+    {
+      "word": "maintenance",
+      "start": 40.52000045776367,
+      "end": 40.81999969482422
+    },
+    {
+      "word": "costs",
+      "start": 40.81999969482422,
+      "end": 41.20000076293945
+    },
+    {
+      "word": "make",
+      "start": 41.20000076293945,
+      "end": 41.65999984741211
+    },
+    {
+      "word": "it",
+      "start": 41.65999984741211,
+      "end": 41.7400016784668
+    },
+    {
+      "word": "a",
+      "start": 41.7400016784668,
+      "end": 41.880001068115234
+    },
+    {
+      "word": "practical",
+      "start": 41.880001068115234,
+      "end": 42.15999984741211
+    },
+    {
+      "word": "choice",
+      "start": 42.15999984741211,
+      "end": 42.459999084472656
+    },
+    {
+      "word": "for",
+      "start": 42.459999084472656,
+      "end": 42.70000076293945
+    },
+    {
+      "word": "enthusiasts",
+      "start": 42.70000076293945,
+      "end": 43.119998931884766
+    },
+    {
+      "word": "With",
+      "start": 43.619998931884766,
+      "end": 43.84000015258789
+    },
+    {
+      "word": "tuning",
+      "start": 43.84000015258789,
+      "end": 44.02000045776367
+    },
+    {
+      "word": "you",
+      "start": 44.02000045776367,
+      "end": 44.15999984741211
+    },
+    {
+      "word": "can",
+      "start": 44.15999984741211,
+      "end": 44.29999923706055
+    },
+    {
+      "word": "even",
+      "start": 44.29999923706055,
+      "end": 44.599998474121094
+    },
+    {
+      "word": "push",
+      "start": 44.599998474121094,
+      "end": 44.720001220703125
+    },
+    {
+      "word": "the",
+      "start": 44.720001220703125,
+      "end": 44.86000061035156
+    },
+    {
+      "word": "V8's",
+      "start": 44.86000061035156,
+      "end": 45.2599983215332
+    },
+    {
+      "word": "performance",
+      "start": 45.2599983215332,
+      "end": 45.560001373291016
+    },
+    {
+      "word": "closer",
+      "start": 45.560001373291016,
+      "end": 45.91999816894531
+    },
+    {
+      "word": "to",
+      "start": 45.91999816894531,
+      "end": 46.060001373291016
+    },
+    {
+      "word": "the",
+      "start": 46.060001373291016,
+      "end": 46.18000030517578
+    },
+    {
+      "word": "V10's",
+      "start": 46.18000030517578,
+      "end": 47.099998474121094
+    },
+    {
+      "word": "territory",
+      "start": 47.099998474121094,
+      "end": 47.099998474121094
+    },
+    {
+      "word": "Westracingshop",
+      "start": 48.08000183105469,
+      "end": 48.68000030517578
+    },
+    {
+      "word": "com",
+      "start": 48.68000030517578,
+      "end": 49.279998779296875
+    },
+    {
+      "word": "dot",
+      "start": 49.279998779296875,
+      "end": 49.5
+    },
+    {
+      "word": "westracingshop",
+      "start": 49.5,
+      "end": 50.2400016784668
+    },
+    {
+      "word": "com",
+      "start": 50.2400016784668,
+      "end": 50.7400016784668
+    },
+    {
+      "word": "products",
+      "start": 50.7400016784668,
+      "end": 51.13999938964844
+    },
+    {
+      "word": "Audi",
+      "start": 51.13999938964844,
+      "end": 51.439998626708984
+    },
+    {
+      "word": "R8",
+      "start": 51.439998626708984,
+      "end": 51.81999969482422
+    },
+    {
+      "word": "Stage",
+      "start": 51.81999969482422,
+      "end": 52.099998474121094
+    },
+    {
+      "word": "1",
+      "start": 52.099998474121094,
+      "end": 52.380001068115234
+    },
+    {
+      "word": "tune",
+      "start": 52.380001068115234,
+      "end": 52.68000030517578
+    },
+    {
+      "word": "UTM",
+      "start": 53.060001373291016,
+      "end": 53.400001525878906
+    },
+    {
+      "word": "source",
+      "start": 53.400001525878906,
+      "end": 53.619998931884766
+    },
+    {
+      "word": "OpenAI",
+      "start": 53.619998931884766,
+      "end": 54.119998931884766
+    },
+    {
+      "word": "So",
+      "start": 54.720001220703125,
+      "end": 55.08000183105469
+    },
+    {
+      "word": "would",
+      "start": 55.099998474121094,
+      "end": 55.13999938964844
+    },
+    {
+      "word": "you",
+      "start": 55.13999938964844,
+      "end": 55.2599983215332
+    },
+    {
+      "word": "choose",
+      "start": 55.2599983215332,
+      "end": 55.439998626708984
+    },
+    {
+      "word": "the",
+      "start": 55.439998626708984,
+      "end": 55.619998931884766
+    },
+    {
+      "word": "V8's",
+      "start": 55.619998931884766,
+      "end": 55.86000061035156
+    },
+    {
+      "word": "value",
+      "start": 55.86000061035156,
+      "end": 56.2599983215332
+    },
+    {
+      "word": "or",
+      "start": 56.29999923706055,
+      "end": 56.68000030517578
+    },
+    {
+      "word": "the",
+      "start": 56.68000030517578,
+      "end": 56.779998779296875
+    },
+    {
+      "word": "V10's",
+      "start": 56.779998779296875,
+      "end": 57.20000076293945
+    },
+    {
+      "word": "raw",
+      "start": 57.20000076293945,
+      "end": 57.380001068115234
+    },
+    {
+      "word": "power",
+      "start": 57.380001068115234,
+      "end": 57.63999938964844
+    }
+  ],
+  "media": [
+    {
+      "path": "images/audi-r8/interior-06.jpg",
+      "type": "interior"
+    },
+    {
+      "path": "images/audi-r8/interior-06.jpg",
+      "type": "interior"
+    },
+    {
+      "path": "images/audi-r8/interior-06.jpg",
+      "type": "interior"
+    },
+    {
+      "path": "images/audi-r8/interior-06.jpg",
+      "type": "interior"
+    },
+    {
+      "path": "images/audi-r8/interior-06.jpg",
+      "type": "interior"
+    },
+    {
+      "path": "images/audi-r8/interior-06.jpg",
+      "type": "interior"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9lvwPyO5/2023-audi-r8-gt-coupe",
+    "title": "2023 Audi R8 GT Coupe",
+    "text": "2023 Audi R8 GT Coupe",
+    "titleYear": 2023,
+    "score": 99,
+    "sale_price": 151000,
+    "sale_type": "sold",
+    "page_title": "2023 Audi R8 GT Coupe",
+    "year": 2023,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "video": "single_car_short.mp4"
+}

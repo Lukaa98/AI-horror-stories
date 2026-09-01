@@ -1,0 +1,219 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": "R8 GT",
+      "visible_match_evidence": [
+        "audi badge",
+        "R8 GT badge",
+        "distinctive rear design",
+        "spoiler design",
+        "large exhausts"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 9,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "front view",
+        "grille design",
+        "headlights"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Audi",
+      "detected_model": "R8",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": "V10",
+      "visible_match_evidence": [
+        "audi badge",
+        "R8 shape",
+        "V10 badge",
+        "design features"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 9,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2016-2023",
+      "detected_variant_or_engine": "V10",
+      "visible_match_evidence": [
+        "audi grille",
+        "r8 body shape",
+        "V10 badge",
+        "distinctive side vent"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": null,
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": "R8 V10",
+      "visible_match_evidence": [
+        "distinct Audi badge",
+        "R8 model designation",
+        "spoiler design",
+        "tail light design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Audi logo on steering wheel",
+        "Interior design matches Audi R8"
+      ],
+      "generation_match_confidence": 7,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": "GT",
+      "visible_match_evidence": [
+        "RS GT seats",
+        "interior design"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 9,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "audi logo on steering wheel",
+        "R8 design elements in interior"
+      ],
+      "generation_match_confidence": 7,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    }
+  ]
+}

@@ -1,0 +1,507 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-01T02:21:24.709Z",
+  "query": "Audi R8",
+  "visual_highlight": "exterior engine turbo drivetrain wheel interior dashboard seats performance detail",
+  "search_url": "https://carsandbids.com/search/audi/r8?csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 GT Spyder",
+      "text": "2012 Audi R8 GT Spyder",
+      "titleYear": 2012,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJABOeGv/2012-audi-r8-v10-coupe",
+      "title": "2012 Audi R8 V10 Coupe",
+      "text": "2012 Audi R8 V10 Coupe",
+      "titleYear": 2012,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lvwPyO5/2023-audi-r8-gt-coupe",
+      "title": "2023 Audi R8 GT Coupe",
+      "text": "2023 Audi R8 GT Coupe",
+      "titleYear": 2023,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3ojONe4g/2010-audi-r8-v10-coupe",
+      "title": "2010 Audi R8 V10 Coupe",
+      "text": "2010 Audi R8 V10 Coupe",
+      "titleYear": 2010,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV1PzBwP/2018-audi-r8-v10-coupe-rws",
+      "title": "2018 Audi R8 V10 Coupe RWS",
+      "text": "2018 Audi R8 V10 Coupe RWS",
+      "titleYear": 2018,
+      "score": 99
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rk6kddvg/2015-audi-r8-v10-plus-coupe",
+      "title": "2015 Audi R8 V10 Plus Coupe",
+      "text": "2015 Audi R8 V10 Plus Coupe",
+      "titleYear": 2015,
+      "score": 99
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "title": "2012 Audi R8 GT Spyder",
+      "text": "2012 Audi R8 GT Spyder",
+      "titleYear": 2012,
+      "score": 99,
+      "usable_image_count": 26,
+      "sale_price": 67500,
+      "sale_type": "sold",
+      "page_title": "2012 Audi R8 GT Spyder"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJABOeGv/2012-audi-r8-v10-coupe",
+      "title": "2012 Audi R8 V10 Coupe",
+      "text": "2012 Audi R8 V10 Coupe",
+      "titleYear": 2012,
+      "score": 99,
+      "usable_image_count": 20,
+      "sale_price": 127000,
+      "sale_type": "sold",
+      "page_title": "2012 Audi R8 V10 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lvwPyO5/2023-audi-r8-gt-coupe",
+      "title": "2023 Audi R8 GT Coupe",
+      "text": "2023 Audi R8 GT Coupe",
+      "titleYear": 2023,
+      "score": 99,
+      "usable_image_count": 30,
+      "sale_price": 151000,
+      "sale_type": "sold",
+      "page_title": "2023 Audi R8 GT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3ojONe4g/2010-audi-r8-v10-coupe",
+      "title": "2010 Audi R8 V10 Coupe",
+      "text": "2010 Audi R8 V10 Coupe",
+      "titleYear": 2010,
+      "score": 99,
+      "usable_image_count": 28,
+      "sale_price": 60502,
+      "sale_type": "sold",
+      "page_title": "2010 Audi R8 V10 Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9lvwPyO5/2023-audi-r8-gt-coupe",
+    "title": "2023 Audi R8 GT Coupe",
+    "text": "2023 Audi R8 GT Coupe",
+    "titleYear": 2023,
+    "score": 99,
+    "sale_price": 151000,
+    "sale_type": "sold",
+    "page_title": "2023 Audi R8 GT Coupe",
+    "year": 2023,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e528653fd59e3fdbd2fe177fc27b41bf68cdf8f2/photos/Audi2023R8GT20260310008.jpg?t=177324803405",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 GT Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 288988
+    },
+    {
+      "path": "engine-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e528653fd59e3fdbd2fe177fc27b41bf68cdf8f2/photos/Audi2023R8GT20260310001.jpg?t=177324803405",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 242396
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e528653fd59e3fdbd2fe177fc27b41bf68cdf8f2/photos/Audi2023R8GT20260310003.jpg?t=177324803405",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 280129
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e528653fd59e3fdbd2fe177fc27b41bf68cdf8f2/photos/Audi2023R8GT20260310006.jpg?t=177324803405",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 300215
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e528653fd59e3fdbd2fe177fc27b41bf68cdf8f2/photos/Audi2023R8GT20260310005.jpg?t=177324803405",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 255785
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e528653fd59e3fdbd2fe177fc27b41bf68cdf8f2/photos/Audi2023R8GT20260310050.jpg?t=177324803405",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 220525
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e528653fd59e3fdbd2fe177fc27b41bf68cdf8f2/photos/Audi2023R8GT20260310054.jpg?t=177324803405",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 212079
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e528653fd59e3fdbd2fe177fc27b41bf68cdf8f2/photos/Audi2023R8GT20260310051.jpg?t=177324803405",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi R8 GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 207273
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ffd3f075cd660785cb806c1557a4a649/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ffd3f075cd660785cb806c1557a4a649/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Audi R8 GT Spyder",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ffd3f075cd660785cb806c1557a4a649/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ffd3f075cd660785cb806c1557a4a649/manifest/video.m3u8",
+      "auction_title": "2012 Audi R8 GT Spyder",
+      "auction_year": 2012,
+      "search_score": 99
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/61ee3e356a88241432328871720e014b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/61ee3e356a88241432328871720e014b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2012 Audi R8 GT Spyder",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/61ee3e356a88241432328871720e014b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4JZjEPy/2012-audi-r8-gt-spyder",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/61ee3e356a88241432328871720e014b/manifest/video.m3u8",
+      "auction_title": "2012 Audi R8 GT Spyder",
+      "auction_year": 2012,
+      "search_score": 99
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ce47066f646e52c97bcfab5da5325b55/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ce47066f646e52c97bcfab5da5325b55/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Audi R8 GT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ce47066f646e52c97bcfab5da5325b55/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9lvwPyO5/2023-audi-r8-gt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ce47066f646e52c97bcfab5da5325b55/manifest/video.m3u8",
+      "auction_title": "2023 Audi R8 GT Coupe",
+      "auction_year": 2023,
+      "search_score": 99
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5b568a03c7cb0285b89b0b1f9695b7f5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5b568a03c7cb0285b89b0b1f9695b7f5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Audi R8 V10 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5b568a03c7cb0285b89b0b1f9695b7f5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3ojONe4g/2010-audi-r8-v10-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5b568a03c7cb0285b89b0b1f9695b7f5/manifest/video.m3u8",
+      "auction_title": "2010 Audi R8 V10 Coupe",
+      "auction_year": 2010,
+      "search_score": 99
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": "R8 GT",
+        "visible_match_evidence": [
+          "audi badge",
+          "R8 GT badge",
+          "distinctive rear design",
+          "spoiler design",
+          "large exhausts"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 9,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front view",
+          "grille design",
+          "headlights"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "R8",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": "V10",
+        "visible_match_evidence": [
+          "audi badge",
+          "R8 shape",
+          "V10 badge",
+          "design features"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 9,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2016-2023",
+        "detected_variant_or_engine": "V10",
+        "visible_match_evidence": [
+          "audi grille",
+          "r8 body shape",
+          "V10 badge",
+          "distinctive side vent"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": null,
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": "R8 V10",
+        "visible_match_evidence": [
+          "distinct Audi badge",
+          "R8 model designation",
+          "spoiler design",
+          "tail light design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi logo on steering wheel",
+          "Interior design matches Audi R8"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "RS GT seats",
+          "interior design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 9,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "audi logo on steering wheel",
+          "R8 design elements in interior"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 7,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
