@@ -237,20 +237,23 @@
      between redrawn frames, not a slow breathing pulse. */
   #character {
     transform-origin: 200px 700px;
-    animation: bodySway 3.8s ease-in-out infinite, lineFlicker 0.5s steps(1) infinite;
+    animation: bodySway 4.6s ease-in-out infinite, lineFlicker 0.3s steps(1) infinite;
   }
+  /* Symmetric left/right tilt (equal amplitude both ways) on a slower,
+     smoother cycle -- the earlier version leaned further right than left
+     and cycled fast enough to read as fidgeting instead of a natural
+     weight shift. */
   @keyframes bodySway {
-    0%   { transform: rotate(-1deg) translateX(-3px); }
-    35%  { transform: rotate(0.6deg) translateX(2px); }
-    65%  { transform: rotate(1deg) translateX(3px); }
-    100% { transform: rotate(-1deg) translateX(-3px); }
+    0%, 100% { transform: rotate(-0.8deg) translateX(-2px); }
+    50%      { transform: rotate(0.8deg) translateX(2px); }
   }
+  /* Thinner range and a quicker cycle than the sway -- a smaller jump
+     read as more of a natural line tremor, where the wider/slower first
+     version was noticeable enough to be distracting. */
   @keyframes lineFlicker {
     0%   { stroke-width: 4.5; }
-    25%  { stroke-width: 3.6; }
-    50%  { stroke-width: 5.2; }
-    75%  { stroke-width: 4.1; }
-    100% { stroke-width: 4.5; }
+    50%  { stroke-width: 4.2; }
+    100% { stroke-width: 4.8; }
   }
 </style>
 
