@@ -1,0 +1,481 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-01T22:55:54.554Z",
+  "query": "Ford Mustang",
+  "visual_highlight": "engine turbo horsepower wheel brake detail",
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=2015&end_year=2015&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "title": "2015 Ford Mustang Gt Premium Convertible Neiman Marcus Edition",
+      "text": "Sold for $48,750",
+      "titleYear": 2015,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdaZ4Oxr/2015-ford-mustang-shelby-gt350",
+      "title": "2015 Ford Mustang Shelby Gt350",
+      "text": "Sold for $48,250",
+      "titleYear": 2015,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vqLXzGk/2015-ford-mustang-gt-coupe",
+      "title": "2015 Ford Mustang Gt Coupe",
+      "text": "Sold for $45,678",
+      "titleYear": 2015,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGNOdzZX/2015-ford-mustang-gt-hennessey-hpe700-coupe",
+      "title": "2015 Ford Mustang Gt Hennessey Hpe700 Coupe",
+      "text": "Sold for $42,000",
+      "titleYear": 2015,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98zv5aWm/2015-ford-mustang-saleen-s302-yellow-label-coupe",
+      "title": "2015 Ford Mustang Saleen S302 Yellow Label Coupe",
+      "text": "Bid to $39,000",
+      "titleYear": 2015,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98ZRP2JQ/2015-ford-mustang-gt-roush-stage-2",
+      "title": "2015 Ford Mustang Gt Roush Stage 2",
+      "text": "Sold for $38,500",
+      "titleYear": 2015,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "title": "2015 Ford Mustang Gt Premium Convertible Neiman Marcus Edition",
+      "text": "Sold for $48,750",
+      "titleYear": 2015,
+      "score": 70,
+      "usable_image_count": 21,
+      "sale_price": 48750,
+      "sale_type": "sold",
+      "page_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KdaZ4Oxr/2015-ford-mustang-shelby-gt350",
+      "title": "2015 Ford Mustang Shelby Gt350",
+      "text": "Sold for $48,250",
+      "titleYear": 2015,
+      "score": 70,
+      "usable_image_count": 27,
+      "sale_price": 48250,
+      "sale_type": "sold",
+      "page_title": "2015 Ford Mustang Shelby GT350"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vqLXzGk/2015-ford-mustang-gt-coupe",
+      "title": "2015 Ford Mustang Gt Coupe",
+      "text": "Sold for $45,678",
+      "titleYear": 2015,
+      "score": 70,
+      "usable_image_count": 34,
+      "sale_price": 45678,
+      "sale_type": "sold",
+      "page_title": "2015 Ford Mustang GT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rGNOdzZX/2015-ford-mustang-gt-hennessey-hpe700-coupe",
+      "title": "2015 Ford Mustang Gt Hennessey Hpe700 Coupe",
+      "text": "Sold for $42,000",
+      "titleYear": 2015,
+      "score": 70,
+      "usable_image_count": 23,
+      "sale_price": 42000,
+      "sale_type": "sold",
+      "page_title": "2015 Ford Mustang GT Hennessey HPE700 Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vqLXzGk/2015-ford-mustang-gt-coupe",
+    "title": "2015 Ford Mustang Gt Coupe",
+    "text": "Sold for $45,678",
+    "titleYear": 2015,
+    "score": 70,
+    "sale_price": 45678,
+    "sale_type": "sold",
+    "page_title": "2015 Ford Mustang GT Coupe",
+    "year": 2015,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9lRwJdo5-iP64Fj-2RC-(edit).jpg?t=171195183808",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2015 Ford Mustang GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 249749
+    },
+    {
+      "path": "engine-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9lRwJdo5-l5qQCRby23-(edit).jpg?t=171172862211",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2015 Ford Mustang GT Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 160401
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9lRwJdo5-Y0yUrINFFC-(edit).jpg?t=171195166855",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2015 Ford Mustang GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 132342
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9lRwJdo5-XT1yss2-Gp-(edit).jpg?t=171173033963",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2015 Ford Mustang GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 154677
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9lRwJdo5-aj9FGxt3f2-(edit).jpg?t=171195187729",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2015 Ford Mustang GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 153468
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9lRwJdo5-Lh3_Q23gPR-(edit).jpg?t=171172961266",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2015 Ford Mustang GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 207736
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9lRwJdo5-HG2vyh_EI2-(edit).jpg?t=171172950954",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2015 Ford Mustang GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 167104
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9lRwJdo5-HbDhYpbpz1-(edit).jpg?t=171172876232",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2015 Ford Mustang GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 186288
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eea5e60be29c1329368390b7c3486883/manifest/video.m3u8",
+      "auction_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "auction_year": 2015,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6b0a3e78c2de4b898b10d1ad91cd8d18/manifest/video.m3u8",
+      "auction_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "auction_year": 2015,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vLZRJDk/2015-ford-mustang-gt-premium-convertible-neiman-marcus-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a8fa42a2c03925f5d166ce46a7e83d08/manifest/video.m3u8",
+      "auction_title": "2015 Ford Mustang GT Premium Convertible Neiman Marcus Edition",
+      "auction_year": 2015,
+      "search_score": 70
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Photo does not show the target vehicle.",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "overall body design",
+          "front grille shape",
+          "headlight style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork style",
+          "front lights design",
+          "grille shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "bodywork style",
+          "proportions",
+          "badging on side"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "body design matches Mustang",
+          "lights and proportions consistent with 2015 model",
+          "visible badge and styling details"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "RECARO seats",
+          "interior design typical for Mustang"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 7,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ford Mustang steering wheel",
+          "Interior design matches 2015 Mustang"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2015",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "steering wheel design",
+          "gauge layout",
+          "interior styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
