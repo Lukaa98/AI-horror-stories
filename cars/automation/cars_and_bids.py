@@ -199,7 +199,12 @@ def _desired_shot_types(entry):
         str(value or "")
         for value in [entry.get("name"), entry.get("visual_highlight"), entry.get("one_line_fact"), entry.get("label")]
     ).lower()
-    desired = ["front_3q", "front", "rear_3q", "rear", "exterior"]
+    # Cars & Bids listings almost always have a clean side-profile shot,
+    # and it reads as the strongest establishing shot for a car-review
+    # hook -- but it wasn't in this list at all before, so it only ever
+    # showed up by accident (whenever it happened to rank high on quality
+    # among leftover images), not because it was actually preferred.
+    desired = ["side", "front_3q", "front", "rear_3q", "rear", "exterior"]
     if any(word in text for word in ["interior", "cabin", "cockpit", "dashboard"]):
         desired.insert(1, "interior")
     if any(word in text for word in ["engine", "v8", "v10", "horsepower", "powertrain"]):

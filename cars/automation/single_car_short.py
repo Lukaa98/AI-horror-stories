@@ -62,6 +62,25 @@ def _word_count(text):
     return len(re.findall(r"\b[\w'-]+\b", text))
 
 
+# The web-search tool makes the model attach inline citations to claims it
+# just looked up, e.g. "...420 horsepower ([ru.wikipedia.org](https://...))"
+# -- exactly the kind of thing that's fine in written text but gets read
+# out loud (or at minimum sits visibly in the script/captions) if it isn't
+# stripped before the text is used for narration. `sources` is the schema's
+# actual place for citation URLs; this is a safety net in case the prompt
+# instruction alone doesn't stop the model from also inlining them.
+_CITATION_MARKDOWN_LINK = re.compile(r"\(\[[^\]]*\]\([^)]*\)\)")
+_BARE_MARKDOWN_LINK = re.compile(r"\[[^\]]*\]\([^)]*\)")
+_BARE_URL = re.compile(r"https?://\S+")
+
+
+def _strip_citations(text):
+    text = _CITATION_MARKDOWN_LINK.sub("", text)
+    text = _BARE_MARKDOWN_LINK.sub("", text)
+    text = _BARE_URL.sub("", text)
+    return re.sub(r"[ \t]{2,}", " ", text).strip()
+
+
 def research_script(make, model, trim="", start_year=None, end_year=None):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
@@ -71,6 +90,8 @@ def research_script(make, model, trim="", start_year=None, end_year=None):
     prompt = f"""Research and write one original vertical car-video package about {label}, scoped to {year_scope}.
 Use web search and verify every technical comparison. Write a quick, conversational script of {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words so faster TTS lands near 55-60 seconds. Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, one comparison or ownership insight, tuning potential only when supportable, and finish with a direct viewer-choice question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
+The "script" field is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the script.
+
 Return 5-7 scenes in script order. Headlines are only for important facts and must be 1-4 words (examples: model/chassis, engine code, AWD, horsepower, price gap); use an empty string for ordinary beats. Use exterior media for the hook/close, engine for powertrain, wheel for drivetrain when useful, detail for modification/technical beats, and interior only when the script specifically discusses the cabin, seats, controls, or practicality. Sources must be direct URLs supporting the claims."""
     response = with_openai_retry(lambda: OpenAI().responses.create(
         model="gpt-4o",
@@ -79,6 +100,7 @@ Return 5-7 scenes in script order. Headlines are only for important facts and mu
         text={"format": {"type": "json_schema", "name": "single_car_short", "strict": True, "schema": PACKAGE_SCHEMA}},
     ))
     package = json.loads(response.output_text.strip())
+    package["script"] = _strip_citations(package["script"])
     count = _word_count(package["script"])
     if not ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
         raise RuntimeError(
@@ -172,6 +194,36 @@ def transcribe_word_timeline(audio_path):
     return words
 
 
+def order_media_for_scenes(scenes, media):
+    """Put images in the same semantic order as the written scenes, but
+    never repeat a photo while a different, still-unused one of a
+    reasonable type is available.
+
+    Always taking the first same-type (or "exterior" fallback) match
+    regardless of what earlier scenes already used meant every scene
+    requesting the same media_type -- or every scene falling back to
+    "exterior" because its own type had no photos -- collapsed onto the
+    exact same single image, which is why a whole video could end up stuck
+    on one repeated interior shot even when several photos existed.
+    """
+    ordered = []
+    used_paths = set()
+    for scene in scenes:
+        requested = scene["media_type"]
+        same_type = [item for item in media if item["type"] == requested]
+        exterior = [item for item in media if item["type"] == "exterior"]
+        pick = (
+            next((item for item in same_type if item["path"] not in used_paths), None)
+            or next((item for item in exterior if item["path"] not in used_paths), None)
+            or next((item for item in media if item["path"] not in used_paths), None)
+            # Only reach here once every photo has been used at least once.
+            or (same_type[0] if same_type else media[0])
+        )
+        used_paths.add(pick["path"])
+        ordered.append(pick)
+    return ordered
+
+
 def build_short(args):
     output_dir = OUTPUT_ROOT / args.short_id
     images_dir = output_dir / "images"
@@ -180,15 +232,7 @@ def build_short(args):
     media, selected_auction = gather_media(
         args.make, args.model, args.trim, args.start_year, args.end_year, images_dir
     )
-    # Put images in the same semantic order as the written scenes. Reuse a
-    # strong exterior when a requested niche shot was unavailable.
-    ordered_media = []
-    for scene in package["scenes"]:
-        requested = scene["media_type"]
-        match = next((item for item in media if item["type"] == requested), None)
-        match = match or next((item for item in media if item["type"] == "exterior"), None) or media[0]
-        ordered_media.append(match)
-    media = ordered_media
+    media = order_media_for_scenes(package["scenes"], media)
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
     normalized_duration = normalize_audio_duration(audio_path)

@@ -21,7 +21,10 @@ from moviepy.editor import (
 from generate_sample import ROOT, CANVAS, _font, _wrap
 
 SPRITES_DIR = ROOT / "narrator" / "sprites"
-MAX_CAR_RATIO = 0.42
+# Car media zone height as a fraction of the canvas -- kept smaller than a
+# near-half split so the narrator (and the caption sitting between the two)
+# reads as the focal point instead of the media dominating the frame.
+MAX_CAR_RATIO = 0.34
 CAPTION_CHUNK_WORDS = 1
 
 
