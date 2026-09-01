@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import jobsData from "./jobs-data.json";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.55";
+const UI_VERSION = "V10.73";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -13,6 +14,7 @@ const RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
 const VIDEO_TEST_TIMEOUT_MS = 60 * 60 * 1000;
 const NARRATOR_PREVIEW_TIMEOUT_MS = 20 * 60 * 1000;
+const SINGLE_CAR_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RENDER_TIMEOUT_MS = 20 * 60 * 1000;
 const RIVAL_SUGGEST_TIMEOUT_MS = 8 * 60 * 1000;
@@ -39,6 +41,11 @@ const WORKFLOW_OPTIONS = [
     id: "narrator_preview",
     label: "Narrator Preview",
     description: "Stills only, no video: find one exterior photo for a car and composite it with our narrator character in a few poses, to check how the pairing looks before building the full talking video.",
+  },
+  {
+    id: "single_car",
+    label: "Single Car Story",
+    description: "Build a fast 55-60 second narrated Short about one car using exterior, engine, interior, wheel, and detail stills with animated captions and our character.",
   },
 ];
 
@@ -186,6 +193,12 @@ function buildStructuredRequest({ workflow, make, model, focus, startYear, endYe
   const makeLabel = titleCaseWords(make);
   const modelLabel = titleCaseWords(model);
   if (!makeLabel || !modelLabel) return "";
+
+  if (workflow === "single_car") {
+    const trim = focus.trim() ? ` ${focus.trim()}` : "";
+    const years = startYear || endYear ? ` (${startYear || "any"}-${endYear || "any"})` : "";
+    return `Build one fast, approximately 60-second narrated Short about the ${makeLabel} ${modelLabel}${trim}${years}.`;
+  }
 
   if (workflow === "focused") {
     const focusLabel = titleCaseWords(focus);
@@ -411,12 +424,14 @@ const DASHBOARD_FOLDERS = {
   draft: { prefix: "cars/drafts", file: "research.json" },
   "video-test": { prefix: "cars/video-tests", file: "result.json" },
   battle: { prefix: "cars/battles", file: "battle.json" },
+  "single-car": { prefix: "cars/single-car-shorts", file: "result.json" },
 };
 
 function groupDashboardEntries(entries) {
   const drafts = new Map();
   const tests = new Map();
   const battles = new Map();
+  const singleCars = new Map();
   for (const item of entries) {
     if (item.type !== "blob") continue;
     let m = item.path.match(/^cars\/drafts\/([^/]+)\/(.+)$/);
@@ -439,6 +454,14 @@ function groupDashboardEntries(entries) {
       if (id === "_frames") continue;
       if (!battles.has(id)) battles.set(id, []);
       battles.get(id).push(rest);
+      continue;
+    }
+    m = item.path.match(/^cars\/single-car-shorts\/([^/]+)\/(.+)$/);
+    if (m) {
+      const [, id, rest] = m;
+      if (id === "_frames") continue;
+      if (!singleCars.has(id)) singleCars.set(id, []);
+      singleCars.get(id).push(rest);
     }
   }
   const items = [];
@@ -472,6 +495,16 @@ function groupDashboardEntries(entries) {
       hasVideo: files.includes("battle_short.mp4"),
     });
   }
+  for (const [id, files] of singleCars) {
+    items.push({
+      type: "single-car",
+      id,
+      files,
+      timestamp: parseIdTimestamp(id),
+      hasResult: files.includes("result.json"),
+      hasVideo: files.includes("single_car_short.mp4"),
+    });
+  }
   items.sort((a, b) => (b.timestamp?.getTime() || 0) - (a.timestamp?.getTime() || 0));
   return items;
 }
@@ -483,6 +516,7 @@ async function attachDashboardPreviews(items, owner, repo, token) {
       if (item.type === "draft" && !item.hasResearch) return;
       if (item.type === "video-test" && !item.hasResult) return;
       if (item.type === "battle" && !item.hasBattle) return;
+      if (item.type === "single-car" && !item.hasResult) return;
       const preview = await fetchFileViaApi(owner, repo, OUTPUT_BRANCH, `${prefix}/${item.id}/${file}`, token);
       if (preview) item.preview = preview;
     })
@@ -500,6 +534,7 @@ async function loadDashboardEntries({ owner, repo, token }) {
 function dashboardFolderName(type) {
   if (type === "draft") return "drafts";
   if (type === "battle") return "battles";
+  if (type === "single-car") return "single-car-shorts";
   return "video-tests";
 }
 
@@ -575,6 +610,8 @@ export default function App() {
   const [videoProbe, setVideoProbe] = useState(null);
   const [narratorPreviewId, setNarratorPreviewId] = useState(null);
   const [narratorPreview, setNarratorPreview] = useState(null);
+  const [singleCarId, setSingleCarId] = useState(null);
+  const [singleCarResult, setSingleCarResult] = useState(null);
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
   const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
@@ -586,6 +623,7 @@ export default function App() {
   const [battle, setBattle] = useState(null);
   const [battleVideoUrl, setBattleVideoUrl] = useState(null);
   const [view, setView] = useState("create");
+  const [jobSearch, setJobSearch] = useState("");
   const [dashboardItems, setDashboardItems] = useState([]);
   const [dashboardLoading, setDashboardLoading] = useState(false);
   const [dashboardError, setDashboardError] = useState(null);
@@ -766,6 +804,55 @@ export default function App() {
       setError(String(err.message || err));
       setStage("error");
       setStatusDetail("Narrator preview failed - open the build log for details");
+    }
+  }
+
+  async function handleSingleCarShort() {
+    if (!repoOk || !make.trim() || !model.trim()) return;
+    setError(null);
+    setSingleCarResult(null);
+    const id = makeDraftId(`single-${make}-${model}`);
+    setSingleCarId(id);
+    setStage("single-car-building");
+    setStatusDetail(`Researching and building a one-minute ${titleCaseWords(make)} ${titleCaseWords(model)} story...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Single-car story for ${make.trim()} ${model.trim()} ${focus.trim()}`.trim(),
+          draft_id: id,
+          mode: "single_car",
+          make: make.trim(),
+          model: model.trim(),
+          query: focus.trim(),
+          start_year: startYear,
+          end_year: endYear,
+          voice,
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/single-car-shorts/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: SINGLE_CAR_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setSingleCarResult(await response.json());
+      setStage("single-car-done");
+      setStatusDetail("Single-car Short complete");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Single-car Short failed - open the build log for details");
     }
   }
 
@@ -1049,6 +1136,10 @@ export default function App() {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/narrator-previews/${narratorPreviewId}/${relativePath}`;
   }
 
+  function rawSingleCarUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/single-car-shorts/${singleCarId}/${relativePath}`;
+  }
+
   function dashboardRawUrl(item, relativePath) {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/${dashboardFolderName(item.type)}/${item.id}/${relativePath}`;
   }
@@ -1152,13 +1243,105 @@ export default function App() {
         <button type="button" className={view === "dashboard" ? "active" : ""} onClick={() => setView("dashboard")}>
           Dashboard
         </button>
+        <button type="button" className={view === "jobs" ? "active" : ""} onClick={() => setView("jobs")}>
+          Jobs
+        </button>
       </nav>
+
+      {view === "jobs" && (() => {
+        const query = jobSearch.trim().toLowerCase();
+        const companies = jobsData.companyDirectory.filter((company) => !query || company.name.toLowerCase().includes(query));
+        const allOpenRoles = jobsData.companyDirectory
+          .flatMap((company) => (company.openRoles || []).map((role) => ({ ...role, company: company.name })));
+        return (
+          <section className="jobs-panel">
+            <div className="jobs-header">
+              <div>
+                <span className="preview-label">Ongoing company-by-company scrape</span>
+                <h2>Employer Careers &amp; Open Roles</h2>
+                <p className="hint">
+                  {jobsData.peopleFromCsv} alumni map to {jobsData.companiesFromCsv} unique employers, current and past — a past employer still means an alum who may be able to refer Khatia in. {allOpenRoles.length} open Project Manager / Program Manager / Operations Manager / Business Analyst role links found so far ({jobsData.companiesResearched} of {jobsData.companiesFromCsv} companies checked). No fit filtering is applied — every matching-titled role found gets listed here regardless of seniority or location, so Khatia can judge compatibility herself. Checked {jobsData.checkedAt}.
+                </p>
+              </div>
+              <input
+                className="jobs-search"
+                value={jobSearch}
+                onChange={(event) => setJobSearch(event.target.value)}
+                placeholder="Filter the employer directory..."
+              />
+            </div>
+            <div className="jobs-recommendations">
+              <div className="jobs-section-heading">
+                <div>
+                  <span className="preview-label">Every open role found</span>
+                  <h3>Open roles across all companies</h3>
+                </div>
+                <strong>{allOpenRoles.length} links found</strong>
+              </div>
+              <div className="jobs-list">
+                {allOpenRoles.map((role) => (
+                  <a className="job-row" href={role.url} target="_blank" rel="noreferrer" key={`${role.company}-${role.title}-${role.url}`}>
+                    <div>
+                      <strong>{role.title}</strong>
+                      <span>{role.company}</span>
+                    </div>
+                    <div className="job-tags">
+                      <span>Open posting ↗</span>
+                    </div>
+                  </a>
+                ))}
+                {!allOpenRoles.length && <p className="hint">No open roles found yet — still working through the company list.</p>}
+              </div>
+            </div>
+            <div className="jobs-section-heading jobs-directory-heading">
+              <div>
+                <span className="preview-label">Complete source-company list</span>
+                <h3>Official employer career pages</h3>
+              </div>
+              <strong>{jobsData.companyDirectory.length} companies</strong>
+            </div>
+            <div className="jobs-grid">
+              {companies.map((company) => (
+                <article className="jobs-company" key={company.name}>
+                  <div className="jobs-company-heading">
+                    <h3>{company.name}</h3>
+                    {company.careersUrl ? (
+                      <a className="jobs-careers-link" href={company.careersUrl} target="_blank" rel="noreferrer">Official careers page ↗</a>
+                    ) : (
+                      <span className="jobs-unavailable">No public careers page located</span>
+                    )}
+                  </div>
+                  {!!company.alumni?.length && (
+                    <p className="jobs-alumni">
+                      {company.alumni.map((alum, index) => (
+                        <span key={alum.name} className={alum.current ? "jobs-alum-current" : "jobs-alum-previous"}>
+                          {alum.name}{alum.current ? "" : " (past)"}{index < company.alumni.length - 1 ? ", " : ""}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                  {!!company.openRoles?.length && (
+                    <ul className="jobs-open-roles">
+                      {company.openRoles.map((role) => (
+                        <li key={role.url}>
+                          <a href={role.url} target="_blank" rel="noreferrer">{role.title}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </article>
+              ))}
+              {!companies.length && <p className="hint">No employer matches that filter.</p>}
+            </div>
+          </section>
+        );
+      })()}
 
       {view === "dashboard" && (
         <section className="dashboard-panel">
           <div className="dashboard-header">
             <div>
-              <h2>Generated Drafts, Video Tests &amp; Battles</h2>
+              <h2>Generated Drafts, Video Tests, Battles &amp; Single-Car Stories</h2>
               <p className="hint">
                 Reads directly from the <code>{OUTPUT_BRANCH}</code> branch, so results survive a refresh. Deleting
                 an item commits a removal of its files to that branch.
@@ -1179,13 +1362,15 @@ export default function App() {
                 const title =
                   item.type === "draft" ? item.preview?.title || item.id
                   : item.type === "battle" ? item.preview?.title || `Battle: ${item.id}`
+                  : item.type === "single-car" ? item.preview?.title || `Single-car story: ${item.id}`
                   : `Video test: ${item.preview?.query || item.id}`;
                 const thumb =
                   item.type === "draft" ? item.preview?.entries?.find((entry) => (entry.images || []).length)?.images?.[0]
                   : item.type === "battle" ? item.preview?.cars?.find((car) => (car.photos || []).length)?.photos?.[0]
+                  : item.type === "single-car" ? item.preview?.media?.[0]?.path
                   : item.preview?.clips?.find((clip) => clip.thumbnail_url)?.thumbnail_url;
                 const thumbUrl = item.type === "video-test" ? thumb : (thumb ? dashboardRawUrl(item, thumb) : null);
-                const typeLabel = item.type === "draft" ? "Draft" : item.type === "battle" ? "Battle" : "Video Test";
+                const typeLabel = item.type === "draft" ? "Draft" : item.type === "battle" ? "Battle" : item.type === "single-car" ? "Single Car Story" : "Video Test";
                 return (
                   <article className="dashboard-card" key={key}>
                     {thumbUrl && <img src={thumbUrl} alt={title} />}
@@ -1202,6 +1387,9 @@ export default function App() {
                         <p className="hint">
                           {item.hasVideo ? "Battle video ready" : `${item.preview?.approved_count ?? "?"}/${item.preview?.total_count ?? "?"} clips found`}
                         </p>
+                      )}
+                      {item.type === "single-car" && (
+                        <p className="hint">{item.hasVideo ? "Narrated video ready" : "Result saved without video"}</p>
                       )}
                       <div className="dashboard-card-actions">
                         <button type="button" onClick={() => setSelectedItem({ type: item.type, id: item.id })}>
@@ -1448,6 +1636,41 @@ export default function App() {
                       <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
                     </details>
                   </div>
+                )}
+
+                {item.type === "single-car" && item.preview && (
+                  <section className="video-probe-panel">
+                    <h2>{item.preview.title || `${item.preview.car?.make || ""} ${item.preview.car?.model || ""}`.trim()}</h2>
+                    <p className="rationale">
+                      {item.preview.word_count} words at {item.preview.tts_speed}x voice speed; {Number(item.preview.duration_seconds || 0).toFixed(1)} seconds.
+                    </p>
+                    {item.hasVideo && (
+                      <div className="video-player">
+                        <video controls src={dashboardRawUrl(item, item.preview.video || "single_car_short.mp4")} width="360" preload="metadata" />
+                      </div>
+                    )}
+                    <div className="narration-scroll">
+                      <div className="narration-entry"><strong>Script</strong><p>{item.preview.script}</p></div>
+                      {(item.preview.scenes || []).map((scene, index) => (
+                        <div className="narration-entry" key={index}>
+                          <strong>{scene.headline || `Scene ${index + 1}`}</strong>
+                          <p>{scene.fact}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="thumbs">
+                      {(item.preview.media || []).map((media, index) => (
+                        <a key={`${media.path}-${index}`} href={dashboardRawUrl(item, media.path)} target="_blank" rel="noreferrer">
+                          <img src={dashboardRawUrl(item, media.path)} alt={`${media.type || "car"} scene`} />
+                          <span className="image-label">{media.type || "car"}</span>
+                        </a>
+                      ))}
+                    </div>
+                    <details className="settings">
+                      <summary>Full result.json</summary>
+                      <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
+                    </details>
+                  </section>
                 )}
 
                 {!item.preview && <p className="hint">No JSON data found for this item (files: {item.files.join(", ")}).</p>}
@@ -1729,20 +1952,20 @@ export default function App() {
                   <input
                     value={focus}
                     onChange={(e) => setFocus(e.target.value)}
-                    placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : workflow === "narrator_preview" ? "Trim/notes (optional)" : "Used only for focused mode"}
-                    disabled={stage === "researching" || stage === "generating" || (workflow !== "focused" && workflow !== "narrator_preview")}
+                    placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : ["narrator_preview", "single_car"].includes(workflow) ? "Trim/notes (optional)" : "Used only for focused mode"}
+                    disabled={stage === "researching" || stage === "generating" || !["focused", "narrator_preview", "single_car"].includes(workflow)}
                   />
                 </label>
                 <label>
                   Start Year
-                  <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || (workflow !== "focused" && workflow !== "narrator_preview")}>
+                  <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || !["focused", "narrator_preview", "single_car"].includes(workflow)}>
                     <option value="">Any</option>
                     {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
                   </select>
                 </label>
                 <label>
                   End Year
-                  <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || (workflow !== "focused" && workflow !== "narrator_preview")}>
+                  <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || !["focused", "narrator_preview", "single_car"].includes(workflow)}>
                     <option value="">Any</option>
                     {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
                   </select>
@@ -1790,6 +2013,13 @@ export default function App() {
               disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}
             >
               {stage === "narrator-preview-testing" ? "Rendering Preview..." : "Generate Narrator Preview"}
+            </button>
+          ) : workflow === "single_car" ? (
+            <button
+              onClick={handleSingleCarShort}
+              disabled={!repoOk || !make.trim() || !model.trim() || stage === "single-car-building"}
+            >
+              {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}
             </button>
           ) : (
             <>
@@ -2054,6 +2284,9 @@ export default function App() {
       {stage === "narrator-preview-testing" && (
         <p className="status">Finding an exterior photo and compositing the narrator over it -- stills only, no video...</p>
       )}
+      {stage === "single-car-building" && (
+        <p className="status">Researching verified facts, gathering scene-matched car stills, generating faster narration, and rendering the animated character...</p>
+      )}
 
       {videoProbe && (
         <section className="video-probe-panel">
@@ -2111,6 +2344,24 @@ export default function App() {
               <article className="video-probe-card" key={relativePath}>
                 <img src={rawNarratorPreviewUrl(relativePath)} alt="Narrator preview composite" />
               </article>
+            ))}
+          </div>
+        </section>
+      )}
+      {singleCarResult && (
+        <section className="video-probe-panel">
+          <h2>{singleCarResult.title || `${singleCarResult.car?.make} ${singleCarResult.car?.model}`}</h2>
+          <p className="rationale">
+            {singleCarResult.word_count} words at {singleCarResult.tts_speed}x voice speed; {Number(singleCarResult.duration_seconds || 0).toFixed(1)} seconds.
+          </p>
+          {singleCarResult.video && <video controls src={rawSingleCarUrl(singleCarResult.video)} preload="metadata" />}
+          <div className="narration-scroll">
+            <div className="narration-entry"><strong>Script</strong><p>{singleCarResult.script}</p></div>
+            {(singleCarResult.scenes || []).map((scene, index) => (
+              <div className="narration-entry" key={index}>
+                <strong>{scene.headline || `Scene ${index + 1}`}</strong>
+                <p>{scene.fact}</p>
+              </div>
             ))}
           </div>
         </section>
