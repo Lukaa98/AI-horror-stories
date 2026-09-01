@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.71";
+const UI_VERSION = "V10.72";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1251,14 +1251,16 @@ export default function App() {
       {view === "jobs" && (() => {
         const query = jobSearch.trim().toLowerCase();
         const companies = jobsData.companyDirectory.filter((company) => !query || company.name.toLowerCase().includes(query));
+        const allOpenRoles = jobsData.companyDirectory
+          .flatMap((company) => (company.openRoles || []).map((role) => ({ ...role, company: company.name })));
         return (
           <section className="jobs-panel">
             <div className="jobs-header">
               <div>
-                <span className="preview-label">One-time official-site snapshot</span>
-                <h2>Employer Careers &amp; Recommended Jobs</h2>
+                <span className="preview-label">Ongoing company-by-company scrape</span>
+                <h2>Employer Careers &amp; Open Roles</h2>
                 <p className="hint">
-                  {jobsData.peopleFromCsv} alumni map to {jobsData.companiesFromCsv} unique employers, current and past — a past employer still means an alum who may be able to refer Khatia in. {jobsData.recommendations.length} resume-aligned jobs were individually verified so far ({jobsData.companiesResearched} of {jobsData.companiesFromCsv} companies researched). Checked {jobsData.checkedAt}.
+                  {jobsData.peopleFromCsv} alumni map to {jobsData.companiesFromCsv} unique employers, current and past — a past employer still means an alum who may be able to refer Khatia in. {allOpenRoles.length} open Project Manager / Program Manager / Operations Manager / Business Analyst role links found so far ({jobsData.companiesResearched} of {jobsData.companiesFromCsv} companies checked). No fit filtering is applied — every matching-titled role found gets listed here regardless of seniority or location, so Khatia can judge compatibility herself. Checked {jobsData.checkedAt}.
                 </p>
               </div>
               <input
@@ -1268,33 +1270,27 @@ export default function App() {
                 placeholder="Filter the employer directory..."
               />
             </div>
-            <p className="jobs-source-note">{jobsData.sourceNote}</p>
             <div className="jobs-recommendations">
               <div className="jobs-section-heading">
                 <div>
-                  <span className="preview-label">Best application targets</span>
-                  <h3>Recommended matches</h3>
+                  <span className="preview-label">Every open role found</span>
+                  <h3>Open roles across all companies</h3>
                 </div>
-                <strong>{jobsData.recommendations.length} jobs found</strong>
+                <strong>{allOpenRoles.length} links found</strong>
               </div>
               <div className="jobs-list">
-                {jobsData.recommendations.map((job) => (
-                  <a className="job-row" href={job.url} target="_blank" rel="noreferrer" key={`${job.company}-${job.title}`}>
+                {allOpenRoles.map((role) => (
+                  <a className="job-row" href={role.url} target="_blank" rel="noreferrer" key={`${role.company}-${role.title}-${role.url}`}>
                     <div>
-                      <strong>{job.title}</strong>
-                      <span>{job.company} · {job.location}</span>
-                      <p>{job.matchReason}</p>
-                      <p><strong>Requirements check:</strong> {job.requirementsCheck}</p>
+                      <strong>{role.title}</strong>
+                      <span>{role.company}</span>
                     </div>
                     <div className="job-tags">
-                      <span>{job.fit}</span>
-                      <span>{job.category}</span>
-                      <span>{job.experience}</span>
-                      <span>{job.workplace}</span>
-                      <span>Direct posting ↗</span>
+                      <span>Open posting ↗</span>
                     </div>
                   </a>
                 ))}
+                {!allOpenRoles.length && <p className="hint">No open roles found yet — still working through the company list.</p>}
               </div>
             </div>
             <div className="jobs-section-heading jobs-directory-heading">
