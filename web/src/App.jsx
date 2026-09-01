@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.56";
+const UI_VERSION = "V10.57";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -423,12 +423,14 @@ const DASHBOARD_FOLDERS = {
   draft: { prefix: "cars/drafts", file: "research.json" },
   "video-test": { prefix: "cars/video-tests", file: "result.json" },
   battle: { prefix: "cars/battles", file: "battle.json" },
+  "single-car": { prefix: "cars/single-car-shorts", file: "result.json" },
 };
 
 function groupDashboardEntries(entries) {
   const drafts = new Map();
   const tests = new Map();
   const battles = new Map();
+  const singleCars = new Map();
   for (const item of entries) {
     if (item.type !== "blob") continue;
     let m = item.path.match(/^cars\/drafts\/([^/]+)\/(.+)$/);
@@ -451,6 +453,14 @@ function groupDashboardEntries(entries) {
       if (id === "_frames") continue;
       if (!battles.has(id)) battles.set(id, []);
       battles.get(id).push(rest);
+      continue;
+    }
+    m = item.path.match(/^cars\/single-car-shorts\/([^/]+)\/(.+)$/);
+    if (m) {
+      const [, id, rest] = m;
+      if (id === "_frames") continue;
+      if (!singleCars.has(id)) singleCars.set(id, []);
+      singleCars.get(id).push(rest);
     }
   }
   const items = [];
@@ -484,6 +494,16 @@ function groupDashboardEntries(entries) {
       hasVideo: files.includes("battle_short.mp4"),
     });
   }
+  for (const [id, files] of singleCars) {
+    items.push({
+      type: "single-car",
+      id,
+      files,
+      timestamp: parseIdTimestamp(id),
+      hasResult: files.includes("result.json"),
+      hasVideo: files.includes("single_car_short.mp4"),
+    });
+  }
   items.sort((a, b) => (b.timestamp?.getTime() || 0) - (a.timestamp?.getTime() || 0));
   return items;
 }
@@ -495,6 +515,7 @@ async function attachDashboardPreviews(items, owner, repo, token) {
       if (item.type === "draft" && !item.hasResearch) return;
       if (item.type === "video-test" && !item.hasResult) return;
       if (item.type === "battle" && !item.hasBattle) return;
+      if (item.type === "single-car" && !item.hasResult) return;
       const preview = await fetchFileViaApi(owner, repo, OUTPUT_BRANCH, `${prefix}/${item.id}/${file}`, token);
       if (preview) item.preview = preview;
     })
@@ -512,6 +533,7 @@ async function loadDashboardEntries({ owner, repo, token }) {
 function dashboardFolderName(type) {
   if (type === "draft") return "drafts";
   if (type === "battle") return "battles";
+  if (type === "single-car") return "single-car-shorts";
   return "video-tests";
 }
 
@@ -1225,7 +1247,7 @@ export default function App() {
         <section className="dashboard-panel">
           <div className="dashboard-header">
             <div>
-              <h2>Generated Drafts, Video Tests &amp; Battles</h2>
+              <h2>Generated Drafts, Video Tests, Battles &amp; Single-Car Stories</h2>
               <p className="hint">
                 Reads directly from the <code>{OUTPUT_BRANCH}</code> branch, so results survive a refresh. Deleting
                 an item commits a removal of its files to that branch.
@@ -1246,13 +1268,15 @@ export default function App() {
                 const title =
                   item.type === "draft" ? item.preview?.title || item.id
                   : item.type === "battle" ? item.preview?.title || `Battle: ${item.id}`
+                  : item.type === "single-car" ? item.preview?.title || `Single-car story: ${item.id}`
                   : `Video test: ${item.preview?.query || item.id}`;
                 const thumb =
                   item.type === "draft" ? item.preview?.entries?.find((entry) => (entry.images || []).length)?.images?.[0]
                   : item.type === "battle" ? item.preview?.cars?.find((car) => (car.photos || []).length)?.photos?.[0]
+                  : item.type === "single-car" ? item.preview?.media?.[0]?.path
                   : item.preview?.clips?.find((clip) => clip.thumbnail_url)?.thumbnail_url;
                 const thumbUrl = item.type === "video-test" ? thumb : (thumb ? dashboardRawUrl(item, thumb) : null);
-                const typeLabel = item.type === "draft" ? "Draft" : item.type === "battle" ? "Battle" : "Video Test";
+                const typeLabel = item.type === "draft" ? "Draft" : item.type === "battle" ? "Battle" : item.type === "single-car" ? "Single Car Story" : "Video Test";
                 return (
                   <article className="dashboard-card" key={key}>
                     {thumbUrl && <img src={thumbUrl} alt={title} />}
@@ -1269,6 +1293,9 @@ export default function App() {
                         <p className="hint">
                           {item.hasVideo ? "Battle video ready" : `${item.preview?.approved_count ?? "?"}/${item.preview?.total_count ?? "?"} clips found`}
                         </p>
+                      )}
+                      {item.type === "single-car" && (
+                        <p className="hint">{item.hasVideo ? "Narrated video ready" : "Result saved without video"}</p>
                       )}
                       <div className="dashboard-card-actions">
                         <button type="button" onClick={() => setSelectedItem({ type: item.type, id: item.id })}>
@@ -1515,6 +1542,41 @@ export default function App() {
                       <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
                     </details>
                   </div>
+                )}
+
+                {item.type === "single-car" && item.preview && (
+                  <section className="video-probe-panel">
+                    <h2>{item.preview.title || `${item.preview.car?.make || ""} ${item.preview.car?.model || ""}`.trim()}</h2>
+                    <p className="rationale">
+                      {item.preview.word_count} words at {item.preview.tts_speed}x voice speed; {Number(item.preview.duration_seconds || 0).toFixed(1)} seconds.
+                    </p>
+                    {item.hasVideo && (
+                      <div className="video-player">
+                        <video controls src={dashboardRawUrl(item, item.preview.video || "single_car_short.mp4")} width="360" preload="metadata" />
+                      </div>
+                    )}
+                    <div className="narration-scroll">
+                      <div className="narration-entry"><strong>Script</strong><p>{item.preview.script}</p></div>
+                      {(item.preview.scenes || []).map((scene, index) => (
+                        <div className="narration-entry" key={index}>
+                          <strong>{scene.headline || `Scene ${index + 1}`}</strong>
+                          <p>{scene.fact}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="thumbs">
+                      {(item.preview.media || []).map((media, index) => (
+                        <a key={`${media.path}-${index}`} href={dashboardRawUrl(item, media.path)} target="_blank" rel="noreferrer">
+                          <img src={dashboardRawUrl(item, media.path)} alt={`${media.type || "car"} scene`} />
+                          <span className="image-label">{media.type || "car"}</span>
+                        </a>
+                      ))}
+                    </div>
+                    <details className="settings">
+                      <summary>Full result.json</summary>
+                      <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
+                    </details>
+                  </section>
                 )}
 
                 {!item.preview && <p className="hint">No JSON data found for this item (files: {item.files.join(", ")}).</p>}
