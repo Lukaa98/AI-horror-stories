@@ -225,6 +225,33 @@
     50%  { transform: rotate(1.5deg) translateY(-4px); }
     100% { transform: rotate(-1.5deg) translateY(0px); }
   }
+
+  /* Weight shift for the whole figure -- pivoting near the feet so it
+     reads as a lean/shift in stance, not the whole body floating. The
+     reference channel's character is never fully static; head+arm motion
+     alone still read as "a stuck body with a moving head" without this. */
+  /* Hand-drawn "redraw" flicker on top of (not instead of) the wobble
+     filter's positional jitter -- the reference channel's line work
+     visibly jumps between thinner and thicker strokes, not one constant
+     weight. steps() instead of smooth easing so it reads as a snap
+     between redrawn frames, not a slow breathing pulse. */
+  #character {
+    transform-origin: 200px 700px;
+    animation: bodySway 3.8s ease-in-out infinite, lineFlicker 0.5s steps(1) infinite;
+  }
+  @keyframes bodySway {
+    0%   { transform: rotate(-1deg) translateX(-3px); }
+    35%  { transform: rotate(0.6deg) translateX(2px); }
+    65%  { transform: rotate(1deg) translateX(3px); }
+    100% { transform: rotate(-1deg) translateX(-3px); }
+  }
+  @keyframes lineFlicker {
+    0%   { stroke-width: 4.5; }
+    25%  { stroke-width: 3.6; }
+    50%  { stroke-width: 5.2; }
+    75%  { stroke-width: 4.1; }
+    100% { stroke-width: 4.5; }
+  }
 </style>
 
 <header>
