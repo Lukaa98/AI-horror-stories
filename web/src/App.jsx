@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.58";
+const UI_VERSION = "V10.59";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1250,61 +1250,71 @@ export default function App() {
 
       {view === "jobs" && (() => {
         const query = jobSearch.trim().toLowerCase();
-        const companies = jobsData.companies.filter((company) => (
-          !query || company.name.toLowerCase().includes(query) || company.jobs.some((job) =>
-            [job.title, job.category, job.location, job.workplace].some((value) => String(value || "").toLowerCase().includes(query))
-          )
-        ));
-        const openingCount = jobsData.companies.reduce((total, company) => total + company.jobs.length, 0);
+        const companies = jobsData.companyDirectory.filter((company) => !query || company.name.toLowerCase().includes(query));
         return (
           <section className="jobs-panel">
             <div className="jobs-header">
               <div>
                 <span className="preview-label">One-time official-site snapshot</span>
-                <h2>Alumni Employer Jobs</h2>
+                <h2>Employer Careers &amp; Recommended Jobs</h2>
                 <p className="hint">
-                  {openingCount} matching openings across {jobsData.companiesChecked} checked employers from a {jobsData.companiesFromCsv}-company source list. Checked {jobsData.checkedAt}.
+                  {jobsData.peopleFromCsv} people map to {jobsData.companiesFromCsv} unique current employers. {jobsData.recommendations.length} resume-aligned jobs were individually verified. Checked {jobsData.checkedAt}.
                 </p>
               </div>
               <input
                 className="jobs-search"
                 value={jobSearch}
                 onChange={(event) => setJobSearch(event.target.value)}
-                placeholder="Filter company, role, location, remote..."
+                placeholder="Filter the employer directory..."
               />
             </div>
             <p className="jobs-source-note">{jobsData.sourceNote}</p>
+            <div className="jobs-recommendations">
+              <div className="jobs-section-heading">
+                <div>
+                  <span className="preview-label">Best application targets</span>
+                  <h3>Recommended matches</h3>
+                </div>
+                <strong>{jobsData.recommendations.length} jobs found</strong>
+              </div>
+              <div className="jobs-list">
+                {jobsData.recommendations.map((job) => (
+                  <a className="job-row" href={job.url} target="_blank" rel="noreferrer" key={`${job.company}-${job.title}`}>
+                    <div>
+                      <strong>{job.title}</strong>
+                      <span>{job.company} · {job.location}</span>
+                      <p>{job.matchReason}</p>
+                    </div>
+                    <div className="job-tags">
+                      <span>{job.category}</span>
+                      <span>{job.workplace}</span>
+                      <span>Direct posting ↗</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div className="jobs-section-heading jobs-directory-heading">
+              <div>
+                <span className="preview-label">Complete source-company list</span>
+                <h3>Official employer career pages</h3>
+              </div>
+              <strong>{jobsData.companyDirectory.length} companies</strong>
+            </div>
             <div className="jobs-grid">
               {companies.map((company) => (
                 <article className="jobs-company" key={company.name}>
                   <div className="jobs-company-heading">
-                    <div>
-                      <h3>{company.name}</h3>
-                      <span className="hint">{company.jobs.length} matching opening{company.jobs.length === 1 ? "" : "s"}</span>
-                    </div>
-                    <a className="jobs-careers-link" href={company.careersUrl} target="_blank" rel="noreferrer">Official careers page</a>
+                    <h3>{company.name}</h3>
+                    {company.careersUrl ? (
+                      <a className="jobs-careers-link" href={company.careersUrl} target="_blank" rel="noreferrer">Official careers page ↗</a>
+                    ) : (
+                      <span className="jobs-unavailable">No public careers page located</span>
+                    )}
                   </div>
-                  {company.jobs.length ? (
-                    <div className="jobs-list">
-                      {company.jobs.map((job) => (
-                        <a className="job-row" href={job.url} target="_blank" rel="noreferrer" key={`${company.name}-${job.title}`}>
-                          <div>
-                            <strong>{job.title}</strong>
-                            <span>{job.location}</span>
-                          </div>
-                          <div className="job-tags">
-                            <span>{job.category}</span>
-                            <span>{job.workplace}</span>
-                          </div>
-                        </a>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="jobs-empty">No matching product, operations, project, or program role found on the official page during this check.</p>
-                  )}
                 </article>
               ))}
-              {!companies.length && <p className="hint">No companies or roles match that filter.</p>}
+              {!companies.length && <p className="hint">No employer matches that filter.</p>}
             </div>
           </section>
         );
