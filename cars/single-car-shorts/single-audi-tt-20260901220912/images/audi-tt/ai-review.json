@@ -1,0 +1,213 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2015-2021",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "auditorum logo visible",
+        "TT badge on the rear",
+        "convertible body style"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "audi badge",
+        "front design elements"
+      ],
+      "generation_match_confidence": 7,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 6,
+      "reject": true,
+      "reason": "wrong generation due to design style",
+      "path": "engine-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2016-2022",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "convertible roof",
+        "Audi logo",
+        "body proportions"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "none",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2015-2021",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Audi branding",
+        "TT shape and styling",
+        "Convertible design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2015-2022",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "audi logo",
+        "TT badge",
+        "proportions consistent with Audi TT"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Audi",
+      "detected_model": "TT",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Audi logo",
+        "TT design elements",
+        "interior layout"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "seat stitching",
+        "steering wheel"
+      ],
+      "generation_match_confidence": 7,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 6,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design aligns with Audi TT",
+        "distinctive styling of seats and dashboard"
+      ],
+      "generation_match_confidence": 7,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 6,
+      "reject": false,
+      "reason": "",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    }
+  ]
+}

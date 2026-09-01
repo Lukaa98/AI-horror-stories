@@ -1,0 +1,488 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-01T22:11:10.268Z",
+  "query": "Audi TT",
+  "visual_highlight": "exterior engine turbo drivetrain wheel interior dashboard seats performance detail",
+  "search_url": "https://carsandbids.com/search/audi/tt?csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9a0l7bzE/2018-audi-tt-coupe",
+      "title": "2018 Audi Tt Coupe",
+      "text": "Sold for $40,000",
+      "titleYear": 2018,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KD1RV2Zp/2013-audi-tt-20t-quattro-coupe",
+      "title": "2013 Audi Tt 20t Quattro Coupe",
+      "text": "Sold for $38,000",
+      "titleYear": 2013,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vBEjgGm/2019-audi-tt-20th-anniversary-roadster",
+      "title": "2019 Audi Tt 20th Anniversary Roadster",
+      "text": "Bid to $35,090",
+      "titleYear": 2019,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMx65VDk/2022-audi-tt-quattro-coupe",
+      "title": "2022 Audi Tt Quattro Coupe",
+      "text": "Sold for $34,750",
+      "titleYear": 2022,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KDy5OEWM/2020-audi-tt-roadster",
+      "title": "2020 Audi Tt Roadster",
+      "text": "Sold for $25,300",
+      "titleYear": 2020,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjP1gYRN/2006-audi-tt-quattro-coupe",
+      "title": "2006 Audi Tt Quattro Coupe",
+      "text": "Sold for $24,750",
+      "titleYear": 2006,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9a0l7bzE/2018-audi-tt-coupe",
+      "title": "2018 Audi Tt Coupe",
+      "text": "Sold for $40,000",
+      "titleYear": 2018,
+      "score": 60,
+      "usable_image_count": 17,
+      "sale_price": 40000,
+      "sale_type": "sold",
+      "page_title": "2018 Audi TT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KD1RV2Zp/2013-audi-tt-20t-quattro-coupe",
+      "title": "2013 Audi Tt 20t Quattro Coupe",
+      "text": "Sold for $38,000",
+      "titleYear": 2013,
+      "score": 60,
+      "usable_image_count": 15,
+      "sale_price": 38000,
+      "sale_type": "sold",
+      "page_title": "2013 Audi TT 2.0T Quattro Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vBEjgGm/2019-audi-tt-20th-anniversary-roadster",
+      "title": "2019 Audi Tt 20th Anniversary Roadster",
+      "text": "Bid to $35,090",
+      "titleYear": 2019,
+      "score": 60,
+      "usable_image_count": 32,
+      "sale_price": 35090,
+      "sale_type": "bid_to",
+      "page_title": "2019 Audi TT 20th Anniversary Roadster"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMx65VDk/2022-audi-tt-quattro-coupe",
+      "title": "2022 Audi Tt Quattro Coupe",
+      "text": "Sold for $34,750",
+      "titleYear": 2022,
+      "score": 60,
+      "usable_image_count": 12,
+      "sale_price": 34750,
+      "sale_type": "sold",
+      "page_title": "2022 Audi TT Quattro Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vBEjgGm/2019-audi-tt-20th-anniversary-roadster",
+    "title": "2019 Audi Tt 20th Anniversary Roadster",
+    "text": "Bid to $35,090",
+    "titleYear": 2019,
+    "score": 60,
+    "sale_price": 35090,
+    "sale_type": "bid_to",
+    "page_title": "2019 Audi TT 20th Anniversary Roadster",
+    "year": 2019,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/b150f4717d13d7d5de13266ac75c8e5bd087de84/photos/s-USpOiTtcuan.jpg?t=170899119886",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Audi TT 20th Anniversary Roadster",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 324995
+    },
+    {
+      "path": "engine-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/rxAOVok8-myO2Et_vXC-(edit).jpg?t=170913729479",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Audi TT 20th Anniversary Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 247481
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/rxAOVok8-smB-8ACWWa-(edit).jpg?t=170913734236",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Audi TT 20th Anniversary Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 382623
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/b150f4717d13d7d5de13266ac75c8e5bd087de84/photos/s-s8kE2b1rRIQ.jpg?t=170899119041",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Audi TT 20th Anniversary Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 275557
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/rxAOVok8-GS7Bp-lvOm-(edit).jpg?t=170913740357",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Audi TT 20th Anniversary Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 242610
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/rxAOVok8-rkR7W-u_dO-(edit).jpg?t=170913756773",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Audi TT 20th Anniversary Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 204169
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/rxAOVok8-dCpuc8W8Z2-(edit).jpg?t=170913753953",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Audi TT 20th Anniversary Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 190207
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/b150f4717d13d7d5de13266ac75c8e5bd087de84/photos/s-VUTqd4Pvh1D.jpg?t=170899126588",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Audi TT 20th Anniversary Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 188817
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/146e766d6e01e6e6e919652e21605f4c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/146e766d6e01e6e6e919652e21605f4c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Audi TT Quattro Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/146e766d6e01e6e6e919652e21605f4c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rMx65VDk/2022-audi-tt-quattro-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/146e766d6e01e6e6e919652e21605f4c/manifest/video.m3u8",
+      "auction_title": "2022 Audi TT Quattro Coupe",
+      "auction_year": 2022,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/78071922d3e6310498ee1b1f40999df7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/78071922d3e6310498ee1b1f40999df7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Audi TT Quattro Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/78071922d3e6310498ee1b1f40999df7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rMx65VDk/2022-audi-tt-quattro-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/78071922d3e6310498ee1b1f40999df7/manifest/video.m3u8",
+      "auction_title": "2022 Audi TT Quattro Coupe",
+      "auction_year": 2022,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/959143b9d20d37337ff284d045183eb8/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/959143b9d20d37337ff284d045183eb8/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Audi TT Quattro Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/959143b9d20d37337ff284d045183eb8/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rMx65VDk/2022-audi-tt-quattro-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/959143b9d20d37337ff284d045183eb8/manifest/video.m3u8",
+      "auction_title": "2022 Audi TT Quattro Coupe",
+      "auction_year": 2022,
+      "search_score": 60
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2015-2021",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "auditorum logo visible",
+          "TT badge on the rear",
+          "convertible body style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "audi badge",
+          "front design elements"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 6,
+        "reject": true,
+        "reason": "wrong generation due to design style",
+        "path": "engine-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2016-2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "convertible roof",
+          "Audi logo",
+          "body proportions"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "none",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2015-2021",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi branding",
+          "TT shape and styling",
+          "Convertible design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2015-2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "audi logo",
+          "TT badge",
+          "proportions consistent with Audi TT"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "TT",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi logo",
+          "TT design elements",
+          "interior layout"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "seat stitching",
+          "steering wheel"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 6,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design aligns with Audi TT",
+          "distinctive styling of seats and dashboard"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 6,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
