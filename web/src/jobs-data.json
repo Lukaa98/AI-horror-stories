@@ -56,7 +56,7 @@
   "companyDirectory": [
     {
       "name": "10 Minute School",
-      "careersUrl": null,
+      "careersUrl": "https://careers.smartrecruiters.com/10MinuteSchool",
       "alumniCount": 1,
       "hasCurrentAlum": false,
       "alumni": [
@@ -123,6 +123,12 @@
         {
           "name": "Ann Marie Diener",
           "current": false
+        }
+      ],
+      "openRoles": [
+        {
+          "title": "Business Analyst (P3445)",
+          "url": "https://job-boards.greenhouse.io/8451/jobs/8341965002"
         }
       ]
     },
@@ -251,6 +257,24 @@
         {
           "name": "Sarim Ahmed",
           "current": false
+        }
+      ],
+      "openRoles": [
+        {
+          "title": "Analyst, Operations",
+          "url": "https://builtin.com/job/analyst-operations/3523550"
+        },
+        {
+          "title": "Senior Program Manager, Revenue Operations",
+          "url": "https://builtin.com/job/senior-program-manager-revenue-operations/6898033"
+        },
+        {
+          "title": "Senior Program Manager - Strategic Initiatives",
+          "url": "https://builtin.com/job/senior-revenue-operations-program-manager-strategic-initiatives/3342150"
+        },
+        {
+          "title": "Senior Talent Operations Program Manager",
+          "url": "https://builtin.com/job/senior-talent-operations-program-manager/10295360"
         }
       ]
     },
@@ -408,6 +432,28 @@
           "name": "Jasper DeShields",
           "current": false
         }
+      ],
+      "openRoles": [
+        {
+          "title": "Legal Operations Manager",
+          "url": "https://www.angi.com/careers/jobs/8208135002"
+        },
+        {
+          "title": "Design Operations Manager",
+          "url": "https://www.angi.com/careers/jobs/7082487002"
+        },
+        {
+          "title": "Customer Strategy & Operations Manager",
+          "url": "https://www.angi.com/careers/jobs/7825754002"
+        },
+        {
+          "title": "Strategy & Operations Manager (Office of the CEO)",
+          "url": "https://www.angi.com/careers/jobs/7953278002"
+        },
+        {
+          "title": "Business Analyst",
+          "url": "https://www.angi.com/careers/jobs/6940713002"
+        }
       ]
     },
     {
@@ -471,6 +517,16 @@
         {
           "name": "Sarim Ahmed",
           "current": false
+        }
+      ],
+      "openRoles": [
+        {
+          "title": "Operations Project Manager",
+          "url": "https://jobs.apple.com/en-us/details/200659838-0836/operations-project-manager"
+        },
+        {
+          "title": "Operations Program Manager",
+          "url": "https://jobs.apple.com/en-us/details/200639245-1340/operations-program-manager"
         }
       ]
     },
@@ -580,6 +636,12 @@
           "name": "Apurva Kasam",
           "current": false
         }
+      ],
+      "openRoles": [
+        {
+          "title": "Lead Project & Program Manager",
+          "url": "https://careers.techtitans.org/companies/at-t-2-91e8eb1f-f53b-4ef1-9ab3-ee91278661cb/jobs/42245578-lead-project-program-manager"
+        }
       ]
     },
     {
@@ -644,7 +706,7 @@
     },
     {
       "name": "AutoLeadStar",
-      "careersUrl": null,
+      "careersUrl": "https://builtin.com/company/autoleadstar/jobs",
       "alumniCount": 1,
       "hasCurrentAlum": false,
       "alumni": [
@@ -748,11 +810,21 @@
           "name": "Joe Mulligan",
           "current": false
         }
+      ],
+      "openRoles": [
+        {
+          "title": "Project Manager roles (search)",
+          "url": "https://careers.bankofamerica.com/en-us/job-search/q-project-manager"
+        },
+        {
+          "title": "Analyst roles (search)",
+          "url": "https://careers.bankofamerica.com/en-us/job-search/q-analyst"
+        }
       ]
     },
     {
       "name": "Bayer",
-      "careersUrl": null,
+      "careersUrl": "https://www.bayer.com/en/us/careers",
       "alumniCount": 1,
       "hasCurrentAlum": false,
       "alumni": [
@@ -856,6 +928,12 @@
           "name": "Lisa Zhang",
           "current": false
         }
+      ],
+      "openRoles": [
+        {
+          "title": "Associate, Business Analyst/Project Manager - L&C COO Technology Team",
+          "url": "https://careers.blackrock.com/job/princeton/associate-business-analyst-project-manager-l-and-c-coo-technology-team/45831/84922156000"
+        }
       ]
     },
     {
@@ -891,6 +969,16 @@
         {
           "name": "Laura Berk",
           "current": false
+        }
+      ],
+      "openRoles": [
+        {
+          "title": "Program Manager - Portfolio",
+          "url": "https://job-boards.greenhouse.io/bpcs/jobs/7776665"
+        },
+        {
+          "title": "Technical Project Manager",
+          "url": "https://job-boards.greenhouse.io/bpcs/jobs/7838952"
         }
       ]
     },
@@ -9417,5 +9505,5 @@
       ]
     }
   ],
-  "companiesResearched": 93
+  "companiesResearched": 96
 }
