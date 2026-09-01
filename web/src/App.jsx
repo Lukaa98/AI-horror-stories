@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.61";
+const UI_VERSION = "V10.62";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1284,6 +1284,7 @@ export default function App() {
                       <strong>{job.title}</strong>
                       <span>{job.company} · {job.location}</span>
                       <p>{job.matchReason}</p>
+                      <p><strong>Requirements check:</strong> {job.requirementsCheck}</p>
                     </div>
                     <div className="job-tags">
                       <span>{job.fit}</span>
