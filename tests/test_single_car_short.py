@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "cars" / "automation")]
 
-from single_car_short import ALLOWED_MEDIA_TYPES, TARGET_WORDS, _word_count  # noqa: E402
+from single_car_short import ACCEPTABLE_WORDS, ALLOWED_MEDIA_TYPES, TARGET_WORDS, _word_count  # noqa: E402
 
 
 def test_word_count_handles_contractions_and_hyphenated_terms():
@@ -13,6 +13,7 @@ def test_word_count_handles_contractions_and_hyphenated_terms():
 
 def test_one_minute_script_range_is_fast_but_bounded():
     assert TARGET_WORDS == (175, 190)
+    assert ACCEPTABLE_WORDS[0] <= 199 <= ACCEPTABLE_WORDS[1]
 
 
 def test_interior_media_is_available_for_cabin_script_scenes():

@@ -25,6 +25,11 @@ load_dotenv(ROOT / ".env")
 SCRAPER_DIR = ROOT / "scraper" / "car-source-scraper"
 OUTPUT_ROOT = ROOT / "cars" / "single-car-shorts"
 TARGET_WORDS = (175, 190)
+# The prompt targets the tight range above, but word counts from a grounded
+# structured response can land a little outside it. Runtime is normalized
+# from the actual audio below, so only reject clearly broken short/long
+# responses instead of throwing away an otherwise good 199-word script.
+ACCEPTABLE_WORDS = (140, 220)
 FAST_TTS_SPEED = 1.12
 TARGET_DURATION_SECONDS = 58.0
 ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
@@ -75,8 +80,16 @@ Return 5-7 scenes in script order. Headlines are only for important facts and mu
     ))
     package = json.loads(response.output_text.strip())
     count = _word_count(package["script"])
+    if not ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
+        raise RuntimeError(
+            f"Single-car script is outside the safe {ACCEPTABLE_WORDS[0]}-{ACCEPTABLE_WORDS[1]} word range; "
+            f"model returned {count}."
+        )
     if not TARGET_WORDS[0] <= count <= TARGET_WORDS[1]:
-        raise RuntimeError(f"Single-car script must be {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words; model returned {count}.")
+        print(
+            f"[single-car] Script returned {count} words outside the preferred "
+            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} range; audio timing will normalize the final runtime."
+        )
     package["word_count"] = count
     return package
 
