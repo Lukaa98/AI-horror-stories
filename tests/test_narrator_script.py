@@ -9,7 +9,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "cars" / "automation")]
 
-from narrator_script import build_mouth_timeline  # noqa: E402
+from narrator_script import _resolve_voice, build_mouth_timeline  # noqa: E402
 
 
 def _write_synthetic_wav(path, rate=16000):
@@ -40,3 +40,14 @@ def test_build_mouth_timeline_buckets_by_relative_loudness(tmp_path):
         assert previous["end"] == current["start"]
     assert timeline[0]["start"] == 0.0
     assert timeline[-1]["end"] == pytest.approx(1.8, abs=0.05)
+
+
+def test_raw_ui_voice_is_accepted_without_a_named_preset():
+    voice = _resolve_voice("onyx")
+    assert voice["voice"] == "onyx"
+    assert voice["instructions"]
+
+
+def test_unknown_voice_is_rejected_clearly():
+    with pytest.raises(ValueError, match="Unknown narrator voice"):
+        _resolve_voice("not-a-real-voice")

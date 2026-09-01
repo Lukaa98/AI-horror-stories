@@ -22,6 +22,11 @@ from audition_voices import VOICE_PRESETS
 DEFAULT_SCRIPT_MODEL = os.getenv("OPENAI_NARRATOR_SCRIPT_MODEL", "gpt-4o-mini")
 DEFAULT_TTS_MODEL = os.getenv("OPENAI_TTS_MODEL", "gpt-4o-mini-tts")
 DEFAULT_VOICE_PRESET = "trailer_hype"
+RAW_TTS_VOICES = {"alloy", "ash", "ballad", "cedar", "coral", "echo", "fable", "marin", "nova", "onyx", "sage", "shimmer", "verse"}
+RAW_VOICE_INSTRUCTIONS = (
+    "Sound like a confident, quick automotive YouTube host. Keep it conversational, punchy, "
+    "human, and clear without imitating any real presenter or celebrity."
+)
 
 # Mouth state per RMS-loudness bucket, coarsest approximation of visemes:
 # real speech has dozens of mouth shapes, but the rig only has three, so
@@ -76,6 +81,17 @@ def generate_narration_script(car_entry, model=DEFAULT_SCRIPT_MODEL):
     return response.output_text.strip()
 
 
+def _resolve_voice(preset):
+    if preset in VOICE_PRESETS:
+        return VOICE_PRESETS[preset]
+    if preset in RAW_TTS_VOICES:
+        return {"voice": preset, "speed": 1.0, "instructions": RAW_VOICE_INSTRUCTIONS}
+    raise ValueError(
+        f"Unknown narrator voice or preset: {preset}. "
+        f"Use a preset ({', '.join(VOICE_PRESETS)}) or supported voice ({', '.join(sorted(RAW_TTS_VOICES))})."
+    )
+
+
 def synthesize_narration(text, output_path, preset=DEFAULT_VOICE_PRESET, model=DEFAULT_TTS_MODEL, speed=None):
     """Render `text` to speech using one of audition_voices.py's presets,
     so a voice already chosen during auditioning carries straight through
@@ -83,7 +99,7 @@ def synthesize_narration(text, output_path, preset=DEFAULT_VOICE_PRESET, model=D
     api_key = os.getenv("OPENAI_API_KEY")
     if not _looks_like_real_openai_key(api_key):
         raise RuntimeError("OPENAI_API_KEY is missing or a placeholder; cannot synthesize narration.")
-    voice = VOICE_PRESETS[preset]
+    voice = _resolve_voice(preset)
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     response = with_openai_retry(lambda: OpenAI().audio.speech.create(
