@@ -4,9 +4,11 @@ the manifest.json that narrator_script.py produces (script text, narration
 audio, and an audio-loudness mouth timeline).
 
 The narrator itself is not rendered live; export-sprites.js pre-renders it
-to a fixed set of transparent PNGs (one per mouth x eyes combination) and
-this just flips between them per mouth_timeline segment, like a flipbook,
-rather than driving a browser for every output frame.
+to a fixed set of transparent PNGs (one per mouth x eyes x pose
+combination) and this flips between them like a flipbook: mouth state
+follows the audio-loudness mouth_timeline, while pose and blink follow
+their own fixed-clock timelines defined below, rather than driving a
+browser for every output frame.
 """
 import argparse
 import json
@@ -26,6 +28,22 @@ SPRITES_DIR = ROOT / "narrator" / "sprites"
 # reads as the focal point instead of the media dominating the frame.
 MAX_CAR_RATIO = 0.34
 CAPTION_CHUNK_WORDS = 1
+
+# The sprite flipbook only ever varied by mouth state, so the rendered
+# character read as "a stuck body with a moving mouth" even though the
+# interactive rig (narrator-rig.html) has idle body sway, a line-flicker,
+# arm sway, and brow lift. export-sprites.js now bakes those into 3 fixed
+# "pose" snapshots (a/b/c); cycling through them here on a fixed clock -- the
+# same trick the mouth timeline already uses, just time-driven instead of
+# loudness-driven -- gets that motion into the actual video instead of only
+# ever appearing in the live rig preview.
+POSE_CYCLE = ["a", "b", "c"]
+POSE_SEGMENT_SECONDS = 0.7
+# A blink timeline of its own -- the flipbook otherwise defaults to
+# permanently-open eyes for the whole video.
+BLINK_START_SECONDS = 1.2
+BLINK_INTERVAL_SECONDS = 3.0
+BLINK_DURATION_SECONDS = 0.12
 
 
 def _load_sprites_manifest():
@@ -105,30 +123,83 @@ def _caption_frame(size, text, center_y, out_path, fill=(238, 44, 44), font_size
     canvas.save(out_path)
 
 
+def _pose_intervals(duration):
+    intervals = []
+    t, i = 0.0, 0
+    while t < duration:
+        end = min(duration, t + POSE_SEGMENT_SECONDS)
+        intervals.append((t, end, POSE_CYCLE[i % len(POSE_CYCLE)]))
+        t = end
+        i += 1
+    return intervals
+
+
+def _blink_intervals(duration):
+    intervals = []
+    t = BLINK_START_SECONDS
+    while t < duration:
+        end = min(duration, t + BLINK_DURATION_SECONDS)
+        intervals.append((t, end, "blink"))
+        t += BLINK_INTERVAL_SECONDS
+    return intervals
+
+
+def _value_at(intervals, t, default):
+    for start, end, value in intervals:
+        if start <= t < end:
+            return value
+    return default
+
+
+def _merged_boundaries(interval_lists, duration):
+    bounds = {0.0, duration}
+    for intervals in interval_lists:
+        for start, end, _ in intervals:
+            bounds.add(min(duration, max(0.0, start)))
+            bounds.add(min(duration, max(0.0, end)))
+    return sorted(bounds)
+
+
 def _narrator_track(manifest, sprites, size, duration):
-    """One ImageClip per mouth_timeline segment, sprite-swapped -- eyes
-    default to open throughout since the timeline only carries mouth
-    state, not blink timing (a later pass could add that)."""
+    """One ImageClip per merged mouth/pose/blink segment, sprite-swapped.
+
+    Mouth state comes from the audio-loudness mouth_timeline; pose and
+    blink are driven by their own fixed-clock timelines (see POSE_CYCLE /
+    BLINK_* above) since nothing in the manifest carries that timing. The
+    three timelines are merged into one set of cut points so each resulting
+    segment has one unambiguous (mouth, eyes, pose) sprite for its whole
+    duration.
+    """
     max_h = int(size[1] * (1 - MAX_CAR_RATIO))
-    timeline = list(manifest.get("mouth_timeline") or [])
-    if not timeline:
-        timeline = [{"start": 0, "end": duration, "mouth": "closed"}]
-    elif timeline[-1]["mouth"] == "closed":
+    mouth_timeline = list(manifest.get("mouth_timeline") or [])
+    if not mouth_timeline:
+        mouth_timeline = [{"start": 0, "end": duration, "mouth": "closed"}]
+    elif mouth_timeline[-1]["mouth"] == "closed":
         # A nicer closing beat than trailing off on a flat mouth -- the
         # last silence in the clip is almost always the sign-off pause.
-        timeline[-1] = {**timeline[-1], "mouth": "smile"}
+        mouth_timeline[-1] = {**mouth_timeline[-1], "mouth": "smile"}
+    mouth_intervals = [(entry["start"], entry["end"], entry["mouth"]) for entry in mouth_timeline]
+
+    pose_intervals = _pose_intervals(duration)
+    blink_intervals = _blink_intervals(duration)
+    boundaries = _merged_boundaries([mouth_intervals, pose_intervals, blink_intervals], duration)
 
     segments = []
-    for entry in timeline:
-        sprite_key = f"{entry['mouth']}_open"
-        sprite_file = sprites["sprites"].get(sprite_key)
+    for start, end in zip(boundaries, boundaries[1:]):
+        if end - start < 0.005:
+            continue
+        mid = (start + end) / 2
+        mouth = _value_at(mouth_intervals, mid, "closed")
+        pose = _value_at(pose_intervals, mid, POSE_CYCLE[0])
+        eyes = _value_at(blink_intervals, mid, "open")
+        sprite_file = sprites["sprites"].get(f"{mouth}_{eyes}_{pose}") or sprites["sprites"].get(f"{mouth}_{eyes}")
         if not sprite_file:
             continue
-        seg_duration = max(0.01, entry["end"] - entry["start"])
-        segments.append(ImageClip(str(SPRITES_DIR / sprite_file)).set_duration(seg_duration))
+        segments.append(ImageClip(str(SPRITES_DIR / sprite_file)).set_duration(end - start))
 
     if not segments:
-        segments = [ImageClip(str(SPRITES_DIR / sprites["sprites"]["closed_open"])).set_duration(duration)]
+        fallback = next(iter(sprites["sprites"].values()))
+        segments = [ImageClip(str(SPRITES_DIR / fallback)).set_duration(duration)]
 
     track = concatenate_videoclips(segments, method="compose")
     return _fit_content(track, (size[0], max_h))
@@ -185,13 +256,16 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     )
 
     car_clip = _car_track(car_media_paths, size, duration)
-    car_positioned = car_clip.set_position(("center", 0))
+    # A small top margin instead of flush-to-the-edge -- pinned to the very
+    # top read as cropped/cut off against the white background.
+    car_top_margin = int(size[1] * 0.04)
+    car_positioned = car_clip.set_position(("center", car_top_margin))
 
     # Sit on the lower part of the car-media zone (like "ENGINE" /
     # "REAR WHEEL DRIVE" captions in the reference channel), not in the
     # gap between car and narrator -- there isn't room there once the
     # narrator occupies the rest of the frame.
-    caption_center_y = int(size[1] * MAX_CAR_RATIO) - 90
+    caption_center_y = int(size[1] * MAX_CAR_RATIO) - 90 + car_top_margin
     caption_clips = [
         ImageClip(str(_caption_frame_path(output_path, text, start, caption_center_y, size)))
         .set_start(start).set_duration(end - start).set_position((0, 0))

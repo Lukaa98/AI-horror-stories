@@ -1,17 +1,19 @@
 // Renders narrator/narrator-rig.html to a fixed set of transparent PNG
-// sprites, one per mouth x eye combination the mouth_timeline (see
-// cars/automation/narrator_script.py) can reference. This trades a full
+// sprites, one per mouth x eyes x pose combination the video compositor
+// (cars/automation/narrator_video.py) can reference. This trades a full
 // per-frame video render of the HTML/CSS rig for a cheap flipbook: the
-// Python compositor swaps between these sprites according to the timeline
-// instead of driving a browser for every output frame.
+// Python compositor swaps between these sprites according to the mouth
+// timeline (loudness-driven) and a pose cycle (time-driven) instead of
+// driving a browser for every output frame.
 //
-// Idle animations (arm sway, head bob, the wobble filter) are disabled
-// before capture so every sprite is a clean, reproducible snapshot rather
-// than an arbitrary frame of a running CSS animation -- the render step
-// trades that idle motion away for determinism. Re-adding a few "phase
-// variants" per state is a reasonable follow-up if the flipbook reads too
-// stiff, but a static-per-state export is the simplest thing that works
-// first.
+// Idle animations (arm sway, head bob, body sway, line flicker, the wobble
+// filter) are disabled before capture so every sprite is a clean,
+// reproducible snapshot rather than an arbitrary frame of a running CSS
+// animation -- each of the 3 POSES below instead bakes in one fixed
+// snapshot of what those animations do (a body lean, a stroke-width step,
+// an arm angle, a brow state), so cycling through poses over time in
+// narrator_video.py approximates the same motion a flipbook can't render
+// continuously.
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -22,6 +24,37 @@ const RIG_PATH = path.join(__dirname, "..", "narrator-rig.html");
 
 const MOUTHS = ["closed", "small", "wide", "smile"];
 const EYES = ["open", "blink"];
+// Freezing every idle animation for a static-per-mouth-state export made the
+// flipbook read as a stuck body with only a moving mouth -- these three
+// poses bake in a snapshot of the body sway, line-flicker, arm position, and
+// brow lift the rig's idle CSS animations already do, so narrator_video.py
+// can cycle through them over time the same way it already cycles mouths.
+const POSES = {
+  a: {
+    body: "rotate(-0.8deg) translateX(-2px)",
+    strokeWidth: 4.5,
+    armLeft: "rotate(-2deg)",
+    armRight: "rotate(2deg)",
+    head: "rotate(-1.5deg) translateY(0px)",
+    brows: "neutral",
+  },
+  b: {
+    body: "rotate(0deg) translateX(0px)",
+    strokeWidth: 4.8,
+    armLeft: "rotate(0deg)",
+    armRight: "rotate(0deg)",
+    head: "rotate(0deg) translateY(-2px)",
+    brows: "talk",
+  },
+  c: {
+    body: "rotate(0.8deg) translateX(2px)",
+    strokeWidth: 4.2,
+    armLeft: "rotate(2deg)",
+    armRight: "rotate(-2deg)",
+    head: "rotate(1.5deg) translateY(-4px)",
+    brows: "neutral",
+  },
+};
 
 function chromeExecutableOverride() {
   return process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_PATH || undefined;
@@ -82,24 +115,41 @@ async function main() {
     const svgHandle = await page.$("#charSvg");
 
     const manifest = { sprites: {} };
-    for (const mouth of MOUTHS) {
-      for (const eyes of EYES) {
-        await page.evaluate((mouthName, eyesName) => {
-          setMouth(mouthName);
-          const eyeOpen = document.querySelector(".eyes-open");
-          const eyeBlink = document.querySelector(".eyes-blink");
-          eyeOpen.style.display = eyesName === "open" ? "" : "none";
-          eyeBlink.style.display = eyesName === "blink" ? "" : "none";
-        }, mouth, eyes);
+    for (const [poseName, pose] of Object.entries(POSES)) {
+      await page.evaluate((pose) => {
+        const charEl = document.getElementById("character");
+        charEl.style.transform = pose.body;
+        charEl.style.strokeWidth = String(pose.strokeWidth);
+        document.querySelector(".arm-left").style.transform = pose.armLeft;
+        document.querySelector(".arm-right").style.transform = pose.armRight;
+        document.getElementById("headGroup").style.transform = pose.head;
+        const neutral = document.querySelector(".brows-neutral");
+        const raised = document.querySelector(".brows-raised");
+        const talk = document.querySelector(".brows-talk");
+        neutral.style.display = pose.brows === "neutral" ? "" : "none";
+        raised.style.display = pose.brows === "raised" ? "" : "none";
+        talk.style.display = pose.brows === "talk" ? "" : "none";
+      }, pose);
 
-        const fileName = `mouth-${mouth}_eyes-${eyes}.png`;
-        const filePath = path.join(outDir, fileName);
-        await svgHandle.screenshot({
-          path: filePath,
-          omitBackground: true,
-        });
-        manifest.sprites[`${mouth}_${eyes}`] = fileName;
-        process.stderr.write(`wrote ${fileName}\n`);
+      for (const mouth of MOUTHS) {
+        for (const eyes of EYES) {
+          await page.evaluate((mouthName, eyesName) => {
+            setMouth(mouthName);
+            const eyeOpen = document.querySelector(".eyes-open");
+            const eyeBlink = document.querySelector(".eyes-blink");
+            eyeOpen.style.display = eyesName === "open" ? "" : "none";
+            eyeBlink.style.display = eyesName === "blink" ? "" : "none";
+          }, mouth, eyes);
+
+          const fileName = `mouth-${mouth}_eyes-${eyes}_pose-${poseName}.png`;
+          const filePath = path.join(outDir, fileName);
+          await svgHandle.screenshot({
+            path: filePath,
+            omitBackground: true,
+          });
+          manifest.sprites[`${mouth}_${eyes}_${poseName}`] = fileName;
+          process.stderr.write(`wrote ${fileName}\n`);
+        }
       }
     }
 

@@ -4,7 +4,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "cars" / "automation")]
 
-from narrator_video import _caption_chunks, _caption_timeline  # noqa: E402
+from narrator_video import (  # noqa: E402
+    _blink_intervals,
+    _caption_chunks,
+    _caption_timeline,
+    _merged_boundaries,
+    _pose_intervals,
+    _value_at,
+)
 
 
 def test_caption_chunks_tile_the_full_duration_with_no_gaps():
@@ -36,3 +43,35 @@ def test_real_word_timestamps_override_estimated_caption_timing():
         "word_timeline": [{"word": "exact", "start": 0.2, "end": 0.7}, {"word": "turbo", "start": 0.8, "end": 1.4}],
     }
     assert _caption_timeline(manifest, 2.0) == [("exact", 0.2, 0.7), ("turbo", 0.8, 1.4)]
+
+
+def test_pose_intervals_cycle_and_cover_the_full_duration():
+    intervals = _pose_intervals(2.0)
+    assert intervals[0][0] == 0.0
+    assert intervals[-1][2] in {"a", "b", "c"}
+    for (_, end, _), (next_start, _, _) in zip(intervals, intervals[1:]):
+        assert end == next_start
+    assert intervals[-1][1] == 2.0
+
+
+def test_blink_intervals_are_short_and_spaced_out():
+    intervals = _blink_intervals(10.0)
+    assert intervals
+    for start, end, value in intervals:
+        assert value == "blink"
+        assert end - start <= 0.13
+
+
+def test_merged_boundaries_combine_all_interval_lists_without_duplicates():
+    mouth = [(0.0, 1.0, "closed"), (1.0, 2.0, "wide")]
+    pose = [(0.0, 0.7, "a"), (0.7, 1.4, "b"), (1.4, 2.0, "c")]
+    bounds = _merged_boundaries([mouth, pose], 2.0)
+    assert bounds == sorted(set(bounds))
+    assert bounds[0] == 0.0 and bounds[-1] == 2.0
+    assert 1.0 in bounds and 0.7 in bounds and 1.4 in bounds
+
+
+def test_value_at_falls_back_to_default_outside_all_intervals():
+    intervals = [(0.0, 1.0, "open")]
+    assert _value_at(intervals, 0.5, "closed") == "open"
+    assert _value_at(intervals, 1.5, "closed") == "closed"

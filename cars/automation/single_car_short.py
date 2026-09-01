@@ -37,10 +37,18 @@ ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 PACKAGE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
-    "required": ["title", "script", "scenes", "sources"],
+    "required": ["title", "script", "scenes", "sources", "start_year", "end_year"],
     "properties": {
         "title": {"type": "string"},
         "script": {"type": "string"},
+        # Whichever generation the script actually settles on -- especially
+        # important when the caller didn't pin a year range, since research
+        # is free to pick "the best-known generation" on its own. Without
+        # this, photo gathering had no idea which generation to search for
+        # and could land on a totally different one (e.g. narrating the
+        # first-gen 8N Audi TT while showing photos of a modern 8S).
+        "start_year": {"type": ["integer", "null"]},
+        "end_year": {"type": ["integer", "null"]},
         "scenes": {
             "type": "array", "minItems": 5, "maxItems": 7,
             "items": {
@@ -71,13 +79,17 @@ def _word_count(text):
 # instruction alone doesn't stop the model from also inlining them.
 _CITATION_MARKDOWN_LINK = re.compile(r"\(\[[^\]]*\]\([^)]*\)\)")
 _BARE_MARKDOWN_LINK = re.compile(r"\[[^\]]*\]\([^)]*\)")
-_BARE_URL = re.compile(r"https?://\S+")
+_BARE_URL = re.compile(r"https?://[^\s)]+")
 
 
 def _strip_citations(text):
     text = _CITATION_MARKDOWN_LINK.sub("", text)
     text = _BARE_MARKDOWN_LINK.sub("", text)
     text = _BARE_URL.sub("", text)
+    # A bare URL can also show up wrapped in a single paren rather than the
+    # doubled "([text](url))" citation shape, e.g. "(https://site.com)" --
+    # stripping just the URL leaves an empty, now-meaningless "()" behind.
+    text = re.sub(r"\(\s*\)", "", text)
     return re.sub(r"[ \t]{2,}", " ", text).strip()
 
 
@@ -92,7 +104,9 @@ Use web search and verify every technical comparison. Write a quick, conversatio
 
 The "script" field is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the script.
 
-Return 5-7 scenes in script order. Headlines are only for important facts and must be 1-4 words (examples: model/chassis, engine code, AWD, horsepower, price gap); use an empty string for ordinary beats. Use exterior media for the hook/close, engine for powertrain, wheel for drivetrain when useful, detail for modification/technical beats, and interior only when the script specifically discusses the cabin, seats, controls, or practicality. Sources must be direct URLs supporting the claims."""
+Return 5-7 scenes in script order. Headlines are only for important facts and must be 1-4 words (examples: model/chassis, engine code, AWD, horsepower, price gap); use an empty string for ordinary beats. Use exterior media for the hook/close, engine for powertrain, wheel for drivetrain when useful, detail for modification/technical beats, and interior only when the script specifically discusses the cabin, seats, controls, or practicality -- most scripts should lean on exterior shots with only a couple of interior beats, not the other way around. Sources must be direct URLs supporting the claims.
+
+Also return "start_year" and "end_year": the exact model-year range of the generation your script actually describes (the same year, twice, if it's a single model year). This must reflect what you actually researched and wrote about, even when the scope above was "the best-known generation" and you had to pick one yourself -- the photos shown alongside the narration are gathered using these years, so they need to match the generation you're describing."""
     response = with_openai_retry(lambda: OpenAI().responses.create(
         model="gpt-4o",
         input=prompt,
@@ -116,7 +130,30 @@ Return 5-7 scenes in script order. Headlines are only for important facts and mu
     return package
 
 
-def gather_media(make, model, trim, start_year, end_year, images_dir):
+def _visual_highlight_for_scenes(scenes):
+    """Build the entry's shot-type hint from what the script actually needs,
+    instead of unconditionally naming every shot type.
+
+    _desired_shot_types() (cars_and_bids.py) reads this text to decide which
+    shot types to prioritize, and it used to always name exterior, engine,
+    interior, wheel, *and* detail -- so every single-car short pushed
+    interior/engine shots to the front of the priority order regardless of
+    what the script's scenes actually called for, which is how a script with
+    only exterior/engine/wheel/detail beats still ended up entirely composed
+    of interior photos.
+    """
+    media_types = {scene.get("media_type") for scene in scenes}
+    words = []
+    if "interior" in media_types:
+        words.append("interior dashboard seats")
+    if "engine" in media_types:
+        words.append("engine turbo horsepower")
+    if "wheel" in media_types or "detail" in media_types:
+        words.append("wheel brake detail")
+    return " ".join(words)
+
+
+def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None):
     search_hint = " ".join(value for value in [make, model, trim] if value).strip()
     if start_year or end_year:
         first, last = start_year or end_year, end_year or start_year
@@ -128,7 +165,7 @@ def gather_media(make, model, trim, start_year, end_year, images_dir):
         "label": search_hint,
         "years": f"{first}-{last}" if first and first != last else str(first),
         "search_hint": search_hint,
-        "visual_highlight": "exterior engine turbo drivetrain wheel interior dashboard seats performance detail",
+        "visual_highlight": _visual_highlight_for_scenes(scenes or []),
         "generation_label": generation,
     }
     selected, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
@@ -229,8 +266,14 @@ def build_short(args):
     images_dir = output_dir / "images"
     output_dir.mkdir(parents=True, exist_ok=True)
     package = research_script(args.make, args.model, args.trim, args.start_year, args.end_year)
+    # Prefer the caller's explicit year range when given; otherwise fall
+    # back to whatever generation the script actually settled on, so photo
+    # gathering searches the same generation the narration describes
+    # instead of an unconstrained "Audi TT" that can land on any year.
+    media_start_year = args.start_year or package.get("start_year")
+    media_end_year = args.end_year or package.get("end_year")
     media, selected_auction = gather_media(
-        args.make, args.model, args.trim, args.start_year, args.end_year, images_dir
+        args.make, args.model, args.trim, media_start_year, media_end_year, images_dir, package["scenes"]
     )
     media = order_media_for_scenes(package["scenes"], media)
     audio_path = output_dir / "narration.mp3"
