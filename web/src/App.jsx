@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import jobsData from "./jobs-data.json";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.57";
+const UI_VERSION = "V10.58";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -622,6 +623,7 @@ export default function App() {
   const [battle, setBattle] = useState(null);
   const [battleVideoUrl, setBattleVideoUrl] = useState(null);
   const [view, setView] = useState("create");
+  const [jobSearch, setJobSearch] = useState("");
   const [dashboardItems, setDashboardItems] = useState([]);
   const [dashboardLoading, setDashboardLoading] = useState(false);
   const [dashboardError, setDashboardError] = useState(null);
@@ -1241,7 +1243,72 @@ export default function App() {
         <button type="button" className={view === "dashboard" ? "active" : ""} onClick={() => setView("dashboard")}>
           Dashboard
         </button>
+        <button type="button" className={view === "jobs" ? "active" : ""} onClick={() => setView("jobs")}>
+          Jobs
+        </button>
       </nav>
+
+      {view === "jobs" && (() => {
+        const query = jobSearch.trim().toLowerCase();
+        const companies = jobsData.companies.filter((company) => (
+          !query || company.name.toLowerCase().includes(query) || company.jobs.some((job) =>
+            [job.title, job.category, job.location, job.workplace].some((value) => String(value || "").toLowerCase().includes(query))
+          )
+        ));
+        const openingCount = jobsData.companies.reduce((total, company) => total + company.jobs.length, 0);
+        return (
+          <section className="jobs-panel">
+            <div className="jobs-header">
+              <div>
+                <span className="preview-label">One-time official-site snapshot</span>
+                <h2>Alumni Employer Jobs</h2>
+                <p className="hint">
+                  {openingCount} matching openings across {jobsData.companiesChecked} checked employers from a {jobsData.companiesFromCsv}-company source list. Checked {jobsData.checkedAt}.
+                </p>
+              </div>
+              <input
+                className="jobs-search"
+                value={jobSearch}
+                onChange={(event) => setJobSearch(event.target.value)}
+                placeholder="Filter company, role, location, remote..."
+              />
+            </div>
+            <p className="jobs-source-note">{jobsData.sourceNote}</p>
+            <div className="jobs-grid">
+              {companies.map((company) => (
+                <article className="jobs-company" key={company.name}>
+                  <div className="jobs-company-heading">
+                    <div>
+                      <h3>{company.name}</h3>
+                      <span className="hint">{company.jobs.length} matching opening{company.jobs.length === 1 ? "" : "s"}</span>
+                    </div>
+                    <a className="jobs-careers-link" href={company.careersUrl} target="_blank" rel="noreferrer">Official careers page</a>
+                  </div>
+                  {company.jobs.length ? (
+                    <div className="jobs-list">
+                      {company.jobs.map((job) => (
+                        <a className="job-row" href={job.url} target="_blank" rel="noreferrer" key={`${company.name}-${job.title}`}>
+                          <div>
+                            <strong>{job.title}</strong>
+                            <span>{job.location}</span>
+                          </div>
+                          <div className="job-tags">
+                            <span>{job.category}</span>
+                            <span>{job.workplace}</span>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="jobs-empty">No matching product, operations, project, or program role found on the official page during this check.</p>
+                  )}
+                </article>
+              ))}
+              {!companies.length && <p className="hint">No companies or roles match that filter.</p>}
+            </div>
+          </section>
+        );
+      })()}
 
       {view === "dashboard" && (
         <section className="dashboard-panel">

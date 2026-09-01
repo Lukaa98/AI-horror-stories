@@ -1,0 +1,132 @@
+{
+  "checkedAt": "2026-08-31",
+  "sourceNote": "One-time manual snapshot from official company career pages and company-linked ATS pages only. No alumni personal data is included.",
+  "companiesFromCsv": 99,
+  "companiesChecked": 17,
+  "companies": [
+    {
+      "name": "Anthropic",
+      "careersUrl": "https://www.anthropic.com/careers/jobs",
+      "jobs": [
+        { "title": "Product Manager, Enterprise", "category": "Product", "location": "San Francisco, CA / New York, NY", "workplace": "Hybrid", "url": "https://www.anthropic.com/careers/jobs" },
+        { "title": "Product Manager, Claude Code Model Performance", "category": "Product", "location": "San Francisco, CA / Seattle, WA", "workplace": "Hybrid", "url": "https://www.anthropic.com/careers/jobs" },
+        { "title": "Product Operations Manager, Claude.ai", "category": "Product Operations", "location": "New York, NY / San Francisco, CA / Seattle, WA", "workplace": "Hybrid", "url": "https://www.anthropic.com/careers/jobs" },
+        { "title": "Commercial Operations Program Manager", "category": "Program", "location": "San Francisco, CA / New York, NY", "workplace": "Hybrid", "url": "https://www.anthropic.com/careers/jobs" },
+        { "title": "Technical Program Manager, API Platform", "category": "Program", "location": "San Francisco, CA / Seattle, WA", "workplace": "Hybrid", "url": "https://www.anthropic.com/careers/jobs" },
+        { "title": "Research Product Manager, Labs", "category": "Product", "location": "San Francisco, CA / New York, NY", "workplace": "Hybrid", "url": "https://www.anthropic.com/careers/jobs" }
+      ]
+    },
+    {
+      "name": "Amazon",
+      "careersUrl": "https://www.amazon.jobs/content/en/job-categories/project-program-product-management-non-tech",
+      "jobs": [
+        { "title": "Product Manager, Amazon Fuse", "category": "Product", "location": "United States", "workplace": "See posting", "url": "https://amazon.jobs/en/jobs/10475711/product-manager-amazon-fuse" }
+      ]
+    },
+    {
+      "name": "Atlassian",
+      "careersUrl": "https://www.atlassian.com/company/careers/all-jobs",
+      "jobs": []
+    },
+    {
+      "name": "BILL",
+      "careersUrl": "https://www.bill.com/jobs",
+      "jobs": []
+    },
+    {
+      "name": "Capital One",
+      "careersUrl": "https://www.capitalonecareers.com/search-jobs",
+      "jobs": [
+        { "title": "Manager, Product Manager - Small Business Bank Digital Servicing", "category": "Product", "location": "New York, NY", "workplace": "See posting", "url": "https://www.capitalonecareers.com/search-jobs" },
+        { "title": "Senior Associate, Product Manager - Small Business Bank", "category": "Product", "location": "New York, NY", "workplace": "See posting", "url": "https://www.capitalonecareers.com/search-jobs" },
+        { "title": "Senior Director, Product Management", "category": "Product", "location": "McLean, VA", "workplace": "See posting", "url": "https://www.capitalonecareers.com/search-jobs" },
+        { "title": "Senior Manager, Product Manager - Retail Bank Platform Enablement", "category": "Product", "location": "New York, NY", "workplace": "See posting", "url": "https://www.capitalonecareers.com/search-jobs" },
+        { "title": "Senior Manager, Product Manager - Data Analysis & Governance", "category": "Product", "location": "McLean, VA", "workplace": "See posting", "url": "https://www.capitalonecareers.com/search-jobs" },
+        { "title": "Business Director, International Pricing Strategy and Operations", "category": "Operations", "location": "McLean, VA", "workplace": "See posting", "url": "https://www.capitalonecareers.com/search-jobs" }
+      ]
+    },
+    {
+      "name": "Coursedog",
+      "careersUrl": "https://www.coursedog.com/company/careers",
+      "jobs": []
+    },
+    {
+      "name": "CrowdStrike",
+      "careersUrl": "https://www.crowdstrike.com/en-us/careers/",
+      "jobs": []
+    },
+    {
+      "name": "GitHub",
+      "careersUrl": "https://www.github.careers/careers-home/jobs",
+      "jobs": [
+        { "title": "Senior Product Manager", "category": "Product", "location": "United States", "workplace": "Remote-friendly", "url": "https://www.github.careers/careers-home/jobs/5683?lang=en-us" }
+      ]
+    },
+    {
+      "name": "Klaviyo",
+      "careersUrl": "https://www.klaviyo.com/careers",
+      "jobs": []
+    },
+    {
+      "name": "Intuit",
+      "careersUrl": "https://jobs.intuit.com/category/program-management-and-business-operations-jobs/27595/8698480/1",
+      "jobs": [
+        { "title": "Principal Technical Program Manager - Data Lifecycle Management", "category": "Program", "location": "Multiple locations", "workplace": "See posting", "url": "https://jobs.intuit.com/category/program-management-and-business-operations-jobs/27595/8698480/1" },
+        { "title": "Program Manager, Service Partner Team", "category": "Program", "location": "Multiple locations", "workplace": "See posting", "url": "https://jobs.intuit.com/category/program-management-and-business-operations-jobs/27595/8698480/1" },
+        { "title": "Senior Business Operations Manager, Intuit India Strategy & Operations", "category": "Operations", "location": "Bangalore, India", "workplace": "See posting", "url": "https://jobs.intuit.com/category/program-management-and-business-operations-jobs/27595/8698480/1" }
+      ]
+    },
+    {
+      "name": "Paramount",
+      "careersUrl": "https://careers.paramount.com/jobs/?locale=en_US",
+      "jobs": []
+    },
+    {
+      "name": "Realtor.com",
+      "careersUrl": "https://careers.realtor.com/",
+      "jobs": []
+    },
+    {
+      "name": "Ro",
+      "careersUrl": "https://ro.co/careers/",
+      "jobs": [
+        { "title": "Packaging Program Manager", "category": "Program", "location": "United States", "workplace": "See posting", "url": "https://ro.co/careers/" },
+        { "title": "Senior Director, People Operations", "category": "Operations", "location": "New York, NY", "workplace": "See posting", "url": "https://ro.co/careers/" }
+      ]
+    },
+    {
+      "name": "Shopify",
+      "careersUrl": "https://www.shopify.com/careers",
+      "jobs": [
+        { "title": "Senior Lead, Product Operations, Growth", "category": "Product Operations", "location": "Americas", "workplace": "Remote", "url": "https://www.shopify.com/careers" },
+        { "title": "Senior Project Manager, Real Estate", "category": "Project", "location": "Toronto, Canada", "workplace": "See posting", "url": "https://www.shopify.com/careers" },
+        { "title": "Senior Lead, Strategy & Operations - Revenue Marketing", "category": "Operations", "location": "Americas", "workplace": "Remote", "url": "https://www.shopify.com/careers" }
+      ]
+    },
+    {
+      "name": "The New York Times",
+      "careersUrl": "https://job-boards.greenhouse.io/thenewyorktimes",
+      "jobs": [
+        { "title": "Operations Manager, International", "category": "Operations", "location": "Hong Kong / Seoul / Singapore / Tokyo", "workplace": "See posting", "url": "https://job-boards.greenhouse.io/thenewyorktimes" }
+      ]
+    },
+    {
+      "name": "Tubi",
+      "careersUrl": "https://job-boards.greenhouse.io/tubitv",
+      "jobs": [
+        { "title": "Senior Product Manager, Content Platform", "category": "Product", "location": "San Francisco, CA", "workplace": "Hybrid", "url": "https://job-boards.greenhouse.io/tubitv" },
+        { "title": "Senior Product Manager, Data Privacy & Security", "category": "Product", "location": "San Francisco, CA", "workplace": "Hybrid", "url": "https://job-boards.greenhouse.io/tubitv" },
+        { "title": "Staff Product Manager, Ads Monetization", "category": "Product", "location": "San Francisco, CA", "workplace": "Hybrid", "url": "https://job-boards.greenhouse.io/tubitv" }
+      ]
+    },
+    {
+      "name": "Zocdoc",
+      "careersUrl": "https://www.zocdoc.com/about/careers-list/",
+      "jobs": [
+        { "title": "Staff Product Manager", "category": "Product", "location": "New York, NY", "workplace": "See posting", "url": "https://www.zocdoc.com/about/careers-list/" },
+        { "title": "Staff Product Manager, Payments", "category": "Product", "location": "New York, NY", "workplace": "See posting", "url": "https://www.zocdoc.com/about/careers-list/" },
+        { "title": "Team Lead, Provider Data Operations", "category": "Operations", "location": "Pune, India", "workplace": "See posting", "url": "https://www.zocdoc.com/about/careers-list/" }
+      ]
+    }
+  ]
+}
