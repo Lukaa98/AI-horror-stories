@@ -76,7 +76,7 @@ def generate_narration_script(car_entry, model=DEFAULT_SCRIPT_MODEL):
     return response.output_text.strip()
 
 
-def synthesize_narration(text, output_path, preset=DEFAULT_VOICE_PRESET, model=DEFAULT_TTS_MODEL):
+def synthesize_narration(text, output_path, preset=DEFAULT_VOICE_PRESET, model=DEFAULT_TTS_MODEL, speed=None):
     """Render `text` to speech using one of audition_voices.py's presets,
     so a voice already chosen during auditioning carries straight through
     to real narration without redefining it here."""
@@ -91,7 +91,7 @@ def synthesize_narration(text, output_path, preset=DEFAULT_VOICE_PRESET, model=D
         voice=voice["voice"],
         input=text,
         instructions=voice["instructions"],
-        speed=voice["speed"],
+        speed=speed if speed is not None else voice["speed"],
         response_format="mp3",
     ))
     response.write_to_file(str(output_path))

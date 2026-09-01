@@ -5,7 +5,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.55";
+const UI_VERSION = "V10.56";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -13,6 +13,7 @@ const RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
 const VIDEO_TEST_TIMEOUT_MS = 60 * 60 * 1000;
 const NARRATOR_PREVIEW_TIMEOUT_MS = 20 * 60 * 1000;
+const SINGLE_CAR_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RENDER_TIMEOUT_MS = 20 * 60 * 1000;
 const RIVAL_SUGGEST_TIMEOUT_MS = 8 * 60 * 1000;
@@ -39,6 +40,11 @@ const WORKFLOW_OPTIONS = [
     id: "narrator_preview",
     label: "Narrator Preview",
     description: "Stills only, no video: find one exterior photo for a car and composite it with our narrator character in a few poses, to check how the pairing looks before building the full talking video.",
+  },
+  {
+    id: "single_car",
+    label: "Single Car Story",
+    description: "Build a fast 55-60 second narrated Short about one car using exterior, engine, interior, wheel, and detail stills with animated captions and our character.",
   },
 ];
 
@@ -186,6 +192,12 @@ function buildStructuredRequest({ workflow, make, model, focus, startYear, endYe
   const makeLabel = titleCaseWords(make);
   const modelLabel = titleCaseWords(model);
   if (!makeLabel || !modelLabel) return "";
+
+  if (workflow === "single_car") {
+    const trim = focus.trim() ? ` ${focus.trim()}` : "";
+    const years = startYear || endYear ? ` (${startYear || "any"}-${endYear || "any"})` : "";
+    return `Build one fast, approximately 60-second narrated Short about the ${makeLabel} ${modelLabel}${trim}${years}.`;
+  }
 
   if (workflow === "focused") {
     const focusLabel = titleCaseWords(focus);
@@ -575,6 +587,8 @@ export default function App() {
   const [videoProbe, setVideoProbe] = useState(null);
   const [narratorPreviewId, setNarratorPreviewId] = useState(null);
   const [narratorPreview, setNarratorPreview] = useState(null);
+  const [singleCarId, setSingleCarId] = useState(null);
+  const [singleCarResult, setSingleCarResult] = useState(null);
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
   const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
@@ -766,6 +780,55 @@ export default function App() {
       setError(String(err.message || err));
       setStage("error");
       setStatusDetail("Narrator preview failed - open the build log for details");
+    }
+  }
+
+  async function handleSingleCarShort() {
+    if (!repoOk || !make.trim() || !model.trim()) return;
+    setError(null);
+    setSingleCarResult(null);
+    const id = makeDraftId(`single-${make}-${model}`);
+    setSingleCarId(id);
+    setStage("single-car-building");
+    setStatusDetail(`Researching and building a one-minute ${titleCaseWords(make)} ${titleCaseWords(model)} story...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Single-car story for ${make.trim()} ${model.trim()} ${focus.trim()}`.trim(),
+          draft_id: id,
+          mode: "single_car",
+          make: make.trim(),
+          model: model.trim(),
+          query: focus.trim(),
+          start_year: startYear,
+          end_year: endYear,
+          voice,
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/single-car-shorts/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: SINGLE_CAR_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setSingleCarResult(await response.json());
+      setStage("single-car-done");
+      setStatusDetail("Single-car Short complete");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Single-car Short failed - open the build log for details");
     }
   }
 
@@ -1047,6 +1110,10 @@ export default function App() {
 
   function rawNarratorPreviewUrl(relativePath) {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/narrator-previews/${narratorPreviewId}/${relativePath}`;
+  }
+
+  function rawSingleCarUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/single-car-shorts/${singleCarId}/${relativePath}`;
   }
 
   function dashboardRawUrl(item, relativePath) {
@@ -1729,20 +1796,20 @@ export default function App() {
                   <input
                     value={focus}
                     onChange={(e) => setFocus(e.target.value)}
-                    placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : workflow === "narrator_preview" ? "Trim/notes (optional)" : "Used only for focused mode"}
-                    disabled={stage === "researching" || stage === "generating" || (workflow !== "focused" && workflow !== "narrator_preview")}
+                    placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : ["narrator_preview", "single_car"].includes(workflow) ? "Trim/notes (optional)" : "Used only for focused mode"}
+                    disabled={stage === "researching" || stage === "generating" || !["focused", "narrator_preview", "single_car"].includes(workflow)}
                   />
                 </label>
                 <label>
                   Start Year
-                  <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || (workflow !== "focused" && workflow !== "narrator_preview")}>
+                  <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || !["focused", "narrator_preview", "single_car"].includes(workflow)}>
                     <option value="">Any</option>
                     {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
                   </select>
                 </label>
                 <label>
                   End Year
-                  <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || (workflow !== "focused" && workflow !== "narrator_preview")}>
+                  <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || !["focused", "narrator_preview", "single_car"].includes(workflow)}>
                     <option value="">Any</option>
                     {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
                   </select>
@@ -1790,6 +1857,13 @@ export default function App() {
               disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}
             >
               {stage === "narrator-preview-testing" ? "Rendering Preview..." : "Generate Narrator Preview"}
+            </button>
+          ) : workflow === "single_car" ? (
+            <button
+              onClick={handleSingleCarShort}
+              disabled={!repoOk || !make.trim() || !model.trim() || stage === "single-car-building"}
+            >
+              {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}
             </button>
           ) : (
             <>
@@ -2054,6 +2128,9 @@ export default function App() {
       {stage === "narrator-preview-testing" && (
         <p className="status">Finding an exterior photo and compositing the narrator over it -- stills only, no video...</p>
       )}
+      {stage === "single-car-building" && (
+        <p className="status">Researching verified facts, gathering scene-matched car stills, generating faster narration, and rendering the animated character...</p>
+      )}
 
       {videoProbe && (
         <section className="video-probe-panel">
@@ -2111,6 +2188,24 @@ export default function App() {
               <article className="video-probe-card" key={relativePath}>
                 <img src={rawNarratorPreviewUrl(relativePath)} alt="Narrator preview composite" />
               </article>
+            ))}
+          </div>
+        </section>
+      )}
+      {singleCarResult && (
+        <section className="video-probe-panel">
+          <h2>{singleCarResult.title || `${singleCarResult.car?.make} ${singleCarResult.car?.model}`}</h2>
+          <p className="rationale">
+            {singleCarResult.word_count} words at {singleCarResult.tts_speed}x voice speed; {Number(singleCarResult.duration_seconds || 0).toFixed(1)} seconds.
+          </p>
+          {singleCarResult.video && <video controls src={rawSingleCarUrl(singleCarResult.video)} preload="metadata" />}
+          <div className="narration-scroll">
+            <div className="narration-entry"><strong>Script</strong><p>{singleCarResult.script}</p></div>
+            {(singleCarResult.scenes || []).map((scene, index) => (
+              <div className="narration-entry" key={index}>
+                <strong>{scene.headline || `Scene ${index + 1}`}</strong>
+                <p>{scene.fact}</p>
+              </div>
             ))}
           </div>
         </section>

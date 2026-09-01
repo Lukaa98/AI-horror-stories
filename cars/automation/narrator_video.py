@@ -20,9 +20,9 @@ from moviepy.editor import (
 
 from generate_sample import ROOT, CANVAS, _font, _wrap
 
-SPRITES_DIR = ROOT / "narrator" / "render" / "sprites"
+SPRITES_DIR = ROOT / "narrator" / "sprites"
 MAX_CAR_RATIO = 0.42
-CAPTION_CHUNK_WORDS = 4
+CAPTION_CHUNK_WORDS = 1
 
 
 def _load_sprites_manifest():
@@ -69,7 +69,18 @@ def _caption_chunks(script, duration, words_per_chunk=CAPTION_CHUNK_WORDS):
     ]
 
 
-def _caption_frame(size, text, center_y, out_path):
+def _caption_timeline(manifest, duration):
+    aligned = list(manifest.get("word_timeline") or [])
+    if aligned:
+        return [
+            (str(item["word"]).strip(), float(item["start"]), min(duration, float(item["end"])))
+            for item in aligned
+            if str(item.get("word") or "").strip() and float(item.get("end", 0)) > float(item.get("start", 0))
+        ]
+    return _caption_chunks(manifest["script"], duration)
+
+
+def _caption_frame(size, text, center_y, out_path, fill=(238, 44, 44), font_size=64):
     """Render a full-canvas-sized transparent image with the caption
     baked in at an absolute position, matching how _label_frame/
     _intro_frame in battle_engine.py already work -- the caller places the
@@ -79,12 +90,12 @@ def _caption_frame(size, text, center_y, out_path):
     scale = width / 1080
     canvas = Image.new("RGBA", size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(canvas)
-    font = _font(int(64 * scale))
+    font = _font(int(font_size * scale))
     wrapped = _wrap(draw, text.upper(), font, int(width * 0.85), max_lines=2)
     bbox = draw.multiline_textbbox((0, 0), wrapped, font=font, spacing=int(10 * scale))
     draw.multiline_text(
         (width / 2 - (bbox[2] - bbox[0]) / 2, center_y - (bbox[3] - bbox[1]) / 2),
-        wrapped, font=font, fill=(255, 214, 64), spacing=int(10 * scale),
+        wrapped, font=font, fill=fill, spacing=int(10 * scale),
         align="center", stroke_width=max(2, int(3 * scale)), stroke_fill=(0, 0, 0),
     )
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -127,7 +138,7 @@ def _car_track(media_paths, size, duration):
 
     per_media = max(1.0, duration / len(media_paths))
     clips = []
-    for path in media_paths:
+    for index, path in enumerate(media_paths):
         path = Path(path)
         if path.suffix.lower() in {".mp4", ".mov", ".webm"}:
             raw = VideoFileClip(str(path))
@@ -135,7 +146,18 @@ def _car_track(media_paths, size, duration):
         else:
             clip = ImageClip(str(path)).set_duration(per_media)
         fitted = _fit_content(clip, (size[0], max_h))
-        clips.append(fitted.on_color(size=(size[0], max_h), color=(255, 255, 255), pos=("center", "center")))
+        # Small vertical float prevents stills from looking pinned in place;
+        # the first car also enters from the left like the format reference.
+        base_x = (size[0] - fitted.w) / 2
+        base_y = (max_h - fitted.h) / 2
+        moving = fitted.set_position(lambda t, i=index, x=base_x, y=base_y: (
+            x - max(0, 1 - t / 0.55) * size[0] if i == 0 else x,
+            y + 4 * __import__("math").sin(t * 1.7),
+        ))
+        clips.append(CompositeVideoClip([
+            ColorClip(size=(size[0], max_h), color=(255, 255, 255)).set_duration(per_media),
+            moving,
+        ], size=(size[0], max_h)).set_duration(per_media))
 
     track = concatenate_videoclips(clips, method="compose")
     # concatenate_videoclips' total can drift slightly from `duration`
@@ -153,7 +175,11 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     duration = audio.duration
 
     narrator_clip = _narrator_track(manifest, sprites, size, duration)
-    narrator_positioned = narrator_clip.set_position(("center", size[1] - narrator_clip.h))
+    narrator_x = (size[0] - narrator_clip.w) / 2
+    narrator_y = size[1] - narrator_clip.h
+    narrator_positioned = narrator_clip.set_position(
+        lambda t: (narrator_x + 3 * __import__("math").sin(t * 1.15), narrator_y + 3 * __import__("math").sin(t * 1.65))
+    )
 
     car_clip = _car_track(car_media_paths, size, duration)
     car_positioned = car_clip.set_position(("center", 0))
@@ -166,12 +192,26 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     caption_clips = [
         ImageClip(str(_caption_frame_path(output_path, text, start, caption_center_y, size)))
         .set_start(start).set_duration(end - start).set_position((0, 0))
-        for text, start, end in _caption_chunks(manifest["script"], duration)
+        for text, start, end in _caption_timeline(manifest, duration)
     ]
+    scenes = list(manifest.get("scenes") or [])
+    scene_duration = duration / len(scenes) if scenes else duration
+    headline_clips = []
+    for index, scene in enumerate(scenes):
+        headline = str(scene.get("headline") or "").strip()
+        if not headline:
+            continue
+        start = index * scene_duration
+        end = min(duration, (index + 1) * scene_duration)
+        frame_path = output_path.parent / "_frames" / f"headline-{index}.png"
+        _caption_frame(size, headline, int(size[1] * 0.09), frame_path, fill=(255, 214, 64), font_size=92)
+        headline_clips.append(
+            ImageClip(str(frame_path)).set_start(start).set_duration(end - start).set_position((0, 0))
+        )
 
     background = ColorClip(size=size, color=(255, 255, 255)).set_duration(duration)
     video = CompositeVideoClip(
-        [background, car_positioned, *caption_clips, narrator_positioned], size=size
+        [background, car_positioned, *headline_clips, *caption_clips, narrator_positioned], size=size
     ).set_duration(duration).set_audio(audio)
 
     video.write_videofile(
