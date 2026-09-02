@@ -1,19 +1,22 @@
 // Renders narrator/narrator-rig.html to a fixed set of transparent PNG
-// sprites, one per mouth x eyes x pose combination the video compositor
-// (cars/automation/narrator_video.py) can reference. This trades a full
-// per-frame video render of the HTML/CSS rig for a cheap flipbook: the
-// Python compositor swaps between these sprites according to the mouth
-// timeline (loudness-driven) and a pose cycle (time-driven) instead of
-// driving a browser for every output frame.
+// sprites, one per mouth x eyes x flicker-pose combination the video
+// compositor (cars/automation/narrator_video.py) can reference. This trades
+// a full per-frame video render of the HTML/CSS rig for a cheap flipbook:
+// the Python compositor swaps between these sprites according to the mouth
+// timeline (loudness-driven) and a flicker cycle (time-driven), and applies
+// the smooth body lean itself as a continuous per-frame rotation, instead
+// of driving a browser for every output frame.
 //
 // Idle animations (arm sway, head bob, body sway, line flicker, the wobble
 // filter) are disabled before capture so every sprite is a clean,
 // reproducible snapshot rather than an arbitrary frame of a running CSS
-// animation -- each of the 3 POSES below instead bakes in one fixed
-// snapshot of what those animations do (a body lean, a stroke-width step,
-// an arm angle, a brow state), so cycling through poses over time in
-// narrator_video.py approximates the same motion a flipbook can't render
-// continuously.
+// animation. The body-wide lean is smooth and continuous in CSS, but baking
+// several lean angles into discrete sprites and cycling through them made it
+// look like a jerky snap between 3 pictures instead of a smooth motion, so
+// that lean is applied at the video-compositing level instead (see
+// narrator_video.py's _apply_body_sway) -- the two POSES below only bake in
+// the fast, small hand-drawn "redraw" flicker (line weight + a tiny arm/brow
+// twitch), which is meant to read as a discrete jump-cut, not a smooth one.
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -24,35 +27,18 @@ const RIG_PATH = path.join(__dirname, "..", "narrator-rig.html");
 
 const MOUTHS = ["closed", "small", "wide", "smile"];
 const EYES = ["open", "blink"];
-// Freezing every idle animation for a static-per-mouth-state export made the
-// flipbook read as a stuck body with only a moving mouth -- these three
-// poses bake in a snapshot of the body sway, line-flicker, arm position, and
-// brow lift the rig's idle CSS animations already do, so narrator_video.py
-// can cycle through them over time the same way it already cycles mouths.
 const POSES = {
-  a: {
-    body: "rotate(-0.8deg) translateX(-2px)",
+  steady: {
     strokeWidth: 4.5,
-    armLeft: "rotate(-2deg)",
-    armRight: "rotate(2deg)",
-    head: "rotate(-1.5deg) translateY(0px)",
+    armLeft: "rotate(-1deg)",
+    armRight: "rotate(1deg)",
     brows: "neutral",
   },
-  b: {
-    body: "rotate(0deg) translateX(0px)",
-    strokeWidth: 4.8,
-    armLeft: "rotate(0deg)",
-    armRight: "rotate(0deg)",
-    head: "rotate(0deg) translateY(-2px)",
-    brows: "talk",
-  },
-  c: {
-    body: "rotate(0.8deg) translateX(2px)",
+  jolt: {
     strokeWidth: 4.2,
-    armLeft: "rotate(2deg)",
-    armRight: "rotate(-2deg)",
-    head: "rotate(1.5deg) translateY(-4px)",
-    brows: "neutral",
+    armLeft: "rotate(1deg)",
+    armRight: "rotate(-1deg)",
+    brows: "talk",
   },
 };
 
@@ -118,11 +104,9 @@ async function main() {
     for (const [poseName, pose] of Object.entries(POSES)) {
       await page.evaluate((pose) => {
         const charEl = document.getElementById("character");
-        charEl.style.transform = pose.body;
         charEl.style.strokeWidth = String(pose.strokeWidth);
         document.querySelector(".arm-left").style.transform = pose.armLeft;
         document.querySelector(".arm-right").style.transform = pose.armRight;
-        document.getElementById("headGroup").style.transform = pose.head;
         const neutral = document.querySelector(".brows-neutral");
         const raised = document.querySelector(".brows-raised");
         const talk = document.querySelector(".brows-talk");

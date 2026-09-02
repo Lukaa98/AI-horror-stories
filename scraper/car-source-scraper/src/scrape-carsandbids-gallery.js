@@ -521,6 +521,16 @@ function candidateLooksRelevant(candidate, { auctionId, makeToken, modelToken, q
   return Boolean(strongModelMatch || queryMatches >= 2);
 }
 
+// scoreCandidate ranks "interior" a little above "exterior" (18 vs 12), and
+// a gallery frequently has far more cabin/dashboard/seat shots than clean
+// exterior ones -- so the uncapped fill-to-8 pass below used to just take
+// the next-highest-scoring candidates regardless of label, which in a
+// gallery skewed that way silently filled most of the 8 download slots
+// with more interior shots. Capping how many of each type can be picked
+// keeps the download set from being dominated by one type before the AI/
+// heuristic review even gets a chance to pick good exterior angles.
+const MAX_CANDIDATES_PER_LABEL = { interior: 2, engine: 2, detail: 2, wheel: 1, highlight: 1 };
+
 function chooseImages(candidates, desiredLabels, queryTokens) {
   const ranked = candidates
     .map((candidate) => ({ ...candidate, score: scoreCandidate(candidate, desiredLabels, queryTokens) }))
@@ -528,7 +538,11 @@ function chooseImages(candidates, desiredLabels, queryTokens) {
 
   const chosen = [];
   const used = new Set();
-  const targetOrder = ["front", "rear", "interior", "engine", "highlight", "detail", "exterior"];
+  // Establishing exterior angles come first, one of each -- exterior
+  // variety takes priority over cabin/engine/detail shots so a video isn't
+  // dominated by whichever type this particular gallery happened to have
+  // the most (or highest-scoring) candidates for.
+  const targetOrder = ["front", "rear", "exterior", "engine", "interior", "highlight", "detail"];
 
   for (const target of targetOrder) {
     const match = ranked.find((candidate) => !used.has(candidate.url) && candidate.labels.includes(target));
@@ -538,6 +552,23 @@ function chooseImages(candidates, desiredLabels, queryTokens) {
     }
   }
 
+  const labelCounts = {};
+  for (const item of chosen) labelCounts[item.primaryLabel] = (labelCounts[item.primaryLabel] || 0) + 1;
+
+  for (const candidate of ranked) {
+    if (chosen.length >= 8) break;
+    if (used.has(candidate.url)) continue;
+    const label = candidate.labels[0] || "exterior";
+    const cap = MAX_CANDIDATES_PER_LABEL[label];
+    if (cap != null && (labelCounts[label] || 0) >= cap) continue;
+    used.add(candidate.url);
+    labelCounts[label] = (labelCounts[label] || 0) + 1;
+    chosen.push({ ...candidate, primaryLabel: label });
+  }
+
+  // Caps only skip candidates, they never shrink the target of 8 -- if this
+  // gallery genuinely doesn't have 8 diverse shots, fall back to whatever's
+  // left (even over-represented types) rather than shipping an undersized set.
   for (const candidate of ranked) {
     if (chosen.length >= 8) break;
     if (used.has(candidate.url)) continue;

@@ -4,14 +4,19 @@ the manifest.json that narrator_script.py produces (script text, narration
 audio, and an audio-loudness mouth timeline).
 
 The narrator itself is not rendered live; export-sprites.js pre-renders it
-to a fixed set of transparent PNGs (one per mouth x eyes x pose
+to a fixed set of transparent PNGs (one per mouth x eyes x flicker-pose
 combination) and this flips between them like a flipbook: mouth state
-follows the audio-loudness mouth_timeline, while pose and blink follow
-their own fixed-clock timelines defined below, rather than driving a
-browser for every output frame.
+follows the audio-loudness mouth_timeline, the flicker pose follows its own
+fast fixed-clock timeline, and eyes follow a blink timeline, rather than
+driving a browser for every output frame. The one exception is the body's
+idle lean, which is smooth and continuous in the interactive rig -- baking
+that into discrete sprites and cycling through them made it look like a
+jerky snap between pictures instead of a smooth sway, so it's applied here
+as a continuous per-frame rotation instead (_apply_body_sway).
 """
 import argparse
 import json
+import math
 from pathlib import Path
 
 from PIL import Image, ImageDraw
@@ -23,26 +28,44 @@ from moviepy.editor import (
 from generate_sample import ROOT, CANVAS, _font, _wrap
 
 SPRITES_DIR = ROOT / "narrator" / "sprites"
-# Car media zone height as a fraction of the canvas -- kept smaller than a
-# near-half split so the narrator (and the caption sitting between the two)
-# reads as the focal point instead of the media dominating the frame.
-MAX_CAR_RATIO = 0.34
+# The top of the frame is a stack of three bands, top to bottom: a headline
+# band, the car media itself, then a caption band -- in that order so
+# neither piece of text sits on top of the picture the way it used to when
+# both were just absolutely positioned over the whole top region. Together
+# they're kept smaller than a near-half split so the narrator reads as the
+# focal point instead of the media dominating the frame.
+TOP_STACK_RATIO = 0.40
+HEADLINE_ZONE_RATIO = 0.095
+CAPTION_ZONE_RATIO = 0.075
+# Margin on every edge of the media's own band -- the picture is inset
+# instead of stretched edge-to-edge, so it reads as a framed photo rather
+# than a banner.
+MEDIA_INSET_RATIO = 0.125
 CAPTION_CHUNK_WORDS = 1
 
 # The sprite flipbook only ever varied by mouth state, so the rendered
 # character read as "a stuck body with a moving mouth" even though the
 # interactive rig (narrator-rig.html) has idle body sway, a line-flicker,
-# arm sway, and brow lift. export-sprites.js now bakes those into 3 fixed
-# "pose" snapshots (a/b/c); cycling through them here on a fixed clock -- the
-# same trick the mouth timeline already uses, just time-driven instead of
-# loudness-driven -- gets that motion into the actual video instead of only
-# ever appearing in the live rig preview.
-POSE_CYCLE = ["a", "b", "c"]
-POSE_SEGMENT_SECONDS = 0.7
+# arm sway, and brow lift. export-sprites.js now bakes the fast, small
+# hand-drawn "redraw" flicker (line weight + a tiny arm/brow twitch) into 2
+# fixed poses (steady/jolt); cycling through them here on a fixed clock --
+# the same trick the mouth timeline already uses, just time-driven instead
+# of loudness-driven -- gets that motion into the actual video instead of
+# only ever appearing in the live rig preview. The slower body-wide lean is
+# handled separately below (_apply_body_sway) as a continuous rotation,
+# since baking that into the same discrete cycle read as jerky rather than
+# a smooth sway.
+POSE_CYCLE = ["steady", "jolt"]
+POSE_SEGMENT_SECONDS = 0.35
 # A blink timeline of its own -- the flipbook otherwise defaults to
 # permanently-open eyes for the whole video.
 BLINK_START_SECONDS = 1.2
 BLINK_INTERVAL_SECONDS = 3.0
+# Smooth, continuous body lean -- matches the rig's bodySway keyframes
+# (rotate -0.8deg..0.8deg over ~4.6s), applied as a per-frame rotation
+# instead of discrete sprite poses so it doesn't read as a jerky snap.
+BODY_SWAY_DEGREES = 0.8
+BODY_SWAY_PERIOD_SECONDS = 4.6
 BLINK_DURATION_SECONDS = 0.12
 
 
@@ -160,6 +183,26 @@ def _merged_boundaries(interval_lists, duration):
     return sorted(bounds)
 
 
+def _media_zone_geometry(size):
+    """Pixel geometry for the headline/media/caption stack.
+
+    Returns (headline_center_y, media_box, caption_center_y) where
+    media_box is (x, y, w, h) -- the inset box the car media is fit and
+    centered into, leaving a visible margin on every edge instead of
+    spanning the full band.
+    """
+    headline_h = size[1] * HEADLINE_ZONE_RATIO
+    caption_h = size[1] * CAPTION_ZONE_RATIO
+    band_h = size[1] * TOP_STACK_RATIO - headline_h - caption_h
+    media_w = size[0] * (1 - 2 * MEDIA_INSET_RATIO)
+    media_h = band_h * (1 - 2 * MEDIA_INSET_RATIO)
+    media_x = (size[0] - media_w) / 2
+    media_y = headline_h + band_h * MEDIA_INSET_RATIO
+    headline_center_y = headline_h / 2
+    caption_center_y = headline_h + band_h + caption_h / 2
+    return headline_center_y, (media_x, media_y, media_w, media_h), caption_center_y
+
+
 def _narrator_track(manifest, sprites, size, duration):
     """One ImageClip per merged mouth/pose/blink segment, sprite-swapped.
 
@@ -170,7 +213,7 @@ def _narrator_track(manifest, sprites, size, duration):
     segment has one unambiguous (mouth, eyes, pose) sprite for its whole
     duration.
     """
-    max_h = int(size[1] * (1 - MAX_CAR_RATIO))
+    max_h = int(size[1] * (1 - TOP_STACK_RATIO))
     mouth_timeline = list(manifest.get("mouth_timeline") or [])
     if not mouth_timeline:
         mouth_timeline = [{"start": 0, "end": duration, "mouth": "closed"}]
@@ -205,10 +248,14 @@ def _narrator_track(manifest, sprites, size, duration):
     return _fit_content(track, (size[0], max_h))
 
 
-def _car_track(media_paths, size, duration):
-    max_h = int(size[1] * MAX_CAR_RATIO)
+def _car_track(media_paths, box_size, duration):
+    """Renders the car media into a box of exactly box_size -- the caller
+    positions that box within the inset media band (see
+    _media_zone_geometry), so this only needs to fit/center content and
+    animate it within its own bounds."""
+    box_w, box_h = box_size
     if not media_paths:
-        return ColorClip(size=(size[0], max_h), color=(255, 255, 255)).set_duration(duration)
+        return ColorClip(size=(box_w, box_h), color=(255, 255, 255)).set_duration(duration)
 
     per_media = max(1.0, duration / len(media_paths))
     clips = []
@@ -219,25 +266,34 @@ def _car_track(media_paths, size, duration):
             clip = raw.subclip(0, min(per_media, raw.duration))
         else:
             clip = ImageClip(str(path)).set_duration(per_media)
-        fitted = _fit_content(clip, (size[0], max_h))
+        fitted = _fit_content(clip, (box_w, box_h))
         # Small vertical float prevents stills from looking pinned in place;
         # the first car also enters from the left like the format reference.
-        base_x = (size[0] - fitted.w) / 2
-        base_y = (max_h - fitted.h) / 2
+        base_x = (box_w - fitted.w) / 2
+        base_y = (box_h - fitted.h) / 2
         moving = fitted.set_position(lambda t, i=index, x=base_x, y=base_y: (
-            x - max(0, 1 - t / 0.55) * size[0] if i == 0 else x,
-            y + 4 * __import__("math").sin(t * 1.7),
+            x - max(0, 1 - t / 0.55) * box_w if i == 0 else x,
+            y + 4 * math.sin(t * 1.7),
         ))
         clips.append(CompositeVideoClip([
-            ColorClip(size=(size[0], max_h), color=(255, 255, 255)).set_duration(per_media),
+            ColorClip(size=(box_w, box_h), color=(255, 255, 255)).set_duration(per_media),
             moving,
-        ], size=(size[0], max_h)).set_duration(per_media))
+        ], size=(box_w, box_h)).set_duration(per_media))
 
     track = concatenate_videoclips(clips, method="compose")
     # concatenate_videoclips' total can drift slightly from `duration`
     # (per-media rounding, a short final source clip) -- clamp explicitly
     # so the car track and narrator track never fall out of sync.
     return track.set_duration(duration)
+
+
+def _apply_body_sway(clip):
+    """Smooth, continuous idle lean -- a per-frame rotation instead of
+    baking several lean angles into discrete sprites, which read as a
+    jerky snap between pictures rather than a smooth sway."""
+    def angle(t):
+        return BODY_SWAY_DEGREES * math.sin(2 * math.pi * t / BODY_SWAY_PERIOD_SECONDS)
+    return clip.rotate(angle, expand=False)
 
 
 def render_narrator_video(car_media_paths, manifest, output_path):
@@ -248,26 +304,22 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     audio = AudioFileClip(manifest["audio_path"])
     duration = audio.duration
 
-    narrator_clip = _narrator_track(manifest, sprites, size, duration)
+    narrator_clip = _apply_body_sway(_narrator_track(manifest, sprites, size, duration))
     narrator_x = (size[0] - narrator_clip.w) / 2
     narrator_y = size[1] - narrator_clip.h
     narrator_positioned = narrator_clip.set_position(
-        lambda t: (narrator_x + 3 * __import__("math").sin(t * 1.15), narrator_y + 3 * __import__("math").sin(t * 1.65))
+        lambda t: (narrator_x + 3 * math.sin(t * 1.15), narrator_y + 3 * math.sin(t * 1.65))
     )
 
-    car_clip = _car_track(car_media_paths, size, duration)
-    # A small top margin instead of flush-to-the-edge -- pinned to the very
-    # top read as cropped/cut off against the white background.
-    car_top_margin = int(size[1] * 0.04)
-    car_positioned = car_clip.set_position(("center", car_top_margin))
+    headline_center_y, media_box, caption_center_y = _media_zone_geometry(size)
+    media_x, media_y, media_w, media_h = media_box
+    car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration)
+    car_positioned = car_clip.set_position((media_x, media_y))
 
-    # Sit on the lower part of the car-media zone (like "ENGINE" /
-    # "REAR WHEEL DRIVE" captions in the reference channel), not in the
-    # gap between car and narrator -- there isn't room there once the
-    # narrator occupies the rest of the frame.
-    caption_center_y = int(size[1] * MAX_CAR_RATIO) - 90 + car_top_margin
+    # The caption band sits below the picture, not on top of it -- distinct
+    # from the headline band above the picture.
     caption_clips = [
-        ImageClip(str(_caption_frame_path(output_path, text, start, caption_center_y, size)))
+        ImageClip(str(_caption_frame_path(output_path, text, start, int(caption_center_y), size)))
         .set_start(start).set_duration(end - start).set_position((0, 0))
         for text, start, end in _caption_timeline(manifest, duration)
     ]
@@ -281,7 +333,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         start = index * scene_duration
         end = min(duration, (index + 1) * scene_duration)
         frame_path = output_path.parent / "_frames" / f"headline-{index}.png"
-        _caption_frame(size, headline, int(size[1] * 0.09), frame_path, fill=(255, 214, 64), font_size=92)
+        _caption_frame(size, headline, int(headline_center_y), frame_path, fill=(255, 214, 64), font_size=92)
         headline_clips.append(
             ImageClip(str(frame_path)).set_start(start).set_duration(end - start).set_position((0, 0))
         )

@@ -48,7 +48,7 @@ def test_real_word_timestamps_override_estimated_caption_timing():
 def test_pose_intervals_cycle_and_cover_the_full_duration():
     intervals = _pose_intervals(2.0)
     assert intervals[0][0] == 0.0
-    assert intervals[-1][2] in {"a", "b", "c"}
+    assert intervals[-1][2] in {"steady", "jolt"}
     for (_, end, _), (next_start, _, _) in zip(intervals, intervals[1:]):
         assert end == next_start
     assert intervals[-1][1] == 2.0
