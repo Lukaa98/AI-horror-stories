@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.84";
+const UI_VERSION = "V10.85";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -18,6 +18,7 @@ const SINGLE_CAR_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const BATTLE_RENDER_TIMEOUT_MS = 20 * 60 * 1000;
 const RIVAL_SUGGEST_TIMEOUT_MS = 8 * 60 * 1000;
+const VOICE_AUDITION_TIMEOUT_MS = 8 * 60 * 1000;
 const MIN_BATTLE_CARS = 3;
 const MAX_BATTLE_CARS = 5;
 const YEAR_OPTIONS = Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => String(new Date().getFullYear() - index));
@@ -46,6 +47,11 @@ const WORKFLOW_OPTIONS = [
     id: "single_car",
     label: "Single Car Story",
     description: "Build a fast 55-60 second narrated Short about one car using exterior, engine, interior, wheel, and detail stills with animated captions and our character.",
+  },
+  {
+    id: "voice_audition",
+    label: "Voice Auditions",
+    description: "Read a fixed sample script in every narrator voice preset (current + British options) with no research, scraping, or video render -- ready in well under a minute instead of a 20+ minute full build.",
   },
 ];
 
@@ -612,6 +618,8 @@ export default function App() {
   const [narratorPreview, setNarratorPreview] = useState(null);
   const [singleCarId, setSingleCarId] = useState(null);
   const [singleCarResult, setSingleCarResult] = useState(null);
+  const [voiceAuditionId, setVoiceAuditionId] = useState(null);
+  const [voiceAudition, setVoiceAudition] = useState(null);
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
   const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
@@ -804,6 +812,50 @@ export default function App() {
       setError(String(err.message || err));
       setStage("error");
       setStatusDetail("Narrator preview failed - open the build log for details");
+    }
+  }
+
+  async function handleVoiceAudition() {
+    if (!repoOk) return;
+    setError(null);
+    setVoiceAudition(null);
+    const id = makeDraftId("voice-audition");
+    setVoiceAuditionId(id);
+    setStage("voice-audition-testing");
+    setStatusDetail("Reading the sample script in every voice preset...");
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: "Voice audition sample",
+          draft_id: id,
+          mode: "voice_audition",
+          voice,
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/voice-auditions/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: VOICE_AUDITION_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setVoiceAudition(await response.json());
+      setStage("voice-audition-done");
+      setStatusDetail("Voice auditions ready");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Voice audition failed - open the build log for details");
     }
   }
 
@@ -1134,6 +1186,10 @@ export default function App() {
 
   function rawNarratorPreviewUrl(relativePath) {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/narrator-previews/${narratorPreviewId}/${relativePath}`;
+  }
+
+  function rawVoiceAuditionUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/voice-auditions/${relativePath}`;
   }
 
   function rawSingleCarUrl(relativePath) {
@@ -2021,6 +2077,13 @@ export default function App() {
             >
               {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}
             </button>
+          ) : workflow === "voice_audition" ? (
+            <button
+              onClick={handleVoiceAudition}
+              disabled={!repoOk || stage === "voice-audition-testing"}
+            >
+              {stage === "voice-audition-testing" ? "Reading Sample Script..." : "Generate Voice Auditions"}
+            </button>
           ) : (
             <>
               <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}>
@@ -2287,6 +2350,9 @@ export default function App() {
       {stage === "single-car-building" && (
         <p className="status">Researching verified facts, gathering scene-matched car stills, generating faster narration, and rendering the animated character...</p>
       )}
+      {stage === "voice-audition-testing" && (
+        <p className="status">Reading the sample script in every voice preset -- no research, scraping, or video render...</p>
+      )}
 
       {videoProbe && (
         <section className="video-probe-panel">
@@ -2361,6 +2427,24 @@ export default function App() {
               <div className="narration-entry" key={index}>
                 <strong>{scene.headline || `Scene ${index + 1}`}</strong>
                 <p>{scene.fact}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {voiceAudition && (
+        <section className="video-probe-panel">
+          <h2>Voice Auditions</h2>
+          <p className="rationale">Same sample script, read in every preset below -- listen and pick one.</p>
+          <p className="hint">{voiceAudition.text}</p>
+          <div className="voice-audition-list">
+            {Object.entries(voiceAudition.files || {}).map(([preset, relativePath]) => (
+              <div className="voice-audition-item" key={preset}>
+                <span>
+                  {preset.replaceAll("_", " ")}
+                  {preset === voiceAudition.chosen_preset ? " (current)" : ""}
+                </span>
+                <audio controls preload="none" src={rawVoiceAuditionUrl(relativePath)} />
               </div>
             ))}
           </div>

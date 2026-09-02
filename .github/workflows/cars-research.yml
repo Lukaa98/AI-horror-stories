@@ -16,7 +16,7 @@ on:
         required: true
         type: string
       mode:
-        description: "Full ranking research, video test, startup battle, rival suggestion, narrator preview, or single-car short"
+        description: "Full ranking research, video test, startup battle, rival suggestion, narrator preview, single-car short, or voice audition"
         required: false
         type: choice
         default: research
@@ -27,6 +27,7 @@ on:
           - suggest_rivals
           - narrator_preview
           - single_car
+          - voice_audition
       make:
         description: "Vehicle make for video mode"
         required: false
@@ -96,7 +97,7 @@ jobs:
           cache-dependency-path: requirements.txt
 
       - uses: actions/setup-node@v4
-        if: ${{ inputs.mode != 'suggest_rivals' }}
+        if: ${{ inputs.mode != 'suggest_rivals' && inputs.mode != 'voice_audition' }}
         with:
           node-version: "20"
           cache: npm
@@ -115,17 +116,17 @@ jobs:
         run: pip install openai python-dotenv
 
       - name: Install scraper dependencies
-        if: ${{ inputs.mode != 'suggest_rivals' }}
+        if: ${{ inputs.mode != 'suggest_rivals' && inputs.mode != 'voice_audition' }}
         working-directory: scraper/car-source-scraper
         run: npm ci
 
       - name: Install Puppeteer Linux deps
-        if: ${{ inputs.mode != 'suggest_rivals' }}
+        if: ${{ inputs.mode != 'suggest_rivals' && inputs.mode != 'voice_audition' }}
         working-directory: scraper/car-source-scraper
         run: bash scripts/install-linux-deps.sh
 
       - name: Install ffmpeg
-        if: ${{ inputs.mode != 'suggest_rivals' }}
+        if: ${{ inputs.mode != 'suggest_rivals' && inputs.mode != 'voice_audition' }}
         run: |
           if ! command -v ffmpeg >/dev/null 2>&1; then
             sudo apt-get update
@@ -209,6 +210,15 @@ jobs:
             --short-id "${{ inputs.draft_id }}" \
             --voice "${{ inputs.voice || 'onyx' }}" \
             "${YEAR_ARGS[@]}"
+
+      - name: Run voice audition
+        if: ${{ inputs.mode == 'voice_audition' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python cars/automation/voice_audition_request.py \
+            --audition-id "${{ inputs.draft_id }}" \
+            --preset "${{ inputs.voice || 'onyx' }}"
 
       - name: Commit draft
         if: ${{ inputs.mode == 'research' }}
@@ -360,5 +370,30 @@ jobs:
           cp -R "$tmp_dir/cars/single-car-shorts/${{ inputs.draft_id }}" "cars/single-car-shorts/${{ inputs.draft_id }}"
           git add "cars/single-car-shorts/${{ inputs.draft_id }}"
           git commit -m "cars: single-car short ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit voice audition
+        if: ${{ inputs.mode == 'voice_audition' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/voice-auditions"
+          cp -R "cars/voice-auditions/${{ inputs.draft_id }}" "$tmp_dir/cars/voice-auditions/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p cars/voice-auditions
+          rm -rf "cars/voice-auditions/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/voice-auditions/${{ inputs.draft_id }}" "cars/voice-auditions/${{ inputs.draft_id }}"
+          git add "cars/voice-auditions/${{ inputs.draft_id }}"
+          git commit -m "cars: voice audition ${{ inputs.draft_id }}" || exit 0
           git pull --rebase origin "${OUTPUT_BRANCH}" || true
           git push origin "${OUTPUT_BRANCH}"
