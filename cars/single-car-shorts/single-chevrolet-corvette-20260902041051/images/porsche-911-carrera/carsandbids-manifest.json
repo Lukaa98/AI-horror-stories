@@ -1,0 +1,567 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-02T04:19:11.693Z",
+  "query": "Porsche 911 Carrera",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/porsche/911?start_year=2010&end_year=2010&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3Ln4xgMy/2010-porsche-911-carrera-s-cabriolet",
+      "title": "2010 Porsche 911 Carrera S Cabriolet",
+      "text": "FEATURED Sold for $81,000",
+      "titleYear": 2010,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gyWbD5G/2010-porsche-911-carrera-s-coupe",
+      "title": "2010 Porsche 911 Carrera S Coupe",
+      "text": "Sold for $75,997",
+      "titleYear": 2010,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K1eX6a6n/2010-porsche-911-carrera-4s-coupe",
+      "title": "2010 Porsche 911 Carrera 4s Coupe",
+      "text": "Bid to $69,000",
+      "titleYear": 2010,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98lDpx8Y/2010-porsche-911-carrera-4s-cabriolet",
+      "title": "2010 Porsche 911 Carrera 4s Cabriolet",
+      "text": "Sold for $65,000",
+      "titleYear": 2010,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/361bovqB/2010-porsche-911-carrera-4s-coupe",
+      "title": "2010 Porsche 911 Carrera 4s Coupe",
+      "text": "Sold for $55,997",
+      "titleYear": 2010,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3OW4oYB6/2010-porsche-911-carrera-4s-coupe",
+      "title": "2010 Porsche 911 Carrera 4s Coupe",
+      "text": "Sold for $55,555",
+      "titleYear": 2010,
+      "score": 88
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3Ln4xgMy/2010-porsche-911-carrera-s-cabriolet",
+      "title": "2010 Porsche 911 Carrera S Cabriolet",
+      "text": "FEATURED Sold for $81,000",
+      "titleYear": 2010,
+      "score": 88,
+      "usable_image_count": 17,
+      "sale_price": 81000,
+      "sale_type": "sold",
+      "page_title": "2010 Porsche 911 Carrera S Cabriolet"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gyWbD5G/2010-porsche-911-carrera-s-coupe",
+      "title": "2010 Porsche 911 Carrera S Coupe",
+      "text": "Sold for $75,997",
+      "titleYear": 2010,
+      "score": 88,
+      "usable_image_count": 22,
+      "sale_price": 75997,
+      "sale_type": "sold",
+      "page_title": "2010 Porsche 911 Carrera S Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K1eX6a6n/2010-porsche-911-carrera-4s-coupe",
+      "title": "2010 Porsche 911 Carrera 4s Coupe",
+      "text": "Bid to $69,000",
+      "titleYear": 2010,
+      "score": 88,
+      "usable_image_count": 22,
+      "sale_price": 69000,
+      "sale_type": "bid_to",
+      "page_title": "2010 Porsche 911 Carrera 4S Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98lDpx8Y/2010-porsche-911-carrera-4s-cabriolet",
+      "title": "2010 Porsche 911 Carrera 4s Cabriolet",
+      "text": "Sold for $65,000",
+      "titleYear": 2010,
+      "score": 88,
+      "usable_image_count": 17,
+      "sale_price": 65000,
+      "sale_type": "sold",
+      "page_title": "2010 Porsche 911 Carrera 4S Cabriolet"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3gyWbD5G/2010-porsche-911-carrera-s-coupe",
+    "title": "2010 Porsche 911 Carrera S Coupe",
+    "text": "Sold for $75,997",
+    "titleYear": 2010,
+    "score": 88,
+    "sale_price": 75997,
+    "sale_type": "sold",
+    "page_title": "2010 Porsche 911 Carrera S Coupe",
+    "year": 2010,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/exterior/3gJPjZG9-aU1slnRqTF/edit/b6Oyr.jpg?t=173351013531",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2010 Porsche 911 Carrera S Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 268929
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/interior/3gJPjZG9-roqgsEU6K4/edit/Nm_K7.jpg?t=173351027238",
+      "labels": [
+        "interior"
+      ],
+      "section": "2010 Porsche 911 Carrera S Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 275869
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/interior/3gJPjZG9-IfqwHpLX--/edit/QWXsG.jpg?t=173351028517",
+      "labels": [
+        "interior"
+      ],
+      "section": "2010 Porsche 911 Carrera S Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 249720
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/interior/3gJPjZG9-NKqqATSYo9q/edit/LEtCg.jpg?t=173351029891",
+      "labels": [
+        "interior"
+      ],
+      "section": "2010 Porsche 911 Carrera S Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 153424
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/exterior/3gJPjZG9-omZEQZdMZG/edit/-iqo0.jpg?t=173351015997",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2010 Porsche 911 Carrera S Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 231576
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/exterior/3gJPjZG9-Fu2pjCq0rj/edit/7nlHp.jpg?t=173351019250",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2010 Porsche 911 Carrera S Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 263990
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/exterior/3gJPjZG9-Nez_dcb1TB/edit/Bm8QY.jpg?t=173351021420",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2010 Porsche 911 Carrera S Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 276539
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/exterior/3gJPjZG9-MWDGl1d16A/edit/nsZB-.jpg?t=173351024401",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2010 Porsche 911 Carrera S Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 305457
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/2afc90d8bd87517f0701c39d2e9e53bb6a23b08b/photos/9eNypzRd-LbdjLkq4_mI.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 6541 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/8f794fefba3280227198cc3eeb4244bd2e0fdf3b/photos/3vNpjq2N-kP6cFpAIHW.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 6110 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/4d2a11cb7f5572bd9d9dd31db056505ce66e1edc/photos/9QxJxeLd-cpW7zaK.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 9859 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/31b2e980c801a7ab7c0e5a37562743e08482e976/photos/rxqGnbRq-zCwsYOqjPaK.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 14193 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e4656e9a1287ac1521f78e44dec4145e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e4656e9a1287ac1521f78e44dec4145e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Porsche 911 Carrera S Cabriolet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e4656e9a1287ac1521f78e44dec4145e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3Ln4xgMy/2010-porsche-911-carrera-s-cabriolet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e4656e9a1287ac1521f78e44dec4145e/manifest/video.m3u8",
+      "auction_title": "2010 Porsche 911 Carrera S Cabriolet",
+      "auction_year": 2010,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/777f58e8af372c57499204d555d302d9/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/777f58e8af372c57499204d555d302d9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Porsche 911 Carrera S Cabriolet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/777f58e8af372c57499204d555d302d9/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3Ln4xgMy/2010-porsche-911-carrera-s-cabriolet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/777f58e8af372c57499204d555d302d9/manifest/video.m3u8",
+      "auction_title": "2010 Porsche 911 Carrera S Cabriolet",
+      "auction_year": 2010,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/45f510f267ddd10762f0720bda15189f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/45f510f267ddd10762f0720bda15189f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Porsche 911 Carrera S Cabriolet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/45f510f267ddd10762f0720bda15189f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3Ln4xgMy/2010-porsche-911-carrera-s-cabriolet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/45f510f267ddd10762f0720bda15189f/manifest/video.m3u8",
+      "auction_title": "2010 Porsche 911 Carrera S Cabriolet",
+      "auction_year": 2010,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/120f70a324fc38f3686f1bc184dad15b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/120f70a324fc38f3686f1bc184dad15b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Porsche 911 Carrera S Cabriolet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/120f70a324fc38f3686f1bc184dad15b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3Ln4xgMy/2010-porsche-911-carrera-s-cabriolet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/120f70a324fc38f3686f1bc184dad15b/manifest/video.m3u8",
+      "auction_title": "2010 Porsche 911 Carrera S Cabriolet",
+      "auction_year": 2010,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/22a617ee9df7cd4ceb0f8e26ed71ffec/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/22a617ee9df7cd4ceb0f8e26ed71ffec/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Porsche 911 Carrera S Cabriolet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/22a617ee9df7cd4ceb0f8e26ed71ffec/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3Ln4xgMy/2010-porsche-911-carrera-s-cabriolet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/22a617ee9df7cd4ceb0f8e26ed71ffec/manifest/video.m3u8",
+      "auction_title": "2010 Porsche 911 Carrera S Cabriolet",
+      "auction_year": 2010,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5f71f4e7af566a325f240b159f0b7a3e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5f71f4e7af566a325f240b159f0b7a3e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Porsche 911 Carrera 4S Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5f71f4e7af566a325f240b159f0b7a3e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1eX6a6n/2010-porsche-911-carrera-4s-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5f71f4e7af566a325f240b159f0b7a3e/manifest/video.m3u8",
+      "auction_title": "2010 Porsche 911 Carrera 4S Coupe",
+      "auction_year": 2010,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1fc2d9e684ec9c00a60c544ccb8420df/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1fc2d9e684ec9c00a60c544ccb8420df/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Porsche 911 Carrera 4S Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1fc2d9e684ec9c00a60c544ccb8420df/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1eX6a6n/2010-porsche-911-carrera-4s-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1fc2d9e684ec9c00a60c544ccb8420df/manifest/video.m3u8",
+      "auction_title": "2010 Porsche 911 Carrera 4S Coupe",
+      "auction_year": 2010,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9c3738d5449b136de2260545ca669856/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9c3738d5449b136de2260545ca669856/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Porsche 911 Carrera 4S Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9c3738d5449b136de2260545ca669856/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1eX6a6n/2010-porsche-911-carrera-4s-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9c3738d5449b136de2260545ca669856/manifest/video.m3u8",
+      "auction_title": "2010 Porsche 911 Carrera 4S Coupe",
+      "auction_year": 2010,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6855f2cd45f35c00300ecf721d688ae8/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6855f2cd45f35c00300ecf721d688ae8/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Porsche 911 Carrera 4S Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6855f2cd45f35c00300ecf721d688ae8/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1eX6a6n/2010-porsche-911-carrera-4s-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6855f2cd45f35c00300ecf721d688ae8/manifest/video.m3u8",
+      "auction_title": "2010 Porsche 911 Carrera 4S Coupe",
+      "auction_year": 2010,
+      "search_score": 88
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive Porsche styling",
+          "wide stance",
+          "characteristic headlights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 headlights",
+          "front fascia design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche styling",
+          "911 proportions",
+          "year 2010 bodywork"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": "Carrera S",
+        "visible_match_evidence": [
+          "specific bodywork of 911",
+          "Carrera S badging",
+          "distinctive tail lights",
+          "proportions consistent with 911"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": "Carrera S",
+        "visible_match_evidence": [
+          "Carrera S badging",
+          "Porsche design elements",
+          "body shape features"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": "Carrera",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "Interior layout matching 2010 Porsche 911",
+          "Specific design features of the Carrera"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "Porsche branding",
+          "sport seats"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": "Carrera",
+        "visible_match_evidence": [
+          "manual transmission knob"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

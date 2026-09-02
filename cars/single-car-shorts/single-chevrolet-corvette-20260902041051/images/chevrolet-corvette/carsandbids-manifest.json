@@ -1,0 +1,639 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-02T04:12:31.965Z",
+  "query": "chevrolet corvette",
+  "visual_highlight": "engine turbo horsepower wheel brake detail",
+  "search_url": "https://carsandbids.com/search/chevrolet/corvette?start_year=2010&end_year=2010&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3zbpkyG4/2010-chevrolet-corvette-zr1",
+      "title": "2010 Chevrolet Corvette Zr1",
+      "text": "Sold for $83,400",
+      "titleYear": 2010,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36N6P7mW/2010-chevrolet-corvette-zr1",
+      "title": "2010 Chevrolet Corvette Zr1",
+      "text": "Sold for $61,000",
+      "titleYear": 2010,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9Q5o70zx/2010-chevrolet-corvette-zr1",
+      "title": "2010 Chevrolet Corvette Zr1",
+      "text": "Sold for $56,000",
+      "titleYear": 2010,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3pBXqNLB/2010-chevrolet-corvette-z06-coupe",
+      "title": "2010 Chevrolet Corvette Z06 Coupe",
+      "text": "Sold for $47,000",
+      "titleYear": 2010,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lRL6MG2/2010-chevrolet-corvette-grand-sport-convertible",
+      "title": "2010 Chevrolet Corvette Grand Sport Convertible",
+      "text": "Bid to $35,944 (Sold After)",
+      "titleYear": 2010,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92pEBvqa/2010-chevrolet-corvette-grand-sport-coupe",
+      "title": "2010 Chevrolet Corvette Grand Sport Coupe",
+      "text": "Sold for $35,250",
+      "titleYear": 2010,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3zbpkyG4/2010-chevrolet-corvette-zr1",
+      "title": "2010 Chevrolet Corvette Zr1",
+      "text": "Sold for $83,400",
+      "titleYear": 2010,
+      "score": 70,
+      "usable_image_count": 27,
+      "sale_price": 83400,
+      "sale_type": "sold",
+      "page_title": "2010 Chevrolet Corvette ZR1"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36N6P7mW/2010-chevrolet-corvette-zr1",
+      "title": "2010 Chevrolet Corvette Zr1",
+      "text": "Sold for $61,000",
+      "titleYear": 2010,
+      "score": 70,
+      "usable_image_count": 25,
+      "sale_price": 61000,
+      "sale_type": "sold",
+      "page_title": "2010 Chevrolet Corvette ZR1"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9Q5o70zx/2010-chevrolet-corvette-zr1",
+      "title": "2010 Chevrolet Corvette Zr1",
+      "text": "Sold for $56,000",
+      "titleYear": 2010,
+      "score": 70,
+      "usable_image_count": 30,
+      "sale_price": 56000,
+      "sale_type": "sold",
+      "page_title": "2010 Chevrolet Corvette ZR1"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3pBXqNLB/2010-chevrolet-corvette-z06-coupe",
+      "title": "2010 Chevrolet Corvette Z06 Coupe",
+      "text": "Sold for $47,000",
+      "titleYear": 2010,
+      "score": 70,
+      "usable_image_count": 18,
+      "sale_price": 47000,
+      "sale_type": "sold",
+      "page_title": "2010 Chevrolet Corvette Z06 Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9Q5o70zx/2010-chevrolet-corvette-zr1",
+    "title": "2010 Chevrolet Corvette Zr1",
+    "text": "Sold for $56,000",
+    "titleYear": 2010,
+    "score": 70,
+    "sale_price": 56000,
+    "sale_type": "sold",
+    "page_title": "2010 Chevrolet Corvette ZR1",
+    "year": 2010,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/KmaBpBqm-qAbdjEpX1P-(edit).jpg?t=164977142040",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2010 Chevrolet Corvette ZR1",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 373726
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/KmaBpBqm-zJ8_h-O7t1-(edit).jpg?t=164977108456",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2010 Chevrolet Corvette ZR1",
+      "width": 542,
+      "height": 361,
+      "bytes": 224956
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/KmaBpBqm-W9vJfYY9Jg-(edit).jpg?t=164977123698",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2010 Chevrolet Corvette ZR1",
+      "width": 542,
+      "height": 361,
+      "bytes": 286201
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/KmaBpBqm-HscKyTHp55-(edit).jpg?t=164977130730",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2010 Chevrolet Corvette ZR1",
+      "width": 542,
+      "height": 361,
+      "bytes": 317021
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/KmaBpBqm-E1hE5k2WIB-(edit).jpg?t=164977038739",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2010 Chevrolet Corvette ZR1",
+      "width": 542,
+      "height": 361,
+      "bytes": 140642
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/KmaBpBqm-J_7473yzXx-(edit).jpg?t=164977150871",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2010 Chevrolet Corvette ZR1",
+      "width": 542,
+      "height": 361,
+      "bytes": 315930
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/KmaBpBqm-zr2oQOqkuT-(edit).jpg?t=164977158582",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2010 Chevrolet Corvette ZR1",
+      "width": 542,
+      "height": 361,
+      "bytes": 435784
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/KmaBpBqm-jQPTOwhQ-J-(edit).jpg?t=164977186530",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2010 Chevrolet Corvette ZR1",
+      "width": 542,
+      "height": 361,
+      "bytes": 323453
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/KmaBpBqm-xZmoTJ1X7x-(edit).jpg?t=164977168904",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2010 Chevrolet Corvette ZR1",
+      "width": 542,
+      "height": 361,
+      "bytes": 342251
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/7099ff40ea0fde224f500dd4c6e56cb55808df08/photos/KDvORaOG-2NgkjkQE8.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 9948 bytes"
+    },
+    {
+      "path": "engine-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7099ff40ea0fde224f500dd4c6e56cb55808df08/attachments/9Q5o70zx-DkyuP6kg7V1.jpeg?t=165093959916",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 479514
+    },
+    {
+      "path": "engine-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7099ff40ea0fde224f500dd4c6e56cb55808df08/attachments/9Q5o70zx-zYTLfPFy57O.jpeg?t=165093960987",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 460344
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/30bd1bf4362a0d07ba1aabdc9ba1e81c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/30bd1bf4362a0d07ba1aabdc9ba1e81c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Chevrolet Corvette Z06 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/30bd1bf4362a0d07ba1aabdc9ba1e81c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3pBXqNLB/2010-chevrolet-corvette-z06-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/30bd1bf4362a0d07ba1aabdc9ba1e81c/manifest/video.m3u8",
+      "auction_title": "2010 Chevrolet Corvette Z06 Coupe",
+      "auction_year": 2010,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/24ae60771a8e3aae62d4f42f2e5d0a3a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/24ae60771a8e3aae62d4f42f2e5d0a3a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Chevrolet Corvette Z06 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/24ae60771a8e3aae62d4f42f2e5d0a3a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3pBXqNLB/2010-chevrolet-corvette-z06-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/24ae60771a8e3aae62d4f42f2e5d0a3a/manifest/video.m3u8",
+      "auction_title": "2010 Chevrolet Corvette Z06 Coupe",
+      "auction_year": 2010,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/896e25e62b358e2c79260b5f6be687e9/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/896e25e62b358e2c79260b5f6be687e9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Chevrolet Corvette Z06 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/896e25e62b358e2c79260b5f6be687e9/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3pBXqNLB/2010-chevrolet-corvette-z06-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/896e25e62b358e2c79260b5f6be687e9/manifest/video.m3u8",
+      "auction_title": "2010 Chevrolet Corvette Z06 Coupe",
+      "auction_year": 2010,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/47f5f80dbf4dc67ad76a4263965f73cc/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/47f5f80dbf4dc67ad76a4263965f73cc/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Chevrolet Corvette Z06 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/47f5f80dbf4dc67ad76a4263965f73cc/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3pBXqNLB/2010-chevrolet-corvette-z06-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/47f5f80dbf4dc67ad76a4263965f73cc/manifest/video.m3u8",
+      "auction_title": "2010 Chevrolet Corvette Z06 Coupe",
+      "auction_year": 2010,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3274e3b1514957510b5056fff6f3ec48/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3274e3b1514957510b5056fff6f3ec48/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2010 Chevrolet Corvette Z06 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3274e3b1514957510b5056fff6f3ec48/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3pBXqNLB/2010-chevrolet-corvette-z06-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3274e3b1514957510b5056fff6f3ec48/manifest/video.m3u8",
+      "auction_title": "2010 Chevrolet Corvette Z06 Coupe",
+      "auction_year": 2010,
+      "search_score": 70
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 11,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "gear shifter design",
+          "interior layout",
+          "material use"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive front lights",
+          "body shape matching Corvette",
+          "specific front grille design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive corvette body shape",
+          "front headlights design",
+          "side profile proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "body shape",
+          "headlights design",
+          "emblem placement"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": "ZR1",
+        "visible_match_evidence": [
+          "distinctive rear lights",
+          "ZR1 badge",
+          "overall body shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": "ZR1",
+        "visible_match_evidence": [
+          "distinctive rear lights",
+          "quad exhaust tips",
+          "ZR1 badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Corvette badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "dashboard displays",
+          "corvette branding"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": "ZR1",
+        "visible_match_evidence": [
+          "interior design",
+          "seats",
+          "shift knob"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Dashboard badge with 'Corvette'",
+          "Interior layout and design typical of 2010 Corvette"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2010",
+        "detected_variant_or_engine": "ZR1",
+        "visible_match_evidence": [
+          "ZR1 badge",
+          "Corvette branding on speedometer"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
