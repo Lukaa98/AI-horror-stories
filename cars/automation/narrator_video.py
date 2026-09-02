@@ -36,15 +36,14 @@ SPRITES_DIR = ROOT / "narrator" / "sprites"
 # both were just absolutely positioned over the whole top region. Together
 # they're kept smaller than a near-half split so the narrator reads as the
 # focal point instead of the media dominating the frame.
-TOP_STACK_RATIO = 0.40
+TOP_STACK_RATIO = 0.45
 HEADLINE_ZONE_RATIO = 0.095
 CAPTION_ZONE_RATIO = 0.075
 # Margin on every edge of the media's own band -- the picture is inset
 # instead of stretched edge-to-edge, so it reads as a framed photo rather
-# than a banner. Trimmed from 0.125 to grow the picture itself by ~1/5
-# ((1 - 2*0.05) / (1 - 2*0.125) = 1.2) while keeping a visible, if
-# thinner, margin on every edge.
-MEDIA_INSET_RATIO = 0.05
+# than a banner. Trimmed further (0.125 -> 0.05 -> 0.02) each time the
+# picture needed to read bigger; still a thin margin, not edge-to-edge.
+MEDIA_INSET_RATIO = 0.02
 CAPTION_CHUNK_WORDS = 1
 
 # Four poses, cycled once per sentence: steady/jolt are the small "redraw
