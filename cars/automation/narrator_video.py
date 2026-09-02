@@ -86,6 +86,19 @@ TYPING_CHAR_SECONDS = 0.045
 POSE_CYCLE = ["steady", "jolt", "lean_left", "lean_right"]
 SENTENCE_PAUSE_THRESHOLD_SECONDS = 0.4
 POSE_TRANSITION_SECONDS = 0.18
+# A plain opacity crossfade between two differently-posed sprites (e.g. arm
+# hanging straight vs. bent at the elbow) reads as a double exposure of two
+# still pictures rather than the arm actually moving, since the crossfade
+# only blends pixels -- it never moves anything. Layering a small scale +
+# horizontal shift on top of that blend (see _apply_pose_transition_motion)
+# gives the eye an actual motion cue -- a quick "wind-up" leaning toward the
+# next stance as a pose hands off, and a "settle" into place as the next one
+# takes over -- so the transition reads as the character shifting weight
+# instead of one picture dissolving into another.
+POSE_TRANSITION_LEAN_PX = 10
+POSE_TRANSITION_POP_SCALE = 0.04
+POSE_TRANSITION_WINDUP_SCALE = 0.03
+POSE_LEAN_DIRECTION = {"steady": 0, "jolt": 0, "lean_left": -1, "lean_right": 1}
 # Fallback cadence only used when there's no real word_timeline to find
 # pauses in (estimated caption timing) -- some pose variety beats none.
 POSE_FALLBACK_SEGMENT_SECONDS = 3.0
@@ -360,6 +373,37 @@ def _narrator_segments(manifest, sprites, duration):
     return segments
 
 
+def _apply_pose_transition_motion(clip, seg_duration, transition_in, transition_out, in_direction, out_direction):
+    """Layer a small scale + horizontal shift on top of the pose crossfade
+    (see POSE_TRANSITION_LEAN_PX above for why the crossfade alone isn't
+    enough). The incoming edge pops in slightly oversized and settles to
+    its own pose's lean direction; the outgoing edge winds up a little
+    toward whichever pose is taking over. Centered around the sprite's own
+    midpoint (not its top-left corner) so it reads as the character
+    shifting weight, not the image growing from a corner."""
+    base_w, base_h = clip.size
+
+    def scale_at(t):
+        if transition_in > 0.01 and t < transition_in:
+            return 1.0 + POSE_TRANSITION_POP_SCALE * (1 - t / transition_in)
+        if transition_out > 0.01 and t > seg_duration:
+            return 1.0 + POSE_TRANSITION_WINDUP_SCALE * (t - seg_duration) / transition_out
+        return 1.0
+
+    def offset_at(t):
+        if transition_in > 0.01 and t < transition_in:
+            return -in_direction * POSE_TRANSITION_LEAN_PX * (1 - t / transition_in)
+        if transition_out > 0.01 and t > seg_duration:
+            return out_direction * POSE_TRANSITION_LEAN_PX * 0.5 * (t - seg_duration) / transition_out
+        return 0.0
+
+    def position_at(t):
+        scale = scale_at(t)
+        return (base_w * (1 - scale) / 2 + offset_at(t), base_h * (1 - scale) / 2)
+
+    return clip.resize(scale_at).set_position(position_at)
+
+
 def _narrator_track(manifest, sprites, size, duration):
     """One ImageClip per merged mouth/pose/blink segment, sprite-swapped,
     with a short crossfade wherever the *pose* changes (sentence to
@@ -375,10 +419,12 @@ def _narrator_track(manifest, sprites, size, duration):
         return _fit_content(track, (size[0], max_h))
 
     clips = []
+    frame_size = None
     current_time = 0.0
     for index, seg in enumerate(segments):
         seg_duration = seg["end"] - seg["start"]
         next_seg = segments[index + 1] if index + 1 < len(segments) else None
+        prev_seg = segments[index - 1] if index > 0 else None
         # The *outgoing* clip needs to keep playing through the overlap
         # window so there's something for the next clip to fade in over --
         # extending its own duration into that window (not just starting
@@ -390,15 +436,27 @@ def _narrator_track(manifest, sprites, size, duration):
         )
         transition_in = (
             min(POSE_TRANSITION_SECONDS, seg_duration * 0.4)
-            if index > 0 and seg["pose"] != segments[index - 1]["pose"] else 0.0
+            if prev_seg and seg["pose"] != prev_seg["pose"] else 0.0
         )
         clip = ImageClip(str(SPRITES_DIR / seg["sprite"])).set_duration(seg_duration + transition_out)
+        # Captured from the raw, unwrapped clip -- resize() below makes a
+        # clip's own reported size time-varying, so grabbing it after
+        # wrapping (and specifically off segments[0], which is exactly the
+        # clip CompositeVideoClip's frame size was read from before) would
+        # silently break the composite's canvas size.
+        if frame_size is None:
+            frame_size = clip.size
+        if transition_in > 0.01 or transition_out > 0.01:
+            clip = _apply_pose_transition_motion(
+                clip, seg_duration, transition_in, transition_out,
+                POSE_LEAN_DIRECTION.get(seg["pose"], 0),
+                POSE_LEAN_DIRECTION.get(next_seg["pose"], 0) if next_seg else 0,
+            )
         if transition_in > 0.01:
             clip = clip.crossfadein(transition_in)
         clips.append(clip.set_start(current_time))
         current_time += seg_duration
 
-    frame_size = clips[0].size
     track = CompositeVideoClip(clips, size=frame_size).set_duration(duration)
     return _fit_content(track, (size[0], max_h))
 
