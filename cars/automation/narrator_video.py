@@ -284,38 +284,99 @@ def _narrator_track(manifest, sprites, size, duration):
 
     clips = []
     current_time = 0.0
-    prev_pose = None
     for index, seg in enumerate(segments):
         seg_duration = seg["end"] - seg["start"]
-        clip = ImageClip(str(SPRITES_DIR / seg["sprite"])).set_duration(seg_duration)
-        transition = min(POSE_TRANSITION_SECONDS, seg_duration * 0.4)
-        pose_changed = index > 0 and seg["pose"] != prev_pose
-        if pose_changed and transition > 0.01:
-            clip = clip.crossfadein(transition)
-            start_time = current_time - transition
-        else:
-            start_time = current_time
-        clips.append(clip.set_start(max(0.0, start_time)))
+        next_seg = segments[index + 1] if index + 1 < len(segments) else None
+        # The *outgoing* clip needs to keep playing through the overlap
+        # window so there's something for the next clip to fade in over --
+        # extending its own duration into that window (not just starting
+        # the next clip early) is what actually avoids a blank gap where
+        # the character flashes out of existence mid-transition.
+        transition_out = (
+            min(POSE_TRANSITION_SECONDS, seg_duration * 0.4)
+            if next_seg and next_seg["pose"] != seg["pose"] else 0.0
+        )
+        transition_in = (
+            min(POSE_TRANSITION_SECONDS, seg_duration * 0.4)
+            if index > 0 and seg["pose"] != segments[index - 1]["pose"] else 0.0
+        )
+        clip = ImageClip(str(SPRITES_DIR / seg["sprite"])).set_duration(seg_duration + transition_out)
+        if transition_in > 0.01:
+            clip = clip.crossfadein(transition_in)
+        clips.append(clip.set_start(current_time))
         current_time += seg_duration
-        prev_pose = seg["pose"]
 
     frame_size = clips[0].size
     track = CompositeVideoClip(clips, size=frame_size).set_duration(duration)
     return _fit_content(track, (size[0], max_h))
 
 
-def _car_track(media_paths, box_size, duration):
+def _scene_time_boundaries(scenes, word_timeline, duration):
+    """Real per-scene (start, end) times, one per scene, derived from each
+    scene's own "narration" word span walked cumulatively against the
+    actual word_timeline -- not an even split of total duration, which has
+    no relation to how long each scene's beat actually took to say (that
+    mismatch is why a named rival car's photo could show up at the end of
+    the video instead of during the sentence that names it, and why
+    headlines drifted out of sync with their own beat).
+
+    The cut between two scenes lands at the midpoint of the pause between
+    the first scene's last word and the second's first word (mirroring
+    _sentence_boundaries_from_pauses), not simply at the previous scene's
+    end -- assigning a whole silent gap entirely to whichever scene comes
+    next would still leave a rival scene's display window starting long
+    before it's actually spoken, just less extremely than an even split.
+
+    Falls back to an even split only when there's no real word_timeline to
+    walk (estimated caption timing).
+    """
+    if not scenes:
+        return []
+    if not word_timeline:
+        n = len(scenes)
+        return [(duration * i / n, duration * (i + 1) / n) for i in range(n)]
+
+    spans = []
+    word_index = 0
+    for scene in scenes:
+        word_count = len(str(scene.get("narration") or "").split())
+        chunk = word_timeline[word_index:word_index + word_count]
+        if chunk:
+            spans.append((float(chunk[0]["start"]), float(chunk[-1]["end"])))
+        else:
+            # Ran out of real words (a mismatch between narration text and
+            # the transcribed audio) -- keep the previous scene's span
+            # rather than collapsing to a zero-length window.
+            spans.append(spans[-1] if spans else (0.0, 0.0))
+        word_index += word_count
+
+    cut_points = [0.0]
+    for (_, prev_end), (next_start, _) in zip(spans, spans[1:]):
+        cut_points.append(prev_end + (next_start - prev_end) / 2 if next_start > prev_end else prev_end)
+    cut_points.append(duration)
+    return list(zip(cut_points, cut_points[1:]))
+
+
+def _car_track(media_paths, box_size, duration, boundaries=None):
     """Renders the car media into a box of exactly box_size -- the caller
     positions that box within the inset media band (see
     _media_zone_geometry), so this only needs to fit/center content and
-    animate it within its own bounds."""
+    animate it within its own bounds. `boundaries`, one (start, end) pair
+    per media item, times each item to when its own scene is actually
+    spoken; an even split across `duration` is only a fallback for when
+    real timing isn't available."""
     box_w, box_h = box_size
     if not media_paths:
         return ColorClip(size=(box_w, box_h), color=(255, 255, 255)).set_duration(duration)
 
-    per_media = max(1.0, duration / len(media_paths))
+    if not boundaries or len(boundaries) != len(media_paths):
+        per_media = max(1.0, duration / len(media_paths))
+        boundaries = [(i * per_media, (i + 1) * per_media) for i in range(len(media_paths))]
+
     clips = []
     for index, path in enumerate(media_paths):
+        seg_start, seg_end = boundaries[index]
+        per_media = max(0.5, seg_end - seg_start)
         path = Path(path)
         if path.suffix.lower() in {".mp4", ".mov", ".webm"}:
             raw = VideoFileClip(str(path))
@@ -369,7 +430,10 @@ def render_narrator_video(car_media_paths, manifest, output_path):
 
     headline_center_y, media_box, caption_center_y = _media_zone_geometry(size)
     media_x, media_y, media_w, media_h = media_box
-    car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration)
+    scenes = list(manifest.get("scenes") or [])
+    word_timeline = list(manifest.get("word_timeline") or [])
+    scene_boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
+    car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration, scene_boundaries)
     car_positioned = car_clip.set_position((media_x, media_y))
 
     # The caption band sits below the picture, not on top of it -- distinct
@@ -379,15 +443,12 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         .set_start(start).set_duration(end - start).set_position((0, 0))
         for text, start, end in _caption_timeline(manifest, duration)
     ]
-    scenes = list(manifest.get("scenes") or [])
-    scene_duration = duration / len(scenes) if scenes else duration
     headline_clips = []
     for index, scene in enumerate(scenes):
         headline = str(scene.get("headline") or "").strip()
         if not headline:
             continue
-        start = index * scene_duration
-        end = min(duration, (index + 1) * scene_duration)
+        start, end = scene_boundaries[index] if index < len(scene_boundaries) else (0.0, duration)
         frame_path = output_path.parent / "_frames" / f"headline-{index}.png"
         _caption_frame(size, headline, int(headline_center_y), frame_path, fill=(255, 214, 64), font_size=92)
         headline_clips.append(

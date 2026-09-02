@@ -10,6 +10,7 @@ from narrator_video import (  # noqa: E402
     _caption_timeline,
     _merged_boundaries,
     _pose_intervals,
+    _scene_time_boundaries,
     _value_at,
 )
 
@@ -95,3 +96,57 @@ def test_value_at_falls_back_to_default_outside_all_intervals():
     intervals = [(0.0, 1.0, "open")]
     assert _value_at(intervals, 0.5, "closed") == "open"
     assert _value_at(intervals, 1.5, "closed") == "closed"
+
+
+def test_scene_time_boundaries_falls_back_to_even_split_without_word_timeline():
+    scenes = [{"narration": "a b c"}, {"narration": "d e"}]
+    boundaries = _scene_time_boundaries(scenes, [], 10.0)
+    assert boundaries == [(0.0, 5.0), (5.0, 10.0)]
+
+
+def test_scene_time_boundaries_cuts_at_the_pause_midpoint_between_scenes():
+    # Scene 0's narration is 3 words, scene 1's is 2 words, with a 0.5s
+    # pause between "three" ending and "four" starting -- the cut should
+    # land at that pause's midpoint, not at an even 1.75s split.
+    scenes = [{"narration": "one two three"}, {"narration": "four five"}]
+    word_timeline = [
+        {"word": "one", "start": 0.0, "end": 0.3},
+        {"word": "two", "start": 0.35, "end": 0.6},
+        {"word": "three", "start": 0.65, "end": 1.9},
+        {"word": "four", "start": 2.4, "end": 2.7},
+        {"word": "five", "start": 2.75, "end": 3.0},
+    ]
+    boundaries = _scene_time_boundaries(scenes, word_timeline, 3.5)
+    assert boundaries[0] == (0.0, 2.15)
+    assert boundaries[1] == (2.15, 3.5)
+
+
+def test_scene_time_boundaries_names_a_rival_car_only_where_it_is_actually_spoken():
+    """The regression this whole feature exists to fix: a scene naming a
+    rival car must get a display window that actually contains where its
+    own words are spoken, not an even slice of the whole clip that has no
+    relation to it (which is how a rival's photo ended up showing at the
+    end of a video instead of during the sentence that names it)."""
+    scenes = [
+        {"narration": "one two"},
+        {"narration": "three four five"},
+        {"narration": "six"},
+    ]
+    word_timeline = [
+        {"word": "one", "start": 0.0, "end": 0.2},
+        {"word": "two", "start": 0.25, "end": 0.4},
+        {"word": "three", "start": 0.8, "end": 1.0},
+        {"word": "four", "start": 1.05, "end": 1.3},
+        {"word": "five", "start": 1.35, "end": 1.6},
+        {"word": "six", "start": 2.0, "end": 2.3},
+    ]
+    boundaries = _scene_time_boundaries(scenes, word_timeline, 2.6)
+    rival_start, rival_end = boundaries[1]
+    # The rival scene's actual spoken window (0.8-1.6) must fall entirely
+    # inside its assigned display window -- an even 3-way split of a 2.6s
+    # clip ((0.867, 1.733)) would have clipped "five" (ends at 1.6, so
+    # that alone wouldn't catch this bug), so also pin the boundary close
+    # to the real pause midpoints (0.4/0.8 -> 0.6, 1.6/2.0 -> 1.8).
+    assert rival_start <= 0.8 and rival_end >= 1.6
+    assert 0.5 <= rival_start <= 0.7
+    assert 1.7 <= rival_end <= 1.9

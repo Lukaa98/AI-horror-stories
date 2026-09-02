@@ -39,10 +39,9 @@ ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 PACKAGE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
-    "required": ["title", "script", "scenes", "sources", "start_year", "end_year"],
+    "required": ["title", "scenes", "sources", "start_year", "end_year"],
     "properties": {
         "title": {"type": "string"},
-        "script": {"type": "string"},
         # Whichever generation the script actually settles on -- especially
         # important when the caller didn't pin a year range, since research
         # is free to pick "the best-known generation" on its own. Without
@@ -55,12 +54,22 @@ PACKAGE_SCHEMA = {
             "type": "array", "minItems": 5, "maxItems": 7,
             "items": {
                 "type": "object", "additionalProperties": False,
-                "required": ["media_type", "headline", "fact", "rival_make", "rival_model"],
+                "required": ["media_type", "headline", "narration", "rival_make", "rival_model"],
                 "properties": {
                     "media_type": {"type": "string", "enum": ["exterior", "engine", "interior", "detail", "wheel"]},
                     "headline": {"type": "string"},
-                    "fact": {"type": "string"},
-                    # When this scene's fact directly names a specific
+                    # The actual spoken narration for this one beat -- the
+                    # full script is these joined in order (see
+                    # research_script), not a separate freeform field, so
+                    # each scene's photo/caption can be timed to exactly
+                    # when its own words are actually being spoken instead
+                    # of an even split across the whole clip that has no
+                    # relation to how long each beat took to say (that
+                    # mismatch is why a rival car's photo could show up at
+                    # the end of the video instead of during the sentence
+                    # that names it).
+                    "narration": {"type": "string"},
+                    # When this scene's narration directly names a specific
                     # competitor car (e.g. "beats the Camaro in handling"),
                     # these carry that competitor's make/model so build_short
                     # can show one real photo of it instead of the main
@@ -110,13 +119,13 @@ def research_script(make, model, trim="", start_year=None, end_year=None):
         else f"model year {start_year or end_year}" if start_year or end_year else "the best-known generation"
     )
     prompt = f"""Research and write one original vertical car-video package about {label}, scoped to {year_scope}.
-Use web search and verify every technical comparison. Write a quick, conversational script of {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words so faster TTS lands near 55-60 seconds. Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, one comparison or ownership insight, tuning potential only when supportable, and finish with a direct viewer-choice question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+Use web search and verify every technical comparison. Write a quick, conversational narration of {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total so faster TTS lands near 55-60 seconds, split across 5-7 scenes in speaking order -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, one comparison or ownership insight, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
-The "script" field is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the script.
+Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
-Return 5-7 scenes in script order. Headlines are only for important facts and must be 1-4 words (examples: model/chassis, engine code, AWD, horsepower, price gap); use an empty string for ordinary beats. Use exterior media for the hook/close, engine for powertrain, wheel for drivetrain when useful, detail for modification/technical beats, and interior only when the script specifically discusses the cabin, seats, controls, or practicality -- most scripts should lean on exterior shots with only a couple of interior beats, not the other way around. Sources must be direct URLs supporting the claims.
+Headlines are only for important facts and must be 1-4 words (examples: model/chassis, engine code, AWD, horsepower, price gap); use an empty string for ordinary beats. Use exterior media for the hook/close, engine for powertrain, wheel for drivetrain when useful, detail for modification/technical beats, and interior only when the script specifically discusses the cabin, seats, controls, or practicality -- most scripts should lean on exterior shots with only a couple of interior beats, not the other way around. Sources must be direct URLs supporting the claims.
 
-When a scene's "fact" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown; otherwise set both to null. Only set these when the fact truly names one specific rival car, not a vague "its rivals" or a whole segment/class. That comparison's "fact" must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search.
+When a scene's "narration" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown exactly during that scene; otherwise set both to null. Only set these when the narration truly names one specific rival car in THAT scene, not a vague "its rivals" or a whole segment/class. That scene's narration must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search.
 
 Also return "start_year" and "end_year": the exact model-year range of the generation your script actually describes (the same year, twice, if it's a single model year). This must reflect what you actually researched and wrote about, even when the scope above was "the best-known generation" and you had to pick one yourself -- the photos shown alongside the narration are gathered using these years, so they need to match the generation you're describing."""
     response = with_openai_retry(lambda: OpenAI().responses.create(
@@ -126,7 +135,9 @@ Also return "start_year" and "end_year": the exact model-year range of the gener
         text={"format": {"type": "json_schema", "name": "single_car_short", "strict": True, "schema": PACKAGE_SCHEMA}},
     ))
     package = json.loads(response.output_text.strip())
-    package["script"] = _strip_citations(package["script"])
+    for scene in package["scenes"]:
+        scene["narration"] = _strip_citations(scene["narration"])
+    package["script"] = " ".join(scene["narration"] for scene in package["scenes"])
     count = _word_count(package["script"])
     if not ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
         raise RuntimeError(
