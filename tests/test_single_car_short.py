@@ -103,7 +103,12 @@ def test_research_script_does_not_retry_when_first_attempt_is_already_acceptable
     assert len(calls) == 1
 
 
-def test_research_script_raises_only_when_still_outside_the_hard_range_after_all_attempts(monkeypatch):
+def test_research_script_never_fails_the_build_over_word_count(monkeypatch):
+    """A build dying over a word count was the actual complaint (a script
+    the retries still couldn't pull into range used to raise RuntimeError
+    and throw the whole build away) -- research_script must always return
+    its best attempt, however far outside any of the word ranges, and just
+    let normalize_audio_duration's atempo correction do what it can."""
     import single_car_short
 
     monkeypatch.setattr(
@@ -111,11 +116,9 @@ def test_research_script_raises_only_when_still_outside_the_hard_range_after_all
         lambda prompt: {"scenes": [], "script": "", "word_count": HARD_WORD_RANGE[0] - 20},
     )
 
-    try:
-        research_script("Ford", "Mustang", max_attempts=2)
-        assert False, "expected RuntimeError"
-    except RuntimeError as exc:
-        assert "outside the safe" in str(exc)
+    package = research_script("Ford", "Mustang", max_attempts=2)
+
+    assert package["word_count"] == HARD_WORD_RANGE[0] - 20
 
 
 def test_strip_citations_removes_inline_markdown_links_and_urls():

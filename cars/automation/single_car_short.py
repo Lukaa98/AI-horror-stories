@@ -220,17 +220,20 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             + (" Retrying with corrective feedback..." if attempt < max_attempts else "")
         )
     count = package["word_count"]
-    # The real failure gate -- see HARD_WORD_RANGE's own comment for why
-    # this is much wider than ACCEPTABLE_WORDS: normalize_audio_duration's
-    # atempo correction already brings anything in this range to ~target
-    # runtime without sounding broken, so only reject a script the retries
-    # above still couldn't pull back to something atempo can actually fix.
+    # No hard failure here, on request -- a build dying over a word count
+    # was the actual complaint (the retries above already gave the model
+    # several honest shots at landing closer). Outside HARD_WORD_RANGE,
+    # normalize_audio_duration's atempo clamp (0.5-2.0) can't fully correct
+    # the runtime any more -- the video plays noticeably off pace -- but
+    # that's a quality tradeoff to proceed with, not a reason to throw the
+    # whole build away.
     if not HARD_WORD_RANGE[0] <= count <= HARD_WORD_RANGE[1]:
-        raise RuntimeError(
-            f"Single-car script is outside the safe {HARD_WORD_RANGE[0]}-{HARD_WORD_RANGE[1]} word range even "
-            f"after {max_attempts} attempts; model returned {count}."
+        print(
+            f"[single-car] Proceeding with {count} words even though it's outside the "
+            f"{HARD_WORD_RANGE[0]}-{HARD_WORD_RANGE[1]} range atempo can fully correct for -- "
+            "the video's pacing may be noticeably off."
         )
-    if not TARGET_WORDS[0] <= count <= TARGET_WORDS[1]:
+    elif not TARGET_WORDS[0] <= count <= TARGET_WORDS[1]:
         print(
             f"[single-car] Proceeding with {count} words outside the preferred "
             f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} range; audio timing will normalize the final runtime."
@@ -452,7 +455,12 @@ def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum
     if minimum <= duration <= maximum:
         return duration
     tempo = duration / target
-    # atempo accepts 0.5-2.0; this range is ample for a tightly constrained script.
+    # atempo accepts 0.5-2.0 -- comfortably enough for a script inside
+    # HARD_WORD_RANGE, but a script research_script now lets through
+    # outside that range (rather than failing the build over it) can still
+    # need more correction than this covers, in which case the clamp
+    # saturates and the real output duration lands short of `target`
+    # rather than exactly on it.
     tempo = max(0.5, min(2.0, tempo))
     adjusted = audio_path.with_name(f"{audio_path.stem}-timed{audio_path.suffix}")
     subprocess.run(
@@ -460,7 +468,9 @@ def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum
         check=True, capture_output=True, text=True,
     )
     adjusted.replace(audio_path)
-    return target
+    # Report what the file actually ends up at, not the target -- honest
+    # even when the clamp above saturated and couldn't fully correct it.
+    return duration / tempo
 
 
 def transcribe_word_timeline(audio_path):
