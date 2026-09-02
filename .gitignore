@@ -14,3 +14,7 @@ narrator/render/sprites/
 
 # Local environment secrets
 .env
+
+# Isolated venv for background_removal.py (rembg needs pillow>=12, which
+# conflicts with this repo's own Pillow pin -- kept out of the shared env)
+/.cache/

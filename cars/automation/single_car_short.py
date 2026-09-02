@@ -14,6 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 
+from background_removal import remove_background
 from cars_and_bids import enrich_entry_from_manifest, scrape_entry_images
 from research_request import _auction_provenance_matches_entry, review_and_rename_entry_images
 from generate_sample import ROOT
@@ -54,11 +55,19 @@ PACKAGE_SCHEMA = {
             "type": "array", "minItems": 5, "maxItems": 7,
             "items": {
                 "type": "object", "additionalProperties": False,
-                "required": ["media_type", "headline", "fact"],
+                "required": ["media_type", "headline", "fact", "rival_make", "rival_model"],
                 "properties": {
                     "media_type": {"type": "string", "enum": ["exterior", "engine", "interior", "detail", "wheel"]},
                     "headline": {"type": "string"},
                     "fact": {"type": "string"},
+                    # When this scene's fact directly names a specific
+                    # competitor car (e.g. "beats the Camaro in handling"),
+                    # these carry that competitor's make/model so build_short
+                    # can show one real photo of it instead of the main
+                    # car's own photo for this one beat -- null/null when
+                    # the scene doesn't name a specific rival.
+                    "rival_make": {"type": ["string", "null"]},
+                    "rival_model": {"type": ["string", "null"]},
                 },
             },
         },
@@ -106,6 +115,8 @@ Use web search and verify every technical comparison. Write a quick, conversatio
 The "script" field is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the script.
 
 Return 5-7 scenes in script order. Headlines are only for important facts and must be 1-4 words (examples: model/chassis, engine code, AWD, horsepower, price gap); use an empty string for ordinary beats. Use exterior media for the hook/close, engine for powertrain, wheel for drivetrain when useful, detail for modification/technical beats, and interior only when the script specifically discusses the cabin, seats, controls, or practicality -- most scripts should lean on exterior shots with only a couple of interior beats, not the other way around. Sources must be direct URLs supporting the claims.
+
+When a scene's "fact" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown; otherwise set both to null. Only set these when the fact truly names one specific rival car, not a vague "its rivals" or a whole segment/class.
 
 Also return "start_year" and "end_year": the exact model-year range of the generation your script actually describes (the same year, twice, if it's a single model year). This must reflect what you actually researched and wrote about, even when the scope above was "the best-known generation" and you had to pick one yourself -- the photos shown alongside the narration are gathered using these years, so they need to match the generation you're describing."""
     response = with_openai_retry(lambda: OpenAI().responses.create(
@@ -211,12 +222,105 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
         review = reviews_by_path.get(relative, {})
         shot_type = _SHOT_TYPE_BY_CATEGORY.get(review.get("category"), "exterior")
         path = images_dir.parent / relative
-        if path.exists():
-            blur_license_plates(path)
-            media.append({"path": relative.replace("\\", "/"), "type": shot_type})
+        if not path.exists():
+            continue
+        blur_license_plates(path)
+        # Exterior shots read better as a cutout on the format's white
+        # canvas; interior/engine/wheel/detail shots are meant to look like
+        # a real photo, so they're left with their original background.
+        if shot_type == "exterior":
+            path = remove_background(path)
+            relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
+        media.append({"path": relative, "type": shot_type})
     if not media:
         raise RuntimeError("No approved exterior, engine, detail, or wheel images were found.")
     return media, manifest.get("selected_auction") or {}
+
+
+def apply_rival_photos(scenes, media, start_year, end_year, images_dir):
+    """Swap in a real photo of the named competitor for any scene that
+    directly compares to one, instead of showing the main car's own photo
+    again there. One scrape per distinct rival (a video rarely names more
+    than one), best-effort -- a rival lookup failure just leaves that
+    scene's original media untouched."""
+    rival_cache = {}
+    for index, scene in enumerate(scenes):
+        rival_make = scene.get("rival_make")
+        rival_model = scene.get("rival_model")
+        if not rival_make and not rival_model:
+            continue
+        cache_key = (rival_make, rival_model)
+        if cache_key not in rival_cache:
+            rival_cache[cache_key] = gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir)
+        rival_path = rival_cache[cache_key]
+        if rival_path and index < len(media):
+            media[index] = {"path": rival_path, "type": "exterior"}
+    return media
+
+
+def gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir):
+    """One real exterior photo of a named competitor car, same era as the
+    main car -- for the single scene that directly compares to it, instead
+    of showing the main car's own photo again there. Best-effort: returns
+    None on any failure (no results, review rejects everything, etc.)
+    rather than failing the whole build over one optional beat."""
+    search_hint = " ".join(value for value in [rival_make, rival_model] if value).strip()
+    if not search_hint:
+        return None
+    entry = {
+        "name": search_hint,
+        "label": search_hint,
+        "years": f"{start_year}-{end_year}" if start_year and end_year and start_year != end_year else str(start_year or end_year or ""),
+        "search_hint": search_hint,
+        "visual_highlight": "",
+        "generation_label": "",
+    }
+    try:
+        selected, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
+        entry["images"] = selected
+        enrich_entry_from_manifest(entry, manifest)
+        review_and_rename_entry_images(
+            entry, images_dir, require_ai=False, seen_images=[],
+            trusted_variant_provenance=_auction_provenance_matches_entry(entry),
+        )
+    except Exception:
+        return None
+    reviews_by_path = {review.get("path"): review for review in entry.get("image_reviews", [])}
+    exterior_categories = {"exterior_front", "exterior_rear", "exterior_side", "exterior_full"}
+    for relative in entry.get("images", []):
+        review = reviews_by_path.get(relative, {})
+        if review.get("category") not in exterior_categories:
+            continue
+        path = images_dir.parent / relative
+        if not path.exists():
+            continue
+        blur_license_plates(path)
+        path = remove_background(path)
+        return str(path.relative_to(images_dir.parent)).replace("\\", "/")
+    return None
+
+
+# Extra takes of the same script in a few other voices, purely for the
+# creator to listen to and compare against the chosen voice -- not used in
+# the rendered video itself. British presets added on request; the
+# currently-chosen preset is included too so there's a like-for-like
+# comparison instead of only ever hearing the alternatives.
+AUDITION_PRESETS = ["british_narrator", "british_dry_wit", "british_energetic"]
+
+
+def generate_voice_auditions(script, output_dir, chosen_preset):
+    presets = list(dict.fromkeys([chosen_preset, *AUDITION_PRESETS]))
+    audition_dir = output_dir / "voice_auditions"
+    audition_dir.mkdir(parents=True, exist_ok=True)
+    files = {}
+    for preset in presets:
+        try:
+            path = audition_dir / f"{preset}.mp3"
+            synthesize_narration(script, path, preset=preset, speed=FAST_TTS_SPEED)
+            files[preset] = str(path.relative_to(output_dir.parent)).replace("\\", "/")
+        except Exception as exc:
+            print(f"[single-car] Voice audition failed for preset {preset!r}: {exc}")
+    return files
 
 
 def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum=55.0, maximum=60.0):
@@ -309,9 +413,13 @@ def build_short(args):
         args.make, args.model, args.trim, media_start_year, media_end_year, images_dir, package["scenes"]
     )
     media = order_media_for_scenes(package["scenes"], media)
+    media = apply_rival_photos(package["scenes"], media, media_start_year, media_end_year, images_dir)
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
     normalized_duration = normalize_audio_duration(audio_path)
+    voice_auditions = (
+        generate_voice_auditions(package["script"], output_dir, args.voice) if args.audition_voices else {}
+    )
     try:
         word_timeline = transcribe_word_timeline(audio_path)
     except Exception as exc:
@@ -334,6 +442,7 @@ def build_short(args):
         "word_timeline": word_timeline,
         "media": media,
         "selected_auction": selected_auction,
+        "voice_auditions": voice_auditions,
     }
     manifest_path = output_dir / "result.json"
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
@@ -354,6 +463,11 @@ def main():
     parser.add_argument("--end-year", type=int)
     parser.add_argument("--short-id", required=True)
     parser.add_argument("--voice", default="onyx")
+    parser.add_argument(
+        "--audition-voices", dest="audition_voices", action="store_true", default=True,
+        help="Also synthesize the script in a few other voice presets (British included) to compare. On by default.",
+    )
+    parser.add_argument("--no-audition-voices", dest="audition_voices", action="store_false")
     args = parser.parse_args()
     print(json.dumps(build_short(args), indent=2))
 
