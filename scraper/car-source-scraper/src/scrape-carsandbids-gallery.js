@@ -529,7 +529,13 @@ function candidateLooksRelevant(candidate, { auctionId, makeToken, modelToken, q
 // with more interior shots. Capping how many of each type can be picked
 // keeps the download set from being dominated by one type before the AI/
 // heuristic review even gets a chance to pick good exterior angles.
-const MAX_CANDIDATES_PER_LABEL = { interior: 2, engine: 2, detail: 2, wheel: 1, highlight: 1 };
+// Raised from 8 -- with AI review (and now dedupe_similar_images in
+// cars_and_bids.py) both able to discard candidates before final selection,
+// a bigger raw pool gives them more real variety to actually choose from
+// instead of being stuck with whatever handful of types survived a
+// tighter cap.
+const MAX_CHOSEN = 12;
+const MAX_CANDIDATES_PER_LABEL = { interior: 3, engine: 2, detail: 3, wheel: 2, highlight: 1 };
 
 function chooseImages(candidates, desiredLabels, queryTokens) {
   const ranked = candidates
@@ -556,7 +562,7 @@ function chooseImages(candidates, desiredLabels, queryTokens) {
   for (const item of chosen) labelCounts[item.primaryLabel] = (labelCounts[item.primaryLabel] || 0) + 1;
 
   for (const candidate of ranked) {
-    if (chosen.length >= 8) break;
+    if (chosen.length >= MAX_CHOSEN) break;
     if (used.has(candidate.url)) continue;
     const label = candidate.labels[0] || "exterior";
     const cap = MAX_CANDIDATES_PER_LABEL[label];
@@ -566,17 +572,18 @@ function chooseImages(candidates, desiredLabels, queryTokens) {
     chosen.push({ ...candidate, primaryLabel: label });
   }
 
-  // Caps only skip candidates, they never shrink the target of 8 -- if this
-  // gallery genuinely doesn't have 8 diverse shots, fall back to whatever's
-  // left (even over-represented types) rather than shipping an undersized set.
+  // Caps only skip candidates, they never shrink the target count -- if
+  // this gallery genuinely doesn't have that many diverse shots, fall back
+  // to whatever's left (even over-represented types) rather than shipping
+  // an undersized set.
   for (const candidate of ranked) {
-    if (chosen.length >= 8) break;
+    if (chosen.length >= MAX_CHOSEN) break;
     if (used.has(candidate.url)) continue;
     used.add(candidate.url);
     chosen.push({ ...candidate, primaryLabel: candidate.labels[0] || "exterior" });
   }
 
-  return chosen.slice(0, 8);
+  return chosen.slice(0, MAX_CHOSEN);
 }
 
 async function main() {

@@ -295,6 +295,11 @@
         <path d="M 148 328 L 242 400 M 138 350 L 232 422 M 128 372 L 222 444"
               stroke-width="3" opacity="0.55"/>
 
+        <!-- legs + shoes: scaled to ~4/5 length, anchored at the hip (460)
+             so the waist/torso above stays put and only the legs get
+             shorter -- makes the figure read as more compact/stouter
+             overall. -->
+        <g transform="translate(0,460) scale(1,0.8) translate(0,-460)">
         <!-- legs: shorter, straight -->
         <path d="M 150 460 L 144 680 L 178 680 L 184 460 Z" fill="#ffffff" stroke="#1c1712"/>
         <path d="M 164 470 L 160 670" stroke-width="2.5" opacity="0.5"/>
@@ -304,6 +309,7 @@
         <!-- shoes -->
         <path d="M 136 680 C 128 698 150 706 176 700 C 182 692 180 682 174 678 Z" fill="#ffffff" stroke="#1c1712"/>
         <path d="M 264 680 C 272 698 250 706 224 700 C 218 692 220 682 226 678 Z" fill="#ffffff" stroke="#1c1712"/>
+        </g>
 
         <!-- arms: both hang straight at the sides with open, spread-finger
              hands -- a plain symmetric pose instead of one bent on the hip -->
@@ -325,10 +331,10 @@
              one idle unit, pivoting from the base of the neck, so the head
              isn't frozen while the arms sway -->
         <g id="headGroup">
-        <!-- shrink the whole head+face down a bit, anchored at the neck
-             join (200,294) so it doesn't pull away from the body while it
-             shrinks -- the head was reading as almost as wide as the torso -->
-        <g transform="translate(200,294) scale(0.72) translate(-200,-294)">
+        <!-- head scale, anchored at the neck join (200,294) so it doesn't
+             pull away from the body -- bumped up ~1/5 from 0.72 for a
+             bigger, more expressive head relative to the now-shorter body -->
+        <g transform="translate(200,294) scale(0.86) translate(-200,-294)">
         <!-- ears: open outline instead of a filled shape -->
         <path d="M 128 190 C 120 194 118 206 126 214" fill="none"/>
         <path d="M 272 190 C 280 194 282 206 274 214" fill="none"/>

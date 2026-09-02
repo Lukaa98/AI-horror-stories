@@ -29,15 +29,15 @@ const MOUTHS = ["closed", "small", "wide", "smile"];
 const EYES = ["open", "blink"];
 const POSES = {
   steady: {
-    strokeWidth: 4.5,
-    armLeft: "rotate(-1deg)",
-    armRight: "rotate(1deg)",
+    strokeWidth: 4.6,
+    armLeft: "rotate(-1.5deg)",
+    armRight: "rotate(1.5deg)",
     brows: "neutral",
   },
   jolt: {
-    strokeWidth: 4.2,
-    armLeft: "rotate(1deg)",
-    armRight: "rotate(-1deg)",
+    strokeWidth: 3.9,
+    armLeft: "rotate(1.5deg)",
+    armRight: "rotate(-1.5deg)",
     brows: "talk",
   },
 };

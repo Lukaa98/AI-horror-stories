@@ -30,7 +30,7 @@ TARGET_WORDS = (175, 190)
 # from the actual audio below, so only reject clearly broken short/long
 # responses instead of throwing away an otherwise good 199-word script.
 ACCEPTABLE_WORDS = (140, 220)
-FAST_TTS_SPEED = 1.12
+FAST_TTS_SPEED = 1.25
 TARGET_DURATION_SECONDS = 58.0
 ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 

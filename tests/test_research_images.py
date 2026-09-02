@@ -17,6 +17,7 @@ from research_request import (  # noqa: E402
 )
 from cars_and_bids import (  # noqa: E402
     augment_narration_with_current_value,
+    dedupe_similar_images,
     format_current_value,
     infer_search_params,
     parse_year_range,
@@ -50,6 +51,48 @@ def test_infer_search_params_keeps_toyota_gr_sub_brand_specific():
     assert infer_search_params("Toyota GR Supra 3.0") == {"make": "toyota", "model": "gr supra"}
     assert infer_search_params("Toyota GR Corolla Circuit Edition") == {"make": "toyota", "model": "gr corolla"}
     assert infer_search_params("Toyota GR86 Premium") == {"make": "toyota", "model": "gr86"}
+
+
+def _textured_image(size, seed):
+    """A solid color has zero internal gradient, which the difference-hash
+    used by dedupe_similar_images can't tell apart from any other solid
+    color (every neighbor comparison is equal) -- these tests need actual
+    photo-like structure to exercise real vs. near-duplicate detection."""
+    from PIL import ImageDraw
+
+    image = Image.new("RGB", size, (30, 30, 30))
+    draw = ImageDraw.Draw(image)
+    for index in range(8):
+        x = (index * 37 + seed * 53) % size[0]
+        y = (index * 29 + seed * 41) % size[1]
+        draw.ellipse([x, y, x + 20, y + 20], fill=((seed * 40) % 255, (index * 30) % 255, 200))
+    return image
+
+
+def test_dedupe_similar_images_removes_near_identical_copies(tmp_path):
+    source = _textured_image((200, 150), seed=1)
+    source.save(tmp_path / "front-01.jpg")
+    # A resized re-encode of the exact same photo, the way the same cover
+    # photo can reach the scraper twice under a thumbnail URL and a
+    # full-size URL -- these should hash as near-identical.
+    source.resize((320, 240)).save(tmp_path / "highlight-02.jpg")
+    _textured_image((200, 150), seed=9).save(tmp_path / "interior-03.jpg")
+
+    dedupe_similar_images(tmp_path)
+
+    remaining = sorted(path.name for path in tmp_path.iterdir())
+    assert remaining == ["front-01.jpg", "interior-03.jpg"]
+
+
+def test_dedupe_similar_images_keeps_genuinely_different_photos(tmp_path):
+    _textured_image((200, 150), seed=1).save(tmp_path / "front-01.jpg")
+    _textured_image((200, 150), seed=5).save(tmp_path / "interior-02.jpg")
+    _textured_image((200, 150), seed=9).save(tmp_path / "engine-03.jpg")
+
+    dedupe_similar_images(tmp_path)
+
+    remaining = sorted(path.name for path in tmp_path.iterdir())
+    assert remaining == ["engine-03.jpg", "front-01.jpg", "interior-02.jpg"]
 
 
 def test_parse_year_range_handles_ranges_and_single_years():

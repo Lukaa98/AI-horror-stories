@@ -39,8 +39,10 @@ HEADLINE_ZONE_RATIO = 0.095
 CAPTION_ZONE_RATIO = 0.075
 # Margin on every edge of the media's own band -- the picture is inset
 # instead of stretched edge-to-edge, so it reads as a framed photo rather
-# than a banner.
-MEDIA_INSET_RATIO = 0.125
+# than a banner. Trimmed from 0.125 to grow the picture itself by ~1/5
+# ((1 - 2*0.05) / (1 - 2*0.125) = 1.2) while keeping a visible, if
+# thinner, margin on every edge.
+MEDIA_INSET_RATIO = 0.05
 CAPTION_CHUNK_WORDS = 1
 
 # The sprite flipbook only ever varied by mouth state, so the rendered
@@ -56,7 +58,7 @@ CAPTION_CHUNK_WORDS = 1
 # since baking that into the same discrete cycle read as jerky rather than
 # a smooth sway.
 POSE_CYCLE = ["steady", "jolt"]
-POSE_SEGMENT_SECONDS = 0.35
+POSE_SEGMENT_SECONDS = 0.24
 # A blink timeline of its own -- the flipbook otherwise defaults to
 # permanently-open eyes for the whole video.
 BLINK_START_SECONDS = 1.2

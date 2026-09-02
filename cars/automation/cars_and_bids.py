@@ -77,6 +77,48 @@ def _draft_image_paths(dest):
     return sorted([path for path in dest.iterdir() if path.suffix.lower() in IMAGE_SUFFIXES])
 
 
+def _perceptual_hash(path):
+    """Difference-hash (dHash): shrink to 9x8 grayscale and compare each
+    pixel to its right neighbor, giving a 64-bit fingerprint where visually
+    similar images (even at different resolutions or crops) hash close
+    together. Matches the algorithm research_request.py's
+    _image_fingerprints already uses for cross-entry duplicate detection --
+    kept as a separate copy here since research_request.py imports from
+    this module, not the other way around."""
+    from PIL import Image
+
+    with Image.open(path) as image:
+        pixels = list(image.convert("L").resize((9, 8), Image.Resampling.LANCZOS).getdata())
+    bits = 0
+    for row in range(8):
+        for column in range(8):
+            bits = (bits << 1) | int(pixels[row * 9 + column] > pixels[row * 9 + column + 1])
+    return bits
+
+
+def dedupe_similar_images(dest, max_distance=5):
+    """Cars & Bids sometimes serves the same cover/hero photo at several
+    different URLs (a thumbnail vs. the full-size version, different CDN
+    resize params) -- the scraper's own URL-based dedup only catches exact
+    URL matches, so several near-identical copies of one photo can get
+    downloaded under different filenames, wasting every downstream review
+    and scene slot on one repeated picture instead of real variety.
+    Compares every downloaded image with a perceptual hash and deletes
+    near-duplicates, keeping the first (typically highest-priority) copy
+    of each distinct photo.
+    """
+    kept_hashes = []
+    for path in _draft_image_paths(dest):
+        try:
+            digest = _perceptual_hash(path)
+        except Exception:
+            continue
+        if any(bin(digest ^ existing).count("1") <= max_distance for existing in kept_hashes):
+            path.unlink(missing_ok=True)
+            continue
+        kept_hashes.append(digest)
+
+
 def _fallback_shot_type(path):
     stem = path.stem.lower()
     if stem.startswith("interior"):
@@ -350,6 +392,7 @@ def scrape_entry_images(scraper_dir, draft_images_dir, entry):
         cmd.append(f"--end-year={end_year}")
 
     subprocess.run(cmd, cwd=scraper_dir, check=False)
+    dedupe_similar_images(dest)
     manifest = load_manifest(manifest_path)
     review_payload = review_draft_images(dest, entry)
     images = choose_reviewed_images(dest, entry, review_payload, limit=6)
@@ -383,6 +426,7 @@ def scrape_auction_images(scraper_dir, draft_images_dir, entry, auction_url):
     ]
 
     subprocess.run(cmd, cwd=scraper_dir, check=False)
+    dedupe_similar_images(dest)
     manifest = load_manifest(manifest_path)
     review_payload = review_draft_images(dest, entry)
     images = choose_reviewed_images(dest, entry, review_payload, limit=6)
