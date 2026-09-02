@@ -14,7 +14,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from cars_and_bids import scrape_entry_images
+from cars_and_bids import enrich_entry_from_manifest, scrape_entry_images
+from research_request import _auction_provenance_matches_entry, review_and_rename_entry_images
 from generate_sample import ROOT
 from narrator_script import _extract_wav, build_mouth_timeline, synthesize_narration
 from narrator_video import render_narrator_video
@@ -153,6 +154,21 @@ def _visual_highlight_for_scenes(scenes):
     return " ".join(words)
 
 
+# research_request.py's category vocabulary (from its own real per-image AI
+# review, review_and_rename_entry_images) mapped down to the coarser types
+# this format's scenes actually request.
+_SHOT_TYPE_BY_CATEGORY = {
+    "exterior_front": "exterior",
+    "exterior_rear": "exterior",
+    "exterior_side": "exterior",
+    "exterior_full": "exterior",
+    "interior": "interior",
+    "engine_bay": "engine",
+    "wheel_detail": "wheel",
+    "other_detail": "detail",
+}
+
+
 def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None):
     search_hint = " ".join(value for value in [make, model, trim] if value).strip()
     if start_year or end_year:
@@ -169,14 +185,31 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
         "generation_label": generation,
     }
     selected, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
-    reviews = (manifest.get("ai_review") or {}).get("reviews", [])
-    review_by_name = {item.get("path"): item for item in reviews}
+    entry["images"] = selected
+    enrich_entry_from_manifest(entry, manifest)
+    # scrape_entry_images already runs a first-pass review internally
+    # (cars_and_bids.review_draft_images / choose_reviewed_images), but that
+    # pass only does coarse shot-type keyword/heuristic scoring. The
+    # ranking/battle pipeline's real strength is this second pass -- an
+    # actual per-image AI vision review that checks the pixels against the
+    # expected generation and gives usable files a truthful category name
+    # (research_request.review_and_rename_entry_images) -- which is what
+    # actually answers "is this really the front/side/interior of this car"
+    # instead of trusting a keyword guess. Reusing it here instead of
+    # reimplementing a thinner version is what should have been done from
+    # the start.
+    review_and_rename_entry_images(
+        entry,
+        images_dir,
+        require_ai=False,
+        seen_images=[],
+        trusted_variant_provenance=_auction_provenance_matches_entry(entry),
+    )
+    reviews_by_path = {review.get("path"): review for review in entry.get("image_reviews", [])}
     media = []
-    for relative in selected:
-        review = review_by_name.get(Path(relative).name, {})
-        shot_type = review.get("shot_type", "exterior")
-        if shot_type not in ALLOWED_MEDIA_TYPES:
-            continue
+    for relative in entry["images"]:
+        review = reviews_by_path.get(relative, {})
+        shot_type = _SHOT_TYPE_BY_CATEGORY.get(review.get("category"), "exterior")
         path = images_dir.parent / relative
         if path.exists():
             blur_license_plates(path)
