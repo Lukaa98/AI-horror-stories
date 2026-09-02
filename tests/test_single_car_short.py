@@ -9,7 +9,9 @@ from single_car_short import (  # noqa: E402
     ALLOWED_MEDIA_TYPES,
     AUDITION_PRESETS,
     FAST_TTS_SPEED,
+    HARD_WORD_RANGE,
     TARGET_WORDS,
+    _hard_word_range,
     _select_side_profile_media,
     _strip_citations,
     _target_word_range,
@@ -18,6 +20,7 @@ from single_car_short import (  # noqa: E402
     apply_rival_photos,
     generate_voice_auditions,
     order_media_for_scenes,
+    research_script,
 )
 from audition_voices import VOICE_PRESETS  # noqa: E402
 
@@ -42,6 +45,77 @@ def test_target_words_scales_with_tts_speed_so_the_two_cant_drift_apart():
 
 def test_interior_media_is_available_for_cabin_script_scenes():
     assert "interior" in ALLOWED_MEDIA_TYPES
+
+
+def test_hard_word_range_is_derived_from_the_atempo_clamp_not_a_guess():
+    # normalize_audio_duration clamps atempo to 0.5-2.0 -- a script whose
+    # raw audio needs a gentler correction than that still reaches ~target
+    # runtime with acceptable audio quality, so the hard gate should track
+    # that clamp directly rather than an arbitrary +-25% guess.
+    assert HARD_WORD_RANGE == _hard_word_range()
+    assert HARD_WORD_RANGE[0] < ACCEPTABLE_WORDS[0] < TARGET_WORDS[0]
+    assert TARGET_WORDS[1] < ACCEPTABLE_WORDS[1] < HARD_WORD_RANGE[1]
+    # This is the actual regression this whole range exists to fix: a
+    # 146-word script (real build failure -- see the commit this test was
+    # added in) is well outside ACCEPTABLE_WORDS but must NOT be outside
+    # the real, atempo-derived hard gate.
+    assert HARD_WORD_RANGE[0] <= 146 <= HARD_WORD_RANGE[1]
+
+
+def test_research_script_retries_with_feedback_when_outside_acceptable_words(monkeypatch):
+    import single_car_short
+
+    prompts = []
+    packages = [
+        {"scenes": [], "script": "", "word_count": 146},
+        {"scenes": [{"headline": "", "narration": "ok", "rival_make": None, "rival_model": None}],
+         "script": "ok", "word_count": TARGET_WORDS[0] + 5},
+    ]
+
+    def fake_request(prompt):
+        prompts.append(prompt)
+        return packages[len(prompts) - 1]
+
+    monkeypatch.setattr(single_car_short, "_request_script_package", fake_request)
+
+    package = research_script("Ford", "Mustang")
+
+    assert package["word_count"] == TARGET_WORDS[0] + 5
+    assert len(prompts) == 2
+    # The retry prompt must actually reference what went wrong so the
+    # model has something concrete to correct.
+    assert "146 words" in prompts[1]
+
+
+def test_research_script_does_not_retry_when_first_attempt_is_already_acceptable(monkeypatch):
+    import single_car_short
+
+    calls = []
+
+    def fake_request(prompt):
+        calls.append(prompt)
+        return {"scenes": [], "script": "", "word_count": TARGET_WORDS[0]}
+
+    monkeypatch.setattr(single_car_short, "_request_script_package", fake_request)
+
+    research_script("Ford", "Mustang")
+
+    assert len(calls) == 1
+
+
+def test_research_script_raises_only_when_still_outside_the_hard_range_after_all_attempts(monkeypatch):
+    import single_car_short
+
+    monkeypatch.setattr(
+        single_car_short, "_request_script_package",
+        lambda prompt: {"scenes": [], "script": "", "word_count": HARD_WORD_RANGE[0] - 20},
+    )
+
+    try:
+        research_script("Ford", "Mustang", max_attempts=2)
+        assert False, "expected RuntimeError"
+    except RuntimeError as exc:
+        assert "outside the safe" in str(exc)
 
 
 def test_strip_citations_removes_inline_markdown_links_and_urls():

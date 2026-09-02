@@ -52,12 +52,32 @@ def _acceptable_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_
     return (round(center * 0.75), round(center * 1.25))
 
 
+def _hard_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECONDS, min_tempo=0.5, max_tempo=2.0):
+    """The word count actually stops being safe to ship -- derived from
+    normalize_audio_duration's own atempo clamp (0.5-2.0), not an arbitrary
+    guess. A script this short/long still gets its runtime corrected to
+    ~target_seconds by that atempo stretch; only outside this range does
+    the correction have to exceed what atempo can do without sounding
+    broken. ACCEPTABLE_WORDS used to be the actual pass/fail gate at a much
+    tighter +-25% band, rejecting scripts (e.g. 146 words, when the target
+    center is ~220) that normalize_audio_duration would have handled fine
+    with a ~0.66x slowdown -- comfortably inside the 0.5-2.0 clamp -- so a
+    build failed over nothing actually broken."""
+    words_per_second = _BASE_WORDS_PER_SECOND * speed
+    min_words = words_per_second * (min_tempo * target_seconds)
+    max_words = words_per_second * (max_tempo * target_seconds)
+    return (round(min_words), round(max_words))
+
+
 TARGET_WORDS = _target_word_range()
-# The prompt targets the tight range above, but word counts from a grounded
-# structured response can land a little outside it. Runtime is normalized
-# from the actual audio below, so only reject clearly broken short/long
-# responses instead of throwing away an otherwise good script.
+# The prompt targets the tight range above, and this wider band is used to
+# decide whether to retry the model with corrective feedback (see
+# research_script) -- neither one is the actual failure gate anymore.
 ACCEPTABLE_WORDS = _acceptable_word_range()
+# The real failure gate: only a script this far outside the atempo-safe
+# range gets rejected, since anything inside it still reaches ~target
+# runtime with an audio-quality-preserving tempo correction.
+HARD_WORD_RANGE = _hard_word_range()
 ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 
 PACKAGE_SCHEMA = {
@@ -147,13 +167,8 @@ def _strip_citations(text):
     return re.sub(r"[ \t]{2,}", " ", text).strip()
 
 
-def research_script(make, model, trim="", start_year=None, end_year=None):
-    label = " ".join(value for value in [make, model, trim] if value).strip()
-    year_scope = (
-        f"model years {start_year}-{end_year}" if start_year and end_year
-        else f"model year {start_year or end_year}" if start_year or end_year else "the best-known generation"
-    )
-    prompt = f"""Research and write one original vertical car-video package about {label}, scoped to {year_scope}.
+def _research_script_prompt(label, year_scope, retry_feedback=""):
+    return f"""Research and write one original vertical car-video package about {label}, scoped to {year_scope}.{retry_feedback}
 Use web search and verify every technical comparison. Write a quick, conversational narration of {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total so faster TTS lands near 55-60 seconds, split across 5-7 scenes in speaking order -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, one comparison or ownership insight, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
@@ -165,6 +180,9 @@ When this car's original MSRP when new and a rough current used/market price are
 When a scene's "narration" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown exactly during that scene; otherwise set both to null. Only set these when the narration truly names one specific rival car in THAT scene, not a vague "its rivals" or a whole segment/class. That scene's narration must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search. Also set that same scene's main_horsepower/rival_horsepower to those same two verified figures as plain integers (e.g. 420 and 455) -- these drive a visual drag-race animation between the two cars, so they must exactly match the numbers stated in the narration. Set both to null on every other scene.
 
 Also return "start_year" and "end_year": the exact model-year range of the generation your script actually describes (the same year, twice, if it's a single model year). This must reflect what you actually researched and wrote about, even when the scope above was "the best-known generation" and you had to pick one yourself -- the photos shown alongside the narration are gathered using these years, so they need to match the generation you're describing."""
+
+
+def _request_script_package(prompt):
     response = with_openai_retry(lambda: OpenAI().responses.create(
         model="gpt-4o",
         input=prompt,
@@ -175,18 +193,48 @@ Also return "start_year" and "end_year": the exact model-year range of the gener
     for scene in package["scenes"]:
         scene["narration"] = _strip_citations(scene["narration"])
     package["script"] = " ".join(scene["narration"] for scene in package["scenes"])
-    count = _word_count(package["script"])
-    if not ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
+    package["word_count"] = _word_count(package["script"])
+    return package
+
+
+def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=3):
+    label = " ".join(value for value in [make, model, trim] if value).strip()
+    year_scope = (
+        f"model years {start_year}-{end_year}" if start_year and end_year
+        else f"model year {start_year or end_year}" if start_year or end_year else "the best-known generation"
+    )
+    package = None
+    for attempt in range(1, max_attempts + 1):
+        retry_feedback = (
+            f" Your previous attempt came back at {package['word_count']} words, outside the "
+            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} target -- rewrite from scratch so the narration lands "
+            f"squarely in that range this time." if package else ""
+        )
+        package = _request_script_package(_research_script_prompt(label, year_scope, retry_feedback))
+        count = package["word_count"]
+        if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
+            break
+        print(
+            f"[single-car] Attempt {attempt}/{max_attempts} returned {count} words, outside the preferred "
+            f"{ACCEPTABLE_WORDS[0]}-{ACCEPTABLE_WORDS[1]} range."
+            + (" Retrying with corrective feedback..." if attempt < max_attempts else "")
+        )
+    count = package["word_count"]
+    # The real failure gate -- see HARD_WORD_RANGE's own comment for why
+    # this is much wider than ACCEPTABLE_WORDS: normalize_audio_duration's
+    # atempo correction already brings anything in this range to ~target
+    # runtime without sounding broken, so only reject a script the retries
+    # above still couldn't pull back to something atempo can actually fix.
+    if not HARD_WORD_RANGE[0] <= count <= HARD_WORD_RANGE[1]:
         raise RuntimeError(
-            f"Single-car script is outside the safe {ACCEPTABLE_WORDS[0]}-{ACCEPTABLE_WORDS[1]} word range; "
-            f"model returned {count}."
+            f"Single-car script is outside the safe {HARD_WORD_RANGE[0]}-{HARD_WORD_RANGE[1]} word range even "
+            f"after {max_attempts} attempts; model returned {count}."
         )
     if not TARGET_WORDS[0] <= count <= TARGET_WORDS[1]:
         print(
-            f"[single-car] Script returned {count} words outside the preferred "
+            f"[single-car] Proceeding with {count} words outside the preferred "
             f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} range; audio timing will normalize the final runtime."
         )
-    package["word_count"] = count
     return package
 
 
