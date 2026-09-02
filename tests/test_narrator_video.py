@@ -5,16 +5,25 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "cars" / "automation")]
 
 from narrator_video import (  # noqa: E402
+    CANVAS,
     _blink_intervals,
     _caption_chunks,
     _caption_timeline,
+    _drag_race_track,
+    _drift_doodle_track,
     _merged_boundaries,
     _pose_intervals,
+    _progress_bar_track,
     _scene_time_boundaries,
     _typing_headline_positions,
     _value_at,
     _wobble_intervals,
 )
+
+
+def _make_transparent_png(path, size=(200, 300)):
+    from PIL import Image
+    Image.new("RGBA", size, (0, 0, 0, 0)).save(path)
 
 
 def test_caption_chunks_tile_the_full_duration_with_no_gaps():
@@ -191,6 +200,78 @@ def test_typing_headline_positions_caps_the_char_rate_to_fit_a_short_scene():
 
 def test_typing_headline_positions_empty_text_yields_no_frames():
     assert _typing_headline_positions("", 0.0, 5.0) == []
+
+
+def test_drift_doodle_track_returns_no_clips_without_a_cutout_path(tmp_path):
+    assert _drift_doodle_track(None, CANVAS, 5.0) == []
+    assert _drift_doodle_track(str(tmp_path / "missing.png"), CANVAS, 5.0) == []
+
+
+def test_drift_doodle_track_builds_small_clips_for_the_full_duration(tmp_path):
+    cutout = tmp_path / "car.png"
+    _make_transparent_png(cutout)
+    clips = _drift_doodle_track(str(cutout), CANVAS, 6.0)
+    # The car itself plus a few trailing smoke puffs -- a handful of small
+    # clips, not one nested full-canvas composite (which was the actual
+    # performance regression this shape fixes).
+    assert len(clips) >= 2
+    for clip in clips:
+        assert clip.duration == 6.0
+        # Each clip should stay inside the corner region across a couple
+        # of spin cycles, not drift off toward the middle of the frame or
+        # off-canvas.
+        for t in (0.0, 1.1, 2.7, 5.9):
+            x, y = clip.pos(t)
+            assert 0 <= x <= CANVAS[0]
+            assert 0 <= y <= CANVAS[1]
+
+
+def test_drag_race_track_returns_empty_without_both_cutouts(tmp_path):
+    cutout = tmp_path / "car.png"
+    _make_transparent_png(cutout)
+    assert _drag_race_track(None, str(cutout), 400, 300, CANVAS, 1.0, 4.0) == []
+    assert _drag_race_track(str(cutout), str(tmp_path / "missing.png"), 400, 300, CANVAS, 1.0, 4.0) == []
+
+
+def test_drag_race_track_returns_empty_for_a_too_short_beat(tmp_path):
+    cutout = tmp_path / "car.png"
+    _make_transparent_png(cutout)
+    assert _drag_race_track(str(cutout), str(cutout), 400, 300, CANVAS, 1.0, 1.1) == []
+
+
+def test_drag_race_track_the_higher_horsepower_car_reaches_the_bottom_first(tmp_path):
+    main_cutout = tmp_path / "main.png"
+    rival_cutout = tmp_path / "rival.png"
+    _make_transparent_png(main_cutout)
+    _make_transparent_png(rival_cutout)
+
+    main_clip, rival_clip = _drag_race_track(
+        str(main_cutout), str(rival_cutout), main_hp=300, rival_hp=500, size=CANVAS, seg_start=2.0, seg_end=6.0
+    )
+    assert main_clip.start == 2.0 and rival_clip.start == 2.0
+    assert main_clip.duration == 4.0 and rival_clip.duration == 4.0
+
+    # Rival (500hp) should win: it reaches further down the track by the
+    # end of the beat than the main car (300hp) does, at the same instant.
+    _, main_y_end = main_clip.pos(main_clip.duration)
+    _, rival_y_end = rival_clip.pos(rival_clip.duration)
+    assert rival_y_end > main_y_end
+
+    # Both lanes stay on their own side of the frame the whole time.
+    main_x, _ = main_clip.pos(0.0)
+    rival_x, _ = rival_clip.pos(0.0)
+    assert main_x < CANVAS[0] / 2 < rival_x
+
+
+def test_progress_bar_track_fills_left_to_right_over_the_real_duration():
+    clip = _progress_bar_track(CANVAS, 10.0)
+    assert clip.duration == 10.0
+    start_frame = clip.get_frame(0.0)
+    mid_frame = clip.get_frame(5.0)
+    end_frame = clip.get_frame(10.0)
+    assert start_frame[:, :5].sum() == 0  # nothing filled yet
+    assert mid_frame[:, :5].sum() > 0 and mid_frame[:, -5:].sum() == 0
+    assert end_frame[:, -5:].sum() > 0  # fully filled by the end
 
 
 def test_scene_time_boundaries_recovers_from_earlier_tokenization_drift():

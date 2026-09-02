@@ -78,7 +78,10 @@ PACKAGE_SCHEMA = {
             "type": "array", "minItems": 5, "maxItems": 7,
             "items": {
                 "type": "object", "additionalProperties": False,
-                "required": ["media_type", "headline", "narration", "rival_make", "rival_model"],
+                "required": [
+                    "media_type", "headline", "narration", "rival_make", "rival_model",
+                    "main_horsepower", "rival_horsepower",
+                ],
                 "properties": {
                     "media_type": {"type": "string", "enum": ["exterior", "engine", "interior", "detail", "wheel"]},
                     "headline": {"type": "string"},
@@ -101,6 +104,14 @@ PACKAGE_SCHEMA = {
                     # the scene doesn't name a specific rival.
                     "rival_make": {"type": ["string", "null"]},
                     "rival_model": {"type": ["string", "null"]},
+                    # The same two horsepower figures the narration already
+                    # has to state for a rival-comparison beat, but as real
+                    # numbers instead of embedded in prose -- narrator_video's
+                    # drag-race doodle needs a verified winner, not a regex
+                    # guess at whatever number happens to appear in the
+                    # sentence. null/null outside a rival-comparison scene.
+                    "main_horsepower": {"type": ["integer", "null"]},
+                    "rival_horsepower": {"type": ["integer", "null"]},
                 },
             },
         },
@@ -151,7 +162,7 @@ Headlines are only for important facts and must be 1-4 words (examples: model/ch
 
 When this car's original MSRP when new and a rough current used/market price are both verifiable, work one beat around that comparison -- especially call it out when it's notable: a luxury or exotic car that has depreciated hard off its window sticker, or one (often a limited-run or enthusiast favorite) that has held or even gained value. Give both numbers as approximate round figures (e.g. "started around $85K new, trades for about $40K today"), and make that scene's headline the price figures themselves (e.g. "$85K -> $40K" or "Holds Its Value"), still 1-4 words/tokens. Skip this beat entirely when solid pricing can't be verified with web search -- never guess at numbers.
 
-When a scene's "narration" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown exactly during that scene; otherwise set both to null. Only set these when the narration truly names one specific rival car in THAT scene, not a vague "its rivals" or a whole segment/class. That scene's narration must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search.
+When a scene's "narration" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown exactly during that scene; otherwise set both to null. Only set these when the narration truly names one specific rival car in THAT scene, not a vague "its rivals" or a whole segment/class. That scene's narration must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search. Also set that same scene's main_horsepower/rival_horsepower to those same two verified figures as plain integers (e.g. 420 and 455) -- these drive a visual drag-race animation between the two cars, so they must exactly match the numbers stated in the narration. Set both to null on every other scene.
 
 Also return "start_year" and "end_year": the exact model-year range of the generation your script actually describes (the same year, twice, if it's a single model year). This must reflect what you actually researched and wrote about, even when the scope above was "the best-known generation" and you had to pick one yourself -- the photos shown alongside the narration are gathered using these years, so they need to match the generation you're describing."""
     response = with_openai_retry(lambda: OpenAI().responses.create(
@@ -268,10 +279,25 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
         if shot_type == "exterior":
             path = remove_background(path)
             relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
-        media.append({"path": relative, "type": shot_type})
+        media.append({"path": relative, "type": shot_type, "category": review.get("category")})
     if not media:
         raise RuntimeError("No approved exterior, engine, detail, or wheel images were found.")
     return media, manifest.get("selected_auction") or {}
+
+
+def _select_side_profile_media(media):
+    """Pick one exterior photo to reuse for the decorative mini-car
+    animations (drift doodle, drag race) -- a true side profile reads far
+    better doing a spin or a top-to-bottom "race" than a front/rear crop,
+    so this prefers exterior_side, falls back to exterior_full (still shows
+    the whole car), and only then any exterior photo at all rather than
+    skipping the decorative features outright."""
+    exterior = [item for item in media if item["type"] == "exterior"]
+    for category in ("exterior_side", "exterior_full"):
+        match = next((item for item in exterior if item.get("category") == category), None)
+        if match:
+            return match["path"]
+    return exterior[0]["path"] if exterior else None
 
 
 def apply_rival_photos(scenes, media, start_year, end_year, images_dir):
@@ -324,10 +350,16 @@ def gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir
         return None
     reviews_by_path = {review.get("path"): review for review in entry.get("image_reviews", [])}
     exterior_categories = {"exterior_front", "exterior_rear", "exterior_side", "exterior_full"}
-    for relative in entry.get("images", []):
-        review = reviews_by_path.get(relative, {})
-        if review.get("category") not in exterior_categories:
-            continue
+    candidates = [
+        relative for relative in entry.get("images", [])
+        if reviews_by_path.get(relative, {}).get("category") in exterior_categories
+    ]
+    # A side profile (or, failing that, a full-car angle) reads far better
+    # than a front/rear crop for the drag-race mini-car animation this
+    # photo doubles as -- prefer those categories over whatever the scraper
+    # happened to list first.
+    category_rank = {"exterior_side": 0, "exterior_full": 1, "exterior_front": 2, "exterior_rear": 2}
+    for relative in sorted(candidates, key=lambda item: category_rank.get(reviews_by_path.get(item, {}).get("category"), 3)):
         path = images_dir.parent / relative
         if not path.exists():
             continue
@@ -451,6 +483,10 @@ def build_short(args):
     media, selected_auction = gather_media(
         args.make, args.model, args.trim, media_start_year, media_end_year, images_dir, package["scenes"]
     )
+    # Captured before order_media_for_scenes/apply_rival_photos reshuffle
+    # `media` into one pick per scene -- this needs the whole gathered pool
+    # to find the single best side-profile shot.
+    side_profile_media = _select_side_profile_media(media)
     media = order_media_for_scenes(package["scenes"], media)
     media = apply_rival_photos(package["scenes"], media, media_start_year, media_end_year, images_dir)
     audio_path = output_dir / "narration.mp3"
@@ -482,6 +518,7 @@ def build_short(args):
         "media": media,
         "selected_auction": selected_auction,
         "voice_auditions": voice_auditions,
+        "side_profile_media_path": str(output_dir / side_profile_media) if side_profile_media else None,
     }
     manifest_path = output_dir / "result.json"
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
