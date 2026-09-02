@@ -1,0 +1,2239 @@
+{
+  "car": {
+    "make": "Ford",
+    "model": "Mustang",
+    "trim": null
+  },
+  "title": "Ford Mustang 2020 - Power and Potential",
+  "start_year": 2020,
+  "end_year": 2020,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Iconic Design",
+      "narration": "Meet the 2020 Ford Mustang, an iconic blend of heritage and modern muscle. With aggressive styling and a powerful presence, it\u2019s more than just good looks. Let\u2019s dig into what makes it roar.",
+      "rival_make": null,
+      "rival_model": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "5.0-liter V8",
+      "narration": "Under the hood, you've got a choice, but the 5.0-liter V8 is the real star, pushing out 460 horsepower. It delivers a thrilling top-end rush, making every ride an adventure.",
+      "rival_make": null,
+      "rival_model": null
+    },
+    {
+      "media_type": "wheel",
+      "headline": "RWD Performance",
+      "narration": "Rear-wheel drive gives you that classic Mustang feel. It sticks in the corners and rockets out of them, with a six-speed manual that truly connects you to the road.",
+      "rival_make": null,
+      "rival_model": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Against Camaro",
+      "narration": "Stack it against the Chevy Camaro's 455 horsepower, and the Mustang holds its own with a balance of power and agility. Choices, choices.",
+      "rival_make": "Chevrolet",
+      "rival_model": "Camaro"
+    },
+    {
+      "media_type": "interior",
+      "headline": "Driver\u2019s Cabin",
+      "narration": "Inside, it\u2019s all about the driver. Supportive seats and intuitive controls make it just as comfortable for commute as it is on a track day.",
+      "rival_make": null,
+      "rival_model": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Tuning Potential",
+      "narration": "And if you're into tuning, the Mustang offers plenty of potential. From exhaust upgrades to turbocharging, it's a playground for modifications.",
+      "rival_make": null,
+      "rival_model": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Which Would You Choose?",
+      "narration": "So, would you choose the pure muscle of the Mustang? Or do you swing another way? Let us know what drives you.",
+      "rival_make": null,
+      "rival_model": null
+    }
+  ],
+  "sources": [
+    "https://www.caranddriver.com/ford/mustang-2020",
+    "https://www.motortrend.com/cars/ford/mustang/2020/",
+    "https://www.carsguide.com.au/car-reviews/ford-mustang-2020-review-77434"
+  ],
+  "script": "Meet the 2020 Ford Mustang, an iconic blend of heritage and modern muscle. With aggressive styling and a powerful presence, it\u2019s more than just good looks. Let\u2019s dig into what makes it roar. Under the hood, you've got a choice, but the 5.0-liter V8 is the real star, pushing out 460 horsepower. It delivers a thrilling top-end rush, making every ride an adventure. Rear-wheel drive gives you that classic Mustang feel. It sticks in the corners and rockets out of them, with a six-speed manual that truly connects you to the road. Stack it against the Chevy Camaro's 455 horsepower, and the Mustang holds its own with a balance of power and agility. Choices, choices. Inside, it\u2019s all about the driver. Supportive seats and intuitive controls make it just as comfortable for commute as it is on a track day. And if you're into tuning, the Mustang offers plenty of potential. From exhaust upgrades to turbocharging, it's a playground for modifications. So, would you choose the pure muscle of the Mustang? Or do you swing another way? Let us know what drives you.",
+  "word_count": 187,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 58.0,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ford-mustang-20260902150100/narration.mp3",
+  "duration_seconds": 58.05,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.45,
+      "mouth": "small"
+    },
+    {
+      "start": 0.45,
+      "end": 0.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.54,
+      "end": 0.81,
+      "mouth": "small"
+    },
+    {
+      "start": 0.81,
+      "end": 0.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.9,
+      "end": 1.17,
+      "mouth": "small"
+    },
+    {
+      "start": 1.17,
+      "end": 1.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.26,
+      "end": 1.98,
+      "mouth": "small"
+    },
+    {
+      "start": 1.98,
+      "end": 2.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.43,
+      "end": 2.7,
+      "mouth": "small"
+    },
+    {
+      "start": 2.7,
+      "end": 2.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.88,
+      "end": 3.06,
+      "mouth": "small"
+    },
+    {
+      "start": 3.06,
+      "end": 3.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.15,
+      "end": 3.42,
+      "mouth": "small"
+    },
+    {
+      "start": 3.42,
+      "end": 3.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.51,
+      "end": 3.78,
+      "mouth": "small"
+    },
+    {
+      "start": 3.78,
+      "end": 3.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.87,
+      "end": 4.41,
+      "mouth": "small"
+    },
+    {
+      "start": 4.41,
+      "end": 4.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.5,
+      "end": 4.59,
+      "mouth": "small"
+    },
+    {
+      "start": 4.59,
+      "end": 5.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.04,
+      "end": 5.31,
+      "mouth": "small"
+    },
+    {
+      "start": 5.31,
+      "end": 5.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.49,
+      "end": 5.76,
+      "mouth": "small"
+    },
+    {
+      "start": 5.76,
+      "end": 6.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.12,
+      "end": 6.57,
+      "mouth": "small"
+    },
+    {
+      "start": 6.57,
+      "end": 6.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.66,
+      "end": 6.93,
+      "mouth": "small"
+    },
+    {
+      "start": 6.93,
+      "end": 7.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.02,
+      "end": 7.2,
+      "mouth": "small"
+    },
+    {
+      "start": 7.2,
+      "end": 7.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.65,
+      "end": 7.83,
+      "mouth": "small"
+    },
+    {
+      "start": 7.83,
+      "end": 8.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.19,
+      "end": 8.37,
+      "mouth": "small"
+    },
+    {
+      "start": 8.37,
+      "end": 8.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.46,
+      "end": 8.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.55,
+      "end": 8.64,
+      "mouth": "small"
+    },
+    {
+      "start": 8.64,
+      "end": 8.73,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.73,
+      "end": 8.82,
+      "mouth": "small"
+    },
+    {
+      "start": 8.82,
+      "end": 9.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.36,
+      "end": 9.45,
+      "mouth": "small"
+    },
+    {
+      "start": 9.45,
+      "end": 9.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.54,
+      "end": 9.63,
+      "mouth": "small"
+    },
+    {
+      "start": 9.63,
+      "end": 9.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.9,
+      "end": 10.53,
+      "mouth": "small"
+    },
+    {
+      "start": 10.53,
+      "end": 10.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.62,
+      "end": 10.8,
+      "mouth": "small"
+    },
+    {
+      "start": 10.8,
+      "end": 11.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.34,
+      "end": 11.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.88,
+      "end": 11.97,
+      "mouth": "small"
+    },
+    {
+      "start": 11.97,
+      "end": 12.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.15,
+      "end": 12.24,
+      "mouth": "small"
+    },
+    {
+      "start": 12.24,
+      "end": 12.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.51,
+      "end": 12.6,
+      "mouth": "small"
+    },
+    {
+      "start": 12.6,
+      "end": 12.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.78,
+      "end": 12.96,
+      "mouth": "small"
+    },
+    {
+      "start": 12.96,
+      "end": 13.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.23,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.77,
+      "end": 13.86,
+      "mouth": "small"
+    },
+    {
+      "start": 13.86,
+      "end": 14.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.4,
+      "end": 14.49,
+      "mouth": "small"
+    },
+    {
+      "start": 14.49,
+      "end": 14.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.67,
+      "end": 15.03,
+      "mouth": "small"
+    },
+    {
+      "start": 15.03,
+      "end": 15.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.21,
+      "end": 15.39,
+      "mouth": "small"
+    },
+    {
+      "start": 15.39,
+      "end": 15.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.48,
+      "end": 15.66,
+      "mouth": "small"
+    },
+    {
+      "start": 15.66,
+      "end": 15.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.93,
+      "end": 16.02,
+      "mouth": "small"
+    },
+    {
+      "start": 16.02,
+      "end": 16.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.29,
+      "end": 16.38,
+      "mouth": "small"
+    },
+    {
+      "start": 16.38,
+      "end": 16.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.47,
+      "end": 16.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.74,
+      "end": 17.19,
+      "mouth": "small"
+    },
+    {
+      "start": 17.19,
+      "end": 17.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.28,
+      "end": 17.64,
+      "mouth": "small"
+    },
+    {
+      "start": 17.64,
+      "end": 18.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.09,
+      "end": 18.27,
+      "mouth": "small"
+    },
+    {
+      "start": 18.27,
+      "end": 18.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.36,
+      "end": 18.63,
+      "mouth": "small"
+    },
+    {
+      "start": 18.63,
+      "end": 18.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.72,
+      "end": 18.81,
+      "mouth": "small"
+    },
+    {
+      "start": 18.81,
+      "end": 18.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.9,
+      "end": 19.08,
+      "mouth": "small"
+    },
+    {
+      "start": 19.08,
+      "end": 19.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.17,
+      "end": 19.44,
+      "mouth": "small"
+    },
+    {
+      "start": 19.44,
+      "end": 19.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.53,
+      "end": 19.62,
+      "mouth": "small"
+    },
+    {
+      "start": 19.62,
+      "end": 19.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.98,
+      "end": 20.43,
+      "mouth": "small"
+    },
+    {
+      "start": 20.43,
+      "end": 20.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.52,
+      "end": 20.7,
+      "mouth": "small"
+    },
+    {
+      "start": 20.7,
+      "end": 20.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.88,
+      "end": 21.51,
+      "mouth": "small"
+    },
+    {
+      "start": 21.51,
+      "end": 21.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.96,
+      "end": 22.05,
+      "mouth": "small"
+    },
+    {
+      "start": 22.05,
+      "end": 22.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.32,
+      "end": 22.5,
+      "mouth": "small"
+    },
+    {
+      "start": 22.5,
+      "end": 22.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.68,
+      "end": 23.22,
+      "mouth": "small"
+    },
+    {
+      "start": 23.22,
+      "end": 23.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.31,
+      "end": 23.4,
+      "mouth": "small"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.49,
+      "end": 23.85,
+      "mouth": "small"
+    },
+    {
+      "start": 23.85,
+      "end": 23.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.94,
+      "end": 24.39,
+      "mouth": "small"
+    },
+    {
+      "start": 24.39,
+      "end": 24.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.75,
+      "end": 25.02,
+      "mouth": "small"
+    },
+    {
+      "start": 25.02,
+      "end": 25.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.11,
+      "end": 25.47,
+      "mouth": "small"
+    },
+    {
+      "start": 25.47,
+      "end": 25.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.65,
+      "end": 26.01,
+      "mouth": "small"
+    },
+    {
+      "start": 26.01,
+      "end": 26.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.1,
+      "end": 26.82,
+      "mouth": "small"
+    },
+    {
+      "start": 26.82,
+      "end": 27.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.09,
+      "end": 28.26,
+      "mouth": "small"
+    },
+    {
+      "start": 28.26,
+      "end": 28.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.44,
+      "end": 28.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.53,
+      "end": 28.89,
+      "mouth": "small"
+    },
+    {
+      "start": 28.89,
+      "end": 28.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.98,
+      "end": 29.52,
+      "mouth": "small"
+    },
+    {
+      "start": 29.52,
+      "end": 30.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.24,
+      "end": 30.33,
+      "mouth": "small"
+    },
+    {
+      "start": 30.33,
+      "end": 30.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.42,
+      "end": 30.78,
+      "mouth": "small"
+    },
+    {
+      "start": 30.78,
+      "end": 30.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.87,
+      "end": 31.05,
+      "mouth": "small"
+    },
+    {
+      "start": 31.05,
+      "end": 31.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.14,
+      "end": 31.41,
+      "mouth": "small"
+    },
+    {
+      "start": 31.41,
+      "end": 31.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.59,
+      "end": 31.77,
+      "mouth": "small"
+    },
+    {
+      "start": 31.77,
+      "end": 31.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.86,
+      "end": 33.12,
+      "mouth": "small"
+    },
+    {
+      "start": 33.12,
+      "end": 33.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.48,
+      "end": 33.66,
+      "mouth": "small"
+    },
+    {
+      "start": 33.66,
+      "end": 33.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.75,
+      "end": 35.28,
+      "mouth": "small"
+    },
+    {
+      "start": 35.28,
+      "end": 35.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.37,
+      "end": 36.18,
+      "mouth": "small"
+    },
+    {
+      "start": 36.18,
+      "end": 36.81,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.81,
+      "end": 36.9,
+      "mouth": "small"
+    },
+    {
+      "start": 36.9,
+      "end": 36.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.99,
+      "end": 37.17,
+      "mouth": "small"
+    },
+    {
+      "start": 37.17,
+      "end": 37.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.26,
+      "end": 37.53,
+      "mouth": "small"
+    },
+    {
+      "start": 37.53,
+      "end": 38.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.25,
+      "end": 38.61,
+      "mouth": "small"
+    },
+    {
+      "start": 38.61,
+      "end": 38.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.7,
+      "end": 38.79,
+      "mouth": "small"
+    },
+    {
+      "start": 38.79,
+      "end": 39.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.06,
+      "end": 39.24,
+      "mouth": "small"
+    },
+    {
+      "start": 39.24,
+      "end": 39.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.33,
+      "end": 39.42,
+      "mouth": "small"
+    },
+    {
+      "start": 39.42,
+      "end": 39.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.51,
+      "end": 40.05,
+      "mouth": "small"
+    },
+    {
+      "start": 40.05,
+      "end": 40.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.59,
+      "end": 40.68,
+      "mouth": "small"
+    },
+    {
+      "start": 40.68,
+      "end": 40.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.77,
+      "end": 40.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.95,
+      "end": 41.13,
+      "mouth": "small"
+    },
+    {
+      "start": 41.13,
+      "end": 41.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.22,
+      "end": 41.58,
+      "mouth": "small"
+    },
+    {
+      "start": 41.58,
+      "end": 41.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.76,
+      "end": 41.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.85,
+      "end": 42.03,
+      "mouth": "small"
+    },
+    {
+      "start": 42.03,
+      "end": 42.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.21,
+      "end": 42.57,
+      "mouth": "small"
+    },
+    {
+      "start": 42.57,
+      "end": 42.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.66,
+      "end": 42.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.75,
+      "end": 42.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.84,
+      "end": 42.93,
+      "mouth": "small"
+    },
+    {
+      "start": 42.93,
+      "end": 43.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.02,
+      "end": 43.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.11,
+      "end": 43.65,
+      "mouth": "small"
+    },
+    {
+      "start": 43.65,
+      "end": 43.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.83,
+      "end": 43.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.92,
+      "end": 44.1,
+      "mouth": "small"
+    },
+    {
+      "start": 44.1,
+      "end": 44.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.19,
+      "end": 44.37,
+      "mouth": "small"
+    },
+    {
+      "start": 44.37,
+      "end": 44.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.46,
+      "end": 44.91,
+      "mouth": "small"
+    },
+    {
+      "start": 44.91,
+      "end": 45.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.36,
+      "end": 45.63,
+      "mouth": "small"
+    },
+    {
+      "start": 45.63,
+      "end": 45.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.72,
+      "end": 45.99,
+      "mouth": "small"
+    },
+    {
+      "start": 45.99,
+      "end": 46.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.17,
+      "end": 46.26,
+      "mouth": "small"
+    },
+    {
+      "start": 46.26,
+      "end": 46.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.53,
+      "end": 46.62,
+      "mouth": "small"
+    },
+    {
+      "start": 46.62,
+      "end": 46.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.8,
+      "end": 46.89,
+      "mouth": "small"
+    },
+    {
+      "start": 46.89,
+      "end": 47.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.16,
+      "end": 47.34,
+      "mouth": "small"
+    },
+    {
+      "start": 47.34,
+      "end": 47.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.43,
+      "end": 47.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.61,
+      "end": 48.15,
+      "mouth": "small"
+    },
+    {
+      "start": 48.15,
+      "end": 48.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.51,
+      "end": 48.78,
+      "mouth": "small"
+    },
+    {
+      "start": 48.78,
+      "end": 48.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.96,
+      "end": 49.05,
+      "mouth": "small"
+    },
+    {
+      "start": 49.05,
+      "end": 49.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.14,
+      "end": 49.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.23,
+      "end": 49.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.41,
+      "end": 49.5,
+      "mouth": "small"
+    },
+    {
+      "start": 49.5,
+      "end": 49.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.59,
+      "end": 49.77,
+      "mouth": "small"
+    },
+    {
+      "start": 49.77,
+      "end": 49.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.95,
+      "end": 50.04,
+      "mouth": "small"
+    },
+    {
+      "start": 50.04,
+      "end": 50.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.22,
+      "end": 50.4,
+      "mouth": "small"
+    },
+    {
+      "start": 50.4,
+      "end": 50.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.67,
+      "end": 50.85,
+      "mouth": "small"
+    },
+    {
+      "start": 50.85,
+      "end": 50.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.94,
+      "end": 51.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.21,
+      "end": 52.11,
+      "mouth": "small"
+    },
+    {
+      "start": 52.11,
+      "end": 52.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.56,
+      "end": 53.19,
+      "mouth": "small"
+    },
+    {
+      "start": 53.19,
+      "end": 53.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.28,
+      "end": 53.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.37,
+      "end": 54.09,
+      "mouth": "small"
+    },
+    {
+      "start": 54.09,
+      "end": 54.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.18,
+      "end": 54.36,
+      "mouth": "small"
+    },
+    {
+      "start": 54.36,
+      "end": 54.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.63,
+      "end": 54.99,
+      "mouth": "small"
+    },
+    {
+      "start": 54.99,
+      "end": 55.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.26,
+      "end": 55.62,
+      "mouth": "small"
+    },
+    {
+      "start": 55.62,
+      "end": 55.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 55.98,
+      "end": 56.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.16,
+      "end": 56.25,
+      "mouth": "small"
+    },
+    {
+      "start": 56.25,
+      "end": 56.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.43,
+      "end": 56.61,
+      "mouth": "small"
+    },
+    {
+      "start": 56.61,
+      "end": 56.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.7,
+      "end": 56.97,
+      "mouth": "small"
+    },
+    {
+      "start": 56.97,
+      "end": 58.05,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "Meet",
+      "start": 0.0,
+      "end": 0.30000001192092896
+    },
+    {
+      "word": "the",
+      "start": 0.30000001192092896,
+      "end": 0.46000000834465027
+    },
+    {
+      "word": "2020",
+      "start": 0.46000000834465027,
+      "end": 1.1799999475479126
+    },
+    {
+      "word": "Ford",
+      "start": 1.1799999475479126,
+      "end": 1.5399999618530273
+    },
+    {
+      "word": "Mustang",
+      "start": 1.5399999618530273,
+      "end": 2.0
+    },
+    {
+      "word": "an",
+      "start": 2.440000057220459,
+      "end": 2.640000104904175
+    },
+    {
+      "word": "iconic",
+      "start": 2.640000104904175,
+      "end": 2.940000057220459
+    },
+    {
+      "word": "blend",
+      "start": 2.940000057220459,
+      "end": 3.2200000286102295
+    },
+    {
+      "word": "of",
+      "start": 3.2200000286102295,
+      "end": 3.7799999713897705
+    },
+    {
+      "word": "heritage",
+      "start": 3.7799999713897705,
+      "end": 3.7799999713897705
+    },
+    {
+      "word": "and",
+      "start": 3.7799999713897705,
+      "end": 4.079999923706055
+    },
+    {
+      "word": "modern",
+      "start": 4.079999923706055,
+      "end": 4.28000020980835
+    },
+    {
+      "word": "muscle",
+      "start": 4.28000020980835,
+      "end": 4.639999866485596
+    },
+    {
+      "word": "With",
+      "start": 5.119999885559082,
+      "end": 5.21999979019165
+    },
+    {
+      "word": "aggressive",
+      "start": 5.21999979019165,
+      "end": 5.659999847412109
+    },
+    {
+      "word": "styling",
+      "start": 5.659999847412109,
+      "end": 6.039999961853027
+    },
+    {
+      "word": "and",
+      "start": 6.039999961853027,
+      "end": 6.320000171661377
+    },
+    {
+      "word": "a",
+      "start": 6.320000171661377,
+      "end": 6.760000228881836
+    },
+    {
+      "word": "powerful",
+      "start": 6.760000228881836,
+      "end": 6.760000228881836
+    },
+    {
+      "word": "presence",
+      "start": 6.760000228881836,
+      "end": 7.21999979019165
+    },
+    {
+      "word": "it's",
+      "start": 7.639999866485596,
+      "end": 7.900000095367432
+    },
+    {
+      "word": "more",
+      "start": 7.900000095367432,
+      "end": 8.100000381469727
+    },
+    {
+      "word": "than",
+      "start": 8.100000381469727,
+      "end": 8.220000267028809
+    },
+    {
+      "word": "just",
+      "start": 8.220000267028809,
+      "end": 8.5
+    },
+    {
+      "word": "good",
+      "start": 8.5,
+      "end": 8.65999984741211
+    },
+    {
+      "word": "looks",
+      "start": 8.65999984741211,
+      "end": 8.920000076293945
+    },
+    {
+      "word": "Let's",
+      "start": 9.479999542236328,
+      "end": 9.720000267028809
+    },
+    {
+      "word": "dig",
+      "start": 9.720000267028809,
+      "end": 9.819999694824219
+    },
+    {
+      "word": "into",
+      "start": 9.819999694824219,
+      "end": 10.020000457763672
+    },
+    {
+      "word": "what",
+      "start": 10.020000457763672,
+      "end": 10.199999809265137
+    },
+    {
+      "word": "makes",
+      "start": 10.199999809265137,
+      "end": 10.359999656677246
+    },
+    {
+      "word": "it",
+      "start": 10.359999656677246,
+      "end": 10.699999809265137
+    },
+    {
+      "word": "roar",
+      "start": 10.699999809265137,
+      "end": 10.779999732971191
+    },
+    {
+      "word": "Under",
+      "start": 11.420000076293945,
+      "end": 11.539999961853027
+    },
+    {
+      "word": "the",
+      "start": 11.539999961853027,
+      "end": 11.880000114440918
+    },
+    {
+      "word": "hood",
+      "start": 11.880000114440918,
+      "end": 11.880000114440918
+    },
+    {
+      "word": "you've",
+      "start": 12.239999771118164,
+      "end": 12.380000114440918
+    },
+    {
+      "word": "got",
+      "start": 12.380000114440918,
+      "end": 12.479999542236328
+    },
+    {
+      "word": "a",
+      "start": 12.479999542236328,
+      "end": 12.699999809265137
+    },
+    {
+      "word": "choice",
+      "start": 12.699999809265137,
+      "end": 12.9399995803833
+    },
+    {
+      "word": "but",
+      "start": 13.279999732971191,
+      "end": 13.359999656677246
+    },
+    {
+      "word": "the",
+      "start": 13.359999656677246,
+      "end": 13.539999961853027
+    },
+    {
+      "word": "5",
+      "start": 13.539999961853027,
+      "end": 13.84000015258789
+    },
+    {
+      "word": "0",
+      "start": 13.84000015258789,
+      "end": 14.220000267028809
+    },
+    {
+      "word": "liter",
+      "start": 14.220000267028809,
+      "end": 14.380000114440918
+    },
+    {
+      "word": "V8",
+      "start": 14.380000114440918,
+      "end": 14.739999771118164
+    },
+    {
+      "word": "is",
+      "start": 14.739999771118164,
+      "end": 14.880000114440918
+    },
+    {
+      "word": "the",
+      "start": 14.880000114440918,
+      "end": 15.039999961853027
+    },
+    {
+      "word": "real",
+      "start": 15.039999961853027,
+      "end": 15.319999694824219
+    },
+    {
+      "word": "star",
+      "start": 15.319999694824219,
+      "end": 15.619999885559082
+    },
+    {
+      "word": "pushing",
+      "start": 16.18000030517578,
+      "end": 16.18000030517578
+    },
+    {
+      "word": "out",
+      "start": 16.18000030517578,
+      "end": 16.479999542236328
+    },
+    {
+      "word": "460",
+      "start": 16.579999923706055,
+      "end": 17.139999389648438
+    },
+    {
+      "word": "horsepower",
+      "start": 17.139999389648438,
+      "end": 17.600000381469727
+    },
+    {
+      "word": "It",
+      "start": 18.100000381469727,
+      "end": 18.31999969482422
+    },
+    {
+      "word": "delivers",
+      "start": 18.31999969482422,
+      "end": 18.479999542236328
+    },
+    {
+      "word": "a",
+      "start": 18.479999542236328,
+      "end": 18.979999542236328
+    },
+    {
+      "word": "thrilling",
+      "start": 18.979999542236328,
+      "end": 18.979999542236328
+    },
+    {
+      "word": "top",
+      "start": 18.979999542236328,
+      "end": 19.34000015258789
+    },
+    {
+      "word": "end",
+      "start": 19.34000015258789,
+      "end": 19.459999084472656
+    },
+    {
+      "word": "rush",
+      "start": 19.459999084472656,
+      "end": 19.739999771118164
+    },
+    {
+      "word": "making",
+      "start": 20.239999771118164,
+      "end": 20.260000228881836
+    },
+    {
+      "word": "every",
+      "start": 20.260000228881836,
+      "end": 20.700000762939453
+    },
+    {
+      "word": "ride",
+      "start": 20.700000762939453,
+      "end": 20.920000076293945
+    },
+    {
+      "word": "an",
+      "start": 20.920000076293945,
+      "end": 21.139999389648438
+    },
+    {
+      "word": "adventure",
+      "start": 21.139999389648438,
+      "end": 21.420000076293945
+    },
+    {
+      "word": "Rear",
+      "start": 22.18000030517578,
+      "end": 22.280000686645508
+    },
+    {
+      "word": "wheel",
+      "start": 22.280000686645508,
+      "end": 22.399999618530273
+    },
+    {
+      "word": "drive",
+      "start": 22.399999618530273,
+      "end": 22.739999771118164
+    },
+    {
+      "word": "gives",
+      "start": 22.739999771118164,
+      "end": 22.940000534057617
+    },
+    {
+      "word": "you",
+      "start": 22.940000534057617,
+      "end": 23.059999465942383
+    },
+    {
+      "word": "that",
+      "start": 23.059999465942383,
+      "end": 23.280000686645508
+    },
+    {
+      "word": "classic",
+      "start": 23.280000686645508,
+      "end": 23.68000030517578
+    },
+    {
+      "word": "Mustang",
+      "start": 23.68000030517578,
+      "end": 24.040000915527344
+    },
+    {
+      "word": "feel",
+      "start": 24.040000915527344,
+      "end": 24.420000076293945
+    },
+    {
+      "word": "It",
+      "start": 24.799999237060547,
+      "end": 25.020000457763672
+    },
+    {
+      "word": "sticks",
+      "start": 25.020000457763672,
+      "end": 25.15999984741211
+    },
+    {
+      "word": "in",
+      "start": 25.15999984741211,
+      "end": 25.34000015258789
+    },
+    {
+      "word": "the",
+      "start": 25.34000015258789,
+      "end": 25.719999313354492
+    },
+    {
+      "word": "corners",
+      "start": 25.719999313354492,
+      "end": 25.719999313354492
+    },
+    {
+      "word": "and",
+      "start": 25.719999313354492,
+      "end": 26.040000915527344
+    },
+    {
+      "word": "rockets",
+      "start": 26.040000915527344,
+      "end": 26.260000228881836
+    },
+    {
+      "word": "out",
+      "start": 26.260000228881836,
+      "end": 26.5
+    },
+    {
+      "word": "of",
+      "start": 26.5,
+      "end": 26.639999389648438
+    },
+    {
+      "word": "them",
+      "start": 26.639999389648438,
+      "end": 26.799999237060547
+    },
+    {
+      "word": "with",
+      "start": 26.8799991607666,
+      "end": 27.219999313354492
+    },
+    {
+      "word": "a",
+      "start": 27.219999313354492,
+      "end": 27.399999618530273
+    },
+    {
+      "word": "six",
+      "start": 27.399999618530273,
+      "end": 27.639999389648438
+    },
+    {
+      "word": "speed",
+      "start": 27.639999389648438,
+      "end": 27.799999237060547
+    },
+    {
+      "word": "manual",
+      "start": 27.799999237060547,
+      "end": 28.059999465942383
+    },
+    {
+      "word": "that",
+      "start": 28.059999465942383,
+      "end": 28.360000610351562
+    },
+    {
+      "word": "truly",
+      "start": 28.360000610351562,
+      "end": 28.760000228881836
+    },
+    {
+      "word": "connects",
+      "start": 28.760000228881836,
+      "end": 28.940000534057617
+    },
+    {
+      "word": "you",
+      "start": 28.940000534057617,
+      "end": 29.079999923706055
+    },
+    {
+      "word": "to",
+      "start": 29.079999923706055,
+      "end": 29.200000762939453
+    },
+    {
+      "word": "the",
+      "start": 29.200000762939453,
+      "end": 29.5
+    },
+    {
+      "word": "road",
+      "start": 29.5,
+      "end": 29.600000381469727
+    },
+    {
+      "word": "Stack",
+      "start": 30.479999542236328,
+      "end": 30.479999542236328
+    },
+    {
+      "word": "it",
+      "start": 30.479999542236328,
+      "end": 30.639999389648438
+    },
+    {
+      "word": "against",
+      "start": 30.639999389648438,
+      "end": 30.81999969482422
+    },
+    {
+      "word": "the",
+      "start": 30.81999969482422,
+      "end": 31.020000457763672
+    },
+    {
+      "word": "Chevy",
+      "start": 31.020000457763672,
+      "end": 31.239999771118164
+    },
+    {
+      "word": "Camaro's",
+      "start": 31.239999771118164,
+      "end": 31.719999313354492
+    },
+    {
+      "word": "455",
+      "start": 31.719999313354492,
+      "end": 32.58000183105469
+    },
+    {
+      "word": "horsepower",
+      "start": 32.58000183105469,
+      "end": 33.0
+    },
+    {
+      "word": "and",
+      "start": 33.2599983215332,
+      "end": 33.58000183105469
+    },
+    {
+      "word": "the",
+      "start": 33.58000183105469,
+      "end": 33.7400016784668
+    },
+    {
+      "word": "Mustang",
+      "start": 33.7400016784668,
+      "end": 34.0
+    },
+    {
+      "word": "holds",
+      "start": 34.0,
+      "end": 34.29999923706055
+    },
+    {
+      "word": "its",
+      "start": 34.29999923706055,
+      "end": 34.47999954223633
+    },
+    {
+      "word": "own",
+      "start": 34.47999954223633,
+      "end": 34.65999984741211
+    },
+    {
+      "word": "with",
+      "start": 34.65999984741211,
+      "end": 34.779998779296875
+    },
+    {
+      "word": "a",
+      "start": 34.779998779296875,
+      "end": 35.18000030517578
+    },
+    {
+      "word": "balance",
+      "start": 35.18000030517578,
+      "end": 35.18000030517578
+    },
+    {
+      "word": "of",
+      "start": 35.18000030517578,
+      "end": 35.380001068115234
+    },
+    {
+      "word": "power",
+      "start": 35.380001068115234,
+      "end": 35.63999938964844
+    },
+    {
+      "word": "and",
+      "start": 35.63999938964844,
+      "end": 35.86000061035156
+    },
+    {
+      "word": "agility",
+      "start": 35.86000061035156,
+      "end": 36.15999984741211
+    },
+    {
+      "word": "Choices",
+      "start": 36.880001068115234,
+      "end": 37.13999938964844
+    },
+    {
+      "word": "choices",
+      "start": 37.34000015258789,
+      "end": 37.720001220703125
+    },
+    {
+      "word": "Inside",
+      "start": 38.439998626708984,
+      "end": 38.779998779296875
+    },
+    {
+      "word": "it's",
+      "start": 38.900001525878906,
+      "end": 39.220001220703125
+    },
+    {
+      "word": "all",
+      "start": 39.220001220703125,
+      "end": 39.41999816894531
+    },
+    {
+      "word": "about",
+      "start": 39.41999816894531,
+      "end": 39.560001373291016
+    },
+    {
+      "word": "the",
+      "start": 39.560001373291016,
+      "end": 40.060001373291016
+    },
+    {
+      "word": "driver",
+      "start": 40.060001373291016,
+      "end": 40.060001373291016
+    },
+    {
+      "word": "Supportive",
+      "start": 40.68000030517578,
+      "end": 41.099998474121094
+    },
+    {
+      "word": "seats",
+      "start": 41.099998474121094,
+      "end": 41.279998779296875
+    },
+    {
+      "word": "and",
+      "start": 41.279998779296875,
+      "end": 41.459999084472656
+    },
+    {
+      "word": "intuitive",
+      "start": 41.459999084472656,
+      "end": 41.79999923706055
+    },
+    {
+      "word": "controls",
+      "start": 41.79999923706055,
+      "end": 42.220001220703125
+    },
+    {
+      "word": "make",
+      "start": 42.220001220703125,
+      "end": 42.47999954223633
+    },
+    {
+      "word": "it",
+      "start": 42.47999954223633,
+      "end": 42.63999938964844
+    },
+    {
+      "word": "just",
+      "start": 42.63999938964844,
+      "end": 42.86000061035156
+    },
+    {
+      "word": "as",
+      "start": 42.86000061035156,
+      "end": 43.31999969482422
+    },
+    {
+      "word": "comfortable",
+      "start": 43.31999969482422,
+      "end": 43.31999969482422
+    },
+    {
+      "word": "for",
+      "start": 43.31999969482422,
+      "end": 43.63999938964844
+    },
+    {
+      "word": "commute",
+      "start": 43.63999938964844,
+      "end": 43.81999969482422
+    },
+    {
+      "word": "as",
+      "start": 43.81999969482422,
+      "end": 44.02000045776367
+    },
+    {
+      "word": "it",
+      "start": 44.02000045776367,
+      "end": 44.119998931884766
+    },
+    {
+      "word": "is",
+      "start": 44.119998931884766,
+      "end": 44.2599983215332
+    },
+    {
+      "word": "on",
+      "start": 44.2599983215332,
+      "end": 44.36000061035156
+    },
+    {
+      "word": "a",
+      "start": 44.36000061035156,
+      "end": 44.459999084472656
+    },
+    {
+      "word": "track",
+      "start": 44.459999084472656,
+      "end": 44.68000030517578
+    },
+    {
+      "word": "day",
+      "start": 44.68000030517578,
+      "end": 44.91999816894531
+    },
+    {
+      "word": "And",
+      "start": 45.279998779296875,
+      "end": 45.52000045776367
+    },
+    {
+      "word": "if",
+      "start": 45.52000045776367,
+      "end": 45.560001373291016
+    },
+    {
+      "word": "you're",
+      "start": 45.560001373291016,
+      "end": 45.7599983215332
+    },
+    {
+      "word": "into",
+      "start": 45.7599983215332,
+      "end": 45.91999816894531
+    },
+    {
+      "word": "tuning",
+      "start": 45.91999816894531,
+      "end": 46.15999984741211
+    },
+    {
+      "word": "the",
+      "start": 46.540000915527344,
+      "end": 46.79999923706055
+    },
+    {
+      "word": "Mustang",
+      "start": 46.79999923706055,
+      "end": 47.0
+    },
+    {
+      "word": "offers",
+      "start": 47.0,
+      "end": 47.29999923706055
+    },
+    {
+      "word": "plenty",
+      "start": 47.29999923706055,
+      "end": 47.58000183105469
+    },
+    {
+      "word": "of",
+      "start": 47.58000183105469,
+      "end": 48.13999938964844
+    },
+    {
+      "word": "potential",
+      "start": 48.13999938964844,
+      "end": 48.13999938964844
+    },
+    {
+      "word": "From",
+      "start": 48.540000915527344,
+      "end": 48.70000076293945
+    },
+    {
+      "word": "exhaust",
+      "start": 48.70000076293945,
+      "end": 49.060001373291016
+    },
+    {
+      "word": "upgrades",
+      "start": 49.060001373291016,
+      "end": 49.459999084472656
+    },
+    {
+      "word": "to",
+      "start": 49.459999084472656,
+      "end": 49.70000076293945
+    },
+    {
+      "word": "turbocharging",
+      "start": 49.70000076293945,
+      "end": 50.36000061035156
+    },
+    {
+      "word": "it's",
+      "start": 50.63999938964844,
+      "end": 50.81999969482422
+    },
+    {
+      "word": "a",
+      "start": 50.81999969482422,
+      "end": 51.0
+    },
+    {
+      "word": "playground",
+      "start": 51.0,
+      "end": 51.20000076293945
+    },
+    {
+      "word": "for",
+      "start": 51.20000076293945,
+      "end": 51.5
+    },
+    {
+      "word": "modifications",
+      "start": 51.5,
+      "end": 52.0
+    },
+    {
+      "word": "So",
+      "start": 52.31999969482422,
+      "end": 52.7599983215332
+    },
+    {
+      "word": "would",
+      "start": 52.7599983215332,
+      "end": 52.779998779296875
+    },
+    {
+      "word": "you",
+      "start": 52.779998779296875,
+      "end": 52.97999954223633
+    },
+    {
+      "word": "choose",
+      "start": 52.97999954223633,
+      "end": 53.099998474121094
+    },
+    {
+      "word": "the",
+      "start": 53.099998474121094,
+      "end": 53.279998779296875
+    },
+    {
+      "word": "pure",
+      "start": 53.279998779296875,
+      "end": 53.439998626708984
+    },
+    {
+      "word": "muscle",
+      "start": 53.439998626708984,
+      "end": 53.619998931884766
+    },
+    {
+      "word": "of",
+      "start": 53.619998931884766,
+      "end": 53.79999923706055
+    },
+    {
+      "word": "the",
+      "start": 53.79999923706055,
+      "end": 54.0
+    },
+    {
+      "word": "Mustang",
+      "start": 54.0,
+      "end": 54.2599983215332
+    },
+    {
+      "word": "or",
+      "start": 54.380001068115234,
+      "end": 54.7400016784668
+    },
+    {
+      "word": "do",
+      "start": 54.7400016784668,
+      "end": 54.86000061035156
+    },
+    {
+      "word": "you",
+      "start": 54.86000061035156,
+      "end": 55.08000183105469
+    },
+    {
+      "word": "swing",
+      "start": 55.08000183105469,
+      "end": 55.119998931884766
+    },
+    {
+      "word": "another",
+      "start": 55.119998931884766,
+      "end": 55.41999816894531
+    },
+    {
+      "word": "way",
+      "start": 55.41999816894531,
+      "end": 55.63999938964844
+    },
+    {
+      "word": "Let",
+      "start": 55.939998626708984,
+      "end": 56.13999938964844
+    },
+    {
+      "word": "us",
+      "start": 56.13999938964844,
+      "end": 56.2599983215332
+    },
+    {
+      "word": "know",
+      "start": 56.2599983215332,
+      "end": 56.380001068115234
+    },
+    {
+      "word": "what",
+      "start": 56.380001068115234,
+      "end": 56.540000915527344
+    },
+    {
+      "word": "drives",
+      "start": 56.540000915527344,
+      "end": 56.779998779296875
+    },
+    {
+      "word": "you",
+      "start": 56.779998779296875,
+      "end": 57.119998931884766
+    }
+  ],
+  "media": [
+    {
+      "path": "images/ford-mustang/exterior_side-01-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/ford-mustang/exterior_rear-01-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/ford-mustang/exterior_rear-02-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/chevrolet-camaro/exterior_side-01-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/ford-mustang/interior-01.jpg",
+      "type": "interior"
+    },
+    {
+      "path": "images/ford-mustang/exterior_side-01-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/ford-mustang/exterior_side-01-nobg.png",
+      "type": "exterior"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rwREMbQa/2020-ford-mustang-shelby-gt350",
+    "title": "2020 Ford Mustang Shelby GT350",
+    "text": "2020 Ford Mustang Shelby GT350",
+    "titleYear": 2020,
+    "score": 109,
+    "sale_price": 76000,
+    "sale_type": "sold",
+    "page_title": "2020 Ford Mustang Shelby GT350",
+    "year": 2020,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-ford-mustang-20260902150100/voice_auditions/onyx.mp3",
+    "british_narrator": "single-ford-mustang-20260902150100/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-ford-mustang-20260902150100/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-ford-mustang-20260902150100/voice_auditions/british_energetic.mp3"
+  },
+  "video": "single_car_short.mp4"
+}
