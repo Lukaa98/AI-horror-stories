@@ -1,0 +1,733 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-02T03:00:37.589Z",
+  "query": "Ford Mustang",
+  "visual_highlight": "engine turbo horsepower wheel brake detail",
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=1965&end_year=1973&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rxggVPaz/1969-ford-mustang-mach-1-428-cobra-jet",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "text": "FEATURED Sold After for $95,000",
+      "titleYear": 1969,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rxLDaAmV/1969-ford-mustang-mach-1-428-cobra-jet",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "text": "FEATURED Sold After for $84,000",
+      "titleYear": 1969,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vGJj8zb/1966-ford-mustang-convertible",
+      "title": "1966 Ford Mustang Convertible",
+      "text": "FEATURED Bid to $78,000",
+      "titleYear": 1966,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "title": "1965 Ford Mustang Fastback",
+      "text": "Sold for $58,000",
+      "titleYear": 1965,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNd5BjPb/1970-ford-mustang-boss-302",
+      "title": "1970 Ford Mustang Boss 302",
+      "text": "FEATURED Bid to $55,000",
+      "titleYear": 1970,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37wxYozv/1968-ford-mustang-fastback",
+      "title": "1968 Ford Mustang Fastback",
+      "text": "Bid to $52,500",
+      "titleYear": 1968,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rxggVPaz/1969-ford-mustang-mach-1-428-cobra-jet",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "text": "FEATURED Sold After for $95,000",
+      "titleYear": 1969,
+      "score": 70,
+      "usable_image_count": 33,
+      "sale_price": 10900,
+      "sale_type": "sold",
+      "page_title": "1969 Ford Mustang Mach 1 428 Cobra Jet"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rxLDaAmV/1969-ford-mustang-mach-1-428-cobra-jet",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "text": "FEATURED Sold After for $84,000",
+      "titleYear": 1969,
+      "score": 70,
+      "usable_image_count": 19,
+      "sale_price": 10900,
+      "sale_type": "sold",
+      "page_title": "1969 Ford Mustang Mach 1 428 Cobra Jet"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vGJj8zb/1966-ford-mustang-convertible",
+      "title": "1966 Ford Mustang Convertible",
+      "text": "FEATURED Bid to $78,000",
+      "titleYear": 1966,
+      "score": 70,
+      "usable_image_count": 17,
+      "sale_price": 78000,
+      "sale_type": "sold",
+      "page_title": "1966 Ford Mustang Convertible"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "title": "1965 Ford Mustang Fastback",
+      "text": "Sold for $58,000",
+      "titleYear": 1965,
+      "score": 70,
+      "usable_image_count": 21,
+      "sale_price": 58000,
+      "sale_type": "sold",
+      "page_title": "1965 Ford Mustang Fastback"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rxggVPaz/1969-ford-mustang-mach-1-428-cobra-jet",
+    "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+    "text": "FEATURED Sold After for $95,000",
+    "titleYear": 1969,
+    "score": 70,
+    "sale_price": 10900,
+    "sale_type": "sold",
+    "page_title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+    "year": 1969,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/0a57cb53ba59c46fc4b692527a38a87c78d84028/photos/3qxa40a9-57eT_ZFVQa.jpeg?t=177871068777",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 180769
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/interior/3qxa40a9-UPGMIp8/edit/IJ6KI.jpg?t=177702551819",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "width": 542,
+      "height": 361,
+      "bytes": 343086
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/interior/3qxa40a9-K--Hfkw/edit/ppsbC.jpg?t=177702537208",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "width": 542,
+      "height": 361,
+      "bytes": 297717
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/mechanical/3qxa40a9-blTnEVd/edit/juSFB.jpg?t=177746635767",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "width": 542,
+      "height": 361,
+      "bytes": 189319
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/3qxa40a9-xoSps63/edit/NDFCT.jpg?t=177744097292",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "width": 542,
+      "height": 361,
+      "bytes": 106440
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/3qxa40a9--w7iCEY/edit/IJ29N.jpg?t=177702545446",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "width": 542,
+      "height": 361,
+      "bytes": 219588
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/3qxa40a9-SRWPGrD/edit/WZety.jpg?t=177702546749",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "width": 542,
+      "height": 361,
+      "bytes": 178275
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/3qxa40a9-EiXIAcP/edit/kO3P9.jpg?t=177702532690",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "width": 542,
+      "height": 361,
+      "bytes": 184578
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/3qxa40a9--y0DZ7b/edit/ui-zf.jpg?t=177702543192",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "width": 542,
+      "height": 361,
+      "bytes": 169911
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/2fc87156c943b2c27b400157ff3916b19cb6b1aa/photos/3pz6QPMB-RIMF8xUA_Vd.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 1910 bytes"
+    },
+    {
+      "path": "engine-11.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/2fc87156c943b2c27b400157ff3916b19cb6b1aa/attachments/rxggVPaz-Df2J_Lo.jpg?t=178016638862",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 318324
+    },
+    {
+      "path": "engine-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/2fc87156c943b2c27b400157ff3916b19cb6b1aa/attachments/rxggVPaz-LCcxs8Y.jpeg?t=178006968323",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 180,
+      "bytes": 542545
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fab29d06b3e68694d3cda8cb84c5c95f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fab29d06b3e68694d3cda8cb84c5c95f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fab29d06b3e68694d3cda8cb84c5c95f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxggVPaz/1969-ford-mustang-mach-1-428-cobra-jet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fab29d06b3e68694d3cda8cb84c5c95f/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "auction_year": 1969,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fadcbc7a7f9ae740951b7f21ef0cc178/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fadcbc7a7f9ae740951b7f21ef0cc178/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fadcbc7a7f9ae740951b7f21ef0cc178/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxggVPaz/1969-ford-mustang-mach-1-428-cobra-jet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fadcbc7a7f9ae740951b7f21ef0cc178/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "auction_year": 1969,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fd25b015de9850dcd4ea60a634ba8593/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fd25b015de9850dcd4ea60a634ba8593/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fd25b015de9850dcd4ea60a634ba8593/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxLDaAmV/1969-ford-mustang-mach-1-428-cobra-jet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fd25b015de9850dcd4ea60a634ba8593/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "auction_year": 1969,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bbf6e047bcc97db0ebff2d91398945c1/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bbf6e047bcc97db0ebff2d91398945c1/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bbf6e047bcc97db0ebff2d91398945c1/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxLDaAmV/1969-ford-mustang-mach-1-428-cobra-jet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bbf6e047bcc97db0ebff2d91398945c1/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "auction_year": 1969,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0d7ff489cff673f1a6e2b5d4bd69cf4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0d7ff489cff673f1a6e2b5d4bd69cf4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0d7ff489cff673f1a6e2b5d4bd69cf4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxLDaAmV/1969-ford-mustang-mach-1-428-cobra-jet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a0d7ff489cff673f1a6e2b5d4bd69cf4/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "auction_year": 1969,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ed5ba81e3f99f9cb32f2e7009379ca5b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ed5ba81e3f99f9cb32f2e7009379ca5b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ed5ba81e3f99f9cb32f2e7009379ca5b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxLDaAmV/1969-ford-mustang-mach-1-428-cobra-jet",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ed5ba81e3f99f9cb32f2e7009379ca5b/manifest/video.m3u8",
+      "auction_title": "1969 Ford Mustang Mach 1 428 Cobra Jet",
+      "auction_year": 1969,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1a795b3c5f328e8542abb6791fdffd87/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1a795b3c5f328e8542abb6791fdffd87/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1966 Ford Mustang Convertible",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1a795b3c5f328e8542abb6791fdffd87/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vGJj8zb/1966-ford-mustang-convertible",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1a795b3c5f328e8542abb6791fdffd87/manifest/video.m3u8",
+      "auction_title": "1966 Ford Mustang Convertible",
+      "auction_year": 1966,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7f86b0bf6b5117cd134a40c5f29298ac/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c743fa46acc42253d2d39232df1df69/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f114130898aeea55a712dd2eb4e4a490/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac5c0dd933801cccdc4de0ae50b7fda0/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1965 Ford Mustang Fastback",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjnLm4bl/1965-ford-mustang-fastback",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/826ed2632f207c412fbe070c0a005305/manifest/video.m3u8",
+      "auction_title": "1965 Ford Mustang Fastback",
+      "auction_year": 1965,
+      "search_score": 70
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 11,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1970",
+        "detected_variant_or_engine": "Cobra Jet",
+        "visible_match_evidence": [
+          "Cobra Jet badge"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "engine",
+        "scene_fit_tags": [
+          "engine"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1969",
+        "detected_variant_or_engine": "Mach 1",
+        "visible_match_evidence": [
+          "distinctive Mustang grille",
+          "hood scoop",
+          "Macho 1 badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "1969",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive Mustang grille",
+          "two round headlights",
+          "hood scoop",
+          "classic styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1970-1973",
+        "detected_variant_or_engine": "mach 1",
+        "visible_match_evidence": [
+          "bodywork shape",
+          "classic muscle car proportions",
+          "Mach 1 badging",
+          "rear quarter panel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1969",
+        "detected_variant_or_engine": "Mach 1",
+        "visible_match_evidence": [
+          "distinctive rear lights",
+          "model badging",
+          "proportions typical of 1969 Mustang"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1971-1973",
+        "detected_variant_or_engine": "Mach 1",
+        "visible_match_evidence": [
+          "distinct rear lights",
+          "Mach 1 badge",
+          "spoiler",
+          "body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "1969",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Documentation referencing Ford Mustang",
+          "Registration details consistent with 1969 Mustang"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "other",
+        "scene_fit_tags": [
+          "detail",
+          "front"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-11.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "1969",
+        "detected_variant_or_engine": "Mach 1 428 Cobra Jet",
+        "visible_match_evidence": [
+          "bodywork",
+          "proportions",
+          "front grille",
+          "trim"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1965-1973",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "seat patterns",
+          "red leather upholstery",
+          "Ford badge"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "1969",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "dashboard design",
+          "gauge layout",
+          "interior styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle; it only shows a dashboard gauge.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

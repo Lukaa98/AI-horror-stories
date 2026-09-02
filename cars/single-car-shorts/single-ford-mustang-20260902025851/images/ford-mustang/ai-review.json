@@ -1,0 +1,292 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 11,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "1970",
+      "detected_variant_or_engine": "Cobra Jet",
+      "visible_match_evidence": [
+        "Cobra Jet badge"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "engine",
+      "scene_fit_tags": [
+        "engine"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "1969",
+      "detected_variant_or_engine": "Mach 1",
+      "visible_match_evidence": [
+        "distinctive Mustang grille",
+        "hood scoop",
+        "Macho 1 badge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "1969",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinctive Mustang grille",
+        "two round headlights",
+        "hood scoop",
+        "classic styling"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "1970-1973",
+      "detected_variant_or_engine": "mach 1",
+      "visible_match_evidence": [
+        "bodywork shape",
+        "classic muscle car proportions",
+        "Mach 1 badging",
+        "rear quarter panel design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "1969",
+      "detected_variant_or_engine": "Mach 1",
+      "visible_match_evidence": [
+        "distinctive rear lights",
+        "model badging",
+        "proportions typical of 1969 Mustang"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "1971-1973",
+      "detected_variant_or_engine": "Mach 1",
+      "visible_match_evidence": [
+        "distinct rear lights",
+        "Mach 1 badge",
+        "spoiler",
+        "body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "1969",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Documentation referencing Ford Mustang",
+        "Registration details consistent with 1969 Mustang"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "other",
+      "scene_fit_tags": [
+        "detail",
+        "front"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-11.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "1969",
+      "detected_variant_or_engine": "Mach 1 428 Cobra Jet",
+      "visible_match_evidence": [
+        "bodywork",
+        "proportions",
+        "front grille",
+        "trim"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-12.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "1965-1973",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "seat patterns",
+        "red leather upholstery",
+        "Ford badge"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "1969",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "dashboard design",
+        "gauge layout",
+        "interior styling"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle; it only shows a dashboard gauge.",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}
