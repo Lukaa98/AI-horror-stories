@@ -1,0 +1,1989 @@
+{
+  "car": {
+    "make": "Mercedes",
+    "model": "Gt",
+    "trim": null
+  },
+  "title": "2017 Mercedes-AMG GT: Power and Performance",
+  "start_year": 2017,
+  "end_year": 2017,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Mercedes-AMG GT",
+      "narration": "Meet the 2017 Mercedes-AMG GT, a stunning blend of speed and style. This beast offers impressive performance that turns heads wherever it goes.",
+      "rival_make": null,
+      "rival_model": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "Handcrafted V8",
+      "narration": "Under the hood, you get a handcrafted 4.0-liter twin-turbo V8. It churns out a hefty 469 horsepower, delivering exhilarating acceleration.",
+      "rival_make": null,
+      "rival_model": null
+    },
+    {
+      "media_type": "wheel",
+      "headline": "Rear-Wheel Drive",
+      "narration": "Power is sent to the rear wheels, making for a thrilling driving experience. The seven-speed dual-clutch gearbox is quick and precise.",
+      "rival_make": null,
+      "rival_model": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Price Gap to 911",
+      "narration": "It competes with the Porsche 911 but offers a distinct experience. You get similar performance, with a slightly lower price tag.",
+      "rival_make": "Porsche",
+      "rival_model": "911"
+    },
+    {
+      "media_type": "detail",
+      "headline": "Tuning Potential",
+      "narration": "The GT's engine is ripe for tuning. With the right tweaks, you can easily extract more power and personalize driving dynamics.",
+      "rival_make": null,
+      "rival_model": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Ready for You?",
+      "narration": "So, is the 2017 Mercedes-AMG GT the right sports car for your garage? Its mix of power, luxury, and value might just seal the deal.",
+      "rival_make": null,
+      "rival_model": null
+    }
+  ],
+  "sources": [
+    "https://www.caranddriver.com/reviews/2017-mercedes-amg-gt-test-review",
+    "https://www.motortrend.com/cars/mercedes-benz/amg-gt/2017/",
+    "https://www.edmunds.com/mercedes-benz/amg-gt/2017/",
+    "https://en.wikipedia.org/wiki/Mercedes-AMG_GT"
+  ],
+  "script": "Meet the 2017 Mercedes-AMG GT, a stunning blend of speed and style. This beast offers impressive performance that turns heads wherever it goes. Under the hood, you get a handcrafted 4.0-liter twin-turbo V8. It churns out a hefty 469 horsepower, delivering exhilarating acceleration. Power is sent to the rear wheels, making for a thrilling driving experience. The seven-speed dual-clutch gearbox is quick and precise. It competes with the Porsche 911 but offers a distinct experience. You get similar performance, with a slightly lower price tag. The GT's engine is ripe for tuning. With the right tweaks, you can easily extract more power and personalize driving dynamics. So, is the 2017 Mercedes-AMG GT the right sports car for your garage? Its mix of power, luxury, and value might just seal the deal.",
+  "word_count": 132,
+  "voice_preset": "onyx",
+  "tts_speed": 1.25,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 58.0,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-mercedes-gt-20260902124011/narration.mp3",
+  "duration_seconds": 57.96,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.09,
+      "end": 0.18,
+      "mouth": "small"
+    },
+    {
+      "start": 0.18,
+      "end": 0.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.27,
+      "end": 0.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.36,
+      "end": 0.45,
+      "mouth": "small"
+    },
+    {
+      "start": 0.45,
+      "end": 0.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.63,
+      "end": 0.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.81,
+      "end": 0.99,
+      "mouth": "small"
+    },
+    {
+      "start": 0.99,
+      "end": 1.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.08,
+      "end": 1.35,
+      "mouth": "small"
+    },
+    {
+      "start": 1.35,
+      "end": 1.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.53,
+      "end": 1.89,
+      "mouth": "small"
+    },
+    {
+      "start": 1.89,
+      "end": 1.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.98,
+      "end": 2.07,
+      "mouth": "small"
+    },
+    {
+      "start": 2.07,
+      "end": 2.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.16,
+      "end": 2.43,
+      "mouth": "small"
+    },
+    {
+      "start": 2.43,
+      "end": 2.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.52,
+      "end": 3.15,
+      "mouth": "small"
+    },
+    {
+      "start": 3.15,
+      "end": 3.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.24,
+      "end": 3.51,
+      "mouth": "small"
+    },
+    {
+      "start": 3.51,
+      "end": 3.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.69,
+      "end": 3.87,
+      "mouth": "small"
+    },
+    {
+      "start": 3.87,
+      "end": 3.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.96,
+      "end": 4.05,
+      "mouth": "small"
+    },
+    {
+      "start": 4.05,
+      "end": 4.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.32,
+      "end": 4.77,
+      "mouth": "small"
+    },
+    {
+      "start": 4.77,
+      "end": 4.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.95,
+      "end": 5.4,
+      "mouth": "small"
+    },
+    {
+      "start": 5.4,
+      "end": 5.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.49,
+      "end": 5.85,
+      "mouth": "small"
+    },
+    {
+      "start": 5.85,
+      "end": 6.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.12,
+      "end": 6.48,
+      "mouth": "small"
+    },
+    {
+      "start": 6.48,
+      "end": 6.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.57,
+      "end": 7.29,
+      "mouth": "small"
+    },
+    {
+      "start": 7.29,
+      "end": 7.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.38,
+      "end": 7.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.47,
+      "end": 7.92,
+      "mouth": "small"
+    },
+    {
+      "start": 7.92,
+      "end": 8.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.01,
+      "end": 8.55,
+      "mouth": "small"
+    },
+    {
+      "start": 8.55,
+      "end": 8.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.64,
+      "end": 8.91,
+      "mouth": "small"
+    },
+    {
+      "start": 8.91,
+      "end": 9.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.0,
+      "end": 9.72,
+      "mouth": "small"
+    },
+    {
+      "start": 9.72,
+      "end": 9.81,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.81,
+      "end": 10.08,
+      "mouth": "small"
+    },
+    {
+      "start": 10.08,
+      "end": 10.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.8,
+      "end": 10.89,
+      "mouth": "small"
+    },
+    {
+      "start": 10.89,
+      "end": 11.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.43,
+      "end": 11.61,
+      "mouth": "small"
+    },
+    {
+      "start": 11.61,
+      "end": 11.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.88,
+      "end": 12.06,
+      "mouth": "small"
+    },
+    {
+      "start": 12.06,
+      "end": 12.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.15,
+      "end": 12.33,
+      "mouth": "small"
+    },
+    {
+      "start": 12.33,
+      "end": 12.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.51,
+      "end": 12.6,
+      "mouth": "small"
+    },
+    {
+      "start": 12.6,
+      "end": 12.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.78,
+      "end": 13.05,
+      "mouth": "small"
+    },
+    {
+      "start": 13.05,
+      "end": 13.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.14,
+      "end": 13.23,
+      "mouth": "small"
+    },
+    {
+      "start": 13.23,
+      "end": 13.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.32,
+      "end": 13.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.41,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.77,
+      "end": 14.04,
+      "mouth": "small"
+    },
+    {
+      "start": 14.04,
+      "end": 14.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.22,
+      "end": 15.21,
+      "mouth": "small"
+    },
+    {
+      "start": 15.21,
+      "end": 15.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.84,
+      "end": 16.02,
+      "mouth": "small"
+    },
+    {
+      "start": 16.02,
+      "end": 16.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.11,
+      "end": 16.2,
+      "mouth": "small"
+    },
+    {
+      "start": 16.2,
+      "end": 16.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.56,
+      "end": 16.92,
+      "mouth": "small"
+    },
+    {
+      "start": 16.92,
+      "end": 17.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.01,
+      "end": 17.1,
+      "mouth": "small"
+    },
+    {
+      "start": 17.1,
+      "end": 17.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.19,
+      "end": 17.28,
+      "mouth": "small"
+    },
+    {
+      "start": 17.28,
+      "end": 17.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.64,
+      "end": 17.91,
+      "mouth": "small"
+    },
+    {
+      "start": 17.91,
+      "end": 18.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.0,
+      "end": 18.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.18,
+      "end": 18.45,
+      "mouth": "small"
+    },
+    {
+      "start": 18.45,
+      "end": 18.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.54,
+      "end": 18.99,
+      "mouth": "small"
+    },
+    {
+      "start": 18.99,
+      "end": 19.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.44,
+      "end": 19.62,
+      "mouth": "small"
+    },
+    {
+      "start": 19.62,
+      "end": 19.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.71,
+      "end": 19.8,
+      "mouth": "small"
+    },
+    {
+      "start": 19.8,
+      "end": 19.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.98,
+      "end": 20.25,
+      "mouth": "small"
+    },
+    {
+      "start": 20.25,
+      "end": 20.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.61,
+      "end": 20.88,
+      "mouth": "small"
+    },
+    {
+      "start": 20.88,
+      "end": 20.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.97,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.51,
+      "end": 21.6,
+      "mouth": "small"
+    },
+    {
+      "start": 21.6,
+      "end": 22.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.23,
+      "end": 22.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.59,
+      "end": 22.95,
+      "mouth": "small"
+    },
+    {
+      "start": 22.95,
+      "end": 23.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.04,
+      "end": 23.4,
+      "mouth": "small"
+    },
+    {
+      "start": 23.4,
+      "end": 23.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.58,
+      "end": 24.39,
+      "mouth": "small"
+    },
+    {
+      "start": 24.39,
+      "end": 24.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.48,
+      "end": 24.66,
+      "mouth": "small"
+    },
+    {
+      "start": 24.66,
+      "end": 24.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.75,
+      "end": 24.84,
+      "mouth": "small"
+    },
+    {
+      "start": 24.84,
+      "end": 25.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.02,
+      "end": 25.29,
+      "mouth": "small"
+    },
+    {
+      "start": 25.29,
+      "end": 25.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.38,
+      "end": 25.65,
+      "mouth": "small"
+    },
+    {
+      "start": 25.65,
+      "end": 25.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.83,
+      "end": 26.19,
+      "mouth": "small"
+    },
+    {
+      "start": 26.19,
+      "end": 26.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.82,
+      "end": 27.09,
+      "mouth": "small"
+    },
+    {
+      "start": 27.09,
+      "end": 27.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.18,
+      "end": 27.27,
+      "mouth": "small"
+    },
+    {
+      "start": 27.27,
+      "end": 27.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.36,
+      "end": 27.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.45,
+      "end": 27.54,
+      "mouth": "small"
+    },
+    {
+      "start": 27.54,
+      "end": 27.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.63,
+      "end": 27.72,
+      "mouth": "small"
+    },
+    {
+      "start": 27.72,
+      "end": 27.81,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.81,
+      "end": 27.99,
+      "mouth": "small"
+    },
+    {
+      "start": 27.99,
+      "end": 28.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.08,
+      "end": 28.26,
+      "mouth": "small"
+    },
+    {
+      "start": 28.26,
+      "end": 28.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.35,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 28.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.89,
+      "end": 29.07,
+      "mouth": "small"
+    },
+    {
+      "start": 29.07,
+      "end": 29.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.16,
+      "end": 30.06,
+      "mouth": "small"
+    },
+    {
+      "start": 30.06,
+      "end": 30.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.78,
+      "end": 30.87,
+      "mouth": "small"
+    },
+    {
+      "start": 30.87,
+      "end": 30.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.96,
+      "end": 31.23,
+      "mouth": "small"
+    },
+    {
+      "start": 31.23,
+      "end": 31.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.32,
+      "end": 31.68,
+      "mouth": "small"
+    },
+    {
+      "start": 31.68,
+      "end": 31.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.77,
+      "end": 31.86,
+      "mouth": "small"
+    },
+    {
+      "start": 31.86,
+      "end": 31.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.95,
+      "end": 32.22,
+      "mouth": "small"
+    },
+    {
+      "start": 32.22,
+      "end": 32.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.4,
+      "end": 32.58,
+      "mouth": "small"
+    },
+    {
+      "start": 32.58,
+      "end": 32.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.67,
+      "end": 32.85,
+      "mouth": "small"
+    },
+    {
+      "start": 32.85,
+      "end": 33.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.3,
+      "end": 33.39,
+      "mouth": "small"
+    },
+    {
+      "start": 33.39,
+      "end": 33.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.48,
+      "end": 34.29,
+      "mouth": "small"
+    },
+    {
+      "start": 34.29,
+      "end": 34.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.38,
+      "end": 34.56,
+      "mouth": "small"
+    },
+    {
+      "start": 34.56,
+      "end": 34.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.65,
+      "end": 35.01,
+      "mouth": "small"
+    },
+    {
+      "start": 35.01,
+      "end": 35.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.55,
+      "end": 36.0,
+      "mouth": "small"
+    },
+    {
+      "start": 36.0,
+      "end": 36.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.09,
+      "end": 36.18,
+      "mouth": "small"
+    },
+    {
+      "start": 36.18,
+      "end": 36.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.27,
+      "end": 36.99,
+      "mouth": "small"
+    },
+    {
+      "start": 36.99,
+      "end": 37.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.35,
+      "end": 38.16,
+      "mouth": "small"
+    },
+    {
+      "start": 38.16,
+      "end": 38.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.25,
+      "end": 38.43,
+      "mouth": "small"
+    },
+    {
+      "start": 38.43,
+      "end": 38.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.52,
+      "end": 38.7,
+      "mouth": "small"
+    },
+    {
+      "start": 38.7,
+      "end": 38.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.79,
+      "end": 39.06,
+      "mouth": "small"
+    },
+    {
+      "start": 39.06,
+      "end": 39.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.69,
+      "end": 39.96,
+      "mouth": "small"
+    },
+    {
+      "start": 39.96,
+      "end": 40.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.05,
+      "end": 40.14,
+      "mouth": "small"
+    },
+    {
+      "start": 40.14,
+      "end": 40.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.59,
+      "end": 41.04,
+      "mouth": "small"
+    },
+    {
+      "start": 41.04,
+      "end": 41.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.13,
+      "end": 41.22,
+      "mouth": "small"
+    },
+    {
+      "start": 41.22,
+      "end": 41.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.31,
+      "end": 41.4,
+      "mouth": "small"
+    },
+    {
+      "start": 41.4,
+      "end": 41.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.49,
+      "end": 41.85,
+      "mouth": "small"
+    },
+    {
+      "start": 41.85,
+      "end": 42.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.21,
+      "end": 42.57,
+      "mouth": "small"
+    },
+    {
+      "start": 42.57,
+      "end": 42.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.66,
+      "end": 42.75,
+      "mouth": "small"
+    },
+    {
+      "start": 42.75,
+      "end": 42.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.84,
+      "end": 42.93,
+      "mouth": "small"
+    },
+    {
+      "start": 42.93,
+      "end": 43.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.02,
+      "end": 43.2,
+      "mouth": "small"
+    },
+    {
+      "start": 43.2,
+      "end": 43.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.38,
+      "end": 43.83,
+      "mouth": "small"
+    },
+    {
+      "start": 43.83,
+      "end": 43.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.92,
+      "end": 44.01,
+      "mouth": "small"
+    },
+    {
+      "start": 44.01,
+      "end": 44.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.19,
+      "end": 44.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.37,
+      "end": 44.46,
+      "mouth": "small"
+    },
+    {
+      "start": 44.46,
+      "end": 44.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.55,
+      "end": 44.82,
+      "mouth": "small"
+    },
+    {
+      "start": 44.82,
+      "end": 44.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.91,
+      "end": 45.45,
+      "mouth": "small"
+    },
+    {
+      "start": 45.45,
+      "end": 45.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.54,
+      "end": 47.25,
+      "mouth": "small"
+    },
+    {
+      "start": 47.25,
+      "end": 48.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.06,
+      "end": 48.15,
+      "mouth": "small"
+    },
+    {
+      "start": 48.15,
+      "end": 48.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.24,
+      "end": 48.51,
+      "mouth": "small"
+    },
+    {
+      "start": 48.51,
+      "end": 48.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.6,
+      "end": 48.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.78,
+      "end": 48.87,
+      "mouth": "small"
+    },
+    {
+      "start": 48.87,
+      "end": 48.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.96,
+      "end": 49.14,
+      "mouth": "small"
+    },
+    {
+      "start": 49.14,
+      "end": 49.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.23,
+      "end": 50.76,
+      "mouth": "small"
+    },
+    {
+      "start": 50.76,
+      "end": 50.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.85,
+      "end": 51.48,
+      "mouth": "small"
+    },
+    {
+      "start": 51.48,
+      "end": 51.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.57,
+      "end": 51.84,
+      "mouth": "small"
+    },
+    {
+      "start": 51.84,
+      "end": 51.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.93,
+      "end": 52.11,
+      "mouth": "small"
+    },
+    {
+      "start": 52.11,
+      "end": 52.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.2,
+      "end": 52.74,
+      "mouth": "small"
+    },
+    {
+      "start": 52.74,
+      "end": 52.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.83,
+      "end": 52.92,
+      "mouth": "small"
+    },
+    {
+      "start": 52.92,
+      "end": 53.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.64,
+      "end": 53.73,
+      "mouth": "small"
+    },
+    {
+      "start": 53.73,
+      "end": 53.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.82,
+      "end": 54.18,
+      "mouth": "small"
+    },
+    {
+      "start": 54.18,
+      "end": 54.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.27,
+      "end": 54.36,
+      "mouth": "small"
+    },
+    {
+      "start": 54.36,
+      "end": 54.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.63,
+      "end": 54.72,
+      "mouth": "small"
+    },
+    {
+      "start": 54.72,
+      "end": 54.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.9,
+      "end": 55.89,
+      "mouth": "small"
+    },
+    {
+      "start": 55.89,
+      "end": 56.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.07,
+      "end": 56.52,
+      "mouth": "small"
+    },
+    {
+      "start": 56.52,
+      "end": 56.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 56.61,
+      "end": 57.6,
+      "mouth": "small"
+    },
+    {
+      "start": 57.6,
+      "end": 57.96,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "Meet",
+      "start": 0.0,
+      "end": 0.3400000035762787
+    },
+    {
+      "word": "the",
+      "start": 0.3400000035762787,
+      "end": 0.5199999809265137
+    },
+    {
+      "word": "2017",
+      "start": 0.5199999809265137,
+      "end": 1.600000023841858
+    },
+    {
+      "word": "Mercedes",
+      "start": 1.600000023841858,
+      "end": 2.2200000286102295
+    },
+    {
+      "word": "AMG",
+      "start": 2.2200000286102295,
+      "end": 2.880000114440918
+    },
+    {
+      "word": "GT",
+      "start": 2.880000114440918,
+      "end": 3.299999952316284
+    },
+    {
+      "word": "a",
+      "start": 3.7799999713897705,
+      "end": 3.9800000190734863
+    },
+    {
+      "word": "stunning",
+      "start": 3.9800000190734863,
+      "end": 4.260000228881836
+    },
+    {
+      "word": "blend",
+      "start": 4.260000228881836,
+      "end": 4.639999866485596
+    },
+    {
+      "word": "of",
+      "start": 4.639999866485596,
+      "end": 4.940000057220459
+    },
+    {
+      "word": "speed",
+      "start": 4.940000057220459,
+      "end": 5.239999771118164
+    },
+    {
+      "word": "and",
+      "start": 5.239999771118164,
+      "end": 5.5
+    },
+    {
+      "word": "style",
+      "start": 5.5,
+      "end": 5.840000152587891
+    },
+    {
+      "word": "This",
+      "start": 6.199999809265137,
+      "end": 6.340000152587891
+    },
+    {
+      "word": "beast",
+      "start": 6.340000152587891,
+      "end": 6.760000228881836
+    },
+    {
+      "word": "offers",
+      "start": 6.760000228881836,
+      "end": 7.099999904632568
+    },
+    {
+      "word": "impressive",
+      "start": 7.099999904632568,
+      "end": 7.71999979019165
+    },
+    {
+      "word": "performance",
+      "start": 7.71999979019165,
+      "end": 8.34000015258789
+    },
+    {
+      "word": "that",
+      "start": 8.34000015258789,
+      "end": 8.680000305175781
+    },
+    {
+      "word": "turns",
+      "start": 8.680000305175781,
+      "end": 8.960000038146973
+    },
+    {
+      "word": "heads",
+      "start": 8.960000038146973,
+      "end": 9.260000228881836
+    },
+    {
+      "word": "wherever",
+      "start": 9.260000228881836,
+      "end": 9.619999885559082
+    },
+    {
+      "word": "it",
+      "start": 9.619999885559082,
+      "end": 9.859999656677246
+    },
+    {
+      "word": "goes",
+      "start": 9.859999656677246,
+      "end": 10.760000228881836
+    },
+    {
+      "word": "Under",
+      "start": 10.859999656677246,
+      "end": 11.100000381469727
+    },
+    {
+      "word": "the",
+      "start": 11.100000381469727,
+      "end": 11.539999961853027
+    },
+    {
+      "word": "hood",
+      "start": 11.539999961853027,
+      "end": 11.539999961853027
+    },
+    {
+      "word": "you",
+      "start": 11.920000076293945,
+      "end": 12.020000457763672
+    },
+    {
+      "word": "get",
+      "start": 12.020000457763672,
+      "end": 12.140000343322754
+    },
+    {
+      "word": "a",
+      "start": 12.140000343322754,
+      "end": 12.34000015258789
+    },
+    {
+      "word": "handcrafted",
+      "start": 12.34000015258789,
+      "end": 13.180000305175781
+    },
+    {
+      "word": "4",
+      "start": 13.180000305175781,
+      "end": 13.399999618530273
+    },
+    {
+      "word": "0",
+      "start": 13.399999618530273,
+      "end": 13.859999656677246
+    },
+    {
+      "word": "liter",
+      "start": 13.859999656677246,
+      "end": 14.119999885559082
+    },
+    {
+      "word": "twin",
+      "start": 14.119999885559082,
+      "end": 14.5
+    },
+    {
+      "word": "turbo",
+      "start": 14.5,
+      "end": 14.800000190734863
+    },
+    {
+      "word": "V8",
+      "start": 14.800000190734863,
+      "end": 15.359999656677246
+    },
+    {
+      "word": "It",
+      "start": 15.899999618530273,
+      "end": 16.15999984741211
+    },
+    {
+      "word": "churns",
+      "start": 16.15999984741211,
+      "end": 16.440000534057617
+    },
+    {
+      "word": "out",
+      "start": 16.440000534057617,
+      "end": 16.700000762939453
+    },
+    {
+      "word": "a",
+      "start": 16.700000762939453,
+      "end": 16.81999969482422
+    },
+    {
+      "word": "hefty",
+      "start": 16.81999969482422,
+      "end": 17.200000762939453
+    },
+    {
+      "word": "469",
+      "start": 17.200000762939453,
+      "end": 18.399999618530273
+    },
+    {
+      "word": "horsepower",
+      "start": 18.399999618530273,
+      "end": 19.0
+    },
+    {
+      "word": "delivering",
+      "start": 19.639999389648438,
+      "end": 19.920000076293945
+    },
+    {
+      "word": "exhilarating",
+      "start": 19.920000076293945,
+      "end": 20.739999771118164
+    },
+    {
+      "word": "acceleration",
+      "start": 20.739999771118164,
+      "end": 21.5
+    },
+    {
+      "word": "Power",
+      "start": 22.219999313354492,
+      "end": 22.540000915527344
+    },
+    {
+      "word": "is",
+      "start": 22.540000915527344,
+      "end": 22.979999542236328
+    },
+    {
+      "word": "sent",
+      "start": 22.979999542236328,
+      "end": 22.979999542236328
+    },
+    {
+      "word": "to",
+      "start": 22.979999542236328,
+      "end": 23.15999984741211
+    },
+    {
+      "word": "the",
+      "start": 23.15999984741211,
+      "end": 23.459999084472656
+    },
+    {
+      "word": "rear",
+      "start": 23.459999084472656,
+      "end": 23.639999389648438
+    },
+    {
+      "word": "wheels",
+      "start": 23.639999389648438,
+      "end": 23.959999084472656
+    },
+    {
+      "word": "making",
+      "start": 23.959999084472656,
+      "end": 24.280000686645508
+    },
+    {
+      "word": "for",
+      "start": 24.280000686645508,
+      "end": 24.579999923706055
+    },
+    {
+      "word": "a",
+      "start": 24.579999923706055,
+      "end": 25.1200008392334
+    },
+    {
+      "word": "thrilling",
+      "start": 25.1200008392334,
+      "end": 25.1200008392334
+    },
+    {
+      "word": "driving",
+      "start": 25.1200008392334,
+      "end": 25.579999923706055
+    },
+    {
+      "word": "experience",
+      "start": 25.579999923706055,
+      "end": 26.280000686645508
+    },
+    {
+      "word": "The",
+      "start": 26.6200008392334,
+      "end": 26.979999542236328
+    },
+    {
+      "word": "7",
+      "start": 26.979999542236328,
+      "end": 27.3799991607666
+    },
+    {
+      "word": "speed",
+      "start": 27.3799991607666,
+      "end": 27.760000228881836
+    },
+    {
+      "word": "dual",
+      "start": 27.760000228881836,
+      "end": 28.100000381469727
+    },
+    {
+      "word": "clutch",
+      "start": 28.100000381469727,
+      "end": 28.299999237060547
+    },
+    {
+      "word": "gearbox",
+      "start": 28.299999237060547,
+      "end": 28.81999969482422
+    },
+    {
+      "word": "is",
+      "start": 28.81999969482422,
+      "end": 29.18000030517578
+    },
+    {
+      "word": "quick",
+      "start": 29.18000030517578,
+      "end": 29.399999618530273
+    },
+    {
+      "word": "and",
+      "start": 29.399999618530273,
+      "end": 29.739999771118164
+    },
+    {
+      "word": "precise",
+      "start": 29.739999771118164,
+      "end": 30.100000381469727
+    },
+    {
+      "word": "It",
+      "start": 31.3799991607666,
+      "end": 31.3799991607666
+    },
+    {
+      "word": "competes",
+      "start": 31.3799991607666,
+      "end": 31.420000076293945
+    },
+    {
+      "word": "with",
+      "start": 31.420000076293945,
+      "end": 31.600000381469727
+    },
+    {
+      "word": "the",
+      "start": 31.600000381469727,
+      "end": 31.799999237060547
+    },
+    {
+      "word": "Porsche",
+      "start": 31.799999237060547,
+      "end": 32.099998474121094
+    },
+    {
+      "word": "911",
+      "start": 32.099998474121094,
+      "end": 32.720001220703125
+    },
+    {
+      "word": "but",
+      "start": 33.0,
+      "end": 33.47999954223633
+    },
+    {
+      "word": "offers",
+      "start": 33.47999954223633,
+      "end": 33.720001220703125
+    },
+    {
+      "word": "a",
+      "start": 33.720001220703125,
+      "end": 34.08000183105469
+    },
+    {
+      "word": "distinct",
+      "start": 34.08000183105469,
+      "end": 34.380001068115234
+    },
+    {
+      "word": "experience",
+      "start": 34.380001068115234,
+      "end": 35.119998931884766
+    },
+    {
+      "word": "You",
+      "start": 35.68000030517578,
+      "end": 35.70000076293945
+    },
+    {
+      "word": "get",
+      "start": 35.70000076293945,
+      "end": 35.900001525878906
+    },
+    {
+      "word": "similar",
+      "start": 35.900001525878906,
+      "end": 36.36000061035156
+    },
+    {
+      "word": "performance",
+      "start": 36.36000061035156,
+      "end": 36.959999084472656
+    },
+    {
+      "word": "with",
+      "start": 36.959999084472656,
+      "end": 37.52000045776367
+    },
+    {
+      "word": "a",
+      "start": 37.52000045776367,
+      "end": 37.720001220703125
+    },
+    {
+      "word": "slightly",
+      "start": 37.720001220703125,
+      "end": 38.119998931884766
+    },
+    {
+      "word": "lower",
+      "start": 38.119998931884766,
+      "end": 38.41999816894531
+    },
+    {
+      "word": "price",
+      "start": 38.41999816894531,
+      "end": 38.81999969482422
+    },
+    {
+      "word": "tag",
+      "start": 38.81999969482422,
+      "end": 39.18000030517578
+    },
+    {
+      "word": "The",
+      "start": 39.779998779296875,
+      "end": 39.900001525878906
+    },
+    {
+      "word": "GT's",
+      "start": 39.900001525878906,
+      "end": 40.47999954223633
+    },
+    {
+      "word": "engine",
+      "start": 40.47999954223633,
+      "end": 40.720001220703125
+    },
+    {
+      "word": "is",
+      "start": 40.720001220703125,
+      "end": 41.040000915527344
+    },
+    {
+      "word": "ripe",
+      "start": 41.040000915527344,
+      "end": 41.20000076293945
+    },
+    {
+      "word": "for",
+      "start": 41.20000076293945,
+      "end": 41.81999969482422
+    },
+    {
+      "word": "tuning",
+      "start": 41.81999969482422,
+      "end": 41.81999969482422
+    },
+    {
+      "word": "With",
+      "start": 42.34000015258789,
+      "end": 42.36000061035156
+    },
+    {
+      "word": "the",
+      "start": 42.36000061035156,
+      "end": 42.560001373291016
+    },
+    {
+      "word": "right",
+      "start": 42.560001373291016,
+      "end": 42.79999923706055
+    },
+    {
+      "word": "tweaks",
+      "start": 42.79999923706055,
+      "end": 43.13999938964844
+    },
+    {
+      "word": "you",
+      "start": 43.47999954223633,
+      "end": 43.540000915527344
+    },
+    {
+      "word": "can",
+      "start": 43.540000915527344,
+      "end": 43.779998779296875
+    },
+    {
+      "word": "easily",
+      "start": 43.779998779296875,
+      "end": 44.2400016784668
+    },
+    {
+      "word": "extract",
+      "start": 44.2400016784668,
+      "end": 44.619998931884766
+    },
+    {
+      "word": "more",
+      "start": 44.619998931884766,
+      "end": 44.97999954223633
+    },
+    {
+      "word": "power",
+      "start": 44.97999954223633,
+      "end": 45.380001068115234
+    },
+    {
+      "word": "and",
+      "start": 45.380001068115234,
+      "end": 45.70000076293945
+    },
+    {
+      "word": "personalized",
+      "start": 45.70000076293945,
+      "end": 46.29999923706055
+    },
+    {
+      "word": "driving",
+      "start": 46.29999923706055,
+      "end": 46.7599983215332
+    },
+    {
+      "word": "dynamics",
+      "start": 46.7599983215332,
+      "end": 47.36000061035156
+    },
+    {
+      "word": "So",
+      "start": 48.060001373291016,
+      "end": 48.220001220703125
+    },
+    {
+      "word": "is",
+      "start": 48.220001220703125,
+      "end": 48.36000061035156
+    },
+    {
+      "word": "the",
+      "start": 48.36000061035156,
+      "end": 48.560001373291016
+    },
+    {
+      "word": "2017",
+      "start": 48.560001373291016,
+      "end": 49.439998626708984
+    },
+    {
+      "word": "Mercedes",
+      "start": 49.439998626708984,
+      "end": 50.02000045776367
+    },
+    {
+      "word": "AMG",
+      "start": 50.02000045776367,
+      "end": 50.560001373291016
+    },
+    {
+      "word": "GT",
+      "start": 50.560001373291016,
+      "end": 50.880001068115234
+    },
+    {
+      "word": "the",
+      "start": 50.880001068115234,
+      "end": 51.2400016784668
+    },
+    {
+      "word": "right",
+      "start": 51.2400016784668,
+      "end": 51.560001373291016
+    },
+    {
+      "word": "sports",
+      "start": 51.560001373291016,
+      "end": 51.97999954223633
+    },
+    {
+      "word": "car",
+      "start": 51.97999954223633,
+      "end": 52.08000183105469
+    },
+    {
+      "word": "for",
+      "start": 52.08000183105469,
+      "end": 52.34000015258789
+    },
+    {
+      "word": "your",
+      "start": 52.34000015258789,
+      "end": 52.540000915527344
+    },
+    {
+      "word": "garage",
+      "start": 52.540000915527344,
+      "end": 52.939998626708984
+    },
+    {
+      "word": "Its",
+      "start": 52.939998626708984,
+      "end": 53.79999923706055
+    },
+    {
+      "word": "mix",
+      "start": 53.79999923706055,
+      "end": 54.08000183105469
+    },
+    {
+      "word": "of",
+      "start": 54.08000183105469,
+      "end": 54.41999816894531
+    },
+    {
+      "word": "power",
+      "start": 54.41999816894531,
+      "end": 54.720001220703125
+    },
+    {
+      "word": "luxury",
+      "start": 55.5,
+      "end": 55.5
+    },
+    {
+      "word": "and",
+      "start": 55.70000076293945,
+      "end": 55.91999816894531
+    },
+    {
+      "word": "value",
+      "start": 55.91999816894531,
+      "end": 56.2400016784668
+    },
+    {
+      "word": "might",
+      "start": 56.2400016784668,
+      "end": 56.560001373291016
+    },
+    {
+      "word": "just",
+      "start": 56.560001373291016,
+      "end": 56.900001525878906
+    },
+    {
+      "word": "seal",
+      "start": 56.900001525878906,
+      "end": 57.060001373291016
+    },
+    {
+      "word": "the",
+      "start": 57.060001373291016,
+      "end": 57.29999923706055
+    },
+    {
+      "word": "deal",
+      "start": 57.29999923706055,
+      "end": 57.47999954223633
+    }
+  ],
+  "media": [
+    {
+      "path": "images/mercedes-gt/exterior_side-01-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/mercedes-gt/exterior_front-01-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/mercedes-gt/exterior_front-02-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/porsche-911/exterior_front-01-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/mercedes-gt/exterior_rear-02-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/mercedes-gt/interior-01.jpg",
+      "type": "interior"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3g6zVxEz/2017-mercedes-amg-gt-coupe",
+    "title": "2017 Mercedes Amg Gt Coupe",
+    "text": "Sold for $57,289",
+    "titleYear": 2017,
+    "score": 60,
+    "sale_price": 57289,
+    "sale_type": "sold",
+    "page_title": "2017 Mercedes-AMG GT Coupe",
+    "year": 2017,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-mercedes-gt-20260902124011/voice_auditions/onyx.mp3",
+    "british_narrator": "single-mercedes-gt-20260902124011/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-mercedes-gt-20260902124011/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-mercedes-gt-20260902124011/voice_auditions/british_energetic.mp3"
+  },
+  "video": "single_car_short.mp4"
+}

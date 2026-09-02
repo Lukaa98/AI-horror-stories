@@ -1,0 +1,594 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-02T12:43:13.793Z",
+  "query": "Mercedes Gt",
+  "visual_highlight": "engine turbo horsepower wheel brake detail",
+  "search_url": "https://carsandbids.com/search/mercedes/gt?start_year=2017&end_year=2017&csort=10",
+  "search_result_count": 4,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rNNbVMEP/2017-mercedes-amg-gt-coupe",
+      "title": "2017 Mercedes Amg Gt Coupe",
+      "text": "Sold for $63,500",
+      "titleYear": 2017,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KVm5d8gP/2017-mercedes-amg-gt-coupe",
+      "title": "2017 Mercedes Amg Gt Coupe",
+      "text": "Sold for $62,500",
+      "titleYear": 2017,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3g6zVxEz/2017-mercedes-amg-gt-coupe",
+      "title": "2017 Mercedes Amg Gt Coupe",
+      "text": "Sold for $57,289",
+      "titleYear": 2017,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KP0qRRYN/2017-mercedes-amg-gt-coupe",
+      "title": "2017 Mercedes Amg Gt Coupe",
+      "text": "Sold for $51,050",
+      "titleYear": 2017,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rNNbVMEP/2017-mercedes-amg-gt-coupe",
+      "title": "2017 Mercedes Amg Gt Coupe",
+      "text": "Sold for $63,500",
+      "titleYear": 2017,
+      "score": 60,
+      "usable_image_count": 24,
+      "sale_price": 63500,
+      "sale_type": "sold",
+      "page_title": "2017 Mercedes-AMG GT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KVm5d8gP/2017-mercedes-amg-gt-coupe",
+      "title": "2017 Mercedes Amg Gt Coupe",
+      "text": "Sold for $62,500",
+      "titleYear": 2017,
+      "score": 60,
+      "usable_image_count": 18,
+      "sale_price": 62500,
+      "sale_type": "sold",
+      "page_title": "2017 Mercedes-AMG GT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3g6zVxEz/2017-mercedes-amg-gt-coupe",
+      "title": "2017 Mercedes Amg Gt Coupe",
+      "text": "Sold for $57,289",
+      "titleYear": 2017,
+      "score": 60,
+      "usable_image_count": 33,
+      "sale_price": 57289,
+      "sale_type": "sold",
+      "page_title": "2017 Mercedes-AMG GT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KP0qRRYN/2017-mercedes-amg-gt-coupe",
+      "title": "2017 Mercedes Amg Gt Coupe",
+      "text": "Sold for $51,050",
+      "titleYear": 2017,
+      "score": 60,
+      "usable_image_count": 13,
+      "sale_price": 51050,
+      "sale_type": "sold",
+      "page_title": "2017 Mercedes-AMG GT Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3g6zVxEz/2017-mercedes-amg-gt-coupe",
+    "title": "2017 Mercedes Amg Gt Coupe",
+    "text": "Sold for $57,289",
+    "titleYear": 2017,
+    "score": 60,
+    "sale_price": 57289,
+    "sale_type": "sold",
+    "page_title": "2017 Mercedes-AMG GT Coupe",
+    "year": 2017,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/59339d5e07287c702e69307de910cceaa69c1d04/photos/application/s-4kehYxu/edit/kfZbv.jpg?t=175278953072",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Mercedes-AMG GT Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 279407
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/3RGVR8k1-FXq9j3c/edit/xkXTS.jpg?t=175273679024",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Mercedes-AMG GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 179014
+    },
+    {
+      "path": "highlight-03.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4ea594d1061363b63901c0a0ce7d22cbfc8c9f38/photos/interior/3RGVR8k1-fuArF4V.jpeg?t=175208630015",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Mercedes-AMG GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 163239
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/3RGVR8k1-PuwTdTB/edit/R1GJV.jpg?t=175273683748",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Mercedes-AMG GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 152398
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/3RGVR8k1-gpsRoWE/edit/CcoF8.jpg?t=175273687737",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Mercedes-AMG GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 117965
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/3RGVR8k1-Ps8vorm/edit/o-ioR.jpg?t=175273648134",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Mercedes-AMG GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 226530
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/application/s-Klb3w3B/edit/vj-U4.jpg?t=175273651249",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Mercedes-AMG GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 320236
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/3RGVR8k1-24uei_5/edit/6SCQM.jpg?t=175273653824",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Mercedes-AMG GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 222936
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/3RGVR8k1-EAshadU/edit/c0enk.jpg?t=175273657462",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Mercedes-AMG GT Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 148575
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/4ea594d1061363b63901c0a0ce7d22cbfc8c9f38/photos/3Bv1Aqx4-Xq-QbrU.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 17532 bytes"
+    },
+    {
+      "path": "engine-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/f55b669ad2f550027fe3939a23a67d40a9f7c320/photos/KYzWLpmP-siqQNFE.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 22434
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/01ccf18aaa11490ec175f4c8d1eb5c4a32080362/photos/KY2EQDxr-yMoLRoY.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 8769 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6e6a45dbe069950585d2712603d6e82b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6e6a45dbe069950585d2712603d6e82b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Mercedes-AMG GT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6e6a45dbe069950585d2712603d6e82b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3g6zVxEz/2017-mercedes-amg-gt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6e6a45dbe069950585d2712603d6e82b/manifest/video.m3u8",
+      "auction_title": "2017 Mercedes-AMG GT Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/19f2b08669139a361746d10096c4883f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/19f2b08669139a361746d10096c4883f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Mercedes-AMG GT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/19f2b08669139a361746d10096c4883f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3g6zVxEz/2017-mercedes-amg-gt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/19f2b08669139a361746d10096c4883f/manifest/video.m3u8",
+      "auction_title": "2017 Mercedes-AMG GT Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f6bf8845e623963906b61b79b6d75665/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f6bf8845e623963906b61b79b6d75665/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Mercedes-AMG GT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f6bf8845e623963906b61b79b6d75665/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3g6zVxEz/2017-mercedes-amg-gt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f6bf8845e623963906b61b79b6d75665/manifest/video.m3u8",
+      "auction_title": "2017 Mercedes-AMG GT Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/53230e5d7c099534a5c00a75cd68ca94/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/53230e5d7c099534a5c00a75cd68ca94/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Mercedes-AMG GT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/53230e5d7c099534a5c00a75cd68ca94/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP0qRRYN/2017-mercedes-amg-gt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/53230e5d7c099534a5c00a75cd68ca94/manifest/video.m3u8",
+      "auction_title": "2017 Mercedes-AMG GT Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/da1cfbe9cc442e8d6d6b6e0c09591f56/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/da1cfbe9cc442e8d6d6b6e0c09591f56/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Mercedes-AMG GT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/da1cfbe9cc442e8d6d6b6e0c09591f56/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP0qRRYN/2017-mercedes-amg-gt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/da1cfbe9cc442e8d6d6b6e0c09591f56/manifest/video.m3u8",
+      "auction_title": "2017 Mercedes-AMG GT Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "GT",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "AMG seat design",
+          "red and black color scheme",
+          "interior layout consistent with GT"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "GT",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive front grille",
+          "curved body shape",
+          "vehicle proportions",
+          "headlight design",
+          "AMG styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "GT",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinct front grille design",
+          "headlight shape",
+          "overall body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "GT",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Body shape consistent with Mercedes GT",
+          "Positioning and angle show typical GT proportions",
+          "V8 badge visible"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "GT",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "S",
+        "visible_match_evidence": [
+          "bodywork",
+          "lights",
+          "proportions",
+          "badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "GT",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Mercedes badge",
+          "Distinctive GT bodywork",
+          "Rear lights design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 0,
+        "variant_match_confidence": 0,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 3,
+        "target_match_confidence": 0,
+        "reject": true,
+        "reason": "Image does not contain the target vehicle.",
+        "path": "engine-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "GT",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "AMG branding",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "GT",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Mercedes steering wheel design",
+          "Gauges layout",
+          "Center console features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 4,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image is of the interior with dashboard details, not of the exterior or target vehicle.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
