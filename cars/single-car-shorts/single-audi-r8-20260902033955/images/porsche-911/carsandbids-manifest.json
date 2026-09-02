@@ -1,0 +1,447 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-02T03:49:05.270Z",
+  "query": "Porsche 911",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/porsche/911?start_year=2017&end_year=2017&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9adxYgnG/2017-porsche-911-turbo-s",
+      "title": "2017 Porsche 911 Turbo S",
+      "text": "Sold for $155,555",
+      "titleYear": 2017,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJlDewEg/2017-porsche-911-turbo-cabriolet",
+      "title": "2017 Porsche 911 Turbo Cabriolet",
+      "text": "Bid to $126,000",
+      "titleYear": 2017,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9nXVyPxN/2017-porsche-911-turbo-s-coupe",
+      "title": "2017 Porsche 911 Turbo S Coupe",
+      "text": "FEATURED Sold for $125,500",
+      "titleYear": 2017,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Onj7pXY/2017-porsche-911-turbo-coupe",
+      "title": "2017 Porsche 911 Turbo Coupe",
+      "text": "Sold for $125,274",
+      "titleYear": 2017,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lvBvYJO/2017-porsche-911-turbo-s-coupe",
+      "title": "2017 Porsche 911 Turbo S Coupe",
+      "text": "FEATURED Sold for $124,991",
+      "titleYear": 2017,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkpYJjob/2017-porsche-911-targa-4-gts",
+      "title": "2017 Porsche 911 Targa 4 Gts",
+      "text": "Sold for $123,500",
+      "titleYear": 2017,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9adxYgnG/2017-porsche-911-turbo-s",
+      "title": "2017 Porsche 911 Turbo S",
+      "text": "Sold for $155,555",
+      "titleYear": 2017,
+      "score": 70,
+      "usable_image_count": 30,
+      "sale_price": 155555,
+      "sale_type": "sold",
+      "page_title": "2017 Porsche 911 Turbo S"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJlDewEg/2017-porsche-911-turbo-cabriolet",
+      "title": "2017 Porsche 911 Turbo Cabriolet",
+      "text": "Bid to $126,000",
+      "titleYear": 2017,
+      "score": 70,
+      "usable_image_count": 32,
+      "sale_price": 126000,
+      "sale_type": "bid_to",
+      "page_title": "2017 Porsche 911 Turbo Cabriolet"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9nXVyPxN/2017-porsche-911-turbo-s-coupe",
+      "title": "2017 Porsche 911 Turbo S Coupe",
+      "text": "FEATURED Sold for $125,500",
+      "titleYear": 2017,
+      "score": 70,
+      "usable_image_count": 31,
+      "sale_price": 125500,
+      "sale_type": "sold",
+      "page_title": "2017 Porsche 911 Turbo S Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Onj7pXY/2017-porsche-911-turbo-coupe",
+      "title": "2017 Porsche 911 Turbo Coupe",
+      "text": "Sold for $125,274",
+      "titleYear": 2017,
+      "score": 70,
+      "usable_image_count": 15,
+      "sale_price": 125274,
+      "sale_type": "sold",
+      "page_title": "2017 Porsche 911 Turbo Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rJlDewEg/2017-porsche-911-turbo-cabriolet",
+    "title": "2017 Porsche 911 Turbo Cabriolet",
+    "text": "Bid to $126,000",
+    "titleYear": 2017,
+    "score": 70,
+    "sale_price": 126000,
+    "sale_type": "bid_to",
+    "page_title": "2017 Porsche 911 Turbo Cabriolet",
+    "year": 2017,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9nEJ0EXN-0pQzCVi7nF-(edit).jpg?t=168503347690",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2017 Porsche 911 Turbo Cabriolet",
+      "width": 1623,
+      "height": 1082,
+      "bytes": 234346
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9nEJ0EXN-fRzRgzeNd--(edit).jpg?t=168497103423",
+      "labels": [
+        "interior"
+      ],
+      "section": "2017 Porsche 911 Turbo Cabriolet",
+      "width": 542,
+      "height": 361,
+      "bytes": 249902
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9nEJ0EXN-O0YiLt374c-(edit).jpg?t=168497106542",
+      "labels": [
+        "interior"
+      ],
+      "section": "2017 Porsche 911 Turbo Cabriolet",
+      "width": 542,
+      "height": 361,
+      "bytes": 243573
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9nEJ0EXN-0owrcJRU8g-(edit).jpg?t=168497109914",
+      "labels": [
+        "interior"
+      ],
+      "section": "2017 Porsche 911 Turbo Cabriolet",
+      "width": 542,
+      "height": 361,
+      "bytes": 218785
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9nEJ0EXN-t9UrV4ymso-(edit).jpg?t=168497084515",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2017 Porsche 911 Turbo Cabriolet",
+      "width": 542,
+      "height": 361,
+      "bytes": 202961
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9nEJ0EXN-0A2wHzlEd4-(edit).jpg?t=168497089771",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2017 Porsche 911 Turbo Cabriolet",
+      "width": 542,
+      "height": 361,
+      "bytes": 311646
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9nEJ0EXN-a1YNsxnEtp-(edit).jpg?t=168497094327",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2017 Porsche 911 Turbo Cabriolet",
+      "width": 542,
+      "height": 361,
+      "bytes": 248461
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/9nEJ0EXN-OCjSsiMJKd-(edit).jpg?t=168497098755",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2017 Porsche 911 Turbo Cabriolet",
+      "width": 542,
+      "height": 361,
+      "bytes": 210972
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/69025efcb6597ba3192bf4c2fdc40b4ce2c95d56/photos/rNv7mRE5-UBfKHNa.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 16804 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1587d09516d1ec525e640daf7eecd24b18cd4a40/photos/3zYOWoxz-MyGe2SBPw.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 18868 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c5650fe8d419de054ad40c67446c6a5ebd173f44/photos/3g41V1j1-BGzoR4w.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 6426 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1cf2e062a67b9edef7e306c8cbfeb8450482830e/photos/KVQRV0oQ-GVC-99E.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 13433 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 front lights",
+          "body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": null,
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 body design",
+          "front light design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork",
+          "lights",
+          "proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "distinctive rear spoiler",
+          "Porsche badge",
+          "overall body shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "N/A",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive rear lights",
+          "bodywork shape",
+          "exhaust design",
+          "spoiler design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "gauge layout",
+          "center console"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "Porsche styling cues"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle.",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

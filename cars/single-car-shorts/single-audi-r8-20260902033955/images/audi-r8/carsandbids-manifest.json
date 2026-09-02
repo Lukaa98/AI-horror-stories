@@ -1,0 +1,713 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-02T03:41:57.328Z",
+  "query": "Audi R8",
+  "visual_highlight": "engine turbo horsepower wheel brake detail",
+  "search_url": "https://carsandbids.com/search/audi/r8?start_year=2017&end_year=2017&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/356kWxpP/2017-audi-r8-v10-plus",
+      "title": "2017 Audi R8 V10 Plus",
+      "text": "Sold for $158,000",
+      "titleYear": 2017,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9eGLwdl8/2017-audi-r8-v10-plus-coupe",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "text": "FEATURED Sold for $144,000",
+      "titleYear": 2017,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "text": "FEATURED Sold for $134,500",
+      "titleYear": 2017,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3y8pQaVo/2017-audi-r8-v10-plus",
+      "title": "2017 Audi R8 V10 Plus",
+      "text": "Sold for $131,000",
+      "titleYear": 2017,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vdYmAvd/2017-audi-r8-v10-plus-coupe",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "text": "Sold for $126,499",
+      "titleYear": 2017,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rED1QDpd/2017-audi-r8-v10-plus-coupe",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "text": "FEATURED Sold for $119,999",
+      "titleYear": 2017,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/356kWxpP/2017-audi-r8-v10-plus",
+      "title": "2017 Audi R8 V10 Plus",
+      "text": "Sold for $158,000",
+      "titleYear": 2017,
+      "score": 60,
+      "usable_image_count": 28,
+      "sale_price": 158000,
+      "sale_type": "sold",
+      "page_title": "2017 Audi R8 V10 Plus"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9eGLwdl8/2017-audi-r8-v10-plus-coupe",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "text": "FEATURED Sold for $144,000",
+      "titleYear": 2017,
+      "score": 60,
+      "usable_image_count": 16,
+      "sale_price": 144000,
+      "sale_type": "sold",
+      "page_title": "2017 Audi R8 V10 Plus Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "text": "FEATURED Sold for $134,500",
+      "titleYear": 2017,
+      "score": 60,
+      "usable_image_count": 35,
+      "sale_price": 134500,
+      "sale_type": "sold",
+      "page_title": "2017 Audi R8 V10 Plus Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3y8pQaVo/2017-audi-r8-v10-plus",
+      "title": "2017 Audi R8 V10 Plus",
+      "text": "Sold for $131,000",
+      "titleYear": 2017,
+      "score": 60,
+      "usable_image_count": 32,
+      "sale_price": 131000,
+      "sale_type": "sold",
+      "page_title": "2017 Audi R8 V10 Plus"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+    "title": "2017 Audi R8 V10 Plus Coupe",
+    "text": "FEATURED Sold for $134,500",
+    "titleYear": 2017,
+    "score": 60,
+    "sale_price": 134500,
+    "sale_type": "sold",
+    "page_title": "2017 Audi R8 V10 Plus Coupe",
+    "year": 2017,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/AudiR82017008/edit/YmUhp.jpg?t=178329623448",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi R8 V10 Plus Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 268426
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/photos/AudiR82017069.jpg?t=178276604726",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 311001
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/photos/AudiR82017074.jpg?t=178276604726",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 248928
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/photos/AudiR82017075.jpg?t=178276604726",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 239800
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/photos/AudiR82017072.jpg?t=178276604726",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 279034
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/photos/AudiR82017001.jpg?t=178276604726",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 233534
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/photos/AudiR82017007.jpg?t=178276604726",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 318668
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/photos/AudiR82017004.jpg?t=178276604726",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 367442
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/photos/AudiR82017005.jpg?t=178276604726",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi R8 V10 Plus Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 308101
+    },
+    {
+      "path": "engine-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/attachments/KP4ov7P2-RzfuhTI.jpeg?t=178398139884",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 210112
+    },
+    {
+      "path": "engine-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/attachments/KP4ov7P2-6evcTUQ.jpeg?t=178398140065",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 551409
+    },
+    {
+      "path": "engine-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/cfc59edac4fd265a9b367bdcbe6e9a486d3a6383/attachments/KP4ov7P2-t0WqA0h.jpeg?t=178398130512",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 558513
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ecb1e9989654f27b4e467dacc5c91330/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ecb1e9989654f27b4e467dacc5c91330/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ecb1e9989654f27b4e467dacc5c91330/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ecb1e9989654f27b4e467dacc5c91330/manifest/video.m3u8",
+      "auction_title": "2017 Audi R8 V10 Plus Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a3dfce9f0d69c69bcec5e41e99a6573a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a3dfce9f0d69c69bcec5e41e99a6573a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a3dfce9f0d69c69bcec5e41e99a6573a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a3dfce9f0d69c69bcec5e41e99a6573a/manifest/video.m3u8",
+      "auction_title": "2017 Audi R8 V10 Plus Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/495aaa70e0b2e00215e07fcfd2efacdd/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/495aaa70e0b2e00215e07fcfd2efacdd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/495aaa70e0b2e00215e07fcfd2efacdd/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/495aaa70e0b2e00215e07fcfd2efacdd/manifest/video.m3u8",
+      "auction_title": "2017 Audi R8 V10 Plus Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4e901e1e244778d14bcc16eec9510b2a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4e901e1e244778d14bcc16eec9510b2a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4e901e1e244778d14bcc16eec9510b2a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4e901e1e244778d14bcc16eec9510b2a/manifest/video.m3u8",
+      "auction_title": "2017 Audi R8 V10 Plus Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/80bd89f4366f7c37f7bf480d60859f03/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/80bd89f4366f7c37f7bf480d60859f03/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/80bd89f4366f7c37f7bf480d60859f03/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/80bd89f4366f7c37f7bf480d60859f03/manifest/video.m3u8",
+      "auction_title": "2017 Audi R8 V10 Plus Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f6e98741b38d343906fd19c6050b995/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f6e98741b38d343906fd19c6050b995/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f6e98741b38d343906fd19c6050b995/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3f6e98741b38d343906fd19c6050b995/manifest/video.m3u8",
+      "auction_title": "2017 Audi R8 V10 Plus Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aed7c977e3b71514e96a185f81d148d2/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aed7c977e3b71514e96a185f81d148d2/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aed7c977e3b71514e96a185f81d148d2/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aed7c977e3b71514e96a185f81d148d2/manifest/video.m3u8",
+      "auction_title": "2017 Audi R8 V10 Plus Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aeb89737f3e9b945ef5ef7b30d8e3360/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aeb89737f3e9b945ef5ef7b30d8e3360/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aeb89737f3e9b945ef5ef7b30d8e3360/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aeb89737f3e9b945ef5ef7b30d8e3360/manifest/video.m3u8",
+      "auction_title": "2017 Audi R8 V10 Plus Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/139733cba05d347da3013db05a31b924/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/139733cba05d347da3013db05a31b924/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi R8 V10 Plus Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/139733cba05d347da3013db05a31b924/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KP4ov7P2/2017-audi-r8-v10-plus-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/139733cba05d347da3013db05a31b924/manifest/video.m3u8",
+      "auction_title": "2017 Audi R8 V10 Plus Coupe",
+      "auction_year": 2017,
+      "search_score": 60
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 12,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinguished interior design",
+          "black leather seats with diamond stitching",
+          "Audi branding",
+          "layout consistent with Audi R8"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinct front grille design",
+          "body proportions",
+          "headlight shape",
+          "side air intake design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive front grille design",
+          "headlight shape",
+          "overall body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork",
+          "lights",
+          "proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive rear lights",
+          "audi logo",
+          "R8 body shape",
+          "V10 badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi badging",
+          "R8 model designation",
+          "Distinctive rear bodywork"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "engine",
+        "scene_fit_tags": [
+          "engine"
+        ],
+        "quality_score": 3,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle; focused on engine components.",
+        "path": "engine-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "engine",
+        "scene_fit_tags": [
+          "engine"
+        ],
+        "quality_score": 3,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the Audi R8, only an engine view.",
+        "path": "engine-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "audi",
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "detail",
+        "scene_fit_tags": [
+          "detail"
+        ],
+        "quality_score": 5,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "This image focuses on a car part (brake caliper) and does not display the target vehicle.",
+        "path": "engine-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design matches Audi R8",
+          "seating materials consistent with luxury sport cars",
+          "carbon fiber detailing visible"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi branding on steering wheel",
+          "Interior design matches R8 specifications",
+          "R8 logo on floor mat"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "r8",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "dashboard display",
+          "R8 branding"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

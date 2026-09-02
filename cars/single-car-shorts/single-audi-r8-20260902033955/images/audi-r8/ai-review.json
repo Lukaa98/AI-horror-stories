@@ -1,0 +1,308 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 12,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinguished interior design",
+        "black leather seats with diamond stitching",
+        "Audi branding",
+        "layout consistent with Audi R8"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinct front grille design",
+        "body proportions",
+        "headlight shape",
+        "side air intake design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinctive front grille design",
+        "headlight shape",
+        "overall body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "bodywork",
+        "lights",
+        "proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinctive rear lights",
+        "audi logo",
+        "R8 body shape",
+        "V10 badge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 6,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Audi badging",
+        "R8 model designation",
+        "Distinctive rear bodywork"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "engine",
+      "scene_fit_tags": [
+        "engine"
+      ],
+      "quality_score": 3,
+      "composition_score": 2,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not feature the target vehicle; focused on engine components.",
+      "path": "engine-10.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "engine",
+      "scene_fit_tags": [
+        "engine"
+      ],
+      "quality_score": 3,
+      "composition_score": 2,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not depict the Audi R8, only an engine view.",
+      "path": "engine-11.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "audi",
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "detail",
+      "scene_fit_tags": [
+        "detail"
+      ],
+      "quality_score": 5,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "This image focuses on a car part (brake caliper) and does not display the target vehicle.",
+      "path": "engine-12.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design matches Audi R8",
+        "seating materials consistent with luxury sport cars",
+        "carbon fiber detailing visible"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Audi branding on steering wheel",
+        "Interior design matches R8 specifications",
+        "R8 logo on floor mat"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "r8",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "dashboard display",
+        "R8 branding"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}
