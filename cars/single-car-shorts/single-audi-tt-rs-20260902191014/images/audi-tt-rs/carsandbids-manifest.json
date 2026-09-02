@@ -1,0 +1,576 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-02T19:13:42.451Z",
+  "query": "Audi TT RS",
+  "visual_highlight": "engine turbo horsepower wheel brake detail",
+  "search_url": "https://carsandbids.com/search/audi/tt?start_year=2017&end_year=2017&csort=10",
+  "search_result_count": 2,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/K1NkOGRd/2017-audi-tt-coupe",
+      "title": "2017 Audi Tt Coupe",
+      "text": "Bid to $19,000",
+      "titleYear": 2017,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KVaXYQgl/2017-audi-tt-roadster",
+      "title": "2017 Audi Tt Roadster",
+      "text": "Bid to $12,100",
+      "titleYear": 2017,
+      "score": 68
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/K1NkOGRd/2017-audi-tt-coupe",
+      "title": "2017 Audi Tt Coupe",
+      "text": "Bid to $19,000",
+      "titleYear": 2017,
+      "score": 68,
+      "usable_image_count": 11,
+      "sale_price": 19000,
+      "sale_type": "bid_to",
+      "page_title": "2017 Audi TT Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KVaXYQgl/2017-audi-tt-roadster",
+      "title": "2017 Audi Tt Roadster",
+      "text": "Bid to $12,100",
+      "titleYear": 2017,
+      "score": 68,
+      "usable_image_count": 13,
+      "sale_price": 12100,
+      "sale_type": "bid_to",
+      "page_title": "2017 Audi TT Roadster"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KVaXYQgl/2017-audi-tt-roadster",
+    "title": "2017 Audi Tt Roadster",
+    "text": "Bid to $12,100",
+    "titleYear": 2017,
+    "score": 68,
+    "sale_price": 12100,
+    "sale_type": "bid_to",
+    "page_title": "2017 Audi TT Roadster",
+    "year": 2017,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/rMLNQ0VZ-7GGHTbx/edit/pxDb8.jpg?t=177729632542",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi TT Roadster",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 187015
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/rMLNQ0VZ-ks7vGRK/edit/0ctk6.jpg?t=177728877063",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi TT Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 208625
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/interior/rMLNQ0VZ-OntE9Fh/edit/EC_mO.jpg?t=177728879501",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi TT Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 222946
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/application/s-UkB92Ux/edit/Un7dP.jpg?t=177728885067",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi TT Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 180851
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/rMLNQ0VZ-CH2DBfi/edit/o0M06.jpg?t=177728882371",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi TT Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 130033
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/rMLNQ0VZ-1xEvSCL/edit/Yym3S.jpg?t=177729636162",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi TT Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 189372
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/application/s-3BtJK_P/edit/ERg_N.jpg?t=177729640257",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi TT Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 210351
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/application/s-Yh-3VDy/edit/Q0PBh.jpg?t=177728777091",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi TT Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 244361
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/application/s-8tbAr0z/edit/e8siL.jpg?t=177728775063",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2017 Audi TT Roadster",
+      "width": 542,
+      "height": 361,
+      "bytes": 238472
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/91032ad7bbcb6cf72875e8e8207dcfba80173f7c/photos/9AM7lVl8-mJGOmjW.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2787 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/642e9c8a18befa1d9dda19a97710d62db255b2d7/photos/3ydlQkE9-dcUXP6A5j.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 14247 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e37f5f1925305cd018fe4b429e1dc97f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e37f5f1925305cd018fe4b429e1dc97f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi TT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e37f5f1925305cd018fe4b429e1dc97f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1NkOGRd/2017-audi-tt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e37f5f1925305cd018fe4b429e1dc97f/manifest/video.m3u8",
+      "auction_title": "2017 Audi TT Coupe",
+      "auction_year": 2017,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9514de765e91bfee392dffd19e3759c7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9514de765e91bfee392dffd19e3759c7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi TT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9514de765e91bfee392dffd19e3759c7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1NkOGRd/2017-audi-tt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9514de765e91bfee392dffd19e3759c7/manifest/video.m3u8",
+      "auction_title": "2017 Audi TT Coupe",
+      "auction_year": 2017,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/31a90dce01d5cb51879cb4a209b9b83a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/31a90dce01d5cb51879cb4a209b9b83a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi TT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/31a90dce01d5cb51879cb4a209b9b83a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1NkOGRd/2017-audi-tt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/31a90dce01d5cb51879cb4a209b9b83a/manifest/video.m3u8",
+      "auction_title": "2017 Audi TT Coupe",
+      "auction_year": 2017,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0044cb4917fc73ceb6ac640343dafea0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0044cb4917fc73ceb6ac640343dafea0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi TT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0044cb4917fc73ceb6ac640343dafea0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1NkOGRd/2017-audi-tt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0044cb4917fc73ceb6ac640343dafea0/manifest/video.m3u8",
+      "auction_title": "2017 Audi TT Coupe",
+      "auction_year": 2017,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b729facee9412f06026d7bbf32593834/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b729facee9412f06026d7bbf32593834/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi TT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b729facee9412f06026d7bbf32593834/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1NkOGRd/2017-audi-tt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b729facee9412f06026d7bbf32593834/manifest/video.m3u8",
+      "auction_title": "2017 Audi TT Coupe",
+      "auction_year": 2017,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5c7d51b3cfde65275897164f079cf6a3/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5c7d51b3cfde65275897164f079cf6a3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi TT Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5c7d51b3cfde65275897164f079cf6a3/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1NkOGRd/2017-audi-tt-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5c7d51b3cfde65275897164f079cf6a3/manifest/video.m3u8",
+      "auction_title": "2017 Audi TT Coupe",
+      "auction_year": 2017,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5f7432febff03e9eb11f8bc5d3e6a280/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5f7432febff03e9eb11f8bc5d3e6a280/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi TT Roadster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5f7432febff03e9eb11f8bc5d3e6a280/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVaXYQgl/2017-audi-tt-roadster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5f7432febff03e9eb11f8bc5d3e6a280/manifest/video.m3u8",
+      "auction_title": "2017 Audi TT Roadster",
+      "auction_year": 2017,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/992bb266501d9e10de571292f061bb46/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/992bb266501d9e10de571292f061bb46/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi TT Roadster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/992bb266501d9e10de571292f061bb46/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVaXYQgl/2017-audi-tt-roadster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/992bb266501d9e10de571292f061bb46/manifest/video.m3u8",
+      "auction_title": "2017 Audi TT Roadster",
+      "auction_year": 2017,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9efd431bfdfa38e4597979ab132763d6/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9efd431bfdfa38e4597979ab132763d6/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2017 Audi TT Roadster",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9efd431bfdfa38e4597979ab132763d6/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KVaXYQgl/2017-audi-tt-roadster",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9efd431bfdfa38e4597979ab132763d6/manifest/video.m3u8",
+      "auction_title": "2017 Audi TT Roadster",
+      "auction_year": 2017,
+      "search_score": 68
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "TT RS",
+        "visible_match_evidence": [
+          "interior design",
+          "dashboard layout",
+          "sports seats"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "not_2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "body styling",
+          "audis features"
+        ],
+        "generation_match_confidence": 5,
+        "variant_match_confidence": 3,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 4,
+        "reject": true,
+        "reason": "not the correct generation",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "audi branding",
+          "tt body shape",
+          "quattro badge",
+          "front design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "TT RS",
+        "visible_match_evidence": [
+          "distinctive bodywork",
+          "proportions",
+          "badge on wheel"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "TT RS",
+        "visible_match_evidence": [
+          "convertible body style",
+          "rear lights design",
+          "exhaust configuration"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "TT RS",
+        "visible_match_evidence": [
+          "rear design",
+          "TT badge",
+          "quattro badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "TT RS",
+        "visible_match_evidence": [
+          "diamond-stitched seats",
+          "center console design",
+          "sporty interior"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": "TT RS",
+        "visible_match_evidence": [
+          "Audi badge",
+          "Interior layout consistent with Audi TT",
+          "Digital dash display"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "tt",
+        "detected_generation_or_year": "2017",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi logo",
+          "TT branding",
+          "dashboard design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

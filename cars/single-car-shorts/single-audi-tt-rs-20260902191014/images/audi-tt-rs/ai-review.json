@@ -1,0 +1,241 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 9,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": "TT RS",
+      "visible_match_evidence": [
+        "interior design",
+        "dashboard layout",
+        "sports seats"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "not_2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "body styling",
+        "audis features"
+      ],
+      "generation_match_confidence": 5,
+      "variant_match_confidence": 3,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 4,
+      "reject": true,
+      "reason": "not the correct generation",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "audi branding",
+        "tt body shape",
+        "quattro badge",
+        "front design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": "TT RS",
+      "visible_match_evidence": [
+        "distinctive bodywork",
+        "proportions",
+        "badge on wheel"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": "TT RS",
+      "visible_match_evidence": [
+        "convertible body style",
+        "rear lights design",
+        "exhaust configuration"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": "TT RS",
+      "visible_match_evidence": [
+        "rear design",
+        "TT badge",
+        "quattro badge"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": "TT RS",
+      "visible_match_evidence": [
+        "diamond-stitched seats",
+        "center console design",
+        "sporty interior"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": "TT RS",
+      "visible_match_evidence": [
+        "Audi badge",
+        "Interior layout consistent with Audi TT",
+        "Digital dash display"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "tt",
+      "detected_generation_or_year": "2017",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Audi logo",
+        "TT branding",
+        "dashboard design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}
