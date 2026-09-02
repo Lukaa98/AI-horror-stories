@@ -8,8 +8,10 @@ from single_car_short import (  # noqa: E402
     ACCEPTABLE_WORDS,
     ALLOWED_MEDIA_TYPES,
     AUDITION_PRESETS,
+    FAST_TTS_SPEED,
     TARGET_WORDS,
     _strip_citations,
+    _target_word_range,
     _visual_highlight_for_scenes,
     _word_count,
     apply_rival_photos,
@@ -23,9 +25,18 @@ def test_word_count_handles_contractions_and_hyphenated_terms():
     assert _word_count("It's a four-wheel-drive Golf R.") == 5
 
 
-def test_one_minute_script_range_is_fast_but_bounded():
-    assert TARGET_WORDS == (175, 190)
-    assert ACCEPTABLE_WORDS[0] <= 199 <= ACCEPTABLE_WORDS[1]
+def test_target_words_scales_with_tts_speed_so_the_two_cant_drift_apart():
+    # This is the regression the whole formula exists to catch: a script
+    # sized for a slower speed produces less raw audio once spoken faster,
+    # so the duration-normalization step has to slow it back down and
+    # mostly cancels out the speed increase -- TARGET_WORDS must scale
+    # with FAST_TTS_SPEED instead of being a hardcoded tuple that can fall
+    # out of sync with it.
+    slower = _target_word_range(speed=1.0)
+    faster = _target_word_range(speed=1.5)
+    assert faster[0] > slower[0] and faster[1] > slower[1]
+    assert TARGET_WORDS == _target_word_range(FAST_TTS_SPEED)
+    assert ACCEPTABLE_WORDS[0] < TARGET_WORDS[0] < TARGET_WORDS[1] < ACCEPTABLE_WORDS[1]
 
 
 def test_interior_media_is_available_for_cabin_script_scenes():

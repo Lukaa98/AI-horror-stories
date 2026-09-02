@@ -26,14 +26,38 @@ from plate_blur import blur_license_plates
 load_dotenv(ROOT / ".env")
 SCRAPER_DIR = ROOT / "scraper" / "car-source-scraper"
 OUTPUT_ROOT = ROOT / "cars" / "single-car-shorts"
-TARGET_WORDS = (175, 190)
+FAST_TTS_SPEED = 1.35
+TARGET_DURATION_SECONDS = 58.0
+# Calibrated from the original working numbers -- 175-190 words (center
+# 182.5) hit the 55-60s target at the old 1.12x speed, giving a baseline
+# spoken pace independent of playback speed. TARGET_WORDS/ACCEPTABLE_WORDS
+# are derived from that pace at the *current* FAST_TTS_SPEED instead of a
+# hardcoded tuple, specifically so bumping the speed can't silently
+# desync the word target from it again -- that's exactly what happened
+# when FAST_TTS_SPEED went 1.12 -> 1.25 without TARGET_WORDS moving with
+# it: the same ~180 words spoken faster produced meaningfully less raw
+# audio, so normalize_audio_duration's atempo correction had to slow it
+# back down to hit 58s, mostly cancelling out the speed increase (a
+# one-minute video effectively still took close to a minute).
+_BASE_WORDS_PER_SECOND = (182.5 / 58.0) / 1.12
+
+
+def _target_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECONDS):
+    center = _BASE_WORDS_PER_SECOND * speed * target_seconds
+    return (round(center - 12), round(center + 12))
+
+
+def _acceptable_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECONDS):
+    center = _BASE_WORDS_PER_SECOND * speed * target_seconds
+    return (round(center * 0.75), round(center * 1.25))
+
+
+TARGET_WORDS = _target_word_range()
 # The prompt targets the tight range above, but word counts from a grounded
 # structured response can land a little outside it. Runtime is normalized
 # from the actual audio below, so only reject clearly broken short/long
-# responses instead of throwing away an otherwise good 199-word script.
-ACCEPTABLE_WORDS = (100, 220)
-FAST_TTS_SPEED = 1.25
-TARGET_DURATION_SECONDS = 58.0
+# responses instead of throwing away an otherwise good script.
+ACCEPTABLE_WORDS = _acceptable_word_range()
 ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 
 PACKAGE_SCHEMA = {

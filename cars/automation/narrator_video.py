@@ -19,32 +19,53 @@ jerky rather than a smooth sway.
 import argparse
 import json
 import math
+import re
 from pathlib import Path
 
 from PIL import Image, ImageDraw
 from moviepy.editor import (
-    AudioFileClip, ColorClip, CompositeVideoClip, ImageClip, VideoFileClip,
-    concatenate_videoclips,
+    AudioFileClip, ColorClip, CompositeAudioClip, CompositeVideoClip, ImageClip,
+    VideoFileClip, concatenate_videoclips,
 )
 
 from generate_sample import ROOT, CANVAS, _font, _wrap
 
 SPRITES_DIR = ROOT / "narrator" / "sprites"
+SFX_DIR = ROOT / "narrator" / "sfx"
+# High-pitched "pop" that plays the instant a new car photo slides in --
+# picked from a handful of candidates synthesized for this (see the other
+# .wav files in narrator/sfx/, also mirrored into web/public/sfx/ so they
+# can be auditioned in the browser from the create page).
+PHOTO_POP_SFX = "photo_pop_chime.wav"
+PHOTO_POP_VOLUME = 0.55
+TYPING_CLICK_SFX = "typing_click.wav"
+TYPING_CLICK_VOLUME = 0.35
 # The top of the frame is a stack of three bands, top to bottom: a headline
 # band, the car media itself, then a caption band -- in that order so
 # neither piece of text sits on top of the picture the way it used to when
 # both were just absolutely positioned over the whole top region. Together
 # they're kept smaller than a near-half split so the narrator reads as the
 # focal point instead of the media dominating the frame.
-TOP_STACK_RATIO = 0.45
+TOP_STACK_RATIO = 0.50
 HEADLINE_ZONE_RATIO = 0.095
 CAPTION_ZONE_RATIO = 0.075
 # Margin on every edge of the media's own band -- the picture is inset
 # instead of stretched edge-to-edge, so it reads as a framed photo rather
-# than a banner. Trimmed further (0.125 -> 0.05 -> 0.02) each time the
-# picture needed to read bigger; still a thin margin, not edge-to-edge.
-MEDIA_INSET_RATIO = 0.02
+# than a banner. Trimmed further each time the picture needed to read
+# bigger (0.125 -> 0.05 -> 0.02 -> 0.015). Growing TOP_STACK_RATIO (0.45
+# -> 0.50) matters more for the reported "white space above/below the
+# car" than shrinking this further does -- a wider-than-tall media box
+# (>1.9:1) was letterboxing typical car photo aspect ratios (~1.5-1.78:1)
+# top/bottom; a taller box brings the box's own aspect ratio closer to
+# the photos' so _fit_content's scale is less likely to be height-limited
+# with width left over.
+MEDIA_INSET_RATIO = 0.015
 CAPTION_CHUNK_WORDS = 1
+# How long each revealed character of a headline stays on screen before the
+# next one appears -- a typewriter reveal instead of the whole headline
+# popping in at once. "Fairly quick": the full headline is typically fully
+# typed out in well under a second.
+TYPING_CHAR_SECONDS = 0.045
 
 # Four poses, cycled once per sentence: steady/jolt are the small "redraw
 # flicker" (line weight + a tiny arm/brow twitch, no lean); lean_left/
@@ -67,6 +88,11 @@ POSE_FALLBACK_SEGMENT_SECONDS = 3.0
 # permanently-open eyes for the whole video.
 BLINK_START_SECONDS = 1.2
 BLINK_INTERVAL_SECONDS = 3.0
+# Fast alternation between the two fixed wobble-filter seeds (see
+# WOBBLE_SEEDS in export-sprites.js) for the hand-drawn outline jitter --
+# independent of, and much faster than, the pose cycle above.
+WOBBLE_CYCLE = ["a", "b"]
+WOBBLE_SEGMENT_SECONDS = 0.32
 # Smooth, continuous body lean -- matches the rig's bodySway keyframes
 # (rotate -0.8deg..0.8deg over ~4.6s), applied as a per-frame rotation
 # instead of discrete sprite poses so it doesn't read as a jerky snap.
@@ -152,6 +178,37 @@ def _caption_frame(size, text, center_y, out_path, fill=(238, 44, 44), font_size
     canvas.save(out_path)
 
 
+def _sfx_clip(name, start, volume):
+    """A single sound-effect hit positioned at `start`, or None if the
+    asset isn't present -- missing sfx should never break a render."""
+    path = SFX_DIR / name
+    if not path.exists():
+        return None
+    return AudioFileClip(str(path)).volumex(volume).set_start(start)
+
+
+def _typing_headline_positions(text, start, end, char_seconds=TYPING_CHAR_SECONDS):
+    """(prefix, seg_start, seg_duration) for each character revealed of
+    `text`, one prefix per character -- the last prefix (the full string)
+    holds for whatever's left of the scene instead of just one more
+    char_seconds tick, so the headline doesn't vanish right after finishing
+    typing."""
+    total_chars = len(text)
+    if total_chars == 0 or end <= start:
+        return []
+    per_char = min(char_seconds, (end - start) / total_chars)
+    positions = []
+    t = start
+    for i in range(1, total_chars + 1):
+        if i < total_chars:
+            seg_duration = per_char
+        else:
+            seg_duration = max(0.01, end - t)
+        positions.append((text[:i], t, seg_duration))
+        t += seg_duration
+    return positions
+
+
 def _sentence_boundaries_from_pauses(word_timeline, duration):
     """Split the clip wherever there's a real pause of at least
     SENTENCE_PAUSE_THRESHOLD_SECONDS between two words -- a much more
@@ -187,6 +244,22 @@ def _pose_intervals(manifest, duration):
         (start, end, POSE_CYCLE[i % len(POSE_CYCLE)])
         for i, (start, end) in enumerate(sentence_bounds)
     ]
+
+
+def _wobble_intervals(duration):
+    """Fast, small alternation between the two fixed wobble-filter seeds
+    export-sprites.js captured (see WOBBLE_SEEDS there) -- approximates
+    the rig's own randomly-retriggering hand-drawn outline jitter well
+    enough to read as "alive" rather than a perfectly static line, without
+    needing a genuinely random clock (which wouldn't be reproducible)."""
+    intervals = []
+    t, i = 0.0, 0
+    while t < duration:
+        end = min(duration, t + WOBBLE_SEGMENT_SECONDS)
+        intervals.append((t, end, WOBBLE_CYCLE[i % len(WOBBLE_CYCLE)]))
+        t = end
+        i += 1
+    return intervals
 
 
 def _blink_intervals(duration):
@@ -251,7 +324,10 @@ def _narrator_segments(manifest, sprites, duration):
 
     pose_intervals = _pose_intervals(manifest, duration)
     blink_intervals = _blink_intervals(duration)
-    boundaries = _merged_boundaries([mouth_intervals, pose_intervals, blink_intervals], duration)
+    wobble_intervals = _wobble_intervals(duration)
+    boundaries = _merged_boundaries(
+        [mouth_intervals, pose_intervals, blink_intervals, wobble_intervals], duration
+    )
 
     segments = []
     for start, end in zip(boundaries, boundaries[1:]):
@@ -261,7 +337,12 @@ def _narrator_segments(manifest, sprites, duration):
         mouth = _value_at(mouth_intervals, mid, "closed")
         pose = _value_at(pose_intervals, mid, POSE_CYCLE[0])
         eyes = _value_at(blink_intervals, mid, "open")
-        sprite_file = sprites["sprites"].get(f"{mouth}_{eyes}_{pose}") or sprites["sprites"].get(f"{mouth}_{eyes}")
+        wobble = _value_at(wobble_intervals, mid, WOBBLE_CYCLE[0])
+        sprite_file = (
+            sprites["sprites"].get(f"{mouth}_{eyes}_{pose}_{wobble}")
+            or sprites["sprites"].get(f"{mouth}_{eyes}_{pose}")
+            or sprites["sprites"].get(f"{mouth}_{eyes}")
+        )
         if not sprite_file:
             continue
         segments.append({"start": start, "end": end, "pose": pose, "sprite": sprite_file})
@@ -311,6 +392,33 @@ def _narrator_track(manifest, sprites, size, duration):
     return _fit_content(track, (size[0], max_h))
 
 
+_WORD_NORM_RE = re.compile(r"[^a-z0-9]")
+
+
+def _find_word_index(word_timeline, expected_index, target_word, window=6):
+    """Re-anchor to the nearest real match of target_word around
+    expected_index, instead of trusting pure cumulative word-count
+    advancement -- a single decimal/number earlier in the script tokenizing
+    differently in Whisper's output than a plain text split (e.g.
+    "5.0-liter" coming back as several separate word entries) shifts every
+    later scene's boundary by however many words it was off by, and that
+    drift compounds scene over scene. Searching a small window around
+    where the word "should" be and snapping to an actual text match resets
+    that drift at every scene instead of carrying it forward indefinitely
+    -- this is the fix for a rival car's photo still landing a couple
+    seconds late several scenes into the video."""
+    target_norm = _WORD_NORM_RE.sub("", target_word.lower())
+    if not target_norm:
+        return expected_index
+    for offset in range(window + 1):
+        for idx in (expected_index + offset, expected_index - offset):
+            if 0 <= idx < len(word_timeline):
+                candidate = _WORD_NORM_RE.sub("", str(word_timeline[idx].get("word") or "").lower())
+                if candidate == target_norm:
+                    return idx
+    return expected_index
+
+
 def _scene_time_boundaries(scenes, word_timeline, duration):
     """Real per-scene (start, end) times, one per scene, derived from each
     scene's own "narration" word span walked cumulatively against the
@@ -339,7 +447,10 @@ def _scene_time_boundaries(scenes, word_timeline, duration):
     spans = []
     word_index = 0
     for scene in scenes:
-        word_count = len(str(scene.get("narration") or "").split())
+        scene_words = str(scene.get("narration") or "").split()
+        word_count = len(scene_words)
+        if scene_words:
+            word_index = _find_word_index(word_timeline, word_index, scene_words[0])
         chunk = word_timeline[word_index:word_index + word_count]
         if chunk:
             spans.append((float(chunk[0]["start"]), float(chunk[-1]["end"])))
@@ -435,6 +546,13 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     scene_boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
     car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration, scene_boundaries)
     car_positioned = car_clip.set_position((media_x, media_y))
+    # A pop the instant each new car photo slides in, timed to the same
+    # per-scene boundaries the photo itself uses -- not an even split,
+    # which is exactly the "the rival's photo popped in a couple seconds
+    # late" timing bug this whole boundary system exists to fix.
+    photo_pop_clips = [
+        _sfx_clip(PHOTO_POP_SFX, start, PHOTO_POP_VOLUME) for start, _ in scene_boundaries
+    ]
 
     # The caption band sits below the picture, not on top of it -- distinct
     # from the headline band above the picture.
@@ -444,21 +562,28 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         for text, start, end in _caption_timeline(manifest, duration)
     ]
     headline_clips = []
+    typing_sfx_clips = []
     for index, scene in enumerate(scenes):
         headline = str(scene.get("headline") or "").strip()
         if not headline:
             continue
         start, end = scene_boundaries[index] if index < len(scene_boundaries) else (0.0, duration)
-        frame_path = output_path.parent / "_frames" / f"headline-{index}.png"
-        _caption_frame(size, headline, int(headline_center_y), frame_path, fill=(255, 214, 64), font_size=92)
-        headline_clips.append(
-            ImageClip(str(frame_path)).set_start(start).set_duration(end - start).set_position((0, 0))
-        )
+        for char_index, (prefix, seg_start, seg_duration) in enumerate(
+            _typing_headline_positions(headline, start, end)
+        ):
+            frame_path = output_path.parent / "_frames" / f"headline-{index}-{char_index}.png"
+            _caption_frame(size, prefix, int(headline_center_y), frame_path, fill=(255, 214, 64), font_size=92)
+            headline_clips.append(
+                ImageClip(str(frame_path)).set_start(seg_start).set_duration(seg_duration).set_position((0, 0))
+            )
+            typing_sfx_clips.append(_sfx_clip(TYPING_CLICK_SFX, seg_start, TYPING_CLICK_VOLUME))
 
     background = ColorClip(size=size, color=(255, 255, 255)).set_duration(duration)
+    sfx_clips = [clip for clip in (*photo_pop_clips, *typing_sfx_clips) if clip is not None]
+    full_audio = CompositeAudioClip([audio, *sfx_clips]) if sfx_clips else audio
     video = CompositeVideoClip(
         [background, car_positioned, *headline_clips, *caption_clips, narrator_positioned], size=size
-    ).set_duration(duration).set_audio(audio)
+    ).set_duration(duration).set_audio(full_audio)
 
     video.write_videofile(
         str(output_path), fps=24, codec="libx264", audio_codec="aac", preset="medium", threads=4,

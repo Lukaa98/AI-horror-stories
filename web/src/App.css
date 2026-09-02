@@ -352,6 +352,36 @@ button.danger {
   cursor: pointer;
 }
 
+.sfx-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.sfx-preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  background: rgba(255,255,255,.03);
+}
+
+.sfx-preview-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: .85rem;
+  color: #ddd;
+}
+
+.sfx-preview-item audio {
+  height: 30px;
+}
+
 .error {
   background: #4a1414;
   color: #ffb3b3;

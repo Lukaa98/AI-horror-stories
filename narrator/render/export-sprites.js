@@ -71,6 +71,14 @@ const POSES = {
   },
 };
 
+// Two fixed turbulence seeds for the #wobble filter's hand-drawn outline
+// jitter -- the live rig retriggers this on a random ~280-500ms timer
+// (wobbleTick), which a static sprite export can't reproduce continuously,
+// but cycling between a couple of fixed-seed captures in narrator_video.py
+// approximates the same "alive, slightly redrawn" skin/edge flicker
+// instead of a perfectly static outline.
+const WOBBLE_SEEDS = { a: 3, b: 47 };
+
 function chromeExecutableOverride() {
   return process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_PATH || undefined;
 }
@@ -123,8 +131,18 @@ async function main() {
       if (typeof stopBlink === "function") stopBlink();
       if (typeof stopWobble === "function") stopWobble();
       if (typeof stopTalk === "function") stopTalk();
+      // stopWobble() (above) stops the rig's own randomly-retriggering
+      // timer but also strips the filter="url(#wobble)" attribute
+      // entirely as part of turning the effect off for the live preview --
+      // re-apply it here so the filter itself stays active, and
+      // WOBBLE_SEEDS below captures it at a couple of fixed seeds instead
+      // of the rig's own random timer. Without this the hand-drawn
+      // "redrawn outline" jitter never reached the exported sprites (and
+      // so never reached the shipped video) even though it was applied
+      // per pose below -- setting a seed on an element with no filter
+      // attribute silently does nothing.
       const charEl = document.getElementById("character");
-      if (charEl) charEl.removeAttribute("filter");
+      if (charEl) charEl.setAttribute("filter", "url(#wobble)");
     });
 
     const svgHandle = await page.$("#charSvg");
@@ -159,24 +177,30 @@ async function main() {
         talk.style.display = pose.brows === "talk" ? "" : "none";
       }, pose);
 
-      for (const mouth of MOUTHS) {
-        for (const eyes of EYES) {
-          await page.evaluate((mouthName, eyesName) => {
-            setMouth(mouthName);
-            const eyeOpen = document.querySelector(".eyes-open");
-            const eyeBlink = document.querySelector(".eyes-blink");
-            eyeOpen.style.display = eyesName === "open" ? "" : "none";
-            eyeBlink.style.display = eyesName === "blink" ? "" : "none";
-          }, mouth, eyes);
+      for (const [wobbleName, wobbleSeed] of Object.entries(WOBBLE_SEEDS)) {
+        await page.evaluate((seed) => {
+          document.getElementById("turb").setAttribute("seed", String(seed));
+        }, wobbleSeed);
 
-          const fileName = `mouth-${mouth}_eyes-${eyes}_pose-${poseName}.png`;
-          const filePath = path.join(outDir, fileName);
-          await svgHandle.screenshot({
-            path: filePath,
-            omitBackground: true,
-          });
-          manifest.sprites[`${mouth}_${eyes}_${poseName}`] = fileName;
-          process.stderr.write(`wrote ${fileName}\n`);
+        for (const mouth of MOUTHS) {
+          for (const eyes of EYES) {
+            await page.evaluate((mouthName, eyesName) => {
+              setMouth(mouthName);
+              const eyeOpen = document.querySelector(".eyes-open");
+              const eyeBlink = document.querySelector(".eyes-blink");
+              eyeOpen.style.display = eyesName === "open" ? "" : "none";
+              eyeBlink.style.display = eyesName === "blink" ? "" : "none";
+            }, mouth, eyes);
+
+            const fileName = `mouth-${mouth}_eyes-${eyes}_pose-${poseName}_wobble-${wobbleName}.png`;
+            const filePath = path.join(outDir, fileName);
+            await svgHandle.screenshot({
+              path: filePath,
+              omitBackground: true,
+            });
+            manifest.sprites[`${mouth}_${eyes}_${poseName}_${wobbleName}`] = fileName;
+            process.stderr.write(`wrote ${fileName}\n`);
+          }
         }
       }
     }

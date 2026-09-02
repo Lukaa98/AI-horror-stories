@@ -11,7 +11,9 @@ from narrator_video import (  # noqa: E402
     _merged_boundaries,
     _pose_intervals,
     _scene_time_boundaries,
+    _typing_headline_positions,
     _value_at,
+    _wobble_intervals,
 )
 
 
@@ -83,6 +85,18 @@ def test_blink_intervals_are_short_and_spaced_out():
         assert end - start <= 0.13
 
 
+def test_wobble_intervals_alternate_fast_and_cover_the_full_duration():
+    intervals = _wobble_intervals(2.0)
+    assert intervals[0][0] == 0.0
+    assert intervals[-1][1] == 2.0
+    for (_, end, _), (next_start, _, _) in zip(intervals, intervals[1:]):
+        assert end == next_start
+    values = [value for _, _, value in intervals]
+    assert set(values) == {"a", "b"}
+    # Alternates rather than repeating the same seed back to back.
+    assert all(a != b for a, b in zip(values, values[1:]))
+
+
 def test_merged_boundaries_combine_all_interval_lists_without_duplicates():
     mouth = [(0.0, 1.0, "closed"), (1.0, 2.0, "wide")]
     pose = [(0.0, 0.7, "a"), (0.7, 1.4, "b"), (1.4, 2.0, "c")]
@@ -150,3 +164,62 @@ def test_scene_time_boundaries_names_a_rival_car_only_where_it_is_actually_spoke
     assert rival_start <= 0.8 and rival_end >= 1.6
     assert 0.5 <= rival_start <= 0.7
     assert 1.7 <= rival_end <= 1.9
+
+
+def test_typing_headline_positions_reveal_one_character_at_a_time():
+    positions = _typing_headline_positions("GTS", 0.0, 5.0)
+    assert [prefix for prefix, _, _ in positions] == ["G", "GT", "GTS"]
+    # Each reveal step starts exactly where the previous one ended.
+    starts = [start for _, start, _ in positions]
+    durations = [duration for _, _, duration in positions]
+    assert starts[0] == 0.0
+    for i in range(len(positions) - 1):
+        assert starts[i] + durations[i] == starts[i + 1]
+    # The full headline (last prefix) holds for whatever time is left in
+    # the scene, not just one more tick -- it shouldn't vanish right after
+    # finishing typing.
+    assert starts[-1] + durations[-1] == 5.0
+    assert durations[-1] > durations[0]
+
+
+def test_typing_headline_positions_caps_the_char_rate_to_fit_a_short_scene():
+    # A scene shorter than total_chars * TYPING_CHAR_SECONDS must still
+    # finish typing by `end`, not overrun it.
+    positions = _typing_headline_positions("HELLO", 0.0, 0.05)
+    assert positions[-1][1] + positions[-1][2] == 0.05
+
+
+def test_typing_headline_positions_empty_text_yields_no_frames():
+    assert _typing_headline_positions("", 0.0, 5.0) == []
+
+
+def test_scene_time_boundaries_recovers_from_earlier_tokenization_drift():
+    """An earlier scene's word count under-counting relative to Whisper's
+    own tokenization (e.g. "5.0-liter" splitting into more word entries
+    than a plain text .split() sees) must not shift every later scene's
+    boundary by however many words it was off -- re-anchoring to the next
+    scene's own first word should recover, not compound the drift."""
+    scenes = [
+        # .split() sees 3 words here, but the transcribed audio actually
+        # has 5 word entries for this scene (a tokenization mismatch).
+        {"narration": "It has 5.0-liter power"},
+        {"narration": "Rival name here"},
+    ]
+    word_timeline = [
+        {"word": "It", "start": 0.0, "end": 0.1},
+        {"word": "has", "start": 0.15, "end": 0.3},
+        {"word": "5", "start": 0.35, "end": 0.5},
+        {"word": "0", "start": 0.55, "end": 0.7},
+        {"word": "liter", "start": 0.75, "end": 0.9},
+        {"word": "power", "start": 0.95, "end": 1.1},
+        {"word": "Rival", "start": 2.0, "end": 2.3},
+        {"word": "name", "start": 2.35, "end": 2.6},
+        {"word": "here", "start": 2.65, "end": 2.9},
+    ]
+    boundaries = _scene_time_boundaries(scenes, word_timeline, 3.2)
+    rival_start, rival_end = boundaries[1]
+    # Without re-anchoring, scene 2 would start reading from word_index=4
+    # ("liter"/"power"/"Rival" -> wrongly spans ~0.75-2.3, cutting off
+    # most of "Rival") instead of correctly finding "Rival" at index 6.
+    assert rival_end >= 2.9
+    assert rival_start > 1.0
