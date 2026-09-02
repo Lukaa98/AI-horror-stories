@@ -6,18 +6,8 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.83";
+const UI_VERSION = "V10.84";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
-// Candidate "photo slide-in" pop sounds -- narrator_video.py currently
-// ships with photo_pop_chime.wav wired in as the active one, these live
-// here purely so they can be auditioned from the create page.
-const SFX_PREVIEWS = [
-  { label: "Chime (active)", file: "photo_pop_chime.wav" },
-  { label: "Blip", file: "photo_pop_blip.wav" },
-  { label: "Click", file: "photo_pop_click.wav" },
-  { label: "Whoosh", file: "photo_pop_whoosh.wav" },
-  { label: "Typing click", file: "typing_click.wav" },
-];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
@@ -2025,25 +2015,12 @@ export default function App() {
               {stage === "narrator-preview-testing" ? "Rendering Preview..." : "Generate Narrator Preview"}
             </button>
           ) : workflow === "single_car" ? (
-            <>
-              <button
-                onClick={handleSingleCarShort}
-                disabled={!repoOk || !make.trim() || !model.trim() || stage === "single-car-building"}
-              >
-                {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}
-              </button>
-              <div className="sfx-preview">
-                <span className="preview-label">Sound effect options</span>
-                <div className="sfx-preview-list">
-                  {SFX_PREVIEWS.map((sfx) => (
-                    <div key={sfx.file} className="sfx-preview-item">
-                      <span>{sfx.label}</span>
-                      <audio controls preload="none" src={`/sfx/${sfx.file}`} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </>
+            <button
+              onClick={handleSingleCarShort}
+              disabled={!repoOk || !make.trim() || !model.trim() || stage === "single-car-building"}
+            >
+              {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}
+            </button>
           ) : (
             <>
               <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}>

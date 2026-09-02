@@ -115,6 +115,17 @@ VOICE_PRESETS = {
             "Fast-paced but clear, upbeat, not an impression of any real presenter."
         ),
     },
+    "british_deep_narrator": {
+        "voice": "onyx",
+        "speed": 0.97,
+        "instructions": (
+            "Use a deep, textured, gravelly voice -- the same weight and register as a "
+            "cinematic car-trailer narrator -- combined with a natural British "
+            "(Received Pronunciation-leaning) accent. Confident, warm, and clear, like a "
+            "premium UK car-review narrator. Human, not theatrical, and not an impression "
+            "of any real presenter or actor."
+        ),
+    },
 }
 
 

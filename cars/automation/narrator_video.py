@@ -32,14 +32,19 @@ from generate_sample import ROOT, CANVAS, _font, _wrap
 
 SPRITES_DIR = ROOT / "narrator" / "sprites"
 SFX_DIR = ROOT / "narrator" / "sfx"
-# High-pitched "pop" that plays the instant a new car photo slides in --
-# picked from a handful of candidates synthesized for this (see the other
-# .wav files in narrator/sfx/, also mirrored into web/public/sfx/ so they
-# can be auditioned in the browser from the create page).
-PHOTO_POP_SFX = "photo_pop_chime.wav"
-PHOTO_POP_VOLUME = 0.55
-TYPING_CLICK_SFX = "typing_click.wav"
-TYPING_CLICK_VOLUME = 0.35
+# A soft whoosh that plays the instant a new car photo slides in -- swapped
+# in from a supplied sample (replacing an earlier synthesized "chime" that
+# read as an alerting/notification pitch rather than a photo transition).
+# Volume is kept below the narration track so it reads as a texture, not a
+# competing sound.
+PHOTO_POP_SFX = "photo_pop.mp3"
+PHOTO_POP_VOLUME = 0.4
+# A short slice of a keyboard-typing bed, played once per headline (not
+# once per character -- looping/retriggering a full hit per character was
+# the earlier "typing is too loud" complaint) under the typing animation,
+# trimmed to however long that headline actually takes to type out.
+TYPING_SFX = "typing.mp3"
+TYPING_VOLUME = 0.3
 # The top of the frame is a stack of three bands, top to bottom: a headline
 # band, the car media itself, then a caption band -- in that order so
 # neither piece of text sits on top of the picture the way it used to when
@@ -178,13 +183,19 @@ def _caption_frame(size, text, center_y, out_path, fill=(238, 44, 44), font_size
     canvas.save(out_path)
 
 
-def _sfx_clip(name, start, volume):
+def _sfx_clip(name, start, volume, duration=None):
     """A single sound-effect hit positioned at `start`, or None if the
-    asset isn't present -- missing sfx should never break a render."""
+    asset isn't present -- missing sfx should never break a render.
+    `duration`, when given, trims the asset down to at most that long (used
+    to keep the typing bed from ever outrunning how long a headline
+    actually takes to type)."""
     path = SFX_DIR / name
     if not path.exists():
         return None
-    return AudioFileClip(str(path)).volumex(volume).set_start(start)
+    clip = AudioFileClip(str(path)).volumex(volume)
+    if duration is not None and duration < clip.duration:
+        clip = clip.subclip(0, max(0.05, duration))
+    return clip.set_start(start)
 
 
 def _typing_headline_positions(text, start, end, char_seconds=TYPING_CHAR_SECONDS):
@@ -568,15 +579,19 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         if not headline:
             continue
         start, end = scene_boundaries[index] if index < len(scene_boundaries) else (0.0, duration)
-        for char_index, (prefix, seg_start, seg_duration) in enumerate(
-            _typing_headline_positions(headline, start, end)
-        ):
+        positions = _typing_headline_positions(headline, start, end)
+        for char_index, (prefix, seg_start, seg_duration) in enumerate(positions):
             frame_path = output_path.parent / "_frames" / f"headline-{index}-{char_index}.png"
             _caption_frame(size, prefix, int(headline_center_y), frame_path, fill=(255, 214, 64), font_size=92)
             headline_clips.append(
                 ImageClip(str(frame_path)).set_start(seg_start).set_duration(seg_duration).set_position((0, 0))
             )
-            typing_sfx_clips.append(_sfx_clip(TYPING_CLICK_SFX, seg_start, TYPING_CLICK_VOLUME))
+        if positions:
+            # One typing-bed hit for the whole headline, trimmed to however
+            # long it actually took to type -- not one hit per character,
+            # which stacked into an overly loud wall of sound.
+            typing_duration = positions[-1][1] - positions[0][1]
+            typing_sfx_clips.append(_sfx_clip(TYPING_SFX, start, TYPING_VOLUME, duration=typing_duration))
 
     background = ColorClip(size=size, color=(255, 255, 255)).set_duration(duration)
     sfx_clips = [clip for clip in (*photo_pop_clips, *typing_sfx_clips) if clip is not None]

@@ -192,7 +192,7 @@ def _visual_highlight_for_scenes(scenes):
     media_types = {scene.get("media_type") for scene in scenes}
     words = []
     if "interior" in media_types:
-        words.append("interior dashboard seats")
+        words.append("interior dashboard steering wheel cabin")
     if "engine" in media_types:
         words.append("engine turbo horsepower")
     if "wheel" in media_types or "detail" in media_types:
@@ -338,9 +338,11 @@ def gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir
 # Extra takes of the same script in a few other voices, purely for the
 # creator to listen to and compare against the chosen voice -- not used in
 # the rendered video itself. British presets added on request; the
-# currently-chosen preset is included too so there's a like-for-like
-# comparison instead of only ever hearing the alternatives.
-AUDITION_PRESETS = ["british_narrator", "british_dry_wit", "british_energetic"]
+# currently-chosen preset (plain "onyx" by default) is included too so
+# there's a like-for-like comparison instead of only ever hearing the
+# alternatives. british_deep_narrator pairs onyx's own deep register with a
+# British accent, on request for "the same deep voice, more British".
+AUDITION_PRESETS = ["british_narrator", "british_dry_wit", "british_energetic", "british_deep_narrator"]
 
 
 def generate_voice_auditions(script, output_dir, chosen_preset):
