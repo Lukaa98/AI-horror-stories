@@ -155,6 +155,32 @@ def test_order_media_for_scenes_repeats_only_once_every_photo_is_used():
     assert [item["path"] for item in ordered] == ["exterior-01.jpg", "exterior-02.jpg", "exterior-01.jpg"]
 
 
+def test_gather_media_requests_a_wider_pool_than_the_default_limit(tmp_path, monkeypatch):
+    """The default limit=6 (tuned for ranking/battle, which mostly just
+    need one hero shot per car) was capping the pool before engine/wheel/
+    detail photos ever got a chance to survive the second review pass --
+    single-car needs real variety across five media_types, so it must ask
+    for more than the default."""
+    import single_car_short
+
+    images_dir = tmp_path / "images"
+    calls = []
+
+    def fake_scrape_entry_images(scraper_dir, dest, entry, limit=6):
+        calls.append(limit)
+        return [], {"selected_auction": {}}
+
+    monkeypatch.setattr(single_car_short, "scrape_entry_images", fake_scrape_entry_images)
+    monkeypatch.setattr(single_car_short, "enrich_entry_from_manifest", lambda entry, manifest: entry)
+
+    try:
+        single_car_short.gather_media("Audi", "TT", "", 1998, 1998, images_dir, scenes=[{"media_type": "exterior"}])
+    except RuntimeError:
+        pass  # no images approved -- irrelevant to this test, which only checks the requested limit
+
+    assert calls == [10]
+
+
 def test_gather_media_uses_real_ai_review_categories_for_media_types(tmp_path, monkeypatch):
     """gather_media must route through research_request's real per-image AI
     review (review_and_rename_entry_images) -- the same one the ranking/
@@ -169,7 +195,7 @@ def test_gather_media_uses_real_ai_review_categories_for_media_types(tmp_path, m
     for name in ["front-01.jpg", "interior-02.jpg", "engine-03.jpg"]:
         (car_dir / name).write_bytes(b"fake-image-bytes")
 
-    def fake_scrape_entry_images(scraper_dir, dest, entry):
+    def fake_scrape_entry_images(scraper_dir, dest, entry, limit=6):
         return (
             [
                 "images/audi-tt/front-01.jpg",
@@ -217,7 +243,7 @@ def test_gather_media_only_removes_background_from_exterior_photos(tmp_path, mon
 
     monkeypatch.setattr(
         single_car_short, "scrape_entry_images",
-        lambda scraper_dir, dest, entry: (
+        lambda scraper_dir, dest, entry, limit=6: (
             [
                 "images/audi-tt/front-01.jpg",
                 "images/audi-tt/interior-02.jpg",

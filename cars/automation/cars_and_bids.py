@@ -365,7 +365,7 @@ def augment_narration_with_current_value(entry):
     return f"{text}{joiner} Today, clean examples trade around {current_value}."
 
 
-def scrape_entry_images(scraper_dir, draft_images_dir, entry):
+def scrape_entry_images(scraper_dir, draft_images_dir, entry, limit=6):
     params = infer_search_params(entry.get("search_hint", ""))
     if not params:
         return [], {}
@@ -395,7 +395,7 @@ def scrape_entry_images(scraper_dir, draft_images_dir, entry):
     dedupe_similar_images(dest)
     manifest = load_manifest(manifest_path)
     review_payload = review_draft_images(dest, entry)
-    images = choose_reviewed_images(dest, entry, review_payload, limit=6)
+    images = choose_reviewed_images(dest, entry, review_payload, limit=limit)
     manifest["ai_review"] = review_payload
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return images, manifest

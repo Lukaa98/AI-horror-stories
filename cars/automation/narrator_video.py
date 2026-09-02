@@ -38,14 +38,18 @@ SFX_DIR = ROOT / "narrator" / "sfx"
 # read as an alerting/notification pitch rather than a photo transition).
 # Volume is kept below the narration track so it reads as a texture, not a
 # competing sound.
-PHOTO_POP_SFX = "photo_pop.mp3"
-PHOTO_POP_VOLUME = 0.4
+# .wav, not .mp3 -- an MP3-encoded sfx has a well-known ~50-100ms silent
+# lead-in baked in by the LAME encoder (its "encoder delay"), which reads
+# as the sound starting perceptibly late relative to the visual it's
+# supposed to be synced to. WAV has no such padding.
+PHOTO_POP_SFX = "photo_pop.wav"
+PHOTO_POP_VOLUME = 0.34  # 15% quieter, on request
 # A short slice of a keyboard-typing bed, played once per headline (not
 # once per character -- looping/retriggering a full hit per character was
 # the earlier "typing is too loud" complaint) under the typing animation,
 # trimmed to however long that headline actually takes to type out.
-TYPING_SFX = "typing.mp3"
-TYPING_VOLUME = 0.3
+TYPING_SFX = "typing.wav"
+TYPING_VOLUME = 0.36  # 20% louder, on request
 
 # A small "easter egg" loop in a corner: the car's own side-profile cutout
 # (see single_car_short._select_side_profile_media) spun around an
@@ -53,11 +57,19 @@ TYPING_VOLUME = 0.3
 # procedurally generated smoke puffs -- decorative only, not tied to any
 # scene, meant to give the video some ambient personality without pulling
 # focus from the narrator.
-DOODLE_WIDTH_RATIO = 0.11
-DOODLE_ORBIT_RADIUS_RATIO = 0.035
-DOODLE_SPIN_PERIOD_SECONDS = 2.4
-DOODLE_MARGIN_RATIO = 0.045
-SMOKE_PUFF_DIAMETER_RATIO = 0.05
+DOODLE_WIDTH_RATIO = 0.14
+DOODLE_MARGIN_RATIO = 0.05
+# A flat 2D photo spun a full 360deg reads as the car flipping upside down
+# for half of every cycle, not drifting -- bounding the rotation to a small
+# swing and pairing it with a lateral sway and a horizontal squash/stretch
+# approximates a rear-wheel fishtail (nose roughly fixed, tail swinging)
+# well enough without real 3D geometry.
+DOODLE_SWAY_PERIOD_SECONDS = 1.7
+DOODLE_MAX_ROTATION_DEG = 13
+DOODLE_LATERAL_SWAY_RATIO = 0.018
+DOODLE_SQUASH_AMOUNT = 0.1
+SMOKE_PUFF_DIAMETER_RATIO = 0.045
+SMOKE_PULSE_PERIOD_SECONDS = 0.9
 
 # Two small side-profile cutouts racing top-to-bottom along the empty
 # margins beside the narrator during a horsepower-comparison beat -- winner
@@ -72,8 +84,8 @@ RACE_LOSER_LAG_RATIO = 0.22
 # hook, and it echoes the drag-race motif used elsewhere in the format.
 COUNTDOWN_STEPS = ["3", "2", "1", "GO!"]
 COUNTDOWN_STEP_SECONDS = 0.32
-COUNTDOWN_SFX = "countdown_beep.mp3"
-COUNTDOWN_GO_SFX = "countdown_go.mp3"
+COUNTDOWN_SFX = "countdown_beep.wav"
+COUNTDOWN_GO_SFX = "countdown_go.wav"
 COUNTDOWN_SFX_VOLUME = 0.5
 
 # A thin growing bar along the very top edge -- a subtle, near-zero-cost
@@ -105,7 +117,7 @@ CAPTION_CHUNK_WORDS = 1
 # next one appears -- a typewriter reveal instead of the whole headline
 # popping in at once. "Fairly quick": the full headline is typically fully
 # typed out in well under a second.
-TYPING_CHAR_SECONDS = 0.045
+TYPING_CHAR_SECONDS = 0.06
 
 # Four poses, cycled once per sentence: steady/jolt are the small "redraw
 # flicker" (line weight + a tiny arm/brow twitch, no lean); lean_left/
@@ -242,7 +254,13 @@ def _sfx_clip(name, start, volume, duration=None):
         return None
     clip = AudioFileClip(str(path)).volumex(volume)
     if duration is not None and duration < clip.duration:
-        clip = clip.subclip(0, max(0.05, duration))
+        trimmed = max(0.05, duration)
+        clip = clip.subclip(0, trimmed)
+        # A trim this short lands well before the source file's own
+        # built-in fade-out (see narrator/sfx generation), so without one
+        # of its own the clip just stops dead mid-sound -- audible as an
+        # abrupt cutoff rather than the typing bed finishing naturally.
+        clip = clip.audio_fadeout(min(0.15, trimmed * 0.4))
     return clip.set_start(start)
 
 
@@ -641,10 +659,12 @@ def _generate_smoke_puff_image(diameter):
 
 
 def _drift_doodle_track(cutout_path, size, duration):
-    """A tiny version of the car's own side-profile cutout, spun around an
-    off-center pivot in a corner so it reads as doing donuts, with a rigid
-    trail of a few smoke puffs following it -- an ambient decoration for
-    the whole video, not tied to any particular scene.
+    """A tiny version of the car's own side-profile cutout, fishtailing in
+    place in a corner -- a bounded rotation + lateral sway + horizontal
+    squash instead of a full 360deg spin (see DOODLE_MAX_ROTATION_DEG's own
+    comment for why), with a couple of smoke puffs breathing near the rear
+    wheels -- an ambient decoration for the whole video, not tied to any
+    particular scene.
 
     Returns a plain list of small clips (not a nested CompositeVideoClip)
     for the caller to splice straight into its own composite -- wrapping
@@ -657,40 +677,56 @@ def _drift_doodle_track(cutout_path, size, duration):
     width, height = size
     base = ImageClip(str(cutout_path)).resize(width=width * DOODLE_WIDTH_RATIO)
     car_w, car_h = base.size
-    orbit_radius = width * DOODLE_ORBIT_RADIUS_RATIO
-    # Bottom-right corner: clear of the narrator (horizontally centered)
-    # and clear of the media/headline/caption stack above.
-    cx = width - width * DOODLE_MARGIN_RATIO - car_w / 2 - orbit_radius
-    cy = height - height * DOODLE_MARGIN_RATIO - car_h / 2 - orbit_radius
+    sway_px = width * DOODLE_LATERAL_SWAY_RATIO
+    # The squash and the lateral sway both grow the car's on-screen footprint
+    # beyond its own resting size -- sizing the safe area off the *maximum*
+    # extent it can ever reach, not its resting size, is what actually fixes
+    # the reported bug where part of the car got clipped/hidden whenever the
+    # motion carried it past whatever area was actually accounted for.
+    max_half_width = (car_w * (1 + DOODLE_SQUASH_AMOUNT)) / 2 + sway_px
+    cx = width - width * DOODLE_MARGIN_RATIO - max_half_width
+    cy = height - height * DOODLE_MARGIN_RATIO - car_h / 2
 
-    def orbit_point(angle, radius):
-        return (cx + radius * math.cos(angle), cy + radius * math.sin(angle))
+    def rotation_angle(t):
+        return DOODLE_MAX_ROTATION_DEG * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS)
+
+    def x_scale(t):
+        # Out of phase with the rotation -- narrowing as it rotates one way
+        # and widening as it swings back is what sells the rear end moving
+        # toward/away from camera instead of just tilting flat.
+        return 1.0 + DOODLE_SQUASH_AMOUNT * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS + math.pi / 2)
 
     def car_position(t):
-        x, y = orbit_point(2 * math.pi * t / DOODLE_SPIN_PERIOD_SECONDS, orbit_radius)
-        return (x - car_w / 2, y - car_h / 2)
+        sway = sway_px * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS)
+        return (cx - (car_w * x_scale(t)) / 2 + sway, cy - car_h / 2)
 
-    spinning_car = (
+    fishtailing_car = (
         base.set_duration(duration)
-        .rotate(lambda t: -360 * t / DOODLE_SPIN_PERIOD_SECONDS, expand=False)
+        .resize(lambda t: (x_scale(t) * car_w, car_h))
+        .rotate(rotation_angle, expand=False)
         .set_position(car_position)
     )
 
     puff_diameter = max(10, int(width * SMOKE_PUFF_DIAMETER_RATIO))
     puff_image = _generate_smoke_puff_image(puff_diameter)
     puff_clips = []
-    for lag, scale in ((0.5, 1.0), (0.85, 0.75), (1.2, 0.55)):
-        def puff_position(t, lag=lag, scale=scale):
-            angle = 2 * math.pi * t / DOODLE_SPIN_PERIOD_SECONDS - lag
-            x, y = orbit_point(angle, orbit_radius * 0.9)
-            d = puff_diameter * scale
-            return (x - d / 2, y - d / 2)
+    # Two puffs near the base of the car, roughly where the rear wheels
+    # sit, each breathing in size on its own phase-shifted pulse -- fixed
+    # in place rather than orbiting, which reads as smoke billowing by the
+    # tires instead of the odd "trailing dots" the old orbiting puffs had.
+    for phase, x_offset in ((0.0, -car_w * 0.28), (0.55, car_w * 0.28)):
+        def puff_scale(t, phase=phase):
+            return 0.6 + 0.4 * (0.5 + 0.5 * math.sin(2 * math.pi * t / SMOKE_PULSE_PERIOD_SECONDS + phase))
+
+        def puff_position(t, x_offset=x_offset, phase=phase):
+            d = puff_diameter * puff_scale(t, phase)
+            return (cx + x_offset - d / 2, cy + car_h * 0.32 - d / 2)
 
         puff_clips.append(
-            ImageClip(puff_image).set_duration(duration).resize(scale).set_position(puff_position)
+            ImageClip(puff_image).set_duration(duration).resize(puff_scale).set_position(puff_position)
         )
 
-    return [*puff_clips, spinning_car]
+    return [*puff_clips, fishtailing_car]
 
 
 def _drag_race_lane_clip(path, car_width, x_center, top_y, bottom_y, seg_start, seg_duration, is_winner):

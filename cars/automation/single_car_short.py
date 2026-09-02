@@ -169,7 +169,7 @@ def _strip_citations(text):
 
 def _research_script_prompt(label, year_scope, retry_feedback=""):
     return f"""Research and write one original vertical car-video package about {label}, scoped to {year_scope}.{retry_feedback}
-Use web search and verify every technical comparison. Write a quick, conversational narration of {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total so faster TTS lands near 55-60 seconds, split across 5-7 scenes in speaking order -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, one comparison or ownership insight, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+Use web search and verify every technical comparison. Write a quick, conversational narration of {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total so faster TTS lands near 55-60 seconds, split across 5-7 scenes in speaking order -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
@@ -258,9 +258,9 @@ def _visual_highlight_for_scenes(scenes):
     if "interior" in media_types:
         words.append("interior dashboard steering wheel cabin")
     if "engine" in media_types:
-        words.append("engine turbo horsepower")
+        words.append("engine bay turbo horsepower")
     if "wheel" in media_types or "detail" in media_types:
-        words.append("wheel brake detail")
+        words.append("wheel brake exhaust tailpipe detail")
     return " ".join(words)
 
 
@@ -294,7 +294,13 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
         "visual_highlight": _visual_highlight_for_scenes(scenes or []),
         "generation_label": generation,
     }
-    selected, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry)
+    # This format needs real variety across five distinct media_types
+    # (exterior, engine, wheel, detail, interior) plus a dedicated
+    # side-profile shot -- the default limit=6 (tuned for the ranking/
+    # battle pipelines, which mostly just need one hero shot per car) was
+    # capping the pool before engine/wheel/detail photos ever got a chance
+    # to survive the second review pass, even when the gallery had them.
+    selected, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry, limit=10)
     entry["images"] = selected
     enrich_entry_from_manifest(entry, manifest)
     # scrape_entry_images already runs a first-pass review internally

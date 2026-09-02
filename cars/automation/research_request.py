@@ -815,11 +815,13 @@ model/generation when reasonably visible, but do not reject merely because a tri
 badge, or engine designation cannot be proven from this angle. exact_variant_visible is useful
 metadata, not an approval requirement. When provenance is true, the image came from one exact
 auction gallery and remains usable unless the pixels contradict it.
-Only use category "interior" when the dashboard, steering wheel, or center console is clearly
-visible -- a seat-only, trunk/cargo, or door-panel close-up with no dashboard in frame should be
-"other_detail" instead. Only use "engine_bay" when actual engine-bay contents (block, intake,
-hoses, etc. with the hood open) are visible -- a closed hood or an exterior badge is not
-engine_bay."""
+Only use category "interior" when the dashboard, steering wheel, or center console is the
+prominent subject filling a meaningful part of the frame -- not just visible at a small sliver
+along an edge. A seat-only, trunk/cargo, headrest, or door-panel close-up (even one with a corner
+of dashboard peeking in) should be "other_detail" instead; this category exists specifically for
+the driver's-eye cabin view, not any interior-adjacent shot. Only use "engine_bay" when actual
+engine-bay contents (block, intake, hoses, etc. with the hood open) are visible -- a closed hood
+or an exterior badge is not engine_bay."""
     response = with_openai_retry(lambda: client.responses.create(
         model=model,
         input=[{
