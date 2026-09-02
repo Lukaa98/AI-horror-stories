@@ -45,13 +45,33 @@ def test_real_word_timestamps_override_estimated_caption_timing():
     assert _caption_timeline(manifest, 2.0) == [("exact", 0.2, 0.7), ("turbo", 0.8, 1.4)]
 
 
-def test_pose_intervals_cycle_and_cover_the_full_duration():
-    intervals = _pose_intervals(2.0)
+def test_pose_intervals_fall_back_to_a_fixed_clock_without_word_timeline():
+    intervals = _pose_intervals({}, 10.0)
     assert intervals[0][0] == 0.0
-    assert intervals[-1][2] in {"steady", "jolt"}
+    assert intervals[-1][2] in {"steady", "jolt", "lean_left", "lean_right"}
     for (_, end, _), (next_start, _, _) in zip(intervals, intervals[1:]):
         assert end == next_start
-    assert intervals[-1][1] == 2.0
+    assert intervals[-1][1] == 10.0
+    assert len(intervals) > 1
+
+
+def test_pose_intervals_split_on_real_pauses_and_cycle_through_all_four_poses():
+    # A ~0.5s gap between "one" and "Meet" should read as a sentence
+    # boundary; the much smaller gaps elsewhere should not.
+    word_timeline = [
+        {"word": "This", "start": 0.0, "end": 0.3},
+        {"word": "is", "start": 0.35, "end": 0.5},
+        {"word": "one", "start": 0.55, "end": 0.9},
+        {"word": "Meet", "start": 1.4, "end": 1.7},
+        {"word": "two", "start": 1.75, "end": 2.0},
+    ]
+    manifest = {"word_timeline": word_timeline}
+    intervals = _pose_intervals(manifest, 3.0)
+    assert [pose for _, _, pose in intervals] == ["steady", "jolt"]
+    assert intervals[0][0] == 0.0
+    assert intervals[-1][1] == 3.0
+    # The cut should land in the gap, not exactly on either word boundary.
+    assert 0.9 < intervals[0][1] < 1.4
 
 
 def test_blink_intervals_are_short_and_spaced_out():

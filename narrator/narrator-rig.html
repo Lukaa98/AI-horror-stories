@@ -208,6 +208,20 @@
     transform-origin: 260px 306px;
     animation: armSwingRight 2.4s ease-in-out infinite;
   }
+  .arm-right-bent {
+    transform-origin: 260px 306px;
+  }
+  .arm-left-bent {
+    transform-origin: 140px 306px;
+  }
+  /* pivot at the hip line so a pose's stance-shift rotate reads as
+     weight moving onto that leg, not the leg floating away from the body */
+  .leg-left {
+    transform-origin: 165px 460px;
+  }
+  .leg-right {
+    transform-origin: 235px 460px;
+  }
   @keyframes armSwingLeft {
     0%, 100% { transform: rotate(-2deg); }
     50% { transform: rotate(2deg); }
@@ -255,6 +269,21 @@
     50%  { stroke-width: 4.2; }
     100% { stroke-width: 4.8; }
   }
+
+  /* Only takes effect once the "Pose" buttons freeze the idle CSS
+     animations above (a running animation ignores a transition on the
+     same property) -- gives the manual pose picker a smooth interpolation
+     between poses instead of an instant snap, previewing the crossfade
+     the render pipeline does between sentence poses. */
+  body.posing-frozen #character,
+  body.posing-frozen .arm-left,
+  body.posing-frozen .arm-right,
+  body.posing-frozen .arm-left-bent,
+  body.posing-frozen .arm-right-bent,
+  body.posing-frozen .leg-left,
+  body.posing-frozen .leg-right {
+    transition: transform 0.35s ease, stroke-width 0.35s ease;
+  }
 </style>
 
 <header>
@@ -300,15 +329,19 @@
              shorter -- makes the figure read as more compact/stouter
              overall. -->
         <g transform="translate(0,460) scale(1,0.8) translate(0,-460)">
-        <!-- legs: shorter, straight -->
+        <!-- each leg + its shoe wrapped so a pose can shift stance weight
+             onto one leg (a small rotate anchored at the hip) instead of
+             always standing perfectly square -->
+        <g class="leg leg-left">
         <path d="M 150 460 L 144 680 L 178 680 L 184 460 Z" fill="#ffffff" stroke="#1c1712"/>
         <path d="M 164 470 L 160 670" stroke-width="2.5" opacity="0.5"/>
+        <path d="M 136 680 C 128 698 150 706 176 700 C 182 692 180 682 174 678 Z" fill="#ffffff" stroke="#1c1712"/>
+        </g>
+        <g class="leg leg-right">
         <path d="M 250 460 L 256 680 L 222 680 L 216 460 Z" fill="#ffffff" stroke="#1c1712"/>
         <path d="M 236 470 L 240 670" stroke-width="2.5" opacity="0.5"/>
-
-        <!-- shoes -->
-        <path d="M 136 680 C 128 698 150 706 176 700 C 182 692 180 682 174 678 Z" fill="#ffffff" stroke="#1c1712"/>
         <path d="M 264 680 C 272 698 250 706 224 700 C 218 692 220 682 226 678 Z" fill="#ffffff" stroke="#1c1712"/>
+        </g>
         </g>
 
         <!-- arms: both hang straight at the sides with open, spread-finger
@@ -320,12 +353,38 @@
           <path d="M 290 462 L 274 478 M 294 466 L 282 484 M 298 468 L 290 488
                    M 302 466 L 300 488 M 304 462 L 308 482" stroke-width="3"/>
         </g>
+        <!-- bent-elbow variant of the right arm, hand resting near the
+             belly instead of hanging straight -- an alternate pose swap
+             (see export-sprites.js POSES), not an idle animation -->
+        <g class="arm arm-right-bent" style="display:none">
+          <path d="M 260 306 C 284 326 298 352 301 380
+                   C 303 392 300 400 292 406
+                   C 278 414 262 416 248 414
+                   L 234 402
+                   C 250 400 268 396 282 388
+                   C 290 382 292 372 288 360
+                   C 282 340 272 320 256 306 Z" fill="#ffffff"/>
+          <path d="M 250 412 L 234 424 M 246 416 L 232 430 M 240 418 L 228 434
+                   M 234 416 L 224 432 M 230 412 L 222 426" stroke-width="3"/>
+        </g>
         <g class="arm arm-left">
           <path d="M 140 306 C 114 332 98 374 98 422
                    C 98 440 102 454 110 464
                    L 130 454 C 124 422 126 374 144 336 Z" fill="#ffffff"/>
           <path d="M 110 462 L 126 478 M 106 466 L 118 484 M 102 468 L 110 488
                    M 98 466 L 100 488 M 96 462 L 92 482" stroke-width="3"/>
+        </g>
+        <!-- bent-elbow variant of the left arm, mirrored from arm-right-bent -->
+        <g class="arm arm-left-bent" style="display:none">
+          <path d="M 140 306 C 116 326 102 352 99 380
+                   C 97 392 100 400 108 406
+                   C 122 414 138 416 152 414
+                   L 166 402
+                   C 150 400 132 396 118 388
+                   C 110 382 108 372 112 360
+                   C 118 340 128 320 144 306 Z" fill="#ffffff"/>
+          <path d="M 150 412 L 166 424 M 154 416 L 168 430 M 160 418 L 172 434
+                   M 166 416 L 176 432 M 170 412 L 178 426" stroke-width="3"/>
         </g>
         <!-- head group: everything from here down bobs/tilts together as
              one idle unit, pivoting from the base of the neck, so the head
@@ -395,17 +454,26 @@
         <!-- mouth states: each carries its own skin patch sized to how
              open it is, so "closed" doesn't show the same pale window a
              wide-open mouth would. -->
+        <!-- closed: a fuller two-curve lip line (main line + a faint
+             lower-lip crease) instead of a single flat dash -->
         <g class="mouth mouth-closed">
-          <path d="M 182 258 C 190 267 210 267 218 258" stroke-width="5"/>
+          <path d="M 180 259 C 188 264 212 264 220 259" stroke-width="4.5" fill="none"/>
+          <path d="M 183 262 C 190 267 210 267 217 262" stroke-width="2.5" opacity="0.3" fill="none"/>
         </g>
+        <!-- small/wide: a warm dark-red interior (not flat black) with a
+             white teeth row at the top and a pink tongue hint at the
+             bottom, instead of one solid dark oval -->
         <g class="mouth mouth-small" style="display:none">
           <ellipse cx="200" cy="263" rx="14" ry="9" fill="#ffffff" stroke="none"/>
-          <ellipse cx="200" cy="263" rx="11" ry="7" fill="#1c1712" stroke="none"/>
+          <ellipse cx="200" cy="263" rx="11" ry="7" fill="#5a2a2a" stroke="none"/>
+          <rect x="192" y="258" width="16" height="3.5" rx="1.75" fill="#ffffff"/>
+          <ellipse cx="200" cy="267" rx="6" ry="3" fill="#c96b6b" stroke="none"/>
         </g>
         <g class="mouth mouth-wide" style="display:none">
           <ellipse cx="200" cy="266" rx="20" ry="16" fill="#ffffff" stroke="none"/>
-          <ellipse cx="200" cy="266" rx="17" ry="13" fill="#1c1712" stroke="none"/>
-          <path d="M 184 261 L 216 261" stroke-width="3" opacity="0.6" stroke="#ffffff"/>
+          <ellipse cx="200" cy="266" rx="17" ry="13" fill="#5a2a2a" stroke="none"/>
+          <rect x="186" y="255" width="28" height="5" rx="2.5" fill="#ffffff"/>
+          <ellipse cx="200" cy="274" rx="10" ry="6" fill="#c96b6b" stroke="none"/>
         </g>
         <g class="mouth mouth-smile" style="display:none">
           <path d="M 180 250 C 180 258 188 268 200 268 C 212 268 220 258 220 250
@@ -456,6 +524,19 @@
         <button id="browsOnce">Raise brows once</button>
         <button id="browsToggle">Auto‑expression: on</button>
       </div>
+    </div>
+
+    <div class="card">
+      <h2>Pose <span id="roPose" style="font-weight:400;color:var(--ink-soft);text-transform:none;letter-spacing:normal;">idle</span></h2>
+      <div class="btn-grid">
+        <button data-pose="steady">Steady</button>
+        <button data-pose="jolt">Jolt</button>
+        <button data-pose="lean_left">Lean left</button>
+        <button data-pose="lean_right">Lean right</button>
+        <button id="poseCycleToggle" class="wide">Auto‑cycle poses: off</button>
+        <button id="poseResume" class="wide">Resume idle animation</button>
+      </div>
+      <p class="hint" style="margin-top:10px;">These are the same 4 poses the render pipeline cycles through once per sentence (steady/jolt are the small line-weight flicker, lean_left/lean_right add the bent-elbow arm, leg stance shift, and body tilt). Picking one here freezes the idle sway/blink/wobble animations so the pose shows cleanly -- use "Resume idle animation" to go back to the normal live-preview loop.</p>
     </div>
 
     <p class="hint">Auto‑talk cycles the three talking mouths on a random clock, the way the reference channel's frames never quite line up with the words, and now occasionally gives the brows a small lift on a wide-open frame too. Auto‑blink fires every 2.5–5s, and roughly every third blink also raises the brows for a bigger beat -- a natural pairing rather than three clocks running independently. The head itself has a slow idle bob/tilt so it isn't frozen while the arms sway. Wobble redraws the turbulence seed a few times a second for the slight hand‑jitter on the outline.</p>
@@ -620,4 +701,95 @@
     stageLabel.textContent = solidStage ? 'solid stage' : 'transparent stage';
     document.getElementById('stageToggle').textContent = solidStage ? 'Stage: solid' : 'Stage: transparent';
   });
+
+  // Same 4 poses export-sprites.js bakes into sprites for the render
+  // pipeline (see that file's POSES) -- mirrored here so this preview can
+  // show exactly what a sentence-to-sentence pose change will look like.
+  const POSES_JS = {
+    steady:     { strokeWidth: 4.6, armLeft: '', armRight: '', armLeftBent: false, armRightBent: false, legLeft: '', legRight: '', bodyTilt: '', brows: 'neutral' },
+    jolt:       { strokeWidth: 3.9, armLeft: 'rotate(1.5deg)', armRight: 'rotate(-1.5deg)', armLeftBent: false, armRightBent: false, legLeft: '', legRight: '', bodyTilt: '', brows: 'talk' },
+    lean_left:  { strokeWidth: 4.4, armLeft: '', armRight: 'rotate(-2deg)', armLeftBent: true, armRightBent: false, legLeft: 'rotate(-4deg)', legRight: 'rotate(2deg)', bodyTilt: 'rotate(-3deg)', brows: 'neutral' },
+    lean_right: { strokeWidth: 4.4, armLeft: 'rotate(2deg)', armRight: '', armLeftBent: false, armRightBent: true, legLeft: 'rotate(-2deg)', legRight: 'rotate(4deg)', bodyTilt: 'rotate(3deg)', brows: 'talk' },
+  };
+  const roPose = document.getElementById('roPose');
+  let posingFrozen = false;
+  function freezeIdleForPosing() {
+    if (posingFrozen) return;
+    posingFrozen = true;
+    document.body.classList.add('posing-frozen');
+  }
+  function setBrowState(name) {
+    browNeutral.style.display = name === 'neutral' ? '' : 'none';
+    browRaised.style.display = name === 'raised' ? '' : 'none';
+    browTalk.style.display = name === 'talk' ? '' : 'none';
+  }
+  function applyPose(name) {
+    freezeIdleForPosing();
+    const pose = POSES_JS[name];
+    charEl.style.strokeWidth = String(pose.strokeWidth);
+    charEl.style.transform = pose.bodyTilt;
+    const armLeft = document.querySelector('.arm-left');
+    const armLeftBent = document.querySelector('.arm-left-bent');
+    armLeft.style.display = pose.armLeftBent ? 'none' : '';
+    armLeftBent.style.display = pose.armLeftBent ? '' : 'none';
+    armLeft.style.transform = pose.armLeft;
+    const armRight = document.querySelector('.arm-right');
+    const armRightBent = document.querySelector('.arm-right-bent');
+    armRight.style.display = pose.armRightBent ? 'none' : '';
+    armRightBent.style.display = pose.armRightBent ? '' : 'none';
+    armRight.style.transform = pose.armRight;
+    document.querySelector('.leg-left').style.transform = pose.legLeft;
+    document.querySelector('.leg-right').style.transform = pose.legRight;
+    setBrowState(pose.brows);
+    roPose.textContent = name;
+    document.querySelectorAll('[data-pose]').forEach(b => b.classList.toggle('active', b.dataset.pose === name));
+  }
+  document.querySelectorAll('[data-pose]').forEach(b => {
+    b.addEventListener('click', () => applyPose(b.dataset.pose));
+  });
+
+  function resumeIdleAnimation() {
+    posingFrozen = false;
+    document.body.classList.remove('posing-frozen');
+    charEl.style.transform = '';
+    charEl.style.strokeWidth = '';
+    const armLeft = document.querySelector('.arm-left');
+    const armRight = document.querySelector('.arm-right');
+    armLeft.style.display = '';
+    armRight.style.display = '';
+    armLeft.style.transform = '';
+    armRight.style.transform = '';
+    document.querySelector('.arm-left-bent').style.display = 'none';
+    document.querySelector('.arm-right-bent').style.display = 'none';
+    document.querySelector('.leg-left').style.transform = '';
+    document.querySelector('.leg-right').style.transform = '';
+    setBrowState('neutral');
+    roPose.textContent = 'idle';
+    document.querySelectorAll('[data-pose]').forEach(b => b.classList.remove('active'));
+    stopPoseCycle();
+  }
+  document.getElementById('poseResume').addEventListener('click', resumeIdleAnimation);
+
+  let poseCycleTimer = null;
+  const poseCycleOrder = ['steady', 'jolt', 'lean_left', 'lean_right'];
+  let poseCycleIndex = 0;
+  const poseCycleBtn = document.getElementById('poseCycleToggle');
+  function poseCycleTick() {
+    applyPose(poseCycleOrder[poseCycleIndex % poseCycleOrder.length]);
+    poseCycleIndex += 1;
+    poseCycleTimer = setTimeout(poseCycleTick, 1800);
+  }
+  function startPoseCycle() {
+    if (poseCycleTimer) return;
+    poseCycleBtn.textContent = 'Auto‑cycle poses: on';
+    poseCycleBtn.classList.add('active');
+    poseCycleTick();
+  }
+  function stopPoseCycle() {
+    clearTimeout(poseCycleTimer);
+    poseCycleTimer = null;
+    poseCycleBtn.textContent = 'Auto‑cycle poses: off';
+    poseCycleBtn.classList.remove('active');
+  }
+  poseCycleBtn.addEventListener('click', () => poseCycleTimer ? stopPoseCycle() : startPoseCycle());
 </script>

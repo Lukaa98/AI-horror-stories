@@ -4,15 +4,17 @@ the manifest.json that narrator_script.py produces (script text, narration
 audio, and an audio-loudness mouth timeline).
 
 The narrator itself is not rendered live; export-sprites.js pre-renders it
-to a fixed set of transparent PNGs (one per mouth x eyes x flicker-pose
+to a fixed set of transparent PNGs (one per mouth x eyes x pose
 combination) and this flips between them like a flipbook: mouth state
-follows the audio-loudness mouth_timeline, the flicker pose follows its own
-fast fixed-clock timeline, and eyes follow a blink timeline, rather than
-driving a browser for every output frame. The one exception is the body's
-idle lean, which is smooth and continuous in the interactive rig -- baking
-that into discrete sprites and cycling through them made it look like a
-jerky snap between pictures instead of a smooth sway, so it's applied here
-as a continuous per-frame rotation instead (_apply_body_sway).
+follows the audio-loudness mouth_timeline, eyes follow a blink timeline,
+and the body pose advances once per sentence (steady -> jolt -> lean_left
+-> lean_right -> ...), detected from the natural pauses in the real
+per-word timeline rather than a fixed clock, with a short crossfade at
+each pose change so it reads as a transition into the new stance instead
+of a jump cut. The one exception is the small idle lean, which stays a
+smooth, continuous per-frame rotation on top of whichever pose is showing
+(_apply_body_sway), since baking *that* into discrete sprites read as
+jerky rather than a smooth sway.
 """
 import argparse
 import json
@@ -45,20 +47,23 @@ CAPTION_ZONE_RATIO = 0.075
 MEDIA_INSET_RATIO = 0.05
 CAPTION_CHUNK_WORDS = 1
 
-# The sprite flipbook only ever varied by mouth state, so the rendered
-# character read as "a stuck body with a moving mouth" even though the
-# interactive rig (narrator-rig.html) has idle body sway, a line-flicker,
-# arm sway, and brow lift. export-sprites.js now bakes the fast, small
-# hand-drawn "redraw" flicker (line weight + a tiny arm/brow twitch) into 2
-# fixed poses (steady/jolt); cycling through them here on a fixed clock --
-# the same trick the mouth timeline already uses, just time-driven instead
-# of loudness-driven -- gets that motion into the actual video instead of
-# only ever appearing in the live rig preview. The slower body-wide lean is
-# handled separately below (_apply_body_sway) as a continuous rotation,
-# since baking that into the same discrete cycle read as jerky rather than
-# a smooth sway.
-POSE_CYCLE = ["steady", "jolt"]
-POSE_SEGMENT_SECONDS = 0.24
+# Four poses, cycled once per sentence: steady/jolt are the small "redraw
+# flicker" (line weight + a tiny arm/brow twitch, no lean); lean_left/
+# lean_right are a bigger, deliberate weight-shift -- one arm swaps to a
+# bent-elbow variant, that side's leg rotates outward, and the body tilts
+# a few degrees toward that side (see export-sprites.js POSES). Sentence
+# boundaries come from the real per-word timeline's own pause gaps rather
+# than word-counting a sentence split against the script text, since
+# Whisper's tokenization doesn't line up with a naive `sentence.split()`
+# (e.g. "3.7-liter" comes back as three separate word entries) -- a pause
+# of at least SENTENCE_PAUSE_THRESHOLD_SECONDS between two words' audio is
+# a much more reliable signal of "the narrator just finished a sentence."
+POSE_CYCLE = ["steady", "jolt", "lean_left", "lean_right"]
+SENTENCE_PAUSE_THRESHOLD_SECONDS = 0.4
+POSE_TRANSITION_SECONDS = 0.18
+# Fallback cadence only used when there's no real word_timeline to find
+# pauses in (estimated caption timing) -- some pose variety beats none.
+POSE_FALLBACK_SEGMENT_SECONDS = 3.0
 # A blink timeline of its own -- the flipbook otherwise defaults to
 # permanently-open eyes for the whole video.
 BLINK_START_SECONDS = 1.2
@@ -148,15 +153,41 @@ def _caption_frame(size, text, center_y, out_path, fill=(238, 44, 44), font_size
     canvas.save(out_path)
 
 
-def _pose_intervals(duration):
-    intervals = []
-    t, i = 0.0, 0
-    while t < duration:
-        end = min(duration, t + POSE_SEGMENT_SECONDS)
-        intervals.append((t, end, POSE_CYCLE[i % len(POSE_CYCLE)]))
-        t = end
-        i += 1
-    return intervals
+def _sentence_boundaries_from_pauses(word_timeline, duration):
+    """Split the clip wherever there's a real pause of at least
+    SENTENCE_PAUSE_THRESHOLD_SECONDS between two words -- a much more
+    reliable "end of sentence" signal than counting words per sentence
+    against the script text, since the word_timeline's own tokenization
+    doesn't match a naive text split (numbers/decimals routinely come back
+    as several separate word entries)."""
+    if not word_timeline:
+        return None
+    cuts = [0.0]
+    for prev, nxt in zip(word_timeline, word_timeline[1:]):
+        gap = float(nxt["start"]) - float(prev["end"])
+        if gap >= SENTENCE_PAUSE_THRESHOLD_SECONDS:
+            cuts.append(float(prev["end"]) + gap / 2)
+    cuts.append(duration)
+    return list(zip(cuts, cuts[1:]))
+
+
+def _pose_intervals(manifest, duration):
+    word_timeline = list(manifest.get("word_timeline") or [])
+    sentence_bounds = _sentence_boundaries_from_pauses(word_timeline, duration)
+    if not sentence_bounds:
+        # No real word timing to find pauses in -- fall back to a fixed
+        # clock so there's still some pose variety instead of one static
+        # pose for the whole clip.
+        sentence_bounds = []
+        t = 0.0
+        while t < duration:
+            end = min(duration, t + POSE_FALLBACK_SEGMENT_SECONDS)
+            sentence_bounds.append((t, end))
+            t = end
+    return [
+        (start, end, POSE_CYCLE[i % len(POSE_CYCLE)])
+        for i, (start, end) in enumerate(sentence_bounds)
+    ]
 
 
 def _blink_intervals(duration):
@@ -205,17 +236,11 @@ def _media_zone_geometry(size):
     return headline_center_y, (media_x, media_y, media_w, media_h), caption_center_y
 
 
-def _narrator_track(manifest, sprites, size, duration):
-    """One ImageClip per merged mouth/pose/blink segment, sprite-swapped.
-
-    Mouth state comes from the audio-loudness mouth_timeline; pose and
-    blink are driven by their own fixed-clock timelines (see POSE_CYCLE /
-    BLINK_* above) since nothing in the manifest carries that timing. The
-    three timelines are merged into one set of cut points so each resulting
-    segment has one unambiguous (mouth, eyes, pose) sprite for its whole
-    duration.
-    """
-    max_h = int(size[1] * (1 - TOP_STACK_RATIO))
+def _narrator_segments(manifest, sprites, duration):
+    """Build the (start, end, pose, sprite_file) list for one merged mouth/
+    pose/blink timeline -- split out from _narrator_track so the pose-change
+    detection driving crossfades (see _narrator_track) has a plain list to
+    walk instead of re-deriving it from clips."""
     mouth_timeline = list(manifest.get("mouth_timeline") or [])
     if not mouth_timeline:
         mouth_timeline = [{"start": 0, "end": duration, "mouth": "closed"}]
@@ -225,7 +250,7 @@ def _narrator_track(manifest, sprites, size, duration):
         mouth_timeline[-1] = {**mouth_timeline[-1], "mouth": "smile"}
     mouth_intervals = [(entry["start"], entry["end"], entry["mouth"]) for entry in mouth_timeline]
 
-    pose_intervals = _pose_intervals(duration)
+    pose_intervals = _pose_intervals(manifest, duration)
     blink_intervals = _blink_intervals(duration)
     boundaries = _merged_boundaries([mouth_intervals, pose_intervals, blink_intervals], duration)
 
@@ -240,13 +265,43 @@ def _narrator_track(manifest, sprites, size, duration):
         sprite_file = sprites["sprites"].get(f"{mouth}_{eyes}_{pose}") or sprites["sprites"].get(f"{mouth}_{eyes}")
         if not sprite_file:
             continue
-        segments.append(ImageClip(str(SPRITES_DIR / sprite_file)).set_duration(end - start))
+        segments.append({"start": start, "end": end, "pose": pose, "sprite": sprite_file})
+    return segments
+
+
+def _narrator_track(manifest, sprites, size, duration):
+    """One ImageClip per merged mouth/pose/blink segment, sprite-swapped,
+    with a short crossfade wherever the *pose* changes (sentence to
+    sentence) so that switch reads as a transition into the new stance --
+    mouth/blink changes within the same pose stay instant cuts, since
+    crossfading those would blur the lipsync."""
+    max_h = int(size[1] * (1 - TOP_STACK_RATIO))
+    segments = _narrator_segments(manifest, sprites, duration)
 
     if not segments:
         fallback = next(iter(sprites["sprites"].values()))
-        segments = [ImageClip(str(SPRITES_DIR / fallback)).set_duration(duration)]
+        track = ImageClip(str(SPRITES_DIR / fallback)).set_duration(duration)
+        return _fit_content(track, (size[0], max_h))
 
-    track = concatenate_videoclips(segments, method="compose")
+    clips = []
+    current_time = 0.0
+    prev_pose = None
+    for index, seg in enumerate(segments):
+        seg_duration = seg["end"] - seg["start"]
+        clip = ImageClip(str(SPRITES_DIR / seg["sprite"])).set_duration(seg_duration)
+        transition = min(POSE_TRANSITION_SECONDS, seg_duration * 0.4)
+        pose_changed = index > 0 and seg["pose"] != prev_pose
+        if pose_changed and transition > 0.01:
+            clip = clip.crossfadein(transition)
+            start_time = current_time - transition
+        else:
+            start_time = current_time
+        clips.append(clip.set_start(max(0.0, start_time)))
+        current_time += seg_duration
+        prev_pose = seg["pose"]
+
+    frame_size = clips[0].size
+    track = CompositeVideoClip(clips, size=frame_size).set_duration(duration)
     return _fit_content(track, (size[0], max_h))
 
 

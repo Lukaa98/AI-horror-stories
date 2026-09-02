@@ -27,17 +27,46 @@ const RIG_PATH = path.join(__dirname, "..", "narrator-rig.html");
 
 const MOUTHS = ["closed", "small", "wide", "smile"];
 const EYES = ["open", "blink"];
+// Four poses now instead of two: steady/jolt are the fast, small "redraw
+// flicker" (line weight + a tiny arm/brow twitch, no lean), while
+// lean_left/lean_right are a bigger, deliberate weight-shift -- one arm
+// swaps to the bent-elbow variant (hand resting near the belly instead of
+// hanging straight), that side's leg rotates outward at the hip, and the
+// whole body tilts a few degrees toward that side. narrator_video.py
+// cycles through all four per sentence (not on a fixed clock) with a
+// crossfade between them, so the switch reads as a transition into the
+// new stance rather than a jump cut.
 const POSES = {
   steady: {
     strokeWidth: 4.6,
-    armLeft: "rotate(-1.5deg)",
-    armRight: "rotate(1.5deg)",
+    armLeft: "rotate(-1.5deg)", armRight: "rotate(1.5deg)",
+    armLeftBent: false, armRightBent: false,
+    legLeft: "none", legRight: "none",
+    bodyTilt: "none",
     brows: "neutral",
   },
   jolt: {
     strokeWidth: 3.9,
-    armLeft: "rotate(1.5deg)",
-    armRight: "rotate(-1.5deg)",
+    armLeft: "rotate(1.5deg)", armRight: "rotate(-1.5deg)",
+    armLeftBent: false, armRightBent: false,
+    legLeft: "none", legRight: "none",
+    bodyTilt: "none",
+    brows: "talk",
+  },
+  lean_left: {
+    strokeWidth: 4.4,
+    armLeft: "none", armRight: "rotate(-2deg)",
+    armLeftBent: true, armRightBent: false,
+    legLeft: "rotate(-4deg)", legRight: "rotate(2deg)",
+    bodyTilt: "rotate(-3deg)",
+    brows: "neutral",
+  },
+  lean_right: {
+    strokeWidth: 4.4,
+    armLeft: "rotate(2deg)", armRight: "none",
+    armLeftBent: false, armRightBent: true,
+    legLeft: "rotate(-2deg)", legRight: "rotate(4deg)",
+    bodyTilt: "rotate(3deg)",
     brows: "talk",
   },
 };
@@ -105,8 +134,23 @@ async function main() {
       await page.evaluate((pose) => {
         const charEl = document.getElementById("character");
         charEl.style.strokeWidth = String(pose.strokeWidth);
-        document.querySelector(".arm-left").style.transform = pose.armLeft;
-        document.querySelector(".arm-right").style.transform = pose.armRight;
+        charEl.style.transform = pose.bodyTilt === "none" ? "" : pose.bodyTilt;
+
+        const armLeft = document.querySelector(".arm-left");
+        const armLeftBent = document.querySelector(".arm-left-bent");
+        armLeft.style.display = pose.armLeftBent ? "none" : "";
+        armLeftBent.style.display = pose.armLeftBent ? "" : "none";
+        armLeft.style.transform = pose.armLeft === "none" ? "" : pose.armLeft;
+
+        const armRight = document.querySelector(".arm-right");
+        const armRightBent = document.querySelector(".arm-right-bent");
+        armRight.style.display = pose.armRightBent ? "none" : "";
+        armRightBent.style.display = pose.armRightBent ? "" : "none";
+        armRight.style.transform = pose.armRight === "none" ? "" : pose.armRight;
+
+        document.querySelector(".leg-left").style.transform = pose.legLeft === "none" ? "" : pose.legLeft;
+        document.querySelector(".leg-right").style.transform = pose.legRight === "none" ? "" : pose.legRight;
+
         const neutral = document.querySelector(".brows-neutral");
         const raised = document.querySelector(".brows-raised");
         const talk = document.querySelector(".brows-talk");
