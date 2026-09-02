@@ -1,0 +1,212 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 8,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "2013",
+      "detected_variant_or_engine": "Shelby",
+      "visible_match_evidence": [
+        "ford badge",
+        "mustang tail lights",
+        "body proportions",
+        "shelby trim"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2013",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Shelby branding on grille",
+        "Distinctive Mustang body shape",
+        "Generation-specific front fascia"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "2013",
+      "detected_variant_or_engine": "shelby",
+      "visible_match_evidence": [
+        "distinctive Mustang bodywork",
+        "Shelby badge",
+        "proportions consistent with 2013 model"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "2013",
+      "detected_variant_or_engine": "Shelby GT500",
+      "visible_match_evidence": [
+        "distinctive grille",
+        "headlight design",
+        "front fascia",
+        "Shelby emblem"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2013",
+      "detected_variant_or_engine": "Shelby",
+      "visible_match_evidence": [
+        "Distinct rear light design",
+        "Shelby badge",
+        "Proportions consistent with 2013 Mustang"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "2013",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "steering wheel",
+        "dashboard layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "2013",
+      "detected_variant_or_engine": "Shelby",
+      "visible_match_evidence": [
+        "Shelby logo on seat"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 6,
+      "composition_score": 5,
+      "target_match_confidence": 7,
+      "reject": true,
+      "reason": "Image does not show the target vehicle as the main subject, focusing only on the interior seat.",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle.",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    }
+  ]
+}

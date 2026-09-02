@@ -1,0 +1,526 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-02T01:58:38.087Z",
+  "query": "Ford Mustang",
+  "visual_highlight": "interior dashboard seats engine turbo horsepower wheel brake detail",
+  "search_url": "https://carsandbids.com/search/ford/mustang?start_year=2013&end_year=2013&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9aXB0ggm/2013-ford-mustang-shelby-gt500-convertible",
+      "title": "Sold After for $72,000",
+      "text": "Sold After for $72,000",
+      "titleYear": 2013,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "title": "2013 Ford Mustang Gt Premium Coupe",
+      "text": "Sold for $15,000",
+      "titleYear": 2013,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3LwVJnqG/2013-ford-mustang-gt-premium-coupe",
+      "title": "Sold After for $14,000",
+      "text": "Sold After for $14,000",
+      "titleYear": 2013,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rxb2maa8/2013-ford-mustang-shelby-gt500",
+      "title": "2013 Ford Mustang Shelby Gt500",
+      "text": "Sold for $52,500",
+      "titleYear": 2013,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9l54XozG/2013-ford-mustang-shelby-gt500",
+      "title": "2013 Ford Mustang Shelby Gt500",
+      "text": "Sold for $51,000",
+      "titleYear": 2013,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KDbAxqQM/2013-ford-mustang-shelby-gt500-coupe",
+      "title": "2013 Ford Mustang Shelby Gt500 Coupe",
+      "text": "Sold for $47,750",
+      "titleYear": 2013,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9aXB0ggm/2013-ford-mustang-shelby-gt500-convertible",
+      "title": "Sold After for $72,000",
+      "text": "Sold After for $72,000",
+      "titleYear": 2013,
+      "score": 70,
+      "usable_image_count": 15,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2013 Ford Mustang Shelby GT500 Convertible"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "title": "2013 Ford Mustang Gt Premium Coupe",
+      "text": "Sold for $15,000",
+      "titleYear": 2013,
+      "score": 70,
+      "usable_image_count": 16,
+      "sale_price": 15000,
+      "sale_type": "sold",
+      "page_title": "2013 Ford Mustang GT Premium Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3LwVJnqG/2013-ford-mustang-gt-premium-coupe",
+      "title": "Sold After for $14,000",
+      "text": "Sold After for $14,000",
+      "titleYear": 2013,
+      "score": 70,
+      "usable_image_count": 18,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2013 Ford Mustang GT Premium Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rxb2maa8/2013-ford-mustang-shelby-gt500",
+      "title": "2013 Ford Mustang Shelby Gt500",
+      "text": "Sold for $52,500",
+      "titleYear": 2013,
+      "score": 70,
+      "usable_image_count": 33,
+      "sale_price": 52500,
+      "sale_type": "sold",
+      "page_title": "2013 Ford Mustang Shelby GT500"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rxb2maa8/2013-ford-mustang-shelby-gt500",
+    "title": "2013 Ford Mustang Shelby Gt500",
+    "text": "Sold for $52,500",
+    "titleYear": 2013,
+    "score": 70,
+    "sale_price": 52500,
+    "sale_type": "sold",
+    "page_title": "2013 Ford Mustang Shelby GT500",
+    "year": 2013,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3v2L1vZR.xf96JYO88-(edit).jpg?t=163400268318",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2013 Ford Mustang Shelby GT500",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 192038
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3v2L1vZR.um4QYf-b9-(edit).jpg?t=163400238187",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2013 Ford Mustang Shelby GT500",
+      "width": 542,
+      "height": 361,
+      "bytes": 176749
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3v2L1vZR.unTKR8KJw-(edit).jpg?t=163400272886",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2013 Ford Mustang Shelby GT500",
+      "width": 542,
+      "height": 361,
+      "bytes": 146056
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3v2L1vZR.vzLs0eXda-(edit).jpg?t=163400284037",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2013 Ford Mustang Shelby GT500",
+      "width": 542,
+      "height": 361,
+      "bytes": 158810
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3v2L1vZR.kd9VeZ_6T-(edit).jpg?t=163400276556",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2013 Ford Mustang Shelby GT500",
+      "width": 542,
+      "height": 361,
+      "bytes": 195326
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/094c97355891a58ddb6c78f96a3dde93fa9a30ea/photos/s-8nJUDr1vKX.jpg?t=163353268911",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2013 Ford Mustang Shelby GT500",
+      "width": 542,
+      "height": 361,
+      "bytes": 189693
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/094c97355891a58ddb6c78f96a3dde93fa9a30ea/photos/s-lry4QvNuR8.jpg?t=163353266761",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2013 Ford Mustang Shelby GT500",
+      "width": 542,
+      "height": 361,
+      "bytes": 172741
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/094c97355891a58ddb6c78f96a3dde93fa9a30ea/photos/s-02jmsMzAMT.jpg?t=163353277501",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2013 Ford Mustang Shelby GT500",
+      "width": 542,
+      "height": 361,
+      "bytes": 81942
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/621af195786b50fe2ba25ad939beb771/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/621af195786b50fe2ba25ad939beb771/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang Shelby GT500 Convertible",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/621af195786b50fe2ba25ad939beb771/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9aXB0ggm/2013-ford-mustang-shelby-gt500-convertible",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/621af195786b50fe2ba25ad939beb771/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang Shelby GT500 Convertible",
+      "auction_year": 2013,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f852388ff628d39ded65004076c1a072/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f852388ff628d39ded65004076c1a072/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang Shelby GT500 Convertible",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f852388ff628d39ded65004076c1a072/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9aXB0ggm/2013-ford-mustang-shelby-gt500-convertible",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f852388ff628d39ded65004076c1a072/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang Shelby GT500 Convertible",
+      "auction_year": 2013,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/974fc9b0c581c401c4bbc21a0a68e7bd/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/974fc9b0c581c401c4bbc21a0a68e7bd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/974fc9b0c581c401c4bbc21a0a68e7bd/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/974fc9b0c581c401c4bbc21a0a68e7bd/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang GT Premium Coupe",
+      "auction_year": 2013,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7bec2cb447dec699f8f87178a8823c83/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7bec2cb447dec699f8f87178a8823c83/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7bec2cb447dec699f8f87178a8823c83/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7bec2cb447dec699f8f87178a8823c83/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang GT Premium Coupe",
+      "auction_year": 2013,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea055d54c806b164e8326d92da7311ec/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea055d54c806b164e8326d92da7311ec/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea055d54c806b164e8326d92da7311ec/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/92yDGxxY/2013-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea055d54c806b164e8326d92da7311ec/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang GT Premium Coupe",
+      "auction_year": 2013,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/747086c3fe2bbc980b73ddac9e9e59cb/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/747086c3fe2bbc980b73ddac9e9e59cb/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2013 Ford Mustang GT Premium Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/747086c3fe2bbc980b73ddac9e9e59cb/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3LwVJnqG/2013-ford-mustang-gt-premium-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/747086c3fe2bbc980b73ddac9e9e59cb/manifest/video.m3u8",
+      "auction_title": "2013 Ford Mustang GT Premium Coupe",
+      "auction_year": 2013,
+      "search_score": 70
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2013",
+        "detected_variant_or_engine": "Shelby",
+        "visible_match_evidence": [
+          "ford badge",
+          "mustang tail lights",
+          "body proportions",
+          "shelby trim"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2013",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Shelby branding on grille",
+          "Distinctive Mustang body shape",
+          "Generation-specific front fascia"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2013",
+        "detected_variant_or_engine": "shelby",
+        "visible_match_evidence": [
+          "distinctive Mustang bodywork",
+          "Shelby badge",
+          "proportions consistent with 2013 model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2013",
+        "detected_variant_or_engine": "Shelby GT500",
+        "visible_match_evidence": [
+          "distinctive grille",
+          "headlight design",
+          "front fascia",
+          "Shelby emblem"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2013",
+        "detected_variant_or_engine": "Shelby",
+        "visible_match_evidence": [
+          "Distinct rear light design",
+          "Shelby badge",
+          "Proportions consistent with 2013 Mustang"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2013",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "steering wheel",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2013",
+        "detected_variant_or_engine": "Shelby",
+        "visible_match_evidence": [
+          "Shelby logo on seat"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 7,
+        "reject": true,
+        "reason": "Image does not show the target vehicle as the main subject, focusing only on the interior seat.",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
