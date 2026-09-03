@@ -323,35 +323,6 @@ button.danger {
   color: #f2f2f2;
 }
 
-.photo-source {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 0.85rem;
-}
-
-.photo-url-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.photo-url-grid label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 0.85rem;
-}
-
-.photo-url-grid input {
-  padding: 10px 12px;
-  font-size: 0.95rem;
-  border: 1px solid #444;
-  border-radius: 8px;
-  background: #1d1d1f;
-  color: #f2f2f2;
-}
-
 .extra-photo-list {
   display: flex;
   flex-direction: column;
@@ -403,6 +374,143 @@ button.danger {
 
 .extra-photo-add:hover {
   background: rgba(255,255,255,.05);
+}
+
+/* Compact form pattern: an uppercase section label, single-line rows of
+   pill checkboxes/radios, and hover/focus tooltips (Tip component) in
+   place of permanent paragraph explanations underneath every control. */
+.field-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid #3a3a3c;
+  border-radius: 10px;
+  background: rgba(255,255,255,.015);
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #f3b51b;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.check-row,
+.radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+.check-pill,
+.radio-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .88rem;
+  color: #e6e6e6;
+  cursor: pointer;
+}
+
+.check-pill input[type="checkbox"],
+.radio-pill input[type="radio"] {
+  width: 17px;
+  height: 17px;
+  accent-color: #f3b51b;
+  cursor: pointer;
+  margin: 0;
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-row-label {
+  flex: 0 0 84px;
+  font-size: .82rem;
+  color: #b8b8b8;
+}
+
+.field-row input {
+  flex: 1;
+  padding: 9px 11px;
+  font-size: .9rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #1d1d1f;
+  color: #f2f2f2;
+}
+
+.photo-url-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.info-tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #666;
+  color: #999;
+  font-size: .68rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  cursor: help;
+  position: relative;
+}
+
+.info-tip:hover,
+.info-tip:focus {
+  border-color: #f3b51b;
+  color: #f3b51b;
+  outline: none;
+}
+
+.tip-bubble {
+  position: absolute;
+  z-index: 30;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 260px;
+  padding: 8px 10px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #202024;
+  color: #ddd;
+  font-size: .78rem;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.4;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .12s ease;
+  pointer-events: none;
+}
+
+.info-tip:hover .tip-bubble,
+.info-tip:focus .tip-bubble {
+  opacity: 1;
+  visibility: visible;
 }
 
 .request-textarea {
