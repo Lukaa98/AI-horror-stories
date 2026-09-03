@@ -401,7 +401,7 @@ def scrape_entry_images(scraper_dir, draft_images_dir, entry, limit=6):
     return images, manifest
 
 
-def scrape_auction_images(scraper_dir, draft_images_dir, entry, auction_url):
+def scrape_auction_images(scraper_dir, draft_images_dir, entry, auction_url, limit=6):
     """Like scrape_entry_images, but fetches one already-known listing
     directly instead of searching and picking from the top results --
     guarantees the photos come from the exact same car as a video already
@@ -429,7 +429,7 @@ def scrape_auction_images(scraper_dir, draft_images_dir, entry, auction_url):
     dedupe_similar_images(dest)
     manifest = load_manifest(manifest_path)
     review_payload = review_draft_images(dest, entry)
-    images = choose_reviewed_images(dest, entry, review_payload, limit=6)
+    images = choose_reviewed_images(dest, entry, review_payload, limit=limit)
     manifest["ai_review"] = review_payload
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return images, manifest

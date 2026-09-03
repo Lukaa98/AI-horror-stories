@@ -77,6 +77,10 @@ on:
         required: false
         type: string
         default: onyx
+      auction_url:
+        description: "single_car mode: a specific carsandbids.com/auctions/... listing to pull photos from instead of searching"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -203,6 +207,7 @@ jobs:
           YEAR_ARGS=()
           if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
           if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
+          if [ -n "${{ inputs.auction_url }}" ]; then YEAR_ARGS+=(--auction-url "${{ inputs.auction_url }}"); fi
           python cars/automation/single_car_short.py \
             --make "${{ inputs.make }}" \
             --model "${{ inputs.model }}" \

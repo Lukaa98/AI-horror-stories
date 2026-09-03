@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.93";
+const UI_VERSION = "V10.94";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -605,6 +605,8 @@ export default function App() {
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
   const [useCustomRequest, setUseCustomRequest] = useState(false);
+  const [useAuctionUrl, setUseAuctionUrl] = useState(false);
+  const [auctionUrl, setAuctionUrl] = useState("");
   const [voice, setVoice] = useState("onyx");
   const [renderQuality, setRenderQuality] = useState(null);
   const [draftId, setDraftId] = useState(null);
@@ -861,6 +863,7 @@ export default function App() {
 
   async function handleSingleCarShort() {
     if (!repoOk || !make.trim() || !model.trim()) return;
+    if (useAuctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim())) return;
     setError(null);
     setSingleCarResult(null);
     const id = makeDraftId(`single-${make}-${model}`);
@@ -886,6 +889,7 @@ export default function App() {
           start_year: startYear,
           end_year: endYear,
           voice,
+          auction_url: useAuctionUrl ? auctionUrl.trim() : "",
         },
       });
       const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
@@ -2038,6 +2042,36 @@ export default function App() {
                 Use custom request text instead of the structured builder
               </label>
 
+              {workflow === "single_car" && (
+                <>
+                  <label className="custom-toggle">
+                    <input
+                      type="checkbox"
+                      checked={useAuctionUrl}
+                      onChange={(e) => setUseAuctionUrl(e.target.checked)}
+                      disabled={stage === "single-car-building"}
+                    />
+                    Paste a specific Cars &amp; Bids listing instead of searching by make/model
+                  </label>
+                  {useAuctionUrl && (
+                    <label>
+                      Cars &amp; Bids listing URL
+                      <input
+                        value={auctionUrl}
+                        onChange={(e) => setAuctionUrl(e.target.value)}
+                        placeholder="https://carsandbids.com/auctions/xxxxxxxx/..."
+                        disabled={stage === "single-car-building"}
+                      />
+                      <span className="hint">
+                        Use this when the make/model search comes back empty (e.g. a common car with few
+                        Cars &amp; Bids results). Paste the direct link to one auction listing page -- not a
+                        search-results link -- and photos will come from that exact car instead of a search.
+                      </span>
+                    </label>
+                  )}
+                </>
+              )}
+
               <div className="request-preview">
                 <span className="preview-label">{useCustomRequest ? "Custom request" : "Generated request"}</span>
                 {useCustomRequest ? (
@@ -2073,7 +2107,10 @@ export default function App() {
           ) : workflow === "single_car" ? (
             <button
               onClick={handleSingleCarShort}
-              disabled={!repoOk || !make.trim() || !model.trim() || stage === "single-car-building"}
+              disabled={
+                !repoOk || !make.trim() || !model.trim() || stage === "single-car-building" ||
+                (useAuctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim()))
+              }
             >
               {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}
             </button>

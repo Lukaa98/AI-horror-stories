@@ -181,6 +181,42 @@ def test_gather_media_requests_a_wider_pool_than_the_default_limit(tmp_path, mon
     assert calls == [10]
 
 
+def test_gather_media_uses_scrape_auction_images_when_an_auction_url_is_given(tmp_path, monkeypatch):
+    """A pasted Cars & Bids listing URL is the escape hatch for a car whose
+    make/model search comes back empty (or lands on the wrong listing) --
+    it must skip scrape_entry_images' search entirely and fetch that exact
+    auction instead."""
+    import single_car_short
+
+    images_dir = tmp_path / "images"
+    search_calls = []
+    auction_calls = []
+
+    def fake_scrape_entry_images(scraper_dir, dest, entry, limit=6):
+        search_calls.append(entry)
+        return [], {"selected_auction": {}}
+
+    def fake_scrape_auction_images(scraper_dir, dest, entry, auction_url, limit=6):
+        auction_calls.append((auction_url, limit))
+        return [], {"selected_auction": {"url": auction_url}}
+
+    monkeypatch.setattr(single_car_short, "scrape_entry_images", fake_scrape_entry_images)
+    monkeypatch.setattr(single_car_short, "scrape_auction_images", fake_scrape_auction_images)
+    monkeypatch.setattr(single_car_short, "enrich_entry_from_manifest", lambda entry, manifest: entry)
+
+    try:
+        single_car_short.gather_media(
+            "Volkswagen", "Golf GTI", "", 2020, 2020, images_dir,
+            scenes=[{"media_type": "exterior"}],
+            auction_url="https://carsandbids.com/auctions/abc123/2021-volkswagen-golf-gti",
+        )
+    except RuntimeError:
+        pass  # no images approved -- irrelevant to this test
+
+    assert search_calls == []
+    assert auction_calls == [("https://carsandbids.com/auctions/abc123/2021-volkswagen-golf-gti", 10)]
+
+
 def test_gather_media_uses_real_ai_review_categories_for_media_types(tmp_path, monkeypatch):
     """gather_media must route through research_request's real per-image AI
     review (review_and_rename_entry_images) -- the same one the ranking/

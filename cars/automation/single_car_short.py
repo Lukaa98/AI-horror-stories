@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 from background_removal import remove_background
-from cars_and_bids import enrich_entry_from_manifest, scrape_entry_images
+from cars_and_bids import enrich_entry_from_manifest, scrape_auction_images, scrape_entry_images
 from research_request import _auction_provenance_matches_entry, review_and_rename_entry_images
 from generate_sample import ROOT
 from narrator_script import _extract_wav, build_mouth_timeline, synthesize_narration
@@ -295,7 +295,7 @@ _SHOT_TYPE_BY_CATEGORY = {
 }
 
 
-def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None):
+def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None, auction_url=None):
     search_hint = " ".join(value for value in [make, model, trim] if value).strip()
     if start_year or end_year:
         first, last = start_year or end_year, end_year or start_year
@@ -316,7 +316,14 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
     # battle pipelines, which mostly just need one hero shot per car) was
     # capping the pool before engine/wheel/detail photos ever got a chance
     # to survive the second review pass, even when the gallery had them.
-    selected, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry, limit=10)
+    # A pasted auction_url skips the make/model search entirely and scrapes
+    # that exact listing instead -- the escape hatch for a car whose Cars &
+    # Bids search page doesn't turn up results (or turns up the wrong one),
+    # since the user can find the right listing themselves in a browser.
+    if auction_url:
+        selected, manifest = scrape_auction_images(SCRAPER_DIR, images_dir, entry, auction_url, limit=10)
+    else:
+        selected, manifest = scrape_entry_images(SCRAPER_DIR, images_dir, entry, limit=10)
     entry["images"] = selected
     enrich_entry_from_manifest(entry, manifest)
     # scrape_entry_images already runs a first-pass review internally
@@ -578,7 +585,8 @@ def build_short(args):
     media_start_year = args.start_year or package.get("start_year")
     media_end_year = args.end_year or package.get("end_year")
     media, selected_auction = gather_media(
-        args.make, args.model, args.trim, media_start_year, media_end_year, images_dir, package["scenes"]
+        args.make, args.model, args.trim, media_start_year, media_end_year, images_dir, package["scenes"],
+        auction_url=args.auction_url,
     )
     # Captured before order_media_for_scenes/apply_rival_photos reshuffle
     # `media` into one pick per scene -- this needs the whole gathered pool
@@ -637,6 +645,11 @@ def main():
     parser.add_argument("--end-year", type=int)
     parser.add_argument("--short-id", required=True)
     parser.add_argument("--voice", default="onyx")
+    parser.add_argument(
+        "--auction-url", default=None,
+        help="A specific carsandbids.com/auctions/... listing to pull photos from instead of "
+             "searching by make/model -- for a car whose search page doesn't turn up results.",
+    )
     parser.add_argument(
         "--audition-voices", dest="audition_voices", action="store_true", default=True,
         help="Also synthesize the script in a few other voice presets (British included) to compare. On by default.",
