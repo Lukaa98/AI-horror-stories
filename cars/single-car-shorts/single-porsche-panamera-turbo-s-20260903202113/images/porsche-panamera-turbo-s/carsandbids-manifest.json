@@ -1,0 +1,708 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-03T20:22:50.623Z",
+  "query": "Porsche Panamera Turbo S",
+  "visual_highlight": "engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 24,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2023 Porsche Panamera Turbo S"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2023 Porsche Panamera Turbo S",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/36ElqdaP-3wvyYrLT72/edit/E6Jem.jpg?t=178787030826",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Porsche Panamera Turbo S",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 265346
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f042723ed3b21597cf9c58b465226daf0e6de448/photos/36ElqdaP-vsNxWkORaT.jpg?t=178759626512",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Porsche Panamera Turbo S",
+      "width": 542,
+      "height": 361,
+      "bytes": 268634
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f042723ed3b21597cf9c58b465226daf0e6de448/photos/36ElqdaP-pwv3CMaBtt.jpg?t=178759626512",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Porsche Panamera Turbo S",
+      "width": 542,
+      "height": 361,
+      "bytes": 177801
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f042723ed3b21597cf9c58b465226daf0e6de448/photos/36ElqdaP-S5SPkviJjL.jpg?t=178759626512",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Porsche Panamera Turbo S",
+      "width": 542,
+      "height": 361,
+      "bytes": 185613
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f042723ed3b21597cf9c58b465226daf0e6de448/photos/36ElqdaP-Kudp-7CfjR.jpg?t=178759626512",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Porsche Panamera Turbo S",
+      "width": 542,
+      "height": 361,
+      "bytes": 165168
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f042723ed3b21597cf9c58b465226daf0e6de448/photos/36ElqdaP-bT6-hkom4_.jpg?t=178759626512",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Porsche Panamera Turbo S",
+      "width": 542,
+      "height": 361,
+      "bytes": 353658
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f042723ed3b21597cf9c58b465226daf0e6de448/photos/36ElqdaP-AAcY_VfAqL.jpg?t=178759626512",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Porsche Panamera Turbo S",
+      "width": 542,
+      "height": 361,
+      "bytes": 371617
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f042723ed3b21597cf9c58b465226daf0e6de448/photos/36ElqdaP-kKc0kd6dFo.jpg?t=178759626512",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Porsche Panamera Turbo S",
+      "width": 542,
+      "height": 361,
+      "bytes": 317524
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f042723ed3b21597cf9c58b465226daf0e6de448/photos/36ElqdaP-lwOTdKlPrV.jpg?t=178759626512",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Porsche Panamera Turbo S",
+      "width": 542,
+      "height": 361,
+      "bytes": 311012
+    },
+    {
+      "path": "engine-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5bba4fa5e25edf4b86e7395e30106e8d2a205825/attachments/rJv85YAw-EwW73Qx.jpeg?t=178836494744",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 391,
+      "bytes": 143687
+    },
+    {
+      "path": "engine-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5bba4fa5e25edf4b86e7395e30106e8d2a205825/attachments/rJv85YAw-1QZrBcA.jpeg?t=178836494818",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 391,
+      "bytes": 222215
+    },
+    {
+      "path": "engine-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5bba4fa5e25edf4b86e7395e30106e8d2a205825/attachments/rJv85YAw-qa1I8E8.jpeg?t=178826742250",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 158,
+      "bytes": 181223
+    },
+    {
+      "path": "engine-13.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5bba4fa5e25edf4b86e7395e30106e8d2a205825/attachments/rJv85YAw-8qk3EQq.jpeg?t=178843838685",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 329411
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/cf87977587157b107b15630bb9eab915afbbe53b/photos/9aBm7RG8-u3OHrsGn_.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 7533 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4b89ba6c6bd217a3a81abd68217973f1/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4b89ba6c6bd217a3a81abd68217973f1/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4b89ba6c6bd217a3a81abd68217973f1/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4b89ba6c6bd217a3a81abd68217973f1/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/68a6a8a39e9cd4e621cbe286dc373599/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/68a6a8a39e9cd4e621cbe286dc373599/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/68a6a8a39e9cd4e621cbe286dc373599/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/68a6a8a39e9cd4e621cbe286dc373599/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e3b3239c9a9b17027be1357f849f5211/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e3b3239c9a9b17027be1357f849f5211/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e3b3239c9a9b17027be1357f849f5211/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e3b3239c9a9b17027be1357f849f5211/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/54c2420fb56338c01a905f42cd7925b0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/54c2420fb56338c01a905f42cd7925b0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/54c2420fb56338c01a905f42cd7925b0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/54c2420fb56338c01a905f42cd7925b0/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fb11fe0f5f848b3f3422469890804273/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fb11fe0f5f848b3f3422469890804273/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fb11fe0f5f848b3f3422469890804273/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fb11fe0f5f848b3f3422469890804273/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/98488a614d905756e25bf4627bfbf4ff/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/98488a614d905756e25bf4627bfbf4ff/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/98488a614d905756e25bf4627bfbf4ff/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/98488a614d905756e25bf4627bfbf4ff/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8742847484a2e8c8fd7fac5b054f961f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8742847484a2e8c8fd7fac5b054f961f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8742847484a2e8c8fd7fac5b054f961f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8742847484a2e8c8fd7fac5b054f961f/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6974f8e19d905adb1b181475e935ab25/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6974f8e19d905adb1b181475e935ab25/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6974f8e19d905adb1b181475e935ab25/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6974f8e19d905adb1b181475e935ab25/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8181a5ec0b64f654ae5faf744de5e28e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8181a5ec0b64f654ae5faf744de5e28e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8181a5ec0b64f654ae5faf744de5e28e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8181a5ec0b64f654ae5faf744de5e28e/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bbfc50e3ce01ca4d4819e395d09fffe5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bbfc50e3ce01ca4d4819e395d09fffe5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche Panamera Turbo S",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bbfc50e3ce01ca4d4819e395d09fffe5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bbfc50e3ce01ca4d4819e395d09fffe5/manifest/video.m3u8",
+      "auction_title": "2023 Porsche Panamera Turbo S",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 13,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Turbo S",
+        "visible_match_evidence": [
+          "2023 interior design",
+          "Porsche branding on headrest",
+          "distinct seating layout"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "Panamera body shape",
+          "modern design elements"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Turbo S",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "Panamera front design",
+          "2023 model year features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Turbo S",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "distinctive Panamera shape",
+          "year-specific features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Turbo S",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "Panamera Turbo S badge",
+          "body proportions",
+          "taillights design",
+          "overall styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Turbo S",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "Panamera Turbo S badging",
+          "2023 design cues"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not contain a car.",
+        "path": "engine-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not a car image",
+        "path": "engine-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Turbo S",
+        "visible_match_evidence": [
+          "Porsche logo",
+          "Panamera name",
+          "Turbo S specifications"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "other",
+        "scene_fit_tags": [
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "engine-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Turbo S",
+        "visible_match_evidence": [
+          "Porsche branding",
+          "2023 Panamera Turbo S label",
+          "specific engine details"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 10,
+        "shot_type": "other",
+        "scene_fit_tags": [
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "engine-13.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche interior design",
+          "Panamera seating arrangement",
+          "Modern dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Turbo S",
+        "visible_match_evidence": [
+          "Porsche logo",
+          "Panamera design features",
+          "2023 interior design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Panamera",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Turbo S",
+        "visible_match_evidence": [
+          "Turbo S badge",
+          "Panamera nameplate",
+          "modern interior design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 9,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
