@@ -330,14 +330,30 @@ MANUAL_PHOTO_FIELDS = {
 
 def _download_car_photo(url, dest_dir, filename_stem):
     """Download one user-pasted photo URL to dest_dir. Returns the local
-    Path, or None on any failure (dead link, non-image response, etc.) --
-    a bad link should be a skipped photo, not a crashed build."""
+    Path, or None on any failure -- a dead link, a non-image response, or
+    (the actual bug this guards against) the user pasting a *page* URL
+    (e.g. a carsandbids.com/auctions/... listing link) instead of a direct
+    image link: that request succeeds and returns real bytes, just HTML
+    instead of a photo, which silently corrupted the override into a
+    broken image with no visible error -- the manual photo just quietly
+    never "took". Both the response's content-type and a real decode
+    check guard against that, so a bad link fails cleanly (falls back to
+    whatever the scrape already found) instead of corrupting the slot."""
     try:
         response = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
         response.raise_for_status()
     except Exception:
         return None
     content_type = response.headers.get("content-type", "")
+    if not content_type.startswith("image/"):
+        return None
+    try:
+        from PIL import Image
+        import io
+        with Image.open(io.BytesIO(response.content)) as image:
+            image.verify()
+    except Exception:
+        return None
     ext = ".jpg"
     if "png" in content_type:
         ext = ".png"
@@ -450,6 +466,12 @@ def gather_manual_media(photo_urls, images_dir, entry):
             continue
         path = _download_car_photo(url, dest_dir, field)
         if not path:
+            print(
+                f"[single-car] Could not use the pasted {field} photo URL -- it didn't download as a real "
+                f"image (make sure it's a direct image link, e.g. right-click the photo in the listing's "
+                f"gallery and \"Copy image address\", not the listing page URL itself). Falling back to "
+                f"whatever the scrape found for {field}: {url}"
+            )
             continue
         shot_type = _SHOT_TYPE_BY_CATEGORY.get(category, "exterior")
         facing_direction = _facing_direction_for_photo(path, entry) if shot_type == "exterior" else "unclear"
@@ -485,6 +507,10 @@ def gather_extra_media(extra_photos, images_dir, entry):
             continue
         path = _download_car_photo(url, dest_dir, f"{index}-{_slugify(label)}")
         if not path:
+            print(
+                f"[single-car] Could not use the pasted \"{label or 'extra'}\" photo URL -- it didn't "
+                f"download as a real image (needs to be a direct image link, not a listing page URL): {url}"
+            )
             continue
         blur_license_plates(path)
         relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
@@ -513,6 +539,11 @@ def gather_manual_rival_photo(url, images_dir, rival_make, rival_model):
     entry = {"name": f"{rival_make} {rival_model}".strip(), "years": ""}
     path = _download_car_photo(url, images_dir / "manual-rival", "rival")
     if not path:
+        print(
+            f"[single-car] Could not use the pasted comparison-car photo URL -- it didn't download as a "
+            f"real image (needs to be a direct image link, not a listing page URL). Falling back to a "
+            f"normal rival photo search: {url}"
+        )
         return None, "unclear"
     facing_direction = _facing_direction_for_photo(path, entry)
     blur_license_plates(path)

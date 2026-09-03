@@ -465,6 +465,79 @@ def test_apply_rival_photos_uses_the_manual_rival_url_for_every_comparison_scene
     assert len(calls) == 1
 
 
+def test_download_car_photo_rejects_a_pasted_page_link(tmp_path, monkeypatch):
+    """The actual bug this guards against: a user pasting a Cars & Bids
+    *listing page* URL instead of a direct image link. That request
+    succeeds and returns real bytes (an HTML page), which used to get
+    silently saved as a fake ".jpg" -- the override then quietly never
+    took effect, with no indication why. A non-image content-type must
+    fail the download outright instead of saving garbage as a photo."""
+    import single_car_short
+
+    class FakeResponse:
+        status_code = 200
+        headers = {"content-type": "text/html; charset=utf-8"}
+        content = b"<html><body>a listing page, not a photo</body></html>"
+
+        def raise_for_status(self):
+            pass
+
+    monkeypatch.setattr(single_car_short.requests, "get", lambda *a, **k: FakeResponse())
+
+    path = single_car_short._download_car_photo(
+        "https://carsandbids.com/auctions/3vEJlbNB/1993-toyota-supra-turbo", tmp_path, "front",
+    )
+
+    assert path is None
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_download_car_photo_rejects_bytes_that_are_not_a_real_image(tmp_path, monkeypatch):
+    """Even a response that claims to be an image but isn't a real,
+    decodable one (a mislabeled content-type, a truncated download)
+    should fail cleanly rather than save unusable bytes."""
+    import single_car_short
+
+    class FakeResponse:
+        status_code = 200
+        headers = {"content-type": "image/jpeg"}
+        content = b"not actually jpeg bytes"
+
+        def raise_for_status(self):
+            pass
+
+    monkeypatch.setattr(single_car_short.requests, "get", lambda *a, **k: FakeResponse())
+
+    path = single_car_short._download_car_photo("https://example.com/fake.jpg", tmp_path, "front")
+
+    assert path is None
+
+
+def test_download_car_photo_accepts_a_real_image(tmp_path, monkeypatch):
+    import single_car_short
+    from PIL import Image
+    import io
+
+    buf = io.BytesIO()
+    Image.new("RGB", (10, 10), (255, 0, 0)).save(buf, format="JPEG")
+
+    class FakeResponse:
+        status_code = 200
+        headers = {"content-type": "image/jpeg"}
+        content = buf.getvalue()
+
+        def raise_for_status(self):
+            pass
+
+    monkeypatch.setattr(single_car_short.requests, "get", lambda *a, **k: FakeResponse())
+
+    path = single_car_short._download_car_photo("https://example.com/real.jpg", tmp_path, "front")
+
+    assert path is not None
+    assert path.exists()
+    assert path.suffix == ".jpg"
+
+
 def test_gather_manual_media_trusts_the_field_category_over_any_ai_guess(tmp_path, monkeypatch):
     """The category comes from which field the user pasted the link into,
     not from re-classifying the photo -- a user who says "this is the

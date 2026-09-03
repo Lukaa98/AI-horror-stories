@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.99";
+const UI_VERSION = "V11.00";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -2160,11 +2160,15 @@ export default function App() {
                   {useAuctionUrl && useManualPhotos && (
                     <>
                       <p className="hint">
-                        Paste a direct image URL (e.g. copied from that listing's own photo gallery) for any shot
-                        you want to pin down exactly -- it replaces just that one angle; anything left blank
-                        still comes from the listing above. The comparison-car photo falls back to a normal
-                        search if left blank (the AI script decides who the rival is, so there's often no way to
-                        know its photo ahead of time).
+                        These must be direct image links -- open the photo full-size in the listing's gallery,
+                        then right-click it and choose "Copy image address" (the URL will end in something like
+                        .jpg or .png). Pasting the listing page URL itself here won't work -- it'll be rejected
+                        and that shot will silently fall back to whatever the scrape above already found, so
+                        double-check you copied the photo's own link, not the page you copied it from. Each
+                        field replaces just that one angle; anything left blank still comes from the listing
+                        above. The comparison-car photo falls back to a normal search if left blank (the AI
+                        script decides who the rival is, so there's often no way to know its photo ahead of
+                        time).
                       </p>
                       <div className="photo-url-grid">
                         {[
@@ -2180,7 +2184,7 @@ export default function App() {
                             <input
                               value={photoUrls[key]}
                               onChange={(e) => setPhotoUrls({ ...photoUrls, [key]: e.target.value })}
-                              placeholder="https://..."
+                              placeholder="https://media.carsandbids.com/.../photo.jpg"
                               disabled={stage === "single-car-building"}
                             />
                           </label>
@@ -2208,7 +2212,7 @@ export default function App() {
                                   next[index] = { ...next[index], url: e.target.value };
                                   setExtraPhotos(next);
                                 }}
-                                placeholder="https://..."
+                                placeholder="https://media.carsandbids.com/.../photo.jpg"
                                 disabled={stage === "single-car-building"}
                               />
                               <button
