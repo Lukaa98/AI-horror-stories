@@ -330,20 +330,6 @@ button.danger {
   font-size: 0.85rem;
 }
 
-.photo-source-options {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.radio-option {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-}
-
 .photo-url-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

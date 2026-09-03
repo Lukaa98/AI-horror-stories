@@ -370,6 +370,19 @@ def gather_manual_media(photo_urls, images_dir, entry):
     return media
 
 
+def _apply_manual_photo_overrides(media, manual_media):
+    """Layer manual photos on top of a scraped media pool -- each manual
+    photo replaces the scraped one(s) in its own category, leaving every
+    other category from the scrape untouched. So pasting just a side
+    photo, say, overrides only the side shot while front/rear/engine/
+    interior still come from the listing itself."""
+    if not manual_media:
+        return media
+    manual_categories = {item["category"] for item in manual_media}
+    kept = [item for item in media if item.get("category") not in manual_categories]
+    return kept + manual_media
+
+
 def gather_manual_rival_photo(url, images_dir, rival_make, rival_model):
     """Like gather_rival_photo, but from a user-pasted photo link instead
     of a search -- returns (path, facing_direction), or (None, "unclear")
@@ -400,13 +413,15 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
         "visual_highlight": _visual_highlight_for_scenes(scenes or []),
         "generation_label": generation,
     }
-    # Any manually pasted photo link skips the search/scrape entirely --
-    # that whole Puppeteer search+download+first-pass-review pass is the
-    # slow part of a build, and it's pointless when the user already has
-    # the exact photos they want. There's no scraped listing in this case,
-    # so selected_auction just comes back empty (no price/video metadata).
+    # A manually pasted photo link overrides whichever category it's for
+    # (front/side/rear/engine/interior) with that exact photo. Without a
+    # specific listing to fall back to for the rest, manual links skip the
+    # search/scrape entirely -- that whole Puppeteer search+download+
+    # first-pass-review pass is the slow part of a build, and running it
+    # just to throw most of it away would defeat the point. There's no
+    # scraped listing in this case, so selected_auction comes back empty.
     manual_urls = {key: value for key, value in (manual_photo_urls or {}).items() if value}
-    if manual_urls:
+    if manual_urls and not auction_url:
         media = gather_manual_media(manual_urls, images_dir, entry)
         if not media:
             raise RuntimeError("None of the provided photo URLs could be downloaded.")
@@ -465,8 +480,15 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
             "path": relative, "type": shot_type, "category": review.get("category"),
             "facing_direction": review.get("facing_direction", "unclear"),
         })
-    if not media:
+    if not media and not manual_urls:
         raise RuntimeError("No approved exterior, engine, detail, or wheel images were found.")
+    if manual_urls:
+        # A manual link alongside a listing overrides just that one
+        # category -- the rest of the listing's own gallery still fills
+        # in whatever wasn't manually given.
+        media = _apply_manual_photo_overrides(media, gather_manual_media(manual_urls, images_dir, entry))
+        if not media:
+            raise RuntimeError("No approved exterior, engine, detail, or wheel images were found.")
     return media, manifest.get("selected_auction") or {}
 
 

@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.96";
+const UI_VERSION = "V10.97";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -636,11 +636,13 @@ export default function App() {
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
   const [useCustomRequest, setUseCustomRequest] = useState(false);
-  // Single-car photo source: "search" (default, scrape by make/model),
-  // "auction" (one pasted listing URL), or "manual" (individual photo
-  // links per shot, skipping the scrape entirely -- the fastest path for
-  // iterating since there's no Puppeteer search/download/review pass).
-  const [photoSource, setPhotoSource] = useState("search");
+  // Single-car photos: these two are independent, not either/or. A pasted
+  // listing URL identifies the car and is scraped for whatever isn't
+  // manually overridden; manual photo links replace just their own
+  // category (front/side/rear/engine/interior) on top of that -- or, with
+  // no listing at all, skip the scrape entirely and use only what's given.
+  const [useAuctionUrl, setUseAuctionUrl] = useState(false);
+  const [useManualPhotos, setUseManualPhotos] = useState(false);
   const [auctionUrl, setAuctionUrl] = useState("");
   const [photoUrls, setPhotoUrls] = useState({ front: "", side: "", rear: "", engine: "", interior: "", rival: "" });
   const [voice, setVoice] = useState("onyx");
@@ -899,7 +901,7 @@ export default function App() {
 
   async function handleSingleCarShort() {
     if (!repoOk || !make.trim() || !model.trim()) return;
-    if (photoSource === "auction" && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim())) return;
+    if (useAuctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim())) return;
     setError(null);
     setSingleCarResult(null);
     const id = makeDraftId(`single-${make}-${model}`);
@@ -925,13 +927,13 @@ export default function App() {
           start_year: startYear,
           end_year: endYear,
           voice,
-          auction_url: photoSource === "auction" ? auctionUrl.trim() : "",
-          photo_front: photoSource === "manual" ? photoUrls.front.trim() : "",
-          photo_side: photoSource === "manual" ? photoUrls.side.trim() : "",
-          photo_rear: photoSource === "manual" ? photoUrls.rear.trim() : "",
-          photo_engine: photoSource === "manual" ? photoUrls.engine.trim() : "",
-          photo_interior: photoSource === "manual" ? photoUrls.interior.trim() : "",
-          photo_rival: photoSource === "manual" ? photoUrls.rival.trim() : "",
+          auction_url: useAuctionUrl ? auctionUrl.trim() : "",
+          photo_front: useManualPhotos ? photoUrls.front.trim() : "",
+          photo_side: useManualPhotos ? photoUrls.side.trim() : "",
+          photo_rear: useManualPhotos ? photoUrls.rear.trim() : "",
+          photo_engine: useManualPhotos ? photoUrls.engine.trim() : "",
+          photo_interior: useManualPhotos ? photoUrls.interior.trim() : "",
+          photo_rival: useManualPhotos ? photoUrls.rival.trim() : "",
         },
       });
       const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
@@ -2087,40 +2089,17 @@ export default function App() {
               {workflow === "single_car" && (
                 <div className="photo-source">
                   <span className="preview-label">Photos</span>
-                  <div className="photo-source-options">
-                    <label className="radio-option">
-                      <input
-                        type="radio"
-                        name="photoSource"
-                        checked={photoSource === "search"}
-                        onChange={() => setPhotoSource("search")}
-                        disabled={stage === "single-car-building"}
-                      />
-                      Search by make/model (default)
-                    </label>
-                    <label className="radio-option">
-                      <input
-                        type="radio"
-                        name="photoSource"
-                        checked={photoSource === "auction"}
-                        onChange={() => setPhotoSource("auction")}
-                        disabled={stage === "single-car-building"}
-                      />
-                      Paste one Cars &amp; Bids listing
-                    </label>
-                    <label className="radio-option">
-                      <input
-                        type="radio"
-                        name="photoSource"
-                        checked={photoSource === "manual"}
-                        onChange={() => setPhotoSource("manual")}
-                        disabled={stage === "single-car-building"}
-                      />
-                      Paste individual photo links (fastest -- skips the search entirely)
-                    </label>
-                  </div>
 
-                  {photoSource === "auction" && (
+                  <label className="custom-toggle">
+                    <input
+                      type="checkbox"
+                      checked={useAuctionUrl}
+                      onChange={(e) => setUseAuctionUrl(e.target.checked)}
+                      disabled={stage === "single-car-building"}
+                    />
+                    Paste a specific Cars &amp; Bids listing
+                  </label>
+                  {useAuctionUrl && (
                     <label>
                       Cars &amp; Bids listing URL
                       <input
@@ -2144,19 +2123,32 @@ export default function App() {
                       />
                       <span className="hint">
                         Paste the direct link to one auction listing page -- not a search-results link -- and
-                        Make/Model/Year are filled in from the link automatically (still editable). Photos
-                        come from that exact car instead of a search, for when the make/model search comes
-                        back empty.
+                        Make/Model/Year are filled in from the link automatically (still editable). This
+                        listing is scraped for photos, same as a normal search would be.
                       </span>
                     </label>
                   )}
 
-                  {photoSource === "manual" && (
+                  <label className="custom-toggle">
+                    <input
+                      type="checkbox"
+                      checked={useManualPhotos}
+                      onChange={(e) => setUseManualPhotos(e.target.checked)}
+                      disabled={stage === "single-car-building"}
+                    />
+                    {useAuctionUrl ? "Override specific photos from that listing" : "Paste individual photo links (skips the search entirely)"}
+                  </label>
+                  {useManualPhotos && (
                     <>
                       <p className="hint">
-                        Paste a direct image URL for any shots you have -- the scrape is skipped entirely, so
-                        this is the fastest way to iterate. Any field left blank is simply not shown; the
-                        comparison-car photo falls back to a normal search if left blank (the AI script decides
+                        {useAuctionUrl
+                          ? "Paste a direct image URL (e.g. copied from that listing's own photo gallery) for any shot you " +
+                            "want to pin down exactly -- it replaces just that one angle; anything left blank still comes " +
+                            "from the listing above."
+                          : "Paste a direct image URL for any shots you have -- with no listing pasted above, the search " +
+                            "is skipped entirely, so this is the fastest way to iterate. Any field left blank is simply " +
+                            "not shown."}
+                        {" "}The comparison-car photo falls back to a normal search if left blank (the AI script decides
                         who the rival is, so there's often no way to know its photo ahead of time).
                       </p>
                       <div className="photo-url-grid">
@@ -2221,7 +2213,7 @@ export default function App() {
               onClick={handleSingleCarShort}
               disabled={
                 !repoOk || !make.trim() || !model.trim() || stage === "single-car-building" ||
-                (photoSource === "auction" && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim()))
+                (useAuctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim()))
               }
             >
               {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}

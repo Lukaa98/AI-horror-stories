@@ -533,6 +533,78 @@ def test_gather_media_uses_manual_photo_urls_and_skips_scraping_entirely(tmp_pat
     assert selected_auction == {}
 
 
+def test_gather_media_merges_manual_photo_overrides_into_an_auction_scrape(tmp_path, monkeypatch):
+    """Pasting a listing URL *and* a manual photo isn't an either/or --
+    the listing identifies the car and fills in whatever isn't manually
+    overridden, while the manual photo replaces just its own category."""
+    import single_car_short
+
+    images_dir = tmp_path / "images"
+    car_dir = images_dir / "porsche-911"
+    car_dir.mkdir(parents=True)
+    for name in ["front-01.jpg", "interior-02.jpg", "engine-03.jpg"]:
+        (car_dir / name).write_bytes(b"fake-image-bytes")
+
+    def fake_scrape_auction_images(scraper_dir, dest, entry, auction_url, limit=6):
+        assert auction_url == "https://carsandbids.com/auctions/abc123/2024-porsche-911"
+        return (
+            [
+                "images/porsche-911/front-01.jpg",
+                "images/porsche-911/interior-02.jpg",
+                "images/porsche-911/engine-03.jpg",
+            ],
+            {"selected_auction": {"url": auction_url}},
+        )
+
+    def fake_review_and_rename(entry, images_dir_arg, require_ai=False, seen_images=None, trusted_variant_provenance=False):
+        entry["image_reviews"] = [
+            {"path": "images/porsche-911/front-01.jpg", "category": "exterior_front", "facing_direction": "right"},
+            {"path": "images/porsche-911/interior-02.jpg", "category": "interior"},
+            {"path": "images/porsche-911/engine-03.jpg", "category": "engine_bay"},
+        ]
+        return entry
+
+    def fake_gather_manual_media(photo_urls, images_dir_arg, entry):
+        assert photo_urls == {"side": "https://example.com/side.jpg"}
+        return [{"path": "images/manual/side.jpg", "type": "exterior", "category": "exterior_side", "facing_direction": "left"}]
+
+    monkeypatch.setattr(single_car_short, "scrape_auction_images", fake_scrape_auction_images)
+    monkeypatch.setattr(single_car_short, "enrich_entry_from_manifest", lambda entry, manifest: entry)
+    monkeypatch.setattr(single_car_short, "review_and_rename_entry_images", fake_review_and_rename)
+    monkeypatch.setattr(single_car_short, "_auction_provenance_matches_entry", lambda entry: True)
+    monkeypatch.setattr(single_car_short, "blur_license_plates", lambda path: None)
+    monkeypatch.setattr(single_car_short, "remove_background", lambda path: path)
+    monkeypatch.setattr(single_car_short, "gather_manual_media", fake_gather_manual_media)
+
+    media, selected_auction = single_car_short.gather_media(
+        "Porsche", "911", "", 2024, 2024, images_dir, scenes=[{"media_type": "exterior"}],
+        auction_url="https://carsandbids.com/auctions/abc123/2024-porsche-911",
+        manual_photo_urls={"side": "https://example.com/side.jpg"},
+    )
+
+    by_category = {item["category"]: item for item in media}
+    assert set(by_category) == {"exterior_front", "interior", "engine_bay", "exterior_side"}
+    assert by_category["exterior_side"] == {
+        "path": "images/manual/side.jpg", "type": "exterior", "category": "exterior_side", "facing_direction": "left",
+    }
+    assert selected_auction == {"url": "https://carsandbids.com/auctions/abc123/2024-porsche-911"}
+
+
+def test_apply_manual_photo_overrides_replaces_only_matching_categories():
+    import single_car_short
+
+    media = [
+        {"path": "a", "category": "exterior_front"},
+        {"path": "b", "category": "exterior_side"},
+        {"path": "c", "category": "interior"},
+    ]
+    manual_media = [{"path": "new-side", "category": "exterior_side"}]
+
+    result = single_car_short._apply_manual_photo_overrides(media, manual_media)
+
+    assert {item["path"] for item in result} == {"a", "new-side", "c"}
+
+
 def test_british_voice_presets_are_registered():
     for preset in AUDITION_PRESETS:
         assert preset in VOICE_PRESETS
