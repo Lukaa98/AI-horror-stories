@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.02";
+const UI_VERSION = "V11.03";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -942,8 +942,8 @@ export default function App() {
           photo_rear: useManualPhotos ? photoUrls.rear.trim() : "",
           photo_engine: useManualPhotos ? photoUrls.engine.trim() : "",
           photo_interior: useManualPhotos ? photoUrls.interior.trim() : "",
-          photo_rival: useManualPhotos && compareEnabled ? photoUrls.rival.trim() : "",
-          disable_comparison: String(useManualPhotos && !compareEnabled),
+          photo_rival: compareEnabled ? photoUrls.rival.trim() : "",
+          disable_comparison: String(!compareEnabled),
           extra_photos: (() => {
             if (!useManualPhotos) return "";
             const cleaned = extraPhotos
@@ -2104,183 +2104,187 @@ export default function App() {
               </label>
 
               {workflow === "single_car" && (
-                <div className="photo-source">
-                  <span className="preview-label">Photos</span>
+                <>
+                  <div className="photo-source">
+                    <span className="preview-label">Photos</span>
 
-                  <label className="custom-toggle">
-                    <input
-                      type="checkbox"
-                      checked={useAuctionUrl}
-                      onChange={(e) => {
-                        const checked = e.target.checked;
-                        setUseAuctionUrl(checked);
-                        // The photo-override option only makes sense once a listing is
-                        // pasted -- unchecking the listing hides (and clears) it too.
-                        if (!checked) setUseManualPhotos(false);
-                      }}
-                      disabled={stage === "single-car-building"}
-                    />
-                    Paste a specific Cars &amp; Bids listing
-                  </label>
-                  {useAuctionUrl && (
-                    <>
-                      <label>
-                        Cars &amp; Bids listing URL
-                        <input
-                          value={auctionUrl}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            setAuctionUrl(value);
-                            // The listing's own slug names the car (".../auctions/abc123/2021-
-                            // volkswagen-golf-gti") -- fill in Make/Model/Year from it instead of
-                            // making the user retype what the link already says. Only touches
-                            // fields that are still blank, so it never clobbers a manual edit.
-                            const hint = parseAuctionUrlHint(value);
-                            if (hint) {
-                              if (!make.trim()) setMake(hint.make);
-                              if (!model.trim()) setModel(hint.model);
-                              if (hint.year && !startYear) setStartYear(hint.year);
-                            }
-                          }}
-                          placeholder="https://carsandbids.com/auctions/xxxxxxxx/..."
-                          disabled={stage === "single-car-building"}
-                        />
-                        <span className="hint">
-                          Paste the direct link to one auction listing page -- not a search-results link -- and
-                          Make/Model/Year are filled in from the link automatically (still editable). This
-                          listing is scraped for photos, same as a normal search would be.
-                        </span>
-                      </label>
-
-                      <label className="custom-toggle">
-                        <input
-                          type="checkbox"
-                          checked={useManualPhotos}
-                          onChange={(e) => setUseManualPhotos(e.target.checked)}
-                          disabled={stage === "single-car-building"}
-                        />
-                        Override specific photos from that listing
-                      </label>
-                    </>
-                  )}
-                  {useAuctionUrl && useManualPhotos && (
-                    <>
-                      <p className="hint">
-                        These must be direct image links -- open the photo full-size in the listing's gallery,
-                        then right-click it and choose "Copy image address" (the URL will end in something like
-                        .jpg or .png). Pasting the listing page URL itself here won't work -- it'll be rejected
-                        and that shot will silently fall back to whatever the scrape above already found, so
-                        double-check you copied the photo's own link, not the page you copied it from. Each
-                        field replaces just that one angle; anything left blank still comes from the listing
-                        above. Pasting a comparison-car photo identifies that car and forces the script to
-                        name it as the rival (with a real head-to-head and drag-race animation); leave it
-                        blank to let the AI script pick its own rival instead.
-                      </p>
-                      <div className="photo-url-grid">
-                        {[
-                          ["front", "Front"],
-                          ["side", "Side"],
-                          ["rear", "Rear"],
-                          ["engine", "Engine bay"],
-                          ["interior", "Interior"],
-                        ].map(([key, label]) => (
-                          <label key={key}>
-                            {label}
-                            <input
-                              value={photoUrls[key]}
-                              onChange={(e) => setPhotoUrls({ ...photoUrls, [key]: e.target.value })}
-                              placeholder="https://media.carsandbids.com/.../photo.jpg"
-                              disabled={stage === "single-car-building"}
-                            />
-                          </label>
-                        ))}
-                      </div>
-
-                      <label className="custom-toggle">
-                        <input
-                          type="checkbox"
-                          checked={compareEnabled}
-                          onChange={(e) => setCompareEnabled(e.target.checked)}
-                          disabled={stage === "single-car-building"}
-                        />
-                        Include a comparison-car scene
-                      </label>
-                      {compareEnabled ? (
+                    <label className="custom-toggle">
+                      <input
+                        type="checkbox"
+                        checked={useAuctionUrl}
+                        onChange={(e) => {
+                          const checked = e.target.checked;
+                          setUseAuctionUrl(checked);
+                          // The photo-override option only makes sense once a listing is
+                          // pasted -- unchecking the listing hides (and clears) it too.
+                          if (!checked) setUseManualPhotos(false);
+                        }}
+                        disabled={stage === "single-car-building"}
+                      />
+                      Paste a specific Cars &amp; Bids listing
+                    </label>
+                    {useAuctionUrl && (
+                      <>
                         <label>
-                          Comparison car
+                          Cars &amp; Bids listing URL
                           <input
-                            value={photoUrls.rival}
-                            onChange={(e) => setPhotoUrls({ ...photoUrls, rival: e.target.value })}
-                            placeholder="https://media.carsandbids.com/.../photo.jpg"
+                            value={auctionUrl}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              setAuctionUrl(value);
+                              // The listing's own slug names the car (".../auctions/abc123/2021-
+                              // volkswagen-golf-gti") -- fill in Make/Model/Year from it instead of
+                              // making the user retype what the link already says. Only touches
+                              // fields that are still blank, so it never clobbers a manual edit.
+                              const hint = parseAuctionUrlHint(value);
+                              if (hint) {
+                                if (!make.trim()) setMake(hint.make);
+                                if (!model.trim()) setModel(hint.model);
+                                if (hint.year && !startYear) setStartYear(hint.year);
+                              }
+                            }}
+                            placeholder="https://carsandbids.com/auctions/xxxxxxxx/..."
                             disabled={stage === "single-car-building"}
                           />
                           <span className="hint">
-                            Paste a photo to force the script to research and compare against that exact car
-                            (with a real head-to-head and drag-race animation). Leave blank to let the AI script
-                            decide on its own whether to include a comparison and who against.
+                            Paste the direct link to one auction listing page -- not a search-results link -- and
+                            Make/Model/Year are filled in from the link automatically (still editable). This
+                            listing is scraped for photos, same as a normal search would be.
                           </span>
                         </label>
-                      ) : (
-                        <p className="hint">
-                          No comparison-car scene, head-to-head, or drag-race animation will be included in this
-                          video, regardless of what the AI script would otherwise decide.
-                        </p>
-                      )}
 
-                      {extraPhotos.length > 0 && (
-                        <div className="extra-photo-list">
-                          {extraPhotos.map((item, index) => (
-                            <div className="extra-photo-row" key={item.id}>
+                        <label className="custom-toggle">
+                          <input
+                            type="checkbox"
+                            checked={useManualPhotos}
+                            onChange={(e) => setUseManualPhotos(e.target.checked)}
+                            disabled={stage === "single-car-building"}
+                          />
+                          Override specific photos from that listing
+                        </label>
+                      </>
+                    )}
+                    {useAuctionUrl && useManualPhotos && (
+                      <>
+                        <p className="hint">
+                          These must be direct image links -- open the photo full-size in the listing's gallery,
+                          then right-click it and choose "Copy image address" (the URL will end in something
+                          like .jpg or .png). Pasting the listing page URL itself here won't work -- it'll be
+                          rejected and that shot will silently fall back to whatever the scrape above already
+                          found, so double-check you copied the photo's own link, not the page you copied it
+                          from. Each field replaces just that one angle; anything left blank still comes from
+                          the listing above.
+                        </p>
+                        <div className="photo-url-grid">
+                          {[
+                            ["front", "Front"],
+                            ["side", "Side"],
+                            ["rear", "Rear"],
+                            ["engine", "Engine bay"],
+                            ["interior", "Interior"],
+                          ].map(([key, label]) => (
+                            <label key={key}>
+                              {label}
                               <input
-                                value={item.label}
-                                onChange={(e) => {
-                                  const next = [...extraPhotos];
-                                  next[index] = { ...next[index], label: e.target.value };
-                                  setExtraPhotos(next);
-                                }}
-                                placeholder="Photo name, e.g. Gauge Cluster"
-                                disabled={stage === "single-car-building"}
-                              />
-                              <input
-                                value={item.url}
-                                onChange={(e) => {
-                                  const next = [...extraPhotos];
-                                  next[index] = { ...next[index], url: e.target.value };
-                                  setExtraPhotos(next);
-                                }}
+                                value={photoUrls[key]}
+                                onChange={(e) => setPhotoUrls({ ...photoUrls, [key]: e.target.value })}
                                 placeholder="https://media.carsandbids.com/.../photo.jpg"
                                 disabled={stage === "single-car-building"}
                               />
-                              <button
-                                type="button"
-                                className="extra-photo-remove"
-                                onClick={() => setExtraPhotos(extraPhotos.filter((_, i) => i !== index))}
-                                disabled={stage === "single-car-building"}
-                                aria-label={`Remove ${item.label || "extra photo"}`}
-                              >
-                                &times;
-                              </button>
-                            </div>
+                            </label>
                           ))}
                         </div>
-                      )}
-                      <button
-                        type="button"
-                        className="extra-photo-add"
-                        onClick={() => setExtraPhotos([...extraPhotos, { id: `extra-${Date.now()}-${extraPhotos.length}`, label: "", url: "" }])}
+
+                        {extraPhotos.length > 0 && (
+                          <div className="extra-photo-list">
+                            {extraPhotos.map((item, index) => (
+                              <div className="extra-photo-row" key={item.id}>
+                                <input
+                                  value={item.label}
+                                  onChange={(e) => {
+                                    const next = [...extraPhotos];
+                                    next[index] = { ...next[index], label: e.target.value };
+                                    setExtraPhotos(next);
+                                  }}
+                                  placeholder="Photo name, e.g. Gauge Cluster"
+                                  disabled={stage === "single-car-building"}
+                                />
+                                <input
+                                  value={item.url}
+                                  onChange={(e) => {
+                                    const next = [...extraPhotos];
+                                    next[index] = { ...next[index], url: e.target.value };
+                                    setExtraPhotos(next);
+                                  }}
+                                  placeholder="https://media.carsandbids.com/.../photo.jpg"
+                                  disabled={stage === "single-car-building"}
+                                />
+                                <button
+                                  type="button"
+                                  className="extra-photo-remove"
+                                  onClick={() => setExtraPhotos(extraPhotos.filter((_, i) => i !== index))}
+                                  disabled={stage === "single-car-building"}
+                                  aria-label={`Remove ${item.label || "extra photo"}`}
+                                >
+                                  &times;
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        <button
+                          type="button"
+                          className="extra-photo-add"
+                          onClick={() => setExtraPhotos([...extraPhotos, { id: `extra-${Date.now()}-${extraPhotos.length}`, label: "", url: "" }])}
+                          disabled={stage === "single-car-building"}
+                        >
+                          + Add named photo
+                        </button>
+                        <span className="hint">
+                          Add as many extra shots as you want, each with its own name (e.g. "Gauge Cluster",
+                          "Rear Diffuser"). Every pasted photo -- fixed field or named extra -- is analyzed and
+                          the script is written to specifically talk about what's actually in it, not just show
+                          it under unrelated narration.
+                        </span>
+                      </>
+                    )}
+                  </div>
+
+                  <div className="photo-source">
+                    <span className="preview-label">Comparison Car</span>
+                    <label className="custom-toggle">
+                      <input
+                        type="checkbox"
+                        checked={compareEnabled}
+                        onChange={(e) => setCompareEnabled(e.target.checked)}
                         disabled={stage === "single-car-building"}
-                      >
-                        + Add named photo
-                      </button>
-                      <span className="hint">
-                        Add as many extra shots as you want, each with its own name (e.g. "Gauge Cluster",
-                        "Rear Diffuser"). Every pasted photo -- fixed field or named extra -- is analyzed and
-                        the script is written to specifically talk about what's actually in it, not just show it
-                        under unrelated narration.
-                      </span>
-                    </>
-                  )}
-                </div>
+                      />
+                      Include a rival/comparison car in the video
+                    </label>
+                    {compareEnabled ? (
+                      <label>
+                        Comparison car photo (optional)
+                        <input
+                          value={photoUrls.rival}
+                          onChange={(e) => setPhotoUrls({ ...photoUrls, rival: e.target.value })}
+                          placeholder="https://media.carsandbids.com/.../photo.jpg"
+                          disabled={stage === "single-car-building"}
+                        />
+                        <span className="hint">
+                          Paste a direct image URL to force the script to research and compare against that
+                          exact car (with a real head-to-head and drag-race animation). Leave blank and the AI
+                          script decides on its own -- it may pick a rival, or skip the comparison entirely if it
+                          can't find a fair one.
+                        </span>
+                      </label>
+                    ) : (
+                      <p className="hint">
+                        No comparison-car scene, head-to-head, or drag-race animation will be included --
+                        neither a pasted photo nor the AI script's own choice can add one while this is off.
+                      </p>
+                    )}
+                  </div>
+                </>
               )}
 
               <div className="request-preview">
