@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.97";
+const UI_VERSION = "V10.98";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -2094,62 +2094,66 @@ export default function App() {
                     <input
                       type="checkbox"
                       checked={useAuctionUrl}
-                      onChange={(e) => setUseAuctionUrl(e.target.checked)}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+                        setUseAuctionUrl(checked);
+                        // The photo-override option only makes sense once a listing is
+                        // pasted -- unchecking the listing hides (and clears) it too.
+                        if (!checked) setUseManualPhotos(false);
+                      }}
                       disabled={stage === "single-car-building"}
                     />
                     Paste a specific Cars &amp; Bids listing
                   </label>
                   {useAuctionUrl && (
-                    <label>
-                      Cars &amp; Bids listing URL
-                      <input
-                        value={auctionUrl}
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          setAuctionUrl(value);
-                          // The listing's own slug names the car (".../auctions/abc123/2021-
-                          // volkswagen-golf-gti") -- fill in Make/Model/Year from it instead of
-                          // making the user retype what the link already says. Only touches
-                          // fields that are still blank, so it never clobbers a manual edit.
-                          const hint = parseAuctionUrlHint(value);
-                          if (hint) {
-                            if (!make.trim()) setMake(hint.make);
-                            if (!model.trim()) setModel(hint.model);
-                            if (hint.year && !startYear) setStartYear(hint.year);
-                          }
-                        }}
-                        placeholder="https://carsandbids.com/auctions/xxxxxxxx/..."
-                        disabled={stage === "single-car-building"}
-                      />
-                      <span className="hint">
-                        Paste the direct link to one auction listing page -- not a search-results link -- and
-                        Make/Model/Year are filled in from the link automatically (still editable). This
-                        listing is scraped for photos, same as a normal search would be.
-                      </span>
-                    </label>
-                  )}
+                    <>
+                      <label>
+                        Cars &amp; Bids listing URL
+                        <input
+                          value={auctionUrl}
+                          onChange={(e) => {
+                            const value = e.target.value;
+                            setAuctionUrl(value);
+                            // The listing's own slug names the car (".../auctions/abc123/2021-
+                            // volkswagen-golf-gti") -- fill in Make/Model/Year from it instead of
+                            // making the user retype what the link already says. Only touches
+                            // fields that are still blank, so it never clobbers a manual edit.
+                            const hint = parseAuctionUrlHint(value);
+                            if (hint) {
+                              if (!make.trim()) setMake(hint.make);
+                              if (!model.trim()) setModel(hint.model);
+                              if (hint.year && !startYear) setStartYear(hint.year);
+                            }
+                          }}
+                          placeholder="https://carsandbids.com/auctions/xxxxxxxx/..."
+                          disabled={stage === "single-car-building"}
+                        />
+                        <span className="hint">
+                          Paste the direct link to one auction listing page -- not a search-results link -- and
+                          Make/Model/Year are filled in from the link automatically (still editable). This
+                          listing is scraped for photos, same as a normal search would be.
+                        </span>
+                      </label>
 
-                  <label className="custom-toggle">
-                    <input
-                      type="checkbox"
-                      checked={useManualPhotos}
-                      onChange={(e) => setUseManualPhotos(e.target.checked)}
-                      disabled={stage === "single-car-building"}
-                    />
-                    {useAuctionUrl ? "Override specific photos from that listing" : "Paste individual photo links (skips the search entirely)"}
-                  </label>
-                  {useManualPhotos && (
+                      <label className="custom-toggle">
+                        <input
+                          type="checkbox"
+                          checked={useManualPhotos}
+                          onChange={(e) => setUseManualPhotos(e.target.checked)}
+                          disabled={stage === "single-car-building"}
+                        />
+                        Override specific photos from that listing
+                      </label>
+                    </>
+                  )}
+                  {useAuctionUrl && useManualPhotos && (
                     <>
                       <p className="hint">
-                        {useAuctionUrl
-                          ? "Paste a direct image URL (e.g. copied from that listing's own photo gallery) for any shot you " +
-                            "want to pin down exactly -- it replaces just that one angle; anything left blank still comes " +
-                            "from the listing above."
-                          : "Paste a direct image URL for any shots you have -- with no listing pasted above, the search " +
-                            "is skipped entirely, so this is the fastest way to iterate. Any field left blank is simply " +
-                            "not shown."}
-                        {" "}The comparison-car photo falls back to a normal search if left blank (the AI script decides
-                        who the rival is, so there's often no way to know its photo ahead of time).
+                        Paste a direct image URL (e.g. copied from that listing's own photo gallery) for any shot
+                        you want to pin down exactly -- it replaces just that one angle; anything left blank
+                        still comes from the listing above. The comparison-car photo falls back to a normal
+                        search if left blank (the AI script decides who the rival is, so there's often no way to
+                        know its photo ahead of time).
                       </p>
                       <div className="photo-url-grid">
                         {[
