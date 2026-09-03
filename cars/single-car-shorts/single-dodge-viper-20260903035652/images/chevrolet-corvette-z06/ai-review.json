@@ -1,0 +1,249 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 10,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "corvette",
+      "detected_generation_or_year": "2005-2013",
+      "detected_variant_or_engine": "Z06",
+      "visible_match_evidence": [
+        "distinctive bodywork",
+        "racing stripe",
+        "large rear wing"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-01.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "corvette",
+      "detected_generation_or_year": "2005-2013",
+      "detected_variant_or_engine": "Z06",
+      "visible_match_evidence": [
+        "Corvette body style",
+        "Front-end design",
+        "Aerodynamic modifications",
+        "Race number decals"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "corvette",
+      "detected_generation_or_year": "2005-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "body shape",
+        "proportions",
+        "lights",
+        "number on door"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Corvette",
+      "detected_generation_or_year": "2005-2010",
+      "detected_variant_or_engine": "Z06",
+      "visible_match_evidence": [
+        "tail lights",
+        "body shape",
+        "rear wing"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "corvette",
+      "detected_generation_or_year": "2005-2010",
+      "detected_variant_or_engine": "Z06",
+      "visible_match_evidence": [
+        "rear view",
+        "Corvette tail lights",
+        "racing numbers"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 3,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Not a clear view of the target vehicle.",
+      "path": "exterior-12.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 0,
+      "variant_match_confidence": 0,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 1,
+      "composition_score": 1,
+      "target_match_confidence": 0,
+      "reject": true,
+      "reason": "Image does not contain a car.",
+      "path": "exterior-13.png",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Corvette",
+      "detected_generation_or_year": "2005-2010",
+      "detected_variant_or_engine": "Z06",
+      "visible_match_evidence": [
+        "Z06 badge",
+        "interior design",
+        "steering wheel",
+        "gear shifter"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 9,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 6,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Not the target vehicle and does not feature the exterior or identifiers of a Chevrolet Corvette.",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 5,
+      "composition_score": 6,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not feature the target vehicle.",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    }
+  ]
+}

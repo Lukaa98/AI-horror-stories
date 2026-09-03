@@ -1,0 +1,348 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 14,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Dodge branding on steering wheel",
+        "Viper interior design elements",
+        "Specific layout of dashboard controls"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinctive hood vents",
+        "Viper branding on side",
+        "characteristic body shape"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "dodge",
+      "detected_model": "viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "front view",
+        "distinctive hood vents",
+        "Viper branding on windshield",
+        "body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Dodge badge",
+        "Viper script on side",
+        "characteristic body shape"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Dodge badge",
+        "Viper lettering",
+        "Rear wing design",
+        "Body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Dodge badge",
+        "Distinctive rear design",
+        "Rear spoiler",
+        "Striped livery"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinctive hood design",
+        "unique color scheme",
+        "sporty proportions"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "detail",
+      "scene_fit_tags": [
+        "exterior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-10.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 0,
+      "variant_match_confidence": 0,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 1,
+      "composition_score": 1,
+      "target_match_confidence": 0,
+      "reject": true,
+      "reason": "Not a vehicle image.",
+      "path": "engine-11.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 2,
+      "composition_score": 3,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not clearly depict the target vehicle.",
+      "path": "engine-12.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 2,
+      "composition_score": 3,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not clearly show the target vehicle.",
+      "path": "engine-13.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [
+        "detail"
+      ],
+      "quality_score": 3,
+      "composition_score": 3,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle.",
+      "path": "engine-14.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "dodge",
+      "detected_model": "viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior color scheme matching known Viper",
+        "sports seating design",
+        "dashboard layout consistent with Viper"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design specific to Dodge Viper",
+        "Viper branding on seats",
+        "layout of controls"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Dodge",
+      "detected_model": "Viper",
+      "detected_generation_or_year": "2003-2010",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Viper branding on the gauge",
+        "Design consistent with Viper interior"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}

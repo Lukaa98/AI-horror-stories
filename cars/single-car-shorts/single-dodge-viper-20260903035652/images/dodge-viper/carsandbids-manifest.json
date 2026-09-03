@@ -1,0 +1,663 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-03T03:59:13.200Z",
+  "query": "Dodge Viper",
+  "visual_highlight": "engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": "https://carsandbids.com/search/dodge/viper?start_year=2003&end_year=2010&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rGa6YGbX/2008-dodge-viper-srt-10-coupe",
+      "title": "2008 Dodge Viper SRT-10 Coupe",
+      "text": "2008 Dodge Viper SRT-10 Coupe",
+      "titleYear": 2008,
+      "score": 109
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9W71BoBw/2003-dodge-viper-srt-10-convertible",
+      "title": "2003 Dodge Viper SRT-10 Convertible",
+      "text": "2003 Dodge Viper SRT-10 Convertible",
+      "titleYear": 2003,
+      "score": 79
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZal5mxb/2005-dodge-viper-srt-10-copperhead-edition",
+      "title": "2005 Dodge Viper Srt 10 Copperhead Edition",
+      "text": "Sold for $52,000",
+      "titleYear": 2005,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3ypobpXR/2005-dodge-viper-srt-10-copperhead-edition",
+      "title": "2005 Dodge Viper Srt 10 Copperhead Edition",
+      "text": "Sold for $51,500",
+      "titleYear": 2005,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/925GLB46/2009-dodge-viper-srt-10-voi-10-edition-coupe",
+      "title": "2009 Dodge Viper Srt 10 Voi 10 Edition Coupe",
+      "text": "Sold for $87,000",
+      "titleYear": 2009,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9AjAJYew/2009-dodge-viper-acr",
+      "title": "2009 Dodge Viper Acr",
+      "text": "Sold for $116,500",
+      "titleYear": 2009,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rGa6YGbX/2008-dodge-viper-srt-10-coupe",
+      "title": "2008 Dodge Viper SRT-10 Coupe",
+      "text": "2008 Dodge Viper SRT-10 Coupe",
+      "titleYear": 2008,
+      "score": 109,
+      "usable_image_count": 36,
+      "sale_price": 77250,
+      "sale_type": "sold",
+      "page_title": "2008 Dodge Viper SRT-10 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9W71BoBw/2003-dodge-viper-srt-10-convertible",
+      "title": "2003 Dodge Viper SRT-10 Convertible",
+      "text": "2003 Dodge Viper SRT-10 Convertible",
+      "titleYear": 2003,
+      "score": 79,
+      "usable_image_count": 19,
+      "sale_price": 50000,
+      "sale_type": "sold",
+      "page_title": "2003 Dodge Viper SRT-10 Convertible"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZal5mxb/2005-dodge-viper-srt-10-copperhead-edition",
+      "title": "2005 Dodge Viper Srt 10 Copperhead Edition",
+      "text": "Sold for $52,000",
+      "titleYear": 2005,
+      "score": 70,
+      "usable_image_count": 29,
+      "sale_price": 52000,
+      "sale_type": "sold",
+      "page_title": "2005 Dodge Viper SRT-10 Copperhead Edition"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3ypobpXR/2005-dodge-viper-srt-10-copperhead-edition",
+      "title": "2005 Dodge Viper Srt 10 Copperhead Edition",
+      "text": "Sold for $51,500",
+      "titleYear": 2005,
+      "score": 70,
+      "usable_image_count": 38,
+      "sale_price": 51500,
+      "sale_type": "sold",
+      "page_title": "2005 Dodge Viper SRT-10 Copperhead Edition"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rGa6YGbX/2008-dodge-viper-srt-10-coupe",
+    "title": "2008 Dodge Viper SRT-10 Coupe",
+    "text": "2008 Dodge Viper SRT-10 Coupe",
+    "titleYear": 2008,
+    "score": 109,
+    "sale_price": 77250,
+    "sale_type": "sold",
+    "page_title": "2008 Dodge Viper SRT-10 Coupe",
+    "year": 2008,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3qxezOdE-fekZrcM90O-(edit).jpg?t=165393313805",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Dodge Viper SRT-10 Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 420097
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3qxezOdE-N8tCrYztW9-(edit).jpg?t=165393296334",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Dodge Viper SRT-10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 220394
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3qxezOdE-kC1HB430oZ-(edit).jpg?t=165393298233",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Dodge Viper SRT-10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 230129
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3qxezOdE-kSpPwF_x-q-(edit).jpg?t=165393303007",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Dodge Viper SRT-10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 220894
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3qxezOdE-60X7XcLUkl-(edit).jpg?t=165393287219",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Dodge Viper SRT-10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 164559
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3qxezOdE-AruQc0fGuM-(edit).jpg?t=165393316794",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Dodge Viper SRT-10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 368712
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3qxezOdE-Kry6Xf3_pa-(edit).jpg?t=165393320450",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Dodge Viper SRT-10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 472199
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3qxezOdE-WwR8rkRkMr-(edit).jpg?t=165393324006",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Dodge Viper SRT-10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 421625
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/171ab1e538119e13fa98382f268326fc825fdc20/photos/3qxezOdE-qLszFMpuWG-(edit).jpg?t=165393327011",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Dodge Viper SRT-10 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 349855
+    },
+    {
+      "path": "engine-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/35e7382bc92ec41607acb9dce67c9d8706b1d501/photos/9lbQeV6m-Kx8z7iFpM1.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Sold to",
+      "width": 80,
+      "height": 80,
+      "bytes": 27518
+    },
+    {
+      "path": "engine-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/35e7382bc92ec41607acb9dce67c9d8706b1d501/attachments/rGa6YGbX-K6WKAxvu4x.jpeg?t=165478316700",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 232,
+      "bytes": 129262
+    },
+    {
+      "path": "engine-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/35e7382bc92ec41607acb9dce67c9d8706b1d501/attachments/rGa6YGbX-BoPOD5mXl7.jpeg?t=165455825091",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 149619
+    },
+    {
+      "path": "engine-13.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/35e7382bc92ec41607acb9dce67c9d8706b1d501/attachments/rGa6YGbX-C9IiElCf-r.jpeg?t=165455825200",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 166638
+    },
+    {
+      "path": "engine-14.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/35e7382bc92ec41607acb9dce67c9d8706b1d501/attachments/rGa6YGbX-sX4h-JroXW.jpeg?t=165455825334",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 184331
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 14,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Dodge branding on steering wheel",
+          "Viper interior design elements",
+          "Specific layout of dashboard controls"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive hood vents",
+          "Viper branding on side",
+          "characteristic body shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "dodge",
+        "detected_model": "viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front view",
+          "distinctive hood vents",
+          "Viper branding on windshield",
+          "body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Dodge badge",
+          "Viper script on side",
+          "characteristic body shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Dodge badge",
+          "Viper lettering",
+          "Rear wing design",
+          "Body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Dodge badge",
+          "Distinctive rear design",
+          "Rear spoiler",
+          "Striped livery"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive hood design",
+          "unique color scheme",
+          "sporty proportions"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "detail",
+        "scene_fit_tags": [
+          "exterior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 0,
+        "variant_match_confidence": 0,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 0,
+        "reject": true,
+        "reason": "Not a vehicle image.",
+        "path": "engine-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not clearly depict the target vehicle.",
+        "path": "engine-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not clearly show the target vehicle.",
+        "path": "engine-13.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [
+          "detail"
+        ],
+        "quality_score": 3,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "engine-14.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "dodge",
+        "detected_model": "viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior color scheme matching known Viper",
+          "sports seating design",
+          "dashboard layout consistent with Viper"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design specific to Dodge Viper",
+          "Viper branding on seats",
+          "layout of controls"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Dodge",
+        "detected_model": "Viper",
+        "detected_generation_or_year": "2003-2010",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Viper branding on the gauge",
+          "Design consistent with Viper interior"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

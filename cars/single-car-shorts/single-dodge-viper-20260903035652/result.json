@@ -1,0 +1,1521 @@
+{
+  "car": {
+    "make": "Dodge",
+    "model": "Viper",
+    "trim": null
+  },
+  "title": "Dodge Viper (2003-2010)",
+  "start_year": 2003,
+  "end_year": 2010,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "500 Horsepower",
+      "narration": "Meet the Dodge Viper SRT-10, a beast with a staggering 500 horsepower.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "8.3L V10 Engine",
+      "narration": "Under the hood is an 8.3-liter V10 engine that screams performance.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "wheel",
+      "headline": "600 lb-ft Torque",
+      "narration": "With 525 lb-ft of torque, it's all about raw, unfiltered power.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "$85K -> $50K",
+      "narration": "Originally starting around $85,000, you can find them today for about $50,000.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Chevrolet Corvette",
+      "narration": "The Viper faces off against the Chevrolet Corvette Z06, boasting 505 horsepower to the Viper's 500.",
+      "rival_make": "Chevrolet",
+      "rival_model": "Corvette Z06",
+      "main_horsepower": 500,
+      "rival_horsepower": 505,
+      "main_quarter_mile_seconds": 11.8,
+      "rival_quarter_mile_seconds": 12.0
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Track Record",
+      "narration": "At N\u00fcrburgring in 2008, the Viper set a record for fastest lap by a production car at the time.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Ralph Gilles Design",
+      "narration": "Ralph Gilles spearheaded the design, ensuring it stayed true to its aggressive roots.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "narration": "So, do you crave the raw power of the Viper, or the agility of its rivals?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    }
+  ],
+  "sources": [
+    "https://www.caranddriver.com/reviews/a15138141/2008-dodge-viper-srt10-roadster-road-test/",
+    "https://www.motortrend.com/news/dodge-viper-history-details-pictures/",
+    "https://en.wikipedia.org/wiki/Dodge_Viper"
+  ],
+  "script": "Meet the Dodge Viper SRT-10, a beast with a staggering 500 horsepower. Under the hood is an 8.3-liter V10 engine that screams performance. With 525 lb-ft of torque, it's all about raw, unfiltered power. Originally starting around $85,000, you can find them today for about $50,000. The Viper faces off against the Chevrolet Corvette Z06, boasting 505 horsepower to the Viper's 500. At N\u00fcrburgring in 2008, the Viper set a record for fastest lap by a production car at the time. Ralph Gilles spearheaded the design, ensuring it stayed true to its aggressive roots. So, do you crave the raw power of the Viper, or the agility of its rivals?",
+  "word_count": 113,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 39.052,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-dodge-viper-20260903035652/narration.mp3",
+  "duration_seconds": 39.06,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.09,
+      "mouth": "small"
+    },
+    {
+      "start": 0.09,
+      "end": 0.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.27,
+      "end": 0.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.36,
+      "end": 0.63,
+      "mouth": "small"
+    },
+    {
+      "start": 0.63,
+      "end": 0.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.72,
+      "end": 0.9,
+      "mouth": "small"
+    },
+    {
+      "start": 0.9,
+      "end": 0.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.99,
+      "end": 1.17,
+      "mouth": "small"
+    },
+    {
+      "start": 1.17,
+      "end": 1.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.26,
+      "end": 1.53,
+      "mouth": "small"
+    },
+    {
+      "start": 1.53,
+      "end": 1.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.62,
+      "end": 1.71,
+      "mouth": "small"
+    },
+    {
+      "start": 1.71,
+      "end": 1.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.8,
+      "end": 1.98,
+      "mouth": "small"
+    },
+    {
+      "start": 1.98,
+      "end": 2.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.61,
+      "end": 2.79,
+      "mouth": "small"
+    },
+    {
+      "start": 2.79,
+      "end": 2.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.88,
+      "end": 2.97,
+      "mouth": "small"
+    },
+    {
+      "start": 2.97,
+      "end": 3.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.06,
+      "end": 3.42,
+      "mouth": "small"
+    },
+    {
+      "start": 3.42,
+      "end": 3.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.51,
+      "end": 3.87,
+      "mouth": "small"
+    },
+    {
+      "start": 3.87,
+      "end": 3.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.96,
+      "end": 4.5,
+      "mouth": "small"
+    },
+    {
+      "start": 4.5,
+      "end": 4.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.59,
+      "end": 4.68,
+      "mouth": "small"
+    },
+    {
+      "start": 4.68,
+      "end": 5.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.4,
+      "end": 5.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.67,
+      "end": 5.76,
+      "mouth": "small"
+    },
+    {
+      "start": 5.76,
+      "end": 5.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.85,
+      "end": 6.21,
+      "mouth": "small"
+    },
+    {
+      "start": 6.21,
+      "end": 6.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.3,
+      "end": 6.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.39,
+      "end": 6.48,
+      "mouth": "small"
+    },
+    {
+      "start": 6.48,
+      "end": 6.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.57,
+      "end": 6.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.66,
+      "end": 7.83,
+      "mouth": "small"
+    },
+    {
+      "start": 7.83,
+      "end": 7.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.92,
+      "end": 8.1,
+      "mouth": "small"
+    },
+    {
+      "start": 8.1,
+      "end": 8.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.28,
+      "end": 8.82,
+      "mouth": "small"
+    },
+    {
+      "start": 8.82,
+      "end": 9.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.54,
+      "end": 9.72,
+      "mouth": "small"
+    },
+    {
+      "start": 9.72,
+      "end": 9.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.9,
+      "end": 10.08,
+      "mouth": "small"
+    },
+    {
+      "start": 10.08,
+      "end": 10.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.17,
+      "end": 10.44,
+      "mouth": "small"
+    },
+    {
+      "start": 10.44,
+      "end": 10.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.53,
+      "end": 10.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.62,
+      "end": 11.07,
+      "mouth": "small"
+    },
+    {
+      "start": 11.07,
+      "end": 11.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.16,
+      "end": 11.34,
+      "mouth": "small"
+    },
+    {
+      "start": 11.34,
+      "end": 11.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.79,
+      "end": 11.88,
+      "mouth": "small"
+    },
+    {
+      "start": 11.88,
+      "end": 11.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.97,
+      "end": 12.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.33,
+      "end": 12.51,
+      "mouth": "small"
+    },
+    {
+      "start": 12.51,
+      "end": 12.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.78,
+      "end": 12.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.87,
+      "end": 12.96,
+      "mouth": "small"
+    },
+    {
+      "start": 12.96,
+      "end": 13.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.05,
+      "end": 13.68,
+      "mouth": "small"
+    },
+    {
+      "start": 13.68,
+      "end": 14.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.13,
+      "end": 14.22,
+      "mouth": "small"
+    },
+    {
+      "start": 14.22,
+      "end": 14.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.31,
+      "end": 14.4,
+      "mouth": "small"
+    },
+    {
+      "start": 14.4,
+      "end": 14.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.58,
+      "end": 14.67,
+      "mouth": "small"
+    },
+    {
+      "start": 14.67,
+      "end": 14.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.85,
+      "end": 15.93,
+      "mouth": "small"
+    },
+    {
+      "start": 15.93,
+      "end": 16.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.02,
+      "end": 16.11,
+      "mouth": "small"
+    },
+    {
+      "start": 16.11,
+      "end": 16.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.56,
+      "end": 16.83,
+      "mouth": "small"
+    },
+    {
+      "start": 16.83,
+      "end": 16.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.92,
+      "end": 17.64,
+      "mouth": "small"
+    },
+    {
+      "start": 17.64,
+      "end": 17.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.73,
+      "end": 18.54,
+      "mouth": "small"
+    },
+    {
+      "start": 18.54,
+      "end": 19.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.17,
+      "end": 19.35,
+      "mouth": "small"
+    },
+    {
+      "start": 19.35,
+      "end": 19.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.44,
+      "end": 20.79,
+      "mouth": "small"
+    },
+    {
+      "start": 20.79,
+      "end": 20.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.88,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.51,
+      "end": 21.6,
+      "mouth": "small"
+    },
+    {
+      "start": 21.6,
+      "end": 22.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.14,
+      "end": 22.5,
+      "mouth": "small"
+    },
+    {
+      "start": 22.5,
+      "end": 22.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.59,
+      "end": 22.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.68,
+      "end": 22.95,
+      "mouth": "small"
+    },
+    {
+      "start": 22.95,
+      "end": 23.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.04,
+      "end": 23.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.13,
+      "end": 23.4,
+      "mouth": "small"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.49,
+      "end": 24.21,
+      "mouth": "small"
+    },
+    {
+      "start": 24.21,
+      "end": 24.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.3,
+      "end": 24.75,
+      "mouth": "small"
+    },
+    {
+      "start": 24.75,
+      "end": 25.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.29,
+      "end": 25.56,
+      "mouth": "small"
+    },
+    {
+      "start": 25.56,
+      "end": 25.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.74,
+      "end": 25.83,
+      "mouth": "small"
+    },
+    {
+      "start": 25.83,
+      "end": 25.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.92,
+      "end": 26.28,
+      "mouth": "small"
+    },
+    {
+      "start": 26.28,
+      "end": 26.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.37,
+      "end": 26.64,
+      "mouth": "small"
+    },
+    {
+      "start": 26.64,
+      "end": 27.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.09,
+      "end": 27.18,
+      "mouth": "small"
+    },
+    {
+      "start": 27.18,
+      "end": 27.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.27,
+      "end": 27.54,
+      "mouth": "small"
+    },
+    {
+      "start": 27.54,
+      "end": 27.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.72,
+      "end": 28.17,
+      "mouth": "small"
+    },
+    {
+      "start": 28.17,
+      "end": 28.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.26,
+      "end": 28.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.35,
+      "end": 28.53,
+      "mouth": "small"
+    },
+    {
+      "start": 28.53,
+      "end": 28.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.62,
+      "end": 29.88,
+      "mouth": "small"
+    },
+    {
+      "start": 29.88,
+      "end": 29.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.97,
+      "end": 30.15,
+      "mouth": "small"
+    },
+    {
+      "start": 30.15,
+      "end": 30.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.78,
+      "end": 30.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.96,
+      "end": 31.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.05,
+      "end": 31.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.23,
+      "end": 31.32,
+      "mouth": "small"
+    },
+    {
+      "start": 31.32,
+      "end": 31.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.41,
+      "end": 31.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.59,
+      "end": 32.22,
+      "mouth": "small"
+    },
+    {
+      "start": 32.22,
+      "end": 32.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.49,
+      "end": 32.76,
+      "mouth": "small"
+    },
+    {
+      "start": 32.76,
+      "end": 32.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.85,
+      "end": 33.21,
+      "mouth": "small"
+    },
+    {
+      "start": 33.21,
+      "end": 33.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.3,
+      "end": 33.39,
+      "mouth": "small"
+    },
+    {
+      "start": 33.39,
+      "end": 33.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.48,
+      "end": 34.29,
+      "mouth": "small"
+    },
+    {
+      "start": 34.29,
+      "end": 35.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.01,
+      "end": 35.28,
+      "mouth": "small"
+    },
+    {
+      "start": 35.28,
+      "end": 35.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.73,
+      "end": 35.91,
+      "mouth": "small"
+    },
+    {
+      "start": 35.91,
+      "end": 36.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.09,
+      "end": 36.27,
+      "mouth": "small"
+    },
+    {
+      "start": 36.27,
+      "end": 36.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.45,
+      "end": 36.63,
+      "mouth": "small"
+    },
+    {
+      "start": 36.63,
+      "end": 36.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.81,
+      "end": 37.35,
+      "mouth": "small"
+    },
+    {
+      "start": 37.35,
+      "end": 37.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.62,
+      "end": 37.98,
+      "mouth": "small"
+    },
+    {
+      "start": 37.98,
+      "end": 38.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.25,
+      "end": 38.34,
+      "mouth": "small"
+    },
+    {
+      "start": 38.34,
+      "end": 38.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.43,
+      "end": 38.7,
+      "mouth": "small"
+    },
+    {
+      "start": 38.7,
+      "end": 39.06,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "Meet",
+      "start": 0.0,
+      "end": 0.3400000035762787
+    },
+    {
+      "word": "the",
+      "start": 0.3400000035762787,
+      "end": 0.5
+    },
+    {
+      "word": "Dodge",
+      "start": 0.5,
+      "end": 0.8799999952316284
+    },
+    {
+      "word": "Viper",
+      "start": 0.8799999952316284,
+      "end": 1.100000023841858
+    },
+    {
+      "word": "SRT",
+      "start": 1.100000023841858,
+      "end": 1.7599999904632568
+    },
+    {
+      "word": "10",
+      "start": 1.7599999904632568,
+      "end": 2.0199999809265137
+    },
+    {
+      "word": "A",
+      "start": 2.680000066757202,
+      "end": 2.7799999713897705
+    },
+    {
+      "word": "beast",
+      "start": 2.7799999713897705,
+      "end": 3.0199999809265137
+    },
+    {
+      "word": "with",
+      "start": 3.0199999809265137,
+      "end": 3.1600000858306885
+    },
+    {
+      "word": "a",
+      "start": 3.1600000858306885,
+      "end": 3.7200000286102295
+    },
+    {
+      "word": "staggering",
+      "start": 3.7200000286102295,
+      "end": 3.7200000286102295
+    },
+    {
+      "word": "500",
+      "start": 3.7200000286102295,
+      "end": 4.260000228881836
+    },
+    {
+      "word": "horsepower",
+      "start": 4.260000228881836,
+      "end": 4.760000228881836
+    },
+    {
+      "word": "Under",
+      "start": 5.519999980926514,
+      "end": 5.579999923706055
+    },
+    {
+      "word": "the",
+      "start": 5.579999923706055,
+      "end": 5.900000095367432
+    },
+    {
+      "word": "hood",
+      "start": 5.900000095367432,
+      "end": 5.900000095367432
+    },
+    {
+      "word": "is",
+      "start": 5.900000095367432,
+      "end": 6.039999961853027
+    },
+    {
+      "word": "an",
+      "start": 6.039999961853027,
+      "end": 6.179999828338623
+    },
+    {
+      "word": "8",
+      "start": 6.179999828338623,
+      "end": 6.420000076293945
+    },
+    {
+      "word": "3",
+      "start": 6.420000076293945,
+      "end": 6.860000133514404
+    },
+    {
+      "word": "liter",
+      "start": 6.860000133514404,
+      "end": 7.039999961853027
+    },
+    {
+      "word": "V10",
+      "start": 7.039999961853027,
+      "end": 7.480000019073486
+    },
+    {
+      "word": "engine",
+      "start": 7.480000019073486,
+      "end": 7.71999979019165
+    },
+    {
+      "word": "that",
+      "start": 7.71999979019165,
+      "end": 8.020000457763672
+    },
+    {
+      "word": "screams",
+      "start": 8.020000457763672,
+      "end": 8.34000015258789
+    },
+    {
+      "word": "performance",
+      "start": 8.34000015258789,
+      "end": 8.899999618530273
+    },
+    {
+      "word": "With",
+      "start": 9.5600004196167,
+      "end": 9.640000343322754
+    },
+    {
+      "word": "525",
+      "start": 9.640000343322754,
+      "end": 10.539999961853027
+    },
+    {
+      "word": "pound",
+      "start": 10.539999961853027,
+      "end": 10.960000038146973
+    },
+    {
+      "word": "feet",
+      "start": 10.960000038146973,
+      "end": 11.0
+    },
+    {
+      "word": "of",
+      "start": 11.0,
+      "end": 11.399999618530273
+    },
+    {
+      "word": "torque",
+      "start": 11.399999618530273,
+      "end": 11.399999618530273
+    },
+    {
+      "word": "it's",
+      "start": 11.779999732971191,
+      "end": 11.979999542236328
+    },
+    {
+      "word": "all",
+      "start": 11.979999542236328,
+      "end": 12.199999809265137
+    },
+    {
+      "word": "about",
+      "start": 12.199999809265137,
+      "end": 12.4399995803833
+    },
+    {
+      "word": "raw",
+      "start": 12.4399995803833,
+      "end": 12.800000190734863
+    },
+    {
+      "word": "unfiltered",
+      "start": 13.119999885559082,
+      "end": 13.319999694824219
+    },
+    {
+      "word": "power",
+      "start": 13.319999694824219,
+      "end": 13.720000267028809
+    },
+    {
+      "word": "Originally",
+      "start": 14.319999694824219,
+      "end": 14.539999961853027
+    },
+    {
+      "word": "starting",
+      "start": 14.539999961853027,
+      "end": 14.899999618530273
+    },
+    {
+      "word": "around",
+      "start": 14.899999618530273,
+      "end": 15.100000381469727
+    },
+    {
+      "word": "85",
+      "start": 15.100000381469727,
+      "end": 15.720000267028809
+    },
+    {
+      "word": "000",
+      "start": 15.720000267028809,
+      "end": 15.819999694824219
+    },
+    {
+      "word": "you",
+      "start": 16.540000915527344,
+      "end": 16.639999389648438
+    },
+    {
+      "word": "can",
+      "start": 16.639999389648438,
+      "end": 16.780000686645508
+    },
+    {
+      "word": "find",
+      "start": 16.780000686645508,
+      "end": 16.979999542236328
+    },
+    {
+      "word": "them",
+      "start": 16.979999542236328,
+      "end": 17.100000381469727
+    },
+    {
+      "word": "today",
+      "start": 17.100000381469727,
+      "end": 17.360000610351562
+    },
+    {
+      "word": "for",
+      "start": 17.360000610351562,
+      "end": 17.479999542236328
+    },
+    {
+      "word": "about",
+      "start": 17.479999542236328,
+      "end": 17.700000762939453
+    },
+    {
+      "word": "50",
+      "start": 17.700000762939453,
+      "end": 18.0
+    },
+    {
+      "word": "000",
+      "start": 18.0,
+      "end": 18.219999313354492
+    },
+    {
+      "word": "The",
+      "start": 19.1200008392334,
+      "end": 19.5
+    },
+    {
+      "word": "Viper",
+      "start": 19.5,
+      "end": 19.540000915527344
+    },
+    {
+      "word": "faces",
+      "start": 19.540000915527344,
+      "end": 19.84000015258789
+    },
+    {
+      "word": "off",
+      "start": 19.84000015258789,
+      "end": 20.15999984741211
+    },
+    {
+      "word": "against",
+      "start": 20.15999984741211,
+      "end": 20.299999237060547
+    },
+    {
+      "word": "the",
+      "start": 20.299999237060547,
+      "end": 20.540000915527344
+    },
+    {
+      "word": "Chevrolet",
+      "start": 20.540000915527344,
+      "end": 20.780000686645508
+    },
+    {
+      "word": "Corvette",
+      "start": 20.780000686645508,
+      "end": 21.1200008392334
+    },
+    {
+      "word": "Z06",
+      "start": 21.1200008392334,
+      "end": 21.739999771118164
+    },
+    {
+      "word": "boasting",
+      "start": 22.299999237060547,
+      "end": 22.420000076293945
+    },
+    {
+      "word": "505",
+      "start": 22.420000076293945,
+      "end": 23.260000228881836
+    },
+    {
+      "word": "horsepower",
+      "start": 23.260000228881836,
+      "end": 23.639999389648438
+    },
+    {
+      "word": "to",
+      "start": 23.639999389648438,
+      "end": 23.860000610351562
+    },
+    {
+      "word": "the",
+      "start": 23.860000610351562,
+      "end": 24.15999984741211
+    },
+    {
+      "word": "Viper's",
+      "start": 24.15999984741211,
+      "end": 24.280000686645508
+    },
+    {
+      "word": "500",
+      "start": 24.280000686645508,
+      "end": 24.780000686645508
+    },
+    {
+      "word": "At",
+      "start": 24.780000686645508,
+      "end": 25.5
+    },
+    {
+      "word": "N\u00fcrburgring",
+      "start": 25.5,
+      "end": 25.920000076293945
+    },
+    {
+      "word": "in",
+      "start": 25.920000076293945,
+      "end": 26.18000030517578
+    },
+    {
+      "word": "2008",
+      "start": 26.18000030517578,
+      "end": 26.68000030517578
+    },
+    {
+      "word": "the",
+      "start": 27.18000030517578,
+      "end": 27.3799991607666
+    },
+    {
+      "word": "Viper",
+      "start": 27.3799991607666,
+      "end": 27.399999618530273
+    },
+    {
+      "word": "set",
+      "start": 27.399999618530273,
+      "end": 27.65999984741211
+    },
+    {
+      "word": "a",
+      "start": 27.65999984741211,
+      "end": 27.799999237060547
+    },
+    {
+      "word": "record",
+      "start": 27.799999237060547,
+      "end": 28.0
+    },
+    {
+      "word": "for",
+      "start": 28.0,
+      "end": 28.239999771118164
+    },
+    {
+      "word": "fastest",
+      "start": 28.239999771118164,
+      "end": 28.559999465942383
+    },
+    {
+      "word": "lap",
+      "start": 28.559999465942383,
+      "end": 28.84000015258789
+    },
+    {
+      "word": "by",
+      "start": 28.84000015258789,
+      "end": 29.020000457763672
+    },
+    {
+      "word": "a",
+      "start": 29.020000457763672,
+      "end": 29.399999618530273
+    },
+    {
+      "word": "production",
+      "start": 29.399999618530273,
+      "end": 29.399999618530273
+    },
+    {
+      "word": "car",
+      "start": 29.399999618530273,
+      "end": 29.65999984741211
+    },
+    {
+      "word": "at",
+      "start": 29.65999984741211,
+      "end": 29.860000610351562
+    },
+    {
+      "word": "the",
+      "start": 29.860000610351562,
+      "end": 29.920000076293945
+    },
+    {
+      "word": "time",
+      "start": 29.920000076293945,
+      "end": 30.420000076293945
+    },
+    {
+      "word": "Ralph",
+      "start": 30.899999618530273,
+      "end": 31.059999465942383
+    },
+    {
+      "word": "Gills",
+      "start": 31.059999465942383,
+      "end": 31.360000610351562
+    },
+    {
+      "word": "spearheaded",
+      "start": 31.360000610351562,
+      "end": 31.700000762939453
+    },
+    {
+      "word": "the",
+      "start": 31.700000762939453,
+      "end": 31.899999618530273
+    },
+    {
+      "word": "design",
+      "start": 31.899999618530273,
+      "end": 32.2400016784668
+    },
+    {
+      "word": "ensuring",
+      "start": 32.63999938964844,
+      "end": 32.86000061035156
+    },
+    {
+      "word": "it",
+      "start": 32.86000061035156,
+      "end": 33.13999938964844
+    },
+    {
+      "word": "stayed",
+      "start": 33.13999938964844,
+      "end": 33.2400016784668
+    },
+    {
+      "word": "true",
+      "start": 33.2400016784668,
+      "end": 33.5
+    },
+    {
+      "word": "to",
+      "start": 33.5,
+      "end": 33.68000030517578
+    },
+    {
+      "word": "its",
+      "start": 33.68000030517578,
+      "end": 33.79999923706055
+    },
+    {
+      "word": "aggressive",
+      "start": 33.79999923706055,
+      "end": 34.119998931884766
+    },
+    {
+      "word": "roots",
+      "start": 34.119998931884766,
+      "end": 34.41999816894531
+    },
+    {
+      "word": "So",
+      "start": 35.040000915527344,
+      "end": 35.29999923706055
+    },
+    {
+      "word": "do",
+      "start": 35.779998779296875,
+      "end": 35.779998779296875
+    },
+    {
+      "word": "you",
+      "start": 35.779998779296875,
+      "end": 36.099998474121094
+    },
+    {
+      "word": "crave",
+      "start": 36.099998474121094,
+      "end": 36.099998474121094
+    },
+    {
+      "word": "the",
+      "start": 36.099998474121094,
+      "end": 36.34000015258789
+    },
+    {
+      "word": "raw",
+      "start": 36.34000015258789,
+      "end": 36.5
+    },
+    {
+      "word": "power",
+      "start": 36.5,
+      "end": 36.779998779296875
+    },
+    {
+      "word": "of",
+      "start": 36.779998779296875,
+      "end": 36.91999816894531
+    },
+    {
+      "word": "the",
+      "start": 36.91999816894531,
+      "end": 37.20000076293945
+    },
+    {
+      "word": "Viper",
+      "start": 37.20000076293945,
+      "end": 37.2400016784668
+    },
+    {
+      "word": "or",
+      "start": 37.5,
+      "end": 37.720001220703125
+    },
+    {
+      "word": "the",
+      "start": 37.720001220703125,
+      "end": 37.939998626708984
+    },
+    {
+      "word": "agility",
+      "start": 37.939998626708984,
+      "end": 38.13999938964844
+    },
+    {
+      "word": "of",
+      "start": 38.13999938964844,
+      "end": 38.31999969482422
+    },
+    {
+      "word": "its",
+      "start": 38.31999969482422,
+      "end": 38.47999954223633
+    },
+    {
+      "word": "rivals",
+      "start": 38.47999954223633,
+      "end": 38.720001220703125
+    }
+  ],
+  "media": [
+    {
+      "path": "images/dodge-viper/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side"
+    },
+    {
+      "path": "images/dodge-viper/exterior_front-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front"
+    },
+    {
+      "path": "images/dodge-viper/exterior_front-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front"
+    },
+    {
+      "path": "images/dodge-viper/exterior_rear-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear"
+    },
+    {
+      "path": "images/chevrolet-corvette-z06/exterior_side-01-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/dodge-viper/exterior_front-03-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front"
+    },
+    {
+      "path": "images/dodge-viper/interior-02.jpg",
+      "type": "detail",
+      "category": "other_detail"
+    },
+    {
+      "path": "images/dodge-viper/interior-01.jpg",
+      "type": "interior",
+      "category": "interior"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rGa6YGbX/2008-dodge-viper-srt-10-coupe",
+    "title": "2008 Dodge Viper SRT-10 Coupe",
+    "text": "2008 Dodge Viper SRT-10 Coupe",
+    "titleYear": 2008,
+    "score": 109,
+    "sale_price": 77250,
+    "sale_type": "sold",
+    "page_title": "2008 Dodge Viper SRT-10 Coupe",
+    "year": 2008,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-dodge-viper-20260903035652/voice_auditions/onyx.mp3",
+    "british_narrator": "single-dodge-viper-20260903035652/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-dodge-viper-20260903035652/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-dodge-viper-20260903035652/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-dodge-viper-20260903035652/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-dodge-viper-20260903035652/images/dodge-viper/exterior_side-01-nobg.png",
+  "video": "single_car_short.mp4"
+}
