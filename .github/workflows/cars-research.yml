@@ -81,6 +81,30 @@ on:
         description: "single_car mode: a specific carsandbids.com/auctions/... listing to pull photos from instead of searching"
         required: false
         type: string
+      photo_front:
+        description: "single_car mode: direct URL for the main car's front exterior photo"
+        required: false
+        type: string
+      photo_side:
+        description: "single_car mode: direct URL for the main car's side exterior photo"
+        required: false
+        type: string
+      photo_rear:
+        description: "single_car mode: direct URL for the main car's rear exterior photo"
+        required: false
+        type: string
+      photo_engine:
+        description: "single_car mode: direct URL for the main car's engine-bay photo"
+        required: false
+        type: string
+      photo_interior:
+        description: "single_car mode: direct URL for the main car's interior photo"
+        required: false
+        type: string
+      photo_rival:
+        description: "single_car mode: direct URL for the comparison car's photo (falls back to search if omitted)"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -208,6 +232,12 @@ jobs:
           if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
           if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
           if [ -n "${{ inputs.auction_url }}" ]; then YEAR_ARGS+=(--auction-url "${{ inputs.auction_url }}"); fi
+          if [ -n "${{ inputs.photo_front }}" ]; then YEAR_ARGS+=(--photo-front "${{ inputs.photo_front }}"); fi
+          if [ -n "${{ inputs.photo_side }}" ]; then YEAR_ARGS+=(--photo-side "${{ inputs.photo_side }}"); fi
+          if [ -n "${{ inputs.photo_rear }}" ]; then YEAR_ARGS+=(--photo-rear "${{ inputs.photo_rear }}"); fi
+          if [ -n "${{ inputs.photo_engine }}" ]; then YEAR_ARGS+=(--photo-engine "${{ inputs.photo_engine }}"); fi
+          if [ -n "${{ inputs.photo_interior }}" ]; then YEAR_ARGS+=(--photo-interior "${{ inputs.photo_interior }}"); fi
+          if [ -n "${{ inputs.photo_rival }}" ]; then YEAR_ARGS+=(--photo-rival "${{ inputs.photo_rival }}"); fi
           python cars/automation/single_car_short.py \
             --make "${{ inputs.make }}" \
             --model "${{ inputs.model }}" \

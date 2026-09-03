@@ -428,6 +428,111 @@ def test_apply_rival_photos_keeps_original_media_when_rival_lookup_fails(monkeyp
     assert result == media
 
 
+def test_apply_rival_photos_uses_the_manual_rival_url_for_every_comparison_scene(monkeypatch, tmp_path):
+    """A pasted rival photo link can't be matched to a make/model ahead of
+    the AI script naming one -- so it's applied to whichever scene(s) turn
+    out to need a rival photo, and the scrape path is never touched."""
+    import single_car_short
+
+    scenes = [
+        {"media_type": "exterior", "rival_make": "Chevrolet", "rival_model": "Camaro"},
+        {"media_type": "exterior", "rival_make": None, "rival_model": None},
+    ]
+    media = [
+        {"path": "images/mustang/exterior-01.jpg", "type": "exterior"},
+        {"path": "images/mustang/exterior-02.jpg", "type": "exterior"},
+    ]
+    calls = []
+
+    def fake_gather_manual_rival_photo(url, images_dir, rival_make, rival_model):
+        calls.append((url, rival_make, rival_model))
+        return ("images/manual-rival/rival.png", "right")
+
+    def fail_gather_rival_photo(*a, **k):
+        raise AssertionError("should not scrape when a manual rival URL is given")
+
+    monkeypatch.setattr(single_car_short, "gather_manual_rival_photo", fake_gather_manual_rival_photo)
+    monkeypatch.setattr(single_car_short, "gather_rival_photo", fail_gather_rival_photo)
+
+    result = apply_rival_photos(
+        scenes, media, 2015, 2015, tmp_path, manual_rival_url="https://carsandbids.com/rival.jpg",
+    )
+
+    assert result[0] == {"path": "images/manual-rival/rival.png", "type": "exterior", "facing_direction": "right"}
+    assert result[1]["path"] == "images/mustang/exterior-02.jpg"
+    # Only downloaded once even though it's applied to a scene -- caching
+    # the same manual photo instead of re-fetching it per scene.
+    assert len(calls) == 1
+
+
+def test_gather_manual_media_trusts_the_field_category_over_any_ai_guess(tmp_path, monkeypatch):
+    """The category comes from which field the user pasted the link into,
+    not from re-classifying the photo -- a user who says "this is the
+    front" should get exterior_front even if a vision model would have
+    called it exterior_full."""
+    import single_car_short
+
+    images_dir = tmp_path / "images"
+
+    def fake_download(url, dest_dir, filename_stem):
+        path = dest_dir / f"{filename_stem}.jpg"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"fake-image-bytes")
+        return path
+
+    monkeypatch.setattr(single_car_short, "_download_car_photo", fake_download)
+    monkeypatch.setattr(single_car_short, "_facing_direction_for_photo", lambda path, entry: "right")
+    monkeypatch.setattr(single_car_short, "blur_license_plates", lambda path: None)
+    monkeypatch.setattr(single_car_short, "remove_background", lambda path: path)
+
+    media = single_car_short.gather_manual_media(
+        {"front": "https://example.com/front.jpg", "interior": "https://example.com/int.jpg", "rear": ""},
+        images_dir, {"name": "Volkswagen Golf GTI"},
+    )
+
+    by_category = {item["category"]: item for item in media}
+    assert set(by_category) == {"exterior_front", "interior"}
+    assert by_category["exterior_front"]["type"] == "exterior"
+    assert by_category["exterior_front"]["facing_direction"] == "right"
+    # Interior isn't an exterior shot, so no facing-direction lookup is
+    # meaningful for it -- it should stay "unclear" rather than reusing
+    # whatever the (unrelated) exterior mock returned.
+    assert by_category["interior"]["type"] == "interior"
+    assert by_category["interior"]["facing_direction"] == "unclear"
+
+
+def test_gather_media_uses_manual_photo_urls_and_skips_scraping_entirely(tmp_path, monkeypatch):
+    """Pasted photo links are the whole point of avoiding the slow
+    Puppeteer search -- when any are given, neither scrape function should
+    run at all."""
+    import single_car_short
+
+    images_dir = tmp_path / "images"
+
+    def fail_scrape(*a, **k):
+        raise AssertionError("scraping should be skipped when manual photo URLs are given")
+
+    def fake_gather_manual_media(photo_urls, images_dir_arg, entry):
+        assert photo_urls == {"front": "https://example.com/front.jpg", "side": "https://example.com/side.jpg"}
+        return [
+            {"path": "images/manual/front.jpg", "type": "exterior", "category": "exterior_front", "facing_direction": "right"},
+            {"path": "images/manual/side.jpg", "type": "exterior", "category": "exterior_side", "facing_direction": "left"},
+        ]
+
+    monkeypatch.setattr(single_car_short, "scrape_entry_images", fail_scrape)
+    monkeypatch.setattr(single_car_short, "scrape_auction_images", fail_scrape)
+    monkeypatch.setattr(single_car_short, "gather_manual_media", fake_gather_manual_media)
+
+    media, selected_auction = single_car_short.gather_media(
+        "Volkswagen", "Golf GTI", "", 2020, 2020, images_dir,
+        scenes=[{"media_type": "exterior"}],
+        manual_photo_urls={"front": "https://example.com/front.jpg", "side": "https://example.com/side.jpg", "rear": ""},
+    )
+
+    assert len(media) == 2
+    assert selected_auction == {}
+
+
 def test_british_voice_presets_are_registered():
     for preset in AUDITION_PRESETS:
         assert preset in VOICE_PRESETS

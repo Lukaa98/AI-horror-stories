@@ -14,9 +14,11 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 
+import requests
+
 from background_removal import remove_background
 from cars_and_bids import enrich_entry_from_manifest, scrape_auction_images, scrape_entry_images
-from research_request import _auction_provenance_matches_entry, review_and_rename_entry_images
+from research_request import _auction_provenance_matches_entry, _review_image_with_ai, review_and_rename_entry_images
 from generate_sample import ROOT
 from narrator_script import _extract_wav, build_mouth_timeline, synthesize_narration
 from narrator_video import render_narrator_video
@@ -295,7 +297,95 @@ _SHOT_TYPE_BY_CATEGORY = {
 }
 
 
-def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None, auction_url=None):
+# Which manual photo field maps to which review category -- trusted over
+# any AI guess, since the user is telling us directly what the photo is.
+MANUAL_PHOTO_FIELDS = {
+    "front": "exterior_front",
+    "side": "exterior_side",
+    "rear": "exterior_rear",
+    "engine": "engine_bay",
+    "interior": "interior",
+}
+
+
+def _download_car_photo(url, dest_dir, filename_stem):
+    """Download one user-pasted photo URL to dest_dir. Returns the local
+    Path, or None on any failure (dead link, non-image response, etc.) --
+    a bad link should be a skipped photo, not a crashed build."""
+    try:
+        response = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+        response.raise_for_status()
+    except Exception:
+        return None
+    content_type = response.headers.get("content-type", "")
+    ext = ".jpg"
+    if "png" in content_type:
+        ext = ".png"
+    elif "webp" in content_type:
+        ext = ".webp"
+    else:
+        url_ext = Path(url.split("?")[0]).suffix.lower()
+        if url_ext in (".jpg", ".jpeg", ".png", ".webp"):
+            ext = url_ext
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    path = dest_dir / f"{filename_stem}{ext}"
+    path.write_bytes(response.content)
+    return path
+
+
+def _facing_direction_for_photo(path, entry):
+    """A single AI vision call just for facing_direction -- the drag-race/
+    doodle animations need it to orient the cutout, and a user pasting a
+    raw photo link has no way to specify it themselves. Best-effort: a
+    failed call leaves the photo usable, just unflippable."""
+    try:
+        review = _review_image_with_ai(path, entry)
+        return review.get("facing_direction", "unclear")
+    except Exception:
+        return "unclear"
+
+
+def gather_manual_media(photo_urls, images_dir, entry):
+    """Build the media list straight from user-pasted photo URLs instead of
+    searching/scraping Cars & Bids -- the whole point is to skip the slow
+    Puppeteer search+review pass when the user already has the exact
+    photos they want, for much faster iteration. Category comes from
+    which field the user put the link in, not an AI guess."""
+    dest_dir = images_dir / "manual"
+    media = []
+    for field, category in MANUAL_PHOTO_FIELDS.items():
+        url = (photo_urls or {}).get(field)
+        if not url:
+            continue
+        path = _download_car_photo(url, dest_dir, field)
+        if not path:
+            continue
+        shot_type = _SHOT_TYPE_BY_CATEGORY.get(category, "exterior")
+        facing_direction = _facing_direction_for_photo(path, entry) if shot_type == "exterior" else "unclear"
+        blur_license_plates(path)
+        if shot_type == "exterior":
+            path = remove_background(path)
+        relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
+        media.append({"path": relative, "type": shot_type, "category": category, "facing_direction": facing_direction})
+    return media
+
+
+def gather_manual_rival_photo(url, images_dir, rival_make, rival_model):
+    """Like gather_rival_photo, but from a user-pasted photo link instead
+    of a search -- returns (path, facing_direction), or (None, "unclear")
+    on any failure, matching gather_rival_photo's fail-open contract so a
+    bad link costs one optional beat's photo, not the whole build."""
+    entry = {"name": f"{rival_make} {rival_model}".strip(), "years": ""}
+    path = _download_car_photo(url, images_dir / "manual-rival", "rival")
+    if not path:
+        return None, "unclear"
+    facing_direction = _facing_direction_for_photo(path, entry)
+    blur_license_plates(path)
+    path = remove_background(path)
+    return str(path.relative_to(images_dir.parent)).replace("\\", "/"), facing_direction
+
+
+def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None, auction_url=None, manual_photo_urls=None):
     search_hint = " ".join(value for value in [make, model, trim] if value).strip()
     if start_year or end_year:
         first, last = start_year or end_year, end_year or start_year
@@ -310,6 +400,18 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
         "visual_highlight": _visual_highlight_for_scenes(scenes or []),
         "generation_label": generation,
     }
+    # Any manually pasted photo link skips the search/scrape entirely --
+    # that whole Puppeteer search+download+first-pass-review pass is the
+    # slow part of a build, and it's pointless when the user already has
+    # the exact photos they want. There's no scraped listing in this case,
+    # so selected_auction just comes back empty (no price/video metadata).
+    manual_urls = {key: value for key, value in (manual_photo_urls or {}).items() if value}
+    if manual_urls:
+        media = gather_manual_media(manual_urls, images_dir, entry)
+        if not media:
+            raise RuntimeError("None of the provided photo URLs could be downloaded.")
+        return media, {}
+
     # This format needs real variety across five distinct media_types
     # (exterior, engine, wheel, detail, interior) plus a dedicated
     # side-profile shot -- the default limit=6 (tuned for the ranking/
@@ -391,22 +493,34 @@ def _select_side_profile_media(media):
     return {"path": match["path"], "facing_direction": match.get("facing_direction", "unclear")}
 
 
-def apply_rival_photos(scenes, media, start_year, end_year, images_dir):
+def apply_rival_photos(scenes, media, start_year, end_year, images_dir, manual_rival_url=None):
     """Swap in a real photo of the named competitor for any scene that
     directly compares to one, instead of showing the main car's own photo
-    again there. One scrape per distinct rival (a video rarely names more
-    than one), best-effort -- a rival lookup failure just leaves that
-    scene's original media untouched."""
+    again there. The rival car itself is decided by the AI script (it's
+    whichever car that scene's narration actually names), so a manually
+    pasted rival photo can't be matched to a make/model ahead of time --
+    instead it's used directly for whichever scene turns out to be the
+    comparison, on the assumption the user pasted it because they already
+    know roughly who the rival will be. Without a manual link, one scrape
+    per distinct rival (a video rarely names more than one), best-effort --
+    a rival lookup failure just leaves that scene's original media
+    untouched."""
     rival_cache = {}
+    manual_rival_photo = None
     for index, scene in enumerate(scenes):
         rival_make = scene.get("rival_make")
         rival_model = scene.get("rival_model")
         if not rival_make and not rival_model:
             continue
-        cache_key = (rival_make, rival_model)
-        if cache_key not in rival_cache:
-            rival_cache[cache_key] = gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir)
-        rival_path, rival_facing = rival_cache[cache_key]
+        if manual_rival_url:
+            if manual_rival_photo is None:
+                manual_rival_photo = gather_manual_rival_photo(manual_rival_url, images_dir, rival_make, rival_model)
+            rival_path, rival_facing = manual_rival_photo
+        else:
+            cache_key = (rival_make, rival_model)
+            if cache_key not in rival_cache:
+                rival_cache[cache_key] = gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir)
+            rival_path, rival_facing = rival_cache[cache_key]
         if rival_path and index < len(media):
             media[index] = {"path": rival_path, "type": "exterior", "facing_direction": rival_facing}
     return media
@@ -584,16 +698,23 @@ def build_short(args):
     # instead of an unconstrained "Audi TT" that can land on any year.
     media_start_year = args.start_year or package.get("start_year")
     media_end_year = args.end_year or package.get("end_year")
+    manual_photo_urls = {
+        "front": args.photo_front, "side": args.photo_side, "rear": args.photo_rear,
+        "engine": args.photo_engine, "interior": args.photo_interior,
+    }
     media, selected_auction = gather_media(
         args.make, args.model, args.trim, media_start_year, media_end_year, images_dir, package["scenes"],
-        auction_url=args.auction_url,
+        auction_url=args.auction_url, manual_photo_urls=manual_photo_urls,
     )
     # Captured before order_media_for_scenes/apply_rival_photos reshuffle
     # `media` into one pick per scene -- this needs the whole gathered pool
     # to find the single best side-profile shot.
     side_profile_media = _select_side_profile_media(media)
     media = order_media_for_scenes(package["scenes"], media)
-    media = apply_rival_photos(package["scenes"], media, media_start_year, media_end_year, images_dir)
+    media = apply_rival_photos(
+        package["scenes"], media, media_start_year, media_end_year, images_dir,
+        manual_rival_url=args.photo_rival,
+    )
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
     normalized_duration = normalize_audio_duration(audio_path)
@@ -649,6 +770,16 @@ def main():
         "--auction-url", default=None,
         help="A specific carsandbids.com/auctions/... listing to pull photos from instead of "
              "searching by make/model -- for a car whose search page doesn't turn up results.",
+    )
+    parser.add_argument("--photo-front", default=None, help="Direct URL for the main car's front exterior photo.")
+    parser.add_argument("--photo-side", default=None, help="Direct URL for the main car's side exterior photo.")
+    parser.add_argument("--photo-rear", default=None, help="Direct URL for the main car's rear exterior photo.")
+    parser.add_argument("--photo-engine", default=None, help="Direct URL for the main car's engine-bay photo.")
+    parser.add_argument("--photo-interior", default=None, help="Direct URL for the main car's interior photo.")
+    parser.add_argument(
+        "--photo-rival", default=None,
+        help="Direct URL for the comparison car's photo. If omitted, the comparison car (decided by "
+             "the AI script) is found with the normal search instead.",
     )
     parser.add_argument(
         "--audition-voices", dest="audition_voices", action="store_true", default=True,

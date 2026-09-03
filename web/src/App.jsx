@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.95";
+const UI_VERSION = "V10.96";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -636,8 +636,13 @@ export default function App() {
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
   const [useCustomRequest, setUseCustomRequest] = useState(false);
-  const [useAuctionUrl, setUseAuctionUrl] = useState(false);
+  // Single-car photo source: "search" (default, scrape by make/model),
+  // "auction" (one pasted listing URL), or "manual" (individual photo
+  // links per shot, skipping the scrape entirely -- the fastest path for
+  // iterating since there's no Puppeteer search/download/review pass).
+  const [photoSource, setPhotoSource] = useState("search");
   const [auctionUrl, setAuctionUrl] = useState("");
+  const [photoUrls, setPhotoUrls] = useState({ front: "", side: "", rear: "", engine: "", interior: "", rival: "" });
   const [voice, setVoice] = useState("onyx");
   const [renderQuality, setRenderQuality] = useState(null);
   const [draftId, setDraftId] = useState(null);
@@ -894,7 +899,7 @@ export default function App() {
 
   async function handleSingleCarShort() {
     if (!repoOk || !make.trim() || !model.trim()) return;
-    if (useAuctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim())) return;
+    if (photoSource === "auction" && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim())) return;
     setError(null);
     setSingleCarResult(null);
     const id = makeDraftId(`single-${make}-${model}`);
@@ -920,7 +925,13 @@ export default function App() {
           start_year: startYear,
           end_year: endYear,
           voice,
-          auction_url: useAuctionUrl ? auctionUrl.trim() : "",
+          auction_url: photoSource === "auction" ? auctionUrl.trim() : "",
+          photo_front: photoSource === "manual" ? photoUrls.front.trim() : "",
+          photo_side: photoSource === "manual" ? photoUrls.side.trim() : "",
+          photo_rear: photoSource === "manual" ? photoUrls.rear.trim() : "",
+          photo_engine: photoSource === "manual" ? photoUrls.engine.trim() : "",
+          photo_interior: photoSource === "manual" ? photoUrls.interior.trim() : "",
+          photo_rival: photoSource === "manual" ? photoUrls.rival.trim() : "",
         },
       });
       const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
@@ -2074,17 +2085,42 @@ export default function App() {
               </label>
 
               {workflow === "single_car" && (
-                <>
-                  <label className="custom-toggle">
-                    <input
-                      type="checkbox"
-                      checked={useAuctionUrl}
-                      onChange={(e) => setUseAuctionUrl(e.target.checked)}
-                      disabled={stage === "single-car-building"}
-                    />
-                    Paste a specific Cars &amp; Bids listing instead of searching by make/model
-                  </label>
-                  {useAuctionUrl && (
+                <div className="photo-source">
+                  <span className="preview-label">Photos</span>
+                  <div className="photo-source-options">
+                    <label className="radio-option">
+                      <input
+                        type="radio"
+                        name="photoSource"
+                        checked={photoSource === "search"}
+                        onChange={() => setPhotoSource("search")}
+                        disabled={stage === "single-car-building"}
+                      />
+                      Search by make/model (default)
+                    </label>
+                    <label className="radio-option">
+                      <input
+                        type="radio"
+                        name="photoSource"
+                        checked={photoSource === "auction"}
+                        onChange={() => setPhotoSource("auction")}
+                        disabled={stage === "single-car-building"}
+                      />
+                      Paste one Cars &amp; Bids listing
+                    </label>
+                    <label className="radio-option">
+                      <input
+                        type="radio"
+                        name="photoSource"
+                        checked={photoSource === "manual"}
+                        onChange={() => setPhotoSource("manual")}
+                        disabled={stage === "single-car-building"}
+                      />
+                      Paste individual photo links (fastest -- skips the search entirely)
+                    </label>
+                  </div>
+
+                  {photoSource === "auction" && (
                     <label>
                       Cars &amp; Bids listing URL
                       <input
@@ -2114,7 +2150,38 @@ export default function App() {
                       </span>
                     </label>
                   )}
-                </>
+
+                  {photoSource === "manual" && (
+                    <>
+                      <p className="hint">
+                        Paste a direct image URL for any shots you have -- the scrape is skipped entirely, so
+                        this is the fastest way to iterate. Any field left blank is simply not shown; the
+                        comparison-car photo falls back to a normal search if left blank (the AI script decides
+                        who the rival is, so there's often no way to know its photo ahead of time).
+                      </p>
+                      <div className="photo-url-grid">
+                        {[
+                          ["front", "Front"],
+                          ["side", "Side"],
+                          ["rear", "Rear"],
+                          ["engine", "Engine bay"],
+                          ["interior", "Interior"],
+                          ["rival", "Comparison car"],
+                        ].map(([key, label]) => (
+                          <label key={key}>
+                            {label}
+                            <input
+                              value={photoUrls[key]}
+                              onChange={(e) => setPhotoUrls({ ...photoUrls, [key]: e.target.value })}
+                              placeholder="https://..."
+                              disabled={stage === "single-car-building"}
+                            />
+                          </label>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
               )}
 
               <div className="request-preview">
@@ -2154,7 +2221,7 @@ export default function App() {
               onClick={handleSingleCarShort}
               disabled={
                 !repoOk || !make.trim() || !model.trim() || stage === "single-car-building" ||
-                (useAuctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim()))
+                (photoSource === "auction" && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim()))
               }
             >
               {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}
