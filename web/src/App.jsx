@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.00";
+const UI_VERSION = "V11.01";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -2166,9 +2166,9 @@ export default function App() {
                         and that shot will silently fall back to whatever the scrape above already found, so
                         double-check you copied the photo's own link, not the page you copied it from. Each
                         field replaces just that one angle; anything left blank still comes from the listing
-                        above. The comparison-car photo falls back to a normal search if left blank (the AI
-                        script decides who the rival is, so there's often no way to know its photo ahead of
-                        time).
+                        above. Pasting a comparison-car photo identifies that car and forces the script to
+                        name it as the rival (with a real head-to-head and drag-race animation); leave it
+                        blank to let the AI script pick its own rival instead.
                       </p>
                       <div className="photo-url-grid">
                         {[

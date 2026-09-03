@@ -185,22 +185,35 @@ def _strip_citations(text):
     return re.sub(r"[ \t]{2,}", " ", text).strip()
 
 
-def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None):
+def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None):
     photo_hints_block = ""
     if photo_hints:
         bullet_list = "\n".join(f"- {hint}" for hint in photo_hints)
         photo_hints_block = f"""
 
-The user has specifically pasted these photos for this video, each with a genuine, concrete detail already
-identified from the image itself:
+HARD REQUIREMENT, same as the word count above: the user has specifically pasted these photos for this
+video, each with a genuine, concrete detail already identified from the image itself:
 {bullet_list}
-Write one scene's narration specifically about each one -- in your own words, describing/reacting to that
-exact detail (not just reusing the sentence verbatim), so the script actually talks about what's on screen
-instead of narrating something unrelated over it. Use that scene's headline and media_type to match (e.g. an
-interior/gauge detail gets media_type "interior" or "detail" as appropriate). These beats count toward the
-word target and beat variety like any other -- they don't replace the history/mechanical/comparison beats
-above, they're additional specific material to fold in."""
-    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{photo_hints_block}
+You MUST write one scene's narration specifically about each one -- in your own words, describing/reacting
+to that exact detail (not just reusing the sentence verbatim), so the script actually talks about what's on
+screen instead of narrating something unrelated over it. Use that scene's headline and media_type to match
+(e.g. an interior/gauge detail gets media_type "interior" or "detail" as appropriate). These beats count
+toward the word target and beat variety like any other -- they don't replace the history/mechanical/
+comparison beats below, they're additional specific material that must be folded in alongside them. Do not
+substitute a different, unrelated "detail" beat of your own invention for one of these -- every photo listed
+above needs its own scene, genuinely about what's in it."""
+    forced_rival_block = ""
+    if forced_rival:
+        forced_rival_block = f"""
+
+HARD REQUIREMENT: the user has already chosen {forced_rival} as this car's rival for the comparison scene
+below (they pasted a photo of it) -- you MUST include that rival-comparison scene, and its rival_make/
+rival_model MUST be {forced_rival}'s make and model exactly, not a different car you'd otherwise pick. Verify
+both cars' real horsepower and (if published) quarter-mile times with web search as usual; if you genuinely
+cannot verify {forced_rival} is a fair, real comparison for this car, still name it as the rival and focus the
+scene on whatever real, verifiable comparison you can make (value, character, a spec difference) rather than
+dropping it."""
+    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{photo_hints_block}{forced_rival_block}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-8 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), at least one beat of real history or design/legacy context (the designer, a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -232,7 +245,7 @@ def _request_script_package(prompt):
     return package
 
 
-def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None):
+def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
         f"model years {start_year}-{end_year}" if start_year and end_year
@@ -248,7 +261,9 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"chassis platform) rather than padding existing sentences or repeating what you already said -- "
             f"there is almost always more real, well-documented material available if you look for it." if package else ""
         )
-        package = _request_script_package(_research_script_prompt(label, year_scope, retry_feedback, photo_hints))
+        package = _request_script_package(
+            _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival)
+        )
         count = package["word_count"]
         if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
             break
@@ -400,7 +415,46 @@ def _describe_photo_for_script(path, label_hint, car_label):
         ))
         text = response.output_text.strip()
         return text or None
-    except Exception:
+    except Exception as exc:
+        print(f"[single-car] Photo-detail description failed for a pasted photo, skipping that hint: {exc}")
+        return None
+
+
+def _identify_car_in_photo(path):
+    """One AI vision call to name the specific car in a photo -- used so a
+    pasted comparison-car photo can be handed to the script writer as a
+    forced rival (make + model). Without this, the pasted photo only ever
+    got used *if* the AI happened to independently decide to write a
+    rival-comparison scene, and only for whatever car it happened to pick
+    on its own -- routinely not the car in the photo, or no rival scene at
+    all (no drag race, no comparison, and the pasted photo silently
+    unused). Best-effort: returns None on any failure or low-confidence
+    identification, which just means no forced rival, not a crashed
+    build."""
+    try:
+        client = OpenAI()
+        prompt = (
+            "Identify the specific make and model of the car shown in this photo, as precisely as you can "
+            'tell from the pixels (e.g. "Acura NSX", "Chevrolet Camaro SS", "Porsche 911 GT3"). Return ONLY '
+            'the make and model, nothing else -- no year, no extra commentary. If you cannot confidently '
+            'identify a specific car, return exactly "unknown".'
+        )
+        response = with_openai_retry(lambda: client.responses.create(
+            model=IMAGE_REVIEW_MODEL,
+            input=[{
+                "role": "user",
+                "content": [
+                    {"type": "input_text", "text": prompt},
+                    {"type": "input_image", "image_url": _image_data_url(path)},
+                ],
+            }],
+        ))
+        text = response.output_text.strip()
+        if not text or text.lower() == "unknown":
+            return None
+        return text
+    except Exception as exc:
+        print(f"[single-car] Could not identify the car in the pasted comparison photo: {exc}")
         return None
 
 
@@ -883,8 +937,20 @@ def build_short(args):
     # unrelated narration.
     car_label = " ".join(value for value in [args.make, args.model, args.trim] if value).strip()
     photo_hints = gather_photo_script_hints(manual_photo_urls, extra_photos, images_dir, car_label)
+    # A pasted comparison-car photo needs to be identified *before*
+    # research so the script can be told to actually name that car as the
+    # rival -- otherwise the script decides on its own whether to include
+    # a rival scene at all, and the pasted photo only ever gets used if it
+    # happens to agree, which routinely means no rival scene (no drag
+    # race) and the pasted photo going completely unused.
+    forced_rival = None
+    if args.photo_rival:
+        rival_id_path = _download_car_photo(args.photo_rival, images_dir / "manual-rival-id", "rival")
+        if rival_id_path:
+            forced_rival = _identify_car_in_photo(rival_id_path)
     package = research_script(
-        args.make, args.model, args.trim, args.start_year, args.end_year, photo_hints=photo_hints,
+        args.make, args.model, args.trim, args.start_year, args.end_year,
+        photo_hints=photo_hints, forced_rival=forced_rival,
     )
     # Prefer the caller's explicit year range when given; otherwise fall
     # back to whatever generation the script actually settled on, so photo

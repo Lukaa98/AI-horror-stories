@@ -538,6 +538,53 @@ def test_download_car_photo_accepts_a_real_image(tmp_path, monkeypatch):
     assert path.suffix == ".jpg"
 
 
+class _FakeOpenAIResponse:
+    def __init__(self, text):
+        self.output_text = text
+
+
+class _FakeOpenAIClient:
+    def __init__(self, text):
+        self._text = text
+        self.responses = self
+
+    def create(self, **kwargs):
+        return _FakeOpenAIResponse(self._text)
+
+
+def test_identify_car_in_photo_returns_the_identified_car(tmp_path, monkeypatch):
+    import single_car_short
+
+    monkeypatch.setattr(single_car_short, "OpenAI", lambda: _FakeOpenAIClient("Acura NSX"))
+    path = tmp_path / "rival.jpg"
+    path.write_bytes(b"fake-image-bytes")
+
+    assert single_car_short._identify_car_in_photo(path) == "Acura NSX"
+
+
+def test_identify_car_in_photo_returns_none_when_unidentifiable(tmp_path, monkeypatch):
+    import single_car_short
+
+    monkeypatch.setattr(single_car_short, "OpenAI", lambda: _FakeOpenAIClient("unknown"))
+    path = tmp_path / "rival.jpg"
+    path.write_bytes(b"fake-image-bytes")
+
+    assert single_car_short._identify_car_in_photo(path) is None
+
+
+def test_identify_car_in_photo_fails_open_on_error(tmp_path, monkeypatch):
+    import single_car_short
+
+    def broken_client():
+        raise RuntimeError("network down")
+
+    monkeypatch.setattr(single_car_short, "OpenAI", broken_client)
+    path = tmp_path / "rival.jpg"
+    path.write_bytes(b"fake-image-bytes")
+
+    assert single_car_short._identify_car_in_photo(path) is None
+
+
 def test_gather_manual_media_trusts_the_field_category_over_any_ai_guess(tmp_path, monkeypatch):
     """The category comes from which field the user pasted the link into,
     not from re-classifying the photo -- a user who says "this is the
@@ -812,7 +859,7 @@ def test_research_script_prompt_folds_in_photo_hints():
         "1993 Toyota Supra Turbo", "model year 1993", photo_hints=["Gauge Cluster photo: a distinctive analog cluster."],
     )
     assert "Gauge Cluster photo: a distinctive analog cluster." in prompt
-    assert "Write one scene's narration specifically about each one" in prompt
+    assert "You MUST write one scene's narration specifically about each one" in prompt
 
 
 def test_research_script_prompt_omits_the_photo_hints_block_when_there_are_none():
@@ -820,6 +867,27 @@ def test_research_script_prompt_omits_the_photo_hints_block_when_there_are_none(
 
     prompt = single_car_short._research_script_prompt("1993 Toyota Supra Turbo", "model year 1993")
     assert "specifically pasted these photos" not in prompt
+
+
+def test_research_script_prompt_forces_the_pasted_comparison_car_as_rival():
+    """A pasted comparison-car photo must not just be used *if* the script
+    happens to name a rival on its own -- the script has to be told to use
+    that exact car, or the photo (and the drag-race animation) silently
+    never happens."""
+    import single_car_short
+
+    prompt = single_car_short._research_script_prompt(
+        "1993 Toyota Supra Turbo", "model year 1993", forced_rival="Acura NSX",
+    )
+    assert "Acura NSX" in prompt
+    assert "HARD REQUIREMENT: the user has already chosen Acura NSX" in prompt
+
+
+def test_research_script_prompt_omits_the_forced_rival_block_when_there_is_none():
+    import single_car_short
+
+    prompt = single_car_short._research_script_prompt("1993 Toyota Supra Turbo", "model year 1993")
+    assert "already chosen" not in prompt
 
 
 def test_british_voice_presets_are_registered():
