@@ -890,6 +890,23 @@ def test_research_script_prompt_omits_the_forced_rival_block_when_there_is_none(
     assert "already chosen" not in prompt
 
 
+def test_research_script_prompt_forbids_a_rival_scene_when_comparison_is_disabled():
+    import single_car_short
+
+    prompt = single_car_short._research_script_prompt(
+        "1993 Toyota Supra Turbo", "model year 1993", disable_comparison=True,
+    )
+    assert "do NOT name" in prompt
+    assert "explicitly turned off the rival-comparison scene" in prompt
+
+
+def test_research_script_prompt_omits_the_no_comparison_block_by_default():
+    import single_car_short
+
+    prompt = single_car_short._research_script_prompt("1993 Toyota Supra Turbo", "model year 1993")
+    assert "turned off the rival-comparison scene" not in prompt
+
+
 def test_british_voice_presets_are_registered():
     for preset in AUDITION_PRESETS:
         assert preset in VOICE_PRESETS

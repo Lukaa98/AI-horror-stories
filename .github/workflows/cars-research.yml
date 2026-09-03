@@ -105,6 +105,11 @@ on:
         description: "single_car mode: direct URL for the comparison car's photo (falls back to search if omitted)"
         required: false
         type: string
+      disable_comparison:
+        description: "single_car mode: skip the rival-comparison scene and drag-race animation entirely"
+        required: false
+        type: boolean
+        default: false
       extra_photos:
         description: 'single_car mode: JSON array of extra named photos, e.g. [{"label":"Gauge Cluster","url":"https://..."}]'
         required: false
@@ -246,6 +251,7 @@ jobs:
           if [ -n "${{ inputs.photo_engine }}" ]; then YEAR_ARGS+=(--photo-engine "${{ inputs.photo_engine }}"); fi
           if [ -n "${{ inputs.photo_interior }}" ]; then YEAR_ARGS+=(--photo-interior "${{ inputs.photo_interior }}"); fi
           if [ -n "${{ inputs.photo_rival }}" ]; then YEAR_ARGS+=(--photo-rival "${{ inputs.photo_rival }}"); fi
+          if [ "${{ inputs.disable_comparison }}" = "true" ]; then YEAR_ARGS+=(--disable-comparison); fi
           if [ -n "$EXTRA_PHOTOS" ]; then YEAR_ARGS+=(--extra-photos "$EXTRA_PHOTOS"); fi
           python cars/automation/single_car_short.py \
             --make "${{ inputs.make }}" \

@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.01";
+const UI_VERSION = "V11.02";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -649,6 +649,11 @@ export default function App() {
   // fields above -- each becomes its own detail beat the script is told
   // to specifically write about, not just an illustrative extra photo.
   const [extraPhotos, setExtraPhotos] = useState([]);
+  // Whether to include a comparison-car scene at all. Checked (default)
+  // keeps the existing behavior: a pasted comparison-car URL forces that
+  // exact car as the rival, no URL leaves it to the AI script. Unchecked
+  // disables the rival scene (and its drag race) outright.
+  const [compareEnabled, setCompareEnabled] = useState(true);
   const [voice, setVoice] = useState("onyx");
   const [renderQuality, setRenderQuality] = useState(null);
   const [draftId, setDraftId] = useState(null);
@@ -937,7 +942,8 @@ export default function App() {
           photo_rear: useManualPhotos ? photoUrls.rear.trim() : "",
           photo_engine: useManualPhotos ? photoUrls.engine.trim() : "",
           photo_interior: useManualPhotos ? photoUrls.interior.trim() : "",
-          photo_rival: useManualPhotos ? photoUrls.rival.trim() : "",
+          photo_rival: useManualPhotos && compareEnabled ? photoUrls.rival.trim() : "",
+          disable_comparison: String(useManualPhotos && !compareEnabled),
           extra_photos: (() => {
             if (!useManualPhotos) return "";
             const cleaned = extraPhotos
@@ -2177,7 +2183,6 @@ export default function App() {
                           ["rear", "Rear"],
                           ["engine", "Engine bay"],
                           ["interior", "Interior"],
-                          ["rival", "Comparison car"],
                         ].map(([key, label]) => (
                           <label key={key}>
                             {label}
@@ -2190,6 +2195,37 @@ export default function App() {
                           </label>
                         ))}
                       </div>
+
+                      <label className="custom-toggle">
+                        <input
+                          type="checkbox"
+                          checked={compareEnabled}
+                          onChange={(e) => setCompareEnabled(e.target.checked)}
+                          disabled={stage === "single-car-building"}
+                        />
+                        Include a comparison-car scene
+                      </label>
+                      {compareEnabled ? (
+                        <label>
+                          Comparison car
+                          <input
+                            value={photoUrls.rival}
+                            onChange={(e) => setPhotoUrls({ ...photoUrls, rival: e.target.value })}
+                            placeholder="https://media.carsandbids.com/.../photo.jpg"
+                            disabled={stage === "single-car-building"}
+                          />
+                          <span className="hint">
+                            Paste a photo to force the script to research and compare against that exact car
+                            (with a real head-to-head and drag-race animation). Leave blank to let the AI script
+                            decide on its own whether to include a comparison and who against.
+                          </span>
+                        </label>
+                      ) : (
+                        <p className="hint">
+                          No comparison-car scene, head-to-head, or drag-race animation will be included in this
+                          video, regardless of what the AI script would otherwise decide.
+                        </p>
+                      )}
 
                       {extraPhotos.length > 0 && (
                         <div className="extra-photo-list">

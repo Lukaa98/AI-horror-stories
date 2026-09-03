@@ -185,7 +185,7 @@ def _strip_citations(text):
     return re.sub(r"[ \t]{2,}", " ", text).strip()
 
 
-def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None):
+def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False):
     photo_hints_block = ""
     if photo_hints:
         bullet_list = "\n".join(f"- {hint}" for hint in photo_hints)
@@ -213,7 +213,17 @@ both cars' real horsepower and (if published) quarter-mile times with web search
 cannot verify {forced_rival} is a fair, real comparison for this car, still name it as the rival and focus the
 scene on whatever real, verifiable comparison you can make (value, character, a spec difference) rather than
 dropping it."""
-    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{photo_hints_block}{forced_rival_block}
+    no_comparison_block = ""
+    if disable_comparison:
+        no_comparison_block = """
+
+HARD REQUIREMENT: the user has explicitly turned off the rival-comparison scene for this video -- do NOT name
+any specific competitor car anywhere in the script, and do NOT set rival_make/rival_model/main_horsepower/
+rival_horsepower/main_quarter_mile_seconds/rival_quarter_mile_seconds on ANY scene (leave every one of those
+null). Replace that beat with a different one instead -- an ownership/value insight, a character/driving-feel
+observation, or another history/mechanical beat -- so the script still hits its word target and beat variety
+without any head-to-head."""
+    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{photo_hints_block}{forced_rival_block}{no_comparison_block}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-8 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), at least one beat of real history or design/legacy context (the designer, a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -245,7 +255,7 @@ def _request_script_package(prompt):
     return package
 
 
-def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None):
+def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
         f"model years {start_year}-{end_year}" if start_year and end_year
@@ -262,7 +272,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"there is almost always more real, well-documented material available if you look for it." if package else ""
         )
         package = _request_script_package(
-            _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival)
+            _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival, disable_comparison)
         )
         count = package["word_count"]
         if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
@@ -942,16 +952,30 @@ def build_short(args):
     # rival -- otherwise the script decides on its own whether to include
     # a rival scene at all, and the pasted photo only ever gets used if it
     # happens to agree, which routinely means no rival scene (no drag
-    # race) and the pasted photo going completely unused.
+    # race) and the pasted photo going completely unused. Skipped entirely
+    # when comparison is disabled -- an explicit "no comparison" beats
+    # whatever URL happens to be sitting in that field.
     forced_rival = None
-    if args.photo_rival:
+    if args.photo_rival and not args.disable_comparison:
         rival_id_path = _download_car_photo(args.photo_rival, images_dir / "manual-rival-id", "rival")
         if rival_id_path:
             forced_rival = _identify_car_in_photo(rival_id_path)
     package = research_script(
         args.make, args.model, args.trim, args.start_year, args.end_year,
-        photo_hints=photo_hints, forced_rival=forced_rival,
+        photo_hints=photo_hints, forced_rival=forced_rival, disable_comparison=args.disable_comparison,
     )
+    if args.disable_comparison:
+        # Belt-and-suspenders: the prompt already tells the model never to
+        # set these, but a script it wrote before that instruction was
+        # added (or one that just doesn't comply) shouldn't be able to
+        # sneak a rival scene/drag race past an explicit "off" -- strip
+        # the fields outright rather than trusting compliance alone.
+        for scene in package["scenes"]:
+            for field in (
+                "rival_make", "rival_model", "main_horsepower", "rival_horsepower",
+                "main_quarter_mile_seconds", "rival_quarter_mile_seconds",
+            ):
+                scene[field] = None
     # Prefer the caller's explicit year range when given; otherwise fall
     # back to whatever generation the script actually settled on, so photo
     # gathering searches the same generation the narration describes
@@ -969,7 +993,7 @@ def build_short(args):
     media = order_media_for_scenes(package["scenes"], media)
     media = apply_rival_photos(
         package["scenes"], media, media_start_year, media_end_year, images_dir,
-        manual_rival_url=args.photo_rival,
+        manual_rival_url=None if args.disable_comparison else args.photo_rival,
     )
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
@@ -1036,6 +1060,11 @@ def main():
         "--photo-rival", default=None,
         help="Direct URL for the comparison car's photo. If omitted, the comparison car (decided by "
              "the AI script) is found with the normal search instead.",
+    )
+    parser.add_argument(
+        "--disable-comparison", action="store_true", default=False,
+        help="Skip the rival-comparison scene (and its drag-race animation) entirely, regardless of "
+             "--photo-rival or what the AI script would otherwise decide.",
     )
     parser.add_argument(
         "--extra-photos", default=None,
