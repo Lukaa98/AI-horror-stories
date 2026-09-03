@@ -1,0 +1,2218 @@
+{
+  "car": {
+    "make": "Porsche",
+    "model": "Panamera Turbo S",
+    "trim": null
+  },
+  "title": "Porsche Panamera Turbo S",
+  "start_year": 2023,
+  "end_year": 2023,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Fastest Sedan",
+      "narration": "Check out the 2023 Porsche Panamera Turbo S. It\u2019s one of the fastest luxury sedans on the market today, boasting a 0-60 mph time of just 2.9 seconds. That\u2019s supercar territory, wrapped in a four-door.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "4.0L V8",
+      "narration": "Under the hood, you find a 4.0-liter twin-turbocharged V8. It cranks out a staggering 620 horsepower. Designed by Porsche's elite engineers, it balances power with surprising efficiency for its class.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "MSRP $190K -> $150K",
+      "narration": "Originally priced around $190K new, it's currently trading for about $150K. Despite the drop, it holds value well for such a high-end model.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "wheel",
+      "headline": "AWD",
+      "narration": "The all-wheel-drive system ensures that power is seamlessly distributed to all wheels, enhancing grip and control. This makes the Panamera Turbo S not just fast, but incredibly stable at any speed.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Rivals AMG GT",
+      "narration": "It squares off against the Mercedes-AMG GT 63 S, which has 630 horsepower. But the Porsche edges it out with better handling finesse.",
+      "rival_make": "Mercedes-Benz",
+      "rival_model": "AMG GT",
+      "main_horsepower": 620,
+      "rival_horsepower": 630,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "interior",
+      "headline": "Luxurious Cabin",
+      "narration": "Inside, the Panamera Turbo S offers a luxurious experience. High-quality materials and cutting-edge tech create a sophisticated environment.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Your Choice?",
+      "narration": "So, would you choose the Porsche Panamera Turbo S for its unique blend of speed and luxury, or is there another contender in your garage dreams? Let us know your thoughts!",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null
+    }
+  ],
+  "sources": [
+    "https://www.caranddriver.com/porsche/panamera-turbo-s",
+    "https://www.motortrend.com/cars/porsche/panamera/"
+  ],
+  "script": "Check out the 2023 Porsche Panamera Turbo S. It\u2019s one of the fastest luxury sedans on the market today, boasting a 0-60 mph time of just 2.9 seconds. That\u2019s supercar territory, wrapped in a four-door. Under the hood, you find a 4.0-liter twin-turbocharged V8. It cranks out a staggering 620 horsepower. Designed by Porsche's elite engineers, it balances power with surprising efficiency for its class. Originally priced around $190K new, it's currently trading for about $150K. Despite the drop, it holds value well for such a high-end model. The all-wheel-drive system ensures that power is seamlessly distributed to all wheels, enhancing grip and control. This makes the Panamera Turbo S not just fast, but incredibly stable at any speed. It squares off against the Mercedes-AMG GT 63 S, which has 630 horsepower. But the Porsche edges it out with better handling finesse. Inside, the Panamera Turbo S offers a luxurious experience. High-quality materials and cutting-edge tech create a sophisticated environment. So, would you choose the Porsche Panamera Turbo S for its unique blend of speed and luxury, or is there another contender in your garage dreams? Let us know your thoughts!",
+  "word_count": 195,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 58.872,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-porsche-panamera-turbo-s-20260903205952/narration.mp3",
+  "duration_seconds": 58.95,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.09,
+      "end": 0.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.18,
+      "end": 0.36,
+      "mouth": "small"
+    },
+    {
+      "start": 0.36,
+      "end": 0.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.45,
+      "end": 0.54,
+      "mouth": "small"
+    },
+    {
+      "start": 0.54,
+      "end": 0.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.63,
+      "end": 2.43,
+      "mouth": "small"
+    },
+    {
+      "start": 2.43,
+      "end": 2.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.79,
+      "end": 3.15,
+      "mouth": "small"
+    },
+    {
+      "start": 3.15,
+      "end": 3.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.24,
+      "end": 4.59,
+      "mouth": "small"
+    },
+    {
+      "start": 4.59,
+      "end": 4.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.68,
+      "end": 4.86,
+      "mouth": "small"
+    },
+    {
+      "start": 4.86,
+      "end": 5.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.31,
+      "end": 5.76,
+      "mouth": "small"
+    },
+    {
+      "start": 5.76,
+      "end": 5.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.85,
+      "end": 6.12,
+      "mouth": "small"
+    },
+    {
+      "start": 6.12,
+      "end": 6.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.21,
+      "end": 6.48,
+      "mouth": "small"
+    },
+    {
+      "start": 6.48,
+      "end": 6.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.57,
+      "end": 7.11,
+      "mouth": "small"
+    },
+    {
+      "start": 7.11,
+      "end": 7.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.2,
+      "end": 7.29,
+      "mouth": "small"
+    },
+    {
+      "start": 7.29,
+      "end": 7.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.38,
+      "end": 7.47,
+      "mouth": "small"
+    },
+    {
+      "start": 7.47,
+      "end": 7.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.56,
+      "end": 8.19,
+      "mouth": "small"
+    },
+    {
+      "start": 8.19,
+      "end": 8.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.73,
+      "end": 9.9,
+      "mouth": "small"
+    },
+    {
+      "start": 9.9,
+      "end": 9.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.99,
+      "end": 10.71,
+      "mouth": "small"
+    },
+    {
+      "start": 10.71,
+      "end": 11.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.34,
+      "end": 11.43,
+      "mouth": "small"
+    },
+    {
+      "start": 11.43,
+      "end": 11.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.79,
+      "end": 11.88,
+      "mouth": "small"
+    },
+    {
+      "start": 11.88,
+      "end": 11.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.97,
+      "end": 12.69,
+      "mouth": "small"
+    },
+    {
+      "start": 12.69,
+      "end": 12.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.78,
+      "end": 13.14,
+      "mouth": "small"
+    },
+    {
+      "start": 13.14,
+      "end": 13.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.23,
+      "end": 13.68,
+      "mouth": "small"
+    },
+    {
+      "start": 13.68,
+      "end": 13.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.77,
+      "end": 14.04,
+      "mouth": "small"
+    },
+    {
+      "start": 14.04,
+      "end": 14.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.67,
+      "end": 14.76,
+      "mouth": "small"
+    },
+    {
+      "start": 14.76,
+      "end": 14.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.85,
+      "end": 14.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.94,
+      "end": 15.21,
+      "mouth": "small"
+    },
+    {
+      "start": 15.21,
+      "end": 15.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.3,
+      "end": 15.66,
+      "mouth": "small"
+    },
+    {
+      "start": 15.66,
+      "end": 15.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.75,
+      "end": 16.11,
+      "mouth": "small"
+    },
+    {
+      "start": 16.11,
+      "end": 16.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.2,
+      "end": 16.47,
+      "mouth": "small"
+    },
+    {
+      "start": 16.47,
+      "end": 16.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.56,
+      "end": 16.74,
+      "mouth": "small"
+    },
+    {
+      "start": 16.74,
+      "end": 17.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.01,
+      "end": 17.19,
+      "mouth": "small"
+    },
+    {
+      "start": 17.19,
+      "end": 17.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.28,
+      "end": 18.36,
+      "mouth": "small"
+    },
+    {
+      "start": 18.36,
+      "end": 18.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.45,
+      "end": 19.44,
+      "mouth": "small"
+    },
+    {
+      "start": 19.44,
+      "end": 19.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.53,
+      "end": 20.16,
+      "mouth": "small"
+    },
+    {
+      "start": 20.16,
+      "end": 20.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.25,
+      "end": 20.34,
+      "mouth": "small"
+    },
+    {
+      "start": 20.34,
+      "end": 20.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.43,
+      "end": 20.61,
+      "mouth": "small"
+    },
+    {
+      "start": 20.61,
+      "end": 21.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.33,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.69,
+      "end": 21.78,
+      "mouth": "small"
+    },
+    {
+      "start": 21.78,
+      "end": 21.87,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.87,
+      "end": 23.04,
+      "mouth": "small"
+    },
+    {
+      "start": 23.04,
+      "end": 23.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.49,
+      "end": 23.85,
+      "mouth": "small"
+    },
+    {
+      "start": 23.85,
+      "end": 23.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.94,
+      "end": 24.66,
+      "mouth": "small"
+    },
+    {
+      "start": 24.66,
+      "end": 24.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.75,
+      "end": 25.11,
+      "mouth": "small"
+    },
+    {
+      "start": 25.11,
+      "end": 25.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.65,
+      "end": 25.74,
+      "mouth": "small"
+    },
+    {
+      "start": 25.74,
+      "end": 25.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.83,
+      "end": 25.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.92,
+      "end": 26.1,
+      "mouth": "small"
+    },
+    {
+      "start": 26.1,
+      "end": 26.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.19,
+      "end": 26.28,
+      "mouth": "small"
+    },
+    {
+      "start": 26.28,
+      "end": 26.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.37,
+      "end": 26.91,
+      "mouth": "small"
+    },
+    {
+      "start": 26.91,
+      "end": 27.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.0,
+      "end": 27.09,
+      "mouth": "small"
+    },
+    {
+      "start": 27.09,
+      "end": 27.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.18,
+      "end": 27.99,
+      "mouth": "small"
+    },
+    {
+      "start": 27.99,
+      "end": 28.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.8,
+      "end": 28.89,
+      "mouth": "small"
+    },
+    {
+      "start": 28.89,
+      "end": 29.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.16,
+      "end": 29.25,
+      "mouth": "small"
+    },
+    {
+      "start": 29.25,
+      "end": 29.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.34,
+      "end": 29.52,
+      "mouth": "small"
+    },
+    {
+      "start": 29.52,
+      "end": 29.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.61,
+      "end": 30.06,
+      "mouth": "small"
+    },
+    {
+      "start": 30.06,
+      "end": 30.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.15,
+      "end": 30.42,
+      "mouth": "small"
+    },
+    {
+      "start": 30.42,
+      "end": 30.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.51,
+      "end": 30.69,
+      "mouth": "small"
+    },
+    {
+      "start": 30.69,
+      "end": 30.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.78,
+      "end": 31.23,
+      "mouth": "small"
+    },
+    {
+      "start": 31.23,
+      "end": 31.32,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.32,
+      "end": 31.68,
+      "mouth": "small"
+    },
+    {
+      "start": 31.68,
+      "end": 32.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.04,
+      "end": 32.67,
+      "mouth": "small"
+    },
+    {
+      "start": 32.67,
+      "end": 32.76,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.76,
+      "end": 32.94,
+      "mouth": "small"
+    },
+    {
+      "start": 32.94,
+      "end": 33.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.75,
+      "end": 34.92,
+      "mouth": "small"
+    },
+    {
+      "start": 34.92,
+      "end": 35.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.01,
+      "end": 35.28,
+      "mouth": "small"
+    },
+    {
+      "start": 35.28,
+      "end": 35.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.37,
+      "end": 35.55,
+      "mouth": "small"
+    },
+    {
+      "start": 35.55,
+      "end": 35.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.91,
+      "end": 36.9,
+      "mouth": "small"
+    },
+    {
+      "start": 36.9,
+      "end": 36.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.99,
+      "end": 37.17,
+      "mouth": "small"
+    },
+    {
+      "start": 37.17,
+      "end": 37.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.62,
+      "end": 37.89,
+      "mouth": "small"
+    },
+    {
+      "start": 37.89,
+      "end": 37.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.98,
+      "end": 38.07,
+      "mouth": "small"
+    },
+    {
+      "start": 38.07,
+      "end": 38.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.16,
+      "end": 38.34,
+      "mouth": "small"
+    },
+    {
+      "start": 38.34,
+      "end": 38.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.43,
+      "end": 39.69,
+      "mouth": "small"
+    },
+    {
+      "start": 39.69,
+      "end": 39.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.78,
+      "end": 40.14,
+      "mouth": "small"
+    },
+    {
+      "start": 40.14,
+      "end": 40.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.5,
+      "end": 40.86,
+      "mouth": "small"
+    },
+    {
+      "start": 40.86,
+      "end": 40.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.95,
+      "end": 41.49,
+      "mouth": "small"
+    },
+    {
+      "start": 41.49,
+      "end": 41.58,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.58,
+      "end": 41.76,
+      "mouth": "small"
+    },
+    {
+      "start": 41.76,
+      "end": 42.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.48,
+      "end": 42.57,
+      "mouth": "small"
+    },
+    {
+      "start": 42.57,
+      "end": 42.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.66,
+      "end": 42.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.75,
+      "end": 43.2,
+      "mouth": "small"
+    },
+    {
+      "start": 43.2,
+      "end": 43.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.29,
+      "end": 44.01,
+      "mouth": "small"
+    },
+    {
+      "start": 44.01,
+      "end": 44.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.1,
+      "end": 44.28,
+      "mouth": "small"
+    },
+    {
+      "start": 44.28,
+      "end": 45.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.18,
+      "end": 45.45,
+      "mouth": "small"
+    },
+    {
+      "start": 45.45,
+      "end": 45.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.54,
+      "end": 45.81,
+      "mouth": "small"
+    },
+    {
+      "start": 45.81,
+      "end": 45.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.9,
+      "end": 46.44,
+      "mouth": "small"
+    },
+    {
+      "start": 46.44,
+      "end": 46.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.53,
+      "end": 46.89,
+      "mouth": "small"
+    },
+    {
+      "start": 46.89,
+      "end": 46.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.98,
+      "end": 47.07,
+      "mouth": "small"
+    },
+    {
+      "start": 47.07,
+      "end": 47.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.16,
+      "end": 47.34,
+      "mouth": "small"
+    },
+    {
+      "start": 47.34,
+      "end": 47.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.43,
+      "end": 47.7,
+      "mouth": "small"
+    },
+    {
+      "start": 47.7,
+      "end": 48.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.15,
+      "end": 48.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.24,
+      "end": 48.33,
+      "mouth": "small"
+    },
+    {
+      "start": 48.33,
+      "end": 48.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.6,
+      "end": 48.69,
+      "mouth": "small"
+    },
+    {
+      "start": 48.69,
+      "end": 48.87,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.87,
+      "end": 49.05,
+      "mouth": "small"
+    },
+    {
+      "start": 49.05,
+      "end": 49.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.14,
+      "end": 49.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.32,
+      "end": 49.41,
+      "mouth": "small"
+    },
+    {
+      "start": 49.41,
+      "end": 49.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.5,
+      "end": 49.68,
+      "mouth": "small"
+    },
+    {
+      "start": 49.68,
+      "end": 49.86,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.86,
+      "end": 51.03,
+      "mouth": "small"
+    },
+    {
+      "start": 51.03,
+      "end": 51.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.93,
+      "end": 52.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.02,
+      "end": 52.2,
+      "mouth": "small"
+    },
+    {
+      "start": 52.2,
+      "end": 52.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.38,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 52.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.74,
+      "end": 52.92,
+      "mouth": "small"
+    },
+    {
+      "start": 52.92,
+      "end": 53.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.01,
+      "end": 53.28,
+      "mouth": "small"
+    },
+    {
+      "start": 53.28,
+      "end": 53.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.46,
+      "end": 53.73,
+      "mouth": "small"
+    },
+    {
+      "start": 53.73,
+      "end": 53.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.91,
+      "end": 54.27,
+      "mouth": "small"
+    },
+    {
+      "start": 54.27,
+      "end": 54.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.36,
+      "end": 54.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.45,
+      "end": 54.9,
+      "mouth": "small"
+    },
+    {
+      "start": 54.9,
+      "end": 54.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.99,
+      "end": 55.53,
+      "mouth": "small"
+    },
+    {
+      "start": 55.53,
+      "end": 55.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 55.8,
+      "end": 55.89,
+      "mouth": "small"
+    },
+    {
+      "start": 55.89,
+      "end": 55.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.98,
+      "end": 56.07,
+      "mouth": "small"
+    },
+    {
+      "start": 56.07,
+      "end": 56.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.34,
+      "end": 57.06,
+      "mouth": "small"
+    },
+    {
+      "start": 57.06,
+      "end": 57.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 57.15,
+      "end": 57.51,
+      "mouth": "small"
+    },
+    {
+      "start": 57.51,
+      "end": 57.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 57.87,
+      "end": 57.96,
+      "mouth": "small"
+    },
+    {
+      "start": 57.96,
+      "end": 58.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 58.05,
+      "end": 58.59,
+      "mouth": "small"
+    },
+    {
+      "start": 58.59,
+      "end": 58.95,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "Check",
+      "start": 0.0,
+      "end": 0.23999999463558197
+    },
+    {
+      "word": "out",
+      "start": 0.23999999463558197,
+      "end": 0.46000000834465027
+    },
+    {
+      "word": "the",
+      "start": 0.46000000834465027,
+      "end": 0.5799999833106995
+    },
+    {
+      "word": "2023",
+      "start": 0.5799999833106995,
+      "end": 1.2200000286102295
+    },
+    {
+      "word": "Porsche",
+      "start": 1.2200000286102295,
+      "end": 1.5199999809265137
+    },
+    {
+      "word": "Panamera",
+      "start": 1.5199999809265137,
+      "end": 2.0
+    },
+    {
+      "word": "Turbo",
+      "start": 2.0,
+      "end": 2.2799999713897705
+    },
+    {
+      "word": "S",
+      "start": 2.2799999713897705,
+      "end": 2.5999999046325684
+    },
+    {
+      "word": "It's",
+      "start": 2.9200000762939453,
+      "end": 2.9600000381469727
+    },
+    {
+      "word": "one",
+      "start": 2.9600000381469727,
+      "end": 3.059999942779541
+    },
+    {
+      "word": "of",
+      "start": 3.059999942779541,
+      "end": 3.140000104904175
+    },
+    {
+      "word": "the",
+      "start": 3.140000104904175,
+      "end": 3.2799999713897705
+    },
+    {
+      "word": "fastest",
+      "start": 3.2799999713897705,
+      "end": 3.5399999618530273
+    },
+    {
+      "word": "luxury",
+      "start": 3.5399999618530273,
+      "end": 3.940000057220459
+    },
+    {
+      "word": "sedans",
+      "start": 3.940000057220459,
+      "end": 4.199999809265137
+    },
+    {
+      "word": "on",
+      "start": 4.199999809265137,
+      "end": 4.360000133514404
+    },
+    {
+      "word": "the",
+      "start": 4.360000133514404,
+      "end": 4.460000038146973
+    },
+    {
+      "word": "market",
+      "start": 4.460000038146973,
+      "end": 4.599999904632568
+    },
+    {
+      "word": "today",
+      "start": 4.599999904632568,
+      "end": 4.900000095367432
+    },
+    {
+      "word": "boasting",
+      "start": 5.5,
+      "end": 5.519999980926514
+    },
+    {
+      "word": "a",
+      "start": 5.519999980926514,
+      "end": 5.739999771118164
+    },
+    {
+      "word": "0",
+      "start": 5.739999771118164,
+      "end": 5.940000057220459
+    },
+    {
+      "word": "60mph",
+      "start": 5.940000057220459,
+      "end": 6.78000020980835
+    },
+    {
+      "word": "time",
+      "start": 6.78000020980835,
+      "end": 7.079999923706055
+    },
+    {
+      "word": "of",
+      "start": 7.079999923706055,
+      "end": 7.179999828338623
+    },
+    {
+      "word": "just",
+      "start": 7.179999828338623,
+      "end": 7.380000114440918
+    },
+    {
+      "word": "2",
+      "start": 7.380000114440918,
+      "end": 7.559999942779541
+    },
+    {
+      "word": "9",
+      "start": 7.559999942779541,
+      "end": 7.960000038146973
+    },
+    {
+      "word": "seconds",
+      "start": 7.960000038146973,
+      "end": 8.260000228881836
+    },
+    {
+      "word": "That's",
+      "start": 8.819999694824219,
+      "end": 9.020000457763672
+    },
+    {
+      "word": "supercar",
+      "start": 9.020000457763672,
+      "end": 9.399999618530273
+    },
+    {
+      "word": "territory",
+      "start": 9.399999618530273,
+      "end": 9.819999694824219
+    },
+    {
+      "word": "wrapped",
+      "start": 9.819999694824219,
+      "end": 10.199999809265137
+    },
+    {
+      "word": "in",
+      "start": 10.199999809265137,
+      "end": 10.300000190734863
+    },
+    {
+      "word": "a",
+      "start": 10.300000190734863,
+      "end": 10.5
+    },
+    {
+      "word": "four",
+      "start": 10.5,
+      "end": 10.5600004196167
+    },
+    {
+      "word": "door",
+      "start": 10.5600004196167,
+      "end": 10.739999771118164
+    },
+    {
+      "word": "Under",
+      "start": 11.4399995803833,
+      "end": 11.520000457763672
+    },
+    {
+      "word": "the",
+      "start": 11.520000457763672,
+      "end": 11.819999694824219
+    },
+    {
+      "word": "hood",
+      "start": 11.819999694824219,
+      "end": 11.819999694824219
+    },
+    {
+      "word": "you",
+      "start": 12.039999961853027,
+      "end": 12.140000343322754
+    },
+    {
+      "word": "find",
+      "start": 12.140000343322754,
+      "end": 12.239999771118164
+    },
+    {
+      "word": "a",
+      "start": 12.239999771118164,
+      "end": 12.34000015258789
+    },
+    {
+      "word": "4",
+      "start": 12.34000015258789,
+      "end": 12.520000457763672
+    },
+    {
+      "word": "0",
+      "start": 12.520000457763672,
+      "end": 12.859999656677246
+    },
+    {
+      "word": "liter",
+      "start": 12.859999656677246,
+      "end": 13.0
+    },
+    {
+      "word": "twin",
+      "start": 13.0,
+      "end": 13.260000228881836
+    },
+    {
+      "word": "turbocharged",
+      "start": 13.260000228881836,
+      "end": 13.760000228881836
+    },
+    {
+      "word": "V8",
+      "start": 13.760000228881836,
+      "end": 14.180000305175781
+    },
+    {
+      "word": "It",
+      "start": 14.800000190734863,
+      "end": 14.819999694824219
+    },
+    {
+      "word": "cranks",
+      "start": 14.819999694824219,
+      "end": 14.960000038146973
+    },
+    {
+      "word": "out",
+      "start": 14.960000038146973,
+      "end": 15.180000305175781
+    },
+    {
+      "word": "a",
+      "start": 15.180000305175781,
+      "end": 15.300000190734863
+    },
+    {
+      "word": "staggering",
+      "start": 15.300000190734863,
+      "end": 15.579999923706055
+    },
+    {
+      "word": "620",
+      "start": 15.579999923706055,
+      "end": 16.34000015258789
+    },
+    {
+      "word": "horsepower",
+      "start": 16.34000015258789,
+      "end": 16.739999771118164
+    },
+    {
+      "word": "Designed",
+      "start": 17.219999313354492,
+      "end": 17.31999969482422
+    },
+    {
+      "word": "by",
+      "start": 17.31999969482422,
+      "end": 17.479999542236328
+    },
+    {
+      "word": "Porsche's",
+      "start": 17.479999542236328,
+      "end": 17.799999237060547
+    },
+    {
+      "word": "elite",
+      "start": 17.799999237060547,
+      "end": 17.959999084472656
+    },
+    {
+      "word": "engineers",
+      "start": 17.959999084472656,
+      "end": 18.31999969482422
+    },
+    {
+      "word": "it",
+      "start": 18.520000457763672,
+      "end": 18.639999389648438
+    },
+    {
+      "word": "balances",
+      "start": 18.639999389648438,
+      "end": 18.8799991607666
+    },
+    {
+      "word": "power",
+      "start": 18.8799991607666,
+      "end": 19.219999313354492
+    },
+    {
+      "word": "with",
+      "start": 19.219999313354492,
+      "end": 19.399999618530273
+    },
+    {
+      "word": "surprising",
+      "start": 19.399999618530273,
+      "end": 19.760000228881836
+    },
+    {
+      "word": "efficiency",
+      "start": 19.760000228881836,
+      "end": 20.100000381469727
+    },
+    {
+      "word": "for",
+      "start": 20.100000381469727,
+      "end": 20.360000610351562
+    },
+    {
+      "word": "its",
+      "start": 20.360000610351562,
+      "end": 20.440000534057617
+    },
+    {
+      "word": "class",
+      "start": 20.440000534057617,
+      "end": 20.739999771118164
+    },
+    {
+      "word": "Originally",
+      "start": 21.479999542236328,
+      "end": 21.700000762939453
+    },
+    {
+      "word": "priced",
+      "start": 21.700000762939453,
+      "end": 21.959999084472656
+    },
+    {
+      "word": "around",
+      "start": 21.959999084472656,
+      "end": 22.18000030517578
+    },
+    {
+      "word": "190k",
+      "start": 22.18000030517578,
+      "end": 22.860000610351562
+    },
+    {
+      "word": "new",
+      "start": 22.860000610351562,
+      "end": 23.079999923706055
+    },
+    {
+      "word": "it's",
+      "start": 23.479999542236328,
+      "end": 23.6200008392334
+    },
+    {
+      "word": "currently",
+      "start": 23.6200008392334,
+      "end": 23.920000076293945
+    },
+    {
+      "word": "trading",
+      "start": 23.920000076293945,
+      "end": 24.1200008392334
+    },
+    {
+      "word": "for",
+      "start": 24.1200008392334,
+      "end": 24.280000686645508
+    },
+    {
+      "word": "about",
+      "start": 24.280000686645508,
+      "end": 24.440000534057617
+    },
+    {
+      "word": "150k",
+      "start": 24.440000534057617,
+      "end": 25.139999389648438
+    },
+    {
+      "word": "Despite",
+      "start": 25.639999389648438,
+      "end": 25.920000076293945
+    },
+    {
+      "word": "the",
+      "start": 25.920000076293945,
+      "end": 26.100000381469727
+    },
+    {
+      "word": "drop",
+      "start": 26.100000381469727,
+      "end": 26.280000686645508
+    },
+    {
+      "word": "it",
+      "start": 26.360000610351562,
+      "end": 26.479999542236328
+    },
+    {
+      "word": "holds",
+      "start": 26.479999542236328,
+      "end": 26.579999923706055
+    },
+    {
+      "word": "value",
+      "start": 26.579999923706055,
+      "end": 26.84000015258789
+    },
+    {
+      "word": "well",
+      "start": 26.84000015258789,
+      "end": 27.079999923706055
+    },
+    {
+      "word": "for",
+      "start": 27.079999923706055,
+      "end": 27.239999771118164
+    },
+    {
+      "word": "such",
+      "start": 27.239999771118164,
+      "end": 27.34000015258789
+    },
+    {
+      "word": "a",
+      "start": 27.34000015258789,
+      "end": 27.5
+    },
+    {
+      "word": "high",
+      "start": 27.5,
+      "end": 27.639999389648438
+    },
+    {
+      "word": "end",
+      "start": 27.639999389648438,
+      "end": 27.799999237060547
+    },
+    {
+      "word": "model",
+      "start": 27.799999237060547,
+      "end": 27.979999542236328
+    },
+    {
+      "word": "The",
+      "start": 28.6200008392334,
+      "end": 28.84000015258789
+    },
+    {
+      "word": "all",
+      "start": 28.84000015258789,
+      "end": 29.040000915527344
+    },
+    {
+      "word": "wheel",
+      "start": 29.040000915527344,
+      "end": 29.18000030517578
+    },
+    {
+      "word": "drive",
+      "start": 29.18000030517578,
+      "end": 29.420000076293945
+    },
+    {
+      "word": "system",
+      "start": 29.420000076293945,
+      "end": 29.68000030517578
+    },
+    {
+      "word": "ensures",
+      "start": 29.68000030517578,
+      "end": 29.899999618530273
+    },
+    {
+      "word": "that",
+      "start": 29.899999618530273,
+      "end": 30.34000015258789
+    },
+    {
+      "word": "power",
+      "start": 30.34000015258789,
+      "end": 30.34000015258789
+    },
+    {
+      "word": "is",
+      "start": 30.34000015258789,
+      "end": 30.5
+    },
+    {
+      "word": "seamlessly",
+      "start": 30.5,
+      "end": 30.860000610351562
+    },
+    {
+      "word": "distributed",
+      "start": 30.860000610351562,
+      "end": 31.139999389648438
+    },
+    {
+      "word": "to",
+      "start": 31.139999389648438,
+      "end": 31.3799991607666
+    },
+    {
+      "word": "all",
+      "start": 31.3799991607666,
+      "end": 31.600000381469727
+    },
+    {
+      "word": "wheels",
+      "start": 31.600000381469727,
+      "end": 31.799999237060547
+    },
+    {
+      "word": "enhancing",
+      "start": 32.36000061035156,
+      "end": 32.36000061035156
+    },
+    {
+      "word": "grip",
+      "start": 32.36000061035156,
+      "end": 32.599998474121094
+    },
+    {
+      "word": "and",
+      "start": 32.599998474121094,
+      "end": 32.79999923706055
+    },
+    {
+      "word": "control",
+      "start": 32.79999923706055,
+      "end": 33.060001373291016
+    },
+    {
+      "word": "This",
+      "start": 33.91999816894531,
+      "end": 33.91999816894531
+    },
+    {
+      "word": "makes",
+      "start": 33.91999816894531,
+      "end": 34.060001373291016
+    },
+    {
+      "word": "the",
+      "start": 34.060001373291016,
+      "end": 34.2400016784668
+    },
+    {
+      "word": "Panamera",
+      "start": 34.2400016784668,
+      "end": 34.52000045776367
+    },
+    {
+      "word": "Turbo",
+      "start": 34.52000045776367,
+      "end": 34.79999923706055
+    },
+    {
+      "word": "S",
+      "start": 34.79999923706055,
+      "end": 34.97999954223633
+    },
+    {
+      "word": "not",
+      "start": 34.97999954223633,
+      "end": 35.15999984741211
+    },
+    {
+      "word": "just",
+      "start": 35.15999984741211,
+      "end": 35.41999816894531
+    },
+    {
+      "word": "fast",
+      "start": 35.41999816894531,
+      "end": 35.68000030517578
+    },
+    {
+      "word": "but",
+      "start": 35.880001068115234,
+      "end": 36.060001373291016
+    },
+    {
+      "word": "incredibly",
+      "start": 36.060001373291016,
+      "end": 36.380001068115234
+    },
+    {
+      "word": "stable",
+      "start": 36.380001068115234,
+      "end": 36.65999984741211
+    },
+    {
+      "word": "at",
+      "start": 36.65999984741211,
+      "end": 36.79999923706055
+    },
+    {
+      "word": "any",
+      "start": 36.79999923706055,
+      "end": 36.97999954223633
+    },
+    {
+      "word": "speed",
+      "start": 36.97999954223633,
+      "end": 37.20000076293945
+    },
+    {
+      "word": "It",
+      "start": 37.7400016784668,
+      "end": 37.79999923706055
+    },
+    {
+      "word": "squares",
+      "start": 37.79999923706055,
+      "end": 38.02000045776367
+    },
+    {
+      "word": "off",
+      "start": 38.02000045776367,
+      "end": 38.2599983215332
+    },
+    {
+      "word": "against",
+      "start": 38.2599983215332,
+      "end": 38.380001068115234
+    },
+    {
+      "word": "the",
+      "start": 38.380001068115234,
+      "end": 38.540000915527344
+    },
+    {
+      "word": "Mercedes",
+      "start": 38.540000915527344,
+      "end": 38.81999969482422
+    },
+    {
+      "word": "AMG",
+      "start": 38.81999969482422,
+      "end": 39.20000076293945
+    },
+    {
+      "word": "GT",
+      "start": 39.20000076293945,
+      "end": 39.52000045776367
+    },
+    {
+      "word": "63",
+      "start": 39.52000045776367,
+      "end": 39.959999084472656
+    },
+    {
+      "word": "S",
+      "start": 39.959999084472656,
+      "end": 40.2599983215332
+    },
+    {
+      "word": "which",
+      "start": 40.41999816894531,
+      "end": 40.63999938964844
+    },
+    {
+      "word": "has",
+      "start": 40.63999938964844,
+      "end": 40.779998779296875
+    },
+    {
+      "word": "630",
+      "start": 40.779998779296875,
+      "end": 41.36000061035156
+    },
+    {
+      "word": "horsepower",
+      "start": 41.36000061035156,
+      "end": 41.7599983215332
+    },
+    {
+      "word": "But",
+      "start": 42.400001525878906,
+      "end": 42.540000915527344
+    },
+    {
+      "word": "the",
+      "start": 42.540000915527344,
+      "end": 42.7599983215332
+    },
+    {
+      "word": "Porsche",
+      "start": 42.7599983215332,
+      "end": 42.86000061035156
+    },
+    {
+      "word": "edges",
+      "start": 42.86000061035156,
+      "end": 43.119998931884766
+    },
+    {
+      "word": "it",
+      "start": 43.119998931884766,
+      "end": 43.2599983215332
+    },
+    {
+      "word": "out",
+      "start": 43.2599983215332,
+      "end": 43.380001068115234
+    },
+    {
+      "word": "with",
+      "start": 43.380001068115234,
+      "end": 43.52000045776367
+    },
+    {
+      "word": "better",
+      "start": 43.52000045776367,
+      "end": 43.7400016784668
+    },
+    {
+      "word": "handling",
+      "start": 43.7400016784668,
+      "end": 44.02000045776367
+    },
+    {
+      "word": "finesse",
+      "start": 44.02000045776367,
+      "end": 44.380001068115234
+    },
+    {
+      "word": "Inside",
+      "start": 45.34000015258789,
+      "end": 45.58000183105469
+    },
+    {
+      "word": "the",
+      "start": 45.65999984741211,
+      "end": 45.79999923706055
+    },
+    {
+      "word": "Panamera",
+      "start": 45.79999923706055,
+      "end": 46.040000915527344
+    },
+    {
+      "word": "Turbo",
+      "start": 46.040000915527344,
+      "end": 46.2599983215332
+    },
+    {
+      "word": "S",
+      "start": 46.2599983215332,
+      "end": 46.540000915527344
+    },
+    {
+      "word": "offers",
+      "start": 46.540000915527344,
+      "end": 46.7400016784668
+    },
+    {
+      "word": "a",
+      "start": 46.7400016784668,
+      "end": 46.91999816894531
+    },
+    {
+      "word": "luxurious",
+      "start": 46.91999816894531,
+      "end": 47.220001220703125
+    },
+    {
+      "word": "experience",
+      "start": 47.220001220703125,
+      "end": 47.720001220703125
+    },
+    {
+      "word": "High",
+      "start": 48.220001220703125,
+      "end": 48.29999923706055
+    },
+    {
+      "word": "quality",
+      "start": 48.29999923706055,
+      "end": 48.58000183105469
+    },
+    {
+      "word": "materials",
+      "start": 48.58000183105469,
+      "end": 48.91999816894531
+    },
+    {
+      "word": "and",
+      "start": 48.91999816894531,
+      "end": 49.119998931884766
+    },
+    {
+      "word": "cutting",
+      "start": 49.119998931884766,
+      "end": 49.31999969482422
+    },
+    {
+      "word": "edge",
+      "start": 49.31999969482422,
+      "end": 49.459999084472656
+    },
+    {
+      "word": "tech",
+      "start": 49.459999084472656,
+      "end": 49.7400016784668
+    },
+    {
+      "word": "create",
+      "start": 49.7400016784668,
+      "end": 49.97999954223633
+    },
+    {
+      "word": "a",
+      "start": 49.97999954223633,
+      "end": 50.18000030517578
+    },
+    {
+      "word": "sophisticated",
+      "start": 50.18000030517578,
+      "end": 50.560001373291016
+    },
+    {
+      "word": "environment",
+      "start": 50.58000183105469,
+      "end": 51.02000045776367
+    },
+    {
+      "word": "So",
+      "start": 51.720001220703125,
+      "end": 52.15999984741211
+    },
+    {
+      "word": "would",
+      "start": 52.439998626708984,
+      "end": 52.52000045776367
+    },
+    {
+      "word": "you",
+      "start": 52.52000045776367,
+      "end": 52.65999984741211
+    },
+    {
+      "word": "choose",
+      "start": 52.65999984741211,
+      "end": 52.79999923706055
+    },
+    {
+      "word": "the",
+      "start": 52.79999923706055,
+      "end": 52.959999084472656
+    },
+    {
+      "word": "Porsche",
+      "start": 52.959999084472656,
+      "end": 53.15999984741211
+    },
+    {
+      "word": "Panamera",
+      "start": 53.15999984741211,
+      "end": 53.52000045776367
+    },
+    {
+      "word": "Turbo",
+      "start": 53.52000045776367,
+      "end": 53.7400016784668
+    },
+    {
+      "word": "S",
+      "start": 53.7400016784668,
+      "end": 53.97999954223633
+    },
+    {
+      "word": "for",
+      "start": 53.97999954223633,
+      "end": 54.099998474121094
+    },
+    {
+      "word": "its",
+      "start": 54.099998474121094,
+      "end": 54.220001220703125
+    },
+    {
+      "word": "unique",
+      "start": 54.220001220703125,
+      "end": 54.439998626708984
+    },
+    {
+      "word": "blend",
+      "start": 54.439998626708984,
+      "end": 54.63999938964844
+    },
+    {
+      "word": "of",
+      "start": 54.63999938964844,
+      "end": 54.81999969482422
+    },
+    {
+      "word": "speed",
+      "start": 54.81999969482422,
+      "end": 55.040000915527344
+    },
+    {
+      "word": "and",
+      "start": 55.040000915527344,
+      "end": 55.220001220703125
+    },
+    {
+      "word": "luxury",
+      "start": 55.220001220703125,
+      "end": 55.380001068115234
+    },
+    {
+      "word": "or",
+      "start": 55.900001525878906,
+      "end": 55.959999084472656
+    },
+    {
+      "word": "is",
+      "start": 55.959999084472656,
+      "end": 56.060001373291016
+    },
+    {
+      "word": "there",
+      "start": 56.060001373291016,
+      "end": 56.15999984741211
+    },
+    {
+      "word": "another",
+      "start": 56.15999984741211,
+      "end": 56.380001068115234
+    },
+    {
+      "word": "contender",
+      "start": 56.380001068115234,
+      "end": 56.70000076293945
+    },
+    {
+      "word": "in",
+      "start": 56.70000076293945,
+      "end": 56.81999969482422
+    },
+    {
+      "word": "your",
+      "start": 56.81999969482422,
+      "end": 56.939998626708984
+    },
+    {
+      "word": "garage",
+      "start": 56.939998626708984,
+      "end": 57.220001220703125
+    },
+    {
+      "word": "dreams",
+      "start": 57.220001220703125,
+      "end": 57.5
+    },
+    {
+      "word": "Let",
+      "start": 58.0,
+      "end": 58.040000915527344
+    },
+    {
+      "word": "us",
+      "start": 58.040000915527344,
+      "end": 58.15999984741211
+    },
+    {
+      "word": "know",
+      "start": 58.15999984741211,
+      "end": 58.2400016784668
+    },
+    {
+      "word": "your",
+      "start": 58.2400016784668,
+      "end": 58.41999816894531
+    },
+    {
+      "word": "thoughts",
+      "start": 58.41999816894531,
+      "end": 58.619998931884766
+    }
+  ],
+  "media": [
+    {
+      "path": "images/porsche-panamera-turbo-s/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/porsche-panamera-turbo-s/exterior_front-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/porsche-panamera-turbo-s/exterior_front-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/porsche-panamera-turbo-s/exterior_rear-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/porsche-panamera-turbo-s/exterior_rear-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/porsche-panamera-turbo-s/interior-01.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/porsche-panamera-turbo-s/interior-02.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rJv85YAw/2023-porsche-panamera-turbo-s",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2023 Porsche Panamera Turbo S",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-porsche-panamera-turbo-s-20260903205952/voice_auditions/onyx.mp3",
+    "british_narrator": "single-porsche-panamera-turbo-s-20260903205952/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-porsche-panamera-turbo-s-20260903205952/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-porsche-panamera-turbo-s-20260903205952/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-porsche-panamera-turbo-s-20260903205952/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-porsche-panamera-turbo-s-20260903205952/images/porsche-panamera-turbo-s/exterior_side-01-nobg.png",
+  "side_profile_facing_direction": "left",
+  "video": "single_car_short.mp4"
+}
