@@ -1,0 +1,498 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-03T18:00:11.475Z",
+  "query": "Chevrolet C10 Lm7 Swap",
+  "visual_highlight": "engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KdM4XlWv/1986-chevrolet-c10-lm7-swap",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KdM4XlWv/1986-chevrolet-c10-lm7-swap",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 23,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "1986 Chevrolet C10 LM7 Swap"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KdM4XlWv/1986-chevrolet-c10-lm7-swap",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "1986 Chevrolet C10 LM7 Swap",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/exterior/3R2pX1GX-2zkCNNU/edit/4Ms_o.jpg?t=178760306629",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1986 Chevrolet C10 LM7 Swap",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 409807
+    },
+    {
+      "path": "interior-02.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e63ca748a42a22d6e9267ed0c716186ca422ff1a/photos/application/s-hI8hdzM.jpeg?t=178642245965",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1986 Chevrolet C10 LM7 Swap",
+      "width": 542,
+      "height": 361,
+      "bytes": 246341
+    },
+    {
+      "path": "highlight-03.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e63ca748a42a22d6e9267ed0c716186ca422ff1a/photos/application/s-xkSuzvv.jpeg?t=178642246299",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1986 Chevrolet C10 LM7 Swap",
+      "width": 542,
+      "height": 361,
+      "bytes": 331186
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/interior/3R2pX1GX-uGiEiEw/edit/Xf4sR.jpg?t=178760179120",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1986 Chevrolet C10 LM7 Swap",
+      "width": 542,
+      "height": 361,
+      "bytes": 386781
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/interior/3R2pX1GX-7BBZN4X/edit/T9uBN.jpg?t=178760177681",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1986 Chevrolet C10 LM7 Swap",
+      "width": 542,
+      "height": 361,
+      "bytes": 256312
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/exterior/3R2pX1GX-CIINysy/edit/uCkDL.jpg?t=178760313542",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1986 Chevrolet C10 LM7 Swap",
+      "width": 542,
+      "height": 361,
+      "bytes": 227453
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/exterior/3R2pX1GX-YVXOJUg/edit/Bhyhm.jpg?t=178760316392",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1986 Chevrolet C10 LM7 Swap",
+      "width": 542,
+      "height": 361,
+      "bytes": 363049
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/exterior/3R2pX1GX-mUGnWVT/edit/j8P62.jpg?t=178760318436",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1986 Chevrolet C10 LM7 Swap",
+      "width": 542,
+      "height": 361,
+      "bytes": 310310
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/exterior/3R2pX1GX-cgNH8gG/edit/Qe4Xo.jpg?t=178760324326",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1986 Chevrolet C10 LM7 Swap",
+      "width": 542,
+      "height": 361,
+      "bytes": 218160
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/9332968ede701345a19223c3e4de5c57461156f4/photos/9Q5QRLGY-dFUrCiVYMzW.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 10505 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/867c079143b303266598b819200bd14c31d558f9/photos/rJaMmgww-xpz5ppJ.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 12513 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/da85992aab23824f77e1d1e951202c8d3d9cef9a/photos/3zPREEqd-TO3Svoo.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 1355 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/fc63f8aada9986ad684d09fae71554032119ea14/photos/7v-1aGuSY.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 10900 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d62607b754e63c8df2eccdafee5c32b0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d62607b754e63c8df2eccdafee5c32b0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1986 Chevrolet C10 LM7 Swap",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d62607b754e63c8df2eccdafee5c32b0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KdM4XlWv/1986-chevrolet-c10-lm7-swap",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d62607b754e63c8df2eccdafee5c32b0/manifest/video.m3u8",
+      "auction_title": "1986 Chevrolet C10 LM7 Swap",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/265a5632026efbce14995a4c2bc20cf9/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/265a5632026efbce14995a4c2bc20cf9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1986 Chevrolet C10 LM7 Swap",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/265a5632026efbce14995a4c2bc20cf9/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KdM4XlWv/1986-chevrolet-c10-lm7-swap",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/265a5632026efbce14995a4c2bc20cf9/manifest/video.m3u8",
+      "auction_title": "1986 Chevrolet C10 LM7 Swap",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f8922af5eafa1fc84faf7faed147a21e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f8922af5eafa1fc84faf7faed147a21e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "1986 Chevrolet C10 LM7 Swap",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f8922af5eafa1fc84faf7faed147a21e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KdM4XlWv/1986-chevrolet-c10-lm7-swap",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f8922af5eafa1fc84faf7faed147a21e/manifest/video.m3u8",
+      "auction_title": "1986 Chevrolet C10 LM7 Swap",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image lacks clear evidence of the target vehicle make, model, and generation.",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "c10",
+        "detected_generation_or_year": "1986",
+        "detected_variant_or_engine": "Lm7 Swap",
+        "visible_match_evidence": [
+          "squared body design",
+          "classic Chevrolet grille",
+          "specific headlights",
+          "overall proportions typical of C10"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "c10",
+        "detected_generation_or_year": "1986",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Chevrolet logo on grille",
+          "Headlight design typical of 1986 C10",
+          "Overall body shape and proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "C10",
+        "detected_generation_or_year": "1986",
+        "detected_variant_or_engine": "Lm7 Swap",
+        "visible_match_evidence": [
+          "body shape",
+          "hood design",
+          "side profile"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "C10",
+        "detected_generation_or_year": "1986",
+        "detected_variant_or_engine": "Lm7 Swap",
+        "visible_match_evidence": [
+          "Chevrolet badge",
+          "C10 body style",
+          "1980s truck proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "c10",
+        "detected_generation_or_year": "1986",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Chevrolet badge on tailgate",
+          "Body style characteristic of C10",
+          "Single cab configuration"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "c10",
+        "detected_generation_or_year": "1986",
+        "detected_variant_or_engine": "Lm7 Swap",
+        "visible_match_evidence": [
+          "interior design",
+          "seat fabric",
+          "layout typical of 1986 C10"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "c10",
+        "detected_generation_or_year": "1986",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "dashboard design",
+          "steering wheel style",
+          "interior layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "c10",
+        "detected_generation_or_year": "1986",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "classic dashboard design",
+          "analog gauges",
+          "styling attributes consistent with 1986 C10"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
