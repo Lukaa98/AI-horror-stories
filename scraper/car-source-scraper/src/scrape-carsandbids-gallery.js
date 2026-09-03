@@ -250,6 +250,20 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
         if (!haystack.includes(token)) score -= 90;
       }
       if (/sold for|bid to|sold after|ended/i.test(entry.text)) score += 6;
+      // Prefer a coupe/hardtop listing over a convertible/roadster one by
+      // default -- a drop-top's own roofline/rear deck makes for a worse
+      // establishing shot and (for models sold both ways) an inconsistent
+      // silhouette across scenes. Only skip this when the request itself
+      // asked for a convertible/spyder/roadster/cabriolet body style, or
+      // when the model is convertible-only (has no matching hardtop
+      // listings) -- this is a soft ranking penalty, not a hard filter, so
+      // a convertible still wins if it's genuinely the only option.
+      const wantsConvertible = tokens.some((token) =>
+        ["convertible", "spyder", "roadster", "cabriolet", "cabrio", "drophead", "targa"].includes(token)
+      );
+      if (!wantsConvertible && /\b(convertible|spyder|roadster|cabriolet|cabrio|drophead)\b/i.test(haystack)) {
+        score -= 30;
+      }
       if (/spyder|convertible/i.test(haystack) && tokens.includes("coupe")) score -= 25;
       return { ...entry, title: cleanedTitle, titleYear: titleYear || null, score };
     })
@@ -534,8 +548,12 @@ function candidateLooksRelevant(candidate, { auctionId, makeToken, modelToken, q
 // a bigger raw pool gives them more real variety to actually choose from
 // instead of being stuck with whatever handful of types survived a
 // tighter cap.
-const MAX_CHOSEN = 12;
-const MAX_CANDIDATES_PER_LABEL = { interior: 3, engine: 2, detail: 3, wheel: 2, highlight: 1 };
+const MAX_CHOSEN = 14;
+// engine/wheel raised from 2 -- with only 2 engine candidates forwarded,
+// both failing the later strict AI review (bad angle, closed hood, blur)
+// meant zero engine photos survived even when the gallery genuinely had
+// good ones further down, never given a chance to be considered at all.
+const MAX_CANDIDATES_PER_LABEL = { interior: 3, engine: 3, detail: 3, wheel: 3, highlight: 1 };
 
 function chooseImages(candidates, desiredLabels, queryTokens) {
   const ranked = candidates

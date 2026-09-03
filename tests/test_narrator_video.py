@@ -229,38 +229,82 @@ def test_drift_doodle_track_builds_small_clips_for_the_full_duration(tmp_path):
 def test_drag_race_track_returns_empty_without_both_cutouts(tmp_path):
     cutout = tmp_path / "car.png"
     _make_transparent_png(cutout)
-    assert _drag_race_track(None, str(cutout), 400, 300, CANVAS, 1.0, 4.0) == []
-    assert _drag_race_track(str(cutout), str(tmp_path / "missing.png"), 400, 300, CANVAS, 1.0, 4.0) == []
+    assert _drag_race_track(None, str(cutout), 400, 300, None, None, CANVAS, 1.0, 8.0) == ([], [])
+    assert _drag_race_track(str(cutout), str(tmp_path / "missing.png"), 400, 300, None, None, CANVAS, 1.0, 8.0) == ([], [])
 
 
 def test_drag_race_track_returns_empty_for_a_too_short_beat(tmp_path):
     cutout = tmp_path / "car.png"
     _make_transparent_png(cutout)
-    assert _drag_race_track(str(cutout), str(cutout), 400, 300, CANVAS, 1.0, 1.1) == []
+    assert _drag_race_track(str(cutout), str(cutout), 400, 300, None, None, CANVAS, 1.0, 1.2) == ([], [])
 
 
-def test_drag_race_track_the_higher_horsepower_car_reaches_the_bottom_first(tmp_path):
+def test_drag_race_track_skips_the_countdown_lights_on_a_short_beat(tmp_path):
+    """A beat too short to fit the 3-second lead-in still races (just
+    without lights), rather than being dropped entirely."""
+    cutout = tmp_path / "car.png"
+    _make_transparent_png(cutout)
+    clips, sfx = _drag_race_track(str(cutout), str(cutout), 400, 300, None, None, CANVAS, 1.0, 3.0)
+    assert len(clips) == 2  # just the two cars, no light clips
+    assert sfx == []
+
+
+def test_drag_race_track_the_shorter_quarter_mile_time_wins(tmp_path):
     main_cutout = tmp_path / "main.png"
     rival_cutout = tmp_path / "rival.png"
     _make_transparent_png(main_cutout)
     _make_transparent_png(rival_cutout)
 
-    main_clip, rival_clip = _drag_race_track(
-        str(main_cutout), str(rival_cutout), main_hp=300, rival_hp=500, size=CANVAS, seg_start=2.0, seg_end=6.0
+    clips, sfx = _drag_race_track(
+        str(main_cutout), str(rival_cutout), main_hp=300, rival_hp=1000,
+        main_quarter_mile=10.5, rival_quarter_mile=11.5,  # rival has more HP but is slower in the 1/4 mile
+        size=CANVAS, seg_start=2.0, seg_end=10.0,
     )
+    # A beat this long (8s) gets the countdown lights: 3 lights + 2 cars.
+    assert len(clips) == 5
+    assert len(sfx) == 3  # one chime per light step
+    main_clip, rival_clip = clips[-2], clips[-1]
     assert main_clip.start == 2.0 and rival_clip.start == 2.0
-    assert main_clip.duration == 4.0 and rival_clip.duration == 4.0
+    total_duration = (10.0 - 2.0)
+    assert main_clip.duration == total_duration and rival_clip.duration == total_duration
 
-    # Rival (500hp) should win: it reaches further down the track by the
-    # end of the beat than the main car (300hp) does, at the same instant.
-    _, main_y_end = main_clip.pos(main_clip.duration)
-    _, rival_y_end = rival_clip.pos(rival_clip.duration)
-    assert rival_y_end > main_y_end
+    # The main car (quicker quarter mile, despite less horsepower) must
+    # reach the finish line -- rival, being slower, stops short of it.
+    main_x_end, _ = main_clip.pos(total_duration)
+    rival_x_end, _ = rival_clip.pos(total_duration)
+    finish_x = CANVAS[0] - CANVAS[0] * 0.02
+    assert abs(main_x_end + main_clip.size[0] - finish_x) < 1.0
+    assert rival_x_end + rival_clip.size[0] < finish_x - 1.0
 
-    # Both lanes stay on their own side of the frame the whole time.
-    main_x, _ = main_clip.pos(0.0)
-    rival_x, _ = rival_clip.pos(0.0)
-    assert main_x < CANVAS[0] / 2 < rival_x
+    # Both cars sit at the start line (not yet moving) during the lights,
+    # and move strictly left-to-right, not top-to-bottom.
+    main_x_start, main_y_start = main_clip.pos(0.0)
+    main_x_mid, main_y_mid = main_clip.pos(3.0)  # lights finish at t=3, car starts moving
+    assert main_x_start == main_x_mid == CANVAS[0] * 0.02
+    assert main_y_start == main_y_mid  # y never changes -- horizontal movement only
+    main_x_late, _ = main_clip.pos(total_duration - 0.01)
+    assert main_x_late > main_x_mid
+
+
+def test_drag_race_track_falls_back_to_horsepower_without_quarter_mile_times(tmp_path):
+    main_cutout = tmp_path / "main.png"
+    rival_cutout = tmp_path / "rival.png"
+    _make_transparent_png(main_cutout)
+    _make_transparent_png(rival_cutout)
+
+    clips, _ = _drag_race_track(
+        str(main_cutout), str(rival_cutout), main_hp=300, rival_hp=500,
+        main_quarter_mile=None, rival_quarter_mile=None,
+        size=CANVAS, seg_start=2.0, seg_end=10.0,
+    )
+    main_clip, rival_clip = clips[-2], clips[-1]
+    total_duration = 8.0
+    main_x_end, _ = main_clip.pos(total_duration)
+    rival_x_end, _ = rival_clip.pos(total_duration)
+    finish_x = CANVAS[0] - CANVAS[0] * 0.02
+    # Rival (more horsepower) wins when no quarter-mile time is verified.
+    assert abs(rival_x_end + rival_clip.size[0] - finish_x) < 1.0
+    assert main_x_end + main_clip.size[0] < finish_x - 1.0
 
 
 def test_progress_bar_track_fills_left_to_right_over_the_real_duration():

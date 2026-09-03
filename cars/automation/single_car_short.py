@@ -101,6 +101,7 @@ PACKAGE_SCHEMA = {
                 "required": [
                     "media_type", "headline", "narration", "rival_make", "rival_model",
                     "main_horsepower", "rival_horsepower",
+                    "main_quarter_mile_seconds", "rival_quarter_mile_seconds",
                 ],
                 "properties": {
                     "media_type": {"type": "string", "enum": ["exterior", "engine", "interior", "detail", "wheel"]},
@@ -132,6 +133,15 @@ PACKAGE_SCHEMA = {
                     # sentence. null/null outside a rival-comparison scene.
                     "main_horsepower": {"type": ["integer", "null"]},
                     "rival_horsepower": {"type": ["integer", "null"]},
+                    # Verified quarter-mile times (seconds, e.g. 11.5) for
+                    # both cars on the same rival-comparison scene -- the
+                    # drag-race doodle uses the real ratio between these two
+                    # so the faster car actually finishes in less time
+                    # instead of just "winning" arbitrarily. null/null when
+                    # a reliable published figure isn't available for both
+                    # cars (falls back to the horsepower comparison then).
+                    "main_quarter_mile_seconds": {"type": ["number", "null"]},
+                    "rival_quarter_mile_seconds": {"type": ["number", "null"]},
                 },
             },
         },
@@ -168,8 +178,9 @@ def _strip_citations(text):
 
 
 def _research_script_prompt(label, year_scope, retry_feedback=""):
-    return f"""Research and write one original vertical car-video package about {label}, scoped to {year_scope}.{retry_feedback}
-Use web search and verify every technical comparison. Write a quick, conversational narration of {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total so faster TTS lands near 55-60 seconds, split across 5-7 scenes in speaking order -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go, and if you land under {TARGET_WORDS[0]}, add more concrete detail (another spec, another sentence of context) rather than turning in a short script. This word count is a hard requirement, not a suggestion.{retry_feedback}
+
+Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison. Write a quick, conversational narration split across 5-7 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
@@ -177,7 +188,9 @@ Headlines are only for important facts and must be 1-4 words (examples: model/ch
 
 When this car's original MSRP when new and a rough current used/market price are both verifiable, work one beat around that comparison -- especially call it out when it's notable: a luxury or exotic car that has depreciated hard off its window sticker, or one (often a limited-run or enthusiast favorite) that has held or even gained value. Give both numbers as approximate round figures (e.g. "started around $85K new, trades for about $40K today"), and make that scene's headline the price figures themselves (e.g. "$85K -> $40K" or "Holds Its Value"), still 1-4 words/tokens. Skip this beat entirely when solid pricing can't be verified with web search -- never guess at numbers.
 
-When a scene's "narration" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown exactly during that scene; otherwise set both to null. Only set these when the narration truly names one specific rival car in THAT scene, not a vague "its rivals" or a whole segment/class. That scene's narration must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search. Also set that same scene's main_horsepower/rival_horsepower to those same two verified figures as plain integers (e.g. 420 and 455) -- these drive a visual drag-race animation between the two cars, so they must exactly match the numbers stated in the narration. Set both to null on every other scene.
+When a scene's "narration" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown exactly during that scene; otherwise set both to null. Only set these when the narration truly names one specific rival car in THAT scene, not a vague "its rivals" or a whole segment/class. That scene's narration must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search. Also set that same scene's main_horsepower/rival_horsepower to those same two verified figures as plain integers (e.g. 420 and 455). This narration should stay about the cars themselves (specs, character, verdict) -- never narrate or describe an animation, race, or visual; nothing on screen needs a spoken introduction. Set both horsepower fields to null on every other scene.
+
+On that same rival-comparison scene, also look up each car's published quarter-mile time in seconds (e.g. 11.5) and set main_quarter_mile_seconds/rival_quarter_mile_seconds to those two verified figures -- these (not the horsepower numbers) drive a silent visual drag-race animation between the two cars that plays behind the narration, so the faster car needs to actually be the one with the shorter time. Leave both null if you can't verify a real published time for both cars; do not estimate or guess. Set both to null on every other scene.
 
 Also return "start_year" and "end_year": the exact model-year range of the generation your script actually describes (the same year, twice, if it's a single model year). This must reflect what you actually researched and wrote about, even when the scope above was "the best-known generation" and you had to pick one yourself -- the photos shown alongside the narration are gathered using these years, so they need to match the generation you're describing."""
 
@@ -197,7 +210,7 @@ def _request_script_package(prompt):
     return package
 
 
-def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=3):
+def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
         f"model years {start_year}-{end_year}" if start_year and end_year
@@ -207,8 +220,10 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     for attempt in range(1, max_attempts + 1):
         retry_feedback = (
             f" Your previous attempt came back at {package['word_count']} words, outside the "
-            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} target -- rewrite from scratch so the narration lands "
-            f"squarely in that range this time." if package else ""
+            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} target -- rewrite from scratch, and if the shortfall is "
+            f"large, add real content (another spec, a second comparison point, more color on the driving "
+            f"feel) rather than just padding sentences, so the narration lands squarely in that range "
+            f"this time." if package else ""
         )
         package = _request_script_package(_research_script_prompt(label, year_scope, retry_feedback))
         count = package["word_count"]
@@ -461,13 +476,16 @@ def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum
     if minimum <= duration <= maximum:
         return duration
     tempo = duration / target
-    # atempo accepts 0.5-2.0 -- comfortably enough for a script inside
-    # HARD_WORD_RANGE, but a script research_script now lets through
-    # outside that range (rather than failing the build over it) can still
-    # need more correction than this covers, in which case the clamp
-    # saturates and the real output duration lands short of `target`
-    # rather than exactly on it.
-    tempo = max(0.5, min(2.0, tempo))
+    # Slowing speech down to stretch a short script out to ~target was the
+    # actual complaint ("had to watch at 1.5x speed") -- a big atempo
+    # slowdown undoes the whole point of FAST_TTS_SPEED, since it stacks on
+    # top of speech that was already recorded fast. Capping the floor much
+    # closer to 1.0 means a too-short script just produces a shorter final
+    # video instead of artificially dragged-out speech -- a real tradeoff,
+    # but the requested one: pace matters more than hitting exactly ~58s.
+    # The ceiling stays generous (speeding TTS up reads fine, unlike
+    # slowing it down) for a script that runs long instead.
+    tempo = max(0.92, min(2.0, tempo))
     adjusted = audio_path.with_name(f"{audio_path.stem}-timed{audio_path.suffix}")
     subprocess.run(
         ["ffmpeg", "-y", "-i", str(audio_path), "-filter:a", f"atempo={tempo:.5f}", str(adjusted)],

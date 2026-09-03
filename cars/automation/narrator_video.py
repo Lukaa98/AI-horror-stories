@@ -57,33 +57,39 @@ TYPING_VOLUME = 0.36  # 20% louder, on request
 # procedurally generated smoke puffs -- decorative only, not tied to any
 # scene, meant to give the video some ambient personality without pulling
 # focus from the narrator.
-DOODLE_WIDTH_RATIO = 0.14
+DOODLE_WIDTH_RATIO = 0.2
 DOODLE_MARGIN_RATIO = 0.05
 # A flat 2D photo spun a full 360deg reads as the car flipping upside down
-# for half of every cycle, not drifting -- bounding the rotation to a small
-# swing and pairing it with a lateral sway and a horizontal squash/stretch
-# approximates a rear-wheel fishtail (nose roughly fixed, tail swinging)
-# well enough without real 3D geometry.
-DOODLE_SWAY_PERIOD_SECONDS = 1.7
-DOODLE_MAX_ROTATION_DEG = 13
-DOODLE_LATERAL_SWAY_RATIO = 0.018
-DOODLE_SQUASH_AMOUNT = 0.1
-SMOKE_PUFF_DIAMETER_RATIO = 0.045
+# for half of every cycle, not drifting -- bounding the rotation to a swing
+# and pairing it with a lateral sway approximates a rear-wheel fishtail
+# (nose roughly fixed, tail swinging) well enough without real 3D geometry.
+# An earlier version also squashed the width per frame for a pseudo-3D
+# look, but that combined with a real (imperfectly-masked) photo cutout
+# read as a washed-out outline rather than a car -- dropped in favor of
+# just rotation + sway, which is simpler and doesn't touch the image's own
+# pixels at all.
+DOODLE_SWAY_PERIOD_SECONDS = 1.1
+DOODLE_MAX_ROTATION_DEG = 22
+DOODLE_LATERAL_SWAY_RATIO = 0.025
+SMOKE_PUFF_DIAMETER_RATIO = 0.03
 SMOKE_PULSE_PERIOD_SECONDS = 0.9
 
-# Two small side-profile cutouts racing top-to-bottom along the empty
-# margins beside the narrator during a horsepower-comparison beat -- winner
-# is whichever car has more horsepower (a deliberately silly stand-in for a
-# real 0-60 simulation, not a physics claim).
-RACE_CAR_WIDTH_RATIO = 0.13
+# Two small side-profile cutouts drag-racing left-to-right in their own
+# lane -- side-profile photos read as "racing" moving horizontally, not
+# vertically, since that's the angle they're actually photographed at.
+# Winner is whichever car has the shorter (verified) quarter-mile time when
+# available, falling back to more horsepower otherwise -- a deliberately
+# simplified stand-in for a real drag race, not a physics simulation.
+RACE_CAR_WIDTH_RATIO = 0.16
 RACE_LANE_INSET_RATIO = 0.02
-RACE_FINISH_MARGIN_RATIO = 0.02
-RACE_LOSER_LAG_RATIO = 0.22
-
-# A quick drag-strip "3-2-1-GO" flash over the first beat -- a short-form
-# hook, and it echoes the drag-race motif used elsewhere in the format.
-COUNTDOWN_STEPS = ["3", "2", "1", "GO!"]
-COUNTDOWN_STEP_SECONDS = 0.32
+RACE_LANE_GAP_RATIO = 0.09
+# A drag-strip "Christmas tree" -- red/yellow/green lights at the start
+# line, one second apart, before the cars actually move -- instead of a
+# generic countdown at the start of the whole video (which had nothing to
+# do with the race it was supposedly leading into).
+RACE_COUNTDOWN_STEP_SECONDS = 1.0
+RACE_COUNTDOWN_STEPS = 3
+RACE_MIN_SECONDS_FOR_COUNTDOWN = 4.0
 COUNTDOWN_SFX = "countdown_beep.wav"
 COUNTDOWN_GO_SFX = "countdown_go.wav"
 COUNTDOWN_SFX_VOLUME = 0.5
@@ -117,7 +123,11 @@ CAPTION_CHUNK_WORDS = 1
 # next one appears -- a typewriter reveal instead of the whole headline
 # popping in at once. "Fairly quick": the full headline is typically fully
 # typed out in well under a second.
-TYPING_CHAR_SECONDS = 0.06
+# Slowed down further on request ("make typing sounds like 1 second
+# longer") -- a typical headline now takes close to a full second to type
+# out, closer to the typing.wav bed's own natural length (~1.3s) instead of
+# getting trimmed down to a fraction of it.
+TYPING_CHAR_SECONDS = 0.1
 
 # Four poses, cycled once per sentence: steady/jolt are the small "redraw
 # flicker" (line weight + a tiny arm/brow twitch, no lean); lean_left/
@@ -660,11 +670,17 @@ def _generate_smoke_puff_image(diameter):
 
 def _drift_doodle_track(cutout_path, size, duration):
     """A tiny version of the car's own side-profile cutout, fishtailing in
-    place in a corner -- a bounded rotation + lateral sway + horizontal
-    squash instead of a full 360deg spin (see DOODLE_MAX_ROTATION_DEG's own
-    comment for why), with a couple of smoke puffs breathing near the rear
-    wheels -- an ambient decoration for the whole video, not tied to any
-    particular scene.
+    place in a corner -- a bounded rotation + lateral sway instead of a
+    full 360deg spin (see DOODLE_MAX_ROTATION_DEG's own comment for why),
+    with a couple of smoke puffs breathing near the rear wheels -- an
+    ambient decoration for the whole video, not tied to any particular
+    scene.
+
+    Only rotates and repositions the image -- an earlier version also
+    squashed its width per frame for a pseudo-3D look, but combined with a
+    real (imperfectly-masked) photo cutout that read as a washed-out
+    outline rather than an actual car, so this sticks to transforms that
+    don't touch the image's own pixel data.
 
     Returns a plain list of small clips (not a nested CompositeVideoClip)
     for the caller to splice straight into its own composite -- wrapping
@@ -678,31 +694,26 @@ def _drift_doodle_track(cutout_path, size, duration):
     base = ImageClip(str(cutout_path)).resize(width=width * DOODLE_WIDTH_RATIO)
     car_w, car_h = base.size
     sway_px = width * DOODLE_LATERAL_SWAY_RATIO
-    # The squash and the lateral sway both grow the car's on-screen footprint
-    # beyond its own resting size -- sizing the safe area off the *maximum*
-    # extent it can ever reach, not its resting size, is what actually fixes
-    # the reported bug where part of the car got clipped/hidden whenever the
-    # motion carried it past whatever area was actually accounted for.
-    max_half_width = (car_w * (1 + DOODLE_SQUASH_AMOUNT)) / 2 + sway_px
-    cx = width - width * DOODLE_MARGIN_RATIO - max_half_width
-    cy = height - height * DOODLE_MARGIN_RATIO - car_h / 2
+    # A rotated rectangle's bounding box grows a bit beyond its own resting
+    # size -- sizing the safe area off that *rotated* extent (not the
+    # resting size) plus the sway is what actually fixes the reported bug
+    # where part of the car got clipped/hidden whenever the motion carried
+    # it past whatever area was actually accounted for.
+    angle_rad = math.radians(DOODLE_MAX_ROTATION_DEG)
+    rotated_half_width = (car_w * abs(math.cos(angle_rad)) + car_h * abs(math.sin(angle_rad))) / 2
+    rotated_half_height = (car_w * abs(math.sin(angle_rad)) + car_h * abs(math.cos(angle_rad))) / 2
+    cx = width - width * DOODLE_MARGIN_RATIO - rotated_half_width - sway_px
+    cy = height - height * DOODLE_MARGIN_RATIO - rotated_half_height
 
     def rotation_angle(t):
         return DOODLE_MAX_ROTATION_DEG * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS)
 
-    def x_scale(t):
-        # Out of phase with the rotation -- narrowing as it rotates one way
-        # and widening as it swings back is what sells the rear end moving
-        # toward/away from camera instead of just tilting flat.
-        return 1.0 + DOODLE_SQUASH_AMOUNT * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS + math.pi / 2)
-
     def car_position(t):
         sway = sway_px * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS)
-        return (cx - (car_w * x_scale(t)) / 2 + sway, cy - car_h / 2)
+        return (cx - car_w / 2 + sway, cy - car_h / 2)
 
     fishtailing_car = (
         base.set_duration(duration)
-        .resize(lambda t: (x_scale(t) * car_w, car_h))
         .rotate(rotation_angle, expand=False)
         .set_position(car_position)
     )
@@ -710,17 +721,17 @@ def _drift_doodle_track(cutout_path, size, duration):
     puff_diameter = max(10, int(width * SMOKE_PUFF_DIAMETER_RATIO))
     puff_image = _generate_smoke_puff_image(puff_diameter)
     puff_clips = []
-    # Two puffs near the base of the car, roughly where the rear wheels
-    # sit, each breathing in size on its own phase-shifted pulse -- fixed
-    # in place rather than orbiting, which reads as smoke billowing by the
-    # tires instead of the odd "trailing dots" the old orbiting puffs had.
-    for phase, x_offset in ((0.0, -car_w * 0.28), (0.55, car_w * 0.28)):
+    # Two small puffs near the base of the car, clear of the body itself,
+    # each breathing in size on its own phase-shifted pulse -- fixed in
+    # place rather than orbiting, which read as an odd "trailing dots"
+    # trail rather than smoke billowing by the tires.
+    for phase, x_offset in ((0.0, -car_w * 0.32), (0.55, car_w * 0.32)):
         def puff_scale(t, phase=phase):
-            return 0.6 + 0.4 * (0.5 + 0.5 * math.sin(2 * math.pi * t / SMOKE_PULSE_PERIOD_SECONDS + phase))
+            return 0.5 + 0.35 * (0.5 + 0.5 * math.sin(2 * math.pi * t / SMOKE_PULSE_PERIOD_SECONDS + phase))
 
         def puff_position(t, x_offset=x_offset, phase=phase):
             d = puff_diameter * puff_scale(t, phase)
-            return (cx + x_offset - d / 2, cy + car_h * 0.32 - d / 2)
+            return (cx + x_offset - d / 2, cy + car_h * 0.45 - d / 2)
 
         puff_clips.append(
             ImageClip(puff_image).set_duration(duration).resize(puff_scale).set_position(puff_position)
@@ -729,69 +740,128 @@ def _drift_doodle_track(cutout_path, size, duration):
     return [*puff_clips, fishtailing_car]
 
 
-def _drag_race_lane_clip(path, car_width, x_center, top_y, bottom_y, seg_start, seg_duration, is_winner):
-    """One car's clip for _drag_race_track -- a straight top-to-bottom
-    move, the winner reaching bottom_y exactly at the end of the beat, the
-    loser reaching only partway (RACE_LOSER_LAG_RATIO short) by then."""
+def _traffic_light_image(width, height, lit_count):
+    """A small red/yellow/green light stack -- lit_count lights glow (from
+    the top down) with the rest dim, like a drag-strip "Christmas tree"."""
+    img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    draw.rounded_rectangle([0, 0, width - 1, height - 1], radius=width * 0.2, fill=(25, 25, 25, 235))
+    dim = [(90, 20, 20, 255), (95, 80, 10, 255), (15, 70, 25, 255)]
+    lit = [(255, 40, 40, 255), (255, 205, 40, 255), (50, 230, 70, 255)]
+    bulb_d = width * 0.66
+    gap = (height - 3 * bulb_d) / 4
+    for i in range(3):
+        color = lit[i] if i < lit_count else dim[i]
+        x0 = (width - bulb_d) / 2
+        y0 = gap + i * (bulb_d + gap)
+        draw.ellipse([x0, y0, x0 + bulb_d, y0 + bulb_d], fill=color)
+    return np.array(img)
+
+
+def _drag_race_lane_clip(path, car_width, y_center, start_x, finish_x, seg_start, countdown_duration, race_duration, finish_cap):
+    """One car's clip for _drag_race_track -- sits at the start line during
+    the countdown, then moves left-to-right, reaching finish_x exactly at
+    the end of race_duration if finish_cap is 1.0, or stopping short
+    (proportionally, per the real quarter-mile ratio) if it's the slower
+    car. `set_start(seg_start)` makes moviepy pass this clip *local* time
+    (0 at seg_start) into position() -- the duration below is exactly the
+    span this clip is ever shown for, so it never renders anywhere outside
+    its own scene."""
     car = ImageClip(str(path)).resize(width=car_width)
     car_w, car_h = car.size
-    travel = bottom_y - top_y - car_h
-    # The winner's progress reaches 1.0 (bottom_y) exactly at the end of
-    # the beat; the loser's is capped short of 1.0 so it visibly trails
-    # instead of both cars arriving together.
-    finish_cap = 1.0 if is_winner else max(0.35, 1.0 - RACE_LOSER_LAG_RATIO)
+    travel = finish_x - start_x - car_w
+    total_duration = countdown_duration + race_duration
 
-    def position(t):
-        progress = min(finish_cap, t / seg_duration) if seg_duration else finish_cap
-        return (x_center - car_w / 2, top_y + travel * progress)
+    def position(local_t):
+        race_t = local_t - countdown_duration
+        if race_t <= 0:
+            return (start_x, y_center - car_h / 2)
+        progress = min(finish_cap, race_t / race_duration) if race_duration else finish_cap
+        return (start_x + travel * progress, y_center - car_h / 2)
 
-    return car.set_duration(seg_duration).set_start(seg_start).set_position(position)
+    return car.set_duration(total_duration).set_start(seg_start).set_position(position)
 
 
-def _drag_race_track(main_cutout_path, rival_cutout_path, main_hp, rival_hp, size, seg_start, seg_end):
-    """Two small side-profile cutouts racing top-to-bottom along the empty
-    margins beside the narrator during a horsepower-comparison beat -- the
-    car with more horsepower "wins" (a deliberately silly gimmick, not a
-    real 0-60 simulation)."""
+def _drag_race_track(
+    main_cutout_path, rival_cutout_path, main_hp, rival_hp,
+    main_quarter_mile, rival_quarter_mile, size, seg_start, seg_end,
+):
+    """Two small side-profile cutouts drag-racing left-to-right in their
+    own lane during a horsepower/quarter-mile comparison beat, led in by a
+    one-second-per-light countdown -- the car with the shorter (verified)
+    quarter-mile time "wins", falling back to more horsepower when a
+    quarter-mile time isn't available. Both finish at the same line; the
+    slower car is capped short of it by the real ratio between the two
+    times, so it visibly trails instead of arriving together or racing
+    forever past when the faster one already finished."""
     if not main_cutout_path or not rival_cutout_path:
-        return []
+        return [], []
     if not Path(main_cutout_path).exists() or not Path(rival_cutout_path).exists():
-        return []
+        return [], []
     seg_duration = seg_end - seg_start
-    if seg_duration <= 0.2:
-        return []
+    if seg_duration <= 0.5:
+        return [], []
     width, height = size
-    lane_inset = width * RACE_LANE_INSET_RATIO
+
+    use_countdown = seg_duration >= RACE_MIN_SECONDS_FOR_COUNTDOWN
+    countdown_duration = RACE_COUNTDOWN_STEPS * RACE_COUNTDOWN_STEP_SECONDS if use_countdown else 0.0
+    race_duration = seg_duration - countdown_duration
+
+    if main_quarter_mile and rival_quarter_mile and main_quarter_mile > 0 and rival_quarter_mile > 0:
+        main_time, rival_time = main_quarter_mile, rival_quarter_mile
+    else:
+        # No verified quarter-mile times -- fall back to a synthetic "time"
+        # inversely proportional to horsepower (only the ratio between the
+        # two matters here, not the absolute value).
+        main_time = 1.0 / max(main_hp or 1, 1)
+        rival_time = 1.0 / max(rival_hp or 1, 1)
+    fastest = min(main_time, rival_time)
+    main_cap = fastest / main_time
+    rival_cap = fastest / rival_time
+
     car_width = width * RACE_CAR_WIDTH_RATIO
-    top_y = height * TOP_STACK_RATIO + height * 0.01
-    bottom_y = height - height * RACE_FINISH_MARGIN_RATIO
-    main_faster = (main_hp or 0) >= (rival_hp or 0)
-    left_x = lane_inset + car_width / 2
-    right_x = width - lane_inset - car_width / 2
-    return [
-        _drag_race_lane_clip(main_cutout_path, car_width, left_x, top_y, bottom_y, seg_start, seg_duration, main_faster),
-        _drag_race_lane_clip(rival_cutout_path, car_width, right_x, top_y, bottom_y, seg_start, seg_duration, not main_faster),
+    lane_inset = width * RACE_LANE_INSET_RATIO
+    start_x = lane_inset
+    finish_x = width - lane_inset
+    narrator_top = height * TOP_STACK_RATIO
+    lane_gap = height * RACE_LANE_GAP_RATIO
+    main_y = narrator_top + lane_gap
+    rival_y = narrator_top + lane_gap * 2.4
+
+    car_clips = [
+        _drag_race_lane_clip(
+            main_cutout_path, car_width, main_y, start_x, finish_x,
+            seg_start, countdown_duration, race_duration, main_cap,
+        ),
+        _drag_race_lane_clip(
+            rival_cutout_path, car_width, rival_y, start_x, finish_x,
+            seg_start, countdown_duration, race_duration, rival_cap,
+        ),
     ]
 
-
-def _countdown_stinger_track(size, output_path):
-    """A quick "3-2-1-GO" flash over the video's opening beat, overlaid on
-    top of the video's own opening frames rather than delaying the
-    narration/audio, so it doesn't need to retime anything."""
-    clips = []
+    light_clips = []
     sfx_clips = []
-    for index, label in enumerate(COUNTDOWN_STEPS):
-        start = index * COUNTDOWN_STEP_SECONDS
-        frame_path = output_path.parent / "_frames" / f"countdown-{index}.png"
-        _caption_frame(size, label, int(size[1] * 0.46), frame_path, fill=(255, 214, 64), font_size=220)
-        clips.append(
-            ImageClip(str(frame_path)).set_start(start).set_duration(COUNTDOWN_STEP_SECONDS).set_position((0, 0))
-        )
-        sfx_name = COUNTDOWN_GO_SFX if label == "GO!" else COUNTDOWN_SFX
-        sfx_clip = _sfx_clip(sfx_name, start, COUNTDOWN_SFX_VOLUME)
-        if sfx_clip is not None:
-            sfx_clips.append(sfx_clip)
-    return clips, sfx_clips
+    if use_countdown:
+        light_w = max(18, int(width * 0.035))
+        light_h = int(light_w * 2.6)
+        light_x = start_x
+        light_y = (main_y + rival_y) / 2 - light_h / 2
+        # Three one-second steps -- red, then +yellow, then +green (the
+        # green step doubles as "go", with its own sfx) -- not a fast
+        # flash: each light gets a full second, same as a real tree.
+        for step in range(RACE_COUNTDOWN_STEPS):
+            step_start = seg_start + step * RACE_COUNTDOWN_STEP_SECONDS
+            light_image = _traffic_light_image(light_w, light_h, step + 1)
+            light_clips.append(
+                ImageClip(light_image)
+                .set_start(step_start).set_duration(RACE_COUNTDOWN_STEP_SECONDS).set_position((light_x, light_y))
+            )
+            is_go_step = step == RACE_COUNTDOWN_STEPS - 1
+            sfx_clip = _sfx_clip(COUNTDOWN_GO_SFX if is_go_step else COUNTDOWN_SFX, step_start, COUNTDOWN_SFX_VOLUME)
+            if sfx_clip is not None:
+                sfx_clips.append(sfx_clip)
+
+    return [*light_clips, *car_clips], sfx_clips
 
 
 def _progress_bar_track(size, duration):
@@ -869,8 +939,8 @@ def render_narrator_video(car_media_paths, manifest, output_path):
 
     # Decorative extras: an ambient corner doodle reusing the car's own
     # side-profile cutout (single_car_short._select_side_profile_media),
-    # plus a drag race between the main car and rival wherever a scene
-    # states both cars' horsepower.
+    # plus a drag race (with its own lead-in countdown lights) wherever a
+    # scene states both cars' quarter-mile time or horsepower.
     side_profile_path = manifest.get("side_profile_media_path")
     decorative_clips = []
     decorative_sfx = []
@@ -883,22 +953,25 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         if index >= len(car_media_paths) or index >= len(scene_boundaries):
             continue
         seg_start, seg_end = scene_boundaries[index]
-        decorative_clips.extend(
-            _drag_race_track(side_profile_path, car_media_paths[index], main_hp, rival_hp, size, seg_start, seg_end)
+        race_clips, race_sfx = _drag_race_track(
+            side_profile_path, car_media_paths[index], main_hp, rival_hp,
+            scene.get("main_quarter_mile_seconds"), scene.get("rival_quarter_mile_seconds"),
+            size, seg_start, seg_end,
         )
+        decorative_clips.extend(race_clips)
+        decorative_sfx.extend(race_sfx)
 
-    countdown_clips, countdown_sfx = _countdown_stinger_track(size, output_path)
     progress_clip = _progress_bar_track(size, duration)
 
     background = ColorClip(size=size, color=(255, 255, 255)).set_duration(duration)
     sfx_clips = [
-        clip for clip in (*photo_pop_clips, *typing_sfx_clips, *countdown_sfx) if clip is not None
+        clip for clip in (*photo_pop_clips, *typing_sfx_clips, *decorative_sfx) if clip is not None
     ]
     full_audio = CompositeAudioClip([audio, *sfx_clips]) if sfx_clips else audio
     video = CompositeVideoClip(
         [
             background, car_positioned, *headline_clips, *caption_clips, narrator_positioned,
-            *decorative_clips, *countdown_clips, progress_clip,
+            *decorative_clips, progress_clip,
         ],
         size=size,
     ).set_duration(duration).set_audio(full_audio)
