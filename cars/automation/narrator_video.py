@@ -28,6 +28,7 @@ from moviepy.editor import (
     AudioFileClip, ColorClip, CompositeAudioClip, CompositeVideoClip, ImageClip,
     VideoClip, VideoFileClip, concatenate_videoclips,
 )
+import moviepy.audio.fx.all as afx
 import moviepy.video.fx.all as vfx
 
 from generate_sample import ROOT, CANVAS, _font, _wrap
@@ -51,6 +52,30 @@ PHOTO_POP_VOLUME = 0.34  # 15% quieter, on request
 # trimmed to however long that headline actually takes to type out.
 TYPING_SFX = "typing.wav"
 TYPING_VOLUME = 0.36  # 20% louder, on request
+
+# A rock/metal instrumental bed under the whole video, kept low enough to sit
+# behind the narration rather than compete with it. The asset itself is the
+# raw trimmed source (no volume or fades baked in) so the render can loop and
+# fade it to match whatever the actual narration duration turns out to be.
+MUSIC_PATH = ROOT / "narrator" / "music" / "bg_rock.mp3"
+MUSIC_VOLUME = 0.09
+MUSIC_FADE_SECONDS = 1.5
+
+
+def _background_music_clip(duration):
+    """The music bed, looped/trimmed to `duration` with fade in/out -- or
+    None if the asset isn't present (missing music should never break a
+    render, same reasoning as _sfx_clip)."""
+    if not MUSIC_PATH.exists():
+        return None
+    clip = AudioFileClip(str(MUSIC_PATH))
+    if clip.duration < duration:
+        clip = afx.audio_loop(clip, duration=duration)
+    else:
+        clip = clip.subclip(0, duration)
+    fade = min(MUSIC_FADE_SECONDS, duration / 2)
+    clip = clip.volumex(MUSIC_VOLUME).fx(afx.audio_fadein, fade).fx(afx.audio_fadeout, fade)
+    return clip
 
 # A small "easter egg" loop in a corner: the car's own side-profile cutout
 # (see single_car_short._select_side_profile_media) spun around an
@@ -1141,7 +1166,9 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     sfx_clips = [
         clip for clip in (*photo_pop_clips, *typing_sfx_clips, *decorative_sfx) if clip is not None
     ]
-    full_audio = CompositeAudioClip([audio, *sfx_clips]) if sfx_clips else audio
+    music_clip = _background_music_clip(duration)
+    extra_audio = [*sfx_clips, *([music_clip] if music_clip is not None else [])]
+    full_audio = CompositeAudioClip([audio, *extra_audio]) if extra_audio else audio
     video = CompositeVideoClip(
         [
             background, car_positioned, *headline_clips, *caption_clips, narrator_positioned,
