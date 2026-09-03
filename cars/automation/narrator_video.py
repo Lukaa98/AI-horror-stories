@@ -183,13 +183,26 @@ WOBBLE_SEGMENT_SECONDS = 0.32
 BODY_SWAY_DEGREES = 0.8
 BODY_SWAY_PERIOD_SECONDS = 4.6
 BLINK_DURATION_SECONDS = 0.12
-# A brief wide-eyed/raised-brow "reaction" beat at the start of every scene
-# that has a headline -- ties facial expression to the same "important
-# fact" signal the on-screen headline already marks, instead of the face
-# only ever reacting to loudness (mouth) or a fixed clock (blink). Kept
-# short so it reads as a discrete reaction to the beat landing, not a held
-# expression for the whole scene.
+# A brief raised-brow beat at the start of every scene that has a headline
+# -- ties facial expression to the same "important fact" signal the
+# on-screen headline already marks, instead of the face only ever
+# reacting to loudness (mouth) or a fixed clock (blink). Kept short so it
+# reads as a discrete reaction to the beat landing, not a held expression
+# for the whole scene. Brows only -- an earlier version also forced the
+# eyes wide for this, which read as a startled/bug-eyed look rather than
+# genuine expression, so eyes are left to their own independent look
+# cycle below instead.
 EMPHASIS_PULSE_SECONDS = 1.0
+# An occasional glance left or right instead of staring dead-center the
+# whole video -- alternates direction each time on a fixed clock (not
+# truly random, so renders stay reproducible). Independent of blink and
+# of the headline emphasis pulse above; a blink briefly overrides
+# whichever of these is showing rather than the two fighting over the
+# sprite.
+LOOK_CYCLE = ["look_left", "look_right"]
+LOOK_START_SECONDS = 1.8
+LOOK_INTERVAL_SECONDS = 3.4
+LOOK_DURATION_SECONDS = 1.0
 
 
 def _load_sprites_manifest():
@@ -375,12 +388,29 @@ def _blink_intervals(duration):
     return intervals
 
 
+def _look_intervals(duration):
+    """Eyes glance left or right for a beat, then return to center --
+    without this the eyes are dead-center the entire video except for
+    blinking. Alternates direction each time rather than picking randomly
+    so renders stay reproducible."""
+    intervals = []
+    t, i = LOOK_START_SECONDS, 0
+    while t < duration:
+        end = min(duration, t + LOOK_DURATION_SECONDS)
+        intervals.append((t, end, LOOK_CYCLE[i % len(LOOK_CYCLE)]))
+        t += LOOK_INTERVAL_SECONDS
+        i += 1
+    return intervals
+
+
 def _emphasis_intervals(manifest, duration):
-    """A short wide-eyes/raised-brows window at the start of every scene
-    that carries a headline -- the headline is already the pipeline's
-    signal for "this is an important fact", so reusing it to drive facial
+    """A short raised-brows window at the start of every scene that
+    carries a headline -- the headline is already the pipeline's signal
+    for "this is an important fact", so reusing it to drive facial
     expression means the face reacts to what's actually being said instead
-    of only ever following loudness (mouth) or a fixed clock (blink)."""
+    of only ever following loudness (mouth) or a fixed clock (blink).
+    Brows only, on purpose -- an earlier version also forced the eyes wide
+    for this, which read as bug-eyed rather than a genuine expression."""
     scenes = list(manifest.get("scenes") or [])
     if not scenes:
         return []
@@ -448,10 +478,12 @@ def _narrator_segments(manifest, sprites, duration):
 
     pose_intervals = _pose_intervals(manifest, duration)
     blink_intervals = _blink_intervals(duration)
+    look_intervals = _look_intervals(duration)
     wobble_intervals = _wobble_intervals(duration)
     emphasis_intervals = _emphasis_intervals(manifest, duration)
     boundaries = _merged_boundaries(
-        [mouth_intervals, pose_intervals, blink_intervals, wobble_intervals, emphasis_intervals], duration
+        [mouth_intervals, pose_intervals, blink_intervals, look_intervals, wobble_intervals, emphasis_intervals],
+        duration,
     )
 
     segments = []
@@ -462,13 +494,12 @@ def _narrator_segments(manifest, sprites, duration):
         mouth = _value_at(mouth_intervals, mid, "closed")
         pose = _value_at(pose_intervals, mid, POSE_CYCLE[0])
         wobble = _value_at(wobble_intervals, mid, WOBBLE_CYCLE[0])
-        # A headline's emphasis pulse overrides the regular blink cycle --
-        # a wide-eyed, raised-brow "reaction" beat takes priority over
-        # whatever the blink clock would otherwise show at that instant.
-        if _value_at(emphasis_intervals, mid, None):
-            eyes, brows = "wide", "raised"
-        else:
-            eyes, brows = _value_at(blink_intervals, mid, "open"), "neutral"
+        brows = "raised" if _value_at(emphasis_intervals, mid, None) else "neutral"
+        # A blink briefly overrides whichever look-direction is showing,
+        # same as the interactive rig -- the two are independent clocks
+        # that both drive eye shape, so one has to take priority when they
+        # overlap rather than fighting over the sprite.
+        eyes = "blink" if _value_at(blink_intervals, mid, None) else _value_at(look_intervals, mid, "open")
         sprite_file = (
             sprites["sprites"].get(f"{mouth}_{eyes}_{brows}_{pose}_{wobble}")
             or sprites["sprites"].get(f"{mouth}_{eyes}_{brows}_{pose}")

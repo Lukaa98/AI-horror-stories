@@ -446,16 +446,16 @@
           <path d="M 158 197 L 174 197" stroke-width="4"/>
           <path d="M 226 197 L 242 197" stroke-width="4"/>
         </g>
-        <!-- eyes: wide -- a startled/surprised beat for emphasis moments
-             (paired with brows-raised), not just a bigger pupil: a visible
-             white sclera ring around a same-size dark iris is what actually
-             reads as "eyes widening" at this size, rather than just a
-             bigger black dot which mostly reads as a bigger pupil. -->
-        <g class="eyes eyes-wide" style="display:none">
-          <circle cx="166" cy="195" r="11" fill="#ffffff" stroke="#1c1712" stroke-width="2"/>
-          <circle cx="234" cy="195" r="11" fill="#ffffff" stroke="#1c1712" stroke-width="2"/>
-          <circle cx="166" cy="196" r="6.5" fill="#1c1712" stroke="none"/>
-          <circle cx="234" cy="196" r="6.5" fill="#1c1712" stroke="none"/>
+        <!-- eyes: look left/right -- same flat dot style as eyes-open, just
+             shifted a few px toward one side, so the character occasionally
+             glances rather than staring dead-center the whole video. -->
+        <g class="eyes eyes-look-left" style="display:none">
+          <circle cx="159" cy="197" r="7" fill="#1c1712" stroke="none"/>
+          <circle cx="227" cy="197" r="7" fill="#1c1712" stroke="none"/>
+        </g>
+        <g class="eyes eyes-look-right" style="display:none">
+          <circle cx="173" cy="197" r="7" fill="#1c1712" stroke="none"/>
+          <circle cx="241" cy="197" r="7" fill="#1c1712" stroke="none"/>
         </g>
 
         <!-- nose: a small tick, per the new reference, not a long curved line -->
@@ -530,7 +530,7 @@
     <div class="card">
       <h2>Expression</h2>
       <div class="btn-grid">
-        <button id="browsOnce">Emphasis pulse once (eyes + brows)</button>
+        <button id="browsOnce">Raise brows once</button>
         <button id="browsToggle">Auto‑expression: on</button>
       </div>
     </div>
@@ -548,7 +548,7 @@
       <p class="hint" style="margin-top:10px;">These are the same 4 poses the render pipeline cycles through once per sentence (steady/jolt are the small line-weight flicker, lean_left/lean_right add the bent-elbow arm, leg stance shift, and body tilt). Picking one here freezes the idle sway/blink/wobble animations so the pose shows cleanly -- use "Resume idle animation" to go back to the normal live-preview loop.</p>
     </div>
 
-    <p class="hint">Auto‑talk cycles the three talking mouths on a random clock, the way the reference channel's frames never quite line up with the words, and now occasionally gives the brows a small lift on a wide-open frame too. Auto‑blink fires every 2.5–5s on its own clock. Auto‑expression fires a separate, independent "surprised" pulse every 4–7s -- eyes go wide (a bigger, white‑ringed look, not just a bigger pupil) and brows lift together for about a second, then relax back -- this is the same beat the real videos fire once per on‑screen headline. It deliberately never overlaps a blink (closed eyes mid‑"surprised" would cancel the effect), so if you don't see it right away, give it a few seconds -- it's on its own timer, not tied to blinking. The head itself has a slow idle bob/tilt so it isn't frozen while the arms sway. Wobble redraws the turbulence seed a few times a second for the slight hand‑jitter on the outline.</p>
+    <p class="hint">Auto‑talk cycles the three talking mouths on a random clock, the way the reference channel's frames never quite line up with the words, and now occasionally gives the brows a small lift on a wide-open frame too. Auto‑blink fires every 2.5–5s, and roughly every third blink also raises the brows for a bigger beat. Separately, the eyes glance left or right for a second or two every ~2.2–4.5s on their own independent clock, then return to center -- same flat pupil, just shifted, not a different eye shape -- so the character isn't staring dead‑center the whole video. A blink can interrupt a glance and resumes it afterward instead of snapping back to center. The head itself has a slow idle bob/tilt so it isn't frozen while the arms sway. Wobble redraws the turbulence seed a few times a second for the slight hand‑jitter on the outline.</p>
   </div>
 </div>
 
@@ -561,7 +561,12 @@
   const mouths = charEl.querySelectorAll('.mouth');
   const eyeOpen = charEl.querySelector('.eyes-open');
   const eyeBlink = charEl.querySelector('.eyes-blink');
-  const eyeWide = charEl.querySelector('.eyes-wide');
+  const eyeLookLeft = charEl.querySelector('.eyes-look-left');
+  const eyeLookRight = charEl.querySelector('.eyes-look-right');
+  const eyeStates = [eyeOpen, eyeBlink, eyeLookLeft, eyeLookRight];
+  function showEyes(target) {
+    eyeStates.forEach(el => { el.style.display = el === target ? '' : 'none'; });
+  }
   const roMouth = document.getElementById('roMouth');
   const roEyes = document.getElementById('roEyes');
   const roTalk = document.getElementById('roTalk');
@@ -608,18 +613,21 @@
   const talkBtn = document.getElementById('talkToggle');
   talkBtn.addEventListener('click', () => talkTimer ? stopTalk() : startTalk());
 
+  // Eyes track three independent things at once: which way they're
+  // *looking* (center/left/right -- the main "are they alive" cue), a
+  // blink that can interrupt any of those briefly, and brow position
+  // (raised/neutral/talk) which is drawn separately and never changes the
+  // eye shape itself. eyeLookState holds whichever look-direction is
+  // current so a blink can restore it instead of always snapping back to
+  // center.
+  let eyeLookState = eyeOpen;
   function blinkOnce() {
-    // Skip a blink entirely if an emphasis pulse (eyes-wide) is currently
-    // showing -- closing the eyes mid-"surprised" beat would cancel the
-    // exact thing that pulse exists to show.
-    if (eyeWide.style.display !== 'none') return;
-    eyeOpen.style.display = 'none';
-    eyeBlink.style.display = '';
+    const resumeTo = eyeLookState;
+    showEyes(eyeBlink);
     roEyes.textContent = 'blink';
     setTimeout(() => {
-      eyeOpen.style.display = '';
-      eyeBlink.style.display = 'none';
-      roEyes.textContent = 'open';
+      showEyes(resumeTo);
+      roEyes.textContent = resumeTo === eyeOpen ? 'open' : resumeTo === eyeLookLeft ? 'look-left' : 'look-right';
     }, 130);
   }
   document.getElementById('blinkOnce').addEventListener('click', blinkOnce);
@@ -627,32 +635,19 @@
   const browNeutral = charEl.querySelector('.brows-neutral');
   const browRaised = charEl.querySelector('.brows-raised');
   const browTalk = charEl.querySelector('.brows-talk');
-  // The real "surprised" beat: eyes go wide (open circles -> bigger
-  // white-ringed eyes) *and* brows lift together, on their own clock --
-  // deliberately not paired with a blink, since eyes-closed-while-
-  // surprised doesn't read as anything. This is the same pairing
-  // narrator_video.py now fires for every headline in the actual videos.
-  function emphasisOnce() {
-    if (eyeWide.style.display === '') return; // already mid-pulse
-    eyeOpen.style.display = 'none';
-    eyeBlink.style.display = 'none';
-    eyeWide.style.display = '';
+  function browsOnce() {
     browNeutral.style.display = 'none';
     browRaised.style.display = '';
-    roEyes.textContent = 'wide';
     setTimeout(() => {
-      eyeWide.style.display = 'none';
-      eyeOpen.style.display = '';
       browRaised.style.display = 'none';
       browNeutral.style.display = '';
-      roEyes.textContent = 'open';
-    }, 850 + Math.random() * 250);
+    }, 550 + Math.random() * 250);
   }
-  document.getElementById('browsOnce').addEventListener('click', emphasisOnce);
+  document.getElementById('browsOnce').addEventListener('click', browsOnce);
 
   function browsTalkPulse() {
     // Only the small talk-lift, and only from neutral -- skip it if a
-    // bigger emphasis pulse is already mid-beat so the two don't fight.
+    // bigger emphasis raise is already mid-beat so the two don't fight.
     if (browNeutral.style.display === 'none') return;
     browNeutral.style.display = 'none';
     browTalk.style.display = '';
@@ -674,6 +669,10 @@
   function scheduleBlink() {
     blinkTimer = setTimeout(() => {
       blinkOnce();
+      // Pair brow raises with roughly a third of blinks instead of running
+      // a second independent clock -- reads as one natural expression
+      // beat rather than two separate tics firing at random.
+      if (browsEnabled && Math.random() < 0.33) browsOnce();
       scheduleBlink();
     }, 2500 + Math.random() * 2500);
   }
@@ -691,19 +690,34 @@
   blinkBtn.addEventListener('click', () => blinkTimer ? stopBlink() : startBlink());
   startBlink();
 
-  // The emphasis pulse runs on its own independent clock (roughly every
-  // 4-7s) instead of piggybacking on the blink timer -- in the real
-  // videos this fires once per headline, which has no fixed relationship
-  // to the blink cadence, so decoupling the two here is more honest to
-  // how it actually behaves, not just easier to see.
-  let emphasisTimer = null;
-  function scheduleEmphasis() {
-    emphasisTimer = setTimeout(() => {
-      if (browsEnabled) emphasisOnce();
-      scheduleEmphasis();
-    }, 4000 + Math.random() * 3000);
+  // The actual "eyes aren't dead-center the whole video" cue: an
+  // independent clock that glances left or right for a beat, then returns
+  // to center -- the same flat-dot pupil style as eyes-open, just
+  // shifted, not a different eye shape. Runs on its own timer so it isn't
+  // tangled up with blinking or brow raises.
+  let lookTimer = null;
+  function lookOnce() {
+    const direction = Math.random() < 0.5 ? eyeLookLeft : eyeLookRight;
+    eyeLookState = direction;
+    // Don't cut a blink short mid-close -- just update where it'll resume to.
+    if (eyeBlink.style.display !== 'none') return;
+    showEyes(direction);
+    roEyes.textContent = direction === eyeLookLeft ? 'look-left' : 'look-right';
+    setTimeout(() => {
+      eyeLookState = eyeOpen;
+      if (eyeBlink.style.display === 'none') {
+        showEyes(eyeOpen);
+        roEyes.textContent = 'open';
+      }
+    }, 700 + Math.random() * 700);
   }
-  scheduleEmphasis();
+  function scheduleLook() {
+    lookTimer = setTimeout(() => {
+      lookOnce();
+      scheduleLook();
+    }, 2200 + Math.random() * 2400);
+  }
+  scheduleLook();
 
   let wobbleTimer = null;
   const wobbleBtn = document.getElementById('wobbleToggle');

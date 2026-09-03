@@ -8,6 +8,7 @@ from narrator_video import (  # noqa: E402
     CANVAS,
     _blink_intervals,
     _emphasis_intervals,
+    _look_intervals,
     _caption_chunks,
     _caption_timeline,
     _drag_race_lane_clip,
@@ -97,9 +98,9 @@ def test_blink_intervals_are_short_and_spaced_out():
 
 
 def test_emphasis_intervals_pulse_only_at_the_start_of_headline_scenes():
-    """A scene with a headline gets a brief wide-eyes/raised-brows reaction
-    beat at its start; a scene with no headline gets none at all -- the
-    face should only react to genuinely marked "important fact" beats, not
+    """A scene with a headline gets a brief raised-brows reaction beat at
+    its start; a scene with no headline gets none at all -- the face
+    should only react to genuinely marked "important fact" beats, not
     hold an expression for a whole scene or fire on every scene."""
     manifest = {
         "scenes": [
@@ -132,6 +133,23 @@ def test_emphasis_intervals_empty_without_any_headlines():
 
 def test_emphasis_intervals_empty_without_any_scenes():
     assert _emphasis_intervals({}, 5.0) == []
+
+
+def test_look_intervals_alternate_direction_and_cover_the_duration():
+    """Eyes glance left/right on their own clock, alternating direction
+    each time (not the same side repeatedly) so it reads as natural
+    variety rather than a tic."""
+    intervals = _look_intervals(12.0)
+    assert len(intervals) >= 2
+    directions = [value for _, _, value in intervals]
+    assert all(value in ("look_left", "look_right") for value in directions)
+    # Alternates strictly -- no two consecutive glances the same direction.
+    for a, b in zip(directions, directions[1:]):
+        assert a != b
+
+
+def test_look_intervals_empty_for_a_very_short_clip():
+    assert _look_intervals(1.0) == []
 
 
 def test_wobble_intervals_alternate_fast_and_cover_the_full_duration():

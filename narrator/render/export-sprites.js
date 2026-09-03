@@ -26,10 +26,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const RIG_PATH = path.join(__dirname, "..", "narrator-rig.html");
 
 const MOUTHS = ["closed", "small", "wide", "smile"];
-// "wide" is a startled/surprised beat (bigger eyes with a visible white
-// sclera ring -- see narrator-rig.html) for emphasis moments, paired with
-// brows-raised. Independent of mouth/pose, same as brows below.
-const EYES = ["open", "blink", "wide"];
+// look_left/look_right are the same flat-dot pupil as "open", just shifted
+// a few px to one side (see narrator-rig.html) -- an occasional glance so
+// the character isn't staring dead-center the whole video. Independent of
+// mouth/pose, same as brows below.
+const EYES = ["open", "blink", "look_left", "look_right"];
 // Independent of pose now (used to be baked into each pose as a fixed,
 // cosmetic neutral/talk pairing with no relation to what's actually being
 // said) -- narrator_video.py drives "raised" off real emphasis beats
@@ -196,10 +197,12 @@ async function main() {
                 setMouth(mouthName);
                 const eyeOpen = document.querySelector(".eyes-open");
                 const eyeBlink = document.querySelector(".eyes-blink");
-                const eyeWide = document.querySelector(".eyes-wide");
+                const eyeLookLeft = document.querySelector(".eyes-look-left");
+                const eyeLookRight = document.querySelector(".eyes-look-right");
                 eyeOpen.style.display = eyesName === "open" ? "" : "none";
                 eyeBlink.style.display = eyesName === "blink" ? "" : "none";
-                eyeWide.style.display = eyesName === "wide" ? "" : "none";
+                eyeLookLeft.style.display = eyesName === "look_left" ? "" : "none";
+                eyeLookRight.style.display = eyesName === "look_right" ? "" : "none";
               }, mouth, eyes);
 
               const fileName = `mouth-${mouth}_eyes-${eyes}_brows-${brows}_pose-${poseName}_wobble-${wobbleName}.png`;
