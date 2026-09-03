@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.94";
+const UI_VERSION = "V10.95";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -193,6 +193,37 @@ function titleCaseWords(value) {
     .filter(Boolean)
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(" ");
+}
+
+// Cars & Bids listing URLs end in a slug like ".../auctions/abc123/2021-
+// volkswagen-golf-gti" -- the year/make/model are right there, so pasting
+// the link can fill in those fields instead of making the user retype
+// what the link already says. A short list of known two-word makes keeps
+// "alfa-romeo" from getting split into make "alfa", model "romeo ...".
+const MULTI_WORD_MAKES = ["alfa-romeo", "aston-martin", "land-rover", "mercedes-benz", "rolls-royce"];
+
+function parseAuctionUrlHint(url) {
+  const match = String(url || "").match(/\/auctions\/[^/]+\/([a-z0-9-]+)/i);
+  if (!match) return null;
+  const parts = match[1].toLowerCase().split("-").filter(Boolean);
+  let year = null;
+  if (parts.length && /^\d{4}$/.test(parts[0])) {
+    year = parts.shift();
+  }
+  if (!parts.length) return null;
+  let make = parts[0];
+  let modelParts = parts.slice(1);
+  for (const multi of MULTI_WORD_MAKES) {
+    const tokens = multi.split("-");
+    if (parts.slice(0, tokens.length).join("-") === multi) {
+      make = tokens.join(" ");
+      modelParts = parts.slice(tokens.length);
+      break;
+    }
+  }
+  const model = modelParts.join(" ");
+  if (!make || !model) return null;
+  return { year, make: titleCaseWords(make), model: titleCaseWords(model) };
 }
 
 function buildStructuredRequest({ workflow, make, model, focus, startYear, endYear }) {
@@ -2058,14 +2089,28 @@ export default function App() {
                       Cars &amp; Bids listing URL
                       <input
                         value={auctionUrl}
-                        onChange={(e) => setAuctionUrl(e.target.value)}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setAuctionUrl(value);
+                          // The listing's own slug names the car (".../auctions/abc123/2021-
+                          // volkswagen-golf-gti") -- fill in Make/Model/Year from it instead of
+                          // making the user retype what the link already says. Only touches
+                          // fields that are still blank, so it never clobbers a manual edit.
+                          const hint = parseAuctionUrlHint(value);
+                          if (hint) {
+                            if (!make.trim()) setMake(hint.make);
+                            if (!model.trim()) setModel(hint.model);
+                            if (hint.year && !startYear) setStartYear(hint.year);
+                          }
+                        }}
                         placeholder="https://carsandbids.com/auctions/xxxxxxxx/..."
                         disabled={stage === "single-car-building"}
                       />
                       <span className="hint">
-                        Use this when the make/model search comes back empty (e.g. a common car with few
-                        Cars &amp; Bids results). Paste the direct link to one auction listing page -- not a
-                        search-results link -- and photos will come from that exact car instead of a search.
+                        Paste the direct link to one auction listing page -- not a search-results link -- and
+                        Make/Model/Year are filled in from the link automatically (still editable). Photos
+                        come from that exact car instead of a search, for when the make/model search comes
+                        back empty.
                       </span>
                     </label>
                   )}
