@@ -26,16 +26,25 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const RIG_PATH = path.join(__dirname, "..", "narrator-rig.html");
 
 const MOUTHS = ["closed", "small", "wide", "smile"];
-const EYES = ["open", "blink"];
+// "wide" is a startled/surprised beat (bigger eyes with a visible white
+// sclera ring -- see narrator-rig.html) for emphasis moments, paired with
+// brows-raised. Independent of mouth/pose, same as brows below.
+const EYES = ["open", "blink", "wide"];
+// Independent of pose now (used to be baked into each pose as a fixed,
+// cosmetic neutral/talk pairing with no relation to what's actually being
+// said) -- narrator_video.py drives "raised" off real emphasis beats
+// (a scene's headline appearing) instead, so facial expression actually
+// varies with content, not just which body pose happens to be active.
+const BROWS = ["neutral", "raised"];
 // Four poses now instead of two: steady/jolt are the fast, small "redraw
-// flicker" (line weight + a tiny arm/brow twitch, no lean), while
-// lean_left/lean_right are a bigger, deliberate weight-shift -- one arm
-// swaps to the bent-elbow variant (hand resting near the belly instead of
-// hanging straight), that side's leg rotates outward at the hip, and the
-// whole body tilts a few degrees toward that side. narrator_video.py
-// cycles through all four per sentence (not on a fixed clock) with a
-// crossfade between them, so the switch reads as a transition into the
-// new stance rather than a jump cut.
+// flicker" (line weight + a tiny arm twitch, no lean), while lean_left/
+// lean_right are a bigger, deliberate weight-shift -- one arm swaps to the
+// bent-elbow variant (hand resting near the belly instead of hanging
+// straight), that side's leg rotates outward at the hip, and the whole
+// body tilts a few degrees toward that side. narrator_video.py cycles
+// through all four per sentence (not on a fixed clock) with a crossfade
+// between them, so the switch reads as a transition into the new stance
+// rather than a jump cut.
 const POSES = {
   steady: {
     strokeWidth: 4.6,
@@ -43,7 +52,6 @@ const POSES = {
     armLeftBent: false, armRightBent: false,
     legLeft: "none", legRight: "none",
     bodyTilt: "none",
-    brows: "neutral",
   },
   jolt: {
     strokeWidth: 3.9,
@@ -51,7 +59,6 @@ const POSES = {
     armLeftBent: false, armRightBent: false,
     legLeft: "none", legRight: "none",
     bodyTilt: "none",
-    brows: "talk",
   },
   lean_left: {
     strokeWidth: 4.4,
@@ -59,7 +66,6 @@ const POSES = {
     armLeftBent: true, armRightBent: false,
     legLeft: "rotate(-4deg)", legRight: "rotate(2deg)",
     bodyTilt: "rotate(-3deg)",
-    brows: "neutral",
   },
   lean_right: {
     strokeWidth: 4.4,
@@ -67,7 +73,6 @@ const POSES = {
     armLeftBent: false, armRightBent: true,
     legLeft: "rotate(-2deg)", legRight: "rotate(4deg)",
     bodyTilt: "rotate(3deg)",
-    brows: "talk",
   },
 };
 
@@ -168,13 +173,6 @@ async function main() {
 
         document.querySelector(".leg-left").style.transform = pose.legLeft === "none" ? "" : pose.legLeft;
         document.querySelector(".leg-right").style.transform = pose.legRight === "none" ? "" : pose.legRight;
-
-        const neutral = document.querySelector(".brows-neutral");
-        const raised = document.querySelector(".brows-raised");
-        const talk = document.querySelector(".brows-talk");
-        neutral.style.display = pose.brows === "neutral" ? "" : "none";
-        raised.style.display = pose.brows === "raised" ? "" : "none";
-        talk.style.display = pose.brows === "talk" ? "" : "none";
       }, pose);
 
       for (const [wobbleName, wobbleSeed] of Object.entries(WOBBLE_SEEDS)) {
@@ -182,24 +180,37 @@ async function main() {
           document.getElementById("turb").setAttribute("seed", String(seed));
         }, wobbleSeed);
 
-        for (const mouth of MOUTHS) {
-          for (const eyes of EYES) {
-            await page.evaluate((mouthName, eyesName) => {
-              setMouth(mouthName);
-              const eyeOpen = document.querySelector(".eyes-open");
-              const eyeBlink = document.querySelector(".eyes-blink");
-              eyeOpen.style.display = eyesName === "open" ? "" : "none";
-              eyeBlink.style.display = eyesName === "blink" ? "" : "none";
-            }, mouth, eyes);
+        for (const brows of BROWS) {
+          await page.evaluate((browsName) => {
+            const neutral = document.querySelector(".brows-neutral");
+            const raised = document.querySelector(".brows-raised");
+            const talk = document.querySelector(".brows-talk");
+            neutral.style.display = browsName === "neutral" ? "" : "none";
+            raised.style.display = browsName === "raised" ? "" : "none";
+            talk.style.display = "none";
+          }, brows);
 
-            const fileName = `mouth-${mouth}_eyes-${eyes}_pose-${poseName}_wobble-${wobbleName}.png`;
-            const filePath = path.join(outDir, fileName);
-            await svgHandle.screenshot({
-              path: filePath,
-              omitBackground: true,
-            });
-            manifest.sprites[`${mouth}_${eyes}_${poseName}_${wobbleName}`] = fileName;
-            process.stderr.write(`wrote ${fileName}\n`);
+          for (const mouth of MOUTHS) {
+            for (const eyes of EYES) {
+              await page.evaluate((mouthName, eyesName) => {
+                setMouth(mouthName);
+                const eyeOpen = document.querySelector(".eyes-open");
+                const eyeBlink = document.querySelector(".eyes-blink");
+                const eyeWide = document.querySelector(".eyes-wide");
+                eyeOpen.style.display = eyesName === "open" ? "" : "none";
+                eyeBlink.style.display = eyesName === "blink" ? "" : "none";
+                eyeWide.style.display = eyesName === "wide" ? "" : "none";
+              }, mouth, eyes);
+
+              const fileName = `mouth-${mouth}_eyes-${eyes}_brows-${brows}_pose-${poseName}_wobble-${wobbleName}.png`;
+              const filePath = path.join(outDir, fileName);
+              await svgHandle.screenshot({
+                path: filePath,
+                omitBackground: true,
+              });
+              manifest.sprites[`${mouth}_${eyes}_${brows}_${poseName}_${wobbleName}`] = fileName;
+              process.stderr.write(`wrote ${fileName}\n`);
+            }
           }
         }
       }

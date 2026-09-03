@@ -7,6 +7,7 @@ sys.path[:0] = [str(ROOT / "cars" / "automation")]
 from narrator_video import (  # noqa: E402
     CANVAS,
     _blink_intervals,
+    _emphasis_intervals,
     _caption_chunks,
     _caption_timeline,
     _drag_race_lane_clip,
@@ -93,6 +94,44 @@ def test_blink_intervals_are_short_and_spaced_out():
     for start, end, value in intervals:
         assert value == "blink"
         assert end - start <= 0.13
+
+
+def test_emphasis_intervals_pulse_only_at_the_start_of_headline_scenes():
+    """A scene with a headline gets a brief wide-eyes/raised-brows reaction
+    beat at its start; a scene with no headline gets none at all -- the
+    face should only react to genuinely marked "important fact" beats, not
+    hold an expression for a whole scene or fire on every scene."""
+    manifest = {
+        "scenes": [
+            {"headline": "320 HP", "narration": "one two three four"},
+            {"headline": "", "narration": "five six seven eight"},
+        ],
+        "word_timeline": [
+            {"word": "one", "start": 0.0, "end": 0.4},
+            {"word": "two", "start": 0.4, "end": 0.8},
+            {"word": "three", "start": 0.8, "end": 1.2},
+            {"word": "four", "start": 1.2, "end": 1.6},
+            {"word": "five", "start": 2.0, "end": 2.4},
+            {"word": "six", "start": 2.4, "end": 2.8},
+            {"word": "seven", "start": 2.8, "end": 3.2},
+            {"word": "eight", "start": 3.2, "end": 3.6},
+        ],
+    }
+    intervals = _emphasis_intervals(manifest, 4.0)
+    assert len(intervals) == 1
+    start, end, value = intervals[0]
+    assert value == "emphasis"
+    assert start == 0.0
+    assert 0 < end - start <= 1.01  # EMPHASIS_PULSE_SECONDS, not the whole scene
+
+
+def test_emphasis_intervals_empty_without_any_headlines():
+    manifest = {"scenes": [{"headline": "", "narration": "hello"}], "word_timeline": []}
+    assert _emphasis_intervals(manifest, 5.0) == []
+
+
+def test_emphasis_intervals_empty_without_any_scenes():
+    assert _emphasis_intervals({}, 5.0) == []
 
 
 def test_wobble_intervals_alternate_fast_and_cover_the_full_duration():

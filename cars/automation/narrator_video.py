@@ -183,6 +183,13 @@ WOBBLE_SEGMENT_SECONDS = 0.32
 BODY_SWAY_DEGREES = 0.8
 BODY_SWAY_PERIOD_SECONDS = 4.6
 BLINK_DURATION_SECONDS = 0.12
+# A brief wide-eyed/raised-brow "reaction" beat at the start of every scene
+# that has a headline -- ties facial expression to the same "important
+# fact" signal the on-screen headline already marks, instead of the face
+# only ever reacting to loudness (mouth) or a fixed clock (blink). Kept
+# short so it reads as a discrete reaction to the beat landing, not a held
+# expression for the whole scene.
+EMPHASIS_PULSE_SECONDS = 1.0
 
 
 def _load_sprites_manifest():
@@ -368,6 +375,27 @@ def _blink_intervals(duration):
     return intervals
 
 
+def _emphasis_intervals(manifest, duration):
+    """A short wide-eyes/raised-brows window at the start of every scene
+    that carries a headline -- the headline is already the pipeline's
+    signal for "this is an important fact", so reusing it to drive facial
+    expression means the face reacts to what's actually being said instead
+    of only ever following loudness (mouth) or a fixed clock (blink)."""
+    scenes = list(manifest.get("scenes") or [])
+    if not scenes:
+        return []
+    word_timeline = list(manifest.get("word_timeline") or [])
+    boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
+    intervals = []
+    for scene, (start, end) in zip(scenes, boundaries):
+        if not str(scene.get("headline") or "").strip():
+            continue
+        pulse_end = min(end, start + EMPHASIS_PULSE_SECONDS)
+        if pulse_end > start:
+            intervals.append((start, pulse_end, "emphasis"))
+    return intervals
+
+
 def _value_at(intervals, t, default):
     for start, end, value in intervals:
         if start <= t < end:
@@ -421,8 +449,9 @@ def _narrator_segments(manifest, sprites, duration):
     pose_intervals = _pose_intervals(manifest, duration)
     blink_intervals = _blink_intervals(duration)
     wobble_intervals = _wobble_intervals(duration)
+    emphasis_intervals = _emphasis_intervals(manifest, duration)
     boundaries = _merged_boundaries(
-        [mouth_intervals, pose_intervals, blink_intervals, wobble_intervals], duration
+        [mouth_intervals, pose_intervals, blink_intervals, wobble_intervals, emphasis_intervals], duration
     )
 
     segments = []
@@ -432,11 +461,18 @@ def _narrator_segments(manifest, sprites, duration):
         mid = (start + end) / 2
         mouth = _value_at(mouth_intervals, mid, "closed")
         pose = _value_at(pose_intervals, mid, POSE_CYCLE[0])
-        eyes = _value_at(blink_intervals, mid, "open")
         wobble = _value_at(wobble_intervals, mid, WOBBLE_CYCLE[0])
+        # A headline's emphasis pulse overrides the regular blink cycle --
+        # a wide-eyed, raised-brow "reaction" beat takes priority over
+        # whatever the blink clock would otherwise show at that instant.
+        if _value_at(emphasis_intervals, mid, None):
+            eyes, brows = "wide", "raised"
+        else:
+            eyes, brows = _value_at(blink_intervals, mid, "open"), "neutral"
         sprite_file = (
-            sprites["sprites"].get(f"{mouth}_{eyes}_{pose}_{wobble}")
-            or sprites["sprites"].get(f"{mouth}_{eyes}_{pose}")
+            sprites["sprites"].get(f"{mouth}_{eyes}_{brows}_{pose}_{wobble}")
+            or sprites["sprites"].get(f"{mouth}_{eyes}_{brows}_{pose}")
+            or sprites["sprites"].get(f"{mouth}_{eyes}_{brows}")
             or sprites["sprites"].get(f"{mouth}_{eyes}")
         )
         if not sprite_file:
