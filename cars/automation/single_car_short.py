@@ -95,7 +95,7 @@ PACKAGE_SCHEMA = {
         "start_year": {"type": ["integer", "null"]},
         "end_year": {"type": ["integer", "null"]},
         "scenes": {
-            "type": "array", "minItems": 5, "maxItems": 7,
+            "type": "array", "minItems": 5, "maxItems": 8,
             "items": {
                 "type": "object", "additionalProperties": False,
                 "required": [
@@ -178,9 +178,9 @@ def _strip_citations(text):
 
 
 def _research_script_prompt(label, year_scope, retry_feedback=""):
-    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go, and if you land under {TARGET_WORDS[0]}, add more concrete detail (another spec, another sentence of context) rather than turning in a short script. This word count is a hard requirement, not a suggestion.{retry_feedback}
+    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), or a fact about its reputation/legacy. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}
 
-Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison. Write a quick, conversational narration split across 5-7 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-8 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), at least one beat of real history or design/legacy context (the designer, a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
@@ -220,10 +220,10 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     for attempt in range(1, max_attempts + 1):
         retry_feedback = (
             f" Your previous attempt came back at {package['word_count']} words, outside the "
-            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} target -- rewrite from scratch, and if the shortfall is "
-            f"large, add real content (another spec, a second comparison point, more color on the driving "
-            f"feel) rather than just padding sentences, so the narration lands squarely in that range "
-            f"this time." if package else ""
+            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} target -- rewrite from scratch. If you were short, research "
+            f"and add a genuinely new beat (history, design story, a race win or record, a special edition) "
+            f"rather than padding existing sentences or repeating what you already said -- there is almost "
+            f"always more real, well-documented material available if you look for it." if package else ""
         )
         package = _request_script_package(_research_script_prompt(label, year_scope, retry_feedback))
         count = package["word_count"]
