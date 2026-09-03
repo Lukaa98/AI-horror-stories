@@ -58,7 +58,7 @@ TYPING_VOLUME = 0.36  # 20% louder, on request
 # raw trimmed source (no volume or fades baked in) so the render can loop and
 # fade it to match whatever the actual narration duration turns out to be.
 MUSIC_PATH = ROOT / "narrator" / "music" / "bg_rock.mp3"
-MUSIC_VOLUME = 0.09
+MUSIC_VOLUME = 0.03  # was 0.09 -- too loud, dropped to 1/3
 MUSIC_FADE_SECONDS = 1.5
 
 
