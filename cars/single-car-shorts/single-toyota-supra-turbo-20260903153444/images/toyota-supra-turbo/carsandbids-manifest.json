@@ -1,0 +1,488 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-03T15:36:32.349Z",
+  "query": "Toyota Supra Turbo",
+  "visual_highlight": "engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3vEJlbNB/1993-toyota-supra-turbo",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3vEJlbNB/1993-toyota-supra-turbo",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 40,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "1993 Toyota Supra Turbo"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vEJlbNB/1993-toyota-supra-turbo",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "1993 Toyota Supra Turbo",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-AMdDdeo/edit/q-6EK.jpg?t=178788981263",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 289632
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37eca447e95bd6f4af101a73f120b075dee3f093/photos/application/s-xp2bcA0.jpg?t=178663698069",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 542,
+      "height": 362,
+      "bytes": 191249
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37eca447e95bd6f4af101a73f120b075dee3f093/photos/application/s-MAdvtg7.jpg?t=178663700127",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 542,
+      "height": 362,
+      "bytes": 104017
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37eca447e95bd6f4af101a73f120b075dee3f093/photos/application/s-QG5LGmO.jpg?t=178663699398",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 542,
+      "height": 362,
+      "bytes": 113539
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-JDl179S/edit/eaoGj.jpg?t=178788974872",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 542,
+      "height": 361,
+      "bytes": 180140
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37eca447e95bd6f4af101a73f120b075dee3f093/photos/application/s-3aw-eul.jpg?t=178663701792",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 542,
+      "height": 362,
+      "bytes": 203009
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37eca447e95bd6f4af101a73f120b075dee3f093/photos/application/s-W9aOvcz.jpg?t=178663701444",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 542,
+      "height": 362,
+      "bytes": 260256
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37eca447e95bd6f4af101a73f120b075dee3f093/photos/application/s-wWrH488.jpg?t=178663702104",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 542,
+      "height": 362,
+      "bytes": 273594
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37eca447e95bd6f4af101a73f120b075dee3f093/photos/application/s-qMT8ASM.jpg?t=178663702002",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "1993 Toyota Supra Turbo",
+      "width": 542,
+      "height": 362,
+      "bytes": 256674
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/6891fa63097e319d3eb351b0374af5e058e19faa/photos/KmvOvqQd-95W9GvsXzz.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 1376 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/454e8155383bd27ff347be60d939f8307106fb9b/photos/r455G6zg-dhIrosq.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 4407 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/7c829769e07eabdc5aef37a6b5859abbf0b49b1e/photos/8aAh5RHeA.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 14222 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c529e305ff5395494f19a68fc0c92dc99c891615/photos/30x2VJLp-MDQ5sa_.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 18655 bytes"
+    },
+    {
+      "path": "engine-14.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/ce349a2c121fc5ea53b976083f3e05d96b150306/photos/3ylmoekE-_4SVuC9.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 23042
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 3,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the target vehicle.",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "detected_generation_or_year": "1993",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "distinctive bodywork",
+          "car's front design",
+          "headlight shape",
+          "wing design",
+          "wheel style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Toyota",
+        "detected_model": "Supra",
+        "detected_generation_or_year": "1993",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "distinct Toyota badge",
+          "specific headlight design",
+          "body proportions consistent with 1993 Supra"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "detected_generation_or_year": "1993",
+        "detected_variant_or_engine": "Toyota Supra Turbo",
+        "visible_match_evidence": [
+          "bodywork matches Toyota Supra",
+          "characteristic side profile",
+          "rear spoiler style",
+          "wheel design aligns with Supra Turbo"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "detected_generation_or_year": "1993",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "Distinct rear wing",
+          "Supra Turbo badge",
+          "Characteristic body shape and proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Toyota",
+        "detected_model": "Supra",
+        "detected_generation_or_year": "1993",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "Toyota badge on rear",
+          "Supra Turbo badging",
+          "Distinctive rear lights configuration"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle prominently.",
+        "path": "engine-14.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 4,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Photo does not feature the target vehicle.",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "toyota",
+        "detected_model": "supra",
+        "detected_generation_or_year": "1993",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "interior design",
+          "seat style",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Toyota",
+        "detected_model": "Supra",
+        "detected_generation_or_year": "1993",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "Toyota badge on steering wheel",
+          "Interior design typical of 1993 Supra",
+          "Gear shift style matching 1993 model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
