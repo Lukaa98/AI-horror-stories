@@ -1,0 +1,708 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-03T13:51:11.689Z",
+  "query": "Porsche 911 Carrera T Coupe",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 57,
+      "sale_price": 148000,
+      "sale_type": "sold",
+      "page_title": "2024 Porsche 911 Carrera T Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 148000,
+    "sale_type": "sold",
+    "page_title": "2024 Porsche 911 Carrera T Coupe",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/Porsche911CarreraT2024002/edit/7kqLV.jpg?t=178765540334",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Porsche 911 Carrera T Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 357548
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e01fa44879e35dbc2b6848bb0c5c7f177dc65de2/photos/Porsche911CarreraT2024001.jpg?t=178751885545",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Porsche 911 Carrera T Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 351421
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e01fa44879e35dbc2b6848bb0c5c7f177dc65de2/photos/Porsche911CarreraT2024007.jpg?t=178751885545",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Porsche 911 Carrera T Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 429919
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e01fa44879e35dbc2b6848bb0c5c7f177dc65de2/photos/Porsche911CarreraT2024004.jpg?t=178751885545",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Porsche 911 Carrera T Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 360221
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e01fa44879e35dbc2b6848bb0c5c7f177dc65de2/photos/Porsche911CarreraT2024005.jpg?t=178751885545",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Porsche 911 Carrera T Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 266863
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e01fa44879e35dbc2b6848bb0c5c7f177dc65de2/photos/Porsche911CarreraT2024054.jpg?t=178751885545",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Porsche 911 Carrera T Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 226299
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e01fa44879e35dbc2b6848bb0c5c7f177dc65de2/photos/Porsche911CarreraT2024072.jpg?t=178751885545",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Porsche 911 Carrera T Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 274936
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e01fa44879e35dbc2b6848bb0c5c7f177dc65de2/photos/Porsche911CarreraT2024062.jpg?t=178751885545",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Porsche 911 Carrera T Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 195678
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/e01fa44879e35dbc2b6848bb0c5c7f177dc65de2/photos/Porsche911CarreraT2024058.jpg?t=178751885545",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Porsche 911 Carrera T Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 129794
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/e01fa44879e35dbc2b6848bb0c5c7f177dc65de2/photos/rwWGRPwy-1u2ccFNwF.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 11834 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/e5efecffde05a0133cfcf2d0aa2a01087603276d/photos/rMPDJeQa-JAAyHhj.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 8098 bytes"
+    },
+    {
+      "path": "interior-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/74e8e5f016c209691a627d17b15e320b9558ab55/photos/9lb4mdqO-2BfeN_P.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 26638
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/642e9c8a18befa1d9dda19a97710d62db255b2d7/photos/3ydlQkE9-dcUXP6A5j.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 14247 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/f7db8d49f2853273b4b60a9ebf6de40f0a22058f/photos/KmYyndol-qBtFDSH.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 7564 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05361841723eed2865951b61225f2fac/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05361841723eed2865951b61225f2fac/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05361841723eed2865951b61225f2fac/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/05361841723eed2865951b61225f2fac/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a87d6074723a28ec7fd0c24976f79f35/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a87d6074723a28ec7fd0c24976f79f35/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a87d6074723a28ec7fd0c24976f79f35/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a87d6074723a28ec7fd0c24976f79f35/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/89fdcd41dac494139eb27d8dbfb57959/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/89fdcd41dac494139eb27d8dbfb57959/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/89fdcd41dac494139eb27d8dbfb57959/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/89fdcd41dac494139eb27d8dbfb57959/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d67b5ce4c08d5f8bc40c58471f44ed9/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d67b5ce4c08d5f8bc40c58471f44ed9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d67b5ce4c08d5f8bc40c58471f44ed9/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d67b5ce4c08d5f8bc40c58471f44ed9/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bc4efe1f304e48591eccd5c9c906af3e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bc4efe1f304e48591eccd5c9c906af3e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bc4efe1f304e48591eccd5c9c906af3e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bc4efe1f304e48591eccd5c9c906af3e/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/13ca28033c8331a23f4c249b6d3d0aab/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/13ca28033c8331a23f4c249b6d3d0aab/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/13ca28033c8331a23f4c249b6d3d0aab/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/13ca28033c8331a23f4c249b6d3d0aab/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f9e7e862c3573338d974e2964a06385c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f9e7e862c3573338d974e2964a06385c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f9e7e862c3573338d974e2964a06385c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f9e7e862c3573338d974e2964a06385c/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d7cd7a871aa2fd316c8d2296285a447c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d7cd7a871aa2fd316c8d2296285a447c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d7cd7a871aa2fd316c8d2296285a447c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d7cd7a871aa2fd316c8d2296285a447c/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7602854781f9acc33a1db34e42152452/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7602854781f9acc33a1db34e42152452/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7602854781f9acc33a1db34e42152452/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7602854781f9acc33a1db34e42152452/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2987ecc6615ae0deaf82463ea408a396/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2987ecc6615ae0deaf82463ea408a396/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2987ecc6615ae0deaf82463ea408a396/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2987ecc6615ae0deaf82463ea408a396/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/56f0e8491e1cd78a798bd7e8708c6141/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/56f0e8491e1cd78a798bd7e8708c6141/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/56f0e8491e1cd78a798bd7e8708c6141/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/56f0e8491e1cd78a798bd7e8708c6141/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6717759aa32abead72c035ed10a9de68/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6717759aa32abead72c035ed10a9de68/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6717759aa32abead72c035ed10a9de68/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6717759aa32abead72c035ed10a9de68/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0d248753d8cf7329f2195a7a437d7629/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0d248753d8cf7329f2195a7a437d7629/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0d248753d8cf7329f2195a7a437d7629/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/0d248753d8cf7329f2195a7a437d7629/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/28842dcbdc2f256e10eca2901524d459/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/28842dcbdc2f256e10eca2901524d459/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/28842dcbdc2f256e10eca2901524d459/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/28842dcbdc2f256e10eca2901524d459/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/95cd141542774a7e05f2cc801fe04726/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/95cd141542774a7e05f2cc801fe04726/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/95cd141542774a7e05f2cc801fe04726/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/95cd141542774a7e05f2cc801fe04726/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9de0246ef4d772892b6ff1ee8629a53d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9de0246ef4d772892b6ff1ee8629a53d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9de0246ef4d772892b6ff1ee8629a53d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rjYQAvGX/2024-porsche-911-carrera-t-coupe?ref=nr-2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9de0246ef4d772892b6ff1ee8629a53d/manifest/video.m3u8",
+      "auction_title": "2024 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 specific bodywork",
+          "2024 design elements"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 body shape",
+          "front lights design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Carrera T Coupe",
+        "visible_match_evidence": [
+          "distinct Porsche 911 body shape",
+          "specific lighting design",
+          "proportions aligning with Carrera variant"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Carrera T Coupe",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 design",
+          "front fascia"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinct rear design",
+          "signature Porsche lights",
+          "bold rear spoiler"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Carrera T Coupe",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "steering wheel design",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Carrera T",
+        "visible_match_evidence": [
+          "interior design",
+          "sport seats",
+          "Porsche branding"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not clearly show the target vehicle.",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not prominently feature the target vehicle.",
+        "path": "interior-12.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

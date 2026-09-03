@@ -1,0 +1,641 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-03T13:58:21.284Z",
+  "query": "BMW M2",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/bmw/m2?start_year=2024&end_year=2024&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KPOXkBa3/2024-bmw-m2",
+      "title": "2024 Bmw M2",
+      "text": "Bid to $61,500",
+      "titleYear": 2024,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9ajdpYo3/2024-bmw-m2",
+      "title": "2024 Bmw M2",
+      "text": "Sold for $59,000",
+      "titleYear": 2024,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPxXOjMk/2024-bmw-m2",
+      "title": "2024 Bmw M2",
+      "text": "Sold for $57,500",
+      "titleYear": 2024,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmGdnNkx/2024-bmw-m2",
+      "title": "2024 Bmw M2",
+      "text": "Sold for $57,500",
+      "titleYear": 2024,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3OWXpaNk/2024-bmw-m2",
+      "title": "2024 Bmw M2",
+      "text": "Bid to $57,000",
+      "titleYear": 2024,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KYpDNwwL/2024-bmw-m2",
+      "title": "Time Left 1 Day Bid $57,000",
+      "text": "Time Left 1 Day Bid $57,000",
+      "titleYear": 2024,
+      "score": 54
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KPOXkBa3/2024-bmw-m2",
+      "title": "2024 Bmw M2",
+      "text": "Bid to $61,500",
+      "titleYear": 2024,
+      "score": 60,
+      "usable_image_count": 23,
+      "sale_price": 61500,
+      "sale_type": "bid_to",
+      "page_title": "2024 BMW M2"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9ajdpYo3/2024-bmw-m2",
+      "title": "2024 Bmw M2",
+      "text": "Sold for $59,000",
+      "titleYear": 2024,
+      "score": 60,
+      "usable_image_count": 17,
+      "sale_price": 59000,
+      "sale_type": "sold",
+      "page_title": "2024 BMW M2"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPxXOjMk/2024-bmw-m2",
+      "title": "2024 Bmw M2",
+      "text": "Sold for $57,500",
+      "titleYear": 2024,
+      "score": 60,
+      "usable_image_count": 17,
+      "sale_price": 57500,
+      "sale_type": "sold",
+      "page_title": "2024 BMW M2"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmGdnNkx/2024-bmw-m2",
+      "title": "2024 Bmw M2",
+      "text": "Sold for $57,500",
+      "titleYear": 2024,
+      "score": 60,
+      "usable_image_count": 31,
+      "sale_price": 57500,
+      "sale_type": "sold",
+      "page_title": "2024 BMW M2"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KmGdnNkx/2024-bmw-m2",
+    "title": "2024 Bmw M2",
+    "text": "Sold for $57,500",
+    "titleYear": 2024,
+    "score": 60,
+    "sale_price": 57500,
+    "sale_type": "sold",
+    "page_title": "2024 BMW M2",
+    "year": 2024,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-ZFl9E1_/edit/GpfZF.jpg?t=176282285349",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2024 BMW M2",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 423735
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/application/s-ta1OD9x/edit/Q1Uk4.jpg?t=176255015823",
+      "labels": [
+        "interior"
+      ],
+      "section": "2024 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 218589
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/interior/3LvlXk8y-apoa6eg/edit/VRRah.jpg?t=176254937440",
+      "labels": [
+        "interior"
+      ],
+      "section": "2024 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 195388
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/interior/3LvlXk8y-jOSJQGL/edit/cW43F.jpg?t=176255003686",
+      "labels": [
+        "interior"
+      ],
+      "section": "2024 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 239261
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/3LvlXk8y-u--8O-z/edit/aDwZe.jpg?t=176254891363",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2024 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 272474
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/3LvlXk8y-OJXy6iK/edit/2ubBO.jpg?t=176255397044",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2024 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 476130
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/3LvlXk8y-KOpGZcS/edit/bU649.jpg?t=176255393529",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2024 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 301795
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/3LvlXk8y-FzXz-kw/edit/UZSHO.jpg?t=176255382067",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2024 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 272536
+    },
+    {
+      "path": "exterior-09.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5d5982d4097c2db5e995456d0004880b055dc07d/attachments/KmGdnNkx-2W5K--S.jpeg?t=176290907554",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 101725
+    },
+    {
+      "path": "exterior-10.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5d5982d4097c2db5e995456d0004880b055dc07d/attachments/KmGdnNkx-XOZ8aqr.jpg?t=176290915801",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 194392
+    },
+    {
+      "path": "exterior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5d5982d4097c2db5e995456d0004880b055dc07d/attachments/KmGdnNkx-1TwXBW1.jpeg?t=176341190837",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 430112
+    },
+    {
+      "path": "exterior-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5d5982d4097c2db5e995456d0004880b055dc07d/attachments/KmGdnNkx-nUhd72m.jpeg?t=176341190864",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 381973
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/9a779bc32c0faeaac68b056605282167c0e5ee03/photos/9WAoLvLM-iBJDWX7.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 15548 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/02b00bba5445992f731b9217bd6cb27094238b53/photos/d1sDCOmFV.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 14341 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/35022875629853b4e970e656f3e3b033/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/35022875629853b4e970e656f3e3b033/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/35022875629853b4e970e656f3e3b033/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KPOXkBa3/2024-bmw-m2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/35022875629853b4e970e656f3e3b033/manifest/video.m3u8",
+      "auction_title": "2024 BMW M2",
+      "auction_year": 2024,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5895ef658b7da9d3faa80460806aae14/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5895ef658b7da9d3faa80460806aae14/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5895ef658b7da9d3faa80460806aae14/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KPOXkBa3/2024-bmw-m2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5895ef658b7da9d3faa80460806aae14/manifest/video.m3u8",
+      "auction_title": "2024 BMW M2",
+      "auction_year": 2024,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/000994a6f6b06fdf91a36bf945466479/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/000994a6f6b06fdf91a36bf945466479/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/000994a6f6b06fdf91a36bf945466479/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KPxXOjMk/2024-bmw-m2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/000994a6f6b06fdf91a36bf945466479/manifest/video.m3u8",
+      "auction_title": "2024 BMW M2",
+      "auction_year": 2024,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9b0c83de9e310a88c014b6cd403f02b9/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9b0c83de9e310a88c014b6cd403f02b9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9b0c83de9e310a88c014b6cd403f02b9/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KPxXOjMk/2024-bmw-m2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9b0c83de9e310a88c014b6cd403f02b9/manifest/video.m3u8",
+      "auction_title": "2024 BMW M2",
+      "auction_year": 2024,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/375748974eb194884786afb1dc2136b1/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/375748974eb194884786afb1dc2136b1/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/375748974eb194884786afb1dc2136b1/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KPxXOjMk/2024-bmw-m2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/375748974eb194884786afb1dc2136b1/manifest/video.m3u8",
+      "auction_title": "2024 BMW M2",
+      "auction_year": 2024,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/592ee68837e49031622ba266fcf505a4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/592ee68837e49031622ba266fcf505a4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/592ee68837e49031622ba266fcf505a4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KmGdnNkx/2024-bmw-m2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/592ee68837e49031622ba266fcf505a4/manifest/video.m3u8",
+      "auction_title": "2024 BMW M2",
+      "auction_year": 2024,
+      "search_score": 60
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/848f03ffa211c6f2277f46992d6478d5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/848f03ffa211c6f2277f46992d6478d5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/848f03ffa211c6f2277f46992d6478d5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KmGdnNkx/2024-bmw-m2",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/848f03ffa211c6f2277f46992d6478d5/manifest/video.m3u8",
+      "auction_title": "2024 BMW M2",
+      "auction_year": 2024,
+      "search_score": 60
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 12,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive BMW grille",
+          "M2 bodywork",
+          "sporty front bumper"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive BMW grille",
+          "angular headlights",
+          "M2 badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork shape",
+          "BMW badge",
+          "proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW badge",
+          "M2 badge",
+          "2024 body design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M2 badge",
+          "BMW logo",
+          "rear design elements"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not visibly match the target vehicle.",
+        "path": "exterior-09.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 3,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not clearly show the target vehicle; unclear and not focused.",
+        "path": "exterior-10.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the target vehicle.",
+        "path": "exterior-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict a vehicle",
+        "path": "exterior-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW emblem on steering wheel",
+          "M-specific interior design",
+          "modern dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "bmw",
+        "detected_model": "m2",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M2 badge on seat",
+          "Interior design matching BMW M2"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the target vehicle.",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
