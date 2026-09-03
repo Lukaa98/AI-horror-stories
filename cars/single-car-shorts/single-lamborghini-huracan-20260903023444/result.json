@@ -1,0 +1,1687 @@
+{
+  "car": {
+    "make": "Lamborghini",
+    "model": "Huracan",
+    "trim": null
+  },
+  "title": "2014-2023 Lamborghini Huracan",
+  "start_year": 2014,
+  "end_year": 2023,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Value & Performance",
+      "narration": "The Lamborghini Huracan is a stunning blend of power and value in the supercar world.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "V10 Powerhouse",
+      "narration": "Under the hood, it boasts a naturally aspirated 5.2-liter V10 engine, delivering 631 horsepower.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null
+    },
+    {
+      "media_type": "wheel",
+      "headline": "AWD",
+      "narration": "Power flows through an all-wheel-drive system that enhances grip and cornering.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Ferrari 488 Rivalry",
+      "narration": "It faces stiff competition from the Ferrari 488, which has 661 horsepower.",
+      "rival_make": "Ferrari",
+      "rival_model": "488",
+      "main_horsepower": 631,
+      "rival_horsepower": 661
+    },
+    {
+      "media_type": "detail",
+      "headline": "Tuning Potential",
+      "narration": "For enthusiasts, aftermarket tuning can push its power well beyond stock figures.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "$240K -> $180K",
+      "narration": "Originally priced around $240,000 new, you can find used models for about $180,000 today.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "What's Your Pick?",
+      "narration": "So, would you take the Huracan or the Ferrari 488 for a spin?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null
+    }
+  ],
+  "sources": [
+    "https://www.caranddriver.com/lamborghini/huracan",
+    "https://www.motortrend.com/cars/lamborghini/huracan/",
+    "https://www.motor1.com/lamborghini/huracan/",
+    "https://www.evo.co.uk/lamborghini/huracan"
+  ],
+  "script": "The Lamborghini Huracan is a stunning blend of power and value in the supercar world. Under the hood, it boasts a naturally aspirated 5.2-liter V10 engine, delivering 631 horsepower. Power flows through an all-wheel-drive system that enhances grip and cornering. It faces stiff competition from the Ferrari 488, which has 661 horsepower. For enthusiasts, aftermarket tuning can push its power well beyond stock figures. Originally priced around $240,000 new, you can find used models for about $180,000 today. So, would you take the Huracan or the Ferrari 488 for a spin?",
+  "word_count": 94,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 58.0,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-lamborghini-huracan-20260903023444/narration.mp3",
+  "duration_seconds": 58.05,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.18,
+      "end": 0.45,
+      "mouth": "small"
+    },
+    {
+      "start": 0.45,
+      "end": 0.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.72,
+      "end": 0.81,
+      "mouth": "small"
+    },
+    {
+      "start": 0.81,
+      "end": 0.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.9,
+      "end": 1.08,
+      "mouth": "small"
+    },
+    {
+      "start": 1.08,
+      "end": 1.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.26,
+      "end": 1.62,
+      "mouth": "small"
+    },
+    {
+      "start": 1.62,
+      "end": 1.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.71,
+      "end": 1.8,
+      "mouth": "small"
+    },
+    {
+      "start": 1.8,
+      "end": 1.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.89,
+      "end": 2.61,
+      "mouth": "small"
+    },
+    {
+      "start": 2.61,
+      "end": 2.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.88,
+      "end": 2.97,
+      "mouth": "small"
+    },
+    {
+      "start": 2.97,
+      "end": 3.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.24,
+      "end": 3.96,
+      "mouth": "small"
+    },
+    {
+      "start": 3.96,
+      "end": 4.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.05,
+      "end": 4.32,
+      "mouth": "small"
+    },
+    {
+      "start": 4.32,
+      "end": 4.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.59,
+      "end": 5.76,
+      "mouth": "small"
+    },
+    {
+      "start": 5.76,
+      "end": 5.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.85,
+      "end": 6.12,
+      "mouth": "small"
+    },
+    {
+      "start": 6.12,
+      "end": 6.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.3,
+      "end": 7.02,
+      "mouth": "small"
+    },
+    {
+      "start": 7.02,
+      "end": 7.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.92,
+      "end": 8.01,
+      "mouth": "small"
+    },
+    {
+      "start": 8.01,
+      "end": 8.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.82,
+      "end": 9.0,
+      "mouth": "small"
+    },
+    {
+      "start": 9.0,
+      "end": 9.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.09,
+      "end": 9.18,
+      "mouth": "small"
+    },
+    {
+      "start": 9.18,
+      "end": 9.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.36,
+      "end": 9.45,
+      "mouth": "small"
+    },
+    {
+      "start": 9.45,
+      "end": 9.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.63,
+      "end": 10.17,
+      "mouth": "small"
+    },
+    {
+      "start": 10.17,
+      "end": 10.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.26,
+      "end": 10.98,
+      "mouth": "small"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.07,
+      "end": 11.52,
+      "mouth": "small"
+    },
+    {
+      "start": 11.52,
+      "end": 11.7,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.7,
+      "end": 11.97,
+      "mouth": "small"
+    },
+    {
+      "start": 11.97,
+      "end": 12.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.15,
+      "end": 12.42,
+      "mouth": "small"
+    },
+    {
+      "start": 12.42,
+      "end": 12.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.6,
+      "end": 13.41,
+      "mouth": "small"
+    },
+    {
+      "start": 13.41,
+      "end": 13.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.5,
+      "end": 14.31,
+      "mouth": "small"
+    },
+    {
+      "start": 14.31,
+      "end": 14.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.85,
+      "end": 15.03,
+      "mouth": "small"
+    },
+    {
+      "start": 15.03,
+      "end": 15.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.21,
+      "end": 15.3,
+      "mouth": "small"
+    },
+    {
+      "start": 15.3,
+      "end": 15.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.39,
+      "end": 15.57,
+      "mouth": "small"
+    },
+    {
+      "start": 15.57,
+      "end": 15.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.66,
+      "end": 15.84,
+      "mouth": "small"
+    },
+    {
+      "start": 15.84,
+      "end": 15.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.93,
+      "end": 16.02,
+      "mouth": "small"
+    },
+    {
+      "start": 16.02,
+      "end": 16.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.29,
+      "end": 16.38,
+      "mouth": "small"
+    },
+    {
+      "start": 16.38,
+      "end": 16.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.47,
+      "end": 17.37,
+      "mouth": "small"
+    },
+    {
+      "start": 17.37,
+      "end": 17.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.46,
+      "end": 17.82,
+      "mouth": "small"
+    },
+    {
+      "start": 17.82,
+      "end": 18.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.9,
+      "end": 18.99,
+      "mouth": "small"
+    },
+    {
+      "start": 18.99,
+      "end": 19.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.35,
+      "end": 19.44,
+      "mouth": "small"
+    },
+    {
+      "start": 19.44,
+      "end": 19.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.53,
+      "end": 19.62,
+      "mouth": "small"
+    },
+    {
+      "start": 19.62,
+      "end": 19.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.89,
+      "end": 19.98,
+      "mouth": "small"
+    },
+    {
+      "start": 19.98,
+      "end": 20.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.07,
+      "end": 20.52,
+      "mouth": "small"
+    },
+    {
+      "start": 20.52,
+      "end": 20.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.97,
+      "end": 21.51,
+      "mouth": "small"
+    },
+    {
+      "start": 21.51,
+      "end": 21.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.69,
+      "end": 21.87,
+      "mouth": "small"
+    },
+    {
+      "start": 21.87,
+      "end": 21.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.96,
+      "end": 22.68,
+      "mouth": "small"
+    },
+    {
+      "start": 22.68,
+      "end": 22.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.77,
+      "end": 22.86,
+      "mouth": "small"
+    },
+    {
+      "start": 22.86,
+      "end": 22.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.95,
+      "end": 23.13,
+      "mouth": "small"
+    },
+    {
+      "start": 23.13,
+      "end": 23.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.22,
+      "end": 23.31,
+      "mouth": "small"
+    },
+    {
+      "start": 23.31,
+      "end": 23.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "small"
+    },
+    {
+      "start": 23.49,
+      "end": 23.58,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.58,
+      "end": 24.48,
+      "mouth": "small"
+    },
+    {
+      "start": 24.48,
+      "end": 25.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.29,
+      "end": 25.47,
+      "mouth": "small"
+    },
+    {
+      "start": 25.47,
+      "end": 25.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.56,
+      "end": 25.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.74,
+      "end": 26.28,
+      "mouth": "small"
+    },
+    {
+      "start": 26.28,
+      "end": 26.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.37,
+      "end": 26.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.55,
+      "end": 26.73,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.73,
+      "end": 26.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.82,
+      "end": 26.91,
+      "mouth": "small"
+    },
+    {
+      "start": 26.91,
+      "end": 27.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.0,
+      "end": 27.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.09,
+      "end": 28.17,
+      "mouth": "small"
+    },
+    {
+      "start": 28.17,
+      "end": 28.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.35,
+      "end": 28.53,
+      "mouth": "small"
+    },
+    {
+      "start": 28.53,
+      "end": 28.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.62,
+      "end": 29.43,
+      "mouth": "small"
+    },
+    {
+      "start": 29.43,
+      "end": 30.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.15,
+      "end": 30.24,
+      "mouth": "small"
+    },
+    {
+      "start": 30.24,
+      "end": 30.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.33,
+      "end": 30.87,
+      "mouth": "small"
+    },
+    {
+      "start": 30.87,
+      "end": 30.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.96,
+      "end": 31.32,
+      "mouth": "small"
+    },
+    {
+      "start": 31.32,
+      "end": 31.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.41,
+      "end": 31.5,
+      "mouth": "small"
+    },
+    {
+      "start": 31.5,
+      "end": 31.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.68,
+      "end": 32.4,
+      "mouth": "small"
+    },
+    {
+      "start": 32.4,
+      "end": 32.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.49,
+      "end": 32.85,
+      "mouth": "small"
+    },
+    {
+      "start": 32.85,
+      "end": 33.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.84,
+      "end": 34.2,
+      "mouth": "small"
+    },
+    {
+      "start": 34.2,
+      "end": 34.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.38,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 35.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.64,
+      "end": 35.73,
+      "mouth": "small"
+    },
+    {
+      "start": 35.73,
+      "end": 35.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.82,
+      "end": 35.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.91,
+      "end": 36.09,
+      "mouth": "small"
+    },
+    {
+      "start": 36.09,
+      "end": 36.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.27,
+      "end": 36.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.36,
+      "end": 36.45,
+      "mouth": "small"
+    },
+    {
+      "start": 36.45,
+      "end": 36.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.63,
+      "end": 36.72,
+      "mouth": "small"
+    },
+    {
+      "start": 36.72,
+      "end": 36.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.81,
+      "end": 37.08,
+      "mouth": "small"
+    },
+    {
+      "start": 37.08,
+      "end": 37.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.17,
+      "end": 37.35,
+      "mouth": "small"
+    },
+    {
+      "start": 37.35,
+      "end": 37.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.44,
+      "end": 37.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.53,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.98,
+      "end": 38.07,
+      "mouth": "small"
+    },
+    {
+      "start": 38.07,
+      "end": 38.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.34,
+      "end": 38.61,
+      "mouth": "small"
+    },
+    {
+      "start": 38.61,
+      "end": 38.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.79,
+      "end": 39.42,
+      "mouth": "small"
+    },
+    {
+      "start": 39.42,
+      "end": 39.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.51,
+      "end": 39.87,
+      "mouth": "small"
+    },
+    {
+      "start": 39.87,
+      "end": 39.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.96,
+      "end": 40.5,
+      "mouth": "small"
+    },
+    {
+      "start": 40.5,
+      "end": 41.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.67,
+      "end": 41.76,
+      "mouth": "small"
+    },
+    {
+      "start": 41.76,
+      "end": 41.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.94,
+      "end": 42.03,
+      "mouth": "small"
+    },
+    {
+      "start": 42.03,
+      "end": 42.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.3,
+      "end": 42.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.39,
+      "end": 42.48,
+      "mouth": "small"
+    },
+    {
+      "start": 42.48,
+      "end": 42.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.66,
+      "end": 43.2,
+      "mouth": "small"
+    },
+    {
+      "start": 43.2,
+      "end": 43.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.29,
+      "end": 43.38,
+      "mouth": "small"
+    },
+    {
+      "start": 43.38,
+      "end": 43.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.56,
+      "end": 43.74,
+      "mouth": "small"
+    },
+    {
+      "start": 43.74,
+      "end": 43.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.92,
+      "end": 44.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.19,
+      "end": 44.37,
+      "mouth": "small"
+    },
+    {
+      "start": 44.37,
+      "end": 44.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.55,
+      "end": 45.72,
+      "mouth": "small"
+    },
+    {
+      "start": 45.72,
+      "end": 46.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.26,
+      "end": 46.35,
+      "mouth": "small"
+    },
+    {
+      "start": 46.35,
+      "end": 46.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.44,
+      "end": 46.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.53,
+      "end": 46.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.62,
+      "end": 46.8,
+      "mouth": "small"
+    },
+    {
+      "start": 46.8,
+      "end": 46.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.89,
+      "end": 47.16,
+      "mouth": "small"
+    },
+    {
+      "start": 47.16,
+      "end": 47.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.34,
+      "end": 47.61,
+      "mouth": "small"
+    },
+    {
+      "start": 47.61,
+      "end": 47.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.7,
+      "end": 47.97,
+      "mouth": "small"
+    },
+    {
+      "start": 47.97,
+      "end": 48.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.15,
+      "end": 48.69,
+      "mouth": "small"
+    },
+    {
+      "start": 48.69,
+      "end": 48.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.78,
+      "end": 49.41,
+      "mouth": "small"
+    },
+    {
+      "start": 49.41,
+      "end": 49.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.5,
+      "end": 50.31,
+      "mouth": "small"
+    },
+    {
+      "start": 50.31,
+      "end": 50.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.4,
+      "end": 50.85,
+      "mouth": "small"
+    },
+    {
+      "start": 50.85,
+      "end": 51.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.93,
+      "end": 52.02,
+      "mouth": "small"
+    },
+    {
+      "start": 52.02,
+      "end": 52.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.11,
+      "end": 52.38,
+      "mouth": "small"
+    },
+    {
+      "start": 52.38,
+      "end": 52.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.47,
+      "end": 52.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.56,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 52.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.74,
+      "end": 53.01,
+      "mouth": "small"
+    },
+    {
+      "start": 53.01,
+      "end": 53.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.1,
+      "end": 53.73,
+      "mouth": "small"
+    },
+    {
+      "start": 53.73,
+      "end": 54.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.0,
+      "end": 54.27,
+      "mouth": "small"
+    },
+    {
+      "start": 54.27,
+      "end": 54.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.36,
+      "end": 54.54,
+      "mouth": "small"
+    },
+    {
+      "start": 54.54,
+      "end": 54.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.72,
+      "end": 54.9,
+      "mouth": "small"
+    },
+    {
+      "start": 54.9,
+      "end": 54.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.99,
+      "end": 55.71,
+      "mouth": "small"
+    },
+    {
+      "start": 55.71,
+      "end": 55.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 55.89,
+      "end": 56.07,
+      "mouth": "small"
+    },
+    {
+      "start": 56.07,
+      "end": 56.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 56.25,
+      "end": 56.61,
+      "mouth": "small"
+    },
+    {
+      "start": 56.61,
+      "end": 58.05,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "The",
+      "start": 0.0,
+      "end": 0.46000000834465027
+    },
+    {
+      "word": "Lamborghini",
+      "start": 0.46000000834465027,
+      "end": 1.3600000143051147
+    },
+    {
+      "word": "Huracan",
+      "start": 1.3600000143051147,
+      "end": 2.200000047683716
+    },
+    {
+      "word": "is",
+      "start": 2.200000047683716,
+      "end": 2.5199999809265137
+    },
+    {
+      "word": "a",
+      "start": 2.5199999809265137,
+      "end": 3.059999942779541
+    },
+    {
+      "word": "stunning",
+      "start": 3.059999942779541,
+      "end": 3.299999952316284
+    },
+    {
+      "word": "blend",
+      "start": 3.299999952316284,
+      "end": 3.8399999141693115
+    },
+    {
+      "word": "of",
+      "start": 3.8399999141693115,
+      "end": 4.179999828338623
+    },
+    {
+      "word": "power",
+      "start": 4.179999828338623,
+      "end": 4.659999847412109
+    },
+    {
+      "word": "and",
+      "start": 4.659999847412109,
+      "end": 5.0
+    },
+    {
+      "word": "value",
+      "start": 5.0,
+      "end": 5.400000095367432
+    },
+    {
+      "word": "in",
+      "start": 5.400000095367432,
+      "end": 5.659999847412109
+    },
+    {
+      "word": "the",
+      "start": 5.659999847412109,
+      "end": 5.860000133514404
+    },
+    {
+      "word": "supercar",
+      "start": 5.860000133514404,
+      "end": 6.559999942779541
+    },
+    {
+      "word": "world",
+      "start": 6.559999942779541,
+      "end": 7.119999885559082
+    },
+    {
+      "word": "Under",
+      "start": 8.199999809265137,
+      "end": 8.279999732971191
+    },
+    {
+      "word": "the",
+      "start": 8.279999732971191,
+      "end": 8.880000114440918
+    },
+    {
+      "word": "hood",
+      "start": 8.880000114440918,
+      "end": 8.880000114440918
+    },
+    {
+      "word": "it",
+      "start": 8.880000114440918,
+      "end": 9.619999885559082
+    },
+    {
+      "word": "boasts",
+      "start": 9.619999885559082,
+      "end": 9.619999885559082
+    },
+    {
+      "word": "a",
+      "start": 9.619999885559082,
+      "end": 9.979999542236328
+    },
+    {
+      "word": "naturally",
+      "start": 9.979999542236328,
+      "end": 10.579999923706055
+    },
+    {
+      "word": "aspirated",
+      "start": 10.579999923706055,
+      "end": 11.479999542236328
+    },
+    {
+      "word": "5",
+      "start": 11.479999542236328,
+      "end": 12.119999885559082
+    },
+    {
+      "word": "2",
+      "start": 12.119999885559082,
+      "end": 12.800000190734863
+    },
+    {
+      "word": "liter",
+      "start": 12.800000190734863,
+      "end": 13.140000343322754
+    },
+    {
+      "word": "V10",
+      "start": 13.140000343322754,
+      "end": 13.779999732971191
+    },
+    {
+      "word": "engine",
+      "start": 13.779999732971191,
+      "end": 14.359999656677246
+    },
+    {
+      "word": "delivering",
+      "start": 14.359999656677246,
+      "end": 15.479999542236328
+    },
+    {
+      "word": "631",
+      "start": 15.479999542236328,
+      "end": 17.0
+    },
+    {
+      "word": "horsepower",
+      "start": 17.0,
+      "end": 17.84000015258789
+    },
+    {
+      "word": "Power",
+      "start": 19.299999237060547,
+      "end": 19.420000076293945
+    },
+    {
+      "word": "flows",
+      "start": 19.420000076293945,
+      "end": 19.959999084472656
+    },
+    {
+      "word": "through",
+      "start": 19.959999084472656,
+      "end": 20.31999969482422
+    },
+    {
+      "word": "an",
+      "start": 20.31999969482422,
+      "end": 20.579999923706055
+    },
+    {
+      "word": "all",
+      "start": 20.579999923706055,
+      "end": 21.0
+    },
+    {
+      "word": "wheel",
+      "start": 21.0,
+      "end": 21.079999923706055
+    },
+    {
+      "word": "drive",
+      "start": 21.079999923706055,
+      "end": 21.600000381469727
+    },
+    {
+      "word": "system",
+      "start": 21.600000381469727,
+      "end": 22.100000381469727
+    },
+    {
+      "word": "that",
+      "start": 22.100000381469727,
+      "end": 22.559999465942383
+    },
+    {
+      "word": "enhances",
+      "start": 22.559999465942383,
+      "end": 22.959999084472656
+    },
+    {
+      "word": "grip",
+      "start": 22.959999084472656,
+      "end": 23.540000915527344
+    },
+    {
+      "word": "and",
+      "start": 23.540000915527344,
+      "end": 24.139999389648438
+    },
+    {
+      "word": "cornering",
+      "start": 24.139999389648438,
+      "end": 24.520000457763672
+    },
+    {
+      "word": "It",
+      "start": 24.959999084472656,
+      "end": 25.459999084472656
+    },
+    {
+      "word": "faces",
+      "start": 25.459999084472656,
+      "end": 25.959999084472656
+    },
+    {
+      "word": "stiff",
+      "start": 25.959999084472656,
+      "end": 26.559999465942383
+    },
+    {
+      "word": "competition",
+      "start": 26.559999465942383,
+      "end": 27.239999771118164
+    },
+    {
+      "word": "from",
+      "start": 27.239999771118164,
+      "end": 27.760000228881836
+    },
+    {
+      "word": "the",
+      "start": 27.760000228881836,
+      "end": 27.959999084472656
+    },
+    {
+      "word": "Ferrari",
+      "start": 27.959999084472656,
+      "end": 28.420000076293945
+    },
+    {
+      "word": "488",
+      "start": 28.420000076293945,
+      "end": 29.700000762939453
+    },
+    {
+      "word": "which",
+      "start": 29.700000762939453,
+      "end": 30.31999969482422
+    },
+    {
+      "word": "has",
+      "start": 30.31999969482422,
+      "end": 30.719999313354492
+    },
+    {
+      "word": "661",
+      "start": 30.719999313354492,
+      "end": 32.13999938964844
+    },
+    {
+      "word": "horsepower",
+      "start": 32.13999938964844,
+      "end": 32.880001068115234
+    },
+    {
+      "word": "For",
+      "start": 34.08000183105469,
+      "end": 34.08000183105469
+    },
+    {
+      "word": "enthusiasts",
+      "start": 34.08000183105469,
+      "end": 34.939998626708984
+    },
+    {
+      "word": "aftermarket",
+      "start": 36.060001373291016,
+      "end": 36.5
+    },
+    {
+      "word": "tuning",
+      "start": 36.5,
+      "end": 36.959999084472656
+    },
+    {
+      "word": "can",
+      "start": 36.959999084472656,
+      "end": 37.400001525878906
+    },
+    {
+      "word": "push",
+      "start": 37.400001525878906,
+      "end": 37.63999938964844
+    },
+    {
+      "word": "its",
+      "start": 37.63999938964844,
+      "end": 37.97999954223633
+    },
+    {
+      "word": "power",
+      "start": 37.97999954223633,
+      "end": 38.34000015258789
+    },
+    {
+      "word": "well",
+      "start": 38.34000015258789,
+      "end": 39.060001373291016
+    },
+    {
+      "word": "beyond",
+      "start": 39.060001373291016,
+      "end": 39.400001525878906
+    },
+    {
+      "word": "stock",
+      "start": 39.400001525878906,
+      "end": 39.959999084472656
+    },
+    {
+      "word": "figures",
+      "start": 39.959999084472656,
+      "end": 40.599998474121094
+    },
+    {
+      "word": "Originally",
+      "start": 41.7400016784668,
+      "end": 42.279998779296875
+    },
+    {
+      "word": "priced",
+      "start": 42.279998779296875,
+      "end": 42.779998779296875
+    },
+    {
+      "word": "around",
+      "start": 42.779998779296875,
+      "end": 43.2400016784668
+    },
+    {
+      "word": "240",
+      "start": 43.2400016784668,
+      "end": 44.31999969482422
+    },
+    {
+      "word": "000",
+      "start": 44.31999969482422,
+      "end": 44.619998931884766
+    },
+    {
+      "word": "new",
+      "start": 44.619998931884766,
+      "end": 45.779998779296875
+    },
+    {
+      "word": "you",
+      "start": 46.220001220703125,
+      "end": 46.47999954223633
+    },
+    {
+      "word": "can",
+      "start": 46.47999954223633,
+      "end": 46.7400016784668
+    },
+    {
+      "word": "find",
+      "start": 46.7400016784668,
+      "end": 47.08000183105469
+    },
+    {
+      "word": "used",
+      "start": 47.08000183105469,
+      "end": 47.599998474121094
+    },
+    {
+      "word": "models",
+      "start": 47.599998474121094,
+      "end": 47.959999084472656
+    },
+    {
+      "word": "for",
+      "start": 47.959999084472656,
+      "end": 48.279998779296875
+    },
+    {
+      "word": "about",
+      "start": 48.279998779296875,
+      "end": 48.619998931884766
+    },
+    {
+      "word": "180",
+      "start": 48.619998931884766,
+      "end": 49.36000061035156
+    },
+    {
+      "word": "000",
+      "start": 49.36000061035156,
+      "end": 49.86000061035156
+    },
+    {
+      "word": "today",
+      "start": 49.86000061035156,
+      "end": 50.91999816894531
+    },
+    {
+      "word": "So",
+      "start": 50.91999816894531,
+      "end": 52.040000915527344
+    },
+    {
+      "word": "would",
+      "start": 52.040000915527344,
+      "end": 52.2400016784668
+    },
+    {
+      "word": "you",
+      "start": 52.2400016784668,
+      "end": 52.459999084472656
+    },
+    {
+      "word": "take",
+      "start": 52.459999084472656,
+      "end": 52.68000030517578
+    },
+    {
+      "word": "the",
+      "start": 52.68000030517578,
+      "end": 52.959999084472656
+    },
+    {
+      "word": "Huracan",
+      "start": 52.959999084472656,
+      "end": 53.599998474121094
+    },
+    {
+      "word": "or",
+      "start": 53.599998474121094,
+      "end": 54.18000030517578
+    },
+    {
+      "word": "the",
+      "start": 54.18000030517578,
+      "end": 54.86000061035156
+    },
+    {
+      "word": "Ferrari",
+      "start": 54.86000061035156,
+      "end": 54.86000061035156
+    },
+    {
+      "word": "488",
+      "start": 54.86000061035156,
+      "end": 55.79999923706055
+    },
+    {
+      "word": "for",
+      "start": 55.79999923706055,
+      "end": 56.08000183105469
+    },
+    {
+      "word": "a",
+      "start": 56.08000183105469,
+      "end": 56.560001373291016
+    },
+    {
+      "word": "spin",
+      "start": 56.560001373291016,
+      "end": 56.560001373291016
+    }
+  ],
+  "media": [
+    {
+      "path": "images/lamborghini-huracan/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side"
+    },
+    {
+      "path": "images/lamborghini-huracan/exterior_front-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front"
+    },
+    {
+      "path": "images/lamborghini-huracan/exterior_front-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front"
+    },
+    {
+      "path": "images/ferrari-488/exterior_side-01-nobg.png",
+      "type": "exterior"
+    },
+    {
+      "path": "images/lamborghini-huracan/interior-02.jpg",
+      "type": "detail",
+      "category": "other_detail"
+    },
+    {
+      "path": "images/lamborghini-huracan/exterior_rear-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear"
+    },
+    {
+      "path": "images/lamborghini-huracan/interior-01.jpg",
+      "type": "interior",
+      "category": "interior"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rGYReg8g/2020-lamborghini-huracan-evo-spyder",
+    "title": "2020 Lamborghini Huracan EVO Spyder",
+    "text": "2020 Lamborghini Huracan EVO Spyder",
+    "titleYear": 2020,
+    "score": 109,
+    "sale_price": 261000,
+    "sale_type": "sold",
+    "page_title": "2020 Lamborghini Huracan EVO Spyder",
+    "year": 2020,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-lamborghini-huracan-20260903023444/voice_auditions/onyx.mp3",
+    "british_narrator": "single-lamborghini-huracan-20260903023444/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-lamborghini-huracan-20260903023444/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-lamborghini-huracan-20260903023444/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-lamborghini-huracan-20260903023444/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-lamborghini-huracan-20260903023444/images/lamborghini-huracan/exterior_side-01-nobg.png",
+  "video": "single_car_short.mp4"
+}

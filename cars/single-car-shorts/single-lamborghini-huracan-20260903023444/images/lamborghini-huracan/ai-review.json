@@ -1,0 +1,258 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 10,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "lamborghini",
+      "detected_model": "huracan",
+      "detected_generation_or_year": "2014-2023",
+      "detected_variant_or_engine": "evo",
+      "visible_match_evidence": [
+        "evo seats",
+        "interior design",
+        "lamborghini branding"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "lamborghini",
+      "detected_model": "huracan",
+      "detected_generation_or_year": "2014-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "bodywork shape",
+        "front design",
+        "side profile",
+        "wheel design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 6,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Lamborghini",
+      "detected_model": "Huracan",
+      "detected_generation_or_year": "2014-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinct Lamborghini design",
+        "front fascia shape",
+        "headlight styling",
+        "wheels style"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "lamborghini",
+      "detected_model": "huracan",
+      "detected_generation_or_year": "2014-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "bodywork",
+        "lights",
+        "proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Lamborghini",
+      "detected_model": "Huracan",
+      "detected_generation_or_year": "2014-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Lamborghini branding",
+        "distinctive Huracan bodywork",
+        "proportions and rear design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": null,
+      "path": "engine-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "lamborghini",
+      "detected_model": "huracan",
+      "detected_generation_or_year": "2014-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "rear design",
+        "exhaust configuration",
+        "badging"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 0,
+      "variant_match_confidence": 0,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 1,
+      "composition_score": 1,
+      "target_match_confidence": 0,
+      "reject": true,
+      "reason": "Image does not contain a car, lacks relevant content.",
+      "path": "engine-10.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "lamborghini",
+      "detected_model": "huracan",
+      "detected_generation_or_year": "2014-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design matches Lamborghini Huracan",
+        "Lamborghini branding on floor mat"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "lamborghini",
+      "detected_model": "huracan",
+      "detected_generation_or_year": "2014-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Huracan branding",
+        "Lamborghini interior design",
+        "Modern sports car features"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 6,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Interior shot does not show the exterior, make, or model of the vehicle.",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    }
+  ]
+}
