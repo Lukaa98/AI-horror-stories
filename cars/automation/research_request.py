@@ -763,6 +763,8 @@ def _finalize_image_review(review, trusted_variant_provenance=False):
     review["is_expected_vehicle"] = bool(review.get("is_expected_vehicle"))
     review["exact_variant_visible"] = bool(review.get("exact_variant_visible"))
     review["has_visible_contradiction"] = bool(review.get("has_visible_contradiction", False))
+    facing = str(review.get("facing_direction") or "").strip().lower()
+    review["facing_direction"] = facing if facing in ("left", "right") else "unclear"
     review["image_quality_usable"] = bool(
         review.get("image_quality_usable", True if trusted_variant_provenance else review.get("usable"))
     )
@@ -803,6 +805,10 @@ Return ONLY strict JSON with:
 - image_quality_usable: boolean (judge blur, framing, page UI, collage, and resolution only)
 - category: exactly one of exterior_front, exterior_rear, exterior_side, exterior_full,
   interior, engine_bay, wheel_detail, other_detail
+- facing_direction: for any exterior category, which side of the frame the car's own front
+  bumper/nose points toward -- "left", "right", or "unclear" (a straight front/rear shot, or a
+  wheel/interior/engine/detail photo where the whole car isn't in frame). This is used to orient
+  the car correctly in a left-to-right animation, so judge it from the pixels, not the filename.
 - view_description: a precise phrase such as "front-left three-quarter exterior"
 - visible_match_evidence: array of short descriptions of generation/variant-specific details
 - confidence: number from 0 to 1
@@ -819,9 +825,15 @@ Only use category "interior" when the dashboard, steering wheel, or center conso
 prominent subject filling a meaningful part of the frame -- not just visible at a small sliver
 along an edge. A seat-only, trunk/cargo, headrest, or door-panel close-up (even one with a corner
 of dashboard peeking in) should be "other_detail" instead; this category exists specifically for
-the driver's-eye cabin view, not any interior-adjacent shot. Only use "engine_bay" when actual
-engine-bay contents (block, intake, hoses, etc. with the hood open) are visible -- a closed hood
-or an exterior badge is not engine_bay."""
+the driver's-eye cabin view, not any interior-adjacent shot. Also use "other_detail" (never
+"interior") for an extreme macro crop of a single isolated component -- a shifter knob, a single
+vent, a stitching close-up, a lone button or dial -- shot tight enough that it lacks the
+surrounding dashboard/wheel context to read clearly as "the car's interior" at a glance; those
+crops often look like an ambiguous or awkward blob of shapes rather than a recognizable cabin
+shot, which is exactly what "interior" must not be. A genuine "interior" photo shows enough of
+the dash, wheel, and/or console together that a viewer instantly recognizes it as the cabin. Only
+use "engine_bay" when actual engine-bay contents (block, intake, hoses, etc. with the hood open)
+are visible -- a closed hood or an exterior badge is not engine_bay."""
     response = with_openai_retry(lambda: client.responses.create(
         model=model,
         input=[{

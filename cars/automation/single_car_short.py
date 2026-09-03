@@ -178,7 +178,7 @@ def _strip_citations(text):
 
 
 def _research_script_prompt(label, year_scope, retry_feedback=""):
-    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), or a fact about its reputation/legacy. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}
+    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-8 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), at least one beat of real history or design/legacy context (the designer, a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -221,9 +221,10 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
         retry_feedback = (
             f" Your previous attempt came back at {package['word_count']} words, outside the "
             f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} target -- rewrite from scratch. If you were short, research "
-            f"and add a genuinely new beat (history, design story, a race win or record, a special edition) "
-            f"rather than padding existing sentences or repeating what you already said -- there is almost "
-            f"always more real, well-documented material available if you look for it." if package else ""
+            f"and add a genuinely new beat (history, design story, a race win or record, a special edition, "
+            f"or a mechanical/engineering detail like the suspension or rear-axle setup, steering system, or "
+            f"chassis platform) rather than padding existing sentences or repeating what you already said -- "
+            f"there is almost always more real, well-documented material available if you look for it." if package else ""
         )
         package = _request_script_package(_research_script_prompt(label, year_scope, retry_feedback))
         count = package["word_count"]
@@ -351,7 +352,10 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
         if shot_type == "exterior":
             path = remove_background(path)
             relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
-        media.append({"path": relative, "type": shot_type, "category": review.get("category")})
+        media.append({
+            "path": relative, "type": shot_type, "category": review.get("category"),
+            "facing_direction": review.get("facing_direction", "unclear"),
+        })
     if not media:
         raise RuntimeError("No approved exterior, engine, detail, or wheel images were found.")
     return media, manifest.get("selected_auction") or {}
@@ -360,16 +364,24 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
 def _select_side_profile_media(media):
     """Pick one exterior photo to reuse for the decorative mini-car
     animations (drift doodle, drag race) -- a true side profile reads far
-    better doing a spin or a top-to-bottom "race" than a front/rear crop,
+    better doing a spin or a left-to-right "race" than a front/rear crop,
     so this prefers exterior_side, falls back to exterior_full (still shows
     the whole car), and only then any exterior photo at all rather than
-    skipping the decorative features outright."""
+    skipping the decorative features outright. Returns {"path", "facing_direction"}
+    (or None) -- facing_direction lets the race animation flip the cutout so
+    the car's nose actually points the way it's "driving" instead of
+    sometimes appearing to race backwards."""
     exterior = [item for item in media if item["type"] == "exterior"]
+    match = None
     for category in ("exterior_side", "exterior_full"):
         match = next((item for item in exterior if item.get("category") == category), None)
         if match:
-            return match["path"]
-    return exterior[0]["path"] if exterior else None
+            break
+    else:
+        match = exterior[0] if exterior else None
+    if not match:
+        return None
+    return {"path": match["path"], "facing_direction": match.get("facing_direction", "unclear")}
 
 
 def apply_rival_photos(scenes, media, start_year, end_year, images_dir):
@@ -387,9 +399,9 @@ def apply_rival_photos(scenes, media, start_year, end_year, images_dir):
         cache_key = (rival_make, rival_model)
         if cache_key not in rival_cache:
             rival_cache[cache_key] = gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir)
-        rival_path = rival_cache[cache_key]
+        rival_path, rival_facing = rival_cache[cache_key]
         if rival_path and index < len(media):
-            media[index] = {"path": rival_path, "type": "exterior"}
+            media[index] = {"path": rival_path, "type": "exterior", "facing_direction": rival_facing}
     return media
 
 
@@ -397,11 +409,13 @@ def gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir
     """One real exterior photo of a named competitor car, same era as the
     main car -- for the single scene that directly compares to it, instead
     of showing the main car's own photo again there. Best-effort: returns
-    None on any failure (no results, review rejects everything, etc.)
-    rather than failing the whole build over one optional beat."""
+    (None, "unclear") on any failure (no results, review rejects
+    everything, etc.) rather than failing the whole build over one
+    optional beat. The facing_direction lets the drag-race animation flip
+    the cutout so it doesn't sometimes appear to race backwards."""
     search_hint = " ".join(value for value in [rival_make, rival_model] if value).strip()
     if not search_hint:
-        return None
+        return None, "unclear"
     entry = {
         "name": search_hint,
         "label": search_hint,
@@ -419,7 +433,7 @@ def gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir
             trusted_variant_provenance=_auction_provenance_matches_entry(entry),
         )
     except Exception:
-        return None
+        return None, "unclear"
     reviews_by_path = {review.get("path"): review for review in entry.get("image_reviews", [])}
     exterior_categories = {"exterior_front", "exterior_rear", "exterior_side", "exterior_full"}
     candidates = [
@@ -437,8 +451,9 @@ def gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir
             continue
         blur_license_plates(path)
         path = remove_background(path)
-        return str(path.relative_to(images_dir.parent)).replace("\\", "/")
-    return None
+        facing = reviews_by_path.get(relative, {}).get("facing_direction", "unclear")
+        return str(path.relative_to(images_dir.parent)).replace("\\", "/"), facing
+    return None, "unclear"
 
 
 # Extra takes of the same script in a few other voices, purely for the
@@ -600,7 +615,8 @@ def build_short(args):
         "media": media,
         "selected_auction": selected_auction,
         "voice_auditions": voice_auditions,
-        "side_profile_media_path": str(output_dir / side_profile_media) if side_profile_media else None,
+        "side_profile_media_path": str(output_dir / side_profile_media["path"]) if side_profile_media else None,
+        "side_profile_facing_direction": side_profile_media["facing_direction"] if side_profile_media else "unclear",
     }
     manifest_path = output_dir / "result.json"
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")

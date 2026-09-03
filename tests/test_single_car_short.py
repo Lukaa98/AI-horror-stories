@@ -281,22 +281,22 @@ def test_gather_media_only_removes_background_from_exterior_photos(tmp_path, mon
 
 def test_select_side_profile_media_prefers_a_true_side_shot():
     media = [
-        {"path": "front.jpg", "type": "exterior", "category": "exterior_front"},
-        {"path": "side.jpg", "type": "exterior", "category": "exterior_side"},
-        {"path": "full.jpg", "type": "exterior", "category": "exterior_full"},
+        {"path": "front.jpg", "type": "exterior", "category": "exterior_front", "facing_direction": "left"},
+        {"path": "side.jpg", "type": "exterior", "category": "exterior_side", "facing_direction": "right"},
+        {"path": "full.jpg", "type": "exterior", "category": "exterior_full", "facing_direction": "left"},
     ]
-    assert _select_side_profile_media(media) == "side.jpg"
+    assert _select_side_profile_media(media) == {"path": "side.jpg", "facing_direction": "right"}
 
 
 def test_select_side_profile_media_falls_back_to_full_car_angle_then_any_exterior():
     assert _select_side_profile_media([
-        {"path": "front.jpg", "type": "exterior", "category": "exterior_front"},
-        {"path": "full.jpg", "type": "exterior", "category": "exterior_full"},
-    ]) == "full.jpg"
+        {"path": "front.jpg", "type": "exterior", "category": "exterior_front", "facing_direction": "left"},
+        {"path": "full.jpg", "type": "exterior", "category": "exterior_full", "facing_direction": "right"},
+    ]) == {"path": "full.jpg", "facing_direction": "right"}
     assert _select_side_profile_media([
         {"path": "interior.jpg", "type": "interior", "category": "interior"},
-        {"path": "front.jpg", "type": "exterior", "category": "exterior_front"},
-    ]) == "front.jpg"
+        {"path": "front.jpg", "type": "exterior", "category": "exterior_front", "facing_direction": "unclear"},
+    ]) == {"path": "front.jpg", "facing_direction": "unclear"}
 
 
 def test_select_side_profile_media_returns_none_without_any_exterior_photo():
@@ -322,8 +322,8 @@ def test_gather_rival_photo_prefers_side_profile_over_front_rear(monkeypatch, tm
 
     def fake_review_and_rename(entry, images_dir_arg, require_ai=False, seen_images=None, trusted_variant_provenance=False):
         entry["image_reviews"] = [
-            {"path": "images/camaro/front-01.jpg", "category": "exterior_front"},
-            {"path": "images/camaro/side-02.jpg", "category": "exterior_side"},
+            {"path": "images/camaro/front-01.jpg", "category": "exterior_front", "facing_direction": "left"},
+            {"path": "images/camaro/side-02.jpg", "category": "exterior_side", "facing_direction": "right"},
         ]
         return entry
 
@@ -335,7 +335,7 @@ def test_gather_rival_photo_prefers_side_profile_over_front_rear(monkeypatch, tm
 
     result = single_car_short.gather_rival_photo("Chevrolet", "Camaro", 2015, 2015, images_dir)
 
-    assert result == "images/camaro/side-02.jpg"
+    assert result == ("images/camaro/side-02.jpg", "right")
 
 
 def test_apply_rival_photos_swaps_in_a_rival_photo_for_the_naming_scene(monkeypatch, tmp_path):
@@ -353,13 +353,13 @@ def test_apply_rival_photos_swaps_in_a_rival_photo_for_the_naming_scene(monkeypa
     ]
     monkeypatch.setattr(
         single_car_short, "gather_rival_photo",
-        lambda make, model, start, end, images_dir: "images/camaro/exterior-01.jpg",
+        lambda make, model, start, end, images_dir: ("images/camaro/exterior-01.jpg", "left"),
     )
 
     result = apply_rival_photos(scenes, media, 2015, 2015, tmp_path)
 
     assert result[0]["path"] == "images/mustang/exterior-01.jpg"
-    assert result[1] == {"path": "images/camaro/exterior-01.jpg", "type": "exterior"}
+    assert result[1] == {"path": "images/camaro/exterior-01.jpg", "type": "exterior", "facing_direction": "left"}
     assert result[2]["path"] == "images/mustang/detail-01.jpg"
 
 
@@ -371,7 +371,7 @@ def test_apply_rival_photos_leaves_media_untouched_when_no_rival_named(monkeypat
     calls = []
     monkeypatch.setattr(
         single_car_short, "gather_rival_photo",
-        lambda *a, **k: calls.append(a) or "images/camaro/exterior-01.jpg",
+        lambda *a, **k: calls.append(a) or ("images/camaro/exterior-01.jpg", "left"),
     )
 
     result = apply_rival_photos(scenes, media, 2015, 2015, tmp_path)
@@ -385,7 +385,7 @@ def test_apply_rival_photos_keeps_original_media_when_rival_lookup_fails(monkeyp
 
     scenes = [{"media_type": "exterior", "rival_make": "Chevrolet", "rival_model": "Camaro"}]
     media = [{"path": "images/mustang/exterior-01.jpg", "type": "exterior"}]
-    monkeypatch.setattr(single_car_short, "gather_rival_photo", lambda *a, **k: None)
+    monkeypatch.setattr(single_car_short, "gather_rival_photo", lambda *a, **k: (None, "unclear"))
 
     result = apply_rival_photos(scenes, media, 2015, 2015, tmp_path)
 

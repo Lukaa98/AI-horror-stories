@@ -9,6 +9,7 @@ from narrator_video import (  # noqa: E402
     _blink_intervals,
     _caption_chunks,
     _caption_timeline,
+    _drag_race_lane_clip,
     _drag_race_track,
     _drift_doodle_track,
     _merged_boundaries,
@@ -226,17 +227,43 @@ def test_drift_doodle_track_builds_small_clips_for_the_full_duration(tmp_path):
             assert 0 <= y <= CANVAS[1]
 
 
+def test_drag_race_lane_clip_flips_a_car_whose_nose_faces_the_wrong_way(tmp_path):
+    """Left-to-right travel needs the car's nose pointing right -- a photo
+    reviewed as facing left has to be mirrored, or it reads as racing
+    backwards, while a photo already facing right is left untouched."""
+    from PIL import Image
+    import numpy as np
+
+    cutout = tmp_path / "car.png"
+    frame = np.zeros((60, 100, 4), dtype=np.uint8)
+    frame[:, 80:, :] = [255, 0, 0, 255]  # a red block on the right = the "nose"
+    Image.fromarray(frame).save(cutout)
+
+    unflipped = _drag_race_lane_clip(
+        str(cutout), "right", 100, 100, 0, 500, 0.0, 5.0, 0.0, 5.0, 1.0,
+    )
+    flipped = _drag_race_lane_clip(
+        str(cutout), "left", 100, 100, 0, 500, 0.0, 5.0, 0.0, 5.0, 1.0,
+    )
+    unflipped_frame = unflipped.get_frame(0.0)
+    flipped_frame = flipped.get_frame(0.0)
+    # The nose block starts on the right for the untouched clip and moves
+    # to the left once mirrored.
+    assert unflipped_frame[:, -1].max() > unflipped_frame[:, 0].max()
+    assert flipped_frame[:, 0].max() > flipped_frame[:, -1].max()
+
+
 def test_drag_race_track_returns_empty_without_both_cutouts(tmp_path):
     cutout = tmp_path / "car.png"
     _make_transparent_png(cutout)
-    assert _drag_race_track(None, str(cutout), 400, 300, None, None, CANVAS, 1.0, 8.0) == ([], [])
-    assert _drag_race_track(str(cutout), str(tmp_path / "missing.png"), 400, 300, None, None, CANVAS, 1.0, 8.0) == ([], [])
+    assert _drag_race_track(None, str(cutout), "right", "right", 400, 300, None, None, CANVAS, 1.0, 8.0) == ([], [])
+    assert _drag_race_track(str(cutout), str(tmp_path / "missing.png"), "right", "right", 400, 300, None, None, CANVAS, 1.0, 8.0) == ([], [])
 
 
 def test_drag_race_track_returns_empty_for_a_too_short_beat(tmp_path):
     cutout = tmp_path / "car.png"
     _make_transparent_png(cutout)
-    assert _drag_race_track(str(cutout), str(cutout), 400, 300, None, None, CANVAS, 1.0, 1.2) == ([], [])
+    assert _drag_race_track(str(cutout), str(cutout), "right", "right", 400, 300, None, None, CANVAS, 1.0, 1.2) == ([], [])
 
 
 def test_drag_race_track_skips_the_countdown_lights_on_a_short_beat(tmp_path):
@@ -244,8 +271,8 @@ def test_drag_race_track_skips_the_countdown_lights_on_a_short_beat(tmp_path):
     without lights), rather than being dropped entirely."""
     cutout = tmp_path / "car.png"
     _make_transparent_png(cutout)
-    clips, sfx = _drag_race_track(str(cutout), str(cutout), 400, 300, None, None, CANVAS, 1.0, 3.0)
-    assert len(clips) == 2  # just the two cars, no light clips
+    clips, sfx = _drag_race_track(str(cutout), str(cutout), "right", "right", 400, 300, None, None, CANVAS, 1.0, 3.0)
+    assert len(clips) == 4  # flag + winner badge + the two cars, no light clips
     assert sfx == []
 
 
@@ -256,12 +283,13 @@ def test_drag_race_track_the_shorter_quarter_mile_time_wins(tmp_path):
     _make_transparent_png(rival_cutout)
 
     clips, sfx = _drag_race_track(
-        str(main_cutout), str(rival_cutout), main_hp=300, rival_hp=1000,
+        str(main_cutout), str(rival_cutout), "right", "right", main_hp=300, rival_hp=1000,
         main_quarter_mile=10.5, rival_quarter_mile=11.5,  # rival has more HP but is slower in the 1/4 mile
         size=CANVAS, seg_start=2.0, seg_end=10.0,
     )
-    # A beat this long (8s) gets the countdown lights: 3 lights + 2 cars.
-    assert len(clips) == 5
+    # A beat this long (8s) gets the countdown lights: flag + 3 lights +
+    # winner badge + 2 cars.
+    assert len(clips) == 7
     assert len(sfx) == 3  # one chime per light step
     main_clip, rival_clip = clips[-2], clips[-1]
     assert main_clip.start == 2.0 and rival_clip.start == 2.0
@@ -293,7 +321,7 @@ def test_drag_race_track_falls_back_to_horsepower_without_quarter_mile_times(tmp
     _make_transparent_png(rival_cutout)
 
     clips, _ = _drag_race_track(
-        str(main_cutout), str(rival_cutout), main_hp=300, rival_hp=500,
+        str(main_cutout), str(rival_cutout), "right", "right", main_hp=300, rival_hp=500,
         main_quarter_mile=None, rival_quarter_mile=None,
         size=CANVAS, seg_start=2.0, seg_end=10.0,
     )

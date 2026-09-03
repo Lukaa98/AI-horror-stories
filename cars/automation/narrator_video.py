@@ -28,6 +28,7 @@ from moviepy.editor import (
     AudioFileClip, ColorClip, CompositeAudioClip, CompositeVideoClip, ImageClip,
     VideoClip, VideoFileClip, concatenate_videoclips,
 )
+import moviepy.video.fx.all as vfx
 
 from generate_sample import ROOT, CANVAS, _font, _wrap
 
@@ -60,36 +61,44 @@ TYPING_VOLUME = 0.36  # 20% louder, on request
 DOODLE_WIDTH_RATIO = 0.2
 DOODLE_MARGIN_RATIO = 0.05
 # A flat 2D photo spun a full 360deg reads as the car flipping upside down
-# for half of every cycle, not drifting -- bounding the rotation to a swing
-# and pairing it with a lateral sway approximates a rear-wheel fishtail
-# (nose roughly fixed, tail swinging) well enough without real 3D geometry.
-# An earlier version also squashed the width per frame for a pseudo-3D
-# look, but that combined with a real (imperfectly-masked) photo cutout
-# read as a washed-out outline rather than a car -- dropped in favor of
-# just rotation + sway, which is simpler and doesn't touch the image's own
-# pixels at all.
-DOODLE_SWAY_PERIOD_SECONDS = 1.1
-DOODLE_MAX_ROTATION_DEG = 22
-DOODLE_LATERAL_SWAY_RATIO = 0.025
+# for half of every cycle, not drifting -- so this swings the car through a
+# wide pendulum-style arc (a fixed pivot above the car, swinging side to
+# side) instead of either a full rotation or a flat side-to-side slide. The
+# arc itself is the "cornering" motion (it's a real curved path, not just a
+# rotation-in-place, which is what read as "swinging like a baby's cradle"
+# rather than drifting); the car's own rotation stays capped well short of
+# upside down. An earlier version also squashed the image's width per frame
+# for a pseudo-3D look, but combined with a real (imperfectly-masked) photo
+# cutout that read as a washed-out outline rather than a car -- dropped
+# entirely in favor of transforms that don't touch the image's own pixels.
+DOODLE_SWAY_PERIOD_SECONDS = 1.5
+DOODLE_ARC_RADIUS_RATIO = 0.075
+DOODLE_ARC_HALF_ANGLE_DEG = 42
+DOODLE_MAX_ROTATION_DEG = 30
 SMOKE_PUFF_DIAMETER_RATIO = 0.03
 SMOKE_PULSE_PERIOD_SECONDS = 0.9
 
 # Two small side-profile cutouts drag-racing left-to-right in their own
-# lane -- side-profile photos read as "racing" moving horizontally, not
-# vertically, since that's the angle they're actually photographed at.
+# lane, positioned above the media/headline stack -- never overlapping the
+# narrator -- side-profile photos read as "racing" moving horizontally,
+# not vertically, since that's the angle they're actually photographed at.
 # Winner is whichever car has the shorter (verified) quarter-mile time when
 # available, falling back to more horsepower otherwise -- a deliberately
 # simplified stand-in for a real drag race, not a physics simulation.
-RACE_CAR_WIDTH_RATIO = 0.16
+RACE_CAR_WIDTH_RATIO = 0.14
 RACE_LANE_INSET_RATIO = 0.02
-RACE_LANE_GAP_RATIO = 0.09
+RACE_LANE_GAP_RATIO = 0.065
+# A pause at the finish line once the winner arrives, so there's actually
+# time to show the checkered flag / winner badge instead of the race
+# finishing in the same instant the scene ends.
+RACE_CELEBRATION_SECONDS = 0.9
 # A drag-strip "Christmas tree" -- red/yellow/green lights at the start
 # line, one second apart, before the cars actually move -- instead of a
 # generic countdown at the start of the whole video (which had nothing to
 # do with the race it was supposedly leading into).
 RACE_COUNTDOWN_STEP_SECONDS = 1.0
 RACE_COUNTDOWN_STEPS = 3
-RACE_MIN_SECONDS_FOR_COUNTDOWN = 4.0
+RACE_MIN_SECONDS_FOR_COUNTDOWN = 4.5
 COUNTDOWN_SFX = "countdown_beep.wav"
 COUNTDOWN_GO_SFX = "countdown_go.wav"
 COUNTDOWN_SFX_VOLUME = 0.5
@@ -669,12 +678,13 @@ def _generate_smoke_puff_image(diameter):
 
 
 def _drift_doodle_track(cutout_path, size, duration):
-    """A tiny version of the car's own side-profile cutout, fishtailing in
-    place in a corner -- a bounded rotation + lateral sway instead of a
-    full 360deg spin (see DOODLE_MAX_ROTATION_DEG's own comment for why),
-    with a couple of smoke puffs breathing near the rear wheels -- an
-    ambient decoration for the whole video, not tied to any particular
-    scene.
+    """A tiny version of the car's own side-profile cutout, swinging through
+    a genuine curved arc in a corner -- like a pendulum hung from a pivot
+    above the car -- so the motion reads as cornering/drifting rather than
+    a flat side-to-side sway (which just looked like rocking a cradle).
+    A couple of smoke puffs breathe near the rear wheels, trailing the
+    car's own swinging center -- an ambient decoration for the whole
+    video, not tied to any particular scene.
 
     Only rotates and repositions the image -- an earlier version also
     squashed its width per frame for a pseudo-3D look, but combined with a
@@ -693,26 +703,37 @@ def _drift_doodle_track(cutout_path, size, duration):
     width, height = size
     base = ImageClip(str(cutout_path)).resize(width=width * DOODLE_WIDTH_RATIO)
     car_w, car_h = base.size
-    sway_px = width * DOODLE_LATERAL_SWAY_RATIO
+    radius = width * DOODLE_ARC_RADIUS_RATIO
+    half_angle_rad = math.radians(DOODLE_ARC_HALF_ANGLE_DEG)
+    max_rot_rad = math.radians(DOODLE_MAX_ROTATION_DEG)
     # A rotated rectangle's bounding box grows a bit beyond its own resting
     # size -- sizing the safe area off that *rotated* extent (not the
-    # resting size) plus the sway is what actually fixes the reported bug
-    # where part of the car got clipped/hidden whenever the motion carried
-    # it past whatever area was actually accounted for.
-    angle_rad = math.radians(DOODLE_MAX_ROTATION_DEG)
-    rotated_half_width = (car_w * abs(math.cos(angle_rad)) + car_h * abs(math.sin(angle_rad))) / 2
-    rotated_half_height = (car_w * abs(math.sin(angle_rad)) + car_h * abs(math.cos(angle_rad))) / 2
-    cx = width - width * DOODLE_MARGIN_RATIO - rotated_half_width - sway_px
-    cy = height - height * DOODLE_MARGIN_RATIO - rotated_half_height
+    # resting size) plus the full swing of the arc is what keeps the car
+    # (and its rotation) from ever clipping the canvas edge.
+    rotated_half_width = (car_w * abs(math.cos(max_rot_rad)) + car_h * abs(math.sin(max_rot_rad))) / 2
+    rotated_half_height = (car_w * abs(math.sin(max_rot_rad)) + car_h * abs(math.cos(max_rot_rad))) / 2
+    horiz_amplitude = radius * math.sin(half_angle_rad)
+    # The pendulum hangs lowest (largest drop below the pivot) when the
+    # swing angle is 0, at the center of the arc -- that's the point the
+    # bottom margin has to clear, not the resting position at an extreme.
+    pivot_x = width - width * DOODLE_MARGIN_RATIO - rotated_half_width - horiz_amplitude
+    pivot_y = height - height * DOODLE_MARGIN_RATIO - rotated_half_height - radius
+
+    def swing_angle_deg(t):
+        return DOODLE_ARC_HALF_ANGLE_DEG * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS)
+
+    def car_center(t):
+        angle_rad = math.radians(swing_angle_deg(t))
+        return (pivot_x + radius * math.sin(angle_rad), pivot_y + radius * math.cos(angle_rad))
 
     def rotation_angle(t):
         return DOODLE_MAX_ROTATION_DEG * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS)
 
     def car_position(t):
-        sway = sway_px * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS)
-        return (cx - car_w / 2 + sway, cy - car_h / 2)
+        cx, cy = car_center(t)
+        return (cx - car_w / 2, cy - car_h / 2)
 
-    fishtailing_car = (
+    swinging_car = (
         base.set_duration(duration)
         .rotate(rotation_angle, expand=False)
         .set_position(car_position)
@@ -722,14 +743,15 @@ def _drift_doodle_track(cutout_path, size, duration):
     puff_image = _generate_smoke_puff_image(puff_diameter)
     puff_clips = []
     # Two small puffs near the base of the car, clear of the body itself,
-    # each breathing in size on its own phase-shifted pulse -- fixed in
-    # place rather than orbiting, which read as an odd "trailing dots"
-    # trail rather than smoke billowing by the tires.
+    # each breathing in size on its own phase-shifted pulse, and trailing
+    # the car's own swinging center so they stay near its rear wheels
+    # through the whole arc instead of sitting at a single fixed spot.
     for phase, x_offset in ((0.0, -car_w * 0.32), (0.55, car_w * 0.32)):
         def puff_scale(t, phase=phase):
             return 0.5 + 0.35 * (0.5 + 0.5 * math.sin(2 * math.pi * t / SMOKE_PULSE_PERIOD_SECONDS + phase))
 
         def puff_position(t, x_offset=x_offset, phase=phase):
+            cx, cy = car_center(t)
             d = puff_diameter * puff_scale(t, phase)
             return (cx + x_offset - d / 2, cy + car_h * 0.45 - d / 2)
 
@@ -737,7 +759,7 @@ def _drift_doodle_track(cutout_path, size, duration):
             ImageClip(puff_image).set_duration(duration).resize(puff_scale).set_position(puff_position)
         )
 
-    return [*puff_clips, fishtailing_car]
+    return [*puff_clips, swinging_car]
 
 
 def _traffic_light_image(width, height, lit_count):
@@ -758,19 +780,62 @@ def _traffic_light_image(width, height, lit_count):
     return np.array(img)
 
 
-def _drag_race_lane_clip(path, car_width, y_center, start_x, finish_x, seg_start, countdown_duration, race_duration, finish_cap):
+def _generate_checkered_flag_image(width, height):
+    """A small black/white checkerboard marker for the drag-strip finish
+    line -- procedural so it doesn't need a real flag asset."""
+    cols, rows = 4, 10
+    cell_w = max(1, width // cols)
+    cell_h = max(1, height // rows)
+    img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    for row in range(rows):
+        for col in range(cols):
+            if (row + col) % 2 == 0:
+                x0, y0 = col * cell_w, row * cell_h
+                draw.rectangle([x0, y0, x0 + cell_w, y0 + cell_h], fill=(20, 20, 20, 235))
+            else:
+                x0, y0 = col * cell_w, row * cell_h
+                draw.rectangle([x0, y0, x0 + cell_w, y0 + cell_h], fill=(245, 245, 245, 235))
+    return np.array(img)
+
+
+def _generate_winner_badge_image(diameter):
+    """A soft green glow halo to drop behind the winning car once it
+    crosses the finish line -- same radial-falloff approach as the smoke
+    puff, just green instead of gray, so it reads as a "winner" highlight
+    rather than more exhaust."""
+    yy, xx = np.mgrid[0:diameter, 0:diameter]
+    center = diameter / 2
+    dist = np.sqrt((xx - center) ** 2 + (yy - center) ** 2) / center
+    alpha = (np.clip(1.0 - dist, 0, 1) ** 1.4 * 200).astype(np.uint8)
+    rgb = np.zeros((diameter, diameter, 3), dtype=np.uint8)
+    rgb[..., 1] = 230
+    rgb[..., 0] = 60
+    return np.dstack([rgb, alpha])
+
+
+def _drag_race_lane_clip(
+    path, facing_direction, car_width, y_center, start_x, finish_x,
+    seg_start, total_duration, countdown_duration, race_duration, finish_cap,
+):
     """One car's clip for _drag_race_track -- sits at the start line during
     the countdown, then moves left-to-right, reaching finish_x exactly at
     the end of race_duration if finish_cap is 1.0, or stopping short
     (proportionally, per the real quarter-mile ratio) if it's the slower
-    car. `set_start(seg_start)` makes moviepy pass this clip *local* time
-    (0 at seg_start) into position() -- the duration below is exactly the
-    span this clip is ever shown for, so it never renders anywhere outside
-    its own scene."""
+    car, then holding that position for whatever's left of total_duration
+    (the celebration buffer) so the winner is clearly parked at the line
+    rather than still appearing to move. `set_start(seg_start)` makes
+    moviepy pass this clip *local* time (0 at seg_start) into position().
+
+    The cutout is flipped horizontally whenever the AI-reviewed
+    facing_direction says the car's nose points left in its own photo --
+    left-to-right travel means the nose has to point right, or the car
+    reads as racing backwards."""
     car = ImageClip(str(path)).resize(width=car_width)
+    if facing_direction == "left":
+        car = car.fx(vfx.mirror_x)
     car_w, car_h = car.size
     travel = finish_x - start_x - car_w
-    total_duration = countdown_duration + race_duration
 
     def position(local_t):
         race_t = local_t - countdown_duration
@@ -783,17 +848,20 @@ def _drag_race_lane_clip(path, car_width, y_center, start_x, finish_x, seg_start
 
 
 def _drag_race_track(
-    main_cutout_path, rival_cutout_path, main_hp, rival_hp,
+    main_cutout_path, rival_cutout_path, main_facing, rival_facing, main_hp, rival_hp,
     main_quarter_mile, rival_quarter_mile, size, seg_start, seg_end,
 ):
     """Two small side-profile cutouts drag-racing left-to-right in their
-    own lane during a horsepower/quarter-mile comparison beat, led in by a
-    one-second-per-light countdown -- the car with the shorter (verified)
-    quarter-mile time "wins", falling back to more horsepower when a
-    quarter-mile time isn't available. Both finish at the same line; the
-    slower car is capped short of it by the real ratio between the two
-    times, so it visibly trails instead of arriving together or racing
-    forever past when the faster one already finished."""
+    own lane -- above the narrator, never crossing it -- during a
+    horsepower/quarter-mile comparison beat, led in by a one-second-per-
+    light countdown. The car with the shorter (verified) quarter-mile time
+    "wins", falling back to more horsepower when a quarter-mile time isn't
+    available. Both finish at the same line; the slower car is capped
+    short of it by the real ratio between the two times, so it visibly
+    trails instead of arriving together or racing forever past when the
+    faster one already finished. A checkered flag marks that finish line,
+    and the winner gets a green glow once it parks there, so which car
+    actually won is never ambiguous."""
     if not main_cutout_path or not rival_cutout_path:
         return [], []
     if not Path(main_cutout_path).exists() or not Path(rival_cutout_path).exists():
@@ -805,7 +873,12 @@ def _drag_race_track(
 
     use_countdown = seg_duration >= RACE_MIN_SECONDS_FOR_COUNTDOWN
     countdown_duration = RACE_COUNTDOWN_STEPS * RACE_COUNTDOWN_STEP_SECONDS if use_countdown else 0.0
-    race_duration = seg_duration - countdown_duration
+    # A slice of the scene is held back as a celebration buffer -- the
+    # race itself finishes early enough that the winner can sit parked at
+    # the line, badge lit, before the beat ends -- instead of the two cars
+    # visibly still moving (or arriving) right as the scene cuts away.
+    celebration = min(RACE_CELEBRATION_SECONDS, max(0.0, seg_duration - countdown_duration - 0.5))
+    race_duration = max(0.1, seg_duration - countdown_duration - celebration)
 
     if main_quarter_mile and rival_quarter_mile and main_quarter_mile > 0 and rival_quarter_mile > 0:
         main_time, rival_time = main_quarter_mile, rival_quarter_mile
@@ -818,24 +891,31 @@ def _drag_race_track(
     fastest = min(main_time, rival_time)
     main_cap = fastest / main_time
     rival_cap = fastest / rival_time
+    main_wins = main_time <= rival_time
 
     car_width = width * RACE_CAR_WIDTH_RATIO
     lane_inset = width * RACE_LANE_INSET_RATIO
     start_x = lane_inset
     finish_x = width - lane_inset
+    # Both lanes sit *above* the top-stack boundary (never below it, where
+    # the narrator's own bounding box starts) -- subtracting the gap from
+    # narrator_top instead of adding it is what actually keeps the cars
+    # clear of the character, since the two zones share that same y=960
+    # line with no natural gap of their own.
     narrator_top = height * TOP_STACK_RATIO
     lane_gap = height * RACE_LANE_GAP_RATIO
-    main_y = narrator_top + lane_gap
-    rival_y = narrator_top + lane_gap * 2.4
+    main_y = narrator_top - lane_gap
+    rival_y = narrator_top - lane_gap * 2.4
 
+    total_duration = countdown_duration + race_duration + celebration
     car_clips = [
         _drag_race_lane_clip(
-            main_cutout_path, car_width, main_y, start_x, finish_x,
-            seg_start, countdown_duration, race_duration, main_cap,
+            main_cutout_path, main_facing, car_width, main_y, start_x, finish_x,
+            seg_start, total_duration, countdown_duration, race_duration, main_cap,
         ),
         _drag_race_lane_clip(
-            rival_cutout_path, car_width, rival_y, start_x, finish_x,
-            seg_start, countdown_duration, race_duration, rival_cap,
+            rival_cutout_path, rival_facing, car_width, rival_y, start_x, finish_x,
+            seg_start, total_duration, countdown_duration, race_duration, rival_cap,
         ),
     ]
 
@@ -861,7 +941,31 @@ def _drag_race_track(
             if sfx_clip is not None:
                 sfx_clips.append(sfx_clip)
 
-    return [*light_clips, *car_clips], sfx_clips
+    # The finish line itself -- a checkered marker spanning both lanes, up
+    # for the whole race so there's always a visible destination, not just
+    # two cars racing toward an unmarked edge of the screen.
+    flag_w = max(14, int(width * 0.03))
+    flag_h = int(abs(rival_y - main_y) + car_width * 0.4)
+    flag_x = finish_x - flag_w
+    flag_y = min(main_y, rival_y) - car_width * 0.2
+    flag_clip = (
+        ImageClip(_generate_checkered_flag_image(flag_w, flag_h))
+        .set_start(seg_start).set_duration(total_duration).set_position((flag_x, flag_y))
+    )
+
+    # A green glow behind the winning car, timed to switch on exactly when
+    # it parks at the finish line, so which car actually won never comes
+    # down to "they looked like they finished together."
+    winner_y = main_y if main_wins else rival_y
+    badge_diameter = car_width * 0.9
+    badge_start = seg_start + countdown_duration + race_duration
+    badge_clip = (
+        ImageClip(_generate_winner_badge_image(int(badge_diameter)))
+        .set_start(badge_start).set_duration(max(0.1, total_duration - countdown_duration - race_duration))
+        .set_position((finish_x - car_width - (badge_diameter - car_width) / 2, winner_y - badge_diameter / 2))
+    )
+
+    return [flag_clip, *light_clips, badge_clip, *car_clips], sfx_clips
 
 
 def _progress_bar_track(size, duration):
@@ -942,6 +1046,8 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     # plus a drag race (with its own lead-in countdown lights) wherever a
     # scene states both cars' quarter-mile time or horsepower.
     side_profile_path = manifest.get("side_profile_media_path")
+    side_profile_facing = manifest.get("side_profile_facing_direction", "unclear")
+    media_entries = list(manifest.get("media") or [])
     decorative_clips = []
     decorative_sfx = []
     decorative_clips.extend(_drift_doodle_track(side_profile_path, size, duration))
@@ -953,8 +1059,9 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         if index >= len(car_media_paths) or index >= len(scene_boundaries):
             continue
         seg_start, seg_end = scene_boundaries[index]
+        rival_facing = media_entries[index].get("facing_direction", "unclear") if index < len(media_entries) else "unclear"
         race_clips, race_sfx = _drag_race_track(
-            side_profile_path, car_media_paths[index], main_hp, rival_hp,
+            side_profile_path, car_media_paths[index], side_profile_facing, rival_facing, main_hp, rival_hp,
             scene.get("main_quarter_mile_seconds"), scene.get("rival_quarter_mile_seconds"),
             size, seg_start, seg_end,
         )
