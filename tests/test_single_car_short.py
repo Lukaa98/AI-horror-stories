@@ -605,6 +605,150 @@ def test_apply_manual_photo_overrides_replaces_only_matching_categories():
     assert {item["path"] for item in result} == {"a", "new-side", "c"}
 
 
+def test_gather_extra_media_downloads_arbitrarily_named_photos(tmp_path, monkeypatch):
+    """Extra photos are free-typed by the user (e.g. "Gauge Cluster") --
+    always filed as detail shots, and always additions, never replacing
+    anything else in the pool."""
+    import single_car_short
+
+    images_dir = tmp_path / "images"
+
+    def fake_download(url, dest_dir, filename_stem):
+        assert filename_stem == "0-gauge-cluster"
+        path = dest_dir / f"{filename_stem}.jpg"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"fake-image-bytes")
+        return path
+
+    monkeypatch.setattr(single_car_short, "_download_car_photo", fake_download)
+    monkeypatch.setattr(single_car_short, "blur_license_plates", lambda path: None)
+
+    media = single_car_short.gather_extra_media(
+        [{"label": "Gauge Cluster", "url": "https://example.com/gauges.jpg"}],
+        images_dir, {"name": "Toyota Supra"},
+    )
+
+    assert len(media) == 1
+    assert media[0]["type"] == "detail"
+    assert media[0]["category"] == "other_detail"
+    assert media[0]["label"] == "Gauge Cluster"
+
+
+def test_gather_extra_media_skips_malformed_or_url_less_entries(tmp_path, monkeypatch):
+    import single_car_short
+
+    calls = []
+    monkeypatch.setattr(single_car_short, "_download_car_photo", lambda *a, **k: calls.append(a) or None)
+
+    media = single_car_short.gather_extra_media(
+        [{"label": "No URL"}, "not-a-dict", None, {"label": "Blank", "url": ""}],
+        tmp_path / "images", {"name": "Toyota Supra"},
+    )
+
+    assert media == []
+    assert calls == []
+
+
+def test_gather_media_appends_extra_photos_alongside_scraped_media(tmp_path, monkeypatch):
+    """Extra photos add to the pool from either photo path -- the normal
+    scrape and the manual-only skip-scrape path -- rather than requiring
+    their own separate mode."""
+    import single_car_short
+
+    images_dir = tmp_path / "images"
+
+    def fake_scrape_entry_images(scraper_dir, dest, entry, limit=6):
+        return [], {"selected_auction": {}}
+
+    monkeypatch.setattr(single_car_short, "scrape_entry_images", fake_scrape_entry_images)
+    monkeypatch.setattr(single_car_short, "enrich_entry_from_manifest", lambda entry, manifest: entry)
+    monkeypatch.setattr(single_car_short, "review_and_rename_entry_images", lambda *a, **k: None)
+    monkeypatch.setattr(
+        single_car_short, "gather_extra_media",
+        lambda extra_photos, images_dir_arg, entry: [
+            {"path": "images/manual-extra/0-gauge-cluster.jpg", "type": "detail", "category": "other_detail", "facing_direction": "unclear", "label": "Gauge Cluster"},
+        ],
+    )
+
+    media, _ = single_car_short.gather_media(
+        "Toyota", "Supra", "", 1993, 1993, images_dir, scenes=[{"media_type": "exterior"}],
+        extra_photos=[{"label": "Gauge Cluster", "url": "https://example.com/gauges.jpg"}],
+    )
+
+    assert media == [
+        {"path": "images/manual-extra/0-gauge-cluster.jpg", "type": "detail", "category": "other_detail", "facing_direction": "unclear", "label": "Gauge Cluster"},
+    ]
+
+
+def test_gather_photo_script_hints_describes_fixed_and_extra_photos(tmp_path, monkeypatch):
+    """The whole point of pasting a photo (especially a labeled extra like
+    "Gauge Cluster") is that the script ends up talking about what's
+    actually in it -- so each hint pairs a human-readable label with a
+    concrete AI-described detail."""
+    import single_car_short
+
+    images_dir = tmp_path / "images"
+
+    def fake_download(url, dest_dir, filename_stem):
+        path = dest_dir / f"{filename_stem}.jpg"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"fake-image-bytes")
+        return path
+
+    def fake_describe(path, label_hint, car_label):
+        return f"a described detail for {label_hint} on the {car_label}"
+
+    monkeypatch.setattr(single_car_short, "_download_car_photo", fake_download)
+    monkeypatch.setattr(single_car_short, "_describe_photo_for_script", fake_describe)
+
+    hints = single_car_short.gather_photo_script_hints(
+        {"interior": "https://example.com/int.jpg", "front": ""},
+        [{"label": "Gauge Cluster", "url": "https://example.com/gauges.jpg"}],
+        images_dir, "1993 Toyota Supra Turbo",
+    )
+
+    assert hints == [
+        "interior photo: a described detail for interior on the 1993 Toyota Supra Turbo",
+        "Gauge Cluster photo: a described detail for Gauge Cluster on the 1993 Toyota Supra Turbo",
+    ]
+
+
+def test_gather_photo_script_hints_drops_photos_with_no_description(tmp_path, monkeypatch):
+    import single_car_short
+
+    def fake_download(url, dest_dir, filename_stem):
+        path = dest_dir / f"{filename_stem}.jpg"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"fake-image-bytes")
+        return path
+
+    monkeypatch.setattr(single_car_short, "_download_car_photo", fake_download)
+    monkeypatch.setattr(single_car_short, "_describe_photo_for_script", lambda *a, **k: None)
+
+    hints = single_car_short.gather_photo_script_hints(
+        {"front": "https://example.com/front.jpg"}, [], tmp_path / "images", "Toyota Supra",
+    )
+
+    assert hints == []
+
+
+def test_research_script_prompt_folds_in_photo_hints():
+    import single_car_short
+
+    prompt = single_car_short._research_script_prompt(
+        "1993 Toyota Supra Turbo", "model year 1993", photo_hints=["Gauge Cluster photo: a distinctive analog cluster."],
+    )
+    assert "Gauge Cluster photo: a distinctive analog cluster." in prompt
+    assert "Write one scene's narration specifically about each one" in prompt
+
+
+def test_research_script_prompt_omits_the_photo_hints_block_when_there_are_none():
+    import single_car_short
+
+    prompt = single_car_short._research_script_prompt("1993 Toyota Supra Turbo", "model year 1993")
+    assert "specifically pasted these photos" not in prompt
+
+
 def test_british_voice_presets_are_registered():
     for preset in AUDITION_PRESETS:
         assert preset in VOICE_PRESETS

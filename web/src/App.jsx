@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10.98";
+const UI_VERSION = "V10.99";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -645,6 +645,10 @@ export default function App() {
   const [useManualPhotos, setUseManualPhotos] = useState(false);
   const [auctionUrl, setAuctionUrl] = useState("");
   const [photoUrls, setPhotoUrls] = useState({ front: "", side: "", rear: "", engine: "", interior: "", rival: "" });
+  // Freely-named extra photos (e.g. "Gauge Cluster") on top of the fixed
+  // fields above -- each becomes its own detail beat the script is told
+  // to specifically write about, not just an illustrative extra photo.
+  const [extraPhotos, setExtraPhotos] = useState([]);
   const [voice, setVoice] = useState("onyx");
   const [renderQuality, setRenderQuality] = useState(null);
   const [draftId, setDraftId] = useState(null);
@@ -934,6 +938,13 @@ export default function App() {
           photo_engine: useManualPhotos ? photoUrls.engine.trim() : "",
           photo_interior: useManualPhotos ? photoUrls.interior.trim() : "",
           photo_rival: useManualPhotos ? photoUrls.rival.trim() : "",
+          extra_photos: (() => {
+            if (!useManualPhotos) return "";
+            const cleaned = extraPhotos
+              .map((item) => ({ label: item.label.trim(), url: item.url.trim() }))
+              .filter((item) => item.url);
+            return cleaned.length ? JSON.stringify(cleaned) : "";
+          })(),
         },
       });
       const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
@@ -2175,6 +2186,58 @@ export default function App() {
                           </label>
                         ))}
                       </div>
+
+                      {extraPhotos.length > 0 && (
+                        <div className="extra-photo-list">
+                          {extraPhotos.map((item, index) => (
+                            <div className="extra-photo-row" key={item.id}>
+                              <input
+                                value={item.label}
+                                onChange={(e) => {
+                                  const next = [...extraPhotos];
+                                  next[index] = { ...next[index], label: e.target.value };
+                                  setExtraPhotos(next);
+                                }}
+                                placeholder="Photo name, e.g. Gauge Cluster"
+                                disabled={stage === "single-car-building"}
+                              />
+                              <input
+                                value={item.url}
+                                onChange={(e) => {
+                                  const next = [...extraPhotos];
+                                  next[index] = { ...next[index], url: e.target.value };
+                                  setExtraPhotos(next);
+                                }}
+                                placeholder="https://..."
+                                disabled={stage === "single-car-building"}
+                              />
+                              <button
+                                type="button"
+                                className="extra-photo-remove"
+                                onClick={() => setExtraPhotos(extraPhotos.filter((_, i) => i !== index))}
+                                disabled={stage === "single-car-building"}
+                                aria-label={`Remove ${item.label || "extra photo"}`}
+                              >
+                                &times;
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      <button
+                        type="button"
+                        className="extra-photo-add"
+                        onClick={() => setExtraPhotos([...extraPhotos, { id: `extra-${Date.now()}-${extraPhotos.length}`, label: "", url: "" }])}
+                        disabled={stage === "single-car-building"}
+                      >
+                        + Add named photo
+                      </button>
+                      <span className="hint">
+                        Add as many extra shots as you want, each with its own name (e.g. "Gauge Cluster",
+                        "Rear Diffuser"). Every pasted photo -- fixed field or named extra -- is analyzed and
+                        the script is written to specifically talk about what's actually in it, not just show it
+                        under unrelated narration.
+                      </span>
                     </>
                   )}
                 </div>

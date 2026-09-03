@@ -105,6 +105,10 @@ on:
         description: "single_car mode: direct URL for the comparison car's photo (falls back to search if omitted)"
         required: false
         type: string
+      extra_photos:
+        description: 'single_car mode: JSON array of extra named photos, e.g. [{"label":"Gauge Cluster","url":"https://..."}]'
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -227,6 +231,10 @@ jobs:
         if: ${{ inputs.mode == 'single_car' }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # Piped through an env var rather than interpolated straight into
+          # the command line -- this is a JSON string full of double quotes,
+          # which would break out of the "${{ }}"-substituted shell string.
+          EXTRA_PHOTOS: ${{ inputs.extra_photos }}
         run: |
           YEAR_ARGS=()
           if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
@@ -238,6 +246,7 @@ jobs:
           if [ -n "${{ inputs.photo_engine }}" ]; then YEAR_ARGS+=(--photo-engine "${{ inputs.photo_engine }}"); fi
           if [ -n "${{ inputs.photo_interior }}" ]; then YEAR_ARGS+=(--photo-interior "${{ inputs.photo_interior }}"); fi
           if [ -n "${{ inputs.photo_rival }}" ]; then YEAR_ARGS+=(--photo-rival "${{ inputs.photo_rival }}"); fi
+          if [ -n "$EXTRA_PHOTOS" ]; then YEAR_ARGS+=(--extra-photos "$EXTRA_PHOTOS"); fi
           python cars/automation/single_car_short.py \
             --make "${{ inputs.make }}" \
             --model "${{ inputs.model }}" \

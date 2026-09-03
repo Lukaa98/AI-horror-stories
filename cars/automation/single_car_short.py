@@ -18,7 +18,13 @@ import requests
 
 from background_removal import remove_background
 from cars_and_bids import enrich_entry_from_manifest, scrape_auction_images, scrape_entry_images
-from research_request import _auction_provenance_matches_entry, _review_image_with_ai, review_and_rename_entry_images
+from research_request import (
+    _auction_provenance_matches_entry,
+    _image_data_url,
+    _review_image_with_ai,
+    IMAGE_REVIEW_MODEL,
+    review_and_rename_entry_images,
+)
 from generate_sample import ROOT
 from narrator_script import _extract_wav, build_mouth_timeline, synthesize_narration
 from narrator_video import render_narrator_video
@@ -179,8 +185,22 @@ def _strip_citations(text):
     return re.sub(r"[ \t]{2,}", " ", text).strip()
 
 
-def _research_script_prompt(label, year_scope, retry_feedback=""):
-    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}
+def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None):
+    photo_hints_block = ""
+    if photo_hints:
+        bullet_list = "\n".join(f"- {hint}" for hint in photo_hints)
+        photo_hints_block = f"""
+
+The user has specifically pasted these photos for this video, each with a genuine, concrete detail already
+identified from the image itself:
+{bullet_list}
+Write one scene's narration specifically about each one -- in your own words, describing/reacting to that
+exact detail (not just reusing the sentence verbatim), so the script actually talks about what's on screen
+instead of narrating something unrelated over it. Use that scene's headline and media_type to match (e.g. an
+interior/gauge detail gets media_type "interior" or "detail" as appropriate). These beats count toward the
+word target and beat variety like any other -- they don't replace the history/mechanical/comparison beats
+above, they're additional specific material to fold in."""
+    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{photo_hints_block}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-8 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), at least one beat of real history or design/legacy context (the designer, a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -212,7 +232,7 @@ def _request_script_package(prompt):
     return package
 
 
-def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4):
+def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
         f"model years {start_year}-{end_year}" if start_year and end_year
@@ -228,7 +248,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"chassis platform) rather than padding existing sentences or repeating what you already said -- "
             f"there is almost always more real, well-documented material available if you look for it." if package else ""
         )
-        package = _request_script_package(_research_script_prompt(label, year_scope, retry_feedback))
+        package = _request_script_package(_research_script_prompt(label, year_scope, retry_feedback, photo_hints))
         count = package["word_count"]
         if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
             break
@@ -333,6 +353,77 @@ def _download_car_photo(url, dest_dir, filename_stem):
     return path
 
 
+def _describe_photo_for_script(path, label_hint, car_label):
+    """One AI vision call that turns a user-pasted photo into a concrete,
+    specific detail the script can actually talk about -- not just "there's
+    a photo of the interior" but the kind of thing a reviewer would call
+    out by name (an era-specific gauge design, an unusual material, a
+    visible modification). Best-effort: returns None on any failure so a
+    bad photo just means no forced beat for it, not a crashed build."""
+    try:
+        client = OpenAI()
+        hint_line = f'The user labeled it "{label_hint}". ' if label_hint else ""
+        prompt = (
+            f"This is a real photo of a {car_label} that the user specifically chose to include in their "
+            f"car-review video script. {hint_line}Look closely and describe, in one concise sentence, the "
+            f"single most notable and concrete visual detail actually visible in this photo -- something a "
+            f"knowledgeable car reviewer would call out by name (a specific design element, an era-typical "
+            f"styling choice, a functional or unusual characteristic, a visible modification). Be specific "
+            f"to what's really in the frame, not a generic description of the photo's subject. Return ONLY "
+            f"that one sentence -- no preamble, no quotes."
+        )
+        response = with_openai_retry(lambda: client.responses.create(
+            model=IMAGE_REVIEW_MODEL,
+            input=[{
+                "role": "user",
+                "content": [
+                    {"type": "input_text", "text": prompt},
+                    {"type": "input_image", "image_url": _image_data_url(path)},
+                ],
+            }],
+        ))
+        text = response.output_text.strip()
+        return text or None
+    except Exception:
+        return None
+
+
+def gather_photo_script_hints(manual_photo_urls, extra_photos, images_dir, car_label):
+    """Downloads and describes every manually-pasted photo (the fixed
+    front/side/rear/engine/interior fields plus any free-typed extras) so
+    research_script can be told what's actually in them and write a beat
+    that specifically references each one -- the point of pasting a photo
+    is that the script ends up being about it, not just illustrating an
+    unrelated line of narration. Best-effort per photo: a description
+    failure just drops that one hint, not the whole build."""
+    dest_dir = images_dir / "script-hints"
+    hints = []
+    for field, category in MANUAL_PHOTO_FIELDS.items():
+        url = (manual_photo_urls or {}).get(field)
+        if not url:
+            continue
+        path = _download_car_photo(url, dest_dir, f"hint-{field}")
+        if not path:
+            continue
+        description = _describe_photo_for_script(path, category.replace("_", " "), car_label)
+        if description:
+            hints.append(f"{category.replace('_', ' ')} photo: {description}")
+    for index, item in enumerate(extra_photos or []):
+        if not isinstance(item, dict):
+            continue
+        url = str(item.get("url") or "").strip()
+        label = str(item.get("label") or "").strip()
+        if not url:
+            continue
+        path = _download_car_photo(url, dest_dir, f"hint-extra-{index}-{_slugify(label)}")
+        if not path:
+            continue
+        description = _describe_photo_for_script(path, label, car_label)
+        if description:
+            hints.append(f"{label or 'featured'} photo: {description}")
+    return hints
+
+
 def _facing_direction_for_photo(path, entry):
     """A single AI vision call just for facing_direction -- the drag-race/
     doodle animations need it to orient the cutout, and a user pasting a
@@ -370,6 +461,37 @@ def gather_manual_media(photo_urls, images_dir, entry):
     return media
 
 
+def _slugify(value):
+    return re.sub(r"[^a-z0-9]+", "-", str(value or "").lower()).strip("-") or "photo"
+
+
+def gather_extra_media(extra_photos, images_dir, entry):
+    """Any number of arbitrarily-named extra photos (e.g. "Gauge Cluster",
+    "Rear Diffuser") -- always additions to whatever media the scrape or
+    the fixed manual fields already produced, never an override of an
+    existing category, since a free-typed label has no fixed category to
+    replace. Filed as "other_detail"/type "detail", same bucket the
+    format's normal detail beats already draw from. Best-effort: a
+    malformed entry or a dead link just means one fewer photo, not a
+    crashed build."""
+    dest_dir = images_dir / "manual-extra"
+    media = []
+    for index, item in enumerate(extra_photos or []):
+        if not isinstance(item, dict):
+            continue
+        url = str(item.get("url") or "").strip()
+        label = str(item.get("label") or "").strip()
+        if not url:
+            continue
+        path = _download_car_photo(url, dest_dir, f"{index}-{_slugify(label)}")
+        if not path:
+            continue
+        blur_license_plates(path)
+        relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
+        media.append({"path": relative, "type": "detail", "category": "other_detail", "facing_direction": "unclear", "label": label or None})
+    return media
+
+
 def _apply_manual_photo_overrides(media, manual_media):
     """Layer manual photos on top of a scraped media pool -- each manual
     photo replaces the scraped one(s) in its own category, leaving every
@@ -398,7 +520,7 @@ def gather_manual_rival_photo(url, images_dir, rival_make, rival_model):
     return str(path.relative_to(images_dir.parent)).replace("\\", "/"), facing_direction
 
 
-def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None, auction_url=None, manual_photo_urls=None):
+def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None, auction_url=None, manual_photo_urls=None, extra_photos=None):
     search_hint = " ".join(value for value in [make, model, trim] if value).strip()
     if start_year or end_year:
         first, last = start_year or end_year, end_year or start_year
@@ -423,6 +545,7 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
     manual_urls = {key: value for key, value in (manual_photo_urls or {}).items() if value}
     if manual_urls and not auction_url:
         media = gather_manual_media(manual_urls, images_dir, entry)
+        media.extend(gather_extra_media(extra_photos, images_dir, entry))
         if not media:
             raise RuntimeError("None of the provided photo URLs could be downloaded.")
         return media, {}
@@ -480,15 +603,14 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
             "path": relative, "type": shot_type, "category": review.get("category"),
             "facing_direction": review.get("facing_direction", "unclear"),
         })
-    if not media and not manual_urls:
-        raise RuntimeError("No approved exterior, engine, detail, or wheel images were found.")
     if manual_urls:
         # A manual link alongside a listing overrides just that one
         # category -- the rest of the listing's own gallery still fills
         # in whatever wasn't manually given.
         media = _apply_manual_photo_overrides(media, gather_manual_media(manual_urls, images_dir, entry))
-        if not media:
-            raise RuntimeError("No approved exterior, engine, detail, or wheel images were found.")
+    media.extend(gather_extra_media(extra_photos, images_dir, entry))
+    if not media:
+        raise RuntimeError("No approved exterior, engine, detail, or wheel images were found.")
     return media, manifest.get("selected_auction") or {}
 
 
@@ -713,20 +835,35 @@ def build_short(args):
     output_dir = OUTPUT_ROOT / args.short_id
     images_dir = output_dir / "images"
     output_dir.mkdir(parents=True, exist_ok=True)
-    package = research_script(args.make, args.model, args.trim, args.start_year, args.end_year)
+    manual_photo_urls = {
+        "front": args.photo_front, "side": args.photo_side, "rear": args.photo_rear,
+        "engine": args.photo_engine, "interior": args.photo_interior,
+    }
+    try:
+        extra_photos = json.loads(args.extra_photos) if args.extra_photos else []
+        if not isinstance(extra_photos, list):
+            extra_photos = []
+    except (json.JSONDecodeError, TypeError):
+        extra_photos = []
+    # Any pasted photo (fixed field or free-typed extra) is analyzed up
+    # front so the script itself can be written about what's actually in
+    # it -- e.g. a pasted gauge-cluster photo should get the script
+    # actually talking about that gauge cluster, not just showing it under
+    # unrelated narration.
+    car_label = " ".join(value for value in [args.make, args.model, args.trim] if value).strip()
+    photo_hints = gather_photo_script_hints(manual_photo_urls, extra_photos, images_dir, car_label)
+    package = research_script(
+        args.make, args.model, args.trim, args.start_year, args.end_year, photo_hints=photo_hints,
+    )
     # Prefer the caller's explicit year range when given; otherwise fall
     # back to whatever generation the script actually settled on, so photo
     # gathering searches the same generation the narration describes
     # instead of an unconstrained "Audi TT" that can land on any year.
     media_start_year = args.start_year or package.get("start_year")
     media_end_year = args.end_year or package.get("end_year")
-    manual_photo_urls = {
-        "front": args.photo_front, "side": args.photo_side, "rear": args.photo_rear,
-        "engine": args.photo_engine, "interior": args.photo_interior,
-    }
     media, selected_auction = gather_media(
         args.make, args.model, args.trim, media_start_year, media_end_year, images_dir, package["scenes"],
-        auction_url=args.auction_url, manual_photo_urls=manual_photo_urls,
+        auction_url=args.auction_url, manual_photo_urls=manual_photo_urls, extra_photos=extra_photos,
     )
     # Captured before order_media_for_scenes/apply_rival_photos reshuffle
     # `media` into one pick per scene -- this needs the whole gathered pool
@@ -802,6 +939,11 @@ def main():
         "--photo-rival", default=None,
         help="Direct URL for the comparison car's photo. If omitted, the comparison car (decided by "
              "the AI script) is found with the normal search instead.",
+    )
+    parser.add_argument(
+        "--extra-photos", default=None,
+        help='JSON array of extra, arbitrarily-named photos to add on top of the fixed slots, e.g. '
+             '\'[{"label": "Gauge Cluster", "url": "https://..."}]\'. Always additions, filed as detail shots.',
     )
     parser.add_argument(
         "--audition-voices", dest="audition_voices", action="store_true", default=True,
