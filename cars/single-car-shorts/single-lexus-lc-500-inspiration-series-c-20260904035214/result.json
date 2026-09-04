@@ -1,0 +1,2299 @@
+{
+  "car": {
+    "make": "Lexus",
+    "model": "Lc 500 Inspiration Series Coupe",
+    "trim": null
+  },
+  "title": "2024 Lexus LC 500 Inspiration Series",
+  "start_year": 2024,
+  "end_year": 2024,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "599 Units Built",
+      "narration": "The 2024 Lexus LC 500 Inspiration Series is a rare gem, with just 599 units built worldwide. It's a stunning blend of luxury and performance, making it a true collector's item.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Production",
+      "stat_value": "599 Units"
+    },
+    {
+      "media_type": "detail",
+      "headline": "Sam Livingstone Design",
+      "narration": "Designed by Sam Livingstone, the LC 500 Inspiration Series boasts a striking appearance. Its Nebula Gray exterior and Black Alcantara interior make it an instant eye-catcher with an aura of exclusivity.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "471 Horsepower",
+      "narration": "Under the hood, it packs a naturally aspirated 5.0-liter V8, delivering 471 horsepower. This engine ensures a thrilling auditory experience with its unmistakable roar.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "471 hp"
+    },
+    {
+      "media_type": "wheel",
+      "headline": "RWD",
+      "narration": "Power is sent to the rear wheels, offering engaging driving dynamics. The LC 500 aims to deliver a purist's driving experience with a 10-speed automatic transmission enhancing acceleration.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "$115K -> $95K",
+      "narration": "Starting around $115,000 new, it currently trades for about $95,000, showcasing remarkable value retention for a luxury coupe that's bound to become a classic.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "$115K -> $95K"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Rival: BMW M850i",
+      "narration": "Facing off against the BMW M850i, the Lexus's 471 hp holds its own against the Bimmer's 523 hp, while the LC's seductive styling sets it apart.",
+      "rival_make": "BMW",
+      "rival_model": "M850i",
+      "main_horsepower": 471,
+      "rival_horsepower": 523,
+      "main_quarter_mile_seconds": 12.6,
+      "rival_quarter_mile_seconds": 12.3,
+      "stat_label": null,
+      "stat_value": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "narration": "So, is the LC 500 Inspiration Series your dream coupe, or does another exotic tickle your fancy? Let us know what you think.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null
+    }
+  ],
+  "sources": [
+    "https://www.motortrend.com/reviews/2024-lexus-lc-500-inspiration-series-first-drive-review",
+    "https://www.caranddriver.com/lexus/lc500/specs",
+    "https://www.edmunds.com/lexus/lc-500/2024/coupe/",
+    "https://www.kbb.com/lexus/lc-500/2024/"
+  ],
+  "script": "The 2024 Lexus LC 500 Inspiration Series is a rare gem, with just 599 units built worldwide. It's a stunning blend of luxury and performance, making it a true collector's item. Designed by Sam Livingstone, the LC 500 Inspiration Series boasts a striking appearance. Its Nebula Gray exterior and Black Alcantara interior make it an instant eye-catcher with an aura of exclusivity. Under the hood, it packs a naturally aspirated 5.0-liter V8, delivering 471 horsepower. This engine ensures a thrilling auditory experience with its unmistakable roar. Power is sent to the rear wheels, offering engaging driving dynamics. The LC 500 aims to deliver a purist's driving experience with a 10-speed automatic transmission enhancing acceleration. Starting around $115,000 new, it currently trades for about $95,000, showcasing remarkable value retention for a luxury coupe that's bound to become a classic. Facing off against the BMW M850i, the Lexus's 471 hp holds its own against the Bimmer's 523 hp, while the LC's seductive styling sets it apart. So, is the LC 500 Inspiration Series your dream coupe, or does another exotic tickle your fancy? Let us know what you think.",
+  "word_count": 190,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 73.9,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-lexus-lc-500-inspiration-series-c-20260904035214/narration.mp3",
+  "duration_seconds": 73.89,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.09,
+      "end": 0.36,
+      "mouth": "small"
+    },
+    {
+      "start": 0.36,
+      "end": 0.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.45,
+      "end": 0.99,
+      "mouth": "small"
+    },
+    {
+      "start": 0.99,
+      "end": 1.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.08,
+      "end": 1.53,
+      "mouth": "small"
+    },
+    {
+      "start": 1.53,
+      "end": 1.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.62,
+      "end": 1.89,
+      "mouth": "small"
+    },
+    {
+      "start": 1.89,
+      "end": 1.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.98,
+      "end": 2.25,
+      "mouth": "small"
+    },
+    {
+      "start": 2.25,
+      "end": 2.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.34,
+      "end": 3.33,
+      "mouth": "small"
+    },
+    {
+      "start": 3.33,
+      "end": 3.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.51,
+      "end": 3.78,
+      "mouth": "small"
+    },
+    {
+      "start": 3.78,
+      "end": 3.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.96,
+      "end": 4.23,
+      "mouth": "small"
+    },
+    {
+      "start": 4.23,
+      "end": 4.32,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.32,
+      "end": 4.41,
+      "mouth": "small"
+    },
+    {
+      "start": 4.41,
+      "end": 4.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.5,
+      "end": 4.77,
+      "mouth": "small"
+    },
+    {
+      "start": 4.77,
+      "end": 4.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.86,
+      "end": 5.31,
+      "mouth": "small"
+    },
+    {
+      "start": 5.31,
+      "end": 5.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.4,
+      "end": 6.03,
+      "mouth": "small"
+    },
+    {
+      "start": 6.03,
+      "end": 6.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.48,
+      "end": 6.75,
+      "mouth": "small"
+    },
+    {
+      "start": 6.75,
+      "end": 6.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.93,
+      "end": 7.02,
+      "mouth": "small"
+    },
+    {
+      "start": 7.02,
+      "end": 7.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.2,
+      "end": 7.38,
+      "mouth": "small"
+    },
+    {
+      "start": 7.38,
+      "end": 7.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.47,
+      "end": 7.56,
+      "mouth": "small"
+    },
+    {
+      "start": 7.56,
+      "end": 7.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.65,
+      "end": 8.1,
+      "mouth": "small"
+    },
+    {
+      "start": 8.1,
+      "end": 8.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.37,
+      "end": 8.55,
+      "mouth": "small"
+    },
+    {
+      "start": 8.55,
+      "end": 8.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.64,
+      "end": 8.73,
+      "mouth": "small"
+    },
+    {
+      "start": 8.73,
+      "end": 8.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.82,
+      "end": 9.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.0,
+      "end": 9.09,
+      "mouth": "small"
+    },
+    {
+      "start": 9.09,
+      "end": 9.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.18,
+      "end": 9.54,
+      "mouth": "small"
+    },
+    {
+      "start": 9.54,
+      "end": 10.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.08,
+      "end": 10.26,
+      "mouth": "small"
+    },
+    {
+      "start": 10.26,
+      "end": 10.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.53,
+      "end": 10.71,
+      "mouth": "small"
+    },
+    {
+      "start": 10.71,
+      "end": 10.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "small"
+    },
+    {
+      "start": 11.07,
+      "end": 11.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.16,
+      "end": 11.25,
+      "mouth": "small"
+    },
+    {
+      "start": 11.25,
+      "end": 11.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.52,
+      "end": 11.61,
+      "mouth": "small"
+    },
+    {
+      "start": 11.61,
+      "end": 11.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.79,
+      "end": 11.97,
+      "mouth": "small"
+    },
+    {
+      "start": 11.97,
+      "end": 12.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.06,
+      "end": 12.15,
+      "mouth": "small"
+    },
+    {
+      "start": 12.15,
+      "end": 12.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.24,
+      "end": 12.51,
+      "mouth": "small"
+    },
+    {
+      "start": 12.51,
+      "end": 12.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.6,
+      "end": 13.23,
+      "mouth": "small"
+    },
+    {
+      "start": 13.23,
+      "end": 13.32,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.32,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.59,
+      "end": 13.95,
+      "mouth": "small"
+    },
+    {
+      "start": 13.95,
+      "end": 14.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.49,
+      "end": 14.76,
+      "mouth": "small"
+    },
+    {
+      "start": 14.76,
+      "end": 14.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.94,
+      "end": 15.66,
+      "mouth": "small"
+    },
+    {
+      "start": 15.66,
+      "end": 15.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.84,
+      "end": 16.02,
+      "mouth": "small"
+    },
+    {
+      "start": 16.02,
+      "end": 16.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.11,
+      "end": 18.36,
+      "mouth": "small"
+    },
+    {
+      "start": 18.36,
+      "end": 18.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.45,
+      "end": 18.63,
+      "mouth": "small"
+    },
+    {
+      "start": 18.63,
+      "end": 18.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.72,
+      "end": 19.08,
+      "mouth": "small"
+    },
+    {
+      "start": 19.08,
+      "end": 19.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.62,
+      "end": 19.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.98,
+      "end": 20.07,
+      "mouth": "small"
+    },
+    {
+      "start": 20.07,
+      "end": 20.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.34,
+      "end": 20.43,
+      "mouth": "small"
+    },
+    {
+      "start": 20.43,
+      "end": 20.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.52,
+      "end": 20.7,
+      "mouth": "small"
+    },
+    {
+      "start": 20.7,
+      "end": 20.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.79,
+      "end": 20.88,
+      "mouth": "small"
+    },
+    {
+      "start": 20.88,
+      "end": 20.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.97,
+      "end": 21.06,
+      "mouth": "small"
+    },
+    {
+      "start": 21.06,
+      "end": 21.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.15,
+      "end": 21.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.24,
+      "end": 21.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.33,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.51,
+      "end": 21.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.69,
+      "end": 22.41,
+      "mouth": "small"
+    },
+    {
+      "start": 22.41,
+      "end": 22.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.77,
+      "end": 23.04,
+      "mouth": "small"
+    },
+    {
+      "start": 23.04,
+      "end": 23.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.13,
+      "end": 23.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.31,
+      "end": 23.49,
+      "mouth": "small"
+    },
+    {
+      "start": 23.49,
+      "end": 23.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.58,
+      "end": 24.21,
+      "mouth": "small"
+    },
+    {
+      "start": 24.21,
+      "end": 24.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.75,
+      "end": 25.11,
+      "mouth": "small"
+    },
+    {
+      "start": 25.11,
+      "end": 25.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.2,
+      "end": 25.56,
+      "mouth": "small"
+    },
+    {
+      "start": 25.56,
+      "end": 25.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.65,
+      "end": 25.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.83,
+      "end": 25.92,
+      "mouth": "small"
+    },
+    {
+      "start": 25.92,
+      "end": 26.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.01,
+      "end": 26.19,
+      "mouth": "small"
+    },
+    {
+      "start": 26.19,
+      "end": 26.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.28,
+      "end": 26.37,
+      "mouth": "small"
+    },
+    {
+      "start": 26.37,
+      "end": 26.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.46,
+      "end": 27.72,
+      "mouth": "small"
+    },
+    {
+      "start": 27.72,
+      "end": 28.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.35,
+      "end": 28.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.62,
+      "end": 28.98,
+      "mouth": "small"
+    },
+    {
+      "start": 28.98,
+      "end": 29.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.16,
+      "end": 29.43,
+      "mouth": "small"
+    },
+    {
+      "start": 29.43,
+      "end": 29.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.61,
+      "end": 30.78,
+      "mouth": "small"
+    },
+    {
+      "start": 30.78,
+      "end": 31.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.5,
+      "end": 31.59,
+      "mouth": "small"
+    },
+    {
+      "start": 31.59,
+      "end": 31.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.68,
+      "end": 31.77,
+      "mouth": "small"
+    },
+    {
+      "start": 31.77,
+      "end": 32.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.22,
+      "end": 32.31,
+      "mouth": "small"
+    },
+    {
+      "start": 32.31,
+      "end": 32.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.4,
+      "end": 32.58,
+      "mouth": "small"
+    },
+    {
+      "start": 32.58,
+      "end": 32.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.67,
+      "end": 32.85,
+      "mouth": "small"
+    },
+    {
+      "start": 32.85,
+      "end": 32.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.94,
+      "end": 33.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.03,
+      "end": 33.12,
+      "mouth": "small"
+    },
+    {
+      "start": 33.12,
+      "end": 33.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.21,
+      "end": 33.3,
+      "mouth": "small"
+    },
+    {
+      "start": 33.3,
+      "end": 33.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.48,
+      "end": 33.57,
+      "mouth": "small"
+    },
+    {
+      "start": 33.57,
+      "end": 33.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.66,
+      "end": 33.93,
+      "mouth": "small"
+    },
+    {
+      "start": 33.93,
+      "end": 34.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.11,
+      "end": 34.29,
+      "mouth": "small"
+    },
+    {
+      "start": 34.29,
+      "end": 34.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.38,
+      "end": 34.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.47,
+      "end": 34.65,
+      "mouth": "small"
+    },
+    {
+      "start": 34.65,
+      "end": 34.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.74,
+      "end": 34.83,
+      "mouth": "small"
+    },
+    {
+      "start": 34.83,
+      "end": 35.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.01,
+      "end": 35.55,
+      "mouth": "small"
+    },
+    {
+      "start": 35.55,
+      "end": 35.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.73,
+      "end": 35.91,
+      "mouth": "small"
+    },
+    {
+      "start": 35.91,
+      "end": 36.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.0,
+      "end": 36.18,
+      "mouth": "small"
+    },
+    {
+      "start": 36.18,
+      "end": 36.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.27,
+      "end": 36.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.36,
+      "end": 36.54,
+      "mouth": "small"
+    },
+    {
+      "start": 36.54,
+      "end": 37.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.26,
+      "end": 37.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.71,
+      "end": 37.8,
+      "mouth": "small"
+    },
+    {
+      "start": 37.8,
+      "end": 37.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.89,
+      "end": 38.52,
+      "mouth": "small"
+    },
+    {
+      "start": 38.52,
+      "end": 38.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.7,
+      "end": 39.06,
+      "mouth": "small"
+    },
+    {
+      "start": 39.06,
+      "end": 39.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.24,
+      "end": 39.33,
+      "mouth": "small"
+    },
+    {
+      "start": 39.33,
+      "end": 39.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.42,
+      "end": 40.14,
+      "mouth": "small"
+    },
+    {
+      "start": 40.14,
+      "end": 40.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.32,
+      "end": 40.41,
+      "mouth": "small"
+    },
+    {
+      "start": 40.41,
+      "end": 40.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.5,
+      "end": 41.04,
+      "mouth": "small"
+    },
+    {
+      "start": 41.04,
+      "end": 41.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.31,
+      "end": 41.85,
+      "mouth": "small"
+    },
+    {
+      "start": 41.85,
+      "end": 41.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.94,
+      "end": 43.2,
+      "mouth": "small"
+    },
+    {
+      "start": 43.2,
+      "end": 43.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.29,
+      "end": 43.38,
+      "mouth": "small"
+    },
+    {
+      "start": 43.38,
+      "end": 43.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.65,
+      "end": 43.74,
+      "mouth": "small"
+    },
+    {
+      "start": 43.74,
+      "end": 43.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.83,
+      "end": 43.92,
+      "mouth": "small"
+    },
+    {
+      "start": 43.92,
+      "end": 44.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.01,
+      "end": 44.55,
+      "mouth": "small"
+    },
+    {
+      "start": 44.55,
+      "end": 45.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.18,
+      "end": 45.27,
+      "mouth": "small"
+    },
+    {
+      "start": 45.27,
+      "end": 45.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.36,
+      "end": 45.45,
+      "mouth": "small"
+    },
+    {
+      "start": 45.45,
+      "end": 45.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.54,
+      "end": 45.99,
+      "mouth": "small"
+    },
+    {
+      "start": 45.99,
+      "end": 46.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.08,
+      "end": 46.44,
+      "mouth": "small"
+    },
+    {
+      "start": 46.44,
+      "end": 46.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.53,
+      "end": 46.8,
+      "mouth": "small"
+    },
+    {
+      "start": 46.8,
+      "end": 46.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.98,
+      "end": 47.07,
+      "mouth": "small"
+    },
+    {
+      "start": 47.07,
+      "end": 47.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.25,
+      "end": 47.7,
+      "mouth": "small"
+    },
+    {
+      "start": 47.7,
+      "end": 47.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.79,
+      "end": 47.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.97,
+      "end": 49.86,
+      "mouth": "small"
+    },
+    {
+      "start": 49.86,
+      "end": 49.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.95,
+      "end": 50.76,
+      "mouth": "small"
+    },
+    {
+      "start": 50.76,
+      "end": 50.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.85,
+      "end": 51.03,
+      "mouth": "small"
+    },
+    {
+      "start": 51.03,
+      "end": 51.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.3,
+      "end": 51.57,
+      "mouth": "small"
+    },
+    {
+      "start": 51.57,
+      "end": 51.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.66,
+      "end": 52.11,
+      "mouth": "small"
+    },
+    {
+      "start": 52.11,
+      "end": 52.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.2,
+      "end": 52.29,
+      "mouth": "small"
+    },
+    {
+      "start": 52.29,
+      "end": 52.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.38,
+      "end": 52.47,
+      "mouth": "small"
+    },
+    {
+      "start": 52.47,
+      "end": 52.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.56,
+      "end": 53.01,
+      "mouth": "small"
+    },
+    {
+      "start": 53.01,
+      "end": 69.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 69.39,
+      "end": 69.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 69.57,
+      "end": 69.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 69.84,
+      "end": 70.02,
+      "mouth": "small"
+    },
+    {
+      "start": 70.02,
+      "end": 70.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 70.11,
+      "end": 70.2,
+      "mouth": "small"
+    },
+    {
+      "start": 70.2,
+      "end": 70.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 70.56,
+      "end": 70.83,
+      "mouth": "small"
+    },
+    {
+      "start": 70.83,
+      "end": 70.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 70.92,
+      "end": 71.19,
+      "mouth": "small"
+    },
+    {
+      "start": 71.19,
+      "end": 71.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 71.28,
+      "end": 71.46,
+      "mouth": "small"
+    },
+    {
+      "start": 71.46,
+      "end": 71.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 71.55,
+      "end": 71.82,
+      "mouth": "small"
+    },
+    {
+      "start": 71.82,
+      "end": 72.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 72.09,
+      "end": 72.18,
+      "mouth": "small"
+    },
+    {
+      "start": 72.18,
+      "end": 72.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 72.54,
+      "end": 72.63,
+      "mouth": "small"
+    },
+    {
+      "start": 72.63,
+      "end": 72.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 72.81,
+      "end": 72.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 72.9,
+      "end": 72.99,
+      "mouth": "small"
+    },
+    {
+      "start": 72.99,
+      "end": 73.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 73.08,
+      "end": 73.44,
+      "mouth": "small"
+    },
+    {
+      "start": 73.44,
+      "end": 73.89,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "The",
+      "start": 0.0,
+      "end": 0.20000000298023224
+    },
+    {
+      "word": "2024",
+      "start": 0.20000000298023224,
+      "end": 0.9399999976158142
+    },
+    {
+      "word": "Lexus",
+      "start": 0.9399999976158142,
+      "end": 1.4600000381469727
+    },
+    {
+      "word": "LC500",
+      "start": 1.4600000381469727,
+      "end": 2.140000104904175
+    },
+    {
+      "word": "Inspiration",
+      "start": 2.140000104904175,
+      "end": 2.740000009536743
+    },
+    {
+      "word": "Series",
+      "start": 2.740000009536743,
+      "end": 3.0
+    },
+    {
+      "word": "is",
+      "start": 3.0,
+      "end": 3.200000047683716
+    },
+    {
+      "word": "a",
+      "start": 3.200000047683716,
+      "end": 3.4000000953674316
+    },
+    {
+      "word": "rare",
+      "start": 3.4000000953674316,
+      "end": 3.5
+    },
+    {
+      "word": "gem",
+      "start": 3.5,
+      "end": 3.759999990463257
+    },
+    {
+      "word": "with",
+      "start": 3.759999990463257,
+      "end": 4.139999866485596
+    },
+    {
+      "word": "just",
+      "start": 4.139999866485596,
+      "end": 4.340000152587891
+    },
+    {
+      "word": "599",
+      "start": 4.340000152587891,
+      "end": 5.099999904632568
+    },
+    {
+      "word": "units",
+      "start": 5.099999904632568,
+      "end": 5.380000114440918
+    },
+    {
+      "word": "built",
+      "start": 5.380000114440918,
+      "end": 5.619999885559082
+    },
+    {
+      "word": "worldwide",
+      "start": 5.619999885559082,
+      "end": 6.039999961853027
+    },
+    {
+      "word": "It's",
+      "start": 6.539999961853027,
+      "end": 6.599999904632568
+    },
+    {
+      "word": "a",
+      "start": 6.599999904632568,
+      "end": 6.820000171661377
+    },
+    {
+      "word": "stunning",
+      "start": 6.820000171661377,
+      "end": 6.940000057220459
+    },
+    {
+      "word": "blend",
+      "start": 6.940000057220459,
+      "end": 7.199999809265137
+    },
+    {
+      "word": "of",
+      "start": 7.199999809265137,
+      "end": 7.599999904632568
+    },
+    {
+      "word": "luxury",
+      "start": 7.599999904632568,
+      "end": 7.599999904632568
+    },
+    {
+      "word": "and",
+      "start": 7.599999904632568,
+      "end": 7.820000171661377
+    },
+    {
+      "word": "performance",
+      "start": 7.820000171661377,
+      "end": 8.140000343322754
+    },
+    {
+      "word": "making",
+      "start": 8.579999923706055,
+      "end": 8.579999923706055
+    },
+    {
+      "word": "it",
+      "start": 8.579999923706055,
+      "end": 8.699999809265137
+    },
+    {
+      "word": "a",
+      "start": 8.699999809265137,
+      "end": 8.819999694824219
+    },
+    {
+      "word": "true",
+      "start": 8.819999694824219,
+      "end": 9.020000457763672
+    },
+    {
+      "word": "collector's",
+      "start": 9.020000457763672,
+      "end": 9.600000381469727
+    },
+    {
+      "word": "item",
+      "start": 9.600000381469727,
+      "end": 9.739999771118164
+    },
+    {
+      "word": "Designed",
+      "start": 10.220000267028809,
+      "end": 10.5
+    },
+    {
+      "word": "by",
+      "start": 10.5,
+      "end": 10.600000381469727
+    },
+    {
+      "word": "Sam",
+      "start": 10.600000381469727,
+      "end": 10.819999694824219
+    },
+    {
+      "word": "Livingstone",
+      "start": 10.819999694824219,
+      "end": 11.180000305175781
+    },
+    {
+      "word": "the",
+      "start": 11.5600004196167,
+      "end": 11.680000305175781
+    },
+    {
+      "word": "LC500",
+      "start": 11.680000305175781,
+      "end": 12.260000228881836
+    },
+    {
+      "word": "Inspiration",
+      "start": 12.260000228881836,
+      "end": 12.720000267028809
+    },
+    {
+      "word": "Series",
+      "start": 12.720000267028809,
+      "end": 13.0
+    },
+    {
+      "word": "boasts",
+      "start": 13.0,
+      "end": 13.239999771118164
+    },
+    {
+      "word": "a",
+      "start": 13.239999771118164,
+      "end": 13.699999809265137
+    },
+    {
+      "word": "striking",
+      "start": 13.699999809265137,
+      "end": 13.699999809265137
+    },
+    {
+      "word": "appearance",
+      "start": 13.699999809265137,
+      "end": 14.039999961853027
+    },
+    {
+      "word": "Its",
+      "start": 14.579999923706055,
+      "end": 14.699999809265137
+    },
+    {
+      "word": "nebula",
+      "start": 14.699999809265137,
+      "end": 14.979999542236328
+    },
+    {
+      "word": "gray",
+      "start": 14.979999542236328,
+      "end": 15.180000305175781
+    },
+    {
+      "word": "exterior",
+      "start": 15.180000305175781,
+      "end": 15.5600004196167
+    },
+    {
+      "word": "and",
+      "start": 15.5600004196167,
+      "end": 16.0
+    },
+    {
+      "word": "black",
+      "start": 16.0,
+      "end": 16.260000228881836
+    },
+    {
+      "word": "Alcantara",
+      "start": 16.260000228881836,
+      "end": 16.6200008392334
+    },
+    {
+      "word": "interior",
+      "start": 16.6200008392334,
+      "end": 17.0
+    },
+    {
+      "word": "make",
+      "start": 17.0,
+      "end": 17.18000030517578
+    },
+    {
+      "word": "it",
+      "start": 17.18000030517578,
+      "end": 17.260000228881836
+    },
+    {
+      "word": "an",
+      "start": 17.260000228881836,
+      "end": 17.459999084472656
+    },
+    {
+      "word": "instant",
+      "start": 17.459999084472656,
+      "end": 17.6200008392334
+    },
+    {
+      "word": "eye",
+      "start": 17.6200008392334,
+      "end": 17.979999542236328
+    },
+    {
+      "word": "catcher",
+      "start": 17.979999542236328,
+      "end": 17.979999542236328
+    },
+    {
+      "word": "with",
+      "start": 17.979999542236328,
+      "end": 18.18000030517578
+    },
+    {
+      "word": "an",
+      "start": 18.18000030517578,
+      "end": 18.479999542236328
+    },
+    {
+      "word": "aura",
+      "start": 18.479999542236328,
+      "end": 18.479999542236328
+    },
+    {
+      "word": "of",
+      "start": 18.479999542236328,
+      "end": 18.719999313354492
+    },
+    {
+      "word": "exclusivity",
+      "start": 18.719999313354492,
+      "end": 19.1200008392334
+    },
+    {
+      "word": "Under",
+      "start": 19.6200008392334,
+      "end": 19.760000228881836
+    },
+    {
+      "word": "the",
+      "start": 19.760000228881836,
+      "end": 20.020000457763672
+    },
+    {
+      "word": "hood",
+      "start": 20.020000457763672,
+      "end": 20.040000915527344
+    },
+    {
+      "word": "it",
+      "start": 20.360000610351562,
+      "end": 20.559999465942383
+    },
+    {
+      "word": "packs",
+      "start": 20.559999465942383,
+      "end": 20.559999465942383
+    },
+    {
+      "word": "a",
+      "start": 20.559999465942383,
+      "end": 20.739999771118164
+    },
+    {
+      "word": "naturally",
+      "start": 20.739999771118164,
+      "end": 21.0
+    },
+    {
+      "word": "aspirated",
+      "start": 21.0,
+      "end": 21.420000076293945
+    },
+    {
+      "word": "5",
+      "start": 21.420000076293945,
+      "end": 21.739999771118164
+    },
+    {
+      "word": "0",
+      "start": 21.739999771118164,
+      "end": 22.0
+    },
+    {
+      "word": "liter",
+      "start": 22.0,
+      "end": 22.139999389648438
+    },
+    {
+      "word": "V8",
+      "start": 22.139999389648438,
+      "end": 22.540000915527344
+    },
+    {
+      "word": "delivering",
+      "start": 22.860000610351562,
+      "end": 23.0
+    },
+    {
+      "word": "471",
+      "start": 23.0,
+      "end": 23.81999969482422
+    },
+    {
+      "word": "horsepower",
+      "start": 23.81999969482422,
+      "end": 24.200000762939453
+    },
+    {
+      "word": "This",
+      "start": 24.700000762939453,
+      "end": 24.959999084472656
+    },
+    {
+      "word": "engine",
+      "start": 24.959999084472656,
+      "end": 25.18000030517578
+    },
+    {
+      "word": "ensures",
+      "start": 25.18000030517578,
+      "end": 25.420000076293945
+    },
+    {
+      "word": "a",
+      "start": 25.420000076293945,
+      "end": 25.65999984741211
+    },
+    {
+      "word": "thrilling",
+      "start": 25.65999984741211,
+      "end": 25.860000610351562
+    },
+    {
+      "word": "auditory",
+      "start": 25.860000610351562,
+      "end": 26.280000686645508
+    },
+    {
+      "word": "experience",
+      "start": 26.280000686645508,
+      "end": 26.65999984741211
+    },
+    {
+      "word": "with",
+      "start": 26.65999984741211,
+      "end": 26.84000015258789
+    },
+    {
+      "word": "its",
+      "start": 26.84000015258789,
+      "end": 27.020000457763672
+    },
+    {
+      "word": "unmistakable",
+      "start": 27.020000457763672,
+      "end": 27.479999542236328
+    },
+    {
+      "word": "roar",
+      "start": 27.479999542236328,
+      "end": 27.739999771118164
+    },
+    {
+      "word": "Power",
+      "start": 28.559999465942383,
+      "end": 28.559999465942383
+    },
+    {
+      "word": "is",
+      "start": 28.559999465942383,
+      "end": 28.780000686645508
+    },
+    {
+      "word": "sent",
+      "start": 28.780000686645508,
+      "end": 28.780000686645508
+    },
+    {
+      "word": "to",
+      "start": 28.780000686645508,
+      "end": 28.920000076293945
+    },
+    {
+      "word": "the",
+      "start": 28.920000076293945,
+      "end": 29.040000915527344
+    },
+    {
+      "word": "rear",
+      "start": 29.040000915527344,
+      "end": 29.15999984741211
+    },
+    {
+      "word": "wheels",
+      "start": 29.15999984741211,
+      "end": 29.420000076293945
+    },
+    {
+      "word": "offering",
+      "start": 29.860000610351562,
+      "end": 29.8799991607666
+    },
+    {
+      "word": "engaging",
+      "start": 29.8799991607666,
+      "end": 30.239999771118164
+    },
+    {
+      "word": "driving",
+      "start": 30.239999771118164,
+      "end": 30.540000915527344
+    },
+    {
+      "word": "dynamics",
+      "start": 30.540000915527344,
+      "end": 30.940000534057617
+    },
+    {
+      "word": "The",
+      "start": 31.559999465942383,
+      "end": 31.600000381469727
+    },
+    {
+      "word": "LC500",
+      "start": 31.600000381469727,
+      "end": 32.18000030517578
+    },
+    {
+      "word": "aims",
+      "start": 32.18000030517578,
+      "end": 32.41999816894531
+    },
+    {
+      "word": "to",
+      "start": 32.41999816894531,
+      "end": 32.7599983215332
+    },
+    {
+      "word": "deliver",
+      "start": 32.7599983215332,
+      "end": 32.7599983215332
+    },
+    {
+      "word": "a",
+      "start": 32.7599983215332,
+      "end": 32.97999954223633
+    },
+    {
+      "word": "purist's",
+      "start": 32.97999954223633,
+      "end": 33.31999969482422
+    },
+    {
+      "word": "driving",
+      "start": 33.31999969482422,
+      "end": 33.52000045776367
+    },
+    {
+      "word": "experience",
+      "start": 33.52000045776367,
+      "end": 33.939998626708984
+    },
+    {
+      "word": "with",
+      "start": 33.939998626708984,
+      "end": 34.2400016784668
+    },
+    {
+      "word": "a",
+      "start": 34.2400016784668,
+      "end": 34.400001525878906
+    },
+    {
+      "word": "10",
+      "start": 34.400001525878906,
+      "end": 34.560001373291016
+    },
+    {
+      "word": "speed",
+      "start": 34.560001373291016,
+      "end": 34.7599983215332
+    },
+    {
+      "word": "automatic",
+      "start": 34.7599983215332,
+      "end": 35.099998474121094
+    },
+    {
+      "word": "transmission",
+      "start": 35.099998474121094,
+      "end": 35.560001373291016
+    },
+    {
+      "word": "enhancing",
+      "start": 35.86000061035156,
+      "end": 36.099998474121094
+    },
+    {
+      "word": "acceleration",
+      "start": 36.099998474121094,
+      "end": 36.619998931884766
+    },
+    {
+      "word": "Starting",
+      "start": 37.400001525878906,
+      "end": 37.439998626708984
+    },
+    {
+      "word": "around",
+      "start": 37.439998626708984,
+      "end": 37.68000030517578
+    },
+    {
+      "word": "115",
+      "start": 37.68000030517578,
+      "end": 38.2599983215332
+    },
+    {
+      "word": "000",
+      "start": 38.2599983215332,
+      "end": 38.52000045776367
+    },
+    {
+      "word": "new",
+      "start": 38.52000045776367,
+      "end": 39.02000045776367
+    },
+    {
+      "word": "it",
+      "start": 39.20000076293945,
+      "end": 39.36000061035156
+    },
+    {
+      "word": "currently",
+      "start": 39.36000061035156,
+      "end": 39.619998931884766
+    },
+    {
+      "word": "trades",
+      "start": 39.619998931884766,
+      "end": 39.779998779296875
+    },
+    {
+      "word": "for",
+      "start": 39.779998779296875,
+      "end": 39.900001525878906
+    },
+    {
+      "word": "about",
+      "start": 39.900001525878906,
+      "end": 40.099998474121094
+    },
+    {
+      "word": "95",
+      "start": 40.099998474121094,
+      "end": 40.540000915527344
+    },
+    {
+      "word": "000",
+      "start": 40.540000915527344,
+      "end": 40.79999923706055
+    },
+    {
+      "word": "showcasing",
+      "start": 41.58000183105469,
+      "end": 41.65999984741211
+    },
+    {
+      "word": "remarkable",
+      "start": 41.65999984741211,
+      "end": 42.099998474121094
+    },
+    {
+      "word": "value",
+      "start": 42.099998474121094,
+      "end": 42.41999816894531
+    },
+    {
+      "word": "retention",
+      "start": 42.41999816894531,
+      "end": 42.68000030517578
+    },
+    {
+      "word": "for",
+      "start": 42.68000030517578,
+      "end": 42.880001068115234
+    },
+    {
+      "word": "a",
+      "start": 42.880001068115234,
+      "end": 43.08000183105469
+    },
+    {
+      "word": "luxury",
+      "start": 43.08000183105469,
+      "end": 43.220001220703125
+    },
+    {
+      "word": "coupe",
+      "start": 43.220001220703125,
+      "end": 43.439998626708984
+    },
+    {
+      "word": "that's",
+      "start": 43.439998626708984,
+      "end": 43.939998626708984
+    },
+    {
+      "word": "bound",
+      "start": 43.939998626708984,
+      "end": 44.02000045776367
+    },
+    {
+      "word": "to",
+      "start": 44.02000045776367,
+      "end": 44.220001220703125
+    },
+    {
+      "word": "become",
+      "start": 44.220001220703125,
+      "end": 44.29999923706055
+    },
+    {
+      "word": "a",
+      "start": 44.29999923706055,
+      "end": 44.779998779296875
+    },
+    {
+      "word": "classic",
+      "start": 44.779998779296875,
+      "end": 44.779998779296875
+    },
+    {
+      "word": "Facing",
+      "start": 45.380001068115234,
+      "end": 45.439998626708984
+    },
+    {
+      "word": "off",
+      "start": 45.439998626708984,
+      "end": 45.68000030517578
+    },
+    {
+      "word": "against",
+      "start": 45.68000030517578,
+      "end": 45.79999923706055
+    },
+    {
+      "word": "the",
+      "start": 45.79999923706055,
+      "end": 45.97999954223633
+    },
+    {
+      "word": "BMW",
+      "start": 45.97999954223633,
+      "end": 46.2400016784668
+    },
+    {
+      "word": "M850i",
+      "start": 46.2400016784668,
+      "end": 47.060001373291016
+    },
+    {
+      "word": "the",
+      "start": 47.2400016784668,
+      "end": 47.439998626708984
+    },
+    {
+      "word": "Lexus's",
+      "start": 47.439998626708984,
+      "end": 47.779998779296875
+    },
+    {
+      "word": "471",
+      "start": 47.779998779296875,
+      "end": 48.439998626708984
+    },
+    {
+      "word": "horsepower",
+      "start": 48.439998626708984,
+      "end": 48.81999969482422
+    },
+    {
+      "word": "holds",
+      "start": 48.81999969482422,
+      "end": 49.060001373291016
+    },
+    {
+      "word": "its",
+      "start": 49.060001373291016,
+      "end": 49.18000030517578
+    },
+    {
+      "word": "own",
+      "start": 49.18000030517578,
+      "end": 49.36000061035156
+    },
+    {
+      "word": "against",
+      "start": 49.36000061035156,
+      "end": 49.52000045776367
+    },
+    {
+      "word": "the",
+      "start": 49.52000045776367,
+      "end": 49.7599983215332
+    },
+    {
+      "word": "Bimmer's",
+      "start": 49.7599983215332,
+      "end": 50.0
+    },
+    {
+      "word": "523",
+      "start": 50.0,
+      "end": 50.599998474121094
+    },
+    {
+      "word": "horsepower",
+      "start": 50.599998474121094,
+      "end": 50.97999954223633
+    },
+    {
+      "word": "while",
+      "start": 51.400001525878906,
+      "end": 51.47999954223633
+    },
+    {
+      "word": "the",
+      "start": 51.47999954223633,
+      "end": 51.70000076293945
+    },
+    {
+      "word": "LC's",
+      "start": 51.70000076293945,
+      "end": 51.900001525878906
+    },
+    {
+      "word": "seductive",
+      "start": 51.900001525878906,
+      "end": 52.18000030517578
+    },
+    {
+      "word": "styling",
+      "start": 52.18000030517578,
+      "end": 52.459999084472656
+    },
+    {
+      "word": "sets",
+      "start": 52.459999084472656,
+      "end": 52.68000030517578
+    },
+    {
+      "word": "it",
+      "start": 52.68000030517578,
+      "end": 56.81999969482422
+    },
+    {
+      "word": "apart",
+      "start": 56.81999969482422,
+      "end": 56.81999969482422
+    },
+    {
+      "word": "So",
+      "start": 69.16000366210938,
+      "end": 69.5999984741211
+    },
+    {
+      "word": "is",
+      "start": 69.87999725341797,
+      "end": 69.91999816894531
+    },
+    {
+      "word": "the",
+      "start": 69.91999816894531,
+      "end": 70.0999984741211
+    },
+    {
+      "word": "LC500",
+      "start": 70.0999984741211,
+      "end": 70.62000274658203
+    },
+    {
+      "word": "Inspiration",
+      "start": 70.62000274658203,
+      "end": 71.0999984741211
+    },
+    {
+      "word": "Series",
+      "start": 71.0999984741211,
+      "end": 71.27999877929688
+    },
+    {
+      "word": "your",
+      "start": 71.27999877929688,
+      "end": 71.45999908447266
+    },
+    {
+      "word": "dream",
+      "start": 71.45999908447266,
+      "end": 71.66000366210938
+    },
+    {
+      "word": "coupe",
+      "start": 71.66000366210938,
+      "end": 71.81999969482422
+    },
+    {
+      "word": "or",
+      "start": 72.0199966430664,
+      "end": 72.19999694824219
+    },
+    {
+      "word": "does",
+      "start": 72.19999694824219,
+      "end": 72.30000305175781
+    },
+    {
+      "word": "another",
+      "start": 72.30000305175781,
+      "end": 72.54000091552734
+    },
+    {
+      "word": "exotic",
+      "start": 72.54000091552734,
+      "end": 72.83999633789062
+    },
+    {
+      "word": "tickle",
+      "start": 72.83999633789062,
+      "end": 73.08000183105469
+    },
+    {
+      "word": "your",
+      "start": 73.08000183105469,
+      "end": 73.23999786376953
+    },
+    {
+      "word": "fancy",
+      "start": 73.23999786376953,
+      "end": 73.45999908447266
+    }
+  ],
+  "media": [
+    {
+      "path": "images/lexus-lc-500-inspiration-series-coupe/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/lexus-lc-500-inspiration-series-coupe/interior-02.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/lexus-lc-500-inspiration-series-coupe/exterior_front-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/lexus-lc-500-inspiration-series-coupe/exterior_front-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/lexus-lc-500-inspiration-series-coupe/exterior_rear-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/lexus-lc-500-inspiration-series-coupe/exterior_rear-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/lexus-lc-500-inspiration-series-coupe/interior-01.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3yv1ynyo/2024-lexus-lc-500-inspiration-series-coupe?ss_id=c3390842-5ec2-4a62-9af0-2e6f6508763d&ref=pr_1_7",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 117620,
+    "sale_type": "sold",
+    "page_title": "2024 Lexus LC 500 Inspiration Series Coupe",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-lexus-lc-500-inspiration-series-c-20260904035214/voice_auditions/onyx.mp3",
+    "british_narrator": "single-lexus-lc-500-inspiration-series-c-20260904035214/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-lexus-lc-500-inspiration-series-c-20260904035214/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-lexus-lc-500-inspiration-series-c-20260904035214/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-lexus-lc-500-inspiration-series-c-20260904035214/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-lexus-lc-500-inspiration-series-c-20260904035214/images/lexus-lc-500-inspiration-series-coupe/exterior_side-01-nobg.png",
+  "side_profile_facing_direction": "left",
+  "video": "single_car_short.mp4"
+}
