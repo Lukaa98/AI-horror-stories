@@ -1,0 +1,239 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 9,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Cadillac",
+      "detected_model": "CT5",
+      "detected_generation_or_year": "2025",
+      "detected_variant_or_engine": "V Blackwing Precision Package",
+      "visible_match_evidence": [
+        "Rear lights design",
+        "V badge",
+        "Exhaust outlets"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Cadillac",
+      "detected_model": "CT5",
+      "detected_generation_or_year": "2025",
+      "detected_variant_or_engine": "V Blackwing Precision Package",
+      "visible_match_evidence": [
+        "distinctive Cadillac grille",
+        "V badge on side",
+        "bodywork and proportions matching CT5",
+        "quadrilateral tail lights"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Cadillac",
+      "detected_model": "CT5",
+      "detected_generation_or_year": "2025",
+      "detected_variant_or_engine": "V Blackwing Precision Package",
+      "visible_match_evidence": [
+        "Cadillac branding",
+        "V series badge",
+        "2025 design traits"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "side"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Cadillac",
+      "detected_model": "CT5",
+      "detected_generation_or_year": "2025",
+      "detected_variant_or_engine": "V Blackwing Precision Package",
+      "visible_match_evidence": [
+        "Cadillac crest",
+        "CT5 body design",
+        "specific front grille",
+        "headlight shape"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Cadillac",
+      "detected_model": "CT5",
+      "detected_generation_or_year": "2025",
+      "detected_variant_or_engine": "V Blackwing Precision Package",
+      "visible_match_evidence": [
+        "CT5 badge",
+        "V Series badge",
+        "2025 body design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Cadillac",
+      "detected_model": "CT5",
+      "detected_generation_or_year": "2025",
+      "detected_variant_or_engine": "Blackwing Precision Package",
+      "visible_match_evidence": [
+        "interior design",
+        "dashboard layout",
+        "steering wheel",
+        "gear shift"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "cadillac",
+      "detected_model": "ct5",
+      "detected_generation_or_year": "2025",
+      "detected_variant_or_engine": "V Blackwing Precision Package",
+      "visible_match_evidence": [
+        "interior design",
+        "specific seating",
+        "branding elements"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 6,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not feature the target vehicle.",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 3,
+      "composition_score": 2,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle, only an interior display.",
+      "path": "interior-09.jpg",
+      "provider": "openai"
+    }
+  ]
+}
