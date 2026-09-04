@@ -503,9 +503,11 @@ STAT_TABLE_DIVIDER_COLOR = (0, 0, 0, 70)
 
 def _stat_tracker_entries(manifest, duration):
     """(start_time, label, value) for up to STAT_TABLE_MAX_ROWS scenes that
-    carry a stat_label/stat_value pair -- timed to the same scene_boundaries
-    driving headlines/captions, so a row appears exactly when its own
-    number is actually spoken, not before."""
+    carry a stat_label/stat_value pair (and, if present, a second
+    stat_label_2/stat_value_2 -- the same scene stating two distinct hard
+    numbers, e.g. horsepower and torque in the same beat) -- timed to the
+    same scene_boundaries driving headlines/captions, so a row appears
+    exactly when its own number is actually spoken, not before."""
     scenes = list(manifest.get("scenes") or [])
     if not scenes:
         return []
@@ -513,13 +515,14 @@ def _stat_tracker_entries(manifest, duration):
     boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
     entries = []
     for scene, (start, _end) in zip(scenes, boundaries):
-        label = str(scene.get("stat_label") or "").strip()
-        value = str(scene.get("stat_value") or "").strip()
-        if not label or not value:
-            continue
-        entries.append((start, label, value))
-        if len(entries) >= STAT_TABLE_MAX_ROWS:
-            break
+        for label_key, value_key in (("stat_label", "stat_value"), ("stat_label_2", "stat_value_2")):
+            label = str(scene.get(label_key) or "").strip()
+            value = str(scene.get(value_key) or "").strip()
+            if not label or not value:
+                continue
+            entries.append((start, label, value))
+            if len(entries) >= STAT_TABLE_MAX_ROWS:
+                return entries
     return entries
 
 

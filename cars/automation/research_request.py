@@ -807,17 +807,18 @@ Return ONLY strict JSON with:
   interior, engine_bay, wheel_detail, other_detail
 - facing_direction: for any exterior category -- including a three-quarter angle (front-left,
   front-right, rear-left, rear-right), not just a clean side profile -- which horizontal direction
-  the car's own front bumper/nose is oriented toward: "left" or "right". If the front bumper or
-  headlights are visible, judge directly from them. If only the rear is visible (a rear or
-  rear-three-quarter shot), infer the nose direction from the rear instead -- the front points the
-  OPPOSITE horizontal direction from whichever side the visible tail-lights/rear bumper leans
-  toward (e.g. a rear-left three-quarter shot, where the tail is angled toward the left of the
-  frame, means the front/nose is oriented toward the right). Only answer "unclear" for a perfectly
-  straight-on front or rear shot with no lean to either side at all, or a wheel/interior/engine/
-  detail crop where the car's own orientation genuinely isn't visible. This is used to mirror the
-  cutout so it doesn't appear to drive backwards in a left-to-right animation, so get an actual
-  left/right answer from the pixels whenever the car leans either way at all -- don't default to
-  "unclear" just because the angle isn't a perfect broadside profile.
+  the car's own front end is oriented toward: "left" or "right". Judge this from a concrete,
+  literal landmark, not an abstract impression: find the FRONT wheel and the REAR wheel in the
+  photo (whichever axle is closer to the visible headlights/front bumper is the front wheel, and
+  the one closer to the tail-lights/rear bumper is the rear wheel). Whichever side of the frame the
+  FRONT wheel sits on relative to the REAR wheel is the answer -- front wheel to the left of the
+  rear wheel means "left", front wheel to the right of the rear wheel means "right". This works the
+  same way whether the front or the rear of the car is the more prominent/visible end. Only answer
+  "unclear" when just one axle/wheel is visible at all (a perfectly straight-on front or rear shot,
+  or a wheel/interior/engine/detail crop). This is used to mirror the cutout so it doesn't appear to
+  drive backwards in a left-to-right animation -- get an actual left/right answer whenever both
+  wheels are visible, don't default to "unclear" just because the angle isn't a perfect broadside
+  profile.
 - view_description: a precise phrase such as "front-left three-quarter exterior"
 - visible_match_evidence: array of short descriptions of generation/variant-specific details
 - confidence: number from 0 to 1

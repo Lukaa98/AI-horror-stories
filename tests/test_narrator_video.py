@@ -460,6 +460,25 @@ def test_stat_tracker_entries_collects_labeled_scenes_timed_to_their_own_start()
     assert len(entries) == 2
 
 
+def test_stat_tracker_entries_includes_a_second_stat_from_the_same_scene():
+    """A single beat stating two distinct hard numbers (the classic case:
+    the engine beat gives both horsepower and torque) must produce two
+    rows, not just whichever one landed in the first slot."""
+    manifest = {
+        "scenes": [
+            {
+                "narration": "one", "stat_label": "Horsepower", "stat_value": "493 hp",
+                "stat_label_2": "Torque", "stat_value_2": "331 lb-ft",
+            },
+        ],
+        "word_timeline": [{"word": "one", "start": 0.0, "end": 0.2}],
+    }
+    entries = _stat_tracker_entries(manifest, 2.0)
+    assert [(label, value) for _, label, value in entries] == [
+        ("Horsepower", "493 hp"), ("Torque", "331 lb-ft"),
+    ]
+
+
 def test_stat_tracker_entries_caps_at_the_max_row_count():
     manifest = {
         "scenes": [

@@ -47,7 +47,7 @@ TARGET_DURATION_SECONDS = 58.0
 # already-fast TTS to hit ~58s, which is exactly what read as rushed.
 _BASE_WORDS_PER_SECOND = (182.5 / 58.0) / 1.12
 TARGET_WORD_CENTER = 175
-TARGET_WORD_FLEX = 10
+TARGET_WORD_FLEX = 5
 
 
 def _hard_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECONDS, min_tempo=0.5, max_tempo=2.0):
@@ -70,8 +70,12 @@ def _hard_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECOND
 TARGET_WORDS = (TARGET_WORD_CENTER - TARGET_WORD_FLEX, TARGET_WORD_CENTER + TARGET_WORD_FLEX)
 # The prompt targets the tight range above, and this wider band is used to
 # decide whether to retry the model with corrective feedback (see
-# research_script) -- neither one is the actual failure gate anymore.
-ACCEPTABLE_WORDS = (round(TARGET_WORD_CENTER * 0.75), round(TARGET_WORD_CENTER * 1.25))
+# research_script) -- neither one is the actual failure gate anymore. A
+# fixed +-10 margin around TARGET_WORDS (not a percentage of it) so a script
+# that overshoots by, say, 14 words -- comfortably "acceptable" under the
+# old +-25% band -- still triggers a retry instead of shipping noticeably
+# over the stated hard target.
+ACCEPTABLE_WORDS = (TARGET_WORDS[0] - 10, TARGET_WORDS[1] + 10)
 # The real failure gate: only a script this far outside the atempo-safe
 # range gets rejected, since anything inside it still reaches ~target
 # runtime with an audio-quality-preserving tempo correction.
@@ -100,7 +104,7 @@ PACKAGE_SCHEMA = {
                     "media_type", "headline", "narration", "rival_make", "rival_model",
                     "main_horsepower", "rival_horsepower",
                     "main_quarter_mile_seconds", "rival_quarter_mile_seconds",
-                    "stat_label", "stat_value",
+                    "stat_label", "stat_value", "stat_label_2", "stat_value_2",
                 ],
                 "properties": {
                     "media_type": {"type": "string", "enum": ["exterior", "engine", "interior", "detail", "wheel"]},
@@ -148,9 +152,16 @@ PACKAGE_SCHEMA = {
                     # null/null on beats that don't (the hook, the closing
                     # question, general character/legacy color). Keep
                     # stat_value short -- it renders in a narrow table cell,
-                    # not a sentence.
+                    # not a sentence. stat_label_2/stat_value_2 are the same
+                    # thing for a SECOND distinct hard number in that same
+                    # scene (e.g. the engine beat stating both horsepower and
+                    # torque needs both numbers to make the tracker, not just
+                    # whichever one gets picked) -- null/null when there
+                    # isn't a second one.
                     "stat_label": {"type": ["string", "null"]},
                     "stat_value": {"type": ["string", "null"]},
+                    "stat_label_2": {"type": ["string", "null"]},
+                    "stat_value_2": {"type": ["string", "null"]},
                 },
             },
         },
@@ -242,11 +253,11 @@ Headlines are only for important facts and must be 1-4 words (examples: model/ch
 
 When this car's original MSRP when new and a rough current used/market price are both verifiable, work one beat around that comparison -- especially call it out when it's notable: a luxury or exotic car that has depreciated hard off its window sticker, or one (often a limited-run or enthusiast favorite) that has held or even gained value. Give both numbers as approximate round figures (e.g. "started around $85K new, trades for about $40K today"), and make that scene's headline the price figures themselves (e.g. "$85K -> $40K" or "Holds Its Value"), still 1-4 words/tokens. Also work out the average annual depreciation (or appreciation) rate -- the percentage change divided by roughly how many years old the car is -- and state that rate too (e.g. "that's about 8% a year"); put all three figures (MSRP, current price, and the yearly rate) into that scene's stat_value together (e.g. "$85K -> $40K (-8%/yr)") under stat_label "Value". Skip this beat entirely when solid pricing can't be verified with web search -- never guess at numbers.
 
-When a scene's "narration" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown exactly during that scene; otherwise set both to null. Only set these when the narration truly names one specific rival car in THAT scene, not a vague "its rivals" or a whole segment/class. That scene's narration must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search. Also set that same scene's main_horsepower/rival_horsepower to those same two verified figures as plain integers (e.g. 420 and 455). This narration should stay about the cars themselves (specs, character, verdict) -- never narrate or describe an animation, race, or visual; nothing on screen needs a spoken introduction. Set both horsepower fields to null on every other scene.
+When a scene's "narration" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown exactly during that scene; otherwise set both to null. Only set these when the narration truly names one specific rival car in THAT scene, not a vague "its rivals" or a whole segment/class. That scene's narration must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search. Also set that same scene's main_horsepower/rival_horsepower to those same two verified figures as plain integers (e.g. 420 and 455), AND set that scene's stat_label/stat_value to reflect the same head-to-head (e.g. "Horsepower"/"420 hp vs 455 hp") -- this comparison beat needs a stat row just as much as any other hard-number beat does, it's easy to forget since the number's already captured in main_horsepower/rival_horsepower. This narration should stay about the cars themselves (specs, character, verdict) -- never narrate or describe an animation, race, or visual; nothing on screen needs a spoken introduction. Set both horsepower fields to null on every other scene.
 
 On that same rival-comparison scene, also look up each car's published quarter-mile time in seconds (e.g. 11.5) and set main_quarter_mile_seconds/rival_quarter_mile_seconds to those two verified figures -- these (not the horsepower numbers) drive a silent visual drag-race animation between the two cars that plays behind the narration, so the faster car needs to actually be the one with the shorter time. Leave both null if you can't verify a real published time for both cars; do not estimate or guess. Set both to null on every other scene.
 
-Whenever a scene's narration states one hard, concrete number about THIS car (horsepower, torque, 0-60 time, quarter-mile time, top speed, MSRP/price, weight, production count -- not the rival's), also set that scene's stat_label/stat_value to a short label and that number, formatted for a narrow on-screen table cell (e.g. "Horsepower"/"620 hp", "0-60"/"2.9s", "MSRP"/"$190K -> $150K"). Reuse the same figures already stated in that scene's narration -- never introduce a new number here that isn't spoken. Leave both null on scenes that don't state a standalone hard number (the hook, the closing question, character/legacy/design color without a figure attached).
+Whenever a scene's narration states one hard, concrete number about THIS car (horsepower, torque, 0-60 time, quarter-mile time, top speed, MSRP/price, weight, production count -- not the rival's), also set that scene's stat_label/stat_value to a short label and that number, formatted for a narrow on-screen table cell (e.g. "Horsepower"/"620 hp", "0-60"/"2.9s", "MSRP"/"$190K -> $150K"). If that SAME scene also states a second, different hard number (the classic case: the engine beat gives both horsepower and torque in the same breath), put that second one in stat_label_2/stat_value_2 -- don't drop it just because stat_label/stat_value is already used. Reuse the same figures already stated in that scene's narration -- never introduce a new number here that isn't spoken. Leave stat_label/stat_value null on scenes that don't state a standalone hard number at all (the hook, the closing question, character/legacy/design color without a figure attached), and leave stat_label_2/stat_value_2 null whenever there's no second number.
 
 Also return "start_year" and "end_year": the exact model-year range of the generation your script actually describes (the same year, twice, if it's a single model year). This must reflect what you actually researched and wrote about, even when the scope above was "the best-known generation" and you had to pick one yourself -- the photos shown alongside the narration are gathered using these years, so they need to match the generation you're describing."""
 
@@ -993,6 +1004,19 @@ def build_short(args):
                 "main_quarter_mile_seconds", "rival_quarter_mile_seconds",
             ):
                 scene[field] = None
+    else:
+        # Belt-and-suspenders, same reasoning as above: the prompt asks for
+        # a stat row on the comparison scene too, but main_horsepower/
+        # rival_horsepower are already real verified numbers regardless of
+        # whether the model remembered to also mirror them into
+        # stat_label/stat_value -- so fill that row in directly from the
+        # numbers already on the scene rather than depending on compliance
+        # for the one stat viewers most expect to see.
+        for scene in package["scenes"]:
+            main_hp, rival_hp = scene.get("main_horsepower"), scene.get("rival_horsepower")
+            if main_hp is not None and rival_hp is not None and not scene.get("stat_label"):
+                scene["stat_label"] = "Horsepower"
+                scene["stat_value"] = f"{main_hp} hp vs {rival_hp} hp"
     # Prefer the caller's explicit year range when given; otherwise fall
     # back to whatever generation the script actually settled on, so photo
     # gathering searches the same generation the narration describes
