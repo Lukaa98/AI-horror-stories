@@ -306,6 +306,15 @@
 
       <g id="character" filter="url(#wobble)" fill="none" stroke="#1c1712" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
 
+        <!-- torso group: neck + body + both arms scaled in horizontally
+             around the body's own centerline (x=200) for a slimmer build,
+             on request ("make it a bit skinnier") -- wrapping the existing
+             shapes in one shared scale keeps the arms' shoulder attachment
+             lined up with the now-narrower body instead of hand-editing
+             every coordinate separately. Legs and head are outside this
+             group, unaffected. -->
+        <g transform="translate(200,0) scale(0.86,1) translate(-200,0)">
+
         <!-- neck: short, meeting the head's own bottom edge (294, now that
              the head is taller) -->
         <path d="M 172 294 L 170 306 C 188 314 212 314 230 306 L 228 294" fill="#ffffff" stroke="none"/>
@@ -350,8 +359,8 @@
           <path d="M 260 306 C 286 332 302 374 302 422
                    C 302 440 298 454 290 464
                    L 270 454 C 276 422 274 374 256 336 Z" fill="#ffffff"/>
-          <path d="M 290 462 L 274 478 M 294 466 L 282 484 M 298 468 L 290 488
-                   M 302 466 L 300 488 M 304 462 L 308 482" stroke-width="3"/>
+          <path d="M 290 462 L 281 471 M 294 466 L 287 476 M 298 468 L 294 479
+                   M 302 466 L 301 478 M 304 462 L 306 473" stroke-width="2.2"/>
         </g>
         <!-- bent-elbow variant of the right arm, hand resting near the
              belly instead of hanging straight -- an alternate pose swap
@@ -364,15 +373,15 @@
                    C 250 400 268 396 282 388
                    C 290 382 292 372 288 360
                    C 282 340 272 320 256 306 Z" fill="#ffffff"/>
-          <path d="M 250 412 L 234 424 M 246 416 L 232 430 M 240 418 L 228 434
-                   M 234 416 L 224 432 M 230 412 L 222 426" stroke-width="3"/>
+          <path d="M 250 412 L 241 419 M 246 416 L 238 424 M 240 418 L 233 427
+                   M 234 416 L 229 425 M 230 412 L 226 420" stroke-width="2.2"/>
         </g>
         <g class="arm arm-left">
           <path d="M 140 306 C 114 332 98 374 98 422
                    C 98 440 102 454 110 464
                    L 130 454 C 124 422 126 374 144 336 Z" fill="#ffffff"/>
-          <path d="M 110 462 L 126 478 M 106 466 L 118 484 M 102 468 L 110 488
-                   M 98 466 L 100 488 M 96 462 L 92 482" stroke-width="3"/>
+          <path d="M 110 462 L 119 471 M 106 466 L 113 476 M 102 468 L 106 479
+                   M 98 466 L 99 478 M 96 462 L 94 473" stroke-width="2.2"/>
         </g>
         <!-- bent-elbow variant of the left arm, mirrored from arm-right-bent -->
         <g class="arm arm-left-bent" style="display:none">
@@ -383,8 +392,10 @@
                    C 150 400 132 396 118 388
                    C 110 382 108 372 112 360
                    C 118 340 128 320 144 306 Z" fill="#ffffff"/>
-          <path d="M 150 412 L 166 424 M 154 416 L 168 430 M 160 418 L 172 434
-                   M 166 416 L 176 432 M 170 412 L 178 426" stroke-width="3"/>
+          <path d="M 150 412 L 159 419 M 154 416 L 162 424 M 160 418 L 167 427
+                   M 166 416 L 172 425 M 170 412 L 174 420" stroke-width="2.2"/>
+        </g>
+
         </g>
         <!-- head group: everything from here down bobs/tilts together as
              one idle unit, pivoting from the base of the neck, so the head
