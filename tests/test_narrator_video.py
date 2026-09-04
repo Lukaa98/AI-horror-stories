@@ -8,6 +8,8 @@ from narrator_video import (  # noqa: E402
     CANVAS,
     RACE_FALLBACK_GAP_SECONDS,
     RACE_FALLBACK_SECONDS,
+    RACE_MAX_SLOWER_SECONDS,
+    RACE_WINDOW_SECONDS,
     STAT_TABLE_MAX_ROWS,
     _blink_intervals,
     _emphasis_intervals,
@@ -16,7 +18,6 @@ from narrator_video import (  # noqa: E402
     _caption_timeline,
     _drag_race_lane_clip,
     _drag_race_track,
-    _drift_doodle_track,
     _merged_boundaries,
     _pose_intervals,
     _progress_bar_track,
@@ -265,28 +266,6 @@ def test_typing_headline_positions_empty_text_yields_no_frames():
     assert _typing_headline_positions("", 0.0, 5.0) == []
 
 
-def test_drift_doodle_track_returns_no_clips_without_a_cutout_path(tmp_path):
-    assert _drift_doodle_track(None, CANVAS, 5.0) == []
-    assert _drift_doodle_track(str(tmp_path / "missing.png"), CANVAS, 5.0) == []
-
-
-def test_drift_doodle_track_builds_small_clips_for_the_full_duration(tmp_path):
-    cutout = tmp_path / "car.png"
-    _make_transparent_png(cutout)
-    clips = _drift_doodle_track(str(cutout), CANVAS, 6.0)
-    # The car itself plus a few trailing smoke puffs -- a handful of small
-    # clips, not one nested full-canvas composite (which was the actual
-    # performance regression this shape fixes).
-    assert len(clips) >= 2
-    for clip in clips:
-        assert clip.duration == 6.0
-        # Each clip should stay inside the corner region across a couple
-        # of spin cycles, not drift off toward the middle of the frame or
-        # off-canvas.
-        for t in (0.0, 1.1, 2.7, 5.9):
-            x, y = clip.pos(t)
-            assert 0 <= x <= CANVAS[0]
-            assert 0 <= y <= CANVAS[1]
 
 
 def test_drag_race_lane_clip_flips_a_car_whose_nose_faces_the_wrong_way(tmp_path):
@@ -344,13 +323,12 @@ def test_drag_race_track_the_shorter_quarter_mile_time_wins(tmp_path):
     _make_transparent_png(main_cutout)
     _make_transparent_png(rival_cutout)
 
-    # A window comfortably wider than countdown(3) + race(11.5) +
-    # celebration(0.9) -- exactly what single_car_short's race-pause splice
-    # is supposed to guarantee -- so the real, unscaled arrival gap shows.
+    # RACE_WINDOW_SECONDS -- the same fixed runway render_narrator_video
+    # always gives a comparison scene, real quarter-mile times included.
     clips, sfx = _drag_race_track(
         str(main_cutout), str(rival_cutout), "right", "right", main_hp=300, rival_hp=1000,
         main_quarter_mile=10.5, rival_quarter_mile=11.5,  # rival has more HP but is slower in the 1/4 mile
-        size=CANVAS, seg_start=2.0, seg_end=18.0,
+        size=CANVAS, seg_start=2.0, seg_end=2.0 + RACE_WINDOW_SECONDS,
     )
     # flag + 3 lights + winner badge + 2 cars.
     assert len(clips) == 7
@@ -360,18 +338,25 @@ def test_drag_race_track_the_shorter_quarter_mile_time_wins(tmp_path):
     countdown_duration = 3.0
     finish_x = CANVAS[0] - CANVAS[0] * 0.02
 
+    # Both real times (10.5s, 11.5s) exceed RACE_MAX_SLOWER_SECONDS, so both
+    # scale down together, preserving their ratio -- the rival (slower)
+    # lands exactly on the cap.
+    scale = RACE_MAX_SLOWER_SECONDS / 11.5
+    main_arrival = 10.5 * scale
+    rival_arrival = RACE_MAX_SLOWER_SECONDS
+
     # The main car (quicker quarter mile, despite less horsepower) reaches
-    # the finish line first, at its own real 10.5s -- at that exact moment
-    # the rival, a real second slower, must still be short of the line.
-    main_arrival_t = countdown_duration + 10.5
+    # the finish line first -- at that exact moment the rival must still be
+    # short of the line.
+    main_arrival_t = countdown_duration + main_arrival
     main_x_at_arrival, _ = main_clip.pos(main_arrival_t)
     rival_x_at_same_time, _ = rival_clip.pos(main_arrival_t)
     assert abs(main_x_at_arrival + main_clip.size[0] - finish_x) < 1.0
     assert rival_x_at_same_time + rival_clip.size[0] < finish_x - 1.0
 
-    # The rival still finishes too, just a real second later than the main
-    # car, not capped short of the line forever.
-    rival_arrival_t = countdown_duration + 11.5
+    # The rival still finishes too, just later than the main car, not
+    # capped short of the line forever.
+    rival_arrival_t = countdown_duration + rival_arrival
     rival_x_at_arrival, _ = rival_clip.pos(rival_arrival_t)
     assert abs(rival_x_at_arrival + rival_clip.size[0] - finish_x) < 1.0
 
@@ -455,27 +440,6 @@ def test_scene_time_boundaries_recovers_from_earlier_tokenization_drift():
     assert rival_start > 1.0
 
 
-def test_scene_time_boundaries_gives_the_race_scene_the_whole_gap_after_it():
-    """The comparison scene gets a dedicated silent pause spliced into the
-    audio for its drag race (see single_car_short's race splice) -- that
-    whole gap must count as part of the race scene's own window, not be
-    split with the next scene the way an ordinary inter-scene pause is,
-    or the race gets starved of screen time and the next scene's photo
-    pops in before its narration actually starts."""
-    scenes = [{"narration": "one"}, {"narration": "two"}, {"narration": "three"}]
-    word_timeline = [
-        {"word": "one", "start": 0.0, "end": 0.2},
-        {"word": "two", "start": 10.0, "end": 10.2},  # a big spliced-in pause before this
-        {"word": "three", "start": 10.4, "end": 10.6},
-    ]
-    default_boundaries = _scene_time_boundaries(scenes, word_timeline, 11.0)
-    assert default_boundaries[0][1] < 6.0  # normally split ~50/50 with scene 2 (midpoint ~5.1)
-
-    race_boundaries = _scene_time_boundaries(scenes, word_timeline, 11.0, race_scene_index=0)
-    assert race_boundaries[0][1] == 10.0  # the whole gap goes to the race scene
-    assert race_boundaries[1][0] == 10.0  # scene 2 starts exactly when it's actually spoken
-
-
 def test_stat_tracker_entries_collects_labeled_scenes_timed_to_their_own_start():
     manifest = {
         "scenes": [
@@ -523,7 +487,7 @@ def test_stat_tracker_track_builds_one_growing_clip_per_added_row(tmp_path):
         ],
     }
     output_path = tmp_path / "single_car_short.mp4"
-    clips = _stat_tracker_track(manifest, 6.0, output_path, CANVAS)
+    clips = _stat_tracker_track(manifest, 6.0, output_path, CANVAS, narrator_top_y=1400.0)
     assert len(clips) == 2
     # The second row's scene starts at the pause midpoint between the two
     # scenes' spoken words (0.2 and 3.0 -> 1.6), same as any other scene

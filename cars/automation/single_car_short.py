@@ -27,7 +27,7 @@ from research_request import (
 )
 from generate_sample import ROOT
 from narrator_script import _extract_wav, build_mouth_timeline, synthesize_narration
-from narrator_video import _scene_time_boundaries, race_reserved_seconds, render_narrator_video
+from narrator_video import render_narrator_video
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
 
@@ -46,7 +46,7 @@ TARGET_DURATION_SECONDS = 58.0
 # 1.35x) produced scripts that needed real atempo speed-up on top of the
 # already-fast TTS to hit ~58s, which is exactly what read as rushed.
 _BASE_WORDS_PER_SECOND = (182.5 / 58.0) / 1.12
-TARGET_WORD_CENTER = 180
+TARGET_WORD_CENTER = 175
 TARGET_WORD_FLEX = 10
 
 
@@ -226,7 +226,11 @@ observation, or another history/mechanical beat -- so the script still hits its 
 without any head-to-head."""
     return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{photo_hints_block}{forced_rival_block}{no_comparison_block}
 
-Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-8 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (the designer, a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-8 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo, drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+
+The hook must be the very first words, no throat-clearing lead-in like "Check out the..." or "Let's talk about..." -- open directly with the superlative/fact itself, e.g. "This is the most reliable luxury coupe you can buy, and here's why," or "This is the cheapest way into 400 horsepower," THEN name the car. The claim has to be genuinely verifiable, not just punchy.
+
+Never name a specific individual as the designer unless that person is a real, easily verifiable, widely publicized credit for this exact car (the kind of name that shows up across multiple independent, reputable sources, not just one page) -- a wrong or invented name is worse than no name at all. When you can't verify a specific person, either skip the designer credit and use a different history/legacy fact instead (a motorsport result, a production milestone, why the generation exists), or credit the design studio/brand's design language generally without inventing a person.
 
 Every sentence has to earn its place with a specific, concrete fact -- a real number, a named comparison, a verifiable detail -- not a vague enthusiast-copy adjective doing the work instead. Cut lines like "adding to its sporty agility" or "making every drive engaging and dynamic" or "celebrated for its precise steering" that describe a *feeling* about the car without any fact backing it up -- if you can't attach a real number, a named comparison, or a specific verifiable detail to a claim, cut the claim and replace it with one you can verify, don't soften it into vague praise. This applies to every beat, not just the hook.
 
@@ -885,36 +889,6 @@ def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum
     return duration / tempo
 
 
-def _insert_silence(audio_path, at_seconds, duration_seconds):
-    """Splice `duration_seconds` of real silence into the narration audio
-    at `at_seconds`, in place -- gives the drag-race beat its own dedicated
-    screen time (see race_reserved_seconds) instead of squeezing a real
-    quarter-mile-based race into however long the spoken sentence happens
-    to leave. Total audio (and so total video) duration grows by exactly
-    this much; the character just sits idle through it since there's no
-    speech to lip-sync to."""
-    audio_path = Path(audio_path)
-    if duration_seconds <= 0:
-        return
-    merged = audio_path.with_name(f"{audio_path.stem}-paused{audio_path.suffix}")
-    filter_complex = (
-        f"[0:a]atrim=0:{at_seconds:.3f},asetpts=PTS-STARTPTS[a];"
-        f"[1:a]atrim=0:{duration_seconds:.3f},asetpts=PTS-STARTPTS[sil];"
-        f"[0:a]atrim=start={at_seconds:.3f},asetpts=PTS-STARTPTS[b];"
-        f"[a][sil][b]concat=n=3:v=0:a=1[out]"
-    )
-    subprocess.run(
-        [
-            "ffmpeg", "-y", "-i", str(audio_path),
-            "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
-            "-filter_complex", filter_complex, "-map", "[out]",
-            str(merged),
-        ],
-        check=True, capture_output=True, text=True,
-    )
-    merged.replace(audio_path)
-
-
 def transcribe_word_timeline(audio_path):
     """Get real per-word timestamps for captions; rendering has a safe fallback."""
     with Path(audio_path).open("rb") as audio_file:
@@ -1049,32 +1023,6 @@ def build_short(args):
     except Exception as exc:
         print(f"[single-car] Word alignment failed; falling back to estimated caption timing: {exc}")
         word_timeline = []
-    # The comparison scene's drag race gets its own dedicated, silent
-    # screen time instead of being squeezed into however long the spoken
-    # sentence happens to leave -- splice real silence into the audio right
-    # after that scene's narration ends, sized to the real (or hp-derived
-    # fallback) quarter-mile gap between the two cars, then re-transcribe
-    # so every downstream timestamp (captions, headlines, sfx) reflects the
-    # now-longer audio instead of drifting out of sync with it.
-    race_scene_index = next(
-        (i for i, scene in enumerate(package["scenes"])
-         if scene.get("main_horsepower") is not None and scene.get("rival_horsepower") is not None),
-        None,
-    )
-    if race_scene_index is not None and word_timeline:
-        race_scene = package["scenes"][race_scene_index]
-        pause_seconds = race_reserved_seconds(
-            race_scene.get("main_horsepower"), race_scene.get("rival_horsepower"),
-            race_scene.get("main_quarter_mile_seconds"), race_scene.get("rival_quarter_mile_seconds"),
-        )
-        boundaries = _scene_time_boundaries(package["scenes"], word_timeline, normalized_duration)
-        splice_at = boundaries[race_scene_index][1] if race_scene_index < len(boundaries) else normalized_duration
-        try:
-            _insert_silence(audio_path, splice_at, pause_seconds)
-            normalized_duration += pause_seconds
-            word_timeline = transcribe_word_timeline(audio_path)
-        except Exception as exc:
-            print(f"[single-car] Could not reserve dedicated drag-race screen time; race will share its beat's own timing instead: {exc}")
     wav_path = output_dir / "narration.wav"
     _extract_wav(audio_path, wav_path)
     timeline = build_mouth_timeline(wav_path)

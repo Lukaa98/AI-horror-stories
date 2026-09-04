@@ -37,7 +37,7 @@ def test_target_words_is_a_fixed_center_not_tied_to_tts_speed():
     # a fixed ~180-word center regardless of speed, with a flexible +-10
     # band around it.
     assert TARGET_WORDS == (TARGET_WORD_CENTER - TARGET_WORD_FLEX, TARGET_WORD_CENTER + TARGET_WORD_FLEX)
-    assert TARGET_WORD_CENTER == 180
+    assert TARGET_WORD_CENTER == 175
     assert ACCEPTABLE_WORDS[0] < TARGET_WORDS[0] < TARGET_WORDS[1] < ACCEPTABLE_WORDS[1]
 
 

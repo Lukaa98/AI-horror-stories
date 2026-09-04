@@ -77,31 +77,6 @@ def _background_music_clip(duration):
     clip = clip.volumex(MUSIC_VOLUME).fx(afx.audio_fadein, fade).fx(afx.audio_fadeout, fade)
     return clip
 
-# A small "easter egg" loop in a corner: the car's own side-profile cutout
-# (see single_car_short._select_side_profile_media) spun around an
-# off-center pivot so it reads as doing donuts, with a trail of a few
-# procedurally generated smoke puffs -- decorative only, not tied to any
-# scene, meant to give the video some ambient personality without pulling
-# focus from the narrator.
-DOODLE_WIDTH_RATIO = 0.2
-DOODLE_MARGIN_RATIO = 0.05
-# A flat 2D photo spun a full 360deg reads as the car flipping upside down
-# for half of every cycle, not drifting -- so this swings the car through a
-# wide pendulum-style arc (a fixed pivot above the car, swinging side to
-# side) instead of either a full rotation or a flat side-to-side slide. The
-# arc itself is the "cornering" motion (it's a real curved path, not just a
-# rotation-in-place, which is what read as "swinging like a baby's cradle"
-# rather than drifting); the car's own rotation stays capped well short of
-# upside down. An earlier version also squashed the image's width per frame
-# for a pseudo-3D look, but combined with a real (imperfectly-masked) photo
-# cutout that read as a washed-out outline rather than a car -- dropped
-# entirely in favor of transforms that don't touch the image's own pixels.
-DOODLE_SWAY_PERIOD_SECONDS = 1.5
-DOODLE_ARC_RADIUS_RATIO = 0.075
-DOODLE_ARC_HALF_ANGLE_DEG = 42
-DOODLE_MAX_ROTATION_DEG = 30
-SMOKE_PUFF_DIAMETER_RATIO = 0.03
-SMOKE_PULSE_PERIOD_SECONDS = 0.9
 
 # Two small side-profile cutouts drag-racing left-to-right in their own
 # lane, positioned above the media/headline stack -- never overlapping the
@@ -127,12 +102,20 @@ RACE_MIN_SECONDS_FOR_COUNTDOWN = 4.5
 COUNTDOWN_SFX = "countdown_beep.wav"
 COUNTDOWN_GO_SFX = "countdown_go.wav"
 COUNTDOWN_SFX_VOLUME = 0.5
-# The slower car's real arrival time, capped -- an honest two-second real
-# gap is dramatic, but two real 16-17s quarter-miles would hold the screen
-# on a silent race for that long verbatim. Both times are scaled down
-# together (their ratio preserved) only when the slower one would
-# otherwise run past this.
-RACE_MAX_SLOWER_SECONDS = 12.0
+# The race gets a fixed runway that can run *past* the comparison scene's
+# own natural end, straight over whatever comes next -- narration keeps
+# moving on to the next topic instead of the video going silent so the
+# race can have its own dedicated block of time (that silence was the
+# actual complaint: it made the video noticeably longer than the ~1
+# minute target for no narration benefit). The race is a purely visual
+# overlay -- it doesn't need narration to pause for it.
+RACE_WINDOW_SECONDS = 10.0
+# The slower car's real arrival time, capped to fit inside RACE_WINDOW_SECONDS
+# alongside the countdown and celebration -- an honest two-second real gap
+# is dramatic, but two real 16-17s quarter-miles can't run verbatim inside
+# a fixed window. Both times are scaled down together (their ratio
+# preserved) only when the slower one would otherwise run past this.
+RACE_MAX_SLOWER_SECONDS = RACE_WINDOW_SECONDS - RACE_COUNTDOWN_STEPS * RACE_COUNTDOWN_STEP_SECONDS - RACE_CELEBRATION_SECONDS
 # No verified quarter-mile time for either car -- horsepower alone can't
 # honestly produce a *time*, so this is a modest fixed race (the faster-hp
 # car arrives first by a fixed head start) rather than pretending a
@@ -158,20 +141,12 @@ def _race_arrival_times(main_hp, rival_hp, main_quarter_mile, rival_quarter_mile
     return RACE_FALLBACK_SECONDS, RACE_FALLBACK_SECONDS
 
 
-def race_reserved_seconds(main_hp, rival_hp, main_quarter_mile, rival_quarter_mile):
-    """Total screen time (countdown + race + celebration) the comparison
-    beat needs reserved as a dedicated silent pause -- single_car_short
-    splices exactly this much silence into the narration audio so the race
-    gets its own window instead of being squeezed into however long the
-    spoken sentence happens to leave."""
-    main_time, rival_time = _race_arrival_times(main_hp, rival_hp, main_quarter_mile, rival_quarter_mile)
-    countdown_duration = RACE_COUNTDOWN_STEPS * RACE_COUNTDOWN_STEP_SECONDS
-    return countdown_duration + max(main_time, rival_time) + RACE_CELEBRATION_SECONDS
-
 # A thin growing bar along the very top edge -- a subtle, near-zero-cost
 # retention cue so viewers can subconsciously track how much is left.
 PROGRESS_BAR_HEIGHT_PX = 6
-PROGRESS_BAR_COLOR = (255, 214, 64)
+# White fill against the unfilled black track -- flat black on black would
+# make the whole bar invisible against its own background.
+PROGRESS_BAR_COLOR = (255, 255, 255)
 # The top of the frame is a stack of three bands, top to bottom: a headline
 # band, the car media itself, then a caption band -- in that order so
 # neither piece of text sits on top of the picture the way it used to when
@@ -181,6 +156,7 @@ PROGRESS_BAR_COLOR = (255, 214, 64)
 TOP_STACK_RATIO = 0.50
 HEADLINE_ZONE_RATIO = 0.095
 CAPTION_ZONE_RATIO = 0.075
+NARRATOR_X_OFFSET_RATIO = 0.06
 # Margin on every edge of the media's own band -- the picture is inset
 # instead of stretched edge-to-edge, so it reads as a framed photo rather
 # than a banner. Trimmed further each time the picture needed to read
@@ -325,12 +301,14 @@ def _caption_timeline(manifest, duration):
     return _caption_chunks(manifest["script"], duration)
 
 
-def _caption_frame(size, text, center_y, out_path, fill=(238, 44, 44), font_size=64):
+def _caption_frame(size, text, center_y, out_path, fill=(0, 0, 0), font_size=64, stroke_fill=(255, 255, 255)):
     """Render a full-canvas-sized transparent image with the caption
     baked in at an absolute position, matching how _label_frame/
     _intro_frame in battle_engine.py already work -- the caller places the
     *whole* image at (0, 0) rather than separately positioning it, since a
-    canvas-sized image plus a non-zero set_position() double-offsets."""
+    canvas-sized image plus a non-zero set_position() double-offsets.
+    Black text on a white stroke by default -- a black-and-white scheme on
+    request, replacing the earlier red/amber caption and headline colors."""
     width, height = size
     scale = width / 1080
     canvas = Image.new("RGBA", size, (0, 0, 0, 0))
@@ -341,7 +319,7 @@ def _caption_frame(size, text, center_y, out_path, fill=(238, 44, 44), font_size
     draw.multiline_text(
         (width / 2 - (bbox[2] - bbox[0]) / 2, center_y - (bbox[3] - bbox[1]) / 2),
         wrapped, font=font, fill=fill, spacing=int(10 * scale),
-        align="center", stroke_width=max(2, int(3 * scale)), stroke_fill=(0, 0, 0),
+        align="center", stroke_width=max(2, int(3 * scale)), stroke_fill=stroke_fill,
     )
     out_path.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(out_path)
@@ -503,15 +481,20 @@ STAT_TABLE_X_RATIO = 0.035
 STAT_TABLE_WIDTH_RATIO = 0.42
 STAT_TABLE_LABEL_COLUMN_RATIO = 0.52  # of the table's own width
 STAT_TABLE_ROW_HEIGHT_RATIO = 0.038
-STAT_TABLE_TOP_RATIO = 0.53
+# The table's *bottom* edge anchors this far above the narrator's own top
+# edge (see _stat_tracker_track's narrator_top_y) and grows upward as rows
+# are added, rather than a fixed top position -- a fixed position overlapped
+# the character's face once enough rows stacked up under it.
+STAT_TABLE_BOTTOM_MARGIN_RATIO = 0.02
 STAT_TABLE_FONT_SIZE = 25
-STAT_TABLE_LABEL_COLOR = (255, 214, 64, 255)
-STAT_TABLE_VALUE_COLOR = (255, 255, 255, 255)
-STAT_TABLE_BG_COLOR = (18, 18, 18, 200)
-STAT_TABLE_DIVIDER_COLOR = (255, 255, 255, 60)
+STAT_TABLE_LABEL_COLOR = (0, 0, 0, 255)
+STAT_TABLE_VALUE_COLOR = (0, 0, 0, 255)
+STAT_TABLE_BG_COLOR = (255, 255, 255, 235)
+STAT_TABLE_BORDER_COLOR = (0, 0, 0, 255)
+STAT_TABLE_DIVIDER_COLOR = (0, 0, 0, 70)
 
 
-def _stat_tracker_entries(manifest, duration, race_scene_index=None):
+def _stat_tracker_entries(manifest, duration):
     """(start_time, label, value) for up to STAT_TABLE_MAX_ROWS scenes that
     carry a stat_label/stat_value pair -- timed to the same scene_boundaries
     driving headlines/captions, so a row appears exactly when its own
@@ -520,7 +503,7 @@ def _stat_tracker_entries(manifest, duration, race_scene_index=None):
     if not scenes:
         return []
     word_timeline = list(manifest.get("word_timeline") or [])
-    boundaries = _scene_time_boundaries(scenes, word_timeline, duration, race_scene_index)
+    boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
     entries = []
     for scene, (start, _end) in zip(scenes, boundaries):
         label = str(scene.get("stat_label") or "").strip()
@@ -550,13 +533,18 @@ def _fit_text_to_width(draw, text, base_size, max_width, min_size=14):
     return font, (text + "..." if text else "...")
 
 
-def _stat_table_frame(size, rows, out_path):
+def _stat_table_frame(size, rows, out_path, bottom_y):
     """A full-canvas transparent image with the scoreboard baked in at its
     left-side position -- `rows` is however many are visible at this point
     (cumulative -- this is a running tracker, not scene-local like the
     headline band). Label and value each get their own dedicated column
     width (not just left/right-aligned within the same shared width), so a
-    long label and a long value can never overlap in the middle."""
+    long label and a long value can never overlap in the middle.
+
+    The table's bottom edge is pinned at `bottom_y` and it grows upward as
+    rows are added, rather than a fixed top position growing downward --
+    that fixed-top version could grow tall enough with 4-5 rows to reach
+    down into the narrator's own face."""
     width, height = size
     scale = width / 1080
     canvas = Image.new("RGBA", size, (0, 0, 0, 0))
@@ -570,11 +558,12 @@ def _stat_table_frame(size, rows, out_path):
         label_col_w = table_w * STAT_TABLE_LABEL_COLUMN_RATIO
         value_col_x = table_x + label_col_w
         value_col_w = table_w - label_col_w
-        table_y = height * STAT_TABLE_TOP_RATIO
         table_h = row_h * len(rows)
+        table_y = bottom_y - table_h
         draw.rounded_rectangle(
             [table_x, table_y, table_x + table_w, table_y + table_h],
             radius=10 * scale, fill=STAT_TABLE_BG_COLOR,
+            outline=STAT_TABLE_BORDER_COLOR, width=max(1, int(2 * scale)),
         )
         for i, (label, value) in enumerate(rows):
             row_y = table_y + i * row_h
@@ -597,13 +586,16 @@ def _stat_table_frame(size, rows, out_path):
     canvas.save(out_path)
 
 
-def _stat_tracker_track(manifest, duration, output_path, size, race_scene_index=None):
+def _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y):
     """ImageClips for the running stat scoreboard -- a new frame image each
     time a row is added, holding from then until the next addition (or the
-    end of the video after the last one)."""
-    entries = _stat_tracker_entries(manifest, duration, race_scene_index)
+    end of the video after the last one). `narrator_top_y` is the
+    character's own top edge -- the table's bottom is pinned just above it
+    so it never grows down into the face."""
+    entries = _stat_tracker_entries(manifest, duration)
     if not entries:
         return []
+    bottom_y = narrator_top_y - size[1] * STAT_TABLE_BOTTOM_MARGIN_RATIO
     clips = []
     for i, (start, _, _) in enumerate(entries):
         end = entries[i + 1][0] if i + 1 < len(entries) else duration
@@ -611,7 +603,7 @@ def _stat_tracker_track(manifest, duration, output_path, size, race_scene_index=
             continue
         rows = [(label, value) for _, label, value in entries[: i + 1]]
         frame_path = output_path.parent / "_frames" / f"stat-table-{i}.png"
-        _stat_table_frame(size, rows, frame_path)
+        _stat_table_frame(size, rows, frame_path, bottom_y)
         clips.append(
             ImageClip(str(frame_path)).set_start(start).set_duration(end - start).set_position((0, 0))
         )
@@ -819,7 +811,7 @@ def _find_word_index(word_timeline, expected_index, target_word, window=6):
     return expected_index
 
 
-def _scene_time_boundaries(scenes, word_timeline, duration, race_scene_index=None):
+def _scene_time_boundaries(scenes, word_timeline, duration):
     """Real per-scene (start, end) times, one per scene, derived from each
     scene's own "narration" word span walked cumulatively against the
     actual word_timeline -- not an even split of total duration, which has
@@ -834,14 +826,6 @@ def _scene_time_boundaries(scenes, word_timeline, duration, race_scene_index=Non
     end -- assigning a whole silent gap entirely to whichever scene comes
     next would still leave a rival scene's display window starting long
     before it's actually spoken, just less extremely than an even split.
-
-    The one exception is `race_scene_index`: the comparison scene that had
-    a dedicated silent pause spliced into the audio right after it (see
-    single_car_short's race_reserved_seconds usage) gets the *entire* gap
-    that follows it, not half -- that whole pause is reserved for the drag
-    race, so splitting it would either starve the race of its own screen
-    time or start the next scene's photo before that scene's narration
-    actually begins.
 
     Falls back to an even split only when there's no real word_timeline to
     walk (estimated caption timing).
@@ -870,11 +854,8 @@ def _scene_time_boundaries(scenes, word_timeline, duration, race_scene_index=Non
         word_index += word_count
 
     cut_points = [0.0]
-    for index, ((_, prev_end), (next_start, _)) in enumerate(zip(spans, spans[1:])):
-        if index == race_scene_index and next_start > prev_end:
-            cut_points.append(next_start)
-        else:
-            cut_points.append(prev_end + (next_start - prev_end) / 2 if next_start > prev_end else prev_end)
+    for (_, prev_end), (next_start, _) in zip(spans, spans[1:]):
+        cut_points.append(prev_end + (next_start - prev_end) / 2 if next_start > prev_end else prev_end)
     cut_points.append(duration)
     return list(zip(cut_points, cut_points[1:]))
 
@@ -933,103 +914,6 @@ def _apply_body_sway(clip):
     def angle(t):
         return BODY_SWAY_DEGREES * math.sin(2 * math.pi * t / BODY_SWAY_PERIOD_SECONDS)
     return clip.rotate(angle, expand=False)
-
-
-def _generate_smoke_puff_image(diameter):
-    """A soft, grayscale radial-falloff puff -- procedural so the drift
-    doodle doesn't need a real smoke asset or a particle library, just a
-    cheap numpy distance field turned into an alpha channel."""
-    yy, xx = np.mgrid[0:diameter, 0:diameter]
-    center = diameter / 2
-    dist = np.sqrt((xx - center) ** 2 + (yy - center) ** 2) / center
-    alpha = (np.clip(1.0 - dist, 0, 1) ** 1.6 * 150).astype(np.uint8)
-    rgb = np.full((diameter, diameter, 3), 210, dtype=np.uint8)
-    return np.dstack([rgb, alpha])
-
-
-def _drift_doodle_track(cutout_path, size, duration):
-    """A tiny version of the car's own side-profile cutout, swinging through
-    a genuine curved arc in a corner -- like a pendulum hung from a pivot
-    above the car -- so the motion reads as cornering/drifting rather than
-    a flat side-to-side sway (which just looked like rocking a cradle).
-    A couple of smoke puffs breathe near the rear wheels, trailing the
-    car's own swinging center -- an ambient decoration for the whole
-    video, not tied to any particular scene.
-
-    Only rotates and repositions the image -- an earlier version also
-    squashed its width per frame for a pseudo-3D look, but combined with a
-    real (imperfectly-masked) photo cutout that read as a washed-out
-    outline rather than an actual car, so this sticks to transforms that
-    don't touch the image's own pixel data.
-
-    Returns a plain list of small clips (not a nested CompositeVideoClip)
-    for the caller to splice straight into its own composite -- wrapping
-    even a handful of tiny clips in their own full-canvas-sized
-    CompositeVideoClip forces every frame to build a whole extra
-    1080x1920 buffer that's almost entirely empty, which made render time
-    balloon for no visual benefit."""
-    if not cutout_path or not Path(cutout_path).exists():
-        return []
-    width, height = size
-    base = ImageClip(str(cutout_path)).resize(width=width * DOODLE_WIDTH_RATIO)
-    car_w, car_h = base.size
-    radius = width * DOODLE_ARC_RADIUS_RATIO
-    half_angle_rad = math.radians(DOODLE_ARC_HALF_ANGLE_DEG)
-    max_rot_rad = math.radians(DOODLE_MAX_ROTATION_DEG)
-    # A rotated rectangle's bounding box grows a bit beyond its own resting
-    # size -- sizing the safe area off that *rotated* extent (not the
-    # resting size) plus the full swing of the arc is what keeps the car
-    # (and its rotation) from ever clipping the canvas edge.
-    rotated_half_width = (car_w * abs(math.cos(max_rot_rad)) + car_h * abs(math.sin(max_rot_rad))) / 2
-    rotated_half_height = (car_w * abs(math.sin(max_rot_rad)) + car_h * abs(math.cos(max_rot_rad))) / 2
-    horiz_amplitude = radius * math.sin(half_angle_rad)
-    # The pendulum hangs lowest (largest drop below the pivot) when the
-    # swing angle is 0, at the center of the arc -- that's the point the
-    # bottom margin has to clear, not the resting position at an extreme.
-    pivot_x = width - width * DOODLE_MARGIN_RATIO - rotated_half_width - horiz_amplitude
-    pivot_y = height - height * DOODLE_MARGIN_RATIO - rotated_half_height - radius
-
-    def swing_angle_deg(t):
-        return DOODLE_ARC_HALF_ANGLE_DEG * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS)
-
-    def car_center(t):
-        angle_rad = math.radians(swing_angle_deg(t))
-        return (pivot_x + radius * math.sin(angle_rad), pivot_y + radius * math.cos(angle_rad))
-
-    def rotation_angle(t):
-        return DOODLE_MAX_ROTATION_DEG * math.sin(2 * math.pi * t / DOODLE_SWAY_PERIOD_SECONDS)
-
-    def car_position(t):
-        cx, cy = car_center(t)
-        return (cx - car_w / 2, cy - car_h / 2)
-
-    swinging_car = (
-        base.set_duration(duration)
-        .rotate(rotation_angle, expand=False)
-        .set_position(car_position)
-    )
-
-    puff_diameter = max(10, int(width * SMOKE_PUFF_DIAMETER_RATIO))
-    puff_image = _generate_smoke_puff_image(puff_diameter)
-    puff_clips = []
-    # Two small puffs near the base of the car, clear of the body itself,
-    # each breathing in size on its own phase-shifted pulse, and trailing
-    # the car's own swinging center so they stay near its rear wheels
-    # through the whole arc instead of sitting at a single fixed spot.
-    for phase, x_offset in ((0.0, -car_w * 0.32), (0.55, car_w * 0.32)):
-        def puff_scale(t, phase=phase):
-            return 0.5 + 0.35 * (0.5 + 0.5 * math.sin(2 * math.pi * t / SMOKE_PULSE_PERIOD_SECONDS + phase))
-
-        def puff_position(t, x_offset=x_offset, phase=phase):
-            cx, cy = car_center(t)
-            d = puff_diameter * puff_scale(t, phase)
-            return (cx + x_offset - d / 2, cy + car_h * 0.45 - d / 2)
-
-        puff_clips.append(
-            ImageClip(puff_image).set_duration(duration).resize(puff_scale).set_position(puff_position)
-        )
-
-    return [*puff_clips, swinging_car]
 
 
 def _traffic_light_image(width, height, lit_count):
@@ -1270,7 +1154,10 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     duration = audio.duration
 
     narrator_clip = _apply_body_sway(_narrator_track(manifest, sprites, size, duration))
-    narrator_x = (size[0] - narrator_clip.w) / 2
+    # Shifted left of dead-center, on request -- gives the frame a bit of
+    # asymmetric balance instead of the character sitting exactly in the
+    # middle of every video.
+    narrator_x = (size[0] - narrator_clip.w) / 2 - size[0] * NARRATOR_X_OFFSET_RATIO
     narrator_y = size[1] - narrator_clip.h
     narrator_positioned = narrator_clip.set_position(
         lambda t: (narrator_x + 3 * math.sin(t * 1.15), narrator_y + 3 * math.sin(t * 1.65))
@@ -1280,12 +1167,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     media_x, media_y, media_w, media_h = media_box
     scenes = list(manifest.get("scenes") or [])
     word_timeline = list(manifest.get("word_timeline") or [])
-    race_scene_index = next(
-        (i for i, scene in enumerate(scenes)
-         if scene.get("main_horsepower") is not None and scene.get("rival_horsepower") is not None),
-        None,
-    )
-    scene_boundaries = _scene_time_boundaries(scenes, word_timeline, duration, race_scene_index)
+    scene_boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
     car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration, scene_boundaries)
     car_positioned = car_clip.set_position((media_x, media_y))
     # A pop the instant each new car photo slides in, timed to the same
@@ -1295,7 +1177,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     photo_pop_clips = [
         _sfx_clip(PHOTO_POP_SFX, start, PHOTO_POP_VOLUME) for start, _ in scene_boundaries
     ]
-    stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, race_scene_index)
+    stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_y)
 
     # The caption band sits below the picture, not on top of it -- distinct
     # from the headline band above the picture.
@@ -1314,7 +1196,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         positions = _typing_headline_positions(headline, start, end)
         for char_index, (prefix, seg_start, seg_duration) in enumerate(positions):
             frame_path = output_path.parent / "_frames" / f"headline-{index}-{char_index}.png"
-            _caption_frame(size, prefix, int(headline_center_y), frame_path, fill=(255, 214, 64), font_size=92)
+            _caption_frame(size, prefix, int(headline_center_y), frame_path, font_size=92)
             headline_clips.append(
                 ImageClip(str(frame_path)).set_start(seg_start).set_duration(seg_duration).set_position((0, 0))
             )
@@ -1334,7 +1216,6 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     media_entries = list(manifest.get("media") or [])
     decorative_clips = []
     decorative_sfx = []
-    decorative_clips.extend(_drift_doodle_track(side_profile_path, size, duration))
     for index, scene in enumerate(scenes):
         main_hp = scene.get("main_horsepower")
         rival_hp = scene.get("rival_horsepower")
@@ -1342,7 +1223,13 @@ def render_narrator_video(car_media_paths, manifest, output_path):
             continue
         if index >= len(car_media_paths) or index >= len(scene_boundaries):
             continue
-        seg_start, seg_end = scene_boundaries[index]
+        # A fixed runway, not the scene's own (often much shorter) natural
+        # boundary -- the race is a purely visual overlay, so it's fine for
+        # it to keep animating on top while narration moves on to the next
+        # topic underneath, rather than forcing the video to fall silent
+        # just to give the race its own dedicated block of screen time.
+        seg_start, _natural_end = scene_boundaries[index]
+        seg_end = min(duration, seg_start + RACE_WINDOW_SECONDS)
         rival_facing = media_entries[index].get("facing_direction", "unclear") if index < len(media_entries) else "unclear"
         race_clips, race_sfx = _drag_race_track(
             side_profile_path, car_media_paths[index], side_profile_facing, rival_facing, main_hp, rival_hp,
