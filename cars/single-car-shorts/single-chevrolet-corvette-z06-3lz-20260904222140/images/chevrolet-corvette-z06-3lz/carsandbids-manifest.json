@@ -1,0 +1,677 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-04T22:23:49.051Z",
+  "query": "Chevrolet Corvette Z06 3lz",
+  "visual_highlight": "engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3vQWOx0m/2011-chevrolet-corvette-z06-3lz",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3vQWOx0m/2011-chevrolet-corvette-z06-3lz",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 29,
+      "sale_price": 63000,
+      "sale_type": "sold",
+      "page_title": "2011 Chevrolet Corvette Z06 3LZ"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vQWOx0m/2011-chevrolet-corvette-z06-3lz",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 63000,
+    "sale_type": "sold",
+    "page_title": "2011 Chevrolet Corvette Z06 3LZ",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/photos/3pq8wM4l-83bae6C.jpg?t=178717940468",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Chevrolet Corvette Z06 3LZ",
+      "width": 542,
+      "height": 813,
+      "bytes": 457301
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/photos/3pq8wM4l-DaAjvD9.jpg?t=178717940468",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Chevrolet Corvette Z06 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 244052
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d32c8dde23a1411d0ef2e05bea168897e96c369b/photos/ChevroletCorvette2011002/edit/L4lRW.jpg?t=178723344857",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Chevrolet Corvette Z06 3LZ",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 310167
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/photos/3pq8wM4l-P_susjz.jpg?t=178717940468",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Chevrolet Corvette Z06 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 231435
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/photos/3pq8wM4l-Kmlk2r7.jpg?t=178717940468",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Chevrolet Corvette Z06 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 143457
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/photos/3pq8wM4l-mNts-Od.jpg?t=178717940468",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Chevrolet Corvette Z06 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 256633
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/photos/3pq8wM4l-I5jEmkY.jpg?t=178717940468",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Chevrolet Corvette Z06 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 222519
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/photos/3pq8wM4l-6YHDyTO.jpg?t=178717940468",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Chevrolet Corvette Z06 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 344405
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/photos/3pq8wM4l-X2o7vC5.jpg?t=178717940468",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2011 Chevrolet Corvette Z06 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 300356
+    },
+    {
+      "path": "engine-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/attachments/3vQWOx0m-7fa1tmA.jpeg?t=178777261590",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 318050
+    },
+    {
+      "path": "engine-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/attachments/3vQWOx0m-G1Jt4lw.jpeg?t=178777262071",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 288003
+    },
+    {
+      "path": "engine-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/attachments/3vQWOx0m-vuNFLcW.jpeg?t=178777262239",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 266281
+    },
+    {
+      "path": "engine-13.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/attachments/3vQWOx0m-6zhL8dP.jpeg?t=178802231873",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 138028
+    },
+    {
+      "path": "engine-14.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3b03d3790ba0fa392d70f473b33b873ddab4985e/attachments/3vQWOx0m-QYpZSFi.jpeg?t=178802231930",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 120548
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b95f5201e044d7d209a2a95ad881817e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b95f5201e044d7d209a2a95ad881817e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2011 Chevrolet Corvette Z06 3LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b95f5201e044d7d209a2a95ad881817e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vQWOx0m/2011-chevrolet-corvette-z06-3lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b95f5201e044d7d209a2a95ad881817e/manifest/video.m3u8",
+      "auction_title": "2011 Chevrolet Corvette Z06 3LZ",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1fc398121004e587f260b8da05406b9/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1fc398121004e587f260b8da05406b9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2011 Chevrolet Corvette Z06 3LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1fc398121004e587f260b8da05406b9/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vQWOx0m/2011-chevrolet-corvette-z06-3lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1fc398121004e587f260b8da05406b9/manifest/video.m3u8",
+      "auction_title": "2011 Chevrolet Corvette Z06 3LZ",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e6c71a4592ff5898a2910b162e9a21d1/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e6c71a4592ff5898a2910b162e9a21d1/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2011 Chevrolet Corvette Z06 3LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e6c71a4592ff5898a2910b162e9a21d1/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vQWOx0m/2011-chevrolet-corvette-z06-3lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e6c71a4592ff5898a2910b162e9a21d1/manifest/video.m3u8",
+      "auction_title": "2011 Chevrolet Corvette Z06 3LZ",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d599d90aabb956dfbd3d37575e2b7899/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d599d90aabb956dfbd3d37575e2b7899/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2011 Chevrolet Corvette Z06 3LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d599d90aabb956dfbd3d37575e2b7899/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vQWOx0m/2011-chevrolet-corvette-z06-3lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d599d90aabb956dfbd3d37575e2b7899/manifest/video.m3u8",
+      "auction_title": "2011 Chevrolet Corvette Z06 3LZ",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7d009d6ef4cc284824138f5614ac240e/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7d009d6ef4cc284824138f5614ac240e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2011 Chevrolet Corvette Z06 3LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7d009d6ef4cc284824138f5614ac240e/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3vQWOx0m/2011-chevrolet-corvette-z06-3lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7d009d6ef4cc284824138f5614ac240e/manifest/video.m3u8",
+      "auction_title": "2011 Chevrolet Corvette Z06 3LZ",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 14,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06",
+        "visible_match_evidence": [
+          "Z06 badge",
+          "Interior design specific to Corvette"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06 3LZ",
+        "visible_match_evidence": [
+          "manual transmission",
+          "modern interior design",
+          "carbon fiber trim"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06 3lz",
+        "visible_match_evidence": [
+          "front view",
+          "characteristic headlights",
+          "body shape",
+          "grille design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06",
+        "visible_match_evidence": [
+          "Z06 badge",
+          "body proportions",
+          "design elements typical of 2011 Corvette"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06 3LZ",
+        "visible_match_evidence": [
+          "bodywork style consistent with Corvette",
+          "rear light design matches 2011 model",
+          "prominent exhaust layout indicative of Z06"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Distinctive rear light configuration",
+          "Corvette badge prominent",
+          "Overall body shape consistent with Corvette"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06 3LZ",
+        "visible_match_evidence": [
+          "low front splitter design",
+          "distinctive Corvette body lines",
+          "characteristic front grille shape"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 3,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not clearly show the target vehicle.",
+        "path": "engine-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive front grille design",
+          "Corvette emblem",
+          "headlight shape and placement"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06",
+        "visible_match_evidence": [
+          "Z06 badge",
+          "505 HP marking"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "detail",
+        "scene_fit_tags": [
+          "detail",
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "None",
+        "path": "engine-13.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06",
+        "visible_match_evidence": [
+          "Z06 badge",
+          "Chevrolet emblem"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "detail",
+        "scene_fit_tags": [
+          "detail",
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-14.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06 3LZ",
+        "visible_match_evidence": [
+          "front 3 quarter angle",
+          "Corvette specific bodywork",
+          "Z06 badge on side",
+          "lights and proportions indicating generation"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06 3LZ",
+        "visible_match_evidence": [
+          "Corvette logo",
+          "Interior design",
+          "Year-specific features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "Z06",
+        "visible_match_evidence": [
+          "Z06 badge on the dashboard",
+          "dashboard design consistent with Corvette",
+          "odometer reading confirms usage typical for the year"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

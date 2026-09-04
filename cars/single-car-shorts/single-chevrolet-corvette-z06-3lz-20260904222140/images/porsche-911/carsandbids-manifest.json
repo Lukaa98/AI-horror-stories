@@ -1,0 +1,465 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-04T22:32:32.100Z",
+  "query": "Porsche 911",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/porsche/911?start_year=2011&end_year=2011&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/36Nbzo5l/2011-porsche-911-gt3-rs",
+      "title": "2011 Porsche 911 Gt3 Rs",
+      "text": "FEATURED Bid to $297,000",
+      "titleYear": 2011,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rb1YpvZ2/2011-porsche-911-turbo-s-coupe",
+      "title": "Sold After for $108,500",
+      "text": "Sold After for $108,500",
+      "titleYear": 2011,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lXZVYZg/2011-porsche-911-carrera-gts-coupe",
+      "title": "2011 Porsche 911 Carrera Gts Coupe",
+      "text": "FEATURED Bid to $106,000",
+      "titleYear": 2011,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkPGADZl/2011-porsche-911-turbo-coupe",
+      "title": "2011 Porsche 911 Turbo Coupe",
+      "text": "Sold for $85,000",
+      "titleYear": 2011,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3vLk5dbB/2011-porsche-911-turbo-s-coupe",
+      "title": "2011 Porsche 911 Turbo S Coupe",
+      "text": "Sold for $81,000",
+      "titleYear": 2011,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gjMZZZb/2011-porsche-911-turbo-s-coupe",
+      "title": "2011 Porsche 911 Turbo S Coupe",
+      "text": "FEATURED Sold for $76,500",
+      "titleYear": 2011,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/36Nbzo5l/2011-porsche-911-gt3-rs",
+      "title": "2011 Porsche 911 Gt3 Rs",
+      "text": "FEATURED Bid to $297,000",
+      "titleYear": 2011,
+      "score": 70,
+      "usable_image_count": 34,
+      "sale_price": 297000,
+      "sale_type": "sold",
+      "page_title": "2011 Porsche 911 GT3 RS"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rb1YpvZ2/2011-porsche-911-turbo-s-coupe",
+      "title": "Sold After for $108,500",
+      "text": "Sold After for $108,500",
+      "titleYear": 2011,
+      "score": 70,
+      "usable_image_count": 31,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2011 Porsche 911 Turbo S Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lXZVYZg/2011-porsche-911-carrera-gts-coupe",
+      "title": "2011 Porsche 911 Carrera Gts Coupe",
+      "text": "FEATURED Bid to $106,000",
+      "titleYear": 2011,
+      "score": 70,
+      "usable_image_count": 19,
+      "sale_price": 106000,
+      "sale_type": "bid_to",
+      "page_title": "2011 Porsche 911 Carrera GTS Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkPGADZl/2011-porsche-911-turbo-coupe",
+      "title": "2011 Porsche 911 Turbo Coupe",
+      "text": "Sold for $85,000",
+      "titleYear": 2011,
+      "score": 70,
+      "usable_image_count": 32,
+      "sale_price": 85000,
+      "sale_type": "sold",
+      "page_title": "2011 Porsche 911 Turbo Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/36Nbzo5l/2011-porsche-911-gt3-rs",
+    "title": "2011 Porsche 911 Gt3 Rs",
+    "text": "FEATURED Bid to $297,000",
+    "titleYear": 2011,
+    "score": 70,
+    "sale_price": 297000,
+    "sale_type": "sold",
+    "page_title": "2011 Porsche 911 GT3 RS",
+    "year": 2011,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/KDzkgnDR-MXlFxCPWtb.jpg?t=174016286991",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2011 Porsche 911 GT3 RS",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 185873
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/3744e3f93fe159513615044139e1afcfc1f5d9a3/photos/application/s-okKLilQ.jpg?t=173903684994",
+      "labels": [
+        "interior"
+      ],
+      "section": "2011 Porsche 911 GT3 RS",
+      "width": 542,
+      "height": 361,
+      "bytes": 182363
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/application/s-sXf5j0D/edit/lLSpQ.jpg?t=173984620015",
+      "labels": [
+        "interior"
+      ],
+      "section": "2011 Porsche 911 GT3 RS",
+      "width": 542,
+      "height": 361,
+      "bytes": 175480
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/application/s-VguA2eK/edit/oCxTi.jpg?t=173984617453",
+      "labels": [
+        "interior"
+      ],
+      "section": "2011 Porsche 911 GT3 RS",
+      "width": 542,
+      "height": 361,
+      "bytes": 120749
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/application/s-kmi6zCM/edit/yMWV8.jpg?t=173984595248",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2011 Porsche 911 GT3 RS",
+      "width": 542,
+      "height": 361,
+      "bytes": 200254
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7a0a3c6148108c9c64425dd85e0181fa3cccb652/photos/application/s-FCIHOt2/edit/IvsMi.jpg?t=173986268449",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2011 Porsche 911 GT3 RS",
+      "width": 542,
+      "height": 361,
+      "bytes": 235297
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/application/s-6bKJFkK/edit/2K5pG.jpg?t=173984609768",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2011 Porsche 911 GT3 RS",
+      "width": 542,
+      "height": 361,
+      "bytes": 234143
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/application/s-BRTO6Ne/edit/Nw7Bs.jpg?t=173984614008",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2011 Porsche 911 GT3 RS",
+      "width": 542,
+      "height": 361,
+      "bytes": 157298
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/3744e3f93fe159513615044139e1afcfc1f5d9a3/photos/KPGRJ622-QXuEjVie4.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 3016 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a2bb9cc566801f47c06f7b0b2dffd1f3a8491106/photos/rNXO0Mqk-LftTCQ4QkpH.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 18497 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1b378b0fe028d6bf4af78cce74fc9fa333e16361/photos/rbPkZ4jw-KxcYTzG64.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 10197 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/77de68daecd823babbb58edb1c8e14d7106e83bb/photos/9nbW8GPJ-hOl1mq5f9.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 4239 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/e97164ee86c3a6ee5aaab17d395d231e5ea329d3/photos/rNQw0XzW-eH92fCN6l_.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 4501 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/454e8155383bd27ff347be60d939f8307106fb9b/photos/r455G6zg-dhIrosq.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 4407 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "GT3",
+        "visible_match_evidence": [
+          "distinctive front lights",
+          "proportions of the 911",
+          "GT3 features",
+          "red accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "911 bodywork",
+          "front design features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive bodywork",
+          "red accents",
+          "rear wing"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "GTS",
+        "visible_match_evidence": [
+          "distinctive rear wing",
+          "specific bodywork design",
+          "Porsche badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "GT3 RS",
+        "visible_match_evidence": [
+          "rear wing",
+          "dual exhaust",
+          "GT3 RS badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche branding on steering wheel",
+          "Interior design consistent with 911"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": null,
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2011",
+        "detected_variant_or_engine": "RS 3.8",
+        "visible_match_evidence": [
+          "interior design",
+          "racing seats",
+          "RS badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 5,
+        "composition_score": 6,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not a target vehicle, focus on interior components.",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
