@@ -127,6 +127,46 @@ RACE_MIN_SECONDS_FOR_COUNTDOWN = 4.5
 COUNTDOWN_SFX = "countdown_beep.wav"
 COUNTDOWN_GO_SFX = "countdown_go.wav"
 COUNTDOWN_SFX_VOLUME = 0.5
+# The slower car's real arrival time, capped -- an honest two-second real
+# gap is dramatic, but two real 16-17s quarter-miles would hold the screen
+# on a silent race for that long verbatim. Both times are scaled down
+# together (their ratio preserved) only when the slower one would
+# otherwise run past this.
+RACE_MAX_SLOWER_SECONDS = 12.0
+# No verified quarter-mile time for either car -- horsepower alone can't
+# honestly produce a *time*, so this is a modest fixed race (the faster-hp
+# car arrives first by a fixed head start) rather than pretending a
+# 1/hp ratio means something in seconds.
+RACE_FALLBACK_SECONDS = 6.0
+RACE_FALLBACK_GAP_SECONDS = 1.0
+
+
+def _race_arrival_times(main_hp, rival_hp, main_quarter_mile, rival_quarter_mile):
+    """Real seconds for each car to reach the finish line, scaled/capped so
+    the animation always reads as a fair, honest reflection of the actual
+    gap between the two cars -- never an arbitrary always-the-same-length
+    race."""
+    if main_quarter_mile and rival_quarter_mile and main_quarter_mile > 0 and rival_quarter_mile > 0:
+        main_time, rival_time = main_quarter_mile, rival_quarter_mile
+        slower = max(main_time, rival_time)
+        scale = min(1.0, RACE_MAX_SLOWER_SECONDS / slower) if slower > 0 else 1.0
+        return main_time * scale, rival_time * scale
+    if main_hp and rival_hp and main_hp != rival_hp:
+        if main_hp > rival_hp:
+            return RACE_FALLBACK_SECONDS - RACE_FALLBACK_GAP_SECONDS, RACE_FALLBACK_SECONDS
+        return RACE_FALLBACK_SECONDS, RACE_FALLBACK_SECONDS - RACE_FALLBACK_GAP_SECONDS
+    return RACE_FALLBACK_SECONDS, RACE_FALLBACK_SECONDS
+
+
+def race_reserved_seconds(main_hp, rival_hp, main_quarter_mile, rival_quarter_mile):
+    """Total screen time (countdown + race + celebration) the comparison
+    beat needs reserved as a dedicated silent pause -- single_car_short
+    splices exactly this much silence into the narration audio so the race
+    gets its own window instead of being squeezed into however long the
+    spoken sentence happens to leave."""
+    main_time, rival_time = _race_arrival_times(main_hp, rival_hp, main_quarter_mile, rival_quarter_mile)
+    countdown_duration = RACE_COUNTDOWN_STEPS * RACE_COUNTDOWN_STEP_SECONDS
+    return countdown_duration + max(main_time, rival_time) + RACE_CELEBRATION_SECONDS
 
 # A thin growing bar along the very top edge -- a subtle, near-zero-cost
 # retention cue so viewers can subconsciously track how much is left.
@@ -451,6 +491,133 @@ def _emphasis_intervals(manifest, duration):
     return intervals
 
 
+# A running "kept stats" scoreboard beside the narrator, left side --
+# a narrow 2-column label/value table that gains a row exactly when the
+# script states a hard number (see PACKAGE_SCHEMA's stat_label/stat_value
+# in single_car_short.py), then keeps every row on screen for the rest of
+# the video instead of vanishing with its own scene like the headline band
+# above the picture does. Capped at a handful of rows -- past that it'd
+# either overflow the space or trail off screen.
+STAT_TABLE_MAX_ROWS = 5
+STAT_TABLE_X_RATIO = 0.035
+STAT_TABLE_WIDTH_RATIO = 0.42
+STAT_TABLE_LABEL_COLUMN_RATIO = 0.52  # of the table's own width
+STAT_TABLE_ROW_HEIGHT_RATIO = 0.038
+STAT_TABLE_TOP_RATIO = 0.53
+STAT_TABLE_FONT_SIZE = 25
+STAT_TABLE_LABEL_COLOR = (255, 214, 64, 255)
+STAT_TABLE_VALUE_COLOR = (255, 255, 255, 255)
+STAT_TABLE_BG_COLOR = (18, 18, 18, 200)
+STAT_TABLE_DIVIDER_COLOR = (255, 255, 255, 60)
+
+
+def _stat_tracker_entries(manifest, duration, race_scene_index=None):
+    """(start_time, label, value) for up to STAT_TABLE_MAX_ROWS scenes that
+    carry a stat_label/stat_value pair -- timed to the same scene_boundaries
+    driving headlines/captions, so a row appears exactly when its own
+    number is actually spoken, not before."""
+    scenes = list(manifest.get("scenes") or [])
+    if not scenes:
+        return []
+    word_timeline = list(manifest.get("word_timeline") or [])
+    boundaries = _scene_time_boundaries(scenes, word_timeline, duration, race_scene_index)
+    entries = []
+    for scene, (start, _end) in zip(scenes, boundaries):
+        label = str(scene.get("stat_label") or "").strip()
+        value = str(scene.get("stat_value") or "").strip()
+        if not label or not value:
+            continue
+        entries.append((start, label, value))
+        if len(entries) >= STAT_TABLE_MAX_ROWS:
+            break
+    return entries
+
+
+def _fit_text_to_width(draw, text, base_size, max_width, min_size=14):
+    """A font sized down (never below min_size) until `text` fits
+    max_width, then truncated with an ellipsis as a last resort -- a stat
+    table cell is narrow and fixed-width, so long values ("$190K -> $150K")
+    need to shrink or clip rather than spilling into the next column."""
+    size = base_size
+    while size > min_size:
+        font = _font(size)
+        if draw.textlength(text, font=font) <= max_width:
+            return font, text
+        size -= 1
+    font = _font(min_size)
+    while text and draw.textlength(text + "...", font=font) > max_width:
+        text = text[:-1]
+    return font, (text + "..." if text else "...")
+
+
+def _stat_table_frame(size, rows, out_path):
+    """A full-canvas transparent image with the scoreboard baked in at its
+    left-side position -- `rows` is however many are visible at this point
+    (cumulative -- this is a running tracker, not scene-local like the
+    headline band). Label and value each get their own dedicated column
+    width (not just left/right-aligned within the same shared width), so a
+    long label and a long value can never overlap in the middle."""
+    width, height = size
+    scale = width / 1080
+    canvas = Image.new("RGBA", size, (0, 0, 0, 0))
+    if rows:
+        draw = ImageDraw.Draw(canvas)
+        base_size = int(STAT_TABLE_FONT_SIZE * scale)
+        table_x = width * STAT_TABLE_X_RATIO
+        table_w = width * STAT_TABLE_WIDTH_RATIO
+        row_h = height * STAT_TABLE_ROW_HEIGHT_RATIO
+        pad = 12 * scale
+        label_col_w = table_w * STAT_TABLE_LABEL_COLUMN_RATIO
+        value_col_x = table_x + label_col_w
+        value_col_w = table_w - label_col_w
+        table_y = height * STAT_TABLE_TOP_RATIO
+        table_h = row_h * len(rows)
+        draw.rounded_rectangle(
+            [table_x, table_y, table_x + table_w, table_y + table_h],
+            radius=10 * scale, fill=STAT_TABLE_BG_COLOR,
+        )
+        for i, (label, value) in enumerate(rows):
+            row_y = table_y + i * row_h
+            if i > 0:
+                draw.line(
+                    [(table_x, row_y), (table_x + table_w, row_y)],
+                    fill=STAT_TABLE_DIVIDER_COLOR, width=max(1, int(scale)),
+                )
+            label_font, label_text = _fit_text_to_width(draw, label.upper(), base_size, label_col_w - pad)
+            value_font, value_text = _fit_text_to_width(draw, value, base_size, value_col_w - pad)
+            draw.text(
+                (table_x + pad, row_y + row_h / 2), label_text,
+                font=label_font, fill=STAT_TABLE_LABEL_COLOR, anchor="lm",
+            )
+            draw.text(
+                (value_col_x + value_col_w - pad, row_y + row_h / 2), value_text,
+                font=value_font, fill=STAT_TABLE_VALUE_COLOR, anchor="rm",
+            )
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    canvas.save(out_path)
+
+
+def _stat_tracker_track(manifest, duration, output_path, size, race_scene_index=None):
+    """ImageClips for the running stat scoreboard -- a new frame image each
+    time a row is added, holding from then until the next addition (or the
+    end of the video after the last one)."""
+    entries = _stat_tracker_entries(manifest, duration, race_scene_index)
+    if not entries:
+        return []
+    clips = []
+    for i, (start, _, _) in enumerate(entries):
+        end = entries[i + 1][0] if i + 1 < len(entries) else duration
+        if end <= start:
+            continue
+        rows = [(label, value) for _, label, value in entries[: i + 1]]
+        frame_path = output_path.parent / "_frames" / f"stat-table-{i}.png"
+        _stat_table_frame(size, rows, frame_path)
+        clips.append(
+            ImageClip(str(frame_path)).set_start(start).set_duration(end - start).set_position((0, 0))
+        )
+    return clips
+
+
 def _value_at(intervals, t, default):
     for start, end, value in intervals:
         if start <= t < end:
@@ -652,7 +819,7 @@ def _find_word_index(word_timeline, expected_index, target_word, window=6):
     return expected_index
 
 
-def _scene_time_boundaries(scenes, word_timeline, duration):
+def _scene_time_boundaries(scenes, word_timeline, duration, race_scene_index=None):
     """Real per-scene (start, end) times, one per scene, derived from each
     scene's own "narration" word span walked cumulatively against the
     actual word_timeline -- not an even split of total duration, which has
@@ -667,6 +834,14 @@ def _scene_time_boundaries(scenes, word_timeline, duration):
     end -- assigning a whole silent gap entirely to whichever scene comes
     next would still leave a rival scene's display window starting long
     before it's actually spoken, just less extremely than an even split.
+
+    The one exception is `race_scene_index`: the comparison scene that had
+    a dedicated silent pause spliced into the audio right after it (see
+    single_car_short's race_reserved_seconds usage) gets the *entire* gap
+    that follows it, not half -- that whole pause is reserved for the drag
+    race, so splitting it would either starve the race of its own screen
+    time or start the next scene's photo before that scene's narration
+    actually begins.
 
     Falls back to an even split only when there's no real word_timeline to
     walk (estimated caption timing).
@@ -695,8 +870,11 @@ def _scene_time_boundaries(scenes, word_timeline, duration):
         word_index += word_count
 
     cut_points = [0.0]
-    for (_, prev_end), (next_start, _) in zip(spans, spans[1:]):
-        cut_points.append(prev_end + (next_start - prev_end) / 2 if next_start > prev_end else prev_end)
+    for index, ((_, prev_end), (next_start, _)) in enumerate(zip(spans, spans[1:])):
+        if index == race_scene_index and next_start > prev_end:
+            cut_points.append(next_start)
+        else:
+            cut_points.append(prev_end + (next_start - prev_end) / 2 if next_start > prev_end else prev_end)
     cut_points.append(duration)
     return list(zip(cut_points, cut_points[1:]))
 
@@ -908,16 +1086,19 @@ def _generate_winner_badge_image(diameter):
 
 def _drag_race_lane_clip(
     path, facing_direction, car_width, y_center, start_x, finish_x,
-    seg_start, total_duration, countdown_duration, race_duration, finish_cap,
+    seg_start, total_duration, countdown_duration, arrival_time,
 ):
     """One car's clip for _drag_race_track -- sits at the start line during
-    the countdown, then moves left-to-right, reaching finish_x exactly at
-    the end of race_duration if finish_cap is 1.0, or stopping short
-    (proportionally, per the real quarter-mile ratio) if it's the slower
-    car, then holding that position for whatever's left of total_duration
-    (the celebration buffer) so the winner is clearly parked at the line
-    rather than still appearing to move. `set_start(seg_start)` makes
-    moviepy pass this clip *local* time (0 at seg_start) into position().
+    the countdown, then moves left-to-right, covering the *full* lane over
+    its own real arrival_time (each car gets its own, not a shared race
+    clock), then holds parked at finish_x for whatever's left of
+    total_duration (the celebration buffer) so the winner is clearly
+    parked at the line rather than still appearing to move. A real gap
+    between the two cars' arrival_time is what actually reads as one car
+    being faster -- capping how *far* the slower one travels in the same
+    time read as barely trailing even for a real, meaningful gap.
+    `set_start(seg_start)` makes moviepy pass this clip *local* time
+    (0 at seg_start) into position().
 
     The cutout is flipped horizontally whenever the AI-reviewed
     facing_direction says the car's nose points left in its own photo --
@@ -933,7 +1114,7 @@ def _drag_race_lane_clip(
         race_t = local_t - countdown_duration
         if race_t <= 0:
             return (start_x, y_center - car_h / 2)
-        progress = min(finish_cap, race_t / race_duration) if race_duration else finish_cap
+        progress = min(1.0, race_t / arrival_time) if arrival_time else 1.0
         return (start_x + travel * progress, y_center - car_h / 2)
 
     return car.set_duration(total_duration).set_start(seg_start).set_position(position)
@@ -946,14 +1127,16 @@ def _drag_race_track(
     """Two small side-profile cutouts drag-racing left-to-right in their
     own lane -- above the narrator, never crossing it -- during a
     horsepower/quarter-mile comparison beat, led in by a one-second-per-
-    light countdown. The car with the shorter (verified) quarter-mile time
-    "wins", falling back to more horsepower when a quarter-mile time isn't
-    available. Both finish at the same line; the slower car is capped
-    short of it by the real ratio between the two times, so it visibly
-    trails instead of arriving together or racing forever past when the
-    faster one already finished. A checkered flag marks that finish line,
-    and the winner gets a green glow once it parks there, so which car
-    actually won is never ambiguous."""
+    light countdown. Both cars cover the whole lane, but each arrives at
+    its own real (or hp-derived fallback) time -- see _race_arrival_times
+    -- so a genuine quarter-mile gap actually reads as one, not just a
+    photo-finish shuffle. The beat is expected to already carry its own
+    dedicated silent window (see race_reserved_seconds/single_car_short's
+    audio splice), but if seg_duration comes in shorter than the race
+    actually needs -- e.g. no splice happened -- everything is scaled down
+    proportionally to fit rather than overflowing the beat. A checkered
+    flag marks the finish line, and the winner gets a green glow the
+    instant it parks there, so which car actually won is never ambiguous."""
     if not main_cutout_path or not rival_cutout_path:
         return [], []
     if not Path(main_cutout_path).exists() or not Path(rival_cutout_path).exists():
@@ -965,25 +1148,28 @@ def _drag_race_track(
 
     use_countdown = seg_duration >= RACE_MIN_SECONDS_FOR_COUNTDOWN
     countdown_duration = RACE_COUNTDOWN_STEPS * RACE_COUNTDOWN_STEP_SECONDS if use_countdown else 0.0
+    main_arrival, rival_arrival = _race_arrival_times(main_hp, rival_hp, main_quarter_mile, rival_quarter_mile)
+    race_duration = max(main_arrival, rival_arrival)
+    # The beat is expected to already carry its own dedicated pause (see
+    # race_reserved_seconds), sized for exactly this countdown + race +
+    # celebration -- but if seg_duration comes in shorter than that (no
+    # splice happened), squeeze just the race itself down to fit whatever's
+    # left after the countdown, keeping countdown_duration untouched since
+    # the countdown-light clips below are timed off the same fixed
+    # RACE_COUNTDOWN_STEP_SECONDS constant, not this variable.
+    available_for_race = max(0.1, seg_duration - countdown_duration)
+    if race_duration > available_for_race:
+        scale = available_for_race / race_duration
+        main_arrival *= scale
+        rival_arrival *= scale
+        race_duration = max(main_arrival, rival_arrival)
     # A slice of the scene is held back as a celebration buffer -- the
     # race itself finishes early enough that the winner can sit parked at
     # the line, badge lit, before the beat ends -- instead of the two cars
     # visibly still moving (or arriving) right as the scene cuts away.
-    celebration = min(RACE_CELEBRATION_SECONDS, max(0.0, seg_duration - countdown_duration - 0.5))
-    race_duration = max(0.1, seg_duration - countdown_duration - celebration)
-
-    if main_quarter_mile and rival_quarter_mile and main_quarter_mile > 0 and rival_quarter_mile > 0:
-        main_time, rival_time = main_quarter_mile, rival_quarter_mile
-    else:
-        # No verified quarter-mile times -- fall back to a synthetic "time"
-        # inversely proportional to horsepower (only the ratio between the
-        # two matters here, not the absolute value).
-        main_time = 1.0 / max(main_hp or 1, 1)
-        rival_time = 1.0 / max(rival_hp or 1, 1)
-    fastest = min(main_time, rival_time)
-    main_cap = fastest / main_time
-    rival_cap = fastest / rival_time
-    main_wins = main_time <= rival_time
+    celebration = min(RACE_CELEBRATION_SECONDS, max(0.0, seg_duration - countdown_duration - race_duration))
+    total_duration = countdown_duration + race_duration + celebration
+    main_wins = main_arrival <= rival_arrival
 
     car_width = width * RACE_CAR_WIDTH_RATIO
     lane_inset = width * RACE_LANE_INSET_RATIO
@@ -999,15 +1185,14 @@ def _drag_race_track(
     main_y = narrator_top - lane_gap
     rival_y = narrator_top - lane_gap * 2.4
 
-    total_duration = countdown_duration + race_duration + celebration
     car_clips = [
         _drag_race_lane_clip(
             main_cutout_path, main_facing, car_width, main_y, start_x, finish_x,
-            seg_start, total_duration, countdown_duration, race_duration, main_cap,
+            seg_start, total_duration, countdown_duration, main_arrival,
         ),
         _drag_race_lane_clip(
             rival_cutout_path, rival_facing, car_width, rival_y, start_x, finish_x,
-            seg_start, total_duration, countdown_duration, race_duration, rival_cap,
+            seg_start, total_duration, countdown_duration, rival_arrival,
         ),
     ]
 
@@ -1049,11 +1234,12 @@ def _drag_race_track(
     # it parks at the finish line, so which car actually won never comes
     # down to "they looked like they finished together."
     winner_y = main_y if main_wins else rival_y
+    winner_arrival = min(main_arrival, rival_arrival)
     badge_diameter = car_width * 0.9
-    badge_start = seg_start + countdown_duration + race_duration
+    badge_start = seg_start + countdown_duration + winner_arrival
     badge_clip = (
         ImageClip(_generate_winner_badge_image(int(badge_diameter)))
-        .set_start(badge_start).set_duration(max(0.1, total_duration - countdown_duration - race_duration))
+        .set_start(badge_start).set_duration(max(0.1, total_duration - countdown_duration - winner_arrival))
         .set_position((finish_x - car_width - (badge_diameter - car_width) / 2, winner_y - badge_diameter / 2))
     )
 
@@ -1094,7 +1280,12 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     media_x, media_y, media_w, media_h = media_box
     scenes = list(manifest.get("scenes") or [])
     word_timeline = list(manifest.get("word_timeline") or [])
-    scene_boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
+    race_scene_index = next(
+        (i for i, scene in enumerate(scenes)
+         if scene.get("main_horsepower") is not None and scene.get("rival_horsepower") is not None),
+        None,
+    )
+    scene_boundaries = _scene_time_boundaries(scenes, word_timeline, duration, race_scene_index)
     car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration, scene_boundaries)
     car_positioned = car_clip.set_position((media_x, media_y))
     # A pop the instant each new car photo slides in, timed to the same
@@ -1104,6 +1295,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     photo_pop_clips = [
         _sfx_clip(PHOTO_POP_SFX, start, PHOTO_POP_VOLUME) for start, _ in scene_boundaries
     ]
+    stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, race_scene_index)
 
     # The caption band sits below the picture, not on top of it -- distinct
     # from the headline band above the picture.
@@ -1172,7 +1364,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     video = CompositeVideoClip(
         [
             background, car_positioned, *headline_clips, *caption_clips, narrator_positioned,
-            *decorative_clips, progress_clip,
+            *decorative_clips, *stat_tracker_clips, progress_clip,
         ],
         size=size,
     ).set_duration(duration).set_audio(full_audio)

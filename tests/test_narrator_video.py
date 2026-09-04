@@ -6,6 +6,9 @@ sys.path[:0] = [str(ROOT / "cars" / "automation")]
 
 from narrator_video import (  # noqa: E402
     CANVAS,
+    RACE_FALLBACK_GAP_SECONDS,
+    RACE_FALLBACK_SECONDS,
+    STAT_TABLE_MAX_ROWS,
     _blink_intervals,
     _emphasis_intervals,
     _look_intervals,
@@ -18,6 +21,8 @@ from narrator_video import (  # noqa: E402
     _pose_intervals,
     _progress_bar_track,
     _scene_time_boundaries,
+    _stat_tracker_entries,
+    _stat_tracker_track,
     _typing_headline_positions,
     _value_at,
     _wobble_intervals,
@@ -297,10 +302,10 @@ def test_drag_race_lane_clip_flips_a_car_whose_nose_faces_the_wrong_way(tmp_path
     Image.fromarray(frame).save(cutout)
 
     unflipped = _drag_race_lane_clip(
-        str(cutout), "right", 100, 100, 0, 500, 0.0, 5.0, 0.0, 5.0, 1.0,
+        str(cutout), "right", 100, 100, 0, 500, 0.0, 5.0, 0.0, 5.0,
     )
     flipped = _drag_race_lane_clip(
-        str(cutout), "left", 100, 100, 0, 500, 0.0, 5.0, 0.0, 5.0, 1.0,
+        str(cutout), "left", 100, 100, 0, 500, 0.0, 5.0, 0.0, 5.0,
     )
     unflipped_frame = unflipped.get_frame(0.0)
     flipped_frame = flipped.get_frame(0.0)
@@ -339,35 +344,44 @@ def test_drag_race_track_the_shorter_quarter_mile_time_wins(tmp_path):
     _make_transparent_png(main_cutout)
     _make_transparent_png(rival_cutout)
 
+    # A window comfortably wider than countdown(3) + race(11.5) +
+    # celebration(0.9) -- exactly what single_car_short's race-pause splice
+    # is supposed to guarantee -- so the real, unscaled arrival gap shows.
     clips, sfx = _drag_race_track(
         str(main_cutout), str(rival_cutout), "right", "right", main_hp=300, rival_hp=1000,
         main_quarter_mile=10.5, rival_quarter_mile=11.5,  # rival has more HP but is slower in the 1/4 mile
-        size=CANVAS, seg_start=2.0, seg_end=10.0,
+        size=CANVAS, seg_start=2.0, seg_end=18.0,
     )
-    # A beat this long (8s) gets the countdown lights: flag + 3 lights +
-    # winner badge + 2 cars.
+    # flag + 3 lights + winner badge + 2 cars.
     assert len(clips) == 7
     assert len(sfx) == 3  # one chime per light step
     main_clip, rival_clip = clips[-2], clips[-1]
     assert main_clip.start == 2.0 and rival_clip.start == 2.0
-    total_duration = (10.0 - 2.0)
-    assert main_clip.duration == total_duration and rival_clip.duration == total_duration
-
-    # The main car (quicker quarter mile, despite less horsepower) must
-    # reach the finish line -- rival, being slower, stops short of it.
-    main_x_end, _ = main_clip.pos(total_duration)
-    rival_x_end, _ = rival_clip.pos(total_duration)
+    countdown_duration = 3.0
     finish_x = CANVAS[0] - CANVAS[0] * 0.02
-    assert abs(main_x_end + main_clip.size[0] - finish_x) < 1.0
-    assert rival_x_end + rival_clip.size[0] < finish_x - 1.0
+
+    # The main car (quicker quarter mile, despite less horsepower) reaches
+    # the finish line first, at its own real 10.5s -- at that exact moment
+    # the rival, a real second slower, must still be short of the line.
+    main_arrival_t = countdown_duration + 10.5
+    main_x_at_arrival, _ = main_clip.pos(main_arrival_t)
+    rival_x_at_same_time, _ = rival_clip.pos(main_arrival_t)
+    assert abs(main_x_at_arrival + main_clip.size[0] - finish_x) < 1.0
+    assert rival_x_at_same_time + rival_clip.size[0] < finish_x - 1.0
+
+    # The rival still finishes too, just a real second later than the main
+    # car, not capped short of the line forever.
+    rival_arrival_t = countdown_duration + 11.5
+    rival_x_at_arrival, _ = rival_clip.pos(rival_arrival_t)
+    assert abs(rival_x_at_arrival + rival_clip.size[0] - finish_x) < 1.0
 
     # Both cars sit at the start line (not yet moving) during the lights,
     # and move strictly left-to-right, not top-to-bottom.
     main_x_start, main_y_start = main_clip.pos(0.0)
-    main_x_mid, main_y_mid = main_clip.pos(3.0)  # lights finish at t=3, car starts moving
+    main_x_mid, main_y_mid = main_clip.pos(countdown_duration)  # lights finish, car starts moving
     assert main_x_start == main_x_mid == CANVAS[0] * 0.02
     assert main_y_start == main_y_mid  # y never changes -- horizontal movement only
-    main_x_late, _ = main_clip.pos(total_duration - 0.01)
+    main_x_late, _ = main_clip.pos(main_arrival_t - 0.01)
     assert main_x_late > main_x_mid
 
 
@@ -380,16 +394,22 @@ def test_drag_race_track_falls_back_to_horsepower_without_quarter_mile_times(tmp
     clips, _ = _drag_race_track(
         str(main_cutout), str(rival_cutout), "right", "right", main_hp=300, rival_hp=500,
         main_quarter_mile=None, rival_quarter_mile=None,
-        size=CANVAS, seg_start=2.0, seg_end=10.0,
+        size=CANVAS, seg_start=2.0, seg_end=12.0,
     )
     main_clip, rival_clip = clips[-2], clips[-1]
-    total_duration = 8.0
-    main_x_end, _ = main_clip.pos(total_duration)
-    rival_x_end, _ = rival_clip.pos(total_duration)
     finish_x = CANVAS[0] - CANVAS[0] * 0.02
-    # Rival (more horsepower) wins when no quarter-mile time is verified.
-    assert abs(rival_x_end + rival_clip.size[0] - finish_x) < 1.0
-    assert main_x_end + main_clip.size[0] < finish_x - 1.0
+    countdown_duration = 3.0
+    # Rival (more horsepower) wins the fixed fallback race -- a real head
+    # start, not a made-up ratio -- when no quarter-mile time is verified
+    # for either car.
+    rival_arrival_t = countdown_duration + (RACE_FALLBACK_SECONDS - RACE_FALLBACK_GAP_SECONDS)
+    main_arrival_t = countdown_duration + RACE_FALLBACK_SECONDS
+    rival_x_at_arrival, _ = rival_clip.pos(rival_arrival_t)
+    main_x_at_same_time, _ = main_clip.pos(rival_arrival_t)
+    assert abs(rival_x_at_arrival + rival_clip.size[0] - finish_x) < 1.0
+    assert main_x_at_same_time + main_clip.size[0] < finish_x - 1.0
+    main_x_at_arrival, _ = main_clip.pos(main_arrival_t)
+    assert abs(main_x_at_arrival + main_clip.size[0] - finish_x) < 1.0
 
 
 def test_progress_bar_track_fills_left_to_right_over_the_real_duration():
@@ -433,3 +453,80 @@ def test_scene_time_boundaries_recovers_from_earlier_tokenization_drift():
     # most of "Rival") instead of correctly finding "Rival" at index 6.
     assert rival_end >= 2.9
     assert rival_start > 1.0
+
+
+def test_scene_time_boundaries_gives_the_race_scene_the_whole_gap_after_it():
+    """The comparison scene gets a dedicated silent pause spliced into the
+    audio for its drag race (see single_car_short's race splice) -- that
+    whole gap must count as part of the race scene's own window, not be
+    split with the next scene the way an ordinary inter-scene pause is,
+    or the race gets starved of screen time and the next scene's photo
+    pops in before its narration actually starts."""
+    scenes = [{"narration": "one"}, {"narration": "two"}, {"narration": "three"}]
+    word_timeline = [
+        {"word": "one", "start": 0.0, "end": 0.2},
+        {"word": "two", "start": 10.0, "end": 10.2},  # a big spliced-in pause before this
+        {"word": "three", "start": 10.4, "end": 10.6},
+    ]
+    default_boundaries = _scene_time_boundaries(scenes, word_timeline, 11.0)
+    assert default_boundaries[0][1] < 6.0  # normally split ~50/50 with scene 2 (midpoint ~5.1)
+
+    race_boundaries = _scene_time_boundaries(scenes, word_timeline, 11.0, race_scene_index=0)
+    assert race_boundaries[0][1] == 10.0  # the whole gap goes to the race scene
+    assert race_boundaries[1][0] == 10.0  # scene 2 starts exactly when it's actually spoken
+
+
+def test_stat_tracker_entries_collects_labeled_scenes_timed_to_their_own_start():
+    manifest = {
+        "scenes": [
+            {"narration": "one", "stat_label": "Horsepower", "stat_value": "620 hp"},
+            {"narration": "two", "stat_label": None, "stat_value": None},
+            {"narration": "three", "stat_label": "MSRP", "stat_value": "$190K -> $150K"},
+        ],
+        "word_timeline": [
+            {"word": "one", "start": 0.0, "end": 0.2},
+            {"word": "two", "start": 1.0, "end": 1.2},
+            {"word": "three", "start": 2.0, "end": 2.2},
+        ],
+    }
+    entries = _stat_tracker_entries(manifest, 3.0)
+    assert [label for _, label, _ in entries] == ["Horsepower", "MSRP"]
+    assert [value for _, _, value in entries] == ["620 hp", "$190K -> $150K"]
+    # Scene 2 carries no stat -- it must not produce an empty/blank row.
+    assert len(entries) == 2
+
+
+def test_stat_tracker_entries_caps_at_the_max_row_count():
+    manifest = {
+        "scenes": [
+            {"narration": str(i), "stat_label": f"Stat{i}", "stat_value": str(i)}
+            for i in range(STAT_TABLE_MAX_ROWS + 3)
+        ],
+        "word_timeline": [
+            {"word": str(i), "start": float(i), "end": float(i) + 0.2}
+            for i in range(STAT_TABLE_MAX_ROWS + 3)
+        ],
+    }
+    entries = _stat_tracker_entries(manifest, float(STAT_TABLE_MAX_ROWS + 4))
+    assert len(entries) == STAT_TABLE_MAX_ROWS
+
+
+def test_stat_tracker_track_builds_one_growing_clip_per_added_row(tmp_path):
+    manifest = {
+        "scenes": [
+            {"narration": "one", "stat_label": "Horsepower", "stat_value": "620 hp"},
+            {"narration": "two", "stat_label": "MSRP", "stat_value": "$190K"},
+        ],
+        "word_timeline": [
+            {"word": "one", "start": 0.0, "end": 0.2},
+            {"word": "two", "start": 3.0, "end": 3.2},
+        ],
+    }
+    output_path = tmp_path / "single_car_short.mp4"
+    clips = _stat_tracker_track(manifest, 6.0, output_path, CANVAS)
+    assert len(clips) == 2
+    # The second row's scene starts at the pause midpoint between the two
+    # scenes' spoken words (0.2 and 3.0 -> 1.6), same as any other scene
+    # boundary -- not literally at the word's own start time.
+    assert clips[0].start == 0.0 and abs(clips[0].duration - 1.6) < 1e-6
+    assert abs(clips[1].start - 1.6) < 1e-6 and abs(clips[1].duration - 4.4) < 1e-6

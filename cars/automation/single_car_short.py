@@ -27,7 +27,7 @@ from research_request import (
 )
 from generate_sample import ROOT
 from narrator_script import _extract_wav, build_mouth_timeline, synthesize_narration
-from narrator_video import render_narrator_video
+from narrator_video import _scene_time_boundaries, race_reserved_seconds, render_narrator_video
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
 
@@ -38,26 +38,16 @@ FAST_TTS_SPEED = 1.35
 TARGET_DURATION_SECONDS = 58.0
 # Calibrated from the original working numbers -- 175-190 words (center
 # 182.5) hit the 55-60s target at the old 1.12x speed, giving a baseline
-# spoken pace independent of playback speed. TARGET_WORDS/ACCEPTABLE_WORDS
-# are derived from that pace at the *current* FAST_TTS_SPEED instead of a
-# hardcoded tuple, specifically so bumping the speed can't silently
-# desync the word target from it again -- that's exactly what happened
-# when FAST_TTS_SPEED went 1.12 -> 1.25 without TARGET_WORDS moving with
-# it: the same ~180 words spoken faster produced meaningfully less raw
-# audio, so normalize_audio_duration's atempo correction had to slow it
-# back down to hit 58s, mostly cancelling out the speed increase (a
-# one-minute video effectively still took close to a minute).
+# spoken pace independent of playback speed. HARD_WORD_RANGE (the actual
+# atempo-safety-net failure gate below) is still derived from that pace at
+# the *current* FAST_TTS_SPEED so it can't silently desync from a future
+# speed change. TARGET_WORDS itself, though, is a fixed ~180-word center
+# on request -- letting it float up with speed (it drifted to ~220 at
+# 1.35x) produced scripts that needed real atempo speed-up on top of the
+# already-fast TTS to hit ~58s, which is exactly what read as rushed.
 _BASE_WORDS_PER_SECOND = (182.5 / 58.0) / 1.12
-
-
-def _target_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECONDS):
-    center = _BASE_WORDS_PER_SECOND * speed * target_seconds
-    return (round(center - 12), round(center + 12))
-
-
-def _acceptable_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECONDS):
-    center = _BASE_WORDS_PER_SECOND * speed * target_seconds
-    return (round(center * 0.75), round(center * 1.25))
+TARGET_WORD_CENTER = 180
+TARGET_WORD_FLEX = 10
 
 
 def _hard_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECONDS, min_tempo=0.5, max_tempo=2.0):
@@ -77,11 +67,11 @@ def _hard_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECOND
     return (round(min_words), round(max_words))
 
 
-TARGET_WORDS = _target_word_range()
+TARGET_WORDS = (TARGET_WORD_CENTER - TARGET_WORD_FLEX, TARGET_WORD_CENTER + TARGET_WORD_FLEX)
 # The prompt targets the tight range above, and this wider band is used to
 # decide whether to retry the model with corrective feedback (see
 # research_script) -- neither one is the actual failure gate anymore.
-ACCEPTABLE_WORDS = _acceptable_word_range()
+ACCEPTABLE_WORDS = (round(TARGET_WORD_CENTER * 0.75), round(TARGET_WORD_CENTER * 1.25))
 # The real failure gate: only a script this far outside the atempo-safe
 # range gets rejected, since anything inside it still reaches ~target
 # runtime with an audio-quality-preserving tempo correction.
@@ -110,6 +100,7 @@ PACKAGE_SCHEMA = {
                     "media_type", "headline", "narration", "rival_make", "rival_model",
                     "main_horsepower", "rival_horsepower",
                     "main_quarter_mile_seconds", "rival_quarter_mile_seconds",
+                    "stat_label", "stat_value",
                 ],
                 "properties": {
                     "media_type": {"type": "string", "enum": ["exterior", "engine", "interior", "detail", "wheel"]},
@@ -150,6 +141,16 @@ PACKAGE_SCHEMA = {
                     # cars (falls back to the horsepower comparison then).
                     "main_quarter_mile_seconds": {"type": ["number", "null"]},
                     "rival_quarter_mile_seconds": {"type": ["number", "null"]},
+                    # A short label/value pair for the on-screen stat tracker
+                    # (e.g. "Horsepower"/"620 hp", "MSRP"/"$190K -> $150K") --
+                    # only when this scene's narration actually states one
+                    # hard, concrete number worth pinning to the tracker;
+                    # null/null on beats that don't (the hook, the closing
+                    # question, general character/legacy color). Keep
+                    # stat_value short -- it renders in a narrow table cell,
+                    # not a sentence.
+                    "stat_label": {"type": ["string", "null"]},
+                    "stat_value": {"type": ["string", "null"]},
                 },
             },
         },
@@ -240,6 +241,8 @@ When this car's original MSRP when new and a rough current used/market price are
 When a scene's "narration" directly names one specific competitor car (e.g. "beats the Camaro in handling"), set that scene's rival_make/rival_model to that competitor (e.g. "Chevrolet"/"Camaro") so a real photo of it can be shown exactly during that scene; otherwise set both to null. Only set these when the narration truly names one specific rival car in THAT scene, not a vague "its rivals" or a whole segment/class. That scene's narration must include a concrete horsepower figure for both cars (e.g. "420 hp vs. the Camaro SS's 455 hp"), not just a vague handling or value claim -- verify both numbers with web search. Also set that same scene's main_horsepower/rival_horsepower to those same two verified figures as plain integers (e.g. 420 and 455). This narration should stay about the cars themselves (specs, character, verdict) -- never narrate or describe an animation, race, or visual; nothing on screen needs a spoken introduction. Set both horsepower fields to null on every other scene.
 
 On that same rival-comparison scene, also look up each car's published quarter-mile time in seconds (e.g. 11.5) and set main_quarter_mile_seconds/rival_quarter_mile_seconds to those two verified figures -- these (not the horsepower numbers) drive a silent visual drag-race animation between the two cars that plays behind the narration, so the faster car needs to actually be the one with the shorter time. Leave both null if you can't verify a real published time for both cars; do not estimate or guess. Set both to null on every other scene.
+
+Whenever a scene's narration states one hard, concrete number about THIS car (horsepower, torque, 0-60 time, quarter-mile time, top speed, MSRP/price, weight, production count -- not the rival's), also set that scene's stat_label/stat_value to a short label and that number, formatted for a narrow on-screen table cell (e.g. "Horsepower"/"620 hp", "0-60"/"2.9s", "MSRP"/"$190K -> $150K"). Reuse the same figures already stated in that scene's narration -- never introduce a new number here that isn't spoken. Leave both null on scenes that don't state a standalone hard number (the hook, the closing question, character/legacy/design color without a figure attached).
 
 Also return "start_year" and "end_year": the exact model-year range of the generation your script actually describes (the same year, twice, if it's a single model year). This must reflect what you actually researched and wrote about, even when the scope above was "the best-known generation" and you had to pick one yourself -- the photos shown alongside the narration are gathered using these years, so they need to match the generation you're describing."""
 
@@ -718,14 +721,17 @@ def _select_side_profile_media(media):
     animations (drift doodle, drag race) -- a true side profile reads far
     better doing a spin or a left-to-right "race" than a front/rear crop,
     so this prefers exterior_side, falls back to exterior_full (still shows
-    the whole car), and only then any exterior photo at all rather than
-    skipping the decorative features outright. Returns {"path", "facing_direction"}
-    (or None) -- facing_direction lets the race animation flip the cutout so
-    the car's nose actually points the way it's "driving" instead of
-    sometimes appearing to race backwards."""
+    the whole car), then exterior_front (still reads as a real car "moving"
+    even head-on), and only as a last resort exterior_rear -- a rear shot
+    "driving" left-to-right visibly shows the car's backside the whole way,
+    which is exactly the shot to avoid when every better option has run
+    out, not a fallback tied evenly with front. Returns
+    {"path", "facing_direction"} (or None) -- facing_direction lets the
+    race animation flip the cutout so the car's nose actually points the
+    way it's "driving" instead of sometimes appearing to race backwards."""
     exterior = [item for item in media if item["type"] == "exterior"]
     match = None
-    for category in ("exterior_side", "exterior_full"):
+    for category in ("exterior_side", "exterior_full", "exterior_front", "exterior_rear"):
         match = next((item for item in exterior if item.get("category") == category), None)
         if match:
             break
@@ -807,8 +813,11 @@ def gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir
     # A side profile (or, failing that, a full-car angle) reads far better
     # than a front/rear crop for the drag-race mini-car animation this
     # photo doubles as -- prefer those categories over whatever the scraper
-    # happened to list first.
-    category_rank = {"exterior_side": 0, "exterior_full": 1, "exterior_front": 2, "exterior_rear": 2}
+    # happened to list first. Front beats rear as the last resort: a rear
+    # shot "driving" left-to-right shows the car's backside the whole way,
+    # which reads as racing butt-first rather than just an unglamorous
+    # angle, so it's never picked while a front shot is available.
+    category_rank = {"exterior_side": 0, "exterior_full": 1, "exterior_front": 2, "exterior_rear": 3}
     for relative in sorted(candidates, key=lambda item: category_rank.get(reviews_by_path.get(item, {}).get("category"), 3)):
         path = images_dir.parent / relative
         if not path.exists():
@@ -874,6 +883,36 @@ def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum
     # Report what the file actually ends up at, not the target -- honest
     # even when the clamp above saturated and couldn't fully correct it.
     return duration / tempo
+
+
+def _insert_silence(audio_path, at_seconds, duration_seconds):
+    """Splice `duration_seconds` of real silence into the narration audio
+    at `at_seconds`, in place -- gives the drag-race beat its own dedicated
+    screen time (see race_reserved_seconds) instead of squeezing a real
+    quarter-mile-based race into however long the spoken sentence happens
+    to leave. Total audio (and so total video) duration grows by exactly
+    this much; the character just sits idle through it since there's no
+    speech to lip-sync to."""
+    audio_path = Path(audio_path)
+    if duration_seconds <= 0:
+        return
+    merged = audio_path.with_name(f"{audio_path.stem}-paused{audio_path.suffix}")
+    filter_complex = (
+        f"[0:a]atrim=0:{at_seconds:.3f},asetpts=PTS-STARTPTS[a];"
+        f"[1:a]atrim=0:{duration_seconds:.3f},asetpts=PTS-STARTPTS[sil];"
+        f"[0:a]atrim=start={at_seconds:.3f},asetpts=PTS-STARTPTS[b];"
+        f"[a][sil][b]concat=n=3:v=0:a=1[out]"
+    )
+    subprocess.run(
+        [
+            "ffmpeg", "-y", "-i", str(audio_path),
+            "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+            "-filter_complex", filter_complex, "-map", "[out]",
+            str(merged),
+        ],
+        check=True, capture_output=True, text=True,
+    )
+    merged.replace(audio_path)
 
 
 def transcribe_word_timeline(audio_path):
@@ -1010,6 +1049,32 @@ def build_short(args):
     except Exception as exc:
         print(f"[single-car] Word alignment failed; falling back to estimated caption timing: {exc}")
         word_timeline = []
+    # The comparison scene's drag race gets its own dedicated, silent
+    # screen time instead of being squeezed into however long the spoken
+    # sentence happens to leave -- splice real silence into the audio right
+    # after that scene's narration ends, sized to the real (or hp-derived
+    # fallback) quarter-mile gap between the two cars, then re-transcribe
+    # so every downstream timestamp (captions, headlines, sfx) reflects the
+    # now-longer audio instead of drifting out of sync with it.
+    race_scene_index = next(
+        (i for i, scene in enumerate(package["scenes"])
+         if scene.get("main_horsepower") is not None and scene.get("rival_horsepower") is not None),
+        None,
+    )
+    if race_scene_index is not None and word_timeline:
+        race_scene = package["scenes"][race_scene_index]
+        pause_seconds = race_reserved_seconds(
+            race_scene.get("main_horsepower"), race_scene.get("rival_horsepower"),
+            race_scene.get("main_quarter_mile_seconds"), race_scene.get("rival_quarter_mile_seconds"),
+        )
+        boundaries = _scene_time_boundaries(package["scenes"], word_timeline, normalized_duration)
+        splice_at = boundaries[race_scene_index][1] if race_scene_index < len(boundaries) else normalized_duration
+        try:
+            _insert_silence(audio_path, splice_at, pause_seconds)
+            normalized_duration += pause_seconds
+            word_timeline = transcribe_word_timeline(audio_path)
+        except Exception as exc:
+            print(f"[single-car] Could not reserve dedicated drag-race screen time; race will share its beat's own timing instead: {exc}")
     wav_path = output_dir / "narration.wav"
     _extract_wav(audio_path, wav_path)
     timeline = build_mouth_timeline(wav_path)

@@ -10,11 +10,12 @@ from single_car_short import (  # noqa: E402
     AUDITION_PRESETS,
     FAST_TTS_SPEED,
     HARD_WORD_RANGE,
+    TARGET_WORD_CENTER,
+    TARGET_WORD_FLEX,
     TARGET_WORDS,
     _hard_word_range,
     _select_side_profile_media,
     _strip_citations,
-    _target_word_range,
     _visual_highlight_for_scenes,
     _word_count,
     apply_rival_photos,
@@ -29,17 +30,14 @@ def test_word_count_handles_contractions_and_hyphenated_terms():
     assert _word_count("It's a four-wheel-drive Golf R.") == 5
 
 
-def test_target_words_scales_with_tts_speed_so_the_two_cant_drift_apart():
-    # This is the regression the whole formula exists to catch: a script
-    # sized for a slower speed produces less raw audio once spoken faster,
-    # so the duration-normalization step has to slow it back down and
-    # mostly cancels out the speed increase -- TARGET_WORDS must scale
-    # with FAST_TTS_SPEED instead of being a hardcoded tuple that can fall
-    # out of sync with it.
-    slower = _target_word_range(speed=1.0)
-    faster = _target_word_range(speed=1.5)
-    assert faster[0] > slower[0] and faster[1] > slower[1]
-    assert TARGET_WORDS == _target_word_range(FAST_TTS_SPEED)
+def test_target_words_is_a_fixed_center_not_tied_to_tts_speed():
+    # A target that floated up with FAST_TTS_SPEED (it drifted to ~220 at
+    # 1.35x) produced scripts that needed real atempo speed-up on top of
+    # the already-fast TTS to hit ~58s, which read as rushed -- so this is
+    # a fixed ~180-word center regardless of speed, with a flexible +-10
+    # band around it.
+    assert TARGET_WORDS == (TARGET_WORD_CENTER - TARGET_WORD_FLEX, TARGET_WORD_CENTER + TARGET_WORD_FLEX)
+    assert TARGET_WORD_CENTER == 180
     assert ACCEPTABLE_WORDS[0] < TARGET_WORDS[0] < TARGET_WORDS[1] < ACCEPTABLE_WORDS[1]
 
 
@@ -67,7 +65,7 @@ def test_research_script_retries_with_feedback_when_outside_acceptable_words(mon
 
     prompts = []
     packages = [
-        {"scenes": [], "script": "", "word_count": 146},
+        {"scenes": [], "script": "", "word_count": 100},
         {"scenes": [{"headline": "", "narration": "ok", "rival_make": None, "rival_model": None}],
          "script": "ok", "word_count": TARGET_WORDS[0] + 5},
     ]
@@ -84,7 +82,7 @@ def test_research_script_retries_with_feedback_when_outside_acceptable_words(mon
     assert len(prompts) == 2
     # The retry prompt must actually reference what went wrong so the
     # model has something concrete to correct.
-    assert "146 words" in prompts[1]
+    assert "100 words" in prompts[1]
 
 
 def test_research_script_does_not_retry_when_first_attempt_is_already_acceptable(monkeypatch):
