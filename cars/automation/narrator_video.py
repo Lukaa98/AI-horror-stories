@@ -156,7 +156,10 @@ PROGRESS_BAR_COLOR = (255, 255, 255)
 TOP_STACK_RATIO = 0.50
 HEADLINE_ZONE_RATIO = 0.095
 CAPTION_ZONE_RATIO = 0.075
-NARRATOR_X_OFFSET_RATIO = 0.06
+NARRATOR_X_OFFSET_RATIO = 0.14
+# Capped under the full available bottom-half height so the character
+# always leaves a real gap above its own head -- see _narrator_track.
+NARRATOR_MAX_HEIGHT_RATIO = 0.84
 # Margin on every edge of the media's own band -- the picture is inset
 # instead of stretched edge-to-edge, so it reads as a framed photo rather
 # than a banner. Trimmed further each time the picture needed to read
@@ -486,6 +489,10 @@ STAT_TABLE_ROW_HEIGHT_RATIO = 0.038
 # are added, rather than a fixed top position -- a fixed position overlapped
 # the character's face once enough rows stacked up under it.
 STAT_TABLE_BOTTOM_MARGIN_RATIO = 0.02
+# A hard ceiling just below the media/caption stack's own bottom edge --
+# row height is capped (see _stat_table_frame) so a full table never grows
+# up past this line into the picture/headline above it.
+STAT_TABLE_TOP_MARGIN_RATIO = 0.015
 STAT_TABLE_FONT_SIZE = 25
 STAT_TABLE_LABEL_COLOR = (0, 0, 0, 255)
 STAT_TABLE_VALUE_COLOR = (0, 0, 0, 255)
@@ -533,7 +540,7 @@ def _fit_text_to_width(draw, text, base_size, max_width, min_size=14):
     return font, (text + "..." if text else "...")
 
 
-def _stat_table_frame(size, rows, out_path, bottom_y):
+def _stat_table_frame(size, rows, out_path, bottom_y, top_y):
     """A full-canvas transparent image with the scoreboard baked in at its
     left-side position -- `rows` is however many are visible at this point
     (cumulative -- this is a running tracker, not scene-local like the
@@ -544,16 +551,25 @@ def _stat_table_frame(size, rows, out_path, bottom_y):
     The table's bottom edge is pinned at `bottom_y` and it grows upward as
     rows are added, rather than a fixed top position growing downward --
     that fixed-top version could grow tall enough with 4-5 rows to reach
-    down into the narrator's own face."""
+    down into the narrator's own face. `top_y` is a hard ceiling (the media/
+    caption zone's own bottom edge) -- row height is capped so even a full
+    STAT_TABLE_MAX_ROWS table fits between top_y and bottom_y, instead of
+    the fixed row height pushing the table up into the picture above."""
     width, height = size
     scale = width / 1080
     canvas = Image.new("RGBA", size, (0, 0, 0, 0))
     if rows:
         draw = ImageDraw.Draw(canvas)
-        base_size = int(STAT_TABLE_FONT_SIZE * scale)
+        available_h = max(10.0, bottom_y - top_y)
+        # Capped against *this frame's own* row count, not the overall max
+        # -- capping against STAT_TABLE_MAX_ROWS unconditionally squeezed a
+        # 1-2 row table into a sliver sized for a hypothetical full table,
+        # instead of letting it use the normal row height until it actually
+        # has enough rows to need shrinking.
+        row_h = min(height * STAT_TABLE_ROW_HEIGHT_RATIO, available_h / len(rows))
+        base_size = int(min(STAT_TABLE_FONT_SIZE * scale, row_h * 0.55))
         table_x = width * STAT_TABLE_X_RATIO
         table_w = width * STAT_TABLE_WIDTH_RATIO
-        row_h = height * STAT_TABLE_ROW_HEIGHT_RATIO
         pad = 12 * scale
         label_col_w = table_w * STAT_TABLE_LABEL_COLUMN_RATIO
         value_col_x = table_x + label_col_w
@@ -586,16 +602,20 @@ def _stat_table_frame(size, rows, out_path, bottom_y):
     canvas.save(out_path)
 
 
-def _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y):
+def _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y, media_zone_bottom_y):
     """ImageClips for the running stat scoreboard -- a new frame image each
     time a row is added, holding from then until the next addition (or the
     end of the video after the last one). `narrator_top_y` is the
     character's own top edge -- the table's bottom is pinned just above it
-    so it never grows down into the face."""
+    so it never grows down into the face. `media_zone_bottom_y` is the
+    picture/caption stack's own bottom edge -- a hard ceiling so the table
+    can't grow up into the picture either, whichever of the two boundaries
+    is tighter."""
     entries = _stat_tracker_entries(manifest, duration)
     if not entries:
         return []
     bottom_y = narrator_top_y - size[1] * STAT_TABLE_BOTTOM_MARGIN_RATIO
+    top_y = media_zone_bottom_y + size[1] * STAT_TABLE_TOP_MARGIN_RATIO
     clips = []
     for i, (start, _, _) in enumerate(entries):
         end = entries[i + 1][0] if i + 1 < len(entries) else duration
@@ -603,7 +623,7 @@ def _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y):
             continue
         rows = [(label, value) for _, label, value in entries[: i + 1]]
         frame_path = output_path.parent / "_frames" / f"stat-table-{i}.png"
-        _stat_table_frame(size, rows, frame_path, bottom_y)
+        _stat_table_frame(size, rows, frame_path, bottom_y, top_y)
         clips.append(
             ImageClip(str(frame_path)).set_start(start).set_duration(end - start).set_position((0, 0))
         )
@@ -733,7 +753,10 @@ def _narrator_track(manifest, sprites, size, duration):
     sentence) so that switch reads as a transition into the new stance --
     mouth/blink changes within the same pose stay instant cuts, since
     crossfading those would blur the lipsync."""
-    max_h = int(size[1] * (1 - TOP_STACK_RATIO))
+    # Capped a bit under the full bottom-half height (not the full
+    # 1-TOP_STACK_RATIO) -- filling that whole band left the stat table with
+    # no natural gap above the character's head to sit in at all.
+    max_h = int(size[1] * (1 - TOP_STACK_RATIO) * NARRATOR_MAX_HEIGHT_RATIO)
     segments = _narrator_segments(manifest, sprites, duration)
 
     if not segments:
@@ -1154,10 +1177,10 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     duration = audio.duration
 
     narrator_clip = _apply_body_sway(_narrator_track(manifest, sprites, size, duration))
-    # Shifted left of dead-center, on request -- gives the frame a bit of
-    # asymmetric balance instead of the character sitting exactly in the
-    # middle of every video.
-    narrator_x = (size[0] - narrator_clip.w) / 2 - size[0] * NARRATOR_X_OFFSET_RATIO
+    # Shifted right of dead-center, on request -- leaves clear width on the
+    # left for the stat table instead of the two competing for the same
+    # space.
+    narrator_x = (size[0] - narrator_clip.w) / 2 + size[0] * NARRATOR_X_OFFSET_RATIO
     narrator_y = size[1] - narrator_clip.h
     narrator_positioned = narrator_clip.set_position(
         lambda t: (narrator_x + 3 * math.sin(t * 1.15), narrator_y + 3 * math.sin(t * 1.65))
@@ -1177,7 +1200,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     photo_pop_clips = [
         _sfx_clip(PHOTO_POP_SFX, start, PHOTO_POP_VOLUME) for start, _ in scene_boundaries
     ]
-    stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_y)
+    stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_y, size[1] * TOP_STACK_RATIO)
 
     # The caption band sits below the picture, not on top of it -- distinct
     # from the headline band above the picture.

@@ -487,7 +487,7 @@ def test_stat_tracker_track_builds_one_growing_clip_per_added_row(tmp_path):
         ],
     }
     output_path = tmp_path / "single_car_short.mp4"
-    clips = _stat_tracker_track(manifest, 6.0, output_path, CANVAS, narrator_top_y=1400.0)
+    clips = _stat_tracker_track(manifest, 6.0, output_path, CANVAS, narrator_top_y=1400.0, media_zone_bottom_y=960.0)
     assert len(clips) == 2
     # The second row's scene starts at the pause midpoint between the two
     # scenes' spoken words (0.2 and 3.0 -> 1.6), same as any other scene

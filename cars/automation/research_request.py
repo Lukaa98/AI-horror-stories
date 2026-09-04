@@ -805,10 +805,19 @@ Return ONLY strict JSON with:
 - image_quality_usable: boolean (judge blur, framing, page UI, collage, and resolution only)
 - category: exactly one of exterior_front, exterior_rear, exterior_side, exterior_full,
   interior, engine_bay, wheel_detail, other_detail
-- facing_direction: for any exterior category, which side of the frame the car's own front
-  bumper/nose points toward -- "left", "right", or "unclear" (a straight front/rear shot, or a
-  wheel/interior/engine/detail photo where the whole car isn't in frame). This is used to orient
-  the car correctly in a left-to-right animation, so judge it from the pixels, not the filename.
+- facing_direction: for any exterior category -- including a three-quarter angle (front-left,
+  front-right, rear-left, rear-right), not just a clean side profile -- which horizontal direction
+  the car's own front bumper/nose is oriented toward: "left" or "right". If the front bumper or
+  headlights are visible, judge directly from them. If only the rear is visible (a rear or
+  rear-three-quarter shot), infer the nose direction from the rear instead -- the front points the
+  OPPOSITE horizontal direction from whichever side the visible tail-lights/rear bumper leans
+  toward (e.g. a rear-left three-quarter shot, where the tail is angled toward the left of the
+  frame, means the front/nose is oriented toward the right). Only answer "unclear" for a perfectly
+  straight-on front or rear shot with no lean to either side at all, or a wheel/interior/engine/
+  detail crop where the car's own orientation genuinely isn't visible. This is used to mirror the
+  cutout so it doesn't appear to drive backwards in a left-to-right animation, so get an actual
+  left/right answer from the pixels whenever the car leans either way at all -- don't default to
+  "unclear" just because the angle isn't a perfect broadside profile.
 - view_description: a precise phrase such as "front-left three-quarter exterior"
 - visible_match_evidence: array of short descriptions of generation/variant-specific details
 - confidence: number from 0 to 1
