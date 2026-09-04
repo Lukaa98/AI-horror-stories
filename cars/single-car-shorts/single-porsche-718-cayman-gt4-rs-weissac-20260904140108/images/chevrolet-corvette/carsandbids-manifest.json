@@ -1,0 +1,650 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-04T14:12:49.731Z",
+  "query": "Chevrolet Corvette",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/chevrolet/corvette?start_year=2025&end_year=2025&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/37yWZAOD/2025-chevrolet-corvette-z06-coupe-3lz",
+      "title": "2025 Chevrolet Corvette Z06 Coupe 3lz",
+      "text": "Sold for $125,000",
+      "titleYear": 2025,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMjxRPVa/2025-chevrolet-corvette-e-ray-coupe-1lz",
+      "title": "2025 Chevrolet Corvette E Ray Coupe 1lz",
+      "text": "Sold for $83,500",
+      "titleYear": 2025,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZnpngYQ/2025-chevrolet-corvette-stingray-coupe-1lt",
+      "title": "Sold After for $58,500",
+      "text": "Sold After for $58,500",
+      "titleYear": 2025,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEovNaV3/2025-chevrolet-corvette-z06-convertible-3lz",
+      "title": "2025 Chevrolet Corvette Z06 Convertible 3lz",
+      "text": "Sold for $109,577",
+      "titleYear": 2025,
+      "score": 40
+    },
+    {
+      "url": "https://carsandbids.com/auctions/98Zq4aoX/2025-chevrolet-corvette-z06-convertible-3lz",
+      "title": "2025 Chevrolet Corvette Z06 Convertible 3lz",
+      "text": "FEATURED Bid to $107,502",
+      "titleYear": 2025,
+      "score": 40
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rwOlP7Wa/2025-chevrolet-corvette-e-ray-convertible-2lz",
+      "title": "2025 Chevrolet Corvette E Ray Convertible 2lz",
+      "text": "Bid to $92,000",
+      "titleYear": 2025,
+      "score": 40
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/37yWZAOD/2025-chevrolet-corvette-z06-coupe-3lz",
+      "title": "2025 Chevrolet Corvette Z06 Coupe 3lz",
+      "text": "Sold for $125,000",
+      "titleYear": 2025,
+      "score": 70,
+      "usable_image_count": 21,
+      "sale_price": 125000,
+      "sale_type": "sold",
+      "page_title": "2025 Chevrolet Corvette Z06 Coupe 3LZ"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMjxRPVa/2025-chevrolet-corvette-e-ray-coupe-1lz",
+      "title": "2025 Chevrolet Corvette E Ray Coupe 1lz",
+      "text": "Sold for $83,500",
+      "titleYear": 2025,
+      "score": 70,
+      "usable_image_count": 20,
+      "sale_price": 83500,
+      "sale_type": "sold",
+      "page_title": "2025 Chevrolet Corvette E-Ray Coupe 1LZ"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZnpngYQ/2025-chevrolet-corvette-stingray-coupe-1lt",
+      "title": "Sold After for $58,500",
+      "text": "Sold After for $58,500",
+      "titleYear": 2025,
+      "score": 70,
+      "usable_image_count": 17,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2025 Chevrolet Corvette Stingray Coupe 1LT"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rEovNaV3/2025-chevrolet-corvette-z06-convertible-3lz",
+      "title": "2025 Chevrolet Corvette Z06 Convertible 3lz",
+      "text": "Sold for $109,577",
+      "titleYear": 2025,
+      "score": 40,
+      "usable_image_count": 13,
+      "sale_price": 109577,
+      "sale_type": "sold",
+      "page_title": "2025 Chevrolet Corvette Z06 Convertible 3LZ"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/37yWZAOD/2025-chevrolet-corvette-z06-coupe-3lz",
+    "title": "2025 Chevrolet Corvette Z06 Coupe 3lz",
+    "text": "Sold for $125,000",
+    "titleYear": 2025,
+    "score": 70,
+    "sale_price": 125000,
+    "sale_type": "sold",
+    "page_title": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+    "year": 2025,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/9eewVMnN-nKdnQFR/edit/1XZmm.jpg?t=178593114292",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 222864
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/interior/9eewVMnN-58JJSsR/edit/Bk2Y1.jpg?t=178593105583",
+      "labels": [
+        "interior"
+      ],
+      "section": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 226,
+      "height": 147,
+      "bytes": 163720
+    },
+    {
+      "path": "exterior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/9eewVMnN-lp9Jx3E/edit/RUHtZ.jpg?t=178593123308",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 288951
+    },
+    {
+      "path": "exterior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/9eewVMnN-VH1xVCA/edit/6RoDf.jpg?t=178593126256",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 244315
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/interior/9eewVMnN-wlZFElJ/edit/quIxA.jpg?t=178593132777",
+      "labels": [
+        "interior"
+      ],
+      "section": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 226,
+      "height": 147,
+      "bytes": 169783
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/interior/9eewVMnN-eD0yb_2/edit/oW82g.jpg?t=178593135135",
+      "labels": [
+        "interior"
+      ],
+      "section": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 226,
+      "height": 147,
+      "bytes": 186240
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/9eewVMnN-OhrFyg4/edit/Ql020.jpg?t=178593120240",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 226,
+      "height": 147,
+      "bytes": 160863
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/exterior/9eewVMnN-mhr5O1O/edit/26WTM.jpg?t=178593085489",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 226,
+      "height": 147,
+      "bytes": 211629
+    },
+    {
+      "path": "exterior-09.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4f8b1344ae22f0ccbeebb07f9b83f3455be093f5/attachments/37yWZAOD-53QoWke.jpeg?t=178684934702",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 273056
+    },
+    {
+      "path": "exterior-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4f8b1344ae22f0ccbeebb07f9b83f3455be093f5/attachments/37yWZAOD-na118a5.jpeg?t=178684935211",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 204002
+    },
+    {
+      "path": "exterior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4f8b1344ae22f0ccbeebb07f9b83f3455be093f5/attachments/37yWZAOD-Vr30HeR.jpeg?t=178684935766",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 299701
+    },
+    {
+      "path": "exterior-12.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/7de1b7a29a1a89cf4af6299de03ba3e4b52d81cd/photos/r4zGM8lV-I5L8bNcmk.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 21395
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/44780246088c9790ff176b5efdd5192aa939e5e4/photos/KmeakBpb-nw9sY-C4eas.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 15535 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/b76f8ba9bbb3147a2e10b1c6cbd800b619912c0a/photos/30MdQ1DL-eUIM8WAKbHh.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 8159 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/dc90fbce0bc6abe475117fc44761c01f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/dc90fbce0bc6abe475117fc44761c01f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/dc90fbce0bc6abe475117fc44761c01f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/37yWZAOD/2025-chevrolet-corvette-z06-coupe-3lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/dc90fbce0bc6abe475117fc44761c01f/manifest/video.m3u8",
+      "auction_title": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "auction_year": 2025,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/898bb4932b6cbb2b42a7f11ba6d97304/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/898bb4932b6cbb2b42a7f11ba6d97304/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/898bb4932b6cbb2b42a7f11ba6d97304/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/37yWZAOD/2025-chevrolet-corvette-z06-coupe-3lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/898bb4932b6cbb2b42a7f11ba6d97304/manifest/video.m3u8",
+      "auction_title": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "auction_year": 2025,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/250ee3ec11ce6c45c1bc3ad33b2053a1/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/250ee3ec11ce6c45c1bc3ad33b2053a1/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/250ee3ec11ce6c45c1bc3ad33b2053a1/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/37yWZAOD/2025-chevrolet-corvette-z06-coupe-3lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/250ee3ec11ce6c45c1bc3ad33b2053a1/manifest/video.m3u8",
+      "auction_title": "2025 Chevrolet Corvette Z06 Coupe 3LZ",
+      "auction_year": 2025,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c07db9c9a367ceb61f83ee72e6eab972/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c07db9c9a367ceb61f83ee72e6eab972/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Chevrolet Corvette E-Ray Coupe 1LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c07db9c9a367ceb61f83ee72e6eab972/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rMjxRPVa/2025-chevrolet-corvette-e-ray-coupe-1lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c07db9c9a367ceb61f83ee72e6eab972/manifest/video.m3u8",
+      "auction_title": "2025 Chevrolet Corvette E-Ray Coupe 1LZ",
+      "auction_year": 2025,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6add3a9622e6df0559fdcbabf5eb7ed9/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6add3a9622e6df0559fdcbabf5eb7ed9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Chevrolet Corvette Stingray Coupe 1LT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6add3a9622e6df0559fdcbabf5eb7ed9/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KZnpngYQ/2025-chevrolet-corvette-stingray-coupe-1lt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6add3a9622e6df0559fdcbabf5eb7ed9/manifest/video.m3u8",
+      "auction_title": "2025 Chevrolet Corvette Stingray Coupe 1LT",
+      "auction_year": 2025,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e84d447ffd4d12c80eb5f0bef660d910/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e84d447ffd4d12c80eb5f0bef660d910/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Chevrolet Corvette Z06 Convertible 3LZ",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e84d447ffd4d12c80eb5f0bef660d910/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rEovNaV3/2025-chevrolet-corvette-z06-convertible-3lz",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e84d447ffd4d12c80eb5f0bef660d910/manifest/video.m3u8",
+      "auction_title": "2025 Chevrolet Corvette Z06 Convertible 3LZ",
+      "auction_year": 2025,
+      "search_score": 40
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 12,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "Z06",
+        "visible_match_evidence": [
+          "Chevrolet branding",
+          "Z06 badge",
+          "bodywork design",
+          "front fascia styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "Z06",
+        "visible_match_evidence": [
+          "bodywork design",
+          "rear wing",
+          "wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "Z06",
+        "visible_match_evidence": [
+          "distinctive rear lights",
+          "body proportions",
+          "Z06 badge",
+          "spoiler design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front design",
+          "headlights",
+          "grille",
+          "badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Corvette badge",
+          "Rear design consistent with 2025 Corvette"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "engine",
+        "scene_fit_tags": [
+          "engine"
+        ],
+        "quality_score": 3,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle.",
+        "path": "exterior-09.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "engine",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle, but rather parts of the engine.",
+        "path": "exterior-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "engine",
+        "scene_fit_tags": [
+          "engine"
+        ],
+        "quality_score": 4,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image depicts engine components, not the target vehicle",
+        "path": "exterior-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive front design",
+          "Corvette logo",
+          "current generation styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "detail",
+        "scene_fit_tags": [
+          "exterior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-12.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Chevrolet logo on steering wheel",
+          "Interior design matches Corvette",
+          "Dashboard layout consistent with 2025 model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design consistent with Corvette",
+          "seat stitching pattern",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "Validated as target vehicle based on interior characteristics.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "dashboard layout",
+          "seating",
+          "trim details"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

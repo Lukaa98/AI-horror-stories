@@ -1,0 +1,558 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-04T14:03:33.121Z",
+  "query": "Porsche 718 Cayman Gt4 Rs Weissach Package",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rxPnVWEV/2025-porsche-718-cayman-gt4-rs-weissach-package",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rxPnVWEV/2025-porsche-718-cayman-gt4-rs-weissach-package",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 19,
+      "sale_price": 207000,
+      "sale_type": "sold",
+      "page_title": "2025 Porsche 718 Cayman GT4 RS Weissach Package"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rxPnVWEV/2025-porsche-718-cayman-gt4-rs-weissach-package",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 207000,
+    "sale_type": "sold",
+    "page_title": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Porsche718Cayman2025008/edit/Ck0y4.jpg?t=178722715952",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 331680
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Porsche718Cayman2025001/edit/zxk6B.jpg?t=178722718249",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "width": 542,
+      "height": 361,
+      "bytes": 254928
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Porsche718Cayman2025003/edit/qM_9y.jpg?t=178722719505",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "width": 542,
+      "height": 361,
+      "bytes": 309146
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Porsche718Cayman2025004/edit/mExbA.jpg?t=178722721373",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "width": 542,
+      "height": 361,
+      "bytes": 368535
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Porsche718Cayman2025024/edit/SxkFY.jpg?t=178722723995",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "width": 542,
+      "height": 361,
+      "bytes": 219158
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Porsche718Cayman2025056/edit/gE8rS.jpg?t=178722636670",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "width": 542,
+      "height": 361,
+      "bytes": 271050
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Porsche718Cayman2025073/edit/BVkBp.jpg?t=178722634842",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "width": 542,
+      "height": 361,
+      "bytes": 212822
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Porsche718Cayman2025058/edit/LLkoX.jpg?t=178722638465",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "width": 542,
+      "height": 361,
+      "bytes": 237658
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Porsche718Cayman2025060/edit/dbaQe.jpg?t=178722632841",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "width": 542,
+      "height": 361,
+      "bytes": 232866
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c60f5c857da3e7c7ec9fccda7eaa07db44e0d1e3/photos/Kdb7b7lb-mPKQibW.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 11997 bytes"
+    },
+    {
+      "path": "interior-11.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/fc875120fd4d4ed94b2bdc12dc121a3303723687/photos/3BqokmAE-wrZ8CINmd.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 21073
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/9d0c3f63c0dfbef73a1ace964ed79ffbad57fda8/photos/3OWBd6x6-zbYpTGI.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 13313 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/83884a2d5bfbb4f360b59e2afac5049730d45ca6/photos/36RXdeEW-eRAjMw4V6-U.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 13275 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/8e00c6a31498a34aa68235c05d053ad946fe6057/photos/KmR20VNY-sjb33_0.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 7145 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d580da82092064591cae02071f455f7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d580da82092064591cae02071f455f7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d580da82092064591cae02071f455f7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxPnVWEV/2025-porsche-718-cayman-gt4-rs-weissach-package",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8d580da82092064591cae02071f455f7/manifest/video.m3u8",
+      "auction_title": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6bf025e92968dc5dc5e1ced98aae021c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6bf025e92968dc5dc5e1ced98aae021c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6bf025e92968dc5dc5e1ced98aae021c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxPnVWEV/2025-porsche-718-cayman-gt4-rs-weissach-package",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6bf025e92968dc5dc5e1ced98aae021c/manifest/video.m3u8",
+      "auction_title": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1eb0d6965cfd031a82361f9cb8aa0634/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1eb0d6965cfd031a82361f9cb8aa0634/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1eb0d6965cfd031a82361f9cb8aa0634/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxPnVWEV/2025-porsche-718-cayman-gt4-rs-weissach-package",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1eb0d6965cfd031a82361f9cb8aa0634/manifest/video.m3u8",
+      "auction_title": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ad630e3f83794bc9fa73a6124ff0bfd5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ad630e3f83794bc9fa73a6124ff0bfd5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ad630e3f83794bc9fa73a6124ff0bfd5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rxPnVWEV/2025-porsche-718-cayman-gt4-rs-weissach-package",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ad630e3f83794bc9fa73a6124ff0bfd5/manifest/video.m3u8",
+      "auction_title": "2025 Porsche 718 Cayman GT4 RS Weissach Package",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Porsche",
+        "detected_model": "718 Cayman",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": "GT4 RS",
+        "visible_match_evidence": [
+          "Porsche branding",
+          "Cayman silhouette",
+          "GT4 RS wing"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 6,
+        "reject": true,
+        "reason": "Not 2025 model year; variant shown is GT4 RS, which may not match target generation.",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "718",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT4 RS",
+        "visible_match_evidence": [
+          "Porsche badge",
+          "GT4 RS labeling",
+          "specific bodywork and proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "718",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT4 RS",
+        "visible_match_evidence": [
+          "Distinctive GT4 RS rear wing",
+          "Side profile with unique bodywork",
+          "Prominent GT4 RS badging"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "718",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "Cayman GT4 RS Weissach Package",
+        "visible_match_evidence": [
+          "Porsche badge visible",
+          "specific bodywork and design hints",
+          "front styling consistent with GT4 RS"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "718",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT4 RS Weissach Package",
+        "visible_match_evidence": [
+          "Porsche branding",
+          "GT4 RS badging",
+          "rear wing design",
+          "tail light shape characteristic of 718 generation"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "718",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "Cayman GT4 RS Weissach Package",
+        "visible_match_evidence": [
+          "interior design",
+          "steering wheel",
+          "dashboard materials"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "718",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "Cayman GT4 RS Weissach Package",
+        "visible_match_evidence": [
+          "Weissach RS branding",
+          "interior design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "718",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "Cayman GT4 RS Weissach Package",
+        "visible_match_evidence": [
+          "Porsche interior design",
+          "Distinctive steering wheel",
+          "GT4 RS specific attributes"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Porsche",
+        "detected_model": "718",
+        "detected_generation_or_year": "not_provided",
+        "detected_variant_or_engine": "GT4 RS",
+        "visible_match_evidence": [
+          "GT4RS badge"
+        ],
+        "generation_match_confidence": 6,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 8,
+        "reject": true,
+        "reason": "Not a clear view of the target vehicle exterior.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "engine",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image shows engine components, not the target vehicle.",
+        "path": "interior-11.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
