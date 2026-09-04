@@ -1,0 +1,2306 @@
+{
+  "car": {
+    "make": "Chevrolet",
+    "model": "Corvette Z06 3lz",
+    "trim": null
+  },
+  "title": "2011 Corvette Z06 3LZ",
+  "start_year": 2011,
+  "end_year": 2011,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Performance Front",
+      "narration": "The Corvette Z06 3LZ screams performance from the get-go. Check out the aggressive front air intake and hood vent, crafted to optimize airflow and cooling for this beastly machine.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "High-Performance Badge",
+      "narration": "Along the side, the prominent Z06 badge is not just an aesthetic detail; it\u2019s a declaration of intent, highlighting its legendary high-performance pedigree.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "LS7 Engine",
+      "narration": "Under the hood, the 2011 Corvette Z06 is powered by a monstrous 7.0-liter LS7 V8, delivering 505 horsepower and 470 lb-ft of torque. This engine is all about raw power and engineering finesse.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Engine",
+      "stat_value": "7.0L V8",
+      "stat_label_2": "Horsepower",
+      "stat_value_2": "505 hp"
+    },
+    {
+      "media_type": "detail",
+      "headline": "Manual Focused",
+      "narration": "Inside, the six-speed manual gearbox ensures a pure driving experience. The metal shifter feels robust and direct, making every shift a thrill for true driving enthusiasts.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Quad Exhaust",
+      "narration": "At the rear, the quad exhaust setup is more than eye candy. It allows the Z06 to breathe better and roar louder, announcing its presence even at a distance.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "narration": "Originally priced around $75K, the Z06 now trades for about $45K, with a depreciation rate of roughly 8% per year. This makes it a compelling value for performance seekers.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "$75K -> $45K (-8%/yr)",
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://www.caranddriver.com/reviews/a16580404/2011-chevrolet-corvette-z06-review/",
+    "https://www.motortrend.com/cars/chevrolet/corvette/2011/",
+    "https://www.edmunds.com/chevrolet/corvette/2011/z06/"
+  ],
+  "script": "The Corvette Z06 3LZ screams performance from the get-go. Check out the aggressive front air intake and hood vent, crafted to optimize airflow and cooling for this beastly machine. Along the side, the prominent Z06 badge is not just an aesthetic detail; it\u2019s a declaration of intent, highlighting its legendary high-performance pedigree. Under the hood, the 2011 Corvette Z06 is powered by a monstrous 7.0-liter LS7 V8, delivering 505 horsepower and 470 lb-ft of torque. This engine is all about raw power and engineering finesse. Inside, the six-speed manual gearbox ensures a pure driving experience. The metal shifter feels robust and direct, making every shift a thrill for true driving enthusiasts. At the rear, the quad exhaust setup is more than eye candy. It allows the Z06 to breathe better and roar louder, announcing its presence even at a distance. Originally priced around $75K, the Z06 now trades for about $45K, with a depreciation rate of roughly 8% per year. This makes it a compelling value for performance seekers.",
+  "word_count": 171,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 57.47,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-chevrolet-corvette-z06-3lz-20260904231426/narration.mp3",
+  "duration_seconds": 57.51,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.45,
+      "end": 0.54,
+      "mouth": "small"
+    },
+    {
+      "start": 0.54,
+      "end": 0.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.81,
+      "end": 0.99,
+      "mouth": "small"
+    },
+    {
+      "start": 0.99,
+      "end": 1.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.17,
+      "end": 1.44,
+      "mouth": "small"
+    },
+    {
+      "start": 1.44,
+      "end": 1.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.62,
+      "end": 1.71,
+      "mouth": "small"
+    },
+    {
+      "start": 1.71,
+      "end": 1.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.89,
+      "end": 2.34,
+      "mouth": "small"
+    },
+    {
+      "start": 2.34,
+      "end": 2.7,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.7,
+      "end": 2.97,
+      "mouth": "small"
+    },
+    {
+      "start": 2.97,
+      "end": 3.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.15,
+      "end": 3.69,
+      "mouth": "small"
+    },
+    {
+      "start": 3.69,
+      "end": 3.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.78,
+      "end": 4.32,
+      "mouth": "small"
+    },
+    {
+      "start": 4.32,
+      "end": 5.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.22,
+      "end": 5.4,
+      "mouth": "small"
+    },
+    {
+      "start": 5.4,
+      "end": 5.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.49,
+      "end": 5.94,
+      "mouth": "small"
+    },
+    {
+      "start": 5.94,
+      "end": 6.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.03,
+      "end": 7.02,
+      "mouth": "small"
+    },
+    {
+      "start": 7.02,
+      "end": 7.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.65,
+      "end": 7.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.74,
+      "end": 8.28,
+      "mouth": "small"
+    },
+    {
+      "start": 8.28,
+      "end": 8.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.37,
+      "end": 8.55,
+      "mouth": "small"
+    },
+    {
+      "start": 8.55,
+      "end": 8.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.64,
+      "end": 8.73,
+      "mouth": "small"
+    },
+    {
+      "start": 8.73,
+      "end": 8.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.91,
+      "end": 9.09,
+      "mouth": "small"
+    },
+    {
+      "start": 9.09,
+      "end": 9.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.18,
+      "end": 9.54,
+      "mouth": "small"
+    },
+    {
+      "start": 9.54,
+      "end": 9.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.63,
+      "end": 9.72,
+      "mouth": "small"
+    },
+    {
+      "start": 9.72,
+      "end": 9.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.81,
+      "end": 10.35,
+      "mouth": "small"
+    },
+    {
+      "start": 10.35,
+      "end": 10.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "small"
+    },
+    {
+      "start": 11.07,
+      "end": 11.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.34,
+      "end": 11.43,
+      "mouth": "small"
+    },
+    {
+      "start": 11.43,
+      "end": 11.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.61,
+      "end": 11.79,
+      "mouth": "small"
+    },
+    {
+      "start": 11.79,
+      "end": 12.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.06,
+      "end": 12.15,
+      "mouth": "small"
+    },
+    {
+      "start": 12.15,
+      "end": 12.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.33,
+      "end": 12.51,
+      "mouth": "small"
+    },
+    {
+      "start": 12.51,
+      "end": 12.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.6,
+      "end": 12.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.78,
+      "end": 12.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.87,
+      "end": 14.13,
+      "mouth": "small"
+    },
+    {
+      "start": 14.13,
+      "end": 14.58,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.58,
+      "end": 14.76,
+      "mouth": "small"
+    },
+    {
+      "start": 14.76,
+      "end": 14.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.85,
+      "end": 14.94,
+      "mouth": "small"
+    },
+    {
+      "start": 14.94,
+      "end": 15.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.12,
+      "end": 15.66,
+      "mouth": "small"
+    },
+    {
+      "start": 15.66,
+      "end": 15.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.93,
+      "end": 16.02,
+      "mouth": "small"
+    },
+    {
+      "start": 16.02,
+      "end": 16.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.2,
+      "end": 17.28,
+      "mouth": "small"
+    },
+    {
+      "start": 17.28,
+      "end": 17.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.37,
+      "end": 17.55,
+      "mouth": "small"
+    },
+    {
+      "start": 17.55,
+      "end": 17.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.64,
+      "end": 18.0,
+      "mouth": "small"
+    },
+    {
+      "start": 18.0,
+      "end": 18.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.72,
+      "end": 18.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.99,
+      "end": 19.08,
+      "mouth": "small"
+    },
+    {
+      "start": 19.08,
+      "end": 19.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.17,
+      "end": 19.26,
+      "mouth": "small"
+    },
+    {
+      "start": 19.26,
+      "end": 19.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.53,
+      "end": 19.71,
+      "mouth": "small"
+    },
+    {
+      "start": 19.71,
+      "end": 19.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.98,
+      "end": 20.16,
+      "mouth": "small"
+    },
+    {
+      "start": 20.16,
+      "end": 20.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.25,
+      "end": 20.52,
+      "mouth": "small"
+    },
+    {
+      "start": 20.52,
+      "end": 20.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.61,
+      "end": 20.88,
+      "mouth": "small"
+    },
+    {
+      "start": 20.88,
+      "end": 20.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.97,
+      "end": 21.24,
+      "mouth": "small"
+    },
+    {
+      "start": 21.24,
+      "end": 21.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.33,
+      "end": 21.69,
+      "mouth": "small"
+    },
+    {
+      "start": 21.69,
+      "end": 21.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.78,
+      "end": 22.68,
+      "mouth": "small"
+    },
+    {
+      "start": 22.68,
+      "end": 22.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.77,
+      "end": 23.22,
+      "mouth": "small"
+    },
+    {
+      "start": 23.22,
+      "end": 23.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.31,
+      "end": 23.94,
+      "mouth": "small"
+    },
+    {
+      "start": 23.94,
+      "end": 24.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.48,
+      "end": 24.57,
+      "mouth": "small"
+    },
+    {
+      "start": 24.57,
+      "end": 24.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.66,
+      "end": 24.93,
+      "mouth": "small"
+    },
+    {
+      "start": 24.93,
+      "end": 25.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.02,
+      "end": 25.47,
+      "mouth": "small"
+    },
+    {
+      "start": 25.47,
+      "end": 25.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.56,
+      "end": 25.65,
+      "mouth": "small"
+    },
+    {
+      "start": 25.65,
+      "end": 25.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.74,
+      "end": 25.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.83,
+      "end": 26.1,
+      "mouth": "small"
+    },
+    {
+      "start": 26.1,
+      "end": 26.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.37,
+      "end": 26.55,
+      "mouth": "small"
+    },
+    {
+      "start": 26.55,
+      "end": 26.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.82,
+      "end": 27.0,
+      "mouth": "small"
+    },
+    {
+      "start": 27.0,
+      "end": 27.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.09,
+      "end": 27.9,
+      "mouth": "small"
+    },
+    {
+      "start": 27.9,
+      "end": 28.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.71,
+      "end": 28.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.8,
+      "end": 28.89,
+      "mouth": "small"
+    },
+    {
+      "start": 28.89,
+      "end": 28.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.98,
+      "end": 29.25,
+      "mouth": "small"
+    },
+    {
+      "start": 29.25,
+      "end": 29.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.43,
+      "end": 29.7,
+      "mouth": "small"
+    },
+    {
+      "start": 29.7,
+      "end": 29.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.79,
+      "end": 29.97,
+      "mouth": "small"
+    },
+    {
+      "start": 29.97,
+      "end": 30.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.15,
+      "end": 30.24,
+      "mouth": "small"
+    },
+    {
+      "start": 30.24,
+      "end": 30.42,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.42,
+      "end": 31.23,
+      "mouth": "small"
+    },
+    {
+      "start": 31.23,
+      "end": 32.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.04,
+      "end": 32.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.13,
+      "end": 32.22,
+      "mouth": "small"
+    },
+    {
+      "start": 32.22,
+      "end": 32.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.4,
+      "end": 32.58,
+      "mouth": "small"
+    },
+    {
+      "start": 32.58,
+      "end": 32.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.67,
+      "end": 32.76,
+      "mouth": "small"
+    },
+    {
+      "start": 32.76,
+      "end": 32.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.85,
+      "end": 32.94,
+      "mouth": "small"
+    },
+    {
+      "start": 32.94,
+      "end": 33.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.12,
+      "end": 34.02,
+      "mouth": "small"
+    },
+    {
+      "start": 34.02,
+      "end": 34.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.11,
+      "end": 34.2,
+      "mouth": "small"
+    },
+    {
+      "start": 34.2,
+      "end": 34.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.29,
+      "end": 34.38,
+      "mouth": "small"
+    },
+    {
+      "start": 34.38,
+      "end": 34.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.47,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 34.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.83,
+      "end": 35.1,
+      "mouth": "small"
+    },
+    {
+      "start": 35.1,
+      "end": 35.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.64,
+      "end": 35.73,
+      "mouth": "small"
+    },
+    {
+      "start": 35.73,
+      "end": 35.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.91,
+      "end": 36.0,
+      "mouth": "small"
+    },
+    {
+      "start": 36.0,
+      "end": 36.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.09,
+      "end": 36.27,
+      "mouth": "small"
+    },
+    {
+      "start": 36.27,
+      "end": 36.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.36,
+      "end": 36.45,
+      "mouth": "small"
+    },
+    {
+      "start": 36.45,
+      "end": 36.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.54,
+      "end": 36.63,
+      "mouth": "small"
+    },
+    {
+      "start": 36.63,
+      "end": 36.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.81,
+      "end": 37.08,
+      "mouth": "small"
+    },
+    {
+      "start": 37.08,
+      "end": 37.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.17,
+      "end": 37.26,
+      "mouth": "small"
+    },
+    {
+      "start": 37.26,
+      "end": 37.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.62,
+      "end": 37.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.71,
+      "end": 37.89,
+      "mouth": "small"
+    },
+    {
+      "start": 37.89,
+      "end": 38.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.07,
+      "end": 38.16,
+      "mouth": "small"
+    },
+    {
+      "start": 38.16,
+      "end": 38.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.25,
+      "end": 38.43,
+      "mouth": "small"
+    },
+    {
+      "start": 38.43,
+      "end": 38.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.52,
+      "end": 38.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.7,
+      "end": 38.88,
+      "mouth": "small"
+    },
+    {
+      "start": 38.88,
+      "end": 38.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.97,
+      "end": 39.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.06,
+      "end": 39.15,
+      "mouth": "small"
+    },
+    {
+      "start": 39.15,
+      "end": 39.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.24,
+      "end": 39.33,
+      "mouth": "small"
+    },
+    {
+      "start": 39.33,
+      "end": 39.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.42,
+      "end": 39.87,
+      "mouth": "small"
+    },
+    {
+      "start": 39.87,
+      "end": 40.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.5,
+      "end": 40.77,
+      "mouth": "small"
+    },
+    {
+      "start": 40.77,
+      "end": 41.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.04,
+      "end": 41.22,
+      "mouth": "small"
+    },
+    {
+      "start": 41.22,
+      "end": 41.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.31,
+      "end": 41.49,
+      "mouth": "small"
+    },
+    {
+      "start": 41.49,
+      "end": 41.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.58,
+      "end": 41.67,
+      "mouth": "small"
+    },
+    {
+      "start": 41.67,
+      "end": 41.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.76,
+      "end": 42.03,
+      "mouth": "small"
+    },
+    {
+      "start": 42.03,
+      "end": 42.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.21,
+      "end": 42.75,
+      "mouth": "small"
+    },
+    {
+      "start": 42.75,
+      "end": 43.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.2,
+      "end": 43.29,
+      "mouth": "small"
+    },
+    {
+      "start": 43.29,
+      "end": 43.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.56,
+      "end": 43.74,
+      "mouth": "small"
+    },
+    {
+      "start": 43.74,
+      "end": 43.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.92,
+      "end": 44.28,
+      "mouth": "small"
+    },
+    {
+      "start": 44.28,
+      "end": 44.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.46,
+      "end": 44.55,
+      "mouth": "small"
+    },
+    {
+      "start": 44.55,
+      "end": 44.73,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.73,
+      "end": 44.91,
+      "mouth": "small"
+    },
+    {
+      "start": 44.91,
+      "end": 45.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.09,
+      "end": 45.18,
+      "mouth": "small"
+    },
+    {
+      "start": 45.18,
+      "end": 45.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.27,
+      "end": 45.45,
+      "mouth": "small"
+    },
+    {
+      "start": 45.45,
+      "end": 45.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.72,
+      "end": 45.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.9,
+      "end": 46.17,
+      "mouth": "small"
+    },
+    {
+      "start": 46.17,
+      "end": 46.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.26,
+      "end": 46.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.35,
+      "end": 46.62,
+      "mouth": "small"
+    },
+    {
+      "start": 46.62,
+      "end": 46.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.8,
+      "end": 47.16,
+      "mouth": "small"
+    },
+    {
+      "start": 47.16,
+      "end": 47.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.88,
+      "end": 47.97,
+      "mouth": "small"
+    },
+    {
+      "start": 47.97,
+      "end": 48.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.06,
+      "end": 48.15,
+      "mouth": "small"
+    },
+    {
+      "start": 48.15,
+      "end": 48.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.24,
+      "end": 48.42,
+      "mouth": "small"
+    },
+    {
+      "start": 48.42,
+      "end": 48.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.51,
+      "end": 48.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.6,
+      "end": 48.69,
+      "mouth": "small"
+    },
+    {
+      "start": 48.69,
+      "end": 48.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.78,
+      "end": 49.14,
+      "mouth": "small"
+    },
+    {
+      "start": 49.14,
+      "end": 49.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.23,
+      "end": 49.77,
+      "mouth": "small"
+    },
+    {
+      "start": 49.77,
+      "end": 50.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.04,
+      "end": 50.22,
+      "mouth": "small"
+    },
+    {
+      "start": 50.22,
+      "end": 50.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.31,
+      "end": 50.49,
+      "mouth": "small"
+    },
+    {
+      "start": 50.49,
+      "end": 50.58,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.58,
+      "end": 50.94,
+      "mouth": "small"
+    },
+    {
+      "start": 50.94,
+      "end": 51.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.03,
+      "end": 51.21,
+      "mouth": "small"
+    },
+    {
+      "start": 51.21,
+      "end": 51.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.3,
+      "end": 51.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.39,
+      "end": 51.66,
+      "mouth": "small"
+    },
+    {
+      "start": 51.66,
+      "end": 51.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.75,
+      "end": 51.84,
+      "mouth": "small"
+    },
+    {
+      "start": 51.84,
+      "end": 51.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.93,
+      "end": 52.11,
+      "mouth": "small"
+    },
+    {
+      "start": 52.11,
+      "end": 52.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.38,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 53.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.01,
+      "end": 53.1,
+      "mouth": "small"
+    },
+    {
+      "start": 53.1,
+      "end": 53.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.28,
+      "end": 53.37,
+      "mouth": "small"
+    },
+    {
+      "start": 53.37,
+      "end": 53.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.46,
+      "end": 53.91,
+      "mouth": "small"
+    },
+    {
+      "start": 53.91,
+      "end": 54.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.0,
+      "end": 54.27,
+      "mouth": "small"
+    },
+    {
+      "start": 54.27,
+      "end": 54.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.36,
+      "end": 54.45,
+      "mouth": "small"
+    },
+    {
+      "start": 54.45,
+      "end": 54.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.99,
+      "end": 55.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.08,
+      "end": 55.17,
+      "mouth": "small"
+    },
+    {
+      "start": 55.17,
+      "end": 55.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.26,
+      "end": 55.62,
+      "mouth": "small"
+    },
+    {
+      "start": 55.62,
+      "end": 56.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.07,
+      "end": 56.52,
+      "mouth": "small"
+    },
+    {
+      "start": 56.52,
+      "end": 56.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.61,
+      "end": 57.06,
+      "mouth": "small"
+    },
+    {
+      "start": 57.06,
+      "end": 57.51,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "The",
+      "start": 0.0,
+      "end": 0.5600000023841858
+    },
+    {
+      "word": "Corvette",
+      "start": 0.5600000023841858,
+      "end": 0.8600000143051147
+    },
+    {
+      "word": "Z06",
+      "start": 0.8600000143051147,
+      "end": 1.4800000190734863
+    },
+    {
+      "word": "3LZ",
+      "start": 1.4800000190734863,
+      "end": 2.380000114440918
+    },
+    {
+      "word": "screams",
+      "start": 2.380000114440918,
+      "end": 3.2200000286102295
+    },
+    {
+      "word": "performance",
+      "start": 3.2200000286102295,
+      "end": 3.700000047683716
+    },
+    {
+      "word": "from",
+      "start": 3.700000047683716,
+      "end": 3.859999895095825
+    },
+    {
+      "word": "the",
+      "start": 3.859999895095825,
+      "end": 4.0
+    },
+    {
+      "word": "get",
+      "start": 4.0,
+      "end": 4.239999771118164
+    },
+    {
+      "word": "go",
+      "start": 4.239999771118164,
+      "end": 4.360000133514404
+    },
+    {
+      "word": "Check",
+      "start": 5.360000133514404,
+      "end": 5.360000133514404
+    },
+    {
+      "word": "out",
+      "start": 5.360000133514404,
+      "end": 5.5
+    },
+    {
+      "word": "the",
+      "start": 5.5,
+      "end": 5.659999847412109
+    },
+    {
+      "word": "aggressive",
+      "start": 5.659999847412109,
+      "end": 5.940000057220459
+    },
+    {
+      "word": "front",
+      "start": 5.940000057220459,
+      "end": 6.199999809265137
+    },
+    {
+      "word": "air",
+      "start": 6.199999809265137,
+      "end": 6.440000057220459
+    },
+    {
+      "word": "intake",
+      "start": 6.440000057220459,
+      "end": 6.639999866485596
+    },
+    {
+      "word": "and",
+      "start": 6.639999866485596,
+      "end": 6.800000190734863
+    },
+    {
+      "word": "hood",
+      "start": 6.800000190734863,
+      "end": 6.920000076293945
+    },
+    {
+      "word": "vent",
+      "start": 6.920000076293945,
+      "end": 7.519999980926514
+    },
+    {
+      "word": "crafted",
+      "start": 7.880000114440918,
+      "end": 7.880000114440918
+    },
+    {
+      "word": "to",
+      "start": 7.880000114440918,
+      "end": 8.460000038146973
+    },
+    {
+      "word": "optimize",
+      "start": 8.460000038146973,
+      "end": 8.460000038146973
+    },
+    {
+      "word": "airflow",
+      "start": 8.460000038146973,
+      "end": 8.859999656677246
+    },
+    {
+      "word": "and",
+      "start": 8.859999656677246,
+      "end": 9.260000228881836
+    },
+    {
+      "word": "cooling",
+      "start": 9.260000228881836,
+      "end": 9.260000228881836
+    },
+    {
+      "word": "for",
+      "start": 9.260000228881836,
+      "end": 9.460000038146973
+    },
+    {
+      "word": "this",
+      "start": 9.460000038146973,
+      "end": 9.65999984741211
+    },
+    {
+      "word": "beastly",
+      "start": 9.65999984741211,
+      "end": 10.0600004196167
+    },
+    {
+      "word": "machine",
+      "start": 10.0600004196167,
+      "end": 10.319999694824219
+    },
+    {
+      "word": "Along",
+      "start": 11.100000381469727,
+      "end": 11.239999771118164
+    },
+    {
+      "word": "the",
+      "start": 11.239999771118164,
+      "end": 11.420000076293945
+    },
+    {
+      "word": "side",
+      "start": 11.420000076293945,
+      "end": 11.579999923706055
+    },
+    {
+      "word": "the",
+      "start": 11.699999809265137,
+      "end": 11.800000190734863
+    },
+    {
+      "word": "prominent",
+      "start": 11.800000190734863,
+      "end": 12.079999923706055
+    },
+    {
+      "word": "Z06",
+      "start": 12.079999923706055,
+      "end": 12.5600004196167
+    },
+    {
+      "word": "badge",
+      "start": 12.5600004196167,
+      "end": 12.84000015258789
+    },
+    {
+      "word": "isn't",
+      "start": 12.84000015258789,
+      "end": 13.0600004196167
+    },
+    {
+      "word": "just",
+      "start": 13.0600004196167,
+      "end": 13.279999732971191
+    },
+    {
+      "word": "an",
+      "start": 13.279999732971191,
+      "end": 13.720000267028809
+    },
+    {
+      "word": "aesthetic",
+      "start": 13.720000267028809,
+      "end": 13.720000267028809
+    },
+    {
+      "word": "detail",
+      "start": 13.720000267028809,
+      "end": 14.079999923706055
+    },
+    {
+      "word": "it's",
+      "start": 14.5,
+      "end": 14.699999809265137
+    },
+    {
+      "word": "a",
+      "start": 14.699999809265137,
+      "end": 14.920000076293945
+    },
+    {
+      "word": "declaration",
+      "start": 14.920000076293945,
+      "end": 15.180000305175781
+    },
+    {
+      "word": "of",
+      "start": 15.260000228881836,
+      "end": 15.859999656677246
+    },
+    {
+      "word": "intent",
+      "start": 15.859999656677246,
+      "end": 15.859999656677246
+    },
+    {
+      "word": "highlighting",
+      "start": 16.280000686645508,
+      "end": 16.280000686645508
+    },
+    {
+      "word": "its",
+      "start": 16.280000686645508,
+      "end": 16.520000457763672
+    },
+    {
+      "word": "legendary",
+      "start": 16.520000457763672,
+      "end": 16.920000076293945
+    },
+    {
+      "word": "high",
+      "start": 16.920000076293945,
+      "end": 17.280000686645508
+    },
+    {
+      "word": "performance",
+      "start": 17.280000686645508,
+      "end": 17.579999923706055
+    },
+    {
+      "word": "pedigree",
+      "start": 17.579999923706055,
+      "end": 18.440000534057617
+    },
+    {
+      "word": "Under",
+      "start": 18.81999969482422,
+      "end": 18.920000076293945
+    },
+    {
+      "word": "the",
+      "start": 18.920000076293945,
+      "end": 19.219999313354492
+    },
+    {
+      "word": "hood",
+      "start": 19.219999313354492,
+      "end": 19.219999313354492
+    },
+    {
+      "word": "the",
+      "start": 19.3799991607666,
+      "end": 19.639999389648438
+    },
+    {
+      "word": "2011",
+      "start": 19.639999389648438,
+      "end": 20.079999923706055
+    },
+    {
+      "word": "Corvette",
+      "start": 20.079999923706055,
+      "end": 20.420000076293945
+    },
+    {
+      "word": "Z06",
+      "start": 20.420000076293945,
+      "end": 20.8799991607666
+    },
+    {
+      "word": "is",
+      "start": 20.8799991607666,
+      "end": 21.1200008392334
+    },
+    {
+      "word": "powered",
+      "start": 21.1200008392334,
+      "end": 21.299999237060547
+    },
+    {
+      "word": "by",
+      "start": 21.299999237060547,
+      "end": 21.520000457763672
+    },
+    {
+      "word": "a",
+      "start": 21.520000457763672,
+      "end": 21.700000762939453
+    },
+    {
+      "word": "monstrous",
+      "start": 21.700000762939453,
+      "end": 22.059999465942383
+    },
+    {
+      "word": "7",
+      "start": 22.059999465942383,
+      "end": 22.420000076293945
+    },
+    {
+      "word": "0",
+      "start": 22.420000076293945,
+      "end": 22.899999618530273
+    },
+    {
+      "word": "liter",
+      "start": 22.899999618530273,
+      "end": 23.079999923706055
+    },
+    {
+      "word": "LS7",
+      "start": 23.079999923706055,
+      "end": 23.700000762939453
+    },
+    {
+      "word": "V8",
+      "start": 23.700000762939453,
+      "end": 24.040000915527344
+    },
+    {
+      "word": "delivering",
+      "start": 24.579999923706055,
+      "end": 24.780000686645508
+    },
+    {
+      "word": "505",
+      "start": 25.020000457763672,
+      "end": 25.6200008392334
+    },
+    {
+      "word": "horsepower",
+      "start": 25.6200008392334,
+      "end": 26.059999465942383
+    },
+    {
+      "word": "and",
+      "start": 26.059999465942383,
+      "end": 26.479999542236328
+    },
+    {
+      "word": "470",
+      "start": 26.479999542236328,
+      "end": 27.219999313354492
+    },
+    {
+      "word": "pound",
+      "start": 27.219999313354492,
+      "end": 27.600000381469727
+    },
+    {
+      "word": "feet",
+      "start": 27.600000381469727,
+      "end": 27.600000381469727
+    },
+    {
+      "word": "of",
+      "start": 27.600000381469727,
+      "end": 27.959999084472656
+    },
+    {
+      "word": "torque",
+      "start": 27.959999084472656,
+      "end": 27.979999542236328
+    },
+    {
+      "word": "This",
+      "start": 28.6299991607666,
+      "end": 28.8799991607666
+    },
+    {
+      "word": "engine",
+      "start": 28.8799991607666,
+      "end": 29.079999923706055
+    },
+    {
+      "word": "is",
+      "start": 29.079999923706055,
+      "end": 29.239999771118164
+    },
+    {
+      "word": "all",
+      "start": 29.239999771118164,
+      "end": 29.459999084472656
+    },
+    {
+      "word": "about",
+      "start": 29.459999084472656,
+      "end": 29.639999389648438
+    },
+    {
+      "word": "raw",
+      "start": 29.639999389648438,
+      "end": 29.920000076293945
+    },
+    {
+      "word": "power",
+      "start": 29.920000076293945,
+      "end": 30.18000030517578
+    },
+    {
+      "word": "and",
+      "start": 30.18000030517578,
+      "end": 30.559999465942383
+    },
+    {
+      "word": "engineering",
+      "start": 30.559999465942383,
+      "end": 30.899999618530273
+    },
+    {
+      "word": "finesse",
+      "start": 30.899999618530273,
+      "end": 31.31999969482422
+    },
+    {
+      "word": "Inside",
+      "start": 32.34000015258789,
+      "end": 32.34000015258789
+    },
+    {
+      "word": "the",
+      "start": 32.34000015258789,
+      "end": 32.5
+    },
+    {
+      "word": "six",
+      "start": 32.5,
+      "end": 32.720001220703125
+    },
+    {
+      "word": "speed",
+      "start": 32.720001220703125,
+      "end": 32.880001068115234
+    },
+    {
+      "word": "manual",
+      "start": 32.880001068115234,
+      "end": 33.18000030517578
+    },
+    {
+      "word": "gearbox",
+      "start": 33.18000030517578,
+      "end": 33.58000183105469
+    },
+    {
+      "word": "ensures",
+      "start": 33.58000183105469,
+      "end": 33.880001068115234
+    },
+    {
+      "word": "a",
+      "start": 33.880001068115234,
+      "end": 34.099998474121094
+    },
+    {
+      "word": "pure",
+      "start": 34.099998474121094,
+      "end": 34.31999969482422
+    },
+    {
+      "word": "driving",
+      "start": 34.31999969482422,
+      "end": 34.619998931884766
+    },
+    {
+      "word": "experience",
+      "start": 34.619998931884766,
+      "end": 35.13999938964844
+    },
+    {
+      "word": "The",
+      "start": 35.65999984741211,
+      "end": 35.779998779296875
+    },
+    {
+      "word": "metal",
+      "start": 35.779998779296875,
+      "end": 36.0
+    },
+    {
+      "word": "shifter",
+      "start": 36.0,
+      "end": 36.18000030517578
+    },
+    {
+      "word": "feels",
+      "start": 36.18000030517578,
+      "end": 36.47999954223633
+    },
+    {
+      "word": "robust",
+      "start": 36.47999954223633,
+      "end": 36.81999969482422
+    },
+    {
+      "word": "and",
+      "start": 36.81999969482422,
+      "end": 37.380001068115234
+    },
+    {
+      "word": "direct",
+      "start": 37.380001068115234,
+      "end": 37.380001068115234
+    },
+    {
+      "word": "making",
+      "start": 37.81999969482422,
+      "end": 37.81999969482422
+    },
+    {
+      "word": "every",
+      "start": 37.81999969482422,
+      "end": 38.13999938964844
+    },
+    {
+      "word": "shift",
+      "start": 38.13999938964844,
+      "end": 38.34000015258789
+    },
+    {
+      "word": "a",
+      "start": 38.34000015258789,
+      "end": 38.70000076293945
+    },
+    {
+      "word": "thrill",
+      "start": 38.70000076293945,
+      "end": 38.70000076293945
+    },
+    {
+      "word": "for",
+      "start": 38.70000076293945,
+      "end": 38.900001525878906
+    },
+    {
+      "word": "true",
+      "start": 38.900001525878906,
+      "end": 39.119998931884766
+    },
+    {
+      "word": "driving",
+      "start": 39.119998931884766,
+      "end": 39.400001525878906
+    },
+    {
+      "word": "enthusiasts",
+      "start": 39.459999084472656,
+      "end": 39.959999084472656
+    },
+    {
+      "word": "At",
+      "start": 40.52000045776367,
+      "end": 40.65999984741211
+    },
+    {
+      "word": "the",
+      "start": 40.65999984741211,
+      "end": 40.900001525878906
+    },
+    {
+      "word": "rear",
+      "start": 40.900001525878906,
+      "end": 40.939998626708984
+    },
+    {
+      "word": "the",
+      "start": 41.040000915527344,
+      "end": 41.18000030517578
+    },
+    {
+      "word": "quad",
+      "start": 41.18000030517578,
+      "end": 41.34000015258789
+    },
+    {
+      "word": "exhaust",
+      "start": 41.34000015258789,
+      "end": 41.599998474121094
+    },
+    {
+      "word": "setup",
+      "start": 41.599998474121094,
+      "end": 41.86000061035156
+    },
+    {
+      "word": "is",
+      "start": 41.86000061035156,
+      "end": 42.040000915527344
+    },
+    {
+      "word": "more",
+      "start": 42.040000915527344,
+      "end": 42.220001220703125
+    },
+    {
+      "word": "than",
+      "start": 42.220001220703125,
+      "end": 42.36000061035156
+    },
+    {
+      "word": "eye",
+      "start": 42.36000061035156,
+      "end": 42.7400016784668
+    },
+    {
+      "word": "candy",
+      "start": 42.7400016784668,
+      "end": 42.7400016784668
+    },
+    {
+      "word": "It",
+      "start": 43.220001220703125,
+      "end": 43.400001525878906
+    },
+    {
+      "word": "allows",
+      "start": 43.400001525878906,
+      "end": 43.540000915527344
+    },
+    {
+      "word": "the",
+      "start": 43.540000915527344,
+      "end": 43.7599983215332
+    },
+    {
+      "word": "Z06",
+      "start": 43.7599983215332,
+      "end": 44.0
+    },
+    {
+      "word": "to",
+      "start": 44.0,
+      "end": 44.29999923706055
+    },
+    {
+      "word": "breathe",
+      "start": 44.29999923706055,
+      "end": 44.439998626708984
+    },
+    {
+      "word": "better",
+      "start": 44.439998626708984,
+      "end": 44.720001220703125
+    },
+    {
+      "word": "and",
+      "start": 44.720001220703125,
+      "end": 45.040000915527344
+    },
+    {
+      "word": "roar",
+      "start": 45.040000915527344,
+      "end": 45.08000183105469
+    },
+    {
+      "word": "louder",
+      "start": 45.08000183105469,
+      "end": 45.380001068115234
+    },
+    {
+      "word": "announcing",
+      "start": 45.81999969482422,
+      "end": 46.040000915527344
+    },
+    {
+      "word": "its",
+      "start": 46.040000915527344,
+      "end": 46.2400016784668
+    },
+    {
+      "word": "presence",
+      "start": 46.2400016784668,
+      "end": 46.5
+    },
+    {
+      "word": "even",
+      "start": 46.5,
+      "end": 46.7400016784668
+    },
+    {
+      "word": "at",
+      "start": 46.7400016784668,
+      "end": 46.86000061035156
+    },
+    {
+      "word": "a",
+      "start": 46.86000061035156,
+      "end": 47.31999969482422
+    },
+    {
+      "word": "Originally",
+      "start": 48.02000045776367,
+      "end": 48.279998779296875
+    },
+    {
+      "word": "priced",
+      "start": 48.279998779296875,
+      "end": 48.560001373291016
+    },
+    {
+      "word": "around",
+      "start": 48.560001373291016,
+      "end": 48.84000015258789
+    },
+    {
+      "word": "75k",
+      "start": 48.84000015258789,
+      "end": 49.47999954223633
+    },
+    {
+      "word": "the",
+      "start": 49.84000015258789,
+      "end": 50.15999984741211
+    },
+    {
+      "word": "Z06",
+      "start": 50.15999984741211,
+      "end": 50.52000045776367
+    },
+    {
+      "word": "now",
+      "start": 50.52000045776367,
+      "end": 50.86000061035156
+    },
+    {
+      "word": "trades",
+      "start": 50.86000061035156,
+      "end": 50.939998626708984
+    },
+    {
+      "word": "for",
+      "start": 50.939998626708984,
+      "end": 51.08000183105469
+    },
+    {
+      "word": "about",
+      "start": 51.08000183105469,
+      "end": 51.2400016784668
+    },
+    {
+      "word": "45k",
+      "start": 51.2400016784668,
+      "end": 51.91999816894531
+    },
+    {
+      "word": "with",
+      "start": 52.31999969482422,
+      "end": 52.5
+    },
+    {
+      "word": "a",
+      "start": 52.5,
+      "end": 52.619998931884766
+    },
+    {
+      "word": "depreciation",
+      "start": 52.619998931884766,
+      "end": 53.119998931884766
+    },
+    {
+      "word": "rate",
+      "start": 53.119998931884766,
+      "end": 53.29999923706055
+    },
+    {
+      "word": "of",
+      "start": 53.29999923706055,
+      "end": 53.439998626708984
+    },
+    {
+      "word": "roughly",
+      "start": 53.439998626708984,
+      "end": 53.599998474121094
+    },
+    {
+      "word": "8",
+      "start": 53.599998474121094,
+      "end": 53.81999969482422
+    },
+    {
+      "word": "per",
+      "start": 54.060001373291016,
+      "end": 54.279998779296875
+    },
+    {
+      "word": "year",
+      "start": 54.279998779296875,
+      "end": 54.41999816894531
+    },
+    {
+      "word": "This",
+      "start": 54.41999816894531,
+      "end": 55.119998931884766
+    },
+    {
+      "word": "makes",
+      "start": 55.119998931884766,
+      "end": 55.29999923706055
+    },
+    {
+      "word": "it",
+      "start": 55.29999923706055,
+      "end": 55.41999816894531
+    },
+    {
+      "word": "a",
+      "start": 55.41999816894531,
+      "end": 55.58000183105469
+    },
+    {
+      "word": "compelling",
+      "start": 55.58000183105469,
+      "end": 55.779998779296875
+    },
+    {
+      "word": "value",
+      "start": 55.779998779296875,
+      "end": 56.13999938964844
+    },
+    {
+      "word": "for",
+      "start": 56.13999938964844,
+      "end": 56.36000061035156
+    },
+    {
+      "word": "performance",
+      "start": 56.36000061035156,
+      "end": 56.70000076293945
+    },
+    {
+      "word": "seekers",
+      "start": 56.70000076293945,
+      "end": 57.0
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/chevrolet-corvette-z06-3lz/other_detail-01.jpeg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/chevrolet-corvette-z06-3lz/interior-01.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vQWOx0m/2011-chevrolet-corvette-z06-3lz",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 63000,
+    "sale_type": "sold",
+    "page_title": "2011 Chevrolet Corvette Z06 3LZ",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-chevrolet-corvette-z06-3lz-20260904231426/voice_auditions/onyx.mp3",
+    "british_narrator": "single-chevrolet-corvette-z06-3lz-20260904231426/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-chevrolet-corvette-z06-3lz-20260904231426/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-chevrolet-corvette-z06-3lz-20260904231426/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-chevrolet-corvette-z06-3lz-20260904231426/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-chevrolet-corvette-z06-3lz-20260904231426/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "left",
+  "video": "single_car_short.mp4"
+}
