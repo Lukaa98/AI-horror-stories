@@ -1,0 +1,305 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 12,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "X5 M",
+      "visible_match_evidence": [
+        "bodywork",
+        "lights",
+        "proportions",
+        "interior design"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 9,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "M",
+      "visible_match_evidence": [
+        "characteristic kidney grille",
+        "X5 body style",
+        "M badge",
+        "headlight design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "M",
+      "visible_match_evidence": [
+        "bodywork shape",
+        "wheel design",
+        "headlight style"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "X5 M",
+      "visible_match_evidence": [
+        "BMW badge",
+        "X5 M badge",
+        "2023 body design",
+        "unique rear tail lights"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "X5 M",
+      "visible_match_evidence": [
+        "BMW badge",
+        "rear design",
+        "taillights",
+        "exhaust tips"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 2,
+      "composition_score": 2,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "The image is not a car photo but an invoice document.",
+      "path": "exterior-10.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "M",
+      "visible_match_evidence": [
+        "invoice references BMW X5",
+        "2023 model year indicated"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 6,
+      "shot_type": "other",
+      "scene_fit_tags": [
+        "detail"
+      ],
+      "quality_score": 5,
+      "composition_score": 4,
+      "target_match_confidence": 7,
+      "reject": true,
+      "reason": "Image is an invoice, not a photo of a car.",
+      "path": "exterior-11.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "invoice mention of BMW X5",
+        "production year 2023"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": null,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 3,
+      "composition_score": 2,
+      "target_match_confidence": 5,
+      "reject": true,
+      "reason": "not an image of the car, document instead",
+      "path": "exterior-12.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 1,
+      "composition_score": 1,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show a vehicle clearly; it appears to be a cropped or partial view.",
+      "path": "exterior-14.png",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "X5 M",
+      "visible_match_evidence": [
+        "M badge on steering wheel",
+        "2023 dashboard layout",
+        "red leather interior"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "X5 M",
+      "visible_match_evidence": [
+        "M badge on seats",
+        "sport seat design",
+        "red leather interior"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "X5 M",
+      "visible_match_evidence": [
+        "red leather interior",
+        "specific interior design",
+        "layout consistent with BMW X5"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    }
+  ]
+}

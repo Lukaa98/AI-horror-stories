@@ -1,0 +1,502 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-04T04:55:39.783Z",
+  "query": "Range Rover P530 Sv",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3vp022WM/2023-range-rover-p530-sv?ss_id=bf500be5-2e61-4a28-aab4-8e8cff4b8ab1&ref=pr_1_1",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3vp022WM/2023-range-rover-p530-sv?ss_id=bf500be5-2e61-4a28-aab4-8e8cff4b8ab1&ref=pr_1_1",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 26,
+      "sale_price": 191000,
+      "sale_type": "sold",
+      "page_title": "2023 Range Rover P530 SV"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vp022WM/2023-range-rover-p530-sv?ss_id=bf500be5-2e61-4a28-aab4-8e8cff4b8ab1&ref=pr_1_1",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 191000,
+    "sale_type": "sold",
+    "page_title": "2023 Range Rover P530 SV",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/KD4GJnV0-TEdN4DOx5m-(edit).jpg?t=170312913654",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Range Rover P530 SV",
+      "width": 1523,
+      "height": 1015,
+      "bytes": 217314
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/KD4GJnV0-XvkGGfHEVy-(edit).jpg?t=170312916613",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Range Rover P530 SV",
+      "width": 542,
+      "height": 361,
+      "bytes": 126694
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/KD4GJnV0-YqXFIV9UJ8-(edit).jpg?t=170312918661",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Range Rover P530 SV",
+      "width": 542,
+      "height": 361,
+      "bytes": 223502
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/KD4GJnV0-dxRJdF9wJW-(edit).jpg?t=170312923598",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Range Rover P530 SV",
+      "width": 542,
+      "height": 361,
+      "bytes": 206554
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/KD4GJnV0-he-F0hnrmE-(edit).jpg?t=170312928119",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Range Rover P530 SV",
+      "width": 542,
+      "height": 361,
+      "bytes": 168640
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/21fc1c77d80edbd75542aa1d49353814e8f50358/photos/s-MMc8tZcNAO.jpg?t=170258726245",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Range Rover P530 SV",
+      "width": 542,
+      "height": 361,
+      "bytes": 236764
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/21fc1c77d80edbd75542aa1d49353814e8f50358/photos/s-WIjTIDg8V0.jpg?t=170258727820",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Range Rover P530 SV",
+      "width": 542,
+      "height": 361,
+      "bytes": 218695
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/21fc1c77d80edbd75542aa1d49353814e8f50358/photos/s-5Qor_57m4x.jpg?t=170258727258",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Range Rover P530 SV",
+      "width": 542,
+      "height": 361,
+      "bytes": 228739
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/21fc1c77d80edbd75542aa1d49353814e8f50358/photos/s-yFJYjl1EC9.jpg?t=170258734920",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Range Rover P530 SV",
+      "width": 542,
+      "height": 361,
+      "bytes": 157838
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/21fc1c77d80edbd75542aa1d49353814e8f50358/photos/rwZRLYYy-HwnQl71.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2202 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/756e397c27c607c04e699428f2809b6db3416a9c/photos/rEvk4nLb-izG9hxy.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 8565 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/b2364ba4f7b863b69b22cfb76a3be0c09cbaeb66/photos/3L0NoVqy-dihzzUgeW.png",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 7121 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/91032ad7bbcb6cf72875e8e8207dcfba80173f7c/photos/9AM7lVl8-mJGOmjW.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2787 bytes"
+    },
+    {
+      "path": "interior-14.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/d11bcc3d1dc79f4900c7aeeacd2f344385857aac/photos/36MbeQZx-TRI-HhNgqbO.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 24759
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Range Rover",
+        "detected_model": "Rover",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "P530 Sv",
+        "visible_match_evidence": [
+          "distinctive bodywork",
+          "proportions",
+          "tail lights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Range Rover",
+        "detected_model": "Rover",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "P530 Sv",
+        "visible_match_evidence": [
+          "bodywork design is consistent with Range Rover 2023",
+          "front grille shape matches P530",
+          "wheel design aligned with luxury variant"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Range Rover",
+        "detected_model": "Rover",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "P530 Sv",
+        "visible_match_evidence": [
+          "distinctive bodywork",
+          "tail light design",
+          "overall proportions",
+          "large wheels"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Land Rover",
+        "detected_model": "Range Rover",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "P530 Sv",
+        "visible_match_evidence": [
+          "design features consistent with 2023 Range Rover",
+          "prominent front grille",
+          "LED headlight shape",
+          "overall proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Range Rover",
+        "detected_model": "Rover",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "P530 Sv",
+        "visible_match_evidence": [
+          "rear design",
+          "badging",
+          "tail lights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Range Rover",
+        "detected_model": "Rover",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "P530 Sv",
+        "visible_match_evidence": [
+          "interior design features",
+          "dashboard layout",
+          "steering wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Range Rover",
+        "detected_model": "Rover",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design meets luxury expectations",
+          "characteristic seating design and layout"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Range Rover",
+        "detected_model": "Rover",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "technology features",
+          "material quality"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not the main subject; does not show the target vehicle.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 3,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not clearly show the target vehicle and lacks identifiable features.",
+        "path": "interior-14.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

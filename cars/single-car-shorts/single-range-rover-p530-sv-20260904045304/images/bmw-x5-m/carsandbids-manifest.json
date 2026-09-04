@@ -1,0 +1,633 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-04T05:02:37.531Z",
+  "query": "BMW X5 M",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/bmw/x5?start_year=2023&end_year=2023&csort=10",
+  "search_result_count": 4,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9nEAVy4J/2023-bmw-x5-m-competition",
+      "title": "2023 Bmw X5 M Competition",
+      "text": "Sold for $91,000",
+      "titleYear": 2023,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KDOOYwAa/2023-bmw-x5-m50i",
+      "title": "2023 Bmw X5 M50i",
+      "text": "Sold for $67,000",
+      "titleYear": 2023,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rbPqm0jL/2023-bmw-x5-m50i",
+      "title": "2023 Bmw X5 M50i",
+      "text": "Sold for $60,000",
+      "titleYear": 2023,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rky1nj1L/2023-bmw-x5-m-competition",
+      "title": "2023 Bmw X5 M Competition",
+      "text": "Sold for $59,750",
+      "titleYear": 2023,
+      "score": 68
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9nEAVy4J/2023-bmw-x5-m-competition",
+      "title": "2023 Bmw X5 M Competition",
+      "text": "Sold for $91,000",
+      "titleYear": 2023,
+      "score": 68,
+      "usable_image_count": 28,
+      "sale_price": 91000,
+      "sale_type": "sold",
+      "page_title": "2023 BMW X5 M Competition"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KDOOYwAa/2023-bmw-x5-m50i",
+      "title": "2023 Bmw X5 M50i",
+      "text": "Sold for $67,000",
+      "titleYear": 2023,
+      "score": 68,
+      "usable_image_count": 11,
+      "sale_price": 67000,
+      "sale_type": "sold",
+      "page_title": "2023 BMW X5 M50i"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rbPqm0jL/2023-bmw-x5-m50i",
+      "title": "2023 Bmw X5 M50i",
+      "text": "Sold for $60,000",
+      "titleYear": 2023,
+      "score": 68,
+      "usable_image_count": 12,
+      "sale_price": 60000,
+      "sale_type": "sold",
+      "page_title": "2023 BMW X5 M50i"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rky1nj1L/2023-bmw-x5-m-competition",
+      "title": "2023 Bmw X5 M Competition",
+      "text": "Sold for $59,750",
+      "titleYear": 2023,
+      "score": 68,
+      "usable_image_count": 16,
+      "sale_price": 59750,
+      "sale_type": "sold",
+      "page_title": "2023 BMW X5 M Competition"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9nEAVy4J/2023-bmw-x5-m-competition",
+    "title": "2023 Bmw X5 M Competition",
+    "text": "Sold for $91,000",
+    "titleYear": 2023,
+    "score": 68,
+    "sale_price": 91000,
+    "sale_type": "sold",
+    "page_title": "2023 BMW X5 M Competition",
+    "year": 2023,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/3goMaOp8-fOg6ou9Fds-(edit).jpg?t=170052040419",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2023 BMW X5 M Competition",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 471814
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/3goMaOp8-eSB8Y57kGi-(edit).jpg?t=170052059640",
+      "labels": [
+        "interior"
+      ],
+      "section": "2023 BMW X5 M Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 246479
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/3goMaOp8-muIhCCEnjc-(edit).jpg?t=170052064137",
+      "labels": [
+        "interior"
+      ],
+      "section": "2023 BMW X5 M Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 327928
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/3goMaOp8-VqbnMZvIS5-(edit).jpg?t=170052068348",
+      "labels": [
+        "interior"
+      ],
+      "section": "2023 BMW X5 M Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 225515
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/3goMaOp8-iihYzplQTT-(edit).jpg?t=170052043457",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2023 BMW X5 M Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 280455
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/3goMaOp8-UUcMTHXr1u-(edit).jpg?t=170052046229",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2023 BMW X5 M Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 407384
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/3goMaOp8-D3lOgQohRn-(edit).jpg?t=170052050199",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2023 BMW X5 M Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 435245
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/20309e251cb7341d1fb94cb5d4546882260d2202/photos/3goMaOp8-y-vnwQ4fHS-(edit).jpg?t=170052053800",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2023 BMW X5 M Competition",
+      "width": 542,
+      "height": 361,
+      "bytes": 386086
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c11e829ced233f40e95799c20efae68e799469e8/photos/Kmnja200-cKQgJr2Ki.png",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 7238 bytes"
+    },
+    {
+      "path": "exterior-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c11e829ced233f40e95799c20efae68e799469e8/attachments/9nEAVy4J-UzfUTqCjC.jpeg?t=170234678699",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 231,
+      "bytes": 243758
+    },
+    {
+      "path": "exterior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c11e829ced233f40e95799c20efae68e799469e8/attachments/9nEAVy4J-SNc6PLMH9D.jpeg?t=170234678533",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 228,
+      "bytes": 152175
+    },
+    {
+      "path": "exterior-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c11e829ced233f40e95799c20efae68e799469e8/attachments/9nEAVy4J-QkaTDPDe3w.jpeg?t=170234678599",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 228,
+      "bytes": 234257
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/e22b2655426eafdf2a19956a15665090e37468ba/photos/rN50LW6X-armF3rr5c.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 17570 bytes"
+    },
+    {
+      "path": "exterior-14.png",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/27a5109239081f652d123914c34c277be25ba530/photos/KmJkQVEm-Zpa0QApsSh.png",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 59515
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6e1d05565dae13ce2204ee49b3111278/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6e1d05565dae13ce2204ee49b3111278/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 BMW X5 M50i",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6e1d05565dae13ce2204ee49b3111278/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rbPqm0jL/2023-bmw-x5-m50i",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6e1d05565dae13ce2204ee49b3111278/manifest/video.m3u8",
+      "auction_title": "2023 BMW X5 M50i",
+      "auction_year": 2023,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/84ad4d060723c990d8590192c6e68dc6/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/84ad4d060723c990d8590192c6e68dc6/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 BMW X5 M50i",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/84ad4d060723c990d8590192c6e68dc6/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rbPqm0jL/2023-bmw-x5-m50i",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/84ad4d060723c990d8590192c6e68dc6/manifest/video.m3u8",
+      "auction_title": "2023 BMW X5 M50i",
+      "auction_year": 2023,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f09cfae8cf4a85666e8e1af35df725f5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f09cfae8cf4a85666e8e1af35df725f5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 BMW X5 M50i",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f09cfae8cf4a85666e8e1af35df725f5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rbPqm0jL/2023-bmw-x5-m50i",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f09cfae8cf4a85666e8e1af35df725f5/manifest/video.m3u8",
+      "auction_title": "2023 BMW X5 M50i",
+      "auction_year": 2023,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f3dc5301690f071db5b25301bbeed1af/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f3dc5301690f071db5b25301bbeed1af/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 BMW X5 M50i",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f3dc5301690f071db5b25301bbeed1af/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rbPqm0jL/2023-bmw-x5-m50i",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f3dc5301690f071db5b25301bbeed1af/manifest/video.m3u8",
+      "auction_title": "2023 BMW X5 M50i",
+      "auction_year": 2023,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d4a9764149c730fe68f0012e3a134653/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d4a9764149c730fe68f0012e3a134653/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 BMW X5 M50i",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d4a9764149c730fe68f0012e3a134653/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rbPqm0jL/2023-bmw-x5-m50i",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d4a9764149c730fe68f0012e3a134653/manifest/video.m3u8",
+      "auction_title": "2023 BMW X5 M50i",
+      "auction_year": 2023,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f667ffab9a6fe6fc49b791537bc611d5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f667ffab9a6fe6fc49b791537bc611d5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 BMW X5 M Competition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f667ffab9a6fe6fc49b791537bc611d5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rky1nj1L/2023-bmw-x5-m-competition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f667ffab9a6fe6fc49b791537bc611d5/manifest/video.m3u8",
+      "auction_title": "2023 BMW X5 M Competition",
+      "auction_year": 2023,
+      "search_score": 68
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 12,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "X5 M",
+        "visible_match_evidence": [
+          "bodywork",
+          "lights",
+          "proportions",
+          "interior design"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "M",
+        "visible_match_evidence": [
+          "characteristic kidney grille",
+          "X5 body style",
+          "M badge",
+          "headlight design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "M",
+        "visible_match_evidence": [
+          "bodywork shape",
+          "wheel design",
+          "headlight style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "X5 M",
+        "visible_match_evidence": [
+          "BMW badge",
+          "X5 M badge",
+          "2023 body design",
+          "unique rear tail lights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "X5 M",
+        "visible_match_evidence": [
+          "BMW badge",
+          "rear design",
+          "taillights",
+          "exhaust tips"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "The image is not a car photo but an invoice document.",
+        "path": "exterior-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "M",
+        "visible_match_evidence": [
+          "invoice references BMW X5",
+          "2023 model year indicated"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 6,
+        "shot_type": "other",
+        "scene_fit_tags": [
+          "detail"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 7,
+        "reject": true,
+        "reason": "Image is an invoice, not a photo of a car.",
+        "path": "exterior-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "invoice mention of BMW X5",
+          "production year 2023"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": null,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 3,
+        "composition_score": 2,
+        "target_match_confidence": 5,
+        "reject": true,
+        "reason": "not an image of the car, document instead",
+        "path": "exterior-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show a vehicle clearly; it appears to be a cropped or partial view.",
+        "path": "exterior-14.png",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "X5 M",
+        "visible_match_evidence": [
+          "M badge on steering wheel",
+          "2023 dashboard layout",
+          "red leather interior"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "X5 M",
+        "visible_match_evidence": [
+          "M badge on seats",
+          "sport seat design",
+          "red leather interior"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "X5 M",
+        "visible_match_evidence": [
+          "red leather interior",
+          "specific interior design",
+          "layout consistent with BMW X5"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

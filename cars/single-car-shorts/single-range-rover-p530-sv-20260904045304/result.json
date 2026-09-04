@@ -1,0 +1,1937 @@
+{
+  "car": {
+    "make": "Range",
+    "model": "Rover P530 Sv",
+    "trim": null
+  },
+  "title": "Range Rover P530 SV",
+  "start_year": 2023,
+  "end_year": 2023,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Luxurious SUV",
+      "narration": "Starting at a whopping $194,000, the 2023 Range Rover P530 SV blends luxury and power like no other.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "MSRP",
+      "stat_value": "$194K"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Design Legacy",
+      "narration": "Rooted in Range Rover's iconic design language, this model continues a legacy of sophistication. It's styled to impress with sleeker lines and a bold presence.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "523-Horsepower V8",
+      "narration": "Under the hood, it packs a 4.4-liter twin-turbo V8 delivering 523 horsepower, sourced from BMW, offering smooth, powerful acceleration.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": 523,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "523 hp"
+    },
+    {
+      "media_type": "wheel",
+      "headline": "AWD Capability",
+      "narration": "The P530's all-wheel drive offers superior handling on any terrain. It's a perfect match for both city streets and rugged trails.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Beats X5 M",
+      "narration": "With its powerful engine, it stands against the BMW X5 M\u2019s 600 horsepower. Still, Range Rover's elegance often wins over in luxury.",
+      "rival_make": "BMW",
+      "rival_model": "X5 M",
+      "main_horsepower": 523,
+      "rival_horsepower": 600,
+      "main_quarter_mile_seconds": 12.7,
+      "rival_quarter_mile_seconds": 11.5,
+      "stat_label": null,
+      "stat_value": null
+    },
+    {
+      "media_type": "interior",
+      "headline": "Sumptuous Interior",
+      "narration": "Inside, opulence abounds with plush leather, real wood, and the latest tech\u2014creating an exquisite driving environment.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "narration": "So, when choosing between raw power and unmatched luxury, which SUV would you take home?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null
+    }
+  ],
+  "sources": [
+    "https://www.motortrend.com/cars/land-rover/range-rover/2023/",
+    "https://carbuzz.com/cars/land-rover/range-rover/2023",
+    "https://www.caranddriver.com/land-rover/range-rover-2023"
+  ],
+  "script": "Starting at a whopping $194,000, the 2023 Range Rover P530 SV blends luxury and power like no other. Rooted in Range Rover's iconic design language, this model continues a legacy of sophistication. It's styled to impress with sleeker lines and a bold presence. Under the hood, it packs a 4.4-liter twin-turbo V8 delivering 523 horsepower, sourced from BMW, offering smooth, powerful acceleration. The P530's all-wheel drive offers superior handling on any terrain. It's a perfect match for both city streets and rugged trails. With its powerful engine, it stands against the BMW X5 M\u2019s 600 horsepower. Still, Range Rover's elegance often wins over in luxury. Inside, opulence abounds with plush leather, real wood, and the latest tech\u2014creating an exquisite driving environment. So, when choosing between raw power and unmatched luxury, which SUV would you take home?",
+  "word_count": 140,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 51.287,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-range-rover-p530-sv-20260904045304/narration.mp3",
+  "duration_seconds": 51.3,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.09,
+      "end": 0.18,
+      "mouth": "small"
+    },
+    {
+      "start": 0.18,
+      "end": 0.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.36,
+      "end": 0.72,
+      "mouth": "small"
+    },
+    {
+      "start": 0.72,
+      "end": 0.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.81,
+      "end": 1.8,
+      "mouth": "small"
+    },
+    {
+      "start": 1.8,
+      "end": 1.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.89,
+      "end": 2.7,
+      "mouth": "small"
+    },
+    {
+      "start": 2.7,
+      "end": 2.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.97,
+      "end": 3.06,
+      "mouth": "small"
+    },
+    {
+      "start": 3.06,
+      "end": 3.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.15,
+      "end": 3.24,
+      "mouth": "small"
+    },
+    {
+      "start": 3.24,
+      "end": 3.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.33,
+      "end": 3.42,
+      "mouth": "small"
+    },
+    {
+      "start": 3.42,
+      "end": 3.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.51,
+      "end": 4.95,
+      "mouth": "small"
+    },
+    {
+      "start": 4.95,
+      "end": 5.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.04,
+      "end": 5.4,
+      "mouth": "small"
+    },
+    {
+      "start": 5.4,
+      "end": 5.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.49,
+      "end": 5.76,
+      "mouth": "small"
+    },
+    {
+      "start": 5.76,
+      "end": 6.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.03,
+      "end": 7.74,
+      "mouth": "small"
+    },
+    {
+      "start": 7.74,
+      "end": 8.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.46,
+      "end": 9.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.0,
+      "end": 9.63,
+      "mouth": "small"
+    },
+    {
+      "start": 9.63,
+      "end": 9.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.72,
+      "end": 10.44,
+      "mouth": "small"
+    },
+    {
+      "start": 10.44,
+      "end": 10.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.71,
+      "end": 10.98,
+      "mouth": "small"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.07,
+      "end": 12.06,
+      "mouth": "small"
+    },
+    {
+      "start": 12.06,
+      "end": 12.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.15,
+      "end": 12.78,
+      "mouth": "small"
+    },
+    {
+      "start": 12.78,
+      "end": 13.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.23,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.59,
+      "end": 13.86,
+      "mouth": "small"
+    },
+    {
+      "start": 13.86,
+      "end": 13.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.95,
+      "end": 14.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.04,
+      "end": 14.13,
+      "mouth": "small"
+    },
+    {
+      "start": 14.13,
+      "end": 14.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.49,
+      "end": 14.67,
+      "mouth": "small"
+    },
+    {
+      "start": 14.67,
+      "end": 14.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.76,
+      "end": 14.85,
+      "mouth": "small"
+    },
+    {
+      "start": 14.85,
+      "end": 15.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.12,
+      "end": 15.48,
+      "mouth": "small"
+    },
+    {
+      "start": 15.48,
+      "end": 15.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.57,
+      "end": 15.93,
+      "mouth": "small"
+    },
+    {
+      "start": 15.93,
+      "end": 16.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.47,
+      "end": 16.65,
+      "mouth": "small"
+    },
+    {
+      "start": 16.65,
+      "end": 17.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.01,
+      "end": 17.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.37,
+      "end": 17.64,
+      "mouth": "small"
+    },
+    {
+      "start": 17.64,
+      "end": 17.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.73,
+      "end": 17.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.91,
+      "end": 18.09,
+      "mouth": "small"
+    },
+    {
+      "start": 18.09,
+      "end": 18.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.18,
+      "end": 18.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.45,
+      "end": 18.72,
+      "mouth": "small"
+    },
+    {
+      "start": 18.72,
+      "end": 18.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.81,
+      "end": 18.9,
+      "mouth": "small"
+    },
+    {
+      "start": 18.9,
+      "end": 18.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.99,
+      "end": 19.53,
+      "mouth": "small"
+    },
+    {
+      "start": 19.53,
+      "end": 19.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.8,
+      "end": 19.89,
+      "mouth": "small"
+    },
+    {
+      "start": 19.89,
+      "end": 19.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.98,
+      "end": 20.16,
+      "mouth": "small"
+    },
+    {
+      "start": 20.16,
+      "end": 20.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.25,
+      "end": 20.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.34,
+      "end": 20.79,
+      "mouth": "small"
+    },
+    {
+      "start": 20.79,
+      "end": 20.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.88,
+      "end": 21.15,
+      "mouth": "small"
+    },
+    {
+      "start": 21.15,
+      "end": 21.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.24,
+      "end": 21.51,
+      "mouth": "small"
+    },
+    {
+      "start": 21.51,
+      "end": 21.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.78,
+      "end": 21.87,
+      "mouth": "small"
+    },
+    {
+      "start": 21.87,
+      "end": 21.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.96,
+      "end": 22.77,
+      "mouth": "small"
+    },
+    {
+      "start": 22.77,
+      "end": 23.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.13,
+      "end": 23.58,
+      "mouth": "small"
+    },
+    {
+      "start": 23.58,
+      "end": 23.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.85,
+      "end": 23.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.94,
+      "end": 24.03,
+      "mouth": "small"
+    },
+    {
+      "start": 24.03,
+      "end": 24.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.12,
+      "end": 24.39,
+      "mouth": "small"
+    },
+    {
+      "start": 24.39,
+      "end": 24.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.48,
+      "end": 24.84,
+      "mouth": "small"
+    },
+    {
+      "start": 24.84,
+      "end": 25.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.56,
+      "end": 25.65,
+      "mouth": "small"
+    },
+    {
+      "start": 25.65,
+      "end": 25.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.74,
+      "end": 25.83,
+      "mouth": "small"
+    },
+    {
+      "start": 25.83,
+      "end": 25.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.92,
+      "end": 26.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.01,
+      "end": 26.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.1,
+      "end": 26.37,
+      "mouth": "small"
+    },
+    {
+      "start": 26.37,
+      "end": 26.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.46,
+      "end": 26.73,
+      "mouth": "small"
+    },
+    {
+      "start": 26.73,
+      "end": 26.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.82,
+      "end": 27.54,
+      "mouth": "small"
+    },
+    {
+      "start": 27.54,
+      "end": 27.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.63,
+      "end": 28.17,
+      "mouth": "small"
+    },
+    {
+      "start": 28.17,
+      "end": 28.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.26,
+      "end": 28.44,
+      "mouth": "small"
+    },
+    {
+      "start": 28.44,
+      "end": 28.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.53,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 29.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.25,
+      "end": 29.52,
+      "mouth": "small"
+    },
+    {
+      "start": 29.52,
+      "end": 29.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.61,
+      "end": 29.97,
+      "mouth": "small"
+    },
+    {
+      "start": 29.97,
+      "end": 30.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.06,
+      "end": 30.6,
+      "mouth": "small"
+    },
+    {
+      "start": 30.6,
+      "end": 30.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.69,
+      "end": 30.87,
+      "mouth": "small"
+    },
+    {
+      "start": 30.87,
+      "end": 31.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.14,
+      "end": 31.32,
+      "mouth": "small"
+    },
+    {
+      "start": 31.32,
+      "end": 31.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.41,
+      "end": 31.86,
+      "mouth": "small"
+    },
+    {
+      "start": 31.86,
+      "end": 32.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.4,
+      "end": 32.58,
+      "mouth": "small"
+    },
+    {
+      "start": 32.58,
+      "end": 32.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.67,
+      "end": 32.76,
+      "mouth": "small"
+    },
+    {
+      "start": 32.76,
+      "end": 32.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.85,
+      "end": 33.3,
+      "mouth": "small"
+    },
+    {
+      "start": 33.3,
+      "end": 33.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.57,
+      "end": 33.75,
+      "mouth": "small"
+    },
+    {
+      "start": 33.75,
+      "end": 33.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.84,
+      "end": 34.11,
+      "mouth": "small"
+    },
+    {
+      "start": 34.11,
+      "end": 34.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.2,
+      "end": 34.38,
+      "mouth": "small"
+    },
+    {
+      "start": 34.38,
+      "end": 34.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.47,
+      "end": 34.92,
+      "mouth": "small"
+    },
+    {
+      "start": 34.92,
+      "end": 35.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.01,
+      "end": 35.46,
+      "mouth": "small"
+    },
+    {
+      "start": 35.46,
+      "end": 35.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.82,
+      "end": 35.91,
+      "mouth": "small"
+    },
+    {
+      "start": 35.91,
+      "end": 36.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.0,
+      "end": 36.36,
+      "mouth": "small"
+    },
+    {
+      "start": 36.36,
+      "end": 36.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.45,
+      "end": 36.63,
+      "mouth": "small"
+    },
+    {
+      "start": 36.63,
+      "end": 37.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.08,
+      "end": 37.26,
+      "mouth": "small"
+    },
+    {
+      "start": 37.26,
+      "end": 37.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.35,
+      "end": 37.44,
+      "mouth": "small"
+    },
+    {
+      "start": 37.44,
+      "end": 37.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.71,
+      "end": 37.8,
+      "mouth": "small"
+    },
+    {
+      "start": 37.8,
+      "end": 38.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.07,
+      "end": 38.25,
+      "mouth": "small"
+    },
+    {
+      "start": 38.25,
+      "end": 38.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.34,
+      "end": 38.52,
+      "mouth": "small"
+    },
+    {
+      "start": 38.52,
+      "end": 38.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.61,
+      "end": 38.7,
+      "mouth": "small"
+    },
+    {
+      "start": 38.7,
+      "end": 38.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.79,
+      "end": 39.78,
+      "mouth": "small"
+    },
+    {
+      "start": 39.78,
+      "end": 40.32,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.32,
+      "end": 40.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.41,
+      "end": 40.77,
+      "mouth": "small"
+    },
+    {
+      "start": 40.77,
+      "end": 41.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.04,
+      "end": 41.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.13,
+      "end": 41.22,
+      "mouth": "small"
+    },
+    {
+      "start": 41.22,
+      "end": 41.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.4,
+      "end": 41.58,
+      "mouth": "small"
+    },
+    {
+      "start": 41.58,
+      "end": 41.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.67,
+      "end": 41.85,
+      "mouth": "small"
+    },
+    {
+      "start": 41.85,
+      "end": 42.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.03,
+      "end": 42.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.12,
+      "end": 42.39,
+      "mouth": "small"
+    },
+    {
+      "start": 42.39,
+      "end": 42.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.48,
+      "end": 42.57,
+      "mouth": "small"
+    },
+    {
+      "start": 42.57,
+      "end": 42.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.75,
+      "end": 42.84,
+      "mouth": "small"
+    },
+    {
+      "start": 42.84,
+      "end": 43.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.2,
+      "end": 43.29,
+      "mouth": "small"
+    },
+    {
+      "start": 43.29,
+      "end": 43.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.47,
+      "end": 43.74,
+      "mouth": "small"
+    },
+    {
+      "start": 43.74,
+      "end": 43.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.83,
+      "end": 43.92,
+      "mouth": "small"
+    },
+    {
+      "start": 43.92,
+      "end": 44.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.01,
+      "end": 44.19,
+      "mouth": "small"
+    },
+    {
+      "start": 44.19,
+      "end": 44.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.55,
+      "end": 44.64,
+      "mouth": "small"
+    },
+    {
+      "start": 44.64,
+      "end": 44.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.91,
+      "end": 45.09,
+      "mouth": "small"
+    },
+    {
+      "start": 45.09,
+      "end": 45.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.18,
+      "end": 45.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.27,
+      "end": 45.36,
+      "mouth": "small"
+    },
+    {
+      "start": 45.36,
+      "end": 45.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.45,
+      "end": 46.08,
+      "mouth": "small"
+    },
+    {
+      "start": 46.08,
+      "end": 46.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.62,
+      "end": 46.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.8,
+      "end": 46.89,
+      "mouth": "small"
+    },
+    {
+      "start": 46.89,
+      "end": 47.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.16,
+      "end": 47.34,
+      "mouth": "small"
+    },
+    {
+      "start": 47.34,
+      "end": 47.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.61,
+      "end": 47.7,
+      "mouth": "small"
+    },
+    {
+      "start": 47.7,
+      "end": 47.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.79,
+      "end": 47.88,
+      "mouth": "small"
+    },
+    {
+      "start": 47.88,
+      "end": 47.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.97,
+      "end": 48.15,
+      "mouth": "small"
+    },
+    {
+      "start": 48.15,
+      "end": 48.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.33,
+      "end": 49.32,
+      "mouth": "small"
+    },
+    {
+      "start": 49.32,
+      "end": 49.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.68,
+      "end": 49.77,
+      "mouth": "small"
+    },
+    {
+      "start": 49.77,
+      "end": 49.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.95,
+      "end": 50.22,
+      "mouth": "small"
+    },
+    {
+      "start": 50.22,
+      "end": 50.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.31,
+      "end": 50.67,
+      "mouth": "small"
+    },
+    {
+      "start": 50.67,
+      "end": 50.76,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.76,
+      "end": 50.94,
+      "mouth": "small"
+    },
+    {
+      "start": 50.94,
+      "end": 51.3,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "Starting",
+      "start": 0.0,
+      "end": 0.4399999976158142
+    },
+    {
+      "word": "at",
+      "start": 0.4399999976158142,
+      "end": 0.6000000238418579
+    },
+    {
+      "word": "a",
+      "start": 0.6000000238418579,
+      "end": 0.7400000095367432
+    },
+    {
+      "word": "whopping",
+      "start": 0.7400000095367432,
+      "end": 1.0199999809265137
+    },
+    {
+      "word": "194",
+      "start": 1.0199999809265137,
+      "end": 2.240000009536743
+    },
+    {
+      "word": "000",
+      "start": 2.240000009536743,
+      "end": 2.2799999713897705
+    },
+    {
+      "word": "the",
+      "start": 3.0399999618530273,
+      "end": 3.0999999046325684
+    },
+    {
+      "word": "2023",
+      "start": 3.0999999046325684,
+      "end": 3.8399999141693115
+    },
+    {
+      "word": "Range",
+      "start": 3.8399999141693115,
+      "end": 4.300000190734863
+    },
+    {
+      "word": "Rover",
+      "start": 4.300000190734863,
+      "end": 4.360000133514404
+    },
+    {
+      "word": "P530SV",
+      "start": 4.360000133514404,
+      "end": 5.760000228881836
+    },
+    {
+      "word": "blends",
+      "start": 5.760000228881836,
+      "end": 6.260000228881836
+    },
+    {
+      "word": "luxury",
+      "start": 6.260000228881836,
+      "end": 6.659999847412109
+    },
+    {
+      "word": "and",
+      "start": 6.659999847412109,
+      "end": 6.940000057220459
+    },
+    {
+      "word": "power",
+      "start": 6.940000057220459,
+      "end": 7.199999809265137
+    },
+    {
+      "word": "like",
+      "start": 7.199999809265137,
+      "end": 7.400000095367432
+    },
+    {
+      "word": "no",
+      "start": 7.400000095367432,
+      "end": 7.619999885559082
+    },
+    {
+      "word": "other",
+      "start": 7.619999885559082,
+      "end": 8.399999618530273
+    },
+    {
+      "word": "Rooted",
+      "start": 8.680000305175781,
+      "end": 8.680000305175781
+    },
+    {
+      "word": "in",
+      "start": 8.680000305175781,
+      "end": 8.920000076293945
+    },
+    {
+      "word": "Range",
+      "start": 8.920000076293945,
+      "end": 9.199999809265137
+    },
+    {
+      "word": "Rover's",
+      "start": 9.199999809265137,
+      "end": 9.5
+    },
+    {
+      "word": "iconic",
+      "start": 9.5,
+      "end": 9.779999732971191
+    },
+    {
+      "word": "design",
+      "start": 9.779999732971191,
+      "end": 10.15999984741211
+    },
+    {
+      "word": "language",
+      "start": 10.15999984741211,
+      "end": 10.420000076293945
+    },
+    {
+      "word": "this",
+      "start": 10.819999694824219,
+      "end": 10.960000038146973
+    },
+    {
+      "word": "model",
+      "start": 10.960000038146973,
+      "end": 11.140000343322754
+    },
+    {
+      "word": "continues",
+      "start": 11.140000343322754,
+      "end": 11.539999961853027
+    },
+    {
+      "word": "a",
+      "start": 11.539999961853027,
+      "end": 11.760000228881836
+    },
+    {
+      "word": "legacy",
+      "start": 11.760000228881836,
+      "end": 11.9399995803833
+    },
+    {
+      "word": "of",
+      "start": 11.9399995803833,
+      "end": 12.220000267028809
+    },
+    {
+      "word": "sophistication",
+      "start": 12.220000267028809,
+      "end": 12.760000228881836
+    },
+    {
+      "word": "It's",
+      "start": 13.34000015258789,
+      "end": 13.640000343322754
+    },
+    {
+      "word": "styled",
+      "start": 13.640000343322754,
+      "end": 13.640000343322754
+    },
+    {
+      "word": "to",
+      "start": 13.640000343322754,
+      "end": 13.899999618530273
+    },
+    {
+      "word": "impress",
+      "start": 13.899999618530273,
+      "end": 14.15999984741211
+    },
+    {
+      "word": "with",
+      "start": 14.4399995803833,
+      "end": 14.640000343322754
+    },
+    {
+      "word": "sleeker",
+      "start": 14.640000343322754,
+      "end": 14.880000114440918
+    },
+    {
+      "word": "lines",
+      "start": 14.880000114440918,
+      "end": 15.199999809265137
+    },
+    {
+      "word": "and",
+      "start": 15.199999809265137,
+      "end": 15.319999694824219
+    },
+    {
+      "word": "a",
+      "start": 15.319999694824219,
+      "end": 15.619999885559082
+    },
+    {
+      "word": "bold",
+      "start": 15.619999885559082,
+      "end": 15.619999885559082
+    },
+    {
+      "word": "presence",
+      "start": 15.619999885559082,
+      "end": 16.040000915527344
+    },
+    {
+      "word": "Under",
+      "start": 16.6200008392334,
+      "end": 16.719999313354492
+    },
+    {
+      "word": "the",
+      "start": 16.719999313354492,
+      "end": 16.979999542236328
+    },
+    {
+      "word": "hood",
+      "start": 16.979999542236328,
+      "end": 17.0
+    },
+    {
+      "word": "it",
+      "start": 17.31999969482422,
+      "end": 17.559999465942383
+    },
+    {
+      "word": "packs",
+      "start": 17.559999465942383,
+      "end": 17.559999465942383
+    },
+    {
+      "word": "a",
+      "start": 17.559999465942383,
+      "end": 17.700000762939453
+    },
+    {
+      "word": "4",
+      "start": 17.700000762939453,
+      "end": 17.920000076293945
+    },
+    {
+      "word": "4",
+      "start": 17.920000076293945,
+      "end": 18.3799991607666
+    },
+    {
+      "word": "liter",
+      "start": 18.3799991607666,
+      "end": 18.540000915527344
+    },
+    {
+      "word": "twin",
+      "start": 18.540000915527344,
+      "end": 18.899999618530273
+    },
+    {
+      "word": "turbo",
+      "start": 18.899999618530273,
+      "end": 19.139999389648438
+    },
+    {
+      "word": "V8",
+      "start": 19.139999389648438,
+      "end": 19.6200008392334
+    },
+    {
+      "word": "delivering",
+      "start": 19.940000534057617,
+      "end": 20.1200008392334
+    },
+    {
+      "word": "523",
+      "start": 20.1200008392334,
+      "end": 20.979999542236328
+    },
+    {
+      "word": "horsepower",
+      "start": 20.979999542236328,
+      "end": 21.5
+    },
+    {
+      "word": "sourced",
+      "start": 21.920000076293945,
+      "end": 22.040000915527344
+    },
+    {
+      "word": "from",
+      "start": 22.040000915527344,
+      "end": 22.239999771118164
+    },
+    {
+      "word": "BMW",
+      "start": 22.100000381469727,
+      "end": 22.65999984741211
+    },
+    {
+      "word": "offering",
+      "start": 23.299999237060547,
+      "end": 23.420000076293945
+    },
+    {
+      "word": "smooth",
+      "start": 23.420000076293945,
+      "end": 23.899999618530273
+    },
+    {
+      "word": "powerful",
+      "start": 24.360000610351562,
+      "end": 24.360000610351562
+    },
+    {
+      "word": "acceleration",
+      "start": 24.360000610351562,
+      "end": 24.920000076293945
+    },
+    {
+      "word": "The",
+      "start": 25.15999984741211,
+      "end": 25.719999313354492
+    },
+    {
+      "word": "P530's",
+      "start": 25.719999313354492,
+      "end": 26.280000686645508
+    },
+    {
+      "word": "all",
+      "start": 26.280000686645508,
+      "end": 26.65999984741211
+    },
+    {
+      "word": "wheel",
+      "start": 26.65999984741211,
+      "end": 26.65999984741211
+    },
+    {
+      "word": "drive",
+      "start": 26.65999984741211,
+      "end": 26.979999542236328
+    },
+    {
+      "word": "offers",
+      "start": 26.979999542236328,
+      "end": 27.260000228881836
+    },
+    {
+      "word": "superior",
+      "start": 27.260000228881836,
+      "end": 27.719999313354492
+    },
+    {
+      "word": "handling",
+      "start": 27.719999313354492,
+      "end": 28.020000457763672
+    },
+    {
+      "word": "on",
+      "start": 28.020000457763672,
+      "end": 28.219999313354492
+    },
+    {
+      "word": "any",
+      "start": 28.219999313354492,
+      "end": 28.540000915527344
+    },
+    {
+      "word": "terrain",
+      "start": 28.540000915527344,
+      "end": 28.760000228881836
+    },
+    {
+      "word": "It's",
+      "start": 29.079999923706055,
+      "end": 29.360000610351562
+    },
+    {
+      "word": "a",
+      "start": 29.360000610351562,
+      "end": 29.479999542236328
+    },
+    {
+      "word": "perfect",
+      "start": 29.479999542236328,
+      "end": 29.760000228881836
+    },
+    {
+      "word": "match",
+      "start": 29.760000228881836,
+      "end": 30.020000457763672
+    },
+    {
+      "word": "for",
+      "start": 30.020000457763672,
+      "end": 30.18000030517578
+    },
+    {
+      "word": "both",
+      "start": 30.18000030517578,
+      "end": 30.420000076293945
+    },
+    {
+      "word": "city",
+      "start": 30.420000076293945,
+      "end": 30.639999389648438
+    },
+    {
+      "word": "streets",
+      "start": 30.639999389648438,
+      "end": 30.899999618530273
+    },
+    {
+      "word": "and",
+      "start": 30.899999618530273,
+      "end": 31.399999618530273
+    },
+    {
+      "word": "rugged",
+      "start": 31.399999618530273,
+      "end": 31.559999465942383
+    },
+    {
+      "word": "trails",
+      "start": 31.559999465942383,
+      "end": 31.899999618530273
+    },
+    {
+      "word": "With",
+      "start": 32.439998626708984,
+      "end": 32.5
+    },
+    {
+      "word": "its",
+      "start": 32.5,
+      "end": 32.65999984741211
+    },
+    {
+      "word": "powerful",
+      "start": 32.65999984741211,
+      "end": 33.02000045776367
+    },
+    {
+      "word": "engine",
+      "start": 33.02000045776367,
+      "end": 33.279998779296875
+    },
+    {
+      "word": "it",
+      "start": 33.63999938964844,
+      "end": 33.720001220703125
+    },
+    {
+      "word": "stands",
+      "start": 33.720001220703125,
+      "end": 33.91999816894531
+    },
+    {
+      "word": "against",
+      "start": 33.91999816894531,
+      "end": 34.18000030517578
+    },
+    {
+      "word": "the",
+      "start": 34.18000030517578,
+      "end": 34.380001068115234
+    },
+    {
+      "word": "BMW",
+      "start": 34.380001068115234,
+      "end": 34.720001220703125
+    },
+    {
+      "word": "X5",
+      "start": 34.720001220703125,
+      "end": 35.279998779296875
+    },
+    {
+      "word": "M's",
+      "start": 35.279998779296875,
+      "end": 35.68000030517578
+    },
+    {
+      "word": "600",
+      "start": 35.68000030517578,
+      "end": 36.20000076293945
+    },
+    {
+      "word": "horsepower",
+      "start": 36.20000076293945,
+      "end": 36.619998931884766
+    },
+    {
+      "word": "Still",
+      "start": 37.20000076293945,
+      "end": 37.47999954223633
+    },
+    {
+      "word": "Range",
+      "start": 37.880001068115234,
+      "end": 38.060001373291016
+    },
+    {
+      "word": "Rover's",
+      "start": 38.060001373291016,
+      "end": 38.47999954223633
+    },
+    {
+      "word": "elegance",
+      "start": 38.47999954223633,
+      "end": 38.560001373291016
+    },
+    {
+      "word": "often",
+      "start": 38.560001373291016,
+      "end": 38.959999084472656
+    },
+    {
+      "word": "wins",
+      "start": 38.959999084472656,
+      "end": 39.099998474121094
+    },
+    {
+      "word": "over",
+      "start": 39.099998474121094,
+      "end": 39.380001068115234
+    },
+    {
+      "word": "in",
+      "start": 39.380001068115234,
+      "end": 39.84000015258789
+    },
+    {
+      "word": "luxury",
+      "start": 39.84000015258789,
+      "end": 39.84000015258789
+    },
+    {
+      "word": "Inside",
+      "start": 40.70000076293945,
+      "end": 40.779998779296875
+    },
+    {
+      "word": "opulence",
+      "start": 41.18000030517578,
+      "end": 41.41999816894531
+    },
+    {
+      "word": "abounds",
+      "start": 41.41999816894531,
+      "end": 41.7400016784668
+    },
+    {
+      "word": "with",
+      "start": 41.7400016784668,
+      "end": 42.02000045776367
+    },
+    {
+      "word": "plush",
+      "start": 42.02000045776367,
+      "end": 42.220001220703125
+    },
+    {
+      "word": "leather",
+      "start": 42.220001220703125,
+      "end": 42.47999954223633
+    },
+    {
+      "word": "real",
+      "start": 42.97999954223633,
+      "end": 43.099998474121094
+    },
+    {
+      "word": "wood",
+      "start": 43.099998474121094,
+      "end": 43.29999923706055
+    },
+    {
+      "word": "and",
+      "start": 43.400001525878906,
+      "end": 43.619998931884766
+    },
+    {
+      "word": "the",
+      "start": 43.619998931884766,
+      "end": 43.959999084472656
+    },
+    {
+      "word": "latest",
+      "start": 43.959999084472656,
+      "end": 43.959999084472656
+    },
+    {
+      "word": "tech",
+      "start": 43.959999084472656,
+      "end": 44.2599983215332
+    },
+    {
+      "word": "creating",
+      "start": 44.81999969482422,
+      "end": 44.81999969482422
+    },
+    {
+      "word": "an",
+      "start": 44.81999969482422,
+      "end": 45.099998474121094
+    },
+    {
+      "word": "exquisite",
+      "start": 45.099998474121094,
+      "end": 45.36000061035156
+    },
+    {
+      "word": "driving",
+      "start": 45.36000061035156,
+      "end": 45.720001220703125
+    },
+    {
+      "word": "environment",
+      "start": 45.720001220703125,
+      "end": 46.08000183105469
+    },
+    {
+      "word": "So",
+      "start": 46.439998626708984,
+      "end": 46.880001068115234
+    },
+    {
+      "word": "when",
+      "start": 47.13999938964844,
+      "end": 47.31999969482422
+    },
+    {
+      "word": "choosing",
+      "start": 47.31999969482422,
+      "end": 47.52000045776367
+    },
+    {
+      "word": "between",
+      "start": 47.52000045776367,
+      "end": 47.84000015258789
+    },
+    {
+      "word": "raw",
+      "start": 47.84000015258789,
+      "end": 48.08000183105469
+    },
+    {
+      "word": "power",
+      "start": 48.08000183105469,
+      "end": 48.36000061035156
+    },
+    {
+      "word": "and",
+      "start": 48.36000061035156,
+      "end": 48.58000183105469
+    },
+    {
+      "word": "unmatched",
+      "start": 48.58000183105469,
+      "end": 48.900001525878906
+    },
+    {
+      "word": "luxury",
+      "start": 48.900001525878906,
+      "end": 49.2599983215332
+    },
+    {
+      "word": "which",
+      "start": 49.7599983215332,
+      "end": 49.91999816894531
+    },
+    {
+      "word": "SUV",
+      "start": 49.91999816894531,
+      "end": 50.2400016784668
+    },
+    {
+      "word": "would",
+      "start": 50.2400016784668,
+      "end": 50.439998626708984
+    },
+    {
+      "word": "you",
+      "start": 50.439998626708984,
+      "end": 50.560001373291016
+    },
+    {
+      "word": "take",
+      "start": 50.560001373291016,
+      "end": 50.7400016784668
+    },
+    {
+      "word": "home",
+      "start": 50.7400016784668,
+      "end": 50.959999084472656
+    }
+  ],
+  "media": [
+    {
+      "path": "images/range-rover-p530-sv/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/range-rover-p530-sv/exterior_front-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/range-rover-p530-sv/exterior_front-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/range-rover-p530-sv/exterior_rear-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/bmw-x5-m/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/range-rover-p530-sv/interior-01.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/range-rover-p530-sv/interior-02.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3vp022WM/2023-range-rover-p530-sv?ss_id=bf500be5-2e61-4a28-aab4-8e8cff4b8ab1&ref=pr_1_1",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 191000,
+    "sale_type": "sold",
+    "page_title": "2023 Range Rover P530 SV",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-range-rover-p530-sv-20260904045304/voice_auditions/onyx.mp3",
+    "british_narrator": "single-range-rover-p530-sv-20260904045304/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-range-rover-p530-sv-20260904045304/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-range-rover-p530-sv-20260904045304/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-range-rover-p530-sv-20260904045304/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-range-rover-p530-sv-20260904045304/images/range-rover-p530-sv/exterior_side-01-nobg.png",
+  "side_profile_facing_direction": "left",
+  "video": "single_car_short.mp4"
+}
