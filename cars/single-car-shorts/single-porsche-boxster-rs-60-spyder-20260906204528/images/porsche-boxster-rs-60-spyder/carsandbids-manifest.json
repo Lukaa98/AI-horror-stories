@@ -1,0 +1,511 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-06T22:56:12.938Z",
+  "query": "Porsche Boxster Rs 60 Spyder",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9WLWZAB3/2008-porsche-boxster-rs-60-spyder",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9WLWZAB3/2008-porsche-boxster-rs-60-spyder",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 21,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2008 Porsche Boxster RS 60 Spyder"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9WLWZAB3/2008-porsche-boxster-rs-60-spyder",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2008 Porsche Boxster RS 60 Spyder",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/other/3zmGyZ0P-e87JK7s/edit/5JEHj.jpg?t=178791549664",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Porsche Boxster RS 60 Spyder",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 202750
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/other/3zmGyZ0P-1lIOxp2/edit/OPzH7.jpg?t=178791556735",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Porsche Boxster RS 60 Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 150144
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/other/3zmGyZ0P-pQZqXOi/edit/3PNWC.jpg?t=178791553519",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Porsche Boxster RS 60 Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 269088
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/other/3zmGyZ0P-CAe9iPQ/edit/w0BcL.jpg?t=178791551489",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Porsche Boxster RS 60 Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 202126
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/other/3zmGyZ0P-KrkuOrz/edit/r4N5M.jpg?t=178791555093",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Porsche Boxster RS 60 Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 166644
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/other/3zmGyZ0P-e5g51_c/edit/FwHey.jpg?t=178791583213",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Porsche Boxster RS 60 Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 191485
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/other/3zmGyZ0P-5ecFY_q/edit/GoTpi.jpg?t=178791588983",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Porsche Boxster RS 60 Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 260420
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/other/3zmGyZ0P-ck-YtIX/edit/MhC4m.jpg?t=178791587203",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Porsche Boxster RS 60 Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 282953
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/other/3zmGyZ0P-NVL6Eow/edit/BHvZk.jpg?t=178791590871",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2008 Porsche Boxster RS 60 Spyder",
+      "width": 542,
+      "height": 361,
+      "bytes": 167415
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c9a5ec98a300dec930ac757dc2a73951df79d806/photos/9ApnQ1Zw-1RVCwO9.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 4514 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c37be86b42f1102426526cf80dfc08d0566630cd/photos/9XQzG5j7-MulVdDD.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 10272 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac3491141d4b8b33fcac30dcc17fc436/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac3491141d4b8b33fcac30dcc17fc436/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2008 Porsche Boxster RS 60 Spyder",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac3491141d4b8b33fcac30dcc17fc436/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9WLWZAB3/2008-porsche-boxster-rs-60-spyder",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ac3491141d4b8b33fcac30dcc17fc436/manifest/video.m3u8",
+      "auction_title": "2008 Porsche Boxster RS 60 Spyder",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62dc4f770c2855b5e935c60372650cf4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62dc4f770c2855b5e935c60372650cf4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2008 Porsche Boxster RS 60 Spyder",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62dc4f770c2855b5e935c60372650cf4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9WLWZAB3/2008-porsche-boxster-rs-60-spyder",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/62dc4f770c2855b5e935c60372650cf4/manifest/video.m3u8",
+      "auction_title": "2008 Porsche Boxster RS 60 Spyder",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/764babb13fd93916b26504a34e914cf1/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/764babb13fd93916b26504a34e914cf1/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2008 Porsche Boxster RS 60 Spyder",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/764babb13fd93916b26504a34e914cf1/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9WLWZAB3/2008-porsche-boxster-rs-60-spyder",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/764babb13fd93916b26504a34e914cf1/manifest/video.m3u8",
+      "auction_title": "2008 Porsche Boxster RS 60 Spyder",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6291a285df02c1bacf36f58c1c093907/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6291a285df02c1bacf36f58c1c093907/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2008 Porsche Boxster RS 60 Spyder",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6291a285df02c1bacf36f58c1c093907/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9WLWZAB3/2008-porsche-boxster-rs-60-spyder",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6291a285df02c1bacf36f58c1c093907/manifest/video.m3u8",
+      "auction_title": "2008 Porsche Boxster RS 60 Spyder",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1eeac88705b187777864e750fae881aa/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1eeac88705b187777864e750fae881aa/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2008 Porsche Boxster RS 60 Spyder",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1eeac88705b187777864e750fae881aa/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9WLWZAB3/2008-porsche-boxster-rs-60-spyder",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1eeac88705b187777864e750fae881aa/manifest/video.m3u8",
+      "auction_title": "2008 Porsche Boxster RS 60 Spyder",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "2008",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche logo",
+          "Boxster designation",
+          "Convertible body style",
+          "Overall proportions and design consistent with 2008 Boxster"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "2008",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "front end design",
+          "headlight shape",
+          "wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "2008",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "body shape matches Boxster",
+          "Porsche badge visible",
+          "convertible design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "2008",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche badge",
+          "specific front design",
+          "headlight shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "2008",
+        "detected_variant_or_engine": "Boxster S",
+        "visible_match_evidence": [
+          "Boxster S badging",
+          "rear design matches 2008 model",
+          "dual exhaust"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "2008",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche interior design",
+          "Porsche badge",
+          "Design elements consistent with Boxster"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "porsche",
+        "detected_model": "boxster",
+        "detected_generation_or_year": "2008",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "seating design",
+          "branding on seat"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "Boxster",
+        "detected_generation_or_year": "2008",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche seating design",
+          "Interior layout characteristic of Boxster"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 4,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not contain the target vehicle, only the interior instruments.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
