@@ -937,6 +937,18 @@ def order_media_for_scenes(scenes, media):
     "exterior" because its own type had no photos -- collapsed onto the
     exact same single image, which is why a whole video could end up stuck
     on one repeated interior shot even when several photos existed.
+
+    Once same-type is fully used, this reuses an already-shown same-type
+    photo BEFORE ever reaching for a different type (exterior fallback, or
+    any other unused photo) -- e.g. a script with more exterior-topic
+    scenes than distinct exterior photos must repeat an exterior shot, not
+    "steal" the one interior photo reserved for the video's own interior
+    beat. A repeated shot is a minor issue; a wrong-content-type photo
+    under an unrelated topic (the actual complaint this fixes -- an
+    interior photo showing up during a scene about the rear wing) is a
+    real one. The "exterior" fallback (unused, then reused) only kicks in
+    once same_type has no photos in the pool AT ALL, not merely once its
+    photos are used up.
     """
     ordered = []
     used_paths = set()
@@ -946,9 +958,11 @@ def order_media_for_scenes(scenes, media):
         exterior = [item for item in media if item["type"] == "exterior"]
         pick = (
             next((item for item in same_type if item["path"] not in used_paths), None)
+            or next((item for item in same_type if item["path"] in used_paths), None)
             or next((item for item in exterior if item["path"] not in used_paths), None)
+            or next((item for item in exterior if item["path"] in used_paths), None)
             or next((item for item in media if item["path"] not in used_paths), None)
-            # Only reach here once every photo has been used at least once.
+            # Only reach here once every photo of every type has been used.
             or (same_type[0] if same_type else media[0])
         )
         used_paths.add(pick["path"])

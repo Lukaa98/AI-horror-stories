@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.12";
+const UI_VERSION = "V11.13";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1783,11 +1783,10 @@ export default function App() {
                       </div>
                     )}
                     <div className="narration-scroll">
-                      <div className="narration-entry"><strong>Script</strong><p>{item.preview.script}</p></div>
                       {(item.preview.scenes || []).map((scene, index) => (
                         <div className="narration-entry" key={index}>
-                          <strong>{scene.headline || `Scene ${index + 1}`}</strong>
-                          <p>{scene.fact}</p>
+                          <strong>{index + 1}. {scene.headline || `Scene ${index + 1}`}</strong>
+                          <p>{scene.narration}</p>
                         </div>
                       ))}
                     </div>
@@ -2676,11 +2675,10 @@ export default function App() {
           </p>
           {singleCarResult.video && <video controls src={rawSingleCarUrl(singleCarResult.video)} preload="metadata" />}
           <div className="narration-scroll">
-            <div className="narration-entry"><strong>Script</strong><p>{singleCarResult.script}</p></div>
             {(singleCarResult.scenes || []).map((scene, index) => (
               <div className="narration-entry" key={index}>
-                <strong>{scene.headline || `Scene ${index + 1}`}</strong>
-                <p>{scene.fact}</p>
+                <strong>{index + 1}. {scene.headline || `Scene ${index + 1}`}</strong>
+                <p>{scene.narration}</p>
               </div>
             ))}
           </div>

@@ -135,6 +135,25 @@ def test_order_media_for_scenes_does_not_repeat_a_photo_while_others_are_unused(
     scenes = [
         {"media_type": "interior"},
         {"media_type": "interior"},
+    ]
+    media = [
+        {"path": "interior-06.jpg", "type": "interior"},
+        {"path": "interior-07.jpg", "type": "interior"},
+        {"path": "exterior-01.jpg", "type": "exterior"},
+    ]
+    ordered = order_media_for_scenes(scenes, media)
+    assert [item["path"] for item in ordered] == ["interior-06.jpg", "interior-07.jpg"]
+
+
+def test_order_media_for_scenes_reuses_same_type_before_stealing_a_different_type():
+    """The actual regression this fixes: a third interior-topic scene, with
+    both interior photos already used, must repeat one of them rather than
+    grab the still-unused exterior photo -- reusing a shot is fine, but a
+    wrong-content-type photo under an unrelated topic (e.g. an interior
+    photo shown during a scene about the rear wing) is a real bug."""
+    scenes = [
+        {"media_type": "interior"},
+        {"media_type": "interior"},
         {"media_type": "interior"},
     ]
     media = [
@@ -143,7 +162,7 @@ def test_order_media_for_scenes_does_not_repeat_a_photo_while_others_are_unused(
         {"path": "exterior-01.jpg", "type": "exterior"},
     ]
     ordered = order_media_for_scenes(scenes, media)
-    assert [item["path"] for item in ordered] == ["interior-06.jpg", "interior-07.jpg", "exterior-01.jpg"]
+    assert [item["path"] for item in ordered] == ["interior-06.jpg", "interior-07.jpg", "interior-06.jpg"]
 
 
 def test_order_media_for_scenes_repeats_only_once_every_photo_is_used():
