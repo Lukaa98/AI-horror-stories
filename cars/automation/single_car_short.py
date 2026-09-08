@@ -979,6 +979,22 @@ def transcribe_word_timeline(audio_path):
     return words
 
 
+def _normalize_photo_label(text):
+    """photo_label matching has to survive the model paraphrasing slightly
+    even when told to copy the label verbatim -- in practice it reliably
+    echoes back "<label> photo" (trailing the word "photo", taken from the
+    "<label> photo: <description>" hint format it was shown) instead of the
+    bare label, and a strict equality check against the bare label/category
+    then never matches anything, silently falling back to the old
+    pool-order behavior this was meant to fix. Stripping a trailing
+    "photo"/"photograph"/"picture"/"pic" word (plus punctuation/case) makes
+    the match survive that without requiring exact literal compliance."""
+    text = (text or "").strip().lower()
+    text = re.sub(r"[.:!]+$", "", text).strip()
+    text = re.sub(r"\s+(photo|photograph|picture|pic)s?$", "", text).strip()
+    return text
+
+
 def order_media_for_scenes(scenes, media):
     """Put images in the same semantic order as the written scenes, but
     never repeat a photo while a different, still-unused one of a
@@ -1016,7 +1032,7 @@ def order_media_for_scenes(scenes, media):
     used_paths = set()
     for scene in scenes:
         requested = scene["media_type"]
-        photo_label = (scene.get("photo_label") or "").strip().lower()
+        photo_label = _normalize_photo_label(scene.get("photo_label"))
         labeled_match = None
         if photo_label:
             labeled_match = next(
@@ -1024,8 +1040,8 @@ def order_media_for_scenes(scenes, media):
                     item for item in media
                     if item["path"] not in used_paths
                     and (
-                        (item.get("label") or "").strip().lower() == photo_label
-                        or (item.get("category") or "").replace("_", " ").strip().lower() == photo_label
+                        _normalize_photo_label(item.get("label")) == photo_label
+                        or _normalize_photo_label((item.get("category") or "").replace("_", " ")) == photo_label
                     )
                 ),
                 None,

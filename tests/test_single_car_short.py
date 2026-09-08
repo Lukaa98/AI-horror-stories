@@ -186,6 +186,25 @@ def test_order_media_for_scenes_matches_a_labeled_photo_to_its_own_scene():
     assert [item["path"] for item in ordered] == ["spoiler.jpg", "gauges.jpg", "tail-lights.jpg"]
 
 
+def test_order_media_for_scenes_matches_a_labeled_photo_even_with_a_trailing_photo_word():
+    """The actual Maybach-build regression: despite the prompt telling it to
+    copy the label verbatim, the model reliably echoes "<label> photo"
+    (picked up from the "<label> photo: <description>" hint format it was
+    shown) instead of the bare label -- a strict equality check against the
+    bare label/category then never matches anything at all, silently
+    falling back to the old pool-order behavior for the entire build."""
+    scenes = [
+        {"media_type": "engine", "photo_label": "V12 engine photo"},
+        {"media_type": "detail", "photo_label": "Rear seats with pillows photo."},
+    ]
+    media = [
+        {"path": "v12.jpg", "type": "detail", "category": "other_detail", "label": "V12 engine"},
+        {"path": "rear-seats.jpg", "type": "detail", "category": "other_detail", "label": "Rear seats with pillows"},
+    ]
+    ordered = order_media_for_scenes(scenes, media)
+    assert [item["path"] for item in ordered] == ["v12.jpg", "rear-seats.jpg"]
+
+
 def test_order_media_for_scenes_repeats_only_once_every_photo_is_used():
     scenes = [{"media_type": "exterior"}, {"media_type": "exterior"}, {"media_type": "exterior"}]
     media = [{"path": "exterior-01.jpg", "type": "exterior"}, {"path": "exterior-02.jpg", "type": "exterior"}]
