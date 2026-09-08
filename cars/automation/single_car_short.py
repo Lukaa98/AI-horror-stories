@@ -1069,6 +1069,30 @@ def build_short(args):
     wav_path.unlink(missing_ok=True)
     manifest = {
         "car": {"make": args.make, "model": args.model, "trim": args.trim or None},
+        # A verbatim snapshot of the raw build inputs -- not anything
+        # derived/researched -- so the dashboard's "rerun same pipeline"
+        # button can replay this exact build (same photos, same car, same
+        # comparison settings) under new code, without the user retyping
+        # every link. Keys match dispatchWorkflow's single_car `inputs`
+        # shape 1:1 (see App.jsx's handleSingleCarShort) so the UI can pass
+        # this straight through, only swapping in a fresh draft_id/request.
+        "build_inputs": {
+            "make": args.make,
+            "model": args.model,
+            "query": args.trim or "",
+            "start_year": args.start_year if args.start_year is not None else "",
+            "end_year": args.end_year if args.end_year is not None else "",
+            "voice": args.voice,
+            "auction_url": args.auction_url or "",
+            "photo_front": args.photo_front or "",
+            "photo_side": args.photo_side or "",
+            "photo_rear": args.photo_rear or "",
+            "photo_engine": args.photo_engine or "",
+            "photo_interior": args.photo_interior or "",
+            "photo_rival": args.photo_rival or "",
+            "disable_comparison": "true" if args.disable_comparison else "false",
+            "extra_photos": args.extra_photos or "",
+        },
         **package,
         "voice_preset": args.voice,
         "tts_speed": FAST_TTS_SPEED,

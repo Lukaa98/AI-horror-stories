@@ -691,6 +691,10 @@ button.secondary {
   border-color: #666;
 }
 
+.rerun-pipeline-button {
+  margin-bottom: 10px;
+}
+
 .video-probe-panel {
   margin-top: 24px;
   padding: 18px;
