@@ -205,6 +205,28 @@ def test_order_media_for_scenes_matches_a_labeled_photo_even_with_a_trailing_pho
     assert [item["path"] for item in ordered] == ["v12.jpg", "rear-seats.jpg"]
 
 
+def test_order_media_for_scenes_reserves_a_labeled_photo_against_an_earlier_unlabeled_scene():
+    """The actual second-Maybach-build regression: an earlier scene with no
+    photo_label at all (an ordinary "4MATIC" beat) grabbed the "Its all
+    about rear seat luxury" extra via plain same-type pool order before the
+    later "Rear Seat Luxury" scene -- which specifically names that same
+    photo via photo_label -- got its turn, leaving the labeled scene to
+    fall back to a generic reused interior shot instead of its own photo.
+    Labeled matches must be reserved in a pass over the whole scene list
+    before any unlabeled scene's type fallback can claim them."""
+    scenes = [
+        {"media_type": "detail", "photo_label": None},
+        {"media_type": "detail", "photo_label": "Its all about rear seat luxury photo"},
+    ]
+    media = [
+        {"path": "rear-seat-luxury.jpg", "type": "detail", "category": "other_detail", "label": "Its all about rear seat luxury"},
+        {"path": "front-seat-luxury.jpg", "type": "detail", "category": "other_detail", "label": "Front seat luxuary"},
+    ]
+    ordered = order_media_for_scenes(scenes, media)
+    assert ordered[1]["path"] == "rear-seat-luxury.jpg"
+    assert ordered[0]["path"] == "front-seat-luxury.jpg"
+
+
 def test_order_media_for_scenes_repeats_only_once_every_photo_is_used():
     scenes = [{"media_type": "exterior"}, {"media_type": "exterior"}, {"media_type": "exterior"}]
     media = [{"path": "exterior-01.jpg", "type": "exterior"}, {"path": "exterior-02.jpg", "type": "exterior"}]

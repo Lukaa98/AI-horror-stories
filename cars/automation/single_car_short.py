@@ -1027,30 +1027,48 @@ def order_media_for_scenes(scenes, media):
     pool order, which is how a "Driver-Focused Gauges" scene could end up
     showing the rear-spoiler photo while the actual gauge-cluster photo
     goes to a different, unrelated scene.
+
+    Labeled scenes are resolved in a first pass, over the whole scene list,
+    before any type-based fallback runs -- not inline, scene by scene.
+    Doing it inline let an earlier UNLABELED scene's generic same-type
+    fallback grab a specific photo before the later scene that's actually
+    supposed to show it got a turn (e.g. a plain "4MATIC" beat with no
+    photo_label stealing the "Its all about rear seat luxury" extra via
+    plain pool order, leaving the actual "Rear Seat Luxury" scene further
+    down to fall back to a generic reused interior shot instead). Reserving
+    every labeled match first means a later labeled scene's photo is never
+    up for grabs to an earlier unlabeled one.
     """
-    ordered = []
+    ordered = [None] * len(scenes)
     used_paths = set()
-    for scene in scenes:
-        requested = scene["media_type"]
+
+    for index, scene in enumerate(scenes):
         photo_label = _normalize_photo_label(scene.get("photo_label"))
-        labeled_match = None
-        if photo_label:
-            labeled_match = next(
-                (
-                    item for item in media
-                    if item["path"] not in used_paths
-                    and (
-                        _normalize_photo_label(item.get("label")) == photo_label
-                        or _normalize_photo_label((item.get("category") or "").replace("_", " ")) == photo_label
-                    )
-                ),
-                None,
-            )
+        if not photo_label:
+            continue
+        match = next(
+            (
+                item for item in media
+                if item["path"] not in used_paths
+                and (
+                    _normalize_photo_label(item.get("label")) == photo_label
+                    or _normalize_photo_label((item.get("category") or "").replace("_", " ")) == photo_label
+                )
+            ),
+            None,
+        )
+        if match:
+            ordered[index] = match
+            used_paths.add(match["path"])
+
+    for index, scene in enumerate(scenes):
+        if ordered[index] is not None:
+            continue
+        requested = scene["media_type"]
         same_type = [item for item in media if item["type"] == requested]
         exterior = [item for item in media if item["type"] == "exterior"]
         pick = (
-            labeled_match
-            or next((item for item in same_type if item["path"] not in used_paths), None)
+            next((item for item in same_type if item["path"] not in used_paths), None)
             or next((item for item in same_type if item["path"] in used_paths), None)
             or next((item for item in exterior if item["path"] not in used_paths), None)
             or next((item for item in exterior if item["path"] in used_paths), None)
@@ -1059,7 +1077,7 @@ def order_media_for_scenes(scenes, media):
             or (same_type[0] if same_type else media[0])
         )
         used_paths.add(pick["path"])
-        ordered.append(pick)
+        ordered[index] = pick
     return ordered
 
 
