@@ -6,6 +6,7 @@ narrator sprites, word-sized captions, and gentle motion so still images do
 not feel frozen.
 """
 import argparse
+import copy
 import json
 import re
 import subprocess
@@ -97,6 +98,11 @@ PACKAGE_SCHEMA = {
         "start_year": {"type": ["integer", "null"]},
         "end_year": {"type": ["integer", "null"]},
         "scenes": {
+            # maxItems here is the *default* cap (no/few pasted extra
+            # photos) -- _schema_with_scene_cap raises it per-request when
+            # there are enough pasted photos that they wouldn't all fit a
+            # dedicated scene under this default alongside the canonical
+            # hook/history/engine/comparison beats.
             "type": "array", "minItems": 5, "maxItems": 8,
             "items": {
                 "type": "object", "additionalProperties": False,
@@ -207,7 +213,7 @@ def _strip_citations(text):
     return re.sub(r"[ \t]{2,}", " ", text).strip()
 
 
-def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False):
+def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8):
     photo_hints_block = ""
     if photo_hints:
         bullet_list = "\n".join(f"- {hint}" for hint in photo_hints)
@@ -228,7 +234,9 @@ that aren't specifically about one of these pasted photos. These beats count tow
 variety like any other -- they don't replace the history/mechanical/comparison beats below, they're
 additional specific material that must be folded in alongside them. Do not substitute a different, unrelated
 "detail" beat of your own invention for one of these -- every photo listed above needs its own scene,
-genuinely about what's in it."""
+genuinely about what's in it. You have up to {max_scenes} scenes total specifically so all of these pasted
+photos fit alongside the canonical hook/history/engine/drivetrain/comparison/closing beats below -- use as
+many of them as you need; never drop one of these pasted-photo scenes to stay at a lower scene count."""
     forced_rival_block = ""
     if forced_rival:
         forced_rival_block = f"""
@@ -252,7 +260,7 @@ observation, or another history/mechanical beat -- so the script still hits its 
 without any head-to-head."""
     return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{photo_hints_block}{forced_rival_block}{no_comparison_block}
 
-Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-8 scenes in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-{max_scenes} scenes (the higher end of that range only when you have several pasted photos each requiring their own scene, per above) in speaking order so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival (nearly every car has one -- only skip this and use an ownership/value insight instead if you genuinely cannot name a fair rival), tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
 The hook must be the very first words, no throat-clearing lead-in like "Check out the..." or "Let's talk about..." -- open directly with the superlative/fact itself, e.g. "This is the most reliable luxury coupe you can buy, and here's why," or "This is the cheapest way into 400 horsepower," THEN name the car. The claim has to be genuinely verifiable, not just punchy.
 
@@ -279,12 +287,37 @@ Whenever a scene's narration states one hard, concrete number about THIS car (ho
 Also return "start_year" and "end_year": the exact model-year range of the generation your script actually describes (the same year, twice, if it's a single model year). This must reflect what you actually researched and wrote about, even when the scope above was "the best-known generation" and you had to pick one yourself -- the photos shown alongside the narration are gathered using these years, so they need to match the generation you're describing."""
 
 
-def _request_script_package(prompt):
+def _scene_cap_for_photo_hints(photo_hints):
+    """The schema's default scenes.maxItems (8) assumes the canonical
+    hook/history/engine/drivetrain/comparison/closing beats plus at most a
+    couple of pasted-photo beats. Every pasted photo (fixed field or
+    free-typed extra) needs its own dedicated scene, so with more than a
+    couple of them the fixed cap forced the model to silently drop some --
+    they'd get described in the photo hints but never actually assigned a
+    scene, which is why a pasted photo (e.g. cup holders) could go
+    completely unused even though it downloaded and was described fine.
+    Six canonical beats plus one scene per pasted photo, capped so a video
+    with a huge number of pasted photos still stays a reasonable length."""
+    return min(12, max(8, 6 + len(photo_hints or [])))
+
+
+def _schema_with_scene_cap(max_scenes):
+    schema = copy.deepcopy(PACKAGE_SCHEMA)
+    schema["properties"]["scenes"]["maxItems"] = max_scenes
+    return schema
+
+
+def _request_script_package(prompt, max_scenes=8):
     response = with_openai_retry(lambda: OpenAI().responses.create(
         model="gpt-4o",
         input=prompt,
         tools=[{"type": "web_search_preview"}],
-        text={"format": {"type": "json_schema", "name": "single_car_short", "strict": True, "schema": PACKAGE_SCHEMA}},
+        text={
+            "format": {
+                "type": "json_schema", "name": "single_car_short", "strict": True,
+                "schema": _schema_with_scene_cap(max_scenes),
+            },
+        },
     ))
     package = json.loads(response.output_text.strip())
     for scene in package["scenes"]:
@@ -300,6 +333,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
         f"model years {start_year}-{end_year}" if start_year and end_year
         else f"model year {start_year or end_year}" if start_year or end_year else "the best-known generation"
     )
+    max_scenes = _scene_cap_for_photo_hints(photo_hints)
     package = None
     for attempt in range(1, max_attempts + 1):
         retry_feedback = (
@@ -311,7 +345,8 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"there is almost always more real, well-documented material available if you look for it." if package else ""
         )
         package = _request_script_package(
-            _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival, disable_comparison)
+            _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival, disable_comparison, max_scenes),
+            max_scenes=max_scenes,
         )
         count = package["word_count"]
         if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:

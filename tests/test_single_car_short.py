@@ -70,7 +70,7 @@ def test_research_script_retries_with_feedback_when_outside_acceptable_words(mon
          "script": "ok", "word_count": TARGET_WORDS[0] + 5},
     ]
 
-    def fake_request(prompt):
+    def fake_request(prompt, max_scenes=8):
         prompts.append(prompt)
         return packages[len(prompts) - 1]
 
@@ -90,7 +90,7 @@ def test_research_script_does_not_retry_when_first_attempt_is_already_acceptable
 
     calls = []
 
-    def fake_request(prompt):
+    def fake_request(prompt, max_scenes=8):
         calls.append(prompt)
         return {"scenes": [], "script": "", "word_count": TARGET_WORDS[0]}
 
@@ -111,7 +111,7 @@ def test_research_script_never_fails_the_build_over_word_count(monkeypatch):
 
     monkeypatch.setattr(
         single_car_short, "_request_script_package",
-        lambda prompt: {"scenes": [], "script": "", "word_count": HARD_WORD_RANGE[0] - 20},
+        lambda prompt, max_scenes=8: {"scenes": [], "script": "", "word_count": HARD_WORD_RANGE[0] - 20},
     )
 
     package = research_script("Ford", "Mustang", max_attempts=2)
@@ -898,6 +898,34 @@ def test_research_script_prompt_folds_in_photo_hints():
     )
     assert "Gauge Cluster photo: a distinctive analog cluster." in prompt
     assert "You MUST write one scene's narration specifically about each one" in prompt
+
+
+def test_scene_cap_for_photo_hints_grows_with_more_pasted_photos():
+    """The actual root cause behind a pasted extra (e.g. cup holders) never
+    showing up at all: with the old fixed 8-scene cap, several pasted
+    photos each requiring their own dedicated scene didn't fit alongside
+    the canonical hook/history/engine/comparison beats, so the model had
+    to silently drop some -- they were described in the photo hints but
+    never actually assigned a scene. The cap must grow with the number of
+    pasted photos, not stay fixed."""
+    import single_car_short
+
+    assert single_car_short._scene_cap_for_photo_hints([]) == 8
+    assert single_car_short._scene_cap_for_photo_hints(["a", "b"]) == 8
+    assert single_car_short._scene_cap_for_photo_hints(["a", "b", "c", "d", "e"]) == 11
+    # Capped so a huge number of pasted photos doesn't blow up the video length.
+    assert single_car_short._scene_cap_for_photo_hints(["x"] * 20) == 12
+
+
+def test_research_script_prompt_reflects_a_raised_scene_cap():
+    import single_car_short
+
+    prompt = single_car_short._research_script_prompt(
+        "1993 Toyota Supra Turbo", "model year 1993",
+        photo_hints=["Gauge Cluster photo: a distinctive analog cluster."], max_scenes=10,
+    )
+    assert "up to 10 scenes total" in prompt
+    assert "5-10 scenes" in prompt
 
 
 def test_research_script_prompt_omits_the_photo_hints_block_when_there_are_none():
