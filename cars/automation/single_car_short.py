@@ -296,9 +296,12 @@ def _scene_cap_for_photo_hints(photo_hints):
     they'd get described in the photo hints but never actually assigned a
     scene, which is why a pasted photo (e.g. cup holders) could go
     completely unused even though it downloaded and was described fine.
-    Six canonical beats plus one scene per pasted photo, capped so a video
-    with a huge number of pasted photos still stays a reasonable length."""
-    return min(12, max(8, 6 + len(photo_hints or [])))
+    Six canonical beats plus one scene per pasted photo, deliberately
+    uncapped on the high end -- pasting 10 photos is meant to just work,
+    each getting a short couple-second beat of its own, without the total
+    word count changing (more scenes just means shorter beats, not a
+    longer video)."""
+    return max(8, 6 + len(photo_hints or []))
 
 
 def _schema_with_scene_cap(max_scenes):

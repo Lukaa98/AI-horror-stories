@@ -913,8 +913,8 @@ def test_scene_cap_for_photo_hints_grows_with_more_pasted_photos():
     assert single_car_short._scene_cap_for_photo_hints([]) == 8
     assert single_car_short._scene_cap_for_photo_hints(["a", "b"]) == 8
     assert single_car_short._scene_cap_for_photo_hints(["a", "b", "c", "d", "e"]) == 11
-    # Capped so a huge number of pasted photos doesn't blow up the video length.
-    assert single_car_short._scene_cap_for_photo_hints(["x"] * 20) == 12
+    # Deliberately uncapped -- pasting 10 photos should just work.
+    assert single_car_short._scene_cap_for_photo_hints(["x"] * 10) == 16
 
 
 def test_research_script_prompt_reflects_a_raised_scene_cap():
