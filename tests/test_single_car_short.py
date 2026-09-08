@@ -165,6 +165,27 @@ def test_order_media_for_scenes_reuses_same_type_before_stealing_a_different_typ
     assert [item["path"] for item in ordered] == ["interior-06.jpg", "interior-07.jpg", "interior-06.jpg"]
 
 
+def test_order_media_for_scenes_matches_a_labeled_photo_to_its_own_scene():
+    """The actual Boxster-build regression: several "detail"-type extra
+    photos in the pool (tail lights, spoiler, gauge cluster) with several
+    "detail"-type scenes about them -- without label matching, pool order
+    alone pairs them up wrong (the spoiler scene gets the tail-lights
+    photo, the gauge scene gets the spoiler photo). photo_label lets each
+    scene claim its own specific photo regardless of pool order."""
+    scenes = [
+        {"media_type": "detail", "photo_label": "Stability Boost"},
+        {"media_type": "detail", "photo_label": "Driver-Focused Gauges"},
+        {"media_type": "detail", "photo_label": None},
+    ]
+    media = [
+        {"path": "tail-lights.jpg", "type": "detail", "category": "other_detail", "label": "Retro Tail Lights"},
+        {"path": "spoiler.jpg", "type": "detail", "category": "other_detail", "label": "Stability Boost"},
+        {"path": "gauges.jpg", "type": "detail", "category": "other_detail", "label": "Driver-Focused Gauges"},
+    ]
+    ordered = order_media_for_scenes(scenes, media)
+    assert [item["path"] for item in ordered] == ["spoiler.jpg", "gauges.jpg", "tail-lights.jpg"]
+
+
 def test_order_media_for_scenes_repeats_only_once_every_photo_is_used():
     scenes = [{"media_type": "exterior"}, {"media_type": "exterior"}, {"media_type": "exterior"}]
     media = [{"path": "exterior-01.jpg", "type": "exterior"}, {"path": "exterior-02.jpg", "type": "exterior"}]

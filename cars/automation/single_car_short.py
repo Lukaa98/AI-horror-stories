@@ -104,11 +104,21 @@ PACKAGE_SCHEMA = {
                     "media_type", "headline", "narration", "rival_make", "rival_model",
                     "main_horsepower", "rival_horsepower",
                     "main_quarter_mile_seconds", "rival_quarter_mile_seconds",
-                    "stat_label", "stat_value", "stat_label_2", "stat_value_2",
+                    "stat_label", "stat_value", "stat_label_2", "stat_value_2", "photo_label",
                 ],
                 "properties": {
                     "media_type": {"type": "string", "enum": ["exterior", "engine", "interior", "detail", "wheel"]},
                     "headline": {"type": "string"},
+                    # When this scene is specifically about one of the
+                    # user's pasted photos (see the photo hints below), the
+                    # exact label text for that photo, copied verbatim --
+                    # this is how the actual matching picture gets shown
+                    # for this scene instead of build_short falling back to
+                    # "whichever same-type photo hasn't been used yet",
+                    # which has no idea a "Gauge Cluster" scene should use
+                    # the gauge-cluster photo specifically. null on every
+                    # other scene.
+                    "photo_label": {"type": ["string", "null"]},
                     # The actual spoken narration for this one beat -- the
                     # full script is these joined in order (see
                     # research_script), not a separate freeform field, so
@@ -209,11 +219,16 @@ video, each with a genuine, concrete detail already identified from the image it
 You MUST write one scene's narration specifically about each one -- in your own words, describing/reacting
 to that exact detail (not just reusing the sentence verbatim), so the script actually talks about what's on
 screen instead of narrating something unrelated over it. Use that scene's headline and media_type to match
-(e.g. an interior/gauge detail gets media_type "interior" or "detail" as appropriate). These beats count
-toward the word target and beat variety like any other -- they don't replace the history/mechanical/
-comparison beats below, they're additional specific material that must be folded in alongside them. Do not
-substitute a different, unrelated "detail" beat of your own invention for one of these -- every photo listed
-above needs its own scene, genuinely about what's in it."""
+(e.g. an interior/gauge detail gets media_type "interior" or "detail" as appropriate). Each hint above begins
+with its exact label followed by " photo:" -- for whichever scene you write about that photo, copy that exact
+label text (everything before " photo:") into that scene's photo_label field, verbatim, character for
+character, so the real picture can be matched back to it instead of a generic same-type photo. Set
+photo_label to null on every other scene, including the ordinary hook/history/mechanical/comparison beats
+that aren't specifically about one of these pasted photos. These beats count toward the word target and beat
+variety like any other -- they don't replace the history/mechanical/comparison beats below, they're
+additional specific material that must be folded in alongside them. Do not substitute a different, unrelated
+"detail" beat of your own invention for one of these -- every photo listed above needs its own scene,
+genuinely about what's in it."""
     forced_rival_block = ""
     if forced_rival:
         forced_rival_block = f"""
@@ -949,15 +964,39 @@ def order_media_for_scenes(scenes, media):
     real one. The "exterior" fallback (unused, then reused) only kicks in
     once same_type has no photos in the pool AT ALL, not merely once its
     photos are used up.
+
+    Before any of that type-based matching, a scene carrying a photo_label
+    (set by research_script when its narration is specifically about one
+    pasted photo, e.g. "Gauge Cluster") is matched directly to the media
+    item with that same label/category -- otherwise every "detail"-type
+    scene just grabs whichever unused detail photo happens to be first in
+    pool order, which is how a "Driver-Focused Gauges" scene could end up
+    showing the rear-spoiler photo while the actual gauge-cluster photo
+    goes to a different, unrelated scene.
     """
     ordered = []
     used_paths = set()
     for scene in scenes:
         requested = scene["media_type"]
+        photo_label = (scene.get("photo_label") or "").strip().lower()
+        labeled_match = None
+        if photo_label:
+            labeled_match = next(
+                (
+                    item for item in media
+                    if item["path"] not in used_paths
+                    and (
+                        (item.get("label") or "").strip().lower() == photo_label
+                        or (item.get("category") or "").replace("_", " ").strip().lower() == photo_label
+                    )
+                ),
+                None,
+            )
         same_type = [item for item in media if item["type"] == requested]
         exterior = [item for item in media if item["type"] == "exterior"]
         pick = (
-            next((item for item in same_type if item["path"] not in used_paths), None)
+            labeled_match
+            or next((item for item in same_type if item["path"] not in used_paths), None)
             or next((item for item in same_type if item["path"] in used_paths), None)
             or next((item for item in exterior if item["path"] not in used_paths), None)
             or next((item for item in exterior if item["path"] in used_paths), None)
