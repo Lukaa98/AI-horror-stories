@@ -1,0 +1,288 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 11,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "mercedes",
+      "detected_model": "maybach",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "S680 4matic Sedan",
+      "visible_match_evidence": [
+        "distinct Maybach styling",
+        "S680 badge visible",
+        "modern rear light design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Maybach",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "S680 4MATIC Sedan",
+      "visible_match_evidence": [
+        "Distinctive grille",
+        "Chrome accents",
+        "Overall body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Maybach",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "S680 4MATIC Sedan",
+      "visible_match_evidence": [
+        "Unique Maybach bodywork",
+        "V12 badge on the side",
+        "Distinctive design and proportions"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Maybach",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "S680 4MATIC Sedan",
+      "visible_match_evidence": [
+        "Distinct Maybach grille",
+        "Refined front design",
+        "Signature logo placement"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Maybach",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "S680 4MATIC",
+      "visible_match_evidence": [
+        "S 680 badge",
+        "Maybach branding",
+        "2024 design elements"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "mercedes",
+      "detected_model": "maybach",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "S680 4matic Sedan",
+      "visible_match_evidence": [
+        "luxurious interior design",
+        "specific dashboard layout",
+        "steering wheel design",
+        "upscale materials"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 9,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Maybach",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Blue leather interior with diamond stitching",
+        "Maybach logo on headrests"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "mercedes",
+      "detected_model": "maybach",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "high-end luxury interior",
+        "Maybach logo on seats",
+        "specific seat design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Maybach",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "S680 4MATIC Sedan",
+      "visible_match_evidence": [
+        "dashboard design",
+        "display layout",
+        "brand style indicators"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "mercedes",
+      "detected_model": "maybach",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "wheel",
+        "badge"
+      ],
+      "generation_match_confidence": 3,
+      "variant_match_confidence": 2,
+      "shot_type": "detail",
+      "scene_fit_tags": [
+        "detail",
+        "exterior"
+      ],
+      "quality_score": 4,
+      "composition_score": 5,
+      "target_match_confidence": 4,
+      "reject": true,
+      "reason": "Image is not a full vehicle but a wheel, lacks context of the target vehicle.",
+      "path": "interior-10.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 2,
+      "composition_score": 2,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not feature a vehicle, only tires and wheels.",
+      "path": "interior-11.jpeg",
+      "provider": "openai"
+    }
+  ]
+}
