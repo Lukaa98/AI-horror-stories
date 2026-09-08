@@ -6,7 +6,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.15";
+const UI_VERSION = "V11.16";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -418,6 +418,28 @@ async function trackWorkflowRun({ owner, repo, branch, token, workflow, startedA
   }
 }
 
+const CARS_RESEARCH_WORKFLOW = "cars-research.yml";
+
+// Everything the dashboard's "Currently Running" box needs, straight from
+// the Actions API -- so an in-progress build (dispatched from this browser,
+// another one, or the mobile app) shows up without anyone needing to open
+// GitHub, and it survives a refresh since it's not tied to local state.
+async function fetchRunningWorkflowRuns({ owner, repo, token }) {
+  const data = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${CARS_RESEARCH_WORKFLOW}/runs?per_page=15`,
+    { headers: ghHeaders(token), cache: "no-store" }
+  );
+  return (data.workflow_runs || [])
+    .filter((run) => run.status !== "completed")
+    .map((run) => ({
+      id: run.id,
+      url: run.html_url,
+      status: run.status,
+      title: run.display_title || run.name,
+      createdAt: run.created_at,
+    }));
+}
+
 function parseIdTimestamp(id) {
   const match = String(id || "").match(/(\d{14})$/);
   if (!match) return null;
@@ -700,6 +722,8 @@ export default function App() {
   const [deletingId, setDeletingId] = useState(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const [dashboardRenderingId, setDashboardRenderingId] = useState(null);
+  const [runningRuns, setRunningRuns] = useState([]);
+  const [runningError, setRunningError] = useState(null);
   const dashboardAbortRef = useRef(null);
   const abortRef = useRef(null);
   const trackerIdRef = useRef(0);
@@ -711,10 +735,31 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view]);
 
-
   const repoOk = settings.token && settings.owner && settings.repo && settings.branch;
   const builtRequest = buildStructuredRequest({ workflow, make, model, focus, startYear, endYear });
   const effectiveRequest = useCustomRequest ? request.trim() : builtRequest.trim();
+
+  async function refreshRunningRuns() {
+    if (!repoOk) return;
+    try {
+      const runs = await fetchRunningWorkflowRuns({ owner: settings.owner, repo: settings.repo, token: settings.token });
+      setRunningRuns(runs);
+      setRunningError(null);
+    } catch (err) {
+      setRunningError(String(err.message || err));
+    }
+  }
+
+  // Polls while the dashboard is open so a build that finishes just
+  // disappears from "Currently Running" and its finished card shows up on
+  // the next full refresh, with no manual clicking needed either way.
+  useEffect(() => {
+    if (view !== "dashboard" || !repoOk) return;
+    refreshRunningRuns();
+    const interval = setInterval(refreshRunningRuns, 15000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view, repoOk, settings.owner, settings.repo, settings.token]);
 
   function beginRunTracking(runWorkflow, startedAt, signal) {
     const trackerId = ++trackerIdRef.current;
@@ -1009,12 +1054,19 @@ export default function App() {
         branch: settings.branch,
         token: settings.token,
         workflow: "cars-research.yml",
-        inputs: {
-          ...buildInputs,
-          request: `Rerun: ${buildInputs.make} ${buildInputs.model}`,
-          draft_id: id,
-          mode: "single_car",
-        },
+        // workflow_dispatch inputs must all be strings -- build_inputs was
+        // snapshotted straight from the Python manifest, where start_year/
+        // end_year are real integers (or "" when unset), so spreading it
+        // as-is sends a JSON number for start_year and GitHub's dispatch
+        // API rejects the whole request with a 422 ("not of type string").
+        inputs: Object.fromEntries(
+          Object.entries({
+            ...buildInputs,
+            request: `Rerun: ${buildInputs.make} ${buildInputs.model}`,
+            draft_id: id,
+            mode: "single_car",
+          }).map(([key, value]) => [key, value === null || value === undefined ? "" : String(value)])
+        ),
       });
       const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
       const resultFile = pollForFile({
@@ -1538,6 +1590,25 @@ export default function App() {
 
           {dashboardError && <div className="error">{dashboardError}</div>}
           {!repoOk && <p className="hint">Fill in your GitHub token + repo settings above to load the dashboard.</p>}
+
+          {repoOk && !selectedItem && (
+            <div className="running-builds-panel">
+              <h3>Currently Running</h3>
+              {runningError && <div className="error">{runningError}</div>}
+              {runningRuns.length === 0 ? (
+                <p className="hint">No builds are running right now.</p>
+              ) : (
+                <ul className="running-builds-list">
+                  {runningRuns.map((run) => (
+                    <li key={run.id}>
+                      <span className={`running-status ${run.status}`}>{run.status.replace("_", " ")}</span>
+                      <a href={run.url} target="_blank" rel="noreferrer">{run.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
 
           {!selectedItem && (
             <div className="dashboard-grid">

@@ -1,5 +1,11 @@
 name: Cars Ranking - Research (Manual)
 
+# Lets a running workflow show a real "<mode>: <request>" title (the
+# dashboard's running-builds list reads this via the Actions API) instead of
+# the default commit-message title, which is the same for every dispatch and
+# doesn't say what's actually building.
+run-name: "${{ github.event.inputs.mode }}: ${{ github.event.inputs.request }}"
+
 # Stage 1 of 2. Manual only. Runs AI research (grounded web search, not just
 # model recall) + best-effort image sourcing for a free-text request, and
 # commits cars/drafts/<draft_id>/research.json for review. Does NOT render a
