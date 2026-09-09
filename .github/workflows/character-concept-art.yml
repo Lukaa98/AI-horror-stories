@@ -1,0 +1,69 @@
+name: Narrator Character Concept Art (Manual)
+
+# One-off experiment, not part of the normal render pipeline: generates a
+# single AI-illustrated candidate for the narrator character via OpenAI's
+# image API and commits it to cars-output for review, instead of continuing
+# to hand-tune narrator-rig.html's SVG path coordinates blind.
+run-name: "Character concept art: ${{ inputs.concept_id }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      concept_id:
+        description: "Unique id for this attempt (the UI/caller generates this)"
+        required: true
+        type: string
+      prompt:
+        description: "Optional override for the image prompt -- leave blank to use the default"
+        required: false
+        type: string
+
+env:
+  OUTPUT_BRANCH: cars-output
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install openai python-dotenv
+
+      - name: Generate concept art
+        working-directory: cars/automation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -n "${{ inputs.prompt }}" ]; then
+            python generate_character_concept.py --concept-id "${{ inputs.concept_id }}" --prompt "${{ inputs.prompt }}"
+          else
+            python generate_character_concept.py --concept-id "${{ inputs.concept_id }}"
+          fi
+
+      - name: Commit concept art
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/narrator/concept-art"
+          cp "narrator/concept-art/${{ inputs.concept_id }}.png" "$tmp_dir/narrator/concept-art/"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p narrator/concept-art
+          cp "$tmp_dir/narrator/concept-art/${{ inputs.concept_id }}.png" "narrator/concept-art/"
+          git add "narrator/concept-art/${{ inputs.concept_id }}.png"
+          git commit -m "narrator: concept art ${{ inputs.concept_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
