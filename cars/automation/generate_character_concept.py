@@ -46,10 +46,10 @@ def _with_retry(call, max_retries=4, initial_delay=1.0, backoff=2.0):
             raise
 
 
-def generate(prompt, output_path):
+def generate(prompt, output_path, size="1024x1024"):
     client = OpenAI()
     response = _with_retry(lambda: client.images.generate(
-        model="gpt-image-1", prompt=prompt, size="1024x1024", n=1,
+        model="gpt-image-1", prompt=prompt, size=size, n=1,
     ))
     image_bytes = base64.b64decode(response.data[0].b64_json)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -60,9 +60,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--prompt", default=DEFAULT_PROMPT)
     parser.add_argument("--concept-id", required=True)
+    # A full standing figure (head to feet) needs a taller canvas than
+    # square, or the face -- the part that actually needs pixel precision
+    # for the mouth/eye overlay -- comes back tiny relative to the frame.
+    parser.add_argument("--size", default="1024x1024", choices=["1024x1024", "1024x1536", "1536x1024"])
     args = parser.parse_args()
     output_path = OUTPUT_ROOT / f"{args.concept_id}.png"
-    generate(args.prompt, output_path)
+    generate(args.prompt, output_path, size=args.size)
     print(f"Saved {output_path}")
 
 
