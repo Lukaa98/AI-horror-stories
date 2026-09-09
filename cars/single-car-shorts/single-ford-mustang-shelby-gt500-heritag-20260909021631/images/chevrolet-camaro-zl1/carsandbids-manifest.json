@@ -1,0 +1,600 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-09T02:26:02.225Z",
+  "query": "Chevrolet Camaro ZL1",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/chevrolet/camaro?start_year=2022&end_year=2022&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rGqln6oN/2022-chevrolet-camaro-zl1-coupe",
+      "title": "2022 Chevrolet Camaro Zl1 Coupe",
+      "text": "FEATURED Sold for $79,500",
+      "titleYear": 2022,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lZRzPNM/2022-chevrolet-camaro-zl1-coupe",
+      "title": "2022 Chevrolet Camaro Zl1 Coupe",
+      "text": "Sold for $64,150",
+      "titleYear": 2022,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4GA5vaL/2022-chevrolet-camaro-1ss-coupe",
+      "title": "Sold After for $47,750",
+      "text": "Sold After for $47,750",
+      "titleYear": 2022,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPe4OevL/2022-chevrolet-camaro-ss-coupe",
+      "title": "2022 Chevrolet Camaro Ss Coupe",
+      "text": "Sold for $43,750",
+      "titleYear": 2022,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/37bykNvk/2022-chevrolet-camaro-ss-coupe",
+      "title": "2022 Chevrolet Camaro Ss Coupe",
+      "text": "Sold for $42,250",
+      "titleYear": 2022,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9QBgVOgk/2022-chevrolet-camaro-coupe-lt1-callaway-sc630",
+      "title": "2022 Chevrolet Camaro Coupe Lt1 Callaway Sc630",
+      "text": "Bid to $41,000",
+      "titleYear": 2022,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rGqln6oN/2022-chevrolet-camaro-zl1-coupe",
+      "title": "2022 Chevrolet Camaro Zl1 Coupe",
+      "text": "FEATURED Sold for $79,500",
+      "titleYear": 2022,
+      "score": 88,
+      "usable_image_count": 22,
+      "sale_price": 79500,
+      "sale_type": "sold",
+      "page_title": "2022 Chevrolet Camaro ZL1 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/9lZRzPNM/2022-chevrolet-camaro-zl1-coupe",
+      "title": "2022 Chevrolet Camaro Zl1 Coupe",
+      "text": "Sold for $64,150",
+      "titleYear": 2022,
+      "score": 88,
+      "usable_image_count": 27,
+      "sale_price": 64150,
+      "sale_type": "sold",
+      "page_title": "2022 Chevrolet Camaro ZL1 Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4GA5vaL/2022-chevrolet-camaro-1ss-coupe",
+      "title": "Sold After for $47,750",
+      "text": "Sold After for $47,750",
+      "titleYear": 2022,
+      "score": 70,
+      "usable_image_count": 13,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2022 Chevrolet Camaro 1SS Coupe"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KPe4OevL/2022-chevrolet-camaro-ss-coupe",
+      "title": "2022 Chevrolet Camaro Ss Coupe",
+      "text": "Sold for $43,750",
+      "titleYear": 2022,
+      "score": 70,
+      "usable_image_count": 17,
+      "sale_price": 43750,
+      "sale_type": "sold",
+      "page_title": "2022 Chevrolet Camaro SS Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9lZRzPNM/2022-chevrolet-camaro-zl1-coupe",
+    "title": "2022 Chevrolet Camaro Zl1 Coupe",
+    "text": "Sold for $64,150",
+    "titleYear": 2022,
+    "score": 88,
+    "sale_price": 64150,
+    "sale_type": "sold",
+    "page_title": "2022 Chevrolet Camaro ZL1 Coupe",
+    "year": 2022,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/06956f6eb54f21d74be5cf53e59e11049519e955/photos/9QL2oaBe-egiUBD_Aqo-(edit).jpg?t=167787848094",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 Chevrolet Camaro ZL1 Coupe",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 376175
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/25eadf8653a94e4d636c99405df31e1d674458d1/photos/3LY4nGdG-s3jeaC_heXS.jpg",
+      "labels": [
+        "engine"
+      ],
+      "error": "Too small: 10279 bytes"
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/06956f6eb54f21d74be5cf53e59e11049519e955/photos/9QL2oaBe-iPKgmop7vZ-(edit).jpg?t=167793649452",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 Chevrolet Camaro ZL1 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 308491
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/06956f6eb54f21d74be5cf53e59e11049519e955/photos/9QL2oaBe-B3HtQ_ABUN-(edit).jpg?t=167793593077",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 Chevrolet Camaro ZL1 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 217274
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/06956f6eb54f21d74be5cf53e59e11049519e955/photos/9QL2oaBe-NE9UDPiFEI-(edit).jpg?t=167793622601",
+      "labels": [
+        "interior"
+      ],
+      "section": "2022 Chevrolet Camaro ZL1 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 282459
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/06956f6eb54f21d74be5cf53e59e11049519e955/photos/9QL2oaBe-VO3K-iWbjG-(edit).jpg?t=167787718463",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 Chevrolet Camaro ZL1 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 299669
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/06956f6eb54f21d74be5cf53e59e11049519e955/photos/9QL2oaBe-HxO8wez6X9-(edit).jpg?t=167787806031",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 Chevrolet Camaro ZL1 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 415120
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/06956f6eb54f21d74be5cf53e59e11049519e955/photos/9QL2oaBe-Wxb1Q0rb6D-(edit).jpg?t=167787836686",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 Chevrolet Camaro ZL1 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 387627
+    },
+    {
+      "path": "exterior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/06956f6eb54f21d74be5cf53e59e11049519e955/photos/9QL2oaBe-UZNN8hZB0w-(edit).jpg?t=167787692581",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2022 Chevrolet Camaro ZL1 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 278206
+    },
+    {
+      "path": "exterior-10.png",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/2b9caed02990f6bc1260e4fa6c7b3420636a10d5/photos/3X3_2DkYJ.png",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 41347
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/7788c6913b5066309079c7227410c02d583db81f/photos/36ByOLzz-cTFfLMJyg.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 18462 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/446b12c165424c3807e2228a7617f946ba5e4b49/photos/rMVa0XG8-NY1Vouh5B_k.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 3601 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/7f498606778dbc63b5ff8e8a3bbb83abe05eac21/photos/rbbEj8jD-DhiwBVdylk.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 3036 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/4d530823ef38788d39caba5a8e17464cc0b1a37a/photos/3OWL2qEm-uKcV-V04B.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 10359 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/66308f56df5ebef0b554cb0119e4bb03/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/66308f56df5ebef0b554cb0119e4bb03/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Chevrolet Camaro ZL1 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/66308f56df5ebef0b554cb0119e4bb03/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rGqln6oN/2022-chevrolet-camaro-zl1-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/66308f56df5ebef0b554cb0119e4bb03/manifest/video.m3u8",
+      "auction_title": "2022 Chevrolet Camaro ZL1 Coupe",
+      "auction_year": 2022,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5080ef9cfee729a1582790af21c64549/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5080ef9cfee729a1582790af21c64549/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Chevrolet Camaro ZL1 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5080ef9cfee729a1582790af21c64549/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rGqln6oN/2022-chevrolet-camaro-zl1-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5080ef9cfee729a1582790af21c64549/manifest/video.m3u8",
+      "auction_title": "2022 Chevrolet Camaro ZL1 Coupe",
+      "auction_year": 2022,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2742132ad6816a27aba9b3717523cabd/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2742132ad6816a27aba9b3717523cabd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Chevrolet Camaro ZL1 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2742132ad6816a27aba9b3717523cabd/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rGqln6oN/2022-chevrolet-camaro-zl1-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2742132ad6816a27aba9b3717523cabd/manifest/video.m3u8",
+      "auction_title": "2022 Chevrolet Camaro ZL1 Coupe",
+      "auction_year": 2022,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/50d8a88529bdf6ba665fb732130fff76/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/50d8a88529bdf6ba665fb732130fff76/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Chevrolet Camaro ZL1 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/50d8a88529bdf6ba665fb732130fff76/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rGqln6oN/2022-chevrolet-camaro-zl1-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/50d8a88529bdf6ba665fb732130fff76/manifest/video.m3u8",
+      "auction_title": "2022 Chevrolet Camaro ZL1 Coupe",
+      "auction_year": 2022,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/36f5964eb6c2bf7b8209f3a8181f68bd/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/36f5964eb6c2bf7b8209f3a8181f68bd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Chevrolet Camaro 1SS Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/36f5964eb6c2bf7b8209f3a8181f68bd/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4GA5vaL/2022-chevrolet-camaro-1ss-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/36f5964eb6c2bf7b8209f3a8181f68bd/manifest/video.m3u8",
+      "auction_title": "2022 Chevrolet Camaro 1SS Coupe",
+      "auction_year": 2022,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43a355ddf4730b6d0a077d2f54f01e6f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43a355ddf4730b6d0a077d2f54f01e6f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Chevrolet Camaro 1SS Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43a355ddf4730b6d0a077d2f54f01e6f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4GA5vaL/2022-chevrolet-camaro-1ss-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/43a355ddf4730b6d0a077d2f54f01e6f/manifest/video.m3u8",
+      "auction_title": "2022 Chevrolet Camaro 1SS Coupe",
+      "auction_year": 2022,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1291a8d967b66cec708ada72575b162/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1291a8d967b66cec708ada72575b162/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Chevrolet Camaro 1SS Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1291a8d967b66cec708ada72575b162/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4GA5vaL/2022-chevrolet-camaro-1ss-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b1291a8d967b66cec708ada72575b162/manifest/video.m3u8",
+      "auction_title": "2022 Chevrolet Camaro 1SS Coupe",
+      "auction_year": 2022,
+      "search_score": 70
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7e7d0f96cf86c59d6fb28617f1b2ca83/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7e7d0f96cf86c59d6fb28617f1b2ca83/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Chevrolet Camaro 1SS Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7e7d0f96cf86c59d6fb28617f1b2ca83/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/r4GA5vaL/2022-chevrolet-camaro-1ss-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7e7d0f96cf86c59d6fb28617f1b2ca83/manifest/video.m3u8",
+      "auction_title": "2022 Chevrolet Camaro 1SS Coupe",
+      "auction_year": 2022,
+      "search_score": 70
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "camaro",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "ZL1",
+        "visible_match_evidence": [
+          "ZL1 badge",
+          "front fascia design",
+          "body proportions",
+          "wheel style"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "camaro",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "ZL1",
+        "visible_match_evidence": [
+          "ZL1 badge",
+          "2022 model features",
+          "Camaro front design"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "ZL1",
+        "visible_match_evidence": [
+          "bodywork",
+          "lights",
+          "proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "ZL1",
+        "visible_match_evidence": [
+          "distinctive Camaro body shape",
+          "specific taillight design",
+          "quad exhaust tips",
+          "rear spoiler style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "ZL1",
+        "visible_match_evidence": [
+          "ZL1 badge",
+          "rear design",
+          "tail lights style",
+          "proportions",
+          "spoiler"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 10,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show a vehicle or is not related to the target vehicle.",
+        "path": "exterior-10.png",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "ZL1",
+        "visible_match_evidence": [
+          "Steering wheel with Camaro branding",
+          "ZL1 badge on the steering wheel",
+          "Modern interior design elements"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "ZL1",
+        "visible_match_evidence": [
+          "interior design features",
+          "steering wheel style",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Camaro",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "ZL1",
+        "visible_match_evidence": [
+          "ZL1 badge on seat",
+          "interior design matches Camaro",
+          "steering wheel design",
+          "gauge cluster style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

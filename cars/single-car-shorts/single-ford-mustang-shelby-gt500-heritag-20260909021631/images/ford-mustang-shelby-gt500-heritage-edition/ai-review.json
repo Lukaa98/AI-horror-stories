@@ -1,0 +1,245 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 9,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+      "visible_match_evidence": [
+        "distinctive front fascia",
+        "stripes on hood",
+        "rear wing",
+        "specific wheel design"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 9,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+      "visible_match_evidence": [
+        "Shelby badge",
+        "specific bodywork",
+        "proportions match",
+        "design elements"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 9,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "front"
+      ],
+      "quality_score": 10,
+      "composition_score": 9,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": null,
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+      "visible_match_evidence": [
+        "distinct hood scoop",
+        "front grille design",
+        "Shelby badging",
+        "racing stripes"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+      "visible_match_evidence": [
+        "rear design",
+        "tail lights",
+        "GT500 badging",
+        "exhaust configuration"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+      "visible_match_evidence": [
+        "Distinctive rear tail lights",
+        "Dual exhaust",
+        "Shelby badging",
+        "Racing stripes"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 9,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Shelby GT500",
+      "visible_match_evidence": [
+        "Shelby logo",
+        "gauge layout",
+        "interior design",
+        "carbon fiber trim"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ford",
+      "detected_model": "mustang",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Shelby GT500",
+      "visible_match_evidence": [
+        "Recaro seats",
+        "interior design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "exterior"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 3,
+      "composition_score": 2,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Not the main subject vehicle, image of dashboard only.",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ford",
+      "detected_model": "Mustang",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+      "visible_match_evidence": [
+        "interior design",
+        "trim details",
+        "dashboard layout"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-09.jpg",
+      "provider": "openai"
+    }
+  ]
+}
