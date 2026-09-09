@@ -5,16 +5,20 @@ manual attempts at an angular face/proportional body kept coming out wrong
 (a pointed egg-shaped head, oversized balloon sleeves) without ever actually
 looking at the render first. This just produces a PNG to react to; it does
 not wire into narrator_video.py or narrator-rig.html on its own.
+
+Deliberately has no imports from the rest of cars/automation (no
+generate_sample/openai_retry) -- this needs to run standalone off whichever
+ref it's dispatched against, including branches (like main) that predate
+those helpers.
 """
 import argparse
 import base64
+import time
 from pathlib import Path
 
 from openai import OpenAI
 
-from generate_sample import ROOT
-from openai_retry import with_openai_retry
-
+ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_ROOT = ROOT / "narrator" / "concept-art"
 
 DEFAULT_PROMPT = (
@@ -29,9 +33,22 @@ DEFAULT_PROMPT = (
 )
 
 
+def _with_retry(call, max_retries=4, initial_delay=1.0, backoff=2.0):
+    delay = initial_delay
+    for attempt in range(max_retries + 1):
+        try:
+            return call()
+        except Exception as exc:
+            if attempt < max_retries and ("rate_limit" in str(exc) or "429" in str(exc)):
+                time.sleep(delay)
+                delay *= backoff
+                continue
+            raise
+
+
 def generate(prompt, output_path):
     client = OpenAI()
-    response = with_openai_retry(lambda: client.images.generate(
+    response = _with_retry(lambda: client.images.generate(
         model="gpt-image-1", prompt=prompt, size="1024x1024", n=1,
     ))
     image_bytes = base64.b64decode(response.data[0].b64_json)
