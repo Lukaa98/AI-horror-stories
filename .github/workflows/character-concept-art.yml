@@ -17,6 +17,15 @@ on:
         description: "Optional override for the image prompt -- leave blank to use the default"
         required: false
         type: string
+      size:
+        description: "Image canvas size -- use the portrait one for a full standing figure"
+        required: false
+        type: choice
+        default: "1024x1024"
+        options:
+          - "1024x1024"
+          - "1024x1536"
+          - "1536x1024"
 
 env:
   OUTPUT_BRANCH: cars-output
@@ -40,9 +49,9 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           if [ -n "${{ inputs.prompt }}" ]; then
-            python generate_character_concept.py --concept-id "${{ inputs.concept_id }}" --prompt "${{ inputs.prompt }}"
+            python generate_character_concept.py --concept-id "${{ inputs.concept_id }}" --size "${{ inputs.size }}" --prompt "${{ inputs.prompt }}"
           else
-            python generate_character_concept.py --concept-id "${{ inputs.concept_id }}"
+            python generate_character_concept.py --concept-id "${{ inputs.concept_id }}" --size "${{ inputs.size }}"
           fi
 
       - name: Commit concept art
