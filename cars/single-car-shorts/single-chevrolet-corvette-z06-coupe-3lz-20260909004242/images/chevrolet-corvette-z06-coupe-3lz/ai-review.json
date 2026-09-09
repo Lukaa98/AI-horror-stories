@@ -1,0 +1,297 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 11,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Z06",
+      "visible_match_evidence": [
+        "Z06 badge",
+        "Corvette branding",
+        "2024 model lines"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Z06 Coupe 3LZ",
+      "visible_match_evidence": [
+        "distinctive bodywork",
+        "specific front lighting",
+        "unique rear design",
+        "sporty proportions",
+        "racing-style aerodynamic features"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 9,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Z06 Coupe 3LZ",
+      "visible_match_evidence": [
+        "distinctive bodywork",
+        "specific rear wing",
+        "Z06 badge",
+        "overall proportions",
+        "design cues of the 2024 model"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 9,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Z06 Coupe 3LZ",
+      "visible_match_evidence": [
+        "distinctive bodywork",
+        "specific headlights",
+        "front design elements"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Z06 Coupe 3lz",
+      "visible_match_evidence": [
+        "specific bodywork",
+        "distinctive lights",
+        "proportions characteristic of the model",
+        "rear design features",
+        "rear wing"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "corvette steering wheel",
+        "red leather interior",
+        "modern dashboard layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Z06 Coupe 3lz",
+      "visible_match_evidence": [
+        "distinctive red leather seats",
+        "interior layout",
+        "brand specific styling"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "chevrolet",
+      "detected_model": "corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Z06 Coupe 3lz",
+      "visible_match_evidence": [
+        "interior design",
+        "gear selector",
+        "red accents"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "display dashboard",
+        "Corvette branding"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "interior-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Chevrolet",
+      "detected_model": "Corvette",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Z06 Coupe 3LZ",
+      "visible_match_evidence": [
+        "bodywork shape",
+        "rear lights design",
+        "exhaust layout",
+        "rear spoiler"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-11.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 2,
+      "composition_score": 3,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not clearly show the target vehicle.",
+      "path": "interior-13.jpeg",
+      "provider": "openai"
+    }
+  ]
+}

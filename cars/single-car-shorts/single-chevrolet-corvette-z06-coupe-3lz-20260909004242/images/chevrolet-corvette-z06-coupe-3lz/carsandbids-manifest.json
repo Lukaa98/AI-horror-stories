@@ -1,0 +1,533 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-09T00:44:45.149Z",
+  "query": "Chevrolet Corvette Z06 Coupe 3lz",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3BzMooDz/2024-chevrolet-corvette-z06-coupe-3lz",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3BzMooDz/2024-chevrolet-corvette-z06-coupe-3lz",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 29,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2024 Chevrolet Corvette Z06 Coupe 3LZ"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3BzMooDz/2024-chevrolet-corvette-z06-coupe-3lz",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-VOQDx11/edit/636Rx.jpg?t=178812340268",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 190415
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-1LxKRwP/edit/M_NIt.jpg?t=178812380494",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 205398
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-7AB9Lmd/edit/TaImb.jpg?t=178812345316",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 266233
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-p_ttMqI/edit/ask7c.jpg?t=178812343267",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 266354
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-zOvXhBP/edit/1XdAM.jpg?t=178812382740",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 219469
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/be5b28ea0dfa2afbc413fd14f2d67bfa2277e0fb/photos/application/s-bcAd4n2.jpg?t=178769923368",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 193510
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/be5b28ea0dfa2afbc413fd14f2d67bfa2277e0fb/photos/application/s-P-s2Yk4.jpg?t=178769923680",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 145955
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/be5b28ea0dfa2afbc413fd14f2d67bfa2277e0fb/photos/application/s-0s_Hn33.jpg?t=178769925362",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 141776
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/be5b28ea0dfa2afbc413fd14f2d67bfa2277e0fb/photos/application/s-ODT0hNc.jpg?t=178769927237",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Chevrolet Corvette Z06 Coupe 3LZ",
+      "width": 542,
+      "height": 361,
+      "bytes": 115506
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/be5b28ea0dfa2afbc413fd14f2d67bfa2277e0fb/photos/r4dA65vk-qKcXXD0.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 17834 bytes"
+    },
+    {
+      "path": "interior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/be5b28ea0dfa2afbc413fd14f2d67bfa2277e0fb/attachments/3BzMooDz-wulD458.jpeg?t=178879554523",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 119,
+      "bytes": 404825
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/ead4eead0710b00f7e0cac8acc034bd3c2af5d63/photos/rb1ZajBJ-D11Bl11O4.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 14014 bytes"
+    },
+    {
+      "path": "interior-13.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/b4d6f8db8e90af190d355a1541e928ab2a43b080/photos/KV6Y2nnM-mRuibjN.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 25736
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 11,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Z06",
+        "visible_match_evidence": [
+          "Z06 badge",
+          "Corvette branding",
+          "2024 model lines"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Z06 Coupe 3LZ",
+        "visible_match_evidence": [
+          "distinctive bodywork",
+          "specific front lighting",
+          "unique rear design",
+          "sporty proportions",
+          "racing-style aerodynamic features"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Z06 Coupe 3LZ",
+        "visible_match_evidence": [
+          "distinctive bodywork",
+          "specific rear wing",
+          "Z06 badge",
+          "overall proportions",
+          "design cues of the 2024 model"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Z06 Coupe 3LZ",
+        "visible_match_evidence": [
+          "distinctive bodywork",
+          "specific headlights",
+          "front design elements"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Z06 Coupe 3lz",
+        "visible_match_evidence": [
+          "specific bodywork",
+          "distinctive lights",
+          "proportions characteristic of the model",
+          "rear design features",
+          "rear wing"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "corvette steering wheel",
+          "red leather interior",
+          "modern dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Z06 Coupe 3lz",
+        "visible_match_evidence": [
+          "distinctive red leather seats",
+          "interior layout",
+          "brand specific styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Z06 Coupe 3lz",
+        "visible_match_evidence": [
+          "interior design",
+          "gear selector",
+          "red accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "display dashboard",
+          "Corvette branding"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 7,
+        "reject": false,
+        "reason": "",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2024",
+        "detected_variant_or_engine": "Z06 Coupe 3LZ",
+        "visible_match_evidence": [
+          "bodywork shape",
+          "rear lights design",
+          "exhaust layout",
+          "rear spoiler"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not clearly show the target vehicle.",
+        "path": "interior-13.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

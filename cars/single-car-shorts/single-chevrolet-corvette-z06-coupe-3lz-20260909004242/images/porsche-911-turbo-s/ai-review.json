@@ -1,0 +1,298 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 12,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Turbo S",
+      "visible_match_evidence": [
+        "distinct front fascia",
+        "Porsche badge",
+        "turbo rear vents"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Turbo S",
+      "visible_match_evidence": [
+        "front design",
+        "headlights",
+        "grille"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Turbo S",
+      "visible_match_evidence": [
+        "Porsche logo",
+        "911 body shape",
+        "Turbo S rear wing",
+        "specific wheel design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Turbo S",
+      "visible_match_evidence": [
+        "Porsche badge",
+        "bodywork design typical for 911",
+        "rear spoiler design",
+        "turbo exhaust design",
+        "wheel design typical for Turbo S"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Turbo S",
+      "visible_match_evidence": [
+        "Porsche badge",
+        "911 Turbo S badging",
+        "2024 bodywork"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Turbo S",
+      "visible_match_evidence": [
+        "Invoice mentions 2024 Porsche 911 Turbo S"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 10,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 8,
+      "composition_score": 6,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-10.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 1,
+      "composition_score": 1,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "image does not show vehicle",
+      "path": "exterior-11.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 1,
+      "composition_score": 1,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Not a car image.",
+      "path": "exterior-12.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Turbo S",
+      "visible_match_evidence": [
+        "Porsche interior design",
+        "Distinctive seating",
+        "Steering wheel design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-13.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Turbo S",
+      "visible_match_evidence": [
+        "Porsche emblem on steering wheel",
+        "Digital display consistent with 2024 models",
+        "Interior layout matches Turbo S configuration"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2024",
+      "detected_variant_or_engine": "Turbo S",
+      "visible_match_evidence": [
+        "interior design features",
+        "seat style and materials",
+        "dashboard layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [],
+      "quality_score": 3,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image shows interior without evidence of target make/model.",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    }
+  ]
+}
