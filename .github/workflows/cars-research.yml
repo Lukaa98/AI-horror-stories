@@ -82,6 +82,7 @@ on:
         description: "Narrator voice for single-car mode"
         required: false
         type: string
+        default: onyx
       narrator_character:
         description: "Which narrator sprite set to render with -- 'v3' is the AI-illustrated full-body character test"
         required: false
@@ -90,7 +91,6 @@ on:
         options:
           - "default"
           - "v3"
-        default: onyx
       auction_url:
         description: "single_car mode: a specific carsandbids.com/auctions/... listing to pull photos from instead of searching"
         required: false
