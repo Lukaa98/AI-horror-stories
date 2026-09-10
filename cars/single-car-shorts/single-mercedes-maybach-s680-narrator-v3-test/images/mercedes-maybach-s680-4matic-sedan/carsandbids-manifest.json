@@ -1,0 +1,567 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-10T16:09:10.550Z",
+  "query": "Mercedes Maybach S680 4matic Sedan",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/K1GlRb6M/2024-mercedes-maybach-s680-4matic-sedan",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/K1GlRb6M/2024-mercedes-maybach-s680-4matic-sedan",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 40,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2024 Mercedes-Maybach S680 4Matic Sedan"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/K1GlRb6M/2024-mercedes-maybach-s680-4matic-sedan",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2024 Mercedes-Maybach S680 4Matic Sedan",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/KYxOwyEx-2SS49fQ/edit/EEZFc.jpg?t=178832784552",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 374919
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/KYxOwyEx-GuSmLBx/edit/XfZL0.jpg?t=178832791475",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 342744
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/KYxOwyEx-iZ0OavN/edit/qka9w.jpg?t=178832801763",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 469014
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/KYxOwyEx-q0uBiRE/edit/QE5U2.jpg?t=178832804552",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 362739
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/KYxOwyEx-Gjq1qrc/edit/quB8A.jpg?t=178832807057",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 235875
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/abddefa8b0b1d0d47fa08455900b8fae00a811f1/photos/KYxOwyEx-E6D5lMB.jpg?t=178794276140",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 225827
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/abddefa8b0b1d0d47fa08455900b8fae00a811f1/photos/application/s-dghOFp5.jpg?t=178794119626",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 252664
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/abddefa8b0b1d0d47fa08455900b8fae00a811f1/photos/application/s-Z0TmRZH.jpg?t=178794121243",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 213564
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/abddefa8b0b1d0d47fa08455900b8fae00a811f1/photos/KYxOwyEx-HvOG5rB.jpg?t=178794282309",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 161018
+    },
+    {
+      "path": "interior-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/abddefa8b0b1d0d47fa08455900b8fae00a811f1/attachments/K1GlRb6M-CkOb-P4.jpeg?t=178887688929",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 203,
+      "bytes": 272158
+    },
+    {
+      "path": "interior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/abddefa8b0b1d0d47fa08455900b8fae00a811f1/attachments/K1GlRb6M-1MlVGRp.jpeg?t=178887687233",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 167,
+      "bytes": 262200
+    },
+    {
+      "path": "interior-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/abddefa8b0b1d0d47fa08455900b8fae00a811f1/attachments/K1GlRb6M-oFAw0fR.jpeg?t=178887688275",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 167,
+      "bytes": 262200
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/8e09198a654ea5a8d936e6db6bc02aa307f76ad6/photos/3ONVzQpv-kEPJdUK.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 11275 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a6f8d5b4d7e72912c9e22988f2e565b304f90e07/photos/3v8g2Bxj-Qupp2BkqmBu.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 6425 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e2b2645cb92697eb1824fdd241afb5b3/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e2b2645cb92697eb1824fdd241afb5b3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e2b2645cb92697eb1824fdd241afb5b3/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1GlRb6M/2024-mercedes-maybach-s680-4matic-sedan",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e2b2645cb92697eb1824fdd241afb5b3/manifest/video.m3u8",
+      "auction_title": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c6fb6087a66c749e83bd2d51eb81ea7c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c6fb6087a66c749e83bd2d51eb81ea7c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c6fb6087a66c749e83bd2d51eb81ea7c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/K1GlRb6M/2024-mercedes-maybach-s680-4matic-sedan",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c6fb6087a66c749e83bd2d51eb81ea7c/manifest/video.m3u8",
+      "auction_title": "2024 Mercedes-Maybach S680 4Matic Sedan",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 11,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "Maybach",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": "S680",
+        "visible_match_evidence": [
+          "S680 badge",
+          "Maybach emblem",
+          "design proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "Maybach",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": "S680 4MATIC Sedan",
+        "visible_match_evidence": [
+          "distinctive grille",
+          "body proportions",
+          "luxury trim elements",
+          "V12 badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "Maybach",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": "S680 4MATIC",
+        "visible_match_evidence": [
+          "body shape aligns with Maybach",
+          "V12 badge visible",
+          "luxurious design features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "Maybach",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": "S680 4matic Sedan",
+        "visible_match_evidence": [
+          "distinct grille",
+          "Maybach badge",
+          "body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "Maybach",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": "S680 4MATIC Sedan",
+        "visible_match_evidence": [
+          "S 680 badge",
+          "Maybach branding",
+          "2021 bodywork and design features"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "Maybach",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": "S680 4MATIC Sedan",
+        "visible_match_evidence": [
+          "luxurious interior design",
+          "dash layout specific to Maybach",
+          "steering wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "Maybach",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": "S680 4MATIC Sedan",
+        "visible_match_evidence": [
+          "Distinctive blue leather upholstery",
+          "Maybach headrest logos",
+          "Interior design elements aligning with Maybach styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "mercedes",
+        "detected_model": "maybach",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "luxurious interior design",
+          "plush seating with Maybach logo",
+          "high-quality materials"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "Maybach",
+        "detected_generation_or_year": "2021",
+        "detected_variant_or_engine": "S680 4matic Sedan",
+        "visible_match_evidence": [
+          "Interior design matches Mercedes Maybach",
+          "Digital gauges characteristic of 2021 model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "mercedes",
+        "detected_model": "maybach",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "wheel with Maybach logo"
+        ],
+        "generation_match_confidence": 3,
+        "variant_match_confidence": 2,
+        "shot_type": "wheel",
+        "scene_fit_tags": [
+          "detail"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 4,
+        "reject": true,
+        "reason": "Image features a wheel, not the target vehicle.",
+        "path": "interior-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "mercedes",
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "visible Mercedes wheels"
+        ],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "detail",
+        "scene_fit_tags": [
+          "detail"
+        ],
+        "quality_score": 4,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not a photo of the target vehicle.",
+        "path": "interior-11.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
