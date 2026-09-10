@@ -19,6 +19,7 @@ jerky rather than a smooth sway.
 import argparse
 import json
 import math
+import os
 import re
 from pathlib import Path
 
@@ -33,7 +34,10 @@ import moviepy.video.fx.all as vfx
 
 from generate_sample import ROOT, CANVAS, _font, _wrap
 
-SPRITES_DIR = ROOT / "narrator" / "sprites"
+# Lets a build opt into a different sprite set (e.g. the AI-illustrated
+# character in narrator/sprites-v3) without touching the default pipeline --
+# unset, this is exactly the previous hard-coded path.
+SPRITES_DIR = Path(os.environ["NARRATOR_SPRITES_DIR"]) if os.environ.get("NARRATOR_SPRITES_DIR") else ROOT / "narrator" / "sprites"
 SFX_DIR = ROOT / "narrator" / "sfx"
 # A soft whoosh that plays the instant a new car photo slides in -- swapped
 # in from a supplied sample (replacing an earlier synthesized "chime" that
