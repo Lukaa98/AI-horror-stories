@@ -1,0 +1,215 @@
+<title>Narrator Character Concepts</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #f5f2ea;
+    --panel: #eae5d8;
+    --border: #d3cab4;
+    --ink: #211d17;
+    --ink-soft: #5c5344;
+    --accent: #c1391f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17140f; --panel: #221e17; --border: #3a3427;
+      --ink: #f1ece1; --ink-soft: #b8ae9a; --accent: #e2603f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17140f; --panel: #221e17; --border: #3a3427;
+    --ink: #f1ece1; --ink-soft: #b8ae9a; --accent: #e2603f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    margin: 0;
+    padding: 28px 24px 50px;
+  }
+  h1 {
+    font-family: "Archivo", sans-serif;
+    font-weight: 800;
+    font-size: clamp(22px, 3.4vw, 30px);
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  header p { margin: 0 0 22px; color: var(--ink-soft); font-size: 13px; max-width: 60ch; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+    max-width: 1280px;
+  }
+  .cell {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cell svg { width: 100%; height: auto; display: block; }
+  .cell h2 {
+    font-family: "Archivo", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  .cell p { margin: 0; font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+  .tag {
+    display: inline-block;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 100px;
+    padding: 2px 8px;
+    align-self: flex-start;
+  }
+</style>
+
+<header>
+  <h1>Narrator Character Concepts</h1>
+  <p>Four car/mechanical mascot directions, side by side for a quick gut-check before committing to one. Same line-art
+  language (white fill, dark stroke) as the current human rig, just swapping what the "face" is built from.</p>
+</header>
+
+<div class="grid">
+
+  <!-- 1: anthropomorphic car-front face -->
+  <div class="cell">
+    <span class="tag">Concept 1</span>
+    <h2>Car-Front Face</h2>
+    <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#1c1712" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- hood/bumper body -->
+        <path d="M 90 140 C 90 110 115 95 150 95 C 185 95 210 110 210 140
+                 L 214 240 C 214 270 195 288 150 288 C 105 288 86 270 86 240 Z" fill="#ffffff"/>
+        <!-- headlight eyes -->
+        <ellipse cx="118" cy="155" rx="17" ry="13" fill="#ffffff"/>
+        <ellipse cx="182" cy="155" rx="17" ry="13" fill="#ffffff"/>
+        <circle cx="118" cy="155" r="6" fill="#1c1712" stroke="none"/>
+        <circle cx="182" cy="155" r="6" fill="#1c1712" stroke="none"/>
+        <!-- grille mouth: bars that part like teeth -->
+        <path d="M 108 210 L 108 240 M 122 208 L 122 242 M 136 207 L 136 243
+                 M 150 207 L 150 243 M 164 207 L 164 243 M 178 208 L 178 242
+                 M 192 210 L 192 240" stroke-width="5"/>
+        <path d="M 100 205 C 100 232 100 232 100 232 C 130 250 170 250 200 232 C 200 232 200 205 200 205"
+              stroke-width="3" opacity="0.5"/>
+        <!-- simple stub arms + legs so it can still gesture -->
+        <path d="M 90 200 L 58 220 M 210 200 L 242 220" stroke-width="6"/>
+        <path d="M 118 288 L 112 340 M 182 288 L 188 340" stroke-width="6"/>
+        <ellipse cx="108" cy="346" rx="16" ry="9" fill="#ffffff"/>
+        <ellipse cx="192" cy="346" rx="16" ry="9" fill="#ffffff"/>
+      </g>
+    </svg>
+    <p>Headlights = eyes, grille slats = a mouth that literally parts like teeth. Grille-teeth map straight onto the
+    existing open/closed/talking mouth states. Whole silhouette reads as "car" immediately.</p>
+  </div>
+
+  <!-- 2: steering wheel head, mechanic body -->
+  <div class="cell">
+    <span class="tag">Concept 2 — recommended</span>
+    <h2>Steering Wheel Head</h2>
+    <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#1c1712" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- shoulders/torso (human-ish, keeps the existing arm/leg rig) -->
+        <path d="M 100 220 L 92 250 L 92 340 L 208 340 L 208 250 L 200 220
+                 C 185 230 165 234 150 232 C 135 234 115 230 100 220 Z" fill="#ffffff"/>
+        <!-- neck -->
+        <path d="M 130 205 L 128 222 M 170 205 L 172 222" stroke-width="3.5"/>
+        <!-- wheel rim = head outline -->
+        <circle cx="150" cy="140" r="68" fill="#ffffff"/>
+        <circle cx="150" cy="140" r="68" stroke-width="10" opacity="0.9"/>
+        <!-- horn pad = face plate -->
+        <circle cx="150" cy="140" r="40" fill="#ffffff"/>
+        <!-- 3 spokes doubling as brows -->
+        <path d="M 150 140 L 150 100" stroke-width="6"/>
+        <path d="M 150 140 L 116 162" stroke-width="6"/>
+        <path d="M 150 140 L 184 162" stroke-width="6"/>
+        <!-- eyes + mouth on the horn pad -->
+        <circle cx="136" cy="146" r="5" fill="#1c1712" stroke="none"/>
+        <circle cx="164" cy="146" r="5" fill="#1c1712" stroke="none"/>
+        <path d="M 138 164 C 144 169 156 169 162 164" stroke-width="3.5"/>
+        <!-- arms + legs, straight out of the existing rig -->
+        <path d="M 92 250 C 70 270 60 300 62 330" stroke-width="6"/>
+        <path d="M 208 250 C 230 270 240 300 238 330" stroke-width="6"/>
+        <path d="M 122 340 L 118 385 M 178 340 L 182 385" stroke-width="6"/>
+      </g>
+    </svg>
+    <p>Wheel rim + horn pad = head and face; 3 spokes read as expressive brow lines. Body/arms/legs stay exactly the
+    existing human rig, so all current pose/mouth/blink work carries over untouched -- smallest rework, still a big
+    novelty jump.</p>
+  </div>
+
+  <!-- 3: gauge cluster head -->
+  <div class="cell">
+    <span class="tag">Concept 3</span>
+    <h2>Gauge Cluster Head</h2>
+    <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#1c1712" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- body -->
+        <path d="M 100 220 L 92 250 L 92 340 L 208 340 L 208 250 L 200 220
+                 C 185 230 165 234 150 232 C 135 234 115 230 100 220 Z" fill="#ffffff"/>
+        <path d="M 130 205 L 128 222 M 170 205 L 172 222" stroke-width="3.5"/>
+        <!-- dial face -->
+        <circle cx="150" cy="140" r="66" fill="#ffffff"/>
+        <!-- tick marks around the rim -->
+        <path d="M 150 78 L 150 88 M 202 100 L 195 108 M 220 150 L 210 150
+                 M 202 200 L 195 192 M 98 200 L 105 192 M 80 150 L 90 150
+                 M 98 100 L 105 108" stroke-width="3"/>
+        <!-- needle acting as one raised "brow" -->
+        <path d="M 150 140 L 178 108" stroke-width="5"/>
+        <circle cx="150" cy="140" r="5" fill="#1c1712" stroke="none"/>
+        <!-- eyes + small dial-in-a-dial mouth -->
+        <circle cx="134" cy="150" r="5" fill="#1c1712" stroke="none"/>
+        <circle cx="150" cy="150" r="0" stroke="none"/>
+        <circle cx="166" cy="150" r="5" fill="#1c1712" stroke="none"/>
+        <circle cx="150" cy="172" r="10" fill="#ffffff" stroke-width="3"/>
+        <path d="M 150 168 L 150 172 L 154 174" stroke-width="2.5"/>
+        <!-- arms + legs -->
+        <path d="M 92 250 C 70 270 60 300 62 330" stroke-width="6"/>
+        <path d="M 208 250 C 230 270 240 300 238 330" stroke-width="6"/>
+        <path d="M 122 340 L 118 385 M 178 340 L 182 385" stroke-width="6"/>
+      </g>
+    </svg>
+    <p>Dial face + tick marks, needle doubles as a swinging brow/emphasis pointer, a tiny secondary dial stands in
+    for a mouth. Most unique of the four ("the narrator IS the stat readout"), but the needle only really does one
+    continuous gesture -- harder to get discrete talking/expression states out of it.</p>
+  </div>
+
+  <!-- 4: wrench + bolt buddy -->
+  <div class="cell">
+    <span class="tag">Concept 4</span>
+    <h2>Bolt-Head Buddy</h2>
+    <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#1c1712" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- body -->
+        <path d="M 100 220 L 92 250 L 92 340 L 208 340 L 208 250 L 200 220
+                 C 185 230 165 234 150 232 C 135 234 115 230 100 220 Z" fill="#ffffff"/>
+        <path d="M 130 205 L 128 222 M 170 205 L 172 222" stroke-width="3.5"/>
+        <!-- hex bolt head (this one can be genuinely angular without looking wrong) -->
+        <path d="M 150 68 L 202 96 L 202 152 L 150 180 L 98 152 L 98 96 Z" fill="#ffffff"/>
+        <!-- center hex recess -->
+        <path d="M 150 108 L 172 120 L 172 144 L 150 156 L 128 144 L 128 120 Z" stroke-width="3"/>
+        <!-- eyes + mouth -->
+        <circle cx="136" cy="118" r="5" fill="#1c1712" stroke="none"/>
+        <circle cx="164" cy="118" r="5" fill="#1c1712" stroke="none"/>
+        <path d="M 138 138 C 144 143 156 143 162 138" stroke-width="3.5"/>
+        <!-- one arm holding a wrench prop -->
+        <path d="M 92 250 C 70 270 60 300 62 330" stroke-width="6"/>
+        <path d="M 208 250 C 226 262 236 278 236 296" stroke-width="6"/>
+        <path d="M 232 292 L 262 260" stroke-width="7"/>
+        <path d="M 258 250 C 258 240 268 236 276 242 C 284 248 282 258 272 260 L 262 264 Z" fill="#ffffff" stroke-width="4"/>
+        <path d="M 122 340 L 118 385 M 178 340 L 182 385" stroke-width="6"/>
+      </g>
+    </svg>
+    <p>Hex bolt head + held wrench prop -- a genuine garage-toolbox mascot, and the one spot where hard angular
+    facets actually belong (a real bolt has flat faces). Reads more "generic mechanic" than "car review narrator"
+    specifically, though.</p>
+  </div>
+
+</div>
