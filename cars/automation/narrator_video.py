@@ -3,18 +3,9 @@ narrator character talking underneath, captions in between -- driven by
 the manifest.json that narrator_script.py produces (script text, narration
 audio, and an audio-loudness mouth timeline).
 
-The narrator itself is not rendered live; export-sprites.js pre-renders it
-to a fixed set of transparent PNGs (one per mouth x eyes x pose
-combination) and this flips between them like a flipbook: mouth state
-follows the audio-loudness mouth_timeline, eyes follow a blink timeline,
-and the body pose advances once per sentence (steady -> jolt -> lean_left
--> lean_right -> ...), detected from the natural pauses in the real
-per-word timeline rather than a fixed clock, with a short crossfade at
-each pose change so it reads as a transition into the new stance instead
-of a jump cut. The one exception is the small idle lean, which stays a
-smooth, continuous per-frame rotation on top of whichever pose is showing
-(_apply_body_sway), since baking *that* into discrete sprites read as
-jerky rather than a smooth sway.
+V21 is captured frame by frame from the live SVG rig, preserving continuous
+arm/wrist motion and smooth placements while mouth and eyes follow independent
+tracks. Legacy sprite sets remain available with NARRATOR_RENDERER=sprites.
 """
 import argparse
 import json
@@ -33,6 +24,7 @@ import moviepy.audio.fx.all as afx
 import moviepy.video.fx.all as vfx
 
 from generate_sample import ROOT, CANVAS, _font, _wrap
+from narrator_motion import build_motion_plan, render_live_narrator
 
 # Lets a build opt into a different sprite set (e.g. the AI-illustrated
 # character in narrator/sprites-v3) without touching the default pipeline --
@@ -1310,7 +1302,6 @@ def _progress_bar_track(size, duration):
 
 def render_narrator_video(car_media_paths, manifest, output_path):
     size = CANVAS
-    sprites = _load_sprites_manifest()
     output_path = Path(output_path)
 
     audio = AudioFileClip(manifest["audio_path"])
@@ -1322,45 +1313,62 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     word_timeline = list(manifest.get("word_timeline") or [])
     scene_boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
 
-    narrator_clip = _apply_body_sway(_narrator_track(manifest, sprites, size, duration))
-    # Size and placement change per scene instead of staying pinned, which
-    # read as a cutout pasted in one spot for the whole video. Scale and
-    # position are driven per-frame off the shot table rather than baked in,
-    # so the switch lands on the same scene boundary the car photo uses --
-    # the character re-frames when the subject changes, not on its own clock.
-    shot_intervals = _shot_intervals(scene_boundaries, duration)
-    # Captured before the time-varying resize below, which makes a clip's
-    # own reported w/h vary with t and so useless for positioning math.
-    base_w, base_h = narrator_clip.w, narrator_clip.h
+    # Explicit legacy selections retain their exporter. Otherwise use the
+    # approved live rig, including in local builds without Actions inputs.
+    renderer = os.environ.get("NARRATOR_RENDERER") or ("sprites" if os.environ.get("NARRATOR_SPRITES_DIR") else "v21")
+    live_source = None
+    if renderer == "v21":
+        motion_plan = build_motion_plan(manifest, duration, scene_boundaries, size, fps=24)
+        live_path, plan_path = render_live_narrator(motion_plan, output_path.parent / "_frames" / "narrator")
+        live_source = VideoFileClip(str(live_path), has_mask=True, audio=False)
+        narrator_positioned = live_source.set_duration(duration).set_position((0, 0))
+        narrator_top_y = size[1] * motion_plan["safe_top"]
+        manifest["narrator_render"] = {"version": "v21", "fps": 24,
+            "shots": motion_plan["shots"], "gestures": motion_plan["gestures"],
+            "safe_top": motion_plan["safe_top"], "continuous_motion": True}
+    elif renderer == "sprites":
+        sprites = _load_sprites_manifest()
+        narrator_clip = _apply_body_sway(_narrator_track(manifest, sprites, size, duration))
+        # Size and placement change per scene instead of staying pinned, which
+        # read as a cutout pasted in one spot for the whole video. Scale and
+        # position are driven per-frame off the shot table rather than baked in,
+        # so the switch lands on the same scene boundary the car photo uses --
+        # the character re-frames when the subject changes, not on its own clock.
+        shot_intervals = _shot_intervals(scene_boundaries, duration)
+        # Captured before the time-varying resize below, which makes a clip's
+        # own reported w/h vary with t and so useless for positioning math.
+        base_w, base_h = narrator_clip.w, narrator_clip.h
 
-    def shot_at(t):
-        return _value_at(shot_intervals, t, NARRATOR_SHOTS[0])
+        def shot_at(t):
+            return _value_at(shot_intervals, t, NARRATOR_SHOTS[0])
 
-    def narrator_position(t):
-        shot = shot_at(t)
-        scaled_w = base_w * shot["height"]
-        scaled_h = base_h * shot["height"]
-        x = (size[0] - scaled_w) / 2 + size[0] * shot["x"]
-        # Anchored so `bleed` of the character's height falls past the
-        # bottom edge: a closer shot is framed by the frame itself rather
-        # than by cropping the sprite, which is how the reference channel's
-        # close-ups read (head and shoulders, body running off-screen).
-        y = size[1] - scaled_h * (1 - shot["bleed"])
-        return (x + 3 * math.sin(t * 1.15), y + 3 * math.sin(t * 1.65))
+        def narrator_position(t):
+            shot = shot_at(t)
+            scaled_w = base_w * shot["height"]
+            scaled_h = base_h * shot["height"]
+            x = (size[0] - scaled_w) / 2 + size[0] * shot["x"]
+            # Anchored so `bleed` of the character's height falls past the
+            # bottom edge: a closer shot is framed by the frame itself rather
+            # than by cropping the sprite, which is how the reference channel's
+            # close-ups read (head and shoulders, body running off-screen).
+            y = size[1] - scaled_h * (1 - shot["bleed"])
+            return (x + 3 * math.sin(t * 1.15), y + 3 * math.sin(t * 1.65))
 
-    narrator_positioned = (
-        narrator_clip
-        .resize(lambda t: shot_at(t)["height"])
-        .set_position(narrator_position)
-    )
-    # The stat table is pinned above the character's head, which is no
-    # longer a single value -- take the highest any shot puts it so the
-    # table clears the character in every one of them rather than only the
-    # shot that happened to be active when it was laid out.
-    narrator_top_y = min(
-        size[1] - base_h * shot["height"] * (1 - shot["bleed"])
-        for shot in NARRATOR_SHOTS
-    )
+        narrator_positioned = (
+            narrator_clip
+            .resize(lambda t: shot_at(t)["height"])
+            .set_position(narrator_position)
+        )
+        # The stat table is pinned above the character's head, which is no
+        # longer a single value -- take the highest any shot puts it so the
+        # table clears the character in every one of them rather than only the
+        # shot that happened to be active when it was laid out.
+        narrator_top_y = min(
+            size[1] - base_h * shot["height"] * (1 - shot["bleed"])
+            for shot in NARRATOR_SHOTS
+        )
+    else:
+        raise ValueError("NARRATOR_RENDERER must be v21 or sprites")
     car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration, scene_boundaries)
     car_positioned = car_clip.set_position((media_x, media_y))
     # A pop the instant each new car photo slides in, timed to the same
@@ -1449,9 +1457,16 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         size=size,
     ).set_duration(duration).set_audio(full_audio)
 
-    video.write_videofile(
-        str(output_path), fps=24, codec="libx264", audio_codec="aac", preset="medium", threads=4,
-    )
+    try:
+        video.write_videofile(
+            str(output_path), fps=24, codec="libx264", audio_codec="aac", preset="medium", threads=4,
+        )
+    finally:
+        video.close()
+        audio.close()
+        if live_source is not None:
+            live_source.close()
+            live_path.unlink(missing_ok=True)
     return output_path
 
 

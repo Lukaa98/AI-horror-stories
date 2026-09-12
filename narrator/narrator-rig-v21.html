@@ -181,12 +181,20 @@
   </main>
 
   <script>
+    const rigTimers=new Set();
+    function rigTimeout(callback,delay){
+      const id=setTimeout(()=>{rigTimers.delete(id);callback()},delay);
+      rigTimers.add(id);return id;
+    }
+    function cancelRigTimeout(id){clearTimeout(id);rigTimers.delete(id)}
     const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
     const character=$('#character'),svg=$('#character-svg');
     const leftUpper=$('#left-upper-arm'),leftForearm=$('#left-forearm'),leftHand=$('#left-hand'),rightUpper=$('#right-upper-arm'),rightForearm=$('#right-forearm'),rightHand=$('#right-hand');
     const leftEye=$('#left-eye'),rightEye=$('#right-eye'),eyesOpen=$('#eyes-open'),eyesBlink=$('#eyes-blink'),eyebrows=$('#eyebrows');
     const mouthReadout=$('#mouth-readout'),eyesReadout=$('#eyes-readout'),talkReadout=$('#talk-readout'),speechReadout=$('#speech-readout');
     let talkTimer=null,blinkTimer=null,expressionTimer=null,gestureTimer=null,gazeTimer=null,lastPointer=0,talkFrame=0,autoBlink=true,autoGesture=false,isSpeaking=false,tracking=true,isBlinking=false,browsRaised=false,voices=[],activePose='rest';
+    let renderMode=new URLSearchParams(location.search).has('render'),renderTime=0,renderSafeTop=null;
+    const rigNow=()=>renderMode?renderTime*1000:performance.now();
     const mouthNames=['closed','small','wide','teeth','smile'],talkFrames=['closed','small','wide','teeth','small','wide'];
 
     function showSvg(el,show){
@@ -195,13 +203,13 @@
       el.style.opacity=show?'1':'0';
     }
     function setMouth(name){mouthNames.forEach(n=>showSvg($('#mouth-'+n),n===name));mouthReadout.textContent=name;$$('[data-mouth]').forEach(b=>b.classList.toggle('active',b.dataset.mouth===name))}
-    function talkTick(){setMouth(talkFrames[talkFrame++%talkFrames.length]);talkTimer=setTimeout(talkTick,190+Math.random()*80)}
-    function startTalk(){if(talkTimer)return;talkFrame=1;setMouth('wide');talkReadout.textContent='on';talkReadout.classList.add('on');$('#auto-talk').textContent='Auto-talk: on';$('#auto-talk').classList.add('active');talkTimer=setTimeout(talkTick,150)}
-    function stopTalk(close=true){clearTimeout(talkTimer);talkTimer=null;talkReadout.textContent='off';talkReadout.classList.remove('on');$('#auto-talk').textContent='Auto-talk: off';$('#auto-talk').classList.remove('active');if(close)setMouth('closed')}
-    function blink(){if(isBlinking)return;isBlinking=true;showSvg(eyesOpen,false);showSvg(eyesBlink,true);eyesReadout.textContent='blink';setTimeout(()=>{showSvg(eyesBlink,false);showSvg(eyesOpen,true);eyesReadout.textContent='open';isBlinking=false},320)}
-    function scheduleBlink(first=false){clearTimeout(blinkTimer);blinkTimer=setTimeout(()=>{if(autoBlink){blink();if(Math.random()<.25)raiseBrows()}scheduleBlink()},first?900:2100+Math.random()*2100)}
-    function raiseBrows(duration=850){if(browsRaised)return;browsRaised=true;eyebrows.setAttribute('transform','translate(0 -10)');setTimeout(()=>{eyebrows.removeAttribute('transform');browsRaised=false},duration)}
-    function idleExpression(){clearTimeout(expressionTimer);expressionTimer=setTimeout(()=>{if(!isSpeaking&&!talkTimer){setMouth('smile');raiseBrows(700);setTimeout(()=>{if(!isSpeaking&&!talkTimer)setMouth('closed')},900)}idleExpression()},4500+Math.random()*3500)}
+    function talkTick(){setMouth(talkFrames[talkFrame++%talkFrames.length]);talkTimer=rigTimeout(talkTick,190+Math.random()*80)}
+    function startTalk(){if(talkTimer)return;talkFrame=1;setMouth('wide');talkReadout.textContent='on';talkReadout.classList.add('on');$('#auto-talk').textContent='Auto-talk: on';$('#auto-talk').classList.add('active');talkTimer=rigTimeout(talkTick,150)}
+    function stopTalk(close=true){cancelRigTimeout(talkTimer);talkTimer=null;talkReadout.textContent='off';talkReadout.classList.remove('on');$('#auto-talk').textContent='Auto-talk: off';$('#auto-talk').classList.remove('active');if(close)setMouth('closed')}
+    function blink(){if(isBlinking)return;isBlinking=true;showSvg(eyesOpen,false);showSvg(eyesBlink,true);eyesReadout.textContent='blink';rigTimeout(()=>{showSvg(eyesBlink,false);showSvg(eyesOpen,true);eyesReadout.textContent='open';isBlinking=false},320)}
+    function scheduleBlink(first=false){cancelRigTimeout(blinkTimer);blinkTimer=rigTimeout(()=>{if(autoBlink){blink();if(Math.random()<.25)raiseBrows()}scheduleBlink()},first?900:2100+Math.random()*2100)}
+    function raiseBrows(duration=850){if(browsRaised)return;browsRaised=true;eyebrows.setAttribute('transform','translate(0 -10)');rigTimeout(()=>{eyebrows.removeAttribute('transform');browsRaised=false},duration)}
+    function idleExpression(){cancelRigTimeout(expressionTimer);expressionTimer=rigTimeout(()=>{if(!isSpeaking&&!talkTimer){setMouth('smile');raiseBrows(700);rigTimeout(()=>{if(!isSpeaking&&!talkTimer)setMouth('closed')},900)}idleExpression()},4500+Math.random()*3500)}
     function setEyeDirection(dx){const t=`translate(${dx}px,0)`;leftEye.style.transform=t;rightEye.style.transform=t}
     // Screen-space face coordinates follow placement, zoom, and idle sway.
     // Converting the pointer back to head coordinates keeps gaze consistent.
@@ -213,7 +221,7 @@
       setEyeDirection(clamp((local.x-190)/28,-4.5,4.5));
     }
     function resetEyes(){leftEye.style.transform='';rightEye.style.transform=''}
-    function idleGaze(){clearTimeout(gazeTimer);gazeTimer=setTimeout(()=>{if(tracking&&Date.now()-lastPointer>1800)setEyeDirection(Math.random()>.5?3.5:-3.5);idleGaze()},1800+Math.random()*1700)}
+    function idleGaze(){cancelRigTimeout(gazeTimer);gazeTimer=rigTimeout(()=>{if(tracking&&Date.now()-lastPointer>1800)setEyeDirection(Math.random()>.5?3.5:-3.5);idleGaze()},1800+Math.random()*1700)}
     function loadVoices(){if(!('speechSynthesis'in window))return;voices=speechSynthesis.getVoices();const selected=$('#voice-select').value;$('#voice-select').innerHTML='<option value="">Default system voice</option>';voices.forEach((v,i)=>$('#voice-select').add(new Option(`${v.name} — ${v.lang}`,i)));$('#voice-select').value=selected}
     const poses={
       rest:{lu:0,lf:0,lh:0,ru:0,rf:0,rh:0},
@@ -251,6 +259,12 @@
       if(reducedMotion?.matches){finishMotion();return}
       const dt=lastMotionTime?clamp((now-lastMotionTime)/1000,.001,.05):1/60;
       lastMotionTime=now;
+      stepRigMotion(dt,now);
+      const waving=activePose==='wave';
+      const moving=waving||Object.values(joints).some(j=>Math.abs(j.angle-j.target)>.015||Math.abs(j.velocity)>.04);
+      if(moving)motionFrame=requestAnimationFrame(motionTick);else lastMotionTime=0;
+    }
+    function stepRigMotion(dt,now){
       const waving=activePose==='wave';
       const waveTime=Math.max(0,(now-waveStarted-900)/1000);
       const wave=Math.sin(waveTime*Math.PI*2/1.5)*Math.min(1,waveTime/.35);
@@ -267,8 +281,6 @@
         if(j.angle>12||j.angle< -12){j.angle=clamp(j.angle,-12,12);j.velocity=0}
       }
       paintRig();
-      const moving=waving||Object.values(joints).some(j=>Math.abs(j.angle-j.target)>.015||Math.abs(j.velocity)>.04);
-      if(moving)motionFrame=requestAnimationFrame(motionTick);else lastMotionTime=0;
     }
     function finishMotion(){
       if(motionFrame!==null)cancelAnimationFrame(motionFrame);
@@ -276,13 +288,14 @@
       Object.values(joints).forEach(j=>{j.angle=j.target;j.velocity=0});paintRig();
     }
     function requestMotion(){
+      if(renderMode)return;
       if(reducedMotion?.matches){finishMotion();return}
       if(motionFrame===null){lastMotionTime=0;motionFrame=requestAnimationFrame(motionTick)}
     }
     function setPose(name){
       name=Object.hasOwn(poses,name)?name:'rest';
       const p=poses[name];
-      if(name==='wave'&&activePose!=='wave')waveStarted=performance.now();
+      if(name==='wave'&&activePose!=='wave')waveStarted=rigNow();
       activePose=name;
       for(const [key,j] of Object.entries(joints)){
         j.target=key.endsWith('h')?clamp(p[key],-10,10):p[key];
@@ -303,20 +316,20 @@
     let gestureStep=0;
     function randomGesture(){
       setPose(gestureSequence[gestureStep++%gestureSequence.length]);
-      clearTimeout(gestureTimer);
-      gestureTimer=setTimeout(()=>{setPose('rest');if(autoGesture||isSpeaking)scheduleGesture()},1800+Math.random()*500);
+      cancelRigTimeout(gestureTimer);
+      gestureTimer=rigTimeout(()=>{setPose('rest');if(autoGesture||isSpeaking)scheduleGesture()},1800+Math.random()*500);
     }
-    function scheduleGesture(){clearTimeout(gestureTimer);if(autoGesture||isSpeaking)gestureTimer=setTimeout(randomGesture,1400+Math.random()*600)}
-    function speak(){if(!('speechSynthesis'in window)){alert('Speech is unavailable in this browser.');return}const text=$('#speech-text').value.trim();if(!text)return;speechSynthesis.cancel();stopTalk();const u=new SpeechSynthesisUtterance(text),i=$('#voice-select').value;if(i!==''&&voices[i])u.voice=voices[i];u.rate=.96;speechReadout.textContent='starting';startTalk();u.onstart=()=>{isSpeaking=true;speechReadout.textContent='speaking';speechReadout.classList.add('on');raiseBrows(450);randomGesture()};u.onboundary=()=>{if(Math.random()<.07)blink()};u.onend=()=>{isSpeaking=false;speechReadout.textContent='idle';speechReadout.classList.remove('on');clearTimeout(gestureTimer);setPose('rest');stopTalk(false);setMouth('smile');setTimeout(()=>setMouth('closed'),650);if(autoGesture)scheduleGesture()};u.onerror=()=>{isSpeaking=false;speechReadout.textContent='error';speechReadout.classList.remove('on');clearTimeout(gestureTimer);setPose('rest');stopTalk();if(autoGesture)scheduleGesture()};speechSynthesis.speak(u)}
-    function stopSpeech(){if('speechSynthesis'in window)speechSynthesis.cancel();isSpeaking=false;clearTimeout(gestureTimer);setPose('rest');speechReadout.textContent='idle';speechReadout.classList.remove('on');stopTalk();if(autoGesture)scheduleGesture()}
-    function resetPose(){clearTimeout(gestureTimer);autoGesture=false;$('#auto-gesture').textContent='Preview gestures';$('#auto-gesture').classList.remove('active');$('#auto-gesture').setAttribute('aria-pressed','false');setPose('rest');character.classList.remove('excited');setMouth('closed');resetEyes()}
+    function scheduleGesture(){cancelRigTimeout(gestureTimer);if(autoGesture||isSpeaking)gestureTimer=rigTimeout(randomGesture,1400+Math.random()*600)}
+    function speak(){if(!('speechSynthesis'in window)){alert('Speech is unavailable in this browser.');return}const text=$('#speech-text').value.trim();if(!text)return;speechSynthesis.cancel();stopTalk();const u=new SpeechSynthesisUtterance(text),i=$('#voice-select').value;if(i!==''&&voices[i])u.voice=voices[i];u.rate=.96;speechReadout.textContent='starting';startTalk();u.onstart=()=>{isSpeaking=true;speechReadout.textContent='speaking';speechReadout.classList.add('on');raiseBrows(450);randomGesture()};u.onboundary=()=>{if(Math.random()<.07)blink()};u.onend=()=>{isSpeaking=false;speechReadout.textContent='idle';speechReadout.classList.remove('on');cancelRigTimeout(gestureTimer);setPose('rest');stopTalk(false);setMouth('smile');rigTimeout(()=>setMouth('closed'),650);if(autoGesture)scheduleGesture()};u.onerror=()=>{isSpeaking=false;speechReadout.textContent='error';speechReadout.classList.remove('on');cancelRigTimeout(gestureTimer);setPose('rest');stopTalk();if(autoGesture)scheduleGesture()};speechSynthesis.speak(u)}
+    function stopSpeech(){if('speechSynthesis'in window)speechSynthesis.cancel();isSpeaking=false;cancelRigTimeout(gestureTimer);setPose('rest');speechReadout.textContent='idle';speechReadout.classList.remove('on');stopTalk();if(autoGesture)scheduleGesture()}
+    function resetPose(){cancelRigTimeout(gestureTimer);autoGesture=false;$('#auto-gesture').textContent='Preview gestures';$('#auto-gesture').classList.remove('active');$('#auto-gesture').setAttribute('aria-pressed','false');setPose('rest');character.classList.remove('excited');setMouth('closed');resetEyes()}
 
     $$('[data-mouth]').forEach(b=>b.onclick=()=>{stopTalk(false);setMouth(b.dataset.mouth)});
     $('#auto-talk').onclick=()=>talkTimer?stopTalk():startTalk();$('#blink').onclick=blink;$('#brows').onclick=()=>raiseBrows();
     $('#auto-blink').onclick=e=>{autoBlink=!autoBlink;e.currentTarget.textContent=`Auto-blink: ${autoBlink?'on':'off'}`;e.currentTarget.classList.toggle('active',autoBlink)};
     $('#tracking').onclick=e=>{tracking=!tracking;e.currentTarget.textContent=`Eye tracking: ${tracking?'on':'off'}`;e.currentTarget.classList.toggle('active',tracking);if(!tracking)resetEyes()};
-    $$('[data-pose]').forEach(b=>b.onclick=()=>{clearTimeout(gestureTimer);setPose(b.dataset.pose);if(autoGesture||isSpeaking)scheduleGesture()});
-    $('#auto-gesture').onclick=e=>{autoGesture=!autoGesture;e.currentTarget.textContent=autoGesture?'Stop preview':'Preview gestures';e.currentTarget.classList.toggle('active',autoGesture);e.currentTarget.setAttribute('aria-pressed',String(autoGesture));if(autoGesture){gestureStep=0;randomGesture()}else{clearTimeout(gestureTimer);setPose('rest');if(isSpeaking)scheduleGesture()}};
+    $$('[data-pose]').forEach(b=>b.onclick=()=>{cancelRigTimeout(gestureTimer);setPose(b.dataset.pose);if(autoGesture||isSpeaking)scheduleGesture()});
+    $('#auto-gesture').onclick=e=>{autoGesture=!autoGesture;e.currentTarget.textContent=autoGesture?'Stop preview':'Preview gestures';e.currentTarget.classList.toggle('active',autoGesture);e.currentTarget.setAttribute('aria-pressed',String(autoGesture));if(autoGesture){gestureStep=0;randomGesture()}else{cancelRigTimeout(gestureTimer);setPose('rest');if(isSpeaking)scheduleGesture()}};
     $('#reset').onclick=resetPose;$('#speak').onclick=speak;$('#stop-speech').onclick=stopSpeech;
     $('#sway').onclick=e=>{character.classList.toggle('no-sway');const on=!character.classList.contains('no-sway');e.currentTarget.textContent=`Idle sway: ${on?'on':'off'}`;e.currentTarget.classList.toggle('active',on)};
     $('#stage-btn').onclick=e=>{const stage=$('#stage');stage.classList.toggle('solid');const solid=stage.classList.contains('solid');$('#stage-label').textContent=solid?'9:16 · solid stage':'9:16 · transparent stage';e.currentTarget.textContent=`Stage: ${solid?'solid':'transparent'}`;e.currentTarget.classList.toggle('active',solid)};
@@ -340,7 +353,7 @@
     // Positive SVG rotation leans the head right; negative leans it left.
     let currentShot=[80.174,20,.98913,0,0,380,920,0,920],guideEnabled=true,tiltEnabled=true;
     const CORNER_TILT_DEGREES=7;
-    const CAMERA_MOVE_MS=680;
+    let cameraMoveMs=820;
     const easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
     function composeShot(layoutName,cameraName){
       const box=CAMERAS[cameraName],layout=LAYOUTS[layoutName];
@@ -348,14 +361,21 @@
         const scale=Math.min(500/box[2],920/box[3]);
         return[270-(box[0]+box[2]/2)*scale,(960-box[3]*scale)/2-box[1]*scale,scale,...box,0,box[1]+box[3]];
       }
-      const scale=Math.min(960*layout.height/box[3],496/172);
+      const height=renderSafeTop===null?layout.height:(1-renderSafeTop)*(layoutName.startsWith('close-')?1:.94);
+      const scale=Math.min(960*height/box[3],496/172);
       // Keep the complete face inside the video, including a sway margin.
       // The outer shoulder/arm may tuck beyond the edge as in the references.
       const headCenter=layout.anchor==='left'?22+84*scale:layout.anchor==='right'?518-84*scale:270;
       const angle=tiltEnabled?(layout.anchor==='left'?CORNER_TILT_DEGREES:layout.anchor==='right'?-CORNER_TILT_DEGREES:0):0;
       // Pivot at the visible lower edge: the body stays tucked into its
       // corner while the face leans toward the video, rather than orbiting.
-      return[headCenter-190*scale,960-(box[1]+box[3])*scale,scale,-1000,-1000,2380,3000,angle,box[1]+box[3]];
+      const shot=[headCenter-190*scale,960-(box[1]+box[3])*scale,scale,-1000,-1000,2380,3000,angle,box[1]+box[3]];
+      if(renderSafeTop!==null){
+        const rad=angle*Math.PI/180,py=shot[8];
+        const headTop=Math.min(...[108,272].map(x=>shot[1]+scale*(py+Math.sin(rad)*(x-190)+Math.cos(rad)*(4-py))));
+        shot[1]+=Math.max(0,renderSafeTop*960+8-headTop);
+      }
+      return shot;
     }
     function paintCamera(shot){
       currentShot=[...shot];
@@ -372,18 +392,19 @@
     }
     function cameraTick(now){
       cameraFrame=null;if(placement.isConnected===false)return;
-      if(reducedMotion?.matches){paintCamera(cameraTo);return}
-      const t=clamp((now-cameraStart)/CAMERA_MOVE_MS,0,1),e=easeInOut(t);
+      if(!renderMode&&reducedMotion?.matches){paintCamera(cameraTo);return}
+      const t=clamp((now-cameraStart)/cameraMoveMs,0,1),e=easeInOut(t);
       paintCamera(cameraFrom.map((v,i)=>v+(cameraTo[i]-v)*e));
-      if(t<1)cameraFrame=requestAnimationFrame(cameraTick);else paintCamera(cameraTo);
+      if(t<1){if(!renderMode)cameraFrame=requestAnimationFrame(cameraTick)}else paintCamera(cameraTo);
     }
     function moveComposition(animate=true){
       updateCompositionUI();
       if(cameraFrame!==null){cancelAnimationFrame(cameraFrame);cameraFrame=null}
       cameraTo=composeShot(activeLayout,activeCamera);
-      if(!animate||reducedMotion?.matches){paintCamera(cameraTo);return}
-      cameraFrom=[...currentShot];cameraStart=performance.now();
-      cameraFrame=requestAnimationFrame(cameraTick);
+      if(!animate||(!renderMode&&reducedMotion?.matches)){paintCamera(cameraTo);return}
+      cameraFrom=[...currentShot];cameraStart=rigNow();
+      cameraMoveMs=Math.abs(cameraTo[0]-cameraFrom[0])>150?1050:820;
+      if(!renderMode)cameraFrame=requestAnimationFrame(cameraTick);
     }
     function setLayout(name,options={}){
       if(!Object.hasOwn(LAYOUTS,name))return false;
@@ -407,8 +428,8 @@
     let cameraCycleTimer=null,cameraStep=0;
     const cameraOrder=['bottom-right','bottom-left','close-left','close-right','bottom-center','center'];
     const cameraCycleBtn=$('#camera-cycle');
-    function cameraCycleTick(){setLayout(cameraOrder[cameraStep++%cameraOrder.length]);cameraCycleTimer=setTimeout(cameraCycleTick,3400)}
-    function stopCameraCycle(){clearTimeout(cameraCycleTimer);cameraCycleTimer=null;cameraCycleBtn.textContent='Preview placements';cameraCycleBtn.classList.remove('active');cameraCycleBtn.setAttribute('aria-pressed','false')}
+    function cameraCycleTick(){setLayout(cameraOrder[cameraStep++%cameraOrder.length]);cameraCycleTimer=rigTimeout(cameraCycleTick,3400)}
+    function stopCameraCycle(){cancelRigTimeout(cameraCycleTimer);cameraCycleTimer=null;cameraCycleBtn.textContent='Preview placements';cameraCycleBtn.classList.remove('active');cameraCycleBtn.setAttribute('aria-pressed','false')}
     cameraCycleBtn.onclick=()=>{
       if(cameraCycleTimer){stopCameraCycle();return}
       cameraCycleBtn.textContent='Stop placement preview';cameraCycleBtn.classList.add('active');cameraCycleBtn.setAttribute('aria-pressed','true');
@@ -416,6 +437,78 @@
     };
     $('#guide-btn').onclick=e=>{guideEnabled=!guideEnabled;e.currentTarget.textContent=`Footage guide: ${guideEnabled?'on':'off'}`;e.currentTarget.classList.toggle('active',guideEnabled);e.currentTarget.setAttribute('aria-pressed',String(guideEnabled));updateCompositionUI()};
     reducedMotion?.addEventListener?.('change',()=>{if(reducedMotion.matches&&cameraFrame!==null){cancelAnimationFrame(cameraFrame);cameraFrame=null;paintCamera(cameraTo)}});
+
+    // A deterministic capture clock uses exactly the same joint solver and
+    // placement functions as the buttons. Face states remain independent.
+    let capturePlan=null,captureEvents=[],captureEventIndex=0;
+    function beginRender(plan){
+      renderMode=true;renderTime=0;renderSafeTop=clamp(Number(plan.safe_top??.59),0,.8);
+      capturePlan=plan;captureEventIndex=0;
+      rigTimers.forEach(clearTimeout);rigTimers.clear();
+      stopTalk();stopCameraCycle();
+      [blinkTimer,expressionTimer,gestureTimer,gazeTimer].forEach(cancelRigTimeout);
+      autoBlink=false;autoGesture=false;tracking=false;
+      if(motionFrame!==null)cancelAnimationFrame(motionFrame);
+      if(cameraFrame!==null)cancelAnimationFrame(cameraFrame);
+      motionFrame=null;cameraFrame=null;
+      character.classList.add('no-sway');character.classList.remove('excited');character.style.transform='';
+      eyebrows.style.transition='none';leftEye.style.transition='none';rightEye.style.transition='none';
+      Object.values(joints).forEach(j=>{j.angle=0;j.target=0;j.velocity=0});
+      activePose='rest';paintRig();
+      guideEnabled=false;setTilt(true,false);
+      captureEvents=[
+        ...(plan.shots||[]).map(s=>({...s,kind:'shot'})),
+        ...(plan.gestures||[]).map(s=>({...s,kind:'pose'}))
+      ].sort((a,b)=>a.start-b.start);
+      const first=(plan.shots||[])[0]||{layout:'bottom-right',framing:'half'};
+      setLayout(first.layout,{framing:first.framing,animate:false});
+      cameraFrom=[...currentShot];cameraTo=[...currentShot];cameraStart=0;
+      showSvg(eyesOpen,true);showSvg(eyesBlink,false);setMouth('closed');
+    }
+    function advanceRenderClock(target){
+      // Integrate at <=120 Hz, including exact cue boundaries. A frame rate
+      // change cannot alter the motion or cut off wrist follow-through.
+      while(renderTime<target-1e-9){
+        const dt=Math.min(1/120,target-renderTime);
+        renderTime+=dt;stepRigMotion(dt,rigNow());cameraTick(rigNow());
+      }
+    }
+    function renderAt(time){
+      if(!capturePlan)throw new Error('Call beginRender(plan) first');
+      if(!Number.isFinite(time)||time<renderTime-1e-8)throw new Error('Capture time must advance monotonically');
+      while(captureEventIndex<captureEvents.length&&captureEvents[captureEventIndex].start<=time){
+        const event=captureEvents[captureEventIndex++];
+        advanceRenderClock(Math.max(renderTime,event.start));
+        if(event.kind==='shot')setLayout(event.layout,{framing:event.framing,animate:event.start>0});
+        else setPose(event.pose);
+      }
+      advanceRenderClock(time);
+      character.style.transform=`rotate(${(.35*Math.sin(time*2*Math.PI/4.6)).toFixed(4)}deg)`;
+      const mouth=(capturePlan.mouth_timeline||[]).find(m=>m.start<=time&&time<m.end);
+      setMouth(mouth?.mouth??(time>capturePlan.duration-.4?'smile':'closed'));
+      const blinking=time>=1.1&&(time-1.1)%3.15<.16;
+      showSvg(eyesOpen,!blinking);showSvg(eyesBlink,blinking);isBlinking=blinking;
+      eyesReadout.textContent=blinking?'blink':'open';
+      const expression=(capturePlan.expressions||[]).find(e=>e.start<=time&&time<e.end);
+      let dx=0,dy=0,brow=0;
+      if(expression){
+        const phase=(time-expression.start)/Math.max(.001,expression.end-expression.start);
+        const weight=Math.sin(Math.PI*phase);
+        if(expression.brows)brow=8*weight;
+        const matrix=$('#head').getCTM();
+        if(matrix&&expression.look_at){
+          const pt=svg.createSVGPoint();[pt.x,pt.y]=expression.look_at;
+          const local=pt.matrixTransform(matrix.inverse());
+          dx=clamp((local.x-190)/65,-3.5,3.5)*weight;
+          dy=clamp((local.y-125)/65,-2.5,2.5)*weight;
+        }
+      }
+      eyebrows.setAttribute('transform',`translate(0 ${-brow})`);
+      leftEye.style.transform=rightEye.style.transform=`translate(${dx}px,${dy}px)`;
+      return{time,pose:activePose,layout:activeLayout,shot:[...currentShot],
+        joints:Object.fromEntries(Object.entries(joints).map(([key,j])=>[key,j.angle])),
+        mouth:mouthReadout.textContent,blinking};
+    }
 
     // Pipeline triggers (all local; no network or character re-creation):
     // narratorRig.setLayout('bottom-right');
@@ -427,7 +520,7 @@
       setLayout:(name,options)=>{stopCameraCycle();return setLayout(name,options)},
       setFraming:(name,options={})=>{stopCameraCycle();return setCamera(name,options.animate!==false)},
       setTilt:(enabled,options={})=>setTilt(enabled,options.animate!==false),
-      setPose,setMouth,blink,raiseBrows,startTalk,stopTalk,speak,stopSpeech,
+      setPose,setMouth,blink,raiseBrows,startTalk,stopTalk,speak,stopSpeech,beginRender,renderAt,
       setGuide:(enabled)=>{guideEnabled=Boolean(enabled);const b=$('#guide-btn');b.textContent=`Footage guide: ${guideEnabled?'on':'off'}`;b.classList.toggle('active',guideEnabled);b.setAttribute('aria-pressed',String(guideEnabled));updateCompositionUI()},
       getState:()=>({layout:activeLayout,framing:activeCamera,pose:activePose,tilt:currentShot[7],cornerTilt:tiltEnabled,mouth:mouthReadout.textContent,blinking:isBlinking,talking:talkTimer!==null,speaking:isSpeaking})
     });
@@ -435,7 +528,7 @@
 
     setMouth('closed');showSvg(eyesOpen,true);showSvg(eyesBlink,false);
     if('speechSynthesis'in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
-    scheduleBlink(true);idleExpression();idleGaze();
+    if(!renderMode){scheduleBlink(true);idleExpression();idleGaze()}
   </script>
 </body>
 </html>

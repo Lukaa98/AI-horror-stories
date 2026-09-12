@@ -84,11 +84,12 @@ on:
         type: string
         default: onyx
       narrator_character:
-        description: "Which narrator sprite set to render with -- 'v4' is the current articulated character, 'default'/'v3' are the earlier ones"
+        description: "Narrator character: v21 has continuous gestures and smooth video placements; other choices use legacy sprites"
         required: false
         type: choice
-        default: "v4"
+        default: "v21"
         options:
+          - "v21"
           - "v4"
           - "default"
           - "v3"
@@ -172,6 +173,11 @@ jobs:
         working-directory: scraper/car-source-scraper
         run: npm ci
 
+      - name: Install narrator renderer
+        if: ${{ inputs.mode == 'single_car' }}
+        working-directory: narrator/render
+        run: npm ci
+
       - name: Install Puppeteer Linux deps
         if: ${{ inputs.mode != 'suggest_rivals' && inputs.mode != 'voice_audition' }}
         working-directory: scraper/car-source-scraper
@@ -184,6 +190,12 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y ffmpeg
           fi
+
+      - name: Check V21 narrator motion
+        if: ${{ inputs.mode == 'single_car' && (inputs.narrator_character == 'v21' || inputs.narrator_character == '') }}
+        run: |
+          python -m pytest -q tests/test_narrator_motion.py tests/test_narrator_video.py
+          node narrator/render/test-v21.js
 
       - name: Run research
         if: ${{ inputs.mode == 'research' }}
@@ -255,9 +267,9 @@ jobs:
           # the command line -- this is a JSON string full of double quotes,
           # which would break out of the "${{ }}"-substituted shell string.
           EXTRA_PHOTOS: ${{ inputs.extra_photos }}
-          # Selects which exported sprite set narrator_video.py composites.
-          # Left unset for 'default', which falls back to narrator/sprites
-          # (the original hand-drawn rig) exactly as before.
+          # V21 captures every frame of the approved live HTML rig.
+          # Explicit older selections retain their existing sprite sets.
+          NARRATOR_RENDERER: ${{ (inputs.narrator_character == 'v21' || inputs.narrator_character == '') && 'v21' || 'sprites' }}
           NARRATOR_SPRITES_DIR: ${{ inputs.narrator_character == 'v4' && format('{0}/narrator/sprites-v4', github.workspace) || inputs.narrator_character == 'v3' && format('{0}/narrator/sprites-v3', github.workspace) || '' }}
         run: |
           YEAR_ARGS=()
