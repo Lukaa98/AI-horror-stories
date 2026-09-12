@@ -37,6 +37,28 @@ const GAZE_OFFSET_PX = 3.5;
 // Matches raiseBrows() in the rig.
 const BROW_RAISE_PX = 10;
 
+// Pose-to-pose in-between frames. The compositor used to crossfade two
+// settled poses, which blends pixels but never moves anything -- the arm
+// appeared to blink from one place to another. These capture the rig's own
+// spring solver mid-flight, so the compositor can play a short flipbook of
+// the arm actually travelling instead. Stepped manually at a fixed dt
+// rather than by waiting on requestAnimationFrame, so the sequence is
+// deterministic and doesn't depend on how fast the export machine renders.
+// Non-uniform steps: the spring covers most of its distance early, so the
+// samples are dense at the start and stretch out as it settles. Seven
+// frames spanning 0.56s of motion this way leaves only a couple of percent
+// of the travel unresolved at the last frame, where seven evenly spaced
+// ones spanning 0.35s still had a visible snap left over at the end.
+const TWEEN_STEPS = [0.03, 0.04, 0.05, 0.07, 0.09, 0.12, 0.16];
+// Pose changes land in the pause between sentences (see
+// _pose_intervals/SENTENCE_PAUSE_THRESHOLD_SECONDS in narrator_video.py),
+// so the face is idle there: one closed-mouth, eyes-open, neutral-brow
+// capture per in-between frame covers every transition instead of
+// multiplying the whole face cross-product by TWEEN_FRAMES. The compositor
+// only reaches for these while the mouth timeline is actually closed and
+// falls back to the old crossfade otherwise.
+const TWEEN_FACE = { mouth: "closed", eyes: "open", brows: "neutral" };
+
 // narrator_video.py's POSE_CYCLE is a fixed vocabulary (steady, jolt,
 // lean_left, lean_right) that it cycles once per sentence, and
 // POSE_LEAN_DIRECTION expects lean_left/lean_right to actually lean that
@@ -128,6 +150,31 @@ async function main() {
           p.style.transform = `translate(${dx}px,0)`;
         });
       };
+
+      // Stops the rig's own animation loop without snapping the joints to
+      // their targets, which is what finishMotion() would do -- the whole
+      // point of a tween capture is to sit between the two poses.
+      window.__exportCancelMotion = () => {
+        if (motionFrame !== null) cancelAnimationFrame(motionFrame);
+        motionFrame = null;
+        lastMotionTime = 0;
+      };
+      // motionTick() without the wave term, advanced by an explicit dt
+      // instead of a frame clock -- same advanceJoint() integration, same
+      // wrist follow-through, so a stepped frame matches the frame the
+      // live rig would paint at that point in the motion.
+      window.__exportStepMotion = (dt) => {
+        for (const key of ["lu", "lf", "ru", "rf"]) {
+          advanceJoint(joints[key], joints[key].target, dt);
+        }
+        for (const [key, forearm] of [["lh", "lf"], ["rh", "rf"]]) {
+          const j = joints[key];
+          const follow = clamp(-joints[forearm].velocity * 0.014, -2.5, 2.5);
+          advanceJoint(j, clamp(j.target + follow, -12, 12), dt);
+          if (j.angle > 12 || j.angle < -12) { j.angle = clamp(j.angle, -12, 12); j.velocity = 0; }
+        }
+        paintRig();
+      };
     }, BROW_RAISE_PX);
 
     const svgHandle = await page.$("#character-svg");
@@ -163,6 +210,44 @@ async function main() {
             process.stderr.write(`wrote ${fileName}\n`);
           }
         }
+      }
+    }
+
+    // In-between frames, one sequence per ordered pair of distinct poses.
+    // setPose() on top of a settled from-pose sets the targets and the
+    // per-joint frequency exactly as it would live; stepping from there
+    // captures the same easing the interactive rig plays.
+    // Per-frame hold lengths, so the compositor plays the flipbook with the
+    // same easing it was sampled at instead of at a flat frame rate.
+    manifest.tween_steps = TWEEN_STEPS;
+    manifest.tweens = {};
+    await page.evaluate((face) => {
+      window.__exportSetBrows(face.brows === "raised");
+      setMouth(face.mouth);
+      window.__exportSetEyes(face.eyes, 0);
+    }, TWEEN_FACE);
+
+    for (const fromPose of Object.keys(POSES)) {
+      for (const toPose of Object.keys(POSES)) {
+        if (fromPose === toPose) continue;
+        await page.evaluate((args) => {
+          setPose(args.from);
+          finishMotion();
+          setPose(args.to);
+          // setPose() queues a real animation frame; cancel it so the only
+          // thing advancing the solver is __exportStepMotion below.
+          window.__exportCancelMotion();
+        }, { from: POSES[fromPose], to: POSES[toPose] });
+
+        const files = [];
+        for (let frame = 0; frame < TWEEN_STEPS.length; frame += 1) {
+          await page.evaluate((dt) => window.__exportStepMotion(dt), TWEEN_STEPS[frame]);
+          const fileName = `tween_${fromPose}_to_${toPose}_${frame}.png`;
+          await svgHandle.screenshot({ path: path.join(outDir, fileName), omitBackground: true });
+          files.push(fileName);
+          process.stderr.write(`wrote ${fileName}\n`);
+        }
+        manifest.tweens[`${fromPose}>${toPose}`] = files;
       }
     }
 

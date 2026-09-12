@@ -170,7 +170,11 @@ NARRATOR_MAX_HEIGHT_RATIO = 0.84
 #   height -- multiplier on the fitted narrator height (>1 is closer than
 #             the bottom band, so the figure runs past the frame)
 #   x      -- horizontal offset from centered, as a fraction of frame width
-#             (positive right, negative left)
+#             (positive right, negative left). The close shots are pushed
+#             far enough that the outside shoulder actually runs off that
+#             side of the frame -- a figure merely left *of centre* still
+#             reads as "standing in the middle", not as standing in the
+#             corner, which is what the reference shorts actually do.
 #   bleed  -- fraction of the scaled height falling below the bottom edge,
 #             so a close shot is cropped by the frame the way a camera
 #             would crop it, rather than by cutting the sprite down to a
@@ -180,13 +184,13 @@ NARRATOR_SHOTS = [
     # has NARRATOR_MAX_HEIGHT_RATIO baked in), so "wide" reproduces the
     # previous fixed framing exactly.
     {"name": "wide", "height": 1.00, "x": NARRATOR_X_OFFSET_RATIO, "bleed": 0.00},
-    {"name": "close_right", "height": 2.30, "x": 0.30, "bleed": 0.60},
+    {"name": "close_right", "height": 2.30, "x": 0.38, "bleed": 0.60},
     # bleed chosen so this shot's head sits no higher than the wide shot's
     # -- the stat table is pinned above the highest head across all shots,
     # so a taller mid shot with less bleed would quietly shrink the table
     # for the whole video.
-    {"name": "mid_left", "height": 1.35, "x": -0.22, "bleed": 0.28},
-    {"name": "close_left", "height": 2.10, "x": -0.30, "bleed": 0.55},
+    {"name": "mid_left", "height": 1.35, "x": -0.30, "bleed": 0.28},
+    {"name": "close_left", "height": 2.10, "x": -0.38, "bleed": 0.55},
 ]
 # Margin on every edge of the media's own band -- the picture is inset
 # instead of stretched edge-to-edge, so it reads as a framed photo rather
@@ -237,6 +241,19 @@ POSE_TRANSITION_LEAN_PX = 10
 POSE_TRANSITION_POP_SCALE = 0.04
 POSE_TRANSITION_WINDUP_SCALE = 0.03
 POSE_LEAN_DIRECTION = {"steady": 0, "jolt": 0, "lean_left": -1, "lean_right": 1}
+# The real fix for "it doesn't move, it just appears in the new pose": the
+# v4 sprite set also ships a short flipbook of in-between frames per
+# ordered pose pair (see export-sprites-v4.js), captured off the rig's own
+# spring solver mid-flight. Where one is available the arm is genuinely
+# drawn travelling, and the crossfade above degrades to a seam-hider for
+# the few percent of travel the last in-between frame hasn't resolved yet.
+# The in-between frames are captured closed-mouth, so they're only used
+# while the mouth timeline is actually closed -- which is where pose
+# changes land anyway, since _pose_intervals cuts them on speech pauses.
+# Below this much usable silence the flipbook would be too rushed to read
+# as motion and the plain crossfade is kept instead.
+POSE_TWEEN_MIN_SECONDS = 0.12
+POSE_TRANSITION_SEAM_SECONDS = 0.06
 # Fallback cadence only used when there's no real word_timeline to find
 # pauses in (estimated caption timing) -- some pose variety beats none.
 POSE_FALLBACK_SEGMENT_SECONDS = 3.0
@@ -434,6 +451,60 @@ def _pose_intervals(manifest, duration):
         (start, end, POSE_CYCLE[i % len(POSE_CYCLE)])
         for i, (start, end) in enumerate(sentence_bounds)
     ]
+
+
+def _silence_start_before(mouth_intervals, boundary):
+    """Start of the run of closed-mouth intervals that ends at `boundary`.
+
+    The mouth timeline is contiguous, so walking backwards from the
+    interval containing the boundary until a non-closed one turns up gives
+    the pause the pose change is sitting in.
+    """
+    start = boundary
+    for interval_start, _interval_end, mouth in reversed(mouth_intervals):
+        if interval_start >= boundary:
+            continue
+        if mouth != "closed":
+            break
+        start = interval_start
+    return start
+
+
+def _pose_tween_intervals(pose_intervals, mouth_intervals, sprites):
+    """(start, end, sprite_file) per in-between frame, one flipbook per
+    pose change, laid into the silence immediately *before* the change so
+    the arm has finished travelling by the time the new pose's sprites take
+    over. Empty for sprite sets that ship no in-between frames (the v3 and
+    original rigs), which fall straight back to the old crossfade."""
+    tweens = sprites.get("tweens") or {}
+    steps = sprites.get("tween_steps") or []
+    if not tweens or not steps:
+        return []
+
+    intervals = []
+    for previous, current in zip(pose_intervals, pose_intervals[1:]):
+        frames = tweens.get(f"{previous[2]}>{current[2]}")
+        if not frames or len(frames) != len(steps):
+            continue
+        boundary = current[0]
+        window_start = max(
+            _silence_start_before(mouth_intervals, boundary),
+            boundary - sum(steps),
+        )
+        window = boundary - window_start
+        if window < POSE_TWEEN_MIN_SECONDS:
+            continue
+        # Squeeze (or stretch) the captured easing into whatever silence is
+        # actually there, keeping each frame's share of it -- a shorter
+        # pause plays the same motion faster rather than truncating it and
+        # leaving the arm stranded halfway.
+        scale = window / sum(steps)
+        t = window_start
+        for step, frame in zip(steps, frames):
+            end = t + step * scale
+            intervals.append((t, end, frame))
+            t = end
+    return intervals
 
 
 def _shot_intervals(scene_boundaries, duration):
@@ -729,12 +800,14 @@ def _narrator_segments(manifest, sprites, duration):
     mouth_intervals = [(entry["start"], entry["end"], entry["mouth"]) for entry in mouth_timeline]
 
     pose_intervals = _pose_intervals(manifest, duration)
+    tween_intervals = _pose_tween_intervals(pose_intervals, mouth_intervals, sprites)
     blink_intervals = _blink_intervals(duration)
     look_intervals = _look_intervals(duration)
     wobble_intervals = _wobble_intervals(duration)
     emphasis_intervals = _emphasis_intervals(manifest, duration)
     boundaries = _merged_boundaries(
-        [mouth_intervals, pose_intervals, blink_intervals, look_intervals, wobble_intervals, emphasis_intervals],
+        [mouth_intervals, pose_intervals, tween_intervals, blink_intervals,
+         look_intervals, wobble_intervals, emphasis_intervals],
         duration,
     )
 
@@ -752,7 +825,12 @@ def _narrator_segments(manifest, sprites, duration):
         # that both drive eye shape, so one has to take priority when they
         # overlap rather than fighting over the sprite.
         eyes = "blink" if _value_at(blink_intervals, mid, None) else _value_at(look_intervals, mid, "open")
-        sprite_file = (
+        # An in-between frame wins over the pose's own still: it is the
+        # same face (closed mouth, open eyes, neutral brows, which is what
+        # the merged timeline resolves to in a speech pause anyway) with
+        # the arms caught mid-travel.
+        tween_file = _value_at(tween_intervals, mid, None)
+        sprite_file = tween_file or (
             sprites["sprites"].get(f"{mouth}_{eyes}_{brows}_{pose}_{wobble}")
             or sprites["sprites"].get(f"{mouth}_{eyes}_{brows}_{pose}")
             or sprites["sprites"].get(f"{mouth}_{eyes}_{brows}")
@@ -760,7 +838,10 @@ def _narrator_segments(manifest, sprites, duration):
         )
         if not sprite_file:
             continue
-        segments.append({"start": start, "end": end, "pose": pose, "sprite": sprite_file})
+        segments.append({
+            "start": start, "end": end, "pose": pose,
+            "sprite": sprite_file, "tween": bool(tween_file),
+        })
     return segments
 
 
@@ -814,7 +895,6 @@ def _narrator_track(manifest, sprites, size, duration):
 
     clips = []
     frame_size = None
-    current_time = 0.0
     for index, seg in enumerate(segments):
         seg_duration = seg["end"] - seg["start"]
         next_seg = segments[index + 1] if index + 1 < len(segments) else None
@@ -828,10 +908,17 @@ def _narrator_track(manifest, sprites, size, duration):
             min(POSE_TRANSITION_SECONDS, seg_duration * 0.4)
             if next_seg and next_seg["pose"] != seg["pose"] else 0.0
         )
+        tweened_in = bool(prev_seg and prev_seg.get("tween"))
         transition_in = (
             min(POSE_TRANSITION_SECONDS, seg_duration * 0.4)
             if prev_seg and seg["pose"] != prev_seg["pose"] else 0.0
         )
+        if tweened_in:
+            # The in-between frames already did the moving, and the last of
+            # them sits within a few percent of this pose -- a long blend
+            # plus the staged pop/lean below would only smear a motion that
+            # already landed, so this shrinks to a seam-hider.
+            transition_in = min(transition_in, POSE_TRANSITION_SEAM_SECONDS)
         clip = ImageClip(str(SPRITES_DIR / seg["sprite"])).set_duration(seg_duration + transition_out)
         # Captured from the raw, unwrapped clip -- resize() below makes a
         # clip's own reported size time-varying, so grabbing it after
@@ -840,7 +927,7 @@ def _narrator_track(manifest, sprites, size, duration):
         # silently break the composite's canvas size.
         if frame_size is None:
             frame_size = clip.size
-        if transition_in > 0.01 or transition_out > 0.01:
+        if not tweened_in and (transition_in > 0.01 or transition_out > 0.01):
             clip = _apply_pose_transition_motion(
                 clip, seg_duration, transition_in, transition_out,
                 POSE_LEAN_DIRECTION.get(seg["pose"], 0),
@@ -848,8 +935,13 @@ def _narrator_track(manifest, sprites, size, duration):
             )
         if transition_in > 0.01:
             clip = clip.crossfadein(transition_in)
-        clips.append(clip.set_start(current_time))
-        current_time += seg_duration
+        # Anchored to the segment's own start rather than a running total:
+        # sub-5ms segments are skipped above, and advancing a cursor by
+        # each kept segment's length silently slid every later segment
+        # earlier by however much had been dropped -- which the extra
+        # boundaries the in-between frames introduce make much easier to
+        # hit.
+        clips.append(clip.set_start(seg["start"]))
 
     track = CompositeVideoClip(clips, size=frame_size).set_duration(duration)
     return _fit_content(track, (size[0], max_h))

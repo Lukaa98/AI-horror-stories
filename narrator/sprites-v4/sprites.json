@@ -128,5 +128,124 @@
     "smile_blink_raised_lean_right": "mouth-smile_eyes-blink_brows-raised_pose-lean_right.png",
     "smile_look_left_raised_lean_right": "mouth-smile_eyes-look_left_brows-raised_pose-lean_right.png",
     "smile_look_right_raised_lean_right": "mouth-smile_eyes-look_right_brows-raised_pose-lean_right.png"
+  },
+  "tween_steps": [
+    0.03,
+    0.04,
+    0.05,
+    0.07,
+    0.09,
+    0.12,
+    0.16
+  ],
+  "tweens": {
+    "steady>jolt": [
+      "tween_steady_to_jolt_0.png",
+      "tween_steady_to_jolt_1.png",
+      "tween_steady_to_jolt_2.png",
+      "tween_steady_to_jolt_3.png",
+      "tween_steady_to_jolt_4.png",
+      "tween_steady_to_jolt_5.png",
+      "tween_steady_to_jolt_6.png"
+    ],
+    "steady>lean_left": [
+      "tween_steady_to_lean_left_0.png",
+      "tween_steady_to_lean_left_1.png",
+      "tween_steady_to_lean_left_2.png",
+      "tween_steady_to_lean_left_3.png",
+      "tween_steady_to_lean_left_4.png",
+      "tween_steady_to_lean_left_5.png",
+      "tween_steady_to_lean_left_6.png"
+    ],
+    "steady>lean_right": [
+      "tween_steady_to_lean_right_0.png",
+      "tween_steady_to_lean_right_1.png",
+      "tween_steady_to_lean_right_2.png",
+      "tween_steady_to_lean_right_3.png",
+      "tween_steady_to_lean_right_4.png",
+      "tween_steady_to_lean_right_5.png",
+      "tween_steady_to_lean_right_6.png"
+    ],
+    "jolt>steady": [
+      "tween_jolt_to_steady_0.png",
+      "tween_jolt_to_steady_1.png",
+      "tween_jolt_to_steady_2.png",
+      "tween_jolt_to_steady_3.png",
+      "tween_jolt_to_steady_4.png",
+      "tween_jolt_to_steady_5.png",
+      "tween_jolt_to_steady_6.png"
+    ],
+    "jolt>lean_left": [
+      "tween_jolt_to_lean_left_0.png",
+      "tween_jolt_to_lean_left_1.png",
+      "tween_jolt_to_lean_left_2.png",
+      "tween_jolt_to_lean_left_3.png",
+      "tween_jolt_to_lean_left_4.png",
+      "tween_jolt_to_lean_left_5.png",
+      "tween_jolt_to_lean_left_6.png"
+    ],
+    "jolt>lean_right": [
+      "tween_jolt_to_lean_right_0.png",
+      "tween_jolt_to_lean_right_1.png",
+      "tween_jolt_to_lean_right_2.png",
+      "tween_jolt_to_lean_right_3.png",
+      "tween_jolt_to_lean_right_4.png",
+      "tween_jolt_to_lean_right_5.png",
+      "tween_jolt_to_lean_right_6.png"
+    ],
+    "lean_left>steady": [
+      "tween_lean_left_to_steady_0.png",
+      "tween_lean_left_to_steady_1.png",
+      "tween_lean_left_to_steady_2.png",
+      "tween_lean_left_to_steady_3.png",
+      "tween_lean_left_to_steady_4.png",
+      "tween_lean_left_to_steady_5.png",
+      "tween_lean_left_to_steady_6.png"
+    ],
+    "lean_left>jolt": [
+      "tween_lean_left_to_jolt_0.png",
+      "tween_lean_left_to_jolt_1.png",
+      "tween_lean_left_to_jolt_2.png",
+      "tween_lean_left_to_jolt_3.png",
+      "tween_lean_left_to_jolt_4.png",
+      "tween_lean_left_to_jolt_5.png",
+      "tween_lean_left_to_jolt_6.png"
+    ],
+    "lean_left>lean_right": [
+      "tween_lean_left_to_lean_right_0.png",
+      "tween_lean_left_to_lean_right_1.png",
+      "tween_lean_left_to_lean_right_2.png",
+      "tween_lean_left_to_lean_right_3.png",
+      "tween_lean_left_to_lean_right_4.png",
+      "tween_lean_left_to_lean_right_5.png",
+      "tween_lean_left_to_lean_right_6.png"
+    ],
+    "lean_right>steady": [
+      "tween_lean_right_to_steady_0.png",
+      "tween_lean_right_to_steady_1.png",
+      "tween_lean_right_to_steady_2.png",
+      "tween_lean_right_to_steady_3.png",
+      "tween_lean_right_to_steady_4.png",
+      "tween_lean_right_to_steady_5.png",
+      "tween_lean_right_to_steady_6.png"
+    ],
+    "lean_right>jolt": [
+      "tween_lean_right_to_jolt_0.png",
+      "tween_lean_right_to_jolt_1.png",
+      "tween_lean_right_to_jolt_2.png",
+      "tween_lean_right_to_jolt_3.png",
+      "tween_lean_right_to_jolt_4.png",
+      "tween_lean_right_to_jolt_5.png",
+      "tween_lean_right_to_jolt_6.png"
+    ],
+    "lean_right>lean_left": [
+      "tween_lean_right_to_lean_left_0.png",
+      "tween_lean_right_to_lean_left_1.png",
+      "tween_lean_right_to_lean_left_2.png",
+      "tween_lean_right_to_lean_left_3.png",
+      "tween_lean_right_to_lean_left_4.png",
+      "tween_lean_right_to_lean_left_5.png",
+      "tween_lean_right_to_lean_left_6.png"
+    ]
   }
 }
