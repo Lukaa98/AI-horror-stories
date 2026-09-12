@@ -164,6 +164,30 @@ NARRATOR_X_OFFSET_RATIO = 0.14
 # Capped under the full available bottom-half height so the character
 # always leaves a real gap above its own head -- see _narrator_track.
 NARRATOR_MAX_HEIGHT_RATIO = 0.84
+# Per-scene shot placement. One fixed size in one fixed spot reads as a
+# cutout pasted over the corner for the whole video; cutting between a wide
+# establishing shot and closer ones gives the character somewhere to be.
+#   height -- multiplier on the fitted narrator height (>1 is closer than
+#             the bottom band, so the figure runs past the frame)
+#   x      -- horizontal offset from centered, as a fraction of frame width
+#             (positive right, negative left)
+#   bleed  -- fraction of the scaled height falling below the bottom edge,
+#             so a close shot is cropped by the frame the way a camera
+#             would crop it, rather than by cutting the sprite down to a
+#             bust and losing the arms that the gestures live in
+NARRATOR_SHOTS = [
+    # height 1.0 is the fitted size _narrator_track already produced (which
+    # has NARRATOR_MAX_HEIGHT_RATIO baked in), so "wide" reproduces the
+    # previous fixed framing exactly.
+    {"name": "wide", "height": 1.00, "x": NARRATOR_X_OFFSET_RATIO, "bleed": 0.00},
+    {"name": "close_right", "height": 2.30, "x": 0.30, "bleed": 0.60},
+    # bleed chosen so this shot's head sits no higher than the wide shot's
+    # -- the stat table is pinned above the highest head across all shots,
+    # so a taller mid shot with less bleed would quietly shrink the table
+    # for the whole video.
+    {"name": "mid_left", "height": 1.35, "x": -0.22, "bleed": 0.28},
+    {"name": "close_left", "height": 2.10, "x": -0.30, "bleed": 0.55},
+]
 # Margin on every edge of the media's own band -- the picture is inset
 # instead of stretched edge-to-edge, so it reads as a framed photo rather
 # than a banner. Trimmed further each time the picture needed to read
@@ -409,6 +433,23 @@ def _pose_intervals(manifest, duration):
     return [
         (start, end, POSE_CYCLE[i % len(POSE_CYCLE)])
         for i, (start, end) in enumerate(sentence_bounds)
+    ]
+
+
+def _shot_intervals(scene_boundaries, duration):
+    """(start, end, shot) per scene, cycling NARRATOR_SHOTS.
+
+    Tied to the scene boundaries the car photos already use rather than a
+    clock of its own, so the character re-frames on the same beat the
+    subject changes on. Falls back to one wide shot for the whole clip when
+    there are no scenes to cut against, since cutting on an invented clock
+    would just be motion unrelated to anything being said.
+    """
+    if not scene_boundaries:
+        return [(0.0, duration, NARRATOR_SHOTS[0])]
+    return [
+        (start, end, NARRATOR_SHOTS[i % len(NARRATOR_SHOTS)])
+        for i, (start, end) in enumerate(scene_boundaries)
     ]
 
 
@@ -1183,21 +1224,51 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     audio = AudioFileClip(manifest["audio_path"])
     duration = audio.duration
 
-    narrator_clip = _apply_body_sway(_narrator_track(manifest, sprites, size, duration))
-    # Shifted right of dead-center, on request -- leaves clear width on the
-    # left for the stat table instead of the two competing for the same
-    # space.
-    narrator_x = (size[0] - narrator_clip.w) / 2 + size[0] * NARRATOR_X_OFFSET_RATIO
-    narrator_y = size[1] - narrator_clip.h
-    narrator_positioned = narrator_clip.set_position(
-        lambda t: (narrator_x + 3 * math.sin(t * 1.15), narrator_y + 3 * math.sin(t * 1.65))
-    )
-
     headline_center_y, media_box, caption_center_y = _media_zone_geometry(size)
     media_x, media_y, media_w, media_h = media_box
     scenes = list(manifest.get("scenes") or [])
     word_timeline = list(manifest.get("word_timeline") or [])
     scene_boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
+
+    narrator_clip = _apply_body_sway(_narrator_track(manifest, sprites, size, duration))
+    # Size and placement change per scene instead of staying pinned, which
+    # read as a cutout pasted in one spot for the whole video. Scale and
+    # position are driven per-frame off the shot table rather than baked in,
+    # so the switch lands on the same scene boundary the car photo uses --
+    # the character re-frames when the subject changes, not on its own clock.
+    shot_intervals = _shot_intervals(scene_boundaries, duration)
+    # Captured before the time-varying resize below, which makes a clip's
+    # own reported w/h vary with t and so useless for positioning math.
+    base_w, base_h = narrator_clip.w, narrator_clip.h
+
+    def shot_at(t):
+        return _value_at(shot_intervals, t, NARRATOR_SHOTS[0])
+
+    def narrator_position(t):
+        shot = shot_at(t)
+        scaled_w = base_w * shot["height"]
+        scaled_h = base_h * shot["height"]
+        x = (size[0] - scaled_w) / 2 + size[0] * shot["x"]
+        # Anchored so `bleed` of the character's height falls past the
+        # bottom edge: a closer shot is framed by the frame itself rather
+        # than by cropping the sprite, which is how the reference channel's
+        # close-ups read (head and shoulders, body running off-screen).
+        y = size[1] - scaled_h * (1 - shot["bleed"])
+        return (x + 3 * math.sin(t * 1.15), y + 3 * math.sin(t * 1.65))
+
+    narrator_positioned = (
+        narrator_clip
+        .resize(lambda t: shot_at(t)["height"])
+        .set_position(narrator_position)
+    )
+    # The stat table is pinned above the character's head, which is no
+    # longer a single value -- take the highest any shot puts it so the
+    # table clears the character in every one of them rather than only the
+    # shot that happened to be active when it was laid out.
+    narrator_top_y = min(
+        size[1] - base_h * shot["height"] * (1 - shot["bleed"])
+        for shot in NARRATOR_SHOTS
+    )
     car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration, scene_boundaries)
     car_positioned = car_clip.set_position((media_x, media_y))
     # A pop the instant each new car photo slides in, timed to the same
@@ -1207,7 +1278,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     photo_pop_clips = [
         _sfx_clip(PHOTO_POP_SFX, start, PHOTO_POP_VOLUME) for start, _ in scene_boundaries
     ]
-    stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_y, size[1] * TOP_STACK_RATIO)
+    stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y, size[1] * TOP_STACK_RATIO)
 
     # The caption band sits below the picture, not on top of it -- distinct
     # from the headline band above the picture.
