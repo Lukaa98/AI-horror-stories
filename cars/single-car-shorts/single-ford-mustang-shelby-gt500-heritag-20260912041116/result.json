@@ -1,0 +1,2422 @@
+{
+  "car": {
+    "make": "Ford",
+    "model": "Mustang Shelby Gt500 Heritage Edition",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Ford",
+    "model": "Mustang Shelby Gt500 Heritage Edition",
+    "query": "",
+    "start_year": 2022,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/rkdw65lb/2022-ford-mustang-shelby-gt500-heritage-edition",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/FordMustangShelbyGT500HeritageEdition2022002/edit/WW7Cb.jpg?t=178809222943",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022007.jpg?t=178793363484",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022004.jpg?t=178793363484",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022030.jpg?t=178793363484",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022034.jpg?t=178793363484",
+    "photo_rival": "",
+    "disable_comparison": "false",
+    "extra_photos": "[{\"label\":\"Sears\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022040.jpg?t=178793363484\"},{\"label\":\"Another front\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/FordMustangShelbyGT500HeritageEdition2022001/edit/uZVTf.jpg?t=178809224909\"}]"
+  },
+  "title": "2022 Shelby GT500 Heritage Edition",
+  "start_year": 2022,
+  "end_year": 2022,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Most Powerful Mustang",
+      "photo_label": "Another front photo:",
+      "narration": "The 2022 Shelby GT500 Heritage Edition is the most powerful factory Mustang ever built. Those classic white racing stripes aren't just for looks; they scream American muscle.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": 760,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Classic Performance",
+      "photo_label": "exterior front photo:",
+      "narration": "The dual racing stripes across the hood reflect a nod to its illustrious racing past. The GT500 badge stands for decades of track dominance.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "760 HP & 625 lb-ft",
+      "photo_label": "engine bay photo:",
+      "narration": "Under the hood, the supercharged 5.2-liter V8 cranks out 760 horsepower and 625 pound-feet of torque. The Shelby snake emblem on the intake declares its raw power.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": 760,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Torque",
+      "stat_value": "625 lb-ft",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Aerodynamics Enhanced",
+      "photo_label": "exterior side photo:",
+      "narration": "The GT500's rear spoiler isn\u2019t just for show. It improves aerodynamics, anchoring the car with aggressive styling that means business.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Adjustable Rear Wing",
+      "photo_label": "exterior rear photo:",
+      "narration": "The adjustable rear wing is a hallmark of the Shelby GT500. Tailor your aerodynamic setup for street or track.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Recaro Performance",
+      "photo_label": "Sears photo:",
+      "narration": "Inside, the Recaro racing seats are embroidered with the Shelby logo, underlining the GT500's status as a true driver's car.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Carbon Fiber Accents",
+      "photo_label": "interior photo:",
+      "narration": "The interior boasts carbon fiber accents on the dashboard and console, emphasizing performance-inspired design and saving weight.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "$73K MSRP",
+      "photo_label": null,
+      "narration": "The GT500 started around $73,000 new, and it\u2019s holding value strong, a testament to its coveted status among muscle car enthusiasts, only dropping about 10% annually.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "$73K -> $55K (-10%/yr)",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Vs Camaro ZL1",
+      "photo_label": null,
+      "narration": "When pitted against the Camaro ZL1, the GT500's 760 hp trumps the ZL1's 650 hp. A clear powerhouse, with bragging rights to match.",
+      "rival_make": "Chevrolet",
+      "rival_model": "Camaro ZL1",
+      "main_horsepower": 760,
+      "rival_horsepower": 650,
+      "main_quarter_mile_seconds": 11.1,
+      "rival_quarter_mile_seconds": 11.4,
+      "stat_label": "Horsepower",
+      "stat_value": "760 hp vs 650 hp",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Choose Your Power",
+      "photo_label": null,
+      "narration": "So, does the Shelby GT500\u2019s raw power and heritage make it your ultimate muscle car?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://www.motortrend.com/cars/ford/mustang/2022/",
+    "https://www.caranddriver.com/ford/mustang-shelby-gt500"
+  ],
+  "script": "The 2022 Shelby GT500 Heritage Edition is the most powerful factory Mustang ever built. Those classic white racing stripes aren't just for looks; they scream American muscle. The dual racing stripes across the hood reflect a nod to its illustrious racing past. The GT500 badge stands for decades of track dominance. Under the hood, the supercharged 5.2-liter V8 cranks out 760 horsepower and 625 pound-feet of torque. The Shelby snake emblem on the intake declares its raw power. The GT500's rear spoiler isn\u2019t just for show. It improves aerodynamics, anchoring the car with aggressive styling that means business. The adjustable rear wing is a hallmark of the Shelby GT500. Tailor your aerodynamic setup for street or track. Inside, the Recaro racing seats are embroidered with the Shelby logo, underlining the GT500's status as a true driver's car. The interior boasts carbon fiber accents on the dashboard and console, emphasizing performance-inspired design and saving weight. The GT500 started around $73,000 new, and it\u2019s holding value strong, a testament to its coveted status among muscle car enthusiasts, only dropping about 10% annually. When pitted against the Camaro ZL1, the GT500's 760 hp trumps the ZL1's 650 hp. A clear powerhouse, with bragging rights to match. So, does the Shelby GT500\u2019s raw power and heritage make it your ultimate muscle car?",
+  "word_count": 223,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 58.0,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ford-mustang-shelby-gt500-heritag-20260912041116/narration.mp3",
+  "duration_seconds": 58.05,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.45,
+      "mouth": "small"
+    },
+    {
+      "start": 0.45,
+      "end": 0.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.54,
+      "end": 1.8,
+      "mouth": "small"
+    },
+    {
+      "start": 1.8,
+      "end": 1.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.89,
+      "end": 2.34,
+      "mouth": "small"
+    },
+    {
+      "start": 2.34,
+      "end": 2.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.52,
+      "end": 2.7,
+      "mouth": "small"
+    },
+    {
+      "start": 2.7,
+      "end": 2.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.79,
+      "end": 2.97,
+      "mouth": "small"
+    },
+    {
+      "start": 2.97,
+      "end": 3.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.06,
+      "end": 4.05,
+      "mouth": "small"
+    },
+    {
+      "start": 4.05,
+      "end": 4.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.41,
+      "end": 6.03,
+      "mouth": "small"
+    },
+    {
+      "start": 6.03,
+      "end": 6.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.3,
+      "end": 6.39,
+      "mouth": "small"
+    },
+    {
+      "start": 6.39,
+      "end": 6.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.48,
+      "end": 6.57,
+      "mouth": "small"
+    },
+    {
+      "start": 6.57,
+      "end": 6.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.84,
+      "end": 7.2,
+      "mouth": "small"
+    },
+    {
+      "start": 7.2,
+      "end": 7.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.56,
+      "end": 7.65,
+      "mouth": "small"
+    },
+    {
+      "start": 7.65,
+      "end": 7.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.92,
+      "end": 8.37,
+      "mouth": "small"
+    },
+    {
+      "start": 8.37,
+      "end": 8.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.46,
+      "end": 8.73,
+      "mouth": "small"
+    },
+    {
+      "start": 8.73,
+      "end": 8.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.91,
+      "end": 9.18,
+      "mouth": "small"
+    },
+    {
+      "start": 9.18,
+      "end": 9.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.27,
+      "end": 10.26,
+      "mouth": "small"
+    },
+    {
+      "start": 10.26,
+      "end": 10.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.71,
+      "end": 10.98,
+      "mouth": "small"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.07,
+      "end": 11.34,
+      "mouth": "small"
+    },
+    {
+      "start": 11.34,
+      "end": 11.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.43,
+      "end": 12.15,
+      "mouth": "small"
+    },
+    {
+      "start": 12.15,
+      "end": 12.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.24,
+      "end": 12.33,
+      "mouth": "small"
+    },
+    {
+      "start": 12.33,
+      "end": 12.42,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.42,
+      "end": 12.6,
+      "mouth": "small"
+    },
+    {
+      "start": 12.6,
+      "end": 13.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.05,
+      "end": 13.14,
+      "mouth": "small"
+    },
+    {
+      "start": 13.14,
+      "end": 13.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.23,
+      "end": 13.32,
+      "mouth": "small"
+    },
+    {
+      "start": 13.32,
+      "end": 13.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.41,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.68,
+      "end": 13.95,
+      "mouth": "small"
+    },
+    {
+      "start": 13.95,
+      "end": 14.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.04,
+      "end": 14.85,
+      "mouth": "small"
+    },
+    {
+      "start": 14.85,
+      "end": 14.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.94,
+      "end": 16.29,
+      "mouth": "small"
+    },
+    {
+      "start": 16.29,
+      "end": 16.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.47,
+      "end": 16.74,
+      "mouth": "small"
+    },
+    {
+      "start": 16.74,
+      "end": 16.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.83,
+      "end": 17.82,
+      "mouth": "small"
+    },
+    {
+      "start": 17.82,
+      "end": 18.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.27,
+      "end": 18.45,
+      "mouth": "small"
+    },
+    {
+      "start": 18.45,
+      "end": 18.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.54,
+      "end": 19.08,
+      "mouth": "small"
+    },
+    {
+      "start": 19.08,
+      "end": 19.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.17,
+      "end": 19.35,
+      "mouth": "small"
+    },
+    {
+      "start": 19.35,
+      "end": 19.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.44,
+      "end": 19.62,
+      "mouth": "small"
+    },
+    {
+      "start": 19.62,
+      "end": 19.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.8,
+      "end": 19.98,
+      "mouth": "small"
+    },
+    {
+      "start": 19.98,
+      "end": 20.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.07,
+      "end": 20.61,
+      "mouth": "small"
+    },
+    {
+      "start": 20.61,
+      "end": 20.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.97,
+      "end": 21.06,
+      "mouth": "small"
+    },
+    {
+      "start": 21.06,
+      "end": 21.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.15,
+      "end": 21.33,
+      "mouth": "small"
+    },
+    {
+      "start": 21.33,
+      "end": 21.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.51,
+      "end": 21.69,
+      "mouth": "small"
+    },
+    {
+      "start": 21.69,
+      "end": 21.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.78,
+      "end": 21.87,
+      "mouth": "small"
+    },
+    {
+      "start": 21.87,
+      "end": 21.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.96,
+      "end": 22.41,
+      "mouth": "small"
+    },
+    {
+      "start": 22.41,
+      "end": 22.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.5,
+      "end": 22.68,
+      "mouth": "small"
+    },
+    {
+      "start": 22.68,
+      "end": 22.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.95,
+      "end": 23.31,
+      "mouth": "small"
+    },
+    {
+      "start": 23.31,
+      "end": 23.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.4,
+      "end": 23.76,
+      "mouth": "small"
+    },
+    {
+      "start": 23.76,
+      "end": 24.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.03,
+      "end": 24.39,
+      "mouth": "small"
+    },
+    {
+      "start": 24.39,
+      "end": 24.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.48,
+      "end": 24.84,
+      "mouth": "small"
+    },
+    {
+      "start": 24.84,
+      "end": 24.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.93,
+      "end": 25.65,
+      "mouth": "small"
+    },
+    {
+      "start": 25.65,
+      "end": 26.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.01,
+      "end": 26.19,
+      "mouth": "small"
+    },
+    {
+      "start": 26.19,
+      "end": 26.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.28,
+      "end": 26.82,
+      "mouth": "small"
+    },
+    {
+      "start": 26.82,
+      "end": 26.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.91,
+      "end": 27.18,
+      "mouth": "small"
+    },
+    {
+      "start": 27.18,
+      "end": 27.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.27,
+      "end": 28.26,
+      "mouth": "small"
+    },
+    {
+      "start": 28.26,
+      "end": 28.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.62,
+      "end": 28.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.98,
+      "end": 29.25,
+      "mouth": "small"
+    },
+    {
+      "start": 29.25,
+      "end": 29.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.34,
+      "end": 29.79,
+      "mouth": "small"
+    },
+    {
+      "start": 29.79,
+      "end": 29.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.88,
+      "end": 30.15,
+      "mouth": "small"
+    },
+    {
+      "start": 30.15,
+      "end": 30.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.51,
+      "end": 30.69,
+      "mouth": "small"
+    },
+    {
+      "start": 30.69,
+      "end": 30.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.78,
+      "end": 31.05,
+      "mouth": "small"
+    },
+    {
+      "start": 31.05,
+      "end": 31.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.23,
+      "end": 31.77,
+      "mouth": "small"
+    },
+    {
+      "start": 31.77,
+      "end": 31.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.86,
+      "end": 32.58,
+      "mouth": "small"
+    },
+    {
+      "start": 32.58,
+      "end": 32.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.85,
+      "end": 32.94,
+      "mouth": "small"
+    },
+    {
+      "start": 32.94,
+      "end": 33.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.21,
+      "end": 33.93,
+      "mouth": "small"
+    },
+    {
+      "start": 33.93,
+      "end": 34.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.02,
+      "end": 34.11,
+      "mouth": "small"
+    },
+    {
+      "start": 34.11,
+      "end": 34.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.2,
+      "end": 34.29,
+      "mouth": "small"
+    },
+    {
+      "start": 34.29,
+      "end": 34.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.38,
+      "end": 34.56,
+      "mouth": "small"
+    },
+    {
+      "start": 34.56,
+      "end": 34.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.65,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 34.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.83,
+      "end": 34.92,
+      "mouth": "small"
+    },
+    {
+      "start": 34.92,
+      "end": 35.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.28,
+      "end": 35.55,
+      "mouth": "small"
+    },
+    {
+      "start": 35.55,
+      "end": 35.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.82,
+      "end": 35.91,
+      "mouth": "small"
+    },
+    {
+      "start": 35.91,
+      "end": 36.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.0,
+      "end": 37.53,
+      "mouth": "small"
+    },
+    {
+      "start": 37.53,
+      "end": 37.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.8,
+      "end": 37.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.89,
+      "end": 37.98,
+      "mouth": "small"
+    },
+    {
+      "start": 37.98,
+      "end": 38.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.07,
+      "end": 38.34,
+      "mouth": "small"
+    },
+    {
+      "start": 38.34,
+      "end": 38.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.43,
+      "end": 39.06,
+      "mouth": "small"
+    },
+    {
+      "start": 39.06,
+      "end": 39.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.24,
+      "end": 39.78,
+      "mouth": "small"
+    },
+    {
+      "start": 39.78,
+      "end": 40.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.14,
+      "end": 40.5,
+      "mouth": "small"
+    },
+    {
+      "start": 40.5,
+      "end": 40.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.59,
+      "end": 40.86,
+      "mouth": "small"
+    },
+    {
+      "start": 40.86,
+      "end": 40.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.95,
+      "end": 41.22,
+      "mouth": "small"
+    },
+    {
+      "start": 41.22,
+      "end": 41.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.31,
+      "end": 42.21,
+      "mouth": "small"
+    },
+    {
+      "start": 42.21,
+      "end": 42.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.39,
+      "end": 42.48,
+      "mouth": "small"
+    },
+    {
+      "start": 42.48,
+      "end": 42.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.57,
+      "end": 42.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.66,
+      "end": 43.29,
+      "mouth": "small"
+    },
+    {
+      "start": 43.29,
+      "end": 43.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.47,
+      "end": 44.01,
+      "mouth": "small"
+    },
+    {
+      "start": 44.01,
+      "end": 44.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.1,
+      "end": 44.55,
+      "mouth": "small"
+    },
+    {
+      "start": 44.55,
+      "end": 44.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.82,
+      "end": 45.63,
+      "mouth": "small"
+    },
+    {
+      "start": 45.63,
+      "end": 45.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.99,
+      "end": 46.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.44,
+      "end": 47.16,
+      "mouth": "small"
+    },
+    {
+      "start": 47.16,
+      "end": 47.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.52,
+      "end": 47.61,
+      "mouth": "small"
+    },
+    {
+      "start": 47.61,
+      "end": 47.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.97,
+      "end": 48.15,
+      "mouth": "small"
+    },
+    {
+      "start": 48.15,
+      "end": 48.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.33,
+      "end": 48.42,
+      "mouth": "small"
+    },
+    {
+      "start": 48.42,
+      "end": 48.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.51,
+      "end": 48.78,
+      "mouth": "small"
+    },
+    {
+      "start": 48.78,
+      "end": 48.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.96,
+      "end": 49.32,
+      "mouth": "small"
+    },
+    {
+      "start": 49.32,
+      "end": 49.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.41,
+      "end": 49.59,
+      "mouth": "small"
+    },
+    {
+      "start": 49.59,
+      "end": 49.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.68,
+      "end": 49.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.86,
+      "end": 50.31,
+      "mouth": "small"
+    },
+    {
+      "start": 50.31,
+      "end": 50.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.4,
+      "end": 50.58,
+      "mouth": "small"
+    },
+    {
+      "start": 50.58,
+      "end": 50.76,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.76,
+      "end": 50.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.85,
+      "end": 51.03,
+      "mouth": "small"
+    },
+    {
+      "start": 51.03,
+      "end": 51.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.3,
+      "end": 51.93,
+      "mouth": "small"
+    },
+    {
+      "start": 51.93,
+      "end": 52.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.02,
+      "end": 52.2,
+      "mouth": "small"
+    },
+    {
+      "start": 52.2,
+      "end": 52.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.47,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 52.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.74,
+      "end": 52.83,
+      "mouth": "small"
+    },
+    {
+      "start": 52.83,
+      "end": 52.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.92,
+      "end": 53.1,
+      "mouth": "small"
+    },
+    {
+      "start": 53.1,
+      "end": 53.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.37,
+      "end": 53.46,
+      "mouth": "small"
+    },
+    {
+      "start": 53.46,
+      "end": 53.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.64,
+      "end": 53.82,
+      "mouth": "small"
+    },
+    {
+      "start": 53.82,
+      "end": 53.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.91,
+      "end": 54.09,
+      "mouth": "small"
+    },
+    {
+      "start": 54.09,
+      "end": 54.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.63,
+      "end": 54.99,
+      "mouth": "small"
+    },
+    {
+      "start": 54.99,
+      "end": 55.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.08,
+      "end": 55.8,
+      "mouth": "small"
+    },
+    {
+      "start": 55.8,
+      "end": 55.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.89,
+      "end": 55.98,
+      "mouth": "small"
+    },
+    {
+      "start": 55.98,
+      "end": 56.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.07,
+      "end": 57.33,
+      "mouth": "small"
+    },
+    {
+      "start": 57.33,
+      "end": 58.05,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "The",
+      "start": 0.0,
+      "end": 0.14000000059604645
+    },
+    {
+      "word": "2022",
+      "start": 0.14000000059604645,
+      "end": 0.7200000286102295
+    },
+    {
+      "word": "Shelby",
+      "start": 0.7200000286102295,
+      "end": 1.059999942779541
+    },
+    {
+      "word": "GT500",
+      "start": 1.059999942779541,
+      "end": 1.659999966621399
+    },
+    {
+      "word": "Heritage",
+      "start": 1.659999966621399,
+      "end": 2.0
+    },
+    {
+      "word": "Edition",
+      "start": 2.0,
+      "end": 2.259999990463257
+    },
+    {
+      "word": "is",
+      "start": 2.259999990463257,
+      "end": 2.640000104904175
+    },
+    {
+      "word": "the",
+      "start": 2.640000104904175,
+      "end": 2.7799999713897705
+    },
+    {
+      "word": "most",
+      "start": 2.7799999713897705,
+      "end": 2.9200000762939453
+    },
+    {
+      "word": "powerful",
+      "start": 2.9200000762939453,
+      "end": 3.240000009536743
+    },
+    {
+      "word": "factory",
+      "start": 3.240000009536743,
+      "end": 3.5399999618530273
+    },
+    {
+      "word": "Mustang",
+      "start": 3.5399999618530273,
+      "end": 3.7799999713897705
+    },
+    {
+      "word": "ever",
+      "start": 3.7799999713897705,
+      "end": 4.019999980926514
+    },
+    {
+      "word": "built",
+      "start": 4.019999980926514,
+      "end": 4.139999866485596
+    },
+    {
+      "word": "Those",
+      "start": 4.559999942779541,
+      "end": 4.599999904632568
+    },
+    {
+      "word": "classic",
+      "start": 4.599999904632568,
+      "end": 4.880000114440918
+    },
+    {
+      "word": "white",
+      "start": 4.880000114440918,
+      "end": 5.099999904632568
+    },
+    {
+      "word": "racing",
+      "start": 5.099999904632568,
+      "end": 5.300000190734863
+    },
+    {
+      "word": "stripes",
+      "start": 5.300000190734863,
+      "end": 5.460000038146973
+    },
+    {
+      "word": "aren't",
+      "start": 5.460000038146973,
+      "end": 5.659999847412109
+    },
+    {
+      "word": "just",
+      "start": 5.659999847412109,
+      "end": 5.78000020980835
+    },
+    {
+      "word": "for",
+      "start": 5.78000020980835,
+      "end": 6.099999904632568
+    },
+    {
+      "word": "looks",
+      "start": 6.099999904632568,
+      "end": 6.099999904632568
+    },
+    {
+      "word": "they",
+      "start": 6.28000020980835,
+      "end": 6.5
+    },
+    {
+      "word": "scream",
+      "start": 6.5,
+      "end": 6.699999809265137
+    },
+    {
+      "word": "American",
+      "start": 6.699999809265137,
+      "end": 6.960000038146973
+    },
+    {
+      "word": "muscle",
+      "start": 6.960000038146973,
+      "end": 7.199999809265137
+    },
+    {
+      "word": "The",
+      "start": 7.579999923706055,
+      "end": 7.699999809265137
+    },
+    {
+      "word": "dual",
+      "start": 7.699999809265137,
+      "end": 7.860000133514404
+    },
+    {
+      "word": "racing",
+      "start": 7.860000133514404,
+      "end": 8.079999923706055
+    },
+    {
+      "word": "stripes",
+      "start": 8.079999923706055,
+      "end": 8.260000228881836
+    },
+    {
+      "word": "across",
+      "start": 8.260000228881836,
+      "end": 8.479999542236328
+    },
+    {
+      "word": "the",
+      "start": 8.479999542236328,
+      "end": 8.779999732971191
+    },
+    {
+      "word": "hood",
+      "start": 8.779999732971191,
+      "end": 8.779999732971191
+    },
+    {
+      "word": "reflect",
+      "start": 8.779999732971191,
+      "end": 9.100000381469727
+    },
+    {
+      "word": "a",
+      "start": 9.100000381469727,
+      "end": 9.34000015258789
+    },
+    {
+      "word": "nod",
+      "start": 9.34000015258789,
+      "end": 9.34000015258789
+    },
+    {
+      "word": "to",
+      "start": 9.34000015258789,
+      "end": 9.460000038146973
+    },
+    {
+      "word": "its",
+      "start": 9.460000038146973,
+      "end": 9.579999923706055
+    },
+    {
+      "word": "illustrious",
+      "start": 9.579999923706055,
+      "end": 9.819999694824219
+    },
+    {
+      "word": "racing",
+      "start": 9.819999694824219,
+      "end": 10.0600004196167
+    },
+    {
+      "word": "past",
+      "start": 10.0600004196167,
+      "end": 10.380000114440918
+    },
+    {
+      "word": "The",
+      "start": 10.699999809265137,
+      "end": 10.800000190734863
+    },
+    {
+      "word": "GT500",
+      "start": 10.800000190734863,
+      "end": 11.260000228881836
+    },
+    {
+      "word": "badge",
+      "start": 11.260000228881836,
+      "end": 11.520000457763672
+    },
+    {
+      "word": "stands",
+      "start": 11.520000457763672,
+      "end": 11.699999809265137
+    },
+    {
+      "word": "for",
+      "start": 11.699999809265137,
+      "end": 11.859999656677246
+    },
+    {
+      "word": "decades",
+      "start": 11.859999656677246,
+      "end": 12.100000381469727
+    },
+    {
+      "word": "of",
+      "start": 12.100000381469727,
+      "end": 12.279999732971191
+    },
+    {
+      "word": "track",
+      "start": 12.279999732971191,
+      "end": 12.420000076293945
+    },
+    {
+      "word": "dominance",
+      "start": 12.420000076293945,
+      "end": 12.720000267028809
+    },
+    {
+      "word": "Under",
+      "start": 13.15999984741211,
+      "end": 13.220000267028809
+    },
+    {
+      "word": "the",
+      "start": 13.220000267028809,
+      "end": 13.460000038146973
+    },
+    {
+      "word": "hood",
+      "start": 13.460000038146973,
+      "end": 13.460000038146973
+    },
+    {
+      "word": "the",
+      "start": 13.699999809265137,
+      "end": 13.779999732971191
+    },
+    {
+      "word": "supercharged",
+      "start": 13.779999732971191,
+      "end": 14.100000381469727
+    },
+    {
+      "word": "5",
+      "start": 14.100000381469727,
+      "end": 14.34000015258789
+    },
+    {
+      "word": "2L",
+      "start": 14.34000015258789,
+      "end": 14.720000267028809
+    },
+    {
+      "word": "V8",
+      "start": 14.720000267028809,
+      "end": 15.0
+    },
+    {
+      "word": "cranks",
+      "start": 15.0,
+      "end": 15.140000343322754
+    },
+    {
+      "word": "out",
+      "start": 15.140000343322754,
+      "end": 15.380000114440918
+    },
+    {
+      "word": "760hp",
+      "start": 15.380000114440918,
+      "end": 16.260000228881836
+    },
+    {
+      "word": "and",
+      "start": 16.260000228881836,
+      "end": 16.6200008392334
+    },
+    {
+      "word": "625lb",
+      "start": 16.6200008392334,
+      "end": 17.5
+    },
+    {
+      "word": "ft",
+      "start": 17.5,
+      "end": 17.559999465942383
+    },
+    {
+      "word": "of",
+      "start": 17.559999465942383,
+      "end": 17.899999618530273
+    },
+    {
+      "word": "torque",
+      "start": 17.899999618530273,
+      "end": 17.899999618530273
+    },
+    {
+      "word": "The",
+      "start": 18.239999771118164,
+      "end": 18.459999084472656
+    },
+    {
+      "word": "Shelby",
+      "start": 18.459999084472656,
+      "end": 18.579999923706055
+    },
+    {
+      "word": "snake",
+      "start": 18.579999923706055,
+      "end": 18.81999969482422
+    },
+    {
+      "word": "emblem",
+      "start": 18.81999969482422,
+      "end": 19.0
+    },
+    {
+      "word": "on",
+      "start": 19.0,
+      "end": 19.31999969482422
+    },
+    {
+      "word": "the",
+      "start": 19.31999969482422,
+      "end": 19.68000030517578
+    },
+    {
+      "word": "intake",
+      "start": 19.68000030517578,
+      "end": 19.68000030517578
+    },
+    {
+      "word": "declares",
+      "start": 19.68000030517578,
+      "end": 20.059999465942383
+    },
+    {
+      "word": "its",
+      "start": 20.059999465942383,
+      "end": 20.219999313354492
+    },
+    {
+      "word": "raw",
+      "start": 20.219999313354492,
+      "end": 20.399999618530273
+    },
+    {
+      "word": "power",
+      "start": 20.399999618530273,
+      "end": 20.6200008392334
+    },
+    {
+      "word": "The",
+      "start": 21.0,
+      "end": 21.100000381469727
+    },
+    {
+      "word": "GT500's",
+      "start": 21.100000381469727,
+      "end": 21.68000030517578
+    },
+    {
+      "word": "rear",
+      "start": 21.68000030517578,
+      "end": 21.81999969482422
+    },
+    {
+      "word": "spoiler",
+      "start": 21.81999969482422,
+      "end": 22.040000915527344
+    },
+    {
+      "word": "isn't",
+      "start": 22.040000915527344,
+      "end": 22.219999313354492
+    },
+    {
+      "word": "just",
+      "start": 22.219999313354492,
+      "end": 22.360000610351562
+    },
+    {
+      "word": "for",
+      "start": 22.360000610351562,
+      "end": 22.600000381469727
+    },
+    {
+      "word": "show",
+      "start": 22.600000381469727,
+      "end": 22.65999984741211
+    },
+    {
+      "word": "it",
+      "start": 22.959999084472656,
+      "end": 23.1200008392334
+    },
+    {
+      "word": "improves",
+      "start": 23.1200008392334,
+      "end": 23.299999237060547
+    },
+    {
+      "word": "aerodynamics",
+      "start": 23.299999237060547,
+      "end": 23.739999771118164
+    },
+    {
+      "word": "anchoring",
+      "start": 24.1200008392334,
+      "end": 24.219999313354492
+    },
+    {
+      "word": "the",
+      "start": 24.219999313354492,
+      "end": 24.420000076293945
+    },
+    {
+      "word": "car",
+      "start": 24.420000076293945,
+      "end": 24.479999542236328
+    },
+    {
+      "word": "with",
+      "start": 24.479999542236328,
+      "end": 24.6200008392334
+    },
+    {
+      "word": "aggressive",
+      "start": 24.6200008392334,
+      "end": 24.899999618530273
+    },
+    {
+      "word": "styling",
+      "start": 24.899999618530273,
+      "end": 25.079999923706055
+    },
+    {
+      "word": "that",
+      "start": 25.079999923706055,
+      "end": 25.260000228881836
+    },
+    {
+      "word": "means",
+      "start": 25.260000228881836,
+      "end": 25.3799991607666
+    },
+    {
+      "word": "business",
+      "start": 25.3799991607666,
+      "end": 25.700000762939453
+    },
+    {
+      "word": "The",
+      "start": 26.020000457763672,
+      "end": 26.15999984741211
+    },
+    {
+      "word": "adjustable",
+      "start": 26.15999984741211,
+      "end": 26.3799991607666
+    },
+    {
+      "word": "rear",
+      "start": 26.3799991607666,
+      "end": 26.65999984741211
+    },
+    {
+      "word": "wing",
+      "start": 26.65999984741211,
+      "end": 26.760000228881836
+    },
+    {
+      "word": "is",
+      "start": 26.760000228881836,
+      "end": 27.040000915527344
+    },
+    {
+      "word": "a",
+      "start": 27.040000915527344,
+      "end": 27.200000762939453
+    },
+    {
+      "word": "hallmark",
+      "start": 27.200000762939453,
+      "end": 27.299999237060547
+    },
+    {
+      "word": "of",
+      "start": 27.299999237060547,
+      "end": 27.420000076293945
+    },
+    {
+      "word": "the",
+      "start": 27.420000076293945,
+      "end": 27.6200008392334
+    },
+    {
+      "word": "Shelby",
+      "start": 27.6200008392334,
+      "end": 27.68000030517578
+    },
+    {
+      "word": "GT500",
+      "start": 27.68000030517578,
+      "end": 28.239999771118164
+    },
+    {
+      "word": "Tailor",
+      "start": 28.239999771118164,
+      "end": 28.780000686645508
+    },
+    {
+      "word": "your",
+      "start": 28.780000686645508,
+      "end": 28.899999618530273
+    },
+    {
+      "word": "aerodynamic",
+      "start": 28.899999618530273,
+      "end": 29.239999771118164
+    },
+    {
+      "word": "setup",
+      "start": 29.239999771118164,
+      "end": 29.479999542236328
+    },
+    {
+      "word": "for",
+      "start": 29.479999542236328,
+      "end": 29.65999984741211
+    },
+    {
+      "word": "street",
+      "start": 29.65999984741211,
+      "end": 29.81999969482422
+    },
+    {
+      "word": "or",
+      "start": 29.81999969482422,
+      "end": 30.0
+    },
+    {
+      "word": "track",
+      "start": 30.0,
+      "end": 30.260000228881836
+    },
+    {
+      "word": "Inside",
+      "start": 30.799999237060547,
+      "end": 30.799999237060547
+    },
+    {
+      "word": "the",
+      "start": 30.799999237060547,
+      "end": 30.940000534057617
+    },
+    {
+      "word": "Recaro",
+      "start": 30.940000534057617,
+      "end": 31.219999313354492
+    },
+    {
+      "word": "racing",
+      "start": 31.219999313354492,
+      "end": 31.420000076293945
+    },
+    {
+      "word": "seats",
+      "start": 31.420000076293945,
+      "end": 31.579999923706055
+    },
+    {
+      "word": "are",
+      "start": 31.579999923706055,
+      "end": 31.739999771118164
+    },
+    {
+      "word": "embroidered",
+      "start": 31.739999771118164,
+      "end": 32.0
+    },
+    {
+      "word": "with",
+      "start": 32.0,
+      "end": 32.060001373291016
+    },
+    {
+      "word": "the",
+      "start": 32.060001373291016,
+      "end": 32.29999923706055
+    },
+    {
+      "word": "Shelby",
+      "start": 32.29999923706055,
+      "end": 32.29999923706055
+    },
+    {
+      "word": "logo",
+      "start": 32.29999923706055,
+      "end": 32.619998931884766
+    },
+    {
+      "word": "underlining",
+      "start": 33.0,
+      "end": 33.15999984741211
+    },
+    {
+      "word": "the",
+      "start": 33.15999984741211,
+      "end": 33.36000061035156
+    },
+    {
+      "word": "GT500's",
+      "start": 33.36000061035156,
+      "end": 33.939998626708984
+    },
+    {
+      "word": "status",
+      "start": 33.939998626708984,
+      "end": 34.119998931884766
+    },
+    {
+      "word": "as",
+      "start": 34.119998931884766,
+      "end": 34.2599983215332
+    },
+    {
+      "word": "a",
+      "start": 34.2599983215332,
+      "end": 34.380001068115234
+    },
+    {
+      "word": "true",
+      "start": 34.380001068115234,
+      "end": 34.52000045776367
+    },
+    {
+      "word": "driver's",
+      "start": 34.52000045776367,
+      "end": 34.86000061035156
+    },
+    {
+      "word": "car",
+      "start": 34.86000061035156,
+      "end": 34.97999954223633
+    },
+    {
+      "word": "The",
+      "start": 35.31999969482422,
+      "end": 35.47999954223633
+    },
+    {
+      "word": "interior",
+      "start": 35.47999954223633,
+      "end": 35.70000076293945
+    },
+    {
+      "word": "boasts",
+      "start": 35.70000076293945,
+      "end": 35.91999816894531
+    },
+    {
+      "word": "carbon",
+      "start": 35.91999816894531,
+      "end": 36.15999984741211
+    },
+    {
+      "word": "fiber",
+      "start": 36.15999984741211,
+      "end": 36.400001525878906
+    },
+    {
+      "word": "accents",
+      "start": 36.400001525878906,
+      "end": 36.619998931884766
+    },
+    {
+      "word": "on",
+      "start": 36.619998931884766,
+      "end": 36.779998779296875
+    },
+    {
+      "word": "the",
+      "start": 36.779998779296875,
+      "end": 36.880001068115234
+    },
+    {
+      "word": "dashboard",
+      "start": 36.880001068115234,
+      "end": 37.08000183105469
+    },
+    {
+      "word": "and",
+      "start": 37.08000183105469,
+      "end": 37.279998779296875
+    },
+    {
+      "word": "console",
+      "start": 37.279998779296875,
+      "end": 37.52000045776367
+    },
+    {
+      "word": "emphasizing",
+      "start": 38.13999938964844,
+      "end": 38.13999938964844
+    },
+    {
+      "word": "performance",
+      "start": 38.13999938964844,
+      "end": 38.5
+    },
+    {
+      "word": "inspired",
+      "start": 38.5,
+      "end": 38.7400016784668
+    },
+    {
+      "word": "design",
+      "start": 38.7400016784668,
+      "end": 39.060001373291016
+    },
+    {
+      "word": "and",
+      "start": 39.060001373291016,
+      "end": 39.400001525878906
+    },
+    {
+      "word": "saving",
+      "start": 39.400001525878906,
+      "end": 39.58000183105469
+    },
+    {
+      "word": "weight",
+      "start": 39.58000183105469,
+      "end": 39.7599983215332
+    },
+    {
+      "word": "The",
+      "start": 40.18000030517578,
+      "end": 40.279998779296875
+    },
+    {
+      "word": "GT500",
+      "start": 40.279998779296875,
+      "end": 40.68000030517578
+    },
+    {
+      "word": "started",
+      "start": 40.68000030517578,
+      "end": 40.959999084472656
+    },
+    {
+      "word": "around",
+      "start": 40.959999084472656,
+      "end": 41.15999984741211
+    },
+    {
+      "word": "73",
+      "start": 41.15999984741211,
+      "end": 41.68000030517578
+    },
+    {
+      "word": "000",
+      "start": 41.68000030517578,
+      "end": 41.720001220703125
+    },
+    {
+      "word": "new",
+      "start": 41.720001220703125,
+      "end": 42.2599983215332
+    },
+    {
+      "word": "and",
+      "start": 42.380001068115234,
+      "end": 42.52000045776367
+    },
+    {
+      "word": "it's",
+      "start": 42.52000045776367,
+      "end": 42.58000183105469
+    },
+    {
+      "word": "holding",
+      "start": 42.58000183105469,
+      "end": 42.720001220703125
+    },
+    {
+      "word": "value",
+      "start": 42.720001220703125,
+      "end": 43.0
+    },
+    {
+      "word": "strong",
+      "start": 43.0,
+      "end": 43.279998779296875
+    },
+    {
+      "word": "a",
+      "start": 43.540000915527344,
+      "end": 43.79999923706055
+    },
+    {
+      "word": "testament",
+      "start": 43.79999923706055,
+      "end": 43.79999923706055
+    },
+    {
+      "word": "to",
+      "start": 43.79999923706055,
+      "end": 43.939998626708984
+    },
+    {
+      "word": "its",
+      "start": 43.939998626708984,
+      "end": 44.08000183105469
+    },
+    {
+      "word": "coveted",
+      "start": 44.08000183105469,
+      "end": 44.380001068115234
+    },
+    {
+      "word": "status",
+      "start": 44.380001068115234,
+      "end": 44.58000183105469
+    },
+    {
+      "word": "among",
+      "start": 44.58000183105469,
+      "end": 44.97999954223633
+    },
+    {
+      "word": "muscle",
+      "start": 44.97999954223633,
+      "end": 45.18000030517578
+    },
+    {
+      "word": "car",
+      "start": 45.18000030517578,
+      "end": 45.31999969482422
+    },
+    {
+      "word": "enthusiasts",
+      "start": 45.31999969482422,
+      "end": 45.65999984741211
+    },
+    {
+      "word": "only",
+      "start": 46.0,
+      "end": 46.2400016784668
+    },
+    {
+      "word": "dropping",
+      "start": 46.2400016784668,
+      "end": 46.34000015258789
+    },
+    {
+      "word": "about",
+      "start": 46.34000015258789,
+      "end": 46.560001373291016
+    },
+    {
+      "word": "10",
+      "start": 46.560001373291016,
+      "end": 46.70000076293945
+    },
+    {
+      "word": "annually",
+      "start": 46.900001525878906,
+      "end": 47.15999984741211
+    },
+    {
+      "word": "When",
+      "start": 47.58000183105469,
+      "end": 47.7400016784668
+    },
+    {
+      "word": "pitted",
+      "start": 47.7400016784668,
+      "end": 47.81999969482422
+    },
+    {
+      "word": "against",
+      "start": 47.81999969482422,
+      "end": 48.02000045776367
+    },
+    {
+      "word": "the",
+      "start": 48.02000045776367,
+      "end": 48.18000030517578
+    },
+    {
+      "word": "Camaro's",
+      "start": 48.18000030517578,
+      "end": 48.400001525878906
+    },
+    {
+      "word": "ZL1",
+      "start": 48.400001525878906,
+      "end": 48.7400016784668
+    },
+    {
+      "word": "the",
+      "start": 49.0,
+      "end": 49.13999938964844
+    },
+    {
+      "word": "GT500's",
+      "start": 49.13999938964844,
+      "end": 49.68000030517578
+    },
+    {
+      "word": "760hp",
+      "start": 49.68000030517578,
+      "end": 50.540000915527344
+    },
+    {
+      "word": "trumps",
+      "start": 50.540000915527344,
+      "end": 50.91999816894531
+    },
+    {
+      "word": "the",
+      "start": 50.91999816894531,
+      "end": 51.08000183105469
+    },
+    {
+      "word": "ZL1's",
+      "start": 51.08000183105469,
+      "end": 51.439998626708984
+    },
+    {
+      "word": "650hp",
+      "start": 51.439998626708984,
+      "end": 52.18000030517578
+    },
+    {
+      "word": "A",
+      "start": 52.47999954223633,
+      "end": 52.619998931884766
+    },
+    {
+      "word": "clear",
+      "start": 52.619998931884766,
+      "end": 52.7599983215332
+    },
+    {
+      "word": "powerhouse",
+      "start": 52.7599983215332,
+      "end": 53.13999938964844
+    },
+    {
+      "word": "with",
+      "start": 53.34000015258789,
+      "end": 53.5
+    },
+    {
+      "word": "bragging",
+      "start": 53.5,
+      "end": 53.68000030517578
+    },
+    {
+      "word": "rights",
+      "start": 53.68000030517578,
+      "end": 53.84000015258789
+    },
+    {
+      "word": "to",
+      "start": 53.84000015258789,
+      "end": 54.040000915527344
+    },
+    {
+      "word": "match",
+      "start": 54.040000915527344,
+      "end": 54.15999984741211
+    },
+    {
+      "word": "So",
+      "start": 54.619998931884766,
+      "end": 54.7599983215332
+    },
+    {
+      "word": "does",
+      "start": 54.7599983215332,
+      "end": 54.84000015258789
+    },
+    {
+      "word": "the",
+      "start": 54.84000015258789,
+      "end": 55.0
+    },
+    {
+      "word": "Shelby",
+      "start": 55.0,
+      "end": 55.119998931884766
+    },
+    {
+      "word": "GT500's",
+      "start": 55.119998931884766,
+      "end": 55.79999923706055
+    },
+    {
+      "word": "raw",
+      "start": 55.79999923706055,
+      "end": 55.91999816894531
+    },
+    {
+      "word": "power",
+      "start": 55.91999816894531,
+      "end": 56.119998931884766
+    },
+    {
+      "word": "and",
+      "start": 56.119998931884766,
+      "end": 56.439998626708984
+    },
+    {
+      "word": "heritage",
+      "start": 56.439998626708984,
+      "end": 56.439998626708984
+    },
+    {
+      "word": "make",
+      "start": 56.439998626708984,
+      "end": 56.599998474121094
+    },
+    {
+      "word": "it",
+      "start": 56.599998474121094,
+      "end": 56.68000030517578
+    },
+    {
+      "word": "your",
+      "start": 56.68000030517578,
+      "end": 56.779998779296875
+    },
+    {
+      "word": "ultimate",
+      "start": 56.779998779296875,
+      "end": 56.97999954223633
+    },
+    {
+      "word": "muscle",
+      "start": 56.97999954223633,
+      "end": 57.15999984741211
+    },
+    {
+      "word": "car",
+      "start": 57.15999984741211,
+      "end": 57.31999969482422
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual-extra/1-another-front.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Another front"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual-extra/0-sears.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Sears"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/chevrolet-camaro-zl1/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rkdw65lb/2022-ford-mustang-shelby-gt500-heritage-edition",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 93000,
+    "sale_type": "sold",
+    "page_title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-ford-mustang-shelby-gt500-heritag-20260912041116/voice_auditions/onyx.mp3",
+    "british_narrator": "single-ford-mustang-shelby-gt500-heritag-20260912041116/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-ford-mustang-shelby-gt500-heritag-20260912041116/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-ford-mustang-shelby-gt500-heritag-20260912041116/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-ford-mustang-shelby-gt500-heritag-20260912041116/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ford-mustang-shelby-gt500-heritag-20260912041116/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "left",
+  "video": "single_car_short.mp4"
+}

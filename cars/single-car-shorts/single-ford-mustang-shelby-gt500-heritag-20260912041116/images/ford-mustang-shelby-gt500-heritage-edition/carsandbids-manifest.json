@@ -1,0 +1,492 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-12T04:13:49.520Z",
+  "query": "Ford Mustang Shelby Gt500 Heritage Edition",
+  "visual_highlight": "engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rkdw65lb/2022-ford-mustang-shelby-gt500-heritage-edition",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rkdw65lb/2022-ford-mustang-shelby-gt500-heritage-edition",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 26,
+      "sale_price": 93000,
+      "sale_type": "sold",
+      "page_title": "2022 Ford Mustang Shelby GT500 Heritage Edition"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rkdw65lb/2022-ford-mustang-shelby-gt500-heritage-edition",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 93000,
+    "sale_type": "sold",
+    "page_title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/FordMustangShelbyGT500HeritageEdition2022002/edit/WW7Cb.jpg?t=178809222943",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 365233
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022034.jpg?t=178793363484",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 289132
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022040.jpg?t=178793363484",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 229452
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/FordMustangShelbyGT500HeritageEdition2022037/edit/yk-ks.jpg?t=178809231327",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 295141
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022035.jpg?t=178793363484",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 232861
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/FordMustangShelbyGT500HeritageEdition2022001/edit/uZVTf.jpg?t=178809224909",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 295001
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022007.jpg?t=178793363484",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 190748
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022004.jpg?t=178793363484",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 287307
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/fd6e4985027ea36b3236b528a2506497b954f1a9/photos/FordMustangShelbyGT500HeritageEdition2022005.jpg?t=178793363484",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 232365
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/91032ad7bbcb6cf72875e8e8207dcfba80173f7c/photos/9AM7lVl8-mJGOmjW.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2787 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1e518acc383f74fbd2a5295dca3887ee17ca5f08/photos/9Q5xMJYY-uPXHAX7.JPG",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2958 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/8e36b3291a0da06f70f7c9718d46d7cc2c9fdd71/photos/rN4pGBgw-_e2De67.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 12458 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a6f8d5b4d7e72912c9e22988f2e565b304f90e07/photos/3v8g2Bxj-Qupp2BkqmBu.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 6425 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/2383bd9f52cf62f28418a276add915dbe604036b/photos/9ebNyDpd-YeC48SW.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 11363 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea62b13f627172d6d3331c0127e35dfe/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea62b13f627172d6d3331c0127e35dfe/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea62b13f627172d6d3331c0127e35dfe/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rkdw65lb/2022-ford-mustang-shelby-gt500-heritage-edition",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea62b13f627172d6d3331c0127e35dfe/manifest/video.m3u8",
+      "auction_title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 3,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle as the main subject.",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+        "visible_match_evidence": [
+          "Distinctive bodywork",
+          "Striped paint scheme",
+          "Front grille design",
+          "Rear wing",
+          "Sport wheels"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+        "visible_match_evidence": [
+          "Shelby badging",
+          "distinctive hood vents",
+          "stripes",
+          "front design characteristic"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+        "visible_match_evidence": [
+          "distinctive bodywork",
+          "specific rear spoiler",
+          "wheel design",
+          "brake caliper color"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Shelby Gt500 Heritage Edition",
+        "visible_match_evidence": [
+          "shape and proportions typical of Mustang",
+          "distinctive rear lights",
+          "exhaust configuration",
+          "rear wing"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+        "visible_match_evidence": [
+          "distinctive rear lights",
+          "rear spoiler design",
+          "dual exhaust setup",
+          "heritage stripes"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ford",
+        "detected_model": "mustang",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+        "visible_match_evidence": [
+          "Recaro seats with Shelby branding",
+          "interior design consistent with Mustang GT500"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+        "visible_match_evidence": [
+          "steering wheel design",
+          "dashboard layout",
+          "interior details",
+          "gauge cluster design",
+          "console design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "Shelby GT500 Heritage Edition",
+        "visible_match_evidence": [
+          "interior design",
+          "dashboard layout",
+          "carbon fiber accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
