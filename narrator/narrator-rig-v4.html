@@ -24,7 +24,7 @@
   </style>
 </head>
 <body>
-  <header><h1>Narrator Rig V19</h1><p>Clean hand outlines, subtle nails, and smooth wrist follow-through.</p></header>
+  <header><h1>Narrator Rig V19</h1><p>Articulated arms with smooth wrist follow-through, plus full-body / half / bust / face framings that re-crop the vectors instead of upscaling a render.</p></header>
   <main class="rig">
     <section class="stage" id="stage"><span class="stage-label" id="stage-label">transparent stage</span>
       <svg id="character-svg" viewBox="0 0 380 920" xmlns="http://www.w3.org/2000/svg" aria-label="Animated cartoon narrator">
@@ -150,6 +150,7 @@
       <section class="card"><h2>Mouth</h2><div class="grid"><button data-mouth="closed" class="active">Closed</button><button data-mouth="smile">Smile</button><button data-mouth="small">O shape</button><button data-mouth="wide">Oval</button><button data-mouth="teeth">Show teeth</button><button id="auto-talk">Auto-talk: off</button></div></section>
       <section class="card"><h2>Face</h2><div class="grid"><button id="blink">Blink once</button><button id="auto-blink" class="active">Auto-blink: on</button><button id="brows">Raise brows</button><button id="tracking" class="active">Eye tracking: on</button></div></section>
       <section class="card"><h2>Arm poses</h2><div class="grid"><button data-pose="rest" class="active">Relaxed</button><button data-pose="leftTalk">Left gesture</button><button data-pose="rightTalk">Right gesture</button><button data-pose="open">Open hands</button><button data-pose="chest">Hand on chest</button><button data-pose="wave">Wave</button><button id="reset" class="wide">Reset pose</button></div></section>
+      <section class="card"><h2>Framing</h2><div class="grid"><button data-camera="full" class="active">Full body</button><button data-camera="half">Half body</button><button data-camera="bust">Head &amp; chest</button><button data-camera="face">Face</button><button id="camera-cycle" class="wide">Auto-cycle framing: off</button></div><p class="hint" style="margin-top:10px">Each framing is a different viewBox over the same drawing, so a close-up stays vector-crisp instead of upscaling the full-body render.</p></section>
       <section class="card"><h2>Stage</h2><div class="grid"><button id="sway" class="active">Idle sway: on</button><button id="stage-btn">Stage: transparent</button></div></section>
       <p class="hint">Move the pointer to direct the eyes. Press Ctrl/Command + Enter inside the speech box to speak.</p>
     </aside>
@@ -288,6 +289,44 @@
     $('#sway').onclick=e=>{character.classList.toggle('no-sway');const on=!character.classList.contains('no-sway');e.currentTarget.textContent=`Idle sway: ${on?'on':'off'}`;e.currentTarget.classList.toggle('active',on)};
     $('#stage-btn').onclick=e=>{const stage=$('#stage');stage.classList.toggle('solid');const solid=stage.classList.contains('solid');$('#stage-label').textContent=solid?'solid stage':'transparent stage';e.currentTarget.textContent=`Stage: ${solid?'solid':'transparent'}`;e.currentTarget.classList.toggle('active',solid)};
     document.addEventListener('pointermove',e=>moveEyes(e.clientX));document.documentElement.addEventListener('mouseleave',()=>{lastPointer=0});$('#speech-text').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')speak()});
+    // Framings are viewBoxes over the same drawing rather than a scaled-up
+    // copy of the full-body render, so a close-up re-rasterizes the vectors
+    // at the new size and stays crisp. Values bound the rig's own geometry:
+    // the head sits around x116-264 / y25-215, the hem is at y~510, and the
+    // resting hands reach y~610.
+    const CAMERAS={full:[0,0,380,920],half:[45,0,290,620],bust:[76,2,228,388],face:[104,2,172,228]};
+    let activeCamera='full',cameraFrame=null,cameraFrom=null,cameraTo=null,cameraStart=0;
+    const CAMERA_MOVE_MS=520;
+    const easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    function paintCamera(box){svg.setAttribute('viewBox',box.map(n=>Math.round(n*100)/100).join(' '))}
+    function cameraTick(now){
+      const t=clamp((now-cameraStart)/CAMERA_MOVE_MS,0,1),e=easeInOut(t);
+      paintCamera(cameraFrom.map((v,i)=>v+(cameraTo[i]-v)*e));
+      if(t<1)cameraFrame=requestAnimationFrame(cameraTick);else{cameraFrame=null;paintCamera(cameraTo)}
+    }
+    function setCamera(name,animate=true){
+      name=Object.hasOwn(CAMERAS,name)?name:'full';
+      activeCamera=name;
+      $$('[data-camera]').forEach(b=>b.classList.toggle('active',b.dataset.camera===name));
+      if(cameraFrame!==null){cancelAnimationFrame(cameraFrame);cameraFrame=null}
+      const target=CAMERAS[name];
+      if(!animate||reducedMotion?.matches){paintCamera(target);return}
+      cameraFrom=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+      cameraTo=target;cameraStart=performance.now();
+      cameraFrame=requestAnimationFrame(cameraTick);
+    }
+    $$('[data-camera]').forEach(b=>b.onclick=()=>{stopCameraCycle();setCamera(b.dataset.camera)});
+    let cameraCycleTimer=null,cameraStep=0;
+    const cameraOrder=['full','bust','half','face'];
+    const cameraCycleBtn=$('#camera-cycle');
+    function cameraCycleTick(){setCamera(cameraOrder[cameraStep++%cameraOrder.length]);cameraCycleTimer=setTimeout(cameraCycleTick,2600)}
+    function stopCameraCycle(){clearTimeout(cameraCycleTimer);cameraCycleTimer=null;cameraCycleBtn.textContent='Auto-cycle framing: off';cameraCycleBtn.classList.remove('active')}
+    cameraCycleBtn.onclick=()=>{
+      if(cameraCycleTimer){stopCameraCycle();return}
+      cameraCycleBtn.textContent='Auto-cycle framing: on';cameraCycleBtn.classList.add('active');
+      cameraStep=0;cameraCycleTick();
+    };
+
     setMouth('closed');showSvg(eyesOpen,true);showSvg(eyesBlink,false);
     if('speechSynthesis'in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
     scheduleBlink(true);idleExpression();idleGaze();
