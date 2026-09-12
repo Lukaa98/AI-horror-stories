@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Car Shorts Lab — Narrator Rig V21</title>
+  <style>
+    :root{--bg:#f5f2ea;--panel:#eae5d8;--panel2:#ded7c5;--border:#d3cab4;--ink:#151515;--muted:#5c5344;--accent:#c1391f;--white:#fff;--ok:#3f6b3a}
+    *{box-sizing:border-box}[hidden]{display:none!important}
+    body{min-height:100vh;margin:0;padding:24px;color:var(--ink);background:var(--bg);font-family:Arial,Helvetica,sans-serif}
+    header,.rig{width:min(1050px,100%);margin-inline:auto}h1{margin:0 0 5px;font-size:clamp(24px,4vw,36px)}header p{margin:0 0 18px;color:var(--muted)}
+    .rig{display:grid;grid-template-columns:minmax(360px,1.3fr) minmax(280px,.7fr);gap:18px;align-items:start}
+    .stage{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:16px;background:linear-gradient(45deg,#efebe1 25%,transparent 25%) 0 0/40px 40px,linear-gradient(-45deg,#efebe1 25%,transparent 25%) 0 0/40px 40px,linear-gradient(45deg,transparent 75%,#efebe1 75%) 0 0/40px 40px,linear-gradient(-45deg,transparent 75%,#efebe1 75%) 0 0/40px 40px,#e5e0d4}.stage.solid{background:#e5e0d4}
+    .stage-label{position:absolute;z-index:2;top:12px;left:12px;padding:5px 9px;color:var(--muted);background:#ffffffbf;border:1px solid var(--border);border-radius:999px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+    svg{display:block;width:100%;height:auto}.outline{fill:#fff;stroke:var(--ink);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.line{fill:none;stroke:var(--ink);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.face-line{stroke-width:5}.black{fill:var(--ink)}
+    .hand-detail svg{max-height:220px}.hand-detail{overflow:hidden}
+    .stage{aspect-ratio:9/16}.stage>svg{width:100%;height:100%}.stage-label{pointer-events:none}
+    .placement-card .hint{margin-top:10px}.placement-card h3{margin:16px 0 9px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    .placement-state{margin:0 0 10px;color:var(--muted);font-size:12px;line-height:1.4}.stage-column{min-width:0}
+    @media(min-width:801px){.stage-column{position:sticky;top:18px}}
+    #character{transform-origin:190px 850px;animation:sway 4.6s ease-in-out infinite}#character.no-sway{animation:none}#character.excited{animation:excited .38s ease-in-out infinite alternate}
+    /* Joint transforms are owned exclusively by the continuous motion loop.
+       Explicit SVG pivots keep each hand seated inside its cuff. */
+    #eyebrows{transition:transform .28s cubic-bezier(.2,.8,.2,1)}.pupil{transition:transform .1s ease-out}.panel{display:flex;flex-direction:column;gap:12px}.card{padding:15px;background:var(--panel);border:1px solid var(--border);border-radius:12px}.card h2{margin:0 0 10px;color:var(--muted);font-size:12px;letter-spacing:.09em;text-transform:uppercase}.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.wide{grid-column:1/-1}
+    button,textarea,select{width:100%;font:inherit}button{min-height:40px;padding:8px;color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer}button:hover{border-color:var(--muted)}button.active{color:#fff;background:var(--accent);border-color:var(--accent)}textarea,select{padding:10px;color:var(--ink);background:#fff;border:1px solid var(--border);border-radius:8px}textarea{min-height:95px;margin-bottom:8px;resize:vertical;line-height:1.45}select{margin-bottom:8px}.status{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;margin:0;font-size:13px}.status dt{color:var(--muted)}.status dd{margin:0;text-align:right}.on{color:var(--ok);font-weight:700}.hint{margin:0;color:var(--muted);font-size:12px;line-height:1.5}
+    @keyframes sway{0%,100%{transform:rotate(-.45deg) translateX(-1px)}50%{transform:rotate(.45deg) translateX(1px)}}@keyframes excited{from{transform:translateY(0) rotate(-.3deg)}to{transform:translateY(-4px) rotate(.3deg)}}
+    @media(max-width:800px){.rig{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important}}
+  </style>
+</head>
+<body>
+  <header><h1>Narrator Rig V21</h1><p>Corner placements with a gentle inward lean.</p></header>
+  <main class="rig">
+    <div class="stage-column"><section class="stage" id="stage"><span class="stage-label" id="stage-label">9:16 · transparent stage</span>
+      <svg id="character-svg" viewBox="0 0 540 960" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated narrator on a vertical video stage">
+        <defs>
+          <clipPath id="framing-clip" clipPathUnits="userSpaceOnUse"><rect id="framing-window" x="0" y="0" width="380" height="920"/></clipPath>
+          <!-- Back-of-hand drawing in local coordinates: wrist at (0,0),
+               middle fingertip at y=184. Both wrists reuse this exact geometry.
+               Fingers are kept short and thick with wide web spaces: at this
+               render scale a narrow gap collapses into a solid black wedge
+               once both outline strokes are drawn, which made the earlier
+               longer/thinner fingers read as separate prongs. -->
+          <g id="human-hand" fill="#fff" stroke="#151515" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round">
+            <path id="hand-silhouette" d="M-24-22 L24-22
+              C24 8 26 30 35 44
+              C48 56 64 72 71 88
+              C74 96 70 105 62 105
+              C56 105 51 100 47 93
+              L36 78
+              C33 71 28 74 29 82
+              C32 98 37 112 39 124
+              C40 142 41 160 41 172
+              C41 181 36 187 30 185
+              C26 184 24 180 24 172
+              C24 156 23 138 22 120
+              C21 113 15 113 14 120
+              C13 140 12 160 12 178
+              C12 188 7 194 1 192
+              C-3 191-5 187-5 180
+              C-5 160-6 140-6 120
+              C-7 113-13 113-14 120
+              C-15 138-16 156-17 172
+              C-18 181-23 187-29 185
+              C-33 184-35 180-34 172
+              C-33 155-32 138-33 120
+              C-34 113-40 114-41 121
+              C-42 133-43 146-44 158
+              C-45 166-50 171-55 169
+              C-58 167-59 163-58 156
+              C-59 142-60 128-59 110
+              C-58 86-53 63-45 43
+              C-36 25-25-1-24-22Z"/>
+            <g fill="#fff" stroke-width="1.1" stroke-opacity=".45">
+              <rect data-nail="thumb" x="53" y="88" width="10" height="12" rx="4.5" transform="rotate(40 58 94)"/>
+              <rect data-nail="index" x="27" y="169" width="11" height="13" rx="5" transform="rotate(4 32.5 175.5)"/>
+              <rect data-nail="middle" x="-2" y="176" width="11" height="13" rx="5" transform="rotate(-2 3.5 182.5)"/>
+              <rect data-nail="ring" x="-32" y="169" width="10" height="12" rx="4.5" transform="rotate(-6 -27 175)"/>
+              <rect data-nail="little" x="-56" y="153" width="9" height="11" rx="4" transform="rotate(-12 -51.5 158.5)"/>
+            </g>
+          </g>
+        </defs>
+        <g id="footage-guide" style="visibility:hidden" pointer-events="none" aria-hidden="true">
+          <rect x="38" y="90" width="464" height="330" rx="12" fill="#fff" fill-opacity=".5" stroke="#b6af9d" stroke-width="1.5" stroke-dasharray="7 7"/>
+          <text x="270" y="254" text-anchor="middle" fill="#6b6251" font-family="Arial,sans-serif" font-size="17" letter-spacing="2">CAR FOOTAGE AREA</text>
+        </g>
+        <g id="character-placement" transform="translate(80.174 20) scale(.98913)">
+        <g clip-path="url(#framing-clip)">
+        <g id="character">
+          <g id="shoes"><path class="outline" d="M128 850C126 870 105 881 90 894C80 903 74 913 76 919H176L174 871C158 869 142 863 128 850Z"/><path class="line" d="M126 877C139 873 151 876 158 883"/><path class="outline" d="M252 850C254 870 275 881 290 894C300 903 306 913 304 919H204L206 871C222 869 238 863 252 850Z"/><path class="line" d="M254 877C241 873 229 876 222 883"/></g>
+          <g id="legs"><path class="outline" d="M110 498C112 607 115 734 118 870C134 875 153 875 171 871L190 550L209 871C227 875 246 875 262 870C265 734 268 607 270 498Z"/><path class="line" d="M190 550V842"/></g>
+          <!-- Torso is painted before the articulated arms so conversational
+               gestures and hands remain visible in front of the hoodie. -->
+          <g id="torso"><path class="outline" d="M128 242C145 231 161 226 174 224H206C219 226 235 231 252 242C268 254 274 276 272 305L276 470C276 489 267 498 251 500C211 505 169 505 129 500C113 498 104 489 104 470L108 305C106 276 112 254 128 242Z"/><path class="outline" d="M125 496C167 503 213 503 255 496L254 522C212 528 168 528 126 522Z"/><text x="190" y="406" text-anchor="middle" fill="#151515" font-family="Arial,sans-serif" font-size="20" font-weight="800" letter-spacing="1">CAR SHORTS</text><text x="190" y="430" text-anchor="middle" fill="#151515" font-family="Arial,sans-serif" font-size="20" font-weight="800" letter-spacing="1">LAB</text></g>
+          <!-- Articulated left arm: shoulder group contains an independent elbow/forearm group. -->
+          <g id="left-upper-arm">
+            <path class="outline" d="M129 242C108 244 94 260 88 285L71 377C68 391 75 401 86 403C98 405 106 397 108 384L121 301Z"/>
+            <g id="left-forearm">
+              <path fill="#fff" d="M71 386C67 425 63 457 63 490C63 502 70 509 80 509C91 509 98 501 98 489L103 386Z"/>
+              <path class="line" d="M71 386C67 425 63 457 63 490C63 502 70 509 80 509"/>
+              <path class="line" d="M103 386L98 489C98 501 91 509 80 509"/>
+              <g id="left-wrist-assembly">
+                <g id="left-hand">
+                  <use href="#human-hand" transform="translate(80 518) rotate(-3) scale(.4)"/>
+                </g>
+                <path id="left-cuff" class="outline" d="M64 498Q80 502 97 498L95 516Q80 521 66 516Z"/>
+              </g>
+            </g>
+          </g>
+
+          <!-- Articulated right arm. -->
+          <g id="right-upper-arm">
+            <path class="outline" d="M251 242C272 244 286 260 292 285L309 377C312 391 305 401 294 403C282 405 274 397 272 384L259 301Z"/>
+            <g id="right-forearm">
+              <path fill="#fff" d="M277 386L282 489C282 501 289 509 300 509C310 509 317 502 317 490C317 457 313 425 309 386Z"/>
+              <path class="line" d="M277 386L282 489C282 501 289 509 300 509"/>
+              <path class="line" d="M309 386C313 425 317 457 317 490C317 502 310 509 300 509"/>
+              <g id="right-wrist-assembly">
+                <g id="right-hand">
+                  <use href="#human-hand" transform="translate(300 518) rotate(3) scale(-.4 .4)"/>
+                </g>
+                <path id="right-cuff" class="outline" d="M283 498Q300 502 316 498L314 516Q300 521 285 516Z"/>
+              </g>
+            </g>
+          </g>
+          <path class="outline" d="M163 188V222L190 252L217 222V188Z"/>
+          <g id="hood"><path class="outline" d="M164 201C143 198 124 202 114 218C103 237 118 248 141 259L184 280L199 262L164 239Z"/><path class="outline" d="M216 201C237 198 256 202 266 218C277 237 262 248 239 259L207 275L190 252L216 239Z"/><path class="line" d="M177 258V322M226 258V322"/><circle class="black" cx="177" cy="326" r="7"/><circle class="black" cx="226" cy="326" r="7"/></g>
+
+          <!-- Symmetrical head centered on x=190. -->
+          <g id="head">
+            <path class="outline" d="M132 72C127 94 128 126 134 157C140 188 159 208 190 214C221 208 240 188 246 157C252 126 253 94 248 72Z"/>
+            <path class="outline" d="M134 127C124 120 116 127 116 140C116 153 124 161 136 159"/>
+            <path class="outline" d="M246 127C256 120 264 127 264 140C264 153 256 161 244 159"/>
+            <path class="black" d="M132 123C127 103 127 82 133 64L116 65C110 65 109 59 115 54L143 40L124 31C119 28 122 24 128 25L167 30L155 18C151 13 156 10 162 14L199 33L196 19C195 13 201 12 205 17L229 42L228 29C228 23 234 24 236 30L242 55C251 62 253 78 249 95L245 123L239 77C207 82 173 82 139 76Z"/>
+
+            <!-- Both eyebrows remain safely inside the face. -->
+            <g id="eyebrows">
+              <path class="line face-line" d="M146 106C154 101 164 101 173 105"/>
+              <path class="line face-line" d="M207 105C216 101 226 101 234 106"/>
+            </g>
+
+            <!-- Eye midpoint is exactly x=190. -->
+            <g id="eyes-open"><ellipse id="left-eye" class="black pupil" cx="160" cy="130" rx="6" ry="9"/><ellipse id="right-eye" class="black pupil" cx="220" cy="130" rx="6" ry="9"/></g>
+            <g id="eyes-blink" style="visibility:hidden;opacity:0"><path class="line" style="stroke-width:3.5px" d="M152 130Q160 132 168 130"/><path class="line" style="stroke-width:3.5px" d="M212 130Q220 132 228 130"/></g>
+
+            <!-- Nose and mouth are shifted left onto the face centerline. -->
+            <path class="line face-line" d="M190 135C187 146 184 156 187 160C190 163 196 162 201 160"/>
+            <g id="mouth-closed" class="mouth"><path class="line face-line" d="M166 181C179 188 199 188 214 179"/></g>
+            <g id="mouth-small" class="mouth" style="visibility:hidden;opacity:0"><ellipse cx="190" cy="182" rx="7" ry="11" fill="#151515"/></g>
+            <g id="mouth-wide" class="mouth" style="visibility:hidden;opacity:0"><ellipse cx="190" cy="182" rx="16" ry="9" fill="#151515"/></g>
+            <g id="mouth-teeth" class="mouth" style="visibility:hidden;opacity:0"><rect x="176" y="176" width="28" height="13" rx="5" fill="#fff" stroke="#151515" stroke-width="4"/><path d="M178 182.5H202" stroke="#151515" stroke-width="2"/></g>
+            <g id="mouth-smile" class="mouth" style="visibility:hidden;opacity:0"><path class="line face-line" d="M165 177Q190 198 215 177"/></g>
+          </g>
+        </g>
+        </g>
+        </g>
+      </svg>
+    </section></div>
+
+    <aside class="panel">
+      <section class="card placement-card"><h2>Video placement</h2>
+        <p class="placement-state" id="placement-readout" aria-live="polite">Center · Full body</p>
+        <div class="grid">
+          <button data-layout="center">Center / full</button><button data-layout="bottom-center">Bottom center</button>
+          <button data-layout="bottom-left">Bottom left</button><button data-layout="bottom-right">Bottom right</button>
+          <button data-layout="close-left">Left close-up</button><button data-layout="close-right">Right close-up</button>
+          <button id="camera-cycle" class="wide" aria-pressed="false">Preview placements</button>
+          <button id="tilt-toggle" class="wide active" aria-pressed="true">Corner tilt: on</button>
+        </div>
+        <h3>Framing</h3><div class="grid"><button data-camera="full">Full body</button><button data-camera="half">Half body</button><button data-camera="bust">Head &amp; chest</button><button data-camera="face">Face</button></div>
+        <p class="hint">Start talking, then switch placements to test the live face and gestures.</p>
+      </section>
+      <section class="card"><h2>Speech</h2><textarea id="speech-text">Welcome to Car Shorts Lab! Today, we are taking a look at another interesting car.</textarea><select id="voice-select" aria-label="Speech voice"><option value="">Default system voice</option></select><div class="grid"><button id="speak">Speak</button><button id="stop-speech">Stop</button><button id="auto-talk" class="wide">Auto-talk: off</button></div></section>
+      <section class="card hand-detail"><h2>Wrist close-up</h2><svg viewBox="34 472 100 145" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Live close-up of the active wrist, showing the hand staying connected to the cuff during gestures"><path class="outline" d="M65 472H97V499Q80 503 64 499Z"/><use id="wrist-detail-use" href="#left-wrist-assembly"/></svg><button id="auto-gesture" aria-pressed="false">Preview gestures</button></section>
+      <section class="card"><h2>State</h2><dl class="status"><dt>Mouth</dt><dd id="mouth-readout">closed</dd><dt>Eyes</dt><dd id="eyes-readout">open</dd><dt>Talking</dt><dd id="talk-readout">off</dd><dt>Speech</dt><dd id="speech-readout">idle</dd></dl></section>
+      <section class="card"><h2>Mouth</h2><div class="grid"><button data-mouth="closed" class="active">Closed</button><button data-mouth="smile">Smile</button><button data-mouth="small">O shape</button><button data-mouth="wide">Oval</button><button data-mouth="teeth">Show teeth</button></div></section>
+      <section class="card"><h2>Face</h2><div class="grid"><button id="blink">Blink once</button><button id="auto-blink" class="active">Auto-blink: on</button><button id="brows">Raise brows</button><button id="tracking" class="active">Eye tracking: on</button></div></section>
+      <section class="card"><h2>Arm poses</h2><div class="grid"><button data-pose="rest" class="active">Relaxed</button><button data-pose="leftTalk">Left gesture</button><button data-pose="rightTalk">Right gesture</button><button data-pose="open">Open hands</button><button data-pose="chest">Hand on chest</button><button data-pose="wave">Wave</button><button id="reset" class="wide">Reset pose</button></div></section>
+      <section class="card"><h2>Stage</h2><div class="grid"><button id="sway" class="active">Idle sway: on</button><button id="stage-btn">Stage: transparent</button><button id="guide-btn" class="wide active" aria-pressed="true">Footage guide: on</button></div></section>
+      <p class="hint">Move the pointer to direct the eyes. Press Ctrl/Command + Enter inside the speech box to speak.</p>
+    </aside>
+  </main>
+
+  <script>
+    const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+    const character=$('#character'),svg=$('#character-svg');
+    const leftUpper=$('#left-upper-arm'),leftForearm=$('#left-forearm'),leftHand=$('#left-hand'),rightUpper=$('#right-upper-arm'),rightForearm=$('#right-forearm'),rightHand=$('#right-hand');
+    const leftEye=$('#left-eye'),rightEye=$('#right-eye'),eyesOpen=$('#eyes-open'),eyesBlink=$('#eyes-blink'),eyebrows=$('#eyebrows');
+    const mouthReadout=$('#mouth-readout'),eyesReadout=$('#eyes-readout'),talkReadout=$('#talk-readout'),speechReadout=$('#speech-readout');
+    let talkTimer=null,blinkTimer=null,expressionTimer=null,gestureTimer=null,gazeTimer=null,lastPointer=0,talkFrame=0,autoBlink=true,autoGesture=false,isSpeaking=false,tracking=true,isBlinking=false,browsRaised=false,voices=[],activePose='rest';
+    const mouthNames=['closed','small','wide','teeth','smile'],talkFrames=['closed','small','wide','teeth','small','wide'];
+
+    function showSvg(el,show){
+      el.removeAttribute('hidden');
+      el.style.visibility=show?'visible':'hidden';
+      el.style.opacity=show?'1':'0';
+    }
+    function setMouth(name){mouthNames.forEach(n=>showSvg($('#mouth-'+n),n===name));mouthReadout.textContent=name;$$('[data-mouth]').forEach(b=>b.classList.toggle('active',b.dataset.mouth===name))}
+    function talkTick(){setMouth(talkFrames[talkFrame++%talkFrames.length]);talkTimer=setTimeout(talkTick,190+Math.random()*80)}
+    function startTalk(){if(talkTimer)return;talkFrame=1;setMouth('wide');talkReadout.textContent='on';talkReadout.classList.add('on');$('#auto-talk').textContent='Auto-talk: on';$('#auto-talk').classList.add('active');talkTimer=setTimeout(talkTick,150)}
+    function stopTalk(close=true){clearTimeout(talkTimer);talkTimer=null;talkReadout.textContent='off';talkReadout.classList.remove('on');$('#auto-talk').textContent='Auto-talk: off';$('#auto-talk').classList.remove('active');if(close)setMouth('closed')}
+    function blink(){if(isBlinking)return;isBlinking=true;showSvg(eyesOpen,false);showSvg(eyesBlink,true);eyesReadout.textContent='blink';setTimeout(()=>{showSvg(eyesBlink,false);showSvg(eyesOpen,true);eyesReadout.textContent='open';isBlinking=false},320)}
+    function scheduleBlink(first=false){clearTimeout(blinkTimer);blinkTimer=setTimeout(()=>{if(autoBlink){blink();if(Math.random()<.25)raiseBrows()}scheduleBlink()},first?900:2100+Math.random()*2100)}
+    function raiseBrows(duration=850){if(browsRaised)return;browsRaised=true;eyebrows.setAttribute('transform','translate(0 -10)');setTimeout(()=>{eyebrows.removeAttribute('transform');browsRaised=false},duration)}
+    function idleExpression(){clearTimeout(expressionTimer);expressionTimer=setTimeout(()=>{if(!isSpeaking&&!talkTimer){setMouth('smile');raiseBrows(700);setTimeout(()=>{if(!isSpeaking&&!talkTimer)setMouth('closed')},900)}idleExpression()},4500+Math.random()*3500)}
+    function setEyeDirection(dx){const t=`translate(${dx}px,0)`;leftEye.style.transform=t;rightEye.style.transform=t}
+    // Screen-space face coordinates follow placement, zoom, and idle sway.
+    // Converting the pointer back to head coordinates keeps gaze consistent.
+    function moveEyes(x,y){
+      if(!tracking||isBlinking)return;lastPointer=Date.now();
+      const matrix=$('#head').getScreenCTM();if(!matrix)return;
+      const point=svg.createSVGPoint();point.x=x;point.y=y;
+      const local=point.matrixTransform(matrix.inverse());
+      setEyeDirection(clamp((local.x-190)/28,-4.5,4.5));
+    }
+    function resetEyes(){leftEye.style.transform='';rightEye.style.transform=''}
+    function idleGaze(){clearTimeout(gazeTimer);gazeTimer=setTimeout(()=>{if(tracking&&Date.now()-lastPointer>1800)setEyeDirection(Math.random()>.5?3.5:-3.5);idleGaze()},1800+Math.random()*1700)}
+    function loadVoices(){if(!('speechSynthesis'in window))return;voices=speechSynthesis.getVoices();const selected=$('#voice-select').value;$('#voice-select').innerHTML='<option value="">Default system voice</option>';voices.forEach((v,i)=>$('#voice-select').add(new Option(`${v.name} — ${v.lang}`,i)));$('#voice-select').value=selected}
+    const poses={
+      rest:{lu:0,lf:0,lh:0,ru:0,rf:0,rh:0},
+      chest:{lu:0,lf:0,lh:0,ru:-18,rf:106,rh:-8},
+      leftTalk:{lu:-3,lf:-28,lh:6,ru:0,rf:0,rh:0},
+      rightTalk:{lu:0,lf:0,lh:0,ru:3,rf:28,rh:-6},
+      open:{lu:6,lf:6,lh:-4,ru:-6,rf:-6,rh:4},
+      // 196 degrees reaches the raised pose through the front of the torso,
+      // instead of swinging outward through -164 and leaving the stage.
+      wave:{lu:0,lf:0,lh:0,ru:-8,rf:196,rh:0}
+    };
+    const reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    const clamp=(n,lo,hi)=>Math.max(lo,Math.min(hi,n));
+    const joint=(el,cx,cy,frequency)=>({el,cx,cy,frequency,baseFrequency:frequency,angle:0,velocity:0,target:0});
+    const joints={
+      lu:joint(leftUpper,118,260,12),lf:joint(leftForearm,86,392,11),lh:joint(leftHand,80,511,9),
+      ru:joint(rightUpper,262,260,12),rf:joint(rightForearm,294,392,11),rh:joint(rightHand,300,511,9)
+    };
+    const wristDetail=$('#wrist-detail-use');
+    let motionFrame=null,lastMotionTime=0,waveStarted=0;
+    // Exact critically damped integration preserves the current position AND
+    // velocity when retargeted. No timer delays, CSS transitions, or WAAPI
+    // animations can pull the same joint toward a competing position.
+    function advanceJoint(j,target,dt){
+      const offset=j.angle-target,w=j.frequency,c=j.velocity+w*offset,decay=Math.exp(-w*dt);
+      j.angle=target+(offset+c*dt)*decay;
+      j.velocity=(j.velocity-w*c*dt)*decay;
+      if(Math.abs(j.angle-target)<.008&&Math.abs(j.velocity)<.03){j.angle=target;j.velocity=0}
+    }
+    function paintJoint(j){j.el.setAttribute('transform',`rotate(${j.angle.toFixed(4)} ${j.cx} ${j.cy})`)}
+    function paintRig(){Object.values(joints).forEach(paintJoint)}
+    function motionTick(now){
+      motionFrame=null;
+      if(character.isConnected===false){lastMotionTime=0;return}
+      if(reducedMotion?.matches){finishMotion();return}
+      const dt=lastMotionTime?clamp((now-lastMotionTime)/1000,.001,.05):1/60;
+      lastMotionTime=now;
+      const waving=activePose==='wave';
+      const waveTime=Math.max(0,(now-waveStarted-900)/1000);
+      const wave=Math.sin(waveTime*Math.PI*2/1.5)*Math.min(1,waveTime/.35);
+      for(const key of ['lu','lf','ru','rf']){
+        const j=joints[key];
+        const offset=waving?(key==='ru'?wave*.6:key==='rf'?wave*2:0):0;
+        advanceJoint(j,j.target+offset,dt);
+      }
+      for(const [key,forearm] of [['lh','lf'],['rh','rf']]){
+        const j=joints[key];
+        const follow=clamp(-joints[forearm].velocity*.014,-2.5,2.5);
+        const offset=waving&&key==='rh'?wave*4.5:0;
+        advanceJoint(j,clamp(j.target+follow+offset,-12,12),dt);
+        if(j.angle>12||j.angle< -12){j.angle=clamp(j.angle,-12,12);j.velocity=0}
+      }
+      paintRig();
+      const moving=waving||Object.values(joints).some(j=>Math.abs(j.angle-j.target)>.015||Math.abs(j.velocity)>.04);
+      if(moving)motionFrame=requestAnimationFrame(motionTick);else lastMotionTime=0;
+    }
+    function finishMotion(){
+      if(motionFrame!==null)cancelAnimationFrame(motionFrame);
+      motionFrame=null;lastMotionTime=0;
+      Object.values(joints).forEach(j=>{j.angle=j.target;j.velocity=0});paintRig();
+    }
+    function requestMotion(){
+      if(reducedMotion?.matches){finishMotion();return}
+      if(motionFrame===null){lastMotionTime=0;motionFrame=requestAnimationFrame(motionTick)}
+    }
+    function setPose(name){
+      name=Object.hasOwn(poses,name)?name:'rest';
+      const p=poses[name];
+      if(name==='wave'&&activePose!=='wave')waveStarted=performance.now();
+      activePose=name;
+      for(const [key,j] of Object.entries(joints)){
+        j.target=key.endsWith('h')?clamp(p[key],-10,10):p[key];
+        // Give large raises/returns more time, without slowing small accents.
+        const distance=Math.abs(j.target-j.angle);
+        j.frequency=j.baseFrequency*clamp(Math.sqrt(35/Math.max(35,distance)),.45,1);
+      }
+      const right=['rightTalk','chest','wave'].includes(name);
+      wristDetail.setAttribute('href',right?'#right-wrist-assembly':'#left-wrist-assembly');
+      if(right)wristDetail.setAttribute('transform','translate(380 0) scale(-1 1)');else wristDetail.removeAttribute('transform');
+      requestMotion();
+      $$('[data-pose]').forEach(b=>b.classList.toggle('active',b.dataset.pose===name));
+    }
+    reducedMotion?.addEventListener?.('change',()=>reducedMotion.matches?finishMotion():requestMotion());
+    document.addEventListener('visibilitychange',()=>{lastMotionTime=0});
+    paintRig();
+    const gestureSequence=['leftTalk','rightTalk','open','chest'];
+    let gestureStep=0;
+    function randomGesture(){
+      setPose(gestureSequence[gestureStep++%gestureSequence.length]);
+      clearTimeout(gestureTimer);
+      gestureTimer=setTimeout(()=>{setPose('rest');if(autoGesture||isSpeaking)scheduleGesture()},1800+Math.random()*500);
+    }
+    function scheduleGesture(){clearTimeout(gestureTimer);if(autoGesture||isSpeaking)gestureTimer=setTimeout(randomGesture,1400+Math.random()*600)}
+    function speak(){if(!('speechSynthesis'in window)){alert('Speech is unavailable in this browser.');return}const text=$('#speech-text').value.trim();if(!text)return;speechSynthesis.cancel();stopTalk();const u=new SpeechSynthesisUtterance(text),i=$('#voice-select').value;if(i!==''&&voices[i])u.voice=voices[i];u.rate=.96;speechReadout.textContent='starting';startTalk();u.onstart=()=>{isSpeaking=true;speechReadout.textContent='speaking';speechReadout.classList.add('on');raiseBrows(450);randomGesture()};u.onboundary=()=>{if(Math.random()<.07)blink()};u.onend=()=>{isSpeaking=false;speechReadout.textContent='idle';speechReadout.classList.remove('on');clearTimeout(gestureTimer);setPose('rest');stopTalk(false);setMouth('smile');setTimeout(()=>setMouth('closed'),650);if(autoGesture)scheduleGesture()};u.onerror=()=>{isSpeaking=false;speechReadout.textContent='error';speechReadout.classList.remove('on');clearTimeout(gestureTimer);setPose('rest');stopTalk();if(autoGesture)scheduleGesture()};speechSynthesis.speak(u)}
+    function stopSpeech(){if('speechSynthesis'in window)speechSynthesis.cancel();isSpeaking=false;clearTimeout(gestureTimer);setPose('rest');speechReadout.textContent='idle';speechReadout.classList.remove('on');stopTalk();if(autoGesture)scheduleGesture()}
+    function resetPose(){clearTimeout(gestureTimer);autoGesture=false;$('#auto-gesture').textContent='Preview gestures';$('#auto-gesture').classList.remove('active');$('#auto-gesture').setAttribute('aria-pressed','false');setPose('rest');character.classList.remove('excited');setMouth('closed');resetEyes()}
+
+    $$('[data-mouth]').forEach(b=>b.onclick=()=>{stopTalk(false);setMouth(b.dataset.mouth)});
+    $('#auto-talk').onclick=()=>talkTimer?stopTalk():startTalk();$('#blink').onclick=blink;$('#brows').onclick=()=>raiseBrows();
+    $('#auto-blink').onclick=e=>{autoBlink=!autoBlink;e.currentTarget.textContent=`Auto-blink: ${autoBlink?'on':'off'}`;e.currentTarget.classList.toggle('active',autoBlink)};
+    $('#tracking').onclick=e=>{tracking=!tracking;e.currentTarget.textContent=`Eye tracking: ${tracking?'on':'off'}`;e.currentTarget.classList.toggle('active',tracking);if(!tracking)resetEyes()};
+    $$('[data-pose]').forEach(b=>b.onclick=()=>{clearTimeout(gestureTimer);setPose(b.dataset.pose);if(autoGesture||isSpeaking)scheduleGesture()});
+    $('#auto-gesture').onclick=e=>{autoGesture=!autoGesture;e.currentTarget.textContent=autoGesture?'Stop preview':'Preview gestures';e.currentTarget.classList.toggle('active',autoGesture);e.currentTarget.setAttribute('aria-pressed',String(autoGesture));if(autoGesture){gestureStep=0;randomGesture()}else{clearTimeout(gestureTimer);setPose('rest');if(isSpeaking)scheduleGesture()}};
+    $('#reset').onclick=resetPose;$('#speak').onclick=speak;$('#stop-speech').onclick=stopSpeech;
+    $('#sway').onclick=e=>{character.classList.toggle('no-sway');const on=!character.classList.contains('no-sway');e.currentTarget.textContent=`Idle sway: ${on?'on':'off'}`;e.currentTarget.classList.toggle('active',on)};
+    $('#stage-btn').onclick=e=>{const stage=$('#stage');stage.classList.toggle('solid');const solid=stage.classList.contains('solid');$('#stage-label').textContent=solid?'9:16 · solid stage':'9:16 · transparent stage';e.currentTarget.textContent=`Stage: ${solid?'solid':'transparent'}`;e.currentTarget.classList.toggle('active',solid)};
+    document.addEventListener('pointermove',e=>moveEyes(e.clientX,e.clientY));document.documentElement.addEventListener('mouseleave',()=>{lastPointer=0});$('#speech-text').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')speak()});
+    // The stage is always 540 x 960. Only this OUTER group moves/scales/rotates;
+    // the one live character and all facial/arm animation keep their state.
+    // Framings remain vector crops, independent of the video placement.
+    const CAMERAS={full:[0,0,380,920],half:[45,0,290,620],bust:[76,2,228,388],face:[104,2,172,228]};
+    const CAMERA_LABELS={full:'Full body',half:'Half body',bust:'Head & chest',face:'Face'};
+    const LAYOUTS={
+      center:{label:'Center',anchor:'center',height:.96,camera:'full'},
+      'bottom-left':{label:'Bottom left',anchor:'left',height:.39,camera:'bust'},
+      'bottom-right':{label:'Bottom right',anchor:'right',height:.39,camera:'bust'},
+      'close-left':{label:'Left close-up',anchor:'left',height:.55,camera:'bust'},
+      'close-right':{label:'Right close-up',anchor:'right',height:.55,camera:'bust'},
+      'bottom-center':{label:'Bottom center',anchor:'center',height:.46,camera:'bust'}
+    };
+    const placement=$('#character-placement'),framingWindow=$('#framing-window');
+    let activeCamera='full',activeLayout='center',cameraFrame=null,cameraFrom=null,cameraTo=null,cameraStart=0;
+    // Shot: translation x/y, scale, crop x/y/width/height, tilt, pivot y.
+    // Positive SVG rotation leans the head right; negative leans it left.
+    let currentShot=[80.174,20,.98913,0,0,380,920,0,920],guideEnabled=true,tiltEnabled=true;
+    const CORNER_TILT_DEGREES=7;
+    const CAMERA_MOVE_MS=680;
+    const easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    function composeShot(layoutName,cameraName){
+      const box=CAMERAS[cameraName],layout=LAYOUTS[layoutName];
+      if(layoutName==='center'){
+        const scale=Math.min(500/box[2],920/box[3]);
+        return[270-(box[0]+box[2]/2)*scale,(960-box[3]*scale)/2-box[1]*scale,scale,...box,0,box[1]+box[3]];
+      }
+      const scale=Math.min(960*layout.height/box[3],496/172);
+      // Keep the complete face inside the video, including a sway margin.
+      // The outer shoulder/arm may tuck beyond the edge as in the references.
+      const headCenter=layout.anchor==='left'?22+84*scale:layout.anchor==='right'?518-84*scale:270;
+      const angle=tiltEnabled?(layout.anchor==='left'?CORNER_TILT_DEGREES:layout.anchor==='right'?-CORNER_TILT_DEGREES:0):0;
+      // Pivot at the visible lower edge: the body stays tucked into its
+      // corner while the face leans toward the video, rather than orbiting.
+      return[headCenter-190*scale,960-(box[1]+box[3])*scale,scale,-1000,-1000,2380,3000,angle,box[1]+box[3]];
+    }
+    function paintCamera(shot){
+      currentShot=[...shot];
+      placement.setAttribute('transform',`translate(${shot[0].toFixed(4)} ${shot[1].toFixed(4)}) scale(${shot[2].toFixed(6)}) rotate(${shot[7].toFixed(4)} 190 ${shot[8].toFixed(4)})`);
+      ['x','y','width','height'].forEach((key,i)=>framingWindow.setAttribute(key,shot[i+3].toFixed(4)));
+    }
+    function updateCompositionUI(){
+      $$('[data-layout]').forEach(b=>{const on=b.dataset.layout===activeLayout;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});
+      $$('[data-camera]').forEach(b=>{const on=b.dataset.camera===activeCamera;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});
+      const leaning=tiltEnabled&&['left','right'].includes(LAYOUTS[activeLayout].anchor);
+      $('#placement-readout').textContent=LAYOUTS[activeLayout].label+' · '+CAMERA_LABELS[activeCamera]+(leaning?' · '+CORNER_TILT_DEGREES+'° inward':' · upright');
+      $('#stage').setAttribute('data-layout',activeLayout);$('#stage').setAttribute('data-framing',activeCamera);
+      $('#footage-guide').style.visibility=guideEnabled&&activeLayout!=='center'?'visible':'hidden';
+    }
+    function cameraTick(now){
+      cameraFrame=null;if(placement.isConnected===false)return;
+      if(reducedMotion?.matches){paintCamera(cameraTo);return}
+      const t=clamp((now-cameraStart)/CAMERA_MOVE_MS,0,1),e=easeInOut(t);
+      paintCamera(cameraFrom.map((v,i)=>v+(cameraTo[i]-v)*e));
+      if(t<1)cameraFrame=requestAnimationFrame(cameraTick);else paintCamera(cameraTo);
+    }
+    function moveComposition(animate=true){
+      updateCompositionUI();
+      if(cameraFrame!==null){cancelAnimationFrame(cameraFrame);cameraFrame=null}
+      cameraTo=composeShot(activeLayout,activeCamera);
+      if(!animate||reducedMotion?.matches){paintCamera(cameraTo);return}
+      cameraFrom=[...currentShot];cameraStart=performance.now();
+      cameraFrame=requestAnimationFrame(cameraTick);
+    }
+    function setLayout(name,options={}){
+      if(!Object.hasOwn(LAYOUTS,name))return false;
+      const camera=options.framing??LAYOUTS[name].camera;
+      if(!Object.hasOwn(CAMERAS,camera))return false;
+      activeLayout=name;activeCamera=camera;moveComposition(options.animate!==false);return true;
+    }
+    function setCamera(name,animate=true){
+      if(!Object.hasOwn(CAMERAS,name))return false;
+      activeCamera=name;moveComposition(animate);return true;
+    }
+    function setTilt(enabled,animate=true){
+      tiltEnabled=Boolean(enabled);const button=$('#tilt-toggle');
+      button.textContent=`Corner tilt: ${tiltEnabled?'on':'off'}`;
+      button.classList.toggle('active',tiltEnabled);button.setAttribute('aria-pressed',String(tiltEnabled));
+      moveComposition(animate);
+    }
+    $('#tilt-toggle').onclick=()=>setTilt(!tiltEnabled);
+    $$('[data-layout]').forEach(b=>b.onclick=()=>{stopCameraCycle();setLayout(b.dataset.layout)});
+    $$('[data-camera]').forEach(b=>b.onclick=()=>{stopCameraCycle();setCamera(b.dataset.camera)});
+    let cameraCycleTimer=null,cameraStep=0;
+    const cameraOrder=['bottom-right','bottom-left','close-left','close-right','bottom-center','center'];
+    const cameraCycleBtn=$('#camera-cycle');
+    function cameraCycleTick(){setLayout(cameraOrder[cameraStep++%cameraOrder.length]);cameraCycleTimer=setTimeout(cameraCycleTick,3400)}
+    function stopCameraCycle(){clearTimeout(cameraCycleTimer);cameraCycleTimer=null;cameraCycleBtn.textContent='Preview placements';cameraCycleBtn.classList.remove('active');cameraCycleBtn.setAttribute('aria-pressed','false')}
+    cameraCycleBtn.onclick=()=>{
+      if(cameraCycleTimer){stopCameraCycle();return}
+      cameraCycleBtn.textContent='Stop placement preview';cameraCycleBtn.classList.add('active');cameraCycleBtn.setAttribute('aria-pressed','true');
+      cameraStep=0;cameraCycleTick();
+    };
+    $('#guide-btn').onclick=e=>{guideEnabled=!guideEnabled;e.currentTarget.textContent=`Footage guide: ${guideEnabled?'on':'off'}`;e.currentTarget.classList.toggle('active',guideEnabled);e.currentTarget.setAttribute('aria-pressed',String(guideEnabled));updateCompositionUI()};
+    reducedMotion?.addEventListener?.('change',()=>{if(reducedMotion.matches&&cameraFrame!==null){cancelAnimationFrame(cameraFrame);cameraFrame=null;paintCamera(cameraTo)}});
+
+    // Pipeline triggers (all local; no network or character re-creation):
+    // narratorRig.setLayout('bottom-right');
+    // narratorRig.setLayout('close-left', {framing:'bust', animate:false});
+    // narratorRig.setFraming('half'); narratorRig.startTalk();
+    // narratorRig.setTilt(false); // compare with the upright corner version
+    // narratorRig.setGuide(false); // omit the footage placeholder in captures
+    window.narratorRig=Object.freeze({
+      setLayout:(name,options)=>{stopCameraCycle();return setLayout(name,options)},
+      setFraming:(name,options={})=>{stopCameraCycle();return setCamera(name,options.animate!==false)},
+      setTilt:(enabled,options={})=>setTilt(enabled,options.animate!==false),
+      setPose,setMouth,blink,raiseBrows,startTalk,stopTalk,speak,stopSpeech,
+      setGuide:(enabled)=>{guideEnabled=Boolean(enabled);const b=$('#guide-btn');b.textContent=`Footage guide: ${guideEnabled?'on':'off'}`;b.classList.toggle('active',guideEnabled);b.setAttribute('aria-pressed',String(guideEnabled));updateCompositionUI()},
+      getState:()=>({layout:activeLayout,framing:activeCamera,pose:activePose,tilt:currentShot[7],cornerTilt:tiltEnabled,mouth:mouthReadout.textContent,blinking:isBlinking,talking:talkTimer!==null,speaking:isSpeaking})
+    });
+    setLayout('bottom-right',{animate:false});
+
+    setMouth('closed');showSvg(eyesOpen,true);showSvg(eyesBlink,false);
+    if('speechSynthesis'in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+    scheduleBlink(true);idleExpression();idleGaze();
+  </script>
+</body>
+</html>

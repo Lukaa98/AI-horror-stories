@@ -17,6 +17,7 @@ spending time and API credits on a full render.
 ## Project layout
 
 - `cars/automation/` — topic research, image review, ranking, narration, and rendering
+- `narrator/` — character rigs and sprite exporters; [Narrator Rig V21](narrator/narrator-rig-v21.html) is the baseline for current character work
 - `cars/drafts/` — reviewable workflow artifacts (kept empty on `v10`; generated files live on `cars-output`)
 - `cars/storage/images/` — empty tracked storage location for approved source images
 - `cars/storage/videos/` — empty tracked storage location for approved rendered videos
@@ -44,6 +45,11 @@ npm run dev
 ```
 
 See [`cars/README.md`](cars/README.md) for the local research and rendering flow.
+
+Open [`narrator/narrator-rig-v21.html`](narrator/narrator-rig-v21.html) directly in a
+browser to test the approved character, speech, gestures, corner placements, and
+inward tilt. This self-contained V21 rig is the starting point for character
+changes on `v10`; it requires no build step.
 
 ## GitHub Actions
 
