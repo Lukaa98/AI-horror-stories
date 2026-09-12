@@ -84,11 +84,12 @@ on:
         type: string
         default: onyx
       narrator_character:
-        description: "Which narrator sprite set to render with -- 'v3' is the AI-illustrated full-body character test"
+        description: "Which narrator sprite set to render with -- 'v4' is the current articulated character, 'default'/'v3' are the earlier ones"
         required: false
         type: choice
-        default: "default"
+        default: "v4"
         options:
+          - "v4"
           - "default"
           - "v3"
       auction_url:
@@ -254,10 +255,10 @@ jobs:
           # the command line -- this is a JSON string full of double quotes,
           # which would break out of the "${{ }}"-substituted shell string.
           EXTRA_PHOTOS: ${{ inputs.extra_photos }}
-          # Opt-in test path for the AI-illustrated character -- unset (the
-          # default), narrator_video.py renders with the normal hand-drawn
-          # sprite set exactly as before.
-          NARRATOR_SPRITES_DIR: ${{ inputs.narrator_character == 'v3' && format('{0}/narrator/sprites-v3', github.workspace) || '' }}
+          # Selects which exported sprite set narrator_video.py composites.
+          # Left unset for 'default', which falls back to narrator/sprites
+          # (the original hand-drawn rig) exactly as before.
+          NARRATOR_SPRITES_DIR: ${{ inputs.narrator_character == 'v4' && format('{0}/narrator/sprites-v4', github.workspace) || inputs.narrator_character == 'v3' && format('{0}/narrator/sprites-v3', github.workspace) || '' }}
         run: |
           YEAR_ARGS=()
           if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
