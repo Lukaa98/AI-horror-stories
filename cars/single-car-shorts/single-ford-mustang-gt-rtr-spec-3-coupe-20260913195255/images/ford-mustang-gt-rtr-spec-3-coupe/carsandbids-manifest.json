@@ -1,0 +1,567 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-13T19:55:15.577Z",
+  "query": "Ford Mustang Gt Rtr Spec 3 Coupe",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rM6RzqBp/2025-ford-mustang-gt-rtr-spec-3-coupe",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rM6RzqBp/2025-ford-mustang-gt-rtr-spec-3-coupe",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 27,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2025 Ford Mustang GT RTR Spec 3 Coupe"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rM6RzqBp/2025-ford-mustang-gt-rtr-spec-3-coupe",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/rJmPO0x2-6IxtGx4/edit/yDugH.jpg?t=178842547157",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 263089
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/rJmPO0x2-9762oOH/edit/awdCD.jpg?t=178842555025",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 211164
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/rJmPO0x2-Ad4PI9B/edit/mNaNu.jpg?t=178842550743",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 289587
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/rJmPO0x2-lE_Wd2x/edit/_6mmG.jpg?t=178842549421",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 282688
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/exterior/rJmPO0x2-8QzunSD/edit/PEhQ1.jpg?t=178842553620",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 157595
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/interior/rJmPO0x2-hGyMbeg/edit/OEdoi.jpg?t=178842558343",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 198754
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/interior/rJmPO0x2-UpqmjNb/edit/KLvKw.jpg?t=178842559005",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 204183
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/interior/rJmPO0x2-qM5LMwC/edit/-krQ7.jpg?t=178842560983",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 168364
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/interior/rJmPO0x2-NpIr6OC/edit/ncznc.jpg?t=178842563216",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "width": 542,
+      "height": 361,
+      "bytes": 151737
+    },
+    {
+      "path": "interior-10.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1a9d4a5e637a9b20176137bdfb731f922fee919f/photos/9l4E2pW2-B-NKXt9.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Highlights",
+      "width": 80,
+      "height": 80,
+      "bytes": 24429
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/72d573b399fa3f312e204a3a460ffa3ae7539cdb/photos/3R2j5GWN-0DQgyHU.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 7790 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1e1b6ebb8a43d56dbadac413d7a5e0630d2d83c1/photos/rNX2DL0w-lILT3gZ.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 19808 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a26caa9144adc7d03ef255b1b77bc0ff7ed0e696/photos/9W71WnW5-Lj1gM8J.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2966 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a6a372b7dcf97f3a679f627bda7543b3caf193b3/photos/KdZG6We1-DlxKll8lWCZ.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 15580 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f3c32b498147fb6624c29b286dcd5059/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f3c32b498147fb6624c29b286dcd5059/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f3c32b498147fb6624c29b286dcd5059/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rM6RzqBp/2025-ford-mustang-gt-rtr-spec-3-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f3c32b498147fb6624c29b286dcd5059/manifest/video.m3u8",
+      "auction_title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c519602d73b841d3b8a75f61765537cc/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c519602d73b841d3b8a75f61765537cc/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c519602d73b841d3b8a75f61765537cc/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rM6RzqBp/2025-ford-mustang-gt-rtr-spec-3-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c519602d73b841d3b8a75f61765537cc/manifest/video.m3u8",
+      "auction_title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/55986983d77087bd853866f844bfe043/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/55986983d77087bd853866f844bfe043/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/55986983d77087bd853866f844bfe043/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rM6RzqBp/2025-ford-mustang-gt-rtr-spec-3-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/55986983d77087bd853866f844bfe043/manifest/video.m3u8",
+      "auction_title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/44da4a27e57dae9c4059b660aa69ad85/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/44da4a27e57dae9c4059b660aa69ad85/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/44da4a27e57dae9c4059b660aa69ad85/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rM6RzqBp/2025-ford-mustang-gt-rtr-spec-3-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/44da4a27e57dae9c4059b660aa69ad85/manifest/video.m3u8",
+      "auction_title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d8e866d79fecb018a000778bb5cf0156/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d8e866d79fecb018a000778bb5cf0156/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d8e866d79fecb018a000778bb5cf0156/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rM6RzqBp/2025-ford-mustang-gt-rtr-spec-3-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d8e866d79fecb018a000778bb5cf0156/manifest/video.m3u8",
+      "auction_title": "2025 Ford Mustang GT RTR Spec 3 Coupe",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT RTR Spec 3",
+        "visible_match_evidence": [
+          "Bodywork shape consistent with Mustang",
+          "Rear light design matches Mustang GT",
+          "RTR branding visible on vehicle"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT RTR Spec 3",
+        "visible_match_evidence": [
+          "Mustang GT RTR badging",
+          "specific front design",
+          "proportions consistent with the Mustang"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT RTR Spec 3 Coupe",
+        "visible_match_evidence": [
+          "bodywork design",
+          "shaping",
+          "badges"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT RTR Spec 3 Coupe",
+        "visible_match_evidence": [
+          "Mustang branding",
+          "RTR trim",
+          "2025 body design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT RTR Spec 3",
+        "visible_match_evidence": [
+          "rear view",
+          "spoiler",
+          "tail lights design",
+          "RTR branding"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT RTR Spec 3 Coupe",
+        "visible_match_evidence": [
+          "interior design",
+          "steering wheel badge",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT RTR Spec 3",
+        "visible_match_evidence": [
+          "interior design",
+          "sport seats",
+          "console layout"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ford",
+        "detected_model": "Mustang",
+        "detected_generation_or_year": "2025",
+        "detected_variant_or_engine": "GT RTR Spec 3",
+        "visible_match_evidence": [
+          "RTR badge",
+          "Spec 3 identifier"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "The image does not clearly show the target vehicle and focuses on the interior display.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Visibly wrong generation or a contradictory variant.",
+        "path": "interior-10.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
