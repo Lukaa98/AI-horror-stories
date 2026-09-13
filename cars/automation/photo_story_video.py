@@ -15,7 +15,7 @@ from moviepy.editor import ImageClip, CompositeVideoClip
 from generate_sample import _font
 # Row/height geometry is shared with the motion planner so the narrator can
 # aim at a tile the renderer actually drew -- see photo_story.py.
-from photo_story import MAIN_HEIGHT_RATIO, MIN_TILE_COLUMNS, collage_rows
+from photo_story import MAIN_HEIGHT_RATIO, MIN_TILE_COLUMNS, TILE_ASPECT, collage_rows
 
 GAP_RATIO = 0.018
 BACKGROUND = (255, 255, 255)
@@ -34,7 +34,17 @@ def _open(path, root):
         return None
     try:
         with Image.open(path) as source:
-            return ImageOps.exif_transpose(source).convert("RGB")
+            image = ImageOps.exif_transpose(source)
+            if image.mode in ("RGBA", "LA", "P"):
+                # Exterior shots come back from remove_background as RGBA, and
+                # a straight convert("RGB") paints every transparent pixel
+                # black -- which is why the main photo sat in a black box in
+                # runs #170/#171. Composite onto the frame's own white first.
+                image = image.convert("RGBA")
+                canvas = Image.new("RGBA", image.size, (*BACKGROUND, 255))
+                canvas.alpha_composite(image)
+                return canvas.convert("RGB")
+            return image.convert("RGB")
     except (OSError, ValueError):
         return None
 
@@ -47,17 +57,6 @@ def _paste_contained(frame, image, box):
         return
     fitted = ImageOps.contain(image, (w, h), Image.Resampling.LANCZOS)
     frame.paste(fitted, (x + (w - fitted.width) // 2, y + (h - fitted.height) // 2))
-
-
-def _paste_filled(frame, image, box):
-    """Fill box edge to edge, centre-cropping the overflow. Tiles are wide
-    and short, so containing a close-up in one leaves more grey margin than
-    photo -- and a close-up is already a crop of one centred feature, so
-    trimming its edges costs nothing the way it would on a whole car."""
-    x, y, w, h = box
-    if w < 2 or h < 2:
-        return
-    frame.paste(ImageOps.fit(image, (w, h), Image.Resampling.LANCZOS, centering=(0.5, 0.5)), (x, y))
 
 
 def _short_label(draw, label, font, width):
@@ -86,15 +85,17 @@ def collage_frame(hero_image, closeups, active, box_size, font):
     index, y = 0, main_h + gap
     for row in rows:
         columns = max(row, MIN_TILE_COLUMNS)
-        tile_w = (w - gap * (columns - 1)) // columns
-        # A row that doesn't fill its grid is centred rather than left-aligned.
+        # Never wider than an even split of the band, and never much wider
+        # than the photo it has to hold, so a contained close-up fills its
+        # cell instead of floating in white.
+        tile_w = min((w - gap * (columns - 1)) // columns, round(row_h * TILE_ASPECT))
         row_x = (w - (tile_w * row + gap * (row - 1))) // 2
         for column in range(row):
             if index >= len(closeups):
                 break
             image, label, _photo_id = closeups[index]
             x = row_x + column * (tile_w + gap)
-            _paste_filled(frame, image, (x, y, tile_w, row_h))
+            _paste_contained(frame, image, (x, y, tile_w, row_h))
             if active is not None and index == active:
                 if label:
                     # Caption band first, outline over it, so the highlight

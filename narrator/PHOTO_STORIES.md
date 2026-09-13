@@ -26,6 +26,13 @@ slideshow:
 | 3 | three side by side |
 | 4 | two rows of two |
 
+Close-ups are shown **whole** -- contained, never cropped. Cells are capped to roughly
+photo shape (`TILE_ASPECT`, listing photos are almost all 3:2) and the row is centred,
+so a tile is nearly filled by its photo instead of letterboxed across the full band.
+The stack occupies the top 58.5% of the frame rather than 50%: the character's head
+starts at 0.65, so the old split left a quarter of the frame bare white with one stat
+line floating in it. The extra height is what makes uncropped close-ups readable.
+
 When a scene is specifically about one close-up, that tile gets an outline and its
 name; otherwise nothing is highlighted. Nothing floats over the lower half of the
 frame any more, so the narrator has its full range of framings back.

@@ -33,11 +33,16 @@ MAX_CLOSEUPS = 4
 COLLAGE_ROWS = {0: [], 1: [1], 2: [2], 3: [3], 4: [2, 2]}
 # Share of the media box the main photo keeps. It stays the subject, so it
 # never drops below half even when sharing with four close-ups.
-MAIN_HEIGHT_RATIO = {0: 1.0, 1: 0.70, 2: 0.70, 3: 0.70, 4: 0.58}
+MAIN_HEIGHT_RATIO = {0: 1.0, 1: 0.68, 2: 0.66, 3: 0.66, 4: 0.52}
 # The media band is much wider than it is tall, so a tile row is a wide,
 # short strip. One close-up laid across the whole width would be a 5:1
 # letterbox, so a lone tile takes a half-width cell and sits centred.
 MIN_TILE_COLUMNS = 2
+# Close-ups are shown whole, never cropped, so a cell that is much wider than
+# a photo just adds white either side. Cells are capped to roughly photo
+# shape (listing photos are almost all 3:2) and the row is centred, which
+# keeps each tile nearly filled instead of letterboxed across the full band.
+TILE_ASPECT = 1.5
 
 
 def collage_rows(count):

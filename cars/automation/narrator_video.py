@@ -151,7 +151,13 @@ PROGRESS_BAR_COLOR = (255, 255, 255)
 # both were just absolutely positioned over the whole top region. Together
 # they're kept smaller than a near-half split so the narrator reads as the
 # focal point instead of the media dominating the frame.
-TOP_STACK_RATIO = 0.50
+# Raised from 0.50 after runs #170/#171: the headline/photo/caption stack
+# ended at 0.50 and the narrator's head starts at 0.65, which left a quarter
+# of the frame as bare white with a single stat line floating in it. Pushing
+# the stack down to 0.585 gives the photo band ~26% more height -- which is
+# what lets a close-up be shown whole instead of cropped -- and still leaves
+# room for the stat line above the character.
+TOP_STACK_RATIO = 0.585
 HEADLINE_ZONE_RATIO = 0.095
 CAPTION_ZONE_RATIO = 0.075
 NARRATOR_X_OFFSET_RATIO = 0.14
@@ -1405,7 +1411,11 @@ def render_narrator_video(car_media_paths, manifest, output_path):
                      if scene.get(label) and scene.get(value) is not None]
             if stats:
                 path = output_path.parent / "_frames" / f"photo-stat-{index}.png"
-                _caption_frame(size, " · ".join(stats), int(size[1] * .522), path, font_size=32)
+                # Centred in whatever gap is actually left between the
+                # caption and the character, rather than a fixed 0.522 that
+                # silently stops being right when the stack moves.
+                stat_y = int((size[1] * TOP_STACK_RATIO + narrator_top_y) / 2)
+                _caption_frame(size, " · ".join(stats), stat_y, path, font_size=32)
                 stat_tracker_clips.append(ImageClip(str(path)).set_start(start).set_duration(end-start))
     else:
         stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y, size[1] * TOP_STACK_RATIO)
