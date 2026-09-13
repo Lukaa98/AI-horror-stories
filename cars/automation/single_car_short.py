@@ -237,11 +237,12 @@ already about their main photo, in a clause or a short sentence. Never build a w
 force a mention of one you have nothing real to say about, and never let a close-up push out a
 history/mechanical/comparison beat.
 
-Each hint above begins with its exact label followed by " photo:" -- for whichever scene you write about a
-MAIN PHOTO, copy that exact label text (everything between the "-- " marker and " photo:") into that scene's
-photo_label field, verbatim, character for character, so the real picture can be matched back to it instead
-of a generic same-type photo. If a scene does spend a clause on one specific CLOSE-UP, copy that close-up's
-entire bracketed ID and label into photo_label instead, and the on-screen tile for it will be highlighted
+Every hint above contains `photo_label: "..."`. For whichever scene you write about that photo, copy the
+text INSIDE THE QUOTES into that scene's photo_label field -- verbatim, character for character, the whole
+thing and nothing else. Do not include the MAIN PHOTO / CLOSE-UP prefix, do not include the word "photo",
+do not re-word it, do not drop the bracketed ID from a close-up's label. This is a literal string copy, and
+an inexact one means the real picture cannot be matched back to that scene. If a scene spends a clause on
+one specific CLOSE-UP, use that close-up's quoted photo_label and its on-screen tile will be highlighted
 while that scene runs. Set photo_label to null on every other scene, including the ordinary
 hook/history/mechanical/comparison beats. These beats count toward the word target and beat variety like any
 other -- they don't replace the history/mechanical/comparison beats below, they're additional specific
@@ -581,7 +582,12 @@ def gather_photo_script_hints(manual_photo_urls, extra_photos, images_dir, car_l
             continue
         description = _describe_photo_for_script(path, category.replace("_", " "), car_label)
         if description:
-            hints.append(f"MAIN PHOTO -- {category.replace('_', ' ')} photo: {description}")
+            # The photo_label the model has to echo is quoted inline rather
+            # than described positionally ("everything before ' photo:'"),
+            # which runs #170/#171 each parsed differently and neither got
+            # right -- one kept the "MAIN PHOTO" prefix, the other kept the
+            # trailing " photo".
+            hints.append(f'MAIN PHOTO -- photo_label: "{category.replace("_", " ")}" -- {description}')
     for index, item in enumerate(extra_photos or []):
         if not isinstance(item, dict):
             continue
@@ -602,7 +608,7 @@ def gather_photo_script_hints(manual_photo_urls, extra_photos, images_dir, car_l
                 prefix = f"CLOSE-UP (nested under the {SLOT_LABELS[metadata['slot']]} main photo)"
                 if metadata.get("note"):
                     context = f" User topic suggestion (verify independently): {metadata['note']}"
-            hints.append(f"{prefix} -- {cue_label} photo: {description}{context}")
+            hints.append(f'{prefix} -- photo_label: "{cue_label}" -- {description}{context}')
     return hints
 
 

@@ -16,6 +16,9 @@ export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseu
     <p className="photo-slots-intro">
       One main photo per slot — that’s what the narration talks about. Nested close-ups appear
       underneath it on screen for that whole chapter and get a passing mention at most.
+      <strong> Name every close-up</strong> (“Brembo calipers”, “carbon splitter”, “quad tips”):
+      the name is what the script can talk about and what’s printed on the tile when it’s
+      highlighted. Unnamed ones fall back to “Front close-up”, which says nothing.
     </p>
     {SLOTS.map(([slot, title]) => {
       const nested = closeupsFor(closeups, slot);
@@ -32,6 +35,11 @@ export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseu
         </label>
         {!!nested.length && !hasMain &&
           <p className="photo-slot-warning">Add a main {title.toLowerCase()} photo — close-ups are shown underneath one, never on their own.</p>}
+        {!!nested.filter(p => p.url.trim() && !p.label.trim()).length &&
+          <p className="photo-slot-warning">
+            {nested.filter(p => p.url.trim() && !p.label.trim()).length} close-up(s) here have no name —
+            the script has nothing to say about them and the tile caption will read “{title} close-up”.
+          </p>}
         {nested.map((photo, index) => <div key={photo.id} className="photo-closeup">
           <span className="photo-closeup-index">{index + 1}</span>
           <input
@@ -48,6 +56,7 @@ export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseu
             placeholder="Name (e.g. exhaust tip)"
             maxLength={120}
             disabled={disabled}
+            aria-invalid={!!photo.url.trim() && !photo.label.trim()}
           />
           <button type="button" onClick={() => remove(photo.id)} disabled={disabled}
                   aria-label={`Remove ${title} close-up ${index + 1}`}>×</button>

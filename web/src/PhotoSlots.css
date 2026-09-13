@@ -10,6 +10,7 @@
 .photo-closeup-url { flex: 2 1 0; min-width: 0; }
 .photo-closeup-label { flex: 1 1 0; min-width: 0; }
 .photo-closeup button { flex: 0 0 auto; line-height: 1; padding: 4px 9px; }
+.photo-closeup input[aria-invalid="true"] { border-color: #b3541e; }
 .photo-slot-actions { display: flex; align-items: center; gap: 10px; margin: 10px 0 0 94px; }
 .photo-slot-count { font-size: 12px; opacity: .6; }
 @media (max-width: 620px) {

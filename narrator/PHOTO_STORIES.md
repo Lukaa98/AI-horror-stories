@@ -73,6 +73,20 @@ are explicitly *not* subjects: touch them in a clause where there is something r
 say (a spoiler, carbon trim, an exhaust tip, a headlight), never build a scene around
 one, never force a mention, and never let one push out a history/mechanical beat.
 
+## Naming close-ups
+
+Name every close-up. The name is the only thing research can talk about, and it is what
+is printed on the tile while it is highlighted. An unnamed close-up falls back to
+"Front close-up" / "Side close-up", which says nothing to the script and reads as a
+placeholder on screen -- that is what happened throughout run #171. The editor warns
+when a close-up has a URL and no name.
+
+Each photo hint handed to research now quotes the exact string to echo back:
+`photo_label: "[front-abc-1] Brembo calipers"`. Runs #170 and #171 each parsed the old
+positional instruction ("everything before ' photo:'") differently and neither got it
+right -- one kept the MAIN PHOTO prefix, the other kept the trailing " photo" -- and an
+inexact photo_label is what stops a tile ever being highlighted.
+
 ## Contract
 
 The `extra_photos` workflow input is still a JSON array. Old `{label, url}` entries are
@@ -88,7 +102,8 @@ video into the collage layout. No close-ups anywhere means `photo_sections` is e
 and the original one-photo-per-scene layout runs untouched.
 
 The collector gives every close-up a unique bracketed cue id before research, so a
-scene can point at one exact photo instead of "some interior shot". Only an exact
+scene can point at one exact photo instead of "some interior shot"; the id is quoted
+verbatim in that photo's hint for the model to copy. Only an exact
 `scene.photo_label` match highlights a tile. Adjacent scenes inside one chapter with
 the same highlight render as one continuous picture, so the main photo does not
 restart mid-sentence. A dead close-up link drops that tile and the chapter still

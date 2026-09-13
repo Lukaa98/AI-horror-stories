@@ -165,5 +165,5 @@ def test_download_and_hints_use_identical_photo_identity(tmp_path, monkeypatch):
     media = gather_extra_media(items, images_dir, {})
     hints = gather_photo_script_hints({}, items, images_dir, "Lotus")
     assert media[0]["type"] == "detail", "a nested close-up is never an overview"
-    assert media[0]["cue_label"] + " photo:" in hints[0]
+    assert f'photo_label: "{media[0]["cue_label"]}"' in hints[0]
     assert hints[0].startswith("CLOSE-UP (nested under the Interior main photo)")

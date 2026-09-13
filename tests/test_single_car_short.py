@@ -909,9 +909,11 @@ def test_gather_photo_script_hints_describes_fixed_and_extra_photos(tmp_path, mo
     # Main-slot photos and ungrouped extras are tagged so the prompt can hold
     # them to different standards -- a main photo must carry a scene, an extra
     # need not.
+    # The exact photo_label the model has to echo is quoted inline, so
+    # copying it is a literal string copy rather than a parse of the line.
     assert hints == [
-        "MAIN PHOTO -- interior photo: a described detail for interior on the 1993 Toyota Supra Turbo",
-        "EXTRA PHOTO -- Gauge Cluster photo: a described detail for Gauge Cluster on the 1993 Toyota Supra Turbo",
+        'MAIN PHOTO -- photo_label: "interior" -- a described detail for interior on the 1993 Toyota Supra Turbo',
+        'EXTRA PHOTO -- photo_label: "Gauge Cluster" -- a described detail for Gauge Cluster on the 1993 Toyota Supra Turbo',
     ]
 
 
@@ -943,6 +945,7 @@ def test_research_script_prompt_folds_in_photo_hints():
     assert "Gauge Cluster photo: a distinctive analog cluster." in prompt
     assert "Lines marked MAIN PHOTO are the subjects of this video" in prompt
     assert "Lines marked CLOSE-UP are different" in prompt
+    assert "copy the\ntext INSIDE THE QUOTES" in prompt
 
 
 def test_scene_cap_for_photo_hints_grows_with_more_pasted_photos():
