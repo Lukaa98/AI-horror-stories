@@ -1,57 +1,77 @@
-# Grouped photo stories (v10)
+# Photos: one main shot per slot, close-ups nested under it (v11.18)
 
-In the single-car editor, enable **Override photos**. Expand **Exterior**, **Interior**,
-or **Engine bay**. Add a **Main photo**, then named **Close-ups** or **Angles**.
-A specific listing is optional. The legacy single-photo overrides remain available.
+In the single-car editor, enable **Override photos**. You get the five slots the
+pipeline has always had — **Front, Side, Rear, Engine bay, Interior** — each with one
+**main photo** URL and, nested under it, up to **four close-ups**, each just a URL and
+an optional name.
 
-For the first Lotus test, use one exterior overview plus diffuser, light, intake,
-and wheel details; then one cabin overview plus gauges, console, and steering-wheel
-details. Run the single-car pipeline on **v10**. A rerun of an old request preserves
-its old inputs; create a grouped request to exercise the new layout.
+That replaces v11.17's Exterior/Interior/Engine groups with their hero/angle/detail
+roles, which asked the user to reason about the layout before they could paste a link.
+
+Example for the Lotus test: Front main photo plus two close-ups (headlight, front
+splitter); Rear main photo plus two (exhaust, diffuser); Interior main photo plus two
+or three (gauges, shift knob, seat stitching).
+
+## What reaches the video
+
+A slot's main photo sits across the top of the media band. Its close-ups are tiled
+underneath and stay on screen for that whole chapter — they are context, not a
+slideshow:
+
+| Close-ups | Layout under the main photo |
+|---|---|
+| 0 | main photo alone, full band (unchanged from an ordinary build) |
+| 1 | one half-width tile, centred |
+| 2 | two side by side |
+| 3 | three side by side |
+| 4 | two rows of two |
+
+When a scene is specifically about one close-up, that tile gets an outline and its
+name; otherwise nothing is highlighted. Nothing floats over the lower half of the
+frame any more, so the narrator has its full range of framings back and the
+comparison drag-race overlay is no longer suppressed.
+
+## Narration
+
+Unchanged and already where it should be: `TARGET_WORD_CENTER = 175` words against
+`TARGET_DURATION_SECONDS = 58`. What changed is what research is told to do with the
+photos. Main photos are the subjects — each one must carry its own scene. Close-ups
+are explicitly *not* subjects: touch them in a clause where there is something real to
+say (a spoiler, carbon trim, an exhaust tip, a headlight), never build a scene around
+one, never force a mention, and never let one push out a history/mechanical beat.
 
 ## Contract
 
-The existing `extra_photos` workflow input remains a JSON array. Old `{label,url}`
-entries work unchanged. New entries optionally include `id`, `section` (exterior,
-interior, engine), `role` (hero, angle, detail), and `note`. Reordering is array order.
-Notes are research suggestions, not verified claims.
+The `extra_photos` workflow input is still a JSON array. Old `{label, url}` entries are
+still ungrouped extras. A nested close-up adds `slot` (`front`, `side`, `rear`,
+`engine`, `interior`) and an optional `note`; `role` is gone, because a close-up is
+always a detail and a slot's main photo always comes from that slot's own URL field.
+v11.17 entries carrying `section` are mapped onto the nearest slot rather than
+rejected (`exterior` → `front`, since it cannot say which exterior slot it meant).
 
-The collector assigns unique cue labels before research. Exact `scene.photo_label`
-matches select details; type-only matching never chooses an unrelated grouped detail
-when another overview exists. The manifest retains the full `photo_sections` pool,
-including photos not selected as the per-scene media. Images retain their backgrounds.
+Grouping is opt-in via the close-ups, not the main photos: every ordinary build
+already has front/side/rear/engine/interior media, so keying off those would put every
+video into the collage layout. No close-ups anywhere means `photo_sections` is empty
+and the original one-photo-per-scene layout runs untouched.
 
-The renderer and narrator share actual narration scene boundaries. An overview stays
-above captions while the active detail fades/slides into a lower card. Up to four
-context thumbnails appear below it, with an outline on the active image. Additional
-details page the thumbnail rail. Adjacent identical overviews are merged, so a detail
-change does not restart the main image. Alternate overview angles can replace the main
-image for their own scene.
+The collector gives every close-up a unique bracketed cue id before research, so a
+scene can point at one exact photo instead of "some interior shot". Only an exact
+`scene.photo_label` match highlights a tile. Adjacent scenes inside one chapter with
+the same highlight render as one continuous picture, so the main photo does not
+restart mid-sentence. A dead close-up link drops that tile and the chapter still
+renders; if every photo in a chapter fails, the build falls back to the ordinary
+per-scene media track.
 
-The character stays on one side within a chapter. Chapter changes can switch sides
-with the existing eased camera (minimum 3.6 seconds between switches). Cards wait
-one second on chapter changes, then gaze leads a single open-hand presentation.
-This is a presentation gesture, not exact fingertip pointing. Face, blink, compact
-mouth frames, and continuous wrist motion remain independently animated.
+Inspect `manifest.json` → `photo_presentation` (version 2) for cue times, per-chapter
+slot, tile ids and which tile was active.
 
-Grouped mode uses current-scene stats in a compact strip, not the cumulative table.
-The old lower-half drag-race overlay is omitted to protect the detail card; comparison
-photos, narration, and stats remain. Ungrouped requests keep the original layout.
-Missing details are skipped. Without a usable hero/angle, a section falls back to the
-ordinary selected photo instead of pinning a nonexistent overview.
-
-## Validation and diagnostics
+## Validation
 
 - `python -m pytest -q tests/test_photo_story.py tests/test_narrator_motion.py tests/test_narrator_video.py tests/test_single_car_short.py`
+- From `web`: `node --test src/photoSections.test.js`, `npm run build`, `npm run lint`
 - `PUPPETEER_EXECUTABLE_PATH=/path/to/chrome node narrator/render/test-v21.js`
-- From `web`: `node --test src/photoSections.test.js`, `npm run build`, `npm run lint`.
 
-Actions runs the photo-story Python checks and the extended browser rig checks before
-single-car rendering. Inspect `manifest.json` → `photo_presentation` for cue times,
-selected detail IDs and rectangles; `_frames/narrator/narrator-motion.json` has the same
-photo cues plus camera, gaze, gesture, and mouth tracks.
-
-Local checks: production UI build and Python regression suite passed; static Lotus
-compositions inspected. Live browser checks could not run in the local workspace
-because Chrome's socket creation was denied. Actions is the required full-motion
-verification before judging the final video.
+Local status for this change: the full Python suite (145 tests), the UI serializer
+tests, the production build and lint all pass, and the four collage layouts were
+rendered and inspected at the real media-box size (1047×614). A full-motion video has
+not been rendered locally — Actions remains the verification before judging the result.

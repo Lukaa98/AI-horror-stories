@@ -1,15 +1,42 @@
-"""Persistent hero and focused detail cards for opt-in photo stories."""
+"""Main photo on top, its close-ups tiled underneath, inside the media box.
+
+v11.17 floated the active close-up in a card over the lower half of the
+frame with a paging thumbnail rail beside it, which fought the narrator for
+space and meant the supporting photos were only ever visible one at a time.
+This builds the whole chapter as one picture instead: the main photo across
+the top, every close-up for that slot laid out below it, and a highlight
+that moves between tiles as the narration reaches them. Nothing floats over
+the narrator, so the lower half of the frame is free again.
+"""
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageOps
 from moviepy.editor import ImageClip, CompositeVideoClip
 from generate_sample import _font
 
+# Approved layout: one row under the main photo for one to three close-ups,
+# two rows of two for four. Four in a single row leaves tiles too small to
+# read at phone size, and 3+1 leaves an obvious hole.
+COLLAGE_ROWS = {0: [], 1: [1], 2: [2], 3: [3], 4: [2, 2]}
+# Share of the media box the main photo keeps. It stays the subject, so it
+# never drops below half even when it is sharing with four close-ups.
+MAIN_HEIGHT_RATIO = {0: 1.0, 1: 0.70, 2: 0.70, 3: 0.70, 4: 0.58}
+# The media band is much wider than it is tall, so a tile row is a wide, short
+# strip. One close-up laid across the whole width would be a 5:1 letterbox, so
+# a lone tile takes a half-width cell and sits centred instead.
+MIN_TILE_COLUMNS = 2
+GAP_RATIO = 0.018
+BACKGROUND = (255, 255, 255)
+ACTIVE_OUTLINE = (225, 157, 20)
+ACTIVE_OUTLINE_WIDTH = 4
+# Dark band under the highlighted tile's name: a white one reads as frame
+# background rather than as part of the photo.
+LABEL_BACKGROUND = (24, 26, 30)
+LABEL_COLOR = (255, 255, 255)
 
-def detail_box(size, side):
-    w, h = size
-    return (round(w * (.025 if side == "right" else .515)), round(h * .55),
-            round(w * .46), round(h * .30))
+
+def collage_rows(count):
+    return COLLAGE_ROWS.get(max(0, min(count, 4)), [])
 
 
 def _open(path, root):
@@ -24,8 +51,25 @@ def _open(path, root):
         return None
 
 
-def _fit(image, box):
-    return ImageOps.contain(image, box, Image.Resampling.LANCZOS)
+def _paste_contained(frame, image, box):
+    """Fit the whole photo inside box. Used for the main photo, where
+    cropping could cut the nose or tail off the car."""
+    x, y, w, h = box
+    if w < 2 or h < 2:
+        return
+    fitted = ImageOps.contain(image, (w, h), Image.Resampling.LANCZOS)
+    frame.paste(fitted, (x + (w - fitted.width) // 2, y + (h - fitted.height) // 2))
+
+
+def _paste_filled(frame, image, box):
+    """Fill box edge to edge, centre-cropping the overflow. Tiles are wide
+    and short, so containing a close-up in one leaves more grey margin than
+    photo -- and a close-up is already a crop of one centred feature, so
+    trimming its edges costs nothing the way it would on a whole car."""
+    x, y, w, h = box
+    if w < 2 or h < 2:
+        return
+    frame.paste(ImageOps.fit(image, (w, h), Image.Resampling.LANCZOS, centering=(0.5, 0.5)), (x, y))
 
 
 def _short_label(draw, label, font, width):
@@ -37,85 +81,103 @@ def _short_label(draw, label, font, width):
     return label + "…"
 
 
-def detail_frame(cue, root, size):
-    """Contain (not crop) the focal feature, with up to four context thumbs."""
-    _, _, w, h = detail_box(size, cue["side"])
-    frame = Image.new("RGB", (w, h), (246, 246, 244))
+def collage_frame(hero_image, closeups, active, box_size, font):
+    """One rendered chapter picture. `closeups` are (image, label, photo_id)."""
+    w, h = box_size
+    frame = Image.new("RGB", (w, h), BACKGROUND)
     draw = ImageDraw.Draw(frame)
-    font = _font(max(14, round(size[0] * .023)))
-    pad = max(6, round(w * .035))
-    header_h, footer_h = round(h * .13), round(h * .24)
-    label = cue["detail"].get("label") or "Detail"
-    draw.text((pad, pad), _short_label(draw, f"{cue['section'].title()} · {label}", font, w - 2 * pad), font=font, fill=(28, 30, 34))
-    raw = _open(cue["detail"]["path"], root)
-    if raw is None:
-        return None
-    photo = _fit(raw, (w - 2 * pad, h - header_h - footer_h))
-    frame.paste(photo, ((w - photo.width) // 2, header_h + (h - header_h - footer_h - photo.height) // 2))
-    thumbs = cue.get("thumbnails") or [cue["detail"]]
-    active = next((i for i, p in enumerate(thumbs) if p.get("photo_id") == cue["detail"].get("photo_id")), 0)
-    page = (active // 4) * 4
-    visible = thumbs[page:page + 4]
-    thumb_w = (w - 5 * pad) // 4
-    thumb_h = max(1, footer_h - 2 * pad)
-    for i, thumb in enumerate(visible):
-        raw_thumb = _open(thumb["path"], root)
-        if raw_thumb is None:
-            continue
-        image = _fit(raw_thumb, (thumb_w, thumb_h))
-        x, y = pad + i * (thumb_w + pad), h - footer_h + pad
-        frame.paste(image, (x + (thumb_w - image.width) // 2, y + (thumb_h - image.height) // 2))
-        if page + i == active:
-            draw.rectangle((x - 2, y - 2, x + thumb_w + 2, y + thumb_h + 2), outline=(225, 157, 20), width=3)
+    rows = collage_rows(len(closeups))
+    gap = max(4, round(min(w, h) * GAP_RATIO))
+    main_h = round(h * MAIN_HEIGHT_RATIO.get(len(closeups), 1.0)) if rows else h
+    _paste_contained(frame, hero_image, (0, 0, w, main_h))
+
+    # Rows share whatever is left after the main photo and the gaps between
+    # every row, so two rows of two fill the box exactly like one row does.
+    remaining = h - main_h - gap * len(rows)
+    row_h = remaining // len(rows) if rows else 0
+    index, y = 0, main_h + gap
+    for row in rows:
+        columns = max(row, MIN_TILE_COLUMNS)
+        tile_w = (w - gap * (columns - 1)) // columns
+        # A row that doesn't fill its grid is centred rather than left-aligned.
+        row_x = (w - (tile_w * row + gap * (row - 1))) // 2
+        for column in range(row):
+            if index >= len(closeups):
+                break
+            image, label, _photo_id = closeups[index]
+            x = row_x + column * (tile_w + gap)
+            _paste_filled(frame, image, (x, y, tile_w, row_h))
+            if active is not None and index == active:
+                if label:
+                    # Caption band first, outline over it, so the highlight
+                    # stays a complete rectangle around the whole tile.
+                    pad = max(3, gap // 2)
+                    text = _short_label(draw, label, font, tile_w - 2 * pad)
+                    text_h = round(getattr(font, "size", 14) * 1.6)
+                    draw.rectangle((x, y + row_h - text_h, x + tile_w - 1, y + row_h - 1),
+                                   fill=LABEL_BACKGROUND)
+                    draw.text((x + pad, y + row_h - text_h + (text_h - getattr(font, "size", 14)) // 2),
+                              text, font=font, fill=LABEL_COLOR)
+                draw.rectangle(
+                    (x, y, x + tile_w - 1, y + row_h - 1),
+                    outline=ACTIVE_OUTLINE, width=ACTIVE_OUTLINE_WIDTH)
+            index += 1
+        y += row_h + gap
     return frame
 
 
 def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, output_dir):
-    """Merge identical adjacent heroes, crossfade changes; never restart per detail."""
+    """One clip per distinct chapter picture, crossfaded where it changes.
+
+    Returns (media_clip, [], diagnostics). The empty list is what used to be
+    the floating detail cards -- the collage absorbed them, and keeping the
+    shape means narrator_video.py's composite is unchanged.
+    """
     root, output_dir = Path(root), Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     _, _, box_w, box_h = map(int, media_box)
-    groups, details, diagnostics = [], [], []
+    font = _font(max(13, round(size[0] * 0.019)))
+
+    groups, diagnostics = [], []
     for index, cue in enumerate(cues):
         path = cue.get("hero")
-        raw = _open(path, root) if path else None
-        if raw is None and index < len(fallback_paths):
+        hero = _open(path, root) if path else None
+        if hero is None and index < len(fallback_paths):
             path = str(Path(fallback_paths[index]).resolve())
-            raw = _open(path, root)
-        if raw is not None:
-            if groups and groups[-1]["path"] == path:
-                groups[-1]["end"] = cue["end"]
-            else:
-                groups.append({"path": path, "image": raw, "start": cue["start"], "end": cue["end"]})
-        if not cue.get("detail"):
+            hero = _open(path, root)
+        if hero is None:
             continue
-        start, end = cue["detail_start"], cue["end"]
-        if end - start < .8:
+        closeups = []
+        for closeup in cue.get("closeups") or []:
+            image = _open(closeup.get("path"), root) if closeup.get("path") else None
+            if image is not None:
+                closeups.append((image, closeup.get("label") or "", closeup.get("photo_id")))
+        active = next((i for i, (_, _, pid) in enumerate(closeups)
+                       if pid and pid == cue.get("active")), None)
+        key = (path, tuple(pid for _, _, pid in closeups), active)
+        # Adjacent scenes inside the same chapter with the same highlight are
+        # one continuous picture -- re-rendering them would restart the main
+        # photo's fade partway through a sentence.
+        if groups and groups[-1]["key"] == key:
+            groups[-1]["end"] = cue["end"]
             continue
-        frame = detail_frame(cue, root, size)
-        if frame is None:
-            continue
-        dest = output_dir / f"detail-{index}.png"
-        frame.save(dest)
-        x, y, w, h = detail_box(size, cue["side"])
-        # Ease a small vertical slide and opacity together; chapter side switches
-        # finish before a new card appears. Both shoulders remain unobstructed.
-        clip = ImageClip(str(dest)).set_duration(end - start).set_position(
-            lambda t, x=x, y=y: (x, y + 14 * max(0, 1 - t / .4) ** 3))
-        clip = clip.crossfadein(.25).crossfadeout(min(.2, (end - start) / 4)).set_start(start)
-        details.append(clip)
-        diagnostics.append({"scene": index, "start": start, "end": end,
-                            "photo_id": cue["detail"]["photo_id"], "box": [x, y, w, h]})
-    hero_clips = []
+        groups.append({"key": key, "start": cue["start"], "end": cue["end"],
+                       "hero": hero, "closeups": closeups, "active": active})
+        diagnostics.append({"scene": index, "start": cue["start"], "slot": cue.get("slot"),
+                            "closeups": [pid for _, _, pid in closeups],
+                            "active": closeups[active][2] if active is not None else None})
+    if not groups:
+        return None, [], []
+
+    clips = []
     for index, group in enumerate(groups):
-        canvas = Image.new("RGB", (box_w, box_h), "white")
-        photo = _fit(group["image"], (box_w, box_h))
-        canvas.paste(photo, ((box_w - photo.width) // 2, (box_h - photo.height) // 2))
-        path = output_dir / f"hero-{index}.png"
-        canvas.save(path)
-        clip = ImageClip(str(path)).set_duration(min(duration, group["end"] + .25) - group["start"])
+        frame = collage_frame(group["hero"], group["closeups"], group["active"], (box_w, box_h), font)
+        path = output_dir / f"chapter-{index}.png"
+        frame.save(path)
+        end = min(duration, group["end"] + 0.25) if index < len(groups) - 1 else duration
+        clip = ImageClip(str(path)).set_duration(max(0.1, end - group["start"]))
         if index:
-            clip = clip.crossfadein(.25)
-        hero_clips.append(clip.set_start(group["start"]))
-    hero = CompositeVideoClip(hero_clips, size=(box_w, box_h), bg_color=(255, 255, 255)).set_duration(duration)
-    return hero, details, diagnostics
+            clip = clip.crossfadein(0.25)
+        clips.append(clip.set_start(group["start"]))
+    media = CompositeVideoClip(clips, size=(box_w, box_h), bg_color=BACKGROUND).set_duration(duration)
+    return media, [], diagnostics

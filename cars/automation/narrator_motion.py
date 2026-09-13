@@ -77,30 +77,11 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
         gestures.append({"start": round(min(t + 1.45, duration - 0.2), 6), "pose": "rest"})
         t += 3.4
         index += 1
-    if photo_cues:
-        # All three visual tracks consume these same cues. No independent
-        # random camera cycle can put the character on top of a detail card.
-        shots, expressions, gestures = [], [], []
-        for cue in photo_cues:
-            start, end = cue["start"], cue["end"]
-            layout = "bottom-" + cue["side"]
-            if not shots or shots[-1]["layout"] != layout:
-                shots.append({"start": start, "layout": layout, "framing": "half"})
-            gestures.append({"start": start, "pose": "rest"})
-            detail = cue.get("detail")
-            look_start = cue.get("detail_start", start + .2)
-            if detail and end - look_start > .8:
-                x = 138 if cue["side"] == "right" else 402
-                expressions.append({"start": look_start, "end": min(end - .2, look_start + 2.8),
-                                    "look_at": [x, 640], "brows": True})
-                # Eyes lead the hand; the wrist remains gently bent.
-                gestures.append({"start": look_start + .25,
-                                 "pose": "presentLeft" if cue["side"] == "right" else "presentRight"})
-                gestures.append({"start": min(end - .15, look_start + 2.5), "pose": "rest"})
-            elif end - start > 2:
-                expressions.append({"start": start + .2, "end": min(end, start + 1.5), "look_at": [270, 245], "brows": False})
-                gestures.extend([{"start": start + 1.1, "pose": "leftTalk" if cue["side"] == "right" else "rightTalk"},
-                                 {"start": min(end - .15, start + 2.5), "pose": "rest"}])
+    # No photo-cue override of the framing any more: the close-ups live
+    # inside the media box with the main photo (see photo_story_video.py)
+    # instead of floating in a card over the lower half, so there is nothing
+    # down there for the character to avoid or point at. Photo-story builds
+    # get the same varied shots and gestures as every other build.
     mouths = []
     valid_mouths = {"closed", "small", "mbp", "ee", "ah", "oh", "fv", "wide", "teeth", "smile"}
     for entry in manifest.get("mouth_timeline") or []:

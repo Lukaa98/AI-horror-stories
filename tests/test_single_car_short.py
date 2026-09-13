@@ -906,9 +906,12 @@ def test_gather_photo_script_hints_describes_fixed_and_extra_photos(tmp_path, mo
         images_dir, "1993 Toyota Supra Turbo",
     )
 
+    # Main-slot photos and ungrouped extras are tagged so the prompt can hold
+    # them to different standards -- a main photo must carry a scene, an extra
+    # need not.
     assert hints == [
-        "interior photo: a described detail for interior on the 1993 Toyota Supra Turbo",
-        "Gauge Cluster photo: a described detail for Gauge Cluster on the 1993 Toyota Supra Turbo",
+        "MAIN PHOTO -- interior photo: a described detail for interior on the 1993 Toyota Supra Turbo",
+        "EXTRA PHOTO -- Gauge Cluster photo: a described detail for Gauge Cluster on the 1993 Toyota Supra Turbo",
     ]
 
 
@@ -938,7 +941,8 @@ def test_research_script_prompt_folds_in_photo_hints():
         "1993 Toyota Supra Turbo", "model year 1993", photo_hints=["Gauge Cluster photo: a distinctive analog cluster."],
     )
     assert "Gauge Cluster photo: a distinctive analog cluster." in prompt
-    assert "You MUST write one scene's narration specifically about each one" in prompt
+    assert "Lines marked MAIN PHOTO are the subjects of this video" in prompt
+    assert "Lines marked CLOSE-UP are different" in prompt
 
 
 def test_scene_cap_for_photo_hints_grows_with_more_pasted_photos():

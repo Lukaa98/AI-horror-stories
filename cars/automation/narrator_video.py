@@ -1373,13 +1373,18 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     else:
         raise ValueError("NARRATOR_RENDERER must be v21 or sprites")
     detail_clips = []
+    car_clip = None
     if photo_cues:
         car_clip, detail_clips, detail_diagnostics = build_photo_tracks(
             photo_cues, car_media_paths, output_path.parent, media_box, size, duration,
             output_path.parent / "_frames" / "photo-story")
-        manifest["photo_presentation"] = {"version": 1, "cues": photo_cues,
-            "details": detail_diagnostics, "layout": "hero-plus-focused-detail"}
-    else:
+        if car_clip is not None:
+            manifest["photo_presentation"] = {"version": 2, "cues": photo_cues,
+                "chapters": detail_diagnostics, "layout": "main-photo-over-closeup-tiles"}
+    if car_clip is None:
+        # Every chapter picture failed to build (all the photos were dead
+        # links), so fall back to the ordinary one-photo-per-scene track
+        # rather than shipping an empty media box.
         car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration, scene_boundaries)
     car_positioned = car_clip.set_position((media_x, media_y))
     # A pop the instant each new car photo slides in, timed to the same
@@ -1445,10 +1450,6 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         main_hp = scene.get("main_horsepower")
         rival_hp = scene.get("rival_horsepower")
         if main_hp is None or rival_hp is None:
-            continue
-        if photo_cues:
-            # The old lower-half race overlay conflicts with the detail rail.
-            # Keep the comparison photo/narration/stats, omit only that overlay.
             continue
         if index >= len(car_media_paths) or index >= len(scene_boundaries):
             continue

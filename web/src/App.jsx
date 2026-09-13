@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import PhotoSections from "./PhotoSections";
+import PhotoSlots from "./PhotoSlots";
 import { serializePhotos } from "./photoSections";
 import jobsData from "./jobs-data.json";
 
@@ -8,7 +8,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.17 — Photo stories";
+const UI_VERSION = "V11.18 — Nested close-ups";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -2305,31 +2305,13 @@ export default function App() {
                     )}
 
                     {useManualPhotos && (
-                      <>
-                        <details><summary>Legacy single-photo overrides (optional)</summary>
-                        <div className="photo-url-grid">
-                          {[
-                            ["front", "Front"],
-                            ["side", "Side"],
-                            ["rear", "Rear"],
-                            ["engine", "Engine bay"],
-                            ["interior", "Interior"],
-                          ].map(([key, label]) => (
-                            <label key={key} className="field-row">
-                              <span className="field-row-label">{label}</span>
-                              <input
-                                value={photoUrls[key]}
-                                onChange={(e) => setPhotoUrls({ ...photoUrls, [key]: e.target.value })}
-                                placeholder="Image URL"
-                                disabled={stage === "single-car-building"}
-                              />
-                            </label>
-                          ))}
-                        </div>
-
-                        </details>
-                        <PhotoSections photos={extraPhotos} onChange={setExtraPhotos} disabled={stage === "single-car-building"} />
-                      </>
+                      <PhotoSlots
+                        photoUrls={photoUrls}
+                        onUrlsChange={setPhotoUrls}
+                        closeups={extraPhotos}
+                        onCloseupsChange={setExtraPhotos}
+                        disabled={stage === "single-car-building"}
+                      />
                     )}
                   </div>
 

@@ -31,7 +31,7 @@ from narrator_script import _extract_wav, build_mouth_timeline, synthesize_narra
 from narrator_video import render_narrator_video
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
-from photo_story import SECTIONS, photo_metadata, collect_photo_sections
+from photo_story import SLOTS, SLOT_LABELS, photo_metadata, collect_photo_sections
 
 load_dotenv(ROOT / ".env")
 SCRAPER_DIR = ROOT / "scraper" / "car-source-scraper"
@@ -223,26 +223,37 @@ def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=No
 HARD REQUIREMENT, same as the word count above: the user has specifically pasted these photos for this
 video, each with a genuine, concrete detail already identified from the image itself:
 {bullet_list}
-You MUST write one scene's narration specifically about each one -- in your own words, describing/reacting
-to that exact detail (not just reusing the sentence verbatim), so the script actually talks about what's on
-screen instead of narrating something unrelated over it. Use that scene's headline and media_type to match
-(e.g. an interior/gauge detail gets media_type "interior" or "detail" as appropriate). Each hint above begins
-with its exact label followed by " photo:" -- for whichever scene you write about that photo, copy that exact
-label text (everything before " photo:") into that scene's photo_label field, verbatim, character for
-character, so the real picture can be matched back to it instead of a generic same-type photo. Set
-photo_label to null on every other scene, including the ordinary hook/history/mechanical/comparison beats
-that aren't specifically about one of these pasted photos. These beats count toward the word target and beat
-variety like any other -- they don't replace the history/mechanical/comparison beats below, they're
-additional specific material that must be folded in alongside them. Do not substitute a different, unrelated
-"detail" beat of your own invention for one of these -- every photo listed above needs its own scene,
-genuinely about what's in it. You have up to {max_scenes} scenes total specifically so all of these pasted
-photos fit alongside the canonical hook/history/engine/drivetrain/comparison/closing beats below -- use as
-many of them as you need; never drop one of these pasted-photo scenes to stay at a lower scene count.
-For photos with Section/role metadata, keep each section's scenes together: exterior, then interior,
-then engine. Introduce the hero/overview before its details. Alternate angles are overview shots,
-not close-ups. Copy the entire bracketed ID and label into photo_label. User notes are topic
-suggestions, not verified facts; verify factual claims with your research. Do not infer horsepower,
-modifications, or performance from appearance alone."""
+Lines marked MAIN PHOTO are the subjects of this video. You MUST write one scene's narration specifically
+about each of them -- in your own words, describing/reacting to that exact detail (not just reusing the
+sentence verbatim), so the script actually talks about what's on screen instead of narrating something
+unrelated over it. Use that scene's headline and media_type to match (e.g. an interior/gauge detail gets
+media_type "interior" or "detail" as appropriate).
+
+Lines marked CLOSE-UP are different: they are supporting detail shown on screen alongside the main photo
+they are nested under, not subjects of their own. They stay visible for that whole chapter, so they do NOT
+each need a scene. Touch them lightly, and only where there is something genuinely worth saying -- a spoiler,
+a carbon-fibre panel, an exhaust tip, a headlight, how a trim piece is finished -- inside the scene that is
+already about their main photo, in a clause or a short sentence. Never build a whole scene around one, never
+force a mention of one you have nothing real to say about, and never let a close-up push out a
+history/mechanical/comparison beat.
+
+Each hint above begins with its exact label followed by " photo:" -- for whichever scene you write about a
+MAIN PHOTO, copy that exact label text (everything between the "-- " marker and " photo:") into that scene's
+photo_label field, verbatim, character for character, so the real picture can be matched back to it instead
+of a generic same-type photo. If a scene does spend a clause on one specific CLOSE-UP, copy that close-up's
+entire bracketed ID and label into photo_label instead, and the on-screen tile for it will be highlighted
+while that scene runs. Set photo_label to null on every other scene, including the ordinary
+hook/history/mechanical/comparison beats. These beats count toward the word target and beat variety like any
+other -- they don't replace the history/mechanical/comparison beats below, they're additional specific
+material that must be folded in alongside them. Do not substitute a different, unrelated "detail" beat of
+your own invention for one of the MAIN PHOTOs -- every main photo listed above needs its own scene, genuinely
+about what's in it. You have up to {max_scenes} scenes total specifically so all of these pasted photos fit
+alongside the canonical hook/history/engine/drivetrain/comparison/closing beats below.
+
+Keep each slot's scenes together and in the order the photos are listed, so the video reads front, side,
+rear, engine bay, interior rather than jumping back and forth. User notes are topic suggestions, not verified
+facts; verify factual claims with your research. Do not infer horsepower, modifications, or performance from
+appearance alone."""
     forced_rival_block = ""
     if forced_rival:
         forced_rival_block = f"""
@@ -570,7 +581,7 @@ def gather_photo_script_hints(manual_photo_urls, extra_photos, images_dir, car_l
             continue
         description = _describe_photo_for_script(path, category.replace("_", " "), car_label)
         if description:
-            hints.append(f"{category.replace('_', ' ')} photo: {description}")
+            hints.append(f"MAIN PHOTO -- {category.replace('_', ' ')} photo: {description}")
     for index, item in enumerate(extra_photos or []):
         if not isinstance(item, dict):
             continue
@@ -586,11 +597,12 @@ def gather_photo_script_hints(manual_photo_urls, extra_photos, images_dir, car_l
             metadata = photo_metadata(item, index)
             cue_label = metadata.get("cue_label", label or "featured")
             context = ""
+            prefix = "EXTRA PHOTO"
             if metadata:
-                context = f" Section: {metadata['section']}; role: {metadata['role']}."
+                prefix = f"CLOSE-UP (nested under the {SLOT_LABELS[metadata['slot']]} main photo)"
                 if metadata.get("note"):
-                    context += f" User topic suggestion (verify independently): {metadata['note']}"
-            hints.append(f"{cue_label} photo: {description}{context}")
+                    context = f" User topic suggestion (verify independently): {metadata['note']}"
+            hints.append(f"{prefix} -- {cue_label} photo: {description}{context}")
     return hints
 
 
@@ -669,8 +681,10 @@ def gather_extra_media(extra_photos, images_dir, entry):
         blur_license_plates(path)
         relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
         metadata = photo_metadata(item, index)
-        shot_type = metadata.get("section", "detail") if metadata.get("role") in {"hero", "angle"} else "detail"
-        media.append({"path": relative, "type": shot_type, "category": "other_detail", "facing_direction": "unclear", "label": label or None, **metadata})
+        # A nested close-up is always a detail: the slot's own Image URL is
+        # the main photo, so a close-up never competes to be the overview.
+        media.append({"path": relative, "type": "detail", "category": "other_detail",
+                      "facing_direction": "unclear", "label": label or None, **metadata})
     return media
 
 
@@ -730,7 +744,8 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
     # just to throw most of it away would defeat the point. There's no
     # scraped listing in this case, so selected_auction comes back empty.
     manual_urls = {key: value for key, value in (manual_photo_urls or {}).items() if value}
-    if (manual_urls or any(isinstance(p, dict) and p.get("section") in SECTIONS for p in extra_photos or [])) and not auction_url:
+    nested = any(isinstance(p, dict) and photo_metadata(p, i) for i, p in enumerate(extra_photos or []))
+    if (manual_urls or nested) and not auction_url:
         media = gather_manual_media(manual_urls, images_dir, entry)
         media.extend(gather_extra_media(extra_photos, images_dir, entry))
         if not media:

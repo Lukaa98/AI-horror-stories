@@ -4,90 +4,116 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "cars" / "automation"))
 
-from photo_story import photo_metadata, collect_photo_sections, photo_story_timeline
+from photo_story import (MAX_CLOSEUPS, SLOTS, collect_photo_sections, photo_metadata,
+                         photo_story_timeline, slot_of)
 from narrator_motion import build_motion_plan
-from photo_story_video import build_photo_tracks, detail_box
+from photo_story_video import build_photo_tracks, collage_rows
 from single_car_short import order_media_for_scenes, gather_extra_media, gather_photo_script_hints
 
 
-def photo(section, role, index, label="Wheel"):
-    return {"path": f"{index}.png", "type": section if role != "detail" else "detail",
-            **photo_metadata({"id": "same-id", "section": section, "role": role, "label": label}, index)}
+def main_photo(slot, category, index):
+    return {"path": f"{index}.png", "type": "exterior", "category": category}
+
+
+def closeup(slot, index, label="Exhaust tip", identity="same-id"):
+    return {"path": f"{index}.png", "type": "detail", "category": "other_detail",
+            **photo_metadata({"id": identity, "slot": slot, "label": label}, index)}
 
 
 def fixture():
-    photos = [photo("exterior", "hero", 0), photo("exterior", "detail", 1),
-              photo("exterior", "detail", 2), photo("interior", "hero", 3),
-              photo("interior", "detail", 4)]
-    scenes = [{"media_type": p["type"], "photo_label": p["cue_label"], "text": "A detail."} for p in photos]
+    """Front main photo + two close-ups, interior main photo + one close-up."""
+    photos = [main_photo("front", "exterior_front", 0), closeup("front", 1), closeup("front", 2, "Splitter"),
+              main_photo("interior", "interior", 3), closeup("interior", 4, "Gauges")]
+    photos[3]["type"] = "interior"
+    scenes = [{"media_type": p["type"], "photo_label": p.get("cue_label"), "text": "A detail."} for p in photos]
     manifest = {"scenes": scenes, "media": order_media_for_scenes(scenes, photos),
                 "photo_sections": collect_photo_sections(photos),
                 "mouth_timeline": [{"start": 0, "end": 20, "mouth": "oh"}]}
-    boundaries = [(i * 4, (i + 1) * 4) for i in range(5)]
-    return manifest, boundaries
+    return manifest, [(i * 4.0, i * 4.0 + 4.0) for i in range(len(scenes))]
 
 
-def test_legacy_is_opt_out_and_ids_disambiguate_duplicate_names():
-    assert photo_metadata({"label": "Wheel"}, 0) == {}
-    assert photo_story_timeline({}, [(0, 4)]) == []
-    assert photo("exterior", "detail", 1)["photo_id"] != photo("exterior", "detail", 2)["photo_id"]
+def test_slots_are_the_five_pipeline_fields_and_ids_disambiguate_duplicates():
+    assert SLOTS == ("front", "side", "rear", "engine", "interior")
+    # Same id and label in two input positions must still address two photos.
+    assert closeup("front", 1)["photo_id"] != closeup("front", 2)["photo_id"]
+    # A bare extra with no slot stays ungrouped, exactly as before.
+    assert photo_metadata({"id": "x", "label": "Gauges"}, 0) == {}
+    # v11.17 entries are mapped onto a slot rather than dropped.
+    assert photo_metadata({"id": "x", "section": "engine", "role": "hero"}, 0)["slot"] == "engine"
 
 
-def test_hero_is_persistent_details_exact_and_chapter_switch_is_measured():
+def test_sections_need_a_closeup_so_ordinary_builds_keep_the_old_layout():
+    plain = [main_photo("front", "exterior_front", 0), main_photo("interior", "interior", 1)]
+    assert collect_photo_sections(plain) == []
+    sections = collect_photo_sections(fixture()[0]["media"])
+    assert [s["id"] for s in sections] == ["front", "interior"]
+    assert len(sections[0]["photos"]) == 2
+    assert slot_of(sections[0]["hero"]) == "front"
+
+
+def test_closeups_never_replace_the_main_photo_and_only_an_exact_match_highlights():
     manifest, bounds = fixture()
     cues = photo_story_timeline(manifest, bounds)
-    assert [c["hero"] for c in cues] == ["0.png", "0.png", "0.png", "3.png", "3.png"]
-    assert [c["side"] for c in cues] == ["right"] * 3 + ["left"] * 2
-    assert cues[0]["detail"] is None
-    assert cues[1]["detail"]["photo_id"] == manifest["media"][1]["photo_id"]
+    front = [c for c in cues if c["slot"] == "front"]
+    assert front, "front chapter must produce cues"
+    # Every front cue shows the front main photo, even the scenes whose own
+    # selected media is one of the close-ups.
+    assert {c["hero"] for c in front} == {"0.png"}
+    # All of that slot's close-ups ride along for the whole chapter.
+    assert all(len(c["closeups"]) == 2 for c in front)
+    assert sum(c["active"] is not None for c in cues) == 3
+    # A scene with no photo_label highlights nothing.
     manifest["scenes"][1]["photo_label"] = None
-    assert photo_story_timeline(manifest, bounds)[1]["detail"] is None
+    assert photo_story_timeline(manifest, bounds)[1]["active"] is None
 
 
-def test_motion_uses_card_side_gaze_and_preserves_mouth_track():
+def test_rival_and_missing_section_fall_back_to_the_plain_selected_photo():
     manifest, bounds = fixture()
-    plan = build_motion_plan(manifest, 20, bounds)
-    assert plan == build_motion_plan(manifest, 20, bounds)
-    assert plan["shots"] == [{"start": 0, "layout": "bottom-right", "framing": "half"},
-                             {"start": 12, "layout": "bottom-left", "framing": "half"}]
-    assert {g["pose"] for g in plan["gestures"]} >= {"presentLeft", "presentRight", "rest"}
-    assert any(e["look_at"] == [138, 640] for e in plan["expressions"])
-    assert any(e["look_at"] == [402, 640] for e in plan["expressions"])
-    assert plan["mouth_timeline"][0]["mouth"] == "oh"
+    manifest["scenes"][0] = {"media_type": "exterior", "rival_make": "Porsche", "rival_model": "Cayman"}
+    cue = photo_story_timeline(manifest, bounds)[0]
+    assert cue["slot"] is None and cue["closeups"] == [] and cue["hero"] == manifest["media"][0]["path"]
 
 
-def test_rival_and_missing_hero_are_safe_fallbacks():
+def test_motion_no_longer_pins_the_character_to_one_side():
     manifest, bounds = fixture()
-    manifest["scenes"][1]["rival_make"] = "Porsche"
-    manifest["media"][1] = {"path": "rival.png", "type": "exterior"}
-    cue = photo_story_timeline(manifest, bounds)[1]
-    assert cue["hero"] == "rival.png" and cue["detail"] is None
-    manifest["photo_sections"][1]["hero"] = None
-    assert photo_story_timeline(manifest, bounds)[4]["detail"] is None
+    manifest["word_timeline"] = [{"start": 0, "end": 20}]
+    plan = build_motion_plan(manifest, 20.0, bounds, (1080, 1920), fps=24)
+    # Nothing floats over the lower half any more, so the framing cycle is
+    # free again -- it must not collapse to a single pinned layout.
+    assert len({s["layout"] for s in plan["shots"]}) > 1
+    assert not any(g["pose"].startswith("present") for g in plan["gestures"])
+    assert [m["mouth"] for m in plan["mouth_timeline"]] == ["oh"]
 
 
-def test_generic_scene_cannot_steal_grouped_detail():
-    hero, detail = photo("interior", "hero", 0), photo("interior", "detail", 1)
-    assert order_media_for_scenes([{"media_type": "detail"}], [detail, hero]) == [hero]
+def test_collage_rows_match_the_approved_layout():
+    assert collage_rows(0) == []
+    assert collage_rows(1) == [1]
+    assert collage_rows(2) == [2]
+    assert collage_rows(3) == [3]
+    assert collage_rows(MAX_CLOSEUPS) == [2, 2]
+    assert collage_rows(9) == [2, 2]
 
 
-def test_track_merges_hero_and_handles_broken_detail(tmp_path):
+def test_track_merges_chapters_and_survives_a_dead_closeup(tmp_path):
     from PIL import Image
     manifest, bounds = fixture()
     for item in manifest["media"]:
         Image.new("RGB", (300, 200), (50, 120, 60)).save(tmp_path / item["path"])
     cues = photo_story_timeline(manifest, bounds)
-    hero, cards, diagnostics = build_photo_tracks(cues, [], tmp_path, (0, 0, 540, 300), (540, 960), 20, tmp_path / "frames")
-    assert len(hero.clips) == 2
-    assert len(cards) == len(diagnostics) == 3
-    assert hero.get_frame(19.9).shape == (300, 540, 3)
-    for side in ("left", "right"):
-        x, y, w, h = detail_box((540, 960), side)
-        assert 0 <= x < x + w <= 540 and 480 < y < y + h < 960
+    media, cards, diagnostics = build_photo_tracks(
+        cues, [], tmp_path, (0, 0, 540, 300), (540, 960), 20, tmp_path / "frames")
+    # The floating detail cards are gone; the collage absorbed them.
+    assert cards == []
+    # One chapter picture per highlight change, not one per scene.
+    assert len(media.clips) == len(diagnostics) == len(cues)
+    assert media.get_frame(19.9).shape == (300, 540, 3)
+    assert diagnostics[0]["slot"] == "front" and len(diagnostics[0]["closeups"]) == 2
     (tmp_path / "1.png").unlink()
-    _, cards, diagnostics = build_photo_tracks(cues, [], tmp_path, (0, 0, 540, 300), (540, 960), 20, tmp_path / "frames")
-    assert len(cards) == 2
-    hero.close()
+    _, _, diagnostics = build_photo_tracks(
+        cues, [], tmp_path, (0, 0, 540, 300), (540, 960), 20, tmp_path / "frames")
+    # The dead close-up drops out of its chapter; the chapter still renders.
+    assert len(diagnostics[0]["closeups"]) == 1
+    media.close()
 
 
 def test_download_and_hints_use_identical_photo_identity(tmp_path, monkeypatch):
@@ -99,8 +125,9 @@ def test_download_and_hints_use_identical_photo_identity(tmp_path, monkeypatch):
     monkeypatch.setattr(module, "_download_car_photo", lambda *a: path)
     monkeypatch.setattr(module, "blur_license_plates", lambda *a: None)
     monkeypatch.setattr(module, "_describe_photo_for_script", lambda *a: "Visible dials.")
-    items = [{"section": "interior", "role": "detail", "label": "Gauges", "url": "https://example.com/photo.jpg"}]
+    items = [{"id": "gauges", "slot": "interior", "label": "Gauges", "url": "https://example.com/photo.jpg"}]
     media = gather_extra_media(items, images_dir, {})
     hints = gather_photo_script_hints({}, items, images_dir, "Lotus")
-    assert hints[0].startswith(media[0]["cue_label"] + " photo:")
-    assert "Section: interior" in hints[0]
+    assert media[0]["type"] == "detail", "a nested close-up is never an overview"
+    assert media[0]["cue_label"] + " photo:" in hints[0]
+    assert hints[0].startswith("CLOSE-UP (nested under the Interior main photo)")
