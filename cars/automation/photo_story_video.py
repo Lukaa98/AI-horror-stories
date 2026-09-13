@@ -15,9 +15,7 @@ from moviepy.editor import ImageClip, CompositeVideoClip
 from generate_sample import _font
 # Row/height geometry is shared with the motion planner so the narrator can
 # aim at a tile the renderer actually drew -- see photo_story.py.
-from photo_story import MAIN_HEIGHT_RATIO, MIN_TILE_COLUMNS, TILE_ASPECT, collage_rows
-
-GAP_RATIO = 0.018
+from photo_story import collage_metrics
 BACKGROUND = (255, 255, 255)
 ACTIVE_OUTLINE = (225, 157, 20)
 ACTIVE_OUTLINE_WIDTH = 4
@@ -81,22 +79,13 @@ def collage_frame(hero_image, closeups, active, box_size, font):
     w, h = box_size
     frame = Image.new("RGB", (w, h), BACKGROUND)
     draw = ImageDraw.Draw(frame)
-    rows = collage_rows(len(closeups))
-    gap = max(4, round(min(w, h) * GAP_RATIO))
-    main_h = round(h * MAIN_HEIGHT_RATIO.get(len(closeups), 1.0)) if rows else h
+    metrics = collage_metrics(w, h, len(closeups))
+    rows, gap = metrics["rows"], metrics["gap"]
+    tile_w, row_h, main_h = metrics["tile_w"], metrics["row_h"], metrics["main_h"]
     _paste_contained(frame, hero_image, (0, 0, w, main_h))
 
-    # Rows share whatever is left after the main photo and the gaps between
-    # every row, so two rows of two fill the box exactly like one row does.
-    remaining = h - main_h - gap * len(rows)
-    row_h = remaining // len(rows) if rows else 0
     index, y = 0, main_h + gap
     for row in rows:
-        columns = max(row, MIN_TILE_COLUMNS)
-        # Never wider than an even split of the band, and never much wider
-        # than the photo it has to hold, so a contained close-up fills its
-        # cell instead of floating in white.
-        tile_w = min((w - gap * (columns - 1)) // columns, round(row_h * TILE_ASPECT))
         row_x = (w - (tile_w * row + gap * (row - 1))) // 2
         for column in range(row):
             if index >= len(closeups):
@@ -115,9 +104,8 @@ def collage_frame(hero_image, closeups, active, box_size, font):
                                    fill=LABEL_BACKGROUND)
                     draw.text((x + pad, y + row_h - text_h + (text_h - getattr(font, "size", 14)) // 2),
                               text, font=font, fill=LABEL_COLOR)
-                draw.rectangle(
-                    (x, y, x + tile_w - 1, y + row_h - 1),
-                    outline=ACTIVE_OUTLINE, width=ACTIVE_OUTLINE_WIDTH)
+                draw.rectangle((x, y, x + tile_w - 1, y + row_h - 1),
+                               outline=ACTIVE_OUTLINE, width=ACTIVE_OUTLINE_WIDTH)
             index += 1
         y += row_h + gap
     return frame

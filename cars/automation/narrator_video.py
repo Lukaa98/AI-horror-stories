@@ -157,9 +157,9 @@ PROGRESS_BAR_COLOR = (255, 255, 255)
 # the stack down to 0.585 gives the photo band ~26% more height -- which is
 # what lets a close-up be shown whole instead of cropped -- and still leaves
 # room for the stat line above the character.
-TOP_STACK_RATIO = 0.585
+TOP_STACK_RATIO = 0.61
 HEADLINE_ZONE_RATIO = 0.095
-CAPTION_ZONE_RATIO = 0.075
+CAPTION_ZONE_RATIO = 0.05
 NARRATOR_X_OFFSET_RATIO = 0.14
 # Capped under the full available bottom-half height so the character
 # always leaves a real gap above its own head -- see _narrator_track.
@@ -202,7 +202,7 @@ NARRATOR_SHOTS = [
 # top/bottom; a taller box brings the box's own aspect ratio closer to
 # the photos' so _fit_content's scale is less likely to be height-limited
 # with width left over.
-MEDIA_INSET_RATIO = 0.015
+MEDIA_INSET_RATIO = 0.008
 CAPTION_CHUNK_WORDS = 1
 # How long each revealed character of a headline stays on screen before the
 # next one appears -- a typewriter reveal instead of the whole headline

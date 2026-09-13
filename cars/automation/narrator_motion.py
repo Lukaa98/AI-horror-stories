@@ -4,7 +4,7 @@ import math
 import os
 import subprocess
 from pathlib import Path
-from photo_story import photo_story_timeline
+from photo_story import photo_story_timeline, tile_centers
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -68,10 +68,11 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
     # at it rather than at a hardcoded spot. Falls back to the band the
     # layout reserves for it when the caller doesn't pass the real box.
     if media_box:
-        mx, my, mw, mh = media_box
-        media_frame = (mx / size[0], my / size[1], mw / size[0], mh / size[1])
+        media_pixels = tuple(float(v) for v in media_box)
     else:
-        media_frame = (0.0, 0.09, 1.0, 0.32)
+        media_pixels = (0.0, size[1] * 0.09, float(size[0]), size[1] * 0.32)
+    media_frame = (media_pixels[0] / size[0], media_pixels[1] / size[1],
+                   media_pixels[2] / size[0], media_pixels[3] / size[1])
     media_center = (media_frame[0] + media_frame[2] / 2, media_frame[1] + media_frame[3] / 2)
     boundaries = list(scene_boundaries) or [(0.0, duration)]
     # A single long scene still gets a few measured changes of framing.
@@ -128,9 +129,15 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
     # them: when a scene is about one specific close-up, look at that tile
     # and present it with the hand on that side.
     for cue in photo_cues:
-        center = cue.get("active_center")
-        if not center:
+        active_index = cue.get("active_index")
+        if active_index is None:
             continue
+        # Laid out from the same geometry the renderer draws with, against
+        # the real media box, so the hand goes where the tile actually is.
+        centers = tile_centers(media_pixels[2], media_pixels[3], len(cue.get("closeups") or []))
+        if active_index >= len(centers):
+            continue
+        center = centers[active_index]
         target = (media_frame[0] + center[0] * media_frame[2],
                   media_frame[1] + center[1] * media_frame[3])
         start = cue["start"] + 0.35

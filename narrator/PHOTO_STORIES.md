@@ -21,17 +21,24 @@ slideshow:
 | Close-ups | Layout under the main photo |
 |---|---|
 | 0 | main photo alone, full band (unchanged from an ordinary build) |
-| 1 | one half-width tile, centred |
-| 2 | two side by side |
-| 3 | three side by side |
+| 1 | one half-width cell, centred |
+| 2 | two side by side, edge to edge |
+| 3 | a pair, then one centred underneath |
 | 4 | two rows of two |
 
-Close-ups are shown **whole** -- contained, never cropped. Cells are capped to roughly
-photo shape (`TILE_ASPECT`, listing photos are almost all 3:2) and the row is centred,
-so a tile is nearly filled by its photo instead of letterboxed across the full band.
-The stack occupies the top 58.5% of the frame rather than 50%: the character's head
-starts at 0.65, so the old split left a quarter of the frame bare white with one stat
-line floating in it. The extra height is what makes uncropped close-ups readable.
+Never more than two across: three in a row put each cell at a third of the band, which
+was too cramped to read at phone size.
+
+Close-ups are shown **whole** -- contained, never cropped. Cells are cut to photo shape
+(`TILE_ASPECT`; listing photos are almost all 3:2) so a contained close-up fills its
+cell instead of floating in white. `collage_metrics()` sizes the cells from the band's
+*width* first and gives the main photo whatever is left, down to
+`MIN_MAIN_HEIGHT_RATIO` -- the main photo is wide, so it loses little by being shorter,
+while a tile's height is what its width costs.
+
+The stack occupies the top 61% of the frame. The character's head starts at 0.65, so
+the original 50% left a quarter of the frame bare white with one stat line floating in
+it; the band is now 1062x878 against 1047x614 when the collage first shipped.
 
 When a scene is specifically about one close-up, that tile gets an outline and its
 name; otherwise nothing is highlighted. Nothing floats over the lower half of the

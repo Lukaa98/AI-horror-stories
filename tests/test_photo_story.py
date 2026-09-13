@@ -8,7 +8,7 @@ from photo_story import (MAX_CLOSEUPS, SLOTS, collect_photo_sections, photo_meta
                          photo_story_timeline, slot_of)
 from narrator_motion import build_motion_plan
 from photo_story_video import build_photo_tracks
-from photo_story import collage_rows, tile_centers
+from photo_story import collage_rows, tile_centers, collage_metrics
 from single_car_short import order_media_for_scenes, gather_extra_media, gather_photo_script_hints
 
 
@@ -109,25 +109,49 @@ def test_gaze_aims_up_at_the_photos_and_across_at_the_right_tile():
 
 
 def test_tile_centers_track_the_rendered_rows():
-    assert tile_centers(0) == []
+    box = (1062, 878)
+    assert tile_centers(*box, 0) == []
     # A lone tile is centred horizontally, not stretched across the row.
-    assert tile_centers(1)[0][0] == 0.5
-    two = tile_centers(2)
+    assert abs(tile_centers(*box, 1)[0][0] - 0.5) < 0.01
+    two = tile_centers(*box, 2)
     assert two[0][0] < 0.5 < two[1][0]
-    assert len(tile_centers(4)) == 4
-    # Four close-ups means two rows, so the last two sit lower than the first.
-    assert tile_centers(4)[3][1] > tile_centers(4)[0][1]
+    assert len(tile_centers(*box, 4)) == 4
+    # Two rows, so the last pair sits lower than the first.
+    assert tile_centers(*box, 4)[3][1] > tile_centers(*box, 4)[0][1]
+    # The odd tile in a 2+1 layout is centred under the pair.
+    assert abs(tile_centers(*box, 3)[2][0] - 0.5) < 0.01
     # Tiles always sit below the main photo.
-    assert all(y > 0.5 for _, y in tile_centers(3))
+    main = collage_metrics(*box, 3)["main_h"] / box[1]
+    assert all(y > main for _, y in tile_centers(*box, 3))
 
 
-def test_collage_rows_match_the_approved_layout():
+def test_collage_never_puts_more_than_two_tiles_across():
     assert collage_rows(0) == []
     assert collage_rows(1) == [1]
     assert collage_rows(2) == [2]
-    assert collage_rows(3) == [3]
+    # Three across was cramped; three close-ups stack as a pair plus a single.
+    assert collage_rows(3) == [2, 1]
     assert collage_rows(MAX_CLOSEUPS) == [2, 2]
     assert collage_rows(9) == [2, 2]
+
+
+def test_cells_are_photo_shaped_and_reach_the_band_edges():
+    box = (1062, 878)
+    for count in (1, 2, 3, 4):
+        m = collage_metrics(*box, count)
+        rows, gap = m["rows"], m["gap"]
+        # Photo-shaped, so a contained close-up fills its cell.
+        assert abs(m["tile_w"] / m["row_h"] - 1.5) < 0.05, count
+        # Everything fits inside the band, with the main photo still the
+        # biggest single element.
+        used = m["main_h"] + m["row_h"] * len(rows) + gap * len(rows)
+        assert used <= box[1], (count, used)
+        assert m["main_h"] >= round(box[1] * 0.34) - 1, count
+        widest = max(rows)
+        assert m["tile_w"] * widest + gap * (widest - 1) <= box[0], count
+    # A full-width pair reaches the edges rather than floating in the middle.
+    two = collage_metrics(*box, 2)
+    assert two["tile_w"] * 2 + two["gap"] >= box[0] - 4
 
 
 def test_track_merges_chapters_and_survives_a_dead_closeup(tmp_path):
