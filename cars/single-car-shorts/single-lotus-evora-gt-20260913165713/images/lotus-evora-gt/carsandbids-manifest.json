@@ -1,0 +1,546 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-13T16:59:58.067Z",
+  "query": "Lotus Evora Gt",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9Q2NdOBx/2020-lotus-evora-gt",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9Q2NdOBx/2020-lotus-evora-gt",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 34,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2020 Lotus Evora GT"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9Q2NdOBx/2020-lotus-evora-gt",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2020 Lotus Evora GT",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5c28d9705c009bff3b7249d4ece0812a76c5a5c3/photos/LotusEvoraGT2020002.jpg?t=178837054794",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2020 Lotus Evora GT",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 264451
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5c28d9705c009bff3b7249d4ece0812a76c5a5c3/photos/LotusEvoraGT2020001.jpg?t=178837054794",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2020 Lotus Evora GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 228810
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5c28d9705c009bff3b7249d4ece0812a76c5a5c3/photos/LotusEvoraGT2020007.jpg?t=178837054794",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2020 Lotus Evora GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 303827
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5c28d9705c009bff3b7249d4ece0812a76c5a5c3/photos/LotusEvoraGT2020004.jpg?t=178837054794",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2020 Lotus Evora GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 317259
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5c28d9705c009bff3b7249d4ece0812a76c5a5c3/photos/LotusEvoraGT2020005.jpg?t=178837054794",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2020 Lotus Evora GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 295267
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/LotusEvoraGT2020069/edit/FFgHz.jpg?t=178844447496",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2020 Lotus Evora GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 244534
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5c28d9705c009bff3b7249d4ece0812a76c5a5c3/photos/LotusEvoraGT2020084.jpg?t=178837054794",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2020 Lotus Evora GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 449491
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5c28d9705c009bff3b7249d4ece0812a76c5a5c3/photos/LotusEvoraGT2020079.jpg?t=178837054794",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2020 Lotus Evora GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 210243
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/5c28d9705c009bff3b7249d4ece0812a76c5a5c3/photos/LotusEvoraGT2020072.jpg?t=178837054794",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2020 Lotus Evora GT",
+      "width": 542,
+      "height": 361,
+      "bytes": 167081
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/aea23859990d4ccde82a410e2548531856e693a0/photos/9lRyJ1EK-OpkkE0B.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 11009 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/959d67c6895a8dbe0df386ba917c2937c8fcd040/photos/3zLNOxaJ--NUTdbk.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 8464 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/5617fc7a12dca32fee82cb722ef3d62bdb0ee52f/photos/9a7kwJ18-VVIrnfj.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 9849 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/be5b28ea0dfa2afbc413fd14f2d67bfa2277e0fb/photos/r4dA65vk-qKcXXD0.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 17834 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a6a372b7dcf97f3a679f627bda7543b3caf193b3/photos/KdZG6We1-DlxKll8lWCZ.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 15580 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41a634b1307d192db464d2fb4f5fccc5/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41a634b1307d192db464d2fb4f5fccc5/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Lotus Evora GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41a634b1307d192db464d2fb4f5fccc5/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9Q2NdOBx/2020-lotus-evora-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/41a634b1307d192db464d2fb4f5fccc5/manifest/video.m3u8",
+      "auction_title": "2020 Lotus Evora GT",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/39f82a3bbaf5e3f323813be0ae2e2d8f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/39f82a3bbaf5e3f323813be0ae2e2d8f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Lotus Evora GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/39f82a3bbaf5e3f323813be0ae2e2d8f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9Q2NdOBx/2020-lotus-evora-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/39f82a3bbaf5e3f323813be0ae2e2d8f/manifest/video.m3u8",
+      "auction_title": "2020 Lotus Evora GT",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7a58a39a1a6be07b06e0d014330804f9/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7a58a39a1a6be07b06e0d014330804f9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Lotus Evora GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7a58a39a1a6be07b06e0d014330804f9/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9Q2NdOBx/2020-lotus-evora-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7a58a39a1a6be07b06e0d014330804f9/manifest/video.m3u8",
+      "auction_title": "2020 Lotus Evora GT",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2e93f5895afee60bc7657b9767afc53d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2e93f5895afee60bc7657b9767afc53d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Lotus Evora GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2e93f5895afee60bc7657b9767afc53d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9Q2NdOBx/2020-lotus-evora-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2e93f5895afee60bc7657b9767afc53d/manifest/video.m3u8",
+      "auction_title": "2020 Lotus Evora GT",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d378b94ed4655d11770a3bc0121fc630/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d378b94ed4655d11770a3bc0121fc630/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2020 Lotus Evora GT",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d378b94ed4655d11770a3bc0121fc630/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9Q2NdOBx/2020-lotus-evora-gt",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d378b94ed4655d11770a3bc0121fc630/manifest/video.m3u8",
+      "auction_title": "2020 Lotus Evora GT",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Lotus",
+        "detected_model": "Evora",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "Lotus badge",
+          "Evora badge",
+          "rear design characteristics specific to Evora GT",
+          "specific coloration and trim indicating variant"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "lotus",
+        "detected_model": "evora",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "lotus badge",
+          "evora body style",
+          "2020 specifications",
+          "aerodynamic enhancements"
+        ],
+        "generation_match_confidence": 5,
+        "variant_match_confidence": 2,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 4,
+        "reject": true,
+        "reason": "not the correct variant, appears to be a modified Evora",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Lotus",
+        "detected_model": "Evora",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "Lotus branding",
+          "Evora badge",
+          "Body proportions and design",
+          "Wheel style",
+          "Color and trim"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "lotus",
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive front fascia",
+          "Lotus badge",
+          "green paint"
+        ],
+        "generation_match_confidence": 5,
+        "variant_match_confidence": 4,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 5,
+        "reject": true,
+        "reason": "Incorrect model, does not match specific target vehicle (Evora).",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Lotus",
+        "detected_model": "Evora",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": "Evora GT",
+        "visible_match_evidence": [
+          "distinctive rear design",
+          "Lotus branding",
+          "Evora GT badge",
+          "unique tail lights"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Lotus",
+        "detected_model": "Evora",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "Lotus branding on steering wheel",
+          "Interior design consistent with Lotus Evora",
+          "Carbon fiber elements",
+          "Start button positioning"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Lotus",
+        "detected_model": "Evora",
+        "detected_generation_or_year": "2020",
+        "detected_variant_or_engine": "GT",
+        "visible_match_evidence": [
+          "GT seat stitching",
+          "interior design elements"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 9,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not display the target vehicle or identifiable features.",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the target vehicle.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
