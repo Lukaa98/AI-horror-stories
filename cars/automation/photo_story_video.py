@@ -41,6 +41,14 @@ def _open(path, root):
                 # black -- which is why the main photo sat in a black box in
                 # runs #170/#171. Composite onto the frame's own white first.
                 image = image.convert("RGBA")
+                # Then trim the transparent margin the cutout leaves around
+                # the car. On run #172's front shot the car filled only 56% of
+                # the PNG's height, so a contained fit was sizing the padding
+                # rather than the subject and the main photo came out barely
+                # taller than the close-up tiles beneath it.
+                bounds = image.getchannel("A").getbbox()
+                if bounds:
+                    image = image.crop(bounds)
                 canvas = Image.new("RGBA", image.size, (*BACKGROUND, 255))
                 canvas.alpha_composite(image)
                 return canvas.convert("RGB")
