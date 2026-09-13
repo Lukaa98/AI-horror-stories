@@ -532,12 +532,17 @@
         const phase=(time-expression.start)/Math.max(.001,expression.end-expression.start);
         const weight=Math.sin(Math.PI*phase);
         if(expression.brows)brow=8*weight;
-        const matrix=$('#head').getCTM();
-        if(matrix&&expression.look_at){
-          const pt=svg.createSVGPoint();[pt.x,pt.y]=expression.look_at;
-          const local=pt.matrixTransform(matrix.inverse());
-          dx=clamp((local.x-190)/65,-3.5,3.5)*weight;
-          dy=clamp((local.y-125)/65,-2.5,2.5)*weight;
+        // Aim is a plain direction, -1..1 on each axis, worked out in video
+        // space by build_motion_plan. It used to be a point put through
+        // #head's CTM inverse -- but getCTM() returns *rendered pixels*,
+        // not this rig's 540x960 user units, so a plan expressing the
+        // target in frame coordinates (which is the only space it knows)
+        // was scaled by whatever size the SVG happened to render at. Every
+        // shipped value came out clamped hard against the vertical limit,
+        // and the "look right at the card" case actually looked left.
+        if(expression.aim){
+          dx=clamp(expression.aim[0],-1,1)*3.5*weight;
+          dy=clamp(expression.aim[1],-1,1)*2.5*weight;
         }
       }
       eyebrows.setAttribute('transform',`translate(0 ${-brow})`);

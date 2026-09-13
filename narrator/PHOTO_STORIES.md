@@ -31,6 +31,27 @@ name; otherwise nothing is highlighted. Nothing floats over the lower half of th
 frame any more, so the narrator has its full range of framings back and the
 comparison drag-race overlay is no longer suppressed.
 
+## What the narrator does with them
+
+Framing is the ordinary cycle — bottom-left / bottom-right / bottom-centre at half
+body, close-left / close-right at head-and-chest, changing on scene boundaries with at
+least 3.6s between moves.
+
+On top of that, when a scene is about one specific close-up, the character looks at
+that tile and raises the hand on that side (`presentLeft` / `presentRight`) for the
+length of the beat, then returns to rest; generic conversational gestures inside that
+window are dropped so two arm poses never fight over the same second. The tile's
+position comes from `tile_centers()` in `photo_story.py`, which is the same geometry
+the renderer lays the tiles out with, so the hand goes where the tile actually is.
+
+Gaze is a direction (`aim`: -1..1 per axis), worked out in `build_motion_plan` from
+where the character was placed and where the target is. It used to be a *point* put
+through `#head`'s CTM inverse in the rig — but `getCTM()` returns rendered pixels, not
+the rig's own 540×960 frame units, so the answer depended on the capture's render size:
+every shipped value clamped hard against the vertical limit, and the "look right at the
+card" case actually looked left. `narrator/render/test-v21.js` now asserts the pupils
+travel in the aimed direction, in a real browser.
+
 ## Narration
 
 Unchanged and already where it should be: `TARGET_WORD_CENTER = 175` words against
@@ -71,7 +92,8 @@ slot, tile ids and which tile was active.
 - From `web`: `node --test src/photoSections.test.js`, `npm run build`, `npm run lint`
 - `PUPPETEER_EXECUTABLE_PATH=/path/to/chrome node narrator/render/test-v21.js`
 
-Local status for this change: the full Python suite (145 tests), the UI serializer
+Local status for this change: the full Python suite (147 tests), the live v21 browser
+test (528 frames, in Chromium), the UI serializer
 tests, the production build and lint all pass, and the four collage layouts were
 rendered and inspected at the real media-box size (1047×614). A full-motion video has
 not been rendered locally — Actions remains the verification before judging the result.

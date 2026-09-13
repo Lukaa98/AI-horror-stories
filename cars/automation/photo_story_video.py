@@ -13,18 +13,10 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageOps
 from moviepy.editor import ImageClip, CompositeVideoClip
 from generate_sample import _font
+# Row/height geometry is shared with the motion planner so the narrator can
+# aim at a tile the renderer actually drew -- see photo_story.py.
+from photo_story import MAIN_HEIGHT_RATIO, MIN_TILE_COLUMNS, collage_rows
 
-# Approved layout: one row under the main photo for one to three close-ups,
-# two rows of two for four. Four in a single row leaves tiles too small to
-# read at phone size, and 3+1 leaves an obvious hole.
-COLLAGE_ROWS = {0: [], 1: [1], 2: [2], 3: [3], 4: [2, 2]}
-# Share of the media box the main photo keeps. It stays the subject, so it
-# never drops below half even when it is sharing with four close-ups.
-MAIN_HEIGHT_RATIO = {0: 1.0, 1: 0.70, 2: 0.70, 3: 0.70, 4: 0.58}
-# The media band is much wider than it is tall, so a tile row is a wide, short
-# strip. One close-up laid across the whole width would be a 5:1 letterbox, so
-# a lone tile takes a half-width cell and sits centred instead.
-MIN_TILE_COLUMNS = 2
 GAP_RATIO = 0.018
 BACKGROUND = (255, 255, 255)
 ACTIVE_OUTLINE = (225, 157, 20)
@@ -33,10 +25,6 @@ ACTIVE_OUTLINE_WIDTH = 4
 # background rather than as part of the photo.
 LABEL_BACKGROUND = (24, 26, 30)
 LABEL_COLOR = (255, 255, 255)
-
-
-def collage_rows(count):
-    return COLLAGE_ROWS.get(max(0, min(count, 4)), [])
 
 
 def _open(path, root):

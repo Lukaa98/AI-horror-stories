@@ -48,7 +48,9 @@ try {
       { start: 7.5, pose: "rest" },
     ],
     mouth_timeline: [{ start: 0, end: 11.8, mouth: "wide" }],
-    expressions: [{ start: .3, end: 1.5, look_at: [270, 245], brows: true }],
+    // Aim is a direction, -1..1 per axis; the car photography is above the
+    // character, so up is negative.
+    expressions: [{ start: .3, end: 1.5, aim: [0, -1], brows: true }],
   };
   const run = async () => page.evaluate(plan => {
     narratorRig.beginRender(plan);
@@ -90,8 +92,8 @@ try {
       gestures: [{ start: 1.25, pose: 'presentLeft' }, { start: 3.5, pose: 'rest' },
                  { start: 6.25, pose: 'presentRight' }, { start: 8.5, pose: 'rest' }],
       mouth_timeline: [{ start: 0, end: 10, mouth: 'oh' }],
-      expressions: [{ start: 1, end: 3.8, look_at: [138, 640], brows: true },
-                    { start: 6, end: 8.8, look_at: [402, 640], brows: true }] });
+      expressions: [{ start: 1, end: 3.8, aim: [-1, -.6], brows: true },
+                    { start: 6, end: 8.8, aim: [1, -.6], brows: true }] });
     const result = [];
     for (let frame = 0; frame < 240; frame++) {
       const state = narratorRig.renderAt(frame / 24);
@@ -101,7 +103,10 @@ try {
         return { x: (r.x-svg.x)*540/svg.width, right: (r.right-svg.x)*540/svg.width,
                  y: (r.y-svg.y)*960/svg.height, bottom: (r.bottom-svg.y)*960/svg.height };
       };
-      result.push({ ...state, head: bounds('#head'), left: bounds('#left-hand'), right: bounds('#right-hand') });
+      const pupil = document.querySelector('#left-eye').style.transform;
+      const parsed = /translate\(([-\d.]+)px, *([-\d.]+)px\)/.exec(pupil);
+      result.push({ ...state, head: bounds('#head'), left: bounds('#left-hand'), right: bounds('#right-hand'),
+                    pupil: parsed ? [Number(parsed[1]), Number(parsed[2])] : [0, 0] });
     }
     return result;
   });
@@ -118,6 +123,14 @@ try {
     if (s.time > 6.5 && s.time < 8.4) assert(s.head.right < 278 && s.right.right < 278, 'right card stays unobstructed');
   }
   assert(maxPresentationStep > 0 && maxPresentationStep < 18);
+  // The eyes must actually travel in the aimed direction. This is the check
+  // the old point-plus-CTM gaze would have failed: getCTM() reports rendered
+  // pixels, not this rig's frame units, so every supplied target clamped
+  // against the vertical limit and the right-hand case looked left.
+  const at = time => detailSamples.find(s => Math.abs(s.time - time) < .03).pupil;
+  assert(at(2.4)[0] < -1, `left-aimed gaze must look left, got ${at(2.4)}`);
+  assert(at(7.4)[0] > 1, `right-aimed gaze must look right, got ${at(7.4)}`);
+  assert(at(2.4)[1] < 0 && at(7.4)[1] < 0, 'both look up toward the photos');
   assert.deepEqual(errors, []);
   console.log(JSON.stringify({ frames: samples.length + detailSamples.length, maxJointStep, maxXStep, maxPresentationStep, result: "passed" }));
 } finally {

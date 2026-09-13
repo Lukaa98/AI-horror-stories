@@ -9,6 +9,18 @@ from photo_story import photo_story_timeline
 
 ROOT = Path(__file__).resolve().parents[2]
 MIN_SHOT_SECONDS = 3.6
+# Where the character's head lands horizontally, as a fraction of frame
+# width, for each layout anchor. Mirrors composeShot()'s headCenter in
+# narrator-rig-v21.html (22 + 84*scale from the left, 518 - 84*scale from the
+# right, in that rig's 540-wide frame) at the scales render mode actually
+# uses; the gap between the bottom-* and close-* variants is under 0.01, so
+# one value per anchor is enough to aim with.
+HEAD_X_BY_ANCHOR = {"left": 0.17, "right": 0.83, "center": 0.5}
+# The rig pins the top of the head to safe_top, so the eyes sit a little way
+# below it.
+HEAD_Y_BELOW_SAFE_TOP = 0.05
+# A target half a frame away from the head gives full pupil deflection.
+AIM_SPAN = 0.5
 SHOT_CYCLE = (
     ("bottom-right", "half"), ("close-right", "bust"),
     ("bottom-center", "half"), ("bottom-left", "half"),
@@ -16,7 +28,28 @@ SHOT_CYCLE = (
 )
 
 
-def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), fps=24):
+def _anchor_of(layout):
+    return "left" if layout.endswith("left") else "right" if layout.endswith("right") else "center"
+
+
+def _aim(layout, safe_top, target):
+    """Pupil direction, -1..1 per axis, from the character's head to a point
+    in the frame (both as fractions of frame size).
+
+    The rig used to be handed the target as a point and put it through
+    #head's CTM inverse -- but getCTM() is in rendered pixels, not the rig's
+    own frame units, so the answer depended on the capture's render size and
+    every shipped value came out clamped against the vertical limit. Working
+    the direction out here keeps it in the one place that knows both where
+    the character was placed and where the photo is.
+    """
+    head_x = HEAD_X_BY_ANCHOR[_anchor_of(layout)]
+    head_y = safe_top + HEAD_Y_BELOW_SAFE_TOP
+    return [max(-1.0, min(1.0, (target[0] - head_x) / AIM_SPAN)),
+            max(-1.0, min(1.0, (target[1] - head_y) / AIM_SPAN))]
+
+
+def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), fps=24, media_box=None):
     """Reuse the HTML's named presets, with space reserved for the car/text.
 
     Camera changes follow scenes; gestures happen after the camera settles and
@@ -31,6 +64,15 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
     photo_cues = photo_story_timeline(manifest, scene_boundaries)
     if photo_cues:
         safe_top = 0.65
+    # Where the car photography actually is, so gaze and gestures can point
+    # at it rather than at a hardcoded spot. Falls back to the band the
+    # layout reserves for it when the caller doesn't pass the real box.
+    if media_box:
+        mx, my, mw, mh = media_box
+        media_frame = (mx / size[0], my / size[1], mw / size[0], mh / size[1])
+    else:
+        media_frame = (0.0, 0.09, 1.0, 0.32)
+    media_center = (media_frame[0] + media_frame[2] / 2, media_frame[1] + media_frame[3] / 2)
     boundaries = list(scene_boundaries) or [(0.0, duration)]
     # A single long scene still gets a few measured changes of framing.
     if not photo_cues and len(boundaries) == 1 and duration > 8:
@@ -59,7 +101,9 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
                     side = "right"
         # Briefly look toward the car as its new photo/fact appears.
         expressions.append({"start": start + 0.2, "end": min(end, start + 1.55),
-                            "look_at": [270, 245], "brows": bool(scene.get("headline"))})
+                            "aim": _aim(shots[-1]["layout"] if shots else "bottom-right",
+                                        safe_top, media_center),
+                            "brows": bool(scene.get("headline"))})
     if not shots:
         shots = [{"start": 0.0, "layout": "bottom-right", "framing": "half"}]
     shots[0]["start"] = 0.0
@@ -77,11 +121,41 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
         gestures.append({"start": round(min(t + 1.45, duration - 0.2), 6), "pose": "rest"})
         t += 3.4
         index += 1
-    # No photo-cue override of the framing any more: the close-ups live
-    # inside the media box with the main photo (see photo_story_video.py)
-    # instead of floating in a card over the lower half, so there is nothing
-    # down there for the character to avoid or point at. Photo-story builds
-    # get the same varied shots and gestures as every other build.
+    # The close-ups live inside the media box with the main photo rather
+    # than floating in a card over the lower half, so the framing cycle
+    # above is left alone -- photo-story builds get the same varied shots as
+    # everything else. What the cues do drive is the character reacting to
+    # them: when a scene is about one specific close-up, look at that tile
+    # and present it with the hand on that side.
+    for cue in photo_cues:
+        center = cue.get("active_center")
+        if not center:
+            continue
+        target = (media_frame[0] + center[0] * media_frame[2],
+                  media_frame[1] + center[1] * media_frame[3])
+        start = cue["start"] + 0.35
+        end = min(cue["end"] - 0.2, start + 2.6)
+        # Too short to read as a deliberate point; the generic gesture cycle
+        # covers that scene instead.
+        if end - start < 1.0:
+            continue
+        layout = next((shot["layout"] for shot in reversed(shots) if shot["start"] <= start),
+                      shots[0]["layout"] if shots else "bottom-right")
+        head_x = HEAD_X_BY_ANCHOR[_anchor_of(layout)]
+        expressions.append({"start": start, "end": end,
+                            "aim": _aim(layout, safe_top, target), "brows": True})
+        # presentLeft raises the screen-left arm, presentRight the screen-right
+        # one, so the hand goes up on the side the tile is actually on.
+        gestures.append({"start": round(start + 0.15, 6),
+                         "pose": "presentLeft" if target[0] < head_x else "presentRight"})
+        gestures.append({"start": round(end, 6), "pose": "rest"})
+        # Drop any generic conversational gesture inside the window -- two
+        # arm poses fighting over the same second is what made the old
+        # version look twitchy.
+        gestures = [g for g in gestures
+                    if not (start - 0.3 < g["start"] < end and not g["pose"].startswith("present")
+                            and g["start"] != round(end, 6))]
+    gestures.sort(key=lambda g: g["start"])
     mouths = []
     valid_mouths = {"closed", "small", "mbp", "ee", "ah", "oh", "fv", "wide", "teeth", "smile"}
     for entry in manifest.get("mouth_timeline") or []:

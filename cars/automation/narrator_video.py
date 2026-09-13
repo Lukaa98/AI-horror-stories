@@ -1321,7 +1321,8 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     renderer = os.environ.get("NARRATOR_RENDERER") or ("sprites" if os.environ.get("NARRATOR_SPRITES_DIR") else "v21")
     live_source = None
     if renderer == "v21":
-        motion_plan = build_motion_plan(manifest, duration, scene_boundaries, size, fps=24)
+        motion_plan = build_motion_plan(manifest, duration, scene_boundaries, size, fps=24,
+                                        media_box=media_box)
         live_path, plan_path = render_live_narrator(motion_plan, output_path.parent / "_frames" / "narrator")
         live_source = VideoFileClip(str(live_path), has_mask=True, audio=False)
         narrator_positioned = live_source.set_duration(duration).set_position((0, 0))

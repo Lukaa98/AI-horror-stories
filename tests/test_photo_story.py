@@ -7,7 +7,8 @@ sys.path.insert(0, str(ROOT / "cars" / "automation"))
 from photo_story import (MAX_CLOSEUPS, SLOTS, collect_photo_sections, photo_metadata,
                          photo_story_timeline, slot_of)
 from narrator_motion import build_motion_plan
-from photo_story_video import build_photo_tracks, collage_rows
+from photo_story_video import build_photo_tracks
+from photo_story import collage_rows, tile_centers
 from single_car_short import order_media_for_scenes, gather_extra_media, gather_photo_script_hints
 
 
@@ -74,15 +75,50 @@ def test_rival_and_missing_section_fall_back_to_the_plain_selected_photo():
     assert cue["slot"] is None and cue["closeups"] == [] and cue["hero"] == manifest["media"][0]["path"]
 
 
-def test_motion_no_longer_pins_the_character_to_one_side():
+def test_motion_keeps_its_framing_cycle_and_points_at_the_active_tile():
     manifest, bounds = fixture()
     manifest["word_timeline"] = [{"start": 0, "end": 20}]
-    plan = build_motion_plan(manifest, 20.0, bounds, (1080, 1920), fps=24)
+    media_box = (16, 176, 1047, 614)
+    plan = build_motion_plan(manifest, 20.0, bounds, (1080, 1920), fps=24, media_box=media_box)
     # Nothing floats over the lower half any more, so the framing cycle is
     # free again -- it must not collapse to a single pinned layout.
     assert len({s["layout"] for s in plan["shots"]}) > 1
-    assert not any(g["pose"].startswith("present") for g in plan["gestures"])
+    # Scenes about one specific close-up get a hand raised toward it.
+    assert any(g["pose"].startswith("present") for g in plan["gestures"])
+    # Never two arm poses fighting over the same instant.
+    starts = [g["start"] for g in plan["gestures"]]
+    assert starts == sorted(starts) and len(starts) == len(set(starts))
     assert [m["mouth"] for m in plan["mouth_timeline"]] == ["oh"]
+
+
+def test_gaze_aims_up_at_the_photos_and_across_at_the_right_tile():
+    manifest, bounds = fixture()
+    manifest["word_timeline"] = [{"start": 0, "end": 20}]
+    plan = build_motion_plan(manifest, 20.0, bounds, (1080, 1920), fps=24,
+                             media_box=(16, 176, 1047, 614))
+    aims = [e["aim"] for e in plan["expressions"]]
+    assert aims, "every scene gets a look"
+    # The photos are above the character, so the vertical aim is negative --
+    # the old point-through-CTM version clamped every one of these the wrong
+    # way regardless of where the target was.
+    assert all(-1.0 <= a[0] <= 1.0 and -1.0 <= a[1] <= 1.0 for a in aims)
+    assert all(a[1] < 0 for a in aims)
+    # A tile on the far side from the character pulls the eyes that way.
+    pointing = [e for e in plan["expressions"] if e["brows"] and e["end"] - e["start"] > 1.0]
+    assert pointing
+
+
+def test_tile_centers_track_the_rendered_rows():
+    assert tile_centers(0) == []
+    # A lone tile is centred horizontally, not stretched across the row.
+    assert tile_centers(1)[0][0] == 0.5
+    two = tile_centers(2)
+    assert two[0][0] < 0.5 < two[1][0]
+    assert len(tile_centers(4)) == 4
+    # Four close-ups means two rows, so the last two sit lower than the first.
+    assert tile_centers(4)[3][1] > tile_centers(4)[0][1]
+    # Tiles always sit below the main photo.
+    assert all(y > 0.5 for _, y in tile_centers(3))
 
 
 def test_collage_rows_match_the_approved_layout():
