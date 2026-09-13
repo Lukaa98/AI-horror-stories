@@ -74,12 +74,17 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
         t += 3.4
         index += 1
     mouths = []
-    valid_mouths = {"closed", "small", "wide", "teeth", "smile"}
+    valid_mouths = {"closed", "small", "mbp", "ee", "ah", "oh", "fv", "wide", "teeth", "smile"}
     for entry in manifest.get("mouth_timeline") or []:
         start, end = max(0.0, float(entry["start"])), min(duration, float(entry["end"]))
         if math.isfinite(start) and math.isfinite(end) and end > start:
+            mouth = entry.get("mouth")
+            # Older manifests used a separate OO frame; the compact OH frame
+            # now covers both rounded vowel sounds.
+            if mouth == "oo":
+                mouth = "oh"
             mouths.append({"start": start, "end": end,
-                           "mouth": entry["mouth"] if entry.get("mouth") in valid_mouths else "closed"})
+                           "mouth": mouth if mouth in valid_mouths else "closed"})
     if not mouths:
         for index, word in enumerate(manifest.get("word_timeline") or []):
             start, end = max(0.0, float(word["start"])), min(duration, float(word["end"]))
