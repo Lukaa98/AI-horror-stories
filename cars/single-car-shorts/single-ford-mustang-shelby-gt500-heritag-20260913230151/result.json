@@ -1,0 +1,3551 @@
+{
+  "car": {
+    "make": "Ford",
+    "model": "Mustang Shelby Gt500 Heritage Edition",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Ford",
+    "model": "Mustang Shelby Gt500 Heritage Edition",
+    "query": "",
+    "start_year": 2022,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/9lYRdJ8O/2022-ford-mustang-shelby-gt500-heritage-edition?ss_id=dd23526e-123a-475a-b331-e04baec3b500&ref=pr_1_2",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/rNXeJvP7-ZQVhrmhHkh-(edit)2-t5SNBDqxIA.jpg?t=167571173342",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-EqsYdlUKexe.jpg?t=167538802583",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/c51905b0000b639a185eeb080dd879bf007f5604/photos/rNXeJvP7-Y096-wtXsO-(edit).jpg?t=167548537345",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-iGlv2MbjEu.jpg?t=167538796347",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/c51905b0000b639a185eeb080dd879bf007f5604/photos/rNXeJvP7-bI2YU3bddy-(edit).jpg?t=167558298974",
+    "photo_rival": "",
+    "disable_comparison": "false",
+    "extra_photos": "[{\"id\":\"closeup-1789329203495-0\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/c51905b0000b639a185eeb080dd879bf007f5604/photos/rNXeJvP7-8x5kZV1jjV-(edit).jpg?t=167548510154\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-1789329224980-1\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-5cfOSzJm8i.jpg?t=167538784268\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-1789329242822-2\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-Wcghmne6QK.jpg?t=167538813945\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-1789329257805-3\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-nG6F_f_2wzQ.jpg?t=167538807888\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-1789329267949-4\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-QyytXMGkhiV.jpg?t=167538805920\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-1789329277442-5\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-5LE_KlAzjtf.jpg?t=167538804022\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-1789329288161-6\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-QkoGgXFvHy.jpg?t=167538797498\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-1789329306607-7\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/c51905b0000b639a185eeb080dd879bf007f5604/photos/rNXeJvP7-vq0pw-8fC7-(edit).jpg?t=167548529419\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-1789329333584-8\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-WD5KvmfYCVb.jpg?t=167538790982\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-1789329346057-9\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-mGwLE2QkDR.jpg?t=167538817789\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-1789329359905-10\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-6wiCaP50L8i.jpg?t=167538802230\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-1789329384263-11\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/c51905b0000b639a185eeb080dd879bf007f5604/photos/rNXeJvP7-heW0NvxUW6-(edit).jpg?t=167548475519\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-1789329400145-12\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-T8J0fDBJ2Z.jpg?t=167538818172\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-1789329409939-13\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-KO-g9MBtb2_.jpg?t=167538804045\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-1789329422122-14\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-78fgll46uVk.jpg?t=167538787511\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-1789329475852-15\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-m2fjV3gwwRd.jpg?t=167538786910\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-1789329483202-16\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/14c4604d9ac6fb6345918128f71b7e74aa81aa3b/photos/rNXeJvP7-0X9OJ_yULNP.jpg?t=167538788847\",\"slot\":\"engine\",\"note\":\"\"}]"
+  },
+  "title": "Ford Mustang Shelby GT500 Heritage Edition (2022)",
+  "start_year": 2022,
+  "end_year": 2022,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Performance Icon",
+      "photo_label": "exterior front",
+      "narration": "The 2022 Ford Mustang Shelby GT500 Heritage Edition showcases dual black racing stripes from the hood to the rear spoiler, emphasizing its classic performance aesthetic. This model celebrates the Mustang's iconic legacy with striking design elements reminiscent of its historic predecessors.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Carbon Fiber Aerodynamics",
+      "photo_label": "exterior side",
+      "narration": "The carbon fiber rear spoiler stands out, emphasizing the GT500's performance-oriented design. It's a nod to its aerodynamically focused roots, underscored by the striking Cobra badge on the fender.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Aerodynamic Strength",
+      "photo_label": "exterior rear",
+      "narration": "The prominent rear wing and diffuser setup highlight the Shelby GT500 Heritage Edition's aerodynamic focus. Quad exhaust tips further showcase its performance-driven design.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "Supercharged V8 Power",
+      "photo_label": "engine bay",
+      "narration": "Under the hood, a supercharged 5.2-liter V8 engine with the Cobra emblem dominates. It delivers an impressive 760 horsepower and 625 lb-ft of torque.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": 760,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "760 hp",
+      "stat_label_2": "Torque",
+      "stat_value_2": "625 lb-ft"
+    },
+    {
+      "media_type": "interior",
+      "headline": "Carbon Fiber Interior",
+      "photo_label": "interior",
+      "narration": "Inside, the GT500 features carbon fiber accents on the dashboard and door panels. The Recaro seats with black suede and white leather accentuate its sport-focused cabin.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Heritage Inspiration",
+      "photo_label": "[front-closeup-1789329257805-3-3] Front close-up",
+      "narration": "Distinct racing stripes and angular headlights on the GT500 Heritage Edition echo classic Shelby styling cues, enhancing its performance aesthetic.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Power and Rivalry",
+      "photo_label": "",
+      "narration": "Matched with the Chevrolet Camaro ZL1, the GT500 stands out with more horsepower, 760 versus the Camaro's 650. However, the Camaro\u2019s slightly better quarter-mile time keeps the competition fierce.",
+      "rival_make": "Chevrolet",
+      "rival_model": "Camaro ZL1",
+      "main_horsepower": 760,
+      "rival_horsepower": 650,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "760 hp vs 650 hp",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Aero Details",
+      "photo_label": "[rear-closeup-1789329333584-8-8] Rear close-up",
+      "narration": "The carbon fiber rear wing not only underscores the GT500's design but also plays a crucial role in its aerodynamic efficiency.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "interior",
+      "headline": "Limited Edition",
+      "photo_label": "[interior-closeup-1789329384263-11-11] Interior close-up",
+      "narration": "The chassis plate inside the GT500 Heritage Edition highlights a unique serial number, marking its limited production run and collector's appeal.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Closing Question",
+      "photo_label": "",
+      "narration": "With all these performance features, would you choose the Shelby GT500 Heritage Edition over its rivals? Let us know your pick.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://www.caranddriver.com/ford/mustang-shelby-gt500-2022",
+    "https://www.motortrend.com/cars/ford/mustang/2022/",
+    "https://www.cars.com/research/ford-mustang_shelby_2022/",
+    "https://www.edmunds.com/ford/mustang/2022/gt500/"
+  ],
+  "script": "The 2022 Ford Mustang Shelby GT500 Heritage Edition showcases dual black racing stripes from the hood to the rear spoiler, emphasizing its classic performance aesthetic. This model celebrates the Mustang's iconic legacy with striking design elements reminiscent of its historic predecessors. The carbon fiber rear spoiler stands out, emphasizing the GT500's performance-oriented design. It's a nod to its aerodynamically focused roots, underscored by the striking Cobra badge on the fender. The prominent rear wing and diffuser setup highlight the Shelby GT500 Heritage Edition's aerodynamic focus. Quad exhaust tips further showcase its performance-driven design. Under the hood, a supercharged 5.2-liter V8 engine with the Cobra emblem dominates. It delivers an impressive 760 horsepower and 625 lb-ft of torque. Inside, the GT500 features carbon fiber accents on the dashboard and door panels. The Recaro seats with black suede and white leather accentuate its sport-focused cabin. Distinct racing stripes and angular headlights on the GT500 Heritage Edition echo classic Shelby styling cues, enhancing its performance aesthetic. Matched with the Chevrolet Camaro ZL1, the GT500 stands out with more horsepower, 760 versus the Camaro's 650. However, the Camaro\u2019s slightly better quarter-mile time keeps the competition fierce. The carbon fiber rear wing not only underscores the GT500's design but also plays a crucial role in its aerodynamic efficiency. The chassis plate inside the GT500 Heritage Edition highlights a unique serial number, marking its limited production run and collector's appeal. With all these performance features, would you choose the Shelby GT500 Heritage Edition over its rivals? Let us know your pick.",
+  "word_count": 257,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 58.0,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ford-mustang-shelby-gt500-heritag-20260913230151/narration.mp3",
+  "duration_seconds": 58.05,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.18,
+      "end": 0.27,
+      "mouth": "small"
+    },
+    {
+      "start": 0.27,
+      "end": 0.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.36,
+      "end": 0.72,
+      "mouth": "small"
+    },
+    {
+      "start": 0.72,
+      "end": 0.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.9,
+      "end": 1.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.08,
+      "end": 2.61,
+      "mouth": "small"
+    },
+    {
+      "start": 2.61,
+      "end": 2.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.79,
+      "end": 3.15,
+      "mouth": "small"
+    },
+    {
+      "start": 3.15,
+      "end": 3.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.24,
+      "end": 3.78,
+      "mouth": "small"
+    },
+    {
+      "start": 3.78,
+      "end": 3.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.87,
+      "end": 4.05,
+      "mouth": "small"
+    },
+    {
+      "start": 4.05,
+      "end": 4.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.14,
+      "end": 4.68,
+      "mouth": "small"
+    },
+    {
+      "start": 4.68,
+      "end": 4.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.95,
+      "end": 5.13,
+      "mouth": "small"
+    },
+    {
+      "start": 5.13,
+      "end": 5.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.22,
+      "end": 6.12,
+      "mouth": "small"
+    },
+    {
+      "start": 6.12,
+      "end": 6.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.48,
+      "end": 7.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.02,
+      "end": 7.92,
+      "mouth": "small"
+    },
+    {
+      "start": 7.92,
+      "end": 8.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.1,
+      "end": 8.55,
+      "mouth": "small"
+    },
+    {
+      "start": 8.55,
+      "end": 8.73,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.73,
+      "end": 8.91,
+      "mouth": "small"
+    },
+    {
+      "start": 8.91,
+      "end": 9.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.0,
+      "end": 9.72,
+      "mouth": "small"
+    },
+    {
+      "start": 9.72,
+      "end": 10.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.26,
+      "end": 10.35,
+      "mouth": "small"
+    },
+    {
+      "start": 10.35,
+      "end": 10.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.44,
+      "end": 10.53,
+      "mouth": "small"
+    },
+    {
+      "start": 10.53,
+      "end": 10.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.62,
+      "end": 10.71,
+      "mouth": "small"
+    },
+    {
+      "start": 10.71,
+      "end": 10.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.8,
+      "end": 10.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.89,
+      "end": 10.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.98,
+      "end": 11.34,
+      "mouth": "small"
+    },
+    {
+      "start": 11.34,
+      "end": 11.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.61,
+      "end": 11.79,
+      "mouth": "small"
+    },
+    {
+      "start": 11.79,
+      "end": 11.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.88,
+      "end": 12.42,
+      "mouth": "small"
+    },
+    {
+      "start": 12.42,
+      "end": 12.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.51,
+      "end": 13.23,
+      "mouth": "small"
+    },
+    {
+      "start": 13.23,
+      "end": 13.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.5,
+      "end": 13.68,
+      "mouth": "small"
+    },
+    {
+      "start": 13.68,
+      "end": 13.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.77,
+      "end": 14.04,
+      "mouth": "small"
+    },
+    {
+      "start": 14.04,
+      "end": 14.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.13,
+      "end": 14.76,
+      "mouth": "small"
+    },
+    {
+      "start": 14.76,
+      "end": 15.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.03,
+      "end": 15.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.12,
+      "end": 15.48,
+      "mouth": "small"
+    },
+    {
+      "start": 15.48,
+      "end": 15.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.57,
+      "end": 16.38,
+      "mouth": "small"
+    },
+    {
+      "start": 16.38,
+      "end": 16.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.74,
+      "end": 16.83,
+      "mouth": "small"
+    },
+    {
+      "start": 16.83,
+      "end": 17.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.01,
+      "end": 17.1,
+      "mouth": "small"
+    },
+    {
+      "start": 17.1,
+      "end": 17.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.19,
+      "end": 17.46,
+      "mouth": "small"
+    },
+    {
+      "start": 17.46,
+      "end": 17.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.55,
+      "end": 17.82,
+      "mouth": "small"
+    },
+    {
+      "start": 17.82,
+      "end": 18.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.0,
+      "end": 18.09,
+      "mouth": "small"
+    },
+    {
+      "start": 18.09,
+      "end": 18.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.18,
+      "end": 18.36,
+      "mouth": "small"
+    },
+    {
+      "start": 18.36,
+      "end": 18.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.45,
+      "end": 19.89,
+      "mouth": "small"
+    },
+    {
+      "start": 19.89,
+      "end": 20.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.34,
+      "end": 20.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.43,
+      "end": 20.52,
+      "mouth": "small"
+    },
+    {
+      "start": 20.52,
+      "end": 20.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.61,
+      "end": 21.87,
+      "mouth": "small"
+    },
+    {
+      "start": 21.87,
+      "end": 22.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.23,
+      "end": 22.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.5,
+      "end": 22.59,
+      "mouth": "small"
+    },
+    {
+      "start": 22.59,
+      "end": 22.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.68,
+      "end": 22.95,
+      "mouth": "small"
+    },
+    {
+      "start": 22.95,
+      "end": 23.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.04,
+      "end": 23.31,
+      "mouth": "small"
+    },
+    {
+      "start": 23.31,
+      "end": 23.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "small"
+    },
+    {
+      "start": 23.49,
+      "end": 23.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.58,
+      "end": 24.03,
+      "mouth": "small"
+    },
+    {
+      "start": 24.03,
+      "end": 24.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.12,
+      "end": 24.3,
+      "mouth": "small"
+    },
+    {
+      "start": 24.3,
+      "end": 24.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.39,
+      "end": 24.93,
+      "mouth": "small"
+    },
+    {
+      "start": 24.93,
+      "end": 25.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.2,
+      "end": 25.38,
+      "mouth": "small"
+    },
+    {
+      "start": 25.38,
+      "end": 25.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.56,
+      "end": 25.65,
+      "mouth": "small"
+    },
+    {
+      "start": 25.65,
+      "end": 25.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.74,
+      "end": 26.64,
+      "mouth": "small"
+    },
+    {
+      "start": 26.64,
+      "end": 26.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.82,
+      "end": 27.0,
+      "mouth": "small"
+    },
+    {
+      "start": 27.0,
+      "end": 27.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.09,
+      "end": 27.27,
+      "mouth": "small"
+    },
+    {
+      "start": 27.27,
+      "end": 27.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.36,
+      "end": 27.45,
+      "mouth": "small"
+    },
+    {
+      "start": 27.45,
+      "end": 27.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.54,
+      "end": 27.81,
+      "mouth": "small"
+    },
+    {
+      "start": 27.81,
+      "end": 28.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.26,
+      "end": 28.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.35,
+      "end": 28.44,
+      "mouth": "small"
+    },
+    {
+      "start": 28.44,
+      "end": 28.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.53,
+      "end": 28.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.71,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 28.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.89,
+      "end": 28.98,
+      "mouth": "small"
+    },
+    {
+      "start": 28.98,
+      "end": 29.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.07,
+      "end": 29.52,
+      "mouth": "small"
+    },
+    {
+      "start": 29.52,
+      "end": 29.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.61,
+      "end": 30.06,
+      "mouth": "small"
+    },
+    {
+      "start": 30.06,
+      "end": 30.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.24,
+      "end": 30.96,
+      "mouth": "small"
+    },
+    {
+      "start": 30.96,
+      "end": 31.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.41,
+      "end": 31.5,
+      "mouth": "small"
+    },
+    {
+      "start": 31.5,
+      "end": 31.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.68,
+      "end": 32.22,
+      "mouth": "small"
+    },
+    {
+      "start": 32.22,
+      "end": 32.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.31,
+      "end": 32.67,
+      "mouth": "small"
+    },
+    {
+      "start": 32.67,
+      "end": 32.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.85,
+      "end": 33.48,
+      "mouth": "small"
+    },
+    {
+      "start": 33.48,
+      "end": 33.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.57,
+      "end": 33.75,
+      "mouth": "small"
+    },
+    {
+      "start": 33.75,
+      "end": 34.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.02,
+      "end": 34.29,
+      "mouth": "small"
+    },
+    {
+      "start": 34.29,
+      "end": 34.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.38,
+      "end": 36.18,
+      "mouth": "small"
+    },
+    {
+      "start": 36.18,
+      "end": 36.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.36,
+      "end": 37.35,
+      "mouth": "small"
+    },
+    {
+      "start": 37.35,
+      "end": 37.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.53,
+      "end": 37.62,
+      "mouth": "small"
+    },
+    {
+      "start": 37.62,
+      "end": 37.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.71,
+      "end": 37.98,
+      "mouth": "small"
+    },
+    {
+      "start": 37.98,
+      "end": 38.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.07,
+      "end": 38.34,
+      "mouth": "small"
+    },
+    {
+      "start": 38.34,
+      "end": 38.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.61,
+      "end": 38.7,
+      "mouth": "small"
+    },
+    {
+      "start": 38.7,
+      "end": 38.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.79,
+      "end": 39.06,
+      "mouth": "small"
+    },
+    {
+      "start": 39.06,
+      "end": 39.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.15,
+      "end": 39.24,
+      "mouth": "small"
+    },
+    {
+      "start": 39.24,
+      "end": 39.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.42,
+      "end": 39.51,
+      "mouth": "small"
+    },
+    {
+      "start": 39.51,
+      "end": 39.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.6,
+      "end": 39.78,
+      "mouth": "small"
+    },
+    {
+      "start": 39.78,
+      "end": 39.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.96,
+      "end": 41.22,
+      "mouth": "small"
+    },
+    {
+      "start": 41.22,
+      "end": 41.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.4,
+      "end": 41.49,
+      "mouth": "small"
+    },
+    {
+      "start": 41.49,
+      "end": 41.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.58,
+      "end": 41.94,
+      "mouth": "small"
+    },
+    {
+      "start": 41.94,
+      "end": 42.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.12,
+      "end": 43.02,
+      "mouth": "small"
+    },
+    {
+      "start": 43.02,
+      "end": 43.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.29,
+      "end": 43.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.38,
+      "end": 43.47,
+      "mouth": "small"
+    },
+    {
+      "start": 43.47,
+      "end": 43.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.74,
+      "end": 43.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.92,
+      "end": 44.73,
+      "mouth": "small"
+    },
+    {
+      "start": 44.73,
+      "end": 44.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.91,
+      "end": 45.63,
+      "mouth": "small"
+    },
+    {
+      "start": 45.63,
+      "end": 45.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.9,
+      "end": 46.08,
+      "mouth": "small"
+    },
+    {
+      "start": 46.08,
+      "end": 46.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.17,
+      "end": 47.97,
+      "mouth": "small"
+    },
+    {
+      "start": 47.97,
+      "end": 48.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.15,
+      "end": 48.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.24,
+      "end": 48.87,
+      "mouth": "small"
+    },
+    {
+      "start": 48.87,
+      "end": 49.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.05,
+      "end": 49.68,
+      "mouth": "small"
+    },
+    {
+      "start": 49.68,
+      "end": 50.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.13,
+      "end": 51.57,
+      "mouth": "small"
+    },
+    {
+      "start": 51.57,
+      "end": 51.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.75,
+      "end": 51.84,
+      "mouth": "small"
+    },
+    {
+      "start": 51.84,
+      "end": 51.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.93,
+      "end": 52.56,
+      "mouth": "small"
+    },
+    {
+      "start": 52.56,
+      "end": 52.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.74,
+      "end": 53.55,
+      "mouth": "small"
+    },
+    {
+      "start": 53.55,
+      "end": 53.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.73,
+      "end": 54.18,
+      "mouth": "small"
+    },
+    {
+      "start": 54.18,
+      "end": 54.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.54,
+      "end": 54.63,
+      "mouth": "small"
+    },
+    {
+      "start": 54.63,
+      "end": 54.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.72,
+      "end": 54.9,
+      "mouth": "small"
+    },
+    {
+      "start": 54.9,
+      "end": 54.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.99,
+      "end": 55.26,
+      "mouth": "small"
+    },
+    {
+      "start": 55.26,
+      "end": 55.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 55.35,
+      "end": 55.8,
+      "mouth": "small"
+    },
+    {
+      "start": 55.8,
+      "end": 55.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.89,
+      "end": 57.15,
+      "mouth": "small"
+    },
+    {
+      "start": 57.15,
+      "end": 57.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 57.33,
+      "end": 57.78,
+      "mouth": "small"
+    },
+    {
+      "start": 57.78,
+      "end": 58.05,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "The",
+      "start": 0.0,
+      "end": 0.25999999046325684
+    },
+    {
+      "word": "2022",
+      "start": 0.25999999046325684,
+      "end": 0.6600000262260437
+    },
+    {
+      "word": "Ford",
+      "start": 0.6600000262260437,
+      "end": 1.0800000429153442
+    },
+    {
+      "word": "Mustang",
+      "start": 1.0800000429153442,
+      "end": 1.340000033378601
+    },
+    {
+      "word": "Shelby",
+      "start": 1.340000033378601,
+      "end": 1.559999942779541
+    },
+    {
+      "word": "GT500",
+      "start": 1.559999942779541,
+      "end": 2.059999942779541
+    },
+    {
+      "word": "Heritage",
+      "start": 2.059999942779541,
+      "end": 2.359999895095825
+    },
+    {
+      "word": "Edition",
+      "start": 2.359999895095825,
+      "end": 2.559999942779541
+    },
+    {
+      "word": "showcases",
+      "start": 2.559999942779541,
+      "end": 3.0399999618530273
+    },
+    {
+      "word": "dual",
+      "start": 3.0399999618530273,
+      "end": 3.240000009536743
+    },
+    {
+      "word": "black",
+      "start": 3.240000009536743,
+      "end": 3.4000000953674316
+    },
+    {
+      "word": "racing",
+      "start": 3.4000000953674316,
+      "end": 3.619999885559082
+    },
+    {
+      "word": "stripes",
+      "start": 3.619999885559082,
+      "end": 3.740000009536743
+    },
+    {
+      "word": "from",
+      "start": 3.740000009536743,
+      "end": 4.019999980926514
+    },
+    {
+      "word": "the",
+      "start": 4.019999980926514,
+      "end": 4.179999828338623
+    },
+    {
+      "word": "hood",
+      "start": 4.179999828338623,
+      "end": 4.179999828338623
+    },
+    {
+      "word": "to",
+      "start": 4.179999828338623,
+      "end": 4.300000190734863
+    },
+    {
+      "word": "the",
+      "start": 4.300000190734863,
+      "end": 4.420000076293945
+    },
+    {
+      "word": "rear",
+      "start": 4.420000076293945,
+      "end": 4.5
+    },
+    {
+      "word": "spoiler",
+      "start": 4.5,
+      "end": 4.699999809265137
+    },
+    {
+      "word": "emphasizing",
+      "start": 5.179999828338623,
+      "end": 5.239999771118164
+    },
+    {
+      "word": "its",
+      "start": 5.239999771118164,
+      "end": 5.420000076293945
+    },
+    {
+      "word": "classic",
+      "start": 5.420000076293945,
+      "end": 5.599999904632568
+    },
+    {
+      "word": "performance",
+      "start": 5.599999904632568,
+      "end": 5.860000133514404
+    },
+    {
+      "word": "aesthetic",
+      "start": 5.860000133514404,
+      "end": 6.099999904632568
+    },
+    {
+      "word": "This",
+      "start": 6.519999980926514,
+      "end": 6.579999923706055
+    },
+    {
+      "word": "model",
+      "start": 6.579999923706055,
+      "end": 6.739999771118164
+    },
+    {
+      "word": "celebrates",
+      "start": 6.739999771118164,
+      "end": 7.019999980926514
+    },
+    {
+      "word": "the",
+      "start": 7.019999980926514,
+      "end": 7.179999828338623
+    },
+    {
+      "word": "Mustang's",
+      "start": 7.179999828338623,
+      "end": 7.460000038146973
+    },
+    {
+      "word": "iconic",
+      "start": 7.460000038146973,
+      "end": 7.639999866485596
+    },
+    {
+      "word": "legacy",
+      "start": 7.639999866485596,
+      "end": 7.860000133514404
+    },
+    {
+      "word": "with",
+      "start": 7.860000133514404,
+      "end": 8.220000267028809
+    },
+    {
+      "word": "striking",
+      "start": 8.220000267028809,
+      "end": 8.399999618530273
+    },
+    {
+      "word": "design",
+      "start": 8.399999618530273,
+      "end": 8.619999885559082
+    },
+    {
+      "word": "elements",
+      "start": 8.619999885559082,
+      "end": 8.800000190734863
+    },
+    {
+      "word": "reminiscent",
+      "start": 8.800000190734863,
+      "end": 9.0600004196167
+    },
+    {
+      "word": "of",
+      "start": 9.0600004196167,
+      "end": 9.199999809265137
+    },
+    {
+      "word": "its",
+      "start": 9.199999809265137,
+      "end": 9.34000015258789
+    },
+    {
+      "word": "historic",
+      "start": 9.34000015258789,
+      "end": 9.520000457763672
+    },
+    {
+      "word": "predecessors",
+      "start": 9.520000457763672,
+      "end": 9.84000015258789
+    },
+    {
+      "word": "The",
+      "start": 10.300000190734863,
+      "end": 10.380000114440918
+    },
+    {
+      "word": "carbon",
+      "start": 10.380000114440918,
+      "end": 10.520000457763672
+    },
+    {
+      "word": "fiber",
+      "start": 10.520000457763672,
+      "end": 10.699999809265137
+    },
+    {
+      "word": "rear",
+      "start": 10.699999809265137,
+      "end": 11.020000457763672
+    },
+    {
+      "word": "spoiler",
+      "start": 11.020000457763672,
+      "end": 11.020000457763672
+    },
+    {
+      "word": "stands",
+      "start": 11.020000457763672,
+      "end": 11.239999771118164
+    },
+    {
+      "word": "out",
+      "start": 11.239999771118164,
+      "end": 11.600000381469727
+    },
+    {
+      "word": "emphasizing",
+      "start": 11.880000114440918,
+      "end": 11.880000114440918
+    },
+    {
+      "word": "the",
+      "start": 11.880000114440918,
+      "end": 12.0600004196167
+    },
+    {
+      "word": "GT500's",
+      "start": 12.0600004196167,
+      "end": 12.539999961853027
+    },
+    {
+      "word": "performance",
+      "start": 12.539999961853027,
+      "end": 12.779999732971191
+    },
+    {
+      "word": "oriented",
+      "start": 12.779999732971191,
+      "end": 13.020000457763672
+    },
+    {
+      "word": "design",
+      "start": 13.020000457763672,
+      "end": 13.260000228881836
+    },
+    {
+      "word": "It's",
+      "start": 13.539999961853027,
+      "end": 13.640000343322754
+    },
+    {
+      "word": "a",
+      "start": 13.640000343322754,
+      "end": 13.779999732971191
+    },
+    {
+      "word": "nod",
+      "start": 13.779999732971191,
+      "end": 13.779999732971191
+    },
+    {
+      "word": "to",
+      "start": 13.779999732971191,
+      "end": 13.899999618530273
+    },
+    {
+      "word": "its",
+      "start": 13.899999618530273,
+      "end": 14.020000457763672
+    },
+    {
+      "word": "aerodynamically",
+      "start": 14.020000457763672,
+      "end": 14.359999656677246
+    },
+    {
+      "word": "focused",
+      "start": 14.359999656677246,
+      "end": 14.600000381469727
+    },
+    {
+      "word": "roots",
+      "start": 14.600000381469727,
+      "end": 14.800000190734863
+    },
+    {
+      "word": "underscored",
+      "start": 15.119999885559082,
+      "end": 15.420000076293945
+    },
+    {
+      "word": "by",
+      "start": 15.420000076293945,
+      "end": 15.4399995803833
+    },
+    {
+      "word": "the",
+      "start": 15.4399995803833,
+      "end": 15.619999885559082
+    },
+    {
+      "word": "striking",
+      "start": 15.619999885559082,
+      "end": 15.760000228881836
+    },
+    {
+      "word": "Cobra",
+      "start": 15.760000228881836,
+      "end": 15.920000076293945
+    },
+    {
+      "word": "badge",
+      "start": 15.920000076293945,
+      "end": 16.079999923706055
+    },
+    {
+      "word": "on",
+      "start": 16.079999923706055,
+      "end": 16.18000030517578
+    },
+    {
+      "word": "the",
+      "start": 16.18000030517578,
+      "end": 16.3799991607666
+    },
+    {
+      "word": "fender",
+      "start": 16.3799991607666,
+      "end": 16.3799991607666
+    },
+    {
+      "word": "The",
+      "start": 16.719999313354492,
+      "end": 16.860000610351562
+    },
+    {
+      "word": "prominent",
+      "start": 16.860000610351562,
+      "end": 17.040000915527344
+    },
+    {
+      "word": "rear",
+      "start": 17.040000915527344,
+      "end": 17.219999313354492
+    },
+    {
+      "word": "wing",
+      "start": 17.219999313354492,
+      "end": 17.34000015258789
+    },
+    {
+      "word": "and",
+      "start": 17.34000015258789,
+      "end": 17.459999084472656
+    },
+    {
+      "word": "diffuser",
+      "start": 17.459999084472656,
+      "end": 17.600000381469727
+    },
+    {
+      "word": "setup",
+      "start": 17.600000381469727,
+      "end": 17.860000610351562
+    },
+    {
+      "word": "highlight",
+      "start": 17.860000610351562,
+      "end": 18.219999313354492
+    },
+    {
+      "word": "the",
+      "start": 18.219999313354492,
+      "end": 18.520000457763672
+    },
+    {
+      "word": "Shelby",
+      "start": 18.520000457763672,
+      "end": 18.520000457763672
+    },
+    {
+      "word": "GT500",
+      "start": 18.520000457763672,
+      "end": 19.0
+    },
+    {
+      "word": "Heritage",
+      "start": 19.0,
+      "end": 19.18000030517578
+    },
+    {
+      "word": "Edition's",
+      "start": 19.18000030517578,
+      "end": 19.5
+    },
+    {
+      "word": "aerodynamic",
+      "start": 19.5,
+      "end": 19.719999313354492
+    },
+    {
+      "word": "focus",
+      "start": 19.719999313354492,
+      "end": 20.020000457763672
+    },
+    {
+      "word": "Quad",
+      "start": 20.360000610351562,
+      "end": 20.459999084472656
+    },
+    {
+      "word": "exhaust",
+      "start": 20.459999084472656,
+      "end": 20.65999984741211
+    },
+    {
+      "word": "tips",
+      "start": 20.65999984741211,
+      "end": 20.799999237060547
+    },
+    {
+      "word": "further",
+      "start": 20.799999237060547,
+      "end": 21.020000457763672
+    },
+    {
+      "word": "showcase",
+      "start": 21.020000457763672,
+      "end": 21.18000030517578
+    },
+    {
+      "word": "its",
+      "start": 21.18000030517578,
+      "end": 21.360000610351562
+    },
+    {
+      "word": "performance",
+      "start": 21.360000610351562,
+      "end": 21.540000915527344
+    },
+    {
+      "word": "driven",
+      "start": 21.540000915527344,
+      "end": 21.68000030517578
+    },
+    {
+      "word": "design",
+      "start": 21.68000030517578,
+      "end": 21.899999618530273
+    },
+    {
+      "word": "Under",
+      "start": 22.260000228881836,
+      "end": 22.360000610351562
+    },
+    {
+      "word": "the",
+      "start": 22.360000610351562,
+      "end": 22.579999923706055
+    },
+    {
+      "word": "hood",
+      "start": 22.579999923706055,
+      "end": 22.579999923706055
+    },
+    {
+      "word": "a",
+      "start": 22.719999313354492,
+      "end": 22.81999969482422
+    },
+    {
+      "word": "supercharged",
+      "start": 22.81999969482422,
+      "end": 23.100000381469727
+    },
+    {
+      "word": "5",
+      "start": 23.100000381469727,
+      "end": 23.31999969482422
+    },
+    {
+      "word": "2",
+      "start": 23.31999969482422,
+      "end": 23.559999465942383
+    },
+    {
+      "word": "liter",
+      "start": 23.559999465942383,
+      "end": 23.65999984741211
+    },
+    {
+      "word": "V8",
+      "start": 23.65999984741211,
+      "end": 23.860000610351562
+    },
+    {
+      "word": "engine",
+      "start": 23.860000610351562,
+      "end": 24.059999465942383
+    },
+    {
+      "word": "with",
+      "start": 24.059999465942383,
+      "end": 24.239999771118164
+    },
+    {
+      "word": "the",
+      "start": 24.239999771118164,
+      "end": 24.420000076293945
+    },
+    {
+      "word": "Cobra",
+      "start": 24.420000076293945,
+      "end": 24.420000076293945
+    },
+    {
+      "word": "emblem",
+      "start": 24.420000076293945,
+      "end": 24.639999389648438
+    },
+    {
+      "word": "dominates",
+      "start": 24.639999389648438,
+      "end": 24.979999542236328
+    },
+    {
+      "word": "It",
+      "start": 25.219999313354492,
+      "end": 25.3799991607666
+    },
+    {
+      "word": "delivers",
+      "start": 25.3799991607666,
+      "end": 25.479999542236328
+    },
+    {
+      "word": "an",
+      "start": 25.479999542236328,
+      "end": 25.860000610351562
+    },
+    {
+      "word": "impressive",
+      "start": 25.860000610351562,
+      "end": 25.860000610351562
+    },
+    {
+      "word": "760",
+      "start": 25.860000610351562,
+      "end": 26.31999969482422
+    },
+    {
+      "word": "horsepower",
+      "start": 26.31999969482422,
+      "end": 26.600000381469727
+    },
+    {
+      "word": "and",
+      "start": 26.600000381469727,
+      "end": 26.920000076293945
+    },
+    {
+      "word": "625",
+      "start": 26.920000076293945,
+      "end": 27.3799991607666
+    },
+    {
+      "word": "pound",
+      "start": 27.3799991607666,
+      "end": 27.600000381469727
+    },
+    {
+      "word": "feet",
+      "start": 27.600000381469727,
+      "end": 27.6200008392334
+    },
+    {
+      "word": "of",
+      "start": 27.6200008392334,
+      "end": 27.899999618530273
+    },
+    {
+      "word": "torque",
+      "start": 27.899999618530273,
+      "end": 28.0
+    },
+    {
+      "word": "Inside",
+      "start": 28.0,
+      "end": 28.540000915527344
+    },
+    {
+      "word": "the",
+      "start": 28.760000228881836,
+      "end": 28.84000015258789
+    },
+    {
+      "word": "GT500",
+      "start": 28.84000015258789,
+      "end": 29.15999984741211
+    },
+    {
+      "word": "features",
+      "start": 29.15999984741211,
+      "end": 29.420000076293945
+    },
+    {
+      "word": "carbon",
+      "start": 29.420000076293945,
+      "end": 29.6200008392334
+    },
+    {
+      "word": "fiber",
+      "start": 29.6200008392334,
+      "end": 29.799999237060547
+    },
+    {
+      "word": "accents",
+      "start": 29.799999237060547,
+      "end": 30.020000457763672
+    },
+    {
+      "word": "on",
+      "start": 30.020000457763672,
+      "end": 30.299999237060547
+    },
+    {
+      "word": "the",
+      "start": 30.299999237060547,
+      "end": 30.459999084472656
+    },
+    {
+      "word": "dashboard",
+      "start": 30.459999084472656,
+      "end": 30.579999923706055
+    },
+    {
+      "word": "and",
+      "start": 30.579999923706055,
+      "end": 30.739999771118164
+    },
+    {
+      "word": "door",
+      "start": 30.739999771118164,
+      "end": 30.84000015258789
+    },
+    {
+      "word": "panels",
+      "start": 30.84000015258789,
+      "end": 31.020000457763672
+    },
+    {
+      "word": "The",
+      "start": 31.420000076293945,
+      "end": 31.520000457763672
+    },
+    {
+      "word": "Recaro",
+      "start": 31.520000457763672,
+      "end": 31.719999313354492
+    },
+    {
+      "word": "seats",
+      "start": 31.719999313354492,
+      "end": 31.84000015258789
+    },
+    {
+      "word": "with",
+      "start": 31.84000015258789,
+      "end": 31.979999542236328
+    },
+    {
+      "word": "black",
+      "start": 31.979999542236328,
+      "end": 32.13999938964844
+    },
+    {
+      "word": "suede",
+      "start": 32.13999938964844,
+      "end": 32.279998779296875
+    },
+    {
+      "word": "and",
+      "start": 32.279998779296875,
+      "end": 32.400001525878906
+    },
+    {
+      "word": "white",
+      "start": 32.400001525878906,
+      "end": 32.5
+    },
+    {
+      "word": "leather",
+      "start": 32.5,
+      "end": 32.68000030517578
+    },
+    {
+      "word": "accentuate",
+      "start": 32.68000030517578,
+      "end": 33.119998931884766
+    },
+    {
+      "word": "its",
+      "start": 33.119998931884766,
+      "end": 33.2400016784668
+    },
+    {
+      "word": "sport",
+      "start": 33.2400016784668,
+      "end": 33.380001068115234
+    },
+    {
+      "word": "focused",
+      "start": 33.380001068115234,
+      "end": 33.560001373291016
+    },
+    {
+      "word": "cabin",
+      "start": 33.560001373291016,
+      "end": 33.97999954223633
+    },
+    {
+      "word": "Distinct",
+      "start": 34.20000076293945,
+      "end": 34.2599983215332
+    },
+    {
+      "word": "racing",
+      "start": 34.2599983215332,
+      "end": 34.5
+    },
+    {
+      "word": "stripes",
+      "start": 34.5,
+      "end": 34.63999938964844
+    },
+    {
+      "word": "and",
+      "start": 34.63999938964844,
+      "end": 34.7599983215332
+    },
+    {
+      "word": "angular",
+      "start": 34.7599983215332,
+      "end": 34.959999084472656
+    },
+    {
+      "word": "headlights",
+      "start": 34.959999084472656,
+      "end": 35.13999938964844
+    },
+    {
+      "word": "on",
+      "start": 35.13999938964844,
+      "end": 35.2400016784668
+    },
+    {
+      "word": "the",
+      "start": 35.2400016784668,
+      "end": 35.36000061035156
+    },
+    {
+      "word": "GT500",
+      "start": 35.36000061035156,
+      "end": 35.7400016784668
+    },
+    {
+      "word": "Heritage",
+      "start": 35.7400016784668,
+      "end": 35.959999084472656
+    },
+    {
+      "word": "Edition",
+      "start": 35.959999084472656,
+      "end": 36.15999984741211
+    },
+    {
+      "word": "echo",
+      "start": 36.15999984741211,
+      "end": 36.540000915527344
+    },
+    {
+      "word": "classic",
+      "start": 36.540000915527344,
+      "end": 36.81999969482422
+    },
+    {
+      "word": "Shelby",
+      "start": 36.81999969482422,
+      "end": 36.91999816894531
+    },
+    {
+      "word": "styling",
+      "start": 36.91999816894531,
+      "end": 37.18000030517578
+    },
+    {
+      "word": "cues",
+      "start": 37.18000030517578,
+      "end": 37.380001068115234
+    },
+    {
+      "word": "enhancing",
+      "start": 37.79999923706055,
+      "end": 37.79999923706055
+    },
+    {
+      "word": "its",
+      "start": 37.79999923706055,
+      "end": 37.900001525878906
+    },
+    {
+      "word": "performance",
+      "start": 37.900001525878906,
+      "end": 38.15999984741211
+    },
+    {
+      "word": "aesthetic",
+      "start": 38.15999984741211,
+      "end": 38.400001525878906
+    },
+    {
+      "word": "Matched",
+      "start": 38.81999969482422,
+      "end": 38.81999969482422
+    },
+    {
+      "word": "with",
+      "start": 38.81999969482422,
+      "end": 38.939998626708984
+    },
+    {
+      "word": "the",
+      "start": 38.939998626708984,
+      "end": 39.220001220703125
+    },
+    {
+      "word": "Chevrolet",
+      "start": 39.220001220703125,
+      "end": 39.220001220703125
+    },
+    {
+      "word": "Camaro",
+      "start": 39.220001220703125,
+      "end": 39.380001068115234
+    },
+    {
+      "word": "ZL1",
+      "start": 39.380001068115234,
+      "end": 39.7599983215332
+    },
+    {
+      "word": "the",
+      "start": 39.939998626708984,
+      "end": 40.060001373291016
+    },
+    {
+      "word": "GT500",
+      "start": 40.060001373291016,
+      "end": 40.380001068115234
+    },
+    {
+      "word": "stands",
+      "start": 40.380001068115234,
+      "end": 40.63999938964844
+    },
+    {
+      "word": "out",
+      "start": 40.63999938964844,
+      "end": 40.7400016784668
+    },
+    {
+      "word": "with",
+      "start": 40.7400016784668,
+      "end": 40.84000015258789
+    },
+    {
+      "word": "more",
+      "start": 40.84000015258789,
+      "end": 40.959999084472656
+    },
+    {
+      "word": "horsepower",
+      "start": 40.959999084472656,
+      "end": 41.18000030517578
+    },
+    {
+      "word": "760",
+      "start": 41.52000045776367,
+      "end": 41.939998626708984
+    },
+    {
+      "word": "versus",
+      "start": 41.939998626708984,
+      "end": 42.2400016784668
+    },
+    {
+      "word": "the",
+      "start": 42.2400016784668,
+      "end": 42.5
+    },
+    {
+      "word": "Camaro's",
+      "start": 42.5,
+      "end": 42.58000183105469
+    },
+    {
+      "word": "650",
+      "start": 42.58000183105469,
+      "end": 42.939998626708984
+    },
+    {
+      "word": "However",
+      "start": 43.29999923706055,
+      "end": 43.52000045776367
+    },
+    {
+      "word": "the",
+      "start": 43.52000045776367,
+      "end": 43.79999923706055
+    },
+    {
+      "word": "Camaro's",
+      "start": 43.79999923706055,
+      "end": 44.0
+    },
+    {
+      "word": "slightly",
+      "start": 44.0,
+      "end": 44.15999984741211
+    },
+    {
+      "word": "better",
+      "start": 44.15999984741211,
+      "end": 44.31999969482422
+    },
+    {
+      "word": "quarter",
+      "start": 44.31999969482422,
+      "end": 44.459999084472656
+    },
+    {
+      "word": "mile",
+      "start": 44.459999084472656,
+      "end": 44.58000183105469
+    },
+    {
+      "word": "time",
+      "start": 44.58000183105469,
+      "end": 44.900001525878906
+    },
+    {
+      "word": "keeps",
+      "start": 44.900001525878906,
+      "end": 45.060001373291016
+    },
+    {
+      "word": "the",
+      "start": 45.060001373291016,
+      "end": 45.400001525878906
+    },
+    {
+      "word": "competition",
+      "start": 45.400001525878906,
+      "end": 45.400001525878906
+    },
+    {
+      "word": "fierce",
+      "start": 45.400001525878906,
+      "end": 45.65999984741211
+    },
+    {
+      "word": "The",
+      "start": 45.91999816894531,
+      "end": 46.060001373291016
+    },
+    {
+      "word": "carbon",
+      "start": 46.060001373291016,
+      "end": 46.18000030517578
+    },
+    {
+      "word": "fiber",
+      "start": 46.18000030517578,
+      "end": 46.34000015258789
+    },
+    {
+      "word": "rear",
+      "start": 46.34000015258789,
+      "end": 46.540000915527344
+    },
+    {
+      "word": "wing",
+      "start": 46.540000915527344,
+      "end": 46.58000183105469
+    },
+    {
+      "word": "not",
+      "start": 46.58000183105469,
+      "end": 46.720001220703125
+    },
+    {
+      "word": "only",
+      "start": 46.720001220703125,
+      "end": 46.880001068115234
+    },
+    {
+      "word": "underscores",
+      "start": 46.880001068115234,
+      "end": 47.119998931884766
+    },
+    {
+      "word": "the",
+      "start": 47.119998931884766,
+      "end": 47.279998779296875
+    },
+    {
+      "word": "GT500's",
+      "start": 47.279998779296875,
+      "end": 47.720001220703125
+    },
+    {
+      "word": "design",
+      "start": 47.720001220703125,
+      "end": 47.959999084472656
+    },
+    {
+      "word": "but",
+      "start": 48.02000045776367,
+      "end": 48.20000076293945
+    },
+    {
+      "word": "also",
+      "start": 48.20000076293945,
+      "end": 48.41999816894531
+    },
+    {
+      "word": "plays",
+      "start": 48.41999816894531,
+      "end": 48.459999084472656
+    },
+    {
+      "word": "a",
+      "start": 48.459999084472656,
+      "end": 48.599998474121094
+    },
+    {
+      "word": "crucial",
+      "start": 48.599998474121094,
+      "end": 48.70000076293945
+    },
+    {
+      "word": "role",
+      "start": 48.70000076293945,
+      "end": 48.880001068115234
+    },
+    {
+      "word": "in",
+      "start": 48.880001068115234,
+      "end": 49.099998474121094
+    },
+    {
+      "word": "its",
+      "start": 49.099998474121094,
+      "end": 49.20000076293945
+    },
+    {
+      "word": "aerodynamic",
+      "start": 49.20000076293945,
+      "end": 49.47999954223633
+    },
+    {
+      "word": "efficiency",
+      "start": 49.47999954223633,
+      "end": 49.7400016784668
+    },
+    {
+      "word": "The",
+      "start": 50.099998474121094,
+      "end": 50.279998779296875
+    },
+    {
+      "word": "chassis",
+      "start": 50.279998779296875,
+      "end": 50.380001068115234
+    },
+    {
+      "word": "plate",
+      "start": 50.380001068115234,
+      "end": 50.540000915527344
+    },
+    {
+      "word": "inside",
+      "start": 50.540000915527344,
+      "end": 50.70000076293945
+    },
+    {
+      "word": "the",
+      "start": 50.70000076293945,
+      "end": 50.86000061035156
+    },
+    {
+      "word": "GT500",
+      "start": 50.86000061035156,
+      "end": 51.20000076293945
+    },
+    {
+      "word": "Heritage",
+      "start": 51.20000076293945,
+      "end": 51.36000061035156
+    },
+    {
+      "word": "Edition",
+      "start": 51.36000061035156,
+      "end": 51.58000183105469
+    },
+    {
+      "word": "highlights",
+      "start": 51.58000183105469,
+      "end": 51.939998626708984
+    },
+    {
+      "word": "a",
+      "start": 51.939998626708984,
+      "end": 52.099998474121094
+    },
+    {
+      "word": "unique",
+      "start": 52.099998474121094,
+      "end": 52.20000076293945
+    },
+    {
+      "word": "serial",
+      "start": 52.20000076293945,
+      "end": 52.380001068115234
+    },
+    {
+      "word": "number",
+      "start": 52.380001068115234,
+      "end": 52.58000183105469
+    },
+    {
+      "word": "marking",
+      "start": 52.79999923706055,
+      "end": 52.880001068115234
+    },
+    {
+      "word": "its",
+      "start": 52.880001068115234,
+      "end": 53.02000045776367
+    },
+    {
+      "word": "limited",
+      "start": 53.02000045776367,
+      "end": 53.18000030517578
+    },
+    {
+      "word": "production",
+      "start": 53.18000030517578,
+      "end": 53.380001068115234
+    },
+    {
+      "word": "run",
+      "start": 53.380001068115234,
+      "end": 53.52000045776367
+    },
+    {
+      "word": "and",
+      "start": 53.52000045776367,
+      "end": 53.779998779296875
+    },
+    {
+      "word": "collector's",
+      "start": 53.779998779296875,
+      "end": 54.040000915527344
+    },
+    {
+      "word": "appeal",
+      "start": 54.040000915527344,
+      "end": 54.18000030517578
+    },
+    {
+      "word": "With",
+      "start": 54.540000915527344,
+      "end": 54.619998931884766
+    },
+    {
+      "word": "all",
+      "start": 54.619998931884766,
+      "end": 54.70000076293945
+    },
+    {
+      "word": "these",
+      "start": 54.70000076293945,
+      "end": 54.79999923706055
+    },
+    {
+      "word": "performance",
+      "start": 54.79999923706055,
+      "end": 55.040000915527344
+    },
+    {
+      "word": "features",
+      "start": 55.040000915527344,
+      "end": 55.2400016784668
+    },
+    {
+      "word": "would",
+      "start": 55.41999816894531,
+      "end": 55.5
+    },
+    {
+      "word": "you",
+      "start": 55.5,
+      "end": 55.619998931884766
+    },
+    {
+      "word": "choose",
+      "start": 55.619998931884766,
+      "end": 55.68000030517578
+    },
+    {
+      "word": "the",
+      "start": 55.68000030517578,
+      "end": 55.880001068115234
+    },
+    {
+      "word": "Shelby",
+      "start": 55.880001068115234,
+      "end": 55.900001525878906
+    },
+    {
+      "word": "GT500",
+      "start": 55.900001525878906,
+      "end": 56.34000015258789
+    },
+    {
+      "word": "Heritage",
+      "start": 56.34000015258789,
+      "end": 56.52000045776367
+    },
+    {
+      "word": "Edition",
+      "start": 56.52000045776367,
+      "end": 56.70000076293945
+    },
+    {
+      "word": "over",
+      "start": 56.70000076293945,
+      "end": 56.86000061035156
+    },
+    {
+      "word": "its",
+      "start": 56.86000061035156,
+      "end": 57.0
+    },
+    {
+      "word": "rivals",
+      "start": 57.0,
+      "end": 57.13999938964844
+    },
+    {
+      "word": "Let",
+      "start": 57.2400016784668,
+      "end": 57.47999954223633
+    },
+    {
+      "word": "us",
+      "start": 57.47999954223633,
+      "end": 57.560001373291016
+    },
+    {
+      "word": "know",
+      "start": 57.560001373291016,
+      "end": 57.619998931884766
+    },
+    {
+      "word": "your",
+      "start": 57.619998931884766,
+      "end": 57.70000076293945
+    },
+    {
+      "word": "thoughts",
+      "start": 57.70000076293945,
+      "end": 57.900001525878906
+    },
+    {
+      "word": "in",
+      "start": 57.900001525878906,
+      "end": 57.939998626708984
+    },
+    {
+      "word": "the",
+      "start": 57.939998626708984,
+      "end": 57.939998626708984
+    },
+    {
+      "word": "comments",
+      "start": 57.939998626708984,
+      "end": 57.939998626708984
+    },
+    {
+      "word": "section",
+      "start": 57.939998626708984,
+      "end": 57.939998626708984
+    },
+    {
+      "word": "below",
+      "start": 57.939998626708984,
+      "end": 57.939998626708984
+    },
+    {
+      "word": "and",
+      "start": 57.939998626708984,
+      "end": 57.939998626708984
+    },
+    {
+      "word": "don't",
+      "start": 57.939998626708984,
+      "end": 57.939998626708984
+    },
+    {
+      "word": "forget",
+      "start": 57.939998626708984,
+      "end": 57.959999084472656
+    },
+    {
+      "word": "to",
+      "start": 57.959999084472656,
+      "end": 57.959999084472656
+    },
+    {
+      "word": "like",
+      "start": 57.959999084472656,
+      "end": 57.959999084472656
+    },
+    {
+      "word": "and",
+      "start": 57.959999084472656,
+      "end": 57.959999084472656
+    },
+    {
+      "word": "subscribe",
+      "start": 57.959999084472656,
+      "end": 57.959999084472656
+    },
+    {
+      "word": "to",
+      "start": 57.959999084472656,
+      "end": 57.959999084472656
+    },
+    {
+      "word": "our",
+      "start": 57.959999084472656,
+      "end": 57.959999084472656
+    },
+    {
+      "word": "channel",
+      "start": 57.959999084472656,
+      "end": 57.959999084472656
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual-extra/3-photo.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Front close-up",
+      "slot": "front",
+      "role": "detail",
+      "photo_id": "front-closeup-1789329257805-3-3",
+      "cue_label": "[front-closeup-1789329257805-3-3] Front close-up",
+      "note": ""
+    },
+    {
+      "path": "images/chevrolet-camaro-zl1/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual-extra/8-photo.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Rear close-up",
+      "slot": "rear",
+      "role": "detail",
+      "photo_id": "rear-closeup-1789329333584-8-8",
+      "cue_label": "[rear-closeup-1789329333584-8-8] Rear close-up",
+      "note": ""
+    },
+    {
+      "path": "images/manual-extra/11-photo.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Interior close-up",
+      "slot": "interior",
+      "role": "detail",
+      "photo_id": "interior-closeup-1789329384263-11-11",
+      "cue_label": "[interior-closeup-1789329384263-11-11] Interior close-up",
+      "note": ""
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front close-up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1789329203495-0-0",
+          "cue_label": "[front-closeup-1789329203495-0-0] Front close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/1-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front close-up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1789329224980-1-1",
+          "cue_label": "[front-closeup-1789329224980-1-1] Front close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/2-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front close-up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1789329242822-2-2",
+          "cue_label": "[front-closeup-1789329242822-2-2] Front close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/3-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front close-up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1789329257805-3-3",
+          "cue_label": "[front-closeup-1789329257805-3-3] Front close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/4-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1789329267949-4-4",
+          "cue_label": "[side-closeup-1789329267949-4-4] Side close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/5-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1789329277442-5-5",
+          "cue_label": "[side-closeup-1789329277442-5-5] Side close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/10-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1789329359905-10-10",
+          "cue_label": "[side-closeup-1789329359905-10-10] Side close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/6-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1789329288161-6-6",
+          "cue_label": "[rear-closeup-1789329288161-6-6] Rear close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/7-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1789329306607-7-7",
+          "cue_label": "[rear-closeup-1789329306607-7-7] Rear close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/8-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1789329333584-8-8",
+          "cue_label": "[rear-closeup-1789329333584-8-8] Rear close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/9-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1789329346057-9-9",
+          "cue_label": "[rear-closeup-1789329346057-9-9] Rear close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/15-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Engine bay close-up",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-1789329475852-15-15",
+          "cue_label": "[engine-closeup-1789329475852-15-15] Engine bay close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/16-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Engine bay close-up",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-1789329483202-16-16",
+          "cue_label": "[engine-closeup-1789329483202-16-16] Engine bay close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/11-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1789329384263-11-11",
+          "cue_label": "[interior-closeup-1789329384263-11-11] Interior close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/12-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1789329400145-12-12",
+          "cue_label": "[interior-closeup-1789329400145-12-12] Interior close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/13-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1789329409939-13-13",
+          "cue_label": "[interior-closeup-1789329409939-13-13] Interior close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/14-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1789329422122-14-14",
+          "cue_label": "[interior-closeup-1789329422122-14-14] Interior close-up",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9lYRdJ8O/2022-ford-mustang-shelby-gt500-heritage-edition?ss_id=dd23526e-123a-475a-b331-e04baec3b500&ref=pr_1_2",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 127000,
+    "sale_type": "sold",
+    "page_title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-ford-mustang-shelby-gt500-heritag-20260913230151/voice_auditions/onyx.mp3",
+    "british_narrator": "single-ford-mustang-shelby-gt500-heritag-20260913230151/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-ford-mustang-shelby-gt500-heritag-20260913230151/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-ford-mustang-shelby-gt500-heritag-20260913230151/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-ford-mustang-shelby-gt500-heritag-20260913230151/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ford-mustang-shelby-gt500-heritag-20260913230151/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "right",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 10.070000171661377,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 16.549999237060547,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 21.97000026702881,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 27.800000190734863,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 33.880001068115234,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 38.61000061035156,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 45.65999984741211,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 49.920000076293945,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 54.36000061035156,
+        "layout": "bottom-left",
+        "framing": "half"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 7.45,
+        "pose": "open"
+      },
+      {
+        "start": 8.9,
+        "pose": "rest"
+      },
+      {
+        "start": 11.22,
+        "pose": "chest"
+      },
+      {
+        "start": 12.67,
+        "pose": "rest"
+      },
+      {
+        "start": 14.62,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 16.07,
+        "pose": "rest"
+      },
+      {
+        "start": 18.02,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 19.47,
+        "pose": "rest"
+      },
+      {
+        "start": 21.42,
+        "pose": "open"
+      },
+      {
+        "start": 22.87,
+        "pose": "rest"
+      },
+      {
+        "start": 24.82,
+        "pose": "chest"
+      },
+      {
+        "start": 26.27,
+        "pose": "rest"
+      },
+      {
+        "start": 28.95,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 30.4,
+        "pose": "rest"
+      },
+      {
+        "start": 32.35,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 33.8,
+        "pose": "rest"
+      },
+      {
+        "start": 34.380001,
+        "pose": "presentRight"
+      },
+      {
+        "start": 36.830001,
+        "pose": "rest"
+      },
+      {
+        "start": 37.2,
+        "pose": "rest"
+      },
+      {
+        "start": 39.760001,
+        "pose": "chest"
+      },
+      {
+        "start": 41.210001,
+        "pose": "rest"
+      },
+      {
+        "start": 43.160001,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 44.610001,
+        "pose": "rest"
+      },
+      {
+        "start": 46.16,
+        "pose": "presentLeft"
+      },
+      {
+        "start": 48.61,
+        "pose": "rest"
+      },
+      {
+        "start": 50.42,
+        "pose": "presentLeft"
+      },
+      {
+        "start": 52.87,
+        "pose": "rest"
+      },
+      {
+        "start": 55.510001,
+        "pose": "chest"
+      },
+      {
+        "start": 56.960001,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 10.070000171661377,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329203495-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329224980-1-1"
+          },
+          {
+            "path": "images/manual-extra/2-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329242822-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329257805-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "active_center": null
+      },
+      {
+        "start": 10.070000171661377,
+        "end": 16.549999237060547,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1789329267949-4-4"
+          },
+          {
+            "path": "images/manual-extra/5-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1789329277442-5-5"
+          },
+          {
+            "path": "images/manual-extra/10-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1789329359905-10-10"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "active_center": null
+      },
+      {
+        "start": 16.549999237060547,
+        "end": 21.97000026702881,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/6-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1789329288161-6-6"
+          },
+          {
+            "path": "images/manual-extra/7-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1789329306607-7-7"
+          },
+          {
+            "path": "images/manual-extra/8-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1789329333584-8-8"
+          },
+          {
+            "path": "images/manual-extra/9-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1789329346057-9-9"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "active_center": null
+      },
+      {
+        "start": 21.97000026702881,
+        "end": 27.800000190734863,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/15-photo.jpg",
+            "label": "Engine bay close-up",
+            "photo_id": "engine-closeup-1789329475852-15-15"
+          },
+          {
+            "path": "images/manual-extra/16-photo.jpg",
+            "label": "Engine bay close-up",
+            "photo_id": "engine-closeup-1789329483202-16-16"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "active_center": null
+      },
+      {
+        "start": 27.800000190734863,
+        "end": 33.880001068115234,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/11-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1789329384263-11-11"
+          },
+          {
+            "path": "images/manual-extra/12-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1789329400145-12-12"
+          },
+          {
+            "path": "images/manual-extra/13-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1789329409939-13-13"
+          },
+          {
+            "path": "images/manual-extra/14-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1789329422122-14-14"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "active_center": null
+      },
+      {
+        "start": 33.880001068115234,
+        "end": 38.61000061035156,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329203495-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329224980-1-1"
+          },
+          {
+            "path": "images/manual-extra/2-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329242822-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329257805-3-3"
+          }
+        ],
+        "active": "front-closeup-1789329257805-3-3",
+        "active_index": 3,
+        "active_center": [
+          0.75,
+          0.88
+        ]
+      },
+      {
+        "start": 38.61000061035156,
+        "end": 45.65999984741211,
+        "slot": null,
+        "label": null,
+        "hero": "images/chevrolet-camaro-zl1/exterior_side-01-nobg.png",
+        "closeups": [],
+        "active": null,
+        "active_index": null,
+        "active_center": null
+      },
+      {
+        "start": 45.65999984741211,
+        "end": 49.920000076293945,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/6-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1789329288161-6-6"
+          },
+          {
+            "path": "images/manual-extra/7-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1789329306607-7-7"
+          },
+          {
+            "path": "images/manual-extra/8-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1789329333584-8-8"
+          },
+          {
+            "path": "images/manual-extra/9-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1789329346057-9-9"
+          }
+        ],
+        "active": "rear-closeup-1789329333584-8-8",
+        "active_index": 2,
+        "active_center": [
+          0.25,
+          0.88
+        ]
+      },
+      {
+        "start": 49.920000076293945,
+        "end": 54.36000061035156,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/11-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1789329384263-11-11"
+          },
+          {
+            "path": "images/manual-extra/12-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1789329400145-12-12"
+          },
+          {
+            "path": "images/manual-extra/13-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1789329409939-13-13"
+          },
+          {
+            "path": "images/manual-extra/14-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1789329422122-14-14"
+          }
+        ],
+        "active": "interior-closeup-1789329384263-11-11",
+        "active_index": 0,
+        "active_center": [
+          0.25,
+          0.64
+        ]
+      },
+      {
+        "start": 54.36000061035156,
+        "end": 58.06,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329203495-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329224980-1-1"
+          },
+          {
+            "path": "images/manual-extra/2-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329242822-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1789329257805-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "active_center": null
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1789329203495-0-0",
+          "front-closeup-1789329224980-1-1",
+          "front-closeup-1789329242822-2-2",
+          "front-closeup-1789329257805-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 10.070000171661377,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-1789329267949-4-4",
+          "side-closeup-1789329277442-5-5",
+          "side-closeup-1789329359905-10-10"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 16.549999237060547,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-1789329288161-6-6",
+          "rear-closeup-1789329306607-7-7",
+          "rear-closeup-1789329333584-8-8",
+          "rear-closeup-1789329346057-9-9"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 21.97000026702881,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-1789329475852-15-15",
+          "engine-closeup-1789329483202-16-16"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 27.800000190734863,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-1789329384263-11-11",
+          "interior-closeup-1789329400145-12-12",
+          "interior-closeup-1789329409939-13-13",
+          "interior-closeup-1789329422122-14-14"
+        ],
+        "active": null
+      },
+      {
+        "scene": 5,
+        "start": 33.880001068115234,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1789329203495-0-0",
+          "front-closeup-1789329224980-1-1",
+          "front-closeup-1789329242822-2-2",
+          "front-closeup-1789329257805-3-3"
+        ],
+        "active": "front-closeup-1789329257805-3-3"
+      },
+      {
+        "scene": 6,
+        "start": 38.61000061035156,
+        "slot": null,
+        "closeups": [],
+        "active": null
+      },
+      {
+        "scene": 7,
+        "start": 45.65999984741211,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-1789329288161-6-6",
+          "rear-closeup-1789329306607-7-7",
+          "rear-closeup-1789329333584-8-8",
+          "rear-closeup-1789329346057-9-9"
+        ],
+        "active": "rear-closeup-1789329333584-8-8"
+      },
+      {
+        "scene": 8,
+        "start": 49.920000076293945,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-1789329384263-11-11",
+          "interior-closeup-1789329400145-12-12",
+          "interior-closeup-1789329409939-13-13",
+          "interior-closeup-1789329422122-14-14"
+        ],
+        "active": "interior-closeup-1789329384263-11-11"
+      },
+      {
+        "scene": 9,
+        "start": 54.36000061035156,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1789329203495-0-0",
+          "front-closeup-1789329224980-1-1",
+          "front-closeup-1789329242822-2-2",
+          "front-closeup-1789329257805-3-3"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
