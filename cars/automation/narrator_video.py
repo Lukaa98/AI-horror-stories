@@ -1452,6 +1452,15 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         rival_hp = scene.get("rival_horsepower")
         if main_hp is None or rival_hp is None:
             continue
+        if photo_cues:
+            # Re-suppressed after run #170 (Mustang RTR): removing the
+            # floating detail card removed the *reason* this was disabled,
+            # but not the conflict. The race is a lower-half overlay drawn
+            # against the full frame, so over a collage chapter it puts a
+            # small car and a checkered flag across the tile row, clipped at
+            # the right edge. Comparison photo, narration and stats still
+            # play; only the overlay is dropped.
+            continue
         if index >= len(car_media_paths) or index >= len(scene_boundaries):
             continue
         # A fixed runway, not the scene's own (often much shorter) natural

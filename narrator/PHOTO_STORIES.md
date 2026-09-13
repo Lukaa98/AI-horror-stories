@@ -28,8 +28,13 @@ slideshow:
 
 When a scene is specifically about one close-up, that tile gets an outline and its
 name; otherwise nothing is highlighted. Nothing floats over the lower half of the
-frame any more, so the narrator has its full range of framings back and the
-comparison drag-race overlay is no longer suppressed.
+frame any more, so the narrator has its full range of framings back.
+
+The comparison drag-race overlay stays suppressed in collage mode. Removing the
+floating card removed the *reason* it was disabled but not the conflict: the race is
+an overlay drawn against the full frame, so over a collage chapter it lays a small car
+and a checkered flag across the tile row, clipped at the right edge (seen in run #170).
+The comparison photo, narration and stats still play.
 
 ## What the narrator does with them
 
