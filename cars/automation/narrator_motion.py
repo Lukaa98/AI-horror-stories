@@ -4,6 +4,7 @@ import math
 import os
 import subprocess
 from pathlib import Path
+from photo_story import photo_story_timeline
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -27,9 +28,12 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
     scenes = list(manifest.get("scenes") or [])
     has_stats = any(s.get("stat_label") or s.get("stat_label_2") for s in scenes)
     safe_top = 0.66 if has_stats else 0.59
+    photo_cues = photo_story_timeline(manifest, scene_boundaries)
+    if photo_cues:
+        safe_top = 0.65
     boundaries = list(scene_boundaries) or [(0.0, duration)]
     # A single long scene still gets a few measured changes of framing.
-    if len(boundaries) == 1 and duration > 8:
+    if not photo_cues and len(boundaries) == 1 and duration > 8:
         boundaries = [(t, min(t + 6, duration)) for t in range(0, math.ceil(duration), 6)]
     shots, expressions, gestures = [], [], []
     side = "right"
@@ -73,6 +77,30 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
         gestures.append({"start": round(min(t + 1.45, duration - 0.2), 6), "pose": "rest"})
         t += 3.4
         index += 1
+    if photo_cues:
+        # All three visual tracks consume these same cues. No independent
+        # random camera cycle can put the character on top of a detail card.
+        shots, expressions, gestures = [], [], []
+        for cue in photo_cues:
+            start, end = cue["start"], cue["end"]
+            layout = "bottom-" + cue["side"]
+            if not shots or shots[-1]["layout"] != layout:
+                shots.append({"start": start, "layout": layout, "framing": "half"})
+            gestures.append({"start": start, "pose": "rest"})
+            detail = cue.get("detail")
+            look_start = cue.get("detail_start", start + .2)
+            if detail and end - look_start > .8:
+                x = 138 if cue["side"] == "right" else 402
+                expressions.append({"start": look_start, "end": min(end - .2, look_start + 2.8),
+                                    "look_at": [x, 640], "brows": True})
+                # Eyes lead the hand; the wrist remains gently bent.
+                gestures.append({"start": look_start + .25,
+                                 "pose": "presentLeft" if cue["side"] == "right" else "presentRight"})
+                gestures.append({"start": min(end - .15, look_start + 2.5), "pose": "rest"})
+            elif end - start > 2:
+                expressions.append({"start": start + .2, "end": min(end, start + 1.5), "look_at": [270, 245], "brows": False})
+                gestures.extend([{"start": start + 1.1, "pose": "leftTalk" if cue["side"] == "right" else "rightTalk"},
+                                 {"start": min(end - .15, start + 2.5), "pose": "rest"}])
     mouths = []
     valid_mouths = {"closed", "small", "mbp", "ee", "ah", "oh", "fv", "wide", "teeth", "smile"}
     for entry in manifest.get("mouth_timeline") or []:
@@ -93,6 +121,7 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
     return {"version": "v21", "duration": duration, "fps": fps,
             "width": int(size[0]), "height": int(size[1]), "safe_top": safe_top,
             "shots": shots, "gestures": gestures, "expressions": expressions,
+            "photo_cues": photo_cues,
             "mouth_timeline": sorted(mouths, key=lambda m: m["start"])}
 
 

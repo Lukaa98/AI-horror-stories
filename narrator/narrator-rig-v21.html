@@ -179,7 +179,7 @@
       <section class="card"><h2>State</h2><dl class="status"><dt>Mouth</dt><dd id="mouth-readout">closed</dd><dt>Eyes</dt><dd id="eyes-readout">open</dd><dt>Talking</dt><dd id="talk-readout">off</dd><dt>Speech</dt><dd id="speech-readout">idle</dd></dl></section>
       <section class="card"><h2>Mouth</h2><div class="grid"><button data-mouth="closed" class="active">Relaxed</button><button data-mouth="mbp">M / B / P</button><button data-mouth="ee">EE</button><button data-mouth="ah">AH</button><button data-mouth="oh">OH</button><button data-mouth="fv">F / V</button><button data-mouth="teeth">Teeth</button><button data-mouth="smile">Smile</button></div></section>
       <section class="card"><h2>Face</h2><div class="grid"><button id="blink">Blink once</button><button id="auto-blink" class="active">Auto-blink: on</button><button id="brows">Raise brows</button><button id="tracking" class="active">Eye tracking: on</button></div></section>
-      <section class="card"><h2>Arm poses</h2><div class="grid"><button data-pose="rest" class="active">Relaxed</button><button data-pose="leftTalk">Left gesture</button><button data-pose="rightTalk">Right gesture</button><button data-pose="open">Open hands</button><button data-pose="chest">Hand on chest</button><button data-pose="wave">Wave</button><button id="auto-gesture" class="wide" aria-pressed="false">Preview gestures</button><button id="reset" class="wide">Reset pose</button></div></section>
+      <section class="card"><h2>Arm poses</h2><div class="grid"><button data-pose="rest" class="active">Relaxed</button><button data-pose="leftTalk">Left gesture</button><button data-pose="rightTalk">Right gesture</button><button data-pose="open">Open hands</button><button data-pose="presentLeft">Present left photo</button><button data-pose="presentRight">Present right photo</button><button data-pose="chest">Hand on chest</button><button data-pose="wave">Wave</button><button id="auto-gesture" class="wide" aria-pressed="false">Preview gestures</button><button id="reset" class="wide">Reset pose</button></div></section>
       <section class="card"><h2>Motion</h2><button id="full-motion" class="wide" aria-pressed="false">Full motion: off</button><p class="hint">Enables the complete live rig together: smooth body gestures, mouth movement, blinking, eyebrow expressions, eye tracking, and idle sway.</p></section>
       <section class="card"><h2>Stage</h2><div class="grid"><button id="sway" class="active">Idle sway: on</button><button id="stage-btn">Stage: transparent</button><button id="guide-btn" class="wide active" aria-pressed="true">Footage guide: on</button></div></section>
       <p class="hint">Move the pointer to direct the eyes. Press Ctrl/Command + Enter inside the speech box to speak.</p>
@@ -252,6 +252,8 @@
       chest:{lu:0,lf:0,lh:0,ru:-18,rf:106,rh:-8},
       leftTalk:{lu:-3,lf:-28,lh:6,ru:0,rf:0,rh:0},
       rightTalk:{lu:0,lf:0,lh:0,ru:3,rf:28,rh:-6},
+      presentLeft:{lu:8,lf:92,lh:-4,ru:0,rf:0,rh:0},
+      presentRight:{lu:0,lf:0,lh:0,ru:-8,rf:-92,rh:4},
       open:{lu:6,lf:6,lh:-4,ru:-6,rf:-6,rh:4},
       // 196 degrees reaches the raised pose through the front of the torso,
       // instead of swinging outward through -164 and leaving the stage.

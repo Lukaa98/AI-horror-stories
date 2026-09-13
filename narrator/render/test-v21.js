@@ -83,8 +83,43 @@ try {
   assert(maxJointStep > 0 && maxJointStep < 18, "arms move without snapping, including interrupted poses");
   assert(maxXStep > 0 && maxXStep < 55, "side changes travel through intermediate positions");
   assert(samples.some(s => s.blinking));
+  // Photo-story choreography: alternate chapters, never random side changes.
+  const detailSamples = await page.evaluate(() => {
+    narratorRig.beginRender({ duration: 10, safe_top: .65,
+      shots: [{ start: 0, layout: 'bottom-right', framing: 'half' }, { start: 5, layout: 'bottom-left', framing: 'half' }],
+      gestures: [{ start: 1.25, pose: 'presentLeft' }, { start: 3.5, pose: 'rest' },
+                 { start: 6.25, pose: 'presentRight' }, { start: 8.5, pose: 'rest' }],
+      mouth_timeline: [{ start: 0, end: 10, mouth: 'oh' }],
+      expressions: [{ start: 1, end: 3.8, look_at: [138, 640], brows: true },
+                    { start: 6, end: 8.8, look_at: [402, 640], brows: true }] });
+    const result = [];
+    for (let frame = 0; frame < 240; frame++) {
+      const state = narratorRig.renderAt(frame / 24);
+      const svg = document.querySelector('#character-svg').getBoundingClientRect();
+      const bounds = id => {
+        const r = document.querySelector(id).getBoundingClientRect();
+        return { x: (r.x-svg.x)*540/svg.width, right: (r.right-svg.x)*540/svg.width,
+                 y: (r.y-svg.y)*960/svg.height, bottom: (r.bottom-svg.y)*960/svg.height };
+      };
+      result.push({ ...state, head: bounds('#head'), left: bounds('#left-hand'), right: bounds('#right-hand') });
+    }
+    return result;
+  });
+  let maxPresentationStep = 0;
+  for (let i = 1; i < detailSamples.length; i++) {
+    const s = detailSamples[i];
+    assert.equal(s.mouth, 'oh');
+    assert(s.head.x >= 0 && s.head.right <= 540 && s.head.y >= .65*960-8);
+    for (const key of Object.keys(s.joints)) maxPresentationStep = Math.max(maxPresentationStep, Math.abs(s.joints[key]-detailSamples[i-1].joints[key]));
+    assert(Math.abs(s.joints.lh) <= 12 && Math.abs(s.joints.rh) <= 12);
+    // Cards occupy the opposite half. During the actual presentation hold,
+    // neither the face nor the presenting hand may hide the focal image.
+    if (s.time > 1.5 && s.time < 3.4) assert(s.head.x > 262 && s.left.x > 262, 'left card stays unobstructed');
+    if (s.time > 6.5 && s.time < 8.4) assert(s.head.right < 278 && s.right.right < 278, 'right card stays unobstructed');
+  }
+  assert(maxPresentationStep > 0 && maxPresentationStep < 18);
   assert.deepEqual(errors, []);
-  console.log(JSON.stringify({ frames: samples.length, maxJointStep, maxXStep, result: "passed" }));
+  console.log(JSON.stringify({ frames: samples.length + detailSamples.length, maxJointStep, maxXStep, maxPresentationStep, result: "passed" }));
 } finally {
   await browser.close();
 }

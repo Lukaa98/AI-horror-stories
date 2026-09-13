@@ -127,7 +127,7 @@ on:
         type: boolean
         default: false
       extra_photos:
-        description: 'single_car mode: JSON array of extra named photos, e.g. [{"label":"Gauge Cluster","url":"https://..."}]'
+        description: 'single_car photos: JSON array of {label,url}; optional section (exterior/interior/engine), role (hero/angle/detail), id and note'
         required: false
         type: string
 
@@ -194,7 +194,7 @@ jobs:
       - name: Check V21 narrator motion
         if: ${{ inputs.mode == 'single_car' && (inputs.narrator_character == 'v21' || inputs.narrator_character == '') }}
         run: |
-          python -m pytest -q tests/test_narrator_motion.py tests/test_narrator_video.py
+          python -m pytest -q tests/test_narrator_motion.py tests/test_narrator_video.py tests/test_photo_story.py
           node narrator/render/test-v21.js
 
       - name: Run research

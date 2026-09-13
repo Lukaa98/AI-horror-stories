@@ -25,6 +25,8 @@ import moviepy.video.fx.all as vfx
 
 from generate_sample import ROOT, CANVAS, _font, _wrap
 from narrator_motion import build_motion_plan, render_live_narrator
+from photo_story import photo_story_timeline
+from photo_story_video import build_photo_tracks
 
 # Lets a build opt into a different sprite set (e.g. the AI-illustrated
 # character in narrator/sprites-v3) without touching the default pipeline --
@@ -1312,6 +1314,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     scenes = list(manifest.get("scenes") or [])
     word_timeline = list(manifest.get("word_timeline") or [])
     scene_boundaries = _scene_time_boundaries(scenes, word_timeline, duration)
+    photo_cues = photo_story_timeline(manifest, scene_boundaries)
 
     # Explicit legacy selections retain their exporter. Otherwise use the
     # approved live rig, including in local builds without Actions inputs.
@@ -1369,16 +1372,37 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         )
     else:
         raise ValueError("NARRATOR_RENDERER must be v21 or sprites")
-    car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration, scene_boundaries)
+    detail_clips = []
+    if photo_cues:
+        car_clip, detail_clips, detail_diagnostics = build_photo_tracks(
+            photo_cues, car_media_paths, output_path.parent, media_box, size, duration,
+            output_path.parent / "_frames" / "photo-story")
+        manifest["photo_presentation"] = {"version": 1, "cues": photo_cues,
+            "details": detail_diagnostics, "layout": "hero-plus-focused-detail"}
+    else:
+        car_clip = _car_track(car_media_paths, (int(media_w), int(media_h)), duration, scene_boundaries)
     car_positioned = car_clip.set_position((media_x, media_y))
     # A pop the instant each new car photo slides in, timed to the same
     # per-scene boundaries the photo itself uses -- not an even split,
     # which is exactly the "the rival's photo popped in a couple seconds
     # late" timing bug this whole boundary system exists to fix.
-    photo_pop_clips = [
-        _sfx_clip(PHOTO_POP_SFX, start, PHOTO_POP_VOLUME) for start, _ in scene_boundaries
-    ]
-    stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y, size[1] * TOP_STACK_RATIO)
+    pop_times = ([c["start"] for i, c in enumerate(photo_cues) if i == 0 or c.get("hero") != photo_cues[i-1].get("hero")]
+                 if photo_cues else [start for start, _ in scene_boundaries])
+    photo_pop_clips = [_sfx_clip(PHOTO_POP_SFX, start, PHOTO_POP_VOLUME) for start in pop_times]
+    stat_tracker_clips = []
+    if photo_cues:
+        # Compact current-scene stats above the card; the cumulative scoreboard
+        # would otherwise cover the focused image or the narrator's face.
+        for index, (scene, (start, end)) in enumerate(zip(scenes, scene_boundaries)):
+            stats = [f"{scene[label]}: {scene[value]}" for label, value in
+                     (("stat_label", "stat_value"), ("stat_label_2", "stat_value_2"))
+                     if scene.get(label) and scene.get(value) is not None]
+            if stats:
+                path = output_path.parent / "_frames" / f"photo-stat-{index}.png"
+                _caption_frame(size, " · ".join(stats), int(size[1] * .522), path, font_size=32)
+                stat_tracker_clips.append(ImageClip(str(path)).set_start(start).set_duration(end-start))
+    else:
+        stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y, size[1] * TOP_STACK_RATIO)
 
     # The caption band sits below the picture, not on top of it -- distinct
     # from the headline band above the picture.
@@ -1422,6 +1446,10 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         rival_hp = scene.get("rival_horsepower")
         if main_hp is None or rival_hp is None:
             continue
+        if photo_cues:
+            # The old lower-half race overlay conflicts with the detail rail.
+            # Keep the comparison photo/narration/stats, omit only that overlay.
+            continue
         if index >= len(car_media_paths) or index >= len(scene_boundaries):
             continue
         # A fixed runway, not the scene's own (often much shorter) natural
@@ -1451,7 +1479,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     full_audio = CompositeAudioClip([audio, *extra_audio]) if extra_audio else audio
     video = CompositeVideoClip(
         [
-            background, car_positioned, *headline_clips, *caption_clips, narrator_positioned,
+            background, car_positioned, *headline_clips, *caption_clips, *detail_clips, narrator_positioned,
             *decorative_clips, *stat_tracker_clips, progress_clip,
         ],
         size=size,

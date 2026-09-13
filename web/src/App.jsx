@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import PhotoSections from "./PhotoSections";
+import { serializePhotos } from "./photoSections";
 import jobsData from "./jobs-data.json";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.16";
+const UI_VERSION = "V11.17 — Photo stories";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1003,9 +1005,7 @@ export default function App() {
           disable_comparison: String(!compareEnabled),
           extra_photos: (() => {
             if (!useManualPhotos) return "";
-            const cleaned = extraPhotos
-              .map((item) => ({ label: item.label.trim(), url: item.url.trim() }))
-              .filter((item) => item.url);
+            const cleaned = serializePhotos(extraPhotos);
             return cleaned.length ? JSON.stringify(cleaned) : "";
           })(),
         },
@@ -2258,16 +2258,14 @@ export default function App() {
                           onChange={(e) => {
                             const checked = e.target.checked;
                             setUseAuctionUrl(checked);
-                            // The photo-override option only makes sense once a listing is
-                            // pasted -- unchecking the listing hides (and clears) it too.
-                            if (!checked) setUseManualPhotos(false);
+                            // Direct grouped photos also work without a listing.
                           }}
                           disabled={stage === "single-car-building"}
                         />
                         Specific listing
                         <Tip text="Paste one Cars & Bids auction page instead of searching by make/model." />
                       </label>
-                      {useAuctionUrl && (
+                      {(
                         <label className="check-pill">
                           <input
                             type="checkbox"
@@ -2306,8 +2304,9 @@ export default function App() {
                       </label>
                     )}
 
-                    {useAuctionUrl && useManualPhotos && (
+                    {useManualPhotos && (
                       <>
+                        <details><summary>Legacy single-photo overrides (optional)</summary>
                         <div className="photo-url-grid">
                           {[
                             ["front", "Front"],
@@ -2328,52 +2327,8 @@ export default function App() {
                           ))}
                         </div>
 
-                        {extraPhotos.length > 0 && (
-                          <div className="extra-photo-list">
-                            {extraPhotos.map((item, index) => (
-                              <div className="extra-photo-row" key={item.id}>
-                                <input
-                                  value={item.label}
-                                  onChange={(e) => {
-                                    const next = [...extraPhotos];
-                                    next[index] = { ...next[index], label: e.target.value };
-                                    setExtraPhotos(next);
-                                  }}
-                                  placeholder="Photo name, e.g. Gauge Cluster"
-                                  disabled={stage === "single-car-building"}
-                                />
-                                <input
-                                  value={item.url}
-                                  onChange={(e) => {
-                                    const next = [...extraPhotos];
-                                    next[index] = { ...next[index], url: e.target.value };
-                                    setExtraPhotos(next);
-                                  }}
-                                  placeholder="Image URL"
-                                  disabled={stage === "single-car-building"}
-                                />
-                                <button
-                                  type="button"
-                                  className="extra-photo-remove"
-                                  onClick={() => setExtraPhotos(extraPhotos.filter((_, i) => i !== index))}
-                                  disabled={stage === "single-car-building"}
-                                  aria-label={`Remove ${item.label || "extra photo"}`}
-                                >
-                                  &times;
-                                </button>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                        <button
-                          type="button"
-                          className="extra-photo-add"
-                          onClick={() => setExtraPhotos([...extraPhotos, { id: `extra-${Date.now()}-${extraPhotos.length}`, label: "", url: "" }])}
-                          disabled={stage === "single-car-building"}
-                        >
-                          + Add named photo
-                          <Tip text={'Any extra shot with its own name (e.g. "Gauge Cluster"). The script is written to specifically talk about what\'s in it.'} />
-                        </button>
+                        </details>
+                        <PhotoSections photos={extraPhotos} onChange={setExtraPhotos} disabled={stage === "single-car-building"} />
                       </>
                     )}
                   </div>

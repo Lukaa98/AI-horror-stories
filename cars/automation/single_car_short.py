@@ -31,6 +31,7 @@ from narrator_script import _extract_wav, build_mouth_timeline, synthesize_narra
 from narrator_video import render_narrator_video
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
+from photo_story import SECTIONS, photo_metadata, collect_photo_sections
 
 load_dotenv(ROOT / ".env")
 SCRAPER_DIR = ROOT / "scraper" / "car-source-scraper"
@@ -236,7 +237,12 @@ additional specific material that must be folded in alongside them. Do not subst
 "detail" beat of your own invention for one of these -- every photo listed above needs its own scene,
 genuinely about what's in it. You have up to {max_scenes} scenes total specifically so all of these pasted
 photos fit alongside the canonical hook/history/engine/drivetrain/comparison/closing beats below -- use as
-many of them as you need; never drop one of these pasted-photo scenes to stay at a lower scene count."""
+many of them as you need; never drop one of these pasted-photo scenes to stay at a lower scene count.
+For photos with Section/role metadata, keep each section's scenes together: exterior, then interior,
+then engine. Introduce the hero/overview before its details. Alternate angles are overview shots,
+not close-ups. Copy the entire bracketed ID and label into photo_label. User notes are topic
+suggestions, not verified facts; verify factual claims with your research. Do not infer horsepower,
+modifications, or performance from appearance alone."""
     forced_rival_block = ""
     if forced_rival:
         forced_rival_block = f"""
@@ -577,7 +583,14 @@ def gather_photo_script_hints(manual_photo_urls, extra_photos, images_dir, car_l
             continue
         description = _describe_photo_for_script(path, label, car_label)
         if description:
-            hints.append(f"{label or 'featured'} photo: {description}")
+            metadata = photo_metadata(item, index)
+            cue_label = metadata.get("cue_label", label or "featured")
+            context = ""
+            if metadata:
+                context = f" Section: {metadata['section']}; role: {metadata['role']}."
+                if metadata.get("note"):
+                    context += f" User topic suggestion (verify independently): {metadata['note']}"
+            hints.append(f"{cue_label} photo: {description}{context}")
     return hints
 
 
@@ -655,7 +668,9 @@ def gather_extra_media(extra_photos, images_dir, entry):
             continue
         blur_license_plates(path)
         relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
-        media.append({"path": relative, "type": "detail", "category": "other_detail", "facing_direction": "unclear", "label": label or None})
+        metadata = photo_metadata(item, index)
+        shot_type = metadata.get("section", "detail") if metadata.get("role") in {"hero", "angle"} else "detail"
+        media.append({"path": relative, "type": shot_type, "category": "other_detail", "facing_direction": "unclear", "label": label or None, **metadata})
     return media
 
 
@@ -715,7 +730,7 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
     # just to throw most of it away would defeat the point. There's no
     # scraped listing in this case, so selected_auction comes back empty.
     manual_urls = {key: value for key, value in (manual_photo_urls or {}).items() if value}
-    if manual_urls and not auction_url:
+    if (manual_urls or any(isinstance(p, dict) and p.get("section") in SECTIONS for p in extra_photos or [])) and not auction_url:
         media = gather_manual_media(manual_urls, images_dir, entry)
         media.extend(gather_extra_media(extra_photos, images_dir, entry))
         if not media:
@@ -1051,13 +1066,15 @@ def order_media_for_scenes(scenes, media):
                 item for item in media
                 if item["path"] not in used_paths
                 and (
-                    _normalize_photo_label(item.get("label")) == photo_label
+                    _normalize_photo_label(item.get("cue_label") or item.get("label")) == photo_label
                     or _normalize_photo_label((item.get("category") or "").replace("_", " ")) == photo_label
                 )
             ),
             None,
         )
         if match:
+            if match.get("cue_label"):
+                scene["photo_label"] = match["cue_label"]
             ordered[index] = match
             used_paths.add(match["path"])
 
@@ -1065,16 +1082,18 @@ def order_media_for_scenes(scenes, media):
         if ordered[index] is not None:
             continue
         requested = scene["media_type"]
-        same_type = [item for item in media if item["type"] == requested]
+        # Grouped details are reserved for exact narration cues, never random filler.
+        fallback_media = [item for item in media if not (item.get("section") and item.get("role") == "detail")] or media
+        same_type = [item for item in fallback_media if item["type"] == requested]
         exterior = [item for item in media if item["type"] == "exterior"]
         pick = (
             next((item for item in same_type if item["path"] not in used_paths), None)
             or next((item for item in same_type if item["path"] in used_paths), None)
             or next((item for item in exterior if item["path"] not in used_paths), None)
             or next((item for item in exterior if item["path"] in used_paths), None)
-            or next((item for item in media if item["path"] not in used_paths), None)
+            or next((item for item in fallback_media if item["path"] not in used_paths), None)
             # Only reach here once every photo of every type has been used.
-            or (same_type[0] if same_type else media[0])
+            or (same_type[0] if same_type else fallback_media[0])
         )
         used_paths.add(pick["path"])
         ordered[index] = pick
@@ -1158,6 +1177,7 @@ def build_short(args):
     # `media` into one pick per scene -- this needs the whole gathered pool
     # to find the single best side-profile shot.
     side_profile_media = _select_side_profile_media(media)
+    photo_sections = collect_photo_sections(media)
     media = order_media_for_scenes(package["scenes"], media)
     media = apply_rival_photos(
         package["scenes"], media, media_start_year, media_end_year, images_dir,
@@ -1214,6 +1234,7 @@ def build_short(args):
         "mouth_timeline": timeline,
         "word_timeline": word_timeline,
         "media": media,
+        "photo_sections": photo_sections,
         "selected_auction": selected_auction,
         "voice_auditions": voice_auditions,
         "side_profile_media_path": str(output_dir / side_profile_media["path"]) if side_profile_media else None,
