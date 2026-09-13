@@ -1,0 +1,698 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-13T18:12:21.492Z",
+  "query": "Acura Nsx",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9ldm4zGG/2019-acura-nsx",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9ldm4zGG/2019-acura-nsx",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 53,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2019 Acura NSX"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9ldm4zGG/2019-acura-nsx",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2019 Acura NSX",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AcuraNSX2019002/edit/G2IKy.jpg?t=178846785950",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Acura NSX",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 384888
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AcuraNSX2019025/edit/C3jcH.jpg?t=178846788201",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Acura NSX",
+      "width": 542,
+      "height": 361,
+      "bytes": 288191
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AcuraNSX2019007/edit/3354N.jpg?t=178846790514",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Acura NSX",
+      "width": 542,
+      "height": 361,
+      "bytes": 261366
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AcuraNSX2019006/edit/2hmi7.jpg?t=178846792698",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Acura NSX",
+      "width": 542,
+      "height": 361,
+      "bytes": 263030
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AcuraNSX2019005/edit/I9dVo.jpg?t=178846795234",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Acura NSX",
+      "width": 542,
+      "height": 361,
+      "bytes": 281957
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AcuraNSX2019076/edit/ISfzp.jpg?t=178846657813",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Acura NSX",
+      "width": 542,
+      "height": 361,
+      "bytes": 246197
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AcuraNSX2019092/edit/YQ9tl.jpg?t=178846662682",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Acura NSX",
+      "width": 542,
+      "height": 361,
+      "bytes": 248355
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AcuraNSX2019077/edit/NnOHi.jpg?t=178846664274",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Acura NSX",
+      "width": 542,
+      "height": 361,
+      "bytes": 237756
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AcuraNSX2019078/edit/1uM6F.jpg?t=178846660911",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2019 Acura NSX",
+      "width": 542,
+      "height": 361,
+      "bytes": 119720
+    },
+    {
+      "path": "interior-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/571802d7344e90b2bb5fc420b36f51395f5c92cd/photos/3v8ekLRr-S7uOnPN.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Highlights",
+      "width": 80,
+      "height": 80,
+      "bytes": 20035
+    },
+    {
+      "path": "interior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/571802d7344e90b2bb5fc420b36f51395f5c92cd/attachments/9ldm4zGG-F6XltLm.jpeg?t=178914948204",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 372502
+    },
+    {
+      "path": "interior-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/571802d7344e90b2bb5fc420b36f51395f5c92cd/attachments/9ldm4zGG-fmxQECu.jpeg?t=178914948325",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 791553
+    },
+    {
+      "path": "interior-13.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/571802d7344e90b2bb5fc420b36f51395f5c92cd/attachments/9ldm4zGG-HomVLWG.jpeg?t=178914948553",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 750399
+    },
+    {
+      "path": "interior-14.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/571802d7344e90b2bb5fc420b36f51395f5c92cd/attachments/9ldm4zGG-DrbJKD4.jpeg?t=178922349386",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 186,
+      "bytes": 137633
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/78e45916c4255bf1abcfc91c1cb1dfda/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/78e45916c4255bf1abcfc91c1cb1dfda/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Acura NSX",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/78e45916c4255bf1abcfc91c1cb1dfda/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9ldm4zGG/2019-acura-nsx",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/78e45916c4255bf1abcfc91c1cb1dfda/manifest/video.m3u8",
+      "auction_title": "2019 Acura NSX",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e3011a42f904d3e7c5a544bd804a90eb/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e3011a42f904d3e7c5a544bd804a90eb/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Acura NSX",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e3011a42f904d3e7c5a544bd804a90eb/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9ldm4zGG/2019-acura-nsx",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e3011a42f904d3e7c5a544bd804a90eb/manifest/video.m3u8",
+      "auction_title": "2019 Acura NSX",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d9158f808167ea2e35e852edbb6be203/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d9158f808167ea2e35e852edbb6be203/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Acura NSX",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d9158f808167ea2e35e852edbb6be203/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9ldm4zGG/2019-acura-nsx",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d9158f808167ea2e35e852edbb6be203/manifest/video.m3u8",
+      "auction_title": "2019 Acura NSX",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fdf09544706852ca7311a88e90e7ff49/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fdf09544706852ca7311a88e90e7ff49/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Acura NSX",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fdf09544706852ca7311a88e90e7ff49/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9ldm4zGG/2019-acura-nsx",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fdf09544706852ca7311a88e90e7ff49/manifest/video.m3u8",
+      "auction_title": "2019 Acura NSX",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1051af535bd73b82d01026c7adbc4863/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1051af535bd73b82d01026c7adbc4863/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Acura NSX",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1051af535bd73b82d01026c7adbc4863/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9ldm4zGG/2019-acura-nsx",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/1051af535bd73b82d01026c7adbc4863/manifest/video.m3u8",
+      "auction_title": "2019 Acura NSX",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf1ef88eb04c7e7449ae2c0370a932de/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf1ef88eb04c7e7449ae2c0370a932de/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Acura NSX",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf1ef88eb04c7e7449ae2c0370a932de/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9ldm4zGG/2019-acura-nsx",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf1ef88eb04c7e7449ae2c0370a932de/manifest/video.m3u8",
+      "auction_title": "2019 Acura NSX",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 14,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Distinct rear design",
+          "Acura badge",
+          "Proportions matching the NSX"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork",
+          "proportions",
+          "front design"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork style",
+          "proportions",
+          "lights design"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front view",
+          "distinctive headlights",
+          "Acura badge",
+          "body style"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Distinct rear design",
+          "Acura emblem visible",
+          "Dual exhaust layout characteristic of NSX",
+          "Proportions and styling align with 2019 model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Acura branding on the steering wheel",
+          "Interior design consistent with 2019 NSX",
+          "Controls layout matches known NSX features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Interior design matches 2019 Acura NSX",
+          "Sport seats characteristic of NSX"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "dashboard layout",
+          "steering wheel"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": null,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 4,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle; it is an interior shot of a car dashboard.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle as the main subject.",
+        "path": "interior-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Acura logo on steering wheel",
+          "NSX badge on floor mat",
+          "Interior design consistent with 2019 NSX"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork shape",
+          "front splitter design",
+          "dual exhaust layout",
+          "wheel design",
+          "proportional elements"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Distinct NSX bodywork",
+          "Rear design elements",
+          "NSX badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": null,
+        "path": "interior-13.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "NSX",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinct front grille",
+          "LED headlights",
+          "unique body shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-14.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
