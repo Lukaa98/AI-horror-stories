@@ -13,7 +13,6 @@
     .stage{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:16px;background:linear-gradient(45deg,#efebe1 25%,transparent 25%) 0 0/40px 40px,linear-gradient(-45deg,#efebe1 25%,transparent 25%) 0 0/40px 40px,linear-gradient(45deg,transparent 75%,#efebe1 75%) 0 0/40px 40px,linear-gradient(-45deg,transparent 75%,#efebe1 75%) 0 0/40px 40px,#e5e0d4}.stage.solid{background:#e5e0d4}
     .stage-label{position:absolute;z-index:2;top:12px;left:12px;padding:5px 9px;color:var(--muted);background:#ffffffbf;border:1px solid var(--border);border-radius:999px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
     svg{display:block;width:100%;height:auto}.outline{fill:#fff;stroke:var(--ink);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.line{fill:none;stroke:var(--ink);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.face-line{stroke-width:5}.black{fill:var(--ink)}
-    .hand-detail svg{max-height:220px}.hand-detail{overflow:hidden}
     .stage{aspect-ratio:9/16}.stage>svg{width:100%;height:100%}.stage-label{pointer-events:none}
     .placement-card .hint{margin-top:10px}.placement-card h3{margin:16px 0 9px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
     .placement-state{margin:0 0 10px;color:var(--muted);font-size:12px;line-height:1.4}.stage-column{min-width:0}
@@ -146,6 +145,13 @@
             <path class="line face-line" d="M190 135C187 146 184 156 187 160C190 163 196 162 201 160"/>
             <g id="mouth-closed" class="mouth"><path class="line face-line" d="M166 181C179 188 199 188 214 179"/></g>
             <g id="mouth-small" class="mouth" style="visibility:hidden;opacity:0"><ellipse cx="190" cy="182" rx="7" ry="11" fill="#151515"/></g>
+            <!-- Speech visemes: relaxed, M/B/P closure, narrow EE, open AH,
+                 rounded OH, F/V lip contact, and a light teeth frame. -->
+            <g id="mouth-mbp" class="mouth" style="visibility:hidden;opacity:0"><path class="line face-line" d="M174 183Q190 188 206 182"/></g>
+            <g id="mouth-ee" class="mouth" style="visibility:hidden;opacity:0"><path d="M173 181Q190 175 207 181Q190 187 173 181Z" fill="#151515"/><path d="M177 180Q190 178 203 180" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></g>
+            <g id="mouth-ah" class="mouth" style="visibility:hidden;opacity:0"><ellipse cx="190" cy="183" rx="8" ry="10" fill="#151515"/><path d="M185 186Q190 189 195 186" stroke="#6c2520" stroke-width="2" fill="none"/></g>
+            <g id="mouth-oh" class="mouth" style="visibility:hidden;opacity:0"><ellipse cx="190" cy="183" rx="7" ry="9" fill="#151515"/><ellipse cx="190" cy="181" rx="3" ry="2.5" fill="#6c2520"/></g>
+            <g id="mouth-fv" class="mouth" style="visibility:hidden;opacity:0"><path d="M176 181Q190 176 204 181" stroke="#151515" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M178 181Q190 184 202 181" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></g>
             <g id="mouth-wide" class="mouth" style="visibility:hidden;opacity:0"><ellipse cx="190" cy="182" rx="16" ry="9" fill="#151515"/></g>
             <g id="mouth-teeth" class="mouth" style="visibility:hidden;opacity:0"><rect x="176" y="176" width="28" height="13" rx="5" fill="#fff" stroke="#151515" stroke-width="4"/><path d="M178 182.5H202" stroke="#151515" stroke-width="2"/></g>
             <g id="mouth-smile" class="mouth" style="visibility:hidden;opacity:0"><path class="line face-line" d="M165 177Q190 198 215 177"/></g>
@@ -170,11 +176,11 @@
         <p class="hint">Start talking, then switch placements to test the live face and gestures.</p>
       </section>
       <section class="card"><h2>Speech</h2><textarea id="speech-text">Welcome to Car Shorts Lab! Today, we are taking a look at another interesting car.</textarea><select id="voice-select" aria-label="Speech voice"><option value="">Default system voice</option></select><div class="grid"><button id="speak">Speak</button><button id="stop-speech">Stop</button><button id="auto-talk" class="wide">Auto-talk: off</button></div></section>
-      <section class="card hand-detail"><h2>Wrist close-up</h2><svg viewBox="34 472 100 145" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Live close-up of the active wrist, showing the hand staying connected to the cuff during gestures"><path class="outline" d="M65 472H97V499Q80 503 64 499Z"/><use id="wrist-detail-use" href="#left-wrist-assembly"/></svg><button id="auto-gesture" aria-pressed="false">Preview gestures</button></section>
       <section class="card"><h2>State</h2><dl class="status"><dt>Mouth</dt><dd id="mouth-readout">closed</dd><dt>Eyes</dt><dd id="eyes-readout">open</dd><dt>Talking</dt><dd id="talk-readout">off</dd><dt>Speech</dt><dd id="speech-readout">idle</dd></dl></section>
-      <section class="card"><h2>Mouth</h2><div class="grid"><button data-mouth="closed" class="active">Closed</button><button data-mouth="smile">Smile</button><button data-mouth="small">O shape</button><button data-mouth="wide">Oval</button><button data-mouth="teeth">Show teeth</button></div></section>
+      <section class="card"><h2>Mouth</h2><div class="grid"><button data-mouth="closed" class="active">Relaxed</button><button data-mouth="mbp">M / B / P</button><button data-mouth="ee">EE</button><button data-mouth="ah">AH</button><button data-mouth="oh">OH</button><button data-mouth="fv">F / V</button><button data-mouth="teeth">Teeth</button><button data-mouth="smile">Smile</button></div></section>
       <section class="card"><h2>Face</h2><div class="grid"><button id="blink">Blink once</button><button id="auto-blink" class="active">Auto-blink: on</button><button id="brows">Raise brows</button><button id="tracking" class="active">Eye tracking: on</button></div></section>
-      <section class="card"><h2>Arm poses</h2><div class="grid"><button data-pose="rest" class="active">Relaxed</button><button data-pose="leftTalk">Left gesture</button><button data-pose="rightTalk">Right gesture</button><button data-pose="open">Open hands</button><button data-pose="chest">Hand on chest</button><button data-pose="wave">Wave</button><button id="reset" class="wide">Reset pose</button></div></section>
+      <section class="card"><h2>Arm poses</h2><div class="grid"><button data-pose="rest" class="active">Relaxed</button><button data-pose="leftTalk">Left gesture</button><button data-pose="rightTalk">Right gesture</button><button data-pose="open">Open hands</button><button data-pose="chest">Hand on chest</button><button data-pose="wave">Wave</button><button id="auto-gesture" class="wide" aria-pressed="false">Preview gestures</button><button id="reset" class="wide">Reset pose</button></div></section>
+      <section class="card"><h2>Motion</h2><button id="full-motion" class="wide" aria-pressed="false">Full motion: off</button><p class="hint">Enables the complete live rig together: smooth body gestures, mouth movement, blinking, eyebrow expressions, eye tracking, and idle sway.</p></section>
       <section class="card"><h2>Stage</h2><div class="grid"><button id="sway" class="active">Idle sway: on</button><button id="stage-btn">Stage: transparent</button><button id="guide-btn" class="wide active" aria-pressed="true">Footage guide: on</button></div></section>
       <p class="hint">Move the pointer to direct the eyes. Press Ctrl/Command + Enter inside the speech box to speak.</p>
     </aside>
@@ -192,19 +198,37 @@
     const leftUpper=$('#left-upper-arm'),leftForearm=$('#left-forearm'),leftHand=$('#left-hand'),rightUpper=$('#right-upper-arm'),rightForearm=$('#right-forearm'),rightHand=$('#right-hand');
     const leftEye=$('#left-eye'),rightEye=$('#right-eye'),eyesOpen=$('#eyes-open'),eyesBlink=$('#eyes-blink'),eyebrows=$('#eyebrows');
     const mouthReadout=$('#mouth-readout'),eyesReadout=$('#eyes-readout'),talkReadout=$('#talk-readout'),speechReadout=$('#speech-readout');
-    let talkTimer=null,blinkTimer=null,expressionTimer=null,gestureTimer=null,gazeTimer=null,lastPointer=0,talkFrame=0,autoBlink=true,autoGesture=false,isSpeaking=false,tracking=true,isBlinking=false,browsRaised=false,voices=[],activePose='rest';
+    let talkTimer=null,blinkTimer=null,expressionTimer=null,gestureTimer=null,gazeTimer=null,lastPointer=0,talkFrame=0,autoBlink=true,autoGesture=false,isSpeaking=false,tracking=true,isBlinking=false,browsRaised=false,voices=[],activePose='rest',speechSource='';
     let renderMode=new URLSearchParams(location.search).has('render'),renderTime=0,renderSafeTop=null;
     const rigNow=()=>renderMode?renderTime*1000:performance.now();
-    const mouthNames=['closed','small','wide','teeth','smile'],talkFrames=['closed','small','wide','teeth','small','wide'];
+    const mouthNames=['closed','small','mbp','ee','ah','oh','fv','wide','teeth','smile'];
 
     function showSvg(el,show){
       el.removeAttribute('hidden');
       el.style.visibility=show?'visible':'hidden';
       el.style.opacity=show?'1':'0';
     }
-    function setMouth(name){mouthNames.forEach(n=>showSvg($('#mouth-'+n),n===name));mouthReadout.textContent=name;$$('[data-mouth]').forEach(b=>b.classList.toggle('active',b.dataset.mouth===name))}
-    function talkTick(){setMouth(talkFrames[talkFrame++%talkFrames.length]);talkTimer=rigTimeout(talkTick,190+Math.random()*80)}
-    function startTalk(){if(talkTimer)return;talkFrame=1;setMouth('wide');talkReadout.textContent='on';talkReadout.classList.add('on');$('#auto-talk').textContent='Auto-talk: on';$('#auto-talk').classList.add('active');talkTimer=rigTimeout(talkTick,150)}
+    function setMouth(name){if(!mouthNames.includes(name))name='closed';mouthNames.forEach(n=>showSvg($('#mouth-'+n),n===name));mouthReadout.textContent=name;$$('[data-mouth]').forEach(b=>b.classList.toggle('active',b.dataset.mouth===name))}
+    function visemeForChar(ch,next=''){
+      const c=(ch||'').toLowerCase(), n=(next||'').toLowerCase();
+      if(!c||/\s|[,.!?;:]/.test(c))return 'closed';
+      if(/[bmp]/.test(c))return 'mbp';
+      if(/[fv]/.test(c))return 'fv';
+      if(/[iy]/.test(c))return 'ee';
+      if(/[o]/.test(c)&&/[uw]/.test(n))return 'oh';
+      if(/[o]/.test(c))return 'oh';
+      if(/[ae]/.test(c))return 'ah';
+      if(/[rl]/.test(c))return 'teeth';
+      if(/[sztdkgnhcjxq]/.test(c))return 'ee';
+      return 'small';
+    }
+    function talkTick(){
+      const source=speechSource||$('#speech-text').value||'';
+      const i=talkFrame++%Math.max(1,source.length),next=source[i+1]||'';
+      setMouth(visemeForChar(source[i],next));
+      talkTimer=rigTimeout(talkTick,105+((i*37)%70));
+    }
+    function startTalk(){if(talkTimer)return;talkFrame=0;setMouth('small');talkReadout.textContent='on';talkReadout.classList.add('on');$('#auto-talk').textContent='Auto-talk: on';$('#auto-talk').classList.add('active');talkTimer=rigTimeout(talkTick,105)}
     function stopTalk(close=true){cancelRigTimeout(talkTimer);talkTimer=null;talkReadout.textContent='off';talkReadout.classList.remove('on');$('#auto-talk').textContent='Auto-talk: off';$('#auto-talk').classList.remove('active');if(close)setMouth('closed')}
     function blink(){if(isBlinking)return;isBlinking=true;showSvg(eyesOpen,false);showSvg(eyesBlink,true);eyesReadout.textContent='blink';rigTimeout(()=>{showSvg(eyesBlink,false);showSvg(eyesOpen,true);eyesReadout.textContent='open';isBlinking=false},320)}
     function scheduleBlink(first=false){cancelRigTimeout(blinkTimer);blinkTimer=rigTimeout(()=>{if(autoBlink){blink();if(Math.random()<.25)raiseBrows()}scheduleBlink()},first?900:2100+Math.random()*2100)}
@@ -240,8 +264,7 @@
       lu:joint(leftUpper,118,260,12),lf:joint(leftForearm,86,392,11),lh:joint(leftHand,80,511,9),
       ru:joint(rightUpper,262,260,12),rf:joint(rightForearm,294,392,11),rh:joint(rightHand,300,511,9)
     };
-    const wristDetail=$('#wrist-detail-use');
-    let motionFrame=null,lastMotionTime=0,waveStarted=0;
+    let motionFrame=null,lastMotionTime=0,waveStarted=0,fullMotion=false;
     // Exact critically damped integration preserves the current position AND
     // velocity when retargeted. No timer delays, CSS transitions, or WAAPI
     // animations can pull the same joint toward a competing position.
@@ -303,9 +326,6 @@
         const distance=Math.abs(j.target-j.angle);
         j.frequency=j.baseFrequency*clamp(Math.sqrt(35/Math.max(35,distance)),.45,1);
       }
-      const right=['rightTalk','chest','wave'].includes(name);
-      wristDetail.setAttribute('href',right?'#right-wrist-assembly':'#left-wrist-assembly');
-      if(right)wristDetail.setAttribute('transform','translate(380 0) scale(-1 1)');else wristDetail.removeAttribute('transform');
       requestMotion();
       $$('[data-pose]').forEach(b=>b.classList.toggle('active',b.dataset.pose===name));
     }
@@ -320,12 +340,27 @@
       gestureTimer=rigTimeout(()=>{setPose('rest');if(autoGesture||isSpeaking)scheduleGesture()},1800+Math.random()*500);
     }
     function scheduleGesture(){cancelRigTimeout(gestureTimer);if(autoGesture||isSpeaking)gestureTimer=rigTimeout(randomGesture,1400+Math.random()*600)}
-    function speak(){if(!('speechSynthesis'in window)){alert('Speech is unavailable in this browser.');return}const text=$('#speech-text').value.trim();if(!text)return;speechSynthesis.cancel();stopTalk();const u=new SpeechSynthesisUtterance(text),i=$('#voice-select').value;if(i!==''&&voices[i])u.voice=voices[i];u.rate=.96;speechReadout.textContent='starting';startTalk();u.onstart=()=>{isSpeaking=true;speechReadout.textContent='speaking';speechReadout.classList.add('on');raiseBrows(450);randomGesture()};u.onboundary=()=>{if(Math.random()<.07)blink()};u.onend=()=>{isSpeaking=false;speechReadout.textContent='idle';speechReadout.classList.remove('on');cancelRigTimeout(gestureTimer);setPose('rest');stopTalk(false);setMouth('smile');rigTimeout(()=>setMouth('closed'),650);if(autoGesture)scheduleGesture()};u.onerror=()=>{isSpeaking=false;speechReadout.textContent='error';speechReadout.classList.remove('on');cancelRigTimeout(gestureTimer);setPose('rest');stopTalk();if(autoGesture)scheduleGesture()};speechSynthesis.speak(u)}
+    function speak(){if(!('speechSynthesis'in window)){alert('Speech is unavailable in this browser.');return}const text=$('#speech-text').value.trim();if(!text)return;speechSynthesis.cancel();stopTalk();speechSource=text;const u=new SpeechSynthesisUtterance(text),i=$('#voice-select').value;if(i!==''&&voices[i])u.voice=voices[i];u.rate=.96;speechReadout.textContent='starting';startTalk();u.onstart=()=>{isSpeaking=true;speechReadout.textContent='speaking';speechReadout.classList.add('on');raiseBrows(450);randomGesture()};u.onboundary=e=>{if(Number.isFinite(e.charIndex)){talkFrame=e.charIndex;setMouth(visemeForChar(text[e.charIndex],text[e.charIndex+1]))}if(Math.random()<.07)blink()};u.onend=()=>{isSpeaking=false;speechReadout.textContent='idle';speechReadout.classList.remove('on');cancelRigTimeout(gestureTimer);setPose('rest');stopTalk(false);setMouth('smile');rigTimeout(()=>setMouth('closed'),650);if(autoGesture)scheduleGesture()};u.onerror=()=>{isSpeaking=false;speechReadout.textContent='error';speechReadout.classList.remove('on');cancelRigTimeout(gestureTimer);setPose('rest');stopTalk();if(autoGesture)scheduleGesture()};speechSynthesis.speak(u)}
     function stopSpeech(){if('speechSynthesis'in window)speechSynthesis.cancel();isSpeaking=false;cancelRigTimeout(gestureTimer);setPose('rest');speechReadout.textContent='idle';speechReadout.classList.remove('on');stopTalk();if(autoGesture)scheduleGesture()}
     function resetPose(){cancelRigTimeout(gestureTimer);autoGesture=false;$('#auto-gesture').textContent='Preview gestures';$('#auto-gesture').classList.remove('active');$('#auto-gesture').setAttribute('aria-pressed','false');setPose('rest');character.classList.remove('excited');setMouth('closed');resetEyes()}
+    function setFullMotion(enabled){
+      fullMotion=Boolean(enabled);
+      autoBlink=fullMotion;tracking=fullMotion;autoGesture=fullMotion;
+      character.classList.toggle('no-sway',!fullMotion);
+      $('#full-motion').textContent=`Full motion: ${fullMotion?'on':'off'}`;
+      $('#full-motion').classList.toggle('active',fullMotion);
+      $('#full-motion').setAttribute('aria-pressed',String(fullMotion));
+      $('#auto-blink').textContent=`Auto-blink: ${autoBlink?'on':'off'}`;$('#auto-blink').classList.toggle('active',autoBlink);
+      $('#tracking').textContent=`Eye tracking: ${tracking?'on':'off'}`;$('#tracking').classList.toggle('active',tracking);
+      $('#sway').textContent=`Idle sway: ${fullMotion?'on':'off'}`;$('#sway').classList.toggle('active',fullMotion);
+      $('#auto-gesture').textContent=fullMotion?'Stop preview':'Preview gestures';$('#auto-gesture').classList.toggle('active',fullMotion);$('#auto-gesture').setAttribute('aria-pressed',String(fullMotion));
+      if(fullMotion){scheduleBlink(true);startTalk();gestureStep=0;randomGesture();idleExpression();idleGaze()}
+      else{cancelRigTimeout(gestureTimer);stopTalk();setPose('rest');setMouth('closed');resetEyes();}
+    }
 
     $$('[data-mouth]').forEach(b=>b.onclick=()=>{stopTalk(false);setMouth(b.dataset.mouth)});
     $('#auto-talk').onclick=()=>talkTimer?stopTalk():startTalk();$('#blink').onclick=blink;$('#brows').onclick=()=>raiseBrows();
+    $('#full-motion').onclick=()=>setFullMotion(!fullMotion);
     $('#auto-blink').onclick=e=>{autoBlink=!autoBlink;e.currentTarget.textContent=`Auto-blink: ${autoBlink?'on':'off'}`;e.currentTarget.classList.toggle('active',autoBlink)};
     $('#tracking').onclick=e=>{tracking=!tracking;e.currentTarget.textContent=`Eye tracking: ${tracking?'on':'off'}`;e.currentTarget.classList.toggle('active',tracking);if(!tracking)resetEyes()};
     $$('[data-pose]').forEach(b=>b.onclick=()=>{cancelRigTimeout(gestureTimer);setPose(b.dataset.pose);if(autoGesture||isSpeaking)scheduleGesture()});
