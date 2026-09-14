@@ -1,0 +1,398 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-14T22:27:59.132Z",
+  "query": "Ferrari 488 GTB",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/ferrari/488?start_year=2019&end_year=2019&csort=10",
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/92DV5Al6/2019-ferrari-488-gtb",
+      "title": "2019 Ferrari 488 Gtb",
+      "text": "FEATURED Bid to $174,500",
+      "titleYear": 2019,
+      "score": 88
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/92DV5Al6/2019-ferrari-488-gtb",
+      "title": "2019 Ferrari 488 Gtb",
+      "text": "FEATURED Bid to $174,500",
+      "titleYear": 2019,
+      "score": 88,
+      "usable_image_count": 13,
+      "sale_price": 174500,
+      "sale_type": "sold",
+      "page_title": "2019 Ferrari 488 GTB"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/92DV5Al6/2019-ferrari-488-gtb",
+    "title": "2019 Ferrari 488 Gtb",
+    "text": "FEATURED Bid to $174,500",
+    "titleYear": 2019,
+    "score": 88,
+    "sale_price": 174500,
+    "sale_type": "sold",
+    "page_title": "2019 Ferrari 488 GTB",
+    "year": 2019,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/3Bzj8lMd--kxbzdQ2j2/edit/a6af9.jpg?t=173028572024",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2019 Ferrari 488 GTB",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 319331
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/32bcdeb37478af86c032aafa03fd8143eaa5ea68/photos/3Bzj8lMd-bte-10061x.jpg?t=172959524205",
+      "labels": [
+        "interior"
+      ],
+      "section": "2019 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 239576
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/32bcdeb37478af86c032aafa03fd8143eaa5ea68/photos/3Bzj8lMd-hVCtUrhDCo.jpg?t=172959525877",
+      "labels": [
+        "interior"
+      ],
+      "section": "2019 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 227314
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/32bcdeb37478af86c032aafa03fd8143eaa5ea68/photos/3Bzj8lMd-a3RTVkrluz.jpg?t=172959526273",
+      "labels": [
+        "interior"
+      ],
+      "section": "2019 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 270146
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/3Bzj8lMd-U9sZRSJeKY/edit/_7xBp.jpg?t=173022543122",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2019 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 236451
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/3Bzj8lMd-kRNXZkmVpA/edit/Wwiec.jpg?t=173028583547",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2019 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 424062
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/3Bzj8lMd-Zk4YKPTlLK/edit/6QYfq.jpg?t=173022550178",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2019 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 309709
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/3Bzj8lMd-2nXd_NfiVu/edit/wS-ot.jpg?t=173022553321",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2019 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 195520
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/83884a2d5bfbb4f360b59e2afac5049730d45ca6/photos/36RXdeEW-eRAjMw4V6-U.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 13275 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/2d1ad304da1f671dbba9c9b32aa9f0bd92c96830/photos/9lYJdLOZ-3_qNSYn3QM.JPG",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 9185 bytes"
+    },
+    {
+      "path": "interior-11.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f2acd32538fd950f45033f2020f43e44e93f4359/photos/3Bzj8lMd-YRbPjGHUQe/edit/-Sg2c.jpg?t=173022611265",
+      "labels": [
+        "interior"
+      ],
+      "section": "2019 Ferrari 488 GTB",
+      "width": 542,
+      "height": 361,
+      "bytes": 322866
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork style",
+          "headlight design",
+          "overall proportions"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 7,
+        "reject": true,
+        "reason": "Not the correct production year; the photo depicts an earlier generation.",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front fascia design",
+          "manufacturer badge"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 7,
+        "reject": true,
+        "reason": "not a 2019 Ferrari 488 GTB; year-specific evidence is lacking.",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "488 body design",
+          "side profile proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "488 body shape",
+          "GTB rear design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "distinctive rear lights",
+          "rear diffuser design",
+          "body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "Ferrari logo",
+          "488 interior design",
+          "2019 model features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "Ferrari branding on seats",
+          "Interior design matches known Ferrari 488 aesthetics"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "GTB",
+        "visible_match_evidence": [
+          "interior design",
+          "seats",
+          "dash layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ferrari logo",
+          "RPM gauge design typical of 488"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-11.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

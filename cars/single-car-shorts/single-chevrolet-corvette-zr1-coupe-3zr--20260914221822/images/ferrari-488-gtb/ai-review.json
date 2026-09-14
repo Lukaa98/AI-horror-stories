@@ -1,0 +1,236 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 9,
+  "reviews": [
+    {
+      "is_target_vehicle": false,
+      "detected_make": "Ferrari",
+      "detected_model": "488",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "bodywork style",
+        "headlight design",
+        "overall proportions"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 7,
+      "reject": true,
+      "reason": "Not the correct production year; the photo depicts an earlier generation.",
+      "path": "exterior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "Ferrari",
+      "detected_model": "488",
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "front fascia design",
+        "manufacturer badge"
+      ],
+      "generation_match_confidence": 7,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 7,
+      "reject": true,
+      "reason": "not a 2019 Ferrari 488 GTB; year-specific evidence is lacking.",
+      "path": "exterior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ferrari",
+      "detected_model": "488",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Ferrari badge",
+        "488 body design",
+        "side profile proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ferrari",
+      "detected_model": "488",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GTB",
+      "visible_match_evidence": [
+        "Ferrari badge",
+        "488 body shape",
+        "GTB rear design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ferrari",
+      "detected_model": "488",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GTB",
+      "visible_match_evidence": [
+        "distinctive rear lights",
+        "rear diffuser design",
+        "body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ferrari",
+      "detected_model": "488",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GTB",
+      "visible_match_evidence": [
+        "Ferrari logo",
+        "488 interior design",
+        "2019 model features"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ferrari",
+      "detected_model": "488",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GTB",
+      "visible_match_evidence": [
+        "Ferrari branding on seats",
+        "Interior design matches known Ferrari 488 aesthetics"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Ferrari",
+      "detected_model": "488",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GTB",
+      "visible_match_evidence": [
+        "interior design",
+        "seats",
+        "dash layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "ferrari",
+      "detected_model": "488",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Ferrari logo",
+        "RPM gauge design typical of 488"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-11.jpg",
+      "provider": "openai"
+    }
+  ]
+}
