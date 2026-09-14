@@ -1,0 +1,1615 @@
+{
+  "version": "v21",
+  "duration": 55.94,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "safe_top": 0.65,
+  "shots": [
+    {
+      "start": 0.0,
+      "layout": "close-right",
+      "framing": "bust"
+    },
+    {
+      "start": 26.350000381469727,
+      "layout": "bottom-right",
+      "framing": "half"
+    },
+    {
+      "start": 31.09000015258789,
+      "layout": "bottom-center",
+      "framing": "half"
+    },
+    {
+      "start": 35.88999938964844,
+      "layout": "bottom-right",
+      "framing": "half"
+    },
+    {
+      "start": 40.71000099182129,
+      "layout": "close-right",
+      "framing": "bust"
+    },
+    {
+      "start": 45.96999931335449,
+      "layout": "bottom-right",
+      "framing": "half"
+    }
+  ],
+  "gestures": [
+    {
+      "start": 0.65,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 2.1,
+      "pose": "rest"
+    },
+    {
+      "start": 4.05,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 5.5,
+      "pose": "rest"
+    },
+    {
+      "start": 7.45,
+      "pose": "open"
+    },
+    {
+      "start": 8.9,
+      "pose": "rest"
+    },
+    {
+      "start": 10.85,
+      "pose": "chest"
+    },
+    {
+      "start": 12.3,
+      "pose": "rest"
+    },
+    {
+      "start": 14.25,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 15.7,
+      "pose": "rest"
+    },
+    {
+      "start": 17.65,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 19.1,
+      "pose": "rest"
+    },
+    {
+      "start": 21.05,
+      "pose": "open"
+    },
+    {
+      "start": 22.5,
+      "pose": "rest"
+    },
+    {
+      "start": 24.45,
+      "pose": "chest"
+    },
+    {
+      "start": 25.9,
+      "pose": "rest"
+    },
+    {
+      "start": 26.85,
+      "pose": "presentLeft"
+    },
+    {
+      "start": 29.3,
+      "pose": "rest"
+    },
+    {
+      "start": 29.3,
+      "pose": "rest"
+    },
+    {
+      "start": 32.24,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 33.69,
+      "pose": "rest"
+    },
+    {
+      "start": 37.039999,
+      "pose": "open"
+    },
+    {
+      "start": 38.489999,
+      "pose": "rest"
+    },
+    {
+      "start": 41.860001,
+      "pose": "chest"
+    },
+    {
+      "start": 43.310001,
+      "pose": "rest"
+    },
+    {
+      "start": 45.260001,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 46.710001,
+      "pose": "rest"
+    },
+    {
+      "start": 48.660001,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 50.110001,
+      "pose": "rest"
+    },
+    {
+      "start": 52.060001,
+      "pose": "open"
+    },
+    {
+      "start": 53.510001,
+      "pose": "rest"
+    }
+  ],
+  "expressions": [
+    {
+      "start": 0.2,
+      "end": 1.55,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 5.050000143051148,
+      "end": 6.400000143051147,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 11.810000133514404,
+      "end": 13.160000133514405,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 20.38000030517578,
+      "end": 21.730000305175782,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 26.550000381469726,
+      "end": 27.900000381469727,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 31.29000015258789,
+      "end": 32.64000015258789,
+      "aim": [
+        0.0,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 36.08999938964844,
+      "end": 37.439999389648435,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 40.91000099182129,
+      "end": 42.260000991821286,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 46.169999313354495,
+      "end": 47.51999931335449,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 52.310000610351565,
+      "end": 53.66000061035156,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 26.700000381469728,
+      "end": 29.30000038146973,
+      "aim": [
+        -0.26555555555555554,
+        -0.7322475000000002
+      ],
+      "brows": true
+    }
+  ],
+  "photo_cues": [
+    {
+      "start": 0.0,
+      "end": 4.8500001430511475,
+      "slot": "front",
+      "label": "Front",
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/0-front.jpg",
+          "label": "Front",
+          "photo_id": "front-closeup-1789395164035-0-0"
+        },
+        {
+          "path": "images/manual-extra/3-front-carbon-fiber-lip.jpg",
+          "label": "Front carbon fiber lip",
+          "photo_id": "front-closeup-1789395294897-3-3"
+        },
+        {
+          "path": "images/manual-extra/14-head-lights.jpg",
+          "label": "Head lights",
+          "photo_id": "front-closeup-1789395662474-14-14"
+        },
+        {
+          "path": "images/manual-extra/15-hood.jpg",
+          "label": "Hood",
+          "photo_id": "front-closeup-1789395685943-15-15"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 0.0,
+      "chapter_end": 11.610000133514404
+    },
+    {
+      "start": 4.8500001430511475,
+      "end": 11.610000133514404,
+      "slot": "front",
+      "label": "Front",
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/0-front.jpg",
+          "label": "Front",
+          "photo_id": "front-closeup-1789395164035-0-0"
+        },
+        {
+          "path": "images/manual-extra/3-front-carbon-fiber-lip.jpg",
+          "label": "Front carbon fiber lip",
+          "photo_id": "front-closeup-1789395294897-3-3"
+        },
+        {
+          "path": "images/manual-extra/14-head-lights.jpg",
+          "label": "Head lights",
+          "photo_id": "front-closeup-1789395662474-14-14"
+        },
+        {
+          "path": "images/manual-extra/15-hood.jpg",
+          "label": "Hood",
+          "photo_id": "front-closeup-1789395685943-15-15"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 0.0,
+      "chapter_end": 11.610000133514404
+    },
+    {
+      "start": 11.610000133514404,
+      "end": 20.18000030517578,
+      "slot": "engine",
+      "label": "Engine bay",
+      "hero": "images/manual/engine.jpg",
+      "closeups": [
+        {
+          "path": "images/manual-extra/12-carbon-fiber-supercharger.jpg",
+          "label": "Carbon fiber supercharger",
+          "photo_id": "engine-closeup-1789395581528-12-12"
+        },
+        {
+          "path": "images/manual-extra/13-opeen-hood-with-exposed-supercharger.jpg",
+          "label": "Opeen hood with exposed supercharger",
+          "photo_id": "engine-closeup-1789395601566-13-13"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 11.610000133514404,
+      "chapter_end": 20.18000030517578
+    },
+    {
+      "start": 20.18000030517578,
+      "end": 26.350000381469727,
+      "slot": "side",
+      "label": "Side",
+      "hero": "images/manual/side-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/6-side-air-went.jpg",
+          "label": "Side air went",
+          "photo_id": "side-closeup-1789395395159-6-6"
+        },
+        {
+          "path": "images/manual-extra/7-carbon-fiber-hood.jpg",
+          "label": "Carbon fiber hood",
+          "photo_id": "side-closeup-1789395422143-7-7"
+        },
+        {
+          "path": "images/manual-extra/8-giant-calipers-on-zr1.jpg",
+          "label": "Giant Calipers on ZR1",
+          "photo_id": "side-closeup-1789395444377-8-8"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 20.18000030517578,
+      "chapter_end": 31.09000015258789
+    },
+    {
+      "start": 26.350000381469727,
+      "end": 31.09000015258789,
+      "slot": "side",
+      "label": "Side",
+      "hero": "images/manual/side-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/6-side-air-went.jpg",
+          "label": "Side air went",
+          "photo_id": "side-closeup-1789395395159-6-6"
+        },
+        {
+          "path": "images/manual-extra/7-carbon-fiber-hood.jpg",
+          "label": "Carbon fiber hood",
+          "photo_id": "side-closeup-1789395422143-7-7"
+        },
+        {
+          "path": "images/manual-extra/8-giant-calipers-on-zr1.jpg",
+          "label": "Giant Calipers on ZR1",
+          "photo_id": "side-closeup-1789395444377-8-8"
+        }
+      ],
+      "active": "side-closeup-1789395422143-7-7",
+      "active_index": 1,
+      "chapter_start": 20.18000030517578,
+      "chapter_end": 31.09000015258789
+    },
+    {
+      "start": 31.09000015258789,
+      "end": 35.88999938964844,
+      "slot": "rear",
+      "label": "Rear",
+      "hero": "images/manual/rear-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/1-roof-top-off.jpg",
+          "label": "Roof top off",
+          "photo_id": "rear-closeup-1789395190786-1-1"
+        },
+        {
+          "path": "images/manual-extra/2-back.jpg",
+          "label": "back",
+          "photo_id": "rear-closeup-1789395247836-2-2"
+        },
+        {
+          "path": "images/manual-extra/4-carbon-fiber-wing.jpg",
+          "label": "Carbon fiber wing",
+          "photo_id": "rear-closeup-1789395337946-4-4"
+        },
+        {
+          "path": "images/manual-extra/5-quad-exhaust-zr-badge.jpg",
+          "label": "Quad exhaust ZR! badge",
+          "photo_id": "rear-closeup-1789395360827-5-5"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 31.09000015258789,
+      "chapter_end": 35.88999938964844
+    },
+    {
+      "start": 35.88999938964844,
+      "end": 40.71000099182129,
+      "slot": "interior",
+      "label": "Interior",
+      "hero": "images/manual/interior.jpg",
+      "closeups": [
+        {
+          "path": "images/manual-extra/9-7-speed-manual.jpg",
+          "label": "7 speed manual",
+          "photo_id": "interior-closeup-1789395470084-9-9"
+        },
+        {
+          "path": "images/manual-extra/10-gauge-cluster.jpg",
+          "label": "Gauge cluster",
+          "photo_id": "interior-closeup-1789395510747-10-10"
+        },
+        {
+          "path": "images/manual-extra/11-3-pedals.jpg",
+          "label": "3 pedals",
+          "photo_id": "interior-closeup-1789395540853-11-11"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 35.88999938964844,
+      "chapter_end": 40.71000099182129
+    },
+    {
+      "start": 40.71000099182129,
+      "end": 45.96999931335449,
+      "slot": "front",
+      "label": "Front",
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/0-front.jpg",
+          "label": "Front",
+          "photo_id": "front-closeup-1789395164035-0-0"
+        },
+        {
+          "path": "images/manual-extra/3-front-carbon-fiber-lip.jpg",
+          "label": "Front carbon fiber lip",
+          "photo_id": "front-closeup-1789395294897-3-3"
+        },
+        {
+          "path": "images/manual-extra/14-head-lights.jpg",
+          "label": "Head lights",
+          "photo_id": "front-closeup-1789395662474-14-14"
+        },
+        {
+          "path": "images/manual-extra/15-hood.jpg",
+          "label": "Hood",
+          "photo_id": "front-closeup-1789395685943-15-15"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 40.71000099182129,
+      "chapter_end": 45.96999931335449
+    },
+    {
+      "start": 45.96999931335449,
+      "end": 52.11000061035156,
+      "slot": null,
+      "label": null,
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 45.96999931335449,
+      "chapter_end": 52.11000061035156
+    },
+    {
+      "start": 52.11000061035156,
+      "end": 55.94,
+      "slot": "front",
+      "label": "Front",
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/0-front.jpg",
+          "label": "Front",
+          "photo_id": "front-closeup-1789395164035-0-0"
+        },
+        {
+          "path": "images/manual-extra/3-front-carbon-fiber-lip.jpg",
+          "label": "Front carbon fiber lip",
+          "photo_id": "front-closeup-1789395294897-3-3"
+        },
+        {
+          "path": "images/manual-extra/14-head-lights.jpg",
+          "label": "Head lights",
+          "photo_id": "front-closeup-1789395662474-14-14"
+        },
+        {
+          "path": "images/manual-extra/15-hood.jpg",
+          "label": "Hood",
+          "photo_id": "front-closeup-1789395685943-15-15"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 52.11000061035156,
+      "chapter_end": 55.94
+    }
+  ],
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.36,
+      "end": 0.63,
+      "mouth": "small"
+    },
+    {
+      "start": 0.63,
+      "end": 0.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.9,
+      "end": 1.26,
+      "mouth": "small"
+    },
+    {
+      "start": 1.26,
+      "end": 1.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.35,
+      "end": 1.98,
+      "mouth": "small"
+    },
+    {
+      "start": 1.98,
+      "end": 2.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.07,
+      "end": 2.16,
+      "mouth": "small"
+    },
+    {
+      "start": 2.16,
+      "end": 2.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.43,
+      "end": 2.61,
+      "mouth": "small"
+    },
+    {
+      "start": 2.61,
+      "end": 2.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.7,
+      "end": 2.79,
+      "mouth": "small"
+    },
+    {
+      "start": 2.79,
+      "end": 3.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.06,
+      "end": 3.42,
+      "mouth": "small"
+    },
+    {
+      "start": 3.42,
+      "end": 3.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.6,
+      "end": 3.78,
+      "mouth": "small"
+    },
+    {
+      "start": 3.78,
+      "end": 3.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.96,
+      "end": 4.14,
+      "mouth": "small"
+    },
+    {
+      "start": 4.14,
+      "end": 4.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.23,
+      "end": 4.41,
+      "mouth": "small"
+    },
+    {
+      "start": 4.41,
+      "end": 5.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.13,
+      "end": 5.31,
+      "mouth": "small"
+    },
+    {
+      "start": 5.31,
+      "end": 5.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.58,
+      "end": 5.67,
+      "mouth": "small"
+    },
+    {
+      "start": 5.67,
+      "end": 5.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.76,
+      "end": 5.85,
+      "mouth": "small"
+    },
+    {
+      "start": 5.85,
+      "end": 5.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.94,
+      "end": 6.21,
+      "mouth": "small"
+    },
+    {
+      "start": 6.21,
+      "end": 6.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.48,
+      "end": 6.93,
+      "mouth": "small"
+    },
+    {
+      "start": 6.93,
+      "end": 7.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.02,
+      "end": 7.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.11,
+      "end": 7.29,
+      "mouth": "small"
+    },
+    {
+      "start": 7.29,
+      "end": 7.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.38,
+      "end": 7.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.47,
+      "end": 7.56,
+      "mouth": "small"
+    },
+    {
+      "start": 7.56,
+      "end": 7.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.65,
+      "end": 7.74,
+      "mouth": "small"
+    },
+    {
+      "start": 7.74,
+      "end": 7.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.83,
+      "end": 7.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.92,
+      "end": 8.28,
+      "mouth": "small"
+    },
+    {
+      "start": 8.28,
+      "end": 8.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.55,
+      "end": 8.64,
+      "mouth": "small"
+    },
+    {
+      "start": 8.64,
+      "end": 8.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.73,
+      "end": 8.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.82,
+      "end": 8.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.91,
+      "end": 9.18,
+      "mouth": "small"
+    },
+    {
+      "start": 9.18,
+      "end": 9.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.36,
+      "end": 9.72,
+      "mouth": "small"
+    },
+    {
+      "start": 9.72,
+      "end": 10.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.26,
+      "end": 10.35,
+      "mouth": "small"
+    },
+    {
+      "start": 10.35,
+      "end": 10.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.44,
+      "end": 10.53,
+      "mouth": "small"
+    },
+    {
+      "start": 10.53,
+      "end": 10.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.8,
+      "end": 11.43,
+      "mouth": "small"
+    },
+    {
+      "start": 11.43,
+      "end": 11.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.79,
+      "end": 11.88,
+      "mouth": "small"
+    },
+    {
+      "start": 11.88,
+      "end": 11.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.97,
+      "end": 12.06,
+      "mouth": "small"
+    },
+    {
+      "start": 12.06,
+      "end": 12.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.15,
+      "end": 12.42,
+      "mouth": "small"
+    },
+    {
+      "start": 12.42,
+      "end": 12.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.51,
+      "end": 12.87,
+      "mouth": "small"
+    },
+    {
+      "start": 12.87,
+      "end": 12.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.96,
+      "end": 13.14,
+      "mouth": "small"
+    },
+    {
+      "start": 13.14,
+      "end": 13.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.41,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.59,
+      "end": 13.86,
+      "mouth": "small"
+    },
+    {
+      "start": 13.86,
+      "end": 14.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.04,
+      "end": 15.75,
+      "mouth": "small"
+    },
+    {
+      "start": 15.75,
+      "end": 15.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.84,
+      "end": 16.65,
+      "mouth": "small"
+    },
+    {
+      "start": 16.65,
+      "end": 17.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.1,
+      "end": 17.19,
+      "mouth": "small"
+    },
+    {
+      "start": 17.19,
+      "end": 17.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.28,
+      "end": 17.55,
+      "mouth": "small"
+    },
+    {
+      "start": 17.55,
+      "end": 17.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.64,
+      "end": 17.82,
+      "mouth": "small"
+    },
+    {
+      "start": 17.82,
+      "end": 17.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.91,
+      "end": 18.36,
+      "mouth": "small"
+    },
+    {
+      "start": 18.36,
+      "end": 18.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.45,
+      "end": 18.9,
+      "mouth": "small"
+    },
+    {
+      "start": 18.9,
+      "end": 19.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.17,
+      "end": 19.98,
+      "mouth": "small"
+    },
+    {
+      "start": 19.98,
+      "end": 20.7,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.7,
+      "end": 21.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.15,
+      "end": 21.33,
+      "mouth": "small"
+    },
+    {
+      "start": 21.33,
+      "end": 21.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.51,
+      "end": 22.32,
+      "mouth": "small"
+    },
+    {
+      "start": 22.32,
+      "end": 22.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.41,
+      "end": 22.77,
+      "mouth": "small"
+    },
+    {
+      "start": 22.77,
+      "end": 23.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.13,
+      "end": 23.22,
+      "mouth": "small"
+    },
+    {
+      "start": 23.22,
+      "end": 23.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.31,
+      "end": 23.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.49,
+      "end": 23.67,
+      "mouth": "small"
+    },
+    {
+      "start": 23.67,
+      "end": 23.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.76,
+      "end": 24.03,
+      "mouth": "small"
+    },
+    {
+      "start": 24.03,
+      "end": 24.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.21,
+      "end": 24.48,
+      "mouth": "small"
+    },
+    {
+      "start": 24.48,
+      "end": 24.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.57,
+      "end": 24.75,
+      "mouth": "small"
+    },
+    {
+      "start": 24.75,
+      "end": 24.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.84,
+      "end": 26.01,
+      "mouth": "small"
+    },
+    {
+      "start": 26.01,
+      "end": 26.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.73,
+      "end": 26.82,
+      "mouth": "small"
+    },
+    {
+      "start": 26.82,
+      "end": 27.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.0,
+      "end": 27.09,
+      "mouth": "small"
+    },
+    {
+      "start": 27.09,
+      "end": 27.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.18,
+      "end": 27.36,
+      "mouth": "small"
+    },
+    {
+      "start": 27.36,
+      "end": 27.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.45,
+      "end": 27.9,
+      "mouth": "small"
+    },
+    {
+      "start": 27.9,
+      "end": 27.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.99,
+      "end": 28.26,
+      "mouth": "small"
+    },
+    {
+      "start": 28.26,
+      "end": 28.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.35,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 28.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.89,
+      "end": 29.7,
+      "mouth": "small"
+    },
+    {
+      "start": 29.7,
+      "end": 29.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.79,
+      "end": 29.88,
+      "mouth": "small"
+    },
+    {
+      "start": 29.88,
+      "end": 29.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.97,
+      "end": 30.06,
+      "mouth": "small"
+    },
+    {
+      "start": 30.06,
+      "end": 30.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.15,
+      "end": 30.33,
+      "mouth": "small"
+    },
+    {
+      "start": 30.33,
+      "end": 30.42,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.42,
+      "end": 30.51,
+      "mouth": "small"
+    },
+    {
+      "start": 30.51,
+      "end": 30.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.6,
+      "end": 30.69,
+      "mouth": "small"
+    },
+    {
+      "start": 30.69,
+      "end": 30.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.78,
+      "end": 30.87,
+      "mouth": "small"
+    },
+    {
+      "start": 30.87,
+      "end": 31.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.23,
+      "end": 31.41,
+      "mouth": "small"
+    },
+    {
+      "start": 31.41,
+      "end": 31.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.59,
+      "end": 31.95,
+      "mouth": "small"
+    },
+    {
+      "start": 31.95,
+      "end": 32.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.04,
+      "end": 32.49,
+      "mouth": "small"
+    },
+    {
+      "start": 32.49,
+      "end": 32.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.67,
+      "end": 33.39,
+      "mouth": "small"
+    },
+    {
+      "start": 33.39,
+      "end": 33.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.48,
+      "end": 33.75,
+      "mouth": "small"
+    },
+    {
+      "start": 33.75,
+      "end": 34.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.2,
+      "end": 34.56,
+      "mouth": "small"
+    },
+    {
+      "start": 34.56,
+      "end": 34.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.65,
+      "end": 34.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.74,
+      "end": 35.55,
+      "mouth": "small"
+    },
+    {
+      "start": 35.55,
+      "end": 36.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.0,
+      "end": 36.27,
+      "mouth": "small"
+    },
+    {
+      "start": 36.27,
+      "end": 36.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.36,
+      "end": 36.45,
+      "mouth": "small"
+    },
+    {
+      "start": 36.45,
+      "end": 36.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.54,
+      "end": 36.72,
+      "mouth": "small"
+    },
+    {
+      "start": 36.72,
+      "end": 36.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.9,
+      "end": 37.44,
+      "mouth": "small"
+    },
+    {
+      "start": 37.44,
+      "end": 37.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.53,
+      "end": 37.98,
+      "mouth": "small"
+    },
+    {
+      "start": 37.98,
+      "end": 38.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.07,
+      "end": 38.43,
+      "mouth": "small"
+    },
+    {
+      "start": 38.43,
+      "end": 38.7,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.7,
+      "end": 39.69,
+      "mouth": "small"
+    },
+    {
+      "start": 39.69,
+      "end": 39.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.78,
+      "end": 40.23,
+      "mouth": "small"
+    },
+    {
+      "start": 40.23,
+      "end": 41.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.04,
+      "end": 41.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.13,
+      "end": 41.4,
+      "mouth": "small"
+    },
+    {
+      "start": 41.4,
+      "end": 41.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.49,
+      "end": 42.03,
+      "mouth": "small"
+    },
+    {
+      "start": 42.03,
+      "end": 42.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.12,
+      "end": 42.75,
+      "mouth": "small"
+    },
+    {
+      "start": 42.75,
+      "end": 43.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.02,
+      "end": 43.11,
+      "mouth": "small"
+    },
+    {
+      "start": 43.11,
+      "end": 43.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.2,
+      "end": 43.56,
+      "mouth": "small"
+    },
+    {
+      "start": 43.56,
+      "end": 43.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.65,
+      "end": 44.37,
+      "mouth": "small"
+    },
+    {
+      "start": 44.37,
+      "end": 44.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.46,
+      "end": 44.64,
+      "mouth": "small"
+    },
+    {
+      "start": 44.64,
+      "end": 44.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.82,
+      "end": 44.91,
+      "mouth": "small"
+    },
+    {
+      "start": 44.91,
+      "end": 45.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.09,
+      "end": 45.27,
+      "mouth": "small"
+    },
+    {
+      "start": 45.27,
+      "end": 45.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.36,
+      "end": 45.63,
+      "mouth": "small"
+    },
+    {
+      "start": 45.63,
+      "end": 46.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.17,
+      "end": 47.07,
+      "mouth": "small"
+    },
+    {
+      "start": 47.07,
+      "end": 47.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.16,
+      "end": 47.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.25,
+      "end": 47.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.34,
+      "end": 48.42,
+      "mouth": "small"
+    },
+    {
+      "start": 48.42,
+      "end": 48.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.69,
+      "end": 48.87,
+      "mouth": "small"
+    },
+    {
+      "start": 48.87,
+      "end": 49.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.14,
+      "end": 49.32,
+      "mouth": "small"
+    },
+    {
+      "start": 49.32,
+      "end": 49.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.41,
+      "end": 51.03,
+      "mouth": "small"
+    },
+    {
+      "start": 51.03,
+      "end": 51.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.12,
+      "end": 52.11,
+      "mouth": "small"
+    },
+    {
+      "start": 52.11,
+      "end": 52.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.65,
+      "end": 52.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.74,
+      "end": 52.83,
+      "mouth": "small"
+    },
+    {
+      "start": 52.83,
+      "end": 53.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.01,
+      "end": 53.19,
+      "mouth": "small"
+    },
+    {
+      "start": 53.19,
+      "end": 53.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.28,
+      "end": 53.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.46,
+      "end": 53.64,
+      "mouth": "small"
+    },
+    {
+      "start": 53.64,
+      "end": 53.73,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.73,
+      "end": 53.82,
+      "mouth": "small"
+    },
+    {
+      "start": 53.82,
+      "end": 53.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.91,
+      "end": 54.72,
+      "mouth": "small"
+    },
+    {
+      "start": 54.72,
+      "end": 54.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.81,
+      "end": 54.9,
+      "mouth": "small"
+    },
+    {
+      "start": 54.9,
+      "end": 55.89,
+      "mouth": "closed"
+    }
+  ]
+}
