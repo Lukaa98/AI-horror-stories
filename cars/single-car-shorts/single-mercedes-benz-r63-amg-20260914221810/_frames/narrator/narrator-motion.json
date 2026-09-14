@@ -1,0 +1,1294 @@
+{
+  "version": "v21",
+  "duration": 45.58,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "safe_top": 0.65,
+  "shots": [
+    {
+      "start": 0.0,
+      "layout": "bottom-right",
+      "framing": "half"
+    },
+    {
+      "start": 7.450000286102295,
+      "layout": "close-right",
+      "framing": "bust"
+    },
+    {
+      "start": 13.279999732971191,
+      "layout": "bottom-center",
+      "framing": "half"
+    },
+    {
+      "start": 19.139999389648438,
+      "layout": "bottom-right",
+      "framing": "half"
+    },
+    {
+      "start": 24.68000030517578,
+      "layout": "close-right",
+      "framing": "bust"
+    },
+    {
+      "start": 33.2400016784668,
+      "layout": "bottom-right",
+      "framing": "half"
+    },
+    {
+      "start": 38.15999984741211,
+      "layout": "close-right",
+      "framing": "bust"
+    }
+  ],
+  "gestures": [
+    {
+      "start": 0.65,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 2.1,
+      "pose": "rest"
+    },
+    {
+      "start": 4.05,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 5.5,
+      "pose": "rest"
+    },
+    {
+      "start": 8.6,
+      "pose": "open"
+    },
+    {
+      "start": 10.05,
+      "pose": "rest"
+    },
+    {
+      "start": 12.0,
+      "pose": "chest"
+    },
+    {
+      "start": 13.45,
+      "pose": "rest"
+    },
+    {
+      "start": 15.4,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 16.85,
+      "pose": "rest"
+    },
+    {
+      "start": 18.8,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 20.25,
+      "pose": "rest"
+    },
+    {
+      "start": 22.2,
+      "pose": "open"
+    },
+    {
+      "start": 23.65,
+      "pose": "rest"
+    },
+    {
+      "start": 26.23,
+      "pose": "presentLeft"
+    },
+    {
+      "start": 28.68,
+      "pose": "rest"
+    },
+    {
+      "start": 29.23,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 30.68,
+      "pose": "rest"
+    },
+    {
+      "start": 32.63,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 34.08,
+      "pose": "rest"
+    },
+    {
+      "start": 35.538001,
+      "pose": "presentLeft"
+    },
+    {
+      "start": 37.96,
+      "pose": "rest"
+    },
+    {
+      "start": 39.71,
+      "pose": "presentLeft"
+    },
+    {
+      "start": 42.16,
+      "pose": "rest"
+    },
+    {
+      "start": 42.83,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 44.28,
+      "pose": "rest"
+    }
+  ],
+  "expressions": [
+    {
+      "start": 0.2,
+      "end": 1.55,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 7.650000286102295,
+      "end": 9.000000286102296,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 13.47999973297119,
+      "end": 14.829999732971192,
+      "aim": [
+        0.0,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 19.339999389648437,
+      "end": 20.689999389648438,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 24.88000030517578,
+      "end": 26.230000305175782,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 33.4400016784668,
+      "end": 34.790001678466794,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 38.35999984741211,
+      "end": 39.70999984741211,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 43.51999969482422,
+      "end": 44.869999694824216,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 26.08000030517578,
+      "end": 28.68000030517578,
+      "aim": [
+        -1.0,
+        -0.5739141666666667
+      ],
+      "brows": true
+    },
+    {
+      "start": 35.38800125122071,
+      "end": 37.95999984741211,
+      "aim": [
+        -0.34518518518518504,
+        -0.6431850000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 39.559999847412115,
+      "end": 42.15999984741212,
+      "aim": [
+        -1.0,
+        -0.5739141666666667
+      ],
+      "brows": true
+    }
+  ],
+  "photo_cues": [
+    {
+      "start": 0.0,
+      "end": 7.450000286102295,
+      "slot": "front",
+      "label": "Front",
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/0-front-image.jpg",
+          "label": "Front image",
+          "photo_id": "front-closeup-1789406388663-0-0"
+        },
+        {
+          "path": "images/manual-extra/2-lights-up-front-side.jpeg",
+          "label": "lights up front side",
+          "photo_id": "front-closeup-1789406432265-2-2"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 0.0,
+      "chapter_end": 13.279999732971191
+    },
+    {
+      "start": 7.450000286102295,
+      "end": 13.279999732971191,
+      "slot": "front",
+      "label": "Front",
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/0-front-image.jpg",
+          "label": "Front image",
+          "photo_id": "front-closeup-1789406388663-0-0"
+        },
+        {
+          "path": "images/manual-extra/2-lights-up-front-side.jpeg",
+          "label": "lights up front side",
+          "photo_id": "front-closeup-1789406432265-2-2"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 0.0,
+      "chapter_end": 13.279999732971191
+    },
+    {
+      "start": 13.279999732971191,
+      "end": 19.139999389648438,
+      "slot": "side",
+      "label": "Side",
+      "hero": "images/manual/side-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/3-6-3-amg-padge.jpeg",
+          "label": "6.3 amg padge",
+          "photo_id": "side-closeup-1789406446467-3-3"
+        },
+        {
+          "path": "images/manual-extra/4-wheels.jpeg",
+          "label": "wheels",
+          "photo_id": "side-closeup-1789406458704-4-4"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 13.279999732971191,
+      "chapter_end": 19.139999389648438
+    },
+    {
+      "start": 19.139999389648438,
+      "end": 24.68000030517578,
+      "slot": null,
+      "label": null,
+      "hero": "images/manual-extra/3-6-3-amg-padge.jpeg",
+      "closeups": [],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 19.139999389648438,
+      "chapter_end": 24.68000030517578
+    },
+    {
+      "start": 24.68000030517578,
+      "end": 33.2400016784668,
+      "slot": "engine",
+      "label": "Engine bay",
+      "hero": "images/manual/engine.jpg",
+      "closeups": [
+        {
+          "path": "images/manual-extra/9-engine-bay.jpg",
+          "label": "Engine bay",
+          "photo_id": "engine-closeup-1789406578032-9-9"
+        },
+        {
+          "path": "images/manual-extra/11-hand-built-engine.jpg",
+          "label": "Hand built engine",
+          "photo_id": "engine-closeup-1789406596749-11-11"
+        }
+      ],
+      "active": "engine-closeup-1789406578032-9-9",
+      "active_index": 0,
+      "chapter_start": 24.68000030517578,
+      "chapter_end": 33.2400016784668
+    },
+    {
+      "start": 33.2400016784668,
+      "end": 38.15999984741211,
+      "slot": "interior",
+      "label": "Interior",
+      "hero": "images/manual/interior.jpg",
+      "closeups": [
+        {
+          "path": "images/manual-extra/5-bolster-seats-car-in-family-minivan.jpg",
+          "label": "bolster seats car in family minivan",
+          "photo_id": "interior-closeup-1789406496781-5-5"
+        },
+        {
+          "path": "images/manual-extra/6-7-seater-for-family.jpg",
+          "label": "7 Seater for family",
+          "photo_id": "interior-closeup-1789406521465-6-6"
+        },
+        {
+          "path": "images/manual-extra/7-steering-wheel.jpg",
+          "label": "Steering wheel",
+          "photo_id": "interior-closeup-1789406534996-7-7"
+        },
+        {
+          "path": "images/manual-extra/8-rear-climate-controls.jpg",
+          "label": "Rear Climate controls",
+          "photo_id": "interior-closeup-1789406556259-8-8"
+        }
+      ],
+      "active": "interior-closeup-1789406521465-6-6",
+      "active_index": 1,
+      "chapter_start": 33.2400016784668,
+      "chapter_end": 38.15999984741211
+    },
+    {
+      "start": 38.15999984741211,
+      "end": 43.31999969482422,
+      "slot": "rear",
+      "label": "Rear",
+      "hero": "images/manual/rear-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/1-back.jpg",
+          "label": "back",
+          "photo_id": "rear-closeup-1789406407418-1-1"
+        },
+        {
+          "path": "images/manual-extra/10-side-back-amd-and-r63-badges.jpg",
+          "label": "side back amd and r63 badges",
+          "photo_id": "rear-closeup-1789406595817-10-10"
+        }
+      ],
+      "active": "rear-closeup-1789406407418-1-1",
+      "active_index": 0,
+      "chapter_start": 38.15999984741211,
+      "chapter_end": 45.58
+    },
+    {
+      "start": 43.31999969482422,
+      "end": 45.58,
+      "slot": "rear",
+      "label": "Rear",
+      "hero": "images/manual/rear-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/1-back.jpg",
+          "label": "back",
+          "photo_id": "rear-closeup-1789406407418-1-1"
+        },
+        {
+          "path": "images/manual-extra/10-side-back-amd-and-r63-badges.jpg",
+          "label": "side back amd and r63 badges",
+          "photo_id": "rear-closeup-1789406595817-10-10"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 38.15999984741211,
+      "chapter_end": 45.58
+    }
+  ],
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.9,
+      "end": 1.26,
+      "mouth": "small"
+    },
+    {
+      "start": 1.26,
+      "end": 1.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.53,
+      "end": 1.71,
+      "mouth": "small"
+    },
+    {
+      "start": 1.71,
+      "end": 1.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.8,
+      "end": 1.89,
+      "mouth": "small"
+    },
+    {
+      "start": 1.89,
+      "end": 1.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.98,
+      "end": 2.07,
+      "mouth": "small"
+    },
+    {
+      "start": 2.07,
+      "end": 2.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.16,
+      "end": 2.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.34,
+      "end": 2.52,
+      "mouth": "small"
+    },
+    {
+      "start": 2.52,
+      "end": 2.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.61,
+      "end": 2.7,
+      "mouth": "small"
+    },
+    {
+      "start": 2.7,
+      "end": 2.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.79,
+      "end": 2.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.88,
+      "end": 3.15,
+      "mouth": "small"
+    },
+    {
+      "start": 3.15,
+      "end": 3.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.51,
+      "end": 3.78,
+      "mouth": "small"
+    },
+    {
+      "start": 3.78,
+      "end": 3.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.96,
+      "end": 4.05,
+      "mouth": "small"
+    },
+    {
+      "start": 4.05,
+      "end": 4.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.23,
+      "end": 4.32,
+      "mouth": "small"
+    },
+    {
+      "start": 4.32,
+      "end": 4.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.41,
+      "end": 4.59,
+      "mouth": "small"
+    },
+    {
+      "start": 4.59,
+      "end": 4.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.68,
+      "end": 5.58,
+      "mouth": "small"
+    },
+    {
+      "start": 5.58,
+      "end": 5.76,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.76,
+      "end": 5.85,
+      "mouth": "small"
+    },
+    {
+      "start": 5.85,
+      "end": 5.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.94,
+      "end": 6.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.12,
+      "end": 6.3,
+      "mouth": "small"
+    },
+    {
+      "start": 6.3,
+      "end": 6.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.39,
+      "end": 6.66,
+      "mouth": "small"
+    },
+    {
+      "start": 6.66,
+      "end": 6.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.75,
+      "end": 6.84,
+      "mouth": "small"
+    },
+    {
+      "start": 6.84,
+      "end": 6.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.93,
+      "end": 7.74,
+      "mouth": "small"
+    },
+    {
+      "start": 7.74,
+      "end": 8.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.46,
+      "end": 8.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.55,
+      "end": 8.64,
+      "mouth": "small"
+    },
+    {
+      "start": 8.64,
+      "end": 9.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.0,
+      "end": 9.36,
+      "mouth": "small"
+    },
+    {
+      "start": 9.36,
+      "end": 9.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.45,
+      "end": 9.54,
+      "mouth": "small"
+    },
+    {
+      "start": 9.54,
+      "end": 9.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.63,
+      "end": 9.81,
+      "mouth": "small"
+    },
+    {
+      "start": 9.81,
+      "end": 10.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.17,
+      "end": 10.53,
+      "mouth": "small"
+    },
+    {
+      "start": 10.53,
+      "end": 10.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.62,
+      "end": 11.16,
+      "mouth": "small"
+    },
+    {
+      "start": 11.16,
+      "end": 11.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.34,
+      "end": 11.88,
+      "mouth": "small"
+    },
+    {
+      "start": 11.88,
+      "end": 11.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.97,
+      "end": 12.06,
+      "mouth": "small"
+    },
+    {
+      "start": 12.06,
+      "end": 12.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.33,
+      "end": 13.05,
+      "mouth": "small"
+    },
+    {
+      "start": 13.05,
+      "end": 13.86,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.86,
+      "end": 14.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.04,
+      "end": 14.31,
+      "mouth": "small"
+    },
+    {
+      "start": 14.31,
+      "end": 14.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.76,
+      "end": 14.85,
+      "mouth": "small"
+    },
+    {
+      "start": 14.85,
+      "end": 14.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.94,
+      "end": 15.48,
+      "mouth": "small"
+    },
+    {
+      "start": 15.48,
+      "end": 15.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.57,
+      "end": 15.93,
+      "mouth": "small"
+    },
+    {
+      "start": 15.93,
+      "end": 16.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.02,
+      "end": 16.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.29,
+      "end": 16.47,
+      "mouth": "small"
+    },
+    {
+      "start": 16.47,
+      "end": 16.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.56,
+      "end": 16.74,
+      "mouth": "small"
+    },
+    {
+      "start": 16.74,
+      "end": 16.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.83,
+      "end": 16.92,
+      "mouth": "small"
+    },
+    {
+      "start": 16.92,
+      "end": 17.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.19,
+      "end": 17.28,
+      "mouth": "small"
+    },
+    {
+      "start": 17.28,
+      "end": 17.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.37,
+      "end": 17.73,
+      "mouth": "small"
+    },
+    {
+      "start": 17.73,
+      "end": 17.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.82,
+      "end": 17.91,
+      "mouth": "small"
+    },
+    {
+      "start": 17.91,
+      "end": 18.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.0,
+      "end": 19.44,
+      "mouth": "small"
+    },
+    {
+      "start": 19.44,
+      "end": 19.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.98,
+      "end": 20.25,
+      "mouth": "small"
+    },
+    {
+      "start": 20.25,
+      "end": 20.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.52,
+      "end": 21.24,
+      "mouth": "small"
+    },
+    {
+      "start": 21.24,
+      "end": 21.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.51,
+      "end": 21.6,
+      "mouth": "small"
+    },
+    {
+      "start": 21.6,
+      "end": 21.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.69,
+      "end": 21.78,
+      "mouth": "small"
+    },
+    {
+      "start": 21.78,
+      "end": 21.87,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.87,
+      "end": 22.14,
+      "mouth": "small"
+    },
+    {
+      "start": 22.14,
+      "end": 22.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.23,
+      "end": 22.68,
+      "mouth": "small"
+    },
+    {
+      "start": 22.68,
+      "end": 22.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.77,
+      "end": 22.86,
+      "mouth": "small"
+    },
+    {
+      "start": 22.86,
+      "end": 22.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.95,
+      "end": 24.39,
+      "mouth": "small"
+    },
+    {
+      "start": 24.39,
+      "end": 25.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.11,
+      "end": 25.2,
+      "mouth": "small"
+    },
+    {
+      "start": 25.2,
+      "end": 25.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.47,
+      "end": 25.65,
+      "mouth": "small"
+    },
+    {
+      "start": 25.65,
+      "end": 25.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.83,
+      "end": 26.28,
+      "mouth": "small"
+    },
+    {
+      "start": 26.28,
+      "end": 26.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.46,
+      "end": 26.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.55,
+      "end": 27.45,
+      "mouth": "small"
+    },
+    {
+      "start": 27.45,
+      "end": 27.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.54,
+      "end": 27.99,
+      "mouth": "small"
+    },
+    {
+      "start": 27.99,
+      "end": 28.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.08,
+      "end": 29.07,
+      "mouth": "small"
+    },
+    {
+      "start": 29.07,
+      "end": 29.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.79,
+      "end": 29.88,
+      "mouth": "small"
+    },
+    {
+      "start": 29.88,
+      "end": 29.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.97,
+      "end": 30.06,
+      "mouth": "small"
+    },
+    {
+      "start": 30.06,
+      "end": 30.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.15,
+      "end": 30.33,
+      "mouth": "small"
+    },
+    {
+      "start": 30.33,
+      "end": 30.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.6,
+      "end": 30.69,
+      "mouth": "small"
+    },
+    {
+      "start": 30.69,
+      "end": 30.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.78,
+      "end": 30.96,
+      "mouth": "small"
+    },
+    {
+      "start": 30.96,
+      "end": 31.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.05,
+      "end": 31.77,
+      "mouth": "small"
+    },
+    {
+      "start": 31.77,
+      "end": 31.86,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.86,
+      "end": 32.22,
+      "mouth": "small"
+    },
+    {
+      "start": 32.22,
+      "end": 32.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.31,
+      "end": 32.4,
+      "mouth": "small"
+    },
+    {
+      "start": 32.4,
+      "end": 32.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.49,
+      "end": 32.85,
+      "mouth": "small"
+    },
+    {
+      "start": 32.85,
+      "end": 33.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.03,
+      "end": 33.12,
+      "mouth": "small"
+    },
+    {
+      "start": 33.12,
+      "end": 33.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.21,
+      "end": 33.84,
+      "mouth": "small"
+    },
+    {
+      "start": 33.84,
+      "end": 33.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.93,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 35.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.46,
+      "end": 35.55,
+      "mouth": "small"
+    },
+    {
+      "start": 35.55,
+      "end": 35.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.64,
+      "end": 35.73,
+      "mouth": "small"
+    },
+    {
+      "start": 35.73,
+      "end": 35.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.82,
+      "end": 35.91,
+      "mouth": "small"
+    },
+    {
+      "start": 35.91,
+      "end": 36.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.0,
+      "end": 37.35,
+      "mouth": "small"
+    },
+    {
+      "start": 37.35,
+      "end": 37.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.62,
+      "end": 37.8,
+      "mouth": "small"
+    },
+    {
+      "start": 37.8,
+      "end": 37.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.89,
+      "end": 38.16,
+      "mouth": "small"
+    },
+    {
+      "start": 38.16,
+      "end": 38.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.25,
+      "end": 39.33,
+      "mouth": "small"
+    },
+    {
+      "start": 39.33,
+      "end": 39.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.6,
+      "end": 39.78,
+      "mouth": "small"
+    },
+    {
+      "start": 39.78,
+      "end": 39.87,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.87,
+      "end": 40.05,
+      "mouth": "small"
+    },
+    {
+      "start": 40.05,
+      "end": 40.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.14,
+      "end": 40.68,
+      "mouth": "small"
+    },
+    {
+      "start": 40.68,
+      "end": 40.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.77,
+      "end": 41.58,
+      "mouth": "small"
+    },
+    {
+      "start": 41.58,
+      "end": 42.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.03,
+      "end": 42.21,
+      "mouth": "small"
+    },
+    {
+      "start": 42.21,
+      "end": 42.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.3,
+      "end": 42.39,
+      "mouth": "small"
+    },
+    {
+      "start": 42.39,
+      "end": 42.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.57,
+      "end": 42.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.66,
+      "end": 42.75,
+      "mouth": "small"
+    },
+    {
+      "start": 42.75,
+      "end": 42.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.84,
+      "end": 43.92,
+      "mouth": "small"
+    },
+    {
+      "start": 43.92,
+      "end": 44.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.01,
+      "end": 44.19,
+      "mouth": "small"
+    },
+    {
+      "start": 44.19,
+      "end": 44.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.28,
+      "end": 44.46,
+      "mouth": "small"
+    },
+    {
+      "start": 44.46,
+      "end": 44.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.55,
+      "end": 45.09,
+      "mouth": "small"
+    },
+    {
+      "start": 45.09,
+      "end": 45.54,
+      "mouth": "closed"
+    }
+  ]
+}
