@@ -513,3 +513,30 @@ def test_stat_tracker_track_builds_one_growing_clip_per_added_row(tmp_path):
     # boundary -- not literally at the word's own start time.
     assert clips[0].start == 0.0 and abs(clips[0].duration - 1.6) < 1e-6
     assert abs(clips[1].start - 1.6) < 1e-6 and abs(clips[1].duration - 4.4) < 1e-6
+
+def test_drag_race_flip_mirrors_the_cutout_mask_too(tmp_path):
+    """mirror_x flips a clip's colour frames but leaves its alpha mask in the
+    original orientation, so a background-removed car was drawn mirrored
+    through an unmirrored silhouette and came out looking unflipped -- the
+    rival raced backwards, away from the finish line (run #181)."""
+    import numpy as np
+    from PIL import Image
+    from narrator_video import _drag_race_lane_clip
+
+    # An obviously asymmetric cutout: opaque only on its left half.
+    pixels = np.zeros((20, 40, 4), dtype=np.uint8)
+    pixels[:, :20] = (255, 0, 0, 255)
+    path = tmp_path / "car.png"
+    Image.fromarray(pixels, "RGBA").save(path)
+
+    plain = _drag_race_lane_clip(str(path), "right", 40, 100, 0, 400, 0.0, 4.0, 0.0, 2.0)
+    flipped = _drag_race_lane_clip(str(path), "left", 40, 100, 0, 400, 0.0, 4.0, 0.0, 2.0)
+
+    assert plain.mask is not None and flipped.mask is not None
+    left = plain.mask.get_frame(0.01)
+    right = flipped.mask.get_frame(0.01)
+    assert np.allclose(right, left[:, ::-1], atol=0.02), "mask must mirror with the image"
+    # And the opaque half really did move to the other side.
+    half = left.shape[1] // 2
+    assert left[:, :half].sum() > left[:, half:].sum()
+    assert right[:, half:].sum() > right[:, :half].sum()

@@ -1160,7 +1160,16 @@ def _drag_race_lane_clip(
     reads as racing backwards."""
     car = ImageClip(str(path)).resize(width=car_width)
     if facing_direction == "left":
+        # mirror_x flips the colour frames but leaves the clip's alpha mask
+        # in its original orientation, so a background-removed cutout was
+        # drawn mirrored *through an unmirrored silhouette* -- the car came
+        # out looking like it had never been flipped, which is why the rival
+        # raced backwards away from the finish line. The mask has to be
+        # mirrored explicitly alongside it.
+        mask = car.mask
         car = car.fx(vfx.mirror_x)
+        if mask is not None:
+            car.mask = mask.fx(vfx.mirror_x)
     car_w, car_h = car.size
     travel = finish_x - start_x - car_w
 
