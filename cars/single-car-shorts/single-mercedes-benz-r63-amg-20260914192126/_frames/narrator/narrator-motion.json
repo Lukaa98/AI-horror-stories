@@ -1,0 +1,1080 @@
+{
+  "version": "v21",
+  "duration": 52.97,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "safe_top": 0.65,
+  "shots": [
+    {
+      "start": 0.0,
+      "layout": "close-right",
+      "framing": "bust"
+    },
+    {
+      "start": 18.0,
+      "layout": "bottom-right",
+      "framing": "half"
+    },
+    {
+      "start": 23.989999771118164,
+      "layout": "bottom-center",
+      "framing": "half"
+    },
+    {
+      "start": 32.010000228881836,
+      "layout": "close-right",
+      "framing": "bust"
+    },
+    {
+      "start": 47.22999954223633,
+      "layout": "close-left",
+      "framing": "bust"
+    }
+  ],
+  "gestures": [
+    {
+      "start": 0.65,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 2.1,
+      "pose": "rest"
+    },
+    {
+      "start": 4.05,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 5.5,
+      "pose": "rest"
+    },
+    {
+      "start": 7.45,
+      "pose": "open"
+    },
+    {
+      "start": 8.9,
+      "pose": "rest"
+    },
+    {
+      "start": 10.85,
+      "pose": "chest"
+    },
+    {
+      "start": 12.3,
+      "pose": "rest"
+    },
+    {
+      "start": 14.25,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 15.7,
+      "pose": "rest"
+    },
+    {
+      "start": 17.65,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 19.1,
+      "pose": "rest"
+    },
+    {
+      "start": 21.05,
+      "pose": "open"
+    },
+    {
+      "start": 22.5,
+      "pose": "rest"
+    },
+    {
+      "start": 25.14,
+      "pose": "chest"
+    },
+    {
+      "start": 26.59,
+      "pose": "rest"
+    },
+    {
+      "start": 28.54,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 29.99,
+      "pose": "rest"
+    },
+    {
+      "start": 33.16,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 34.61,
+      "pose": "rest"
+    },
+    {
+      "start": 36.56,
+      "pose": "open"
+    },
+    {
+      "start": 38.01,
+      "pose": "rest"
+    },
+    {
+      "start": 39.96,
+      "pose": "chest"
+    },
+    {
+      "start": 41.41,
+      "pose": "rest"
+    },
+    {
+      "start": 43.36,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 44.81,
+      "pose": "rest"
+    },
+    {
+      "start": 46.76,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 48.21,
+      "pose": "rest"
+    },
+    {
+      "start": 50.16,
+      "pose": "open"
+    },
+    {
+      "start": 51.61,
+      "pose": "rest"
+    }
+  ],
+  "expressions": [
+    {
+      "start": 0.2,
+      "end": 1.55,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 6.459999990463257,
+      "end": 7.809999990463257,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 12.460000228881835,
+      "end": 13.810000228881837,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 18.2,
+      "end": 19.55,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 24.189999771118163,
+      "end": 25.539999771118165,
+      "aim": [
+        0.0,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 32.21000022888184,
+      "end": 33.56000022888183,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 39.259999465942386,
+      "end": 40.60999946594238,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 47.42999954223633,
+      "end": 48.779999542236325,
+      "aim": [
+        0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    }
+  ],
+  "photo_cues": [
+    {
+      "start": 0.0,
+      "end": 6.259999990463257,
+      "slot": "front",
+      "label": "Front",
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/0-front-image.jpg",
+          "label": "Front image",
+          "photo_id": "front-closeup-1789406388663-0-0"
+        },
+        {
+          "path": "images/manual-extra/2-lights-up-front-side.jpeg",
+          "label": "lights up front side",
+          "photo_id": "front-closeup-1789406432265-2-2"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 0.0,
+      "chapter_end": 6.259999990463257
+    },
+    {
+      "start": 6.259999990463257,
+      "end": 12.260000228881836,
+      "slot": "side",
+      "label": "Side",
+      "hero": "images/manual/side-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/3-6-3-amg-padge.jpeg",
+          "label": "6.3 amg padge",
+          "photo_id": "side-closeup-1789406446467-3-3"
+        },
+        {
+          "path": "images/manual-extra/4-wheels.jpeg",
+          "label": "wheels",
+          "photo_id": "side-closeup-1789406458704-4-4"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 6.259999990463257,
+      "chapter_end": 12.260000228881836
+    },
+    {
+      "start": 12.260000228881836,
+      "end": 18.0,
+      "slot": "rear",
+      "label": "Rear",
+      "hero": "images/manual/rear-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/1-back.jpg",
+          "label": "back",
+          "photo_id": "rear-closeup-1789406407418-1-1"
+        },
+        {
+          "path": "images/manual-extra/10-side-back-amd-and-r63-badges.jpg",
+          "label": "side back amd and r63 badges",
+          "photo_id": "rear-closeup-1789406595817-10-10"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 12.260000228881836,
+      "chapter_end": 18.0
+    },
+    {
+      "start": 18.0,
+      "end": 23.989999771118164,
+      "slot": "interior",
+      "label": "Interior",
+      "hero": "images/manual/interior.jpg",
+      "closeups": [
+        {
+          "path": "images/manual-extra/5-bolster-seats-car-in-family-minivan.jpg",
+          "label": "bolster seats car in family minivan",
+          "photo_id": "interior-closeup-1789406496781-5-5"
+        },
+        {
+          "path": "images/manual-extra/6-7-seater-for-family.jpg",
+          "label": "7 Seater for family",
+          "photo_id": "interior-closeup-1789406521465-6-6"
+        },
+        {
+          "path": "images/manual-extra/7-steering-wheel.jpg",
+          "label": "Steering wheel",
+          "photo_id": "interior-closeup-1789406534996-7-7"
+        },
+        {
+          "path": "images/manual-extra/8-rear-climate-controls.jpg",
+          "label": "Rear Climate controls",
+          "photo_id": "interior-closeup-1789406556259-8-8"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 18.0,
+      "chapter_end": 23.989999771118164
+    },
+    {
+      "start": 23.989999771118164,
+      "end": 32.010000228881836,
+      "slot": null,
+      "label": null,
+      "hero": "images/mercedes-benz-r63-amg/exterior_full-01-nobg.png",
+      "closeups": [],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 23.989999771118164,
+      "chapter_end": 52.97
+    },
+    {
+      "start": 32.010000228881836,
+      "end": 39.05999946594238,
+      "slot": null,
+      "label": null,
+      "hero": "images/mercedes-benz-r63-amg/exterior_full-01-nobg.png",
+      "closeups": [],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 23.989999771118164,
+      "chapter_end": 52.97
+    },
+    {
+      "start": 39.05999946594238,
+      "end": 47.22999954223633,
+      "slot": null,
+      "label": null,
+      "hero": "images/mercedes-benz-r63-amg/exterior_full-01-nobg.png",
+      "closeups": [],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 23.989999771118164,
+      "chapter_end": 52.97
+    },
+    {
+      "start": 47.22999954223633,
+      "end": 52.97,
+      "slot": null,
+      "label": null,
+      "hero": "images/mercedes-benz-r63-amg/exterior_full-01-nobg.png",
+      "closeups": [],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 23.989999771118164,
+      "chapter_end": 52.97
+    }
+  ],
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.54,
+      "end": 1.71,
+      "mouth": "small"
+    },
+    {
+      "start": 1.71,
+      "end": 1.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.8,
+      "end": 2.16,
+      "mouth": "small"
+    },
+    {
+      "start": 2.16,
+      "end": 2.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.25,
+      "end": 2.52,
+      "mouth": "small"
+    },
+    {
+      "start": 2.52,
+      "end": 2.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.61,
+      "end": 3.78,
+      "mouth": "small"
+    },
+    {
+      "start": 3.78,
+      "end": 4.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.23,
+      "end": 4.59,
+      "mouth": "small"
+    },
+    {
+      "start": 4.59,
+      "end": 4.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.77,
+      "end": 5.13,
+      "mouth": "small"
+    },
+    {
+      "start": 5.13,
+      "end": 5.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.22,
+      "end": 5.31,
+      "mouth": "small"
+    },
+    {
+      "start": 5.31,
+      "end": 5.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.49,
+      "end": 5.76,
+      "mouth": "small"
+    },
+    {
+      "start": 5.76,
+      "end": 5.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.85,
+      "end": 6.03,
+      "mouth": "small"
+    },
+    {
+      "start": 6.03,
+      "end": 6.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.75,
+      "end": 7.02,
+      "mouth": "small"
+    },
+    {
+      "start": 7.02,
+      "end": 7.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.11,
+      "end": 7.56,
+      "mouth": "small"
+    },
+    {
+      "start": 7.56,
+      "end": 7.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.65,
+      "end": 7.74,
+      "mouth": "small"
+    },
+    {
+      "start": 7.74,
+      "end": 7.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.83,
+      "end": 9.0,
+      "mouth": "small"
+    },
+    {
+      "start": 9.0,
+      "end": 9.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.54,
+      "end": 9.81,
+      "mouth": "small"
+    },
+    {
+      "start": 9.81,
+      "end": 9.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.9,
+      "end": 12.06,
+      "mouth": "small"
+    },
+    {
+      "start": 12.06,
+      "end": 12.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.69,
+      "end": 12.78,
+      "mouth": "small"
+    },
+    {
+      "start": 12.78,
+      "end": 12.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.96,
+      "end": 13.23,
+      "mouth": "small"
+    },
+    {
+      "start": 13.23,
+      "end": 13.32,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.32,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.59,
+      "end": 14.58,
+      "mouth": "small"
+    },
+    {
+      "start": 14.58,
+      "end": 14.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.67,
+      "end": 15.39,
+      "mouth": "small"
+    },
+    {
+      "start": 15.39,
+      "end": 15.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.84,
+      "end": 16.02,
+      "mouth": "small"
+    },
+    {
+      "start": 16.02,
+      "end": 16.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.11,
+      "end": 16.29,
+      "mouth": "small"
+    },
+    {
+      "start": 16.29,
+      "end": 16.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.56,
+      "end": 17.55,
+      "mouth": "small"
+    },
+    {
+      "start": 17.55,
+      "end": 18.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.18,
+      "end": 18.36,
+      "mouth": "small"
+    },
+    {
+      "start": 18.36,
+      "end": 18.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.45,
+      "end": 19.35,
+      "mouth": "small"
+    },
+    {
+      "start": 19.35,
+      "end": 19.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.44,
+      "end": 19.98,
+      "mouth": "small"
+    },
+    {
+      "start": 19.98,
+      "end": 20.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.07,
+      "end": 20.16,
+      "mouth": "small"
+    },
+    {
+      "start": 20.16,
+      "end": 20.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.25,
+      "end": 20.43,
+      "mouth": "small"
+    },
+    {
+      "start": 20.43,
+      "end": 20.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.52,
+      "end": 20.79,
+      "mouth": "small"
+    },
+    {
+      "start": 20.79,
+      "end": 20.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.97,
+      "end": 21.15,
+      "mouth": "small"
+    },
+    {
+      "start": 21.15,
+      "end": 21.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.24,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.78,
+      "end": 22.59,
+      "mouth": "small"
+    },
+    {
+      "start": 22.59,
+      "end": 22.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.68,
+      "end": 23.31,
+      "mouth": "small"
+    },
+    {
+      "start": 23.31,
+      "end": 24.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.03,
+      "end": 24.21,
+      "mouth": "small"
+    },
+    {
+      "start": 24.21,
+      "end": 24.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.3,
+      "end": 24.48,
+      "mouth": "small"
+    },
+    {
+      "start": 24.48,
+      "end": 24.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.57,
+      "end": 24.93,
+      "mouth": "small"
+    },
+    {
+      "start": 24.93,
+      "end": 25.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.02,
+      "end": 25.29,
+      "mouth": "small"
+    },
+    {
+      "start": 25.29,
+      "end": 25.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.56,
+      "end": 25.92,
+      "mouth": "small"
+    },
+    {
+      "start": 25.92,
+      "end": 26.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.01,
+      "end": 27.63,
+      "mouth": "small"
+    },
+    {
+      "start": 27.63,
+      "end": 28.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.08,
+      "end": 28.98,
+      "mouth": "small"
+    },
+    {
+      "start": 28.98,
+      "end": 29.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.07,
+      "end": 29.97,
+      "mouth": "small"
+    },
+    {
+      "start": 29.97,
+      "end": 30.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.06,
+      "end": 30.15,
+      "mouth": "small"
+    },
+    {
+      "start": 30.15,
+      "end": 30.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.6,
+      "end": 31.05,
+      "mouth": "small"
+    },
+    {
+      "start": 31.05,
+      "end": 31.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.14,
+      "end": 31.5,
+      "mouth": "small"
+    },
+    {
+      "start": 31.5,
+      "end": 31.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.59,
+      "end": 31.77,
+      "mouth": "small"
+    },
+    {
+      "start": 31.77,
+      "end": 32.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.4,
+      "end": 32.49,
+      "mouth": "small"
+    },
+    {
+      "start": 32.49,
+      "end": 32.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.58,
+      "end": 32.85,
+      "mouth": "small"
+    },
+    {
+      "start": 32.85,
+      "end": 32.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.94,
+      "end": 34.29,
+      "mouth": "small"
+    },
+    {
+      "start": 34.29,
+      "end": 34.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.74,
+      "end": 34.83,
+      "mouth": "small"
+    },
+    {
+      "start": 34.83,
+      "end": 34.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.92,
+      "end": 35.1,
+      "mouth": "small"
+    },
+    {
+      "start": 35.1,
+      "end": 35.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.28,
+      "end": 35.73,
+      "mouth": "small"
+    },
+    {
+      "start": 35.73,
+      "end": 35.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.82,
+      "end": 36.0,
+      "mouth": "small"
+    },
+    {
+      "start": 36.0,
+      "end": 36.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.36,
+      "end": 37.89,
+      "mouth": "small"
+    },
+    {
+      "start": 37.89,
+      "end": 37.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.98,
+      "end": 38.7,
+      "mouth": "small"
+    },
+    {
+      "start": 38.7,
+      "end": 39.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.51,
+      "end": 41.04,
+      "mouth": "small"
+    },
+    {
+      "start": 41.04,
+      "end": 41.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.13,
+      "end": 42.12,
+      "mouth": "small"
+    },
+    {
+      "start": 42.12,
+      "end": 42.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.48,
+      "end": 43.02,
+      "mouth": "small"
+    },
+    {
+      "start": 43.02,
+      "end": 43.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.11,
+      "end": 43.47,
+      "mouth": "small"
+    },
+    {
+      "start": 43.47,
+      "end": 43.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.56,
+      "end": 43.74,
+      "mouth": "small"
+    },
+    {
+      "start": 43.74,
+      "end": 43.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.92,
+      "end": 44.64,
+      "mouth": "small"
+    },
+    {
+      "start": 44.64,
+      "end": 45.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.09,
+      "end": 46.71,
+      "mouth": "small"
+    },
+    {
+      "start": 46.71,
+      "end": 46.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.8,
+      "end": 47.16,
+      "mouth": "small"
+    },
+    {
+      "start": 47.16,
+      "end": 47.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.25,
+      "end": 47.34,
+      "mouth": "small"
+    },
+    {
+      "start": 47.34,
+      "end": 47.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.97,
+      "end": 49.32,
+      "mouth": "small"
+    },
+    {
+      "start": 49.32,
+      "end": 49.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.41,
+      "end": 49.5,
+      "mouth": "small"
+    },
+    {
+      "start": 49.5,
+      "end": 49.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.59,
+      "end": 50.22,
+      "mouth": "small"
+    },
+    {
+      "start": 50.22,
+      "end": 50.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.67,
+      "end": 51.03,
+      "mouth": "small"
+    },
+    {
+      "start": 51.03,
+      "end": 51.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.12,
+      "end": 51.21,
+      "mouth": "small"
+    },
+    {
+      "start": 51.21,
+      "end": 51.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.3,
+      "end": 52.47,
+      "mouth": "small"
+    },
+    {
+      "start": 52.47,
+      "end": 52.92,
+      "mouth": "closed"
+    }
+  ]
+}
