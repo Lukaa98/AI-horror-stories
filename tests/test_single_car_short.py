@@ -144,6 +144,29 @@ def test_word_cap_trims_whole_sentences_and_keeps_every_scene_narrating():
     assert all(scene["narration"].strip().endswith(".") for scene in package["scenes"])
 
 
+def test_word_cap_drops_whole_scenes_when_no_scene_has_a_spare_sentence():
+    """Run #175 came back as eleven scenes of exactly one sentence each. The
+    sentence-level trim cannot touch those without emptying a scene, so it
+    found nothing trimmable and shipped 199 words. Whole scenes go instead --
+    longest first, never the hook or the closing question."""
+    import single_car_short
+
+    scenes = [{"narration": f"Scene {i} alpha beta gamma delta epsilon zeta eta theta iota kappa."}
+              for i in range(16)]
+    hook, closer = scenes[0]["narration"], scenes[-1]["narration"]
+    package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes)}
+    package["word_count"] = single_car_short._word_count(package["script"])
+    assert package["word_count"] > single_car_short.WORD_CAP
+
+    single_car_short._enforce_word_cap(package)
+
+    assert package["word_count"] <= single_car_short.WORD_CAP
+    assert len(package["scenes"]) < 16
+    assert package["scenes"][0]["narration"] == hook
+    assert package["scenes"][-1]["narration"] == closer
+    assert all(scene["narration"].strip() for scene in package["scenes"])
+
+
 def test_word_cap_leaves_a_script_already_under_it_untouched():
     import single_car_short
 

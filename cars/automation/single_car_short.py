@@ -376,8 +376,15 @@ def _enforce_word_cap(package, cap=WORD_CAP):
         # own reported word_count, when there is nothing to trim.
         return package
     scenes = package.get("scenes") or []
-    removed = 0
-    while _word_count(package["script"]) > cap:
+    trimmed = dropped = 0
+
+    def rescript():
+        package["script"] = " ".join(scene["narration"] for scene in scenes)
+        return _word_count(package["script"])
+
+    # First pass: trailing sentences off whichever scene is longest, never a
+    # scene's only sentence, so every scene keeps narrating its own photo.
+    while rescript() > cap:
         trimmable = [
             (len(_SENTENCE_SPLIT_RE.split(scene["narration"].strip())), index)
             for index, scene in enumerate(scenes)
@@ -388,13 +395,23 @@ def _enforce_word_cap(package, cap=WORD_CAP):
         _, index = max(trimmable)
         sentences = _SENTENCE_SPLIT_RE.split(scenes[index]["narration"].strip())
         scenes[index]["narration"] = " ".join(sentences[:-1])
-        removed += 1
-        package["script"] = " ".join(scene["narration"] for scene in scenes)
-    package["word_count"] = _word_count(package["script"])
-    if removed:
+        trimmed += 1
+
+    # Second pass: whole scenes. Run #175 came back as eleven scenes of one
+    # sentence each, which the first pass cannot touch at all -- it found
+    # nothing trimmable and shipped 199 words. Dropping a scene costs a beat
+    # and its photo, so it goes longest-first and never takes the hook or
+    # the closing question, which carry the video.
+    while rescript() > cap and len(scenes) > 2:
+        index = max(range(1, len(scenes) - 1), key=lambda i: _word_count(scenes[i]["narration"]))
+        scenes.pop(index)
+        dropped += 1
+
+    package["word_count"] = rescript()
+    if trimmed or dropped:
         print(
-            f"[single-car] Trimmed {removed} trailing sentence(s) to bring the script to "
-            f"{package['word_count']} words, at or under the {cap}-word cap."
+            f"[single-car] Trimmed {trimmed} trailing sentence(s) and dropped {dropped} scene(s) to "
+            f"bring the script to {package['word_count']} words, at or under the {cap}-word cap."
         )
     return package
 
@@ -1011,6 +1028,32 @@ def generate_voice_auditions(script, output_dir, chosen_preset):
     return files
 
 
+# TTS starts speaking almost immediately -- measured on run #175, the first
+# audible sample was at 0.060s and the opening "The" was still ramping up
+# out of silence, so its consonant got clipped and the first word sounded
+# swallowed. A short lead-in gives the encoder and the viewer's player
+# somewhere to start.
+NARRATION_LEAD_IN_SECONDS = 0.35
+
+
+def add_narration_lead_in(audio_path, seconds=NARRATION_LEAD_IN_SECONDS):
+    """Prepend silence to the narration, in place.
+
+    Runs before duration normalisation and before transcription, so the word
+    timeline -- and therefore captions, mouth shapes and every scene
+    boundary -- is measured against the padded audio and stays in step.
+    """
+    audio_path = Path(audio_path)
+    padded = audio_path.with_name(f"{audio_path.stem}-leadin{audio_path.suffix}")
+    subprocess.run(
+        ["ffmpeg", "-y", "-i", str(audio_path),
+         "-af", f"adelay={int(seconds * 1000)}:all=1", str(padded)],
+        check=True, capture_output=True, text=True,
+    )
+    padded.replace(audio_path)
+    return audio_path
+
+
 def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum=55.0, maximum=60.0):
     """Keep the final voice close to one minute without asking TTS twice."""
     probe = subprocess.run(
@@ -1257,6 +1300,7 @@ def build_short(args):
     )
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
+    add_narration_lead_in(audio_path)
     normalized_duration = normalize_audio_duration(audio_path)
     voice_auditions = (
         generate_voice_auditions(package["script"], output_dir, args.voice) if args.audition_voices else {}
