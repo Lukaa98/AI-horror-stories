@@ -47,12 +47,20 @@ MIN_TILE_COLUMNS = 2
 # Listing photos are almost all 3:2, and a close-up is shown whole, so cells
 # are cut to that shape -- a cell much wider than its photo is just white.
 TILE_ASPECT = 1.5
-# The main photo is wide, so it is cheap to make it shorter; a tile is
-# photo-shaped, so its height is what its width costs. Tiles are therefore
-# sized from the band's width first and the main photo takes what is left,
-# down to this floor -- which is what stops a two-row grid squeezing the
-# subject out.
-MIN_MAIN_HEIGHT_RATIO = 0.34
+# The main photo is the same height in every chapter, whatever the close-ups
+# do. Sizing it from what the tiles left over meant a chapter with four
+# close-ups showed its main photo at 299px against 513px next door, and the
+# subject of the video visibly changed size from cut to cut. The close-ups
+# absorb the difference instead: two of them are large, four are smaller,
+# which is the part that is meant to vary.
+#
+# 0.47 is chosen so a typical wide exterior cutout is limited by the band's
+# width rather than by this height -- it renders at exactly the same size as
+# it did in the old one-row layout, so nothing got smaller to buy this.
+MAIN_HEIGHT_RATIO = 0.47
+# ...unless honouring it would squeeze the tiles below this, which can only
+# happen when a race lane is reserved in a chapter that also has two rows.
+MIN_ROW_HEIGHT = 150
 GAP_RATIO = 0.018
 # A clear lane for the drag race, opened between the main photo and the
 # close-ups by pushing the close-ups down. Reserved for every chapter the
@@ -116,34 +124,42 @@ def collage_metrics(box_w, box_h, count, race_strip=False):
     aims the narrator's eyes and hand at one, so the character cannot point
     at a cell the renderer laid out somewhere else.
 
-    With `race_strip`, a band is reserved between the main photo and the
-    close-ups for the drag race, and the main photo is pinned to its floor
-    so that band lands at the same height in every chapter the race crosses
-    -- the race runs for ten seconds and usually spans more than one.
+    The main photo takes MAIN_HEIGHT_RATIO in every chapter; the close-ups
+    divide what is left, so more of them means smaller ones rather than a
+    smaller subject. With `race_strip`, a band is reserved between the two
+    for the drag race.
     """
-    rows = collage_rows(count)
     gap = max(4, round(min(box_w, box_h) * GAP_RATIO))
     strip_h = round(box_h * RACE_STRIP_RATIO) if race_strip else 0
-    floor = round(box_h * MIN_MAIN_HEIGHT_RATIO)
+    # While the lane is open the chapter shows at most one row of close-ups:
+    # a reserved strip plus two rows cannot also keep the main photo at its
+    # constant height, and the lane has to land at the same y in every
+    # chapter the race crosses or the cars jump mid-race.
+    rows = collage_rows(min(count, MIN_TILE_COLUMNS) if race_strip else count)
+    main_h = round(box_h * MAIN_HEIGHT_RATIO)
     if not rows:
-        main_h = floor if race_strip else box_h
-        return {"rows": [], "gap": gap, "main_h": main_h, "row_h": 0, "tile_w": 0,
+        return {"rows": [], "gap": gap,
+                "main_h": main_h if race_strip else box_h, "row_h": 0, "tile_w": 0,
                 "strip_y": main_h + gap if race_strip else None, "strip_h": strip_h}
     columns = max(max(rows), MIN_TILE_COLUMNS)
-    # Widest the cells can be without overflowing the band, then as tall as
-    # that width allows at photo shape -- so a contained close-up fills its
-    # cell and the row reaches the edges.
-    tile_w = (box_w - gap * (columns - 1)) // columns
-    row_h = round(tile_w / TILE_ASPECT)
-    tiles_h = row_h * len(rows) + gap * (len(rows) - 1)
-    main_h = box_h - tiles_h - gap - strip_h - (gap if race_strip else 0)
-    if main_h < floor:
-        # Two rows at full width would leave the main photo a sliver, so give
-        # it its floor and shrink the cells to suit, keeping their shape.
-        tiles_h = box_h - floor - gap - strip_h - (gap if race_strip else 0)
-        row_h = max(1, (tiles_h - gap * (len(rows) - 1)) // len(rows))
-        tile_w = round(row_h * TILE_ASPECT)
-        main_h = floor
+    widest = (box_w - gap * (columns - 1)) // columns
+
+    def fit(main):
+        available = box_h - main - strip_h - gap * (len(rows) + (1 if race_strip else 0))
+        row_h = max(1, available // len(rows))
+        # Cells are photo-shaped, so a cell never gets wider than its height
+        # can carry, nor taller than its width can fill.
+        tile_w = min(widest, round(row_h * TILE_ASPECT))
+        return tile_w, min(row_h, max(1, round(tile_w / TILE_ASPECT)))
+
+    tile_w, row_h = fit(main_h)
+    if row_h < MIN_ROW_HEIGHT:
+        # Only reachable when a reserved race lane leaves two rows too little
+        # room; give the tiles their floor and let the main photo take the hit
+        # for that one chapter rather than shipping unreadable thumbnails.
+        room = box_h - strip_h - gap * (len(rows) + (1 if race_strip else 0)) - MIN_ROW_HEIGHT * len(rows)
+        main_h = max(1, min(main_h, room))
+        tile_w, row_h = fit(main_h)
     return {"rows": rows, "gap": gap, "main_h": main_h, "row_h": row_h, "tile_w": tile_w,
             "strip_y": main_h + gap if race_strip else None, "strip_h": strip_h}
 

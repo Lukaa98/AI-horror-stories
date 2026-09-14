@@ -29,6 +29,14 @@ slideshow:
 Never more than two across: three in a row put each cell at a third of the band, which
 was too cramped to read at phone size.
 
+The main photo is the **same height in every chapter** (`MAIN_HEIGHT_RATIO`), whatever the
+close-ups do -- it is the subject of the video and must not change size from cut to cut.
+Sizing it from whatever the tiles left over meant a four-close-up chapter showed its main
+photo at 299px against 513px next door. The close-ups absorb the difference instead: two
+are large (523x349), four are smaller (324x216), which is the part that is meant to vary.
+The ratio is chosen so a typical wide exterior cutout is limited by the band's width
+rather than by this height, so nothing got smaller to buy the consistency.
+
 Close-ups are shown **whole** -- contained, never cropped. Cells are cut to photo shape
 (`TILE_ASPECT`; listing photos are almost all 3:2) so a contained close-up fills its
 cell instead of floating in white. `collage_metrics()` sizes the cells from the band's
