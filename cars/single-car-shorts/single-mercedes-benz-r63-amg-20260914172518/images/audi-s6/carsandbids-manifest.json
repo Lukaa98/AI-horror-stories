@@ -1,0 +1,473 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-14T17:37:43.144Z",
+  "query": "Audi S6",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/audi/s6?start_year=2007&end_year=2007&csort=10",
+  "search_result_count": 4,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rJ6X4Meg/2007-audi-s6",
+      "title": "2007 Audi S6",
+      "text": "Sold for $12,750",
+      "titleYear": 2007,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV7avwZL/2007-audi-s6",
+      "title": "2007 Audi S6",
+      "text": "Sold for $8,500",
+      "titleYear": 2007,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMXBQPO4/2007-audi-s6",
+      "title": "2007 Audi S6",
+      "text": "Sold for $7,900",
+      "titleYear": 2007,
+      "score": 60
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkdEqOzR/2007-audi-s6",
+      "title": "2007 Audi S6",
+      "text": "Sold for $7,100",
+      "titleYear": 2007,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rJ6X4Meg/2007-audi-s6",
+      "title": "2007 Audi S6",
+      "text": "Sold for $12,750",
+      "titleYear": 2007,
+      "score": 60,
+      "usable_image_count": 19,
+      "sale_price": 12750,
+      "sale_type": "sold",
+      "page_title": "2007 Audi S6"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KV7avwZL/2007-audi-s6",
+      "title": "2007 Audi S6",
+      "text": "Sold for $8,500",
+      "titleYear": 2007,
+      "score": 60,
+      "usable_image_count": 29,
+      "sale_price": 8500,
+      "sale_type": "sold",
+      "page_title": "2007 Audi S6"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMXBQPO4/2007-audi-s6",
+      "title": "2007 Audi S6",
+      "text": "Sold for $7,900",
+      "titleYear": 2007,
+      "score": 60,
+      "usable_image_count": 33,
+      "sale_price": 7900,
+      "sale_type": "sold",
+      "page_title": "2007 Audi S6"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rkdEqOzR/2007-audi-s6",
+      "title": "2007 Audi S6",
+      "text": "Sold for $7,100",
+      "titleYear": 2007,
+      "score": 60,
+      "usable_image_count": 26,
+      "sale_price": 7100,
+      "sale_type": "sold",
+      "page_title": "2007 Audi S6"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rMXBQPO4/2007-audi-s6",
+    "title": "2007 Audi S6",
+    "text": "Sold for $7,900",
+    "titleYear": 2007,
+    "score": 60,
+    "sale_price": 7900,
+    "sale_type": "sold",
+    "page_title": "2007 Audi S6",
+    "year": 2007,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/77de68daecd823babbb58edb1c8e14d7106e83bb/photos/s6.pTWjMOa_x.jpg?t=159188611605",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 Audi S6",
+      "width": 1800,
+      "height": 1229,
+      "bytes": 416195
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7011373a43fe19f1c3694b1fd9f3a16526900659/photos/07xvdv_-YZh.jpg?t=159175530794",
+      "labels": [
+        "interior"
+      ],
+      "section": "2007 Audi S6",
+      "width": 542,
+      "height": 406,
+      "bytes": 257076
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7011373a43fe19f1c3694b1fd9f3a16526900659/photos/wvkEPA9x6L.jpg?t=159175519472",
+      "labels": [
+        "interior"
+      ],
+      "section": "2007 Audi S6",
+      "width": 542,
+      "height": 406,
+      "bytes": 247026
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7011373a43fe19f1c3694b1fd9f3a16526900659/photos/NmGj4GKoGhS.jpg?t=159175525690",
+      "labels": [
+        "interior"
+      ],
+      "section": "2007 Audi S6",
+      "width": 542,
+      "height": 406,
+      "bytes": 269480
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7011373a43fe19f1c3694b1fd9f3a16526900659/photos/KpSRG0r9v.jpg?t=159175523405",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 Audi S6",
+      "width": 542,
+      "height": 406,
+      "bytes": 510163
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7011373a43fe19f1c3694b1fd9f3a16526900659/photos/UX3nq0-PQn.jpg?t=159166833448",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 Audi S6",
+      "width": 542,
+      "height": 406,
+      "bytes": 486400
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7011373a43fe19f1c3694b1fd9f3a16526900659/photos/4lkiKvPHSZ.jpg?t=159166833448",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 Audi S6",
+      "width": 542,
+      "height": 406,
+      "bytes": 436589
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/7011373a43fe19f1c3694b1fd9f3a16526900659/photos/6n3JqWtzWb.jpg?t=159175608729",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 Audi S6",
+      "width": 542,
+      "height": 406,
+      "bytes": 409442
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/5797b3c4bca65b9afb57cc0bb1fbabdab9201945/photos/qboRNN3r7.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 16178 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/77de68daecd823babbb58edb1c8e14d7106e83bb/photos/9nbW8GPJ-hOl1mq5f9.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 4239 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/877b6ae0c6a24489c3b575c559a8694abece57ea/photos/KPMpjWQr-0TyMl8mw-.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 13752 bytes"
+    },
+    {
+      "path": "exterior-12.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/68286cedf15357e09594de6a31748523f671e91b/photos/rJnZkv0Y-gt16W0TK-Ds.JPG",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 21945
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/ffcfe351b0fdac5d8f8d204046564d1070bb80a3/photos/NRGFoetWS.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 3600 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a1ffbe49f9fe93d97643cb39d52bfdc1ea9ce9f9/photos/Vuz_mKSmt.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 17007 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "s6",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "S6 badge",
+          "body shape",
+          "front grille design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "s6",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "S6 badge",
+          "front grille design",
+          "overall body shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "s6",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive Audi grille",
+          "S6 badge",
+          "body proportions typical of S6"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": null,
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "s6",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "audi badge",
+          "S6 bodywork",
+          "2007 model proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "s6",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "appropriate bodywork",
+          "correct proportions",
+          "model badge noticeable"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "side"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 3,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "The vehicle does not match the target make, model, or generation.",
+        "path": "exterior-12.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "s6",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi steering wheel with S badge",
+          "Interior layout consistent with 2007 Audi S6"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "s6",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "S6 badge on the seats",
+          "interior design matches Audi S6"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "s6",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "audi logo on steering wheel",
+          "dashboard design typical of Audi S6",
+          "S6 badge on dashboard"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
