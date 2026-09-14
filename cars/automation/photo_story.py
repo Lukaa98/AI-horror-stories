@@ -55,6 +55,41 @@ TILE_ASPECT = 1.5
 MIN_MAIN_HEIGHT_RATIO = 0.34
 GAP_RATIO = 0.018
 
+# The close-ups arrive one at a time as the narration reaches them, rather
+# than the whole chapter landing at once: the main photo holds alone first,
+# then each tile appears into the slot the finished layout has already
+# reserved for it, so nothing reflows as they come in.
+MAIN_HOLD_SECONDS = 1.2
+# All the tiles are up by this far through the chapter, leaving the rest of
+# it on the complete picture.
+REVEAL_TAIL_RATIO = 0.7
+
+
+def reveal_schedule(start, end, count):
+    """[(time, visible_count)] for one chapter -- when each close-up joins.
+
+    The layout never changes as tiles arrive: collage_metrics() is keyed off
+    the chapter's *total* close-up count, so a tile fades into its final
+    cell instead of the grid re-flowing under it.
+    """
+    span = max(0.0, end - start)
+    if count <= 0 or span <= 0:
+        return [(start, count if span > 0 else 0)]
+    hold = min(MAIN_HOLD_SECONDS, span * 0.35)
+    last = start + max(hold, span * REVEAL_TAIL_RATIO)
+    steps = [(start, 0)]
+    for index in range(count):
+        share = index / (count - 1) if count > 1 else 0.0
+        steps.append((min(end, start + hold + (last - start - hold) * share), index + 1))
+    # A chapter too short to stage the reveal collapses to showing them all.
+    deduped = []
+    for time, visible in steps:
+        if deduped and time - deduped[-1][0] < 0.25:
+            deduped[-1] = (deduped[-1][0], visible)
+        else:
+            deduped.append((time, visible))
+    return deduped
+
 
 def collage_rows(count):
     """How many tiles sit in each row, for `count` close-ups."""
@@ -200,4 +235,24 @@ def photo_story_timeline(manifest, boundaries):
             # here where it could drift from what was drawn.
             "active_index": active_index,
         })
+    return _mark_chapters(cues)
+
+
+def _mark_chapters(cues):
+    """Tag every cue with the span of the run of scenes sharing its picture.
+
+    The reveal is paced against the chapter, not the scene: a slot usually
+    covers several scenes, and staging the close-ups per scene would either
+    restart the reveal each time or never finish it.
+    """
+    index = 0
+    while index < len(cues):
+        end = index
+        while (end + 1 < len(cues) and cues[end + 1].get("slot") == cues[index].get("slot")
+               and cues[end + 1].get("hero") == cues[index].get("hero")):
+            end += 1
+        span = (cues[index]["start"], cues[end]["end"])
+        for cue in cues[index:end + 1]:
+            cue["chapter_start"], cue["chapter_end"] = span
+        index = end + 1
     return cues

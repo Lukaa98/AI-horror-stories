@@ -164,8 +164,10 @@ def test_track_merges_chapters_and_survives_a_dead_closeup(tmp_path):
         cues, [], tmp_path, (0, 0, 540, 300), (540, 960), 20, tmp_path / "frames")
     # The floating detail cards are gone; the collage absorbed them.
     assert cards == []
-    # One chapter picture per highlight change, not one per scene.
-    assert len(media.clips) == len(diagnostics) == len(cues)
+    assert len(diagnostics) == len(cues)
+    # More clips than chapters now: each chapter stages its close-ups in,
+    # one reveal step at a time.
+    assert len(media.clips) > len(diagnostics)
     assert media.get_frame(19.9).shape == (300, 540, 3)
     assert diagnostics[0]["slot"] == "front" and len(diagnostics[0]["closeups"]) == 2
     (tmp_path / "1.png").unlink()

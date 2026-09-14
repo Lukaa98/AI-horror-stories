@@ -40,6 +40,20 @@ The stack occupies the top 61% of the frame. The character's head starts at 0.65
 the original 50% left a quarter of the frame bare white with one stat line floating in
 it; the band is now 1062x878 against 1047x614 when the collage first shipped.
 
+## How a chapter plays
+
+The close-ups do not all land at once. The main photo holds alone for `MAIN_HOLD_SECONDS`,
+then each close-up appears in turn, all of them up by `REVEAL_TAIL_RATIO` through the
+chapter, leaving the rest of it on the complete picture. The next chapter's main photo
+then takes over and the staging starts again.
+
+The layout never reflows while this happens: `collage_metrics()` is keyed off the
+chapter's *total* close-up count, so a tile fades into the cell it will keep rather than
+the grid rearranging under it. Pacing is against the chapter -- the whole run of scenes
+sharing one main photo -- not the scene, since a slot usually covers several scenes and
+staging per scene would either restart the reveal each time or never finish it. The
+narrator waits for a tile to actually appear before pointing at it.
+
 When a scene is specifically about one close-up, that tile gets an outline and its
 name; otherwise nothing is highlighted. Nothing floats over the lower half of the
 frame any more, so the narrator has its full range of framings back.
@@ -73,8 +87,13 @@ travel in the aimed direction, in a real browser.
 
 ## Narration
 
-Unchanged and already where it should be: `TARGET_WORD_CENTER = 175` words against
-`TARGET_DURATION_SECONDS = 58`. What changed is what research is told to do with the
+`WORD_CAP = 175` is a **ceiling**, against `TARGET_DURATION_SECONDS = 58`. It was
+previously only a target: the retry loop asked for 170-180 and then shipped whatever
+came back, because the real gate was the atempo-safe range of 110-440 words. Runs #171
+and #172 shipped 217 and 257 words -- 4.4 words/sec on #172 -- which is the rushed
+delivery the number exists to prevent. `_enforce_word_cap()` now trims whole trailing
+sentences from the longest scene until the script fits, never emptying a scene, so every
+scene still narrates its own photo. What changed is what research is told to do with the
 photos. Main photos are the subjects — each one must carry its own scene. Close-ups
 are explicitly *not* subjects: touch them in a clause where there is something real to
 say (a spoiler, carbon trim, an exhaust tip, a headlight), never build a scene around

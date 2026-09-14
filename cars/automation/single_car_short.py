@@ -48,7 +48,12 @@ TARGET_DURATION_SECONDS = 58.0
 # 1.35x) produced scripts that needed real atempo speed-up on top of the
 # already-fast TTS to hit ~58s, which is exactly what read as rushed.
 _BASE_WORDS_PER_SECOND = (182.5 / 58.0) / 1.12
-TARGET_WORD_CENTER = 175
+# A hard ceiling, not a target to hover around. Above this the TTS has to be
+# sped up on top of the already-fast playback to still land at ~58s, and the
+# result is the rushed delivery this number exists to prevent: run #172
+# shipped 257 words (4.4 words/sec) because nothing actually enforced it.
+WORD_CAP = 175
+TARGET_WORD_CENTER = WORD_CAP
 TARGET_WORD_FLEX = 5
 
 
@@ -69,7 +74,8 @@ def _hard_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECOND
     return (round(min_words), round(max_words))
 
 
-TARGET_WORDS = (TARGET_WORD_CENTER - TARGET_WORD_FLEX, TARGET_WORD_CENTER + TARGET_WORD_FLEX)
+# The cap is the top of the range, never its midpoint.
+TARGET_WORDS = (WORD_CAP - 2 * TARGET_WORD_FLEX, WORD_CAP)
 # The prompt targets the tight range above, and this wider band is used to
 # decide whether to retry the model with corrective feedback (see
 # research_script) -- neither one is the actual failure gate anymore. A
@@ -77,7 +83,7 @@ TARGET_WORDS = (TARGET_WORD_CENTER - TARGET_WORD_FLEX, TARGET_WORD_CENTER + TARG
 # that overshoots by, say, 14 words -- comfortably "acceptable" under the
 # old +-25% band -- still triggers a retry instead of shipping noticeably
 # over the stated hard target.
-ACCEPTABLE_WORDS = (TARGET_WORDS[0] - 10, TARGET_WORDS[1] + 10)
+ACCEPTABLE_WORDS = (TARGET_WORDS[0] - 10, WORD_CAP)
 # The real failure gate: only a script this far outside the atempo-safe
 # range gets rejected, since anything inside it still reaches ~target
 # runtime with an audio-quality-preserving tempo correction.
@@ -348,6 +354,51 @@ def _request_script_package(prompt, max_scenes=8):
     return package
 
 
+_SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
+
+
+def _enforce_word_cap(package, cap=WORD_CAP):
+    """Trim the script down to the cap, deterministically.
+
+    The retry loop asks the model to land under the cap and it often will
+    not -- runs #171 and #172 came back at 217 and 257 words after four
+    attempts each, and were shipped anyway, so the TTS had to race to fit
+    ~58 seconds. This is the backstop: drop whole trailing sentences from
+    whichever scene is longest until the total fits.
+
+    Sentences, not words, because a truncated sentence is worse than a
+    missing one; and never the last sentence a scene has, because every
+    scene has to keep narrating its own photo for the imagery to still line
+    up with what is being said.
+    """
+    if _word_count(package.get("script") or "") <= cap:
+        # Leave the package exactly as the model returned it, including its
+        # own reported word_count, when there is nothing to trim.
+        return package
+    scenes = package.get("scenes") or []
+    removed = 0
+    while _word_count(package["script"]) > cap:
+        trimmable = [
+            (len(_SENTENCE_SPLIT_RE.split(scene["narration"].strip())), index)
+            for index, scene in enumerate(scenes)
+            if len(_SENTENCE_SPLIT_RE.split(scene["narration"].strip())) > 1
+        ]
+        if not trimmable:
+            break
+        _, index = max(trimmable)
+        sentences = _SENTENCE_SPLIT_RE.split(scenes[index]["narration"].strip())
+        scenes[index]["narration"] = " ".join(sentences[:-1])
+        removed += 1
+        package["script"] = " ".join(scene["narration"] for scene in scenes)
+    package["word_count"] = _word_count(package["script"])
+    if removed:
+        print(
+            f"[single-car] Trimmed {removed} trailing sentence(s) to bring the script to "
+            f"{package['word_count']} words, at or under the {cap}-word cap."
+        )
+    return package
+
+
 def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
@@ -396,7 +447,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"[single-car] Proceeding with {count} words outside the preferred "
             f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} range; audio timing will normalize the final runtime."
         )
-    return package
+    return _enforce_word_cap(package)
 
 
 def _visual_highlight_for_scenes(scenes):

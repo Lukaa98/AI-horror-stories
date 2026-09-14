@@ -4,7 +4,7 @@ import math
 import os
 import subprocess
 from pathlib import Path
-from photo_story import photo_story_timeline, tile_centers
+from photo_story import photo_story_timeline, reveal_schedule, tile_centers
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -140,7 +140,13 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
         center = centers[active_index]
         target = (media_frame[0] + center[0] * media_frame[2],
                   media_frame[1] + center[1] * media_frame[3])
-        start = cue["start"] + 0.35
+        # Wait until the tile is actually on screen. The close-ups arrive one
+        # at a time now, so pointing on the scene's own clock could put the
+        # hand on an empty cell.
+        appears = next((t for t, visible in reveal_schedule(
+            cue.get("chapter_start", cue["start"]), cue.get("chapter_end", cue["end"]),
+            len(cue.get("closeups") or [])) if visible > active_index), cue["start"])
+        start = max(cue["start"] + 0.35, appears + 0.2)
         end = min(cue["end"] - 0.2, start + 2.6)
         # Too short to read as a deliberate point; the generic gesture cycle
         # covers that scene instead.

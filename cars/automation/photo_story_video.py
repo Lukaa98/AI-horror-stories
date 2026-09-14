@@ -15,7 +15,7 @@ from moviepy.editor import ImageClip, CompositeVideoClip
 from generate_sample import _font
 # Row/height geometry is shared with the motion planner so the narrator can
 # aim at a tile the renderer actually drew -- see photo_story.py.
-from photo_story import collage_metrics
+from photo_story import collage_metrics, reveal_schedule
 BACKGROUND = (255, 255, 255)
 ACTIVE_OUTLINE = (225, 157, 20)
 ACTIVE_OUTLINE_WIDTH = 4
@@ -74,8 +74,15 @@ def _short_label(draw, label, font, width):
     return label + "…"
 
 
-def collage_frame(hero_image, closeups, active, box_size, font):
-    """One rendered chapter picture. `closeups` are (image, label, photo_id)."""
+def collage_frame(hero_image, closeups, active, box_size, font, visible=None):
+    """One rendered chapter picture. `closeups` are (image, label, photo_id).
+
+    `visible` draws only the first N tiles while keeping the layout of the
+    full set, so a close-up appears in the cell it will keep rather than the
+    grid re-flowing as each one arrives.
+    """
+    if visible is None:
+        visible = len(closeups)
     w, h = box_size
     frame = Image.new("RGB", (w, h), BACKGROUND)
     draw = ImageDraw.Draw(frame)
@@ -88,7 +95,7 @@ def collage_frame(hero_image, closeups, active, box_size, font):
     for row in rows:
         row_x = (w - (tile_w * row + gap * (row - 1))) // 2
         for column in range(row):
-            if index >= len(closeups):
+            if index >= min(visible, len(closeups)):
                 break
             image, label, _photo_id = closeups[index]
             x = row_x + column * (tile_w + gap)
@@ -147,6 +154,8 @@ def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, ou
             groups[-1]["end"] = cue["end"]
             continue
         groups.append({"key": key, "start": cue["start"], "end": cue["end"],
+                       "chapter_start": cue.get("chapter_start", cue["start"]),
+                       "chapter_end": cue.get("chapter_end", cue["end"]),
                        "hero": hero, "closeups": closeups, "active": active})
         diagnostics.append({"scene": index, "start": cue["start"], "slot": cue.get("slot"),
                             "closeups": [pid for _, _, pid in closeups],
@@ -156,13 +165,27 @@ def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, ou
 
     clips = []
     for index, group in enumerate(groups):
-        frame = collage_frame(group["hero"], group["closeups"], group["active"], (box_w, box_h), font)
-        path = output_dir / f"chapter-{index}.png"
-        frame.save(path)
-        end = min(duration, group["end"] + 0.25) if index < len(groups) - 1 else duration
-        clip = ImageClip(str(path)).set_duration(max(0.1, end - group["start"]))
-        if index:
-            clip = clip.crossfadein(0.25)
-        clips.append(clip.set_start(group["start"]))
+        # Stage the close-ups across the chapter this group belongs to, not
+        # across the group itself: a chapter is usually several scenes, and
+        # a group ends whenever the highlight moves.
+        steps = reveal_schedule(group["chapter_start"], group["chapter_end"], len(group["closeups"]))
+        group_end = min(duration, group["end"] + 0.25) if index < len(groups) - 1 else duration
+        for step_index, (step_start, visible) in enumerate(steps):
+            step_end = steps[step_index + 1][0] if step_index + 1 < len(steps) else group_end
+            # Only the part of this reveal step that falls inside the group.
+            start = max(step_start, group["start"])
+            end = min(step_end, group_end) if step_index + 1 < len(steps) else group_end
+            if end - start < 0.05:
+                continue
+            frame = collage_frame(group["hero"], group["closeups"], group["active"],
+                                  (box_w, box_h), font, visible=visible)
+            path = output_dir / f"chapter-{index}-{step_index}.png"
+            frame.save(path)
+            clip = ImageClip(str(path)).set_duration(max(0.1, end - start))
+            # Every picture after the very first one fades in, so a tile
+            # arrives rather than popping.
+            if clips:
+                clip = clip.crossfadein(0.3 if step_index else 0.25)
+            clips.append(clip.set_start(start))
     media = CompositeVideoClip(clips, size=(box_w, box_h), bg_color=BACKGROUND).set_duration(duration)
     return media, [], diagnostics

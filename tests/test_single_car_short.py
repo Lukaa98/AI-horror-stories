@@ -31,14 +31,14 @@ def test_word_count_handles_contractions_and_hyphenated_terms():
 
 
 def test_target_words_is_a_fixed_center_not_tied_to_tts_speed():
-    # A target that floated up with FAST_TTS_SPEED (it drifted to ~220 at
-    # 1.35x) produced scripts that needed real atempo speed-up on top of
-    # the already-fast TTS to hit ~58s, which read as rushed -- so this is
-    # a fixed ~180-word center regardless of speed, with a flexible +-10
-    # band around it.
-    assert TARGET_WORDS == (TARGET_WORD_CENTER - TARGET_WORD_FLEX, TARGET_WORD_CENTER + TARGET_WORD_FLEX)
-    assert TARGET_WORD_CENTER == 175
-    assert ACCEPTABLE_WORDS[0] < TARGET_WORDS[0] < TARGET_WORDS[1] < ACCEPTABLE_WORDS[1]
+    # 175 is a ceiling, not a midpoint. A target that floated up with
+    # FAST_TTS_SPEED (it drifted to ~220 at 1.35x) produced scripts that
+    # needed real atempo speed-up on top of the already-fast TTS to hit
+    # ~58s, which read as rushed.
+    from single_car_short import WORD_CAP
+    assert WORD_CAP == 175
+    assert TARGET_WORDS[1] == WORD_CAP and ACCEPTABLE_WORDS[1] == WORD_CAP
+    assert ACCEPTABLE_WORDS[0] < TARGET_WORDS[0] < TARGET_WORDS[1]
 
 
 def test_interior_media_is_available_for_cabin_script_scenes():
@@ -52,7 +52,9 @@ def test_hard_word_range_is_derived_from_the_atempo_clamp_not_a_guess():
     # that clamp directly rather than an arbitrary +-25% guess.
     assert HARD_WORD_RANGE == _hard_word_range()
     assert HARD_WORD_RANGE[0] < ACCEPTABLE_WORDS[0] < TARGET_WORDS[0]
-    assert TARGET_WORDS[1] < ACCEPTABLE_WORDS[1] < HARD_WORD_RANGE[1]
+    # The upper end of the atempo range is no longer a ceiling anyone can
+    # ship through -- _enforce_word_cap trims to WORD_CAP well below it.
+    assert TARGET_WORDS[1] < HARD_WORD_RANGE[1]
     # This is the actual regression this whole range exists to fix: a
     # 146-word script (real build failure -- see the commit this test was
     # added in) is well outside ACCEPTABLE_WORDS but must NOT be outside
@@ -117,6 +119,37 @@ def test_research_script_never_fails_the_build_over_word_count(monkeypatch):
     package = research_script("Ford", "Mustang", max_attempts=2)
 
     assert package["word_count"] == HARD_WORD_RANGE[0] - 20
+
+
+def test_word_cap_trims_whole_sentences_and_keeps_every_scene_narrating():
+    """Run #172 shipped 257 words in 58 seconds -- 4.4 words/sec -- because
+    the retry loop only warned and the atempo gate allowed up to 440. The
+    cap is now enforced by trimming rather than by hoping."""
+    import single_car_short
+
+    scenes = [{"narration": f"Sentence {i} alpha beta gamma delta epsilon zeta. "
+                            f"Sentence {i} tail eta theta iota kappa lambda."}
+              for i in range(16)]
+    package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes)}
+    package["word_count"] = single_car_short._word_count(package["script"])
+    assert package["word_count"] > single_car_short.WORD_CAP
+
+    single_car_short._enforce_word_cap(package)
+
+    assert package["word_count"] <= single_car_short.WORD_CAP
+    # Every scene keeps narrating, so the imagery still lines up with what
+    # is being said -- trimming must never empty a scene.
+    assert all(scene["narration"].strip() for scene in package["scenes"])
+    # Whole sentences only; no truncated fragments.
+    assert all(scene["narration"].strip().endswith(".") for scene in package["scenes"])
+
+
+def test_word_cap_leaves_a_script_already_under_it_untouched():
+    import single_car_short
+
+    package = {"scenes": [{"narration": "Short and sweet."}], "script": "Short and sweet.", "word_count": 3}
+    assert single_car_short._enforce_word_cap(package) is package
+    assert package["word_count"] == 3
 
 
 def test_strip_citations_removes_inline_markdown_links_and_urls():
