@@ -1,0 +1,297 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 11,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GT3 RS",
+      "visible_match_evidence": [
+        "Porsche branding",
+        "911 silhouette",
+        "GT3 RS specific aerodynamic features"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-01.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "Porsche badge",
+        "specific front bumper",
+        "carbon fiber hood",
+        "yellow color",
+        "headlight shape"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2017-2019",
+      "detected_variant_or_engine": "GT3 RS",
+      "visible_match_evidence": [
+        "GT3 RS badge",
+        "Porsche styling cues",
+        "proportions consistent with 911"
+      ],
+      "generation_match_confidence": 7,
+      "variant_match_confidence": 9,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 6,
+      "reject": true,
+      "reason": "While the vehicle matches the make, model, and variant, it is the wrong generation.",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "GT3RS badge",
+        "specific rear wing design",
+        "unique bodywork proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GT3 RS",
+      "visible_match_evidence": [
+        "Porsche badge",
+        "Distinctive rear wing",
+        "GT3 RS badging",
+        "911 chassis design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 9,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "distinctive Porsche design",
+        "GT3 rear wing",
+        "bodywork proportions",
+        "vented hood"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-11.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GT3 RS",
+      "visible_match_evidence": [
+        "GT3 RS badging",
+        "bodywork style",
+        "rear wing design",
+        "color scheme"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-12.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "Porsche badge on steering wheel",
+        "Interior design consistent with Porsche 911",
+        "Use of yellow accents typical for GT3",
+        "Dashboard layout matches 2019 models"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-13.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "Porsche branding on steering wheel",
+        "interior design consistent with 911",
+        "gear shift layout typical of GT3"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Porsche",
+      "detected_model": "911",
+      "detected_generation_or_year": "2019",
+      "detected_variant_or_engine": "GT3",
+      "visible_match_evidence": [
+        "Weissach RS seats",
+        "interior design elements",
+        "specific seat design"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle.",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    }
+  ]
+}
