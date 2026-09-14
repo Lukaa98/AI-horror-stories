@@ -111,6 +111,10 @@ COUNTDOWN_SFX_VOLUME = 0.5
 # minute target for no narration benefit). The race is a purely visual
 # overlay -- it doesn't need narration to pause for it.
 RACE_WINDOW_SECONDS = 10.0
+# Below this a race is too short to read, so it is allowed to run past its own
+# chapter (and make the next one reserve the lane); above it, the race is
+# trimmed to its chapter instead so no neighbour shrinks its photos.
+RACE_MIN_LANE_SECONDS = 4.5
 # The slower car's real arrival time, capped to fit inside RACE_WINDOW_SECONDS
 # alongside the countdown and celebration -- an honest two-second real gap
 # is dramatic, but two real 16-17s quarter-miles can't run verbatim inside
@@ -1403,7 +1407,18 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         if index >= len(car_media_paths) or index >= len(scene_boundaries):
             continue
         seg_start = scene_boundaries[index][0]
-        race_windows.append((seg_start, min(duration, seg_start + RACE_WINDOW_SECONDS)))
+        seg_end = min(duration, seg_start + RACE_WINDOW_SECONDS)
+        # Stop the race at the end of its own chapter wherever that still
+        # leaves a real race. A chapter reserves the lane for its *whole*
+        # length, so a race spilling three seconds into the next chapter made
+        # that chapter shrink its photos for its entire run -- in run #178 the
+        # interior chapter overlapped by 3.1s of its 18s and paid for it with
+        # tiles at 240x160 instead of 410x273.
+        chapter_end = next((cue.get("chapter_end") for cue in photo_cues
+                            if cue["start"] <= seg_start < cue["end"]), None)
+        if chapter_end is not None and chapter_end - seg_start >= RACE_MIN_LANE_SECONDS:
+            seg_end = min(seg_end, chapter_end)
+        race_windows.append((seg_start, seg_end))
 
     detail_clips = []
     car_clip = None
@@ -1496,7 +1511,10 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         # topic underneath, rather than forcing the video to fall silent
         # just to give the race its own dedicated block of screen time.
         seg_start, _natural_end = scene_boundaries[index]
-        seg_end = min(duration, seg_start + RACE_WINDOW_SECONDS)
+        # Same window the photo band reserved its lane for, so the cars never
+        # outlast the strip they are running in.
+        seg_end = next((end for start, end in race_windows if start == seg_start),
+                       min(duration, seg_start + RACE_WINDOW_SECONDS))
         rival_facing = media_entries[index].get("facing_direction", "unclear") if index < len(media_entries) else "unclear"
         # In collage mode the cars run in the strip the photo band reserved
         # for them, between the main photo and the close-ups. Without the
