@@ -64,6 +64,13 @@ RACE_STRIP_RATIO = 0.24
 # than the whole chapter landing at once: the main photo holds alone first,
 # then each tile appears into the slot the finished layout has already
 # reserved for it, so nothing reflows as they come in.
+# No chapter may sit on the same picture longer than this. Run #176's last
+# four scenes all landed on a scraped "exterior_full" photo, which belongs to
+# no slot, so they merged into a single 29-second chapter with no close-ups
+# at all -- 55% of the video on one static image, everything else spent in
+# the first 24 seconds. A chapter this long rotates to another slot instead,
+# which keeps photos arriving right through the minute.
+MAX_CHAPTER_SECONDS = 12.0
 MAIN_HOLD_SECONDS = 1.2
 # All the tiles are up by this far through the chapter, leaving the rest of
 # it on the complete picture.
@@ -219,17 +226,37 @@ def photo_story_timeline(manifest, boundaries):
     media = manifest.get("media") or []
     scenes = manifest.get("scenes") or []
     cues = []
+    # Which slot was last on screen and when, so an unmatched scene can pick
+    # up whichever has been waiting longest rather than repeating.
+    shown, previous_slot, chapter_started = {}, None, 0.0
     for index, (start, end) in enumerate(boundaries):
         scene = scenes[index] if index < len(scenes) else {}
         selected = media[index] if index < len(media) else {}
-        section = sections.get(slot_of(selected))
         # The comparison beat is about the rival's own photo; never replace
         # it with the primary car's main image.
-        if scene.get("rival_make") or scene.get("rival_model") or not section:
+        if scene.get("rival_make") or scene.get("rival_model"):
             cues.append({"start": start, "end": end, "slot": None, "label": None,
                          "hero": selected.get("path"), "closeups": [], "active": None,
                          "active_index": None})
             continue
+        section = sections.get(slot_of(selected))
+        # A scene whose own photo belongs to no slot -- a scraped exterior,
+        # say -- used to fall through to a bare cue, which is how run #176
+        # ended up parked on one image for its whole second half. Give it the
+        # slot that has been off screen longest instead, so the video keeps
+        # working through the photos the user actually supplied.
+        if section is None:
+            section = min(sections.values(), key=lambda s: shown.get(s["id"], -1.0))
+        # Same again when one slot would otherwise hold the screen too long.
+        elif (section["id"] == previous_slot
+              and start - chapter_started >= MAX_CHAPTER_SECONDS
+              and len(sections) > 1):
+            section = min((s for s in sections.values() if s["id"] != previous_slot),
+                          key=lambda s: shown.get(s["id"], -1.0))
+        if section["id"] != previous_slot:
+            chapter_started = start
+        previous_slot = section["id"]
+        shown[section["id"]] = end
         hero = section.get("hero") or selected
         # A tile is highlighted only when research pinned that exact photo
         # to this scene -- no guessing from media_type, which would light up
