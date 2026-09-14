@@ -57,6 +57,9 @@ TYPING_VOLUME = 0.36  # 20% louder, on request
 # fade it to match whatever the actual narration duration turns out to be.
 MUSIC_PATH = ROOT / "narrator" / "music" / "bg_rock.mp3"
 MUSIC_VOLUME = 0.03  # was 0.09 -- too loud, dropped to 1/3
+# Applied to the finished mix, on request -- narration, music and effects
+# all come down together so the balance between them is unchanged.
+MASTER_VOLUME = 0.85
 MUSIC_FADE_SECONDS = 1.5
 
 
@@ -1498,6 +1501,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     music_clip = _background_music_clip(duration)
     extra_audio = [*sfx_clips, *([music_clip] if music_clip is not None else [])]
     full_audio = CompositeAudioClip([audio, *extra_audio]) if extra_audio else audio
+    full_audio = full_audio.volumex(MASTER_VOLUME)
     video = CompositeVideoClip(
         [
             background, car_positioned, *headline_clips, *caption_clips, *detail_clips, narrator_positioned,

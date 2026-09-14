@@ -7,6 +7,13 @@ This builds the whole chapter as one picture instead: the main photo across
 the top, every close-up for that slot laid out below it, and a highlight
 that moves between tiles as the narration reaches them. Nothing floats over
 the narrator, so the lower half of the frame is free again.
+
+Each piece is its own layer -- the main photo, each close-up, each highlight
+-- rather than one flat picture re-rendered whenever anything changes. The
+flat version had to crossfade the *entire* band every time a close-up
+arrived, so the main photo and every tile already on screen dissolved into
+identical copies of themselves: the whole thing appeared to re-render on
+every reveal. Layering means only the piece that actually changed animates.
 """
 from pathlib import Path
 
@@ -74,63 +81,67 @@ def _short_label(draw, label, font, width):
     return label + "…"
 
 
-def collage_frame(hero_image, closeups, active, box_size, font, visible=None):
-    """One rendered chapter picture. `closeups` are (image, label, photo_id).
-
-    `visible` draws only the first N tiles while keeping the layout of the
-    full set, so a close-up appears in the cell it will keep rather than the
-    grid re-flowing as each one arrives.
-    """
-    if visible is None:
-        visible = len(closeups)
-    w, h = box_size
-    frame = Image.new("RGB", (w, h), BACKGROUND)
-    draw = ImageDraw.Draw(frame)
-    metrics = collage_metrics(w, h, len(closeups))
+def _cell_boxes(box_w, box_h, count):
+    """(x, y, w, h) for each close-up cell, in fill order."""
+    metrics = collage_metrics(box_w, box_h, count)
     rows, gap = metrics["rows"], metrics["gap"]
-    tile_w, row_h, main_h = metrics["tile_w"], metrics["row_h"], metrics["main_h"]
-    _paste_contained(frame, hero_image, (0, 0, w, main_h))
-
-    index, y = 0, main_h + gap
+    tile_w, row_h = metrics["tile_w"], metrics["row_h"]
+    boxes, y = [], metrics["main_h"] + gap
     for row in rows:
-        row_x = (w - (tile_w * row + gap * (row - 1))) // 2
+        row_x = (box_w - (tile_w * row + gap * (row - 1))) // 2
         for column in range(row):
-            if index >= min(visible, len(closeups)):
-                break
-            image, label, _photo_id = closeups[index]
-            x = row_x + column * (tile_w + gap)
-            _paste_contained(frame, image, (x, y, tile_w, row_h))
-            if active is not None and index == active:
-                if label:
-                    # Caption band first, outline over it, so the highlight
-                    # stays a complete rectangle around the whole tile.
-                    pad = max(3, gap // 2)
-                    text = _short_label(draw, label, font, tile_w - 2 * pad)
-                    text_h = round(getattr(font, "size", 14) * 1.6)
-                    draw.rectangle((x, y + row_h - text_h, x + tile_w - 1, y + row_h - 1),
-                                   fill=LABEL_BACKGROUND)
-                    draw.text((x + pad, y + row_h - text_h + (text_h - getattr(font, "size", 14)) // 2),
-                              text, font=font, fill=LABEL_COLOR)
-                draw.rectangle((x, y, x + tile_w - 1, y + row_h - 1),
-                               outline=ACTIVE_OUTLINE, width=ACTIVE_OUTLINE_WIDTH)
-            index += 1
+            boxes.append((row_x + column * (tile_w + gap), y, tile_w, row_h))
         y += row_h + gap
-    return frame
+    return boxes, metrics["main_h"], gap
+
+
+def _contained(image, size):
+    """The photo fitted whole inside size, on its own white tile."""
+    w, h = size
+    tile = Image.new("RGB", (max(1, w), max(1, h)), BACKGROUND)
+    fitted = ImageOps.contain(image, (max(1, w), max(1, h)), Image.Resampling.LANCZOS)
+    tile.paste(fitted, ((w - fitted.width) // 2, (h - fitted.height) // 2))
+    return tile
+
+
+def _highlight_overlay(size, label, font, gap):
+    """The outline and name drawn over an already-placed tile, as its own
+    transparent layer -- so highlighting a tile never redraws the photo."""
+    w, h = size
+    overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    if label:
+        pad = max(3, gap // 2)
+        text = _short_label(draw, label, font, w - 2 * pad)
+        text_h = round(getattr(font, "size", 14) * 1.6)
+        draw.rectangle((0, h - text_h, w - 1, h - 1), fill=(*LABEL_BACKGROUND, 255))
+        draw.text((pad, h - text_h + (text_h - getattr(font, "size", 14)) // 2),
+                  text, font=font, fill=(*LABEL_COLOR, 255))
+    draw.rectangle((0, 0, w - 1, h - 1), outline=(*ACTIVE_OUTLINE, 255), width=ACTIVE_OUTLINE_WIDTH)
+    return overlay
 
 
 def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, output_dir):
-    """One clip per distinct chapter picture, crossfaded where it changes.
+    """Layered media track: (media_clip, [], diagnostics).
 
-    Returns (media_clip, [], diagnostics). The empty list is what used to be
-    the floating detail cards -- the collage absorbed them, and keeping the
-    shape means narrator_video.py's composite is unchanged.
+    One clip for each main photo, one for each close-up starting when it is
+    revealed, one for each highlight. Nothing that is already on screen is
+    re-drawn when something new arrives, which is what stopped the whole
+    band appearing to re-render on every reveal.
+
+    The empty list is what used to be the floating detail cards -- the
+    collage absorbed them, and keeping the shape means narrator_video.py's
+    composite is unchanged.
     """
     root, output_dir = Path(root), Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     _, _, box_w, box_h = map(int, media_box)
     font = _font(max(13, round(size[0] * 0.019)))
 
-    groups, diagnostics = [], []
+    # One chapter per run of scenes sharing a picture; cues already carry the
+    # span, so the reveal is paced against the whole chapter rather than
+    # restarting at each scene.
+    chapters, diagnostics = [], []
     for index, cue in enumerate(cues):
         path = cue.get("hero")
         hero = _open(path, root) if path else None
@@ -146,46 +157,74 @@ def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, ou
                 closeups.append((image, closeup.get("label") or "", closeup.get("photo_id")))
         active = next((i for i, (_, _, pid) in enumerate(closeups)
                        if pid and pid == cue.get("active")), None)
-        key = (path, tuple(pid for _, _, pid in closeups), active)
-        # Adjacent scenes inside the same chapter with the same highlight are
-        # one continuous picture -- re-rendering them would restart the main
-        # photo's fade partway through a sentence.
-        if groups and groups[-1]["key"] == key:
-            groups[-1]["end"] = cue["end"]
-            continue
-        groups.append({"key": key, "start": cue["start"], "end": cue["end"],
-                       "chapter_start": cue.get("chapter_start", cue["start"]),
-                       "chapter_end": cue.get("chapter_end", cue["end"]),
-                       "hero": hero, "closeups": closeups, "active": active})
+        start = cue.get("chapter_start", cue["start"])
+        end = cue.get("chapter_end", cue["end"])
+        if not chapters or chapters[-1]["key"] != (path, start):
+            chapters.append({"key": (path, start), "start": start, "end": end,
+                             "hero": hero, "closeups": closeups, "highlights": []})
+        chapters[-1]["end"] = max(chapters[-1]["end"], end)
+        if active is not None:
+            chapters[-1]["highlights"].append((cue["start"], cue["end"], active))
         diagnostics.append({"scene": index, "start": cue["start"], "slot": cue.get("slot"),
                             "closeups": [pid for _, _, pid in closeups],
                             "active": closeups[active][2] if active is not None else None})
-    if not groups:
+    if not chapters:
         return None, [], []
 
-    clips = []
-    for index, group in enumerate(groups):
-        # Stage the close-ups across the chapter this group belongs to, not
-        # across the group itself: a chapter is usually several scenes, and
-        # a group ends whenever the highlight moves.
-        steps = reveal_schedule(group["chapter_start"], group["chapter_end"], len(group["closeups"]))
-        group_end = min(duration, group["end"] + 0.25) if index < len(groups) - 1 else duration
-        for step_index, (step_start, visible) in enumerate(steps):
-            step_end = steps[step_index + 1][0] if step_index + 1 < len(steps) else group_end
-            # Only the part of this reveal step that falls inside the group.
-            start = max(step_start, group["start"])
-            end = min(step_end, group_end) if step_index + 1 < len(steps) else group_end
-            if end - start < 0.05:
+    layers = []
+    for index, chapter in enumerate(chapters):
+        start = chapter["start"]
+        # Hold the last chapter to the end of the video so the band never
+        # goes blank on a trailing beat.
+        end = chapters[index + 1]["start"] if index + 1 < len(chapters) else duration
+        if end - start < 0.05:
+            continue
+        cells, main_h, gap = _cell_boxes(box_w, box_h, len(chapter["closeups"]))
+
+        main_path = output_dir / f"chapter-{index}-main.png"
+        _contained(chapter["hero"], (box_w, main_h)).save(main_path)
+        main = ImageClip(str(main_path)).set_duration(end - start).set_position((0, 0))
+        # Only a change of main photo crossfades; a close-up arriving under
+        # it leaves it completely alone.
+        layers.append((main.crossfadein(0.25) if index else main).set_start(start))
+
+        steps = reveal_schedule(start, chapter["end"], len(chapter["closeups"]))
+        appears = {}
+        for step_time, visible in steps:
+            for tile_index in range(visible):
+                appears.setdefault(tile_index, step_time)
+        for tile_index, (image, _label, _pid) in enumerate(chapter["closeups"]):
+            if tile_index >= len(cells):
+                break
+            x, y, w, h = cells[tile_index]
+            tile_start = min(max(appears.get(tile_index, start), start), end)
+            if end - tile_start < 0.05:
                 continue
-            frame = collage_frame(group["hero"], group["closeups"], group["active"],
-                                  (box_w, box_h), font, visible=visible)
-            path = output_dir / f"chapter-{index}-{step_index}.png"
-            frame.save(path)
-            clip = ImageClip(str(path)).set_duration(max(0.1, end - start))
-            # Every picture after the very first one fades in, so a tile
-            # arrives rather than popping.
-            if clips:
-                clip = clip.crossfadein(0.3 if step_index else 0.25)
-            clips.append(clip.set_start(start))
-    media = CompositeVideoClip(clips, size=(box_w, box_h), bg_color=BACKGROUND).set_duration(duration)
+            tile_path = output_dir / f"chapter-{index}-tile-{tile_index}.png"
+            _contained(image, (w, h)).save(tile_path)
+            layers.append(ImageClip(str(tile_path))
+                          .set_duration(end - tile_start)
+                          .set_position((x, y))
+                          .crossfadein(0.35)
+                          .set_start(tile_start))
+
+        for highlight_start, highlight_end, tile_index in chapter["highlights"]:
+            if tile_index >= len(cells):
+                continue
+            x, y, w, h = cells[tile_index]
+            label = chapter["closeups"][tile_index][1]
+            # Never before the tile it marks has arrived.
+            highlight_start = max(highlight_start, appears.get(tile_index, start))
+            highlight_end = min(highlight_end, end)
+            if highlight_end - highlight_start < 0.2:
+                continue
+            overlay_path = output_dir / f"chapter-{index}-mark-{tile_index}.png"
+            _highlight_overlay((w, h), label, font, gap).save(overlay_path)
+            layers.append(ImageClip(str(overlay_path), transparent=True)
+                          .set_duration(highlight_end - highlight_start)
+                          .set_position((x, y))
+                          .crossfadein(0.2)
+                          .set_start(highlight_start))
+
+    media = CompositeVideoClip(layers, size=(box_w, box_h), bg_color=BACKGROUND).set_duration(duration)
     return media, [], diagnostics
