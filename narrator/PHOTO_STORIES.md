@@ -58,11 +58,14 @@ When a scene is specifically about one close-up, that tile gets an outline and i
 name; otherwise nothing is highlighted. Nothing floats over the lower half of the
 frame any more, so the narrator has its full range of framings back.
 
-The comparison drag-race overlay stays suppressed in collage mode. Removing the
-floating card removed the *reason* it was disabled but not the conflict: the race is
-an overlay drawn against the full frame, so over a collage chapter it lays a small car
-and a checkered flag across the tile row, clipped at the right edge (seen in run #170).
-The comparison photo, narration and stats still play.
+The comparison drag race runs in a lane the photo band opens for it, between the main
+photo and the close-ups. The lanes used to be pinned to `TOP_STACK_RATIO`, which stopped
+being the bottom of the photo area once that band grew -- run #170 put a car and a
+checkered flag straight across the tile row. Any chapter a race window touches is laid
+out with `race_strip=True`: the main photo is pinned to its floor and the close-ups are
+pushed below a reserved strip, so the lane lands at the same height in every chapter the
+race crosses and nothing resizes mid-race. The race outlasts the comparison scene by
+design (`RACE_WINDOW_SECONDS`), which is why more than one chapter usually reserves it.
 
 ## What the narrator does with them
 

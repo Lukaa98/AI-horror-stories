@@ -81,12 +81,13 @@ def _short_label(draw, label, font, width):
     return label + "…"
 
 
-def _cell_boxes(box_w, box_h, count):
+def _cell_boxes(box_w, box_h, count, race_strip=False):
     """(x, y, w, h) for each close-up cell, in fill order."""
-    metrics = collage_metrics(box_w, box_h, count)
+    metrics = collage_metrics(box_w, box_h, count, race_strip)
     rows, gap = metrics["rows"], metrics["gap"]
     tile_w, row_h = metrics["tile_w"], metrics["row_h"]
-    boxes, y = [], metrics["main_h"] + gap
+    boxes = []
+    y = metrics["main_h"] + gap + (metrics["strip_h"] + gap if race_strip else 0)
     for row in rows:
         row_x = (box_w - (tile_w * row + gap * (row - 1))) // 2
         for column in range(row):
@@ -121,13 +122,19 @@ def _highlight_overlay(size, label, font, gap):
     return overlay
 
 
-def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, output_dir):
+def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, output_dir,
+                       race_windows=()):
     """Layered media track: (media_clip, [], diagnostics).
 
     One clip for each main photo, one for each close-up starting when it is
     revealed, one for each highlight. Nothing that is already on screen is
     re-drawn when something new arrives, which is what stopped the whole
     band appearing to re-render on every reveal.
+
+    `race_windows` are spans where the drag race needs a clear lane: any
+    chapter one touches is laid out with the close-ups pushed below a
+    reserved strip, for that chapter's whole duration so nothing resizes
+    mid-chapter.
 
     The empty list is what used to be the floating detail cards -- the
     collage absorbed them, and keeping the shape means narrator_video.py's
@@ -179,7 +186,9 @@ def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, ou
         end = chapters[index + 1]["start"] if index + 1 < len(chapters) else duration
         if end - start < 0.05:
             continue
-        cells, main_h, gap = _cell_boxes(box_w, box_h, len(chapter["closeups"]))
+        racing = any(window_start < end and start < window_end
+                     for window_start, window_end in race_windows)
+        cells, main_h, gap = _cell_boxes(box_w, box_h, len(chapter["closeups"]), racing)
 
         main_path = output_dir / f"chapter-{index}-main.png"
         _contained(chapter["hero"], (box_w, main_h)).save(main_path)

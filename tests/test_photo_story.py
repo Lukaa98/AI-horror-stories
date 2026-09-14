@@ -108,6 +108,32 @@ def test_gaze_aims_up_at_the_photos_and_across_at_the_right_tile():
     assert pointing
 
 
+def test_race_strip_pushes_the_close_ups_clear_of_the_lane():
+    """Run #170 put a drag-race car and a checkered flag straight across the
+    tile row, because the lanes were pinned to TOP_STACK_RATIO after the
+    photo band had grown over it. The band reserves the lane itself now."""
+    box = (1062, 878)
+    from photo_story_video import _cell_boxes
+    strip_tops = set()
+    for count in (0, 1, 2, 3, 4):
+        racing = collage_metrics(*box, count, race_strip=True)
+        assert racing["strip_h"] > 0
+        strip_bottom = racing["strip_y"] + racing["strip_h"]
+        strip_tops.add((racing["strip_y"], racing["strip_h"]))
+        # The lane sits below the main photo...
+        assert racing["strip_y"] >= racing["main_h"]
+        # ...and every tile sits below the lane.
+        cells, _, _ = _cell_boxes(*box, count, True)
+        assert all(y >= strip_bottom for _x, y, _w, _h in cells), count
+        # Still inside the band.
+        assert all(y + h <= box[1] for _x, y, _w, h in cells), count
+    # One lane position for every chapter the race crosses, so nothing moves
+    # under the cars mid-race.
+    assert len(strip_tops) == 1
+    # Without a race the layout is untouched.
+    assert collage_metrics(*box, 4)["strip_h"] == 0
+
+
 def test_tile_centers_track_the_rendered_rows():
     box = (1062, 878)
     assert tile_centers(*box, 0) == []

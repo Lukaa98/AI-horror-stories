@@ -54,6 +54,11 @@ TILE_ASPECT = 1.5
 # subject out.
 MIN_MAIN_HEIGHT_RATIO = 0.34
 GAP_RATIO = 0.018
+# A clear lane for the drag race, opened between the main photo and the
+# close-ups by pushing the close-ups down. Reserved for every chapter the
+# race window touches rather than appearing partway through one, so the
+# tiles never resize mid-chapter.
+RACE_STRIP_RATIO = 0.24
 
 # The close-ups arrive one at a time as the narration reaches them, rather
 # than the whole chapter landing at once: the main photo holds alone first,
@@ -96,18 +101,27 @@ def collage_rows(count):
     return COLLAGE_ROWS.get(max(0, min(count, MAX_CLOSEUPS)), [])
 
 
-def collage_metrics(box_w, box_h, count):
+def collage_metrics(box_w, box_h, count, race_strip=False):
     """Pixel geometry for one chapter picture: how tall the main photo is,
     and the size and shape of the close-up cells under it.
 
     Shared by the renderer that draws the tiles and the motion planner that
     aims the narrator's eyes and hand at one, so the character cannot point
     at a cell the renderer laid out somewhere else.
+
+    With `race_strip`, a band is reserved between the main photo and the
+    close-ups for the drag race, and the main photo is pinned to its floor
+    so that band lands at the same height in every chapter the race crosses
+    -- the race runs for ten seconds and usually spans more than one.
     """
     rows = collage_rows(count)
     gap = max(4, round(min(box_w, box_h) * GAP_RATIO))
+    strip_h = round(box_h * RACE_STRIP_RATIO) if race_strip else 0
+    floor = round(box_h * MIN_MAIN_HEIGHT_RATIO)
     if not rows:
-        return {"rows": [], "gap": gap, "main_h": box_h, "row_h": 0, "tile_w": 0}
+        main_h = floor if race_strip else box_h
+        return {"rows": [], "gap": gap, "main_h": main_h, "row_h": 0, "tile_w": 0,
+                "strip_y": main_h + gap if race_strip else None, "strip_h": strip_h}
     columns = max(max(rows), MIN_TILE_COLUMNS)
     # Widest the cells can be without overflowing the band, then as tall as
     # that width allows at photo shape -- so a contained close-up fills its
@@ -115,26 +129,26 @@ def collage_metrics(box_w, box_h, count):
     tile_w = (box_w - gap * (columns - 1)) // columns
     row_h = round(tile_w / TILE_ASPECT)
     tiles_h = row_h * len(rows) + gap * (len(rows) - 1)
-    main_h = box_h - tiles_h - gap
-    floor = round(box_h * MIN_MAIN_HEIGHT_RATIO)
+    main_h = box_h - tiles_h - gap - strip_h - (gap if race_strip else 0)
     if main_h < floor:
         # Two rows at full width would leave the main photo a sliver, so give
         # it its floor and shrink the cells to suit, keeping their shape.
-        tiles_h = box_h - floor - gap
-        row_h = (tiles_h - gap * (len(rows) - 1)) // len(rows)
+        tiles_h = box_h - floor - gap - strip_h - (gap if race_strip else 0)
+        row_h = max(1, (tiles_h - gap * (len(rows) - 1)) // len(rows))
         tile_w = round(row_h * TILE_ASPECT)
         main_h = floor
-    return {"rows": rows, "gap": gap, "main_h": main_h, "row_h": row_h, "tile_w": tile_w}
+    return {"rows": rows, "gap": gap, "main_h": main_h, "row_h": row_h, "tile_w": tile_w,
+            "strip_y": main_h + gap if race_strip else None, "strip_h": strip_h}
 
 
-def tile_centers(box_w, box_h, count):
+def tile_centers(box_w, box_h, count, race_strip=False):
     """Centre of each close-up cell as a fraction of the media box, in the
     order the cells are filled."""
-    metrics = collage_metrics(box_w, box_h, count)
+    metrics = collage_metrics(box_w, box_h, count, race_strip)
     rows, gap, tile_w, row_h = metrics["rows"], metrics["gap"], metrics["tile_w"], metrics["row_h"]
     if not rows or not box_w or not box_h:
         return []
-    centers, y = [], metrics["main_h"] + gap
+    centers, y = [], metrics["main_h"] + gap + (metrics["strip_h"] + gap if race_strip else 0)
     for row in rows:
         row_x = (box_w - (tile_w * row + gap * (row - 1))) / 2
         for column in range(row):

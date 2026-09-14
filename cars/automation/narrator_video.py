@@ -25,7 +25,7 @@ import moviepy.video.fx.all as vfx
 
 from generate_sample import ROOT, CANVAS, _font, _wrap
 from narrator_motion import build_motion_plan, render_live_narrator
-from photo_story import photo_story_timeline
+from photo_story import collage_metrics, photo_story_timeline
 from photo_story_video import build_photo_tracks
 
 # Lets a build opt into a different sprite set (e.g. the AI-illustrated
@@ -1172,7 +1172,7 @@ def _drag_race_lane_clip(
 
 def _drag_race_track(
     main_cutout_path, rival_cutout_path, main_facing, rival_facing, main_hp, rival_hp,
-    main_quarter_mile, rival_quarter_mile, size, seg_start, seg_end,
+    main_quarter_mile, rival_quarter_mile, size, seg_start, seg_end, lane_band=None,
 ):
     """Two small side-profile cutouts drag-racing left-to-right in their
     own lane -- above the narrator, never crossing it -- during a
@@ -1230,10 +1230,20 @@ def _drag_race_track(
     # narrator_top instead of adding it is what actually keeps the cars
     # clear of the character, since the two zones share that same y=960
     # line with no natural gap of their own.
-    narrator_top = height * TOP_STACK_RATIO
-    lane_gap = height * RACE_LANE_GAP_RATIO
-    main_y = narrator_top - lane_gap
-    rival_y = narrator_top - lane_gap * 2.4
+    if lane_band:
+        # A strip reserved inside the photo band, between the main photo and
+        # the close-ups (see RACE_STRIP_RATIO). The lanes used to be pinned
+        # to TOP_STACK_RATIO, which stopped being the bottom of the photo
+        # area when that band grew -- run #170 put a car and a checkered flag
+        # straight across the tile row.
+        band_top, band_height = lane_band
+        rival_y = band_top + band_height * 0.12
+        main_y = band_top + band_height * 0.55
+    else:
+        narrator_top = height * TOP_STACK_RATIO
+        lane_gap = height * RACE_LANE_GAP_RATIO
+        main_y = narrator_top - lane_gap
+        rival_y = narrator_top - lane_gap * 2.4
 
     car_clips = [
         _drag_race_lane_clip(
@@ -1382,12 +1392,25 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         )
     else:
         raise ValueError("NARRATOR_RENDERER must be v21 or sprites")
+    # Worked out before the media track so the photo band can reserve a clear
+    # lane for each one; the race runs RACE_WINDOW_SECONDS, which is long
+    # enough to outlast the comparison scene and reach into the next
+    # chapter's close-ups.
+    race_windows = []
+    for index, scene in enumerate(scenes):
+        if scene.get("main_horsepower") is None or scene.get("rival_horsepower") is None:
+            continue
+        if index >= len(car_media_paths) or index >= len(scene_boundaries):
+            continue
+        seg_start = scene_boundaries[index][0]
+        race_windows.append((seg_start, min(duration, seg_start + RACE_WINDOW_SECONDS)))
+
     detail_clips = []
     car_clip = None
     if photo_cues:
         car_clip, detail_clips, detail_diagnostics = build_photo_tracks(
             photo_cues, car_media_paths, output_path.parent, media_box, size, duration,
-            output_path.parent / "_frames" / "photo-story")
+            output_path.parent / "_frames" / "photo-story", race_windows=race_windows)
         if car_clip is not None:
             manifest["photo_presentation"] = {"version": 2, "cues": photo_cues,
                 "chapters": detail_diagnostics, "layout": "main-photo-over-closeup-tiles"}
@@ -1465,15 +1488,6 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         rival_hp = scene.get("rival_horsepower")
         if main_hp is None or rival_hp is None:
             continue
-        if photo_cues:
-            # Re-suppressed after run #170 (Mustang RTR): removing the
-            # floating detail card removed the *reason* this was disabled,
-            # but not the conflict. The race is a lower-half overlay drawn
-            # against the full frame, so over a collage chapter it puts a
-            # small car and a checkered flag across the tile row, clipped at
-            # the right edge. Comparison photo, narration and stats still
-            # play; only the overlay is dropped.
-            continue
         if index >= len(car_media_paths) or index >= len(scene_boundaries):
             continue
         # A fixed runway, not the scene's own (often much shorter) natural
@@ -1484,10 +1498,17 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         seg_start, _natural_end = scene_boundaries[index]
         seg_end = min(duration, seg_start + RACE_WINDOW_SECONDS)
         rival_facing = media_entries[index].get("facing_direction", "unclear") if index < len(media_entries) else "unclear"
+        # In collage mode the cars run in the strip the photo band reserved
+        # for them, between the main photo and the close-ups. Without the
+        # collage the original lane above the narrator is still right.
+        lane_band = None
+        if photo_cues:
+            strip = collage_metrics(int(media_w), int(media_h), 0, race_strip=True)
+            lane_band = (media_y + strip["strip_y"], strip["strip_h"])
         race_clips, race_sfx = _drag_race_track(
             side_profile_path, car_media_paths[index], side_profile_facing, rival_facing, main_hp, rival_hp,
             scene.get("main_quarter_mile_seconds"), scene.get("rival_quarter_mile_seconds"),
-            size, seg_start, seg_end,
+            size, seg_start, seg_end, lane_band=lane_band,
         )
         decorative_clips.extend(race_clips)
         decorative_sfx.extend(race_sfx)
