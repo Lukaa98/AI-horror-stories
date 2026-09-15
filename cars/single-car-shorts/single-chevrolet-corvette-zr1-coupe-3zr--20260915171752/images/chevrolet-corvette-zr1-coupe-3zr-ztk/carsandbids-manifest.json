@@ -1,0 +1,626 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-15T17:22:03.915Z",
+  "query": "Chevrolet Corvette Zr1 Coupe 3zr Ztk",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3BZnQgdA/2019-chevrolet-corvette-zr1-coupe-3zr-ztk",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3BZnQgdA/2019-chevrolet-corvette-zr1-coupe-3zr-ztk",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 49,
+      "sale_price": 222777,
+      "sale_type": "sold",
+      "page_title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3BZnQgdA/2019-chevrolet-corvette-zr1-coupe-3zr-ztk",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 222777,
+    "sale_type": "sold",
+    "page_title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/3vLdnoYd-McEZ8arZtV.jpg?t=178431678507",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 154537
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/3vLdnoYd-ViuwWKrXmY.jpg?t=178456212239",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "width": 542,
+      "height": 361,
+      "bytes": 180126
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/3vLdnoYd-gTwXEqFThF/edit/Z5g79.jpg?t=178433021894",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "width": 542,
+      "height": 361,
+      "bytes": 237504
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/6044da250e73d38687e8b34fd89153b6337e4388/photos/KPJ2zwBL-S3tcQN3.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 8629 bytes"
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/3vLdnoYd-OPeHGfyw98.jpg?t=178431748157",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "width": 542,
+      "height": 361,
+      "bytes": 180352
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/3vLdnoYd-VMT-Z041Mk/edit/ZMp2s.jpg?t=178433021894",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "width": 542,
+      "height": 361,
+      "bytes": 264342
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/3vLdnoYd-WeZSs2f5xU.jpg?t=178431688455",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "width": 542,
+      "height": 361,
+      "bytes": 214978
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/3vLdnoYd-YGz83P1ggp.jpg?t=178431744465",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "width": 542,
+      "height": 361,
+      "bytes": 259570
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/3vLdnoYd-kwu87WgJuP.jpg?t=178431738125",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "width": 542,
+      "height": 361,
+      "bytes": 101997
+    },
+    {
+      "path": "interior-10.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/3vLdnoYd-WCrdhEeYMY.jpg?t=178431697045",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "width": 542,
+      "height": 361,
+      "bytes": 61810
+    },
+    {
+      "path": "interior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6044da250e73d38687e8b34fd89153b6337e4388/attachments/3BZnQgdA-OBlaCY_.jpeg?t=178518768681",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 497268
+    },
+    {
+      "path": "interior-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6044da250e73d38687e8b34fd89153b6337e4388/attachments/3BZnQgdA-S_mUXKp.jpeg?t=178518769503",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 391091
+    },
+    {
+      "path": "interior-13.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6044da250e73d38687e8b34fd89153b6337e4388/attachments/3BZnQgdA-ZJfXEgE.jpeg?t=178518771125",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 235157
+    },
+    {
+      "path": "interior-14.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/6044da250e73d38687e8b34fd89153b6337e4388/attachments/3BZnQgdA-Y_Y3wg5.jpeg?t=178483210267",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 121,
+      "bytes": 142267
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ab7f3143319b49c2066340c08baad0a0/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ab7f3143319b49c2066340c08baad0a0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ab7f3143319b49c2066340c08baad0a0/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3BZnQgdA/2019-chevrolet-corvette-zr1-coupe-3zr-ztk",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ab7f3143319b49c2066340c08baad0a0/manifest/video.m3u8",
+      "auction_title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f569ea483949b4a8ae006d78fe84f383/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f569ea483949b4a8ae006d78fe84f383/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f569ea483949b4a8ae006d78fe84f383/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3BZnQgdA/2019-chevrolet-corvette-zr1-coupe-3zr-ztk",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f569ea483949b4a8ae006d78fe84f383/manifest/video.m3u8",
+      "auction_title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/279c32ad7066ce94d7aff5de0908cba4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/279c32ad7066ce94d7aff5de0908cba4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/279c32ad7066ce94d7aff5de0908cba4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3BZnQgdA/2019-chevrolet-corvette-zr1-coupe-3zr-ztk",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/279c32ad7066ce94d7aff5de0908cba4/manifest/video.m3u8",
+      "auction_title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a28da5d8cbc989efbe92e16776e1665a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a28da5d8cbc989efbe92e16776e1665a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a28da5d8cbc989efbe92e16776e1665a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3BZnQgdA/2019-chevrolet-corvette-zr1-coupe-3zr-ztk",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a28da5d8cbc989efbe92e16776e1665a/manifest/video.m3u8",
+      "auction_title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b521e8dc311b77cc14ce0f5b0b200180/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b521e8dc311b77cc14ce0f5b0b200180/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b521e8dc311b77cc14ce0f5b0b200180/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3BZnQgdA/2019-chevrolet-corvette-zr1-coupe-3zr-ztk",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b521e8dc311b77cc14ce0f5b0b200180/manifest/video.m3u8",
+      "auction_title": "2019 Chevrolet Corvette ZR1 Coupe 3ZR ZTK",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 13,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "ZR1 Coupe 3ZR ZTK",
+        "visible_match_evidence": [
+          "bodywork",
+          "proportions",
+          "front fascia",
+          "rear wing"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "ZR1 Coupe 3ZR ZTK",
+        "visible_match_evidence": [
+          "body shape",
+          "Z71 badges",
+          "lights design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "ZR1 Coupe 3ZR ZTK",
+        "visible_match_evidence": [
+          "ZR1 badging",
+          "design features typical of 2019 Corvette"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "ZR1 Coupe 3ZR ZTK",
+        "visible_match_evidence": [
+          "ZR1 specific bodywork",
+          "Distinctive rear wing",
+          "ZTK package features",
+          "Proportions consistent with C7 generation"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "chevrolet",
+        "detected_model": "corvette",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "ZR1 Coupe",
+        "visible_match_evidence": [
+          "distinctive rear wing",
+          "tail light design",
+          "overall body shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "ZR1 Coupe 3ZR ZTK",
+        "visible_match_evidence": [
+          "Corvette badge",
+          "interior design",
+          "gear shifter"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "ZR1 Coupe 3ZR ZTK",
+        "visible_match_evidence": [
+          "interior design",
+          "sport seats",
+          "model badge"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 6,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not a full view of the vehicle; lacks identifiable features of the Chevrolet Corvette.",
+        "path": "interior-10.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle, but rather an unrelated part.",
+        "path": "interior-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the target vehicle, content unrelated.",
+        "path": "interior-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 0,
+        "variant_match_confidence": 0,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 0,
+        "reject": true,
+        "reason": "Image does not depict a car; it is a parts label.",
+        "path": "interior-13.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Chevrolet",
+        "detected_model": "Corvette",
+        "detected_generation_or_year": "2019",
+        "detected_variant_or_engine": "ZR1 Coupe 3ZR ZTK",
+        "visible_match_evidence": [
+          "distinctive Corvette bodywork",
+          "ZR1 front fascia",
+          "aero enhancements",
+          "year-specific design elements"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-14.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
