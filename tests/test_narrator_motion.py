@@ -7,12 +7,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automatio
 from narrator_motion import MIN_SHOT_SECONDS, build_motion_plan
 
 
-def test_motion_continues_during_unbroken_speech_and_visits_both_sides():
+def test_motion_continues_during_unbroken_speech_and_keeps_off_the_table():
+    """The spec table holds the lower-left for the whole video, so the
+    framing cycle is right and centre only -- a left-anchored shot would put
+    the character straight through it. It must still vary, though."""
     manifest = {"scenes": [{"headline": "Fact"}] * 6,
                 "mouth_timeline": [{"start": 0, "end": 30, "mouth": "wide"}]}
     plan = build_motion_plan(manifest, 30, [(i, i + 5) for i in range(0, 30, 5)])
     layouts = {s["layout"] for s in plan["shots"]}
-    assert {"bottom-left", "bottom-right", "bottom-center", "close-left", "close-right"} <= layouts
+    assert not any(layout.endswith("left") for layout in layouts), layouts
+    assert {"bottom-right", "bottom-center", "close-right"} <= layouts
     assert len(plan["gestures"]) >= 10
     assert plan["mouth_timeline"] == manifest["mouth_timeline"]
     assert all(p["pose"] == "rest" for p in plan["gestures"][1::2])

@@ -21,10 +21,12 @@ HEAD_X_BY_ANCHOR = {"left": 0.17, "right": 0.83, "center": 0.5}
 HEAD_Y_BELOW_SAFE_TOP = 0.05
 # A target half a frame away from the head gives full pupil deflection.
 AIM_SPAN = 0.5
+# Right and centre only. The spec table holds the lower-left for the whole
+# video, so a left-anchored shot would put the character straight through it.
 SHOT_CYCLE = (
     ("bottom-right", "half"), ("close-right", "bust"),
-    ("bottom-center", "half"), ("bottom-left", "half"),
-    ("close-left", "bust"), ("bottom-center", "half"),
+    ("bottom-center", "half"), ("bottom-right", "half"),
+    ("close-right", "bust"), ("bottom-center", "half"),
 )
 
 

@@ -772,6 +772,66 @@ def _merged_boundaries(interval_lists, duration):
     return sorted(bounds)
 
 
+# The five headline numbers, pinned in the empty lower-left for the whole
+# video. Run #184's script never spoke the car's own horsepower and never
+# mentioned torque or 0-60 at all -- the table means the viewer gets them
+# regardless of what the narration decides to talk about.
+SPEC_TABLE_FIELDS = (
+    ("horsepower", "Horsepower"),
+    ("torque", "Torque"),
+    ("zero_to_sixty", "0-60 mph"),
+    ("engine", "Engine"),
+    ("price", "Price"),
+)
+SPEC_TABLE_X_RATIO = 0.035
+SPEC_TABLE_WIDTH_RATIO = 0.46
+SPEC_TABLE_TOP_RATIO = 0.70
+SPEC_TABLE_ROW_HEIGHT_RATIO = 0.043
+SPEC_TABLE_FONT_SIZE = 26
+
+
+def _spec_table_clip(key_specs, size, output_path):
+    """One static table of the car's headline numbers, shown throughout.
+
+    Returns None when research gave nothing usable, so an older manifest
+    just renders as it always did.
+    """
+    rows = [(title, str(key_specs.get(field) or "").strip())
+            for field, title in SPEC_TABLE_FIELDS]
+    rows = [(title, value) for title, value in rows if value and value.lower() not in ("n/a", "na", "-")]
+    if not rows:
+        return None
+    width, height = size
+    table_w = int(width * SPEC_TABLE_WIDTH_RATIO)
+    row_h = int(height * SPEC_TABLE_ROW_HEIGHT_RATIO)
+    table_h = row_h * len(rows)
+    table_x, table_y = int(width * SPEC_TABLE_X_RATIO), int(height * SPEC_TABLE_TOP_RATIO)
+
+    frame = Image.new("RGBA", size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(frame)
+    draw.rectangle((table_x, table_y, table_x + table_w, table_y + table_h),
+                   fill=STAT_TABLE_BG_COLOR, outline=STAT_TABLE_BORDER_COLOR, width=3)
+    label_font = _font(int(SPEC_TABLE_FONT_SIZE * 0.82))
+    value_font = _font(SPEC_TABLE_FONT_SIZE)
+    pad = max(10, int(table_w * 0.05))
+    for index, (title, value) in enumerate(rows):
+        top = table_y + index * row_h
+        if index:
+            draw.line((table_x + pad, top, table_x + table_w - pad, top),
+                      fill=STAT_TABLE_DIVIDER_COLOR, width=2)
+        draw.text((table_x + pad, top + row_h * 0.16), title.upper(),
+                  font=label_font, fill=STAT_TABLE_LABEL_COLOR)
+        # The value is what matters, so it takes the right-hand side and is
+        # shrunk to fit rather than clipped -- "3.6L twin-turbo flat-six" is
+        # a legitimate answer and must not run out of the box.
+        fitted = value_font
+        while draw.textlength(value, font=fitted) > table_w - 2 * pad and getattr(fitted, "size", 10) > 12:
+            fitted = _font(getattr(fitted, "size", SPEC_TABLE_FONT_SIZE) - 1)
+        draw.text((table_x + pad, top + row_h * 0.48), value, font=fitted, fill=STAT_TABLE_VALUE_COLOR)
+    frame.save(output_path)
+    return output_path
+
+
 def _media_zone_geometry(size):
     """Pixel geometry for the headline/media/caption stack.
 
@@ -1585,6 +1645,16 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         decorative_clips.extend(race_clips)
         decorative_sfx.extend(race_sfx)
 
+    spec_clips = []
+    spec_path = _spec_table_clip(
+        manifest.get("key_specs") or {}, size,
+        output_path.parent / "_frames" / "spec-table.png",
+    )
+    if spec_path is not None:
+        spec_clips.append(
+            ImageClip(str(spec_path), transparent=True).set_duration(duration).set_position((0, 0))
+        )
+
     progress_clip = _progress_bar_track(size, duration)
 
     background = ColorClip(size=size, color=(255, 255, 255)).set_duration(duration)
@@ -1598,7 +1668,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     video = CompositeVideoClip(
         [
             background, car_positioned, *headline_clips, *caption_clips, *detail_clips, narrator_positioned,
-            *decorative_clips, *stat_tracker_clips, progress_clip,
+            *decorative_clips, *stat_tracker_clips, *spec_clips, progress_clip,
         ],
         size=size,
     ).set_duration(duration).set_audio(full_audio)

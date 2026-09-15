@@ -93,9 +93,25 @@ ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 PACKAGE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
-    "required": ["title", "scenes", "sources", "start_year", "end_year"],
+    "required": ["title", "key_specs", "scenes", "sources", "start_year", "end_year"],
     "properties": {
         "title": {"type": "string"},
+        # The numbers a viewer came for, held apart from the narration so
+        # they are guaranteed on screen. Run #184's script never said the
+        # car's horsepower, never mentioned torque or 0-60 at all, and spent
+        # four of its seven scenes describing what the photos looked like --
+        # the spec table exists so that cannot cost the viewer the facts.
+        "key_specs": {
+            "type": "object", "additionalProperties": False,
+            "required": ["horsepower", "torque", "zero_to_sixty", "engine", "price"],
+            "properties": {
+                "horsepower": {"type": "string"},
+                "torque": {"type": "string"},
+                "zero_to_sixty": {"type": "string"},
+                "engine": {"type": "string"},
+                "price": {"type": "string"},
+            },
+        },
         # Whichever generation the script actually settles on -- especially
         # important when the caller didn't pin a year range, since research
         # is free to pick "the best-known generation" on its own. Without
@@ -308,6 +324,18 @@ Write like an excited, knowledgeable friend talking fast about a car they love, 
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
+Also fill in "key_specs" with this car's five headline numbers, verified by web search, each a
+short value the way a spec sheet prints it and nothing else -- no sentences: horsepower ("415 hp"),
+torque ("413 lb-ft"), zero_to_sixty ("3.9 sec"), engine ("3.6L twin-turbo flat-six") and price
+("$110K new, ~$70K today"). These are shown to the viewer in a table for the whole video, separate
+from anything you say, so they must be right. Use "n/a" only when a figure genuinely does not exist
+for this car, never as a shortcut for not having looked.
+
+Your narration must still SAY the horsepower and the torque as real numbers in the engine beat --
+the table does not excuse leaving them out of the script. Run #184 never spoke the car's own
+horsepower at all, never mentioned torque or 0-60, and spent four of its seven scenes describing
+what the photos looked like instead.
+
 Headlines are only for important facts and must be 1-4 words (examples: model/chassis, engine code, AWD, horsepower, price gap); use an empty string for ordinary beats. Use exterior media for the hook/close, engine for powertrain, wheel for drivetrain when useful, detail for modification/technical beats, and interior only when the script specifically discusses the cabin, seats, controls, or practicality -- most scripts should lean on exterior shots with only a couple of interior beats, not the other way around. Sources must be direct URLs supporting the claims.
 
 Each scene shows exactly one photo for its entire duration, so each scene's narration must stay on the ONE physical thing that photo actually shows -- never drift onto a second, different physical subject partway through the same scene. If you want to talk about two different things (e.g. the shift knob AND the seats, or one exterior detail AND a completely different exterior detail), that is two separate scenes, each with its own headline and media_type, not one scene covering both -- otherwise the photo on screen stops matching what's being said the moment the narration moves to the second thing. The reverse also applies: if you're still elaborating on the SAME subject a previous sentence already introduced (more detail on the same spec, the same price discussion, the same feature), keep that in the SAME scene rather than splitting it into a pointless extra scene that would just repeat the same photo. One scene = one subject = one photo, for exactly as long as that subject is being discussed.
@@ -471,6 +499,12 @@ def _script_violations(package, make, model):
             "viewer something that calls back to the hook."
         )
     script = " ".join(scene.get("narration") or "" for scene in scenes).lower()
+    # "807-horsepower" is as common as "807 horsepower", so the separator
+    # between the number and the unit may be a hyphen, a space, or nothing.
+    if not re.search(r"\d[\d,.]*\s*-?\s*(hp\b|horsepower|bhp\b)", script):
+        violations.append("your narration never states the car's horsepower as a number. Say it in the engine beat.")
+    if not re.search(r"\d[\d,.]*\s*-?\s*(lb-ft|lb\.?\s?ft|pound-feet|nm\b)", script):
+        violations.append("your narration never states the car's torque as a number. Say it in the engine beat.")
     for shape in BANNED_SHAPES:
         if shape in script:
             violations.append(f'you used the banned phrase "{shape}". Rewrite that sentence around a fact.')

@@ -70,7 +70,7 @@ def test_research_script_retries_with_feedback_when_outside_acceptable_words(mon
     # count, or the loop correctly keeps retrying: opens on a number without
     # naming the car, closes on a question, no banned shapes.
     good = [
-        {"headline": "", "narration": "A 707-horsepower coupe hides behind that badge.",
+        {"headline": "", "narration": "A 707-horsepower coupe with 650 lb-ft hides behind that badge.",
          "rival_make": None, "rival_model": None},
         {"headline": "", "narration": "So would you daily it, or is that too much?",
          "rival_make": None, "rival_model": None},
@@ -189,6 +189,8 @@ def test_script_violations_catch_what_the_prompt_alone_did_not():
         {"narration": "The Challenger is not just a muscle car; it's a statement."},
     ]}
     found = " | ".join(single_car_short._script_violations(bad, "Dodge", "Challenger SRT Super Stock"))
+    # Run #184 never said the car's own horsepower and never mentioned torque.
+    assert "never states the car's torque" in found
     assert "no number" in found
     assert "names the car" in found
     assert "does not end on a question" in found
@@ -196,7 +198,7 @@ def test_script_violations_catch_what_the_prompt_alone_did_not():
     assert "just for looks" in found
 
     good = {"scenes": [
-        {"narration": "A 807-horsepower supercharged V8 hides behind that badge."},
+        {"narration": "A 807-horsepower supercharged V8 making 707 lb-ft hides behind that badge."},
         {"narration": "So would you daily it, or is that a step too far?"},
     ]}
     assert single_car_short._script_violations(good, "Dodge", "Challenger SRT Super Stock") == []
