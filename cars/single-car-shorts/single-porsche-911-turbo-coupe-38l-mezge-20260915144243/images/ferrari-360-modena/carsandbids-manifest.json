@@ -1,0 +1,487 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-15T14:53:33.109Z",
+  "query": "Ferrari 360 Modena",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/ferrari/360?start_year=2002&end_year=2002&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KPvxmGXQ/2002-ferrari-360-modena",
+      "title": "2002 Ferrari 360 Modena",
+      "text": "Sold for $153,360",
+      "titleYear": 2002,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Rq8RBgD/2002-ferrari-360-modena",
+      "title": "2002 Ferrari 360 Modena",
+      "text": "Sold for $121,000",
+      "titleYear": 2002,
+      "score": 88
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJalkQyw/2002-ferrari-360-spider",
+      "title": "2002 Ferrari 360 Spider",
+      "text": "Sold for $90,500",
+      "titleYear": 2002,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4Zaxv4V/2002-ferrari-360-spider",
+      "title": "2002 Ferrari 360 Spider",
+      "text": "FEATURED Sold After for $70,000",
+      "titleYear": 2002,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3gqJojL1/2002-ferrari-360-spider",
+      "title": "2002 Ferrari 360 Spider",
+      "text": "Sold for $62,500",
+      "titleYear": 2002,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3BYRjGpA/2002-ferrari-360-spider",
+      "title": "2002 Ferrari 360 Spider",
+      "text": "FEATURED Sold for $56,500",
+      "titleYear": 2002,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KPvxmGXQ/2002-ferrari-360-modena",
+      "title": "2002 Ferrari 360 Modena",
+      "text": "Sold for $153,360",
+      "titleYear": 2002,
+      "score": 88,
+      "usable_image_count": 23,
+      "sale_price": 153360,
+      "sale_type": "sold",
+      "page_title": "2002 Ferrari 360 Modena"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3Rq8RBgD/2002-ferrari-360-modena",
+      "title": "2002 Ferrari 360 Modena",
+      "text": "Sold for $121,000",
+      "titleYear": 2002,
+      "score": 88,
+      "usable_image_count": 15,
+      "sale_price": 121000,
+      "sale_type": "sold",
+      "page_title": "2002 Ferrari 360 Modena"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rJalkQyw/2002-ferrari-360-spider",
+      "title": "2002 Ferrari 360 Spider",
+      "text": "Sold for $90,500",
+      "titleYear": 2002,
+      "score": 70,
+      "usable_image_count": 22,
+      "sale_price": 90500,
+      "sale_type": "sold",
+      "page_title": "2002 Ferrari 360 Spider"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4Zaxv4V/2002-ferrari-360-spider",
+      "title": "2002 Ferrari 360 Spider",
+      "text": "FEATURED Sold After for $70,000",
+      "titleYear": 2002,
+      "score": 70,
+      "usable_image_count": 13,
+      "sale_price": 72800,
+      "sale_type": "sold",
+      "page_title": "2002 Ferrari 360 Spider"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KPvxmGXQ/2002-ferrari-360-modena",
+    "title": "2002 Ferrari 360 Modena",
+    "text": "Sold for $153,360",
+    "titleYear": 2002,
+    "score": 88,
+    "sale_price": 153360,
+    "sale_type": "sold",
+    "page_title": "2002 Ferrari 360 Modena",
+    "year": 2002,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3gVBajoz-kkRZ9nZzBV/edit/Kw03Q.jpg?t=175366188429",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Ferrari 360 Modena",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 170130
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3gVBajoz-bzox-1T2VB/edit/6oQOW.jpg?t=175366206793",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Ferrari 360 Modena",
+      "width": 542,
+      "height": 361,
+      "bytes": 121168
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3gVBajoz-1YW9Ajb3Om/edit/4BZ9R.jpg?t=175366219563",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Ferrari 360 Modena",
+      "width": 542,
+      "height": 361,
+      "bytes": 179664
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3gVBajoz-78h4NbkXmc/edit/zRqg9.jpg?t=175366221278",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Ferrari 360 Modena",
+      "width": 542,
+      "height": 361,
+      "bytes": 88050
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3gVBajoz-EIz1Ok9ImZ/edit/JkYJQ.jpg?t=175366193579",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Ferrari 360 Modena",
+      "width": 542,
+      "height": 361,
+      "bytes": 149055
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3gVBajoz-rKXD36I5vl/edit/J0TSp.jpg?t=175366195973",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Ferrari 360 Modena",
+      "width": 542,
+      "height": 361,
+      "bytes": 121780
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3gVBajoz-ZfGbxSBeDd/edit/OBsy2.jpg?t=175366200417",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Ferrari 360 Modena",
+      "width": 542,
+      "height": 361,
+      "bytes": 168558
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3gVBajoz-2KYwpf93j9/edit/IJY9q.jpg?t=175366203906",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Ferrari 360 Modena",
+      "width": 542,
+      "height": 361,
+      "bytes": 143061
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/bc3a5ecc6dca210220e0eaf0f4ac553d2a502831/photos/3zYvBGR4-8l6ZsXQzNt.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 4593 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/e97164ee86c3a6ee5aaab17d395d231e5ea329d3/photos/3OYwbmma-_OdgEAn6Yy.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 6497 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/642e9c8a18befa1d9dda19a97710d62db255b2d7/photos/3ydlQkE9-dcUXP6A5j.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 14247 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/6d9533935d55f6d72bdb2ef7fbb4316a45701d2b/photos/9aDnp4mr-G2eanK0h6.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 9745 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/d89c40c0f6387cc70cf8a319b13ddc9d311cfddd/photos/KPGbDQ7q-M7qDbHDm5Y.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 17368 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/904a73539c18e4085e0639008570ff3af75c8d5b/photos/K1gWyvO2-y7RkdBR.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 8130 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9bb1e94e1b4b5da527d7f38b1243812a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9bb1e94e1b4b5da527d7f38b1243812a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2002 Ferrari 360 Modena",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9bb1e94e1b4b5da527d7f38b1243812a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KPvxmGXQ/2002-ferrari-360-modena",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9bb1e94e1b4b5da527d7f38b1243812a/manifest/video.m3u8",
+      "auction_title": "2002 Ferrari 360 Modena",
+      "auction_year": 2002,
+      "search_score": 88
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/975b1b1db507bdbc5a2935c0319b5639/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/975b1b1db507bdbc5a2935c0319b5639/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2002 Ferrari 360 Modena",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/975b1b1db507bdbc5a2935c0319b5639/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/KPvxmGXQ/2002-ferrari-360-modena",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/975b1b1db507bdbc5a2935c0319b5639/manifest/video.m3u8",
+      "auction_title": "2002 Ferrari 360 Modena",
+      "auction_year": 2002,
+      "search_score": 88
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "360",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "360 body shape",
+          "headlight design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ferrari",
+        "detected_model": "360",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork shape",
+          "headlight design",
+          "front grille"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "ferrari",
+        "detected_model": "360",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive body shape",
+          "Ferrari badges"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "360",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "360 body shape",
+          "rear lights design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "360",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "360 specific taillights",
+          "body proportions characteristic of the model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": null,
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "360",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "steering wheel design specific to Ferrari 360",
+          "interior layout consistent with Ferrari 360 Modena",
+          "Ferrari logo on the steering wheel"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "360",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Modena",
+        "visible_match_evidence": [
+          "Interior design matches Ferrari 360",
+          "Seats are specific to Ferrari 360",
+          "Center console layout is characteristic of Ferrari Modena"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 3,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not the main subject; interior focus does not allow for proper identification of target vehicle.",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

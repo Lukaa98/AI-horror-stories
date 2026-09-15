@@ -1,0 +1,571 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-15T14:46:02.735Z",
+  "query": "Porsche 911 Turbo Coupe 38l Mezger Build",
+  "visual_highlight": "interior dashboard steering wheel cabin",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 42,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/Porsche9112002008.jpg?t=178837122486",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 296393
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/Porsche9112002001.jpg?t=178837122486",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "width": 542,
+      "height": 361,
+      "bytes": 262474
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/9Ql6zy6Y-IlU9C8R.jpeg",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 11701 bytes"
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/Porsche9112002003.jpg?t=178837122486",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "width": 542,
+      "height": 361,
+      "bytes": 270619
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/Porsche9112002004.jpg?t=178837122486",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "width": 542,
+      "height": 361,
+      "bytes": 270022
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/Porsche9112002005.jpg?t=178837122486",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "width": 542,
+      "height": 361,
+      "bytes": 253641
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/Porsche9112002095.jpg?t=178837122486",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "width": 542,
+      "height": 361,
+      "bytes": 264687
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/Porsche9112002114.jpg?t=178837122486",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "width": 542,
+      "height": 361,
+      "bytes": 256368
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/Porsche9112002111.jpg?t=178837122486",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "width": 542,
+      "height": 361,
+      "bytes": 247657
+    },
+    {
+      "path": "interior-10.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/55830658f19b7d7acabee0d389143a6dfdb6ed98/photos/Porsche9112002098.jpg?t=178837122486",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "width": 542,
+      "height": 361,
+      "bytes": 212542
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/61209a45c081958a39732b0d9f1b593dc954d9ff/photos/r4o0Ndmy-Taq0Yu7.jpeg",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "error": "Too small: 18104 bytes"
+    },
+    {
+      "path": "interior-12.png",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/9b854fede10f9fe55af95054474d88027b050d01/photos/37lwM88R-zhPdvTTbwMJ.png",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 38922
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/3f5fd8bb6cab3a09ee6f3b1e7713a81490181425/photos/KVb5OWLM-UWnTfcb.jpg",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "error": "Too small: 9296 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/91032ad7bbcb6cf72875e8e8207dcfba80173f7c/photos/9AM7lVl8-mJGOmjW.jpeg",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "error": "Too small: 2787 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ecf19172cc874b0b4ac5d62cddd2dfa7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ecf19172cc874b0b4ac5d62cddd2dfa7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ecf19172cc874b0b4ac5d62cddd2dfa7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ecf19172cc874b0b4ac5d62cddd2dfa7/manifest/video.m3u8",
+      "auction_title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/229b1a7ff5a38e7b783c503820c74c40/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/229b1a7ff5a38e7b783c503820c74c40/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/229b1a7ff5a38e7b783c503820c74c40/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/229b1a7ff5a38e7b783c503820c74c40/manifest/video.m3u8",
+      "auction_title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/53b39ed4aea4951be120b9e330fa5e70/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/53b39ed4aea4951be120b9e330fa5e70/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/53b39ed4aea4951be120b9e330fa5e70/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/53b39ed4aea4951be120b9e330fa5e70/manifest/video.m3u8",
+      "auction_title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4adaeebf96d992385a243f7c78a5514c/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4adaeebf96d992385a243f7c78a5514c/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4adaeebf96d992385a243f7c78a5514c/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4adaeebf96d992385a243f7c78a5514c/manifest/video.m3u8",
+      "auction_title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea1162d7ba82054debdc92b947036339/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea1162d7ba82054debdc92b947036339/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea1162d7ba82054debdc92b947036339/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ea1162d7ba82054debdc92b947036339/manifest/video.m3u8",
+      "auction_title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cc9ca9ff3e90fb4ea05613b19c04c578/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cc9ca9ff3e90fb4ea05613b19c04c578/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cc9ca9ff3e90fb4ea05613b19c04c578/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cc9ca9ff3e90fb4ea05613b19c04c578/manifest/video.m3u8",
+      "auction_title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3343f05c76a82b5afc069afac0700ace/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3343f05c76a82b5afc069afac0700ace/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3343f05c76a82b5afc069afac0700ace/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OMNNYVy/2002-porsche-911-turbo-coupe-38l-mezger-build",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/3343f05c76a82b5afc069afac0700ace/manifest/video.m3u8",
+      "auction_title": "2002 Porsche 911 Turbo Coupe 3.8L Mezger Build",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Turbo Coupe",
+        "visible_match_evidence": [
+          "front view",
+          "Porsche emblem",
+          "distinctive headlights"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Turbo Coupe 3.6l",
+        "visible_match_evidence": [
+          "Porsche badges",
+          "Bodywork matching 911 Turbo",
+          "Headlight design typical of 2002 911"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Turbo Coupe",
+        "visible_match_evidence": [
+          "distinct rear wing",
+          "side profile proportions consistent with Turbo",
+          "Porsche logo on wheels"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "Turbo badge",
+          "Proportions matching 911",
+          "Rear wing design",
+          "Exhaust layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "Distinct rear lights",
+          "Turbo badge",
+          "Defined rear wing"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Turbo Coupe 3.6l Mezger Build",
+        "visible_match_evidence": [
+          "interior design",
+          "steering wheel",
+          "pedal layout",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "N/A",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Porsche branding on seats",
+          "Interior layout matches 2002 911",
+          "Distinctive seat design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Turbo Coupe 3.8L Mezger Build",
+        "visible_match_evidence": [
+          "Porsche branding",
+          "shifter design",
+          "interior details"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Porsche",
+        "detected_model": "911",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Turbo",
+        "visible_match_evidence": [
+          "Turbo gauge present",
+          "Porsche branding on the gauge",
+          "Speedometer and tachometer design consistent with 911"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 7,
+        "reject": false,
+        "reason": "",
+        "path": "interior-10.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not contain a car.",
+        "path": "interior-12.png",
+        "provider": "openai"
+      }
+    ]
+  }
+}
