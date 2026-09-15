@@ -428,6 +428,55 @@ def _enforce_word_cap(package, cap=WORD_CAP):
     return package
 
 
+# Shapes that read as generated copy. Substrings, so a plural or a tense
+# change cannot walk past them the way "aren't just for looks" walked past a
+# ban on "isn't just for looks" in run #182.
+BANNED_SHAPES = (
+    "you'll notice", "the rear features", "side profile reveals", "a testament to",
+    "design ethos", "adding a touch of", "just for looks", "catering to",
+    "sporty feel", "blending luxury", "design language of",
+)
+
+
+def _script_violations(package, make, model):
+    """The house rules that can actually be checked, checked.
+
+    Stating them in the prompt was not enough: audited across runs #180-#182
+    the hook named the car every single time, and #182 also opened without a
+    number, closed on a statement instead of a question, and used a banned
+    shape. These are mechanical properties of the text, so the retry loop can
+    verify them instead of hoping.
+    """
+    scenes = package.get("scenes") or []
+    if not scenes:
+        return []
+    violations = []
+    opening = _SENTENCE_SPLIT_RE.split((scenes[0].get("narration") or "").strip())[0]
+    if not re.search(r"\d", opening):
+        violations.append(
+            f'your first sentence contains no number -- it was "{opening}". Open on a real '
+            "figure or a hard superlative."
+        )
+    names = [part for part in re.split(r"\s+", f"{make} {model}".strip()) if len(part) > 2]
+    named = [part for part in names if re.search(rf"\b{re.escape(part)}\b", opening, re.I)]
+    if named:
+        violations.append(
+            f'your first sentence names the car ("{named[0]}") -- it was "{opening}". The name is '
+            "the payoff and belongs in the second sentence; the first has to make the viewer want it."
+        )
+    closing = (scenes[-1].get("narration") or "").rstrip()
+    if not closing.endswith("?"):
+        violations.append(
+            f'your last scene does not end on a question -- it was "{closing}". It must ask the '
+            "viewer something that calls back to the hook."
+        )
+    script = " ".join(scene.get("narration") or "" for scene in scenes).lower()
+    for shape in BANNED_SHAPES:
+        if shape in script:
+            violations.append(f'you used the banned phrase "{shape}". Rewrite that sentence around a fact.')
+    return violations
+
+
 def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
@@ -437,9 +486,14 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     max_scenes = _scene_cap_for_photo_hints(photo_hints)
     package = None
     for attempt in range(1, max_attempts + 1):
+        previous_violations = _script_violations(package, make, model) if package else []
+        violation_feedback = (
+            " Your previous attempt also broke these rules, which are not negotiable -- fix every one: "
+            + " ".join(previous_violations) if previous_violations else ""
+        )
         retry_feedback = (
             f" Your previous attempt came back at {package['word_count']} words, outside the "
-            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} target -- rewrite from scratch. If you were short, research "
+            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} target -- rewrite from scratch.{violation_feedback} If you were short, research "
             f"and add a genuinely new beat (history, design story, a race win or record, a special edition, "
             f"or a mechanical/engineering detail like the suspension or rear-axle setup, steering system, or "
             f"chassis platform) rather than padding existing sentences or repeating what you already said -- "
@@ -450,11 +504,15 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             max_scenes=max_scenes,
         )
         count = package["word_count"]
-        if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
+        violations = _script_violations(package, make, model)
+        if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1] and not violations:
             break
+        problems = []
+        if not ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
+            problems.append(f"{count} words, outside the preferred {ACCEPTABLE_WORDS[0]}-{ACCEPTABLE_WORDS[1]} range")
+        problems.extend(violations)
         print(
-            f"[single-car] Attempt {attempt}/{max_attempts} returned {count} words, outside the preferred "
-            f"{ACCEPTABLE_WORDS[0]}-{ACCEPTABLE_WORDS[1]} range."
+            f"[single-car] Attempt {attempt}/{max_attempts}: " + "; ".join(problems)
             + (" Retrying with corrective feedback..." if attempt < max_attempts else "")
         )
     count = package["word_count"]
@@ -1322,6 +1380,22 @@ def build_short(args):
     except Exception as exc:
         print(f"[single-car] Word alignment failed; falling back to estimated caption timing: {exc}")
         word_timeline = []
+    # The narration in run #182 stopped at "...not just a muscle car", leaving
+    # "it's a statement" unspoken -- the video simply ended mid-sentence and
+    # nothing noticed. The transcript is the only evidence of what was
+    # actually said, so compare it with what was meant to be said. Whisper
+    # splits some tokens (hyphenated words, numbers) and so usually returns
+    # *more* entries than the script has words; coming back materially short
+    # means audio is missing.
+    if word_timeline:
+        spoken, written = len(word_timeline), _word_count(package["script"])
+        if spoken < written * 0.95:
+            print(
+                f"[single-car] WARNING: narration audio looks truncated -- the script is {written} "
+                f"words but only {spoken} were transcribed. The last words spoken were "
+                f"\"{' '.join(str(w.get('word')) for w in word_timeline[-6:])}\", against a script "
+                f"ending \"{' '.join(package['script'].split()[-6:])}\"."
+            )
     wav_path = output_dir / "narration.wav"
     _extract_wav(audio_path, wav_path)
     timeline = build_mouth_timeline(wav_path)

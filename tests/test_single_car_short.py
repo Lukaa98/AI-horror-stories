@@ -66,10 +66,19 @@ def test_research_script_retries_with_feedback_when_outside_acceptable_words(mon
     import single_car_short
 
     prompts = []
+    # The second attempt has to satisfy the house rules as well as the word
+    # count, or the loop correctly keeps retrying: opens on a number without
+    # naming the car, closes on a question, no banned shapes.
+    good = [
+        {"headline": "", "narration": "A 707-horsepower coupe hides behind that badge.",
+         "rival_make": None, "rival_model": None},
+        {"headline": "", "narration": "So would you daily it, or is that too much?",
+         "rival_make": None, "rival_model": None},
+    ]
     packages = [
         {"scenes": [], "script": "", "word_count": 100},
-        {"scenes": [{"headline": "", "narration": "ok", "rival_make": None, "rival_model": None}],
-         "script": "ok", "word_count": TARGET_WORDS[0] + 5},
+        {"scenes": good, "script": " ".join(s["narration"] for s in good),
+         "word_count": TARGET_WORDS[0] + 5},
     ]
 
     def fake_request(prompt, max_scenes=8):
@@ -165,6 +174,32 @@ def test_word_cap_drops_whole_scenes_when_no_scene_has_a_spare_sentence():
     assert package["scenes"][0]["narration"] == hook
     assert package["scenes"][-1]["narration"] == closer
     assert all(scene["narration"].strip() for scene in package["scenes"])
+
+
+def test_script_violations_catch_what_the_prompt_alone_did_not():
+    """Audited across runs #180-#182 the hook named the car every time, and
+    #182 also opened without a number, closed on a statement instead of a
+    question, and used a banned shape. These are mechanical properties of the
+    text, so the retry loop verifies them rather than hoping."""
+    import single_car_short
+
+    bad = {"scenes": [
+        {"narration": "Performance is at the core of the Challenger SRT Super Stock."},
+        {"narration": "The wide-body fenders aren't just for looks."},
+        {"narration": "The Challenger is not just a muscle car; it's a statement."},
+    ]}
+    found = " | ".join(single_car_short._script_violations(bad, "Dodge", "Challenger SRT Super Stock"))
+    assert "no number" in found
+    assert "names the car" in found
+    assert "does not end on a question" in found
+    # A plural walked straight past a ban on the singular in run #182.
+    assert "just for looks" in found
+
+    good = {"scenes": [
+        {"narration": "A 807-horsepower supercharged V8 hides behind that badge."},
+        {"narration": "So would you daily it, or is that a step too far?"},
+    ]}
+    assert single_car_short._script_violations(good, "Dodge", "Challenger SRT Super Stock") == []
 
 
 def test_word_cap_leaves_a_script_already_under_it_untouched():
