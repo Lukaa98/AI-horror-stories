@@ -1204,3 +1204,56 @@ def test_visual_highlight_only_names_shot_types_the_scenes_actually_need():
 
     with_interior = [{"media_type": "exterior"}, {"media_type": "interior"}]
     assert "interior" in _visual_highlight_for_scenes(with_interior)
+
+
+def test_the_hook_gets_the_car_name_taken_out_of_it():
+    """Asking the model to keep the name out of sentence one failed on 47 of
+    56 builds. It is the one rule that is text surgery rather than judgement,
+    so it is done in code after the retries instead of asked for again."""
+    import single_car_short
+
+    assert single_car_short._strip_car_name(
+        "A family vehicle with over 500 horsepower sounds unreal, but that's exactly "
+        "what the R63 AMG delivers.", "Mercedes-Benz", "R63 AMG"
+    ) == ("A family vehicle with over 500 horsepower sounds unreal, but that's exactly "
+          "what this one delivers.")
+
+    # A possessive keeps its article rather than welding onto the next word,
+    # and a short name word ("RS") must not break the span and strand the
+    # rest of the name mid-sentence.
+    assert single_car_short._strip_car_name(
+        "With a blistering 2.7-second zero to sixty, the GT2 RS Weissach is Porsche's "
+        "most powerful 911 ever crafted for the street.", "Porsche", "911 GT2 RS Weissach"
+    ) == ("With a blistering 2.7-second zero to sixty, this one is the most powerful "
+          "ever crafted for the street.")
+
+
+def test_an_unrepairable_hook_is_left_alone_rather_than_mangled():
+    import single_car_short
+
+    # The only number here is part of the name, so taking the name out would
+    # trade one violation for another.
+    assert single_car_short._strip_car_name(
+        "The 2011 Corvette Z06 3LZ has an aggressive grille and a lower air intake.",
+        "Chevrolet", "Corvette Z06 3LZ") is None
+    # Nothing to repair: the hook never names the car.
+    assert single_car_short._strip_car_name(
+        "Only 500 were ever built, and almost nobody knows it.", "Dodge", "Challenger") is None
+
+
+def test_repair_runs_on_the_package_and_keeps_the_word_count_honest():
+    import single_car_short
+
+    package = {"scenes": [
+        {"narration": "With 755 horsepower, the Chevrolet Corvette ZR1 is the quickest yet. "
+                      "It is also the loudest."},
+        {"narration": "So would you daily it?"},
+    ]}
+    package["script"] = " ".join(s["narration"] for s in package["scenes"])
+    package["word_count"] = single_car_short._word_count(package["script"])
+    repaired = single_car_short._repair_script(package, "Chevrolet", "Corvette ZR1")
+    opening = repaired["scenes"][0]["narration"]
+    assert "Corvette" not in opening and "Chevrolet" not in opening
+    # The rest of the scene survives the surgery on its first sentence.
+    assert opening.endswith("It is also the loudest.")
+    assert repaired["word_count"] == single_car_short._word_count(repaired["script"])

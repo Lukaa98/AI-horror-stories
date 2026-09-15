@@ -544,6 +544,114 @@ def _script_violations(package, make, model):
     return violations
 
 
+def _name_tokens(make, model):
+    """Every word of the car's own name, for spotting it in a sentence."""
+    return [t for t in re.split(r"[\s\-/]+", f"{make} {model}".strip()) if t]
+
+
+def _name_span_re(make, model):
+    """Matches a run of the car's name words, with its article and year.
+
+    The run allows short words ("RS", "GT") so "the GT2 RS Weissach" comes
+    out as one span instead of breaking at RS and leaving the rest of the
+    name stranded mid-sentence. A trailing possessive is kept in the match
+    so "Porsche's most powerful 911" can become "the most powerful 911"
+    rather than losing its article.
+    """
+    tokens = _name_tokens(make, model)
+    if not tokens:
+        return None
+    alt = "|".join(re.escape(token) for token in sorted(tokens, key=len, reverse=True))
+    return re.compile(
+        rf"\b(?:the|a|an|this)?\s*(?:\d{{4}}\s+)?(?:(?:{alt})\b[\s\-]*)+(?:'s|\u2019s)?",
+        re.I,
+    )
+
+
+def _strip_car_name(sentence, make, model):
+    """The first sentence with the car's name taken out of it, or None.
+
+    The hook has to make the viewer want the car; the name is the payoff and
+    belongs in the second sentence. Asking the model for that failed on 47 of
+    56 builds and on 5 of today's 6 -- it is the one rule that never sticks,
+    and it is also the only one that is pure text surgery rather than
+    judgement, so it is done here instead of asked for.
+
+    Returns None whenever the surgery would leave a worse sentence than it
+    found: still naming the car, no number left to hook on, or too short to
+    be a sentence. A hook that cannot be repaired cleanly is left alone and
+    reported, never mangled.
+    """
+    pattern = _name_span_re(make, model)
+    if pattern is None:
+        return None
+    long_tokens = [t for t in _name_tokens(make, model) if len(t) > 2]
+    seen = {"count": 0}
+
+    def replace(match):
+        text = match.group(0)
+        # Only a run carrying a real name word is the car's name; "the" or a
+        # bare year on its own is just a sentence doing its job.
+        if not any(re.search(rf"\b{re.escape(token)}\b", text, re.I) for token in long_tokens):
+            return text
+        seen["count"] += 1
+        # Padded on both sides and the whitespace collapsed afterwards: the
+        # match can swallow the space in front of it ("is Porsche's" -> "is"
+        # + replacement), which silently welded two words together.
+        if re.search(r"(?:'s|\u2019s)$", text):
+            return " the "
+        # The first mention carries the sentence's subject or object, so it
+        # needs a stand-in; a second mention is almost always a bare model
+        # word inside a phrase ("the most powerful Corvette ever"), which
+        # reads fine with the word simply gone.
+        return " this one " if seen["count"] == 1 else " "
+
+    repaired = pattern.sub(replace, sentence)
+    if not seen["count"]:
+        return None
+    repaired = re.sub(r"\s+", " ", repaired).strip()
+    repaired = re.sub(r"\s+([,.;:!?])", r"\1", repaired)
+    repaired = re.sub(r"\bthe the\b", "the", repaired, flags=re.I)
+    if repaired:
+        repaired = repaired[0].upper() + repaired[1:]
+    if any(re.search(rf"\b{re.escape(token)}\b", repaired, re.I) for token in long_tokens):
+        return None
+    # The hook's number must survive the surgery -- but a hook that never
+    # had one is a separate violation, not a reason to leave the name in.
+    if re.search(r"\d", sentence) and not re.search(r"\d", repaired):
+        return None
+    if len(repaired.split()) < 6:
+        return None
+    return repaired
+
+
+def _repair_script(package, make, model):
+    """Deterministic fixes for violations the model would not fix itself.
+
+    Runs after the retries, so the model gets its honest shots first and
+    this only touches what survived them. Only the hook's name is repairable
+    as text -- the rest (a missing figure, a closing question) is content
+    that has to be written, not moved.
+    """
+    scenes = package.get("scenes") or []
+    if not scenes:
+        return package
+    first = (scenes[0].get("narration") or "").strip()
+    opening = _SENTENCE_SPLIT_RE.split(first)[0] if first else ""
+    names = [t for t in _name_tokens(make, model) if len(t) > 2]
+    if not opening or not any(re.search(rf"\b{re.escape(t)}\b", opening, re.I) for t in names):
+        return package
+    repaired = _strip_car_name(opening, make, model)
+    if repaired is None:
+        print("[single-car] The hook names the car and could not be repaired cleanly; leaving it as written.")
+        return package
+    scenes[0]["narration"] = first.replace(opening, repaired, 1)
+    package["script"] = " ".join(scene["narration"] for scene in scenes)
+    package["word_count"] = _word_count(package["script"])
+    print(f'[single-car] Repaired the hook so it no longer names the car: "{repaired}"')
+    return package
+
+
 def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
@@ -601,7 +709,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"[single-car] Proceeding with {count} words outside the preferred "
             f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} range; audio timing will normalize the final runtime."
         )
-    return _enforce_word_cap(package)
+    return _enforce_word_cap(_repair_script(package, make, model))
 
 
 def _visual_highlight_for_scenes(scenes):
