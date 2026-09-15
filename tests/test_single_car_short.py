@@ -1327,3 +1327,22 @@ def test_a_build_without_a_listing_is_unchanged():
     assert single_car_short._listing_facts_block(None) == ""
     assert single_car_short._research_script_prompt("Audi TT", "2017") == \
         single_car_short._research_script_prompt("Audi TT", "2017", listing_facts={})
+
+
+def test_photos_json_fills_the_slots_and_individual_flags_still_win():
+    """workflow_dispatch allows only 25 inputs and six were photo URLs, so
+    they travel as one JSON object now. The --photo-* flags keep working."""
+    import single_car_short
+
+    parsed = single_car_short._photos_argument(
+        '{"front":"https://x/f.jpg","side":" https://x/s.jpg ","rear":"","engine":null,'
+        '"rival":"https://x/r.jpg"}')
+    assert parsed == {"front": "https://x/f.jpg", "side": "https://x/s.jpg",
+                      "rival": "https://x/r.jpg"}
+
+    # A malformed value must not take a build down -- every slot is optional
+    # and a missing photo already has a defined meaning.
+    assert single_car_short._photos_argument("not json") == {}
+    assert single_car_short._photos_argument("[1,2,3]") == {}
+    assert single_car_short._photos_argument("") == {}
+    assert single_car_short._photos_argument(None) == {}

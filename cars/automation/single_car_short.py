@@ -1224,6 +1224,23 @@ def _select_side_profile_media(media):
     return {"path": match["path"], "facing_direction": match.get("facing_direction", "unclear")}
 
 
+def _photos_argument(raw):
+    """The --photos JSON object, or {} for anything unusable.
+
+    A malformed value must not take a build down: every slot in it is
+    optional anyway, and a missing photo already has a well-defined meaning.
+    """
+    try:
+        parsed = json.loads(raw) if raw else {}
+    except (json.JSONDecodeError, TypeError):
+        print("[single-car] --photos was not valid JSON; ignoring it.")
+        return {}
+    if not isinstance(parsed, dict):
+        return {}
+    return {key: str(value).strip() for key, value in parsed.items()
+            if isinstance(value, str) and value.strip()}
+
+
 def _year_in(text):
     """The four-digit model year in a chosen rival's name, if it has one."""
     match = re.search(r"\b(19|20)\d{2}\b", str(text or ""))
@@ -1540,10 +1557,17 @@ def build_short(args):
     output_dir = OUTPUT_ROOT / args.short_id
     images_dir = output_dir / "images"
     output_dir.mkdir(parents=True, exist_ok=True)
+    photos = _photos_argument(args.photos)
+    # An explicit --photo-* flag wins over the same slot in --photos, so the
+    # individual flags keep behaving exactly as they always have.
     manual_photo_urls = {
-        "front": args.photo_front, "side": args.photo_side, "rear": args.photo_rear,
-        "engine": args.photo_engine, "interior": args.photo_interior,
+        "front": args.photo_front or photos.get("front"),
+        "side": args.photo_side or photos.get("side"),
+        "rear": args.photo_rear or photos.get("rear"),
+        "engine": args.photo_engine or photos.get("engine"),
+        "interior": args.photo_interior or photos.get("interior"),
     }
+    args.photo_rival = args.photo_rival or photos.get("rival") or None
     try:
         extra_photos = json.loads(args.extra_photos) if args.extra_photos else []
         if not isinstance(extra_photos, list):
@@ -1685,11 +1709,15 @@ def build_short(args):
             "end_year": args.end_year if args.end_year is not None else "",
             "voice": args.voice,
             "auction_url": args.auction_url or "",
-            "photo_front": args.photo_front or "",
-            "photo_side": args.photo_side or "",
-            "photo_rear": args.photo_rear or "",
-            "photo_engine": args.photo_engine or "",
-            "photo_interior": args.photo_interior or "",
+            # The resolved URLs, not the raw flags: a build dispatched with
+            # --photos would otherwise record five empty slots here, and the
+            # create form's "Start from a previous build" dropdown reads
+            # exactly these keys to refill itself.
+            "photo_front": manual_photo_urls.get("front") or "",
+            "photo_side": manual_photo_urls.get("side") or "",
+            "photo_rear": manual_photo_urls.get("rear") or "",
+            "photo_engine": manual_photo_urls.get("engine") or "",
+            "photo_interior": manual_photo_urls.get("interior") or "",
             "photo_rival": args.photo_rival or "",
             "rival_car": args.rival_car or "",
             "disable_comparison": "true" if args.disable_comparison else "false",
@@ -1741,6 +1769,13 @@ def main():
     parser.add_argument("--photo-rear", default=None, help="Direct URL for the main car's rear exterior photo.")
     parser.add_argument("--photo-engine", default=None, help="Direct URL for the main car's engine-bay photo.")
     parser.add_argument("--photo-interior", default=None, help="Direct URL for the main car's interior photo.")
+    parser.add_argument(
+        "--photos", default=None,
+        help='JSON object of photo URLs by slot: {"front":"...","side":"...","rear":"...",'
+             '"engine":"...","interior":"...","rival":"..."}. The individual --photo-* flags '
+             "still work and win where both are given; this exists because workflow_dispatch "
+             "allows only 25 inputs in total and six of them were photo URLs.",
+    )
     parser.add_argument(
         "--rival-car", default=None,
         help="The comparison car by name (e.g. \"2010 BMW X5 M\"), as chosen from the suggested "

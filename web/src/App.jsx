@@ -8,7 +8,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.25 — Rival suggestions without a key";
+const UI_VERSION = "V11.26 — Photo URLs in one input";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1060,12 +1060,21 @@ export default function App() {
           end_year: endYear,
           voice,
           auction_url: useAuctionUrl ? auctionUrl.trim() : "",
-          photo_front: useManualPhotos ? photoUrls.front.trim() : "",
-          photo_side: useManualPhotos ? photoUrls.side.trim() : "",
-          photo_rear: useManualPhotos ? photoUrls.rear.trim() : "",
-          photo_engine: useManualPhotos ? photoUrls.engine.trim() : "",
-          photo_interior: useManualPhotos ? photoUrls.interior.trim() : "",
-          photo_rival: compareEnabled ? photoUrls.rival.trim() : "",
+          // One JSON input rather than six string ones: workflow_dispatch
+          // allows only 25 inputs in total and the photo URLs were using up
+          // a quarter of them.
+          photos: (() => {
+            const slots = {};
+            if (useManualPhotos) {
+              for (const [slot] of SLOTS) {
+                const url = (photoUrls[slot] || "").trim();
+                if (url) slots[slot] = url;
+              }
+            }
+            const rival = compareEnabled ? photoUrls.rival.trim() : "";
+            if (rival) slots.rival = rival;
+            return Object.keys(slots).length ? JSON.stringify(slots) : "";
+          })(),
           rival_car: compareEnabled ? rivalCar.trim() : "",
           disable_comparison: String(!compareEnabled),
           extra_photos: (() => {
