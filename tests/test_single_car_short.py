@@ -204,6 +204,33 @@ def test_script_violations_catch_what_the_prompt_alone_did_not():
     assert single_car_short._script_violations(good, "Dodge", "Challenger SRT Super Stock") == []
 
 
+def test_horsepower_has_to_arrive_in_the_opening_scenes():
+    """Stating horsepower anywhere was not enough. Run #184 buried its only
+    technical beat past the halfway mark, and horsepower is the number that
+    keeps a viewer watching, so the check is positional."""
+    import single_car_short
+
+    late = {"scenes": [
+        {"narration": "Only 300 were ever built."},
+        {"narration": "That's the Challenger SRT Super Stock."},
+        {"narration": "The stance alone tells you it means it."},
+        {"narration": "It makes 807 horsepower and 707 lb-ft."},
+        {"narration": "So would you daily it?"},
+    ]}
+    found = " | ".join(single_car_short._script_violations(late, "Dodge", "Challenger SRT Super Stock"))
+    assert "not until after scene" in found
+    # It is late, not missing -- the feedback has to say which of the two.
+    assert "never states the car's horsepower" not in found
+
+    early = dict(late, scenes=[
+        {"narration": "Only 300 were ever built."},
+        {"narration": "That's the Challenger SRT Super Stock, all 807 horsepower of it."},
+        {"narration": "707 lb-ft goes with it."},
+        {"narration": "So would you daily it?"},
+    ])
+    assert single_car_short._script_violations(early, "Dodge", "Challenger SRT Super Stock") == []
+
+
 def test_word_cap_leaves_a_script_already_under_it_untouched():
     import single_car_short
 

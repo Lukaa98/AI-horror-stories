@@ -331,10 +331,18 @@ torque ("413 lb-ft"), zero_to_sixty ("3.9 sec"), engine ("3.6L twin-turbo flat-s
 from anything you say, so they must be right. Use "n/a" only when a figure genuinely does not exist
 for this car, never as a shortcut for not having looked.
 
-Your narration must still SAY the horsepower and the torque as real numbers in the engine beat --
-the table does not excuse leaving them out of the script. Run #184 never spoke the car's own
-horsepower at all, never mentioned torque or 0-60, and spent four of its seven scenes describing
-what the photos looked like instead.
+Your narration must still SAY the horsepower and the torque as real numbers -- the table does not
+excuse leaving them out of the script; run #184 never spoke the car's own horsepower at all. The
+horsepower figure has to land inside the FIRST {EARLY_TECH_SCENES} SCENES, not wherever the engine
+beat happens to fall. It is the number that sells the car, and a viewer who hasn't heard one about
+fifteen seconds in has already scrolled. If your photo order pushes the engine beat later than
+that, put the figure in the hook or the history beat too rather than holding it back.
+
+Beats about how the car looks are wanted, not a fault -- the stance, the wheels, a spoiler, how a
+trim piece is finished are all fair subjects. What is banned is a beat that ONLY describes what the
+viewer can already see. Every appearance beat still has to carry a fact the picture cannot give
+them: what that vent actually cools, which other model shares that wheel, what the option cost new,
+how many were built in that colour. Point at the thing, then say the part that isn't visible.
 
 Headlines are only for important facts and must be 1-4 words (examples: model/chassis, engine code, AWD, horsepower, price gap); use an empty string for ordinary beats. Use exterior media for the hook/close, engine for powertrain, wheel for drivetrain when useful, detail for modification/technical beats, and interior only when the script specifically discusses the cabin, seats, controls, or practicality -- most scripts should lean on exterior shots with only a couple of interior beats, not the other way around. Sources must be direct URLs supporting the claims.
 
@@ -466,6 +474,14 @@ BANNED_SHAPES = (
 )
 
 
+# Horsepower has to arrive inside the opening beats, not merely somewhere in
+# the script. Three scenes of an eleven-scene, sixty-second cut is roughly the
+# first fifteen seconds -- the window in which a viewer decides to stay.
+EARLY_TECH_SCENES = 3
+HORSEPOWER_RE = r"\d[\d,.]*\s*-?\s*(hp\b|horsepower|bhp\b)"
+TORQUE_RE = r"\d[\d,.]*\s*-?\s*(lb-ft|lb\.?\s?ft|pound-feet|nm\b)"
+
+
 def _script_violations(package, make, model):
     """The house rules that can actually be checked, checked.
 
@@ -499,11 +515,28 @@ def _script_violations(package, make, model):
             "viewer something that calls back to the hook."
         )
     script = " ".join(scene.get("narration") or "" for scene in scenes).lower()
+    # Horsepower is the number that sells the car, so it has to land while the
+    # viewer is still deciding whether to stay -- run #184 buried its only
+    # technical beat past the halfway mark. Checking the whole script was not
+    # enough; the check is positional.
+    early = " ".join(
+        scene.get("narration") or "" for scene in scenes[:EARLY_TECH_SCENES]
+    ).lower()
     # "807-horsepower" is as common as "807 horsepower", so the separator
     # between the number and the unit may be a hyphen, a space, or nothing.
-    if not re.search(r"\d[\d,.]*\s*-?\s*(hp\b|horsepower|bhp\b)", script):
-        violations.append("your narration never states the car's horsepower as a number. Say it in the engine beat.")
-    if not re.search(r"\d[\d,.]*\s*-?\s*(lb-ft|lb\.?\s?ft|pound-feet|nm\b)", script):
+    if not re.search(HORSEPOWER_RE, early):
+        if re.search(HORSEPOWER_RE, script):
+            violations.append(
+                f"you state the horsepower, but not until after scene {EARLY_TECH_SCENES}. Move that "
+                f"figure into the first {EARLY_TECH_SCENES} scenes -- it is the number that keeps the "
+                "viewer watching."
+            )
+        else:
+            violations.append(
+                f"your narration never states the car's horsepower as a number. Say it within the "
+                f"first {EARLY_TECH_SCENES} scenes."
+            )
+    if not re.search(TORQUE_RE, script):
         violations.append("your narration never states the car's torque as a number. Say it in the engine beat.")
     for shape in BANNED_SHAPES:
         if shape in script:
