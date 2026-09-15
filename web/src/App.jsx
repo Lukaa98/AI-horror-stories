@@ -8,7 +8,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.27 — Rival field takes a link too";
+const UI_VERSION = "V11.28 — Pick both drag-race photos";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -761,6 +761,9 @@ export default function App() {
   // worked out from a pasted photo. Naming it skips a vision call, carries
   // the rival's own model year, and means its photo never has to be scraped.
   const [rivalCar, setRivalCar] = useState("");
+  // The exact side-profile shot of the main car to run in the drag race.
+  // Left blank, the build picks the best exterior it has, which is a guess.
+  const [racePhoto, setRacePhoto] = useState("");
   const [rivalChoices, setRivalChoices] = useState(null);
   const [rivalChoicesStage, setRivalChoicesStage] = useState("idle");
   const [rivalChoicesError, setRivalChoicesError] = useState(null);
@@ -1087,6 +1090,8 @@ export default function App() {
             }
             const rival = compareEnabled ? photoUrls.rival.trim() : "";
             if (rival) slots.rival = rival;
+            const race = compareEnabled ? racePhoto.trim() : "";
+            if (race) slots.race = race;
             return Object.keys(slots).length ? JSON.stringify(slots) : "";
           })(),
           rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
@@ -1222,6 +1227,7 @@ export default function App() {
     setUseManualPhotos(SLOTS.some(([slot]) => slots[slot]) || closeups.length > 0);
     setCompareEnabled(String(inputs.disable_comparison) !== "true");
     setRivalCar(inputs.rival_car || "");
+    setRacePhoto(inputs.photo_race || "");
     setWorkflow("single_car");
     setFilledFromBuild(build);
   }
@@ -2557,14 +2563,27 @@ export default function App() {
                           />
                           <Tip text="The car's name, not a link -- paste a Cars & Bids listing URL here and it is turned into the name for you. Naming the car forces the script to compare against it, and carries its own model year so its photo search never asks for a year that car was not sold in." />
                         </label>
+                        <p className="hint">
+                          The drag race runs these two photos side by side. Side-on shots read as cars
+                          driving; a head-on shot does not.
+                        </p>
+                        <label className="field-row">
+                          <input
+                            value={racePhoto}
+                            onChange={(e) => setRacePhoto(e.target.value)}
+                            placeholder="This car's race photo URL -- a side profile"
+                            disabled={stage === "single-car-building"}
+                          />
+                          <Tip text="The exact photo of THIS car to race. Leave blank and the build picks the best exterior shot it has, which can end up being a head-on front shot." />
+                        </label>
                         <label className="field-row">
                           <input
                             value={photoUrls.rival}
                             onChange={(e) => setPhotoUrls({ ...photoUrls, rival: e.target.value })}
-                            placeholder="Comparison car photo URL -- a side profile, for the drag race"
+                            placeholder="Comparison car's race photo URL -- a side profile"
                             disabled={stage === "single-car-building"}
                           />
-                          <Tip text="Paste a side-on photo and it is used directly, so no listing is scraped for the rival. Leave blank and the build searches for one, which is the slow and unreliable path." />
+                          <Tip text="Paste a side-on photo of the rival and it is used directly, so no listing is scraped for it. Leave blank and the build searches for one, which is the slow and unreliable path." />
                         </label>
                       </>
                     )}

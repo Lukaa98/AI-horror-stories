@@ -1198,6 +1198,27 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
     return media, manifest.get("selected_auction") or {}
 
 
+def _pasted_race_media(url, images_dir, entry):
+    """The exact photo of the main car to run in the drag race, if given.
+
+    Without this the race car is whichever exterior shot _select_side_profile_media
+    ranks highest, which is a reasonable guess and still only a guess -- run
+    #201 raced the GT2 RS as a head-on front shot. A side profile is the one
+    that reads as a car driving, and the user is the one who can see which
+    photo that is. Best-effort: an unusable link falls back to the automatic
+    pick rather than losing the race.
+    """
+    if not url:
+        return None
+    path = _download_car_photo(url, images_dir / "manual-race", "race")
+    if not path:
+        print("[single-car] The pasted drag-race photo did not download as an image; "
+              "falling back to the best automatic side-profile pick.")
+        return None
+    relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
+    return {"path": relative, "facing_direction": _facing_direction_for_photo(path, entry)}
+
+
 def _select_side_profile_media(media):
     """Pick one exterior photo to reuse for the decorative mini-car
     animations (drift doodle, drag race) -- a true side profile reads far
@@ -1663,7 +1684,10 @@ def build_short(args):
     # Captured before order_media_for_scenes/apply_rival_photos reshuffle
     # `media` into one pick per scene -- this needs the whole gathered pool
     # to find the single best side-profile shot.
-    side_profile_media = _select_side_profile_media(media)
+    race_entry = {"name": car_label, "label": car_label, "years": "",
+                  "search_hint": car_label, "visual_highlight": "", "generation_label": ""}
+    side_profile_media = (_pasted_race_media(photos.get("race"), images_dir, race_entry)
+                          or _select_side_profile_media(media))
     photo_sections = collect_photo_sections(media)
     media = order_media_for_scenes(package["scenes"], media)
     media = apply_rival_photos(
@@ -1731,6 +1755,7 @@ def build_short(args):
             "photo_interior": manual_photo_urls.get("interior") or "",
             "photo_rival": args.photo_rival or "",
             "rival_car": args.rival_car or "",
+            "photo_race": photos.get("race") or "",
             "disable_comparison": "true" if args.disable_comparison else "false",
             "extra_photos": args.extra_photos or "",
         },

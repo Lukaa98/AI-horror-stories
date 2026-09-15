@@ -1349,3 +1349,33 @@ def test_photos_json_fills_the_slots_and_individual_flags_still_win():
     for bad in ("not json", "[1,2,3]", "{front:https://x/f.jpg}"):
         with pytest.raises(SystemExit):
             single_car_short._photos_argument(bad)
+
+
+def test_a_pasted_race_photo_beats_the_automatic_pick(tmp_path, monkeypatch):
+    """Without one, the race car is whichever exterior shot ranks highest --
+    a guess that raced run #201's GT2 RS as a head-on front shot. A side
+    profile is what reads as a car driving, and only the user can see which
+    photo that is."""
+    import single_car_short
+
+    downloaded = tmp_path / "images" / "manual-race" / "race.jpg"
+    downloaded.parent.mkdir(parents=True)
+    downloaded.write_bytes(b"jpeg")
+    monkeypatch.setattr(single_car_short, "_download_car_photo",
+                        lambda url, dest, stem: downloaded)
+    monkeypatch.setattr(single_car_short, "_facing_direction_for_photo",
+                        lambda path, entry: "right")
+
+    chosen = single_car_short._pasted_race_media(
+        "https://example.com/side.jpg", tmp_path / "images", {})
+    # Relative to the build directory, the same shape every other media entry
+    # uses ("images/manual-extra/0-front.jpg" and so on).
+    assert chosen == {"path": "images/manual-race/race.jpg", "facing_direction": "right"}
+
+    # No link, or a link that will not download, leaves the automatic pick in
+    # charge rather than losing the race entirely.
+    assert single_car_short._pasted_race_media("", tmp_path / "images", {}) is None
+    monkeypatch.setattr(single_car_short, "_download_car_photo",
+                        lambda url, dest, stem: None)
+    assert single_car_short._pasted_race_media(
+        "https://example.com/bad", tmp_path / "images", {}) is None
