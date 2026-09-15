@@ -8,7 +8,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.26 — Photo URLs in one input";
+const UI_VERSION = "V11.27 — Rival field takes a link too";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -203,6 +203,20 @@ function titleCaseWords(value) {
 // what the link already says. A short list of known two-word makes keeps
 // "alfa-romeo" from getting split into make "alfa", model "romeo ...".
 const MULTI_WORD_MAKES = ["alfa-romeo", "aston-martin", "land-rover", "mercedes-benz", "rolls-royce"];
+
+// The comparison-car field wants a name ("2020 Mercedes-AMG GT R Pro"), but
+// the natural thing to paste is the listing you just found it on -- and that
+// URL's own slug already spells the name out. Accepting both beats sending a
+// URL through as the rival's name, which is what the pipeline would then put
+// in front of the script writer.
+function rivalNameFromInput(value) {
+  const hint = parseAuctionUrlHint(value);
+  if (!hint) return value;
+  const name = [hint.year, titleCaseWords(hint.make), titleCaseWords(hint.model)]
+    .filter(Boolean).join(" ").trim();
+  return name || value;
+}
+
 
 function parseAuctionUrlHint(url) {
   const match = String(url || "").match(/\/auctions\/[^/]+\/([a-z0-9-]+)/i);
@@ -1075,7 +1089,7 @@ export default function App() {
             if (rival) slots.rival = rival;
             return Object.keys(slots).length ? JSON.stringify(slots) : "";
           })(),
-          rival_car: compareEnabled ? rivalCar.trim() : "",
+          rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
           disable_comparison: String(!compareEnabled),
           extra_photos: (() => {
             if (!useManualPhotos) return "";
@@ -2537,11 +2551,11 @@ export default function App() {
                         <label className="field-row">
                           <input
                             value={rivalCar}
-                            onChange={(e) => setRivalCar(e.target.value)}
+                            onChange={(e) => setRivalCar(rivalNameFromInput(e.target.value))}
                             placeholder="Comparison car, e.g. 2010 BMW X5 M (optional)"
                             disabled={stage === "single-car-building"}
                           />
-                          <Tip text="Naming the car here forces the script to compare against it, and carries its own model year so its photo search never asks for a year that car was not sold in." />
+                          <Tip text="The car's name, not a link -- paste a Cars & Bids listing URL here and it is turned into the name for you. Naming the car forces the script to compare against it, and carries its own model year so its photo search never asks for a year that car was not sold in." />
                         </label>
                         <label className="field-row">
                           <input
