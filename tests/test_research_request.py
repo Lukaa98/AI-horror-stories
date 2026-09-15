@@ -192,3 +192,19 @@ def test_rival_prompts_ask_for_what_each_format_actually_needs():
     # An unknown flavour must not crash a run; it falls back to the original.
     assert suggest_rivals.RIVAL_PROMPTS.get("nonsense", suggest_rivals._cold_start_prompt) is \
         suggest_rivals._cold_start_prompt
+
+
+def test_json_workflow_inputs_are_passed_through_environment_variables():
+    """A JSON value interpolated straight into the shell command loses its
+    double quotes -- bash strips them while parsing, so {"front":"..."}
+    arrives as {front:...}. Run #201 spent seventeen minutes building from
+    scraped photos because of exactly that. Any input carrying JSON has to
+    reach the script through an env var instead."""
+    from pathlib import Path
+
+    workflow = Path(__file__).resolve().parents[1] / ".github/workflows/cars-research.yml"
+    text = workflow.read_text()
+    for name in ("photos", "extra_photos"):
+        assert f'"${{{{ inputs.{name} }}}}"' not in text, \
+            f"{name} carries JSON and must not be interpolated inline"
+        assert f"inputs.{name} }}}}" in text, f"{name} should still be read into an env var"

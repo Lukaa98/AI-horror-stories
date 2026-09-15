@@ -1,3 +1,4 @@
+import pytest
 import sys
 from pathlib import Path
 
@@ -1340,9 +1341,11 @@ def test_photos_json_fills_the_slots_and_individual_flags_still_win():
     assert parsed == {"front": "https://x/f.jpg", "side": "https://x/s.jpg",
                       "rival": "https://x/r.jpg"}
 
-    # A malformed value must not take a build down -- every slot is optional
-    # and a missing photo already has a defined meaning.
-    assert single_car_short._photos_argument("not json") == {}
-    assert single_car_short._photos_argument("[1,2,3]") == {}
+    # Nothing passed is fine; something passed that cannot be read is not.
+    # Run #201 built a whole video from scraped photos because the shell
+    # stripped this value's quotes and it was quietly ignored.
     assert single_car_short._photos_argument("") == {}
     assert single_car_short._photos_argument(None) == {}
+    for bad in ("not json", "[1,2,3]", "{front:https://x/f.jpg}"):
+        with pytest.raises(SystemExit):
+            single_car_short._photos_argument(bad)

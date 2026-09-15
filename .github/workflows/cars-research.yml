@@ -259,6 +259,11 @@ jobs:
           # the command line -- this is a JSON string full of double quotes,
           # which would break out of the "${{ }}"-substituted shell string.
           EXTRA_PHOTOS: ${{ inputs.extra_photos }}
+          # Same reason: a JSON object of photo URLs, full of double quotes.
+          # Interpolated inline it came through as {front:https://...} --
+          # unparseable, silently ignored, and run #201 quietly fell back to
+          # scraping the gallery instead of using the pasted photos.
+          PHOTOS: ${{ inputs.photos }}
           # V21 captures every frame of the approved live HTML rig.
           # Explicit older selections retain their existing sprite sets.
           NARRATOR_RENDERER: ${{ (inputs.narrator_character == 'v21' || inputs.narrator_character == '') && 'v21' || 'sprites' }}
@@ -268,7 +273,7 @@ jobs:
           if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
           if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
           if [ -n "${{ inputs.auction_url }}" ]; then YEAR_ARGS+=(--auction-url "${{ inputs.auction_url }}"); fi
-          if [ -n "${{ inputs.photos }}" ]; then YEAR_ARGS+=(--photos "${{ inputs.photos }}"); fi
+          if [ -n "$PHOTOS" ]; then YEAR_ARGS+=(--photos "$PHOTOS"); fi
           if [ -n "${{ inputs.rival_car }}" ]; then YEAR_ARGS+=(--rival-car "${{ inputs.rival_car }}"); fi
           if [ "${{ inputs.disable_comparison }}" = "true" ]; then YEAR_ARGS+=(--disable-comparison); fi
           if [ -n "$EXTRA_PHOTOS" ]; then YEAR_ARGS+=(--extra-photos "$EXTRA_PHOTOS"); fi

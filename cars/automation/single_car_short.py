@@ -1225,18 +1225,29 @@ def _select_side_profile_media(media):
 
 
 def _photos_argument(raw):
-    """The --photos JSON object, or {} for anything unusable.
+    """The --photos JSON object. Empty input gives {}; bad input raises.
 
-    A malformed value must not take a build down: every slot in it is
-    optional anyway, and a missing photo already has a well-defined meaning.
+    Ignoring a malformed value looks forgiving and is not: the photos were
+    passed because they are the ones the video is supposed to show, so
+    dropping them does not produce a slightly worse video, it produces a
+    different one. Run #201 spent seventeen minutes building a GT2 RS story
+    out of scraped gallery photos because the JSON arrived with its quotes
+    stripped by the shell and this quietly returned {}. Failing here costs
+    seconds instead.
     """
+    if not raw:
+        return {}
     try:
-        parsed = json.loads(raw) if raw else {}
-    except (json.JSONDecodeError, TypeError):
-        print("[single-car] --photos was not valid JSON; ignoring it.")
-        return {}
+        parsed = json.loads(raw)
+    except (json.JSONDecodeError, TypeError) as exc:
+        raise SystemExit(
+            f"--photos was not valid JSON ({exc}). Received: {str(raw)[:200]!r}. "
+            "If this came from the workflow, the value must be passed through an "
+            "environment variable -- interpolated straight into the shell command its "
+            "double quotes are stripped and the JSON is destroyed."
+        )
     if not isinstance(parsed, dict):
-        return {}
+        raise SystemExit(f"--photos must be a JSON object of slot -> URL, got {type(parsed).__name__}.")
     return {key: str(value).strip() for key, value in parsed.items()
             if isinstance(value, str) and value.strip()}
 
