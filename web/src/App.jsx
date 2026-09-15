@@ -2090,10 +2090,12 @@ export default function App() {
           Stored only in this browser&apos;s localStorage.
         </p>
         <p className="hint">
-          The OpenAI key is only used for "Suggest rivals" in Startup Sound Battle, called directly from this
-          browser so suggestions come back in seconds instead of waiting on a GitHub Actions run. It is stored in
-          this browser&apos;s localStorage like the token above -- leave it blank to fall back to the (slower)
-          workflow-based suggestion instead.
+          The OpenAI key is used for the two "suggest rivals" buttons -- "Suggest comparison cars" in a
+          Single Car Story, and "Suggest rivals" in Startup Sound Battle. Both are called directly from this
+          browser, so suggestions come back in seconds instead of waiting on a GitHub Actions run, and cost a
+          fraction of a cent. It is stored in this browser&apos;s localStorage like the token above. Startup
+          Sound Battle falls back to the (slower) workflow-based suggestion when this is blank; the Single Car
+          Story button needs the key.
         </p>
       </details>
 
