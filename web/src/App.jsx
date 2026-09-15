@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import PhotoSlots from "./PhotoSlots";
-import { serializePhotos } from "./photoSections";
+import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import jobsData from "./jobs-data.json";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.20 — Even photo sizing";
+const UI_VERSION = "V11.21 — Start from a previous build";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -585,6 +585,39 @@ async function attachDashboardPreviews(items, owner, repo, token) {
   return items;
 }
 
+// The dropdown that fills the single-car form from a build you already ran.
+// Deliberately lighter than loadDashboardEntries: only single-car folders,
+// only the newest few, and each result.json is fetched just for the
+// `build_inputs` snapshot inside it. Filling the form is all this does --
+// the build still goes out through the normal dispatch on the configured
+// branch, so it runs whatever the pipeline code does today.
+const PREVIOUS_BUILD_LIMIT = 12;
+
+async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
+  const { entries } = await fetchOutputTree({ owner, repo, token });
+  const ids = groupDashboardEntries(entries)
+    .filter((item) => item.type === "single-car" && item.hasResult)
+    .slice(0, PREVIOUS_BUILD_LIMIT);
+  const loaded = await Promise.allSettled(ids.map(async (item) => {
+    const preview = await fetchFileViaApi(
+      owner, repo, OUTPUT_BRANCH, `cars/single-car-shorts/${item.id}/result.json`, token);
+    if (!preview?.build_inputs) return null;
+    return {
+      id: item.id,
+      timestamp: item.timestamp,
+      title: preview.title
+        || `${preview.car?.make || preview.build_inputs.make || ""} ${preview.car?.model || preview.build_inputs.model || ""}`.trim()
+        || item.id,
+      inputs: preview.build_inputs,
+    };
+  }));
+  // A build whose result.json predates build_inputs has nothing to fill the
+  // form with, so it is left out rather than offered as an empty choice.
+  return loaded
+    .filter((r) => r.status === "fulfilled" && r.value)
+    .map((r) => r.value);
+}
+
 async function loadDashboardEntries({ owner, repo, token }) {
   const { entries } = await fetchOutputTree({ owner, repo, token });
   const items = groupDashboardEntries(entries);
@@ -690,6 +723,13 @@ export default function App() {
   // exact car as the rival, no URL leaves it to the AI script. Unchecked
   // disables the rival scene (and its drag race) outright.
   const [compareEnabled, setCompareEnabled] = useState(true);
+  // "Start from a previous build": the list is fetched once, lazily, the
+  // first time the dropdown is opened -- the create form should not pay for
+  // a tree walk nobody asked for.
+  const [previousBuilds, setPreviousBuilds] = useState([]);
+  const [previousBuildsStage, setPreviousBuildsStage] = useState("idle");
+  const [previousBuildsError, setPreviousBuildsError] = useState(null);
+  const [filledFromBuild, setFilledFromBuild] = useState(null);
   const [voice, setVoice] = useState("onyx");
   const [renderQuality, setRenderQuality] = useState(null);
   const [draftId, setDraftId] = useState(null);
@@ -1028,6 +1068,55 @@ export default function App() {
       setStage("error");
       setStatusDetail("Single-car Short failed - open the build log for details");
     }
+  }
+
+  async function ensurePreviousBuilds() {
+    if (!repoOk || previousBuildsStage === "loading" || previousBuildsStage === "ready") return;
+    setPreviousBuildsStage("loading");
+    setPreviousBuildsError(null);
+    try {
+      setPreviousBuilds(await loadPreviousSingleCarBuilds({
+        owner: settings.owner, repo: settings.repo, token: settings.token,
+      }));
+      setPreviousBuildsStage("ready");
+    } catch (err) {
+      setPreviousBuildsError(String(err.message || err));
+      setPreviousBuildsStage("error");
+    }
+  }
+
+  // Copies a past build's inputs into the form and stops there. Nothing is
+  // dispatched, so the fields stay editable and the build that eventually
+  // goes out is an ordinary one on the configured branch -- today's code,
+  // not the commit the original ran on.
+  function applyPreviousBuild(buildId) {
+    setFilledFromBuild(null);
+    if (!buildId) return;
+    const build = previousBuilds.find((item) => item.id === buildId);
+    if (!build) return;
+    const inputs = build.inputs;
+    setMake(inputs.make || "");
+    setModel(inputs.model || "");
+    setFocus(inputs.query || "");
+    setStartYear(inputs.start_year ? String(inputs.start_year) : "");
+    setEndYear(inputs.end_year ? String(inputs.end_year) : "");
+    if (inputs.voice) setVoice(inputs.voice);
+    setAuctionUrl(inputs.auction_url || "");
+    setUseAuctionUrl(!!inputs.auction_url);
+    const slots = {
+      front: inputs.photo_front || "", side: inputs.photo_side || "", rear: inputs.photo_rear || "",
+      engine: inputs.photo_engine || "", interior: inputs.photo_interior || "",
+      rival: inputs.photo_rival || "",
+    };
+    setPhotoUrls(slots);
+    const closeups = parseExtraPhotos(inputs.extra_photos);
+    setExtraPhotos(closeups);
+    // Only tick "Override photos" when there is actually something to show
+    // under it -- the rival URL lives in its own section and does not count.
+    setUseManualPhotos(SLOTS.some(([slot]) => slots[slot]) || closeups.length > 0);
+    setCompareEnabled(String(inputs.disable_comparison) !== "true");
+    setWorkflow("single_car");
+    setFilledFromBuild(build);
   }
 
   // Replays an already-built single-car short's exact original inputs
@@ -2248,6 +2337,43 @@ export default function App() {
 
               {workflow === "single_car" && (
                 <>
+                  <div className="field-section">
+                    <div className="section-label">
+                      Start From A Previous Build
+                      <Tip text="Fills this form with a past build's car, photos and settings so you don't repaste the links. Nothing is dispatched until you press Build, and that build runs the current pipeline code -- not the code the original ran on." />
+                    </div>
+                    <div className="field-row">
+                      <select
+                        value=""
+                        onFocus={ensurePreviousBuilds}
+                        onMouseDown={ensurePreviousBuilds}
+                        onChange={(e) => applyPreviousBuild(e.target.value)}
+                        disabled={!repoOk || stage === "single-car-building"}
+                      >
+                        <option value="">
+                          {previousBuildsStage === "loading" ? "Loading previous builds..."
+                            : previousBuildsStage === "ready" && !previousBuilds.length ? "No previous builds found"
+                            : "Pick a build to copy its inputs..."}
+                        </option>
+                        {previousBuilds.map((build) => (
+                          <option key={build.id} value={build.id}>
+                            {build.title}
+                            {build.timestamp ? ` — ${build.timestamp.toLocaleString()}` : ""}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    {previousBuildsError && (
+                      <p className="error">Could not load previous builds: {previousBuildsError}</p>
+                    )}
+                    {filledFromBuild && (
+                      <p className="hint">
+                        Filled in from <strong>{filledFromBuild.title}</strong>. Edit anything you
+                        like, then press Build — it runs today's pipeline code.
+                      </p>
+                    )}
+                  </div>
+
                   <div className="field-section">
                     <div className="section-label">Photos</div>
                     <div className="check-row">
