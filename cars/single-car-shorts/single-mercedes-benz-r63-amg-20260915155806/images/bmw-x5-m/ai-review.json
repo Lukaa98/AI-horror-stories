@@ -1,0 +1,313 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 12,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "BMW badge",
+        "X5 bodywork",
+        "front grille design",
+        "headlight style"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "BMW kidney grille",
+        "X5 body shape",
+        "front lights design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "bodywork shape",
+        "window design",
+        "wheel style"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 4,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "side"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinctive BMW grille",
+        "X5 rear lights",
+        "overall shape and proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "BMW badge",
+        "X5 badge",
+        "rear design typical of 2007 BMW X5"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "BMW branding",
+        "X5 body shape",
+        "Proportions consistent with 2007 model"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-10.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": "4.8I",
+      "visible_match_evidence": [
+        "CARFAX report with 2007 BMW X5",
+        "4.8L V8 engine listed"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "other",
+      "scene_fit_tags": [
+        "exterior"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "exterior-11.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "bmw",
+      "detected_model": "x5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": "BMW X5 M",
+      "visible_match_evidence": [
+        "interior design",
+        "dashboard layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "N/A",
+      "path": "exterior-12.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 6,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image shows interior gauge cluster, not the exterior of the target vehicle.",
+      "path": "exterior-13.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "BMW badge on steering wheel",
+        "Interior design matches BMW X5",
+        "Dashboard layout consistent with 2007 X5"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 6,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "seating materials",
+        "general layout"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "X5",
+      "detected_generation_or_year": "2007",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "material quality",
+        "layout"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 7,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    }
+  ]
+}

@@ -1,0 +1,589 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-15T16:09:29.214Z",
+  "query": "BMW X5 M",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/bmw/x5?start_year=2007&end_year=2007&csort=10",
+  "search_result_count": 4,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3pEL6ZYK/2007-bmw-x5-48i",
+      "title": "2007 Bmw X5 48i",
+      "text": "Sold for $8,800",
+      "titleYear": 2007,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36PWW0lB/2007-bmw-x5-48i",
+      "title": "2007 Bmw X5 48i",
+      "text": "Sold for $8,222",
+      "titleYear": 2007,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNNO2keP/2007-bmw-x5-48i",
+      "title": "2007 Bmw X5 48i",
+      "text": "Sold for $6,600",
+      "titleYear": 2007,
+      "score": 68
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K1ynMNm2/2007-bmw-x5-48i",
+      "title": "2007 Bmw X5 48i",
+      "text": "Sold for $5,000",
+      "titleYear": 2007,
+      "score": 68
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3pEL6ZYK/2007-bmw-x5-48i",
+      "title": "2007 Bmw X5 48i",
+      "text": "Sold for $8,800",
+      "titleYear": 2007,
+      "score": 68,
+      "usable_image_count": 30,
+      "sale_price": 8800,
+      "sale_type": "sold",
+      "page_title": "2007 BMW X5 4.8i"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/36PWW0lB/2007-bmw-x5-48i",
+      "title": "2007 Bmw X5 48i",
+      "text": "Sold for $8,222",
+      "titleYear": 2007,
+      "score": 68,
+      "usable_image_count": 27,
+      "sale_price": 8222,
+      "sale_type": "sold",
+      "page_title": "2007 BMW X5 4.8i"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rNNO2keP/2007-bmw-x5-48i",
+      "title": "2007 Bmw X5 48i",
+      "text": "Sold for $6,600",
+      "titleYear": 2007,
+      "score": 68,
+      "usable_image_count": 28,
+      "sale_price": 6600,
+      "sale_type": "sold",
+      "page_title": "2007 BMW X5 4.8i"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/K1ynMNm2/2007-bmw-x5-48i",
+      "title": "2007 Bmw X5 48i",
+      "text": "Sold for $5,000",
+      "titleYear": 2007,
+      "score": 68,
+      "usable_image_count": 27,
+      "sale_price": 5000,
+      "sale_type": "sold",
+      "page_title": "2007 BMW X5 4.8i"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3pEL6ZYK/2007-bmw-x5-48i",
+    "title": "2007 Bmw X5 48i",
+    "text": "Sold for $8,800",
+    "titleYear": 2007,
+    "score": 68,
+    "sale_price": 8800,
+    "sale_type": "sold",
+    "page_title": "2007 BMW X5 4.8i",
+    "year": 2007,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rwWbdNEM-4n8E1zUgEbZ/edit/X6rGO.jpg?t=173592188154",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 BMW X5 4.8i",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 406834
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rwWbdNEM-x2lo48vjQKa/edit/WCQlp.jpg?t=173592224921",
+      "labels": [
+        "interior"
+      ],
+      "section": "2007 BMW X5 4.8i",
+      "width": 542,
+      "height": 361,
+      "bytes": 287624
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rwWbdNEM-I8y48b2QvPF/edit/Vk1wL.jpg?t=173592226750",
+      "labels": [
+        "interior"
+      ],
+      "section": "2007 BMW X5 4.8i",
+      "width": 542,
+      "height": 361,
+      "bytes": 254517
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/application/s-CAN0s_vjhgL/edit/EM5Mj.jpg?t=173592231079",
+      "labels": [
+        "interior"
+      ],
+      "section": "2007 BMW X5 4.8i",
+      "width": 542,
+      "height": 361,
+      "bytes": 137125
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/exterior/rwWbdNEM-9qVyLbors7/edit/Kwm8j.jpg?t=173592196040",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 BMW X5 4.8i",
+      "width": 542,
+      "height": 361,
+      "bytes": 496146
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/exterior/rwWbdNEM-EsjIdxaDdX/edit/gyawi.jpg?t=173592191151",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 BMW X5 4.8i",
+      "width": 542,
+      "height": 361,
+      "bytes": 479671
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/rwWbdNEM-FI5K19hL90/edit/ps0nn.jpg?t=173592193027",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 BMW X5 4.8i",
+      "width": 542,
+      "height": 361,
+      "bytes": 353386
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/exterior/rwWbdNEM-AGjbRrXyoo/edit/mJzgv.jpg?t=173592208055",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2007 BMW X5 4.8i",
+      "width": 542,
+      "height": 361,
+      "bytes": 371217
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/d4890e02016decbadd995c160fc6e912cf2e62da/photos/KPeNzXek-56xZuIA6Q.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 14336 bytes"
+    },
+    {
+      "path": "exterior-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/9e743886199c4889afdc76060b3b01782d55ce11/photos/3BByNWj5-FpruS3D0p.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Sold to",
+      "width": 80,
+      "height": 80,
+      "bytes": 22828
+    },
+    {
+      "path": "exterior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9e743886199c4889afdc76060b3b01782d55ce11/attachments/3pEL6ZYK-hrAKw5le1.jpeg?t=173677828034",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 389,
+      "bytes": 190834
+    },
+    {
+      "path": "exterior-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9e743886199c4889afdc76060b3b01782d55ce11/attachments/3pEL6ZYK-dn6nRLa7f.jpeg?t=173637722956",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 239556
+    },
+    {
+      "path": "exterior-13.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/9e743886199c4889afdc76060b3b01782d55ce11/attachments/3pEL6ZYK-mMMI_MNqn5.jpeg?t=173679707277",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 231636
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/3c260d3f0aeab2728376bd4a3214c5aa91a392ce/photos/3vNdDx7k-3XcV3yEYGR1.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 6287 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7b3c2ae89717273dd0777f4491864bf3/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7b3c2ae89717273dd0777f4491864bf3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 BMW X5 4.8i",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7b3c2ae89717273dd0777f4491864bf3/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rNNO2keP/2007-bmw-x5-48i",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/7b3c2ae89717273dd0777f4491864bf3/manifest/video.m3u8",
+      "auction_title": "2007 BMW X5 4.8i",
+      "auction_year": 2007,
+      "search_score": 68
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/559eae5e5aa596f172d7c9ed0892e5e7/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/559eae5e5aa596f172d7c9ed0892e5e7/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2007 BMW X5 4.8i",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/559eae5e5aa596f172d7c9ed0892e5e7/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rNNO2keP/2007-bmw-x5-48i",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/559eae5e5aa596f172d7c9ed0892e5e7/manifest/video.m3u8",
+      "auction_title": "2007 BMW X5 4.8i",
+      "auction_year": 2007,
+      "search_score": 68
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 12,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW badge",
+          "X5 bodywork",
+          "front grille design",
+          "headlight style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW kidney grille",
+          "X5 body shape",
+          "front lights design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork shape",
+          "window design",
+          "wheel style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 4,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "side"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinctive BMW grille",
+          "X5 rear lights",
+          "overall shape and proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW badge",
+          "X5 badge",
+          "rear design typical of 2007 BMW X5"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW branding",
+          "X5 body shape",
+          "Proportions consistent with 2007 model"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 7,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": "4.8I",
+        "visible_match_evidence": [
+          "CARFAX report with 2007 BMW X5",
+          "4.8L V8 engine listed"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 8,
+        "shot_type": "other",
+        "scene_fit_tags": [
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "bmw",
+        "detected_model": "x5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": "BMW X5 M",
+        "visible_match_evidence": [
+          "interior design",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "N/A",
+        "path": "exterior-12.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image shows interior gauge cluster, not the exterior of the target vehicle.",
+        "path": "exterior-13.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW badge on steering wheel",
+          "Interior design matches BMW X5",
+          "Dashboard layout consistent with 2007 X5"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 6,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "seating materials",
+          "general layout"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "X5",
+        "detected_generation_or_year": "2007",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "material quality",
+          "layout"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 7,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}

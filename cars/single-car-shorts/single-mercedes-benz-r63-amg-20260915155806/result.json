@@ -1,0 +1,3029 @@
+{
+  "car": {
+    "make": "Mercedes Benz",
+    "model": "R63 Amg",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Mercedes Benz",
+    "model": "R63 Amg",
+    "query": "",
+    "start_year": 2007,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/9aXD54eG/2007-mercedes-benz-r63-amg?ss_id=37cc8f83-951b-4da3-b431-73b5786e5049&ref=pr_1_1",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/exterior/rkq7RZ4l-v445bBO/edit/6pfCP.jpg?t=176118428971",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/exterior/rkq7RZ4l-icsqdMT.jpg?t=176090665837",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/exterior/rkq7RZ4l-gtnFMHy/edit/1ZFKY.jpg?t=176102331283",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/mechanical/rkq7RZ4l-uG5sOVy.jpg?t=176090665837",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/application/s-fiJ-qn6/edit/aiNar.jpg?t=176102338948",
+    "photo_rival": "",
+    "disable_comparison": "false",
+    "extra_photos": "[{\"id\":\"closeup-restored-1789487882331-0\",\"label\":\"Front image\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/exterior/rkq7RZ4l-1Qn9DzY/edit/QMciv.jpg?t=176102326605\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-1\",\"label\":\"back\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/exterior/rkq7RZ4l-pePAdRY/edit/aks-u.jpg?t=176102337552\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-2\",\"label\":\"lights up front side\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1664,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/rkq7RZ4l-JdwyA8S.jpeg?t=176102010348\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-3\",\"label\":\"6.3 amg padge\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/rkq7RZ4l-zn3Kb_0.jpeg?t=176102010348\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-4\",\"label\":\"wheels\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/rkq7RZ4l-CXhS0BB.jpeg?t=176102010348\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-5\",\"label\":\"bolster seats car in family minivan\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1170,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/interior/rkq7RZ4l-pv5fkfm.jpg?t=176090665837\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-6\",\"label\":\"7 Seater for family\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/interior/rkq7RZ4l-ivlNdAE.jpg?t=176090665837\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-7\",\"label\":\"Steering wheel\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/interior/rkq7RZ4l-V0L5WmU.jpg?t=176090665837\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-8\",\"label\":\"Rear Climate controls\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1170,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/interior/rkq7RZ4l-0loQa9S.jpg?t=176090665837\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-9\",\"label\":\"Engine bay\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/mechanical/rkq7RZ4l-OD_LkGX.jpg?t=176090665837\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-10\",\"label\":\"side back amd and r63 badges\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/exterior/rkq7RZ4l-Z9XG5zk.jpg?t=176090665837\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1789487882331-11\",\"label\":\"Hand built engine\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1a5270e66ed4ca6b0227a4ebf6a959157221262b/photos/mechanical/rkq7RZ4l-0Y8YGav.jpg?t=176102142987\",\"slot\":\"engine\",\"note\":\"\"}]"
+  },
+  "title": "The Unique Power of the R63 AMG",
+  "key_specs": {
+    "horsepower": "503 hp",
+    "torque": "465 lb-ft",
+    "zero_to_sixty": "4.6 sec",
+    "engine": "6.2L V8",
+    "price": "$88K new, ~$60K today"
+  },
+  "start_year": 2007,
+  "end_year": 2007,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "500+ Horsepower",
+      "photo_label": null,
+      "narration": "A family vehicle with over 500 horsepower sounds unreal, but that's exactly what the R63 AMG delivers.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "503 hp",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Limited Production Run",
+      "photo_label": null,
+      "narration": "This unique powerhouse was part of a rare batch produced in 2007, limited to only a few hundred units worldwide.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Production",
+      "stat_value": "Limited to hundreds",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Engine Code M156",
+      "photo_label": "engine bay",
+      "narration": "Under the hood, its 6.2L V8, known internally as the M156 engine, generates an impressive 503 hp and 465 lb-ft of torque.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Torque",
+      "stat_value": "465 lb-ft",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "wheel",
+      "headline": "All-Wheel Drive",
+      "photo_label": null,
+      "narration": "Power is managed by an all-wheel-drive system, ensuring stability and performance in various conditions.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Drivetrain",
+      "stat_value": "AWD",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Price Drop",
+      "photo_label": null,
+      "narration": "Although it retailed for around $88,000 new, you can find them for about $60,000 today, reflecting a modest depreciation of 4% annually.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "$88K -> $60K (-4%/yr)",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Power vs BMW X5 M",
+      "photo_label": null,
+      "narration": "It rivals the BMW X5 M, trading 503 hp for its 547 hp, but the R63's rarity ensures it stands apart.",
+      "rival_make": "BMW",
+      "rival_model": "X5 M",
+      "main_horsepower": 503,
+      "rival_horsepower": 547,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "503 hp vs 547 hp",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Performance Engineering",
+      "photo_label": "engine-closeup-restored-1789487882331-11-11] Hand built engine",
+      "narration": "This engine is hand-assembled by a single engineer, a hallmark of AMG\u2019s commitment to precision.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "AMG Design",
+      "photo_label": "side-closeup-restored-1789487882331-3-3] 6.3 amg padge",
+      "narration": "The AMG styling, including the prominent 6.3 badge, symbolizes its racing DNA and engineering excellence.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Badge",
+      "stat_value": "6.3 AMG",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "A Unique Daily?",
+      "photo_label": null,
+      "narration": "Could this combination of luxury and performance fit into your daily life, or is the R63 AMG just too bold a choice?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://www.caranddriver.com/news/a15145381/2007-mercedes-benz-r63-amg-auto-shows/",
+    "https://www.motortrend.com/news/2007-mercedesbenz-r63-amg-3/",
+    "https://www.topspeed.com/cars/mercedes/2007-mercedes-benz-r63-amg-ar1810.html"
+  ],
+  "script": "A family vehicle with over 500 horsepower sounds unreal, but that's exactly what the R63 AMG delivers. This unique powerhouse was part of a rare batch produced in 2007, limited to only a few hundred units worldwide. Under the hood, its 6.2L V8, known internally as the M156 engine, generates an impressive 503 hp and 465 lb-ft of torque. Power is managed by an all-wheel-drive system, ensuring stability and performance in various conditions. Although it retailed for around $88,000 new, you can find them for about $60,000 today, reflecting a modest depreciation of 4% annually. It rivals the BMW X5 M, trading 503 hp for its 547 hp, but the R63's rarity ensures it stands apart. This engine is hand-assembled by a single engineer, a hallmark of AMG\u2019s commitment to precision. The AMG styling, including the prominent 6.3 badge, symbolizes its racing DNA and engineering excellence. Could this combination of luxury and performance fit into your daily life, or is the R63 AMG just too bold a choice?",
+  "word_count": 173,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 55.92,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-mercedes-benz-r63-amg-20260915155806/narration.mp3",
+  "duration_seconds": 55.89,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.54,
+      "end": 0.63,
+      "mouth": "small"
+    },
+    {
+      "start": 0.63,
+      "end": 0.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.72,
+      "end": 0.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.99,
+      "end": 1.08,
+      "mouth": "small"
+    },
+    {
+      "start": 1.08,
+      "end": 1.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.17,
+      "end": 1.26,
+      "mouth": "small"
+    },
+    {
+      "start": 1.26,
+      "end": 1.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.35,
+      "end": 1.71,
+      "mouth": "small"
+    },
+    {
+      "start": 1.71,
+      "end": 1.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.8,
+      "end": 3.15,
+      "mouth": "small"
+    },
+    {
+      "start": 3.15,
+      "end": 3.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.69,
+      "end": 4.59,
+      "mouth": "small"
+    },
+    {
+      "start": 4.59,
+      "end": 4.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.68,
+      "end": 4.86,
+      "mouth": "small"
+    },
+    {
+      "start": 4.86,
+      "end": 4.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.95,
+      "end": 5.85,
+      "mouth": "small"
+    },
+    {
+      "start": 5.85,
+      "end": 6.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.39,
+      "end": 6.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.48,
+      "end": 6.57,
+      "mouth": "small"
+    },
+    {
+      "start": 6.57,
+      "end": 6.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.66,
+      "end": 6.93,
+      "mouth": "small"
+    },
+    {
+      "start": 6.93,
+      "end": 7.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.02,
+      "end": 7.2,
+      "mouth": "small"
+    },
+    {
+      "start": 7.2,
+      "end": 7.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.29,
+      "end": 7.47,
+      "mouth": "small"
+    },
+    {
+      "start": 7.47,
+      "end": 7.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.56,
+      "end": 7.74,
+      "mouth": "small"
+    },
+    {
+      "start": 7.74,
+      "end": 7.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.92,
+      "end": 9.27,
+      "mouth": "small"
+    },
+    {
+      "start": 9.27,
+      "end": 9.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.72,
+      "end": 9.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.99,
+      "end": 10.17,
+      "mouth": "small"
+    },
+    {
+      "start": 10.17,
+      "end": 10.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.35,
+      "end": 10.53,
+      "mouth": "small"
+    },
+    {
+      "start": 10.53,
+      "end": 10.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.89,
+      "end": 10.98,
+      "mouth": "small"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.07,
+      "end": 11.61,
+      "mouth": "small"
+    },
+    {
+      "start": 11.61,
+      "end": 11.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.97,
+      "end": 12.06,
+      "mouth": "small"
+    },
+    {
+      "start": 12.06,
+      "end": 12.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.42,
+      "end": 12.51,
+      "mouth": "small"
+    },
+    {
+      "start": 12.51,
+      "end": 12.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.69,
+      "end": 13.05,
+      "mouth": "small"
+    },
+    {
+      "start": 13.05,
+      "end": 13.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.14,
+      "end": 13.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.23,
+      "end": 13.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.5,
+      "end": 13.86,
+      "mouth": "small"
+    },
+    {
+      "start": 13.86,
+      "end": 14.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.31,
+      "end": 14.4,
+      "mouth": "small"
+    },
+    {
+      "start": 14.4,
+      "end": 14.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.49,
+      "end": 14.67,
+      "mouth": "small"
+    },
+    {
+      "start": 14.67,
+      "end": 14.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.94,
+      "end": 15.12,
+      "mouth": "small"
+    },
+    {
+      "start": 15.12,
+      "end": 15.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.3,
+      "end": 16.11,
+      "mouth": "small"
+    },
+    {
+      "start": 16.11,
+      "end": 16.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.38,
+      "end": 16.47,
+      "mouth": "small"
+    },
+    {
+      "start": 16.47,
+      "end": 16.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.65,
+      "end": 17.28,
+      "mouth": "small"
+    },
+    {
+      "start": 17.28,
+      "end": 17.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.37,
+      "end": 17.46,
+      "mouth": "small"
+    },
+    {
+      "start": 17.46,
+      "end": 17.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.55,
+      "end": 17.73,
+      "mouth": "small"
+    },
+    {
+      "start": 17.73,
+      "end": 17.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.91,
+      "end": 18.27,
+      "mouth": "small"
+    },
+    {
+      "start": 18.27,
+      "end": 18.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.54,
+      "end": 18.72,
+      "mouth": "small"
+    },
+    {
+      "start": 18.72,
+      "end": 18.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.9,
+      "end": 19.08,
+      "mouth": "small"
+    },
+    {
+      "start": 19.08,
+      "end": 19.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.17,
+      "end": 19.44,
+      "mouth": "small"
+    },
+    {
+      "start": 19.44,
+      "end": 19.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.53,
+      "end": 19.8,
+      "mouth": "small"
+    },
+    {
+      "start": 19.8,
+      "end": 19.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.89,
+      "end": 20.07,
+      "mouth": "small"
+    },
+    {
+      "start": 20.07,
+      "end": 20.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.61,
+      "end": 20.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.88,
+      "end": 20.97,
+      "mouth": "small"
+    },
+    {
+      "start": 20.97,
+      "end": 21.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.15,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.69,
+      "end": 21.78,
+      "mouth": "small"
+    },
+    {
+      "start": 21.78,
+      "end": 21.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.96,
+      "end": 22.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.05,
+      "end": 22.32,
+      "mouth": "small"
+    },
+    {
+      "start": 22.32,
+      "end": 22.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.59,
+      "end": 22.77,
+      "mouth": "small"
+    },
+    {
+      "start": 22.77,
+      "end": 22.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.86,
+      "end": 23.13,
+      "mouth": "small"
+    },
+    {
+      "start": 23.13,
+      "end": 23.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.22,
+      "end": 23.4,
+      "mouth": "small"
+    },
+    {
+      "start": 23.4,
+      "end": 23.58,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.58,
+      "end": 23.94,
+      "mouth": "small"
+    },
+    {
+      "start": 23.94,
+      "end": 24.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.03,
+      "end": 24.3,
+      "mouth": "small"
+    },
+    {
+      "start": 24.3,
+      "end": 24.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.39,
+      "end": 24.48,
+      "mouth": "small"
+    },
+    {
+      "start": 24.48,
+      "end": 24.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.57,
+      "end": 24.84,
+      "mouth": "small"
+    },
+    {
+      "start": 24.84,
+      "end": 25.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.47,
+      "end": 25.56,
+      "mouth": "small"
+    },
+    {
+      "start": 25.56,
+      "end": 25.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.74,
+      "end": 25.83,
+      "mouth": "small"
+    },
+    {
+      "start": 25.83,
+      "end": 25.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.92,
+      "end": 26.01,
+      "mouth": "small"
+    },
+    {
+      "start": 26.01,
+      "end": 26.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.1,
+      "end": 26.28,
+      "mouth": "small"
+    },
+    {
+      "start": 26.28,
+      "end": 26.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.46,
+      "end": 26.64,
+      "mouth": "small"
+    },
+    {
+      "start": 26.64,
+      "end": 26.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.82,
+      "end": 26.91,
+      "mouth": "small"
+    },
+    {
+      "start": 26.91,
+      "end": 27.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.0,
+      "end": 27.18,
+      "mouth": "small"
+    },
+    {
+      "start": 27.18,
+      "end": 27.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.36,
+      "end": 27.72,
+      "mouth": "small"
+    },
+    {
+      "start": 27.72,
+      "end": 27.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.99,
+      "end": 28.26,
+      "mouth": "small"
+    },
+    {
+      "start": 28.26,
+      "end": 28.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.44,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 28.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.89,
+      "end": 28.98,
+      "mouth": "small"
+    },
+    {
+      "start": 28.98,
+      "end": 29.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.07,
+      "end": 29.61,
+      "mouth": "small"
+    },
+    {
+      "start": 29.61,
+      "end": 29.7,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.7,
+      "end": 29.97,
+      "mouth": "small"
+    },
+    {
+      "start": 29.97,
+      "end": 30.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.33,
+      "end": 30.42,
+      "mouth": "small"
+    },
+    {
+      "start": 30.42,
+      "end": 30.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.51,
+      "end": 30.78,
+      "mouth": "small"
+    },
+    {
+      "start": 30.78,
+      "end": 30.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.96,
+      "end": 31.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.05,
+      "end": 31.77,
+      "mouth": "small"
+    },
+    {
+      "start": 31.77,
+      "end": 31.86,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.86,
+      "end": 32.58,
+      "mouth": "small"
+    },
+    {
+      "start": 32.58,
+      "end": 33.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.21,
+      "end": 33.39,
+      "mouth": "small"
+    },
+    {
+      "start": 33.39,
+      "end": 33.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.66,
+      "end": 33.75,
+      "mouth": "small"
+    },
+    {
+      "start": 33.75,
+      "end": 34.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.2,
+      "end": 34.47,
+      "mouth": "small"
+    },
+    {
+      "start": 34.47,
+      "end": 34.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.56,
+      "end": 34.83,
+      "mouth": "small"
+    },
+    {
+      "start": 34.83,
+      "end": 35.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.1,
+      "end": 35.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.28,
+      "end": 35.37,
+      "mouth": "small"
+    },
+    {
+      "start": 35.37,
+      "end": 35.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.46,
+      "end": 35.64,
+      "mouth": "small"
+    },
+    {
+      "start": 35.64,
+      "end": 35.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.73,
+      "end": 35.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.91,
+      "end": 36.54,
+      "mouth": "small"
+    },
+    {
+      "start": 36.54,
+      "end": 36.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.63,
+      "end": 36.81,
+      "mouth": "small"
+    },
+    {
+      "start": 36.81,
+      "end": 36.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.9,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.98,
+      "end": 38.25,
+      "mouth": "small"
+    },
+    {
+      "start": 38.25,
+      "end": 38.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.34,
+      "end": 38.88,
+      "mouth": "small"
+    },
+    {
+      "start": 38.88,
+      "end": 38.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.97,
+      "end": 39.15,
+      "mouth": "small"
+    },
+    {
+      "start": 39.15,
+      "end": 39.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.33,
+      "end": 40.14,
+      "mouth": "small"
+    },
+    {
+      "start": 40.14,
+      "end": 40.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.5,
+      "end": 40.68,
+      "mouth": "small"
+    },
+    {
+      "start": 40.68,
+      "end": 40.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.95,
+      "end": 41.04,
+      "mouth": "small"
+    },
+    {
+      "start": 41.04,
+      "end": 41.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.22,
+      "end": 41.31,
+      "mouth": "small"
+    },
+    {
+      "start": 41.31,
+      "end": 41.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.4,
+      "end": 41.76,
+      "mouth": "small"
+    },
+    {
+      "start": 41.76,
+      "end": 42.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.12,
+      "end": 42.3,
+      "mouth": "small"
+    },
+    {
+      "start": 42.3,
+      "end": 42.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.48,
+      "end": 42.66,
+      "mouth": "small"
+    },
+    {
+      "start": 42.66,
+      "end": 42.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.93,
+      "end": 43.11,
+      "mouth": "small"
+    },
+    {
+      "start": 43.11,
+      "end": 43.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.2,
+      "end": 43.56,
+      "mouth": "small"
+    },
+    {
+      "start": 43.56,
+      "end": 43.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.65,
+      "end": 43.83,
+      "mouth": "small"
+    },
+    {
+      "start": 43.83,
+      "end": 43.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.92,
+      "end": 44.28,
+      "mouth": "small"
+    },
+    {
+      "start": 44.28,
+      "end": 44.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.73,
+      "end": 44.82,
+      "mouth": "small"
+    },
+    {
+      "start": 44.82,
+      "end": 45.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.18,
+      "end": 45.27,
+      "mouth": "small"
+    },
+    {
+      "start": 45.27,
+      "end": 45.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.45,
+      "end": 45.72,
+      "mouth": "small"
+    },
+    {
+      "start": 45.72,
+      "end": 45.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.9,
+      "end": 45.99,
+      "mouth": "small"
+    },
+    {
+      "start": 45.99,
+      "end": 46.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.17,
+      "end": 46.53,
+      "mouth": "small"
+    },
+    {
+      "start": 46.53,
+      "end": 46.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.62,
+      "end": 46.71,
+      "mouth": "small"
+    },
+    {
+      "start": 46.71,
+      "end": 46.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.8,
+      "end": 47.07,
+      "mouth": "small"
+    },
+    {
+      "start": 47.07,
+      "end": 47.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.43,
+      "end": 47.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.7,
+      "end": 48.06,
+      "mouth": "small"
+    },
+    {
+      "start": 48.06,
+      "end": 48.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.15,
+      "end": 48.24,
+      "mouth": "small"
+    },
+    {
+      "start": 48.24,
+      "end": 48.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.69,
+      "end": 48.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.87,
+      "end": 48.96,
+      "mouth": "small"
+    },
+    {
+      "start": 48.96,
+      "end": 49.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.41,
+      "end": 49.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.5,
+      "end": 49.68,
+      "mouth": "small"
+    },
+    {
+      "start": 49.68,
+      "end": 50.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.13,
+      "end": 50.22,
+      "mouth": "small"
+    },
+    {
+      "start": 50.22,
+      "end": 50.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.76,
+      "end": 50.94,
+      "mouth": "small"
+    },
+    {
+      "start": 50.94,
+      "end": 51.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.3,
+      "end": 51.48,
+      "mouth": "small"
+    },
+    {
+      "start": 51.48,
+      "end": 51.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.66,
+      "end": 51.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.75,
+      "end": 51.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.84,
+      "end": 52.2,
+      "mouth": "small"
+    },
+    {
+      "start": 52.2,
+      "end": 52.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.56,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 53.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.1,
+      "end": 53.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.19,
+      "end": 53.46,
+      "mouth": "small"
+    },
+    {
+      "start": 53.46,
+      "end": 53.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.55,
+      "end": 53.91,
+      "mouth": "small"
+    },
+    {
+      "start": 53.91,
+      "end": 54.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.0,
+      "end": 54.09,
+      "mouth": "small"
+    },
+    {
+      "start": 54.09,
+      "end": 54.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.27,
+      "end": 54.36,
+      "mouth": "small"
+    },
+    {
+      "start": 54.36,
+      "end": 54.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.45,
+      "end": 54.63,
+      "mouth": "small"
+    },
+    {
+      "start": 54.63,
+      "end": 54.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.72,
+      "end": 54.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.81,
+      "end": 54.9,
+      "mouth": "small"
+    },
+    {
+      "start": 54.9,
+      "end": 55.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.08,
+      "end": 55.17,
+      "mouth": "small"
+    },
+    {
+      "start": 55.17,
+      "end": 55.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.26,
+      "end": 55.35,
+      "mouth": "small"
+    },
+    {
+      "start": 55.35,
+      "end": 55.89,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "A",
+      "start": 0.0,
+      "end": 0.7200000286102295
+    },
+    {
+      "word": "family",
+      "start": 0.7200000286102295,
+      "end": 1.0199999809265137
+    },
+    {
+      "word": "vehicle",
+      "start": 1.0199999809265137,
+      "end": 1.2799999713897705
+    },
+    {
+      "word": "with",
+      "start": 1.2799999713897705,
+      "end": 1.4800000190734863
+    },
+    {
+      "word": "over",
+      "start": 1.4800000190734863,
+      "end": 1.6399999856948853
+    },
+    {
+      "word": "500",
+      "start": 1.6399999856948853,
+      "end": 2.059999942779541
+    },
+    {
+      "word": "horsepower",
+      "start": 2.059999942779541,
+      "end": 2.4600000381469727
+    },
+    {
+      "word": "sounds",
+      "start": 2.4600000381469727,
+      "end": 2.819999933242798
+    },
+    {
+      "word": "unreal",
+      "start": 2.819999933242798,
+      "end": 3.1600000858306885
+    },
+    {
+      "word": "But",
+      "start": 3.700000047683716,
+      "end": 3.7799999713897705
+    },
+    {
+      "word": "that's",
+      "start": 3.7799999713897705,
+      "end": 4.0
+    },
+    {
+      "word": "exactly",
+      "start": 4.0,
+      "end": 4.320000171661377
+    },
+    {
+      "word": "what",
+      "start": 4.320000171661377,
+      "end": 4.460000038146973
+    },
+    {
+      "word": "the",
+      "start": 4.460000038146973,
+      "end": 4.579999923706055
+    },
+    {
+      "word": "R63",
+      "start": 4.579999923706055,
+      "end": 5.199999809265137
+    },
+    {
+      "word": "AMG",
+      "start": 5.199999809265137,
+      "end": 5.599999904632568
+    },
+    {
+      "word": "delivers",
+      "start": 5.599999904632568,
+      "end": 5.940000057220459
+    },
+    {
+      "word": "This",
+      "start": 6.519999980926514,
+      "end": 6.559999942779541
+    },
+    {
+      "word": "unique",
+      "start": 6.559999942779541,
+      "end": 6.820000171661377
+    },
+    {
+      "word": "powerhouse",
+      "start": 6.820000171661377,
+      "end": 7.21999979019165
+    },
+    {
+      "word": "was",
+      "start": 7.21999979019165,
+      "end": 7.420000076293945
+    },
+    {
+      "word": "part",
+      "start": 7.420000076293945,
+      "end": 7.539999961853027
+    },
+    {
+      "word": "of",
+      "start": 7.539999961853027,
+      "end": 7.659999847412109
+    },
+    {
+      "word": "a",
+      "start": 7.659999847412109,
+      "end": 7.820000171661377
+    },
+    {
+      "word": "rare",
+      "start": 7.820000171661377,
+      "end": 7.960000038146973
+    },
+    {
+      "word": "batch",
+      "start": 7.960000038146973,
+      "end": 8.199999809265137
+    },
+    {
+      "word": "produced",
+      "start": 8.199999809265137,
+      "end": 8.5
+    },
+    {
+      "word": "in",
+      "start": 8.5,
+      "end": 8.640000343322754
+    },
+    {
+      "word": "2007",
+      "start": 8.640000343322754,
+      "end": 9.279999732971191
+    },
+    {
+      "word": "limited",
+      "start": 9.819999694824219,
+      "end": 9.960000038146973
+    },
+    {
+      "word": "to",
+      "start": 9.960000038146973,
+      "end": 10.180000305175781
+    },
+    {
+      "word": "only",
+      "start": 10.180000305175781,
+      "end": 10.359999656677246
+    },
+    {
+      "word": "a",
+      "start": 10.359999656677246,
+      "end": 10.520000457763672
+    },
+    {
+      "word": "few",
+      "start": 10.520000457763672,
+      "end": 10.720000267028809
+    },
+    {
+      "word": "hundred",
+      "start": 10.720000267028809,
+      "end": 10.920000076293945
+    },
+    {
+      "word": "units",
+      "start": 10.920000076293945,
+      "end": 11.15999984741211
+    },
+    {
+      "word": "worldwide",
+      "start": 11.15999984741211,
+      "end": 11.600000381469727
+    },
+    {
+      "word": "Under",
+      "start": 12.100000381469727,
+      "end": 12.180000305175781
+    },
+    {
+      "word": "the",
+      "start": 12.180000305175781,
+      "end": 12.479999542236328
+    },
+    {
+      "word": "hood",
+      "start": 12.479999542236328,
+      "end": 12.479999542236328
+    },
+    {
+      "word": "it's",
+      "start": 12.65999984741211,
+      "end": 12.84000015258789
+    },
+    {
+      "word": "6",
+      "start": 12.84000015258789,
+      "end": 13.0600004196167
+    },
+    {
+      "word": "2",
+      "start": 13.0600004196167,
+      "end": 13.380000114440918
+    },
+    {
+      "word": "liter",
+      "start": 13.380000114440918,
+      "end": 13.5600004196167
+    },
+    {
+      "word": "V8",
+      "start": 13.5600004196167,
+      "end": 13.960000038146973
+    },
+    {
+      "word": "Known",
+      "start": 14.479999542236328,
+      "end": 14.5
+    },
+    {
+      "word": "internally",
+      "start": 14.5,
+      "end": 14.800000190734863
+    },
+    {
+      "word": "as",
+      "start": 14.800000190734863,
+      "end": 14.979999542236328
+    },
+    {
+      "word": "the",
+      "start": 14.979999542236328,
+      "end": 15.100000381469727
+    },
+    {
+      "word": "M156",
+      "start": 15.100000381469727,
+      "end": 15.800000190734863
+    },
+    {
+      "word": "engine",
+      "start": 15.800000190734863,
+      "end": 16.079999923706055
+    },
+    {
+      "word": "generates",
+      "start": 16.219999313354492,
+      "end": 16.719999313354492
+    },
+    {
+      "word": "an",
+      "start": 16.719999313354492,
+      "end": 17.18000030517578
+    },
+    {
+      "word": "impressive",
+      "start": 17.18000030517578,
+      "end": 17.18000030517578
+    },
+    {
+      "word": "503",
+      "start": 17.18000030517578,
+      "end": 17.81999969482422
+    },
+    {
+      "word": "horsepower",
+      "start": 17.81999969482422,
+      "end": 18.219999313354492
+    },
+    {
+      "word": "and",
+      "start": 18.219999313354492,
+      "end": 18.639999389648438
+    },
+    {
+      "word": "465",
+      "start": 18.639999389648438,
+      "end": 19.440000534057617
+    },
+    {
+      "word": "pounds",
+      "start": 19.440000534057617,
+      "end": 19.719999313354492
+    },
+    {
+      "word": "of",
+      "start": 19.719999313354492,
+      "end": 20.1200008392334
+    },
+    {
+      "word": "torque",
+      "start": 20.1200008392334,
+      "end": 20.1200008392334
+    },
+    {
+      "word": "Power",
+      "start": 20.639999389648438,
+      "end": 20.799999237060547
+    },
+    {
+      "word": "is",
+      "start": 20.799999237060547,
+      "end": 21.0
+    },
+    {
+      "word": "managed",
+      "start": 21.0,
+      "end": 21.15999984741211
+    },
+    {
+      "word": "by",
+      "start": 21.15999984741211,
+      "end": 21.31999969482422
+    },
+    {
+      "word": "an",
+      "start": 21.31999969482422,
+      "end": 21.479999542236328
+    },
+    {
+      "word": "all",
+      "start": 21.479999542236328,
+      "end": 21.65999984741211
+    },
+    {
+      "word": "wheel",
+      "start": 21.65999984741211,
+      "end": 21.780000686645508
+    },
+    {
+      "word": "drive",
+      "start": 21.780000686645508,
+      "end": 22.0
+    },
+    {
+      "word": "system",
+      "start": 22.0,
+      "end": 22.360000610351562
+    },
+    {
+      "word": "ensuring",
+      "start": 22.700000762939453,
+      "end": 22.899999618530273
+    },
+    {
+      "word": "stability",
+      "start": 22.899999618530273,
+      "end": 23.34000015258789
+    },
+    {
+      "word": "and",
+      "start": 23.34000015258789,
+      "end": 23.81999969482422
+    },
+    {
+      "word": "performance",
+      "start": 23.81999969482422,
+      "end": 24.100000381469727
+    },
+    {
+      "word": "in",
+      "start": 24.100000381469727,
+      "end": 24.34000015258789
+    },
+    {
+      "word": "various",
+      "start": 24.34000015258789,
+      "end": 24.520000457763672
+    },
+    {
+      "word": "conditions",
+      "start": 24.520000457763672,
+      "end": 24.920000076293945
+    },
+    {
+      "word": "Although",
+      "start": 25.420000076293945,
+      "end": 25.65999984741211
+    },
+    {
+      "word": "it",
+      "start": 25.65999984741211,
+      "end": 25.920000076293945
+    },
+    {
+      "word": "retailed",
+      "start": 25.920000076293945,
+      "end": 26.260000228881836
+    },
+    {
+      "word": "for",
+      "start": 26.260000228881836,
+      "end": 26.31999969482422
+    },
+    {
+      "word": "around",
+      "start": 26.31999969482422,
+      "end": 26.540000915527344
+    },
+    {
+      "word": "88",
+      "start": 26.540000915527344,
+      "end": 27.020000457763672
+    },
+    {
+      "word": "000",
+      "start": 27.020000457763672,
+      "end": 27.15999984741211
+    },
+    {
+      "word": "new",
+      "start": 27.15999984741211,
+      "end": 27.739999771118164
+    },
+    {
+      "word": "you",
+      "start": 28.100000381469727,
+      "end": 28.1200008392334
+    },
+    {
+      "word": "can",
+      "start": 28.1200008392334,
+      "end": 28.299999237060547
+    },
+    {
+      "word": "find",
+      "start": 28.299999237060547,
+      "end": 28.440000534057617
+    },
+    {
+      "word": "them",
+      "start": 28.440000534057617,
+      "end": 28.540000915527344
+    },
+    {
+      "word": "for",
+      "start": 28.540000915527344,
+      "end": 28.65999984741211
+    },
+    {
+      "word": "about",
+      "start": 28.65999984741211,
+      "end": 28.8799991607666
+    },
+    {
+      "word": "60",
+      "start": 28.8799991607666,
+      "end": 29.219999313354492
+    },
+    {
+      "word": "000",
+      "start": 29.219999313354492,
+      "end": 29.399999618530273
+    },
+    {
+      "word": "today",
+      "start": 29.399999618530273,
+      "end": 30.020000457763672
+    },
+    {
+      "word": "reflecting",
+      "start": 30.399999618530273,
+      "end": 30.600000381469727
+    },
+    {
+      "word": "a",
+      "start": 30.600000381469727,
+      "end": 30.84000015258789
+    },
+    {
+      "word": "modest",
+      "start": 30.84000015258789,
+      "end": 31.040000915527344
+    },
+    {
+      "word": "depreciation",
+      "start": 31.040000915527344,
+      "end": 31.6200008392334
+    },
+    {
+      "word": "of",
+      "start": 31.6200008392334,
+      "end": 31.799999237060547
+    },
+    {
+      "word": "4",
+      "start": 31.799999237060547,
+      "end": 32.02000045776367
+    },
+    {
+      "word": "annually",
+      "start": 32.31999969482422,
+      "end": 32.65999984741211
+    },
+    {
+      "word": "It",
+      "start": 33.220001220703125,
+      "end": 33.36000061035156
+    },
+    {
+      "word": "rivals",
+      "start": 33.36000061035156,
+      "end": 33.619998931884766
+    },
+    {
+      "word": "the",
+      "start": 33.619998931884766,
+      "end": 33.79999923706055
+    },
+    {
+      "word": "BMW",
+      "start": 33.79999923706055,
+      "end": 34.15999984741211
+    },
+    {
+      "word": "X5",
+      "start": 34.15999984741211,
+      "end": 34.63999938964844
+    },
+    {
+      "word": "M",
+      "start": 34.63999938964844,
+      "end": 34.84000015258789
+    },
+    {
+      "word": "trading",
+      "start": 35.18000030517578,
+      "end": 35.2400016784668
+    },
+    {
+      "word": "503",
+      "start": 35.2400016784668,
+      "end": 35.84000015258789
+    },
+    {
+      "word": "horsepower",
+      "start": 35.84000015258789,
+      "end": 36.20000076293945
+    },
+    {
+      "word": "for",
+      "start": 36.20000076293945,
+      "end": 36.380001068115234
+    },
+    {
+      "word": "its",
+      "start": 36.380001068115234,
+      "end": 36.52000045776367
+    },
+    {
+      "word": "547",
+      "start": 36.52000045776367,
+      "end": 37.2400016784668
+    },
+    {
+      "word": "horsepower",
+      "start": 37.2400016784668,
+      "end": 37.63999938964844
+    },
+    {
+      "word": "but",
+      "start": 37.959999084472656,
+      "end": 38.08000183105469
+    },
+    {
+      "word": "the",
+      "start": 38.08000183105469,
+      "end": 38.2599983215332
+    },
+    {
+      "word": "R63's",
+      "start": 38.2599983215332,
+      "end": 38.86000061035156
+    },
+    {
+      "word": "rarity",
+      "start": 38.86000061035156,
+      "end": 39.119998931884766
+    },
+    {
+      "word": "ensures",
+      "start": 39.119998931884766,
+      "end": 39.540000915527344
+    },
+    {
+      "word": "it",
+      "start": 39.540000915527344,
+      "end": 39.7599983215332
+    },
+    {
+      "word": "stands",
+      "start": 39.7599983215332,
+      "end": 39.900001525878906
+    },
+    {
+      "word": "apart",
+      "start": 39.900001525878906,
+      "end": 40.34000015258789
+    },
+    {
+      "word": "This",
+      "start": 40.439998626708984,
+      "end": 40.68000030517578
+    },
+    {
+      "word": "engine",
+      "start": 40.68000030517578,
+      "end": 40.84000015258789
+    },
+    {
+      "word": "is",
+      "start": 40.84000015258789,
+      "end": 41.02000045776367
+    },
+    {
+      "word": "hand",
+      "start": 41.02000045776367,
+      "end": 41.31999969482422
+    },
+    {
+      "word": "assembled",
+      "start": 41.31999969482422,
+      "end": 41.459999084472656
+    },
+    {
+      "word": "by",
+      "start": 41.459999084472656,
+      "end": 41.619998931884766
+    },
+    {
+      "word": "a",
+      "start": 41.619998931884766,
+      "end": 41.779998779296875
+    },
+    {
+      "word": "single",
+      "start": 41.779998779296875,
+      "end": 41.959999084472656
+    },
+    {
+      "word": "engineer",
+      "start": 41.959999084472656,
+      "end": 42.220001220703125
+    },
+    {
+      "word": "a",
+      "start": 42.560001373291016,
+      "end": 42.84000015258789
+    },
+    {
+      "word": "hallmark",
+      "start": 42.84000015258789,
+      "end": 42.900001525878906
+    },
+    {
+      "word": "of",
+      "start": 42.900001525878906,
+      "end": 43.119998931884766
+    },
+    {
+      "word": "AMG's",
+      "start": 43.119998931884766,
+      "end": 43.58000183105469
+    },
+    {
+      "word": "commitment",
+      "start": 43.58000183105469,
+      "end": 43.7400016784668
+    },
+    {
+      "word": "to",
+      "start": 43.7400016784668,
+      "end": 43.97999954223633
+    },
+    {
+      "word": "precision",
+      "start": 43.97999954223633,
+      "end": 44.220001220703125
+    },
+    {
+      "word": "The",
+      "start": 44.68000030517578,
+      "end": 44.86000061035156
+    },
+    {
+      "word": "AMG",
+      "start": 44.86000061035156,
+      "end": 45.20000076293945
+    },
+    {
+      "word": "styling",
+      "start": 45.20000076293945,
+      "end": 45.5
+    },
+    {
+      "word": "including",
+      "start": 45.63999938964844,
+      "end": 45.84000015258789
+    },
+    {
+      "word": "the",
+      "start": 45.84000015258789,
+      "end": 46.040000915527344
+    },
+    {
+      "word": "prominent",
+      "start": 46.040000915527344,
+      "end": 46.2400016784668
+    },
+    {
+      "word": "6",
+      "start": 46.2400016784668,
+      "end": 46.52000045776367
+    },
+    {
+      "word": "3",
+      "start": 46.52000045776367,
+      "end": 46.81999969482422
+    },
+    {
+      "word": "badge",
+      "start": 46.81999969482422,
+      "end": 47.099998474121094
+    },
+    {
+      "word": "symbolizes",
+      "start": 47.560001373291016,
+      "end": 47.86000061035156
+    },
+    {
+      "word": "its",
+      "start": 47.86000061035156,
+      "end": 48.02000045776367
+    },
+    {
+      "word": "racing",
+      "start": 48.02000045776367,
+      "end": 48.31999969482422
+    },
+    {
+      "word": "DNA",
+      "start": 48.31999969482422,
+      "end": 48.63999938964844
+    },
+    {
+      "word": "and",
+      "start": 48.63999938964844,
+      "end": 49.02000045776367
+    },
+    {
+      "word": "engineering",
+      "start": 49.02000045776367,
+      "end": 49.34000015258789
+    },
+    {
+      "word": "excellence",
+      "start": 49.34000015258789,
+      "end": 49.720001220703125
+    },
+    {
+      "word": "Could",
+      "start": 49.84000015258789,
+      "end": 50.2599983215332
+    },
+    {
+      "word": "this",
+      "start": 50.2599983215332,
+      "end": 50.439998626708984
+    },
+    {
+      "word": "combination",
+      "start": 50.439998626708984,
+      "end": 50.79999923706055
+    },
+    {
+      "word": "of",
+      "start": 50.79999923706055,
+      "end": 51.0
+    },
+    {
+      "word": "luxury",
+      "start": 51.0,
+      "end": 51.20000076293945
+    },
+    {
+      "word": "and",
+      "start": 51.20000076293945,
+      "end": 51.41999816894531
+    },
+    {
+      "word": "performance",
+      "start": 51.41999816894531,
+      "end": 51.70000076293945
+    },
+    {
+      "word": "fit",
+      "start": 51.70000076293945,
+      "end": 51.900001525878906
+    },
+    {
+      "word": "into",
+      "start": 51.900001525878906,
+      "end": 52.060001373291016
+    },
+    {
+      "word": "your",
+      "start": 52.060001373291016,
+      "end": 52.2400016784668
+    },
+    {
+      "word": "daily",
+      "start": 52.2400016784668,
+      "end": 52.459999084472656
+    },
+    {
+      "word": "life",
+      "start": 52.459999084472656,
+      "end": 52.68000030517578
+    },
+    {
+      "word": "Or",
+      "start": 52.68000030517578,
+      "end": 53.20000076293945
+    },
+    {
+      "word": "is",
+      "start": 53.20000076293945,
+      "end": 53.29999923706055
+    },
+    {
+      "word": "the",
+      "start": 53.29999923706055,
+      "end": 53.41999816894531
+    },
+    {
+      "word": "R63",
+      "start": 53.41999816894531,
+      "end": 54.040000915527344
+    },
+    {
+      "word": "AMG",
+      "start": 54.040000915527344,
+      "end": 54.459999084472656
+    },
+    {
+      "word": "just",
+      "start": 54.459999084472656,
+      "end": 54.720001220703125
+    },
+    {
+      "word": "too",
+      "start": 54.720001220703125,
+      "end": 54.939998626708984
+    },
+    {
+      "word": "bold",
+      "start": 54.939998626708984,
+      "end": 55.060001373291016
+    },
+    {
+      "word": "a",
+      "start": 55.060001373291016,
+      "end": 55.41999816894531
+    },
+    {
+      "word": "choice",
+      "start": 55.41999816894531,
+      "end": 55.41999816894531
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/bmw-x5-m/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual-extra/0-front-image.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Front image",
+      "slot": "front",
+      "role": "detail",
+      "photo_id": "front-closeup-restored-1789487882331-0-0",
+      "cue_label": "[front-closeup-restored-1789487882331-0-0] Front image",
+      "note": ""
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-front-image.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front image",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1789487882331-0-0",
+          "cue_label": "[front-closeup-restored-1789487882331-0-0] Front image",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/2-lights-up-front-side.jpeg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "lights up front side",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1789487882331-2-2",
+          "cue_label": "[front-closeup-restored-1789487882331-2-2] lights up front side",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/3-6-3-amg-padge.jpeg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "6.3 amg padge",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1789487882331-3-3",
+          "cue_label": "[side-closeup-restored-1789487882331-3-3] 6.3 amg padge",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/4-wheels.jpeg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "wheels",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1789487882331-4-4",
+          "cue_label": "[side-closeup-restored-1789487882331-4-4] wheels",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/1-back.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "back",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1789487882331-1-1",
+          "cue_label": "[rear-closeup-restored-1789487882331-1-1] back",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/10-side-back-amd-and-r63-badges.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "side back amd and r63 badges",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1789487882331-10-10",
+          "cue_label": "[rear-closeup-restored-1789487882331-10-10] side back amd and r63 badges",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/9-engine-bay.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Engine bay",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1789487882331-9-9",
+          "cue_label": "[engine-closeup-restored-1789487882331-9-9] Engine bay",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/11-hand-built-engine.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Hand built engine",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1789487882331-11-11",
+          "cue_label": "[engine-closeup-restored-1789487882331-11-11] Hand built engine",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/5-bolster-seats-car-in-family-minivan.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "bolster seats car in family minivan",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1789487882331-5-5",
+          "cue_label": "[interior-closeup-restored-1789487882331-5-5] bolster seats car in family minivan",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/6-7-seater-for-family.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "7 Seater for family",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1789487882331-6-6",
+          "cue_label": "[interior-closeup-restored-1789487882331-6-6] 7 Seater for family",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/7-steering-wheel.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Steering wheel",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1789487882331-7-7",
+          "cue_label": "[interior-closeup-restored-1789487882331-7-7] Steering wheel",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/8-rear-climate-controls.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear Climate controls",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1789487882331-8-8",
+          "cue_label": "[interior-closeup-restored-1789487882331-8-8] Rear Climate controls",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9aXD54eG/2007-mercedes-benz-r63-amg?ss_id=37cc8f83-951b-4da3-b431-73b5786e5049&ref=pr_1_1",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 64500,
+    "sale_type": "sold",
+    "page_title": "2007 Mercedes-Benz R63 AMG",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "voice_auditions": {
+    "onyx": "single-mercedes-benz-r63-amg-20260915155806/voice_auditions/onyx.mp3",
+    "british_narrator": "single-mercedes-benz-r63-amg-20260915155806/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-mercedes-benz-r63-amg-20260915155806/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-mercedes-benz-r63-amg-20260915155806/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-mercedes-benz-r63-amg-20260915155806/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-mercedes-benz-r63-amg-20260915155806/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "left",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 32.510000228881836,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 40.38999938964844,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 44.329999923706055,
+        "layout": "close-right",
+        "framing": "bust"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 7.45,
+        "pose": "open"
+      },
+      {
+        "start": 8.9,
+        "pose": "rest"
+      },
+      {
+        "start": 10.85,
+        "pose": "chest"
+      },
+      {
+        "start": 12.3,
+        "pose": "rest"
+      },
+      {
+        "start": 14.25,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 15.7,
+        "pose": "rest"
+      },
+      {
+        "start": 17.65,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 19.1,
+        "pose": "rest"
+      },
+      {
+        "start": 21.05,
+        "pose": "open"
+      },
+      {
+        "start": 22.5,
+        "pose": "rest"
+      },
+      {
+        "start": 24.45,
+        "pose": "chest"
+      },
+      {
+        "start": 25.9,
+        "pose": "rest"
+      },
+      {
+        "start": 27.85,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 29.3,
+        "pose": "rest"
+      },
+      {
+        "start": 31.25,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 32.7,
+        "pose": "rest"
+      },
+      {
+        "start": 34.65,
+        "pose": "open"
+      },
+      {
+        "start": 36.1,
+        "pose": "rest"
+      },
+      {
+        "start": 38.05,
+        "pose": "chest"
+      },
+      {
+        "start": 39.5,
+        "pose": "rest"
+      },
+      {
+        "start": 41.539999,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 42.989999,
+        "pose": "rest"
+      },
+      {
+        "start": 45.48,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 46.93,
+        "pose": "rest"
+      },
+      {
+        "start": 48.88,
+        "pose": "open"
+      },
+      {
+        "start": 50.33,
+        "pose": "rest"
+      },
+      {
+        "start": 52.28,
+        "pose": "chest"
+      },
+      {
+        "start": 53.73,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 6.230000019073486,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-image.jpg",
+            "label": "Front image",
+            "photo_id": "front-closeup-restored-1789487882331-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-lights-up-front-side.jpeg",
+            "label": "lights up front side",
+            "photo_id": "front-closeup-restored-1789487882331-2-2"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 6.230000019073486
+      },
+      {
+        "start": 6.230000019073486,
+        "end": 11.850000381469727,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/3-6-3-amg-padge.jpeg",
+            "label": "6.3 amg padge",
+            "photo_id": "side-closeup-restored-1789487882331-3-3"
+          },
+          {
+            "path": "images/manual-extra/4-wheels.jpeg",
+            "label": "wheels",
+            "photo_id": "side-closeup-restored-1789487882331-4-4"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 6.230000019073486,
+        "chapter_end": 11.850000381469727
+      },
+      {
+        "start": 11.850000381469727,
+        "end": 20.179999351501465,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/9-engine-bay.jpg",
+            "label": "Engine bay",
+            "photo_id": "engine-closeup-restored-1789487882331-9-9"
+          },
+          {
+            "path": "images/manual-extra/11-hand-built-engine.jpg",
+            "label": "Hand built engine",
+            "photo_id": "engine-closeup-restored-1789487882331-11-11"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 11.850000381469727,
+        "chapter_end": 20.179999351501465
+      },
+      {
+        "start": 20.179999351501465,
+        "end": 24.880000114440918,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/1-back.jpg",
+            "label": "back",
+            "photo_id": "rear-closeup-restored-1789487882331-1-1"
+          },
+          {
+            "path": "images/manual-extra/10-side-back-amd-and-r63-badges.jpg",
+            "label": "side back amd and r63 badges",
+            "photo_id": "rear-closeup-restored-1789487882331-10-10"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 20.179999351501465,
+        "chapter_end": 24.880000114440918
+      },
+      {
+        "start": 24.880000114440918,
+        "end": 32.510000228881836,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-image.jpg",
+            "label": "Front image",
+            "photo_id": "front-closeup-restored-1789487882331-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-lights-up-front-side.jpeg",
+            "label": "lights up front side",
+            "photo_id": "front-closeup-restored-1789487882331-2-2"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 24.880000114440918,
+        "chapter_end": 32.510000228881836
+      },
+      {
+        "start": 32.510000228881836,
+        "end": 40.38999938964844,
+        "slot": null,
+        "label": null,
+        "hero": "images/bmw-x5-m/exterior_side-01-nobg.png",
+        "closeups": [],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 32.510000228881836,
+        "chapter_end": 40.38999938964844
+      },
+      {
+        "start": 40.38999938964844,
+        "end": 44.329999923706055,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/5-bolster-seats-car-in-family-minivan.jpg",
+            "label": "bolster seats car in family minivan",
+            "photo_id": "interior-closeup-restored-1789487882331-5-5"
+          },
+          {
+            "path": "images/manual-extra/6-7-seater-for-family.jpg",
+            "label": "7 Seater for family",
+            "photo_id": "interior-closeup-restored-1789487882331-6-6"
+          },
+          {
+            "path": "images/manual-extra/7-steering-wheel.jpg",
+            "label": "Steering wheel",
+            "photo_id": "interior-closeup-restored-1789487882331-7-7"
+          },
+          {
+            "path": "images/manual-extra/8-rear-climate-controls.jpg",
+            "label": "Rear Climate controls",
+            "photo_id": "interior-closeup-restored-1789487882331-8-8"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 40.38999938964844,
+        "chapter_end": 44.329999923706055
+      },
+      {
+        "start": 44.329999923706055,
+        "end": 49.59000015258789,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-image.jpg",
+            "label": "Front image",
+            "photo_id": "front-closeup-restored-1789487882331-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-lights-up-front-side.jpeg",
+            "label": "lights up front side",
+            "photo_id": "front-closeup-restored-1789487882331-2-2"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 44.329999923706055,
+        "chapter_end": 55.92
+      },
+      {
+        "start": 49.59000015258789,
+        "end": 55.92,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-image.jpg",
+            "label": "Front image",
+            "photo_id": "front-closeup-restored-1789487882331-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-lights-up-front-side.jpeg",
+            "label": "lights up front side",
+            "photo_id": "front-closeup-restored-1789487882331-2-2"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 44.329999923706055,
+        "chapter_end": 55.92
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1789487882331-0-0",
+          "front-closeup-restored-1789487882331-2-2"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 6.230000019073486,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-restored-1789487882331-3-3",
+          "side-closeup-restored-1789487882331-4-4"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 11.850000381469727,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-restored-1789487882331-9-9",
+          "engine-closeup-restored-1789487882331-11-11"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 20.179999351501465,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-restored-1789487882331-1-1",
+          "rear-closeup-restored-1789487882331-10-10"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 24.880000114440918,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1789487882331-0-0",
+          "front-closeup-restored-1789487882331-2-2"
+        ],
+        "active": null
+      },
+      {
+        "scene": 5,
+        "start": 32.510000228881836,
+        "slot": null,
+        "closeups": [],
+        "active": null
+      },
+      {
+        "scene": 6,
+        "start": 40.38999938964844,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-restored-1789487882331-5-5",
+          "interior-closeup-restored-1789487882331-6-6",
+          "interior-closeup-restored-1789487882331-7-7",
+          "interior-closeup-restored-1789487882331-8-8"
+        ],
+        "active": null
+      },
+      {
+        "scene": 7,
+        "start": 44.329999923706055,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1789487882331-0-0",
+          "front-closeup-restored-1789487882331-2-2"
+        ],
+        "active": null
+      },
+      {
+        "scene": 8,
+        "start": 49.59000015258789,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1789487882331-0-0",
+          "front-closeup-restored-1789487882331-2-2"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
