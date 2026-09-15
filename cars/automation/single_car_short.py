@@ -1040,6 +1040,18 @@ def gather_manual_rival_photo(url, images_dir, rival_make, rival_model):
     return str(path.relative_to(images_dir.parent)).replace("\\", "/"), facing_direction
 
 
+def _pasted_photos_are_enough(manual_urls, auction_url):
+    """Whether the build can skip scraping a listing for photos.
+
+    With no listing there is nothing to scrape, so any pasted photo is
+    enough. With a listing, it is only enough once every slot is pasted --
+    otherwise the gallery still has to fill the gaps.
+    """
+    if not auction_url:
+        return True
+    return all(manual_urls.get(field) for field in MANUAL_PHOTO_FIELDS)
+
+
 def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None, auction_url=None, manual_photo_urls=None, extra_photos=None):
     search_hint = " ".join(value for value in [make, model, trim] if value).strip()
     if start_year or end_year:
@@ -1064,7 +1076,17 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
     # scraped listing in this case, so selected_auction comes back empty.
     manual_urls = {key: value for key, value in (manual_photo_urls or {}).items() if value}
     nested = any(isinstance(p, dict) and photo_metadata(p, i) for i, p in enumerate(extra_photos or []))
-    if (manual_urls or nested) and not auction_url:
+    # A listing URL used to force the scrape even when every slot was
+    # already pasted in. The gallery was downloaded, AI-reviewed image by
+    # image, plate-blurred and background-removed -- and then
+    # _apply_manual_photo_overrides threw nearly all of it away. On a
+    # ten-image gallery that is twenty vision calls, roughly 740k tokens,
+    # spent on photos the video never shows, plus the scrape itself, which
+    # is the slowest and least reliable part of a build (run #190 hung in
+    # it for fifty minutes). When the pasted photos already cover every
+    # slot there is nothing left for the listing to supply, so it is not
+    # fetched.
+    if (manual_urls or nested) and _pasted_photos_are_enough(manual_urls, auction_url):
         media = gather_manual_media(manual_urls, images_dir, entry)
         media.extend(gather_extra_media(extra_photos, images_dir, entry))
         if not media:

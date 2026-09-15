@@ -1257,3 +1257,26 @@ def test_repair_runs_on_the_package_and_keeps_the_word_count_honest():
     # The rest of the scene survives the surgery on its first sentence.
     assert opening.endswith("It is also the loudest.")
     assert repaired["word_count"] == single_car_short._word_count(repaired["script"])
+
+
+def test_a_listing_is_not_scraped_when_every_slot_is_already_pasted():
+    """A listing URL used to force the scrape even with every photo pasted:
+    the gallery was downloaded, AI-reviewed image by image, plate-blurred and
+    background-removed, then thrown away by the manual overrides. That is
+    twenty vision calls on a ten-image gallery, and the scrape is also where
+    run #190 hung for fifty minutes."""
+    import single_car_short
+
+    every_slot = {field: f"https://example.com/{field}.jpg"
+                  for field in single_car_short.MANUAL_PHOTO_FIELDS}
+    listing = "https://carsandbids.com/auctions/abc123/2019-corvette-zr1"
+    assert single_car_short._pasted_photos_are_enough(every_slot, listing)
+
+    # A gap still needs the gallery to fill it.
+    missing_interior = dict(every_slot, interior="")
+    assert not single_car_short._pasted_photos_are_enough(missing_interior, listing)
+
+    # Without a listing there is nothing to scrape either way, which is the
+    # behaviour this has always had.
+    assert single_car_short._pasted_photos_are_enough(missing_interior, "")
+    assert single_car_short._pasted_photos_are_enough({}, "")
