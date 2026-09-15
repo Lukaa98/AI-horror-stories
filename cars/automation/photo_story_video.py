@@ -19,17 +19,12 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageOps
 from moviepy.editor import ImageClip, CompositeVideoClip
-from generate_sample import _font
 # Row/height geometry is shared with the motion planner so the narrator can
 # aim at a tile the renderer actually drew -- see photo_story.py.
 from photo_story import collage_metrics, reveal_schedule
 BACKGROUND = (255, 255, 255)
 ACTIVE_OUTLINE = (225, 157, 20)
 ACTIVE_OUTLINE_WIDTH = 4
-# Dark band under the highlighted tile's name: a white one reads as frame
-# background rather than as part of the photo.
-LABEL_BACKGROUND = (24, 26, 30)
-LABEL_COLOR = (255, 255, 255)
 
 
 def _open(path, root):
@@ -72,15 +67,6 @@ def _paste_contained(frame, image, box):
     frame.paste(fitted, (x + (w - fitted.width) // 2, y + (h - fitted.height) // 2))
 
 
-def _short_label(draw, label, font, width):
-    label = str(label)
-    if draw.textlength(label, font=font) <= width:
-        return label
-    while label and draw.textlength(label + "…", font=font) > width:
-        label = label[:-1]
-    return label + "…"
-
-
 def _cell_boxes(box_w, box_h, count, race_strip=False):
     """(x, y, w, h) for each close-up cell, in fill order."""
     metrics = collage_metrics(box_w, box_h, count, race_strip)
@@ -105,20 +91,19 @@ def _contained(image, size):
     return tile
 
 
-def _highlight_overlay(size, label, font, gap):
-    """The outline and name drawn over an already-placed tile, as its own
-    transparent layer -- so highlighting a tile never redraws the photo."""
+def _highlight_overlay(size):
+    """An outline over an already-placed tile, as its own transparent layer,
+    so marking a tile never redraws the photo.
+
+    Deliberately no caption. A close-up's name is the user's own label,
+    typed to identify the photo in the editor and to tell research what the
+    picture is -- it is working notes, not on-screen copy, and run #182 put
+    a typo ("Direct sire") straight into the video.
+    """
     w, h = size
     overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(overlay)
-    if label:
-        pad = max(3, gap // 2)
-        text = _short_label(draw, label, font, w - 2 * pad)
-        text_h = round(getattr(font, "size", 14) * 1.6)
-        draw.rectangle((0, h - text_h, w - 1, h - 1), fill=(*LABEL_BACKGROUND, 255))
-        draw.text((pad, h - text_h + (text_h - getattr(font, "size", 14)) // 2),
-                  text, font=font, fill=(*LABEL_COLOR, 255))
-    draw.rectangle((0, 0, w - 1, h - 1), outline=(*ACTIVE_OUTLINE, 255), width=ACTIVE_OUTLINE_WIDTH)
+    ImageDraw.Draw(overlay).rectangle(
+        (0, 0, w - 1, h - 1), outline=(*ACTIVE_OUTLINE, 255), width=ACTIVE_OUTLINE_WIDTH)
     return overlay
 
 
@@ -143,7 +128,6 @@ def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, ou
     root, output_dir = Path(root), Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     _, _, box_w, box_h = map(int, media_box)
-    font = _font(max(13, round(size[0] * 0.019)))
 
     # One chapter per run of scenes sharing a picture; cues already carry the
     # span, so the reveal is paced against the whole chapter rather than
@@ -221,14 +205,13 @@ def build_photo_tracks(cues, fallback_paths, root, media_box, size, duration, ou
             if tile_index >= len(cells):
                 continue
             x, y, w, h = cells[tile_index]
-            label = chapter["closeups"][tile_index][1]
             # Never before the tile it marks has arrived.
             highlight_start = max(highlight_start, appears.get(tile_index, start))
             highlight_end = min(highlight_end, end)
             if highlight_end - highlight_start < 0.2:
                 continue
             overlay_path = output_dir / f"chapter-{index}-mark-{tile_index}.png"
-            _highlight_overlay((w, h), label, font, gap).save(overlay_path)
+            _highlight_overlay((w, h)).save(overlay_path)
             layers.append(ImageClip(str(overlay_path), transparent=True)
                           .set_duration(highlight_end - highlight_start)
                           .set_position((x, y))

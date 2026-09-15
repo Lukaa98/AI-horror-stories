@@ -62,8 +62,11 @@ sharing one main photo -- not the scene, since a slot usually covers several sce
 staging per scene would either restart the reveal each time or never finish it. The
 narrator waits for a tile to actually appear before pointing at it.
 
-When a scene is specifically about one close-up, that tile gets an outline and its
-name; otherwise nothing is highlighted. Nothing floats over the lower half of the
+When a scene is specifically about one close-up, that tile gets an outline -- and only
+an outline. A close-up's name is never drawn on screen: it is the user's own working
+label, typed to identify the photo in the editor and to tell research what the picture
+is, and run #182 put a typo ("Direct sire", meant to be "side") straight into the
+video. otherwise nothing is highlighted. Nothing floats over the lower half of the
 frame any more, so the narrator has its full range of framings back.
 
 The comparison drag race runs in a lane the photo band opens for it, between the main
@@ -112,10 +115,10 @@ one, never force a mention, and never let one push out a history/mechanical beat
 
 ## Naming close-ups
 
-Name every close-up. The name is the only thing research can talk about, and it is what
-is printed on the tile while it is highlighted. An unnamed close-up falls back to
-"Front close-up" / "Side close-up", which says nothing to the script and reads as a
-placeholder on screen -- that is what happened throughout run #171. The editor warns
+Name every close-up. The name is the only thing research can talk about, and it is how
+you tell one photo from another in the editor. It is never shown to viewers. An unnamed
+close-up falls back to "Front close-up" / "Side close-up", which says nothing to the
+script and leaves research with no reason to mention that photo at all. The editor warns
 when a close-up has a URL and no name.
 
 Each photo hint handed to research now quotes the exact string to echo back:
