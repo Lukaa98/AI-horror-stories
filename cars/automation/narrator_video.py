@@ -1568,6 +1568,28 @@ def _drag_race_track(
         .set_start(seg_start).set_duration(total_duration).set_position((flag_x, flag_y))
     )
 
+    # What the race is actually measuring, printed on the finish line. The
+    # cars run their published quarter-mile times, which do not have to
+    # agree with the horsepower the narration is quoting: run #202 said "700
+    # horsepower surpasses the Huracan's 630" while the Huracan won, because
+    # it runs 10.3 to the Porsche's 10.5. The race was right and the video
+    # looked like it contradicted itself, so the times are now on screen.
+    race_label_clip = None
+    if main_quarter_mile and rival_quarter_mile:
+        label = f"1/4 MILE  {main_quarter_mile:g}s  vs  {rival_quarter_mile:g}s"
+        label_path = Path(str(main_cutout_path)).parent / "_race-label.png"
+        label_font = _font(max(18, int(width * 0.026)))
+        label_img = Image.new("RGBA", (width, int(width * 0.05)), (0, 0, 0, 0))
+        label_draw = ImageDraw.Draw(label_img)
+        label_draw.text((width / 2, label_img.height / 2), label, font=label_font,
+                        fill=(*ACCENT_COLOR, 255), anchor="mm")
+        label_img.save(label_path)
+        race_label_clip = (
+            ImageClip(str(label_path), transparent=True)
+            .set_start(seg_start).set_duration(total_duration)
+            .set_position((0, int(max(main_y, rival_y) + car_width * 0.45)))
+        )
+
     # A green glow behind the winning car, timed to switch on exactly when
     # it parks at the finish line, so which car actually won never comes
     # down to "they looked like they finished together."
@@ -1581,7 +1603,10 @@ def _drag_race_track(
         .set_position((finish_x - car_width - (badge_diameter - car_width) / 2, winner_y - badge_diameter / 2))
     )
 
-    return [flag_clip, *light_clips, badge_clip, *car_clips], sfx_clips
+    # Cars stay last in the list: they are the layer everything else sits
+    # behind, and callers index them from the end.
+    label_clips = [race_label_clip] if race_label_clip is not None else []
+    return [flag_clip, *light_clips, *label_clips, badge_clip, *car_clips], sfx_clips
 
 
 def _progress_bar_track(size, duration):

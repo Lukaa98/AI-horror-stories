@@ -1215,8 +1215,15 @@ def _pasted_race_media(url, images_dir, entry):
         print("[single-car] The pasted drag-race photo did not download as an image; "
               "falling back to the best automatic side-profile pick.")
         return None
+    facing_direction = _facing_direction_for_photo(path, entry)
+    # The same preparation the rival's own race photo gets: a plate blurred,
+    # and the background cut away so the car races as a cutout on the white
+    # canvas. Without this the pasted photo ran as a rectangular snapshot
+    # with its sky and tarmac still attached, next to a clean rival cutout.
+    blur_license_plates(path)
+    path = remove_background(path)
     relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
-    return {"path": relative, "facing_direction": _facing_direction_for_photo(path, entry)}
+    return {"path": relative, "facing_direction": facing_direction}
 
 
 def _select_side_profile_media(media):

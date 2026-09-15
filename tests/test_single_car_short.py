@@ -1361,16 +1361,26 @@ def test_a_pasted_race_photo_beats_the_automatic_pick(tmp_path, monkeypatch):
     downloaded = tmp_path / "images" / "manual-race" / "race.jpg"
     downloaded.parent.mkdir(parents=True)
     downloaded.write_bytes(b"jpeg")
+    cutout = downloaded.with_name("race-nobg.png")
+    cutout.write_bytes(b"png")
+    calls = []
     monkeypatch.setattr(single_car_short, "_download_car_photo",
                         lambda url, dest, stem: downloaded)
     monkeypatch.setattr(single_car_short, "_facing_direction_for_photo",
                         lambda path, entry: "right")
+    monkeypatch.setattr(single_car_short, "blur_license_plates",
+                        lambda path: calls.append(("blur", path)))
+    monkeypatch.setattr(single_car_short, "remove_background",
+                        lambda path: (calls.append(("nobg", path)), cutout)[1])
 
     chosen = single_car_short._pasted_race_media(
         "https://example.com/side.jpg", tmp_path / "images", {})
     # Relative to the build directory, the same shape every other media entry
-    # uses ("images/manual-extra/0-front.jpg" and so on).
-    assert chosen == {"path": "images/manual-race/race.jpg", "facing_direction": "right"}
+    # uses ("images/manual-extra/0-front.jpg" and so on) -- and a cutout, not
+    # the raw snapshot: run #202 raced a rectangle of sky and tarmac against
+    # a clean rival cutout.
+    assert chosen == {"path": "images/manual-race/race-nobg.png", "facing_direction": "right"}
+    assert [kind for kind, _ in calls] == ["blur", "nobg"]
 
     # No link, or a link that will not download, leaves the automatic pick in
     # charge rather than losing the race entirely.

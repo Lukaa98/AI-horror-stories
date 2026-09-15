@@ -330,8 +330,12 @@ def test_drag_race_track_the_shorter_quarter_mile_time_wins(tmp_path):
         main_quarter_mile=10.5, rival_quarter_mile=11.5,  # rival has more HP but is slower in the 1/4 mile
         size=CANVAS, seg_start=2.0, seg_end=2.0 + RACE_WINDOW_SECONDS,
     )
-    # flag + 3 lights + winner badge + 2 cars.
-    assert len(clips) == 7
+    # flag + 3 lights + winner badge + 2 cars + the 1/4-mile label. The label
+    # exists because the race runs quarter-mile times while the narration
+    # quotes horsepower, and those disagree: run #202 said "700 horsepower
+    # surpasses the Huracan's 630" and then the Huracan won, which is correct
+    # (10.3 vs 10.5) and looked like the video contradicting itself.
+    assert len(clips) == 8
     assert len(sfx) == 3  # one chime per light step
     main_clip, rival_clip = clips[-2], clips[-1]
     assert main_clip.start == 2.0 and rival_clip.start == 2.0
@@ -670,3 +674,20 @@ def test_a_revealed_row_never_redraws_the_rows_already_up(tmp_path):
         # The bottom border legitimately moves down; everything above it must not.
         body = slice(drawn[0], drawn[-1] - 4)
         assert np.abs(earlier[body] - later[body]).max() == 0
+
+
+def test_the_race_label_only_appears_when_there_are_times_to_show(tmp_path):
+    """With no published times the race falls back to horsepower, so there is
+    no quarter-mile figure to print and the label would be a lie."""
+    from narrator_video import CANVAS, RACE_WINDOW_SECONDS, _drag_race_track
+
+    main_cutout, rival_cutout = tmp_path / "m.png", tmp_path / "r.png"
+    _make_transparent_png(main_cutout)
+    _make_transparent_png(rival_cutout)
+    clips, _sfx = _drag_race_track(
+        str(main_cutout), str(rival_cutout), "right", "right", main_hp=700, rival_hp=630,
+        main_quarter_mile=None, rival_quarter_mile=None,
+        size=CANVAS, seg_start=2.0, seg_end=2.0 + RACE_WINDOW_SECONDS,
+    )
+    # flag + 3 lights + winner badge + 2 cars, and no label.
+    assert len(clips) == 7
