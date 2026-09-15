@@ -776,6 +776,14 @@ def _merged_boundaries(interval_lists, duration):
 # video. Run #184's script never spoke the car's own horsepower and never
 # mentioned torque or 0-60 at all -- the table means the viewer gets them
 # regardless of what the narration decides to talk about.
+# One accent used everywhere, so the colour reads as a scheme rather than
+# decoration: headline, the stat line and the spec table's trim. Deep enough
+# to stay legible against white at headline size, which the tile-highlight
+# amber is not. Word-by-word captions stay black -- colouring the spoken
+# ticker as well turns the frame into noise.
+ACCENT_COLOR = (176, 32, 26)
+ACCENT_TINT = (250, 242, 240, 255)
+
 SPEC_TABLE_FIELDS = (
     ("horsepower", "Horsepower"),
     ("torque", "Torque"),
@@ -807,20 +815,30 @@ def _spec_table_clip(key_specs, size, output_path):
     table_h = row_h * len(rows)
     table_x, table_y = int(width * SPEC_TABLE_X_RATIO), int(height * SPEC_TABLE_TOP_RATIO)
 
+    header_h = int(row_h * 0.62)
     frame = Image.new("RGBA", size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(frame)
-    draw.rectangle((table_x, table_y, table_x + table_w, table_y + table_h),
-                   fill=STAT_TABLE_BG_COLOR, outline=STAT_TABLE_BORDER_COLOR, width=3)
+    draw.rectangle((table_x, table_y, table_x + table_w, table_y + header_h + table_h),
+                   fill=STAT_TABLE_BG_COLOR, outline=ACCENT_COLOR, width=3)
+    # Accent header, and a bar down the left edge tying the rows together.
+    draw.rectangle((table_x, table_y, table_x + table_w, table_y + header_h), fill=(*ACCENT_COLOR, 255))
+    header_font = _font(int(SPEC_TABLE_FONT_SIZE * 0.78))
+    draw.text((table_x + int(table_w * 0.05), table_y + header_h * 0.24), "KEY SPECS",
+              font=header_font, fill=(255, 255, 255, 255))
     label_font = _font(int(SPEC_TABLE_FONT_SIZE * 0.82))
     value_font = _font(SPEC_TABLE_FONT_SIZE)
     pad = max(10, int(table_w * 0.05))
     for index, (title, value) in enumerate(rows):
-        top = table_y + index * row_h
+        top = table_y + header_h + index * row_h
+        if index % 2:
+            draw.rectangle((table_x + 3, top, table_x + table_w - 3, top + row_h), fill=ACCENT_TINT)
+        draw.rectangle((table_x + 3, top, table_x + int(table_w * 0.016), top + row_h),
+                       fill=(*ACCENT_COLOR, 255))
         if index:
             draw.line((table_x + pad, top, table_x + table_w - pad, top),
-                      fill=STAT_TABLE_DIVIDER_COLOR, width=2)
+                      fill=STAT_TABLE_DIVIDER_COLOR, width=1)
         draw.text((table_x + pad, top + row_h * 0.16), title.upper(),
-                  font=label_font, fill=STAT_TABLE_LABEL_COLOR)
+                  font=label_font, fill=(*ACCENT_COLOR, 255))
         # The value is what matters, so it takes the right-hand side and is
         # shrunk to fit rather than clipped -- "3.6L twin-turbo flat-six" is
         # a legitimate answer and must not run out of the box.
@@ -1570,7 +1588,8 @@ def render_narrator_video(car_media_paths, manifest, output_path):
                 # caption and the character, rather than a fixed 0.522 that
                 # silently stops being right when the stack moves.
                 stat_y = int((size[1] * TOP_STACK_RATIO + narrator_top_y) / 2)
-                _caption_frame(size, " · ".join(stats), stat_y, path, font_size=32)
+                _caption_frame(size, " · ".join(stats), stat_y, path, font_size=32,
+                               fill=ACCENT_COLOR)
                 stat_tracker_clips.append(ImageClip(str(path)).set_start(start).set_duration(end-start))
     else:
         stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y, size[1] * TOP_STACK_RATIO)
@@ -1592,7 +1611,8 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         positions = _typing_headline_positions(headline, start, end)
         for char_index, (prefix, seg_start, seg_duration) in enumerate(positions):
             frame_path = output_path.parent / "_frames" / f"headline-{index}-{char_index}.png"
-            _caption_frame(size, prefix, int(headline_center_y), frame_path, font_size=92)
+            _caption_frame(size, prefix, int(headline_center_y), frame_path, font_size=92,
+                           fill=ACCENT_COLOR)
             headline_clips.append(
                 ImageClip(str(frame_path)).set_start(seg_start).set_duration(seg_duration).set_position((0, 0))
             )
