@@ -8,7 +8,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.23 — Specs reveal as spoken";
+const UI_VERSION = "V11.24 — Suggested comparison cars";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -308,9 +308,26 @@ function extractResponseText(data) {
 // seconds instead of paying for a GitHub Actions runner cold-start just to
 // make one API call. Requires the user's own OpenAI key (stored the same
 // way the GitHub token is, in localStorage) rather than the repo secret.
-async function fetchRivalsDirect({ apiKey, make, model, trim, year, count }) {
+// The single-car short compares on numbers and runs a drag race, so its
+// rivals are picked for a fair spec match rather than for exhaust note. Each
+// one carries its own model year, which is also what stops the rival photo
+// search inheriting the main car's years and asking for a car that did not
+// exist yet (an R63 is a 2007; "BMW X5 M" did not exist until 2010).
+function singleCarRivalPrompt(baseLabel, count) {
+  return (
+    `Suggest ${count} rival/competitor cars for a head-to-head spec comparison and drag race ` +
+    `against the ${baseLabel}. Pick cars a buyer would genuinely cross-shop: same era, similar ` +
+    "price bracket, similar performance. For each rival give the model year that actually " +
+    "overlaps the base car's own years -- never a year that model was not sold in -- plus make, " +
+    "model, trim (the variant that matches this price/performance tier, empty string if not " +
+    "applicable), and a one-sentence reason it is a fair rival, mentioning its horsepower. Do not " +
+    "suggest the same make and model as the base car."
+  );
+}
+
+async function fetchRivalsDirect({ apiKey, make, model, trim, year, count, prompt: customPrompt }) {
   const baseLabel = `${year} ${make} ${model} ${trim}`.trim();
-  const prompt = (
+  const prompt = customPrompt || (
     `Suggest ${count} rival/competitor cars for a head-to-head cold-start-sound comparison video ` +
     `against the ${baseLabel}. Pick cars from roughly the same era (within a few model years), a ` +
     "similar price bracket, and a similar performance/segment -- genuine rivals a car enthusiast " +
@@ -726,6 +743,13 @@ export default function App() {
   // "Start from a previous build": the list is fetched once, lazily, the
   // first time the dropdown is opened -- the create form should not pay for
   // a tree walk nobody asked for.
+  // The comparison car, chosen by name from AI suggestions rather than
+  // worked out from a pasted photo. Naming it skips a vision call, carries
+  // the rival's own model year, and means its photo never has to be scraped.
+  const [rivalCar, setRivalCar] = useState("");
+  const [rivalChoices, setRivalChoices] = useState(null);
+  const [rivalChoicesStage, setRivalChoicesStage] = useState("idle");
+  const [rivalChoicesError, setRivalChoicesError] = useState(null);
   const [previousBuilds, setPreviousBuilds] = useState([]);
   const [previousBuildsStage, setPreviousBuildsStage] = useState("idle");
   const [previousBuildsError, setPreviousBuildsError] = useState(null);
@@ -1042,6 +1066,7 @@ export default function App() {
           photo_engine: useManualPhotos ? photoUrls.engine.trim() : "",
           photo_interior: useManualPhotos ? photoUrls.interior.trim() : "",
           photo_rival: compareEnabled ? photoUrls.rival.trim() : "",
+          rival_car: compareEnabled ? rivalCar.trim() : "",
           disable_comparison: String(!compareEnabled),
           extra_photos: (() => {
             if (!useManualPhotos) return "";
@@ -1067,6 +1092,30 @@ export default function App() {
       setError(String(err.message || err));
       setStage("error");
       setStatusDetail("Single-car Short failed - open the build log for details");
+    }
+  }
+
+  async function handleSuggestComparisonCars() {
+    if (!make.trim() || !model.trim()) return;
+    setRivalChoicesError(null);
+    setRivalChoices(null);
+    setRivalChoicesStage("loading");
+    const year = startYear || endYear || "";
+    try {
+      const baseLabel = `${year} ${make.trim()} ${model.trim()} ${focus.trim()}`.trim();
+      if (!settings.openaiKey) {
+        throw new Error("Add your OpenAI key in Settings -- suggestions are a direct browser call, "
+          + "so they come back in a couple of seconds instead of starting a workflow run.");
+      }
+      setRivalChoices(await fetchRivalsDirect({
+        apiKey: settings.openaiKey,
+        make: make.trim(), model: model.trim(), trim: focus.trim(), year, count: 4,
+        prompt: singleCarRivalPrompt(baseLabel, 4),
+      }));
+      setRivalChoicesStage("ready");
+    } catch (err) {
+      setRivalChoicesError(String(err.message || err));
+      setRivalChoicesStage("error");
     }
   }
 
@@ -1115,6 +1164,7 @@ export default function App() {
     // under it -- the rival URL lives in its own section and does not count.
     setUseManualPhotos(SLOTS.some(([slot]) => slots[slot]) || closeups.length > 0);
     setCompareEnabled(String(inputs.disable_comparison) !== "true");
+    setRivalCar(inputs.rival_car || "");
     setWorkflow("single_car");
     setFilledFromBuild(build);
   }
@@ -2401,15 +2451,61 @@ export default function App() {
                       </label>
                     </div>
                     {compareEnabled && (
-                      <label className="field-row">
-                        <input
-                          value={photoUrls.rival}
-                          onChange={(e) => setPhotoUrls({ ...photoUrls, rival: e.target.value })}
-                          placeholder="Comparison car photo URL (optional)"
-                          disabled={stage === "single-car-building"}
-                        />
-                        <Tip text="Paste a photo to force the script to use that exact car as the rival. Leave blank and the AI script decides -- it may skip the comparison if it can't find a fair one." />
-                      </label>
+                      <>
+                        <div className="check-row">
+                          <button
+                            type="button"
+                            className="secondary"
+                            onClick={handleSuggestComparisonCars}
+                            disabled={!make.trim() || !model.trim() || rivalChoicesStage === "loading"
+                              || stage === "single-car-building"}
+                          >
+                            {rivalChoicesStage === "loading" ? "Asking for rivals..." : "Suggest comparison cars"}
+                          </button>
+                          <Tip text="A quick text-only question to the AI -- a fraction of a cent, no workflow run. Picking one names the rival outright, so the build skips identifying your photo and skips searching for its picture." />
+                        </div>
+                        {rivalChoicesError && <p className="error">{rivalChoicesError}</p>}
+                        {rivalChoices && (
+                          <div className="rival-grid">
+                            {rivalChoices.map((rival, index) => {
+                              const label = `${rival.year} ${rival.make} ${rival.model} ${rival.trim || ""}`
+                                .replace(/\s+/g, " ").trim();
+                              return (
+                                <div className="rival-card" key={index}>
+                                  <strong>{label}</strong>
+                                  <p className="hint">{rival.reason}</p>
+                                  <button
+                                    type="button"
+                                    className="secondary"
+                                    onClick={() => setRivalCar(label)}
+                                    disabled={rivalCar === label || stage === "single-car-building"}
+                                  >
+                                    {rivalCar === label ? "Chosen" : "Use this rival"}
+                                  </button>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                        <label className="field-row">
+                          <input
+                            value={rivalCar}
+                            onChange={(e) => setRivalCar(e.target.value)}
+                            placeholder="Comparison car, e.g. 2010 BMW X5 M (optional)"
+                            disabled={stage === "single-car-building"}
+                          />
+                          <Tip text="Naming the car here forces the script to compare against it, and carries its own model year so its photo search never asks for a year that car was not sold in." />
+                        </label>
+                        <label className="field-row">
+                          <input
+                            value={photoUrls.rival}
+                            onChange={(e) => setPhotoUrls({ ...photoUrls, rival: e.target.value })}
+                            placeholder="Comparison car photo URL -- a side profile, for the drag race"
+                            disabled={stage === "single-car-building"}
+                          />
+                          <Tip text="Paste a side-on photo and it is used directly, so no listing is scraped for the rival. Leave blank and the build searches for one, which is the slow and unreliable path." />
+                        </label>
+                      </>
                     )}
                   </div>
                 </>

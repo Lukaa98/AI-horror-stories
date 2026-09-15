@@ -1280,3 +1280,17 @@ def test_a_listing_is_not_scraped_when_every_slot_is_already_pasted():
     # behaviour this has always had.
     assert single_car_short._pasted_photos_are_enough(missing_interior, "")
     assert single_car_short._pasted_photos_are_enough({}, "")
+
+
+def test_a_named_rival_is_used_directly_and_carries_its_own_year():
+    """Working the rival out from a pasted photo costs a vision call on a
+    full-size image and tells you nothing about the rival's years -- which is
+    how an R63's 2007 ended up searching for a "BMW X5 M (2007)", a car that
+    did not exist until 2010."""
+    import single_car_short
+
+    assert single_car_short._year_in("2010 BMW X5 M") == 2010
+    assert single_car_short._year_in("BMW X5 M") is None
+    assert single_car_short._year_in("") is None
+    # A trim with digits in it must not read as a model year.
+    assert single_car_short._year_in("Porsche 911 GT2 RS") is None

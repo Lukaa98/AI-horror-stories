@@ -1183,7 +1183,13 @@ def _select_side_profile_media(media):
     return {"path": match["path"], "facing_direction": match.get("facing_direction", "unclear")}
 
 
-def apply_rival_photos(scenes, media, start_year, end_year, images_dir, manual_rival_url=None):
+def _year_in(text):
+    """The four-digit model year in a chosen rival's name, if it has one."""
+    match = re.search(r"\b(19|20)\d{2}\b", str(text or ""))
+    return int(match.group(0)) if match else None
+
+
+def apply_rival_photos(scenes, media, start_year, end_year, images_dir, manual_rival_url=None, rival_year=None):
     """Swap in a real photo of the named competitor for any scene that
     directly compares to one, instead of showing the main car's own photo
     again there. The rival car itself is decided by the AI script (it's
@@ -1209,7 +1215,14 @@ def apply_rival_photos(scenes, media, start_year, end_year, images_dir, manual_r
         else:
             cache_key = (rival_make, rival_model)
             if cache_key not in rival_cache:
-                rival_cache[cache_key] = gather_rival_photo(rival_make, rival_model, start_year, end_year, images_dir)
+                # The rival's own year when the user picked it, not this
+                # car's: an R63 is a 2007, so searching "BMW X5 M" with the
+                # R63's years asked for a 2007 X5 M, a car that did not
+                # exist until 2010, and the search settled for a plain X5.
+                rival_start = rival_year or start_year
+                rival_end = rival_year or end_year
+                rival_cache[cache_key] = gather_rival_photo(
+                    rival_make, rival_model, rival_start, rival_end, images_dir)
             rival_path, rival_facing = rival_cache[cache_key]
         if rival_path and index < len(media):
             media[index] = {"path": rival_path, "type": "exterior", "facing_direction": rival_facing}
@@ -1512,10 +1525,16 @@ def build_short(args):
     # when comparison is disabled -- an explicit "no comparison" beats
     # whatever URL happens to be sitting in that field.
     forced_rival = None
-    if args.photo_rival and not args.disable_comparison:
-        rival_id_path = _download_car_photo(args.photo_rival, images_dir / "manual-rival-id", "rival")
-        if rival_id_path:
-            forced_rival = _identify_car_in_photo(rival_id_path)
+    if not args.disable_comparison:
+        # Naming the rival outright beats working it out from a photo: it is
+        # what the user actually chose, it carries the rival's own model
+        # years instead of inheriting this car's, and it skips a vision call
+        # on a full-size image.
+        forced_rival = (args.rival_car or "").strip() or None
+        if forced_rival is None and args.photo_rival:
+            rival_id_path = _download_car_photo(args.photo_rival, images_dir / "manual-rival-id", "rival")
+            if rival_id_path:
+                forced_rival = _identify_car_in_photo(rival_id_path)
     package = research_script(
         args.make, args.model, args.trim, args.start_year, args.end_year,
         photo_hints=photo_hints, forced_rival=forced_rival, disable_comparison=args.disable_comparison,
@@ -1564,6 +1583,7 @@ def build_short(args):
     media = apply_rival_photos(
         package["scenes"], media, media_start_year, media_end_year, images_dir,
         manual_rival_url=None if args.disable_comparison else args.photo_rival,
+        rival_year=_year_in(args.rival_car),
     )
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
@@ -1620,6 +1640,7 @@ def build_short(args):
             "photo_engine": args.photo_engine or "",
             "photo_interior": args.photo_interior or "",
             "photo_rival": args.photo_rival or "",
+            "rival_car": args.rival_car or "",
             "disable_comparison": "true" if args.disable_comparison else "false",
             "extra_photos": args.extra_photos or "",
         },
@@ -1668,6 +1689,12 @@ def main():
     parser.add_argument("--photo-rear", default=None, help="Direct URL for the main car's rear exterior photo.")
     parser.add_argument("--photo-engine", default=None, help="Direct URL for the main car's engine-bay photo.")
     parser.add_argument("--photo-interior", default=None, help="Direct URL for the main car's interior photo.")
+    parser.add_argument(
+        "--rival-car", default=None,
+        help="The comparison car by name (e.g. \"2010 BMW X5 M\"), as chosen from the suggested "
+             "rivals. Used as the forced rival directly, so no vision call is needed to work out "
+             "what car a pasted rival photo shows.",
+    )
     parser.add_argument(
         "--photo-rival", default=None,
         help="Direct URL for the comparison car's photo. If omitted, the comparison car (decided by "

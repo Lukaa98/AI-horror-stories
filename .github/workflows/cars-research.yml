@@ -121,6 +121,10 @@ on:
         description: "single_car mode: direct URL for the comparison car's photo (falls back to search if omitted)"
         required: false
         type: string
+      rival_car:
+        description: "single_car mode: the comparison car by name (e.g. 2010 BMW X5 M), as chosen from the suggested rivals"
+        required: false
+        type: string
       disable_comparison:
         description: "single_car mode: skip the rival-comparison scene and drag-race animation entirely"
         required: false
@@ -282,6 +286,7 @@ jobs:
           if [ -n "${{ inputs.photo_engine }}" ]; then YEAR_ARGS+=(--photo-engine "${{ inputs.photo_engine }}"); fi
           if [ -n "${{ inputs.photo_interior }}" ]; then YEAR_ARGS+=(--photo-interior "${{ inputs.photo_interior }}"); fi
           if [ -n "${{ inputs.photo_rival }}" ]; then YEAR_ARGS+=(--photo-rival "${{ inputs.photo_rival }}"); fi
+          if [ -n "${{ inputs.rival_car }}" ]; then YEAR_ARGS+=(--rival-car "${{ inputs.rival_car }}"); fi
           if [ "${{ inputs.disable_comparison }}" = "true" ]; then YEAR_ARGS+=(--disable-comparison); fi
           if [ -n "$EXTRA_PHOTOS" ]; then YEAR_ARGS+=(--extra-photos "$EXTRA_PHOTOS"); fi
           python cars/automation/single_car_short.py \
