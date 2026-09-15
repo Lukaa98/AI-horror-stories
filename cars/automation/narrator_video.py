@@ -776,13 +776,15 @@ def _merged_boundaries(interval_lists, duration):
 # video. Run #184's script never spoke the car's own horsepower and never
 # mentioned torque or 0-60 at all -- the table means the viewer gets them
 # regardless of what the narration decides to talk about.
-# One accent used everywhere, so the colour reads as a scheme rather than
-# decoration: headline, the stat line and the spec table's trim. Deep enough
-# to stay legible against white at headline size, which the tile-highlight
-# amber is not. Word-by-word captions stay black -- colouring the spoken
-# ticker as well turns the frame into noise.
-ACCENT_COLOR = (176, 32, 26)
-ACCENT_TINT = (250, 242, 240, 255)
+# Two colours, split by job. The headline and the stat line under it are the
+# loud half, so they get a bright red that reads as energy at 92px. The spec
+# table is the calm half -- it sits in the lower-left for the whole video, and
+# a second red there would fight the headline for the eye, so its trim is
+# blue. Word-by-word captions stay black; colouring the spoken ticker too
+# turns the frame into noise.
+ACCENT_COLOR = (226, 32, 32)
+TABLE_COLOR = (30, 84, 166)
+TABLE_TINT = (238, 244, 252, 255)
 
 SPEC_TABLE_FIELDS = (
     ("horsepower", "Horsepower"),
@@ -819,9 +821,9 @@ def _spec_table_clip(key_specs, size, output_path):
     frame = Image.new("RGBA", size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(frame)
     draw.rectangle((table_x, table_y, table_x + table_w, table_y + header_h + table_h),
-                   fill=STAT_TABLE_BG_COLOR, outline=ACCENT_COLOR, width=3)
-    # Accent header, and a bar down the left edge tying the rows together.
-    draw.rectangle((table_x, table_y, table_x + table_w, table_y + header_h), fill=(*ACCENT_COLOR, 255))
+                   fill=STAT_TABLE_BG_COLOR, outline=TABLE_COLOR, width=3)
+    # Blue header, and a bar down the left edge tying the rows together.
+    draw.rectangle((table_x, table_y, table_x + table_w, table_y + header_h), fill=(*TABLE_COLOR, 255))
     header_font = _font(int(SPEC_TABLE_FONT_SIZE * 0.78))
     draw.text((table_x + int(table_w * 0.05), table_y + header_h * 0.24), "KEY SPECS",
               font=header_font, fill=(255, 255, 255, 255))
@@ -831,14 +833,14 @@ def _spec_table_clip(key_specs, size, output_path):
     for index, (title, value) in enumerate(rows):
         top = table_y + header_h + index * row_h
         if index % 2:
-            draw.rectangle((table_x + 3, top, table_x + table_w - 3, top + row_h), fill=ACCENT_TINT)
+            draw.rectangle((table_x + 3, top, table_x + table_w - 3, top + row_h), fill=TABLE_TINT)
         draw.rectangle((table_x + 3, top, table_x + int(table_w * 0.016), top + row_h),
-                       fill=(*ACCENT_COLOR, 255))
+                       fill=(*TABLE_COLOR, 255))
         if index:
             draw.line((table_x + pad, top, table_x + table_w - pad, top),
                       fill=STAT_TABLE_DIVIDER_COLOR, width=1)
         draw.text((table_x + pad, top + row_h * 0.16), title.upper(),
-                  font=label_font, fill=(*ACCENT_COLOR, 255))
+                  font=label_font, fill=(*TABLE_COLOR, 255))
         # The value is what matters, so it takes the right-hand side and is
         # shrunk to fit rather than clipped -- "3.6L twin-turbo flat-six" is
         # a legitimate answer and must not run out of the box.
