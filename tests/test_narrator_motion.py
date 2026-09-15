@@ -48,10 +48,14 @@ def test_a_stat_on_every_scene_still_gets_a_varied_camera():
     plan = build_motion_plan({"scenes": scenes}, 54.0, boundaries)
     assert len(plan["shots"]) >= 5, plan["shots"]
     framings = [s["framing"] for s in plan["shots"]]
-    assert "bust" in framings and "half" in framings
+    # Every body camera the rig has gets used: the whole figure, the top
+    # two-thirds, and a chest-up zoom.
+    assert {"full", "half", "bust"} <= set(framings), framings
     # Two hands-visible framings per close-up, so the gestures are on screen
     # for most of the video rather than cropped at the chest.
-    assert framings.count("half") > framings.count("bust")
+    assert framings.count("half") + framings.count("full") > 2 * framings.count("bust")
+    # The video opens on the whole character rather than a crop of it.
+    assert plan["shots"][0]["framing"] == "full"
 
 
 def test_no_single_shot_is_held_for_most_of_the_video():

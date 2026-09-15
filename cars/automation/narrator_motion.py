@@ -24,14 +24,16 @@ AIM_SPAN = 0.5
 # Right and centre only. The spec table holds the lower-left for the whole
 # video, so a left-anchored shot would put the character straight through it.
 #
-# Two hands-visible framings per close-up. The rig's cameras crop the body
-# at fixed heights (CAMERAS in narrator-rig-v21.html): "half" keeps the top
-# 620 of 920, which includes the arms the gestures live in; "bust" keeps 388
-# and cuts them off at the chest. A cycle alternating one of each spent half
-# the video gesturing below the frame.
+# All three of the rig's body cameras, in rotation. They crop the body at
+# fixed heights (CAMERAS in narrator-rig-v21.html) and every one of them is
+# then scaled to fill the same on-screen band, so the choice is purely how
+# much of the character you see: "full" is the whole figure at 100%, "half"
+# the top 67% (still including the arms the gestures live in), "bust" the
+# top 42%, cut at the chest. Two hands-visible framings per close-up, and
+# the video opens on the whole character rather than a crop of it.
 SHOT_CYCLE = (
-    ("bottom-right", "half"), ("bottom-center", "half"), ("close-right", "bust"),
-    ("bottom-center", "half"), ("bottom-right", "half"), ("close-right", "bust"),
+    ("bottom-right", "full"), ("bottom-center", "half"), ("close-right", "bust"),
+    ("bottom-center", "full"), ("bottom-right", "half"), ("close-right", "bust"),
 )
 # A shot this old is stale even if the rules keep picking it, so the next
 # distinct framing in the cycle is taken instead. Run #189 held one
