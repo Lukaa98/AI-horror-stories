@@ -8,7 +8,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.24 — Suggested comparison cars";
+const UI_VERSION = "V11.25 — Rival suggestions without a key";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1103,15 +1103,49 @@ export default function App() {
     const year = startYear || endYear || "";
     try {
       const baseLabel = `${year} ${make.trim()} ${model.trim()} ${focus.trim()}`.trim();
-      if (!settings.openaiKey) {
-        throw new Error("Add your OpenAI key in Settings -- suggestions are a direct browser call, "
-          + "so they come back in a couple of seconds instead of starting a workflow run.");
+      if (settings.openaiKey) {
+        // Straight from the browser: a couple of seconds, a fraction of a
+        // cent, no runner to start.
+        setRivalChoices(await fetchRivalsDirect({
+          apiKey: settings.openaiKey,
+          make: make.trim(), model: model.trim(), trim: focus.trim(), year, count: 4,
+          prompt: singleCarRivalPrompt(baseLabel, 4),
+        }));
+        setRivalChoicesStage("ready");
+        return;
       }
-      setRivalChoices(await fetchRivalsDirect({
-        apiKey: settings.openaiKey,
-        make: make.trim(), model: model.trim(), trim: focus.trim(), year, count: 4,
-        prompt: singleCarRivalPrompt(baseLabel, 4),
-      }));
+      // Without a personal key, the same question goes through the workflow,
+      // which has the repo's own OPENAI_API_KEY. Slower -- a runner has to
+      // start -- but it means the GitHub token on its own is enough.
+      if (!repoOk) {
+        throw new Error("Fill in your GitHub token and repo settings, or add an OpenAI key for instant suggestions.");
+      }
+      const id = makeDraftId(`rivals-${make}-${model}`);
+      abortRef.current = new AbortController();
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner, repo: settings.repo, branch: settings.branch, token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Suggest comparison cars for ${baseLabel}`,
+          draft_id: id,
+          mode: "suggest_rivals",
+          base_make: make.trim(),
+          base_model: model.trim(),
+          base_trim: focus.trim(),
+          base_year: String(year || ""),
+          rival_count: "4",
+          rival_flavor: "spec_race",
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const suggestionFile = pollForFileViaApi({
+        owner: settings.owner, repo: settings.repo, branch: OUTPUT_BRANCH,
+        path: `cars/rival-suggestions/${id}/suggestions.json`,
+        token: settings.token, signal: abortRef.current.signal, timeoutMs: RIVAL_SUGGEST_TIMEOUT_MS,
+      });
+      const suggestions = await Promise.race([suggestionFile, workflowRun.then(() => suggestionFile)]);
+      setRivalChoices((suggestions.rivals || []).slice(0, 4));
       setRivalChoicesStage("ready");
     } catch (err) {
       setRivalChoicesError(String(err.message || err));
@@ -2094,8 +2128,8 @@ export default function App() {
           Single Car Story, and "Suggest rivals" in Startup Sound Battle. Both are called directly from this
           browser, so suggestions come back in seconds instead of waiting on a GitHub Actions run, and cost a
           fraction of a cent. It is stored in this browser&apos;s localStorage like the token above. Startup
-          Sound Battle falls back to the (slower) workflow-based suggestion when this is blank; the Single Car
-          Story button needs the key.
+          Both fall back to the (slower) workflow-based suggestion when this is blank, which uses the repo's own
+          OPENAI_API_KEY secret -- so your GitHub token alone is enough, the key just makes it instant.
         </p>
       </details>
 
@@ -2460,11 +2494,13 @@ export default function App() {
                             className="secondary"
                             onClick={handleSuggestComparisonCars}
                             disabled={!make.trim() || !model.trim() || rivalChoicesStage === "loading"
-                              || stage === "single-car-building"}
+                              || (!settings.openaiKey && !repoOk) || stage === "single-car-building"}
                           >
-                            {rivalChoicesStage === "loading" ? "Asking for rivals..." : "Suggest comparison cars"}
+                            {rivalChoicesStage === "loading"
+                              ? (settings.openaiKey ? "Asking for rivals..." : "Asking for rivals (workflow run)...")
+                              : "Suggest comparison cars"}
                           </button>
-                          <Tip text="A quick text-only question to the AI -- a fraction of a cent, no workflow run. Picking one names the rival outright, so the build skips identifying your photo and skips searching for its picture." />
+                          <Tip text="Text only, no photos. With an OpenAI key in Settings it answers in seconds from this browser; without one it goes through the workflow using the repo's own key, which works but has to start a runner. Picking one names the rival outright, so the build skips identifying your photo and skips searching for its picture." />
                         </div>
                         {rivalChoicesError && <p className="error">{rivalChoicesError}</p>}
                         {rivalChoices && (

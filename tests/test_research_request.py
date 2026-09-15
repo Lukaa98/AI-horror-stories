@@ -174,3 +174,21 @@ def test_compose_final_narration_updates_each_entry(monkeypatch):
     assert close == "Which R8 are you taking home?"
     assert entries[0]["narration"] == "Human paragraph for R8 Version 0."
     assert entries[0]["one_line_fact"] == entries[0]["narration"]
+
+
+def test_rival_prompts_ask_for_what_each_format_actually_needs():
+    """The battle cuts cold-start clips together, so it wants distinct
+    exhaust notes. The single-car short compares numbers and runs a drag
+    race, so it wants a fair spec match -- and a model year the rival was
+    really sold in, since that year travels with the pick and drives its
+    photo search."""
+    import suggest_rivals
+
+    cold = suggest_rivals.RIVAL_PROMPTS["cold_start"]("2018 Porsche 911 GT2 RS", 4)
+    race = suggest_rivals.RIVAL_PROMPTS["spec_race"]("2018 Porsche 911 GT2 RS", 4)
+    assert "cold-start" in cold and "exhaust" in cold
+    assert "drag race" in race and "horsepower" in race
+    assert "never a year that model was not sold in" in race
+    # An unknown flavour must not crash a run; it falls back to the original.
+    assert suggest_rivals.RIVAL_PROMPTS.get("nonsense", suggest_rivals._cold_start_prompt) is \
+        suggest_rivals._cold_start_prompt

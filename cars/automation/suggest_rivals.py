@@ -39,9 +39,8 @@ RIVALS_SCHEMA = {
 }
 
 
-def suggest_rivals(make, model, trim, year, count):
-    base_label = f"{year} {make} {model} {trim}".strip()
-    prompt = (
+def _cold_start_prompt(base_label, count):
+    return (
         f"Suggest {count} rival/competitor cars for a head-to-head cold-start-sound comparison video "
         f"against the {base_label}. Pick cars from roughly the same era (within a few model years), a "
         "similar price bracket, and a similar performance/segment -- genuine rivals a car enthusiast "
@@ -51,6 +50,30 @@ def suggest_rivals(make, model, trim, year, count):
         "price/performance tier, empty string if not applicable), year (a specific model year, not a "
         "range), and a one-sentence reason it is a fair rival to the base car."
     )
+
+
+def _spec_race_prompt(base_label, count):
+    """The single-car short compares on numbers and runs a drag race, so it
+    wants a fair spec match rather than a good exhaust note. The year matters
+    more here too: it travels with the pick and stops the rival's photo
+    search asking for a year that car was never sold in."""
+    return (
+        f"Suggest {count} rival/competitor cars for a head-to-head spec comparison and drag race "
+        f"against the {base_label}. Pick cars a buyer would genuinely cross-shop: same era, similar "
+        "price bracket, similar performance. For each rival give the model year that actually "
+        "overlaps the base car's own years -- never a year that model was not sold in -- plus make, "
+        "model, trim (the variant that matches this price/performance tier, empty string if not "
+        "applicable), and a one-sentence reason it is a fair rival, mentioning its horsepower. Do not "
+        "suggest the same make and model as the base car."
+    )
+
+
+RIVAL_PROMPTS = {"cold_start": _cold_start_prompt, "spec_race": _spec_race_prompt}
+
+
+def suggest_rivals(make, model, trim, year, count, flavor="cold_start"):
+    base_label = f"{year} {make} {model} {trim}".strip()
+    prompt = RIVAL_PROMPTS.get(flavor, _cold_start_prompt)(base_label, count)
     from openai import OpenAI
 
     response = with_openai_retry(lambda: OpenAI().responses.create(
@@ -77,10 +100,13 @@ def main():
     parser.add_argument("--year", required=True)
     parser.add_argument("--count", type=int, default=4)
     parser.add_argument("--suggestion-id", required=True)
+    parser.add_argument("--flavor", default="cold_start", choices=sorted(RIVAL_PROMPTS),
+                        help="cold_start for the startup-sound battle, spec_race for a single-car "
+                             "story's comparison beat and drag race.")
     args = parser.parse_args()
 
     count = max(1, min(4, args.count))
-    rivals = suggest_rivals(args.make, args.model, args.trim, args.year, count)
+    rivals = suggest_rivals(args.make, args.model, args.trim, args.year, count, args.flavor)
 
     out_dir = SUGGESTIONS_ROOT / args.suggestion_id
     out_dir.mkdir(parents=True, exist_ok=True)

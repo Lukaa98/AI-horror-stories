@@ -74,6 +74,10 @@ on:
         description: "suggest_rivals mode: base car year"
         required: false
         type: string
+      rival_flavor:
+        description: "suggest_rivals mode: cold_start (startup-sound battle) or spec_race (single-car comparison + drag race)"
+        required: false
+        type: string
       rival_count:
         description: "suggest_rivals mode: how many rivals to suggest (1-4)"
         required: false
@@ -231,7 +235,8 @@ jobs:
             --trim "${{ inputs.base_trim }}" \
             --year "${{ inputs.base_year }}" \
             --count "${{ inputs.rival_count || '4' }}" \
-            --suggestion-id "${{ inputs.draft_id }}"
+            --suggestion-id "${{ inputs.draft_id }}" \
+            --flavor "${{ inputs.rival_flavor || 'cold_start' }}"
 
       - name: Run standalone video test
         if: ${{ inputs.mode == 'video' }}
