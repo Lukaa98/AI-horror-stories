@@ -15,7 +15,7 @@ import re
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 from moviepy.editor import (
     AudioFileClip, ColorClip, CompositeAudioClip, CompositeVideoClip, ImageClip,
     VideoClip, VideoFileClip, concatenate_videoclips,
@@ -1138,6 +1138,50 @@ def _generate_winner_badge_image(diameter):
     return np.dstack([rgb, alpha])
 
 
+# How much lower one end of the silhouette has to be than the other before
+# the measurement is trusted over the reviewer's answer.
+FACING_MARGIN = 1.12
+
+
+def _measured_facing(path):
+    """Which way a background-removed car cutout points, measured.
+
+    The reviewer is asked this question very explicitly and still gets it
+    wrong: in run #184 it called both race cars "left" when both plainly
+    pointed right, so both were flipped and both raced away from the finish
+    line. A car's nose end is lower than its tail end, and these are cutouts
+    with an alpha channel, so the silhouette answers it directly.
+
+    Returns "left"/"right", or None when the ends are too close to call --
+    in which case the reviewer's answer stands.
+    """
+    try:
+        with Image.open(path) as source:
+            image = ImageOps.exif_transpose(source)
+            if image.mode not in ("RGBA", "LA", "P"):
+                return None
+            alpha = np.asarray(image.convert("RGBA"))[..., 3] > 40
+    except (OSError, ValueError):
+        return None
+    columns = np.where(alpha.any(axis=0))[0]
+    if columns.size < 8:
+        return None
+    x0, width = columns[0], columns[-1] - columns[0]
+    if width < 8:
+        return None
+
+    def end_height(low, high):
+        span = alpha[:, int(x0 + width * low):int(x0 + width * high)]
+        return float(span.sum(axis=0).mean()) if span.size else 0.0
+
+    left, right = end_height(0.0, 0.18), end_height(0.82, 1.0)
+    if not left or not right:
+        return None
+    if max(left, right) / min(left, right) < FACING_MARGIN:
+        return None
+    return "left" if left < right else "right"
+
+
 def _drag_race_lane_clip(
     path, facing_direction, car_width, y_center, start_x, finish_x,
     seg_start, total_duration, countdown_duration, arrival_time,
@@ -1159,6 +1203,7 @@ def _drag_race_lane_clip(
     left-to-right travel means the nose has to point right, or the car
     reads as racing backwards."""
     car = ImageClip(str(path)).resize(width=car_width)
+    facing_direction = _measured_facing(path) or facing_direction
     if facing_direction == "left":
         # mirror_x flips the colour frames but leaves the clip's alpha mask
         # in its original orientation, so a background-removed cutout was

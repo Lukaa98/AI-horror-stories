@@ -540,3 +540,39 @@ def test_drag_race_flip_mirrors_the_cutout_mask_too(tmp_path):
     half = left.shape[1] // 2
     assert left[:, :half].sum() > left[:, half:].sum()
     assert right[:, half:].sum() > right[:, :half].sum()
+
+
+def test_measured_facing_beats_a_wrong_reviewer_label(tmp_path):
+    """Run #184 had the reviewer call both race cars "left" when both plainly
+    pointed right, so both were flipped and both raced away from the finish
+    line. A car's nose end is lower than its tail end, and these are cutouts
+    with an alpha channel, so the silhouette answers it without asking."""
+    import numpy as np
+    from PIL import Image
+    from narrator_video import _measured_facing
+
+    def cutout(nose_on_left):
+        # A crude side profile: low nose at one end, tall cabin at the other.
+        pixels = np.zeros((60, 100, 4), dtype=np.uint8)
+        pixels[40:, :, :] = (40, 40, 40, 255)          # body, full length
+        tail = slice(60, 100) if nose_on_left else slice(0, 40)
+        pixels[10:40, tail, :] = (40, 40, 40, 255)     # cabin over the tail end
+        path = tmp_path / f"car-{nose_on_left}.png"
+        Image.fromarray(pixels, "RGBA").save(path)
+        return str(path)
+
+    assert _measured_facing(cutout(True)) == "left"
+    assert _measured_facing(cutout(False)) == "right"
+
+    # A shape with no clear difference between its ends is left to the
+    # reviewer rather than guessed at.
+    flat = np.zeros((60, 100, 4), dtype=np.uint8)
+    flat[20:, :, :] = (40, 40, 40, 255)
+    even = tmp_path / "even.png"
+    Image.fromarray(flat, "RGBA").save(even)
+    assert _measured_facing(str(even)) is None
+
+    # A photo with no alpha at all is not a cutout; nothing to measure.
+    opaque = tmp_path / "opaque.jpg"
+    Image.fromarray(np.full((40, 60, 3), 200, dtype=np.uint8), "RGB").save(opaque)
+    assert _measured_facing(str(opaque)) is None
