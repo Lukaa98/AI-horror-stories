@@ -186,19 +186,33 @@ NARRATOR_MAX_HEIGHT_RATIO = 0.84
 #             so a close shot is cropped by the frame the way a camera
 #             would crop it, rather than by cutting the sprite down to a
 #             bust and losing the arms that the gestures live in
-NARRATOR_SHOTS = [
+_SHOT_FRAMINGS = {
     # height 1.0 is the fitted size _narrator_track already produced (which
     # has NARRATOR_MAX_HEIGHT_RATIO baked in), so "wide" reproduces the
     # previous fixed framing exactly.
-    {"name": "wide", "height": 1.00, "x": NARRATOR_X_OFFSET_RATIO, "bleed": 0.00},
-    {"name": "close_right", "height": 2.30, "x": 0.38, "bleed": 0.60},
+    "wide": {"name": "wide", "height": 1.00, "x": NARRATOR_X_OFFSET_RATIO, "bleed": 0.00},
+    "close_right": {"name": "close_right", "height": 2.30, "x": 0.38, "bleed": 0.60},
     # bleed chosen so this shot's head sits no higher than the wide shot's
     # -- the stat table is pinned above the highest head across all shots,
     # so a taller mid shot with less bleed would quietly shrink the table
     # for the whole video.
-    {"name": "mid_left", "height": 1.35, "x": -0.30, "bleed": 0.28},
-    {"name": "close_left", "height": 2.10, "x": -0.38, "bleed": 0.55},
-]
+    "mid_left": {"name": "mid_left", "height": 1.35, "x": -0.30, "bleed": 0.28},
+    "close_left": {"name": "close_left", "height": 2.10, "x": -0.38, "bleed": 0.55},
+}
+# Two framings that keep the hands, then one that does not. Measured on the
+# sprites, the arms occupy 40-70% of the character's height, so a shot
+# showing the top (1 - bleed) of the body keeps them only above ~0.70:
+# wide (1.00) and mid_left (0.72) do, close_right (0.40) and close_left
+# (0.45) cut them off. The old four-shot cycle alternated one of each, so
+# half the video ran with the gestures cropped away -- the character was
+# pointing at a photo with its arms below the frame. Same shots, same
+# movement, just a 2:1 rhythm instead of 1:1, which puts the zoom at a
+# third of the runtime and alternates left/right in between.
+NARRATOR_SHOT_CYCLE = ("wide", "mid_left", "close_right", "wide", "mid_left", "close_left")
+NARRATOR_SHOTS = [_SHOT_FRAMINGS[name] for name in NARRATOR_SHOT_CYCLE]
+# Deduplicated, for callers that need every distinct framing once (sprite
+# pre-scaling) rather than the cycle's running order.
+NARRATOR_SHOT_FRAMINGS = list(_SHOT_FRAMINGS.values())
 # Margin on every edge of the media's own band -- the picture is inset
 # instead of stretched edge-to-edge, so it reads as a framed photo rather
 # than a banner. Trimmed further each time the picture needed to read
@@ -808,20 +822,24 @@ SPEC_TABLE_MIN_FONT_SIZE = 12
 SPEC_TABLE_COLUMN_GAP = 14
 
 
-def _spec_table_clip(key_specs, size, output_path):
-    """One static table of the car's headline numbers, shown throughout.
+def _spec_rows(key_specs):
+    """(field, title, value) for every headline number research filled in."""
+    rows = [(field, title, str(key_specs.get(field) or "").strip())
+            for field, title in SPEC_TABLE_FIELDS]
+    return [row for row in rows if row[2] and row[2].lower() not in ("n/a", "na", "-")]
+
+
+def _draw_spec_table(rows, size, output_path):
+    """One table of the car's headline numbers.
 
     Each row goes on a single line -- label left, value right -- whenever the
     two genuinely fit side by side, which is most of them. A long value like
     "6.2L supercharged HEMI V8" falls back to sitting under its label rather
     than shrinking the whole table's type to accommodate one row.
 
-    Returns None when research gave nothing usable, so an older manifest
-    just renders as it always did.
+    Returns None when there is nothing to draw, so an older manifest just
+    renders as it always did.
     """
-    rows = [(title, str(key_specs.get(field) or "").strip())
-            for field, title in SPEC_TABLE_FIELDS]
-    rows = [(title, value) for title, value in rows if value and value.lower() not in ("n/a", "na", "-")]
     if not rows:
         return None
     width, height = size
@@ -849,7 +867,7 @@ def _spec_table_clip(key_specs, size, output_path):
     # Lay the rows out before drawing anything: the table's height depends on
     # how many of them ended up on one line.
     layout = []
-    for title, value in rows:
+    for _field, title, value in rows:
         label = title.upper()
         label_w = draw.textlength(label, font=label_font)
         room = usable - label_w - SPEC_TABLE_COLUMN_GAP
@@ -895,6 +913,83 @@ def _spec_table_clip(key_specs, size, output_path):
         top += entry_h
     frame.save(output_path)
     return output_path
+
+
+# What counts as the narration "getting to" each spec. The value's own
+# leading number is the strongest signal ("690 hp" in the table, "690
+# horsepower" in the script), with the unit words as a fallback for a beat
+# that gives the figure in words or a different format.
+SPEC_TABLE_CUES = {
+    "horsepower": r"\bhorsepower\b|\bhp\b|\bbhp\b",
+    "torque": r"\btorque\b|lb\s?-?\s?ft|pound-feet|\bnm\b",
+    "zero_to_sixty": r"0\s?-\s?60|zero to sixty|to sixty|\bsixty\b",
+    "engine": r"\bengine\b|\bv\s?-?\s?(6|8|10|12)\b|flat-six|straight-six|inline|turbo|supercharg|litre|liter|\b\d\.\d\s?l\b",
+    "price": r"\$|\bmsrp\b|\bprice[ds]?\b|\bcost\b|\btrades?\b|\bsold\b|\bwindow sticker\b",
+}
+
+
+def _spec_reveal_times(rows, scenes, boundaries, duration):
+    """When each spec row should appear, in reveal order.
+
+    A row belongs to the moment the narration actually reaches its number:
+    the first scene whose narration states that figure, or failing that
+    mentions the thing by name. The table used to arrive whole in the first
+    frame, which gave away every number before a word was said about any of
+    them. Rows nothing in the script ever touches are spread across what is
+    left of the video rather than dropped -- the table exists precisely so
+    the viewer gets the numbers the narration skipped.
+    """
+    if not rows:
+        return []
+    timed, unmatched = [], []
+    for field, title, value in rows:
+        number = re.search(r"\d[\d,.]*", value)
+        patterns = [re.escape(number.group(0))] if number else []
+        patterns.append(SPEC_TABLE_CUES.get(field, ""))
+        pattern = "|".join(part for part in patterns if part)
+        hit = None
+        for scene, (start, _end) in zip(scenes, boundaries):
+            if pattern and re.search(pattern, str(scene.get("narration") or ""), re.I):
+                hit = start
+                break
+        (timed if hit is not None else unmatched).append(((field, title, value), hit))
+    timed.sort(key=lambda item: item[1])
+    ordered = [(row, time) for row, time in timed]
+    # Whatever the script never mentions trails the rest, evenly spaced over
+    # the remaining runtime so the last one is still on screen long enough
+    # to read rather than flashing up at the final frame.
+    if unmatched:
+        first_free = max((time for _row, time in ordered), default=0.0)
+        tail = max(duration - first_free, 0.0)
+        step = tail / (len(unmatched) + 1)
+        for index, (row, _none) in enumerate(unmatched, start=1):
+            ordered.append((row, first_free + step * index))
+    return ordered
+
+
+def _spec_table_clips(key_specs, size, output_dir, duration, scenes, boundaries):
+    """The spec table, built up one row at a time as the narration reaches
+    each number, as a stack of cumulative overlays.
+
+    Each step is its own clip covering the span until the next reveal, so a
+    new row appearing never redraws the rows already on screen -- the same
+    reason the photo band is layered rather than recomposited.
+    """
+    ordered = _spec_reveal_times(_spec_rows(key_specs), scenes, boundaries, duration)
+    clips = []
+    for index, (_row, start) in enumerate(ordered):
+        end = ordered[index + 1][1] if index + 1 < len(ordered) else duration
+        if end <= start:
+            continue
+        path = _draw_spec_table([row for row, _t in ordered[:index + 1]], size,
+                                output_dir / f"spec-table-{index}.png")
+        if path is None:
+            continue
+        clips.append(
+            ImageClip(str(path), transparent=True)
+            .set_start(start).set_duration(end - start).set_position((0, 0))
+        )
+    return clips
 
 
 def _media_zone_geometry(size):
@@ -1571,7 +1666,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         # shot that happened to be active when it was laid out.
         narrator_top_y = min(
             size[1] - base_h * shot["height"] * (1 - shot["bleed"])
-            for shot in NARRATOR_SHOTS
+            for shot in NARRATOR_SHOT_FRAMINGS
         )
     else:
         raise ValueError("NARRATOR_RENDERER must be v21 or sprites")
@@ -1712,15 +1807,10 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         decorative_clips.extend(race_clips)
         decorative_sfx.extend(race_sfx)
 
-    spec_clips = []
-    spec_path = _spec_table_clip(
-        manifest.get("key_specs") or {}, size,
-        output_path.parent / "_frames" / "spec-table.png",
+    spec_clips = _spec_table_clips(
+        manifest.get("key_specs") or {}, size, output_path.parent / "_frames",
+        duration, scenes, scene_boundaries,
     )
-    if spec_path is not None:
-        spec_clips.append(
-            ImageClip(str(spec_path), transparent=True).set_duration(duration).set_position((0, 0))
-        )
 
     progress_clip = _progress_bar_track(size, duration)
 

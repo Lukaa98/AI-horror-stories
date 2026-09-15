@@ -587,9 +587,10 @@ def test_spec_table_puts_short_rows_on_one_line_and_stays_narrow(tmp_path):
     import narrator_video
 
     size = (1080, 1920)
-    out = narrator_video._spec_table_clip(
-        {"horsepower": "807 hp", "torque": "707 lb-ft", "zero_to_sixty": "3.6 sec",
-         "engine": "6.2L supercharged HEMI V8", "price": "$78,400"},
+    out = narrator_video._draw_spec_table(
+        narrator_video._spec_rows(
+            {"horsepower": "807 hp", "torque": "707 lb-ft", "zero_to_sixty": "3.6 sec",
+             "engine": "6.2L supercharged HEMI V8", "price": "$78,400"}),
         size, tmp_path / "specs.png")
     assert out is not None
     box = Image.open(out).getbbox()
@@ -605,6 +606,67 @@ def test_spec_table_puts_short_rows_on_one_line_and_stays_narrow(tmp_path):
 def test_spec_table_skips_rows_research_could_not_fill(tmp_path):
     import narrator_video
 
-    assert narrator_video._spec_table_clip({}, (1080, 1920), tmp_path / "a.png") is None
-    assert narrator_video._spec_table_clip(
-        {"horsepower": "n/a", "torque": "-"}, (1080, 1920), tmp_path / "b.png") is None
+    assert narrator_video._draw_spec_table(
+        narrator_video._spec_rows({}), (1080, 1920), tmp_path / "a.png") is None
+    assert narrator_video._draw_spec_table(
+        narrator_video._spec_rows({"horsepower": "n/a", "torque": "-"}),
+        (1080, 1920), tmp_path / "b.png") is None
+
+
+def test_spec_rows_appear_when_the_narration_reaches_their_number():
+    """The table used to arrive whole in the first frame, giving away every
+    number before a word was said about any of them. Each row now waits for
+    the beat that states its figure."""
+    import narrator_video
+
+    scenes = [
+        {"narration": "It hits sixty in 2.7 seconds."},
+        {"narration": "Built for the track, and only 500 exist."},
+        {"narration": "The 3.8L twin-turbo flat-six makes 553 lb-ft."},
+        {"narration": "That is 690 horsepower, for $293K new."},
+    ]
+    boundaries = [(0.0, 10.0), (10.0, 20.0), (20.0, 30.0), (30.0, 40.0)]
+    specs = {"horsepower": "690 hp", "torque": "553 lb-ft", "zero_to_sixty": "2.7 sec",
+             "engine": "3.8L twin-turbo flat-six", "price": "$293K new, ~$450K today"}
+    ordered = narrator_video._spec_reveal_times(
+        narrator_video._spec_rows(specs), scenes, boundaries, 40.0)
+    at = {row[0]: time for row, time in ordered}
+    assert at["zero_to_sixty"] == 0.0
+    assert at["torque"] == 20.0 and at["engine"] == 20.0
+    assert at["horsepower"] == 30.0 and at["price"] == 30.0
+    # Reveal order, not the fixed field order, is what the table stacks in.
+    assert [row[0] for row, _t in ordered][0] == "zero_to_sixty"
+
+
+def test_a_spec_the_script_never_mentions_still_gets_on_screen():
+    """The table exists precisely to cover what the narration skipped, so an
+    unspoken row is spread into the remaining runtime, not dropped."""
+    import narrator_video
+
+    scenes = [{"narration": "Making 690 horsepower."}]
+    ordered = narrator_video._spec_reveal_times(
+        narrator_video._spec_rows({"horsepower": "690 hp", "price": "$293K new"}),
+        scenes, [(0.0, 60.0)], 60.0)
+    at = {row[0]: time for row, time in ordered}
+    assert at["horsepower"] == 0.0
+    assert 0.0 < at["price"] < 60.0
+
+
+def test_a_revealed_row_never_redraws_the_rows_already_up(tmp_path):
+    """Same reason the photo band is layered: a new row appearing must not
+    flicker the ones the viewer is already reading."""
+    from PIL import Image
+    import numpy as np
+    import narrator_video
+
+    size = (1080, 1920)
+    rows = narrator_video._spec_rows(
+        {"horsepower": "807 hp", "torque": "707 lb-ft", "zero_to_sixty": "3.6 sec"})
+    frames = [np.array(Image.open(
+        narrator_video._draw_spec_table(rows[:n + 1], size, tmp_path / f"s{n}.png")
+    ).convert("RGBA")).astype(int) for n in range(len(rows))]
+    for earlier, later in zip(frames, frames[1:]):
+        drawn = np.where((earlier[:, :, 3] > 0).any(axis=1))[0]
+        # The bottom border legitimately moves down; everything above it must not.
+        body = slice(drawn[0], drawn[-1] - 4)
+        assert np.abs(earlier[body] - later[body]).max() == 0
