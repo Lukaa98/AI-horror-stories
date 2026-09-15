@@ -27,13 +27,40 @@ def test_fast_scene_cuts_do_not_whip_the_narrator_around():
     assert all(b["start"] - a["start"] >= MIN_SHOT_SECONDS for a, b in zip(plan["shots"], plan["shots"][1:]))
 
 
-def test_car_details_stay_wide_and_stats_reserve_space():
+def test_car_details_stay_wide_and_stats_no_longer_force_a_close_up():
+    """A stat_label used to force a bust close-up. Once the script rules put
+    a stat row on every hard-number beat it fired on nearly every scene, and
+    since a shot is only recorded when it differs from the last one, run #189
+    held a single close-right bust from 0.0s to 47.6s."""
     scenes = [{"headline": "Engine", "media_type": "engine"},
               {"headline": "Power", "stat_label": "Power", "stat_value": "760 hp"},
               {"headline": "Inside", "media_type": "interior"}]
     plan = build_motion_plan({"scenes": scenes}, 15, [(0, 5), (5, 10), (10, 15)])
-    assert [s["framing"] for s in plan["shots"]] == ["half", "bust", "half"]
+    assert [s["framing"] for s in plan["shots"]] == ["half", "half", "half"]
     assert plan["safe_top"] > build_motion_plan({}, 15, [])['safe_top']
+
+
+def test_a_stat_on_every_scene_still_gets_a_varied_camera():
+    """The regression run #189 actually shipped: every scene carrying a stat
+    resolved to the same shot, so the character never re-framed."""
+    scenes = [{"stat_label": "Power", "stat_value": f"{i} hp"} for i in range(9)]
+    boundaries = [(i * 6.0, (i + 1) * 6.0) for i in range(9)]
+    plan = build_motion_plan({"scenes": scenes}, 54.0, boundaries)
+    assert len(plan["shots"]) >= 5, plan["shots"]
+    framings = [s["framing"] for s in plan["shots"]]
+    assert "bust" in framings and "half" in framings
+    # Two hands-visible framings per close-up, so the gestures are on screen
+    # for most of the video rather than cropped at the chest.
+    assert framings.count("half") > framings.count("bust")
+
+
+def test_no_single_shot_is_held_for_most_of_the_video():
+    scenes = [{"stat_label": "Power", "stat_value": "760 hp"} for _ in range(9)]
+    boundaries = [(i * 6.0, (i + 1) * 6.0) for i in range(9)]
+    plan = build_motion_plan({"scenes": scenes}, 54.0, boundaries)
+    spans = [b["start"] - a["start"] for a, b in zip(plan["shots"], plan["shots"][1:])]
+    spans.append(54.0 - plan["shots"][-1]["start"])
+    assert max(spans) <= 20.0, plan["shots"]
 
 
 def test_speech_fallback_uses_word_times_and_leaves_silence_empty():

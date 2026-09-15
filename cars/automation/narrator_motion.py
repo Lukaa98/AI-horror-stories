@@ -23,11 +23,22 @@ HEAD_Y_BELOW_SAFE_TOP = 0.05
 AIM_SPAN = 0.5
 # Right and centre only. The spec table holds the lower-left for the whole
 # video, so a left-anchored shot would put the character straight through it.
+#
+# Two hands-visible framings per close-up. The rig's cameras crop the body
+# at fixed heights (CAMERAS in narrator-rig-v21.html): "half" keeps the top
+# 620 of 920, which includes the arms the gestures live in; "bust" keeps 388
+# and cuts them off at the chest. A cycle alternating one of each spent half
+# the video gesturing below the frame.
 SHOT_CYCLE = (
-    ("bottom-right", "half"), ("close-right", "bust"),
-    ("bottom-center", "half"), ("bottom-right", "half"),
-    ("close-right", "bust"), ("bottom-center", "half"),
+    ("bottom-right", "half"), ("bottom-center", "half"), ("close-right", "bust"),
+    ("bottom-center", "half"), ("bottom-right", "half"), ("close-right", "bust"),
 )
+# A shot this old is stale even if the rules keep picking it, so the next
+# distinct framing in the cycle is taken instead. Run #189 held one
+# close-right bust from 0.0s to 47.6s: almost every scene carried a
+# stat_label, every one of them resolved to the same shot, and a shot is
+# only recorded when it differs from the last one.
+MAX_SHOT_SECONDS = 9.0
 
 
 def _anchor_of(layout):
@@ -87,14 +98,28 @@ def build_motion_plan(manifest, duration, scene_boundaries, size=(1080, 1920), f
         if end <= start:
             continue
         scene = scenes[index] if index < len(scenes) else {}
-        layout, framing = SHOT_CYCLE[len(shots) % len(SHOT_CYCLE)]
+        # Indexed by scene, not by how many shots have been recorded: keyed
+        # off len(shots) the cycle stopped advancing the moment a shot was
+        # skipped, so it could sit on one entry for the whole video.
+        layout, framing = SHOT_CYCLE[index % len(SHOT_CYCLE)]
         is_detail = scene.get("media_type") in {"engine", "interior", "detail", "wheel"}
         if index == len(boundaries) - 1 and index > 0 and not scene.get("headline"):
             layout, framing = "bottom-center", "half"
-        elif scene.get("stat_label") and not scene.get("rival_make"):
-            layout, framing = "close-" + side, "bust"
         elif is_detail or scene.get("rival_make"):
+            # Hands-visible, and the side the character is already on.
             layout, framing = "bottom-" + side, "half"
+        # A stat_label used to force a bust close-up here. Once the script
+        # rules started putting a stat row on every hard-number beat, that
+        # fired on nearly every scene and flattened the whole cycle into one
+        # framing, so the cycle decides and the overrides above only handle
+        # the two cases that genuinely want a specific shot.
+        held = start - shots[-1]["start"] if shots else 0.0
+        if shots and (layout, framing) == (shots[-1]["layout"], shots[-1]["framing"]) and held >= MAX_SHOT_SECONDS:
+            for step in range(1, len(SHOT_CYCLE)):
+                candidate = SHOT_CYCLE[(index + step) % len(SHOT_CYCLE)]
+                if candidate != (shots[-1]["layout"], shots[-1]["framing"]):
+                    layout, framing = candidate
+                    break
         if not shots or (start - shots[-1]["start"] >= MIN_SHOT_SECONDS and end - start >= 1.2):
             if not shots or (layout, framing) != (shots[-1]["layout"], shots[-1]["framing"]):
                 shots.append({"start": start, "layout": layout, "framing": framing})
