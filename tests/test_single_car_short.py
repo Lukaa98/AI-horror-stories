@@ -1294,3 +1294,36 @@ def test_a_named_rival_is_used_directly_and_carries_its_own_year():
     assert single_car_short._year_in("") is None
     # A trim with digits in it must not read as a model year.
     assert single_car_short._year_in("Porsche 911 GT2 RS") is None
+
+
+def test_listing_facts_reach_the_writer_as_ground_truth():
+    """Web search knows what the model makes; the listing knows what this car
+    makes and what it actually sold for. That is the difference between "it
+    costs about" and a figure that is true."""
+    import single_car_short
+
+    facts = {
+        "title": "2024 Porsche 911 Carrera 4S Coupe",
+        "price_text": "Bid to $146,000",
+        "facts": {"Engine": "3.0L Turbocharged Flat-6", "Transmission": "Manual (7-Speed)"},
+        "sections": {"Highlights": "rated at 443 horsepower and 390 lb-ft of torque."},
+    }
+    prompt = single_car_short._research_script_prompt(
+        "Porsche 911 Carrera 4S", "2024", listing_facts=facts)
+    assert "Bid to $146,000" in prompt
+    assert "443 horsepower" in prompt
+    assert "3.0L Turbocharged Flat-6" in prompt
+    # It supplements the research rather than replacing it: the rules the
+    # script already follows have to still be in the prompt.
+    assert "165-175 words" in prompt or "155-175" in prompt
+
+
+def test_a_build_without_a_listing_is_unchanged():
+    """The block has to vanish entirely when there is no listing, so every
+    search-based build writes exactly the prompt it did before."""
+    import single_car_short
+
+    assert single_car_short._listing_facts_block({}) == ""
+    assert single_car_short._listing_facts_block(None) == ""
+    assert single_car_short._research_script_prompt("Audi TT", "2017") == \
+        single_car_short._research_script_prompt("Audi TT", "2017", listing_facts={})

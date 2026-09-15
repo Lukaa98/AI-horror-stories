@@ -478,3 +478,54 @@ def discover_entry_engine_videos(scraper_dir, draft_images_dir, entry):
     except Exception:
         return []
     return manifest.get("videos", [])
+
+
+# The listing's own words, with none of its photos. Kept narrow on purpose:
+# the spec rows describe the car, while mileage, VIN, title status, location
+# and seller identity describe one used example's paperwork and have no place
+# in the narration.
+AUCTION_FACT_KEYS = ("Make", "Model", "Engine", "Drivetrain", "Transmission", "Body Style")
+AUCTION_FACTS_TIMEOUT_SECONDS = 120
+
+
+def scrape_auction_facts(scraper_dir, auction_url, out_dir):
+    """Engine/drivetrain/output and the real sale price from one listing.
+
+    Web search gives the model's numbers; the listing gives this car's, on a
+    dated page -- which is the difference between "it costs about" and a
+    figure that is actually true. Best-effort by design: any failure returns
+    {} and the script is written from web search alone, exactly as before.
+    The gallery scrape is the slow, flaky part of a build (run #190 hung in
+    it for fifty minutes), so this is a separate one-page read with its own
+    hard timeout and no image downloads at all.
+    """
+    if not auction_url:
+        return {}
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = out_dir / "carsandbids-facts.json"
+    try:
+        subprocess.run(
+            ["node", "src/scrape-carsandbids-facts.js",
+             f"--auction-url={auction_url}", f"--out-json={manifest_path}"],
+            cwd=scraper_dir, check=False, timeout=AUCTION_FACTS_TIMEOUT_SECONDS,
+        )
+        data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (subprocess.TimeoutExpired, OSError, json.JSONDecodeError) as exc:
+        print(f"[cars-and-bids] Listing facts unavailable, continuing without them: {exc}")
+        return {}
+    if data.get("error"):
+        print(f"[cars-and-bids] Listing facts unavailable, continuing without them: {data['error']}")
+        return {}
+    facts = {key: value for key, value in (data.get("facts") or {}).items()
+             if key in AUCTION_FACT_KEYS}
+    sections = {key: value for key, value in (data.get("sections") or {}).items() if value}
+    if not facts and not sections and not data.get("price_text"):
+        return {}
+    return {
+        "auction_url": data.get("auction_url") or auction_url,
+        "title": data.get("title") or "",
+        "price_text": data.get("price_text") or "",
+        "facts": facts,
+        "sections": sections,
+    }

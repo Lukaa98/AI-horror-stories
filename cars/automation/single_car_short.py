@@ -18,7 +18,8 @@ from openai import OpenAI
 import requests
 
 from background_removal import remove_background
-from cars_and_bids import enrich_entry_from_manifest, scrape_auction_images, scrape_entry_images
+from cars_and_bids import (enrich_entry_from_manifest, scrape_auction_facts, scrape_auction_images,
+                           scrape_entry_images)
 from research_request import (
     _auction_provenance_matches_entry,
     _image_data_url,
@@ -236,7 +237,46 @@ def _strip_citations(text):
     return re.sub(r"[ \t]{2,}", " ", text).strip()
 
 
-def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8):
+def _listing_facts_block(listing_facts):
+    """The pasted listing's own text, handed to the writer as ground truth.
+
+    Web search knows what the model makes; the listing knows what this car
+    makes and what it actually sold for, on a dated page. That is the
+    difference between "it costs about" and a number that is true. It
+    supplements the research rather than replacing it -- same beats, same
+    rules, better facts.
+    """
+    if not listing_facts:
+        return ""
+    lines = []
+    if listing_facts.get("title"):
+        lines.append(f"Listing title: {listing_facts['title']}")
+    if listing_facts.get("price_text"):
+        lines.append(f"What it actually sold for: {listing_facts['price_text']}")
+    for key, value in (listing_facts.get("facts") or {}).items():
+        lines.append(f"{key}: {value}")
+    for key, value in (listing_facts.get("sections") or {}).items():
+        lines.append(f"{key}: {value}")
+    if not lines:
+        return ""
+    body = "\n".join(f"- {line}" for line in lines)
+    return f"""
+
+VERIFIED SOURCE -- this is the actual listing for the exact car in the photos, so it outranks anything
+web search tells you about this car's own configuration:
+{body}
+
+Use it this way. The engine, output, drivetrain and transmission above describe THIS car; where they
+disagree with a figure you find by search, the listing wins and key_specs must match it. The sale price
+above is a real, dated result -- use it for the value beat instead of estimating, and say what it sold
+for rather than what it is "worth". Any history or generation background in the text above is a starting
+point, not a quote: verify it and write it in your own words, and never read the listing aloud.
+
+Ignore anything in there about this one used example's paperwork -- mileage, VIN, title status, service
+records, flaws, ownership, location, seller. The video is about the car, not about one auction."""
+
+
+def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8, listing_facts=None):
     photo_hints_block = ""
     if photo_hints:
         bullet_list = "\n".join(f"- {hint}" for hint in photo_hints)
@@ -310,7 +350,7 @@ rival_horsepower/main_quarter_mile_seconds/rival_quarter_mile_seconds on ANY sce
 null). Replace that beat with a different one instead -- an ownership/value insight, a character/driving-feel
 observation, or another history/mechanical beat -- so the script still hits its word target and beat variety
 without any head-to-head."""
-    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{photo_hints_block}{forced_rival_block}{no_comparison_block}
+    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_listing_facts_block(listing_facts)}{photo_hints_block}{forced_rival_block}{no_comparison_block}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-{max_scenes} scenes (the higher end of that range only when you have several pasted photos each requiring their own scene, per above) in speaking order, each scene being ONE OR TWO complete sentences -- prefer fewer, fuller scenes over many thin one-liners, which read choppy when spoken back to back so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -652,7 +692,7 @@ def _repair_script(package, make, model):
     return package
 
 
-def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False):
+def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False, listing_facts=None):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
         f"model years {start_year}-{end_year}" if start_year and end_year
@@ -675,7 +715,8 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"there is almost always more real, well-documented material available if you look for it." if package else ""
         )
         package = _request_script_package(
-            _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival, disable_comparison, max_scenes),
+            _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival,
+                                    disable_comparison, max_scenes, listing_facts),
             max_scenes=max_scenes,
         )
         count = package["word_count"]
@@ -1535,9 +1576,19 @@ def build_short(args):
             rival_id_path = _download_car_photo(args.photo_rival, images_dir / "manual-rival-id", "rival")
             if rival_id_path:
                 forced_rival = _identify_car_in_photo(rival_id_path)
+    # Read before the script is written, so the writer has this car's real
+    # engine, output and sale price in hand rather than reconstructing them
+    # from search. One page, no photos, fails open.
+    listing_facts = scrape_auction_facts(SCRAPER_DIR, args.auction_url, images_dir / "listing") \
+        if args.auction_url else {}
+    if listing_facts:
+        print(f"[single-car] Listing facts: {len(listing_facts.get('facts') or {})} spec rows, "
+              f"{len(listing_facts.get('sections') or {})} text sections, "
+              f"price {listing_facts.get('price_text') or 'not stated'}.")
     package = research_script(
         args.make, args.model, args.trim, args.start_year, args.end_year,
         photo_hints=photo_hints, forced_rival=forced_rival, disable_comparison=args.disable_comparison,
+        listing_facts=listing_facts,
     )
     if args.disable_comparison:
         # Belt-and-suspenders: the prompt already tells the model never to
@@ -1656,6 +1707,7 @@ def build_short(args):
         "media": media,
         "photo_sections": photo_sections,
         "selected_auction": selected_auction,
+        "listing_facts": listing_facts,
         "voice_auditions": voice_auditions,
         "side_profile_media_path": str(output_dir / side_profile_media["path"]) if side_profile_media else None,
         "side_profile_facing_direction": side_profile_media["facing_direction"] if side_profile_media else "unclear",
