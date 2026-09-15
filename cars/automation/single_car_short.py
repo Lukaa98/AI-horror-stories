@@ -1470,12 +1470,12 @@ def build_short(args):
     manifest = {
         "car": {"make": args.make, "model": args.model, "trim": args.trim or None},
         # A verbatim snapshot of the raw build inputs -- not anything
-        # derived/researched -- so the dashboard's "rerun same pipeline"
-        # button can replay this exact build (same photos, same car, same
-        # comparison settings) under new code, without the user retyping
-        # every link. Keys match dispatchWorkflow's single_car `inputs`
-        # shape 1:1 (see App.jsx's handleSingleCarShort) so the UI can pass
-        # this straight through, only swapping in a fresh draft_id/request.
+        # derived/researched -- so the create form's "Start from a previous
+        # build" dropdown can fill itself from this build (same photos, same
+        # car, same comparison settings) without the user retyping every
+        # link. Keys match dispatchWorkflow's single_car `inputs` shape 1:1
+        # (see App.jsx's handleSingleCarShort), so the UI maps them straight
+        # back onto its own form fields.
         "build_inputs": {
             "make": args.make,
             "model": args.model,

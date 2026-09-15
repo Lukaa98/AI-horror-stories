@@ -8,7 +8,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.21 — Start from a previous build";
+const UI_VERSION = "V11.22 — Fill from a previous build";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1119,64 +1119,6 @@ export default function App() {
     setFilledFromBuild(build);
   }
 
-  // Replays an already-built single-car short's exact original inputs
-  // (photos, make/model, comparison settings) under whatever the current
-  // pipeline code does now -- reads `manifest.build_inputs`, a verbatim
-  // snapshot single_car_short.py stores for exactly this purpose, so
-  // testing a new fix never requires retyping every pasted link. Only the
-  // draft_id/request are regenerated so this lands as a new build, not an
-  // overwrite of the one being rerun.
-  async function handleRerunSingleCar(buildInputs) {
-    if (!repoOk || !buildInputs) return;
-    setError(null);
-    setSingleCarResult(null);
-    const id = makeDraftId(`single-${buildInputs.make}-${buildInputs.model}`);
-    setSingleCarId(id);
-    setStage("single-car-building");
-    setStatusDetail(`Rerunning the same pipeline for ${titleCaseWords(buildInputs.make)} ${titleCaseWords(buildInputs.model)}...`);
-    abortRef.current = new AbortController();
-    try {
-      const startedAt = Date.now();
-      await dispatchWorkflow({
-        owner: settings.owner,
-        repo: settings.repo,
-        branch: settings.branch,
-        token: settings.token,
-        workflow: "cars-research.yml",
-        // workflow_dispatch inputs must all be strings -- build_inputs was
-        // snapshotted straight from the Python manifest, where start_year/
-        // end_year are real integers (or "" when unset), so spreading it
-        // as-is sends a JSON number for start_year and GitHub's dispatch
-        // API rejects the whole request with a 422 ("not of type string").
-        inputs: Object.fromEntries(
-          Object.entries({
-            ...buildInputs,
-            request: `Rerun: ${buildInputs.make} ${buildInputs.model}`,
-            draft_id: id,
-            mode: "single_car",
-          }).map(([key, value]) => [key, value === null || value === undefined ? "" : String(value)])
-        ),
-      });
-      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
-      const resultFile = pollForFile({
-        owner: settings.owner,
-        repo: settings.repo,
-        branch: OUTPUT_BRANCH,
-        path: `cars/single-car-shorts/${id}/result.json`,
-        signal: abortRef.current.signal,
-        timeoutMs: SINGLE_CAR_TIMEOUT_MS,
-      });
-      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
-      setSingleCarResult(await response.json());
-      setStage("single-car-done");
-      setStatusDetail("Single-car Short complete");
-    } catch (err) {
-      setError(String(err.message || err));
-      setStage("error");
-      setStatusDetail("Single-car Short failed - open the build log for details");
-    }
-  }
-
   async function handleGenerate(quality) {
     if (!draftId) return;
     const outputName = quality === "full" ? "final_short.mp4" : "preview_short.mp4";
@@ -1988,16 +1930,6 @@ export default function App() {
                     <p className="rationale">
                       {item.preview.word_count} words at {item.preview.tts_speed}x voice speed; {Number(item.preview.duration_seconds || 0).toFixed(1)} seconds.
                     </p>
-                    {item.preview.build_inputs && (
-                      <button
-                        className="secondary rerun-pipeline-button"
-                        onClick={() => handleRerunSingleCar(item.preview.build_inputs)}
-                        disabled={!repoOk || stage === "single-car-building"}
-                        title="Re-dispatch this exact build (same car, same photos, same comparison settings) to test new pipeline code without retyping links"
-                      >
-                        {stage === "single-car-building" ? "Rerunning..." : "Rerun Same Pipeline"}
-                      </button>
-                    )}
                     {item.hasVideo && (
                       <div className="video-player">
                         <video controls src={dashboardRawUrl(item, item.preview.video || "single_car_short.mp4")} width="360" preload="metadata" />
@@ -2868,16 +2800,6 @@ export default function App() {
           <p className="rationale">
             {singleCarResult.word_count} words at {singleCarResult.tts_speed}x voice speed; {Number(singleCarResult.duration_seconds || 0).toFixed(1)} seconds.
           </p>
-          {singleCarResult.build_inputs && (
-            <button
-              className="secondary rerun-pipeline-button"
-              onClick={() => handleRerunSingleCar(singleCarResult.build_inputs)}
-              disabled={!repoOk || stage === "single-car-building"}
-              title="Re-dispatch this exact build (same car, same photos, same comparison settings) to test new pipeline code without retyping links"
-            >
-              {stage === "single-car-building" ? "Rerunning..." : "Rerun Same Pipeline"}
-            </button>
-          )}
           {singleCarResult.video && <video controls src={rawSingleCarUrl(singleCarResult.video)} preload="metadata" />}
           <div className="narration-scroll">
             {(singleCarResult.scenes || []).map((scene, index) => (
