@@ -794,14 +794,27 @@ SPEC_TABLE_FIELDS = (
     ("price", "Price"),
 )
 SPEC_TABLE_X_RATIO = 0.035
-SPEC_TABLE_WIDTH_RATIO = 0.46
+# Narrower than it was (0.46). Most rows are short -- "807 hp", "3.6 sec" --
+# and now sit on one line with the label, so the table no longer needs half
+# the frame's width. The space it gives back is the character's.
+SPEC_TABLE_WIDTH_RATIO = 0.33
 SPEC_TABLE_TOP_RATIO = 0.70
 SPEC_TABLE_ROW_HEIGHT_RATIO = 0.043
+# A row that fits on one line doesn't need a two-line row's height.
+SPEC_TABLE_SINGLE_ROW_RATIO = 0.62
 SPEC_TABLE_FONT_SIZE = 26
+SPEC_TABLE_MIN_FONT_SIZE = 12
+# Whitespace between a label and its value before they read as one word.
+SPEC_TABLE_COLUMN_GAP = 14
 
 
 def _spec_table_clip(key_specs, size, output_path):
     """One static table of the car's headline numbers, shown throughout.
+
+    Each row goes on a single line -- label left, value right -- whenever the
+    two genuinely fit side by side, which is most of them. A long value like
+    "6.2L supercharged HEMI V8" falls back to sitting under its label rather
+    than shrinking the whole table's type to accommodate one row.
 
     Returns None when research gave nothing usable, so an older manifest
     just renders as it always did.
@@ -814,12 +827,38 @@ def _spec_table_clip(key_specs, size, output_path):
     width, height = size
     table_w = int(width * SPEC_TABLE_WIDTH_RATIO)
     row_h = int(height * SPEC_TABLE_ROW_HEIGHT_RATIO)
-    table_h = row_h * len(rows)
+    single_row_h = int(row_h * SPEC_TABLE_SINGLE_ROW_RATIO)
     table_x, table_y = int(width * SPEC_TABLE_X_RATIO), int(height * SPEC_TABLE_TOP_RATIO)
 
     header_h = int(row_h * 0.62)
     frame = Image.new("RGBA", size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(frame)
+    label_font = _font(int(SPEC_TABLE_FONT_SIZE * 0.82))
+    value_font = _font(SPEC_TABLE_FONT_SIZE)
+    pad = max(10, int(table_w * 0.05))
+    usable = table_w - 2 * pad
+
+    def _shrunk(text, limit):
+        """Largest font at or below the body size whose text fits `limit`."""
+        fitted = value_font
+        while (draw.textlength(text, font=fitted) > limit
+               and getattr(fitted, "size", 10) > SPEC_TABLE_MIN_FONT_SIZE):
+            fitted = _font(getattr(fitted, "size", SPEC_TABLE_FONT_SIZE) - 1)
+        return fitted
+
+    # Lay the rows out before drawing anything: the table's height depends on
+    # how many of them ended up on one line.
+    layout = []
+    for title, value in rows:
+        label = title.upper()
+        label_w = draw.textlength(label, font=label_font)
+        room = usable - label_w - SPEC_TABLE_COLUMN_GAP
+        if room > 0 and draw.textlength(value, font=value_font) <= room:
+            layout.append((label, value, value_font, True, single_row_h))
+        else:
+            layout.append((label, value, _shrunk(value, usable), False, row_h))
+    table_h = sum(entry[4] for entry in layout)
+
     draw.rectangle((table_x, table_y, table_x + table_w, table_y + header_h + table_h),
                    fill=STAT_TABLE_BG_COLOR, outline=TABLE_COLOR, width=3)
     # Blue header, and a bar down the left edge tying the rows together.
@@ -827,27 +866,33 @@ def _spec_table_clip(key_specs, size, output_path):
     header_font = _font(int(SPEC_TABLE_FONT_SIZE * 0.78))
     draw.text((table_x + int(table_w * 0.05), table_y + header_h * 0.24), "KEY SPECS",
               font=header_font, fill=(255, 255, 255, 255))
-    label_font = _font(int(SPEC_TABLE_FONT_SIZE * 0.82))
-    value_font = _font(SPEC_TABLE_FONT_SIZE)
-    pad = max(10, int(table_w * 0.05))
-    for index, (title, value) in enumerate(rows):
-        top = table_y + header_h + index * row_h
+
+    top = table_y + header_h
+    for index, (label, value, fitted, single_line, entry_h) in enumerate(layout):
         if index % 2:
-            draw.rectangle((table_x + 3, top, table_x + table_w - 3, top + row_h), fill=TABLE_TINT)
-        draw.rectangle((table_x + 3, top, table_x + int(table_w * 0.016), top + row_h),
+            draw.rectangle((table_x + 3, top, table_x + table_w - 3, top + entry_h), fill=TABLE_TINT)
+        draw.rectangle((table_x + 3, top, table_x + int(table_w * 0.016), top + entry_h),
                        fill=(*TABLE_COLOR, 255))
         if index:
             draw.line((table_x + pad, top, table_x + table_w - pad, top),
                       fill=STAT_TABLE_DIVIDER_COLOR, width=1)
-        draw.text((table_x + pad, top + row_h * 0.16), title.upper(),
-                  font=label_font, fill=(*TABLE_COLOR, 255))
-        # The value is what matters, so it takes the right-hand side and is
-        # shrunk to fit rather than clipped -- "3.6L twin-turbo flat-six" is
-        # a legitimate answer and must not run out of the box.
-        fitted = value_font
-        while draw.textlength(value, font=fitted) > table_w - 2 * pad and getattr(fitted, "size", 10) > 12:
-            fitted = _font(getattr(fitted, "size", SPEC_TABLE_FONT_SIZE) - 1)
-        draw.text((table_x + pad, top + row_h * 0.48), value, font=fitted, fill=STAT_TABLE_VALUE_COLOR)
+        if single_line:
+            # Anchored to the row's midline by font metrics rather than by
+            # each string's own bbox, so "807 hp" (with a descender) and
+            # "HORSEPOWER" (without one) still sit on the same line.
+            middle = top + entry_h / 2
+            draw.text((table_x + pad, middle), label, font=label_font,
+                      fill=(*TABLE_COLOR, 255), anchor="lm")
+            # Right-aligned, so the numbers line up down the column the way a
+            # spec sheet prints them.
+            draw.text((table_x + table_w - pad, middle), value, font=fitted,
+                      fill=STAT_TABLE_VALUE_COLOR, anchor="rm")
+        else:
+            draw.text((table_x + pad, top + entry_h * 0.16), label,
+                      font=label_font, fill=(*TABLE_COLOR, 255))
+            draw.text((table_x + pad, top + entry_h * 0.48), value,
+                      font=fitted, fill=STAT_TABLE_VALUE_COLOR)
+        top += entry_h
     frame.save(output_path)
     return output_path
 

@@ -576,3 +576,35 @@ def test_measured_facing_beats_a_wrong_reviewer_label(tmp_path):
     opaque = tmp_path / "opaque.jpg"
     Image.fromarray(np.full((40, 60, 3), 200, dtype=np.uint8), "RGB").save(opaque)
     assert _measured_facing(str(opaque)) is None
+
+
+def test_spec_table_puts_short_rows_on_one_line_and_stays_narrow(tmp_path):
+    """Short values ("807 hp") belong beside their label, not under it. Only a
+    value that genuinely cannot fit -- "6.2L supercharged HEMI V8" -- drops to
+    a second line, so the table stays narrow and leaves the frame's width to
+    the character."""
+    from PIL import Image
+    import narrator_video
+
+    size = (1080, 1920)
+    out = narrator_video._spec_table_clip(
+        {"horsepower": "807 hp", "torque": "707 lb-ft", "zero_to_sixty": "3.6 sec",
+         "engine": "6.2L supercharged HEMI V8", "price": "$78,400"},
+        size, tmp_path / "specs.png")
+    assert out is not None
+    box = Image.open(out).getbbox()
+    drawn_w = box[2] - box[0]
+    assert drawn_w <= size[0] * 0.36, f"table is {drawn_w}px wide, too much of the frame"
+
+    # Four of the five rows fit on one line, so the table is shorter than five
+    # full-height rows plus the header would be.
+    row_h = int(size[1] * narrator_video.SPEC_TABLE_ROW_HEIGHT_RATIO)
+    assert (box[3] - box[1]) < row_h * 5
+
+
+def test_spec_table_skips_rows_research_could_not_fill(tmp_path):
+    import narrator_video
+
+    assert narrator_video._spec_table_clip({}, (1080, 1920), tmp_path / "a.png") is None
+    assert narrator_video._spec_table_clip(
+        {"horsepower": "n/a", "torque": "-"}, (1080, 1920), tmp_path / "b.png") is None
