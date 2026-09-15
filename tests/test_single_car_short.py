@@ -1226,7 +1226,28 @@ def test_the_hook_gets_the_car_name_taken_out_of_it():
         "With a blistering 2.7-second zero to sixty, the GT2 RS Weissach is Porsche's "
         "most powerful 911 ever crafted for the street.", "Porsche", "911 GT2 RS Weissach"
     ) == ("With a blistering 2.7-second zero to sixty, this one is the most powerful "
-          "ever crafted for the street.")
+          "car ever crafted for the street.")
+
+
+def test_a_bare_model_word_is_replaced_by_a_noun_not_a_phrase():
+    """What stands in depends on the job the name is doing, not on whether it
+    came first. Run #202 shipped "the most powerful road-legal this one has"
+    because a bare "911" -- the head noun of someone else's phrase -- got the
+    subject stand-in. Deleting it would have been no better: "the most
+    powerful road-legal ever built"."""
+    import single_car_short
+
+    assert single_car_short._strip_car_name(
+        "700 horsepower from a twin-turbocharged 3.8-liter flat-six makes this the most "
+        "powerful road-legal 911 ever built.", "Porsche", "911 GT2 RS Weissach"
+    ) == ("700 horsepower from a twin-turbocharged 3.8-liter flat-six makes this the most "
+          "powerful road-legal car ever built.")
+
+    # A name heading its own phrase still gets the phrase stand-in, whether it
+    # carries a determiner or simply opens the sentence.
+    assert single_car_short._strip_car_name(
+        "The 2002 Porsche 911 Turbo hits 60 in 4.0 seconds flat.", "Porsche", "911 Turbo"
+    ) == "This one hits 60 in 4.0 seconds flat."
 
 
 def test_an_unrepairable_hook_is_left_alone_rather_than_mangled():

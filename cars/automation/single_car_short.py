@@ -640,11 +640,19 @@ def _strip_car_name(sentence, make, model):
         # + replacement), which silently welded two words together.
         if re.search(r"(?:'s|\u2019s)$", text):
             return " the "
-        # The first mention carries the sentence's subject or object, so it
-        # needs a stand-in; a second mention is almost always a bare model
-        # word inside a phrase ("the most powerful Corvette ever"), which
-        # reads fine with the word simply gone.
-        return " this one " if seen["count"] == 1 else " "
+        # What replaces the name depends on the job it is doing, not on
+        # whether it came first. A name with its own determiner ("the R63
+        # AMG", "The 2002 Porsche 911 Turbo") heads a noun phrase, so a
+        # phrase stands in for it. A bare name inside someone else's phrase
+        # ("the most powerful road-legal 911 ever built") is that phrase's
+        # head noun, and needs a noun, not a phrase and not a hole: run #202
+        # shipped "the most powerful road-legal this one has" because this
+        # substituted the wrong thing, and deleting would have left "the most
+        # powerful road-legal ever built", which is no better.
+        heads_its_own_phrase = (
+            match.start() == 0 or re.match(r"\s*(?:the|a|an|this)\b", text, re.I)
+        )
+        return " this one " if heads_its_own_phrase else " car "
 
     repaired = pattern.sub(replace, sentence)
     if not seen["count"]:
