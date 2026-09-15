@@ -1,0 +1,1617 @@
+{
+  "version": "v21",
+  "duration": 53.5,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "safe_top": 0.65,
+  "shots": [
+    {
+      "start": 0.0,
+      "layout": "close-right",
+      "framing": "bust"
+    },
+    {
+      "start": 21.84000015258789,
+      "layout": "bottom-right",
+      "framing": "half"
+    },
+    {
+      "start": 41.579999923706055,
+      "layout": "close-right",
+      "framing": "bust"
+    },
+    {
+      "start": 47.90999984741211,
+      "layout": "bottom-center",
+      "framing": "half"
+    }
+  ],
+  "gestures": [
+    {
+      "start": 0.65,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 2.1,
+      "pose": "rest"
+    },
+    {
+      "start": 4.05,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 5.5,
+      "pose": "rest"
+    },
+    {
+      "start": 7.45,
+      "pose": "open"
+    },
+    {
+      "start": 8.9,
+      "pose": "rest"
+    },
+    {
+      "start": 10.85,
+      "pose": "chest"
+    },
+    {
+      "start": 12.3,
+      "pose": "rest"
+    },
+    {
+      "start": 14.25,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 15.7,
+      "pose": "rest"
+    },
+    {
+      "start": 17.65,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 19.1,
+      "pose": "rest"
+    },
+    {
+      "start": 21.05,
+      "pose": "open"
+    },
+    {
+      "start": 22.5,
+      "pose": "rest"
+    },
+    {
+      "start": 24.45,
+      "pose": "chest"
+    },
+    {
+      "start": 25.9,
+      "pose": "rest"
+    },
+    {
+      "start": 27.85,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 29.3,
+      "pose": "rest"
+    },
+    {
+      "start": 31.25,
+      "pose": "rightTalk"
+    },
+    {
+      "start": 32.7,
+      "pose": "rest"
+    },
+    {
+      "start": 34.65,
+      "pose": "open"
+    },
+    {
+      "start": 36.1,
+      "pose": "rest"
+    },
+    {
+      "start": 38.05,
+      "pose": "chest"
+    },
+    {
+      "start": 39.5,
+      "pose": "rest"
+    },
+    {
+      "start": 42.73,
+      "pose": "leftTalk"
+    },
+    {
+      "start": 44.18,
+      "pose": "rest"
+    },
+    {
+      "start": 46.361,
+      "pose": "presentLeft"
+    },
+    {
+      "start": 47.71,
+      "pose": "rest"
+    },
+    {
+      "start": 49.53,
+      "pose": "open"
+    },
+    {
+      "start": 50.98,
+      "pose": "rest"
+    }
+  ],
+  "expressions": [
+    {
+      "start": 0.2,
+      "end": 1.55,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 8.110000085830688,
+      "end": 9.46000008583069,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 15.029999923706054,
+      "end": 16.379999923706055,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 22.04000015258789,
+      "end": 23.39000015258789,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 27.340000343322753,
+      "end": 28.690000343322755,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 35.39000053405762,
+      "end": 36.740000534057614,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 41.77999992370606,
+      "end": 43.12999992370605,
+      "aim": [
+        -0.6599999999999999,
+        -0.7450000000000001
+      ],
+      "brows": true
+    },
+    {
+      "start": 48.10999984741211,
+      "end": 49.45999984741211,
+      "aim": [
+        0.0,
+        -0.7450000000000001
+      ],
+      "brows": false
+    },
+    {
+      "start": 46.2109998703003,
+      "end": 47.70999984741211,
+      "aim": [
+        -0.16092592592592592,
+        -0.5739141666666667
+      ],
+      "brows": true
+    }
+  ],
+  "photo_cues": [
+    {
+      "start": 0.0,
+      "end": 7.9100000858306885,
+      "slot": "front",
+      "label": "Front",
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/0-front.jpg",
+          "label": "front",
+          "photo_id": "front-closeup-1789484347015-0-0"
+        },
+        {
+          "path": "images/manual-extra/4-front-side.jpg",
+          "label": "front side",
+          "photo_id": "front-closeup-1789484437670-4-4"
+        },
+        {
+          "path": "images/manual-extra/5-front-side-close-up.jpg",
+          "label": "front side close up",
+          "photo_id": "front-closeup-1789484457484-5-5"
+        },
+        {
+          "path": "images/manual-extra/9-carbon-fiber-hood.jpg",
+          "label": "Carbon fiber hood",
+          "photo_id": "front-closeup-1789484495013-9-9"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 0.0,
+      "chapter_end": 7.9100000858306885
+    },
+    {
+      "start": 7.9100000858306885,
+      "end": 14.829999923706055,
+      "slot": "side",
+      "label": "Side",
+      "hero": "images/manual/side-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/8-side-air-intake.jpg",
+          "label": "Side air intake",
+          "photo_id": "side-closeup-1789484484631-8-8"
+        },
+        {
+          "path": "images/manual-extra/10-wheel.jpg",
+          "label": "wheel",
+          "photo_id": "side-closeup-1789484543112-10-10"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 7.9100000858306885,
+      "chapter_end": 14.829999923706055
+    },
+    {
+      "start": 14.829999923706055,
+      "end": 21.84000015258789,
+      "slot": "engine",
+      "label": "Engine bay",
+      "hero": "images/manual/engine.jpg",
+      "closeups": [
+        {
+          "path": "images/manual-extra/7-no-access-to-your-engine.jpg",
+          "label": "No access to your engine",
+          "photo_id": "engine-closeup-1789484482753-7-7"
+        },
+        {
+          "path": "images/manual-extra/15-titanium-exhaust.jpg",
+          "label": "titanium exhaust",
+          "photo_id": "engine-closeup-1789484665502-15-15"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 14.829999923706055,
+      "chapter_end": 21.84000015258789
+    },
+    {
+      "start": 21.84000015258789,
+      "end": 27.140000343322754,
+      "slot": "rear",
+      "label": "Rear",
+      "hero": "images/manual/rear-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/1-rear.jpg",
+          "label": "rear",
+          "photo_id": "rear-closeup-1789484392602-1-1"
+        },
+        {
+          "path": "images/manual-extra/2-carbon-fiber-spoiler.jpg",
+          "label": "Carbon fiber spoiler",
+          "photo_id": "rear-closeup-1789484402535-2-2"
+        },
+        {
+          "path": "images/manual-extra/3-carbon-fiber-air-intake.jpg",
+          "label": "Carbon fiber air intake",
+          "photo_id": "rear-closeup-1789484405349-3-3"
+        },
+        {
+          "path": "images/manual-extra/6-read-back.jpg",
+          "label": "read back",
+          "photo_id": "rear-closeup-1789484480765-6-6"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 21.84000015258789,
+      "chapter_end": 27.140000343322754
+    },
+    {
+      "start": 27.140000343322754,
+      "end": 35.19000053405762,
+      "slot": null,
+      "label": null,
+      "hero": "images/ferrari-488-pista/exterior_side-01-nobg.png",
+      "closeups": [],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 27.140000343322754,
+      "chapter_end": 35.19000053405762
+    },
+    {
+      "start": 35.19000053405762,
+      "end": 41.579999923706055,
+      "slot": "interior",
+      "label": "Interior",
+      "hero": "images/manual/interior.jpg",
+      "closeups": [
+        {
+          "path": "images/manual-extra/11-clock.jpg",
+          "label": "clock",
+          "photo_id": "interior-closeup-1789484561494-11-11"
+        },
+        {
+          "path": "images/manual-extra/12-gauge-cluster.jpg",
+          "label": "gauge cluster",
+          "photo_id": "interior-closeup-1789484571072-12-12"
+        },
+        {
+          "path": "images/manual-extra/13-bucket-seats.jpg",
+          "label": "bucket seats",
+          "photo_id": "interior-closeup-1789484581229-13-13"
+        },
+        {
+          "path": "images/manual-extra/14-silli-weight-saving-door-handels.jpg",
+          "label": "Silli weight saving door handels",
+          "photo_id": "interior-closeup-1789484615310-14-14"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 35.19000053405762,
+      "chapter_end": 41.579999923706055
+    },
+    {
+      "start": 41.579999923706055,
+      "end": 47.90999984741211,
+      "slot": "side",
+      "label": "Side",
+      "hero": "images/manual/side-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/8-side-air-intake.jpg",
+          "label": "Side air intake",
+          "photo_id": "side-closeup-1789484484631-8-8"
+        },
+        {
+          "path": "images/manual-extra/10-wheel.jpg",
+          "label": "wheel",
+          "photo_id": "side-closeup-1789484543112-10-10"
+        }
+      ],
+      "active": "side-closeup-1789484543112-10-10",
+      "active_index": 1,
+      "chapter_start": 41.579999923706055,
+      "chapter_end": 47.90999984741211
+    },
+    {
+      "start": 47.90999984741211,
+      "end": 53.5,
+      "slot": "front",
+      "label": "Front",
+      "hero": "images/manual/front-nobg.png",
+      "closeups": [
+        {
+          "path": "images/manual-extra/0-front.jpg",
+          "label": "front",
+          "photo_id": "front-closeup-1789484347015-0-0"
+        },
+        {
+          "path": "images/manual-extra/4-front-side.jpg",
+          "label": "front side",
+          "photo_id": "front-closeup-1789484437670-4-4"
+        },
+        {
+          "path": "images/manual-extra/5-front-side-close-up.jpg",
+          "label": "front side close up",
+          "photo_id": "front-closeup-1789484457484-5-5"
+        },
+        {
+          "path": "images/manual-extra/9-carbon-fiber-hood.jpg",
+          "label": "Carbon fiber hood",
+          "photo_id": "front-closeup-1789484495013-9-9"
+        }
+      ],
+      "active": null,
+      "active_index": null,
+      "chapter_start": 47.90999984741211,
+      "chapter_end": 53.5
+    }
+  ],
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.45,
+      "end": 0.63,
+      "mouth": "small"
+    },
+    {
+      "start": 0.63,
+      "end": 0.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.72,
+      "end": 0.81,
+      "mouth": "small"
+    },
+    {
+      "start": 0.81,
+      "end": 0.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.9,
+      "end": 0.99,
+      "mouth": "small"
+    },
+    {
+      "start": 0.99,
+      "end": 1.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.08,
+      "end": 1.35,
+      "mouth": "small"
+    },
+    {
+      "start": 1.35,
+      "end": 1.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.44,
+      "end": 1.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.53,
+      "end": 1.8,
+      "mouth": "small"
+    },
+    {
+      "start": 1.8,
+      "end": 1.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.89,
+      "end": 2.07,
+      "mouth": "small"
+    },
+    {
+      "start": 2.07,
+      "end": 2.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.16,
+      "end": 2.43,
+      "mouth": "small"
+    },
+    {
+      "start": 2.43,
+      "end": 2.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.52,
+      "end": 2.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.61,
+      "end": 2.7,
+      "mouth": "small"
+    },
+    {
+      "start": 2.7,
+      "end": 2.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.79,
+      "end": 3.51,
+      "mouth": "small"
+    },
+    {
+      "start": 3.51,
+      "end": 3.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.78,
+      "end": 3.96,
+      "mouth": "small"
+    },
+    {
+      "start": 3.96,
+      "end": 4.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.05,
+      "end": 4.14,
+      "mouth": "small"
+    },
+    {
+      "start": 4.14,
+      "end": 4.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.32,
+      "end": 4.41,
+      "mouth": "small"
+    },
+    {
+      "start": 4.41,
+      "end": 4.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.5,
+      "end": 5.76,
+      "mouth": "small"
+    },
+    {
+      "start": 5.76,
+      "end": 6.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.03,
+      "end": 6.48,
+      "mouth": "small"
+    },
+    {
+      "start": 6.48,
+      "end": 6.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.57,
+      "end": 7.38,
+      "mouth": "small"
+    },
+    {
+      "start": 7.38,
+      "end": 8.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.19,
+      "end": 8.37,
+      "mouth": "small"
+    },
+    {
+      "start": 8.37,
+      "end": 8.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.55,
+      "end": 8.64,
+      "mouth": "small"
+    },
+    {
+      "start": 8.64,
+      "end": 8.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.91,
+      "end": 9.0,
+      "mouth": "small"
+    },
+    {
+      "start": 9.0,
+      "end": 9.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.18,
+      "end": 9.36,
+      "mouth": "small"
+    },
+    {
+      "start": 9.36,
+      "end": 9.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.45,
+      "end": 9.72,
+      "mouth": "small"
+    },
+    {
+      "start": 9.72,
+      "end": 9.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.81,
+      "end": 9.9,
+      "mouth": "small"
+    },
+    {
+      "start": 9.9,
+      "end": 10.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.08,
+      "end": 10.17,
+      "mouth": "small"
+    },
+    {
+      "start": 10.17,
+      "end": 10.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.26,
+      "end": 10.44,
+      "mouth": "small"
+    },
+    {
+      "start": 10.44,
+      "end": 10.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.53,
+      "end": 10.62,
+      "mouth": "small"
+    },
+    {
+      "start": 10.62,
+      "end": 10.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.71,
+      "end": 11.25,
+      "mouth": "small"
+    },
+    {
+      "start": 11.25,
+      "end": 11.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.52,
+      "end": 11.88,
+      "mouth": "small"
+    },
+    {
+      "start": 11.88,
+      "end": 12.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.15,
+      "end": 12.51,
+      "mouth": "small"
+    },
+    {
+      "start": 12.51,
+      "end": 12.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.6,
+      "end": 12.87,
+      "mouth": "small"
+    },
+    {
+      "start": 12.87,
+      "end": 12.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.96,
+      "end": 13.05,
+      "mouth": "small"
+    },
+    {
+      "start": 13.05,
+      "end": 13.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.23,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.68,
+      "end": 13.86,
+      "mouth": "small"
+    },
+    {
+      "start": 13.86,
+      "end": 13.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.95,
+      "end": 14.4,
+      "mouth": "small"
+    },
+    {
+      "start": 14.4,
+      "end": 15.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.12,
+      "end": 15.39,
+      "mouth": "small"
+    },
+    {
+      "start": 15.39,
+      "end": 15.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.48,
+      "end": 15.57,
+      "mouth": "small"
+    },
+    {
+      "start": 15.57,
+      "end": 15.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.75,
+      "end": 15.93,
+      "mouth": "small"
+    },
+    {
+      "start": 15.93,
+      "end": 16.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.02,
+      "end": 16.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.11,
+      "end": 16.2,
+      "mouth": "small"
+    },
+    {
+      "start": 16.2,
+      "end": 16.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.29,
+      "end": 16.38,
+      "mouth": "small"
+    },
+    {
+      "start": 16.38,
+      "end": 16.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.56,
+      "end": 16.83,
+      "mouth": "small"
+    },
+    {
+      "start": 16.83,
+      "end": 16.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.92,
+      "end": 17.64,
+      "mouth": "small"
+    },
+    {
+      "start": 17.64,
+      "end": 17.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.82,
+      "end": 19.17,
+      "mouth": "small"
+    },
+    {
+      "start": 19.17,
+      "end": 19.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.44,
+      "end": 19.62,
+      "mouth": "small"
+    },
+    {
+      "start": 19.62,
+      "end": 19.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.71,
+      "end": 20.79,
+      "mouth": "small"
+    },
+    {
+      "start": 20.79,
+      "end": 20.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.88,
+      "end": 21.06,
+      "mouth": "small"
+    },
+    {
+      "start": 21.06,
+      "end": 21.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.51,
+      "end": 21.6,
+      "mouth": "small"
+    },
+    {
+      "start": 21.6,
+      "end": 21.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.78,
+      "end": 21.87,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.87,
+      "end": 22.23,
+      "mouth": "small"
+    },
+    {
+      "start": 22.23,
+      "end": 22.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.95,
+      "end": 23.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.04,
+      "end": 23.13,
+      "mouth": "small"
+    },
+    {
+      "start": 23.13,
+      "end": 23.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.31,
+      "end": 23.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "small"
+    },
+    {
+      "start": 23.49,
+      "end": 23.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.67,
+      "end": 23.76,
+      "mouth": "small"
+    },
+    {
+      "start": 23.76,
+      "end": 23.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.85,
+      "end": 23.94,
+      "mouth": "small"
+    },
+    {
+      "start": 23.94,
+      "end": 24.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.12,
+      "end": 24.3,
+      "mouth": "small"
+    },
+    {
+      "start": 24.3,
+      "end": 24.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.48,
+      "end": 24.57,
+      "mouth": "small"
+    },
+    {
+      "start": 24.57,
+      "end": 24.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.66,
+      "end": 24.84,
+      "mouth": "small"
+    },
+    {
+      "start": 24.84,
+      "end": 25.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.11,
+      "end": 25.65,
+      "mouth": "small"
+    },
+    {
+      "start": 25.65,
+      "end": 25.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.83,
+      "end": 25.92,
+      "mouth": "small"
+    },
+    {
+      "start": 25.92,
+      "end": 26.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.01,
+      "end": 26.1,
+      "mouth": "small"
+    },
+    {
+      "start": 26.1,
+      "end": 26.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.19,
+      "end": 26.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.28,
+      "end": 26.91,
+      "mouth": "small"
+    },
+    {
+      "start": 26.91,
+      "end": 27.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.54,
+      "end": 27.81,
+      "mouth": "small"
+    },
+    {
+      "start": 27.81,
+      "end": 28.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.26,
+      "end": 28.44,
+      "mouth": "small"
+    },
+    {
+      "start": 28.44,
+      "end": 28.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.53,
+      "end": 28.71,
+      "mouth": "small"
+    },
+    {
+      "start": 28.71,
+      "end": 28.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.8,
+      "end": 28.98,
+      "mouth": "small"
+    },
+    {
+      "start": 28.98,
+      "end": 29.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.16,
+      "end": 29.34,
+      "mouth": "small"
+    },
+    {
+      "start": 29.34,
+      "end": 29.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.43,
+      "end": 29.7,
+      "mouth": "small"
+    },
+    {
+      "start": 29.7,
+      "end": 29.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.79,
+      "end": 29.88,
+      "mouth": "small"
+    },
+    {
+      "start": 29.88,
+      "end": 29.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.97,
+      "end": 30.06,
+      "mouth": "small"
+    },
+    {
+      "start": 30.06,
+      "end": 30.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.15,
+      "end": 30.42,
+      "mouth": "small"
+    },
+    {
+      "start": 30.42,
+      "end": 30.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.51,
+      "end": 30.69,
+      "mouth": "small"
+    },
+    {
+      "start": 30.69,
+      "end": 31.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.05,
+      "end": 31.5,
+      "mouth": "small"
+    },
+    {
+      "start": 31.5,
+      "end": 31.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.77,
+      "end": 31.95,
+      "mouth": "small"
+    },
+    {
+      "start": 31.95,
+      "end": 32.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.04,
+      "end": 32.13,
+      "mouth": "small"
+    },
+    {
+      "start": 32.13,
+      "end": 32.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.22,
+      "end": 34.02,
+      "mouth": "small"
+    },
+    {
+      "start": 34.02,
+      "end": 34.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.38,
+      "end": 34.56,
+      "mouth": "small"
+    },
+    {
+      "start": 34.56,
+      "end": 34.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.65,
+      "end": 35.64,
+      "mouth": "small"
+    },
+    {
+      "start": 35.64,
+      "end": 36.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.36,
+      "end": 36.45,
+      "mouth": "small"
+    },
+    {
+      "start": 36.45,
+      "end": 36.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.54,
+      "end": 36.63,
+      "mouth": "small"
+    },
+    {
+      "start": 36.63,
+      "end": 36.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.81,
+      "end": 36.9,
+      "mouth": "small"
+    },
+    {
+      "start": 36.9,
+      "end": 37.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.08,
+      "end": 37.17,
+      "mouth": "small"
+    },
+    {
+      "start": 37.17,
+      "end": 37.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.26,
+      "end": 37.44,
+      "mouth": "small"
+    },
+    {
+      "start": 37.44,
+      "end": 37.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.53,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.8,
+      "end": 37.98,
+      "mouth": "small"
+    },
+    {
+      "start": 37.98,
+      "end": 38.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.07,
+      "end": 38.52,
+      "mouth": "small"
+    },
+    {
+      "start": 38.52,
+      "end": 38.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.79,
+      "end": 39.06,
+      "mouth": "small"
+    },
+    {
+      "start": 39.06,
+      "end": 39.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.24,
+      "end": 39.51,
+      "mouth": "small"
+    },
+    {
+      "start": 39.51,
+      "end": 39.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.6,
+      "end": 39.87,
+      "mouth": "small"
+    },
+    {
+      "start": 39.87,
+      "end": 39.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.96,
+      "end": 40.32,
+      "mouth": "small"
+    },
+    {
+      "start": 40.32,
+      "end": 40.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.5,
+      "end": 41.4,
+      "mouth": "small"
+    },
+    {
+      "start": 41.4,
+      "end": 41.76,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.76,
+      "end": 41.94,
+      "mouth": "small"
+    },
+    {
+      "start": 41.94,
+      "end": 42.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.03,
+      "end": 42.21,
+      "mouth": "small"
+    },
+    {
+      "start": 42.21,
+      "end": 42.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.48,
+      "end": 43.11,
+      "mouth": "small"
+    },
+    {
+      "start": 43.11,
+      "end": 43.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.29,
+      "end": 44.01,
+      "mouth": "small"
+    },
+    {
+      "start": 44.01,
+      "end": 44.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.28,
+      "end": 44.37,
+      "mouth": "small"
+    },
+    {
+      "start": 44.37,
+      "end": 44.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.46,
+      "end": 44.73,
+      "mouth": "small"
+    },
+    {
+      "start": 44.73,
+      "end": 44.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.82,
+      "end": 45.18,
+      "mouth": "small"
+    },
+    {
+      "start": 45.18,
+      "end": 45.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.27,
+      "end": 45.45,
+      "mouth": "small"
+    },
+    {
+      "start": 45.45,
+      "end": 45.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.54,
+      "end": 45.72,
+      "mouth": "small"
+    },
+    {
+      "start": 45.72,
+      "end": 46.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.08,
+      "end": 46.17,
+      "mouth": "small"
+    },
+    {
+      "start": 46.17,
+      "end": 46.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.26,
+      "end": 46.35,
+      "mouth": "small"
+    },
+    {
+      "start": 46.35,
+      "end": 46.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.44,
+      "end": 46.89,
+      "mouth": "small"
+    },
+    {
+      "start": 46.89,
+      "end": 46.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.98,
+      "end": 47.61,
+      "mouth": "small"
+    },
+    {
+      "start": 47.61,
+      "end": 48.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.24,
+      "end": 48.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.42,
+      "end": 48.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.78,
+      "end": 49.05,
+      "mouth": "small"
+    },
+    {
+      "start": 49.05,
+      "end": 49.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.68,
+      "end": 50.04,
+      "mouth": "small"
+    },
+    {
+      "start": 50.04,
+      "end": 50.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.31,
+      "end": 50.49,
+      "mouth": "small"
+    },
+    {
+      "start": 50.49,
+      "end": 50.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.58,
+      "end": 50.67,
+      "mouth": "small"
+    },
+    {
+      "start": 50.67,
+      "end": 50.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.76,
+      "end": 50.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.85,
+      "end": 50.94,
+      "mouth": "small"
+    },
+    {
+      "start": 50.94,
+      "end": 51.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.03,
+      "end": 51.3,
+      "mouth": "small"
+    },
+    {
+      "start": 51.3,
+      "end": 51.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.39,
+      "end": 51.57,
+      "mouth": "small"
+    },
+    {
+      "start": 51.57,
+      "end": 51.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.66,
+      "end": 51.75,
+      "mouth": "small"
+    },
+    {
+      "start": 51.75,
+      "end": 51.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.93,
+      "end": 52.29,
+      "mouth": "small"
+    },
+    {
+      "start": 52.29,
+      "end": 52.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.38,
+      "end": 52.47,
+      "mouth": "small"
+    },
+    {
+      "start": 52.47,
+      "end": 52.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.56,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 52.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.74,
+      "end": 52.83,
+      "mouth": "small"
+    },
+    {
+      "start": 52.83,
+      "end": 52.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.92,
+      "end": 53.28,
+      "mouth": "small"
+    },
+    {
+      "start": 53.28,
+      "end": 53.46,
+      "mouth": "closed"
+    }
+  ]
+}

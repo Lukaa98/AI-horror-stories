@@ -1,0 +1,440 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-09-15T15:17:36.248Z",
+  "query": "Ferrari 488 Pista",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/ferrari/488?start_year=2018&end_year=2018&csort=10",
+  "search_result_count": 2,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KmaL0zw6/2018-ferrari-488-gtb",
+      "title": "2018 Ferrari 488 Gtb",
+      "text": "FEATURED Sold for $244,500",
+      "titleYear": 2018,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4vWzZn3/2018-ferrari-488-spider",
+      "title": "2018 Ferrari 488 Spider",
+      "text": "Bid to $234,000",
+      "titleYear": 2018,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KmaL0zw6/2018-ferrari-488-gtb",
+      "title": "2018 Ferrari 488 Gtb",
+      "text": "FEATURED Sold for $244,500",
+      "titleYear": 2018,
+      "score": 70,
+      "usable_image_count": 20,
+      "sale_price": 244500,
+      "sale_type": "sold",
+      "page_title": "2018 Ferrari 488 GTB"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/r4vWzZn3/2018-ferrari-488-spider",
+      "title": "2018 Ferrari 488 Spider",
+      "text": "Bid to $234,000",
+      "titleYear": 2018,
+      "score": 70,
+      "usable_image_count": 26,
+      "sale_price": 234000,
+      "sale_type": "sold",
+      "page_title": "2018 Ferrari 488 Spider"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/r4vWzZn3/2018-ferrari-488-spider",
+    "title": "2018 Ferrari 488 Spider",
+    "text": "Bid to $234,000",
+    "titleYear": 2018,
+    "score": 70,
+    "sale_price": 234000,
+    "sale_type": "sold",
+    "page_title": "2018 Ferrari 488 Spider",
+    "year": 2018,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rxL5gQpq-OL-u_weZLc-(edit).jpg?t=169829852745",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Ferrari 488 Spider",
+      "width": 1800,
+      "height": 1199,
+      "bytes": 417046
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rxL5gQpq-6VLjqCCLqs-(edit).jpg?t=169829932782",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Ferrari 488 Spider",
+      "width": 542,
+      "height": 361,
+      "bytes": 174800
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rxL5gQpq-cC4EMO3Y4O-(edit).jpg?t=169829934898",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Ferrari 488 Spider",
+      "width": 542,
+      "height": 361,
+      "bytes": 204132
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rxL5gQpq-aiomLj1Gc_-(edit).jpg?t=169829955800",
+      "labels": [
+        "interior"
+      ],
+      "section": "2018 Ferrari 488 Spider",
+      "width": 542,
+      "height": 361,
+      "bytes": 180567
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rxL5gQpq-s46KZIfyDS-(edit).jpg?t=169829927033",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Ferrari 488 Spider",
+      "width": 542,
+      "height": 361,
+      "bytes": 271577
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rxL5gQpq-ZLrb77elrO-(edit).jpg?t=169829923756",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Ferrari 488 Spider",
+      "width": 542,
+      "height": 361,
+      "bytes": 412657
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rxL5gQpq-MCuYcC5raw-(edit).jpg?t=169829920255",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Ferrari 488 Spider",
+      "width": 542,
+      "height": 361,
+      "bytes": 367859
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/rxL5gQpq-K-ePle0Wn0-(edit).jpg?t=169829930897",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2018 Ferrari 488 Spider",
+      "width": 542,
+      "height": 361,
+      "bytes": 241326
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c2720380574dcdb2a1a2438dd28ec094ab6c44c4/photos/rNqL5qB7-5SMpDZF_NA.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 11503 bytes"
+    },
+    {
+      "path": "exterior-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/475f9213d701f86f4702b33021d52d6002b96050/photos/K1ljWl2x-WGDX8HGw3.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 28619
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/d9d93308a40f5a4b345fe8307f963768e1f90eb4/photos/KZlMpeER-bF_cKGyzf.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 9421 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/2ece0cb0b6644132a675045172abb9f8cb742408/photos/rMaVdXyG-OqRA5tgQUy.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 5583 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/bc3a5ecc6dca210220e0eaf0f4ac553d2a502831/photos/3zYvBGR4-8l6ZsXQzNt.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 4593 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/ca1d5f82fffff718b6dae719f33ea69379a4e5b9/photos/3yyAyMXy-LvF_zRp.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 3885 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "body shape",
+          "front design",
+          "headlight style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front view",
+          "Ferrari badge",
+          "488 architecture"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 7,
+        "reject": true,
+        "reason": "Mismatch on generation; likely not a Pista variant.",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "488 bodywork",
+          "design proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Ferrari emblem",
+          "488 body shape"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 6,
+        "reject": true,
+        "reason": "Not the correct variant (Pista not evident) and lower confidence in generation.",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "Pista",
+        "visible_match_evidence": [
+          "Ferrari badge",
+          "488 rear design",
+          "Pista rear bumper design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the target vehicle.",
+        "path": "exterior-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "Pista",
+        "visible_match_evidence": [
+          "Ferrari logo",
+          "488 interior design",
+          "red contrast stitching"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "Pista",
+        "visible_match_evidence": [
+          "red interior",
+          "Ferrari branding",
+          "sports car design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 6,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Ferrari",
+        "detected_model": "488",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": "Pista",
+        "visible_match_evidence": [
+          "Distinctive Ferrari interior design",
+          "Red leather upholstery",
+          "Carbon fiber accents"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
