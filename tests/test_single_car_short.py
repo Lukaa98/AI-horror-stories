@@ -1461,3 +1461,52 @@ def test_a_sub_brand_on_its_own_does_not_identify_the_car():
     ]}
     found = " | ".join(single_car_short._script_violations(only_sub_brand, "Mercedes-Benz", "R63 AMG"))
     assert "which car this is" in found
+
+
+def test_a_mislabelled_image_still_downloads(tmp_path, monkeypatch):
+    """The content-type header used to be a hard gate. Any host that labels an
+    image as octet-stream lost the photo, and the build carried on without it.
+    Decoding is the authoritative test."""
+    import io, single_car_short
+    from PIL import Image
+
+    buf = io.BytesIO()
+    Image.new("RGB", (8, 8), (1, 2, 3)).save(buf, format="JPEG")
+
+    class Response:
+        content = buf.getvalue()
+        headers = {"content-type": "application/octet-stream"}
+        def raise_for_status(self): pass
+
+    monkeypatch.setattr(single_car_short.requests, "get", lambda *a, **k: Response())
+    path = single_car_short._download_car_photo("https://x/photo.JPG", tmp_path, "side")
+    assert path is not None and path.exists()
+
+
+def test_html_pretending_to_be_an_image_is_still_rejected(tmp_path, monkeypatch):
+    """The gate existed for a real reason -- a pasted listing page returns real
+    bytes that are HTML. Those do not decode, so the decode check covers it."""
+    import single_car_short
+
+    class Response:
+        content = b"<!doctype html><html><body>not a photo</body></html>"
+        headers = {"content-type": "image/jpeg"}  # even when it claims to be one
+        def raise_for_status(self): pass
+
+    monkeypatch.setattr(single_car_short.requests, "get", lambda *a, **k: Response())
+    assert single_car_short._download_car_photo(
+        "https://carsandbids.com/auctions/abc/2002-corvette", tmp_path, "side") is None
+
+
+def test_a_pasted_photo_that_will_not_download_stops_the_build(tmp_path, monkeypatch):
+    """Run #208 pasted five slots, four failed to download, and it shipped a
+    Corvette story made from two photos with the drag race running the front
+    shot. A pasted link is a decision, not a hint."""
+    import pytest, single_car_short
+
+    monkeypatch.setattr(single_car_short, "_download_car_photo", lambda url, d, stem: None)
+    with pytest.raises(SystemExit) as excinfo:
+        single_car_short.gather_manual_media(
+            {"front": "https://x/f.JPG", "interior": "https://x/i.JPG"}, tmp_path / "images", {})
+    message = str(excinfo.value)
+    assert "front" in message and "interior" in message

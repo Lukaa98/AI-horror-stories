@@ -9,6 +9,7 @@ import argparse
 import copy
 import json
 import re
+import time
 import subprocess
 from pathlib import Path
 
@@ -843,6 +844,9 @@ _SHOT_TYPE_BY_CATEGORY = {
 
 # Which manual photo field maps to which review category -- trusted over
 # any AI guess, since the user is telling us directly what the photo is.
+# A pasted link is deliberate, so a blip should not cost it.
+PHOTO_DOWNLOAD_ATTEMPTS = 3
+
 MANUAL_PHOTO_FIELDS = {
     "front": "exterior_front",
     "side": "exterior_side",
@@ -863,20 +867,33 @@ def _download_car_photo(url, dest_dir, filename_stem):
     never "took". Both the response's content-type and a real decode
     check guard against that, so a bad link fails cleanly (falls back to
     whatever the scrape already found) instead of corrupting the slot."""
-    try:
-        response = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
-        response.raise_for_status()
-    except Exception:
-        return None
+    response = None
+    for attempt in range(PHOTO_DOWNLOAD_ATTEMPTS):
+        try:
+            response = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+            response.raise_for_status()
+            break
+        except Exception as exc:
+            if attempt == PHOTO_DOWNLOAD_ATTEMPTS - 1:
+                print(f"[single-car] Could not fetch {url}: {exc}")
+                return None
+            time.sleep(1.5 * (attempt + 1))
+    # Decode, do not take the server's word for it. The content-type header
+    # used to be a hard gate, which made this fail on any host that labels an
+    # image as octet-stream -- and the build then quietly carried on without
+    # the photo. Decoding is the authoritative test and catches the case the
+    # gate was really there for: a pasted *page* URL returns real bytes that
+    # are HTML, and HTML does not decode as an image.
     content_type = response.headers.get("content-type", "")
-    if not content_type.startswith("image/"):
-        return None
     try:
         from PIL import Image
         import io
         with Image.open(io.BytesIO(response.content)) as image:
             image.verify()
     except Exception:
+        print(f"[single-car] {url} did not decode as an image (content-type {content_type!r}, "
+              f"{len(response.content)} bytes). A listing page URL does this -- the link has to be "
+              "the image itself.")
         return None
     ext = ".jpg"
     if "png" in content_type:
@@ -1036,18 +1053,14 @@ def gather_manual_media(photo_urls, images_dir, entry):
     which field the user put the link in, not an AI guess."""
     dest_dir = images_dir / "manual"
     media = []
+    failed = []
     for field, category in MANUAL_PHOTO_FIELDS.items():
         url = (photo_urls or {}).get(field)
         if not url:
             continue
         path = _download_car_photo(url, dest_dir, field)
         if not path:
-            print(
-                f"[single-car] Could not use the pasted {field} photo URL -- it didn't download as a real "
-                f"image (make sure it's a direct image link, e.g. right-click the photo in the listing's "
-                f"gallery and \"Copy image address\", not the listing page URL itself). Falling back to "
-                f"whatever the scrape found for {field}: {url}"
-            )
+            failed.append((field, url))
             continue
         shot_type = _SHOT_TYPE_BY_CATEGORY.get(category, "exterior")
         facing_direction = _facing_direction_for_photo(path, entry) if shot_type == "exterior" else "unclear"
@@ -1056,6 +1069,21 @@ def gather_manual_media(photo_urls, images_dir, entry):
             path = remove_background(path)
         relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
         media.append({"path": relative, "type": shot_type, "category": category, "facing_direction": facing_direction})
+    # A pasted link is a decision, not a hint. Skipping one quietly produces a
+    # video built from different photos than the ones asked for, and the
+    # build's own log is the only trace: run #208 pasted five slots, four of
+    # them failed to download, and it shipped a Corvette story made of two
+    # photos with the drag race running the front shot because the side one
+    # never arrived.
+    if failed:
+        listed = "\n".join(f"  - {field}: {url}" for field, url in failed)
+        raise SystemExit(
+            f"{len(failed)} pasted photo(s) could not be downloaded, so the video would be built from "
+            f"photos you did not choose:\n{listed}\n"
+            "Each link has to be the image itself -- right-click the photo in the listing gallery and "
+            '"Copy image address" -- not the listing page. If a link looks right, the host may have '
+            "refused the request; re-running usually clears a transient failure."
+        )
     return media
 
 
