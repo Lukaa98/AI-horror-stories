@@ -69,9 +69,11 @@ def test_research_script_retries_with_feedback_when_outside_acceptable_words(mon
     prompts = []
     # The second attempt has to satisfy the house rules as well as the word
     # count, or the loop correctly keeps retrying: opens on a number without
-    # naming the car, closes on a question, no banned shapes.
+    # naming the car, says which car it is in the beat after, closes on a
+    # question, no banned shapes.
     good = [
-        {"headline": "", "narration": "A 707-horsepower coupe with 650 lb-ft hides behind that badge.",
+        {"headline": "", "narration": "A 707-horsepower coupe with 650 lb-ft hides behind that badge. "
+                                      "That's the Mustang.",
          "rival_make": None, "rival_model": None},
         {"headline": "", "narration": "So would you daily it, or is that too much?",
          "rival_make": None, "rival_model": None},
@@ -199,7 +201,8 @@ def test_script_violations_catch_what_the_prompt_alone_did_not():
     assert "just for looks" in found
 
     good = {"scenes": [
-        {"narration": "A 807-horsepower supercharged V8 making 707 lb-ft hides behind that badge."},
+        {"narration": "A 807-horsepower supercharged V8 making 707 lb-ft hides behind that badge. "
+                      "That's the Challenger SRT Super Stock."},
         {"narration": "So would you daily it, or is that a step too far?"},
     ]}
     assert single_car_short._script_violations(good, "Dodge", "Challenger SRT Super Stock") == []
@@ -1410,3 +1413,51 @@ def test_a_pasted_race_photo_beats_the_automatic_pick(tmp_path, monkeypatch):
                         lambda url, dest, stem: None)
     assert single_car_short._pasted_race_media(
         "https://example.com/bad", tmp_path / "images", {}) is None
+
+
+def test_the_script_has_to_say_which_car_this_is():
+    """The hook withholds the name on purpose, and nothing checked that the
+    next beat delivered it. Run #205 left a viewer watching an unidentified
+    minivan for twenty-six seconds: its only early mentions were "AMG" hung
+    on an engine and "Mercedes'" hung on a differential."""
+    import single_car_short
+
+    unnamed = {"scenes": [
+        {"narration": "Zero to sixty in just 4.4 seconds -- astonishing for a minivan."},
+        {"narration": "Under the hood, its hand-built 6.2-liter V8 churns out 465 lb-ft, "
+                      "demonstrating AMG's engineering."},
+        {"narration": "The 7-speed paired with Mercedes' 4Matic AWD handles well."},
+        {"narration": "Rare in its segment, the R63 AMG stood apart. So would you daily it?"},
+    ]}
+    found = " | ".join(single_car_short._script_violations(unnamed, "Mercedes-Benz", "R63 AMG"))
+    assert "which car this is" in found
+
+    # Naming it inside the window is enough -- the make is not required, since
+    # "the 911's aerodynamics" tells a viewer exactly what they are watching.
+    named = {"scenes": [
+        {"narration": "700 horsepower makes this the most powerful road-legal car ever built."},
+        {"narration": "The splitter and intakes enhance the 911's aerodynamics."},
+        {"narration": "So would you daily it?"},
+    ]}
+    assert not [v for v in single_car_short._script_violations(named, "Porsche", "911 GT2 RS Weissach")
+                if "which car this is" in v]
+
+
+def test_a_sub_brand_on_its_own_does_not_identify_the_car():
+    """"AMG", "RS", "GT" and the like name a performance division or a body
+    style. They ride along on engines and trim and tell a viewer nothing, so
+    they cannot be what satisfies the introduction."""
+    import single_car_short
+
+    assert "amg" in single_car_short.GENERIC_MODEL_WORDS
+    assert "rs" in single_car_short.GENERIC_MODEL_WORDS
+    # "GT2" is not generic -- it names this model, unlike a bare "GT".
+    assert "gt2" not in single_car_short.GENERIC_MODEL_WORDS
+
+    only_sub_brand = {"scenes": [
+        {"narration": "503 horsepower in a family wagon sounds made up."},
+        {"narration": "That AMG engine is hand-built by one engineer."},
+        {"narration": "So would you daily it?"},
+    ]}
+    found = " | ".join(single_car_short._script_violations(only_sub_brand, "Mercedes-Benz", "R63 AMG"))
+    assert "which car this is" in found

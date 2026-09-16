@@ -371,6 +371,12 @@ torque ("413 lb-ft"), zero_to_sixty ("3.9 sec"), engine ("3.6L twin-turbo flat-s
 from anything you say, so they must be right. Use "n/a" only when a figure genuinely does not exist
 for this car, never as a shortcut for not having looked.
 
+Say which car this is by the third scene at the latest. The hook deliberately withholds the name, so
+the beat right after it has to deliver it -- "...that's the R63 AMG" -- naming the model itself, not
+just a performance division or the make hung on a part. Run #205's opening thirty seconds mentioned
+"AMG" on an engine and "Mercedes'" on a differential and never said what the car was; the viewer spent
+twenty-six seconds watching an unidentified minivan.
+
 Your narration must still SAY the horsepower and the torque as real numbers -- the table does not
 excuse leaving them out of the script; run #184 never spoke the car's own horsepower at all. The
 horsepower figure has to land inside the FIRST {EARLY_TECH_SCENES} SCENES, not wherever the engine
@@ -518,6 +524,16 @@ BANNED_SHAPES = (
 # the script. Three scenes of an eleven-scene, sixty-second cut is roughly the
 # first fifteen seconds -- the window in which a viewer decides to stay.
 EARLY_TECH_SCENES = 3
+# The hook withholds the name on purpose; this is where it has to arrive.
+INTRODUCE_BY_SCENE = 3
+# Words inside a model field that name a performance division, a trim or a
+# body style rather than the model itself. Saying one of these does not tell
+# a viewer what car they are looking at.
+GENERIC_MODEL_WORDS = frozenset({
+    "amg", "srt", "gts", "gti", "rs", "gt", "gtr", "sti", "type", "edition",
+    "package", "coupe", "sedan", "wagon", "convertible", "cabriolet", "roadster",
+    "spyder", "spider", "base", "premium", "sport", "plus", "pro", "performance",
+})
 HORSEPOWER_RE = r"\d[\d,.]*\s*-?\s*(hp\b|horsepower|bhp\b)"
 TORQUE_RE = r"\d[\d,.]*\s*-?\s*(lb-ft|lb\.?\s?ft|pound-feet|nm\b)"
 
@@ -541,12 +557,38 @@ def _script_violations(package, make, model):
             f'your first sentence contains no number -- it was "{opening}". Open on a real '
             "figure or a hard superlative."
         )
+    make_tokens = [t for t in re.split(r"[\s\-/]+", str(make)) if len(t) > 2]
+    model_tokens = [t for t in re.split(r"[\s\-/]+", str(model)) if len(t) > 2]
     names = [part for part in re.split(r"\s+", f"{make} {model}".strip()) if len(part) > 2]
     named = [part for part in names if re.search(rf"\b{re.escape(part)}\b", opening, re.I)]
     if named:
         violations.append(
             f'your first sentence names the car ("{named[0]}") -- it was "{opening}". The name is '
             "the payoff and belongs in the second sentence; the first has to make the viewer want it."
+        )
+    # Keeping the name out of the first sentence only works if something
+    # then says it. Nothing did: across 56 builds 18 never named the car at
+    # all and run #205 left a viewer watching an unidentified minivan for 26
+    # seconds, with "AMG" and "Mercedes'" passing by as adjectives on an
+    # engine and a diff. A real introduction is the make and the model in one
+    # sentence, and it belongs where the prompt already says it does -- right
+    # after the hook.
+    # Any word of the model that actually names the model. Requiring the make
+    # too was too strict -- "the 911's aerodynamics" tells a viewer exactly
+    # what they are watching without saying Porsche. Requiring the model's
+    # leading word was also wrong: "the 991-based GT2 RS" identifies the car
+    # without saying 911. What has to be excluded is the other direction, a
+    # word naming a performance division or a body style rather than a model,
+    # because those ride along on engines and trim: run #205's only mentions
+    # were "AMG" on an engine and "Mercedes'" on a differential, and the
+    # viewer watched an unidentified minivan for twenty-six seconds.
+    identifying = [t for t in model_tokens if t.lower() not in GENERIC_MODEL_WORDS]
+    early_text = " ".join(scene.get("narration") or "" for scene in scenes[:INTRODUCE_BY_SCENE])
+    if identifying and not any(re.search(rf"\b{re.escape(t)}\b", early_text, re.I) for t in identifying):
+        violations.append(
+            f"you never say which car this is -- none of {identifying} appears in the first "
+            f"{INTRODUCE_BY_SCENE} scenes. The hook withholds the name on purpose, so the next beat has "
+            "to deliver it. A sub-brand or make hung on a part does not count."
         )
     closing = (scenes[-1].get("narration") or "").rstrip()
     if not closing.endswith("?"):
