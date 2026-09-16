@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-chevrolet-corvette-z06-20260916153735",
+  "base_car": {
+    "make": "Chevrolet",
+    "model": "Corvette Z06",
+    "trim": "",
+    "year": "2002"
+  },
+  "rivals": [
+    {
+      "make": "Porsche",
+      "model": "911",
+      "trim": "Carrera 4 (996)",
+      "year": "2002",
+      "reason": "With a powerful 320 horsepower and exceptional handling, the 996 Carrera 4 offers a compelling rear-engine alternative to the Corvette Z06."
+    },
+    {
+      "make": "Ford",
+      "model": "Mustang",
+      "trim": "SVT Cobra",
+      "year": "2002",
+      "reason": "Producing 305 horsepower, the SVT Cobra delivers muscle car excitement and performance that directly competes with the Z06."
+    },
+    {
+      "make": "Dodge",
+      "model": "Viper",
+      "trim": "GTS",
+      "year": "2002",
+      "reason": "The Viper GTS boasts an impressive 500 horsepower, offering a raw and aggressive driving experience that rivals the Corvette's performance."
+    },
+    {
+      "make": "BMW",
+      "model": "M3",
+      "trim": "E46",
+      "year": "2002",
+      "reason": "With 333 horsepower, the E46 M3 combines luxury and agility, making it a sophisticated competitor to the Z06."
+    }
+  ]
+}
