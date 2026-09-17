@@ -1562,3 +1562,49 @@ def test_without_the_toggle_the_photo_is_left_alone(tmp_path, monkeypatch):
 
     single_car_short._pasted_race_media("https://x/s.jpg", tmp_path / "images", {})
     assert source.read_bytes() == before
+
+
+def test_a_superlative_has_to_name_the_group_it_wins():
+    """Run #210 called a $217,545 718 Spyder "the most luxurious car ever
+    produced". The hook rules ask for superlatives, so this is the guard rail
+    on that instruction: scoping is what separates a hook from a lie, and the
+    true version was available -- the most expensive Spyder Porsche sells."""
+    import single_car_short
+
+    bad = {"scenes": [
+        {"narration": "A jaw-dropping $217,545 price tag marks this as the most luxurious car "
+                      "ever produced."},
+        {"narration": "That's the Porsche 718 Spyder RS, making 493 horsepower and 331 lb-ft."},
+        {"narration": "So would you take one over a 911?"},
+    ]}
+    found = " | ".join(single_car_short._script_violations(bad, "Porsche", "718 Spyder RS"))
+    assert "claims a superlative over every car ever made" in found
+
+    # A scoped superlative is exactly what the hook is supposed to be.
+    good = dict(bad, scenes=[
+        {"narration": "A jaw-dropping $217,545 makes this the most expensive Spyder Porsche has sold."},
+        {"narration": "That's the 718 Spyder RS, making 493 horsepower and 331 lb-ft."},
+        {"narration": "So would you take one over a 911?"},
+    ])
+    assert not [v for v in single_car_short._script_violations(good, "Porsche", "718 Spyder RS")
+                if "superlative" in v]
+
+
+def test_scoped_superlatives_across_real_builds_are_not_flagged():
+    """Checked against every past build before shipping: the rule has to catch
+    the false claim without firing on the honest ones."""
+    import single_car_short as m
+
+    for line in [
+        "This is the most powerful road-going 911 ever built.",
+        "It is the quickest Corvette ever made.",
+        "The rarest AMG wagon ever sold in the States.",
+        "A 700-horsepower car that hits sixty in 2.7 seconds.",
+    ]:
+        assert not m.UNSCOPED_SUPERLATIVE_RE.search(line), line
+    for line in [
+        "the most luxurious car ever produced",
+        "the fastest car in the world",
+        "the greatest car of all time",
+    ]:
+        assert m.UNSCOPED_SUPERLATIVE_RE.search(line), line

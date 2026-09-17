@@ -52,13 +52,13 @@
   box-shadow: 0 6px 22px rgba(0, 0, 0, .7);
 }
 
-.photo-thumb img[style*="scaleX(-1)"]:hover {
-  transform: scaleX(-7) scaleY(7);
-}
+.photo-thumb img.flipped { transform: scaleX(-1); }
+
+.photo-thumb img.flipped:hover { transform: scaleX(-7) scaleY(7); }
 
 @media (hover: none) {
   /* No hover on touch, and a 7x image under a fingertip would cover the
      form, so it simply stays a thumbnail. */
   .photo-thumb img:hover { transform: none; box-shadow: none; }
-  .photo-thumb img[style*="scaleX(-1)"]:hover { transform: scaleX(-1); }
+  .photo-thumb img.flipped:hover { transform: scaleX(-1); }
 }

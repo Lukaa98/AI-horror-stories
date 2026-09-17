@@ -361,7 +361,7 @@ Never name a specific individual as the designer unless that person is a real, e
 
 Every sentence has to earn its place with a specific, concrete fact -- a real number, a named comparison, a verifiable detail -- not a vague enthusiast-copy adjective doing the work instead. Cut lines like "adding to its sporty agility" or "making every drive engaging and dynamic" or "celebrated for its precise steering" that describe a *feeling* about the car without any fact backing it up -- if you can't attach a real number, a named comparison, or a specific verifiable detail to a claim, cut the claim and replace it with one you can verify, don't soften it into vague praise. This applies to every beat, not just the hook.
 
-Write like an excited, knowledgeable friend talking fast about a car they love, not a brochure. These exact constructions are banned outright, because they read as generated copy: "a testament to", "design ethos", "blending luxury with practicality", "adding a touch of exclusivity", "catering to family needs", "creating a motorsport feel", "highlighting its performance lineage", and any sentence built on "isn't just for looks", on "blending X with Y", or on "provides a sporty feel". Run #176 still slipped through with "the brushed aluminum pedals and bolstered seats provide a sporty feel, blending luxury with performance intentions" -- three clauses saying nothing. Name what the pedal material is actually for, or which seat it is, or cut the sentence. Also banned is stat-shaped padding -- a number that sounds like data but tells the viewer nothing they can use, like "reflecting an annual depreciation of about 8%". Give the two prices and let them do the subtraction. Favor punchy, stacked, specific claims over smooth marketing prose -- "that's more horsepower per liter than the [famous engine], and it's only got three cylinders" reads as genuinely engaging; "it delivers a dynamic and engaging driving experience" reads as filler no matter how true it is. A strong hook is a bold, specific, verifiable superlative or comparison (most powerful, quickest, cheapest, rarest -- something with a real number and a real point of comparison attached), not a generic "this car blends performance and luxury" opener. Casual contractions and informal phrasing are good here -- this should sound spoken, not written.
+Write like an excited, knowledgeable friend talking fast about a car they love, not a brochure. These exact constructions are banned outright, because they read as generated copy: "a testament to", "design ethos", "blending luxury with practicality", "adding a touch of exclusivity", "catering to family needs", "creating a motorsport feel", "highlighting its performance lineage", and any sentence built on "isn't just for looks", on "blending X with Y", or on "provides a sporty feel". Run #176 still slipped through with "the brushed aluminum pedals and bolstered seats provide a sporty feel, blending luxury with performance intentions" -- three clauses saying nothing. Name what the pedal material is actually for, or which seat it is, or cut the sentence. Also banned is stat-shaped padding -- a number that sounds like data but tells the viewer nothing they can use, like "reflecting an annual depreciation of about 8%". Give the two prices and let them do the subtraction. Favor punchy, stacked, specific claims over smooth marketing prose -- "that's more horsepower per liter than the [famous engine], and it's only got three cylinders" reads as genuinely engaging; "it delivers a dynamic and engaging driving experience" reads as filler no matter how true it is. A strong hook is a bold, specific, verifiable superlative or comparison (most powerful, quickest, cheapest, rarest -- something with a real number and a real point of comparison attached), not a generic "this car blends performance and luxury" opener. Every superlative must name the group it actually wins: "the most powerful 911 ever built", "the most expensive Spyder Porsche has sold", "the quickest minivan ever made". Never aim one at cars in general -- "the most luxurious car ever produced" about a $217,545 718 Spyder is not a bold claim, it is a false one, and the true version was available. Casual contractions and informal phrasing are good here -- this should sound spoken, not written.
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
@@ -371,6 +371,15 @@ torque ("413 lb-ft"), zero_to_sixty ("3.9 sec"), engine ("3.6L twin-turbo flat-s
 ("$110K new, ~$70K today"). These are shown to the viewer in a table for the whole video, separate
 from anything you say, so they must be right. Use "n/a" only when a figure genuinely does not exist
 for this car, never as a shortcut for not having looked.
+
+Work in one REPUTATION beat wherever it fits -- what people actually argue about this car. Not a
+feature, an opinion the audience already holds: what it lives in the shadow of, what it gets dismissed
+for, what the badge snobs say, a criticism that is fair, or one that is not and the fact that settles
+it. A 718 Spyder is written off for not being a 911, and then shares the 911's flat-six and outruns
+most of them -- that is the beat. An R63 is a minivan nobody took seriously with a hand-built AMG V8
+in it. This is what makes a viewer stay past the specs, and it still has to rest on something
+verifiable: name the comparison, the criticism or the reputation, then answer it with a real figure or
+a documented fact. Skip it only when this car genuinely has no such story.
 
 Say which car this is by the third scene at the latest. The hook deliberately withholds the name, so
 the beat right after it has to deliver it -- "...that's the R63 AMG" -- naming the model itself, not
@@ -514,6 +523,15 @@ def _enforce_word_cap(package, cap=WORD_CAP):
 # Shapes that read as generated copy. Substrings, so a plural or a tense
 # change cannot walk past them the way "aren't just for looks" walked past a
 # ban on "isn't just for looks" in run #182.
+# A superlative aimed at "car" or "vehicle" with nothing narrowing it: the
+# noun is the tell. "the fastest 911 ever built" scopes itself and is fine;
+# "the most luxurious car ever produced" does not.
+UNSCOPED_SUPERLATIVE_RE = re.compile(
+    r"\b(?:the\s+)?(?:most\s+\w+|fastest|quickest|rarest|cheapest|priciest|finest|greatest|best)\s+"
+    r"(?:car|vehicle|machine)\s+(?:ever|in\s+(?:the\s+)?world|of\s+all\s+time)\b",
+    re.I,
+)
+
 BANNED_SHAPES = (
     "you'll notice", "the rear features", "side profile reveals", "a testament to",
     "design ethos", "adding a touch of", "just for looks", "catering to",
@@ -621,6 +639,19 @@ def _script_violations(package, make, model):
             )
     if not re.search(TORQUE_RE, script):
         violations.append("your narration never states the car's torque as a number. Say it in the engine beat.")
+    # A superlative has to name the group it wins. "The most luxurious car
+    # ever produced" is not a bold claim about a $217k 718 Spyder, it is a
+    # false one -- and the true version was right there: the most expensive
+    # Spyder, the most powerful naturally-aspirated Porsche. Scoping is what
+    # separates a hook from a lie, and the hook rules ask for superlatives,
+    # so this is the guard rail on that instruction.
+    for match in re.finditer(UNSCOPED_SUPERLATIVE_RE, script):
+        violations.append(
+            f'"{match.group(0).strip()}" claims a superlative over every car ever made, which is not '
+            "true and is not what you meant. Scope it to the group the car actually leads -- its own "
+            "model, brand, era, body style or segment."
+        )
+        break
     for shape in BANNED_SHAPES:
         if shape in script:
             violations.append(f'you used the banned phrase "{shape}". Rewrite that sentence around a fact.')

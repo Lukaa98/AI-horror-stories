@@ -21,12 +21,15 @@ export default function PhotoThumb({ url, flipped = false, alt = "" }) {
   }
   return (
     <span className="photo-thumb">
+      {/* The flip is a class rather than an inline transform: an inline
+          style outranks every stylesheet rule, so a flipped thumbnail
+          could never be grown by :hover. */}
       <img
+        className={flipped ? "flipped" : undefined}
         src={clean}
         alt={alt}
         loading="lazy"
         onError={() => setBroken(true)}
-        style={flipped ? { transform: "scaleX(-1)" } : undefined}
       />
     </span>
   );
