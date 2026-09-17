@@ -8,6 +8,7 @@ import jobsData from "./jobs-data.json";
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
+const OUTPUT_BRANCH = "cars-output";
 const UI_VERSION = "V11.29 — Photo previews and mirror toggle";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
