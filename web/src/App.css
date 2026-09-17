@@ -1088,3 +1088,19 @@ button.secondary {
   .jobs-search { width: 100%; }
   .job-tags { justify-content: flex-start; }
 }
+
+/* Mirror toggle beside a race photo. Sized like the × buttons it sits with,
+   and lit when on so the state is visible without reading the thumbnail. */
+.flip-toggle {
+  flex: 0 0 auto;
+  line-height: 1;
+  padding: 6px 9px;
+  font-size: 15px;
+  background: #343434;
+  border-color: #666;
+}
+.flip-toggle.active {
+  background: #1e54a6;
+  border-color: #1e54a6;
+  color: #fff;
+}

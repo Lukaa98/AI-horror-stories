@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import PhotoSlots from "./PhotoSlots";
+import PhotoThumb from "./PhotoThumb";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import jobsData from "./jobs-data.json";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
-const OUTPUT_BRANCH = "cars-output";
+const UI_VERSION = "V11.29 — Photo previews and mirror toggle";
 const UI_VERSION = "V11.28 — Pick both drag-race photos";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
@@ -764,6 +765,11 @@ export default function App() {
   // The exact side-profile shot of the main car to run in the drag race.
   // Left blank, the build picks the best exterior it has, which is a guess.
   const [racePhoto, setRacePhoto] = useState("");
+  // Which race photos to mirror. Auto-detection reads the cutout's silhouette
+  // and is usually right; this is for when it is not, and for a photo that
+  // simply points the wrong way for a left-to-right race.
+  const [raceFlipped, setRaceFlipped] = useState(false);
+  const [rivalFlipped, setRivalFlipped] = useState(false);
   const [rivalChoices, setRivalChoices] = useState(null);
   const [rivalChoicesStage, setRivalChoicesStage] = useState("idle");
   const [rivalChoicesError, setRivalChoicesError] = useState(null);
@@ -1092,6 +1098,10 @@ export default function App() {
             if (rival) slots.rival = rival;
             const race = compareEnabled ? racePhoto.trim() : "";
             if (race) slots.race = race;
+            // Flags ride in the same object as the URLs they belong to, so a
+            // mirrored photo cannot get separated from its instruction.
+            if (race && raceFlipped) slots.race_flip = "1";
+            if (rival && rivalFlipped) slots.rival_flip = "1";
             return Object.keys(slots).length ? JSON.stringify(slots) : "";
           })(),
           rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
@@ -1228,6 +1238,8 @@ export default function App() {
     setCompareEnabled(String(inputs.disable_comparison) !== "true");
     setRivalCar(inputs.rival_car || "");
     setRacePhoto(inputs.photo_race || "");
+    setRaceFlipped(String(inputs.photo_race_flip || "") === "1");
+    setRivalFlipped(String(inputs.photo_rival_flip || "") === "1");
     setWorkflow("single_car");
     setFilledFromBuild(build);
   }
@@ -2574,7 +2586,16 @@ export default function App() {
                             placeholder="This car's race photo URL -- a side profile"
                             disabled={stage === "single-car-building"}
                           />
-                          <Tip text="The exact photo of THIS car to race. Leave blank and the build picks the best exterior shot it has, which can end up being a head-on front shot." />
+                          <PhotoThumb url={racePhoto} flipped={raceFlipped} alt="This car's race photo" />
+                          <button
+                            type="button"
+                            className={`flip-toggle${raceFlipped ? " active" : ""}`}
+                            onClick={() => setRaceFlipped(!raceFlipped)}
+                            disabled={!racePhoto.trim() || stage === "single-car-building"}
+                            aria-pressed={raceFlipped}
+                            title="Mirror this photo so the car points the way it races"
+                          >⇄</button>
+                          <Tip text="The exact photo of THIS car to race. Leave blank and the build picks the best exterior shot it has, which can end up being a head-on front shot. Use the mirror button when the car points the wrong way -- the thumbnail shows exactly what the race will use." />
                         </label>
                         <label className="field-row">
                           <input
@@ -2583,6 +2604,15 @@ export default function App() {
                             placeholder="Comparison car's race photo URL -- a side profile"
                             disabled={stage === "single-car-building"}
                           />
+                          <PhotoThumb url={photoUrls.rival} flipped={rivalFlipped} alt="Comparison car's race photo" />
+                          <button
+                            type="button"
+                            className={`flip-toggle${rivalFlipped ? " active" : ""}`}
+                            onClick={() => setRivalFlipped(!rivalFlipped)}
+                            disabled={!photoUrls.rival.trim() || stage === "single-car-building"}
+                            aria-pressed={rivalFlipped}
+                            title="Mirror this photo so the car points the way it races"
+                          >⇄</button>
                           <Tip text="Paste a side-on photo of the rival and it is used directly, so no listing is scraped for it. Leave blank and the build searches for one, which is the slow and unreliable path." />
                         </label>
                       </>

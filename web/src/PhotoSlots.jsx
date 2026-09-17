@@ -1,4 +1,5 @@
 import "./PhotoSlots.css";
+import PhotoThumb from "./PhotoThumb";
 import { SLOTS, MAX_CLOSEUPS, closeupsFor } from "./photoSections";
 
 // The five slots the pipeline has always had, each with its one main photo
@@ -32,6 +33,7 @@ export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseu
             placeholder="Main photo — direct image URL"
             disabled={disabled}
           />
+          <PhotoThumb url={photoUrls[slot]} alt={`${title} main photo`} />
         </label>
         {!!nested.length && !hasMain &&
           <p className="photo-slot-warning">Add a main {title.toLowerCase()} photo — close-ups are shown underneath one, never on their own.</p>}
@@ -58,6 +60,7 @@ export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseu
             disabled={disabled}
             aria-invalid={!!photo.url.trim() && !photo.label.trim()}
           />
+          <PhotoThumb url={photo.url} alt={photo.label || `${title} close-up ${index + 1}`} />
           <button type="button" onClick={() => remove(photo.id)} disabled={disabled}
                   aria-label={`Remove ${title} close-up ${index + 1}`}>×</button>
         </div>)}

@@ -910,6 +910,25 @@ def _download_car_photo(url, dest_dir, filename_stem):
     return path
 
 
+def _mirror_photo(path):
+    """Flip a downloaded photo left-to-right, in place.
+
+    The drag race runs left to right, so a car facing the wrong way looks
+    like it is reversing. Facing is normally measured off the cutout's
+    silhouette, which is right most of the time and occasionally is not --
+    this is the manual override, applied to the pixels before anything else
+    reads them, so every later step (the facing measurement included) sees
+    the photo the user actually chose.
+    """
+    try:
+        from PIL import Image, ImageOps
+        with Image.open(path) as image:
+            ImageOps.mirror(image).save(path)
+    except Exception as exc:
+        print(f"[single-car] Could not mirror {path.name}, using it as-is: {exc}")
+    return path
+
+
 def _describe_photo_for_script(path, label_hint, car_label):
     """One AI vision call that turns a user-pasted photo into a concrete,
     specific detail the script can actually talk about -- not just "there's
@@ -1139,7 +1158,7 @@ def _apply_manual_photo_overrides(media, manual_media):
     return kept + manual_media
 
 
-def gather_manual_rival_photo(url, images_dir, rival_make, rival_model):
+def gather_manual_rival_photo(url, images_dir, rival_make, rival_model, mirror=False):
     """Like gather_rival_photo, but from a user-pasted photo link instead
     of a search -- returns (path, facing_direction), or (None, "unclear")
     on any failure, matching gather_rival_photo's fail-open contract so a
@@ -1153,6 +1172,8 @@ def gather_manual_rival_photo(url, images_dir, rival_make, rival_model):
             f"normal rival photo search: {url}"
         )
         return None, "unclear"
+    if mirror:
+        _mirror_photo(path)
     facing_direction = _facing_direction_for_photo(path, entry)
     blur_license_plates(path)
     path = remove_background(path)
@@ -1276,7 +1297,7 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
     return media, manifest.get("selected_auction") or {}
 
 
-def _pasted_race_media(url, images_dir, entry):
+def _pasted_race_media(url, images_dir, entry, mirror=False):
     """The exact photo of the main car to run in the drag race, if given.
 
     Without this the race car is whichever exterior shot _select_side_profile_media
@@ -1293,6 +1314,10 @@ def _pasted_race_media(url, images_dir, entry):
         print("[single-car] The pasted drag-race photo did not download as an image; "
               "falling back to the best automatic side-profile pick.")
         return None
+    if mirror:
+        _mirror_photo(path)
+    # Measured after any mirroring, so the direction describes the photo that
+    # will actually be on screen.
     facing_direction = _facing_direction_for_photo(path, entry)
     # The same preparation the rival's own race photo gets: a plate blurred,
     # and the background cut away so the car races as a cutout on the white
@@ -1364,7 +1389,8 @@ def _year_in(text):
     return int(match.group(0)) if match else None
 
 
-def apply_rival_photos(scenes, media, start_year, end_year, images_dir, manual_rival_url=None, rival_year=None):
+def apply_rival_photos(scenes, media, start_year, end_year, images_dir, manual_rival_url=None,
+                       rival_year=None, mirror_rival=False):
     """Swap in a real photo of the named competitor for any scene that
     directly compares to one, instead of showing the main car's own photo
     again there. The rival car itself is decided by the AI script (it's
@@ -1385,7 +1411,8 @@ def apply_rival_photos(scenes, media, start_year, end_year, images_dir, manual_r
             continue
         if manual_rival_url:
             if manual_rival_photo is None:
-                manual_rival_photo = gather_manual_rival_photo(manual_rival_url, images_dir, rival_make, rival_model)
+                manual_rival_photo = gather_manual_rival_photo(
+                    manual_rival_url, images_dir, rival_make, rival_model, mirror=mirror_rival)
             rival_path, rival_facing = manual_rival_photo
         else:
             cache_key = (rival_make, rival_model)
@@ -1771,7 +1798,8 @@ def build_short(args):
     # to find the single best side-profile shot.
     race_entry = {"name": car_label, "label": car_label, "years": "",
                   "search_hint": car_label, "visual_highlight": "", "generation_label": ""}
-    side_profile_media = (_pasted_race_media(photos.get("race"), images_dir, race_entry)
+    side_profile_media = (_pasted_race_media(photos.get("race"), images_dir, race_entry,
+                                             mirror=photos.get("race_flip") == "1")
                           or _select_side_profile_media(media))
     photo_sections = collect_photo_sections(media)
     media = order_media_for_scenes(package["scenes"], media)
@@ -1779,6 +1807,7 @@ def build_short(args):
         package["scenes"], media, media_start_year, media_end_year, images_dir,
         manual_rival_url=None if args.disable_comparison else args.photo_rival,
         rival_year=_year_in(args.rival_car),
+        mirror_rival=photos.get("rival_flip") == "1",
     )
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
@@ -1841,6 +1870,8 @@ def build_short(args):
             "photo_rival": args.photo_rival or "",
             "rival_car": args.rival_car or "",
             "photo_race": photos.get("race") or "",
+            "photo_race_flip": photos.get("race_flip") or "",
+            "photo_rival_flip": photos.get("rival_flip") or "",
             "disable_comparison": "true" if args.disable_comparison else "false",
             "extra_photos": args.extra_photos or "",
         },

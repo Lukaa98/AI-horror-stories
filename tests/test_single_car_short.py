@@ -647,7 +647,7 @@ def test_apply_rival_photos_uses_the_manual_rival_url_for_every_comparison_scene
     ]
     calls = []
 
-    def fake_gather_manual_rival_photo(url, images_dir, rival_make, rival_model):
+    def fake_gather_manual_rival_photo(url, images_dir, rival_make, rival_model, mirror=False):
         calls.append((url, rival_make, rival_model))
         return ("images/manual-rival/rival.png", "right")
 
@@ -1510,3 +1510,55 @@ def test_a_pasted_photo_that_will_not_download_stops_the_build(tmp_path, monkeyp
             {"front": "https://x/f.JPG", "interior": "https://x/i.JPG"}, tmp_path / "images", {})
     message = str(excinfo.value)
     assert "front" in message and "interior" in message
+
+
+def test_mirroring_flips_the_pixels_before_facing_is_measured(tmp_path, monkeypatch):
+    """The race runs left to right, so a car pointing the wrong way looks like
+    it is reversing. Auto-detection reads the silhouette and is usually right;
+    this is the override. It has to land on the pixels before anything reads
+    them, or the measured facing would describe a photo that no longer exists."""
+    import single_car_short
+    from PIL import Image
+
+    source = tmp_path / "images" / "manual-race" / "race.jpg"
+    source.parent.mkdir(parents=True)
+    # Left half black, right half white -- mirroring has to swap them.
+    image = Image.new("RGB", (10, 4), (255, 255, 255))
+    for x in range(5):
+        for y in range(4):
+            image.putpixel((x, y), (0, 0, 0))
+    image.save(source)
+
+    order = []
+    monkeypatch.setattr(single_car_short, "_download_car_photo", lambda u, d, stem: source)
+    monkeypatch.setattr(single_car_short, "blur_license_plates", lambda p: None)
+    monkeypatch.setattr(single_car_short, "remove_background", lambda p: p)
+
+    def facing(path, entry):
+        with Image.open(path) as opened:
+            order.append("dark-left" if opened.getpixel((0, 0)) == (0, 0, 0) else "dark-right")
+        return "right"
+    monkeypatch.setattr(single_car_short, "_facing_direction_for_photo", facing)
+
+    single_car_short._pasted_race_media("https://x/s.jpg", tmp_path / "images", {}, mirror=True)
+    assert order == ["dark-right"], "facing was measured before the mirror was applied"
+    with Image.open(source) as result:
+        assert result.getpixel((0, 0)) == (255, 255, 255)
+
+
+def test_without_the_toggle_the_photo_is_left_alone(tmp_path, monkeypatch):
+    import single_car_short
+    from PIL import Image
+
+    source = tmp_path / "images" / "manual-race" / "race.jpg"
+    source.parent.mkdir(parents=True)
+    Image.new("RGB", (4, 4), (10, 20, 30)).save(source)
+    before = source.read_bytes()
+
+    monkeypatch.setattr(single_car_short, "_download_car_photo", lambda u, d, stem: source)
+    monkeypatch.setattr(single_car_short, "blur_license_plates", lambda p: None)
+    monkeypatch.setattr(single_car_short, "remove_background", lambda p: p)
+    monkeypatch.setattr(single_car_short, "_facing_direction_for_photo", lambda p, e: "right")
+
+    single_car_short._pasted_race_media("https://x/s.jpg", tmp_path / "images", {})
+    assert source.read_bytes() == before
