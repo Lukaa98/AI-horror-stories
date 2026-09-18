@@ -564,6 +564,48 @@ GENERIC_MODEL_WORDS = frozenset({
 })
 HORSEPOWER_RE = r"\d[\d,.]*\s*-?\s*(hp\b|horsepower|bhp\b)"
 TORQUE_RE = r"\d[\d,.]*\s*-?\s*(lb-ft|lb\.?\s?ft|pound-feet|nm\b)"
+# The same figure, captured, for checking a spoken number against the one the
+# model put in the structured field beside it.
+SPOKEN_HP_RE = re.compile(r"(\d[\d,]*)\s*-?\s*(?:hp\b|horsepower|bhp\b)", re.I)
+# The second figure in a comparison usually drops the unit -- "710 hp to this
+# car's 661" is how anyone would say it. So a bare three- or four-digit number
+# counts too, as long as it is not glued to a letter ("720S" is a model name,
+# not an output) or to a currency symbol. A stray number that happens to land
+# within tolerance only lets a script through, never blocks one.
+SPOKEN_FIGURE_RE = re.compile(r"(?<![\w$£€])(\d[\d,]{2,})(?![\w,])")
+# A round number is a fair way to speak a figure -- "about 500 horsepower" for
+# 493 is not an error. Seven per cent apart is a different car's number.
+HP_SPOKEN_TOLERANCE = 0.02
+
+# A participle hung on a brand abstraction: "reflecting Ferrari's dedication to
+# performance efficiency", "underscoring its prowess", "a hallmark of AMG's
+# commitment". The shape asserts that the car expresses a value, which is not a
+# fact and cannot be wrong, so it survives every rule aimed at false claims
+# while saying nothing. It is the default ending for an appearance beat that
+# ran out of material -- 15 of 56 past builds ended one this way.
+FILLER_TAIL_RE = re.compile(
+    r"\b(?:reflect\w*|underscor\w*|highlight\w*|showcas\w*|emphasiz\w*|embod\w*|"
+    r"epitomiz\w*|exemplif\w*|demonstrat\w*|signal\w*|hallmark)\b[^.?!]{0,70}?\b"
+    r"(?:dedication|commitment|focus|approach|philosophy|ethos|heritage|identity|"
+    r"character|prowess|expertise|craftsmanship|pedigree|dna|legacy|aesthetic)\b",
+    re.I,
+)
+
+# Something in the script has to be about what people think of this car, not
+# about what it has. The vocabulary is wide on purpose: the check only asks
+# whether an argument is anywhere on screen, and a beat phrased outside this
+# list costs one retry, not a failed build.
+REPUTATION_MARKERS_RE = re.compile(
+    r"\b(?:shadow of|dismiss\w+|written off|writes? it off|critics?|purists?|snobs?|"
+    r"reputation|overlooked|underrated|underappreciated|misunderstood|"
+    r"nobody took|no one took|laughed at|mocked|complain\w*|knock on it|"
+    r"people (?:say|said|think|thought|assume|assumed|call|called)|"
+    r"everyone (?:says|thinks|assumes|calls)|gets? called|was called|"
+    r"hate[sd]?\b|hated|controvers\w+|divisive|polariz\w+|"
+    r"not a real|scoff\w*|sneer\w*|derided|maligned|snub\w*|"
+    r"never forgave|bad rap|gets? flak|accused of)\b",
+    re.I,
+)
 
 
 def _script_violations(package, make, model):
@@ -664,6 +706,54 @@ def _script_violations(package, make, model):
     for shape in BANNED_SHAPES:
         if shape in script:
             violations.append(f'you used the banned phrase "{shape}". Rewrite that sentence around a fact.')
+    # The comparison beat has to speak BOTH cars' horsepower, and they have to
+    # be the two figures it put in the structured fields. Run #214 wrote "the
+    # McLaren 720S, which also offers 710 hp" over main_horsepower 661 -- the
+    # Ferrari's own number never appeared, and "also" quietly handed it the
+    # McLaren's. The structured fields drive the race animation and are right;
+    # only the sentence was wrong, which is exactly the kind of disagreement
+    # that can be checked rather than hoped for. Three of the four builds since
+    # the comparison rules went in spoke only one of the two numbers.
+    for index, scene in enumerate(scenes, start=1):
+        main_hp, rival_hp = scene.get("main_horsepower"), scene.get("rival_horsepower")
+        if not (main_hp and rival_hp):
+            continue
+        narration = scene.get("narration") or ""
+        spoken = [
+            int(m.group(1).replace(",", ""))
+            for pattern in (SPOKEN_HP_RE, SPOKEN_FIGURE_RE)
+            for m in pattern.finditer(narration)
+        ]
+        for figure, whose in ((int(main_hp), "this car"), (int(rival_hp), "the rival")):
+            if not any(abs(said - figure) <= figure * HP_SPOKEN_TOLERANCE for said in spoken):
+                violations.append(
+                    f"scene {index} compares the two cars but never says {whose}'s horsepower out loud -- "
+                    f"you set {figure} hp in the data and the narration says {spoken or 'no figure'}. "
+                    "The viewer only hears the narration, so both numbers have to be in the sentence, "
+                    "and they have to be these two."
+                )
+        break
+    # An appearance beat that ran out of material ends on the car expressing a
+    # value -- "reflecting Ferrari's dedication to performance efficiency".
+    # It cannot be false, so nothing else here catches it, and it is where a
+    # beat that should have carried a fact the photo cannot give ends up.
+    filler = FILLER_TAIL_RE.search(script)
+    if filler:
+        violations.append(
+            f'"{filler.group(0).strip()}" says the car expresses a value instead of telling the viewer '
+            "something. Replace that clause with the fact the photo cannot give them -- what the part "
+            "does, what it cost, which other model shares it, how many were made."
+        )
+    # The reputation beat was asked for in the prompt and arrived in none of
+    # the four builds that ran with the instruction live -- including the 718
+    # Spyder the instruction was written about. It is the beat that makes a
+    # viewer stay past the specs, so it gets checked like the rest of them.
+    if not REPUTATION_MARKERS_RE.search(script):
+        violations.append(
+            "no beat says what people actually argue about this car -- what it lives in the shadow of, "
+            "what it gets dismissed for, the criticism that is fair or the one the facts settle. Every "
+            "other beat is a spec. Add that one and land it on a real figure or a documented fact."
+        )
     return violations
 
 
