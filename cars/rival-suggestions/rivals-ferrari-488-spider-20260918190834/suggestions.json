@@ -1,0 +1,39 @@
+{
+  "suggestion_id": "rivals-ferrari-488-spider-20260918190834",
+  "base_car": {
+    "make": "Ferrari",
+    "model": "488 Spider",
+    "trim": "",
+    "year": "2018"
+  },
+  "rivals": [
+    {
+      "make": "McLaren",
+      "model": "720S",
+      "trim": "Performance",
+      "year": "2018",
+      "reason": "With 710 horsepower, the McLaren 720S offers blistering speed and advanced aerodynamics, making it a worthy rival to the 488 Spider."
+    },
+    {
+      "make": "Porsche",
+      "model": "911 Turbo S",
+      "trim": "",
+      "year": "2018",
+      "reason": "Delivering 580 horsepower, the 911 Turbo S combines luxury with high performance, capturing buyers seeking a convertible that competes with the Ferrari."
+    },
+    {
+      "make": "Lamborghini",
+      "model": "Huracan",
+      "trim": "Performante",
+      "year": "2018",
+      "reason": "The Huracan Performante features a roaring 630 horsepower and an emotive design, making it a strong competitor in the supercar segment."
+    },
+    {
+      "make": "Audi",
+      "model": "R8",
+      "trim": "V10 Plus",
+      "year": "2018",
+      "reason": "With a powerful 610 horsepower from its V10 engine, the R8 V10 Plus provides an exhilarating driving experience that appeals to similar supercar enthusiasts."
+    }
+  ]
+}
