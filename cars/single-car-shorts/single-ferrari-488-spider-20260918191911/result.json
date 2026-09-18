@@ -1,0 +1,3260 @@
+{
+  "car": {
+    "make": "Ferrari",
+    "model": "488 Spider",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Ferrari",
+    "model": "488 Spider",
+    "query": "",
+    "start_year": 2018,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/rj5VG7gw/2018-ferrari-488-spider",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018016.jpg?t=178939297791",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018003.jpg?t=178939297791",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Ferrari488Spider2018014/edit/y4t-c.jpg?t=178948762302",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=1386.6666666666665,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018219.jpg?t=178939297791",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Ferrari488Spider2018125/edit/XkU8H.jpg?t=178947323468",
+    "photo_rival": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/7c0895bcd8c0f6225430b95876d9813de1fdac0f/photos/exterior/9QVPdZ0x-7irc4so.jpg?t=177135445188",
+    "rival_car": "2018 McLaren 720S Performance",
+    "photo_race": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018003.jpg?t=178939297791",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "false",
+    "extra_photos": "[{\"id\":\"closeup-1789758534196-0\",\"label\":\"Front grill and shape of the headlights\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Ferrari488Spider2018031/edit/DyOD5.jpg?t=178948656029\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-1789758568356-1\",\"label\":\"Back ferrary horse and dual exhaust\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Ferrari488Spider2018013/edit/Bw51I.jpg?t=178948764882\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-1789758589112-2\",\"label\":\"Rear quarter\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018049.jpg?t=178939297791\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-1789758631575-4\",\"label\":\"front side\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Ferrari488Spider2018002/edit/VIaLF.jpg?t=178948649138\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-1789758657136-4\",\"label\":\"With targa roof on\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018015.jpg?t=178939297791\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-1789758672455-5\",\"label\":\"Head Light close up\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018039.jpg?t=178939297791\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-1789758694263-6\",\"label\":\"Front side\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018058.jpg?t=178939297791\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-1789758704412-7\",\"label\":\"mid ferrari badge\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1386.6666666666665,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018098.jpg?t=178939297791\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-1789758719751-8\",\"label\":\"Front wheele ferrary bardge\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018061.jpg?t=178939297791\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-1789758739271-9\",\"label\":\"Air Intake\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018065.jpg?t=178939297791\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-1789758751745-10\",\"label\":\"Close Tail light\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018044.jpg?t=178939297791\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-1789758814812-11\",\"label\":\"rear side\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018063.jpg?t=178939297791\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-1789758847125-12\",\"label\":\"Steering wheel with all start engine, sport race modes and buttons\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018121.jpg?t=178939297791\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-1789758868163-13\",\"label\":\"Gauge cluster up to 10000 rpm\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/Ferrari488Spider2018107/edit/B_KAM.jpg?t=178947316280\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-1789758922707-14\",\"label\":\"Chairs\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018122.jpg?t=178939297791\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-1789758970225-15\",\"label\":\"Carbon fiber dash with 488 spider\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018164.jpg?t=178939297791\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-1789759012422-16\",\"label\":\"side enginer\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018103.jpg?t=178939297791\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-1789759023705-17\",\"label\":\"with engienr trunk open\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018201.jpg?t=178939297791\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-1789759035431-18\",\"label\":\"ferrari key\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/a79693707984a152e702ff352a1370a713972d3f/photos/Ferrari488Spider2018212.jpg?t=178939297791\",\"slot\":\"engine\",\"note\":\"\"}]"
+  },
+  "title": "Turbocharged Performance",
+  "key_specs": {
+    "horsepower": "661 hp",
+    "torque": "561 lb-ft",
+    "zero_to_sixty": "3.0 sec",
+    "engine": "3.9L Turbocharged V8",
+    "price": "$250K new, ~$200K now"
+  },
+  "start_year": 2016,
+  "end_year": 2019,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "photo_label": null,
+      "narration": "With 661 horsepower and a sub-three second dash to sixty, few cars scream performance like this one.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": 661,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "488 Spider",
+      "photo_label": null,
+      "narration": "Meet the 2018 Ferrari 488 Spider, an evolution from the 458, delivering more power and reduced weight.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "3.9L V8 Turbo",
+      "photo_label": "engine bay",
+      "narration": "The 3.9-liter twin-turbocharged V8 churns out 561 lb-ft of torque, pushing this beast to its limits.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Torque",
+      "stat_value": "561 lb-ft",
+      "stat_label_2": "Engine",
+      "stat_value_2": "3.9L Turbocharged V8"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Aerodynamics",
+      "photo_label": "exterior front",
+      "narration": "The front air intakes optimize aerodynamics, reflecting Ferrari's dedication to performance efficiency.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Price Retention",
+      "photo_label": null,
+      "narration": "Originally priced around $250,000, it now fetches about $200,000, reflecting a stable annual depreciation of roughly 5%.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "$250K -> $200K (-5%/yr)",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "photo_label": "exterior rear",
+      "narration": "Ferrari's iconic quad-exhaust setup enhances the aggressive rear profile of the 488 Spider.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "photo_label": "exterior side",
+      "narration": "The air intake scoops along the rear fenders boost aerodynamics and underscore its design focus on speed.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Vs. McLaren 720S",
+      "photo_label": null,
+      "narration": "Compared to the McLaren 720S Performance, which also offers 710 hp, the Ferrari maintains a unique finesse despite trailing slightly in power.",
+      "rival_make": "McLaren",
+      "rival_model": "720S Performance",
+      "main_horsepower": 661,
+      "rival_horsepower": 710,
+      "main_quarter_mile_seconds": 10.6,
+      "rival_quarter_mile_seconds": 10.3,
+      "stat_label": "Horsepower",
+      "stat_value": "661 hp vs 710 hp",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "interior",
+      "headline": "",
+      "photo_label": "interior",
+      "narration": "Inside, the sweeping dashboard features prominent air vents, a hallmark of Ferrari's modern design approach.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "interior",
+      "headline": "Concluding Thoughts",
+      "photo_label": null,
+      "narration": "So, does the Ferrari 488 Spider's blend of Italian artistry and raw power make it worth the price tag for you?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://www.ferrari.com",
+    "https://www.caranddriver.com"
+  ],
+  "script": "With 661 horsepower and a sub-three second dash to sixty, few cars scream performance like this one. Meet the 2018 Ferrari 488 Spider, an evolution from the 458, delivering more power and reduced weight. The 3.9-liter twin-turbocharged V8 churns out 561 lb-ft of torque, pushing this beast to its limits. The front air intakes optimize aerodynamics, reflecting Ferrari's dedication to performance efficiency. Originally priced around $250,000, it now fetches about $200,000, reflecting a stable annual depreciation of roughly 5%. Ferrari's iconic quad-exhaust setup enhances the aggressive rear profile of the 488 Spider. The air intake scoops along the rear fenders boost aerodynamics and underscore its design focus on speed. Compared to the McLaren 720S Performance, which also offers 710 hp, the Ferrari maintains a unique finesse despite trailing slightly in power. Inside, the sweeping dashboard features prominent air vents, a hallmark of Ferrari's modern design approach. So, does the Ferrari 488 Spider's blend of Italian artistry and raw power make it worth the price tag for you?",
+  "word_count": 170,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 56.352,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ferrari-488-spider-20260918191911/narration.mp3",
+  "duration_seconds": 56.34,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.36,
+      "end": 0.63,
+      "mouth": "small"
+    },
+    {
+      "start": 0.63,
+      "end": 0.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.9,
+      "end": 1.17,
+      "mouth": "small"
+    },
+    {
+      "start": 1.17,
+      "end": 1.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.35,
+      "end": 1.89,
+      "mouth": "small"
+    },
+    {
+      "start": 1.89,
+      "end": 2.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.07,
+      "end": 2.25,
+      "mouth": "small"
+    },
+    {
+      "start": 2.25,
+      "end": 2.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.34,
+      "end": 2.52,
+      "mouth": "small"
+    },
+    {
+      "start": 2.52,
+      "end": 2.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.61,
+      "end": 2.88,
+      "mouth": "small"
+    },
+    {
+      "start": 2.88,
+      "end": 2.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.97,
+      "end": 3.51,
+      "mouth": "small"
+    },
+    {
+      "start": 3.51,
+      "end": 3.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.87,
+      "end": 3.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.96,
+      "end": 4.05,
+      "mouth": "small"
+    },
+    {
+      "start": 4.05,
+      "end": 4.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.23,
+      "end": 4.68,
+      "mouth": "small"
+    },
+    {
+      "start": 4.68,
+      "end": 4.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.77,
+      "end": 5.31,
+      "mouth": "small"
+    },
+    {
+      "start": 5.31,
+      "end": 5.76,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.76,
+      "end": 6.12,
+      "mouth": "small"
+    },
+    {
+      "start": 6.12,
+      "end": 6.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.3,
+      "end": 6.48,
+      "mouth": "small"
+    },
+    {
+      "start": 6.48,
+      "end": 6.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.57,
+      "end": 6.75,
+      "mouth": "small"
+    },
+    {
+      "start": 6.75,
+      "end": 6.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.93,
+      "end": 7.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.02,
+      "end": 7.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.2,
+      "end": 7.38,
+      "mouth": "small"
+    },
+    {
+      "start": 7.38,
+      "end": 7.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.47,
+      "end": 7.74,
+      "mouth": "small"
+    },
+    {
+      "start": 7.74,
+      "end": 8.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.01,
+      "end": 8.1,
+      "mouth": "small"
+    },
+    {
+      "start": 8.1,
+      "end": 8.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.37,
+      "end": 8.82,
+      "mouth": "small"
+    },
+    {
+      "start": 8.82,
+      "end": 8.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.91,
+      "end": 9.27,
+      "mouth": "small"
+    },
+    {
+      "start": 9.27,
+      "end": 9.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.63,
+      "end": 9.72,
+      "mouth": "small"
+    },
+    {
+      "start": 9.72,
+      "end": 10.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.08,
+      "end": 10.17,
+      "mouth": "small"
+    },
+    {
+      "start": 10.17,
+      "end": 10.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.35,
+      "end": 10.98,
+      "mouth": "small"
+    },
+    {
+      "start": 10.98,
+      "end": 11.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.52,
+      "end": 11.61,
+      "mouth": "small"
+    },
+    {
+      "start": 11.61,
+      "end": 12.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.33,
+      "end": 12.51,
+      "mouth": "small"
+    },
+    {
+      "start": 12.51,
+      "end": 12.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.6,
+      "end": 12.69,
+      "mouth": "small"
+    },
+    {
+      "start": 12.69,
+      "end": 12.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.78,
+      "end": 12.87,
+      "mouth": "small"
+    },
+    {
+      "start": 12.87,
+      "end": 12.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.96,
+      "end": 13.14,
+      "mouth": "small"
+    },
+    {
+      "start": 13.14,
+      "end": 13.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.32,
+      "end": 13.41,
+      "mouth": "small"
+    },
+    {
+      "start": 13.41,
+      "end": 13.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.68,
+      "end": 13.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.86,
+      "end": 13.95,
+      "mouth": "small"
+    },
+    {
+      "start": 13.95,
+      "end": 14.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.04,
+      "end": 14.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.4,
+      "end": 14.67,
+      "mouth": "small"
+    },
+    {
+      "start": 14.67,
+      "end": 14.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.76,
+      "end": 15.48,
+      "mouth": "small"
+    },
+    {
+      "start": 15.48,
+      "end": 15.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.75,
+      "end": 15.84,
+      "mouth": "small"
+    },
+    {
+      "start": 15.84,
+      "end": 15.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.93,
+      "end": 16.83,
+      "mouth": "small"
+    },
+    {
+      "start": 16.83,
+      "end": 17.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.37,
+      "end": 17.55,
+      "mouth": "small"
+    },
+    {
+      "start": 17.55,
+      "end": 17.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.64,
+      "end": 17.73,
+      "mouth": "small"
+    },
+    {
+      "start": 17.73,
+      "end": 17.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.91,
+      "end": 18.09,
+      "mouth": "small"
+    },
+    {
+      "start": 18.09,
+      "end": 18.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.18,
+      "end": 18.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.27,
+      "end": 18.45,
+      "mouth": "small"
+    },
+    {
+      "start": 18.45,
+      "end": 18.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.54,
+      "end": 18.63,
+      "mouth": "small"
+    },
+    {
+      "start": 18.63,
+      "end": 18.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.72,
+      "end": 19.08,
+      "mouth": "small"
+    },
+    {
+      "start": 19.08,
+      "end": 19.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.44,
+      "end": 19.53,
+      "mouth": "small"
+    },
+    {
+      "start": 19.53,
+      "end": 19.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.62,
+      "end": 19.89,
+      "mouth": "small"
+    },
+    {
+      "start": 19.89,
+      "end": 20.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.07,
+      "end": 20.79,
+      "mouth": "small"
+    },
+    {
+      "start": 20.79,
+      "end": 20.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.88,
+      "end": 21.51,
+      "mouth": "small"
+    },
+    {
+      "start": 21.51,
+      "end": 22.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.05,
+      "end": 22.14,
+      "mouth": "small"
+    },
+    {
+      "start": 22.14,
+      "end": 22.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.41,
+      "end": 22.5,
+      "mouth": "small"
+    },
+    {
+      "start": 22.5,
+      "end": 22.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.59,
+      "end": 22.95,
+      "mouth": "small"
+    },
+    {
+      "start": 22.95,
+      "end": 23.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.13,
+      "end": 23.49,
+      "mouth": "small"
+    },
+    {
+      "start": 23.49,
+      "end": 23.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.58,
+      "end": 24.03,
+      "mouth": "small"
+    },
+    {
+      "start": 24.03,
+      "end": 24.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.3,
+      "end": 24.48,
+      "mouth": "small"
+    },
+    {
+      "start": 24.48,
+      "end": 24.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.57,
+      "end": 24.66,
+      "mouth": "small"
+    },
+    {
+      "start": 24.66,
+      "end": 24.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.75,
+      "end": 25.2,
+      "mouth": "small"
+    },
+    {
+      "start": 25.2,
+      "end": 25.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.29,
+      "end": 25.47,
+      "mouth": "small"
+    },
+    {
+      "start": 25.47,
+      "end": 25.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.56,
+      "end": 25.92,
+      "mouth": "small"
+    },
+    {
+      "start": 25.92,
+      "end": 26.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.28,
+      "end": 26.46,
+      "mouth": "small"
+    },
+    {
+      "start": 26.46,
+      "end": 26.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.55,
+      "end": 26.82,
+      "mouth": "small"
+    },
+    {
+      "start": 26.82,
+      "end": 26.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.91,
+      "end": 28.44,
+      "mouth": "small"
+    },
+    {
+      "start": 28.44,
+      "end": 28.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.53,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 29.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.34,
+      "end": 29.43,
+      "mouth": "small"
+    },
+    {
+      "start": 29.43,
+      "end": 29.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.61,
+      "end": 29.7,
+      "mouth": "small"
+    },
+    {
+      "start": 29.7,
+      "end": 29.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.79,
+      "end": 29.97,
+      "mouth": "small"
+    },
+    {
+      "start": 29.97,
+      "end": 30.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.06,
+      "end": 30.69,
+      "mouth": "small"
+    },
+    {
+      "start": 30.69,
+      "end": 30.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.96,
+      "end": 31.95,
+      "mouth": "small"
+    },
+    {
+      "start": 31.95,
+      "end": 32.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.04,
+      "end": 32.4,
+      "mouth": "small"
+    },
+    {
+      "start": 32.4,
+      "end": 32.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.67,
+      "end": 32.76,
+      "mouth": "small"
+    },
+    {
+      "start": 32.76,
+      "end": 32.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.85,
+      "end": 32.94,
+      "mouth": "small"
+    },
+    {
+      "start": 32.94,
+      "end": 33.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.03,
+      "end": 33.57,
+      "mouth": "small"
+    },
+    {
+      "start": 33.57,
+      "end": 34.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.11,
+      "end": 34.2,
+      "mouth": "small"
+    },
+    {
+      "start": 34.2,
+      "end": 34.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.38,
+      "end": 34.47,
+      "mouth": "small"
+    },
+    {
+      "start": 34.47,
+      "end": 34.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.56,
+      "end": 34.92,
+      "mouth": "small"
+    },
+    {
+      "start": 34.92,
+      "end": 35.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.01,
+      "end": 35.19,
+      "mouth": "small"
+    },
+    {
+      "start": 35.19,
+      "end": 35.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.28,
+      "end": 35.64,
+      "mouth": "small"
+    },
+    {
+      "start": 35.64,
+      "end": 35.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.73,
+      "end": 35.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.82,
+      "end": 36.0,
+      "mouth": "small"
+    },
+    {
+      "start": 36.0,
+      "end": 36.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.09,
+      "end": 36.45,
+      "mouth": "small"
+    },
+    {
+      "start": 36.45,
+      "end": 36.81,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.81,
+      "end": 36.99,
+      "mouth": "small"
+    },
+    {
+      "start": 36.99,
+      "end": 37.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.08,
+      "end": 37.26,
+      "mouth": "small"
+    },
+    {
+      "start": 37.26,
+      "end": 37.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.35,
+      "end": 37.62,
+      "mouth": "small"
+    },
+    {
+      "start": 37.62,
+      "end": 37.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.71,
+      "end": 38.16,
+      "mouth": "small"
+    },
+    {
+      "start": 38.16,
+      "end": 38.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.25,
+      "end": 38.43,
+      "mouth": "small"
+    },
+    {
+      "start": 38.43,
+      "end": 38.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.88,
+      "end": 39.06,
+      "mouth": "small"
+    },
+    {
+      "start": 39.06,
+      "end": 39.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.15,
+      "end": 39.51,
+      "mouth": "small"
+    },
+    {
+      "start": 39.51,
+      "end": 39.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.6,
+      "end": 39.69,
+      "mouth": "small"
+    },
+    {
+      "start": 39.69,
+      "end": 39.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.78,
+      "end": 40.59,
+      "mouth": "small"
+    },
+    {
+      "start": 40.59,
+      "end": 40.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.95,
+      "end": 41.04,
+      "mouth": "small"
+    },
+    {
+      "start": 41.04,
+      "end": 41.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.13,
+      "end": 41.22,
+      "mouth": "small"
+    },
+    {
+      "start": 41.22,
+      "end": 41.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.31,
+      "end": 41.58,
+      "mouth": "small"
+    },
+    {
+      "start": 41.58,
+      "end": 41.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.67,
+      "end": 42.21,
+      "mouth": "small"
+    },
+    {
+      "start": 42.21,
+      "end": 42.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.3,
+      "end": 42.57,
+      "mouth": "small"
+    },
+    {
+      "start": 42.57,
+      "end": 42.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.75,
+      "end": 42.93,
+      "mouth": "small"
+    },
+    {
+      "start": 42.93,
+      "end": 43.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.2,
+      "end": 43.92,
+      "mouth": "small"
+    },
+    {
+      "start": 43.92,
+      "end": 44.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.01,
+      "end": 44.28,
+      "mouth": "small"
+    },
+    {
+      "start": 44.28,
+      "end": 44.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.46,
+      "end": 44.91,
+      "mouth": "small"
+    },
+    {
+      "start": 44.91,
+      "end": 45.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.0,
+      "end": 45.81,
+      "mouth": "small"
+    },
+    {
+      "start": 45.81,
+      "end": 46.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.26,
+      "end": 46.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.35,
+      "end": 46.44,
+      "mouth": "small"
+    },
+    {
+      "start": 46.44,
+      "end": 46.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.62,
+      "end": 46.71,
+      "mouth": "small"
+    },
+    {
+      "start": 46.71,
+      "end": 46.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.89,
+      "end": 47.07,
+      "mouth": "small"
+    },
+    {
+      "start": 47.07,
+      "end": 47.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.43,
+      "end": 47.97,
+      "mouth": "small"
+    },
+    {
+      "start": 47.97,
+      "end": 48.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.06,
+      "end": 48.15,
+      "mouth": "small"
+    },
+    {
+      "start": 48.15,
+      "end": 48.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.33,
+      "end": 48.42,
+      "mouth": "small"
+    },
+    {
+      "start": 48.42,
+      "end": 48.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.51,
+      "end": 48.69,
+      "mouth": "small"
+    },
+    {
+      "start": 48.69,
+      "end": 49.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.05,
+      "end": 49.14,
+      "mouth": "small"
+    },
+    {
+      "start": 49.14,
+      "end": 49.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.41,
+      "end": 49.68,
+      "mouth": "small"
+    },
+    {
+      "start": 49.68,
+      "end": 49.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.77,
+      "end": 49.95,
+      "mouth": "small"
+    },
+    {
+      "start": 49.95,
+      "end": 50.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.04,
+      "end": 50.67,
+      "mouth": "small"
+    },
+    {
+      "start": 50.67,
+      "end": 51.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.21,
+      "end": 51.3,
+      "mouth": "small"
+    },
+    {
+      "start": 51.3,
+      "end": 51.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.39,
+      "end": 51.48,
+      "mouth": "small"
+    },
+    {
+      "start": 51.48,
+      "end": 51.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.66,
+      "end": 52.02,
+      "mouth": "small"
+    },
+    {
+      "start": 52.02,
+      "end": 52.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.2,
+      "end": 52.29,
+      "mouth": "small"
+    },
+    {
+      "start": 52.29,
+      "end": 52.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.56,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 52.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.74,
+      "end": 52.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.83,
+      "end": 53.46,
+      "mouth": "small"
+    },
+    {
+      "start": 53.46,
+      "end": 53.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.55,
+      "end": 53.82,
+      "mouth": "small"
+    },
+    {
+      "start": 53.82,
+      "end": 53.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.91,
+      "end": 54.09,
+      "mouth": "small"
+    },
+    {
+      "start": 54.09,
+      "end": 54.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.27,
+      "end": 54.45,
+      "mouth": "small"
+    },
+    {
+      "start": 54.45,
+      "end": 54.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.54,
+      "end": 54.63,
+      "mouth": "small"
+    },
+    {
+      "start": 54.63,
+      "end": 54.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.81,
+      "end": 55.98,
+      "mouth": "small"
+    },
+    {
+      "start": 55.98,
+      "end": 56.34,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "With",
+      "start": 0.0,
+      "end": 0.5400000214576721
+    },
+    {
+      "word": "661",
+      "start": 0.5400000214576721,
+      "end": 1.399999976158142
+    },
+    {
+      "word": "horsepower",
+      "start": 1.399999976158142,
+      "end": 1.7599999904632568
+    },
+    {
+      "word": "and",
+      "start": 1.7599999904632568,
+      "end": 2.140000104904175
+    },
+    {
+      "word": "a",
+      "start": 2.140000104904175,
+      "end": 2.319999933242798
+    },
+    {
+      "word": "sub",
+      "start": 2.319999933242798,
+      "end": 2.4600000381469727
+    },
+    {
+      "word": "three",
+      "start": 2.4600000381469727,
+      "end": 2.640000104904175
+    },
+    {
+      "word": "second",
+      "start": 2.640000104904175,
+      "end": 2.880000114440918
+    },
+    {
+      "word": "dash",
+      "start": 2.880000114440918,
+      "end": 3.059999942779541
+    },
+    {
+      "word": "to",
+      "start": 3.059999942779541,
+      "end": 3.200000047683716
+    },
+    {
+      "word": "60",
+      "start": 3.200000047683716,
+      "end": 3.4800000190734863
+    },
+    {
+      "word": "few",
+      "start": 3.940000057220459,
+      "end": 4.019999980926514
+    },
+    {
+      "word": "cars",
+      "start": 4.019999980926514,
+      "end": 4.260000228881836
+    },
+    {
+      "word": "scream",
+      "start": 4.260000228881836,
+      "end": 4.5
+    },
+    {
+      "word": "performance",
+      "start": 4.5,
+      "end": 4.800000190734863
+    },
+    {
+      "word": "like",
+      "start": 4.800000190734863,
+      "end": 5.0
+    },
+    {
+      "word": "this",
+      "start": 5.0,
+      "end": 5.159999847412109
+    },
+    {
+      "word": "one",
+      "start": 5.159999847412109,
+      "end": 5.380000114440918
+    },
+    {
+      "word": "Meet",
+      "start": 5.900000095367432,
+      "end": 5.920000076293945
+    },
+    {
+      "word": "the",
+      "start": 5.920000076293945,
+      "end": 6.059999942779541
+    },
+    {
+      "word": "2018",
+      "start": 6.059999942779541,
+      "end": 6.619999885559082
+    },
+    {
+      "word": "Ferrari",
+      "start": 6.619999885559082,
+      "end": 6.920000076293945
+    },
+    {
+      "word": "488",
+      "start": 6.920000076293945,
+      "end": 7.420000076293945
+    },
+    {
+      "word": "Spyder",
+      "start": 7.420000076293945,
+      "end": 7.71999979019165
+    },
+    {
+      "word": "an",
+      "start": 8.020000457763672,
+      "end": 8.15999984741211
+    },
+    {
+      "word": "evolution",
+      "start": 8.15999984741211,
+      "end": 8.4399995803833
+    },
+    {
+      "word": "from",
+      "start": 8.4399995803833,
+      "end": 8.619999885559082
+    },
+    {
+      "word": "the",
+      "start": 8.619999885559082,
+      "end": 8.779999732971191
+    },
+    {
+      "word": "458",
+      "start": 8.779999732971191,
+      "end": 9.359999656677246
+    },
+    {
+      "word": "delivering",
+      "start": 9.760000228881836,
+      "end": 9.880000114440918
+    },
+    {
+      "word": "more",
+      "start": 9.880000114440918,
+      "end": 10.140000343322754
+    },
+    {
+      "word": "power",
+      "start": 10.140000343322754,
+      "end": 10.380000114440918
+    },
+    {
+      "word": "and",
+      "start": 10.380000114440918,
+      "end": 10.5600004196167
+    },
+    {
+      "word": "reduced",
+      "start": 10.5600004196167,
+      "end": 10.800000190734863
+    },
+    {
+      "word": "weight",
+      "start": 10.800000190734863,
+      "end": 11.079999923706055
+    },
+    {
+      "word": "The",
+      "start": 11.15999984741211,
+      "end": 11.600000381469727
+    },
+    {
+      "word": "3",
+      "start": 11.600000381469727,
+      "end": 11.800000190734863
+    },
+    {
+      "word": "9",
+      "start": 11.800000190734863,
+      "end": 12.199999809265137
+    },
+    {
+      "word": "liter",
+      "start": 12.199999809265137,
+      "end": 12.380000114440918
+    },
+    {
+      "word": "twin",
+      "start": 12.380000114440918,
+      "end": 12.619999885559082
+    },
+    {
+      "word": "turbocharged",
+      "start": 12.619999885559082,
+      "end": 13.079999923706055
+    },
+    {
+      "word": "V8",
+      "start": 13.079999923706055,
+      "end": 13.539999961853027
+    },
+    {
+      "word": "churns",
+      "start": 13.539999961853027,
+      "end": 13.859999656677246
+    },
+    {
+      "word": "out",
+      "start": 13.859999656677246,
+      "end": 14.079999923706055
+    },
+    {
+      "word": "561",
+      "start": 14.079999923706055,
+      "end": 14.880000114440918
+    },
+    {
+      "word": "pound",
+      "start": 14.880000114440918,
+      "end": 15.180000305175781
+    },
+    {
+      "word": "feet",
+      "start": 15.180000305175781,
+      "end": 15.180000305175781
+    },
+    {
+      "word": "of",
+      "start": 15.180000305175781,
+      "end": 15.600000381469727
+    },
+    {
+      "word": "torque",
+      "start": 15.600000381469727,
+      "end": 15.600000381469727
+    },
+    {
+      "word": "pushing",
+      "start": 16.020000457763672,
+      "end": 16.020000457763672
+    },
+    {
+      "word": "this",
+      "start": 16.020000457763672,
+      "end": 16.260000228881836
+    },
+    {
+      "word": "beast",
+      "start": 16.260000228881836,
+      "end": 16.3799991607666
+    },
+    {
+      "word": "to",
+      "start": 16.3799991607666,
+      "end": 16.540000915527344
+    },
+    {
+      "word": "its",
+      "start": 16.540000915527344,
+      "end": 16.700000762939453
+    },
+    {
+      "word": "limits",
+      "start": 16.700000762939453,
+      "end": 16.899999618530273
+    },
+    {
+      "word": "The",
+      "start": 17.420000076293945,
+      "end": 17.540000915527344
+    },
+    {
+      "word": "front",
+      "start": 17.540000915527344,
+      "end": 17.68000030517578
+    },
+    {
+      "word": "air",
+      "start": 17.68000030517578,
+      "end": 17.920000076293945
+    },
+    {
+      "word": "intakes",
+      "start": 17.920000076293945,
+      "end": 18.1200008392334
+    },
+    {
+      "word": "optimize",
+      "start": 18.1200008392334,
+      "end": 18.579999923706055
+    },
+    {
+      "word": "aerodynamics",
+      "start": 18.579999923706055,
+      "end": 19.139999389648438
+    },
+    {
+      "word": "reflecting",
+      "start": 19.739999771118164,
+      "end": 19.739999771118164
+    },
+    {
+      "word": "Ferrari's",
+      "start": 19.739999771118164,
+      "end": 20.219999313354492
+    },
+    {
+      "word": "dedication",
+      "start": 20.219999313354492,
+      "end": 20.540000915527344
+    },
+    {
+      "word": "to",
+      "start": 20.540000915527344,
+      "end": 20.780000686645508
+    },
+    {
+      "word": "performance",
+      "start": 20.780000686645508,
+      "end": 21.079999923706055
+    },
+    {
+      "word": "efficiency",
+      "start": 21.079999923706055,
+      "end": 21.479999542236328
+    },
+    {
+      "word": "Originally",
+      "start": 22.18000030517578,
+      "end": 22.399999618530273
+    },
+    {
+      "word": "priced",
+      "start": 22.399999618530273,
+      "end": 22.65999984741211
+    },
+    {
+      "word": "around",
+      "start": 22.65999984741211,
+      "end": 22.860000610351562
+    },
+    {
+      "word": "250",
+      "start": 22.860000610351562,
+      "end": 23.540000915527344
+    },
+    {
+      "word": "000",
+      "start": 23.540000915527344,
+      "end": 23.65999984741211
+    },
+    {
+      "word": "it",
+      "start": 24.31999969482422,
+      "end": 24.440000534057617
+    },
+    {
+      "word": "now",
+      "start": 24.440000534057617,
+      "end": 24.700000762939453
+    },
+    {
+      "word": "fetches",
+      "start": 24.700000762939453,
+      "end": 24.84000015258789
+    },
+    {
+      "word": "about",
+      "start": 24.84000015258789,
+      "end": 25.079999923706055
+    },
+    {
+      "word": "200",
+      "start": 25.079999923706055,
+      "end": 25.459999084472656
+    },
+    {
+      "word": "000",
+      "start": 25.459999084472656,
+      "end": 25.739999771118164
+    },
+    {
+      "word": "reflecting",
+      "start": 26.579999923706055,
+      "end": 26.579999923706055
+    },
+    {
+      "word": "a",
+      "start": 26.579999923706055,
+      "end": 26.81999969482422
+    },
+    {
+      "word": "stable",
+      "start": 26.81999969482422,
+      "end": 27.040000915527344
+    },
+    {
+      "word": "annual",
+      "start": 27.040000915527344,
+      "end": 27.31999969482422
+    },
+    {
+      "word": "depreciation",
+      "start": 27.31999969482422,
+      "end": 27.860000610351562
+    },
+    {
+      "word": "of",
+      "start": 27.860000610351562,
+      "end": 28.020000457763672
+    },
+    {
+      "word": "roughly",
+      "start": 28.020000457763672,
+      "end": 28.219999313354492
+    },
+    {
+      "word": "5",
+      "start": 28.219999313354492,
+      "end": 29.239999771118164
+    },
+    {
+      "word": "Ferrari's",
+      "start": 29.239999771118164,
+      "end": 29.739999771118164
+    },
+    {
+      "word": "iconic",
+      "start": 29.739999771118164,
+      "end": 29.959999084472656
+    },
+    {
+      "word": "quad",
+      "start": 29.959999084472656,
+      "end": 30.219999313354492
+    },
+    {
+      "word": "exhaust",
+      "start": 30.219999313354492,
+      "end": 30.459999084472656
+    },
+    {
+      "word": "setup",
+      "start": 30.459999084472656,
+      "end": 30.81999969482422
+    },
+    {
+      "word": "enhances",
+      "start": 30.81999969482422,
+      "end": 31.260000228881836
+    },
+    {
+      "word": "the",
+      "start": 31.260000228881836,
+      "end": 31.479999542236328
+    },
+    {
+      "word": "aggressive",
+      "start": 31.479999542236328,
+      "end": 31.719999313354492
+    },
+    {
+      "word": "rear",
+      "start": 31.719999313354492,
+      "end": 32.0
+    },
+    {
+      "word": "profile",
+      "start": 32.0,
+      "end": 32.36000061035156
+    },
+    {
+      "word": "of",
+      "start": 32.36000061035156,
+      "end": 32.7599983215332
+    },
+    {
+      "word": "the",
+      "start": 32.7599983215332,
+      "end": 32.86000061035156
+    },
+    {
+      "word": "488",
+      "start": 32.86000061035156,
+      "end": 33.279998779296875
+    },
+    {
+      "word": "Spyder",
+      "start": 33.279998779296875,
+      "end": 33.540000915527344
+    },
+    {
+      "word": "The",
+      "start": 34.099998474121094,
+      "end": 34.220001220703125
+    },
+    {
+      "word": "air",
+      "start": 34.220001220703125,
+      "end": 34.41999816894531
+    },
+    {
+      "word": "intake",
+      "start": 34.41999816894531,
+      "end": 34.599998474121094
+    },
+    {
+      "word": "scoops",
+      "start": 34.599998474121094,
+      "end": 34.84000015258789
+    },
+    {
+      "word": "along",
+      "start": 34.84000015258789,
+      "end": 35.08000183105469
+    },
+    {
+      "word": "the",
+      "start": 35.08000183105469,
+      "end": 35.2400016784668
+    },
+    {
+      "word": "rear",
+      "start": 35.2400016784668,
+      "end": 35.36000061035156
+    },
+    {
+      "word": "fenders",
+      "start": 35.36000061035156,
+      "end": 35.619998931884766
+    },
+    {
+      "word": "boost",
+      "start": 35.619998931884766,
+      "end": 35.91999816894531
+    },
+    {
+      "word": "aerodynamics",
+      "start": 35.91999816894531,
+      "end": 36.47999954223633
+    },
+    {
+      "word": "and",
+      "start": 36.47999954223633,
+      "end": 36.959999084472656
+    },
+    {
+      "word": "underscore",
+      "start": 36.959999084472656,
+      "end": 37.29999923706055
+    },
+    {
+      "word": "its",
+      "start": 37.29999923706055,
+      "end": 37.459999084472656
+    },
+    {
+      "word": "design",
+      "start": 37.459999084472656,
+      "end": 37.79999923706055
+    },
+    {
+      "word": "focus",
+      "start": 37.79999923706055,
+      "end": 38.02000045776367
+    },
+    {
+      "word": "on",
+      "start": 38.02000045776367,
+      "end": 38.2599983215332
+    },
+    {
+      "word": "speed",
+      "start": 38.2599983215332,
+      "end": 38.459999084472656
+    },
+    {
+      "word": "Compared",
+      "start": 39.119998931884766,
+      "end": 39.119998931884766
+    },
+    {
+      "word": "to",
+      "start": 39.119998931884766,
+      "end": 39.2599983215332
+    },
+    {
+      "word": "the",
+      "start": 39.2599983215332,
+      "end": 39.380001068115234
+    },
+    {
+      "word": "McLaren",
+      "start": 39.380001068115234,
+      "end": 39.599998474121094
+    },
+    {
+      "word": "720S",
+      "start": 39.599998474121094,
+      "end": 40.2400016784668
+    },
+    {
+      "word": "performance",
+      "start": 40.2400016784668,
+      "end": 40.63999938964844
+    },
+    {
+      "word": "which",
+      "start": 40.880001068115234,
+      "end": 41.060001373291016
+    },
+    {
+      "word": "also",
+      "start": 41.060001373291016,
+      "end": 41.34000015258789
+    },
+    {
+      "word": "offers",
+      "start": 41.34000015258789,
+      "end": 41.5
+    },
+    {
+      "word": "710",
+      "start": 41.5,
+      "end": 42.08000183105469
+    },
+    {
+      "word": "horsepower",
+      "start": 42.08000183105469,
+      "end": 42.47999954223633
+    },
+    {
+      "word": "the",
+      "start": 42.79999923706055,
+      "end": 43.18000030517578
+    },
+    {
+      "word": "Ferrari",
+      "start": 43.18000030517578,
+      "end": 43.18000030517578
+    },
+    {
+      "word": "maintains",
+      "start": 43.18000030517578,
+      "end": 43.560001373291016
+    },
+    {
+      "word": "a",
+      "start": 43.560001373291016,
+      "end": 43.779998779296875
+    },
+    {
+      "word": "unique",
+      "start": 43.779998779296875,
+      "end": 43.959999084472656
+    },
+    {
+      "word": "finesse",
+      "start": 43.959999084472656,
+      "end": 44.2599983215332
+    },
+    {
+      "word": "despite",
+      "start": 44.2599983215332,
+      "end": 44.79999923706055
+    },
+    {
+      "word": "trailing",
+      "start": 44.79999923706055,
+      "end": 45.08000183105469
+    },
+    {
+      "word": "slightly",
+      "start": 45.08000183105469,
+      "end": 45.400001525878906
+    },
+    {
+      "word": "in",
+      "start": 45.400001525878906,
+      "end": 45.84000015258789
+    },
+    {
+      "word": "power",
+      "start": 45.84000015258789,
+      "end": 45.84000015258789
+    },
+    {
+      "word": "Inside",
+      "start": 46.380001068115234,
+      "end": 46.70000076293945
+    },
+    {
+      "word": "the",
+      "start": 46.880001068115234,
+      "end": 47.060001373291016
+    },
+    {
+      "word": "sweeping",
+      "start": 47.060001373291016,
+      "end": 47.279998779296875
+    },
+    {
+      "word": "dashboard",
+      "start": 47.279998779296875,
+      "end": 47.68000030517578
+    },
+    {
+      "word": "features",
+      "start": 47.68000030517578,
+      "end": 47.97999954223633
+    },
+    {
+      "word": "prominent",
+      "start": 47.97999954223633,
+      "end": 48.36000061035156
+    },
+    {
+      "word": "air",
+      "start": 48.36000061035156,
+      "end": 48.720001220703125
+    },
+    {
+      "word": "vents",
+      "start": 48.720001220703125,
+      "end": 48.7400016784668
+    },
+    {
+      "word": "a",
+      "start": 49.060001373291016,
+      "end": 49.2599983215332
+    },
+    {
+      "word": "hallmark",
+      "start": 49.2599983215332,
+      "end": 49.400001525878906
+    },
+    {
+      "word": "of",
+      "start": 49.400001525878906,
+      "end": 49.79999923706055
+    },
+    {
+      "word": "Ferrari's",
+      "start": 49.79999923706055,
+      "end": 49.97999954223633
+    },
+    {
+      "word": "modern",
+      "start": 49.97999954223633,
+      "end": 50.18000030517578
+    },
+    {
+      "word": "design",
+      "start": 50.18000030517578,
+      "end": 50.459999084472656
+    },
+    {
+      "word": "approach",
+      "start": 50.459999084472656,
+      "end": 50.7400016784668
+    },
+    {
+      "word": "So",
+      "start": 51.220001220703125,
+      "end": 51.47999954223633
+    },
+    {
+      "word": "does",
+      "start": 51.7400016784668,
+      "end": 51.81999969482422
+    },
+    {
+      "word": "the",
+      "start": 51.81999969482422,
+      "end": 51.97999954223633
+    },
+    {
+      "word": "Ferrari",
+      "start": 51.97999954223633,
+      "end": 52.20000076293945
+    },
+    {
+      "word": "488",
+      "start": 52.20000076293945,
+      "end": 52.63999938964844
+    },
+    {
+      "word": "Spyder's",
+      "start": 52.63999938964844,
+      "end": 53.18000030517578
+    },
+    {
+      "word": "blend",
+      "start": 53.18000030517578,
+      "end": 53.18000030517578
+    },
+    {
+      "word": "of",
+      "start": 53.18000030517578,
+      "end": 53.36000061035156
+    },
+    {
+      "word": "Italian",
+      "start": 53.36000061035156,
+      "end": 53.619998931884766
+    },
+    {
+      "word": "artistry",
+      "start": 53.619998931884766,
+      "end": 54.060001373291016
+    },
+    {
+      "word": "and",
+      "start": 54.060001373291016,
+      "end": 54.380001068115234
+    },
+    {
+      "word": "raw",
+      "start": 54.380001068115234,
+      "end": 54.58000183105469
+    },
+    {
+      "word": "power",
+      "start": 54.58000183105469,
+      "end": 54.79999923706055
+    },
+    {
+      "word": "make",
+      "start": 54.79999923706055,
+      "end": 55.0
+    },
+    {
+      "word": "it",
+      "start": 55.0,
+      "end": 55.119998931884766
+    },
+    {
+      "word": "worth",
+      "start": 55.119998931884766,
+      "end": 55.2400016784668
+    },
+    {
+      "word": "the",
+      "start": 55.2400016784668,
+      "end": 55.36000061035156
+    },
+    {
+      "word": "price",
+      "start": 55.36000061035156,
+      "end": 55.58000183105469
+    },
+    {
+      "word": "tag",
+      "start": 55.58000183105469,
+      "end": 55.720001220703125
+    },
+    {
+      "word": "for",
+      "start": 55.720001220703125,
+      "end": 55.86000061035156
+    },
+    {
+      "word": "you",
+      "start": 55.86000061035156,
+      "end": 56.02000045776367
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual-rival/rival-nobg.png",
+      "type": "exterior",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-front-grill-and-shape-of-the-headlights.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front grill and shape of the headlights",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1789758534196-0-0",
+          "cue_label": "[front-closeup-1789758534196-0-0] Front grill and shape of the headlights",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/3-front-side.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "front side",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1789758631575-4-3",
+          "cue_label": "[front-closeup-1789758631575-4-3] front side",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/5-head-light-close-up.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Head Light close up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1789758672455-5-5",
+          "cue_label": "[front-closeup-1789758672455-5-5] Head Light close up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/6-front-side.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front side",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1789758694263-6-6",
+          "cue_label": "[front-closeup-1789758694263-6-6] Front side",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/4-with-targa-roof-on.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "With targa roof on",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1789758657136-4-4",
+          "cue_label": "[side-closeup-1789758657136-4-4] With targa roof on",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/7-mid-ferrari-badge.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "mid ferrari badge",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1789758704412-7-7",
+          "cue_label": "[side-closeup-1789758704412-7-7] mid ferrari badge",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/8-front-wheele-ferrary-bardge.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front wheele ferrary bardge",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1789758719751-8-8",
+          "cue_label": "[side-closeup-1789758719751-8-8] Front wheele ferrary bardge",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/9-air-intake.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Air Intake",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1789758739271-9-9",
+          "cue_label": "[side-closeup-1789758739271-9-9] Air Intake",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/1-back-ferrary-horse-and-dual-exhaust.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Back ferrary horse and dual exhaust",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1789758568356-1-1",
+          "cue_label": "[rear-closeup-1789758568356-1-1] Back ferrary horse and dual exhaust",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/2-rear-quarter.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear quarter",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1789758589112-2-2",
+          "cue_label": "[rear-closeup-1789758589112-2-2] Rear quarter",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/10-close-tail-light.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Close Tail light",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1789758751745-10-10",
+          "cue_label": "[rear-closeup-1789758751745-10-10] Close Tail light",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/11-rear-side.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "rear side",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1789758814812-11-11",
+          "cue_label": "[rear-closeup-1789758814812-11-11] rear side",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/16-side-enginer.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "side enginer",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-1789759012422-16-16",
+          "cue_label": "[engine-closeup-1789759012422-16-16] side enginer",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/17-with-engienr-trunk-open.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "with engienr trunk open",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-1789759023705-17-17",
+          "cue_label": "[engine-closeup-1789759023705-17-17] with engienr trunk open",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/18-ferrari-key.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "ferrari key",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-1789759035431-18-18",
+          "cue_label": "[engine-closeup-1789759035431-18-18] ferrari key",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/12-steering-wheel-with-all-start-engine-sport-race-modes-and-buttons.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Steering wheel with all start engine, sport race modes and buttons",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1789758847125-12-12",
+          "cue_label": "[interior-closeup-1789758847125-12-12] Steering wheel with all start engine, sport race modes and buttons",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/13-gauge-cluster-up-to-10000-rpm.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Gauge cluster up to 10000 rpm",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1789758868163-13-13",
+          "cue_label": "[interior-closeup-1789758868163-13-13] Gauge cluster up to 10000 rpm",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/14-chairs.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Chairs",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1789758922707-14-14",
+          "cue_label": "[interior-closeup-1789758922707-14-14] Chairs",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/15-carbon-fiber-dash-with-488-spider.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Carbon fiber dash with 488 spider",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1789758970225-15-15",
+          "cue_label": "[interior-closeup-1789758970225-15-15] Carbon fiber dash with 488 spider",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {},
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/rj5VG7gw/2018-ferrari-488-spider",
+    "title": "2018 Ferrari 488 Spider",
+    "price_text": "",
+    "facts": {
+      "Make": "Ferrari",
+      "Engine": "3.9L Turbocharged V8",
+      "Model": "488 Save",
+      "Drivetrain": "Rear-wheel drive",
+      "Transmission": "Automatic (7-Speed)",
+      "Body Style": "Convertible"
+    },
+    "sections": {
+      "Highlights": "THIS\u2026 is a 2018 Ferrari 488 Spider, finished in Rosso Corsa with a beige interior. The odometer currently displays approximately 7,000 miles. This Ferrari is offered with a clean Carfax vehicle history report. According to the Ferrari specification plate provided in the gallery, notable factory equipment includes 20-inch forged wheels, carbon ceramic brakes, a sport exhaust system, a front-axle lift system, a power-retractable hardtop, Scuderia Ferrari fender shields, Daytona-style seats, carbon fiber interior trim, and a premium Hi-Fi sound system. The seller reports no notable modifications. Ferrari launched the 488 for 2016 as an evolution of the 458. Offered as a coupe and as a convertible, the model kept its predecessor's mid-mounted engine layout but received a pair of turbochargers -- displacement decreased but horsepower and torque both increased. Engineers made the 488 slightly lighter than its predecessor, while designers made several visual tweaks. Production ended in 2019. Power comes from a 3.9-liter twin-turbocharged V8, rated at 661 horsepower and 561 lb-ft of torque. Output is sent to the rear wheels via a 7-speed dual-clutch automatic transmission.",
+      "Equipment": "A photo of the Ferrari specification plate is provided in the gallery, and a partial list of notable equipment reported by the seller includes: 20-inch forged wheels Carbon ceramic brakes Sport exhaust system Front-axle lift system Front skid plates Power-retractable hardtop Leather upholstery Carbon fiber interior trim Daytona-style seats Carbon fiber steering wheel with LED shift lights Premium Hi-Fi sound system",
+      "Seller Notes": "The seller states that paint protection film has been applied to all of the body panels."
+    }
+  },
+  "voice_auditions": {
+    "onyx": "single-ferrari-488-spider-20260918191911/voice_auditions/onyx.mp3",
+    "british_narrator": "single-ferrari-488-spider-20260918191911/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-ferrari-488-spider-20260918191911/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-ferrari-488-spider-20260918191911/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-ferrari-488-spider-20260918191911/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ferrari-488-spider-20260918191911/images/manual-race/race-nobg.png",
+  "side_profile_facing_direction": "right",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 5.5299999713897705,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 11.119999885559082,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 16.84000015258789,
+        "layout": "bottom-center",
+        "framing": "full"
+      },
+      {
+        "start": 21.829999923706055,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 28.630000114440918,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 33.689998626708984,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 38.78999900817871,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 50.98000144958496,
+        "layout": "close-right",
+        "framing": "bust"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 7.45,
+        "pose": "open"
+      },
+      {
+        "start": 8.9,
+        "pose": "rest"
+      },
+      {
+        "start": 12.27,
+        "pose": "chest"
+      },
+      {
+        "start": 13.72,
+        "pose": "rest"
+      },
+      {
+        "start": 15.67,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 17.12,
+        "pose": "rest"
+      },
+      {
+        "start": 19.07,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 20.52,
+        "pose": "rest"
+      },
+      {
+        "start": 22.98,
+        "pose": "open"
+      },
+      {
+        "start": 24.43,
+        "pose": "rest"
+      },
+      {
+        "start": 26.38,
+        "pose": "chest"
+      },
+      {
+        "start": 27.83,
+        "pose": "rest"
+      },
+      {
+        "start": 29.78,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 31.23,
+        "pose": "rest"
+      },
+      {
+        "start": 33.18,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 34.63,
+        "pose": "rest"
+      },
+      {
+        "start": 36.58,
+        "pose": "open"
+      },
+      {
+        "start": 38.03,
+        "pose": "rest"
+      },
+      {
+        "start": 39.98,
+        "pose": "chest"
+      },
+      {
+        "start": 41.43,
+        "pose": "rest"
+      },
+      {
+        "start": 43.38,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 44.83,
+        "pose": "rest"
+      },
+      {
+        "start": 46.78,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 48.23,
+        "pose": "rest"
+      },
+      {
+        "start": 50.18,
+        "pose": "open"
+      },
+      {
+        "start": 51.63,
+        "pose": "rest"
+      },
+      {
+        "start": 53.58,
+        "pose": "chest"
+      },
+      {
+        "start": 55.03,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 5.5299999713897705,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-grill-and-shape-of-the-headlights.jpg",
+            "label": "Front grill and shape of the headlights",
+            "photo_id": "front-closeup-1789758534196-0-0"
+          },
+          {
+            "path": "images/manual-extra/3-front-side.jpg",
+            "label": "front side",
+            "photo_id": "front-closeup-1789758631575-4-3"
+          },
+          {
+            "path": "images/manual-extra/5-head-light-close-up.jpg",
+            "label": "Head Light close up",
+            "photo_id": "front-closeup-1789758672455-5-5"
+          },
+          {
+            "path": "images/manual-extra/6-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-1789758694263-6-6"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 11.119999885559082
+      },
+      {
+        "start": 5.5299999713897705,
+        "end": 11.119999885559082,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-grill-and-shape-of-the-headlights.jpg",
+            "label": "Front grill and shape of the headlights",
+            "photo_id": "front-closeup-1789758534196-0-0"
+          },
+          {
+            "path": "images/manual-extra/3-front-side.jpg",
+            "label": "front side",
+            "photo_id": "front-closeup-1789758631575-4-3"
+          },
+          {
+            "path": "images/manual-extra/5-head-light-close-up.jpg",
+            "label": "Head Light close up",
+            "photo_id": "front-closeup-1789758672455-5-5"
+          },
+          {
+            "path": "images/manual-extra/6-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-1789758694263-6-6"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 11.119999885559082
+      },
+      {
+        "start": 11.119999885559082,
+        "end": 16.84000015258789,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/16-side-enginer.jpg",
+            "label": "side enginer",
+            "photo_id": "engine-closeup-1789759012422-16-16"
+          },
+          {
+            "path": "images/manual-extra/17-with-engienr-trunk-open.jpg",
+            "label": "with engienr trunk open",
+            "photo_id": "engine-closeup-1789759023705-17-17"
+          },
+          {
+            "path": "images/manual-extra/18-ferrari-key.jpg",
+            "label": "ferrari key",
+            "photo_id": "engine-closeup-1789759035431-18-18"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 11.119999885559082,
+        "chapter_end": 16.84000015258789
+      },
+      {
+        "start": 16.84000015258789,
+        "end": 21.829999923706055,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-grill-and-shape-of-the-headlights.jpg",
+            "label": "Front grill and shape of the headlights",
+            "photo_id": "front-closeup-1789758534196-0-0"
+          },
+          {
+            "path": "images/manual-extra/3-front-side.jpg",
+            "label": "front side",
+            "photo_id": "front-closeup-1789758631575-4-3"
+          },
+          {
+            "path": "images/manual-extra/5-head-light-close-up.jpg",
+            "label": "Head Light close up",
+            "photo_id": "front-closeup-1789758672455-5-5"
+          },
+          {
+            "path": "images/manual-extra/6-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-1789758694263-6-6"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 16.84000015258789,
+        "chapter_end": 28.630000114440918
+      },
+      {
+        "start": 21.829999923706055,
+        "end": 28.630000114440918,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-grill-and-shape-of-the-headlights.jpg",
+            "label": "Front grill and shape of the headlights",
+            "photo_id": "front-closeup-1789758534196-0-0"
+          },
+          {
+            "path": "images/manual-extra/3-front-side.jpg",
+            "label": "front side",
+            "photo_id": "front-closeup-1789758631575-4-3"
+          },
+          {
+            "path": "images/manual-extra/5-head-light-close-up.jpg",
+            "label": "Head Light close up",
+            "photo_id": "front-closeup-1789758672455-5-5"
+          },
+          {
+            "path": "images/manual-extra/6-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-1789758694263-6-6"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 16.84000015258789,
+        "chapter_end": 28.630000114440918
+      },
+      {
+        "start": 28.630000114440918,
+        "end": 33.689998626708984,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/1-back-ferrary-horse-and-dual-exhaust.jpg",
+            "label": "Back ferrary horse and dual exhaust",
+            "photo_id": "rear-closeup-1789758568356-1-1"
+          },
+          {
+            "path": "images/manual-extra/2-rear-quarter.jpg",
+            "label": "Rear quarter",
+            "photo_id": "rear-closeup-1789758589112-2-2"
+          },
+          {
+            "path": "images/manual-extra/10-close-tail-light.jpg",
+            "label": "Close Tail light",
+            "photo_id": "rear-closeup-1789758751745-10-10"
+          },
+          {
+            "path": "images/manual-extra/11-rear-side.jpg",
+            "label": "rear side",
+            "photo_id": "rear-closeup-1789758814812-11-11"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 28.630000114440918,
+        "chapter_end": 33.689998626708984
+      },
+      {
+        "start": 33.689998626708984,
+        "end": 38.78999900817871,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-with-targa-roof-on.jpg",
+            "label": "With targa roof on",
+            "photo_id": "side-closeup-1789758657136-4-4"
+          },
+          {
+            "path": "images/manual-extra/7-mid-ferrari-badge.jpg",
+            "label": "mid ferrari badge",
+            "photo_id": "side-closeup-1789758704412-7-7"
+          },
+          {
+            "path": "images/manual-extra/8-front-wheele-ferrary-bardge.jpg",
+            "label": "Front wheele ferrary bardge",
+            "photo_id": "side-closeup-1789758719751-8-8"
+          },
+          {
+            "path": "images/manual-extra/9-air-intake.jpg",
+            "label": "Air Intake",
+            "photo_id": "side-closeup-1789758739271-9-9"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 33.689998626708984,
+        "chapter_end": 38.78999900817871
+      },
+      {
+        "start": 38.78999900817871,
+        "end": 46.11000061035156,
+        "slot": null,
+        "label": null,
+        "hero": "images/manual-rival/rival-nobg.png",
+        "closeups": [],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 38.78999900817871,
+        "chapter_end": 46.11000061035156
+      },
+      {
+        "start": 46.11000061035156,
+        "end": 50.98000144958496,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/12-steering-wheel-with-all-start-engine-sport-race-modes-and-buttons.jpg",
+            "label": "Steering wheel with all start engine, sport race modes and buttons",
+            "photo_id": "interior-closeup-1789758847125-12-12"
+          },
+          {
+            "path": "images/manual-extra/13-gauge-cluster-up-to-10000-rpm.jpg",
+            "label": "Gauge cluster up to 10000 rpm",
+            "photo_id": "interior-closeup-1789758868163-13-13"
+          },
+          {
+            "path": "images/manual-extra/14-chairs.jpg",
+            "label": "Chairs",
+            "photo_id": "interior-closeup-1789758922707-14-14"
+          },
+          {
+            "path": "images/manual-extra/15-carbon-fiber-dash-with-488-spider.jpg",
+            "label": "Carbon fiber dash with 488 spider",
+            "photo_id": "interior-closeup-1789758970225-15-15"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 46.11000061035156,
+        "chapter_end": 56.35
+      },
+      {
+        "start": 50.98000144958496,
+        "end": 56.35,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/12-steering-wheel-with-all-start-engine-sport-race-modes-and-buttons.jpg",
+            "label": "Steering wheel with all start engine, sport race modes and buttons",
+            "photo_id": "interior-closeup-1789758847125-12-12"
+          },
+          {
+            "path": "images/manual-extra/13-gauge-cluster-up-to-10000-rpm.jpg",
+            "label": "Gauge cluster up to 10000 rpm",
+            "photo_id": "interior-closeup-1789758868163-13-13"
+          },
+          {
+            "path": "images/manual-extra/14-chairs.jpg",
+            "label": "Chairs",
+            "photo_id": "interior-closeup-1789758922707-14-14"
+          },
+          {
+            "path": "images/manual-extra/15-carbon-fiber-dash-with-488-spider.jpg",
+            "label": "Carbon fiber dash with 488 spider",
+            "photo_id": "interior-closeup-1789758970225-15-15"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 46.11000061035156,
+        "chapter_end": 56.35
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1789758534196-0-0",
+          "front-closeup-1789758631575-4-3",
+          "front-closeup-1789758672455-5-5",
+          "front-closeup-1789758694263-6-6"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 5.5299999713897705,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1789758534196-0-0",
+          "front-closeup-1789758631575-4-3",
+          "front-closeup-1789758672455-5-5",
+          "front-closeup-1789758694263-6-6"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 11.119999885559082,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-1789759012422-16-16",
+          "engine-closeup-1789759023705-17-17",
+          "engine-closeup-1789759035431-18-18"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 16.84000015258789,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1789758534196-0-0",
+          "front-closeup-1789758631575-4-3",
+          "front-closeup-1789758672455-5-5",
+          "front-closeup-1789758694263-6-6"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 21.829999923706055,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1789758534196-0-0",
+          "front-closeup-1789758631575-4-3",
+          "front-closeup-1789758672455-5-5",
+          "front-closeup-1789758694263-6-6"
+        ],
+        "active": null
+      },
+      {
+        "scene": 5,
+        "start": 28.630000114440918,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-1789758568356-1-1",
+          "rear-closeup-1789758589112-2-2",
+          "rear-closeup-1789758751745-10-10",
+          "rear-closeup-1789758814812-11-11"
+        ],
+        "active": null
+      },
+      {
+        "scene": 6,
+        "start": 33.689998626708984,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-1789758657136-4-4",
+          "side-closeup-1789758704412-7-7",
+          "side-closeup-1789758719751-8-8",
+          "side-closeup-1789758739271-9-9"
+        ],
+        "active": null
+      },
+      {
+        "scene": 7,
+        "start": 38.78999900817871,
+        "slot": null,
+        "closeups": [],
+        "active": null
+      },
+      {
+        "scene": 8,
+        "start": 46.11000061035156,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-1789758847125-12-12",
+          "interior-closeup-1789758868163-13-13",
+          "interior-closeup-1789758922707-14-14",
+          "interior-closeup-1789758970225-15-15"
+        ],
+        "active": null
+      },
+      {
+        "scene": 9,
+        "start": 50.98000144958496,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-1789758847125-12-12",
+          "interior-closeup-1789758868163-13-13",
+          "interior-closeup-1789758922707-14-14",
+          "interior-closeup-1789758970225-15-15"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
