@@ -804,6 +804,11 @@ SPEC_TABLE_FIELDS = (
     ("horsepower", "Horsepower"),
     ("torque", "Torque"),
     ("zero_to_sixty", "0-60 mph"),
+    # The channel is called Chasing Redline, so the number it is named after
+    # is on screen in every video. Cars that never rev to one -- electrics --
+    # leave it "n/a", and _spec_rows drops the row rather than printing a
+    # blank.
+    ("redline", "Redline"),
     ("engine", "Engine"),
     ("price", "Price"),
 )
@@ -923,6 +928,7 @@ SPEC_TABLE_CUES = {
     "horsepower": r"\bhorsepower\b|\bhp\b|\bbhp\b",
     "torque": r"\btorque\b|lb\s?-?\s?ft|pound-feet|\bnm\b",
     "zero_to_sixty": r"0\s?-\s?60|zero to sixty|to sixty|\bsixty\b",
+    "redline": r"\bredline[sd]?\b|\brpm\b|\brevs?\s+to\b|\brev limit",
     "engine": r"\bengine\b|\bv\s?-?\s?(6|8|10|12)\b|flat-six|straight-six|inline|turbo|supercharg|litre|liter|\b\d\.\d\s?l\b",
     "price": r"\$|\bmsrp\b|\bprice[ds]?\b|\bcost\b|\btrades?\b|\bsold\b|\bwindow sticker\b",
 }

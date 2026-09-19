@@ -105,11 +105,12 @@ PACKAGE_SCHEMA = {
         # the spec table exists so that cannot cost the viewer the facts.
         "key_specs": {
             "type": "object", "additionalProperties": False,
-            "required": ["horsepower", "torque", "zero_to_sixty", "engine", "price"],
+            "required": ["horsepower", "torque", "zero_to_sixty", "redline", "engine", "price"],
             "properties": {
                 "horsepower": {"type": "string"},
                 "torque": {"type": "string"},
                 "zero_to_sixty": {"type": "string"},
+                "redline": {"type": "string"},
                 "engine": {"type": "string"},
                 "price": {"type": "string"},
             },
@@ -365,12 +366,17 @@ Write like an excited, knowledgeable friend talking fast about a car they love, 
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
-Also fill in "key_specs" with this car's five headline numbers, verified by web search, each a
+Also fill in "key_specs" with this car's six headline numbers, verified by web search, each a
 short value the way a spec sheet prints it and nothing else -- no sentences: horsepower ("415 hp"),
-torque ("413 lb-ft"), zero_to_sixty ("3.9 sec"), engine ("3.6L twin-turbo flat-six") and price
+torque ("413 lb-ft"), zero_to_sixty ("3.9 sec"), redline ("9,000 rpm"), engine ("3.6L twin-turbo flat-six") and price
 ("$110K new, ~$70K today"). These are shown to the viewer in a table for the whole video, separate
 from anything you say, so they must be right. Use "n/a" only when a figure genuinely does not exist
 for this car, never as a shortcut for not having looked.
+
+"redline" is where the tachometer's red arc starts -- the rev limit, not peak power RPM and not a
+0-60 time. Give it as RPM ("9,000 rpm", "7,200 rpm"). It is the number this channel is named after,
+so it has to be this car's published figure, not the engine family's. Use "n/a" only for a car that
+genuinely has no rev limit to quote, which in practice means an electric.
 
 Work in one REPUTATION beat wherever it fits -- what people actually argue about this car. Not a
 feature, an opinion the audience already holds: what it lives in the shadow of, what it gets dismissed
