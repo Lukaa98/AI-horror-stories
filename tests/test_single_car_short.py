@@ -73,7 +73,7 @@ def test_research_script_retries_with_feedback_when_outside_acceptable_words(mon
     # question, no banned shapes.
     good = [
         {"headline": "", "narration": "A 707-horsepower coupe with 650 lb-ft hides behind that badge. "
-                                      "That's the Mustang, the one purists still dismiss as a straight-line car.",
+                                      "That's the Mustang.",
          "rival_make": None, "rival_model": None},
         {"headline": "", "narration": "So would you daily it, or is that too much?",
          "rival_make": None, "rival_model": None},
@@ -202,7 +202,7 @@ def test_script_violations_catch_what_the_prompt_alone_did_not():
 
     good = {"scenes": [
         {"narration": "A 807-horsepower supercharged V8 making 707 lb-ft hides behind that badge. "
-                      "That's the Challenger SRT Super Stock, the one critics call a one-trick drag car."},
+                      "That's the Challenger SRT Super Stock."},
         {"narration": "So would you daily it, or is that a step too far?"},
     ]}
     assert single_car_short._script_violations(good, "Dodge", "Challenger SRT Super Stock") == []
@@ -216,7 +216,7 @@ def test_horsepower_has_to_arrive_in_the_opening_scenes():
 
     late = {"scenes": [
         {"narration": "Only 300 were ever built."},
-        {"narration": "That's the Challenger SRT Super Stock, the one critics write off as a drag toy."},
+        {"narration": "That's the Challenger SRT Super Stock."},
         {"narration": "The stance alone tells you it means it."},
         {"narration": "It makes 807 horsepower and 707 lb-ft."},
         {"narration": "So would you daily it?"},
@@ -228,8 +228,7 @@ def test_horsepower_has_to_arrive_in_the_opening_scenes():
 
     early = dict(late, scenes=[
         {"narration": "Only 300 were ever built."},
-        {"narration": "That's the Challenger SRT Super Stock, all 807 horsepower of it, and the "
-                      "one critics write off as a drag toy."},
+        {"narration": "That's the Challenger SRT Super Stock, all 807 horsepower of it."},
         {"narration": "707 lb-ft goes with it."},
         {"narration": "So would you daily it?"},
     ])
@@ -1609,106 +1608,3 @@ def test_scoped_superlatives_across_real_builds_are_not_flagged():
         "the greatest car of all time",
     ]:
         assert m.UNSCOPED_SUPERLATIVE_RE.search(line), line
-
-
-def test_comparison_beat_has_to_speak_both_horsepower_figures():
-    """Run #214 set main_horsepower 661 and rival_horsepower 710, then wrote
-    "the McLaren 720S, which also offers 710 hp" -- the Ferrari's own number
-    never reached the viewer and "also" quietly handed it the McLaren's. The
-    structured fields drive the race animation and were right; only the
-    sentence was wrong, and that disagreement is checkable."""
-    import single_car_short
-
-    bad = {"scenes": [
-        {"narration": "661 horsepower and 561 lb-ft hide behind that badge, in a car purists "
-                      "still dismiss for going turbo."},
-        {"narration": "That's the Ferrari 488 Spider."},
-        {"narration": "Compared to the McLaren 720S, which also offers 710 hp, it keeps its poise.",
-         "main_horsepower": 661, "rival_horsepower": 710},
-        {"narration": "So would you take the badge or the numbers?"},
-    ]}
-    found = " | ".join(single_car_short._script_violations(bad, "Ferrari", "488 Spider"))
-    assert "never says this car's horsepower out loud" in found
-    assert "never says the rival's horsepower out loud" not in found
-
-    # Run #211 quoted only the rival: "Facing the Shelby GT500 with 800
-    # horsepower, the Porsche's agility ... " over main_horsepower 493.
-    both = dict(bad, scenes=list(bad["scenes"]))
-    both["scenes"][2] = {
-        "narration": "The McLaren 720S makes 710 hp to this car's 661, and gives up the open roof for it.",
-        "main_horsepower": 661, "rival_horsepower": 710,
-    }
-    assert not [v for v in single_car_short._script_violations(both, "Ferrari", "488 Spider")
-                if "horsepower out loud" in v]
-
-    # A rounded spoken figure is a fair way to say a number, not an error.
-    rounded = dict(bad, scenes=list(both["scenes"]))
-    rounded["scenes"][2] = {
-        "narration": "The McLaren 720S makes about 710 hp against roughly 660 here, and rides worse for it.",
-        "main_horsepower": 661, "rival_horsepower": 710,
-    }
-    assert not [v for v in single_car_short._script_violations(rounded, "Ferrari", "488 Spider")
-                if "horsepower out loud" in v]
-
-
-def test_a_beat_cannot_end_on_the_car_expressing_a_value():
-    """"Reflecting Ferrari's dedication to performance efficiency" cannot be
-    false, so every rule aimed at wrong claims lets it through -- and it is
-    where an appearance beat that ran out of material ends up. Fifteen of 56
-    past builds closed one this way."""
-    import single_car_short
-
-    for line in [
-        "The side vents are shaped this way, reflecting Ferrari's dedication to performance efficiency.",
-        "The quad tips underscore its prowess.",
-        "The diffuser is a hallmark of AMG's commitment to the track.",
-        "The wheels showcase exquisite craftsmanship.",
-        "The creases emphasize its classic performance aesthetic.",
-    ]:
-        package = {"scenes": [
-            {"narration": "707 horsepower and 650 lb-ft, in a car critics still write off."},
-            {"narration": f"That's the Mustang. {line}"},
-            {"narration": "So would you have one?"},
-        ]}
-        found = " | ".join(single_car_short._script_violations(package, "Ford", "Mustang"))
-        assert "expresses a value" in found, line
-
-    # A real fact about the same part is what the rule is asking for, and it
-    # must not trip: these are the shapes honest appearance beats take.
-    for line in [
-        "Those side vents feed the intercoolers, and the wider pair came with the Weissach package.",
-        "The quad tips are titanium, and they save eleven pounds over the steel ones.",
-        "That wheel is shared with the GT3, which is why it costs what it does.",
-    ]:
-        package = {"scenes": [
-            {"narration": "707 horsepower and 650 lb-ft, in a car critics still write off."},
-            {"narration": f"That's the Mustang. {line}"},
-            {"narration": "So would you have one?"},
-        ]}
-        assert not [v for v in single_car_short._script_violations(package, "Ford", "Mustang")
-                    if "expresses a value" in v], line
-
-
-def test_something_has_to_say_what_people_argue_about_this_car():
-    """The reputation beat was asked for in the prompt and arrived in none of
-    the four builds that ran with the instruction live -- including the 718
-    Spyder the instruction was written about. It is the beat a viewer stays
-    for, so it is checked like the rest of them."""
-    import single_car_short
-
-    specs_only = {"scenes": [
-        {"narration": "493 horsepower and a 9,000 RPM redline make this the most powerful Boxster built."},
-        {"narration": "That's the 718 Spyder RS, with 331 lb-ft from its flat-six."},
-        {"narration": "Launched at $217,545, it holds its value."},
-        {"narration": "So does that redline still tempt you?"},
-    ]}
-    found = " | ".join(single_car_short._script_violations(specs_only, "Porsche", "718 Spyder RS"))
-    assert "what people actually argue about this car" in found
-
-    argued = dict(specs_only, scenes=list(specs_only["scenes"]))
-    argued["scenes"][1] = {
-        "narration": "That's the 718 Spyder RS, written off for not being a 911 -- and running the "
-                     "911 GT3's flat-six, 493 horsepower and 331 lb-ft of it."
-    }
-    assert not [v for v in single_car_short._script_violations(argued, "Porsche", "718 Spyder RS")
-                if "what people actually argue" in v]

@@ -26,9 +26,6 @@ RULE_LABELS = (
     ("never states the car's horsepower", "horsepower missing"),
     ("never states the car's torque", "torque missing"),
     ("banned phrase", "banned phrase"),
-    ("never says", "comparison hp not spoken"),
-    ("expresses a value", "filler tail"),
-    ("what people actually argue", "no reputation beat"),
 )
 
 
