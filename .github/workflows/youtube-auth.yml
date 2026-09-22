@@ -1,0 +1,96 @@
+name: YouTube - Re-authorise (Manual)
+
+run-name: "youtube_auth: refresh the channel token"
+
+# The channel's OAuth app is in Testing, which caps a refresh token's life at
+# seven days. Rather than needing a laptop and a terminal every week, this
+# runs Google's device flow: it publishes a short code to the output branch
+# for the dashboard to show, waits for the approval, and writes the new token
+# straight into Actions secrets. The token never reaches the branch or the
+# browser -- only the user code does, and that is worthless to anyone who
+# cannot also sign into the channel's Google account.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: youtube-auth
+  cancel-in-progress: true
+
+env:
+  OUTPUT_BRANCH: cars-output
+  CODE_PATH: youtube/auth-code.json
+
+jobs:
+  authorise:
+    runs-on: ubuntu-latest
+    # Google gives the code 30 minutes; this stops a forgotten run from
+    # holding a runner for the full six hours.
+    timeout-minutes: 32
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PyNaCl
+        run: pip install --quiet pynacl
+
+      - name: Request a device code
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          python -m youtube_tools.device_auth \
+            --phase request \
+            --code-file out/auth-code.json \
+            --state-file out/state.json
+
+      - name: Publish the code for the dashboard
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+          mkdir -p "$(dirname "${CODE_PATH}")"
+          cp out/auth-code.json "${CODE_PATH}"
+          git add "${CODE_PATH}"
+          git commit -m "youtube: publish device code for approval" || true
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Wait for the approval and store the token
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          set -euo pipefail
+          python -m youtube_tools.device_auth \
+            --phase wait \
+            --code-file out/auth-code.json \
+            --state-file out/state.json
+
+      - name: Clear the published code
+        if: always()
+        run: |
+          set -euo pipefail
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}"
+          # A code left on the branch after the run reads as a live prompt
+          # to the dashboard. Whatever happened above, it goes.
+          printf '{"status":"idle"}\n' > "${CODE_PATH}"
+          git add "${CODE_PATH}"
+          git commit -m "youtube: clear device code" || true
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
