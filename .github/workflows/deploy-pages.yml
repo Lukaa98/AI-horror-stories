@@ -3,7 +3,11 @@ name: Deploy Cars UI to GitHub Pages
 on:
   push:
     branches:
-      - v10
+      # The branch being developed on. This has to move with it -- it sat on
+      # v10 after work had already moved, which would have left the dashboard
+      # frozen at an old build while changes were pushed past it.
+      - v11
+      - develop
   workflow_dispatch: # allow manual runs
 
 permissions:
