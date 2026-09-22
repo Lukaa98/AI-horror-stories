@@ -19,6 +19,7 @@ from openai import OpenAI
 import requests
 
 from background_removal import remove_background
+from youtube_metadata import build_metadata as build_youtube_metadata
 from cars_and_bids import (enrich_entry_from_manifest, scrape_auction_facts, scrape_auction_images,
                            scrape_entry_images)
 from research_request import (
@@ -1958,6 +1959,20 @@ def build_short(args):
     render_narrator_video(media_paths, manifest, video_path)
     manifest["video"] = video_path.name
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+
+    # The listing, written now rather than at upload time. Everything it
+    # needs is in the manifest, and having it on disk means the dashboard
+    # can show the exact title and description before anything is published
+    # -- and that the upload reads a reviewed file rather than regenerating
+    # something nobody has seen.
+    upload_path = output_dir / "upload.json"
+    upload_path.write_text(json.dumps({
+        **build_youtube_metadata(manifest, credit_url=str(getattr(args, "auction_url", "") or "")),
+        "video": video_path.name,
+        "privacy": "private",
+        "status": "ready",
+    }, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"[single-car] Wrote {upload_path.name}")
     return manifest
 
 
