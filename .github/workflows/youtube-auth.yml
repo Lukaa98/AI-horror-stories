@@ -9,6 +9,13 @@ run-name: "youtube_auth: refresh the channel token"
 # straight into Actions secrets. The token never reaches the branch or the
 # browser -- only the user code does, and that is worthless to anyone who
 # cannot also sign into the channel's Google account.
+#
+# It is one Python step on purpose. The first version committed the code with
+# git, which meant switching the checkout to the output branch mid-run -- and
+# that replaced the very package the next step imported. It also spent three
+# minutes fetching a 2.5GB branch to write 200 bytes, while the code it was
+# publishing was already ticking down. The contents API does it in one call
+# and leaves the checkout alone.
 on:
   workflow_dispatch:
 
@@ -19,15 +26,11 @@ concurrency:
   group: youtube-auth
   cancel-in-progress: true
 
-env:
-  OUTPUT_BRANCH: cars-output
-  CODE_PATH: youtube/auth-code.json
-
 jobs:
   authorise:
     runs-on: ubuntu-latest
     # Google gives the code 30 minutes; this stops a forgotten run from
-    # holding a runner for the full six hours.
+    # holding a runner for the default six hours.
     timeout-minutes: 32
     steps:
       - uses: actions/checkout@v4
@@ -39,58 +42,19 @@ jobs:
       - name: Install PyNaCl
         run: pip install --quiet pynacl
 
-      - name: Request a device code
+      - name: Authorise and store the token
         env:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          # Writes the user code to the output branch.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Writes the refreshed token into Actions secrets, which the
+          # built-in token is not allowed to do.
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           set -euo pipefail
           mkdir -p out
           python -m youtube_tools.device_auth \
-            --phase request \
             --code-file out/auth-code.json \
-            --state-file out/state.json
-
-      - name: Publish the code for the dashboard
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin "${OUTPUT_BRANCH}" || true
-          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
-            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
-          else
-            git switch -c "${OUTPUT_BRANCH}"
-          fi
-          mkdir -p "$(dirname "${CODE_PATH}")"
-          cp out/auth-code.json "${CODE_PATH}"
-          git add "${CODE_PATH}"
-          git commit -m "youtube: publish device code for approval" || true
-          git pull --rebase origin "${OUTPUT_BRANCH}" || true
-          git push origin "${OUTPUT_BRANCH}"
-
-      - name: Wait for the approval and store the token
-        env:
-          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
-          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          set -euo pipefail
-          python -m youtube_tools.device_auth \
-            --phase wait \
-            --code-file out/auth-code.json \
-            --state-file out/state.json
-
-      - name: Clear the published code
-        if: always()
-        run: |
-          set -euo pipefail
-          git fetch origin "${OUTPUT_BRANCH}" || true
-          git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}"
-          # A code left on the branch after the run reads as a live prompt
-          # to the dashboard. Whatever happened above, it goes.
-          printf '{"status":"idle"}\n' > "${CODE_PATH}"
-          git add "${CODE_PATH}"
-          git commit -m "youtube: clear device code" || true
-          git pull --rebase origin "${OUTPUT_BRANCH}" || true
-          git push origin "${OUTPUT_BRANCH}"
+            --publish-branch cars-output \
+            --publish-path youtube/auth-code.json

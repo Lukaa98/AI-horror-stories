@@ -77,6 +77,48 @@ def poll_for_token(client_id, client_secret, device_code, interval, deadline):
     raise SystemExit("The code expired before it was approved. Start again.")
 
 
+def _github(repository, token, path, method="GET", body=None):
+    request = urllib.request.Request(
+        f"https://api.github.com/repos/{repository}{path}",
+        data=json.dumps(body).encode() if body is not None else None,
+        method=method,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json",
+            "Content-Type": "application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            raw = response.read()
+            return json.loads(raw) if raw else {}
+    except urllib.error.HTTPError as error:
+        if error.code == 404:
+            return None
+        raise
+
+
+def publish_code(repository, token, branch, path, payload):
+    """Put the user code on the output branch through the contents API.
+
+    Committing it with git was the obvious way and the wrong one: it meant
+    switching the checkout to the output branch, which replaced the code
+    this very script lives in -- the run died on "No module named
+    youtube_tools.device_auth" one step later. It also spent three minutes
+    fetching a 2.5GB branch to write 200 bytes, which is most of the time a
+    person is sat waiting for a code that expires.
+    """
+    existing = _github(repository, token, f"/contents/{path}?ref={branch}")
+    body = {
+        "message": "youtube: publish device code for approval",
+        "content": base64.b64encode(json.dumps(payload, indent=2).encode()).decode(),
+        "branch": branch,
+    }
+    if existing and existing.get("sha"):
+        body["sha"] = existing["sha"]
+    _github(repository, token, f"/contents/{path}", method="PUT", body=body)
+
+
 def store_secret(repository, pat, name, value):
     """Seal the token to the repo's public key and PUT it as a secret."""
     try:
@@ -113,12 +155,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--code-file", required=True,
                         help="Where to write the user code for the dashboard to show")
-    parser.add_argument("--state-file", default=".device-auth-state.json",
-                        help="Runner-local file holding the device code between phases. Never committed.")
-    parser.add_argument("--phase", choices=("request", "wait", "both"), default="both",
-                        help="'request' writes the code and exits so it can be published; "
-                             "'wait' polls for the approval. The dashboard cannot show a code "
-                             "that is still inside a running process, so the two are separable.")
+    parser.add_argument("--publish-branch", default="",
+                        help="Branch to publish the user code to for the dashboard to read.")
+    parser.add_argument("--publish-path", default="youtube/auth-code.json")
     parser.add_argument("--secret-name", default=SECRET_NAME)
     args = parser.parse_args()
 
@@ -127,51 +166,49 @@ def main():
     if not client_id or not client_secret:
         raise SystemExit("YOUTUBE_CLIENT_ID and YOUTUBE_CLIENT_SECRET must be set.")
 
-    if args.phase in ("request", "both"):
-        device = request_device_code(client_id)
-        expires_at = time.time() + int(device.get("expires_in", 1800))
-        # Written before the wait starts, because the dashboard is watching
-        # for this file and nobody can approve a code they cannot see.
-        payload = {
-            "user_code": device["user_code"],
-            "verification_url": device.get("verification_url") or "https://www.google.com/device",
-            "expires_at": int(expires_at),
-            "status": "waiting",
-        }
-        with open(args.code_file, "w") as handle:
-            json.dump(payload, handle, indent=2)
-        # The device code grants the pending grant, so it stays on the
-        # runner and never goes near the branch the dashboard reads.
-        with open(args.state_file, "w") as handle:
-            json.dump({"device_code": device["device_code"],
-                       "interval": device.get("interval", 5),
-                       "expires_at": expires_at}, handle)
-        print(f"Approve at {payload['verification_url']} with code {payload['user_code']}", flush=True)
-        if args.phase == "request":
-            return 0
+    repository = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    pat = os.environ.get("GH_PAT", "").strip()
+    publish_token = os.environ.get("GITHUB_TOKEN", "").strip() or pat
 
-    with open(args.state_file) as handle:
-        state = json.load(handle)
-    with open(args.code_file) as handle:
-        payload = json.load(handle)
-    expires_at = float(state["expires_at"])
+    device = request_device_code(client_id)
+    expires_at = time.time() + int(device.get("expires_in", 1800))
+    payload = {
+        "user_code": device["user_code"],
+        "verification_url": device.get("verification_url") or "https://www.google.com/device",
+        "expires_at": int(expires_at),
+        "status": "waiting",
+    }
+    with open(args.code_file, "w") as handle:
+        json.dump(payload, handle, indent=2)
+    # Published before the wait starts -- nobody can approve a code they
+    # cannot see, and the clock is already running on it.
+    if args.publish_branch and repository and publish_token:
+        publish_code(repository, publish_token, args.publish_branch, args.publish_path, payload)
+    print(f"Approve at {payload['verification_url']} with code {payload['user_code']}", flush=True)
 
-    token = poll_for_token(client_id, client_secret, state["device_code"],
-                           state.get("interval", 5), expires_at)
+    try:
+        token = poll_for_token(client_id, client_secret, device["device_code"],
+                               device.get("interval", 5), expires_at)
+    finally:
+        # However this ended, the code stops being advertised. A live-looking
+        # prompt for a dead code is worse than no prompt.
+        if args.publish_branch and repository and publish_token:
+            publish_code(repository, publish_token, args.publish_branch,
+                         args.publish_path, {"status": "idle"})
     refresh_token = token.get("refresh_token")
     if not refresh_token:
         raise SystemExit("Google returned no refresh token. Re-run and make sure you approve as the channel owner.")
 
-    repository = os.environ.get("GITHUB_REPOSITORY", "").strip()
-    pat = os.environ.get("GH_PAT", "").strip()
     if not (repository and pat):
         raise SystemExit("GH_PAT and GITHUB_REPOSITORY are needed to store the new token.")
     store_secret(repository, pat, args.secret_name, refresh_token)
 
-    payload["status"] = "stored"
-    payload.pop("user_code", None)
+    stored_payload = {"status": "stored", "expires_at": int(expires_at)}
     with open(args.code_file, "w") as handle:
-        json.dump(payload, handle, indent=2)
+        json.dump(stored_payload, handle, indent=2)
+    if args.publish_branch and repository and publish_token:
+        publish_code(repository, publish_token, args.publish_branch,
+                     args.publish_path, stored_payload)
     print(f"Stored a new {args.secret_name}. Expires in "
           f"{round(int(token.get('refresh_token_expires_in', 0)) / 86400, 1)} days "
           "(0 means it does not expire).", flush=True)

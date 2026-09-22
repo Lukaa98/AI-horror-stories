@@ -82,12 +82,7 @@ def test_the_code_file_never_carries_the_token(tmp_path, monkeypatch):
     monkeypatch.setattr(device_auth, "store_secret",
                         lambda repo, pat, name, value: stored.update(name=name, value=value))
     code_file = tmp_path / "code.json"
-    # --state-file defaults to the working directory, so without this the
-    # test drops a device-code file into the repo root -- which is exactly
-    # how one got committed.
-    state_file = tmp_path / "state.json"
-    monkeypatch.setattr("sys.argv", ["device_auth", "--code-file", str(code_file),
-                                     "--state-file", str(state_file)])
+    monkeypatch.setattr("sys.argv", ["device_auth", "--code-file", str(code_file)])
 
     device_auth.main()
 
@@ -98,3 +93,69 @@ def test_the_code_file_never_carries_the_token(tmp_path, monkeypatch):
     # be mistaken for a live prompt.
     assert json.loads(written)["status"] == "stored"
     assert "user_code" not in json.loads(written)
+
+
+def test_the_code_is_published_before_the_wait_and_cleared_after(tmp_path, monkeypatch):
+    """Ordering is the whole point. Run #1 of this workflow published the
+    code with git, which switched the checkout to the output branch and
+    killed the step that was meant to do the waiting -- and it spent three
+    minutes doing it, against a code that expires in thirty. The publish has
+    to land before polling starts, and the advert has to come down after,
+    whatever the outcome."""
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "cid")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "csec")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "owner/repo")
+    monkeypatch.setenv("GITHUB_TOKEN", "ghs")
+    monkeypatch.setenv("GH_PAT", "pat")
+    monkeypatch.setattr(device_auth, "request_device_code", lambda _cid: {
+        "device_code": "dc", "user_code": "ABC-DEF", "expires_in": 600, "interval": 5,
+    })
+
+    events = []
+    monkeypatch.setattr(device_auth, "publish_code",
+                        lambda repo, token, branch, path, payload:
+                        events.append(("publish", payload.get("status"), payload.get("user_code"))))
+
+    def fake_poll(*a, **k):
+        events.append(("poll", None, None))
+        return {"refresh_token": "SECRET-VALUE", "refresh_token_expires_in": 0}
+
+    monkeypatch.setattr(device_auth, "poll_for_token", fake_poll)
+    monkeypatch.setattr(device_auth, "store_secret", lambda *a: events.append(("store", None, None)))
+    monkeypatch.setattr("sys.argv", ["device_auth",
+                                     "--code-file", str(tmp_path / "code.json"),
+                                     "--publish-branch", "cars-output"])
+
+    device_auth.main()
+
+    kinds = [event[0] for event in events]
+    assert kinds.index("publish") < kinds.index("poll"), kinds
+    assert kinds[0] == "publish" and events[0][1] == "waiting"
+    assert events[0][2] == "ABC-DEF"
+    # Nothing published ever carries the token, at any stage.
+    assert not any("SECRET-VALUE" in str(event) for event in events if event[0] == "publish")
+    assert kinds[-1] == "publish" and events[-1][1] == "stored"
+
+
+def test_a_failed_approval_takes_the_code_down(tmp_path, monkeypatch):
+    """A prompt left on screen for a code that can no longer be approved
+    sends someone to Google to type something that will not work."""
+    monkeypatch.setenv("YOUTUBE_CLIENT_ID", "cid")
+    monkeypatch.setenv("YOUTUBE_CLIENT_SECRET", "csec")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "owner/repo")
+    monkeypatch.setenv("GITHUB_TOKEN", "ghs")
+    monkeypatch.setattr(device_auth, "request_device_code", lambda _cid: {
+        "device_code": "dc", "user_code": "ABC-DEF", "expires_in": 600, "interval": 5,
+    })
+    published = []
+    monkeypatch.setattr(device_auth, "publish_code",
+                        lambda repo, token, branch, path, payload: published.append(payload))
+    monkeypatch.setattr(device_auth, "poll_for_token",
+                        lambda *a, **k: (_ for _ in ()).throw(SystemExit("denied")))
+    monkeypatch.setattr("sys.argv", ["device_auth",
+                                     "--code-file", str(tmp_path / "code.json"),
+                                     "--publish-branch", "cars-output"])
+
+    with pytest.raises(SystemExit):
+        device_auth.main()
+    assert published[-1] == {"status": "idle"}
