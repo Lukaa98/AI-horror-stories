@@ -1,6 +1,9 @@
 from pathlib import Path
 
-from googleapiclient.http import MediaFileUpload
+# Imported inside the function, not here: this module gets imported by
+# publish_video, which gets imported by its tests, and a top-level import
+# meant those tests could not be collected at all without the google
+# libraries present.
 
 
 def upload_video(
@@ -31,6 +34,8 @@ def upload_video(
     }
     if publish_at:
         request_body["status"]["publishAt"] = publish_at
+
+    from googleapiclient.http import MediaFileUpload
 
     media = MediaFileUpload(str(file_path), chunksize=-1, resumable=True, mimetype="video/mp4")
     request = youtube.videos().insert(
