@@ -1,0 +1,44 @@
+/* Built from the app's own tokens rather than fixed colours -- index.css
+   redefines all of them under prefers-color-scheme, so anything hardcoded
+   here would be unreadable in one of the two themes. */
+.yt-panel { padding: 18px 20px 30px; max-width: 640px; }
+.yt-panel h2 { margin: 0 0 6px; color: var(--text-h); }
+.yt-lead { color: var(--text); margin: 0 0 18px; line-height: 1.5; font-size: .92rem; }
+
+.yt-start {
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--accent);
+  cursor: pointer;
+}
+.yt-start:hover:not(:disabled) { border-color: var(--accent); }
+.yt-start:disabled { opacity: .5; cursor: default; }
+
+.yt-warn { color: #d08b2c; margin-top: 12px; font-size: .9rem; }
+.yt-error { color: #e0574a; margin-top: 14px; font-size: .9rem; white-space: pre-wrap; }
+.yt-ok { color: #46c983; margin-top: 16px; font-weight: 600; }
+.yt-step { margin: 10px 0 2px; color: var(--text-h); font-size: .92rem; }
+.yt-note { color: var(--text); font-size: .82rem; margin-top: 12px; }
+
+.yt-code-box {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--code-bg);
+}
+.yt-code {
+  /* The one thing on screen that has to be copied by eye, so it is set
+     wide and monospaced instead of matching the prose around it. */
+  font-family: var(--mono);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 6px 0 0;
+  color: var(--text-h);
+  user-select: all;
+}

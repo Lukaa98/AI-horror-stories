@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import PhotoSlots from "./PhotoSlots";
 import PhotoThumb from "./PhotoThumb";
+import YouTubePanel from "./YouTubePanel";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import jobsData from "./jobs-data.json";
 
@@ -9,7 +10,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.30 — Flipped previews zoom too";
+const UI_VERSION = "V11.31 — Re-authorise YouTube from here";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1638,7 +1639,12 @@ export default function App() {
         <button type="button" className={view === "jobs" ? "active" : ""} onClick={() => setView("jobs")}>
           Jobs
         </button>
+        <button type="button" className={view === "youtube" ? "active" : ""} onClick={() => setView("youtube")}>
+          YouTube
+        </button>
       </nav>
+
+      {view === "youtube" && <YouTubePanel settings={settings} />}
 
       {view === "jobs" && (() => {
         const query = jobSearch.trim().toLowerCase();
