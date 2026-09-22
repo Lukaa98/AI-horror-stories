@@ -98,6 +98,9 @@ PACKAGE_SCHEMA = {
     "required": ["title", "key_specs", "scenes", "sources", "start_year", "end_year"],
     "properties": {
         "title": {"type": "string"},
+        # The YouTube title. Separate from "title", which is a scene headline
+        # and reads as a fragment out of context ("Turbocharged Performance").
+        "youtube_title": {"type": "string"},
         # The numbers a viewer came for, held apart from the narration so
         # they are guaranteed on screen. Run #184's script never said the
         # car's horsepower, never mentioned torque or 0-60 at all, and spent
@@ -363,6 +366,16 @@ Never name a specific individual as the designer unless that person is a real, e
 Every sentence has to earn its place with a specific, concrete fact -- a real number, a named comparison, a verifiable detail -- not a vague enthusiast-copy adjective doing the work instead. Cut lines like "adding to its sporty agility" or "making every drive engaging and dynamic" or "celebrated for its precise steering" that describe a *feeling* about the car without any fact backing it up -- if you can't attach a real number, a named comparison, or a specific verifiable detail to a claim, cut the claim and replace it with one you can verify, don't soften it into vague praise. This applies to every beat, not just the hook.
 
 Write like an excited, knowledgeable friend talking fast about a car they love, not a brochure. These exact constructions are banned outright, because they read as generated copy: "a testament to", "design ethos", "blending luxury with practicality", "adding a touch of exclusivity", "catering to family needs", "creating a motorsport feel", "highlighting its performance lineage", and any sentence built on "isn't just for looks", on "blending X with Y", or on "provides a sporty feel". Run #176 still slipped through with "the brushed aluminum pedals and bolstered seats provide a sporty feel, blending luxury with performance intentions" -- three clauses saying nothing. Name what the pedal material is actually for, or which seat it is, or cut the sentence. Also banned is stat-shaped padding -- a number that sounds like data but tells the viewer nothing they can use, like "reflecting an annual depreciation of about 8%". Give the two prices and let them do the subtraction. Favor punchy, stacked, specific claims over smooth marketing prose -- "that's more horsepower per liter than the [famous engine], and it's only got three cylinders" reads as genuinely engaging; "it delivers a dynamic and engaging driving experience" reads as filler no matter how true it is. A strong hook is a bold, specific, verifiable superlative or comparison (most powerful, quickest, cheapest, rarest -- something with a real number and a real point of comparison attached), not a generic "this car blends performance and luxury" opener. Every superlative must name the group it actually wins: "the most powerful 911 ever built", "the most expensive Spyder Porsche has sold", "the quickest minivan ever made". Never aim one at cars in general -- "the most luxurious car ever produced" about a $217,545 718 Spyder is not a bold claim, it is a false one, and the true version was available. Casual contractions and informal phrasing are good here -- this should sound spoken, not written.
+
+Also write "youtube_title" -- the video's title on the channel, under 100 characters, ending in a
+fire emoji. It is the only thing a viewer reads before deciding to watch, so it carries the same
+job as the hook. Pick whichever of these the car actually earns, in this order of preference:
+a question about the argument people have over it ("Is the 488 Spider still a real Ferrari? \U0001F525"),
+a price move when the move is genuinely notable and both figures are verified
+("$250,000 new. $95,000 now. \U0001F525"), or the plain spec form as the fallback
+("2018 Ferrari 488 Spider -- 661 hp of twin-turbo drama. \U0001F525"). The first two may leave the
+name out, because the description says what the car is. Never claim something the script does not
+support, and never promise a reveal the video does not contain.
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
