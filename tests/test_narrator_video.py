@@ -1,0 +1,693 @@
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(ROOT / "cars" / "automation")]
+
+from narrator_video import (  # noqa: E402
+    CANVAS,
+    RACE_FALLBACK_GAP_SECONDS,
+    RACE_FALLBACK_SECONDS,
+    RACE_MAX_SLOWER_SECONDS,
+    RACE_WINDOW_SECONDS,
+    STAT_TABLE_MAX_ROWS,
+    _blink_intervals,
+    _emphasis_intervals,
+    _look_intervals,
+    _caption_chunks,
+    _caption_timeline,
+    _drag_race_lane_clip,
+    _drag_race_track,
+    _merged_boundaries,
+    _pose_intervals,
+    _progress_bar_track,
+    _scene_time_boundaries,
+    _stat_tracker_entries,
+    _stat_tracker_track,
+    _typing_headline_positions,
+    _value_at,
+    _wobble_intervals,
+)
+
+
+def _make_transparent_png(path, size=(200, 300)):
+    from PIL import Image
+    Image.new("RGBA", size, (0, 0, 0, 0)).save(path)
+
+
+def test_caption_chunks_tile_the_full_duration_with_no_gaps():
+    script = "This is a short narration script with exactly twelve words in it here."
+    chunks = _caption_chunks(script, duration=12.0, words_per_chunk=4)
+
+    assert chunks[0][1] == 0.0
+    assert chunks[-1][2] == 12.0
+    for (_, _, end), (_, next_start, _) in zip(chunks, chunks[1:]):
+        assert end == next_start
+
+    # Every word should show up in exactly one chunk, in order.
+    joined = " ".join(text for text, _, _ in chunks)
+    assert joined.split() == script.split()
+
+
+def test_caption_chunks_empty_script_yields_no_captions():
+    assert _caption_chunks("", duration=10.0) == []
+
+
+def test_default_captions_are_one_spoken_word_at_a_time():
+    chunks = _caption_chunks("exact same turbo", duration=3.0)
+    assert [text for text, _, _ in chunks] == ["exact", "same", "turbo"]
+
+
+def test_real_word_timestamps_override_estimated_caption_timing():
+    manifest = {
+        "script": "exact turbo",
+        "word_timeline": [{"word": "exact", "start": 0.2, "end": 0.7}, {"word": "turbo", "start": 0.8, "end": 1.4}],
+    }
+    assert _caption_timeline(manifest, 2.0) == [("exact", 0.2, 0.7), ("turbo", 0.8, 1.4)]
+
+
+def test_pose_intervals_fall_back_to_a_fixed_clock_without_word_timeline():
+    intervals = _pose_intervals({}, 10.0)
+    assert intervals[0][0] == 0.0
+    assert intervals[-1][2] in {"steady", "jolt", "lean_left", "lean_right"}
+    for (_, end, _), (next_start, _, _) in zip(intervals, intervals[1:]):
+        assert end == next_start
+    assert intervals[-1][1] == 10.0
+    assert len(intervals) > 1
+
+
+def test_pose_intervals_split_on_real_pauses_and_cycle_through_all_four_poses():
+    # A ~0.5s gap between "one" and "Meet" should read as a sentence
+    # boundary; the much smaller gaps elsewhere should not.
+    word_timeline = [
+        {"word": "This", "start": 0.0, "end": 0.3},
+        {"word": "is", "start": 0.35, "end": 0.5},
+        {"word": "one", "start": 0.55, "end": 0.9},
+        {"word": "Meet", "start": 1.4, "end": 1.7},
+        {"word": "two", "start": 1.75, "end": 2.0},
+    ]
+    manifest = {"word_timeline": word_timeline}
+    intervals = _pose_intervals(manifest, 3.0)
+    assert [pose for _, _, pose in intervals] == ["steady", "jolt"]
+    assert intervals[0][0] == 0.0
+    assert intervals[-1][1] == 3.0
+    # The cut should land in the gap, not exactly on either word boundary.
+    assert 0.9 < intervals[0][1] < 1.4
+
+
+def test_blink_intervals_are_short_and_spaced_out():
+    intervals = _blink_intervals(10.0)
+    assert intervals
+    for start, end, value in intervals:
+        assert value == "blink"
+        assert end - start <= 0.13
+
+
+def test_emphasis_intervals_pulse_only_at_the_start_of_headline_scenes():
+    """A scene with a headline gets a brief raised-brows reaction beat at
+    its start; a scene with no headline gets none at all -- the face
+    should only react to genuinely marked "important fact" beats, not
+    hold an expression for a whole scene or fire on every scene."""
+    manifest = {
+        "scenes": [
+            {"headline": "320 HP", "narration": "one two three four"},
+            {"headline": "", "narration": "five six seven eight"},
+        ],
+        "word_timeline": [
+            {"word": "one", "start": 0.0, "end": 0.4},
+            {"word": "two", "start": 0.4, "end": 0.8},
+            {"word": "three", "start": 0.8, "end": 1.2},
+            {"word": "four", "start": 1.2, "end": 1.6},
+            {"word": "five", "start": 2.0, "end": 2.4},
+            {"word": "six", "start": 2.4, "end": 2.8},
+            {"word": "seven", "start": 2.8, "end": 3.2},
+            {"word": "eight", "start": 3.2, "end": 3.6},
+        ],
+    }
+    intervals = _emphasis_intervals(manifest, 4.0)
+    assert len(intervals) == 1
+    start, end, value = intervals[0]
+    assert value == "emphasis"
+    assert start == 0.0
+    assert 0 < end - start <= 1.01  # EMPHASIS_PULSE_SECONDS, not the whole scene
+
+
+def test_emphasis_intervals_empty_without_any_headlines():
+    manifest = {"scenes": [{"headline": "", "narration": "hello"}], "word_timeline": []}
+    assert _emphasis_intervals(manifest, 5.0) == []
+
+
+def test_emphasis_intervals_empty_without_any_scenes():
+    assert _emphasis_intervals({}, 5.0) == []
+
+
+def test_look_intervals_alternate_direction_and_cover_the_duration():
+    """Eyes glance left/right on their own clock, alternating direction
+    each time (not the same side repeatedly) so it reads as natural
+    variety rather than a tic."""
+    intervals = _look_intervals(12.0)
+    assert len(intervals) >= 2
+    directions = [value for _, _, value in intervals]
+    assert all(value in ("look_left", "look_right") for value in directions)
+    # Alternates strictly -- no two consecutive glances the same direction.
+    for a, b in zip(directions, directions[1:]):
+        assert a != b
+
+
+def test_look_intervals_empty_for_a_very_short_clip():
+    assert _look_intervals(1.0) == []
+
+
+def test_wobble_intervals_alternate_fast_and_cover_the_full_duration():
+    intervals = _wobble_intervals(2.0)
+    assert intervals[0][0] == 0.0
+    assert intervals[-1][1] == 2.0
+    for (_, end, _), (next_start, _, _) in zip(intervals, intervals[1:]):
+        assert end == next_start
+    values = [value for _, _, value in intervals]
+    assert set(values) == {"a", "b"}
+    # Alternates rather than repeating the same seed back to back.
+    assert all(a != b for a, b in zip(values, values[1:]))
+
+
+def test_merged_boundaries_combine_all_interval_lists_without_duplicates():
+    mouth = [(0.0, 1.0, "closed"), (1.0, 2.0, "wide")]
+    pose = [(0.0, 0.7, "a"), (0.7, 1.4, "b"), (1.4, 2.0, "c")]
+    bounds = _merged_boundaries([mouth, pose], 2.0)
+    assert bounds == sorted(set(bounds))
+    assert bounds[0] == 0.0 and bounds[-1] == 2.0
+    assert 1.0 in bounds and 0.7 in bounds and 1.4 in bounds
+
+
+def test_value_at_falls_back_to_default_outside_all_intervals():
+    intervals = [(0.0, 1.0, "open")]
+    assert _value_at(intervals, 0.5, "closed") == "open"
+    assert _value_at(intervals, 1.5, "closed") == "closed"
+
+
+def test_scene_time_boundaries_falls_back_to_even_split_without_word_timeline():
+    scenes = [{"narration": "a b c"}, {"narration": "d e"}]
+    boundaries = _scene_time_boundaries(scenes, [], 10.0)
+    assert boundaries == [(0.0, 5.0), (5.0, 10.0)]
+
+
+def test_scene_time_boundaries_cuts_at_the_pause_midpoint_between_scenes():
+    # Scene 0's narration is 3 words, scene 1's is 2 words, with a 0.5s
+    # pause between "three" ending and "four" starting -- the cut should
+    # land at that pause's midpoint, not at an even 1.75s split.
+    scenes = [{"narration": "one two three"}, {"narration": "four five"}]
+    word_timeline = [
+        {"word": "one", "start": 0.0, "end": 0.3},
+        {"word": "two", "start": 0.35, "end": 0.6},
+        {"word": "three", "start": 0.65, "end": 1.9},
+        {"word": "four", "start": 2.4, "end": 2.7},
+        {"word": "five", "start": 2.75, "end": 3.0},
+    ]
+    boundaries = _scene_time_boundaries(scenes, word_timeline, 3.5)
+    assert boundaries[0] == (0.0, 2.15)
+    assert boundaries[1] == (2.15, 3.5)
+
+
+def test_scene_time_boundaries_names_a_rival_car_only_where_it_is_actually_spoken():
+    """The regression this whole feature exists to fix: a scene naming a
+    rival car must get a display window that actually contains where its
+    own words are spoken, not an even slice of the whole clip that has no
+    relation to it (which is how a rival's photo ended up showing at the
+    end of a video instead of during the sentence that names it)."""
+    scenes = [
+        {"narration": "one two"},
+        {"narration": "three four five"},
+        {"narration": "six"},
+    ]
+    word_timeline = [
+        {"word": "one", "start": 0.0, "end": 0.2},
+        {"word": "two", "start": 0.25, "end": 0.4},
+        {"word": "three", "start": 0.8, "end": 1.0},
+        {"word": "four", "start": 1.05, "end": 1.3},
+        {"word": "five", "start": 1.35, "end": 1.6},
+        {"word": "six", "start": 2.0, "end": 2.3},
+    ]
+    boundaries = _scene_time_boundaries(scenes, word_timeline, 2.6)
+    rival_start, rival_end = boundaries[1]
+    # The rival scene's actual spoken window (0.8-1.6) must fall entirely
+    # inside its assigned display window -- an even 3-way split of a 2.6s
+    # clip ((0.867, 1.733)) would have clipped "five" (ends at 1.6, so
+    # that alone wouldn't catch this bug), so also pin the boundary close
+    # to the real pause midpoints (0.4/0.8 -> 0.6, 1.6/2.0 -> 1.8).
+    assert rival_start <= 0.8 and rival_end >= 1.6
+    assert 0.5 <= rival_start <= 0.7
+    assert 1.7 <= rival_end <= 1.9
+
+
+def test_typing_headline_positions_reveal_one_character_at_a_time():
+    positions = _typing_headline_positions("GTS", 0.0, 5.0)
+    assert [prefix for prefix, _, _ in positions] == ["G", "GT", "GTS"]
+    # Each reveal step starts exactly where the previous one ended.
+    starts = [start for _, start, _ in positions]
+    durations = [duration for _, _, duration in positions]
+    assert starts[0] == 0.0
+    for i in range(len(positions) - 1):
+        assert starts[i] + durations[i] == starts[i + 1]
+    # The full headline (last prefix) holds for whatever time is left in
+    # the scene, not just one more tick -- it shouldn't vanish right after
+    # finishing typing.
+    assert starts[-1] + durations[-1] == 5.0
+    assert durations[-1] > durations[0]
+
+
+def test_typing_headline_positions_caps_the_char_rate_to_fit_a_short_scene():
+    # A scene shorter than total_chars * TYPING_CHAR_SECONDS must still
+    # finish typing by `end`, not overrun it.
+    positions = _typing_headline_positions("HELLO", 0.0, 0.05)
+    assert positions[-1][1] + positions[-1][2] == 0.05
+
+
+def test_typing_headline_positions_empty_text_yields_no_frames():
+    assert _typing_headline_positions("", 0.0, 5.0) == []
+
+
+
+
+def test_drag_race_lane_clip_flips_a_car_whose_nose_faces_the_wrong_way(tmp_path):
+    """Left-to-right travel needs the car's nose pointing right -- a photo
+    reviewed as facing left has to be mirrored, or it reads as racing
+    backwards, while a photo already facing right is left untouched."""
+    from PIL import Image
+    import numpy as np
+
+    cutout = tmp_path / "car.png"
+    frame = np.zeros((60, 100, 4), dtype=np.uint8)
+    frame[:, 80:, :] = [255, 0, 0, 255]  # a red block on the right = the "nose"
+    Image.fromarray(frame).save(cutout)
+
+    unflipped = _drag_race_lane_clip(
+        str(cutout), "right", 100, 100, 0, 500, 0.0, 5.0, 0.0, 5.0,
+    )
+    flipped = _drag_race_lane_clip(
+        str(cutout), "left", 100, 100, 0, 500, 0.0, 5.0, 0.0, 5.0,
+    )
+    unflipped_frame = unflipped.get_frame(0.0)
+    flipped_frame = flipped.get_frame(0.0)
+    # The nose block starts on the right for the untouched clip and moves
+    # to the left once mirrored.
+    assert unflipped_frame[:, -1].max() > unflipped_frame[:, 0].max()
+    assert flipped_frame[:, 0].max() > flipped_frame[:, -1].max()
+
+
+def test_drag_race_track_returns_empty_without_both_cutouts(tmp_path):
+    cutout = tmp_path / "car.png"
+    _make_transparent_png(cutout)
+    assert _drag_race_track(None, str(cutout), "right", "right", 400, 300, None, None, CANVAS, 1.0, 8.0) == ([], [])
+    assert _drag_race_track(str(cutout), str(tmp_path / "missing.png"), "right", "right", 400, 300, None, None, CANVAS, 1.0, 8.0) == ([], [])
+
+
+def test_drag_race_track_returns_empty_for_a_too_short_beat(tmp_path):
+    cutout = tmp_path / "car.png"
+    _make_transparent_png(cutout)
+    assert _drag_race_track(str(cutout), str(cutout), "right", "right", 400, 300, None, None, CANVAS, 1.0, 1.2) == ([], [])
+
+
+def test_drag_race_track_skips_the_countdown_lights_on_a_short_beat(tmp_path):
+    """A beat too short to fit the 3-second lead-in still races (just
+    without lights), rather than being dropped entirely."""
+    cutout = tmp_path / "car.png"
+    _make_transparent_png(cutout)
+    clips, sfx = _drag_race_track(str(cutout), str(cutout), "right", "right", 400, 300, None, None, CANVAS, 1.0, 3.0)
+    assert len(clips) == 4  # flag + winner badge + the two cars, no light clips
+    assert sfx == []
+
+
+def test_drag_race_track_the_shorter_quarter_mile_time_wins(tmp_path):
+    main_cutout = tmp_path / "main.png"
+    rival_cutout = tmp_path / "rival.png"
+    _make_transparent_png(main_cutout)
+    _make_transparent_png(rival_cutout)
+
+    # RACE_WINDOW_SECONDS -- the same fixed runway render_narrator_video
+    # always gives a comparison scene, real quarter-mile times included.
+    clips, sfx = _drag_race_track(
+        str(main_cutout), str(rival_cutout), "right", "right", main_hp=300, rival_hp=1000,
+        main_quarter_mile=10.5, rival_quarter_mile=11.5,  # rival has more HP but is slower in the 1/4 mile
+        size=CANVAS, seg_start=2.0, seg_end=2.0 + RACE_WINDOW_SECONDS,
+    )
+    # flag + 3 lights + winner badge + 2 cars + the 1/4-mile label. The label
+    # exists because the race runs quarter-mile times while the narration
+    # quotes horsepower, and those disagree: run #202 said "700 horsepower
+    # surpasses the Huracan's 630" and then the Huracan won, which is correct
+    # (10.3 vs 10.5) and looked like the video contradicting itself.
+    assert len(clips) == 8
+    assert len(sfx) == 3  # one chime per light step
+    main_clip, rival_clip = clips[-2], clips[-1]
+    assert main_clip.start == 2.0 and rival_clip.start == 2.0
+    countdown_duration = 3.0
+    finish_x = CANVAS[0] - CANVAS[0] * 0.02
+
+    # Both real times (10.5s, 11.5s) exceed RACE_MAX_SLOWER_SECONDS, so both
+    # scale down together, preserving their ratio -- the rival (slower)
+    # lands exactly on the cap.
+    scale = RACE_MAX_SLOWER_SECONDS / 11.5
+    main_arrival = 10.5 * scale
+    rival_arrival = RACE_MAX_SLOWER_SECONDS
+
+    # The main car (quicker quarter mile, despite less horsepower) reaches
+    # the finish line first -- at that exact moment the rival must still be
+    # short of the line.
+    main_arrival_t = countdown_duration + main_arrival
+    main_x_at_arrival, _ = main_clip.pos(main_arrival_t)
+    rival_x_at_same_time, _ = rival_clip.pos(main_arrival_t)
+    assert abs(main_x_at_arrival + main_clip.size[0] - finish_x) < 1.0
+    assert rival_x_at_same_time + rival_clip.size[0] < finish_x - 1.0
+
+    # The rival still finishes too, just later than the main car, not
+    # capped short of the line forever.
+    rival_arrival_t = countdown_duration + rival_arrival
+    rival_x_at_arrival, _ = rival_clip.pos(rival_arrival_t)
+    assert abs(rival_x_at_arrival + rival_clip.size[0] - finish_x) < 1.0
+
+    # Both cars sit at the start line (not yet moving) during the lights,
+    # and move strictly left-to-right, not top-to-bottom.
+    main_x_start, main_y_start = main_clip.pos(0.0)
+    main_x_mid, main_y_mid = main_clip.pos(countdown_duration)  # lights finish, car starts moving
+    assert main_x_start == main_x_mid == CANVAS[0] * 0.02
+    assert main_y_start == main_y_mid  # y never changes -- horizontal movement only
+    main_x_late, _ = main_clip.pos(main_arrival_t - 0.01)
+    assert main_x_late > main_x_mid
+
+
+def test_drag_race_track_falls_back_to_horsepower_without_quarter_mile_times(tmp_path):
+    main_cutout = tmp_path / "main.png"
+    rival_cutout = tmp_path / "rival.png"
+    _make_transparent_png(main_cutout)
+    _make_transparent_png(rival_cutout)
+
+    clips, _ = _drag_race_track(
+        str(main_cutout), str(rival_cutout), "right", "right", main_hp=300, rival_hp=500,
+        main_quarter_mile=None, rival_quarter_mile=None,
+        size=CANVAS, seg_start=2.0, seg_end=12.0,
+    )
+    main_clip, rival_clip = clips[-2], clips[-1]
+    finish_x = CANVAS[0] - CANVAS[0] * 0.02
+    countdown_duration = 3.0
+    # Rival (more horsepower) wins the fixed fallback race -- a real head
+    # start, not a made-up ratio -- when no quarter-mile time is verified
+    # for either car.
+    rival_arrival_t = countdown_duration + (RACE_FALLBACK_SECONDS - RACE_FALLBACK_GAP_SECONDS)
+    main_arrival_t = countdown_duration + RACE_FALLBACK_SECONDS
+    rival_x_at_arrival, _ = rival_clip.pos(rival_arrival_t)
+    main_x_at_same_time, _ = main_clip.pos(rival_arrival_t)
+    assert abs(rival_x_at_arrival + rival_clip.size[0] - finish_x) < 1.0
+    assert main_x_at_same_time + main_clip.size[0] < finish_x - 1.0
+    main_x_at_arrival, _ = main_clip.pos(main_arrival_t)
+    assert abs(main_x_at_arrival + main_clip.size[0] - finish_x) < 1.0
+
+
+def test_progress_bar_track_fills_left_to_right_over_the_real_duration():
+    clip = _progress_bar_track(CANVAS, 10.0)
+    assert clip.duration == 10.0
+    start_frame = clip.get_frame(0.0)
+    mid_frame = clip.get_frame(5.0)
+    end_frame = clip.get_frame(10.0)
+    assert start_frame[:, :5].sum() == 0  # nothing filled yet
+    assert mid_frame[:, :5].sum() > 0 and mid_frame[:, -5:].sum() == 0
+    assert end_frame[:, -5:].sum() > 0  # fully filled by the end
+
+
+def test_scene_time_boundaries_recovers_from_earlier_tokenization_drift():
+    """An earlier scene's word count under-counting relative to Whisper's
+    own tokenization (e.g. "5.0-liter" splitting into more word entries
+    than a plain text .split() sees) must not shift every later scene's
+    boundary by however many words it was off -- re-anchoring to the next
+    scene's own first word should recover, not compound the drift."""
+    scenes = [
+        # .split() sees 3 words here, but the transcribed audio actually
+        # has 5 word entries for this scene (a tokenization mismatch).
+        {"narration": "It has 5.0-liter power"},
+        {"narration": "Rival name here"},
+    ]
+    word_timeline = [
+        {"word": "It", "start": 0.0, "end": 0.1},
+        {"word": "has", "start": 0.15, "end": 0.3},
+        {"word": "5", "start": 0.35, "end": 0.5},
+        {"word": "0", "start": 0.55, "end": 0.7},
+        {"word": "liter", "start": 0.75, "end": 0.9},
+        {"word": "power", "start": 0.95, "end": 1.1},
+        {"word": "Rival", "start": 2.0, "end": 2.3},
+        {"word": "name", "start": 2.35, "end": 2.6},
+        {"word": "here", "start": 2.65, "end": 2.9},
+    ]
+    boundaries = _scene_time_boundaries(scenes, word_timeline, 3.2)
+    rival_start, rival_end = boundaries[1]
+    # Without re-anchoring, scene 2 would start reading from word_index=4
+    # ("liter"/"power"/"Rival" -> wrongly spans ~0.75-2.3, cutting off
+    # most of "Rival") instead of correctly finding "Rival" at index 6.
+    assert rival_end >= 2.9
+    assert rival_start > 1.0
+
+
+def test_stat_tracker_entries_collects_labeled_scenes_timed_to_their_own_start():
+    manifest = {
+        "scenes": [
+            {"narration": "one", "stat_label": "Horsepower", "stat_value": "620 hp"},
+            {"narration": "two", "stat_label": None, "stat_value": None},
+            {"narration": "three", "stat_label": "MSRP", "stat_value": "$190K -> $150K"},
+        ],
+        "word_timeline": [
+            {"word": "one", "start": 0.0, "end": 0.2},
+            {"word": "two", "start": 1.0, "end": 1.2},
+            {"word": "three", "start": 2.0, "end": 2.2},
+        ],
+    }
+    entries = _stat_tracker_entries(manifest, 3.0)
+    assert [label for _, label, _ in entries] == ["Horsepower", "MSRP"]
+    assert [value for _, _, value in entries] == ["620 hp", "$190K -> $150K"]
+    # Scene 2 carries no stat -- it must not produce an empty/blank row.
+    assert len(entries) == 2
+
+
+def test_stat_tracker_entries_includes_a_second_stat_from_the_same_scene():
+    """A single beat stating two distinct hard numbers (the classic case:
+    the engine beat gives both horsepower and torque) must produce two
+    rows, not just whichever one landed in the first slot."""
+    manifest = {
+        "scenes": [
+            {
+                "narration": "one", "stat_label": "Horsepower", "stat_value": "493 hp",
+                "stat_label_2": "Torque", "stat_value_2": "331 lb-ft",
+            },
+        ],
+        "word_timeline": [{"word": "one", "start": 0.0, "end": 0.2}],
+    }
+    entries = _stat_tracker_entries(manifest, 2.0)
+    assert [(label, value) for _, label, value in entries] == [
+        ("Horsepower", "493 hp"), ("Torque", "331 lb-ft"),
+    ]
+
+
+def test_stat_tracker_entries_caps_at_the_max_row_count():
+    manifest = {
+        "scenes": [
+            {"narration": str(i), "stat_label": f"Stat{i}", "stat_value": str(i)}
+            for i in range(STAT_TABLE_MAX_ROWS + 3)
+        ],
+        "word_timeline": [
+            {"word": str(i), "start": float(i), "end": float(i) + 0.2}
+            for i in range(STAT_TABLE_MAX_ROWS + 3)
+        ],
+    }
+    entries = _stat_tracker_entries(manifest, float(STAT_TABLE_MAX_ROWS + 4))
+    assert len(entries) == STAT_TABLE_MAX_ROWS
+
+
+def test_stat_tracker_track_builds_one_growing_clip_per_added_row(tmp_path):
+    manifest = {
+        "scenes": [
+            {"narration": "one", "stat_label": "Horsepower", "stat_value": "620 hp"},
+            {"narration": "two", "stat_label": "MSRP", "stat_value": "$190K"},
+        ],
+        "word_timeline": [
+            {"word": "one", "start": 0.0, "end": 0.2},
+            {"word": "two", "start": 3.0, "end": 3.2},
+        ],
+    }
+    output_path = tmp_path / "single_car_short.mp4"
+    clips = _stat_tracker_track(manifest, 6.0, output_path, CANVAS, narrator_top_y=1400.0, media_zone_bottom_y=960.0)
+    assert len(clips) == 2
+    # The second row's scene starts at the pause midpoint between the two
+    # scenes' spoken words (0.2 and 3.0 -> 1.6), same as any other scene
+    # boundary -- not literally at the word's own start time.
+    assert clips[0].start == 0.0 and abs(clips[0].duration - 1.6) < 1e-6
+    assert abs(clips[1].start - 1.6) < 1e-6 and abs(clips[1].duration - 4.4) < 1e-6
+
+def test_drag_race_flip_mirrors_the_cutout_mask_too(tmp_path):
+    """mirror_x flips a clip's colour frames but leaves its alpha mask in the
+    original orientation, so a background-removed car was drawn mirrored
+    through an unmirrored silhouette and came out looking unflipped -- the
+    rival raced backwards, away from the finish line (run #181)."""
+    import numpy as np
+    from PIL import Image
+    from narrator_video import _drag_race_lane_clip
+
+    # An obviously asymmetric cutout: opaque only on its left half.
+    pixels = np.zeros((20, 40, 4), dtype=np.uint8)
+    pixels[:, :20] = (255, 0, 0, 255)
+    path = tmp_path / "car.png"
+    Image.fromarray(pixels, "RGBA").save(path)
+
+    plain = _drag_race_lane_clip(str(path), "right", 40, 100, 0, 400, 0.0, 4.0, 0.0, 2.0)
+    flipped = _drag_race_lane_clip(str(path), "left", 40, 100, 0, 400, 0.0, 4.0, 0.0, 2.0)
+
+    assert plain.mask is not None and flipped.mask is not None
+    left = plain.mask.get_frame(0.01)
+    right = flipped.mask.get_frame(0.01)
+    assert np.allclose(right, left[:, ::-1], atol=0.02), "mask must mirror with the image"
+    # And the opaque half really did move to the other side.
+    half = left.shape[1] // 2
+    assert left[:, :half].sum() > left[:, half:].sum()
+    assert right[:, half:].sum() > right[:, :half].sum()
+
+
+def test_measured_facing_beats_a_wrong_reviewer_label(tmp_path):
+    """Run #184 had the reviewer call both race cars "left" when both plainly
+    pointed right, so both were flipped and both raced away from the finish
+    line. A car's nose end is lower than its tail end, and these are cutouts
+    with an alpha channel, so the silhouette answers it without asking."""
+    import numpy as np
+    from PIL import Image
+    from narrator_video import _measured_facing
+
+    def cutout(nose_on_left):
+        # A crude side profile: low nose at one end, tall cabin at the other.
+        pixels = np.zeros((60, 100, 4), dtype=np.uint8)
+        pixels[40:, :, :] = (40, 40, 40, 255)          # body, full length
+        tail = slice(60, 100) if nose_on_left else slice(0, 40)
+        pixels[10:40, tail, :] = (40, 40, 40, 255)     # cabin over the tail end
+        path = tmp_path / f"car-{nose_on_left}.png"
+        Image.fromarray(pixels, "RGBA").save(path)
+        return str(path)
+
+    assert _measured_facing(cutout(True)) == "left"
+    assert _measured_facing(cutout(False)) == "right"
+
+    # A shape with no clear difference between its ends is left to the
+    # reviewer rather than guessed at.
+    flat = np.zeros((60, 100, 4), dtype=np.uint8)
+    flat[20:, :, :] = (40, 40, 40, 255)
+    even = tmp_path / "even.png"
+    Image.fromarray(flat, "RGBA").save(even)
+    assert _measured_facing(str(even)) is None
+
+    # A photo with no alpha at all is not a cutout; nothing to measure.
+    opaque = tmp_path / "opaque.jpg"
+    Image.fromarray(np.full((40, 60, 3), 200, dtype=np.uint8), "RGB").save(opaque)
+    assert _measured_facing(str(opaque)) is None
+
+
+def test_spec_table_puts_short_rows_on_one_line_and_stays_narrow(tmp_path):
+    """Short values ("807 hp") belong beside their label, not under it. Only a
+    value that genuinely cannot fit -- "6.2L supercharged HEMI V8" -- drops to
+    a second line, so the table stays narrow and leaves the frame's width to
+    the character."""
+    from PIL import Image
+    import narrator_video
+
+    size = (1080, 1920)
+    out = narrator_video._draw_spec_table(
+        narrator_video._spec_rows(
+            {"horsepower": "807 hp", "torque": "707 lb-ft", "zero_to_sixty": "3.6 sec",
+             "engine": "6.2L supercharged HEMI V8", "price": "$78,400"}),
+        size, tmp_path / "specs.png")
+    assert out is not None
+    box = Image.open(out).getbbox()
+    drawn_w = box[2] - box[0]
+    assert drawn_w <= size[0] * 0.36, f"table is {drawn_w}px wide, too much of the frame"
+
+    # Four of the five rows fit on one line, so the table is shorter than five
+    # full-height rows plus the header would be.
+    row_h = int(size[1] * narrator_video.SPEC_TABLE_ROW_HEIGHT_RATIO)
+    assert (box[3] - box[1]) < row_h * 5
+
+
+def test_spec_table_skips_rows_research_could_not_fill(tmp_path):
+    import narrator_video
+
+    assert narrator_video._draw_spec_table(
+        narrator_video._spec_rows({}), (1080, 1920), tmp_path / "a.png") is None
+    assert narrator_video._draw_spec_table(
+        narrator_video._spec_rows({"horsepower": "n/a", "torque": "-"}),
+        (1080, 1920), tmp_path / "b.png") is None
+
+
+def test_spec_rows_appear_when_the_narration_reaches_their_number():
+    """The table used to arrive whole in the first frame, giving away every
+    number before a word was said about any of them. Each row now waits for
+    the beat that states its figure."""
+    import narrator_video
+
+    scenes = [
+        {"narration": "It hits sixty in 2.7 seconds."},
+        {"narration": "Built for the track, and only 500 exist."},
+        {"narration": "The 3.8L twin-turbo flat-six makes 553 lb-ft."},
+        {"narration": "That is 690 horsepower, for $293K new."},
+    ]
+    boundaries = [(0.0, 10.0), (10.0, 20.0), (20.0, 30.0), (30.0, 40.0)]
+    specs = {"horsepower": "690 hp", "torque": "553 lb-ft", "zero_to_sixty": "2.7 sec",
+             "engine": "3.8L twin-turbo flat-six", "price": "$293K new, ~$450K today"}
+    ordered = narrator_video._spec_reveal_times(
+        narrator_video._spec_rows(specs), scenes, boundaries, 40.0)
+    at = {row[0]: time for row, time in ordered}
+    assert at["zero_to_sixty"] == 0.0
+    assert at["torque"] == 20.0 and at["engine"] == 20.0
+    assert at["horsepower"] == 30.0 and at["price"] == 30.0
+    # Reveal order, not the fixed field order, is what the table stacks in.
+    assert [row[0] for row, _t in ordered][0] == "zero_to_sixty"
+
+
+def test_a_spec_the_script_never_mentions_still_gets_on_screen():
+    """The table exists precisely to cover what the narration skipped, so an
+    unspoken row is spread into the remaining runtime, not dropped."""
+    import narrator_video
+
+    scenes = [{"narration": "Making 690 horsepower."}]
+    ordered = narrator_video._spec_reveal_times(
+        narrator_video._spec_rows({"horsepower": "690 hp", "price": "$293K new"}),
+        scenes, [(0.0, 60.0)], 60.0)
+    at = {row[0]: time for row, time in ordered}
+    assert at["horsepower"] == 0.0
+    assert 0.0 < at["price"] < 60.0
+
+
+def test_a_revealed_row_never_redraws_the_rows_already_up(tmp_path):
+    """Same reason the photo band is layered: a new row appearing must not
+    flicker the ones the viewer is already reading."""
+    from PIL import Image
+    import numpy as np
+    import narrator_video
+
+    size = (1080, 1920)
+    rows = narrator_video._spec_rows(
+        {"horsepower": "807 hp", "torque": "707 lb-ft", "zero_to_sixty": "3.6 sec"})
+    frames = [np.array(Image.open(
+        narrator_video._draw_spec_table(rows[:n + 1], size, tmp_path / f"s{n}.png")
+    ).convert("RGBA")).astype(int) for n in range(len(rows))]
+    for earlier, later in zip(frames, frames[1:]):
+        drawn = np.where((earlier[:, :, 3] > 0).any(axis=1))[0]
+        # The bottom border legitimately moves down; everything above it must not.
+        body = slice(drawn[0], drawn[-1] - 4)
+        assert np.abs(earlier[body] - later[body]).max() == 0
+
+
+def test_the_race_label_only_appears_when_there_are_times_to_show(tmp_path):
+    """With no published times the race falls back to horsepower, so there is
+    no quarter-mile figure to print and the label would be a lie."""
+    from narrator_video import CANVAS, RACE_WINDOW_SECONDS, _drag_race_track
+
+    main_cutout, rival_cutout = tmp_path / "m.png", tmp_path / "r.png"
+    _make_transparent_png(main_cutout)
+    _make_transparent_png(rival_cutout)
+    clips, _sfx = _drag_race_track(
+        str(main_cutout), str(rival_cutout), "right", "right", main_hp=700, rival_hp=630,
+        main_quarter_mile=None, rival_quarter_mile=None,
+        size=CANVAS, seg_start=2.0, seg_end=2.0 + RACE_WINDOW_SECONDS,
+    )
+    # flag + 3 lights + winner badge + 2 cars, and no label.
+    assert len(clips) == 7

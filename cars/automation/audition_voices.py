@@ -90,6 +90,42 @@ VOICE_PRESETS = {
             "without sounding like an advertisement."
         ),
     },
+    "british_narrator": {
+        "voice": "fable",
+        "speed": 1.0,
+        "instructions": (
+            "Speak with a natural British (Received Pronunciation-leaning) accent -- confident, "
+            "warm, and conversational, like a UK car-review host. Human and clear, not theatrical, "
+            "and not an impression of any real presenter."
+        ),
+    },
+    "british_dry_wit": {
+        "voice": "onyx",
+        "speed": 0.98,
+        "instructions": (
+            "Speak with a dry, understated British accent and deadpan wit, like a UK motoring "
+            "journalist. Clear diction, controlled energy, not an impression of any real person."
+        ),
+    },
+    "british_energetic": {
+        "voice": "nova",
+        "speed": 1.06,
+        "instructions": (
+            "Speak with an energetic British accent, like an enthusiastic UK car YouTuber. "
+            "Fast-paced but clear, upbeat, not an impression of any real presenter."
+        ),
+    },
+    "british_deep_narrator": {
+        "voice": "onyx",
+        "speed": 0.97,
+        "instructions": (
+            "Use a deep, textured, gravelly voice -- the same weight and register as a "
+            "cinematic car-trailer narrator -- combined with a natural British "
+            "(Received Pronunciation-leaning) accent. Confident, warm, and clear, like a "
+            "premium UK car-review narrator. Human, not theatrical, and not an impression "
+            "of any real presenter or actor."
+        ),
+    },
 }
 
 

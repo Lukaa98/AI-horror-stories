@@ -1,5 +1,11 @@
 name: Cars Ranking - Research (Manual)
 
+# Lets a running workflow show a real "<mode>: <request>" title (the
+# dashboard's running-builds list reads this via the Actions API) instead of
+# the default commit-message title, which is the same for every dispatch and
+# doesn't say what's actually building.
+run-name: "${{ github.event.inputs.mode }}: ${{ github.event.inputs.request }}"
+
 # Stage 1 of 2. Manual only. Runs AI research (grounded web search, not just
 # model recall) + best-effort image sourcing for a free-text request, and
 # commits cars/drafts/<draft_id>/research.json for review. Does NOT render a
@@ -14,6 +20,106 @@ on:
       draft_id:
         description: "Unique folder id (the UI generates this)"
         required: true
+        type: string
+      mode:
+        description: "Full ranking research, video test, startup battle, rival suggestion, narrator preview, single-car short, or voice audition"
+        required: false
+        type: choice
+        default: research
+        options:
+          - research
+          - video
+          - battle
+          - suggest_rivals
+          - narrator_preview
+          - single_car
+          - voice_audition
+      make:
+        description: "Vehicle make for video mode"
+        required: false
+        type: string
+      model:
+        description: "Vehicle model for video mode"
+        required: false
+        type: string
+      query:
+        description: "Search text for video mode"
+        required: false
+        type: string
+      start_year:
+        description: "Optional video-mode start year"
+        required: false
+        type: string
+      end_year:
+        description: "Optional video-mode end year"
+        required: false
+        type: string
+      cars:
+        description: "Battle mode: JSON array of {make, model, year}, 3-5 cars"
+        required: false
+        type: string
+      base_make:
+        description: "suggest_rivals mode: base car make"
+        required: false
+        type: string
+      base_model:
+        description: "suggest_rivals mode: base car model"
+        required: false
+        type: string
+      base_trim:
+        description: "suggest_rivals mode: base car trim (optional)"
+        required: false
+        type: string
+      base_year:
+        description: "suggest_rivals mode: base car year"
+        required: false
+        type: string
+      rival_flavor:
+        description: "suggest_rivals mode: cold_start (startup-sound battle) or spec_race (single-car comparison + drag race)"
+        required: false
+        type: string
+      rival_count:
+        description: "suggest_rivals mode: how many rivals to suggest (1-4)"
+        required: false
+        type: string
+      voice:
+        description: "Narrator voice for single-car mode"
+        required: false
+        type: string
+        default: onyx
+      narrator_character:
+        description: "Narrator character: v21 has continuous gestures and smooth video placements; other choices use legacy sprites"
+        required: false
+        type: choice
+        default: "v21"
+        options:
+          - "v21"
+          - "v4"
+          - "default"
+          - "v3"
+      auction_url:
+        description: "single_car mode: a specific carsandbids.com/auctions/... listing to pull photos from instead of searching"
+        required: false
+        type: string
+      photos:
+        description: >-
+          single_car mode: JSON object of direct photo URLs, one per slot --
+          {"front":"...","side":"...","rear":"...","engine":"...","interior":"...","rival":"..."}.
+          One input rather than six because workflow_dispatch allows only 25 in total.
+        required: false
+        type: string
+      rival_car:
+        description: "single_car mode: the comparison car by name (e.g. 2010 BMW X5 M), as chosen from the suggested rivals"
+        required: false
+        type: string
+      disable_comparison:
+        description: "single_car mode: skip the rival-comparison scene and drag-race animation entirely"
+        required: false
+        type: boolean
+        default: false
+      extra_photos:
+        description: 'single_car photos: JSON array of {label,url}; optional section (exterior/interior/engine), role (hero/angle/detail), id and note'
+        required: false
         type: string
 
 permissions:
@@ -31,31 +137,165 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
 
       - uses: actions/setup-node@v4
+        if: ${{ inputs.mode != 'suggest_rivals' && inputs.mode != 'voice_audition' }}
         with:
           node-version: "20"
+          cache: npm
+          cache-dependency-path: scraper/car-source-scraper/package-lock.json
 
       - name: Install Python dependencies
+        if: ${{ inputs.mode != 'video' && inputs.mode != 'suggest_rivals' }}
         run: pip install -r requirements.txt
 
+      - name: Install lightweight video-test dependencies
+        if: ${{ inputs.mode == 'video' }}
+        run: pip install Pillow openai
+
+      - name: Install lightweight rival-suggestion dependencies
+        if: ${{ inputs.mode == 'suggest_rivals' }}
+        run: pip install openai python-dotenv
+
       - name: Install scraper dependencies
+        if: ${{ inputs.mode != 'suggest_rivals' && inputs.mode != 'voice_audition' }}
         working-directory: scraper/car-source-scraper
-        run: npm install
+        run: npm ci
+
+      - name: Install narrator renderer
+        if: ${{ inputs.mode == 'single_car' }}
+        working-directory: narrator/render
+        run: npm ci
 
       - name: Install Puppeteer Linux deps
+        if: ${{ inputs.mode != 'suggest_rivals' && inputs.mode != 'voice_audition' }}
         working-directory: scraper/car-source-scraper
         run: bash scripts/install-linux-deps.sh
 
+      - name: Install ffmpeg
+        if: ${{ inputs.mode != 'suggest_rivals' && inputs.mode != 'voice_audition' }}
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+
+      - name: Check V21 narrator motion
+        if: ${{ inputs.mode == 'single_car' && (inputs.narrator_character == 'v21' || inputs.narrator_character == '') }}
+        run: |
+          python -m pytest -q tests/test_narrator_motion.py tests/test_narrator_video.py tests/test_photo_story.py
+          node narrator/render/test-v21.js
+
       - name: Run research
+        if: ${{ inputs.mode == 'research' }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python cars/automation/research_request.py \
             --request "${{ inputs.request }}" \
-            --draft-id "${{ inputs.draft_id }}"
+            --draft-id "${{ inputs.draft_id }}" \
+            --require-ai-image-review
+
+      - name: Run startup battle research
+        if: ${{ inputs.mode == 'battle' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python cars/automation/battle_request.py \
+            --cars '${{ inputs.cars }}' \
+            --battle-id "${{ inputs.draft_id }}"
+
+      - name: Run rival suggestion
+        if: ${{ inputs.mode == 'suggest_rivals' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python cars/automation/suggest_rivals.py \
+            --make "${{ inputs.base_make }}" \
+            --model "${{ inputs.base_model }}" \
+            --trim "${{ inputs.base_trim }}" \
+            --year "${{ inputs.base_year }}" \
+            --count "${{ inputs.rival_count || '4' }}" \
+            --suggestion-id "${{ inputs.draft_id }}" \
+            --flavor "${{ inputs.rival_flavor || 'cold_start' }}"
+
+      - name: Run standalone video test
+        if: ${{ inputs.mode == 'video' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          YEAR_ARGS=()
+          if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
+          if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
+          python cars/automation/video_probe.py \
+            --make "${{ inputs.make }}" \
+            --model "${{ inputs.model }}" \
+            --query "${{ inputs.query }}" \
+            --test-id "${{ inputs.draft_id }}" \
+            "${YEAR_ARGS[@]}"
+
+      - name: Run narrator preview
+        if: ${{ inputs.mode == 'narrator_preview' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          YEAR_ARGS=()
+          if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
+          if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
+          python cars/automation/narrator_preview.py \
+            --make "${{ inputs.make }}" \
+            --model "${{ inputs.model }}" \
+            --query "${{ inputs.query }}" \
+            --test-id "${{ inputs.draft_id }}" \
+            "${YEAR_ARGS[@]}"
+
+      - name: Build single-car narrated short
+        if: ${{ inputs.mode == 'single_car' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # Piped through an env var rather than interpolated straight into
+          # the command line -- this is a JSON string full of double quotes,
+          # which would break out of the "${{ }}"-substituted shell string.
+          EXTRA_PHOTOS: ${{ inputs.extra_photos }}
+          # Same reason: a JSON object of photo URLs, full of double quotes.
+          # Interpolated inline it came through as {front:https://...} --
+          # unparseable, silently ignored, and run #201 quietly fell back to
+          # scraping the gallery instead of using the pasted photos.
+          PHOTOS: ${{ inputs.photos }}
+          # V21 captures every frame of the approved live HTML rig.
+          # Explicit older selections retain their existing sprite sets.
+          NARRATOR_RENDERER: ${{ (inputs.narrator_character == 'v21' || inputs.narrator_character == '') && 'v21' || 'sprites' }}
+          NARRATOR_SPRITES_DIR: ${{ inputs.narrator_character == 'v4' && format('{0}/narrator/sprites-v4', github.workspace) || inputs.narrator_character == 'v3' && format('{0}/narrator/sprites-v3', github.workspace) || '' }}
+        run: |
+          YEAR_ARGS=()
+          if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
+          if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
+          if [ -n "${{ inputs.auction_url }}" ]; then YEAR_ARGS+=(--auction-url "${{ inputs.auction_url }}"); fi
+          if [ -n "$PHOTOS" ]; then YEAR_ARGS+=(--photos "$PHOTOS"); fi
+          if [ -n "${{ inputs.rival_car }}" ]; then YEAR_ARGS+=(--rival-car "${{ inputs.rival_car }}"); fi
+          if [ "${{ inputs.disable_comparison }}" = "true" ]; then YEAR_ARGS+=(--disable-comparison); fi
+          if [ -n "$EXTRA_PHOTOS" ]; then YEAR_ARGS+=(--extra-photos "$EXTRA_PHOTOS"); fi
+          python cars/automation/single_car_short.py \
+            --make "${{ inputs.make }}" \
+            --model "${{ inputs.model }}" \
+            --trim "${{ inputs.query }}" \
+            --short-id "${{ inputs.draft_id }}" \
+            --voice "${{ inputs.voice || 'onyx' }}" \
+            "${YEAR_ARGS[@]}"
+
+      - name: Run voice audition
+        if: ${{ inputs.mode == 'voice_audition' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python cars/automation/voice_audition_request.py \
+            --audition-id "${{ inputs.draft_id }}" \
+            --preset "${{ inputs.voice || 'onyx' }}"
 
       - name: Commit draft
+        if: ${{ inputs.mode == 'research' }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -77,5 +317,157 @@ jobs:
 
           git add "cars/drafts/${{ inputs.draft_id }}"
           git commit -m "cars: research draft ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit battle
+        if: ${{ inputs.mode == 'battle' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/battles"
+          cp -R "cars/battles/${{ inputs.draft_id }}" "$tmp_dir/cars/battles/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p "cars/battles"
+          rm -rf "cars/battles/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/battles/${{ inputs.draft_id }}" "cars/battles/${{ inputs.draft_id }}"
+
+          git add "cars/battles/${{ inputs.draft_id }}"
+          git commit -m "cars: startup battle research ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit rival suggestions
+        if: ${{ inputs.mode == 'suggest_rivals' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/rival-suggestions"
+          cp -R "cars/rival-suggestions/${{ inputs.draft_id }}" "$tmp_dir/cars/rival-suggestions/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p "cars/rival-suggestions"
+          rm -rf "cars/rival-suggestions/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/rival-suggestions/${{ inputs.draft_id }}" "cars/rival-suggestions/${{ inputs.draft_id }}"
+
+          git add "cars/rival-suggestions/${{ inputs.draft_id }}"
+          git commit -m "cars: rival suggestions ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit video test
+        if: ${{ inputs.mode == 'video' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/video-tests"
+          cp -R "cars/video-tests/${{ inputs.draft_id }}" "$tmp_dir/cars/video-tests/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p cars/video-tests
+          rm -rf "cars/video-tests/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/video-tests/${{ inputs.draft_id }}" "cars/video-tests/${{ inputs.draft_id }}"
+          git add "cars/video-tests/${{ inputs.draft_id }}"
+          git commit -m "cars: video test ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit narrator preview
+        if: ${{ inputs.mode == 'narrator_preview' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/narrator-previews"
+          cp -R "cars/narrator-previews/${{ inputs.draft_id }}" "$tmp_dir/cars/narrator-previews/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p cars/narrator-previews
+          rm -rf "cars/narrator-previews/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/narrator-previews/${{ inputs.draft_id }}" "cars/narrator-previews/${{ inputs.draft_id }}"
+          git add "cars/narrator-previews/${{ inputs.draft_id }}"
+          git commit -m "cars: narrator preview ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit single-car short
+        if: ${{ inputs.mode == 'single_car' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/single-car-shorts"
+          cp -R "cars/single-car-shorts/${{ inputs.draft_id }}" "$tmp_dir/cars/single-car-shorts/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p cars/single-car-shorts
+          rm -rf "cars/single-car-shorts/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/single-car-shorts/${{ inputs.draft_id }}" "cars/single-car-shorts/${{ inputs.draft_id }}"
+          git add "cars/single-car-shorts/${{ inputs.draft_id }}"
+          git commit -m "cars: single-car short ${{ inputs.draft_id }}" || exit 0
+          git pull --rebase origin "${OUTPUT_BRANCH}" || true
+          git push origin "${OUTPUT_BRANCH}"
+
+      - name: Commit voice audition
+        if: ${{ inputs.mode == 'voice_audition' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp_dir="$(mktemp -d)"
+          mkdir -p "$tmp_dir/cars/voice-auditions"
+          cp -R "cars/voice-auditions/${{ inputs.draft_id }}" "$tmp_dir/cars/voice-auditions/${{ inputs.draft_id }}"
+
+          git fetch origin "${OUTPUT_BRANCH}" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
+            git switch -C "${OUTPUT_BRANCH}" --track "origin/${OUTPUT_BRANCH}" || git switch "${OUTPUT_BRANCH}"
+          else
+            git switch -c "${OUTPUT_BRANCH}"
+          fi
+
+          mkdir -p cars/voice-auditions
+          rm -rf "cars/voice-auditions/${{ inputs.draft_id }}"
+          cp -R "$tmp_dir/cars/voice-auditions/${{ inputs.draft_id }}" "cars/voice-auditions/${{ inputs.draft_id }}"
+          git add "cars/voice-auditions/${{ inputs.draft_id }}"
+          git commit -m "cars: voice audition ${{ inputs.draft_id }}" || exit 0
           git pull --rebase origin "${OUTPUT_BRANCH}" || true
           git push origin "${OUTPUT_BRANCH}"

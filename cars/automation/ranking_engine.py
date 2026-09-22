@@ -6,6 +6,8 @@ call render_ranking_video(config). All the drawing/layout logic here is
 topic-agnostic; only the config content changes per video.
 """
 import json
+import os
+import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -18,11 +20,16 @@ from generate_sample import (
     FAST_CANVAS,
     _font,
     _wrap,
+    _write_openai_audio,
     _write_narration_audio,
     _write_contact_sheet,
 )
 from video_editor import FPS, FAST_MODE
-from moviepy.editor import AudioFileClip, ImageClip, concatenate_videoclips
+from moviepy.editor import (
+    AudioFileClip, CompositeVideoClip, ImageClip, VideoFileClip,
+    concatenate_audioclips, concatenate_videoclips,
+)
+from engine_video import prepare_engine_clip
 
 OUTPUT_ROOT = ROOT / "cars" / "output" / "samples"
 
@@ -43,6 +50,10 @@ class RankEntry:
     label: str  # short sentiment tag, e.g. "THE BOAT"
     stat: str  # short stat chip text
     narration: str  # spoken line for this rank (keep short -- see module docstring)
+    performance_beats: list = field(default_factory=list)
+    engine_videos: list = field(default_factory=list)
+    engine_nickname: str = None
+    engine_clip_preview: dict = None
 
 
 @dataclass
@@ -274,7 +285,257 @@ def _word_weight(text):
     return max(3, len(text.split()))
 
 
-def render_ranking_video(config, output_root=OUTPUT_ROOT, render_video=True, fast=True, tts_provider="gtts"):
+VISUAL_CUES = {
+    "engine": ("engine", "engines", "engine bay", "flat-six", "flat six", "v8", "v10"),
+    "wheel": ("wheel", "wheels", "rim", "rims", "tire", "tires"),
+    "interior": ("interior", "dashboard", "cockpit", "steering", "instrument", "manual", "gated", "shifter"),
+    "rear": ("rear", "wing", "spoiler", "exhaust", "exhausts", "taillight", "taillights"),
+    "front": ("front", "grille", "headlight", "headlights"),
+    "side": ("side", "profile", "side blade"),
+}
+
+
+def _term_position(text, term):
+    match = re.search(rf"(?<!\w){re.escape(term)}(?!\w)", text)
+    return match.start() if match else -1
+
+
+def _image_category(path):
+    name = Path(path).stem.lower().replace("-", " ").replace("_", " ")
+    for category, terms in VISUAL_CUES.items():
+        if any(_term_position(name, term) >= 0 for term in terms):
+            return category
+    return "exterior"
+
+
+def _narration_visual_cues(text):
+    """Return visual subjects in the order they are mentioned by the narration."""
+    cues = []
+    lowered = text.lower()
+    for sentence in re.split(r"(?<=[.!?])\s+", lowered):
+        matches = []
+        for category, terms in VISUAL_CUES.items():
+            positions = [_term_position(sentence, term) for term in terms]
+            positions = [position for position in positions if position >= 0]
+            if positions:
+                matches.append((min(positions), category))
+        cues.extend(category for _, category in sorted(matches))
+    return list(dict.fromkeys(cues))
+
+
+def _order_images_for_narration(images, narration):
+    """Put detail shots near the spoken detail, then retain all remaining shots."""
+    remaining = list(images)
+    ordered = []
+    for cue in _narration_visual_cues(narration):
+        match = next((path for path in remaining if _image_category(path) == cue), None)
+        if match is not None:
+            ordered.append(match)
+            remaining.remove(match)
+    return [*ordered, *remaining]
+
+
+def _still_clip(path, duration):
+    """Keep reviewed photographs static; cuts provide the visual movement."""
+    return ImageClip(str(path)).set_duration(duration)
+
+
+STYLE_DIRECTIONS = {
+    "energetic_reveal": "Open with a lively reveal and clear upward energy, then land the final word cleanly.",
+    "conversational": "Sound relaxed and spontaneous, like sharing this with another car enthusiast.",
+    "intrigued": "Slow down slightly with genuine curiosity and a sense that this detail changes the story.",
+    "confident": "Deliver this with controlled conviction and a decisive finish.",
+    "reflective": "Use a warmer, measured tone that gives the history or tradeoff room to register.",
+}
+
+
+def _automatic_performance_beats(text, default_visual="exterior"):
+    """Provide useful performance structure for drafts created before V10.8."""
+    sentences = [part.strip() for part in re.split(r"(?<=[.!?])\s+", text) if part.strip()]
+    beats = []
+    for index, sentence in enumerate(sentences):
+        lowered = sentence.lower()
+        style = "energetic_reveal" if index == 0 else "conversational"
+        if any(term in lowered for term in ("but ", "though", "however", "what was lost")):
+            style = "intrigued"
+        if any(term in lowered for term in ("number one", "topping", "wins", "best")):
+            style = "confident"
+        cues = _narration_visual_cues(sentence)
+        beats.append({
+            "text": sentence,
+            "style": style,
+            "emphasis_words": [],
+            "pause_after": 0,
+            "visual_cue": cues[0] if cues else default_visual,
+        })
+    return beats or [{
+        "text": text,
+        "style": "conversational",
+        "emphasis_words": [],
+        "pause_after": 0,
+        "visual_cue": default_visual,
+    }]
+
+
+def _performance_instructions(beat):
+    emphasis = [str(word).strip() for word in beat.get("emphasis_words", []) if str(word).strip()]
+    emphasis_direction = (
+        " Slightly sustain and clearly stress these exact words or phrases without changing "
+        f"their pronunciation: {', '.join(emphasis)}."
+        if emphasis else ""
+    )
+    return (
+        "You are a knowledgeable automotive host with a low, warm masculine timbre. "
+        f"{STYLE_DIRECTIONS.get(beat.get('style'), STYLE_DIRECTIONS['conversational'])}"
+        f"{emphasis_direction} Do not sound like a commercial announcer. Do not add words."
+    )
+
+
+VISUAL_FALLBACKS = {
+    "engine": ("engine", "side", "exterior", "front", "rear"),
+    "wheel": ("wheel", "side", "exterior", "front", "rear"),
+    "rear": ("rear", "exterior", "side", "front"),
+    "front": ("front", "exterior", "side", "rear"),
+    "interior": ("interior", "exterior", "side"),
+    "side": ("side", "exterior", "front", "rear"),
+    "exterior": ("exterior", "front", "side", "rear"),
+}
+
+
+def _select_image_for_cue(images, cue, used):
+    match = None
+    for category in VISUAL_FALLBACKS.get(cue, VISUAL_FALLBACKS["exterior"]):
+        match = next(
+            (path for path in images if _image_category(path) == category and path not in used),
+            None,
+        )
+        if match is not None:
+            break
+    if match is None:
+        match = next((path for path in images if path not in used), images[0])
+    used.add(match)
+    return match
+
+
+def _engine_callout_line(entry):
+    """A short spoken cue right before an entry's engine clip plays.
+
+    Named after the engine's own enthusiast nickname when research found one
+    (e.g. "Hemi", "Coyote") so the callout feels specific to that car rather
+    than a generic transition.
+    """
+    if entry.engine_nickname:
+        return f"Let's hear the {entry.engine_nickname} come to life."
+    return "Let's hear it come to life."
+
+
+def _engine_callout_clip(entry, still_image_path, engine_dir):
+    """Build a short narrated still-frame clip introducing the engine clip.
+
+    Reuses the OpenAI TTS voice used for the main narration; skipped
+    entirely (returns None) when no OpenAI key is configured or synthesis
+    fails, since the engine clip itself still plays fine without it.
+    """
+    if not os.getenv("OPENAI_API_KEY"):
+        return None, None
+    text = _engine_callout_line(entry)
+    try:
+        audio_path = engine_dir / f"rank-{entry.rank}-engine-callout.mp3"
+        _write_openai_audio(audio_path, text)
+        callout_audio = AudioFileClip(str(audio_path))
+        callout_clip = _still_clip(still_image_path, callout_audio.duration).set_audio(callout_audio)
+        return callout_clip, text
+    except Exception:
+        return None, None
+
+
+_PERFORMANCE_VOICE_INSTRUCTIONS = (
+    "Use a low, warm masculine automotive-host voice. Read this as one continuous, "
+    "natural sentence with smooth internal flow. Do not insert dramatic silences or "
+    "stop mid-sentence. Clearly emphasize rank numbers, model names, prices, and "
+    "important mechanical details without slowing down excessively."
+)
+
+
+def _write_performance_audio(run_dir, ordered, close_narration):
+    """Synthesize each entry's narration as its own TTS clip, then map real
+    (measured) durations onto visual beats.
+
+    A single combined TTS call split by word-count heuristics drifts as it
+    accumulates across entries - by the last entry the estimated boundary
+    can land mid-word, which is especially jarring once an engine clip is
+    anchored to that same drifted boundary. Synthesizing per entry gives an
+    exact, measured duration for each entry's speech, so the cut to the next
+    entry (or to an engine clip) always lands where the real audio actually
+    ends.
+    """
+    segment_dir = run_dir / "narration_segments"
+    segment_dir.mkdir(parents=True, exist_ok=True)
+    segments = [(f"rank_{entry.rank}", entry, entry.narration) for entry in ordered]
+    segments.append(("close", None, close_narration))
+
+    segment_clips = []
+    for name, entry, text in segments:
+        path = segment_dir / f"{name}.mp3"
+        _write_openai_audio(path, text, instructions=_PERFORMANCE_VOICE_INSTRUCTIONS, speed=1.02)
+        segment_clips.append((name, entry, text, AudioFileClip(str(path))))
+
+    narration_path = run_dir / "narration.mp3"
+    combined = concatenate_audioclips([clip for *_, clip in segment_clips])
+    combined.write_audiofile(str(narration_path), logger=None)
+    combined.close()
+
+    timings = []
+    for name, entry, text, clip in segment_clips:
+        duration = clip.duration
+        clip.close()
+
+        if name == "close":
+            per_entry_close = duration / len(ordered)
+            for close_entry in ordered:
+                image = _select_image_for_cue(close_entry.images, "exterior", set())
+                timings.append({
+                    "segment": "close",
+                    "entry": close_entry,
+                    "text": text,
+                    "style": "conversational",
+                    "emphasis_words": [close_entry.name],
+                    "pause_after": 0,
+                    "visual_cue": "exterior",
+                    "image": image,
+                    "duration": per_entry_close,
+                })
+            continue
+
+        beats = entry.performance_beats or _automatic_performance_beats(entry.narration)
+        weights = [_word_weight(beat["text"]) for beat in beats]
+        total_weight = sum(weights) or 1
+        used_images = set()
+        for beat, weight in zip(beats, weights):
+            beat_duration = duration * weight / total_weight
+            cues = _narration_visual_cues(beat["text"]) or [beat.get("visual_cue", "exterior")]
+            per_cue_duration = beat_duration / len(cues)
+            for cue in cues:
+                image = _select_image_for_cue(entry.images, cue, used_images)
+                timings.append({
+                    "segment": name,
+                    "entry": entry,
+                    "text": beat["text"],
+                    "style": beat.get("style", "conversational"),
+                    "emphasis_words": beat.get("emphasis_words", []),
+                    "pause_after": 0,
+                    "visual_cue": cue,
+                    "image": image,
+                    "duration": per_cue_duration,
+                })
+
+    return narration_path, timings
+
+
+def render_ranking_video(
+    config, output_root=OUTPUT_ROOT, render_video=True, fast=True,
+    tts_provider="gtts", tts_voice=None, output_filename="final_short.mp4",
+):
     ranks_by_num = {e.rank: e for e in config.ranks}
     if set(ranks_by_num) != {4, 3, 2, 1}:
         raise SystemExit(f"RankingConfig.ranks must cover ranks 4,3,2,1 exactly; got {sorted(ranks_by_num)}")
@@ -300,53 +561,170 @@ def render_ranking_video(config, output_root=OUTPUT_ROOT, render_video=True, fas
         "run_slug": config.slug,
     }
 
-    narration_path, audio_provider = _write_narration_audio(
-        run_dir, storyboard, duration_seconds=config.target_seconds, provider=tts_provider
-    )
+    previous_voice = None
+    if tts_voice:
+        import os
+        previous_voice = os.environ.get("OPENAI_TTS_VOICE")
+        os.environ["OPENAI_TTS_VOICE"] = tts_voice
+    performance_timings = None
+    try:
+        if tts_provider.lower() == "openai":
+            narration_path, performance_timings = _write_performance_audio(
+                run_dir, ordered, config.close_narration
+            )
+            audio_provider = "openai-performance-beats"
+        else:
+            narration_path, audio_provider = _write_narration_audio(
+                run_dir, storyboard, duration_seconds=config.target_seconds, provider=tts_provider
+            )
+    finally:
+        if tts_voice:
+            if previous_voice is None:
+                os.environ.pop("OPENAI_TTS_VOICE", None)
+            else:
+                os.environ["OPENAI_TTS_VOICE"] = previous_voice
     storyboard["audio_provider"] = audio_provider
+    storyboard["tts_voice"] = tts_voice or "provider-default"
     audio_clip = AudioFileClip(str(narration_path))
     total_duration = audio_clip.duration
 
-    # Split total narration duration across segments proportional to word count,
-    # then split each rank's segment across its quick-cut images.
-    segments = [*[(f"rank_{e.rank}", e.narration) for e in ordered], ("close", config.close_narration)]
-    weights = [_word_weight(text) for _, text in segments]
-    total_weight = sum(weights)
-    segment_durations = {name: total_duration * w / total_weight for (name, _), w in zip(segments, weights)}
+    frame_entries = []  # (image_path_out, duration, visual_cue, ranked entry)
 
-    frame_entries = []  # (image_path_out, duration)
+    if performance_timings:
+        for index, timing in enumerate(performance_timings):
+            entry = timing["entry"]
+            frame_entry = entry
+            if timing["segment"] == "close":
+                frame_entry = RankEntry(
+                    rank=entry.rank, name=entry.name, years=entry.years, images=entry.images,
+                    label=entry.label, stat=entry.stat, narration=config.close_narration,
+                )
+            out_path = images_dir / f"scene_beat_{index:02d}.png"
+            _draw_rank_frame(config, frame_entry, timing["image"], out_path, size)
+            frame_entries.append((out_path, timing["duration"], timing["visual_cue"], entry))
+        storyboard["performance_beats"] = [
+            {
+                key: value for key, value in timing.items()
+                if key in {"segment", "text", "style", "emphasis_words", "pause_after", "visual_cue", "duration"}
+            }
+            for timing in performance_timings
+        ]
+    else:
+        segments = [*[(f"rank_{e.rank}", e.narration) for e in ordered], ("close", config.close_narration)]
+        weights = [_word_weight(text) for _, text in segments]
+        total_weight = sum(weights)
+        segment_durations = {
+            name: total_duration * weight / total_weight
+            for (name, _), weight in zip(segments, weights)
+        }
+        for entry in ordered:
+            rank_duration = segment_durations[f"rank_{entry.rank}"]
+            ordered_images = _order_images_for_narration(entry.images, entry.narration)
+            per_image = rank_duration / len(ordered_images)
+            for i, image_path in enumerate(ordered_images):
+                out_path = images_dir / f"scene_rank_{entry.rank}_{i}.png"
+                _draw_rank_frame(config, entry, image_path, out_path, size)
+                frame_entries.append((out_path, per_image, _image_category(image_path), entry))
 
-    for entry in ordered:
-        rank_duration = segment_durations[f"rank_{entry.rank}"]
-        per_image = rank_duration / len(entry.images)
-        for i, image_path in enumerate(entry.images):
-            out_path = images_dir / f"scene_rank_{entry.rank}_{i}.png"
-            _draw_rank_frame(config, entry, image_path, out_path, size)
-            frame_entries.append((out_path, per_image))
+        close_path = images_dir / "scene_close.png"
+        best = ordered[-1]
+        close_entry = RankEntry(
+            rank=best.rank, name=best.name, years=best.years, images=best.images,
+            label=best.label, stat=best.stat, narration=config.close_narration,
+        )
+        _draw_rank_frame(config, close_entry, best.images[0], close_path, size)
+        frame_entries.append((close_path, segment_durations["close"], "exterior", None))
 
-    close_path = images_dir / "scene_close.png"
-    best = ordered[-1]
-    close_entry = RankEntry(
-        rank=best.rank, name=best.name, years=best.years, images=best.images,
-        label=best.label, stat=best.stat, narration=config.close_narration,
-    )
-    _draw_rank_frame(config, close_entry, best.images[0], close_path, size)
-    frame_entries.append((close_path, segment_durations["close"]))
-
-    _write_contact_sheet([p for p, _ in frame_entries], run_dir / "scene_contact_sheet.jpg")
-    storyboard["frames"] = [{"path": str(Path(p).relative_to(ROOT)), "duration": round(d, 3)} for p, d in frame_entries]
-    (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
+    _write_contact_sheet([p for p, _, _, _ in frame_entries], run_dir / "scene_contact_sheet.jpg")
+    storyboard["frames"] = [
+        {"path": str(Path(p).relative_to(ROOT)), "duration": round(d, 3), "visual_cue": cue}
+        for p, d, cue, _ in frame_entries
+    ]
 
     if render_video:
-        clips = [ImageClip(str(path)).set_duration(duration) for path, duration in frame_entries]
-        video = concatenate_videoclips(clips, method="compose").set_audio(audio_clip).set_duration(total_duration)
+        engine_dir = run_dir / "engine_clips"
+        engine_results = {}
+        for entry in ordered:
+            if not entry.engine_videos:
+                continue
+            # Research already extracted and verified a preview clip for
+            # review before this render was ever requested - reuse it
+            # instead of re-running ffmpeg extraction and vision
+            # verification a second time for the same entry.
+            preview = entry.engine_clip_preview
+            if preview and preview.get("approved") and preview.get("path"):
+                preview_path = run_dir / preview["path"]
+                if preview_path.exists():
+                    engine_results[entry.rank] = {**preview, "path": preview_path}
+                    continue
+            # allow_irrelevant matches the standalone video-test tool and the
+            # research-time preview: always try real audio on a candidate
+            # rather than giving up purely on thumbnail-guessing.
+            result = prepare_engine_clip(entry, engine_dir, allow_irrelevant=True)
+            if result:
+                engine_results[entry.rank] = result
+
+        clips = []
+        callout_texts = {}
+        used_engine_ranks = set()
+        narration_offset = 0.0
+        for index, (path, duration, _, entry) in enumerate(frame_entries):
+            still = _still_clip(path, duration)
+            narration_end = min(total_duration, narration_offset + duration)
+            if narration_end > narration_offset:
+                still = still.set_audio(audio_clip.subclip(narration_offset, narration_end))
+            clips.append(still)
+            narration_offset = narration_end
+
+            next_entry = frame_entries[index + 1][3] if index + 1 < len(frame_entries) else None
+            entry_finished = entry is not None and (next_entry is None or next_entry.rank != entry.rank)
+            # An entry's rank can recur later (e.g. a closing "which one would you
+            # pick" card revisits every rank), which would otherwise replay that
+            # rank's engine clip a second time - only ever insert it once.
+            engine_result = (
+                engine_results.get(entry.rank)
+                if entry_finished and entry.rank not in used_engine_ranks
+                else None
+            )
+            if engine_result and engine_result.get("approved") and engine_result.get("path"):
+                used_engine_ranks.add(entry.rank)
+                callout_clip, callout_text = _engine_callout_clip(entry, path, engine_dir)
+                if callout_clip is not None:
+                    clips.append(callout_clip)
+                    callout_texts[entry.rank] = callout_text
+                raw_engine = VideoFileClip(str(engine_result["path"]))
+                scale = min(size[0] / raw_engine.w, size[1] / raw_engine.h)
+                fitted = raw_engine.resize(scale).on_color(
+                    size=size,
+                    color=(0, 0, 0),
+                    pos=("center", "center"),
+                )
+                clips.append(fitted)
+
+        video = concatenate_videoclips(clips, method="compose")
         video.write_videofile(
-            str(run_dir / "final_short.mp4"),
+            str(run_dir / output_filename),
             fps=FPS,
             codec="libx264",
             audio_codec="aac",
             preset="ultrafast" if FAST_MODE else "medium",
             threads=4,
         )
+        storyboard["engine_clips"] = [
+            {
+                "rank": rank,
+                "approved": bool(result.get("approved")),
+                "duration": result.get("duration"),
+                "detected_onset_seconds": result.get("detected_onset_seconds"),
+                "engine_event_score": result.get("engine_event_score"),
+                "review": result.get("review"),
+                "source": result.get("source"),
+                "error": result.get("error"),
+                "callout_text": callout_texts.get(rank),
+            }
+            for rank, result in sorted(engine_results.items(), reverse=True)
+        ]
+
+    (run_dir / "storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
 
     return run_dir

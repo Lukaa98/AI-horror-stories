@@ -1,15 +1,30 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import PhotoSlots from "./PhotoSlots";
+import PhotoThumb from "./PhotoThumb";
+import YouTubePanel from "./YouTubePanel";
+import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
+import jobsData from "./jobs-data.json";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
-const DEFAULT_BRANCH = "main";
+const DEFAULT_BRANCH = "v10";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V10";
-const SETTINGS_MIGRATION = "default-branch-main";
+const UI_VERSION = "V11.31 — Re-authorise YouTube from here";
+const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
+const SETTINGS_MIGRATION = "default-branch-v10";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
-const RESEARCH_TIMEOUT_MS = 20 * 60 * 1000;
+const RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;
+const VIDEO_TEST_TIMEOUT_MS = 60 * 60 * 1000;
+const NARRATOR_PREVIEW_TIMEOUT_MS = 20 * 60 * 1000;
+const SINGLE_CAR_TIMEOUT_MS = 60 * 60 * 1000;
+const BATTLE_RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
+const BATTLE_RENDER_TIMEOUT_MS = 20 * 60 * 1000;
+const RIVAL_SUGGEST_TIMEOUT_MS = 8 * 60 * 1000;
+const VOICE_AUDITION_TIMEOUT_MS = 8 * 60 * 1000;
+const MIN_BATTLE_CARS = 3;
+const MAX_BATTLE_CARS = 5;
 const YEAR_OPTIONS = Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => String(new Date().getFullYear() - index));
 const WORKFLOW_OPTIONS = [
   {
@@ -22,7 +37,131 @@ const WORKFLOW_OPTIONS = [
     label: "Best Versions In One Range",
     description: "Find the 4 best trims or variants inside one generation, chassis, or year window.",
   },
+  {
+    id: "battle",
+    label: "Startup Sound Battle",
+    description: "You name 3-5 specific cars; we find each one's exterior-only cold-start clip and cut them together back to back, numbered, no narration.",
+  },
+  {
+    id: "narrator_preview",
+    label: "Narrator Preview",
+    description: "Stills only, no video: find one exterior photo for a car and composite it with our narrator character in a few poses, to check how the pairing looks before building the full talking video.",
+  },
+  {
+    id: "single_car",
+    label: "Single Car Story",
+    description: "Build a fast 55-60 second narrated Short about one car using exterior, engine, interior, wheel, and detail stills with animated captions and our character.",
+  },
+  {
+    id: "voice_audition",
+    label: "Voice Auditions",
+    description: "Read a fixed sample script in every narrator voice preset (current + British options) with no research, scraping, or video render -- ready in well under a minute instead of a 20+ minute full build.",
+  },
 ];
+
+// Curated instead of API-driven: live make/model APIs either return
+// thousands of irrelevant entries (vPIC) or have dead endpoints for trims
+// (CarQuery). This covers mainstream muscle/sports cars plus the enthusiast
+// exotics people actually put in a startup battle. "Other (type manually)"
+// on every level is the escape hatch for anything not listed here.
+const OTHER_VALUE = "__other__";
+const ENTHUSIAST_CARS = {
+  Ford: {
+    Mustang: ["V6", "EcoBoost", "GT", "Mach 1", "Bullitt", "Boss 302", "GT350", "GT350R", "Shelby GT500"],
+    Focus: ["ST", "RS"],
+    "Ford GT": [],
+  },
+  Chevrolet: {
+    Camaro: ["LT1", "SS", "1LE", "ZL1", "ZL1 1LE", "Z/28"],
+    Corvette: ["Stingray", "Z51", "Grand Sport", "Z06", "ZR1"],
+  },
+  Dodge: {
+    Challenger: ["SXT", "R/T", "R/T Scat Pack", "SRT 392", "SRT Hellcat", "SRT Hellcat Redeye", "SRT Demon", "SRT Demon 170", "SRT Super Stock"],
+    Charger: ["R/T", "Scat Pack", "SRT Hellcat", "SRT Hellcat Redeye"],
+    Viper: ["SRT", "GTS", "ACR", "GTC"],
+  },
+  Porsche: {
+    "911": ["Carrera", "Carrera S", "Carrera 4S", "Targa", "Turbo", "Turbo S", "GT3", "GT3 RS", "GT2 RS", "Speedster", "Sport Classic"],
+    Cayman: ["S", "GTS", "GT4", "GT4 RS"],
+    Boxster: ["S", "GTS", "Spyder"],
+  },
+  Ferrari: {
+    "458": ["Italia", "Spider", "Speciale", "Speciale Aperta"],
+    "488": ["GTB", "Spider", "Pista", "Pista Spider"],
+    F8: ["Tributo", "Spider"],
+    "812": ["Superfast", "GTS", "Competizione"],
+    Roma: [],
+    Portofino: [],
+    SF90: ["Stradale", "Spider"],
+    "296": ["GTB", "GTS"],
+  },
+  Lamborghini: {
+    Huracan: ["LP580-2", "LP610-4", "Performante", "EVO", "EVO Spyder", "STO", "Tecnica"],
+    Aventador: ["LP700-4", "SV", "SVJ", "Ultimae"],
+    Gallardo: ["LP560-4", "Superleggera", "LP570-4"],
+    Urus: ["S", "Performante"],
+  },
+  Nissan: {
+    "GT-R": ["Premium", "Track Edition", "Nismo", "Black Edition", "T-spec"],
+    "370Z": ["Base", "Touring", "Nismo"],
+    Z: ["Sport", "Performance", "Nismo"],
+  },
+  Toyota: {
+    Supra: ["2.0", "3.0", "3.0 Premium", "A90 Edition"],
+    GR86: ["Base", "Premium"],
+    "GR Corolla": ["Core", "Circuit", "Morizo"],
+  },
+  BMW: {
+    M2: ["Base", "Competition", "CS"],
+    M3: ["Base", "Competition", "CS", "GTS"],
+    M4: ["Base", "Competition", "CS", "CSL"],
+    M5: ["Base", "Competition", "CS"],
+  },
+  "Mercedes-Benz": {
+    "AMG GT": ["Base", "S", "R", "C", "Black Series"],
+    "C63 AMG": ["S", "Black Series"],
+    "E63 AMG": ["S"],
+  },
+  Audi: {
+    R8: ["V8", "V10", "V10 Plus", "V10 Performance", "V10 Decennium"],
+    RS3: [],
+    RS6: [],
+    RS7: [],
+    "TT RS": [],
+  },
+  Acura: { NSX: ["Base", "Type S"] },
+  Subaru: { "WRX STI": [], BRZ: ["Base", "tS"] },
+  Mazda: { "MX-5 Miata": ["Base", "Club", "RF"], "RX-7": ["Base", "Turbo"] },
+  Honda: { "Civic Type R": [], S2000: [] },
+  Mitsubishi: { "Lancer Evolution": ["VIII", "IX", "X", "X Final Edition"] },
+  McLaren: { "570S": [], "720S": [], "765LT": [], Artura: [] },
+  "Aston Martin": { Vantage: [], DB11: [], DBS: [] },
+};
+
+function makeBattleCarRow() {
+  return { make: "", model: "", trim: "", year: "", makeCustom: "", modelCustom: "", trimCustom: "" };
+}
+
+function battleModelOptions(car) {
+  return ENTHUSIAST_CARS[car.make] ? Object.keys(ENTHUSIAST_CARS[car.make]) : [];
+}
+
+function battleTrimOptions(car) {
+  return (ENTHUSIAST_CARS[car.make] && ENTHUSIAST_CARS[car.make][car.model]) || [];
+}
+
+function resolveBattleCarField(selected, custom) {
+  return (selected === OTHER_VALUE ? custom : selected).trim();
+}
+
+function resolveBattleCar(car) {
+  return {
+    make: resolveBattleCarField(car.make, car.makeCustom),
+    model: resolveBattleCarField(car.model, car.modelCustom),
+    trim: resolveBattleCarField(car.trim, car.trimCustom),
+    year: car.year.trim(),
+  };
+}
 
 function loadSettings() {
   try {
@@ -60,10 +199,61 @@ function titleCaseWords(value) {
     .join(" ");
 }
 
+// Cars & Bids listing URLs end in a slug like ".../auctions/abc123/2021-
+// volkswagen-golf-gti" -- the year/make/model are right there, so pasting
+// the link can fill in those fields instead of making the user retype
+// what the link already says. A short list of known two-word makes keeps
+// "alfa-romeo" from getting split into make "alfa", model "romeo ...".
+const MULTI_WORD_MAKES = ["alfa-romeo", "aston-martin", "land-rover", "mercedes-benz", "rolls-royce"];
+
+// The comparison-car field wants a name ("2020 Mercedes-AMG GT R Pro"), but
+// the natural thing to paste is the listing you just found it on -- and that
+// URL's own slug already spells the name out. Accepting both beats sending a
+// URL through as the rival's name, which is what the pipeline would then put
+// in front of the script writer.
+function rivalNameFromInput(value) {
+  const hint = parseAuctionUrlHint(value);
+  if (!hint) return value;
+  const name = [hint.year, titleCaseWords(hint.make), titleCaseWords(hint.model)]
+    .filter(Boolean).join(" ").trim();
+  return name || value;
+}
+
+
+function parseAuctionUrlHint(url) {
+  const match = String(url || "").match(/\/auctions\/[^/]+\/([a-z0-9-]+)/i);
+  if (!match) return null;
+  const parts = match[1].toLowerCase().split("-").filter(Boolean);
+  let year = null;
+  if (parts.length && /^\d{4}$/.test(parts[0])) {
+    year = parts.shift();
+  }
+  if (!parts.length) return null;
+  let make = parts[0];
+  let modelParts = parts.slice(1);
+  for (const multi of MULTI_WORD_MAKES) {
+    const tokens = multi.split("-");
+    if (parts.slice(0, tokens.length).join("-") === multi) {
+      make = tokens.join(" ");
+      modelParts = parts.slice(tokens.length);
+      break;
+    }
+  }
+  const model = modelParts.join(" ");
+  if (!make || !model) return null;
+  return { year, make: titleCaseWords(make), model: titleCaseWords(model) };
+}
+
 function buildStructuredRequest({ workflow, make, model, focus, startYear, endYear }) {
   const makeLabel = titleCaseWords(make);
   const modelLabel = titleCaseWords(model);
   if (!makeLabel || !modelLabel) return "";
+
+  if (workflow === "single_car") {
+    const trim = focus.trim() ? ` ${focus.trim()}` : "";
+    const years = startYear || endYear ? ` (${startYear || "any"}-${endYear || "any"})` : "";
+    return `Build one fast, approximately 60-second narrated Short about the ${makeLabel} ${modelLabel}${trim}${years}.`;
+  }
 
   if (workflow === "focused") {
     const focusLabel = titleCaseWords(focus);
@@ -96,6 +286,94 @@ async function dispatchWorkflow({ owner, repo, branch, token, workflow, inputs }
   }
 }
 
+const RIVAL_SUGGESTIONS_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  required: ["rivals"],
+  properties: {
+    rivals: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["make", "model", "trim", "year", "reason"],
+        properties: {
+          make: { type: "string" },
+          model: { type: "string" },
+          trim: { type: "string" },
+          year: { type: "string" },
+          reason: { type: "string" },
+        },
+      },
+    },
+  },
+};
+
+function extractResponseText(data) {
+  if (typeof data.output_text === "string") return data.output_text;
+  const parts = [];
+  for (const item of data.output || []) {
+    for (const content of item.content || []) {
+      if (content.type === "output_text" && content.text) parts.push(content.text);
+    }
+  }
+  return parts.join("");
+}
+
+// Direct browser -> OpenAI call, so suggestions come back in a couple
+// seconds instead of paying for a GitHub Actions runner cold-start just to
+// make one API call. Requires the user's own OpenAI key (stored the same
+// way the GitHub token is, in localStorage) rather than the repo secret.
+// The single-car short compares on numbers and runs a drag race, so its
+// rivals are picked for a fair spec match rather than for exhaust note. Each
+// one carries its own model year, which is also what stops the rival photo
+// search inheriting the main car's years and asking for a car that did not
+// exist yet (an R63 is a 2007; "BMW X5 M" did not exist until 2010).
+function singleCarRivalPrompt(baseLabel, count) {
+  return (
+    `Suggest ${count} rival/competitor cars for a head-to-head spec comparison and drag race ` +
+    `against the ${baseLabel}. Pick cars a buyer would genuinely cross-shop: same era, similar ` +
+    "price bracket, similar performance. For each rival give the model year that actually " +
+    "overlaps the base car's own years -- never a year that model was not sold in -- plus make, " +
+    "model, trim (the variant that matches this price/performance tier, empty string if not " +
+    "applicable), and a one-sentence reason it is a fair rival, mentioning its horsepower. Do not " +
+    "suggest the same make and model as the base car."
+  );
+}
+
+async function fetchRivalsDirect({ apiKey, make, model, trim, year, count, prompt: customPrompt }) {
+  const baseLabel = `${year} ${make} ${model} ${trim}`.trim();
+  const prompt = customPrompt || (
+    `Suggest ${count} rival/competitor cars for a head-to-head cold-start-sound comparison video ` +
+    `against the ${baseLabel}. Pick cars from roughly the same era (within a few model years), a ` +
+    "similar price bracket, and a similar performance/segment -- genuine rivals a car enthusiast " +
+    "would cross-shop or compare, not random unrelated cars. Prefer cars with well-known, distinct " +
+    "exhaust notes or cold-start sounds, and avoid suggesting the same make and model as the base " +
+    "car. For each rival return make, model, trim (the best-known trim/variant for that " +
+    "price/performance tier, empty string if not applicable), year (a specific model year, not a " +
+    "range), and a one-sentence reason it is a fair rival to the base car."
+  );
+  const res = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      input: prompt,
+      text: { format: { type: "json_schema", name: "rival_suggestions", strict: true, schema: RIVAL_SUGGESTIONS_SCHEMA } },
+    }),
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`OpenAI request failed (${res.status}): ${body.slice(0, 300)}`);
+  }
+  const data = await res.json();
+  const parsed = JSON.parse(extractResponseText(data));
+  return (parsed.rivals || []).slice(0, count);
+}
+
 async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 6000, timeoutMs }) {
   const start = Date.now();
   const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
@@ -103,6 +381,40 @@ async function pollForFile({ owner, repo, branch, path, signal, intervalMs = 600
     if (signal.aborted) throw new Error("Cancelled");
     const res = await fetch(`${url}?_=${Date.now()}`, { cache: "no-store" });
     if (res.ok) return res;
+    await new Promise((resolve) => setTimeout(resolve, intervalMs));
+  }
+  const timeoutMinutes = Math.round(timeoutMs / 60000);
+  throw new Error(`Timed out after ${timeoutMinutes} minutes waiting for ${path}`);
+}
+
+// raw.githubusercontent.com is CDN-fronted and can lag behind a fresh commit
+// by more than a couple minutes on an infrequently-touched branch -- fine for
+// the other polls in this app (their timeouts are 20-60 minutes), but too
+// slow for a poll meant to resolve in under a minute. The Contents API reads
+// straight from GitHub's backend with no caching layer, so it reflects a
+// commit as soon as the ref updates.
+// Reads a committed file straight from GitHub's Contents API instead of the
+// CDN-fronted raw.githubusercontent.com, which can lag behind a fresh commit
+// by more than expected on an infrequently-touched branch. Returns null
+// (not an error) when the file isn't there yet/at all, so callers can poll
+// or treat it as "no preview" as appropriate.
+async function fetchFileViaApi(owner, repo, branch, path, token) {
+  const res = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`,
+    { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" }, cache: "no-store" }
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, "")), (c) => c.charCodeAt(0));
+  return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+}
+
+async function pollForFileViaApi({ owner, repo, branch, path, token, signal, intervalMs = 5000, timeoutMs }) {
+  const start = Date.now();
+  while (Date.now() - start < timeoutMs) {
+    if (signal.aborted) throw new Error("Cancelled");
+    const data = await fetchFileViaApi(owner, repo, branch, path, token);
+    if (data) return data;
     await new Promise((resolve) => setTimeout(resolve, intervalMs));
   }
   const timeoutMinutes = Math.round(timeoutMs / 60000);
@@ -141,12 +453,281 @@ async function trackWorkflowRun({ owner, repo, branch, token, workflow, startedA
   }
 }
 
+const CARS_RESEARCH_WORKFLOW = "cars-research.yml";
+
+// Everything the dashboard's "Currently Running" box needs, straight from
+// the Actions API -- so an in-progress build (dispatched from this browser,
+// another one, or the mobile app) shows up without anyone needing to open
+// GitHub, and it survives a refresh since it's not tied to local state.
+async function fetchRunningWorkflowRuns({ owner, repo, token }) {
+  const data = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${CARS_RESEARCH_WORKFLOW}/runs?per_page=15`,
+    { headers: ghHeaders(token), cache: "no-store" }
+  );
+  return (data.workflow_runs || [])
+    .filter((run) => run.status !== "completed")
+    .map((run) => ({
+      id: run.id,
+      url: run.html_url,
+      status: run.status,
+      title: run.display_title || run.name,
+      createdAt: run.created_at,
+    }));
+}
+
+function parseIdTimestamp(id) {
+  const match = String(id || "").match(/(\d{14})$/);
+  if (!match) return null;
+  const s = match[1];
+  const iso = `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}T${s.slice(8, 10)}:${s.slice(10, 12)}:${s.slice(12, 14)}Z`;
+  const date = new Date(iso);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function ghHeaders(token) {
+  return { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" };
+}
+
+async function ghJson(url, options) {
+  const res = await fetch(url, options);
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`GitHub API ${res.status}: ${body.slice(0, 300)}`);
+  }
+  return res.json();
+}
+
+async function fetchOutputTree({ owner, repo, token }) {
+  const ref = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${OUTPUT_BRANCH}`,
+    { headers: ghHeaders(token) }
+  );
+  const commitSha = ref.object.sha;
+  const commit = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/commits/${commitSha}`,
+    { headers: ghHeaders(token) }
+  );
+  const treeData = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/trees/${commit.tree.sha}?recursive=1`,
+    { headers: ghHeaders(token) }
+  );
+  return { commitSha, treeSha: commit.tree.sha, entries: treeData.tree || [] };
+}
+
+const DASHBOARD_FOLDERS = {
+  draft: { prefix: "cars/drafts", file: "research.json" },
+  "video-test": { prefix: "cars/video-tests", file: "result.json" },
+  battle: { prefix: "cars/battles", file: "battle.json" },
+  "single-car": { prefix: "cars/single-car-shorts", file: "result.json" },
+};
+
+function groupDashboardEntries(entries) {
+  const drafts = new Map();
+  const tests = new Map();
+  const battles = new Map();
+  const singleCars = new Map();
+  for (const item of entries) {
+    if (item.type !== "blob") continue;
+    let m = item.path.match(/^cars\/drafts\/([^/]+)\/(.+)$/);
+    if (m) {
+      const [, id, rest] = m;
+      if (!drafts.has(id)) drafts.set(id, []);
+      drafts.get(id).push(rest);
+      continue;
+    }
+    m = item.path.match(/^cars\/video-tests\/([^/]+)\/(.+)$/);
+    if (m) {
+      const [, id, rest] = m;
+      if (!tests.has(id)) tests.set(id, []);
+      tests.get(id).push(rest);
+      continue;
+    }
+    m = item.path.match(/^cars\/battles\/([^/]+)\/(.+)$/);
+    if (m) {
+      const [, id, rest] = m;
+      if (id === "_frames") continue;
+      if (!battles.has(id)) battles.set(id, []);
+      battles.get(id).push(rest);
+      continue;
+    }
+    m = item.path.match(/^cars\/single-car-shorts\/([^/]+)\/(.+)$/);
+    if (m) {
+      const [, id, rest] = m;
+      if (id === "_frames") continue;
+      if (!singleCars.has(id)) singleCars.set(id, []);
+      singleCars.get(id).push(rest);
+    }
+  }
+  const items = [];
+  for (const [id, files] of drafts) {
+    items.push({
+      type: "draft",
+      id,
+      files,
+      timestamp: parseIdTimestamp(id),
+      hasResearch: files.includes("research.json"),
+      hasFinal: files.includes("final_short.mp4"),
+      hasPreview: files.includes("preview_short.mp4"),
+    });
+  }
+  for (const [id, files] of tests) {
+    items.push({
+      type: "video-test",
+      id,
+      files,
+      timestamp: parseIdTimestamp(id),
+      hasResult: files.includes("result.json"),
+    });
+  }
+  for (const [id, files] of battles) {
+    items.push({
+      type: "battle",
+      id,
+      files,
+      timestamp: parseIdTimestamp(id),
+      hasBattle: files.includes("battle.json"),
+      hasVideo: files.includes("battle_short.mp4"),
+    });
+  }
+  for (const [id, files] of singleCars) {
+    items.push({
+      type: "single-car",
+      id,
+      files,
+      timestamp: parseIdTimestamp(id),
+      hasResult: files.includes("result.json"),
+      hasVideo: files.includes("single_car_short.mp4"),
+    });
+  }
+  items.sort((a, b) => (b.timestamp?.getTime() || 0) - (a.timestamp?.getTime() || 0));
+  return items;
+}
+
+async function attachDashboardPreviews(items, owner, repo, token) {
+  await Promise.allSettled(
+    items.map(async (item) => {
+      const { prefix, file } = DASHBOARD_FOLDERS[item.type];
+      if (item.type === "draft" && !item.hasResearch) return;
+      if (item.type === "video-test" && !item.hasResult) return;
+      if (item.type === "battle" && !item.hasBattle) return;
+      if (item.type === "single-car" && !item.hasResult) return;
+      const preview = await fetchFileViaApi(owner, repo, OUTPUT_BRANCH, `${prefix}/${item.id}/${file}`, token);
+      if (preview) item.preview = preview;
+    })
+  );
+  return items;
+}
+
+// The dropdown that fills the single-car form from a build you already ran.
+// Deliberately lighter than loadDashboardEntries: only single-car folders,
+// only the newest few, and each result.json is fetched just for the
+// `build_inputs` snapshot inside it. Filling the form is all this does --
+// the build still goes out through the normal dispatch on the configured
+// branch, so it runs whatever the pipeline code does today.
+const PREVIOUS_BUILD_LIMIT = 12;
+
+async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
+  const { entries } = await fetchOutputTree({ owner, repo, token });
+  const ids = groupDashboardEntries(entries)
+    .filter((item) => item.type === "single-car" && item.hasResult)
+    .slice(0, PREVIOUS_BUILD_LIMIT);
+  const loaded = await Promise.allSettled(ids.map(async (item) => {
+    const preview = await fetchFileViaApi(
+      owner, repo, OUTPUT_BRANCH, `cars/single-car-shorts/${item.id}/result.json`, token);
+    if (!preview?.build_inputs) return null;
+    return {
+      id: item.id,
+      timestamp: item.timestamp,
+      title: preview.title
+        || `${preview.car?.make || preview.build_inputs.make || ""} ${preview.car?.model || preview.build_inputs.model || ""}`.trim()
+        || item.id,
+      inputs: preview.build_inputs,
+    };
+  }));
+  // A build whose result.json predates build_inputs has nothing to fill the
+  // form with, so it is left out rather than offered as an empty choice.
+  return loaded
+    .filter((r) => r.status === "fulfilled" && r.value)
+    .map((r) => r.value);
+}
+
+async function loadDashboardEntries({ owner, repo, token }) {
+  const { entries } = await fetchOutputTree({ owner, repo, token });
+  const items = groupDashboardEntries(entries);
+  await attachDashboardPreviews(items, owner, repo, token);
+  return items;
+}
+
+function dashboardFolderName(type) {
+  if (type === "draft") return "drafts";
+  if (type === "battle") return "battles";
+  if (type === "single-car") return "single-car-shorts";
+  return "video-tests";
+}
+
+async function deleteDashboardItem({ owner, repo, token, type, id }) {
+  const prefix = `cars/${dashboardFolderName(type)}/${id}/`;
+  const ref = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${OUTPUT_BRANCH}`,
+    { headers: ghHeaders(token) }
+  );
+  const latestCommitSha = ref.object.sha;
+  const commit = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/commits/${latestCommitSha}`,
+    { headers: ghHeaders(token) }
+  );
+  const baseTreeSha = commit.tree.sha;
+  const treeData = await ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/git/trees/${baseTreeSha}?recursive=1`,
+    { headers: ghHeaders(token) }
+  );
+  const toRemove = (treeData.tree || []).filter(
+    (entry) => entry.type === "blob" && entry.path.startsWith(prefix)
+  );
+  if (toRemove.length === 0) throw new Error("No files found to delete (already removed?).");
+  const newTree = await ghJson(`https://api.github.com/repos/${owner}/${repo}/git/trees`, {
+    method: "POST",
+    headers: { ...ghHeaders(token), "Content-Type": "application/json" },
+    body: JSON.stringify({
+      base_tree: baseTreeSha,
+      tree: toRemove.map((entry) => ({ path: entry.path, mode: entry.mode, type: entry.type, sha: null })),
+    }),
+  });
+  const newCommit = await ghJson(`https://api.github.com/repos/${owner}/${repo}/git/commits`, {
+    method: "POST",
+    headers: { ...ghHeaders(token), "Content-Type": "application/json" },
+    body: JSON.stringify({
+      message: `Delete ${type} ${id}`,
+      tree: newTree.sha,
+      parents: [latestCommitSha],
+    }),
+  });
+  await ghJson(`https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${OUTPUT_BRANCH}`, {
+    method: "PATCH",
+    headers: { ...ghHeaders(token), "Content-Type": "application/json" },
+    body: JSON.stringify({ sha: newCommit.sha }),
+  });
+}
+
+// A small "i" icon that reveals an explanation on hover/focus -- lets a
+// row stay one line (a checkbox + a label) instead of a checkbox plus a
+// permanent paragraph of explanatory text underneath it.
+function Tip({ text }) {
+  return (
+    <span className="info-tip" tabIndex={0}>
+      i
+      <span className="tip-bubble">{text}</span>
+    </span>
+  );
+}
+
 export default function App() {
   const [settings, setSettings] = useState(() => ({
     token: "",
     owner: DEFAULT_OWNER,
     repo: DEFAULT_REPO,
     branch: DEFAULT_BRANCH,
+    openaiKey: "",
     ...loadSettings(),
   }));
   const [request, setRequest] = useState("");
@@ -157,21 +738,118 @@ export default function App() {
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
   const [useCustomRequest, setUseCustomRequest] = useState(false);
+  // Single-car photos: these two are independent, not either/or. A pasted
+  // listing URL identifies the car and is scraped for whatever isn't
+  // manually overridden; manual photo links replace just their own
+  // category (front/side/rear/engine/interior) on top of that -- or, with
+  // no listing at all, skip the scrape entirely and use only what's given.
+  const [useAuctionUrl, setUseAuctionUrl] = useState(false);
+  const [useManualPhotos, setUseManualPhotos] = useState(false);
+  const [auctionUrl, setAuctionUrl] = useState("");
+  const [photoUrls, setPhotoUrls] = useState({ front: "", side: "", rear: "", engine: "", interior: "", rival: "" });
+  // Freely-named extra photos (e.g. "Gauge Cluster") on top of the fixed
+  // fields above -- each becomes its own detail beat the script is told
+  // to specifically write about, not just an illustrative extra photo.
+  const [extraPhotos, setExtraPhotos] = useState([]);
+  // Whether to include a comparison-car scene at all. Checked (default)
+  // keeps the existing behavior: a pasted comparison-car URL forces that
+  // exact car as the rival, no URL leaves it to the AI script. Unchecked
+  // disables the rival scene (and its drag race) outright.
+  const [compareEnabled, setCompareEnabled] = useState(true);
+  // "Start from a previous build": the list is fetched once, lazily, the
+  // first time the dropdown is opened -- the create form should not pay for
+  // a tree walk nobody asked for.
+  // The comparison car, chosen by name from AI suggestions rather than
+  // worked out from a pasted photo. Naming it skips a vision call, carries
+  // the rival's own model year, and means its photo never has to be scraped.
+  const [rivalCar, setRivalCar] = useState("");
+  // The exact side-profile shot of the main car to run in the drag race.
+  // Left blank, the build picks the best exterior it has, which is a guess.
+  const [racePhoto, setRacePhoto] = useState("");
+  // Which race photos to mirror. Auto-detection reads the cutout's silhouette
+  // and is usually right; this is for when it is not, and for a photo that
+  // simply points the wrong way for a left-to-right race.
+  const [raceFlipped, setRaceFlipped] = useState(false);
+  const [rivalFlipped, setRivalFlipped] = useState(false);
+  const [rivalChoices, setRivalChoices] = useState(null);
+  const [rivalChoicesStage, setRivalChoicesStage] = useState("idle");
+  const [rivalChoicesError, setRivalChoicesError] = useState(null);
+  const [previousBuilds, setPreviousBuilds] = useState([]);
+  const [previousBuildsStage, setPreviousBuildsStage] = useState("idle");
+  const [previousBuildsError, setPreviousBuildsError] = useState(null);
+  const [filledFromBuild, setFilledFromBuild] = useState(null);
+  const [voice, setVoice] = useState("onyx");
+  const [renderQuality, setRenderQuality] = useState(null);
   const [draftId, setDraftId] = useState(null);
   const [stage, setStage] = useState("idle");
   const [error, setError] = useState(null);
   const [research, setResearch] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
+  const [videoTestId, setVideoTestId] = useState(null);
+  const [videoProbe, setVideoProbe] = useState(null);
+  const [narratorPreviewId, setNarratorPreviewId] = useState(null);
+  const [narratorPreview, setNarratorPreview] = useState(null);
+  const [singleCarId, setSingleCarId] = useState(null);
+  const [singleCarResult, setSingleCarResult] = useState(null);
+  const [voiceAuditionId, setVoiceAuditionId] = useState(null);
+  const [voiceAudition, setVoiceAudition] = useState(null);
   const [statusDetail, setStatusDetail] = useState("Ready for a new request");
   const [actionRun, setActionRun] = useState(null);
+  const [battleCars, setBattleCars] = useState(() => [makeBattleCarRow(), makeBattleCarRow(), makeBattleCarRow()]);
+  const [rivalSuggestions, setRivalSuggestions] = useState(null);
+  const [rivalSuggestLoading, setRivalSuggestLoading] = useState(false);
+  const [rivalSuggestError, setRivalSuggestError] = useState(null);
+  const [addedRivalIndexes, setAddedRivalIndexes] = useState(() => new Set());
+  const [battleId, setBattleId] = useState(null);
+  const [battle, setBattle] = useState(null);
+  const [battleVideoUrl, setBattleVideoUrl] = useState(null);
+  const [view, setView] = useState("create");
+  const [jobSearch, setJobSearch] = useState("");
+  const [dashboardItems, setDashboardItems] = useState([]);
+  const [dashboardLoading, setDashboardLoading] = useState(false);
+  const [dashboardError, setDashboardError] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [dashboardRenderingId, setDashboardRenderingId] = useState(null);
+  const [runningRuns, setRunningRuns] = useState([]);
+  const [runningError, setRunningError] = useState(null);
+  const dashboardAbortRef = useRef(null);
   const abortRef = useRef(null);
   const trackerIdRef = useRef(0);
 
   useEffect(() => saveSettings(settings), [settings]);
 
+  useEffect(() => {
+    if (view === "dashboard") loadDashboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view]);
+
   const repoOk = settings.token && settings.owner && settings.repo && settings.branch;
   const builtRequest = buildStructuredRequest({ workflow, make, model, focus, startYear, endYear });
   const effectiveRequest = useCustomRequest ? request.trim() : builtRequest.trim();
+
+  async function refreshRunningRuns() {
+    if (!repoOk) return;
+    try {
+      const runs = await fetchRunningWorkflowRuns({ owner: settings.owner, repo: settings.repo, token: settings.token });
+      setRunningRuns(runs);
+      setRunningError(null);
+    } catch (err) {
+      setRunningError(String(err.message || err));
+    }
+  }
+
+  // Polls while the dashboard is open so a build that finishes just
+  // disappears from "Currently Running" and its finished card shows up on
+  // the next full refresh, with no manual clicking needed either way.
+  useEffect(() => {
+    if (view !== "dashboard" || !repoOk) return;
+    refreshRunningRuns();
+    const interval = setInterval(refreshRunningRuns, 15000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view, repoOk, settings.owner, settings.repo, settings.token]);
 
   function beginRunTracking(runWorkflow, startedAt, signal) {
     const trackerId = ++trackerIdRef.current;
@@ -236,11 +914,345 @@ export default function App() {
     }
   }
 
-  async function handleGenerate() {
+  async function handleVideoTest() {
+    if (!repoOk || !make.trim() || !model.trim()) return;
+    setError(null);
+    setVideoProbe(null);
+    setVideoUrl(null);
+    const id = makeDraftId(`video-${make}-${model}`);
+    setVideoTestId(id);
+    setStage("video-testing");
+    setStatusDetail(`Searching matching ${titleCaseWords(make)} ${titleCaseWords(model)} listings for engine videos...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Video test for ${make.trim()} ${model.trim()}`,
+          draft_id: id,
+          mode: "video",
+          make: make.trim(),
+          model: model.trim(),
+          query: [make, model, focus].filter(Boolean).join(" "),
+          start_year: startYear,
+          end_year: endYear,
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/video-tests/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: VIDEO_TEST_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setVideoProbe(await response.json());
+      setStage("video-done");
+      setStatusDetail("Video extraction test complete");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Video extraction test failed - open the build log for details");
+    }
+  }
+
+  async function handleNarratorPreview() {
+    if (!repoOk || !make.trim() || !model.trim()) return;
+    setError(null);
+    setNarratorPreview(null);
+    const id = makeDraftId(`narrator-${make}-${model}`);
+    setNarratorPreviewId(id);
+    setStage("narrator-preview-testing");
+    setStatusDetail(`Finding an exterior photo for ${titleCaseWords(make)} ${titleCaseWords(model)} and compositing the narrator...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Narrator preview for ${make.trim()} ${model.trim()}`,
+          draft_id: id,
+          mode: "narrator_preview",
+          make: make.trim(),
+          model: model.trim(),
+          query: [make, model, focus].filter(Boolean).join(" "),
+          start_year: startYear,
+          end_year: endYear,
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/narrator-previews/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: NARRATOR_PREVIEW_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setNarratorPreview(await response.json());
+      setStage("narrator-preview-done");
+      setStatusDetail("Narrator preview ready");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Narrator preview failed - open the build log for details");
+    }
+  }
+
+  async function handleVoiceAudition() {
+    if (!repoOk) return;
+    setError(null);
+    setVoiceAudition(null);
+    const id = makeDraftId("voice-audition");
+    setVoiceAuditionId(id);
+    setStage("voice-audition-testing");
+    setStatusDetail("Reading the sample script in every voice preset...");
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: "Voice audition sample",
+          draft_id: id,
+          mode: "voice_audition",
+          voice,
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/voice-auditions/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: VOICE_AUDITION_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setVoiceAudition(await response.json());
+      setStage("voice-audition-done");
+      setStatusDetail("Voice auditions ready");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Voice audition failed - open the build log for details");
+    }
+  }
+
+  async function handleSingleCarShort() {
+    if (!repoOk || !make.trim() || !model.trim()) return;
+    if (useAuctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim())) return;
+    setError(null);
+    setSingleCarResult(null);
+    const id = makeDraftId(`single-${make}-${model}`);
+    setSingleCarId(id);
+    setStage("single-car-building");
+    setStatusDetail(`Researching and building a one-minute ${titleCaseWords(make)} ${titleCaseWords(model)} story...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Single-car story for ${make.trim()} ${model.trim()} ${focus.trim()}`.trim(),
+          draft_id: id,
+          mode: "single_car",
+          make: make.trim(),
+          model: model.trim(),
+          query: focus.trim(),
+          start_year: startYear,
+          end_year: endYear,
+          voice,
+          auction_url: useAuctionUrl ? auctionUrl.trim() : "",
+          // One JSON input rather than six string ones: workflow_dispatch
+          // allows only 25 inputs in total and the photo URLs were using up
+          // a quarter of them.
+          photos: (() => {
+            const slots = {};
+            if (useManualPhotos) {
+              for (const [slot] of SLOTS) {
+                const url = (photoUrls[slot] || "").trim();
+                if (url) slots[slot] = url;
+              }
+            }
+            const rival = compareEnabled ? photoUrls.rival.trim() : "";
+            if (rival) slots.rival = rival;
+            const race = compareEnabled ? racePhoto.trim() : "";
+            if (race) slots.race = race;
+            // Flags ride in the same object as the URLs they belong to, so a
+            // mirrored photo cannot get separated from its instruction.
+            if (race && raceFlipped) slots.race_flip = "1";
+            if (rival && rivalFlipped) slots.rival_flip = "1";
+            return Object.keys(slots).length ? JSON.stringify(slots) : "";
+          })(),
+          rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
+          disable_comparison: String(!compareEnabled),
+          extra_photos: (() => {
+            if (!useManualPhotos) return "";
+            const cleaned = serializePhotos(extraPhotos);
+            return cleaned.length ? JSON.stringify(cleaned) : "";
+          })(),
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/single-car-shorts/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: SINGLE_CAR_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setSingleCarResult(await response.json());
+      setStage("single-car-done");
+      setStatusDetail("Single-car Short complete");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Single-car Short failed - open the build log for details");
+    }
+  }
+
+  async function handleSuggestComparisonCars() {
+    if (!make.trim() || !model.trim()) return;
+    setRivalChoicesError(null);
+    setRivalChoices(null);
+    setRivalChoicesStage("loading");
+    const year = startYear || endYear || "";
+    try {
+      const baseLabel = `${year} ${make.trim()} ${model.trim()} ${focus.trim()}`.trim();
+      if (settings.openaiKey) {
+        // Straight from the browser: a couple of seconds, a fraction of a
+        // cent, no runner to start.
+        setRivalChoices(await fetchRivalsDirect({
+          apiKey: settings.openaiKey,
+          make: make.trim(), model: model.trim(), trim: focus.trim(), year, count: 4,
+          prompt: singleCarRivalPrompt(baseLabel, 4),
+        }));
+        setRivalChoicesStage("ready");
+        return;
+      }
+      // Without a personal key, the same question goes through the workflow,
+      // which has the repo's own OPENAI_API_KEY. Slower -- a runner has to
+      // start -- but it means the GitHub token on its own is enough.
+      if (!repoOk) {
+        throw new Error("Fill in your GitHub token and repo settings, or add an OpenAI key for instant suggestions.");
+      }
+      const id = makeDraftId(`rivals-${make}-${model}`);
+      abortRef.current = new AbortController();
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner, repo: settings.repo, branch: settings.branch, token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Suggest comparison cars for ${baseLabel}`,
+          draft_id: id,
+          mode: "suggest_rivals",
+          base_make: make.trim(),
+          base_model: model.trim(),
+          base_trim: focus.trim(),
+          base_year: String(year || ""),
+          rival_count: "4",
+          rival_flavor: "spec_race",
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const suggestionFile = pollForFileViaApi({
+        owner: settings.owner, repo: settings.repo, branch: OUTPUT_BRANCH,
+        path: `cars/rival-suggestions/${id}/suggestions.json`,
+        token: settings.token, signal: abortRef.current.signal, timeoutMs: RIVAL_SUGGEST_TIMEOUT_MS,
+      });
+      const suggestions = await Promise.race([suggestionFile, workflowRun.then(() => suggestionFile)]);
+      setRivalChoices((suggestions.rivals || []).slice(0, 4));
+      setRivalChoicesStage("ready");
+    } catch (err) {
+      setRivalChoicesError(String(err.message || err));
+      setRivalChoicesStage("error");
+    }
+  }
+
+  async function ensurePreviousBuilds() {
+    if (!repoOk || previousBuildsStage === "loading" || previousBuildsStage === "ready") return;
+    setPreviousBuildsStage("loading");
+    setPreviousBuildsError(null);
+    try {
+      setPreviousBuilds(await loadPreviousSingleCarBuilds({
+        owner: settings.owner, repo: settings.repo, token: settings.token,
+      }));
+      setPreviousBuildsStage("ready");
+    } catch (err) {
+      setPreviousBuildsError(String(err.message || err));
+      setPreviousBuildsStage("error");
+    }
+  }
+
+  // Copies a past build's inputs into the form and stops there. Nothing is
+  // dispatched, so the fields stay editable and the build that eventually
+  // goes out is an ordinary one on the configured branch -- today's code,
+  // not the commit the original ran on.
+  function applyPreviousBuild(buildId) {
+    setFilledFromBuild(null);
+    if (!buildId) return;
+    const build = previousBuilds.find((item) => item.id === buildId);
+    if (!build) return;
+    const inputs = build.inputs;
+    setMake(inputs.make || "");
+    setModel(inputs.model || "");
+    setFocus(inputs.query || "");
+    setStartYear(inputs.start_year ? String(inputs.start_year) : "");
+    setEndYear(inputs.end_year ? String(inputs.end_year) : "");
+    if (inputs.voice) setVoice(inputs.voice);
+    setAuctionUrl(inputs.auction_url || "");
+    setUseAuctionUrl(!!inputs.auction_url);
+    const slots = {
+      front: inputs.photo_front || "", side: inputs.photo_side || "", rear: inputs.photo_rear || "",
+      engine: inputs.photo_engine || "", interior: inputs.photo_interior || "",
+      rival: inputs.photo_rival || "",
+    };
+    setPhotoUrls(slots);
+    const closeups = parseExtraPhotos(inputs.extra_photos);
+    setExtraPhotos(closeups);
+    // Only tick "Override photos" when there is actually something to show
+    // under it -- the rival URL lives in its own section and does not count.
+    setUseManualPhotos(SLOTS.some(([slot]) => slots[slot]) || closeups.length > 0);
+    setCompareEnabled(String(inputs.disable_comparison) !== "true");
+    setRivalCar(inputs.rival_car || "");
+    setRacePhoto(inputs.photo_race || "");
+    setRaceFlipped(String(inputs.photo_race_flip || "") === "1");
+    setRivalFlipped(String(inputs.photo_rival_flip || "") === "1");
+    setWorkflow("single_car");
+    setFilledFromBuild(build);
+  }
+
+  async function handleGenerate(quality) {
     if (!draftId) return;
+    const outputName = quality === "full" ? "final_short.mp4" : "preview_short.mp4";
+    const qualityLabel = quality === "full" ? "full-quality" : "quick preview";
     setError(null);
     setStage("generating");
-    setStatusDetail("Dispatching the Onyx render workflow...");
+    setRenderQuality(quality);
+    setStatusDetail(`Dispatching the ${qualityLabel} ${voice} render workflow...`);
     abortRef.current = new AbortController();
     try {
       const startedAt = Date.now();
@@ -250,21 +1262,31 @@ export default function App() {
         branch: settings.branch,
         token: settings.token,
         workflow: "cars-generate-from-research.yml",
-        inputs: { draft_id: draftId, tts_provider: "openai" },
+        inputs: {
+          draft_id: draftId,
+          tts_provider: "openai",
+          tts_voice: voice,
+          render_quality: quality,
+        },
       });
       const workflowRun = beginRunTracking("cars-generate-from-research.yml", startedAt, abortRef.current.signal);
-      setStatusDetail("Rendering video with the Onyx voice...");
-      const renderedFile = pollForFile({
+      setStatusDetail(`Rendering ${qualityLabel} video with the ${voice} voice...`);
+      await workflowRun;
+      await pollForFile({
         owner: settings.owner,
         repo: settings.repo,
         branch: OUTPUT_BRANCH,
-        path: `cars/drafts/${draftId}/final_short.mp4`,
+        path: `cars/drafts/${draftId}/${outputName}`,
         signal: abortRef.current.signal,
         timeoutMs: RENDER_TIMEOUT_MS,
       });
-      await Promise.race([renderedFile, workflowRun.then(() => renderedFile)]);
+      const refreshedResearch = await fetch(
+        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/research.json?_=${Date.now()}`,
+        { cache: "no-store" },
+      );
+      if (refreshedResearch.ok) setResearch(await refreshedResearch.json());
       setVideoUrl(
-        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/final_short.mp4?_=${Date.now()}`
+        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/${outputName}?_=${Date.now()}`
       );
       setStage("done");
       setStatusDetail("Video complete");
@@ -279,6 +1301,325 @@ export default function App() {
     return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/drafts/${draftId}/${relativePath}`;
   }
 
+  function battleRawUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/battles/${battleId}/${relativePath}`;
+  }
+
+  function updateBattleCar(index, field, value) {
+    setBattleCars((prev) => prev.map((car, i) => {
+      if (i !== index) return car;
+      if (field === "make") return { ...car, make: value, makeCustom: "", model: "", modelCustom: "", trim: "", trimCustom: "" };
+      if (field === "model") return { ...car, model: value, modelCustom: "", trim: "", trimCustom: "" };
+      if (field === "trim") return { ...car, trim: value, trimCustom: "" };
+      return { ...car, [field]: value };
+    }));
+  }
+
+  function addBattleCar() {
+    setBattleCars((prev) => (prev.length >= MAX_BATTLE_CARS ? prev : [...prev, makeBattleCarRow()]));
+  }
+
+  function removeBattleCar(index) {
+    setBattleCars((prev) => (prev.length <= MIN_BATTLE_CARS ? prev : prev.filter((_, i) => i !== index)));
+  }
+
+  const battleCarsValid = battleCars.every((car) => {
+    const resolved = resolveBattleCar(car);
+    return resolved.make && resolved.model && resolved.year;
+  });
+
+  const baseCar = resolveBattleCar(battleCars[0]);
+  const baseCarValid = Boolean(baseCar.make && baseCar.model && baseCar.year);
+
+  async function handleSuggestRivals() {
+    if (!baseCarValid) return;
+    setRivalSuggestError(null);
+    setRivalSuggestLoading(true);
+    setRivalSuggestions(null);
+    setAddedRivalIndexes(new Set());
+    const count = Math.max(1, MAX_BATTLE_CARS - 1);
+
+    if (settings.openaiKey) {
+      try {
+        const rivals = await fetchRivalsDirect({
+          apiKey: settings.openaiKey,
+          make: baseCar.make,
+          model: baseCar.model,
+          trim: baseCar.trim,
+          year: baseCar.year,
+          count,
+        });
+        setRivalSuggestions(rivals);
+      } catch (err) {
+        setRivalSuggestError(String(err.message || err));
+      } finally {
+        setRivalSuggestLoading(false);
+      }
+      return;
+    }
+
+    if (!repoOk) {
+      setRivalSuggestError("Fill in your GitHub token + repo settings, or add an OpenAI API key for instant suggestions.");
+      setRivalSuggestLoading(false);
+      return;
+    }
+    const id = makeDraftId(`rivals-${baseCar.year}-${baseCar.make}-${baseCar.model}`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Suggest rivals for ${baseCar.year} ${baseCar.make} ${baseCar.model} ${baseCar.trim}`.trim(),
+          draft_id: id,
+          mode: "suggest_rivals",
+          base_make: baseCar.make,
+          base_model: baseCar.model,
+          base_trim: baseCar.trim,
+          base_year: baseCar.year,
+          rival_count: String(count),
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const suggestionFile = pollForFileViaApi({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/rival-suggestions/${id}/suggestions.json`,
+        token: settings.token,
+        signal: abortRef.current.signal,
+        timeoutMs: RIVAL_SUGGEST_TIMEOUT_MS,
+      });
+      const data = await Promise.race([suggestionFile, workflowRun.then(() => suggestionFile)]);
+      setRivalSuggestions(data.rivals || []);
+    } catch (err) {
+      setRivalSuggestError(String(err.message || err));
+    } finally {
+      setRivalSuggestLoading(false);
+    }
+  }
+
+  function addRivalAsBattleCar(rival, rivalIndex) {
+    const filled = {
+      make: OTHER_VALUE,
+      makeCustom: rival.make || "",
+      model: OTHER_VALUE,
+      modelCustom: rival.model || "",
+      trim: rival.trim ? OTHER_VALUE : "",
+      trimCustom: rival.trim || "",
+      year: rival.year || "",
+    };
+    setBattleCars((prev) => {
+      const emptyIndex = prev.findIndex((car, i) => i > 0 && !resolveBattleCar(car).make);
+      if (emptyIndex !== -1) {
+        return prev.map((car, i) => (i === emptyIndex ? { ...car, ...filled } : car));
+      }
+      if (prev.length >= MAX_BATTLE_CARS) return prev;
+      return [...prev, { ...makeBattleCarRow(), ...filled }];
+    });
+    setAddedRivalIndexes((prev) => new Set(prev).add(rivalIndex));
+  }
+
+  async function handleBattleResearch() {
+    if (!repoOk || !battleCarsValid) return;
+    setError(null);
+    setBattle(null);
+    setBattleVideoUrl(null);
+    const carsList = battleCars.map(resolveBattleCar);
+    const summary = carsList.map((car) => `${car.year} ${car.make} ${[car.model, car.trim].filter(Boolean).join(" ")}`).join(", ");
+    const id = makeDraftId(`battle-${summary}`);
+    setBattleId(id);
+    setStage("researching");
+    setStatusDetail(`Finding exterior cold-start clips for: ${summary}...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `Startup sound battle: ${summary}`,
+          draft_id: id,
+          mode: "battle",
+          cars: JSON.stringify(carsList),
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const battleFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/battles/${id}/battle.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: BATTLE_RESEARCH_TIMEOUT_MS,
+      });
+      const res = await Promise.race([battleFile, workflowRun.then(() => battleFile)]);
+      const data = await res.json();
+      setBattle(data);
+      setStage("researched");
+      setStatusDetail(`Found clips for ${data.approved_count}/${data.total_count} cars`);
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Battle research failed - check the error below and try again");
+    }
+  }
+
+  async function handleBattleRender() {
+    if (!battleId) return;
+    setError(null);
+    setStage("generating");
+    setStatusDetail("Dispatching the battle render workflow...");
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-generate-from-research.yml",
+        inputs: {
+          draft_id: battleId,
+          mode: "battle",
+          tts_provider: "openai",
+          tts_voice: voice,
+          render_quality: "full",
+        },
+      });
+      const workflowRun = beginRunTracking("cars-generate-from-research.yml", startedAt, abortRef.current.signal);
+      setStatusDetail("Rendering the battle video...");
+      await workflowRun;
+      await pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/battles/${battleId}/battle_short.mp4`,
+        signal: abortRef.current.signal,
+        timeoutMs: BATTLE_RENDER_TIMEOUT_MS,
+      });
+      setBattleVideoUrl(
+        `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/battles/${battleId}/battle_short.mp4?_=${Date.now()}`
+      );
+      setStage("done");
+      setStatusDetail("Battle video complete");
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Battle render failed - check the error below and try again");
+    }
+  }
+
+  function rawVideoTestUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/video-tests/${videoTestId}/${relativePath}`;
+  }
+
+  function rawNarratorPreviewUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/narrator-previews/${narratorPreviewId}/${relativePath}`;
+  }
+
+  function rawVoiceAuditionUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/voice-auditions/${relativePath}`;
+  }
+
+  function rawSingleCarUrl(relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/single-car-shorts/${singleCarId}/${relativePath}`;
+  }
+
+  function dashboardRawUrl(item, relativePath) {
+    return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/cars/${dashboardFolderName(item.type)}/${item.id}/${relativePath}`;
+  }
+
+  async function loadDashboard() {
+    if (!repoOk) {
+      setDashboardError("Fill in your GitHub token + repo settings first.");
+      return;
+    }
+    setDashboardLoading(true);
+    setDashboardError(null);
+    try {
+      const items = await loadDashboardEntries({ owner: settings.owner, repo: settings.repo, token: settings.token });
+      setDashboardItems(items);
+    } catch (err) {
+      setDashboardError(String(err.message || err));
+    } finally {
+      setDashboardLoading(false);
+    }
+  }
+
+  async function handleDeleteItem(item) {
+    setDeletingId(`${item.type}:${item.id}`);
+    setDashboardError(null);
+    try {
+      await deleteDashboardItem({ owner: settings.owner, repo: settings.repo, token: settings.token, type: item.type, id: item.id });
+      setDashboardItems((prev) => prev.filter((entry) => !(entry.type === item.type && entry.id === item.id)));
+      setSelectedItem((current) => (current && current.type === item.type && current.id === item.id ? null : current));
+    } catch (err) {
+      setDashboardError(String(err.message || err));
+    } finally {
+      setDeletingId(null);
+      setConfirmDeleteId(null);
+    }
+  }
+
+  async function handleDashboardBattleRender(item) {
+    if (!repoOk) return;
+    const key = `${item.type}:${item.id}`;
+    setDashboardRenderingId(key);
+    setDashboardError(null);
+    dashboardAbortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-generate-from-research.yml",
+        inputs: {
+          draft_id: item.id,
+          mode: "battle",
+          tts_provider: "openai",
+          tts_voice: "onyx",
+          render_quality: "full",
+        },
+      });
+      const workflowRun = trackWorkflowRun({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-generate-from-research.yml",
+        startedAt,
+        signal: dashboardAbortRef.current.signal,
+        onUpdate: () => {},
+      });
+      const videoFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/battles/${item.id}/battle_short.mp4`,
+        signal: dashboardAbortRef.current.signal,
+        timeoutMs: BATTLE_RENDER_TIMEOUT_MS,
+      });
+      await Promise.race([videoFile, workflowRun.then(() => videoFile)]);
+      setDashboardItems((prev) => prev.map((entry) => (
+        entry.type === item.type && entry.id === item.id ? { ...entry, hasVideo: true } : entry
+      )));
+    } catch (err) {
+      setDashboardError(String(err.message || err));
+    } finally {
+      setDashboardRenderingId(null);
+    }
+  }
+
   const activeStep = stage === "idle" ? 0 : stage === "researching" ? 0 : stage === "researched" ? 1 : stage === "generating" ? 2 : stage === "done" ? 3 : 0;
 
   return (
@@ -288,6 +1629,488 @@ export default function App() {
         <span className={`live-state ${stage}`}>{stage === "idle" ? "Ready" : stage}</span>
       </header>
 
+      <nav className="view-tabs">
+        <button type="button" className={view === "create" ? "active" : ""} onClick={() => setView("create")}>
+          Create
+        </button>
+        <button type="button" className={view === "dashboard" ? "active" : ""} onClick={() => setView("dashboard")}>
+          Dashboard
+        </button>
+        <button type="button" className={view === "jobs" ? "active" : ""} onClick={() => setView("jobs")}>
+          Jobs
+        </button>
+        <button type="button" className={view === "youtube" ? "active" : ""} onClick={() => setView("youtube")}>
+          YouTube
+        </button>
+      </nav>
+
+      {view === "youtube" && <YouTubePanel settings={settings} />}
+
+      {view === "jobs" && (() => {
+        const query = jobSearch.trim().toLowerCase();
+        const companies = jobsData.companyDirectory.filter((company) => !query || company.name.toLowerCase().includes(query));
+        const allOpenRoles = jobsData.companyDirectory
+          .flatMap((company) => (company.openRoles || []).map((role) => ({ ...role, company: company.name })));
+        return (
+          <section className="jobs-panel">
+            <div className="jobs-header">
+              <div>
+                <span className="preview-label">Ongoing company-by-company scrape</span>
+                <h2>Employer Careers &amp; Open Roles</h2>
+                <p className="hint">
+                  {jobsData.peopleFromCsv} alumni map to {jobsData.companiesFromCsv} unique employers, current and past — a past employer still means an alum who may be able to refer Khatia in. {allOpenRoles.length} open Project Manager / Program Manager / Operations Manager / Business Analyst role links found so far ({jobsData.companiesResearched} of {jobsData.companiesFromCsv} companies checked). No fit filtering is applied — every matching-titled role found gets listed here regardless of seniority or location, so Khatia can judge compatibility herself. Checked {jobsData.checkedAt}.
+                </p>
+              </div>
+              <input
+                className="jobs-search"
+                value={jobSearch}
+                onChange={(event) => setJobSearch(event.target.value)}
+                placeholder="Filter the employer directory..."
+              />
+            </div>
+            <div className="jobs-recommendations">
+              <div className="jobs-section-heading">
+                <div>
+                  <span className="preview-label">Every open role found</span>
+                  <h3>Open roles across all companies</h3>
+                </div>
+                <strong>{allOpenRoles.length} links found</strong>
+              </div>
+              <div className="jobs-list">
+                {allOpenRoles.map((role) => (
+                  <a className="job-row" href={role.url} target="_blank" rel="noreferrer" key={`${role.company}-${role.title}-${role.url}`}>
+                    <div>
+                      <strong>{role.title}</strong>
+                      <span>{role.company}</span>
+                    </div>
+                    <div className="job-tags">
+                      <span>Open posting ↗</span>
+                    </div>
+                  </a>
+                ))}
+                {!allOpenRoles.length && <p className="hint">No open roles found yet — still working through the company list.</p>}
+              </div>
+            </div>
+            <div className="jobs-section-heading jobs-directory-heading">
+              <div>
+                <span className="preview-label">Complete source-company list</span>
+                <h3>Official employer career pages</h3>
+              </div>
+              <strong>{jobsData.companyDirectory.length} companies</strong>
+            </div>
+            <div className="jobs-grid">
+              {companies.map((company) => (
+                <article className="jobs-company" key={company.name}>
+                  <div className="jobs-company-heading">
+                    <h3>{company.name}</h3>
+                    {company.careersUrl ? (
+                      <a className="jobs-careers-link" href={company.careersUrl} target="_blank" rel="noreferrer">Official careers page ↗</a>
+                    ) : (
+                      <span className="jobs-unavailable">No public careers page located</span>
+                    )}
+                  </div>
+                  {!!company.alumni?.length && (
+                    <p className="jobs-alumni">
+                      {company.alumni.map((alum, index) => (
+                        <span key={alum.name} className={alum.current ? "jobs-alum-current" : "jobs-alum-previous"}>
+                          {alum.name}{alum.current ? "" : " (past)"}{index < company.alumni.length - 1 ? ", " : ""}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                  {!!company.openRoles?.length && (
+                    <ul className="jobs-open-roles">
+                      {company.openRoles.map((role) => (
+                        <li key={role.url}>
+                          <a href={role.url} target="_blank" rel="noreferrer">{role.title}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </article>
+              ))}
+              {!companies.length && <p className="hint">No employer matches that filter.</p>}
+            </div>
+          </section>
+        );
+      })()}
+
+      {view === "dashboard" && (
+        <section className="dashboard-panel">
+          <div className="dashboard-header">
+            <div>
+              <h2>Generated Drafts, Video Tests, Battles &amp; Single-Car Stories</h2>
+              <p className="hint">
+                Reads directly from the <code>{OUTPUT_BRANCH}</code> branch, so results survive a refresh. Deleting
+                an item commits a removal of its files to that branch.
+              </p>
+            </div>
+            <button type="button" className="secondary" onClick={loadDashboard} disabled={dashboardLoading}>
+              {dashboardLoading ? "Loading..." : "Refresh"}
+            </button>
+          </div>
+
+          {dashboardError && <div className="error">{dashboardError}</div>}
+          {!repoOk && <p className="hint">Fill in your GitHub token + repo settings above to load the dashboard.</p>}
+
+          {repoOk && !selectedItem && (
+            <div className="running-builds-panel">
+              <h3>Currently Running</h3>
+              {runningError && <div className="error">{runningError}</div>}
+              {runningRuns.length === 0 ? (
+                <p className="hint">No builds are running right now.</p>
+              ) : (
+                <ul className="running-builds-list">
+                  {runningRuns.map((run) => (
+                    <li key={run.id}>
+                      <span className={`running-status ${run.status}`}>{run.status.replace("_", " ")}</span>
+                      <a href={run.url} target="_blank" rel="noreferrer">{run.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
+          {!selectedItem && (
+            <div className="dashboard-grid">
+              {dashboardItems.map((item) => {
+                const key = `${item.type}:${item.id}`;
+                const title =
+                  item.type === "draft" ? item.preview?.title || item.id
+                  : item.type === "battle" ? item.preview?.title || `Battle: ${item.id}`
+                  : item.type === "single-car" ? item.preview?.title || `Single-car story: ${item.id}`
+                  : `Video test: ${item.preview?.query || item.id}`;
+                const thumb =
+                  item.type === "draft" ? item.preview?.entries?.find((entry) => (entry.images || []).length)?.images?.[0]
+                  : item.type === "battle" ? item.preview?.cars?.find((car) => (car.photos || []).length)?.photos?.[0]
+                  : item.type === "single-car" ? item.preview?.media?.[0]?.path
+                  : item.preview?.clips?.find((clip) => clip.thumbnail_url)?.thumbnail_url;
+                const thumbUrl = item.type === "video-test" ? thumb : (thumb ? dashboardRawUrl(item, thumb) : null);
+                const typeLabel = item.type === "draft" ? "Draft" : item.type === "battle" ? "Battle" : item.type === "single-car" ? "Single Car Story" : "Video Test";
+                return (
+                  <article className="dashboard-card" key={key}>
+                    {thumbUrl && <img src={thumbUrl} alt={title} />}
+                    <div className="dashboard-card-body">
+                      <span className={`dashboard-type ${item.type}`}>{typeLabel}</span>
+                      <h3>{title}</h3>
+                      <p className="hint">{item.timestamp ? item.timestamp.toLocaleString() : item.id}</p>
+                      {item.type === "draft" && (
+                        <p className="hint">
+                          {item.hasFinal ? "Full render ready" : item.hasPreview ? "Preview render ready" : "No render yet"}
+                        </p>
+                      )}
+                      {item.type === "battle" && (
+                        <p className="hint">
+                          {item.hasVideo ? "Battle video ready" : `${item.preview?.approved_count ?? "?"}/${item.preview?.total_count ?? "?"} clips found`}
+                        </p>
+                      )}
+                      {item.type === "single-car" && (
+                        <p className="hint">{item.hasVideo ? "Narrated video ready" : "Result saved without video"}</p>
+                      )}
+                      <div className="dashboard-card-actions">
+                        <button type="button" onClick={() => setSelectedItem({ type: item.type, id: item.id })}>
+                          View
+                        </button>
+                        {confirmDeleteId === key ? (
+                          <>
+                            <button
+                              type="button"
+                              className="danger"
+                              onClick={() => handleDeleteItem(item)}
+                              disabled={deletingId === key}
+                            >
+                              {deletingId === key ? "Deleting..." : "Confirm delete"}
+                            </button>
+                            <button type="button" className="secondary" onClick={() => setConfirmDeleteId(null)}>
+                              Cancel
+                            </button>
+                          </>
+                        ) : (
+                          <button type="button" className="secondary" onClick={() => setConfirmDeleteId(key)}>
+                            Delete
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+              {!dashboardLoading && dashboardItems.length === 0 && !dashboardError && repoOk && (
+                <p className="hint">Nothing generated yet. Research or test a video from the Create tab.</p>
+              )}
+            </div>
+          )}
+
+          {selectedItem && (() => {
+            const item = dashboardItems.find((entry) => entry.type === selectedItem.type && entry.id === selectedItem.id);
+            if (!item) {
+              return (
+                <div>
+                  <button type="button" className="secondary" onClick={() => setSelectedItem(null)}>Back</button>
+                  <p className="hint">This item is no longer available.</p>
+                </div>
+              );
+            }
+            const key = `${item.type}:${item.id}`;
+            return (
+              <div className="dashboard-detail">
+                <button type="button" className="secondary" onClick={() => setSelectedItem(null)}>Back to list</button>
+
+                {item.type === "draft" && item.preview && (
+                  <div className="research-panel">
+                    <h2>{item.preview.title}</h2>
+                    <p className="rationale">{item.preview.order_rationale}</p>
+                    {(item.hasFinal || item.hasPreview) && (
+                      <div className="video-player">
+                        <video controls src={dashboardRawUrl(item, item.hasFinal ? "final_short.mp4" : "preview_short.mp4")} width="360" />
+                      </div>
+                    )}
+                    <div className="entries">
+                      {(item.preview.entries || []).map((entry, i) => (
+                        <div key={i} className="entry-card">
+                          <div className="entry-rank">#{(item.preview.entries.length) - i}</div>
+                          <h3>{entry.name} <span className="years">({entry.years})</span></h3>
+                          <p className="stat">{entry.stat}</p>
+                          <p className="label">{entry.label}</p>
+                          <p className="fact">{entry.one_line_fact}</p>
+                          <div className="thumbs">
+                            {(entry.images || []).length === 0 && <span className="no-images">no images found</span>}
+                            {(entry.images || []).map((img, j) => {
+                              const review = (entry.image_reviews || []).find((r) => r.path === img);
+                              const description = review?.view_description || review?.category || "verified car image";
+                              return (
+                                <a key={j} href={dashboardRawUrl(item, img)} target="_blank" rel="noreferrer" title={description}>
+                                  <img src={dashboardRawUrl(item, img)} alt={`${entry.name} — ${description}`} />
+                                  <span className="image-label">{description}</span>
+                                </a>
+                              );
+                            })}
+                          </div>
+                          {(entry.engine_videos || []).length > 0 && (
+                            <article className="video-probe-card entry-engine-clip">
+                              <h3>{entry.name} engine clip</h3>
+                              {entry.engine_clip_preview?.source?.thumbnail_url && (
+                                <img
+                                  className="video-probe-thumb"
+                                  src={entry.engine_clip_preview.source.thumbnail_url}
+                                  alt={`${entry.name} engine clip source thumbnail`}
+                                />
+                              )}
+                              {entry.engine_clip_preview?.approved && entry.engine_clip_preview?.path ? (
+                                <video controls src={dashboardRawUrl(item, entry.engine_clip_preview.path)} preload="metadata" />
+                              ) : (
+                                <p className="error">No usable clip: {entry.engine_clip_preview?.error || "verification rejected it"}</p>
+                              )}
+                              {entry.engine_clip_preview?.source?.auction_url && (
+                                <a href={entry.engine_clip_preview.source.auction_url} target="_blank" rel="noreferrer">
+                                  Open source listing
+                                </a>
+                              )}
+                            </article>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <p className="close-line">Closing line: "{item.preview.close_narration}"</p>
+                    {item.preview.research_sources && (
+                      <details className="settings">
+                        <summary>Research sources</summary>
+                        <pre className="raw-json">{JSON.stringify(item.preview.research_sources, null, 2)}</pre>
+                      </details>
+                    )}
+                    <details className="settings">
+                      <summary>Full research.json</summary>
+                      <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
+                    </details>
+                  </div>
+                )}
+
+                {item.type === "video-test" && item.preview && (
+                  <section className="video-probe-panel">
+                    <h2>Video Test: {item.preview.query}</h2>
+                    <p className="rationale">
+                      Found {item.preview.videos_discovered} video embeds across {item.preview.listings_considered?.length || 0} matching listings.
+                    </p>
+                    <div className="video-probe-grid">
+                      {(item.preview.clips || []).map((clip) => (
+                        <article className="video-probe-card" key={clip.index}>
+                          <h3>Candidate {clip.index}: {clip.source_title || "Listing video"}</h3>
+                          {clip.thumbnail_url && (
+                            <img className="video-probe-thumb" src={clip.thumbnail_url} alt={`Candidate ${clip.index} source thumbnail`} />
+                          )}
+                          {clip.clip ? (
+                            <video controls src={dashboardRawUrl(item, clip.clip)} preload="metadata" />
+                          ) : (
+                            <p className="error">No usable clip: {clip.error || "verification rejected it"}</p>
+                          )}
+                          <dl>
+                            <div><dt>Scene</dt><dd>{clip.scene_review?.scene_type?.replaceAll("_", " ") || "unknown"}</dd></div>
+                            <div><dt>Detected event</dt><dd>{clip.detected_onset_seconds ?? "?"}s</dd></div>
+                            <div><dt>Engine candidate</dt><dd>{clip.approved ? "Yes" : "No"}</dd></div>
+                          </dl>
+                          {clip.source_listing && (
+                            <a href={clip.source_listing} target="_blank" rel="noreferrer">Open source listing</a>
+                          )}
+                        </article>
+                      ))}
+                    </div>
+                    <details className="settings">
+                      <summary>Full result.json</summary>
+                      <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
+                    </details>
+                  </section>
+                )}
+
+                {item.type === "battle" && item.preview && (
+                  <div className="research-panel">
+                    <h2>{item.preview.title}</h2>
+                    <p className="rationale">
+                      Found usable exterior startup clips for {item.preview.approved_count} of {item.preview.total_count} cars.
+                    </p>
+                    {item.hasVideo ? (
+                      <div className="video-player">
+                        <video controls src={dashboardRawUrl(item, "battle_short.mp4")} width="360" />
+                      </div>
+                    ) : (
+                      <div className="render-actions">
+                        <button
+                          type="button"
+                          className="generate-btn"
+                          onClick={() => handleDashboardBattleRender(item)}
+                          disabled={dashboardRenderingId === key || item.preview.approved_count < 2}
+                        >
+                          {dashboardRenderingId === key ? "Rendering..." : "Generate Full Battle Video"}
+                        </button>
+                        {item.preview.approved_count < 2 && (
+                          <p className="hint">Need at least 2 approved cars to render.</p>
+                        )}
+                      </div>
+                    )}
+                    <div className="entries">
+                      {(item.preview.cars || []).map((car) => (
+                        <div key={car.index} className="entry-card">
+                          <div className="entry-rank">#{car.index}</div>
+                          <h3>{car.label}</h3>
+                          <p className="label">{car.generation_label || `Generation range ${car.generation_start}-${car.generation_end}`}</p>
+                          <div className="thumbs">
+                            {(car.photos || []).length === 0 && <span className="no-images">no exterior photos found</span>}
+                            {(car.photos || []).map((img, j) => (
+                              <a key={j} href={dashboardRawUrl(item, img)} target="_blank" rel="noreferrer">
+                                <img src={dashboardRawUrl(item, img)} alt={`${car.label} exterior`} />
+                              </a>
+                            ))}
+                          </div>
+                          {car.fallback_applied && (
+                            <p className="hint">
+                              Requested trim &quot;{car.trim_requested}&quot; not found; used &quot;{car.trim_used || "base model"}&quot; instead.
+                            </p>
+                          )}
+                          {car.approved && car.clip_path ? (
+                            <article className="video-probe-card entry-engine-clip">
+                              <video controls src={dashboardRawUrl(item, car.clip_path)} preload="metadata" />
+                              <p className="hint">Clip length: {car.clip_duration}s</p>
+                              <p className="hint">
+                                {car.rev_detected
+                                  ? `Revving detected: peak ~${car.rev_events[0].peak_hz}Hz over baseline ~${car.rev_events[0].baseline_hz}Hz`
+                                  : "No revving pattern detected (best-effort pitch check; may miss broadband exhaust notes)"}
+                              </p>
+                              {car.rev_clip_path && (
+                                <p className="hint">
+                                  Distant rev found at ~{car.rev_clip_onset_seconds}s after a long idle -- cut and
+                                  stitched on right after the startup clip (+{car.rev_clip_duration}s) in the render.
+                                </p>
+                              )}
+                            </article>
+                          ) : (
+                            <>
+                              <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>
+                              {(car.listings_considered || []).length > 0 && (
+                                <p className="hint">
+                                  Listings checked:{" "}
+                                  {car.listings_considered.map((url, j) => (
+                                    <span key={url}>
+                                      {j > 0 && ", "}
+                                      <a href={url} target="_blank" rel="noreferrer">#{j + 1}</a>
+                                    </span>
+                                  ))}
+                                </p>
+                              )}
+                              {(car.scene_types_seen || []).length > 0 && (
+                                <p className="hint">
+                                  Scene types seen: {car.scene_types_seen.join(", ")}
+                                  {typeof car.candidates_classified === "number" &&
+                                    ` (${car.candidates_classified} candidate clips classified)`}
+                                </p>
+                              )}
+                            </>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <details className="settings">
+                      <summary>Full battle.json</summary>
+                      <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
+                    </details>
+                  </div>
+                )}
+
+                {item.type === "single-car" && item.preview && (
+                  <section className="video-probe-panel">
+                    <h2>{item.preview.title || `${item.preview.car?.make || ""} ${item.preview.car?.model || ""}`.trim()}</h2>
+                    <p className="rationale">
+                      {item.preview.word_count} words at {item.preview.tts_speed}x voice speed; {Number(item.preview.duration_seconds || 0).toFixed(1)} seconds.
+                    </p>
+                    {item.hasVideo && (
+                      <div className="video-player">
+                        <video controls src={dashboardRawUrl(item, item.preview.video || "single_car_short.mp4")} width="360" preload="metadata" />
+                      </div>
+                    )}
+                    <div className="narration-scroll">
+                      {(item.preview.scenes || []).map((scene, index) => (
+                        <div className="narration-entry" key={index}>
+                          <strong>{index + 1}. {scene.headline || `Scene ${index + 1}`}</strong>
+                          <p>{scene.narration}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="thumbs">
+                      {(item.preview.media || []).map((media, index) => (
+                        <a key={`${media.path}-${index}`} href={dashboardRawUrl(item, media.path)} target="_blank" rel="noreferrer">
+                          <img src={dashboardRawUrl(item, media.path)} alt={`${media.type || "car"} scene`} />
+                          <span className="image-label">{media.type || "car"}</span>
+                        </a>
+                      ))}
+                    </div>
+                    <details className="settings">
+                      <summary>Full result.json</summary>
+                      <pre className="raw-json">{JSON.stringify(item.preview, null, 2)}</pre>
+                    </details>
+                  </section>
+                )}
+
+                {!item.preview && <p className="hint">No JSON data found for this item (files: {item.files.join(", ")}).</p>}
+
+                <div className="dashboard-card-actions">
+                  {confirmDeleteId === key ? (
+                    <>
+                      <button type="button" className="danger" onClick={() => handleDeleteItem(item)} disabled={deletingId === key}>
+                        {deletingId === key ? "Deleting..." : "Confirm delete"}
+                      </button>
+                      <button type="button" className="secondary" onClick={() => setConfirmDeleteId(null)}>Cancel</button>
+                    </>
+                  ) : (
+                    <button type="button" className="secondary" onClick={() => setConfirmDeleteId(key)}>Delete this item</button>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
+        </section>
+      )}
+
+      {view === "create" && (
+      <>
       <div className="progress-panel" aria-label="Generation progress">
         <div className="progress-steps">
           {PROGRESS_STEPS.map((label, index) => (
@@ -333,10 +2156,27 @@ export default function App() {
             Branch
             <input value={settings.branch} onChange={(e) => setSettings({ ...settings, branch: e.target.value })} />
           </label>
+          <label>
+            OpenAI API Key (optional)
+            <input
+              type="password"
+              placeholder="sk-..."
+              value={settings.openaiKey}
+              onChange={(e) => setSettings({ ...settings, openaiKey: e.target.value })}
+            />
+          </label>
         </div>
         <p className="hint">
           Token needs "repo" + "workflow" scope (fine-grained: Contents + Actions read/write on this repo only).
           Stored only in this browser&apos;s localStorage.
+        </p>
+        <p className="hint">
+          The OpenAI key is used for the two "suggest rivals" buttons -- "Suggest comparison cars" in a
+          Single Car Story, and "Suggest rivals" in Startup Sound Battle. Both are called directly from this
+          browser, so suggestions come back in seconds instead of waiting on a GitHub Actions run, and cost a
+          fraction of a cent. It is stored in this browser&apos;s localStorage like the token above. Startup
+          Both fall back to the (slower) workflow-based suggestion when this is blank, which uses the repo's own
+          OPENAI_API_KEY secret -- so your GitHub token alone is enough, the key just makes it instant.
         </p>
       </details>
 
@@ -357,74 +2197,601 @@ export default function App() {
             ))}
           </div>
 
-          <div className="builder-grid">
-            <label>
-              Make
-              <input value={make} onChange={(e) => setMake(e.target.value)} placeholder="Audi" disabled={stage === "researching" || stage === "generating"} />
-            </label>
-            <label>
-              Model
-              <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="R8" disabled={stage === "researching" || stage === "generating"} />
-            </label>
-            <label>
-              Focus
-              <input
-                value={focus}
-                onChange={(e) => setFocus(e.target.value)}
-                placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : "Used only for focused mode"}
-                disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}
-              />
-            </label>
-            <label>
-              Start Year
-              <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}>
-                <option value="">Any</option>
-                {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
-              </select>
-            </label>
-            <label>
-              End Year
-              <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || workflow !== "focused"}>
-                <option value="">Any</option>
-                {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
-              </select>
-            </label>
-          </div>
+          {workflow === "battle" ? (
+            <div className="battle-cars">
+              {battleCars.map((car, index) => {
+                const disabled = stage === "researching" || stage === "generating";
+                const modelOptions = battleModelOptions(car);
+                const trimOptions = battleTrimOptions(car);
+                return (
+                  <div className="battle-car-row" key={index}>
+                    <label>
+                      Make
+                      <select value={car.make} onChange={(e) => updateBattleCar(index, "make", e.target.value)} disabled={disabled}>
+                        <option value="">Choose make</option>
+                        {Object.keys(ENTHUSIAST_CARS).map((name) => <option key={name} value={name}>{name}</option>)}
+                        <option value={OTHER_VALUE}>Other (type manually)</option>
+                      </select>
+                      {car.make === OTHER_VALUE && (
+                        <input
+                          value={car.makeCustom}
+                          onChange={(e) => updateBattleCar(index, "makeCustom", e.target.value)}
+                          placeholder="Make"
+                          disabled={disabled}
+                        />
+                      )}
+                    </label>
+                    <label>
+                      Model
+                      {car.make && car.make !== OTHER_VALUE ? (
+                        <>
+                          <select
+                            value={car.model}
+                            onChange={(e) => updateBattleCar(index, "model", e.target.value)}
+                            disabled={disabled}
+                          >
+                            <option value="">Choose model</option>
+                            {modelOptions.map((name) => <option key={name} value={name}>{name}</option>)}
+                            <option value={OTHER_VALUE}>Other (type manually)</option>
+                          </select>
+                          {car.model === OTHER_VALUE && (
+                            <input
+                              value={car.modelCustom}
+                              onChange={(e) => updateBattleCar(index, "modelCustom", e.target.value)}
+                              placeholder="Model"
+                              disabled={disabled}
+                            />
+                          )}
+                        </>
+                      ) : (
+                        <input
+                          value={car.modelCustom}
+                          onChange={(e) => updateBattleCar(index, "modelCustom", e.target.value)}
+                          placeholder="Model"
+                          disabled={disabled || !car.make}
+                        />
+                      )}
+                    </label>
+                    <label>
+                      Trim
+                      {car.model && car.model !== OTHER_VALUE && trimOptions.length > 0 ? (
+                        <>
+                          <select
+                            value={car.trim}
+                            onChange={(e) => updateBattleCar(index, "trim", e.target.value)}
+                            disabled={disabled}
+                          >
+                            <option value="">Any / base</option>
+                            {trimOptions.map((name) => <option key={name} value={name}>{name}</option>)}
+                            <option value={OTHER_VALUE}>Other (type manually)</option>
+                          </select>
+                          {car.trim === OTHER_VALUE && (
+                            <input
+                              value={car.trimCustom}
+                              onChange={(e) => updateBattleCar(index, "trimCustom", e.target.value)}
+                              placeholder="Trim"
+                              disabled={disabled}
+                            />
+                          )}
+                        </>
+                      ) : (
+                        <input
+                          value={car.trimCustom}
+                          onChange={(e) => updateBattleCar(index, "trimCustom", e.target.value)}
+                          placeholder="GT350 (optional)"
+                          disabled={disabled}
+                        />
+                      )}
+                    </label>
+                    <label>
+                      Year
+                      <select
+                        value={car.year}
+                        onChange={(e) => updateBattleCar(index, "year", e.target.value)}
+                        disabled={disabled}
+                      >
+                        <option value="">Year</option>
+                        {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
+                      </select>
+                    </label>
+                    <button
+                      type="button"
+                      className="secondary battle-car-remove"
+                      onClick={() => removeBattleCar(index)}
+                      disabled={battleCars.length <= MIN_BATTLE_CARS || disabled}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                );
+              })}
+              <div className="battle-cars-buttons">
+                <button
+                  type="button"
+                  className="secondary"
+                  onClick={addBattleCar}
+                  disabled={battleCars.length >= MAX_BATTLE_CARS || stage === "researching" || stage === "generating"}
+                >
+                  + Add another car
+                </button>
+                <button
+                  type="button"
+                  className="secondary"
+                  onClick={handleSuggestRivals}
+                  disabled={(!repoOk && !settings.openaiKey) || !baseCarValid || rivalSuggestLoading || stage === "researching" || stage === "generating"}
+                >
+                  {rivalSuggestLoading ? "Asking AI for rivals..." : "Suggest rivals for car #1"}
+                </button>
+              </div>
+              {rivalSuggestError && <div className="error">{rivalSuggestError}</div>}
+              {rivalSuggestions && (
+                <div className="rival-suggestions">
+                  <p className="hint">
+                    AI-suggested rivals for {baseCar.year} {baseCar.make} {baseCar.model} {baseCar.trim}. Click one to
+                    drop it into an open car slot below.
+                  </p>
+                  <div className="rival-grid">
+                    {rivalSuggestions.map((rival, index) => (
+                      <div className="rival-card" key={index}>
+                        <strong>{rival.year} {rival.make} {rival.model} {rival.trim}</strong>
+                        <p className="hint">{rival.reason}</p>
+                        <button
+                          type="button"
+                          className="secondary"
+                          onClick={() => addRivalAsBattleCar(rival, index)}
+                          disabled={addedRivalIndexes.has(index) || battleCars.length >= MAX_BATTLE_CARS}
+                        >
+                          {addedRivalIndexes.has(index) ? "Added" : "Add to battle"}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <p className="hint">
+                Make/Model/Trim are curated (mainstream muscle + sports cars plus common exotics). Pick "Other" at
+                any level to type something not listed. If an exact trim like GT4 RS isn't found on Cars &amp; Bids,
+                the search automatically broadens (GT4 RS &rarr; GT4 &rarr; base Cayman) until it finds a listing.
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="builder-grid">
+                <label>
+                  Make
+                  <input value={make} onChange={(e) => setMake(e.target.value)} placeholder="Audi" disabled={stage === "researching" || stage === "generating"} />
+                </label>
+                <label>
+                  Model
+                  <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="R8" disabled={stage === "researching" || stage === "generating"} />
+                </label>
+                <label>
+                  Focus
+                  <input
+                    value={focus}
+                    onChange={(e) => setFocus(e.target.value)}
+                    placeholder={workflow === "focused" ? "C8, first gen, B7, etc." : ["narrator_preview", "single_car"].includes(workflow) ? "Trim/notes (optional)" : "Used only for focused mode"}
+                    disabled={stage === "researching" || stage === "generating" || !["focused", "narrator_preview", "single_car"].includes(workflow)}
+                  />
+                </label>
+                <label>
+                  Start Year
+                  <select value={startYear} onChange={(e) => setStartYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || !["focused", "narrator_preview", "single_car"].includes(workflow)}>
+                    <option value="">Any</option>
+                    {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
+                  </select>
+                </label>
+                <label>
+                  End Year
+                  <select value={endYear} onChange={(e) => setEndYear(e.target.value)} disabled={stage === "researching" || stage === "generating" || !["focused", "narrator_preview", "single_car"].includes(workflow)}>
+                    <option value="">Any</option>
+                    {YEAR_OPTIONS.map((year) => <option key={year} value={year}>{year}</option>)}
+                  </select>
+                </label>
+              </div>
 
-          <label className="custom-toggle">
-            <input
-              type="checkbox"
-              checked={useCustomRequest}
-              onChange={(e) => setUseCustomRequest(e.target.checked)}
-              disabled={stage === "researching" || stage === "generating"}
-            />
-            Use custom request text instead of the structured builder
-          </label>
+              <label className="custom-toggle">
+                <input
+                  type="checkbox"
+                  checked={useCustomRequest}
+                  onChange={(e) => setUseCustomRequest(e.target.checked)}
+                  disabled={stage === "researching" || stage === "generating"}
+                />
+                Use custom request text instead of the structured builder
+              </label>
 
-          <div className="request-preview">
-            <span className="preview-label">{useCustomRequest ? "Custom request" : "Generated request"}</span>
-            {useCustomRequest ? (
-              <textarea
-                className="request-input request-textarea"
-                placeholder='e.g. "Rank the 4 best Audi R8 versions overall"'
-                value={request}
-                onChange={(e) => setRequest(e.target.value)}
-                disabled={stage === "researching" || stage === "generating"}
-              />
-            ) : (
-              <div className="request-preview-box">{builtRequest || "Choose a workflow, then enter at least make and model."}</div>
-            )}
-          </div>
+              {workflow === "single_car" && (
+                <>
+                  <div className="field-section">
+                    <div className="section-label">
+                      Start From A Previous Build
+                      <Tip text="Fills this form with a past build's car, photos and settings so you don't repaste the links. Nothing is dispatched until you press Build, and that build runs the current pipeline code -- not the code the original ran on." />
+                    </div>
+                    <div className="field-row">
+                      <select
+                        value=""
+                        onFocus={ensurePreviousBuilds}
+                        onMouseDown={ensurePreviousBuilds}
+                        onChange={(e) => applyPreviousBuild(e.target.value)}
+                        disabled={!repoOk || stage === "single-car-building"}
+                      >
+                        <option value="">
+                          {previousBuildsStage === "loading" ? "Loading previous builds..."
+                            : previousBuildsStage === "ready" && !previousBuilds.length ? "No previous builds found"
+                            : "Pick a build to copy its inputs..."}
+                        </option>
+                        {previousBuilds.map((build) => (
+                          <option key={build.id} value={build.id}>
+                            {build.title}
+                            {build.timestamp ? ` — ${build.timestamp.toLocaleString()}` : ""}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    {previousBuildsError && (
+                      <p className="error">Could not load previous builds: {previousBuildsError}</p>
+                    )}
+                    {filledFromBuild && (
+                      <p className="hint">
+                        Filled in from <strong>{filledFromBuild.title}</strong>. Edit anything you
+                        like, then press Build — it runs today's pipeline code.
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="field-section">
+                    <div className="section-label">Photos</div>
+                    <div className="check-row">
+                      <label className="check-pill">
+                        <input
+                          type="checkbox"
+                          checked={useAuctionUrl}
+                          onChange={(e) => {
+                            const checked = e.target.checked;
+                            setUseAuctionUrl(checked);
+                            // Direct grouped photos also work without a listing.
+                          }}
+                          disabled={stage === "single-car-building"}
+                        />
+                        Specific listing
+                        <Tip text="Paste one Cars & Bids auction page instead of searching by make/model." />
+                      </label>
+                      {(
+                        <label className="check-pill">
+                          <input
+                            type="checkbox"
+                            checked={useManualPhotos}
+                            onChange={(e) => setUseManualPhotos(e.target.checked)}
+                            disabled={stage === "single-car-building"}
+                          />
+                          Override photos
+                          <Tip text={'Pin down exact shots with direct image links -- right-click a photo in the listing\'s gallery and "Copy image address." A page URL is rejected and that shot falls back to the automatic pick.'} />
+                        </label>
+                      )}
+                    </div>
+
+                    {useAuctionUrl && (
+                      <label className="field-row">
+                        <input
+                          value={auctionUrl}
+                          onChange={(e) => {
+                            const value = e.target.value;
+                            setAuctionUrl(value);
+                            // The listing's own slug names the car (".../auctions/abc123/2021-
+                            // volkswagen-golf-gti") -- fill in Make/Model/Year from it instead of
+                            // making the user retype what the link already says. Only touches
+                            // fields that are still blank, so it never clobbers a manual edit.
+                            const hint = parseAuctionUrlHint(value);
+                            if (hint) {
+                              if (!make.trim()) setMake(hint.make);
+                              if (!model.trim()) setModel(hint.model);
+                              if (hint.year && !startYear) setStartYear(hint.year);
+                            }
+                          }}
+                          placeholder="https://carsandbids.com/auctions/xxxxxxxx/..."
+                          disabled={stage === "single-car-building"}
+                        />
+                        <Tip text="A listing page URL, not a search-results link. Make/Model/Year fill in automatically (still editable)." />
+                      </label>
+                    )}
+
+                    {useManualPhotos && (
+                      <PhotoSlots
+                        photoUrls={photoUrls}
+                        onUrlsChange={setPhotoUrls}
+                        closeups={extraPhotos}
+                        onCloseupsChange={setExtraPhotos}
+                        disabled={stage === "single-car-building"}
+                      />
+                    )}
+                  </div>
+
+                  <div className="field-section">
+                    <div className="section-label">
+                      Comparison Car
+                      <Tip text="A head-to-head beat against a rival car, with a real spec comparison and a drag-race animation." />
+                    </div>
+                    <div className="radio-row">
+                      <label className="radio-pill">
+                        <input
+                          type="radio"
+                          name="compareChoice"
+                          checked={compareEnabled}
+                          onChange={() => setCompareEnabled(true)}
+                          disabled={stage === "single-car-building"}
+                        />
+                        Yes
+                      </label>
+                      <label className="radio-pill">
+                        <input
+                          type="radio"
+                          name="compareChoice"
+                          checked={!compareEnabled}
+                          onChange={() => setCompareEnabled(false)}
+                          disabled={stage === "single-car-building"}
+                        />
+                        No
+                      </label>
+                    </div>
+                    {compareEnabled && (
+                      <>
+                        <div className="check-row">
+                          <button
+                            type="button"
+                            className="secondary"
+                            onClick={handleSuggestComparisonCars}
+                            disabled={!make.trim() || !model.trim() || rivalChoicesStage === "loading"
+                              || (!settings.openaiKey && !repoOk) || stage === "single-car-building"}
+                          >
+                            {rivalChoicesStage === "loading"
+                              ? (settings.openaiKey ? "Asking for rivals..." : "Asking for rivals (workflow run)...")
+                              : "Suggest comparison cars"}
+                          </button>
+                          <Tip text="Text only, no photos. With an OpenAI key in Settings it answers in seconds from this browser; without one it goes through the workflow using the repo's own key, which works but has to start a runner. Picking one names the rival outright, so the build skips identifying your photo and skips searching for its picture." />
+                        </div>
+                        {rivalChoicesError && <p className="error">{rivalChoicesError}</p>}
+                        {rivalChoices && (
+                          <div className="rival-grid">
+                            {rivalChoices.map((rival, index) => {
+                              const label = `${rival.year} ${rival.make} ${rival.model} ${rival.trim || ""}`
+                                .replace(/\s+/g, " ").trim();
+                              return (
+                                <div className="rival-card" key={index}>
+                                  <strong>{label}</strong>
+                                  <p className="hint">{rival.reason}</p>
+                                  <button
+                                    type="button"
+                                    className="secondary"
+                                    onClick={() => setRivalCar(label)}
+                                    disabled={rivalCar === label || stage === "single-car-building"}
+                                  >
+                                    {rivalCar === label ? "Chosen" : "Use this rival"}
+                                  </button>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                        <label className="field-row">
+                          <input
+                            value={rivalCar}
+                            onChange={(e) => setRivalCar(rivalNameFromInput(e.target.value))}
+                            placeholder="Comparison car, e.g. 2010 BMW X5 M (optional)"
+                            disabled={stage === "single-car-building"}
+                          />
+                          <Tip text="The car's name, not a link -- paste a Cars & Bids listing URL here and it is turned into the name for you. Naming the car forces the script to compare against it, and carries its own model year so its photo search never asks for a year that car was not sold in." />
+                        </label>
+                        <p className="hint">
+                          The drag race runs these two photos side by side. Side-on shots read as cars
+                          driving; a head-on shot does not.
+                        </p>
+                        <label className="field-row">
+                          <input
+                            value={racePhoto}
+                            onChange={(e) => setRacePhoto(e.target.value)}
+                            placeholder="This car's race photo URL -- a side profile"
+                            disabled={stage === "single-car-building"}
+                          />
+                          <PhotoThumb url={racePhoto} flipped={raceFlipped} alt="This car's race photo" />
+                          <button
+                            type="button"
+                            className={`flip-toggle${raceFlipped ? " active" : ""}`}
+                            onClick={() => setRaceFlipped(!raceFlipped)}
+                            disabled={!racePhoto.trim() || stage === "single-car-building"}
+                            aria-pressed={raceFlipped}
+                            title="Mirror this photo so the car points the way it races"
+                          >⇄</button>
+                          <Tip text="The exact photo of THIS car to race. Leave blank and the build picks the best exterior shot it has, which can end up being a head-on front shot. Use the mirror button when the car points the wrong way -- the thumbnail shows exactly what the race will use." />
+                        </label>
+                        <label className="field-row">
+                          <input
+                            value={photoUrls.rival}
+                            onChange={(e) => setPhotoUrls({ ...photoUrls, rival: e.target.value })}
+                            placeholder="Comparison car's race photo URL -- a side profile"
+                            disabled={stage === "single-car-building"}
+                          />
+                          <PhotoThumb url={photoUrls.rival} flipped={rivalFlipped} alt="Comparison car's race photo" />
+                          <button
+                            type="button"
+                            className={`flip-toggle${rivalFlipped ? " active" : ""}`}
+                            onClick={() => setRivalFlipped(!rivalFlipped)}
+                            disabled={!photoUrls.rival.trim() || stage === "single-car-building"}
+                            aria-pressed={rivalFlipped}
+                            title="Mirror this photo so the car points the way it races"
+                          >⇄</button>
+                          <Tip text="Paste a side-on photo of the rival and it is used directly, so no listing is scraped for it. Leave blank and the build searches for one, which is the slow and unreliable path." />
+                        </label>
+                      </>
+                    )}
+                  </div>
+                </>
+              )}
+
+              <div className="request-preview">
+                <span className="preview-label">{useCustomRequest ? "Custom request" : "Generated request"}</span>
+                {useCustomRequest ? (
+                  <textarea
+                    className="request-input request-textarea"
+                    placeholder='e.g. "Rank the 4 best Audi R8 versions overall"'
+                    value={request}
+                    onChange={(e) => setRequest(e.target.value)}
+                    disabled={stage === "researching" || stage === "generating"}
+                  />
+                ) : (
+                  <div className="request-preview-box">{builtRequest || "Choose a workflow, then enter at least make and model."}</div>
+                )}
+              </div>
+            </>
+          )}
         </div>
-        <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating"}>
-          {stage === "researching" ? "Researching..." : "Research"}
-        </button>
+        <div className="request-actions">
+          {workflow === "battle" ? (
+            <button
+              onClick={handleBattleResearch}
+              disabled={!repoOk || !battleCarsValid || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}
+            >
+              {stage === "researching" ? "Finding Clips..." : "Find Startup Clips"}
+            </button>
+          ) : workflow === "narrator_preview" ? (
+            <button
+              onClick={handleNarratorPreview}
+              disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}
+            >
+              {stage === "narrator-preview-testing" ? "Rendering Preview..." : "Generate Narrator Preview"}
+            </button>
+          ) : workflow === "single_car" ? (
+            <button
+              onClick={handleSingleCarShort}
+              disabled={
+                !repoOk || !make.trim() || !model.trim() || stage === "single-car-building" ||
+                (useAuctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim()))
+              }
+            >
+              {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}
+            </button>
+          ) : workflow === "voice_audition" ? (
+            <button
+              onClick={handleVoiceAudition}
+              disabled={!repoOk || stage === "voice-audition-testing"}
+            >
+              {stage === "voice-audition-testing" ? "Reading Sample Script..." : "Generate Voice Auditions"}
+            </button>
+          ) : (
+            <>
+              <button onClick={handleResearch} disabled={!repoOk || !effectiveRequest || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}>
+                {stage === "researching" ? "Researching..." : "Research"}
+              </button>
+              <button
+                className="secondary"
+                onClick={handleVideoTest}
+                disabled={!repoOk || !make.trim() || !model.trim() || stage === "researching" || stage === "generating" || stage === "video-testing" || stage === "narrator-preview-testing"}
+              >
+                {stage === "video-testing" ? "Testing Videos..." : "Test Videos Only"}
+              </button>
+            </>
+          )}
+        </div>
       </div>
 
       {error && <div className="error">{error}</div>}
 
-      {stage === "researching" && (
+      {stage === "researching" && workflow === "battle" && (
+        <p className="status">Searching each car's generation for an exterior-filmed cold-start clip and exterior photos. This can take a few minutes...</p>
+      )}
+      {stage === "researching" && workflow !== "battle" && (
         <p className="status">AI is researching facts and gathering varied, verified model photos. This can take a few minutes...</p>
+      )}
+
+      {battle && (
+        <div className="research-panel">
+          <h2>{battle.title}</h2>
+          <p className="rationale">
+            Found usable exterior startup clips for {battle.approved_count} of {battle.total_count} cars.
+          </p>
+          <div className="entries">
+            {battle.cars.map((car) => (
+              <div key={car.index} className="entry-card">
+                <div className="entry-rank">#{car.index}</div>
+                <h3>{car.label}</h3>
+                <p className="label">{car.generation_label || `Generation range ${car.generation_start}-${car.generation_end}`}</p>
+                <div className="thumbs">
+                  {(car.photos || []).length === 0 && <span className="no-images">no exterior photos found</span>}
+                  {(car.photos || []).map((img, j) => (
+                    <a key={j} href={battleRawUrl(img)} target="_blank" rel="noreferrer">
+                      <img src={battleRawUrl(img)} alt={`${car.label} exterior`} />
+                    </a>
+                  ))}
+                </div>
+                {car.fallback_applied && (
+                  <p className="hint">
+                    Requested trim &quot;{car.trim_requested}&quot; not found; used &quot;{car.trim_used || "base model"}&quot; instead.
+                  </p>
+                )}
+                {car.approved && car.clip_path ? (
+                  <article className="video-probe-card entry-engine-clip">
+                    <video controls src={battleRawUrl(car.clip_path)} preload="metadata" />
+                    <p className="hint">Clip length: {car.clip_duration}s</p>
+                    <p className="hint">
+                      {car.rev_detected
+                        ? `Revving detected: peak ~${car.rev_events[0].peak_hz}Hz over baseline ~${car.rev_events[0].baseline_hz}Hz`
+                        : "No revving pattern detected (best-effort pitch check; may miss broadband exhaust notes)"}
+                    </p>
+                    {car.rev_clip_path && (
+                      <p className="hint">
+                        Distant rev found at ~{car.rev_clip_onset_seconds}s after a long idle -- cut and stitched on
+                        right after the startup clip (+{car.rev_clip_duration}s) in the render.
+                      </p>
+                    )}
+                  </article>
+                ) : (
+                  <>
+                    <p className="error">No usable exterior startup clip: {car.error || "rejected"}</p>
+                    {(car.listings_considered || []).length > 0 && (
+                      <p className="hint">
+                        Listings checked:{" "}
+                        {car.listings_considered.map((url, j) => (
+                          <span key={url}>
+                            {j > 0 && ", "}
+                            <a href={url} target="_blank" rel="noreferrer">#{j + 1}</a>
+                          </span>
+                        ))}
+                      </p>
+                    )}
+                    {(car.scene_types_seen || []).length > 0 && (
+                      <p className="hint">
+                        Scene types seen: {car.scene_types_seen.join(", ")}
+                        {typeof car.candidates_classified === "number" &&
+                          ` (${car.candidates_classified} candidate clips classified)`}
+                      </p>
+                    )}
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="render-actions">
+            <button
+              className="generate-btn"
+              onClick={handleBattleRender}
+              disabled={stage === "generating" || battle.approved_count < 2}
+            >
+              {stage === "generating" ? "Rendering Battle..." : "Render Battle Video"}
+            </button>
+          </div>
+          {battle.approved_count < 2 && (
+            <p className="hint">Need at least 2 approved cars to render. Try different years/models for the failed ones.</p>
+          )}
+        </div>
+      )}
+
+      {battleVideoUrl && (
+        <div className="video-panel">
+          <h2>Done</h2>
+          <div className="video-player">
+            <video controls src={battleVideoUrl} width="360" />
+            <p><a href={battleVideoUrl} target="_blank" rel="noreferrer">Open video directly</a></p>
+          </div>
+        </div>
       )}
 
       {research && (
@@ -441,24 +2808,88 @@ export default function App() {
                 <p className="fact">{entry.one_line_fact}</p>
                 <div className="thumbs">
                   {(entry.images || []).length === 0 && <span className="no-images">no images found</span>}
-                  {(entry.images || []).map((img, j) => (
-                    <a key={j} href={rawUrl(img)} target="_blank" rel="noreferrer">
-                      <img src={rawUrl(img)} alt={entry.name} />
-                    </a>
-                  ))}
+                  {(entry.images || []).map((img, j) => {
+                    const review = (entry.image_reviews || []).find((item) => item.path === img);
+                    const description = review?.view_description || review?.category || "verified car image";
+                    return (
+                      <a key={j} href={rawUrl(img)} target="_blank" rel="noreferrer" title={description}>
+                        <img src={rawUrl(img)} alt={`${entry.name} — ${description}`} />
+                        <span className="image-label">{description}</span>
+                      </a>
+                    );
+                  })}
                 </div>
+                {entry.image_coverage && !entry.image_coverage.target_met && (
+                  <p className="coverage-warning">
+                    Limited coverage: {entry.image_coverage.approved_count}/{entry.image_coverage.target_count} preferred unique photos.
+                  </p>
+                )}
+                <p className="hint">
+                  Engine video candidates: {(entry.engine_videos || []).length}
+                </p>
+                {(entry.engine_videos || []).length > 0 && (
+                  <article className="video-probe-card entry-engine-clip">
+                    <h3>{entry.name} engine clip</h3>
+                    {entry.engine_clip_preview?.source?.thumbnail_url && (
+                      <img
+                        className="video-probe-thumb"
+                        src={entry.engine_clip_preview.source.thumbnail_url}
+                        alt={`${entry.name} engine clip source thumbnail`}
+                      />
+                    )}
+                    {entry.engine_clip_preview?.approved && entry.engine_clip_preview?.path ? (
+                      <video controls src={rawUrl(entry.engine_clip_preview.path)} preload="metadata" />
+                    ) : (
+                      <p className="error">
+                        No usable clip: {entry.engine_clip_preview?.error || "verification rejected it"}
+                      </p>
+                    )}
+                    <dl>
+                      <div><dt>Scene</dt><dd>{entry.engine_clip_preview?.scene_review?.scene_type?.replaceAll("_", " ") || "unknown"}</dd></div>
+                      <div><dt>Detected event</dt><dd>{entry.engine_clip_preview?.detected_onset_seconds ?? "?"}s</dd></div>
+                      <div><dt>Audio jump</dt><dd>{entry.engine_clip_preview?.engine_event_score !== null && entry.engine_clip_preview?.engine_event_score !== undefined ? `${entry.engine_clip_preview.engine_event_score}×` : "n/a"}</dd></div>
+                      <div><dt>Engine candidate</dt><dd>{entry.engine_clip_preview?.approved ? "Yes" : "No"}</dd></div>
+                    </dl>
+                    {entry.engine_clip_preview?.scene_review?.reason && (
+                      <p className="hint">{entry.engine_clip_preview.scene_review.reason}</p>
+                    )}
+                    {entry.engine_clip_preview?.source?.auction_url && (
+                      <a href={entry.engine_clip_preview.source.auction_url} target="_blank" rel="noreferrer">
+                        Open source listing
+                      </a>
+                    )}
+                  </article>
+                )}
               </div>
             ))}
           </div>
           <p className="close-line">Closing line: "{research.close_narration}"</p>
 
-          <button
-            className="generate-btn"
-            onClick={handleGenerate}
-            disabled={stage === "generating" || research.entries.some((entry) => !(entry.images || []).length)}
-          >
-            {stage === "generating" ? "Generating with Onyx..." : "Generate Video with Onyx"}
-          </button>
+          <label>
+            Narration voice
+            <select value={voice} onChange={(event) => setVoice(event.target.value)} disabled={stage === "generating"}>
+              {VOICES.map((option) => <option key={option} value={option}>{titleCaseWords(option)}</option>)}
+            </select>
+          </label>
+          <div className="render-actions">
+            <button
+              className="generate-btn"
+              onClick={() => handleGenerate("quick")}
+              disabled={stage === "generating" || research.entries.some((entry) => !(entry.images || []).length)}
+            >
+              {stage === "generating" && renderQuality === "quick" ? "Rendering Quick Preview..." : "Quick Preview"}
+            </button>
+            <button
+              className="generate-btn secondary"
+              onClick={() => handleGenerate("full")}
+              disabled={stage === "generating" || research.entries.some((entry) => !(entry.images || []).length)}
+            >
+              {stage === "generating" && renderQuality === "full" ? "Rendering Full Quality..." : "Full Quality Render"}
+            </button>
+          </div>
+          <p className="hint">
+            Both modes use the same approved photos, script, Onyx narration, and verified cold-start clips when available.
+          </p>
           {research.entries.some((entry) => !(entry.images || []).length) && (
             <p className="hint">Can&apos;t generate - at least one entry has no images. Try a different request.</p>
           )}
@@ -470,11 +2901,147 @@ export default function App() {
       {videoUrl && (
         <div className="video-panel">
           <h2>Done</h2>
-          <video controls src={videoUrl} width="360" />
-          <p>
-            <a href={videoUrl} target="_blank" rel="noreferrer">Open video directly</a>
-          </p>
+          <div className="video-result">
+            <div className="video-player">
+              <video controls src={videoUrl} width="360" />
+              <p>
+                <a href={videoUrl} target="_blank" rel="noreferrer">Open video directly</a>
+              </p>
+            </div>
+            {research && (
+              <section className="narration-box" aria-labelledby="narration-title">
+                <h3 id="narration-title">Narration</h3>
+                {(research.engine_clips || []).length > 0 && (
+                  <p className="hint">
+                    Engine clips inserted: {(research.engine_clips || []).filter((clip) => clip.approved).length}
+                  </p>
+                )}
+                <div className="narration-scroll">
+                  {research.entries.map((entry, index) => (
+                    <div className="narration-entry" key={entry.name}>
+                      <strong>#{4 - index} {entry.name}</strong>
+                      <p>{entry.narration || entry.one_line_fact}</p>
+                    </div>
+                  ))}
+                  <div className="narration-entry narration-close">
+                    <strong>Closing line</strong>
+                    <p>{research.close_narration}</p>
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
         </div>
+      )}
+      {stage === "video-testing" && (
+        <p className="status">Discovering listing videos, detecting engine events, and cutting short previews...</p>
+      )}
+      {stage === "narrator-preview-testing" && (
+        <p className="status">Finding an exterior photo and compositing the narrator over it -- stills only, no video...</p>
+      )}
+      {stage === "single-car-building" && (
+        <p className="status">Researching verified facts, gathering scene-matched car stills, generating faster narration, and rendering the animated character...</p>
+      )}
+      {stage === "voice-audition-testing" && (
+        <p className="status">Reading the sample script in every voice preset -- no research, scraping, or video render...</p>
+      )}
+
+      {videoProbe && (
+        <section className="video-probe-panel">
+          <h2>Video Test: {videoProbe.query}</h2>
+          <p className="rationale">
+            Found {videoProbe.videos_discovered} video embeds across {videoProbe.listings_considered?.length || 0} matching listings.
+            {" "}Approved {(videoProbe.clips || []).length} clip{(videoProbe.clips || []).length === 1 ? "" : "s"} after checking {videoProbe.attempts_made ?? (videoProbe.clips || []).length} listing video{(videoProbe.attempts_made ?? 0) === 1 ? "" : "s"}
+            {videoProbe.listings_with_video_attempted ? ` across ${videoProbe.listings_with_video_attempted} listings` : ""}.
+          </p>
+          <div className="video-probe-grid">
+            {(videoProbe.clips || []).map((clip) => (
+              <article className="video-probe-card" key={clip.index}>
+                <h3>Candidate {clip.index}: {clip.source_title || "Listing video"}</h3>
+                {clip.thumbnail_url && (
+                  <img className="video-probe-thumb" src={clip.thumbnail_url} alt={`Candidate ${clip.index} source thumbnail`} />
+                )}
+                {clip.clip ? (
+                  <video controls src={rawVideoTestUrl(clip.clip)} preload="metadata" />
+                ) : (
+                  <p className="error">No usable clip: {clip.error || "verification rejected it"}</p>
+                )}
+                <dl>
+                  <div><dt>Scene</dt><dd>{clip.scene_review?.scene_type?.replaceAll("_", " ") || "unknown"}</dd></div>
+                  <div><dt>Detected event</dt><dd>{clip.detected_onset_seconds ?? "?"}s</dd></div>
+                  <div><dt>Audio jump</dt><dd>{clip.engine_event_score !== null && clip.engine_event_score !== undefined ? `${clip.engine_event_score}×` : "n/a"}</dd></div>
+                  <div><dt>Engine candidate</dt><dd>{clip.approved ? "Yes" : "No"}</dd></div>
+                </dl>
+                {clip.scene_review?.reason && <p className="hint">{clip.scene_review.reason}</p>}
+                {clip.source_listing && (
+                  <a href={clip.source_listing} target="_blank" rel="noreferrer">Open source listing</a>
+                )}
+              </article>
+            ))}
+          </div>
+          {(videoProbe.clips || []).length === 0 && (
+            <p>
+              {videoProbe.videos_discovered
+                ? `No engine-relevant clip was approved out of ${videoProbe.attempts_made ?? videoProbe.videos_discovered} listing videos checked.`
+                : "No embedded listing videos were discovered."}
+            </p>
+          )}
+        </section>
+      )}
+
+      {narratorPreview && (
+        <section className="video-probe-panel">
+          <h2>Narrator Preview: {narratorPreview.label || narratorPreview.query}</h2>
+          <p className="rationale">
+            {narratorPreview.photos_found
+              ? `Found ${narratorPreview.photos_found} exterior photo${narratorPreview.photos_found === 1 ? "" : "s"}; composited the narrator over the first one in ${(narratorPreview.previews || []).length} pose${(narratorPreview.previews || []).length === 1 ? "" : "s"}.`
+              : "No exterior photo was found for this search, so nothing was composited."}
+          </p>
+          <div className="video-probe-grid">
+            {(narratorPreview.previews || []).map((relativePath) => (
+              <article className="video-probe-card" key={relativePath}>
+                <img src={rawNarratorPreviewUrl(relativePath)} alt="Narrator preview composite" />
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+      {singleCarResult && (
+        <section className="video-probe-panel">
+          <h2>{singleCarResult.title || `${singleCarResult.car?.make} ${singleCarResult.car?.model}`}</h2>
+          <p className="rationale">
+            {singleCarResult.word_count} words at {singleCarResult.tts_speed}x voice speed; {Number(singleCarResult.duration_seconds || 0).toFixed(1)} seconds.
+          </p>
+          {singleCarResult.video && <video controls src={rawSingleCarUrl(singleCarResult.video)} preload="metadata" />}
+          <div className="narration-scroll">
+            {(singleCarResult.scenes || []).map((scene, index) => (
+              <div className="narration-entry" key={index}>
+                <strong>{index + 1}. {scene.headline || `Scene ${index + 1}`}</strong>
+                <p>{scene.narration}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {voiceAudition && (
+        <section className="video-probe-panel">
+          <h2>Voice Auditions</h2>
+          <p className="rationale">Same sample script, read in every preset below -- listen and pick one.</p>
+          <p className="hint">{voiceAudition.text}</p>
+          <div className="voice-audition-list">
+            {Object.entries(voiceAudition.files || {}).map(([preset, relativePath]) => (
+              <div className="voice-audition-item" key={preset}>
+                <span>
+                  {preset.replaceAll("_", " ")}
+                  {preset === voiceAudition.chosen_preset ? " (current)" : ""}
+                </span>
+                <audio controls preload="none" src={rawVoiceAuditionUrl(relativePath)} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      </>
       )}
     </div>
   );

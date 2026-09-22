@@ -64,7 +64,11 @@ function normalizeMediaUrl(rawUrl, baseUrl) {
   const value = String(rawUrl).trim().replace(/&amp;/g, "&");
   if (!value || value.startsWith("data:")) return null;
   try {
-    return new URL(value, baseUrl).href;
+    const normalized = new URL(value, baseUrl).href;
+    return normalized.replace(
+      /(cdn-cgi\/image\/[^/]*?)width=\d+/i,
+      "$1width=1800"
+    );
   } catch {
     return null;
   }
@@ -197,10 +201,14 @@ async function downloadImage(candidate, outDir, filenamePrefix) {
   };
 }
 
-async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, endYear) {
+async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, endYear, limit = 6) {
   await page.goto(searchUrl, { waitUntil: "networkidle2", timeout: 90000 });
   await page.waitForSelector("a[href*='/auctions/']", { timeout: 30000 });
-  await autoScroll(page, 6, 400);
+  // Cars & Bids search results load via infinite scroll, so a shallow scroll
+  // only surfaces a handful of cards. Whether a same-relevance batch of
+  // listings happens to have any seller-uploaded videos varies a lot, so
+  // widening the pool (deeper scroll, higher limit) matters for video tests.
+  await autoScroll(page, limit > 6 ? 20 : 6, 400);
 
   const entries = await page.evaluate(() => {
     const results = [];
@@ -224,20 +232,43 @@ async function collectAuctionEntries(page, searchUrl, queryTokens, startYear, en
   return entries
     .map((entry) => {
       const haystack = `${entry.title} ${entry.text} ${entry.url}`.toLowerCase();
-      const titleYear = Number((entry.title.match(/\b(19|20)\d{2}\b/) || [])[0] || 0);
       const cleanedTitle = /sold for|bid to|featured/i.test(entry.title) ? humanizeAuctionUrl(entry.url) : entry.title;
+      const titleYear = Number(
+        (`${cleanedTitle} ${entry.url}`.match(/\b(19|20)\d{2}\b/) || [])[0] || 0
+      );
       let score = 0;
       for (const token of tokens) {
         if (haystack.includes(token)) score += token.length > 2 ? 18 : 8;
       }
       if (tokens.length && haystack.includes(tokens.join(" "))) score += 45;
       if (titleYear && (!startYear || titleYear >= startYear) && (!endYear || titleYear <= endYear)) score += 28;
+      if (titleYear && ((startYear && titleYear < startYear) || (endYear && titleYear > endYear))) score -= 180;
+      const variantTokens = tokens.filter((token) =>
+        ["v6", "v8", "v10", "v12", "plus", "performance", "gt", "gts", "gt3", "gt4", "rs", "rwd", "rws", "awd", "quattro", "spyder", "coupe"].includes(token)
+      );
+      for (const token of variantTokens) {
+        if (!haystack.includes(token)) score -= 90;
+      }
       if (/sold for|bid to|sold after|ended/i.test(entry.text)) score += 6;
+      // Prefer a coupe/hardtop listing over a convertible/roadster one by
+      // default -- a drop-top's own roofline/rear deck makes for a worse
+      // establishing shot and (for models sold both ways) an inconsistent
+      // silhouette across scenes. Only skip this when the request itself
+      // asked for a convertible/spyder/roadster/cabriolet body style, or
+      // when the model is convertible-only (has no matching hardtop
+      // listings) -- this is a soft ranking penalty, not a hard filter, so
+      // a convertible still wins if it's genuinely the only option.
+      const wantsConvertible = tokens.some((token) =>
+        ["convertible", "spyder", "roadster", "cabriolet", "cabrio", "drophead", "targa"].includes(token)
+      );
+      if (!wantsConvertible && /\b(convertible|spyder|roadster|cabriolet|cabrio|drophead)\b/i.test(haystack)) {
+        score -= 30;
+      }
       if (/spyder|convertible/i.test(haystack) && tokens.includes("coupe")) score -= 25;
       return { ...entry, title: cleanedTitle, titleYear: titleYear || null, score };
     })
     .sort((a, b) => b.score - a.score)
-    .slice(0, 6);
+    .slice(0, limit);
 }
 
 async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
@@ -278,6 +309,7 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
     }
 
     const candidates = [];
+    const videoCandidates = [];
     const pushCandidate = (candidate) => {
       if (!candidate?.url || !/media\.carsandbids\.com|carsandbids\.com/i.test(candidate.url)) return;
       candidates.push(candidate);
@@ -325,6 +357,98 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
         title: document.querySelector("h1")?.innerText?.trim() || document.title,
       });
     }
+
+    const videoUrls = new Set();
+    const addVideo = (url, node = null, contextOverride = "") => {
+      if (!url || videoUrls.has(url)) return;
+      if (!/cloudflarestream\.com|videodelivery\.net|\.m3u8(?:\?|$)|\.mp4(?:\?|$)/i.test(url)) return;
+      videoUrls.add(url);
+      const container = node?.closest?.("section, article, li, div") || node?.parentElement;
+      // A player's own title/aria-label (or a sibling tab/caption element,
+      // since Cars & Bids' video gallery is a tabbed list where each tab's
+      // visible label sits next to, not inside, the active player) is far
+      // more likely to carry the real clip label ("Cold Start", "Engine
+      // Start") than the whole container's rendered text, which is often
+      // just the listing's title repeated. Collect every specific signal
+      // first and only fall back to the broader container text.
+      const specificLabel = [
+        node?.getAttribute?.("title"),
+        node?.getAttribute?.("aria-label"),
+        node?.getAttribute?.("alt"),
+        node?.closest?.("a")?.getAttribute?.("title"),
+        node?.closest?.("a")?.getAttribute?.("aria-label"),
+        node?.closest?.("button")?.getAttribute?.("aria-label"),
+        node?.previousElementSibling?.textContent,
+        node?.nextElementSibling?.textContent,
+      ].filter(Boolean).join(" ");
+      const context = (
+        contextOverride ||
+        [specificLabel, container?.innerText].filter(Boolean).join(" | ")
+      ).replace(/\s+/g, " ").trim().slice(0, 500);
+      videoCandidates.push({
+        url,
+        context,
+        section: headingText(container),
+        title: document.querySelector("h1")?.innerText?.trim() || document.title,
+      });
+    };
+
+    for (const node of Array.from(document.querySelectorAll(
+      "iframe[src], video[src], video source[src], a[href], [data-video-id], [data-video-uid]"
+    ))) {
+      const url = node.src || node.href || node.getAttribute("src");
+      addVideo(url, node);
+      const uid = node.getAttribute("data-video-id") || node.getAttribute("data-video-uid");
+      if (uid && /^[a-f0-9]{32}$/i.test(uid)) {
+        addVideo(`https://videodelivery.net/${uid}/manifest/video.m3u8`, node);
+      }
+    }
+
+    // Some Cars & Bids players are hydrated only after interaction. Their
+    // Cloudflare Stream IDs still appear in the serialized page markup, with
+    // multiple videos' JSON objects (each carrying its own "title") packed
+    // close together. A fixed character window around the match can span
+    // into a neighboring video's title, mislabeling e.g. an "Interior
+    // Walkaround" clip as "Engine Start" just because it sits next to one.
+    // Scope the context to the single JSON object enclosing the match
+    // instead, by walking brace balance outward from the match position.
+    const findEnclosingObject = (text, index) => {
+      let start = index;
+      let depth = 0;
+      while (start > 0) {
+        const ch = text[start];
+        if (ch === "}") depth++;
+        else if (ch === "{") {
+          if (depth === 0) break;
+          depth--;
+        }
+        start--;
+      }
+      let end = index;
+      depth = 0;
+      while (end < text.length) {
+        const ch = text[end];
+        if (ch === "{") depth++;
+        else if (ch === "}") {
+          if (depth === 0) { end++; break; }
+          depth--;
+        }
+        end++;
+      }
+      return text.slice(start, end);
+    };
+    const markup = document.documentElement.innerHTML;
+    const streamPattern = /https?:\\?\/\\?\/[^"'\\\s<>]*(?:cloudflarestream\.com|videodelivery\.net)[^"'\\\s<>]*/gi;
+    for (const match of markup.matchAll(streamPattern)) {
+      const rawUrl = match[0].replace(/\\u002F/gi, "/").replace(/\\\//g, "/").replace(/&amp;/g, "&");
+      const enclosing = findEnclosingObject(markup, match.index);
+      const context = (enclosing.length <= 4000 ? enclosing : match[0])
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\\u002F/gi, "/")
+        .replace(/\\\//g, "/")
+        .replace(/\s+/g, " ");
+      addVideo(rawUrl, null, context);
+    }
     return {
       pageMeta: {
         title: auction?.title || document.querySelector("h1")?.innerText?.trim() || document.title,
@@ -336,6 +460,7 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
         location: auction?.location || null,
       },
       candidates,
+      videoCandidates,
     };
   });
 
@@ -350,7 +475,33 @@ async function extractAuctionGallery(page, auctionUrl, visualHighlight) {
       .filter((candidate) => candidate.url)
       .filter((candidate) => /media\.carsandbids\.com/i.test(candidate.url))
       .map((candidate) => classifyCandidate(candidate, visualHighlight)),
+    videoCandidates: raw.videoCandidates
+      .map((candidate) => {
+        const haystack = `${candidate.section || ""} ${candidate.context || ""}`.toLowerCase();
+        let type = "video";
+        if (/cold\s*start|coldstart|engine\s*start|start[\s-]?up|start(?:up)?\s*(?:video|sound)/i.test(haystack)) type = "cold_start";
+        else if (/\b(?:rev|revving|exhaust|engine sound)\b/i.test(haystack)) type = "engine_sound";
+        else if (/walkaround|walk-around/i.test(haystack)) type = "walkaround";
+        return {
+          ...candidate,
+          url: String(candidate.url || "").replace(/\\u002F/gi, "/").replace(/\\\//g, "/"),
+          thumbnail_url: String(candidate.url || "").replace(/\\u002F/gi, "/").replace(/\\\//g, "/"),
+          type,
+          auction_url: auctionUrl,
+        };
+      })
+      .filter((candidate) => candidate.url),
   };
+}
+
+function playbackUrl(candidate) {
+  const raw = String(candidate?.url || "").replace(/&amp;/g, "&");
+  if (/\.m3u8(?:\?|$)/i.test(raw) || /\.mp4(?:\?|$)/i.test(raw)) return raw;
+  const uidMatch = raw.match(/(?:cloudflarestream\.com|videodelivery\.net)\/([a-f0-9]{32})/i);
+  if (!uidMatch) return raw;
+  const originMatch = raw.match(/^(https?:\/\/[^/]+)/i);
+  const origin = originMatch?.[1] || "https://videodelivery.net";
+  return `${origin}/${uidMatch[1]}/manifest/video.m3u8`;
 }
 
 function candidateLooksRelevant(candidate, { auctionId, makeToken, modelToken, queryTokens }) {
@@ -384,6 +535,26 @@ function candidateLooksRelevant(candidate, { auctionId, makeToken, modelToken, q
   return Boolean(strongModelMatch || queryMatches >= 2);
 }
 
+// scoreCandidate ranks "interior" a little above "exterior" (18 vs 12), and
+// a gallery frequently has far more cabin/dashboard/seat shots than clean
+// exterior ones -- so the uncapped fill-to-8 pass below used to just take
+// the next-highest-scoring candidates regardless of label, which in a
+// gallery skewed that way silently filled most of the 8 download slots
+// with more interior shots. Capping how many of each type can be picked
+// keeps the download set from being dominated by one type before the AI/
+// heuristic review even gets a chance to pick good exterior angles.
+// Raised from 8 -- with AI review (and now dedupe_similar_images in
+// cars_and_bids.py) both able to discard candidates before final selection,
+// a bigger raw pool gives them more real variety to actually choose from
+// instead of being stuck with whatever handful of types survived a
+// tighter cap.
+const MAX_CHOSEN = 14;
+// engine/wheel raised from 2 -- with only 2 engine candidates forwarded,
+// both failing the later strict AI review (bad angle, closed hood, blur)
+// meant zero engine photos survived even when the gallery genuinely had
+// good ones further down, never given a chance to be considered at all.
+const MAX_CANDIDATES_PER_LABEL = { interior: 3, engine: 3, detail: 3, wheel: 3, highlight: 1 };
+
 function chooseImages(candidates, desiredLabels, queryTokens) {
   const ranked = candidates
     .map((candidate) => ({ ...candidate, score: scoreCandidate(candidate, desiredLabels, queryTokens) }))
@@ -391,7 +562,11 @@ function chooseImages(candidates, desiredLabels, queryTokens) {
 
   const chosen = [];
   const used = new Set();
-  const targetOrder = ["front", "rear", "interior", "engine", "highlight", "detail", "exterior"];
+  // Establishing exterior angles come first, one of each -- exterior
+  // variety takes priority over cabin/engine/detail shots so a video isn't
+  // dominated by whichever type this particular gallery happened to have
+  // the most (or highest-scoring) candidates for.
+  const targetOrder = ["front", "rear", "exterior", "engine", "interior", "highlight", "detail"];
 
   for (const target of targetOrder) {
     const match = ranked.find((candidate) => !used.has(candidate.url) && candidate.labels.includes(target));
@@ -401,14 +576,32 @@ function chooseImages(candidates, desiredLabels, queryTokens) {
     }
   }
 
+  const labelCounts = {};
+  for (const item of chosen) labelCounts[item.primaryLabel] = (labelCounts[item.primaryLabel] || 0) + 1;
+
   for (const candidate of ranked) {
-    if (chosen.length >= 6) break;
+    if (chosen.length >= MAX_CHOSEN) break;
+    if (used.has(candidate.url)) continue;
+    const label = candidate.labels[0] || "exterior";
+    const cap = MAX_CANDIDATES_PER_LABEL[label];
+    if (cap != null && (labelCounts[label] || 0) >= cap) continue;
+    used.add(candidate.url);
+    labelCounts[label] = (labelCounts[label] || 0) + 1;
+    chosen.push({ ...candidate, primaryLabel: label });
+  }
+
+  // Caps only skip candidates, they never shrink the target count -- if
+  // this gallery genuinely doesn't have that many diverse shots, fall back
+  // to whatever's left (even over-represented types) rather than shipping
+  // an undersized set.
+  for (const candidate of ranked) {
+    if (chosen.length >= MAX_CHOSEN) break;
     if (used.has(candidate.url)) continue;
     used.add(candidate.url);
     chosen.push({ ...candidate, primaryLabel: candidate.labels[0] || "exterior" });
   }
 
-  return chosen.slice(0, 6);
+  return chosen.slice(0, MAX_CHOSEN);
 }
 
 async function main() {
@@ -416,16 +609,34 @@ async function main() {
   const outJson = argValue("out-json", path.join(outDir, "carsandbids-manifest.json"));
   const query = argValue("query", "");
   const visualHighlight = argValue("visual-highlight", "");
-  const searchUrl = argValue("search-url") || buildSearchUrl({
+  const skipImages = argValue("skip-images", "false") === "true";
+  // csort=10 sorts by highest price/bid first, which the main pipeline wants
+  // for photo quality but which starves video discovery: the SQ5 test kept
+  // finding 0 videos across 12 listings because every one of the top-priced
+  // matches (all FEATURED/high-bid auctions) happened to lack a seller
+  // video, while cheaper listings the user found by normal browsing had
+  // clearly labeled Cold Start/Engine Start videos. Video-only tests drop
+  // the forced price sort and use the site's own default ordering instead.
+  // Fetching one already-known listing directly (rather than searching and
+  // picking from the top results) guarantees the photos come from the exact
+  // same physical car as a previously-found video -- the photo search's own
+  // top-4-by-price picks and the video search's much wider unsorted pool
+  // otherwise routinely land on two different auctions entirely.
+  const auctionUrl = argValue("auction-url");
+
+  const searchUrl = auctionUrl ? null : (argValue("search-url") || buildSearchUrl({
     make: argValue("make"),
     model: argValue("model"),
     startYear: argValue("start-year"),
     endYear: argValue("end-year"),
-    sort: argValue("sort", "10"),
-  });
+    sort: argValue("sort", skipImages ? "" : "10"),
+  }));
 
-  if (!searchUrl || !/^https:\/\/carsandbids\.com\/search\//i.test(searchUrl)) {
-    throw new Error("Provide --search-url or --make/--model for a Cars & Bids search page.");
+  if (!auctionUrl && (!searchUrl || !/^https:\/\/carsandbids\.com\/search\//i.test(searchUrl))) {
+    throw new Error("Provide --auction-url, --search-url, or --make/--model for a Cars & Bids search page.");
+  }
+  if (auctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl)) {
+    throw new Error("--auction-url must be a carsandbids.com/auctions/... listing URL.");
   }
 
   const startYear = Number(argValue("start-year", "0")) || null;
@@ -453,7 +664,9 @@ async function main() {
     await page.setExtraHTTPHeaders({ "Accept-Language": "en-US,en;q=0.9" });
     await page.setViewport({ width: 1440, height: 1200, deviceScaleFactor: 1 });
 
-    const auctions = await collectAuctionEntries(page, searchUrl, queryTokens, startYear, endYear);
+    const auctions = auctionUrl
+      ? [{ url: auctionUrl, title: "", text: "", titleYear: null, score: 100 }]
+      : await collectAuctionEntries(page, searchUrl, queryTokens, startYear, endYear, skipImages ? 20 : 6);
     if (!auctions.length) {
       throw new Error(`No auction links found at ${searchUrl}`);
     }
@@ -461,9 +674,24 @@ async function main() {
     let selectedAuction = auctions[0];
     let selectedCandidates = [];
     const auctionsUsed = [];
-    let bestGalleryCount = 0;
-    for (const auction of auctions.slice(0, 4)) {
+    const discoveredVideos = [];
+    let bestSelectionScore = Number.NEGATIVE_INFINITY;
+    // Video-only test runs skip image downloads entirely, so the only cost
+    // of visiting more candidate auctions is page-load time - worth it,
+    // since videos are unevenly distributed across same-score listings and
+    // limiting to the first 4 of 6 was silently missing real cold-start clips.
+    const auctionsToVisit = skipImages ? auctions : auctions.slice(0, 4);
+    for (const auction of auctionsToVisit) {
       const gallery = await extractAuctionGallery(page, auction.url, visualHighlight);
+      for (const video of gallery.videoCandidates || []) {
+        discoveredVideos.push({
+          ...video,
+          playback_url: playbackUrl(video),
+          auction_title: gallery.pageMeta?.title || auction.title,
+          auction_year: gallery.pageMeta?.year || auction.titleYear || null,
+          search_score: auction.score,
+        });
+      }
       const usable = gallery.candidates.filter((candidate) => {
         const haystack = `${candidate.url} ${candidate.alt} ${candidate.anchorText} ${candidate.context} ${candidate.section}`.toLowerCase();
         if (/logo|icon|avatar|dougscore|shipping|carfax/i.test(haystack)) return false;
@@ -482,10 +710,13 @@ async function main() {
           sale_type: gallery.pageMeta?.saleType || null,
           page_title: gallery.pageMeta?.title || null,
         });
-        selectedCandidates.push(...usable);
       }
-      if (usable.length > bestGalleryCount) {
-        bestGalleryCount = usable.length;
+      // Keep one coherent auction gallery per entry. Pooling several auctions
+      // can silently mix generations or trims that share the same make/model.
+      const selectionScore = (Number(auction.score) || 0) * 100 + Math.min(usable.length, 50);
+      if (usable.length && selectionScore > bestSelectionScore) {
+        bestSelectionScore = selectionScore;
+        selectedCandidates = usable;
         selectedAuction = {
           ...auction,
           sale_price: gallery.pageMeta?.salePrice || null,
@@ -499,11 +730,11 @@ async function main() {
       }
     }
 
-    if (!selectedAuction || !selectedCandidates.length) {
+    if (!skipImages && (!selectedAuction || !selectedCandidates.length)) {
       throw new Error("No usable Cars & Bids gallery images found.");
     }
 
-    const chosen = chooseImages(selectedCandidates, desiredLabels, queryTokens);
+    const chosen = skipImages ? [] : chooseImages(selectedCandidates, desiredLabels, queryTokens);
     const downloaded = [];
     for (const [index, candidate] of chosen.entries()) {
       try {
@@ -529,6 +760,14 @@ async function main() {
       auctions_used: auctionsUsed,
       selected_auction: selectedAuction,
       downloaded_images: downloaded,
+      videos: discoveredVideos
+        .sort((a, b) => {
+          const typeScore = (item) => item.type === "cold_start" ? 1000 : item.type === "engine_sound" ? 500 : 0;
+          return (typeScore(b) + Number(b.search_score || 0)) - (typeScore(a) + Number(a.search_score || 0));
+        })
+        .filter((video, index, all) =>
+          index === all.findIndex((other) => other.playback_url === video.playback_url)
+        ),
     };
     await fs.writeFile(outJson, JSON.stringify(manifest, null, 2));
     console.log(JSON.stringify(manifest, null, 2));

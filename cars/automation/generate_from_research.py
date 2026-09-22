@@ -32,6 +32,10 @@ def build_config(draft_dir, data):
             label=entry.get("label", ""),
             stat=entry.get("stat", ""),
             narration=entry.get("narration") or entry.get("one_line_fact", ""),
+            performance_beats=entry.get("performance_beats", []),
+            engine_videos=entry.get("engine_videos", []),
+            engine_nickname=entry.get("engine_nickname"),
+            engine_clip_preview=entry.get("engine_clip_preview"),
         ))
 
     return RankingConfig(
@@ -48,7 +52,9 @@ def main():
     parser = argparse.ArgumentParser(description="Render a ranking video from a research.json draft.")
     parser.add_argument("--draft-id", required=True)
     parser.add_argument("--tts-provider", default="gtts", choices=["gtts", "openai", "tone", "silent"])
+    parser.add_argument("--tts-voice", default="onyx")
     parser.add_argument("--full-res", action="store_true")
+    parser.add_argument("--output-name", default="final_short.mp4")
     args = parser.parse_args()
 
     draft_dir = DRAFTS_ROOT / args.draft_id
@@ -58,9 +64,24 @@ def main():
     data = json.loads(research_path.read_text(encoding="utf-8"))
 
     config = build_config(draft_dir, data)
-    run_dir = render_ranking_video(config, output_root=DRAFTS_ROOT, tts_provider=args.tts_provider, fast=not args.full_res)
+    run_dir = render_ranking_video(
+        config,
+        output_root=DRAFTS_ROOT,
+        tts_provider=args.tts_provider,
+        tts_voice=args.tts_voice,
+        fast=not args.full_res,
+        output_filename=args.output_name,
+    )
 
     data["status"] = "video_generated"
+    data["latest_render"] = {
+        "quality": "full" if args.full_res else "quick",
+        "filename": args.output_name,
+    }
+    storyboard_path = run_dir / "storyboard.json"
+    if storyboard_path.exists():
+        storyboard = json.loads(storyboard_path.read_text(encoding="utf-8"))
+        data["engine_clips"] = storyboard.get("engine_clips", [])
     research_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
     print(run_dir)
