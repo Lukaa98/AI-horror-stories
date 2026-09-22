@@ -135,6 +135,9 @@ def test_the_code_is_published_before_the_wait_and_cleared_after(tmp_path, monke
     # Nothing published ever carries the token, at any stage.
     assert not any("SECRET-VALUE" in str(event) for event in events if event[0] == "publish")
     assert kinds[-1] == "publish" and events[-1][1] == "stored"
+    # A successful run must never blink "idle" between the approval and the
+    # store -- the dashboard reads that as the run having died.
+    assert [e[1] for e in events if e[0] == "publish"] == ["waiting", "stored"]
 
 
 def test_a_failed_approval_takes_the_code_down(tmp_path, monkeypatch):

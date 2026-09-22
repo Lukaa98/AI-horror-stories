@@ -30,6 +30,9 @@ export default function YouTubePanel({ settings }) {
   const [code, setCode] = useState(null);
   const [error, setError] = useState(null);
   const startedAt = useRef(0);
+  // A ref, not state: setInterval captures the callback once, so a state
+  // read here would be the value from the first tick forever.
+  const sawCode = useRef(false);
   const timer = useRef(null);
 
   const ready = Boolean(settings.token && settings.owner && settings.repo);
@@ -54,7 +57,21 @@ export default function YouTubePanel({ settings }) {
       // new one lands, so anything older than this click is ignored.
       const fresh = payload?.status === "waiting"
         && Number(payload.expires_at || 0) * 1000 > startedAt.current;
-      if (fresh) setCode(payload);
+      if (fresh) {
+        sawCode.current = true;
+        setCode(payload);
+        return;
+      }
+      // The workflow clears the code when it fails. Without noticing that,
+      // run #1's crash left this spinning for its full 33 minutes with a
+      // dead code on screen -- the one failure mode a person cannot debug
+      // from here.
+      if (sawCode.current && payload?.status !== "stored") {
+        stop();
+        setState("error");
+        setError("The run ended before the code was approved. Check the Actions log, then try again.");
+        return;
+      }
       if (Date.now() - startedAt.current > GIVE_UP_MS) {
         stop();
         setState("error");
@@ -72,6 +89,7 @@ export default function YouTubePanel({ settings }) {
     setCode(null);
     setState("starting");
     startedAt.current = Date.now();
+    sawCode.current = false;
     try {
       const { owner, repo, branch, token } = settings;
       const res = await fetch(

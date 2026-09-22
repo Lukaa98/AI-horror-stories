@@ -7,11 +7,11 @@ import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
-const DEFAULT_BRANCH = "v10";
+const DEFAULT_BRANCH = "v11";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.31 — Re-authorise YouTube from here";
+const UI_VERSION = "V11.32 — YouTube auth, Jobs tab gone";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
-const SETTINGS_MIGRATION = "default-branch-v10";
+const SETTINGS_MIGRATION = "default-branch-v11";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;

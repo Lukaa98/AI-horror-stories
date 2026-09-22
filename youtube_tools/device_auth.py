@@ -189,12 +189,14 @@ def main():
     try:
         token = poll_for_token(client_id, client_secret, device["device_code"],
                                device.get("interval", 5), expires_at)
-    finally:
-        # However this ended, the code stops being advertised. A live-looking
-        # prompt for a dead code is worse than no prompt.
+    except BaseException:
+        # Only on the way out badly. Clearing it unconditionally would blink
+        # "idle" between the approval and the store, and the dashboard reads
+        # that as the run having died.
         if args.publish_branch and repository and publish_token:
             publish_code(repository, publish_token, args.publish_branch,
                          args.publish_path, {"status": "idle"})
+        raise
     refresh_token = token.get("refresh_token")
     if not refresh_token:
         raise SystemExit("Google returned no refresh token. Re-run and make sure you approve as the channel owner.")
