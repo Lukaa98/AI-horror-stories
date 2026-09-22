@@ -21,6 +21,28 @@ async function readJson(settings, path) {
   return JSON.parse(new TextDecoder("utf-8").decode(bytes));
 }
 
+const DAY_MS = 86400000;
+
+// What the stored expiry means, in the terms the person cares about: is it
+// still good, and for how long. 0 means the OAuth app was published and the
+// token does not expire at all.
+function describeToken(info) {
+  if (!info) return null;
+  const expiresAt = Number(info.token_expires_at || 0);
+  if (!expiresAt) return { tone: "ok", text: "Token does not expire." };
+  const when = new Date(expiresAt * 1000);
+  // Kept fractional: flooring turned a token issued seven days ago-to-the-
+  // second into "6 days left", which is both wrong and alarming.
+  const remaining = (expiresAt * 1000 - Date.now()) / DAY_MS;
+  const days = Math.round(remaining);
+  const date = when.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+  const time = when.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  if (remaining < 0) return { tone: "dead", text: `Token expired on ${date}. Uploads will fail until you re-authorise.` };
+  if (remaining < 1) return { tone: "soon", text: `Token expires today, ${time}. Re-authorise now.` };
+  if (remaining <= 2) return { tone: "soon", text: `Token works until ${date}, ${time} — ${days} day${days === 1 ? "" : "s"} left.` };
+  return { tone: "ok", text: `Token works until ${date}, ${time} — ${days} days left.` };
+}
+
 // The channel's OAuth app is in Testing, which caps a refresh token at seven
 // days. This is the weekly renewal, reduced to reading a code off the screen:
 // the workflow publishes it here, the approval happens on Google, and the new
@@ -29,6 +51,7 @@ export default function YouTubePanel({ settings }) {
   const [state, setState] = useState("idle");   // idle | starting | waiting | stored | error
   const [code, setCode] = useState(null);
   const [error, setError] = useState(null);
+  const [tokenInfo, setTokenInfo] = useState(null);
   const startedAt = useRef(0);
   // A ref, not state: setInterval captures the callback once, so a state
   // read here would be the value from the first tick forever.
@@ -44,12 +67,29 @@ export default function YouTubePanel({ settings }) {
 
   useEffect(() => stop, [stop]);
 
+  // Read on mount so the expiry survives a refresh or a tab switch. The
+  // token lives seven days while the OAuth app is in Testing and nothing
+  // announces its death -- an upload just starts failing -- so the date is
+  // the only warning there is.
+  useEffect(() => {
+    if (!ready) return;
+    let live = true;
+    readJson(settings, CODE_PATH)
+      .then((payload) => {
+        if (live && payload?.status === "stored") setTokenInfo(payload);
+      })
+      .catch(() => {});
+    return () => { live = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, settings.owner, settings.repo, settings.token]);
+
   const poll = useCallback(async () => {
     try {
       const payload = await readJson(settings, CODE_PATH);
       if (payload?.status === "stored") {
         stop();
         setCode(null);
+        setTokenInfo(payload);
         setState("stored");
         return;
       }
@@ -145,8 +185,14 @@ export default function YouTubePanel({ settings }) {
       )}
 
       {state === "stored" && (
-        <p className="yt-ok">Done. A fresh token is in GitHub Secrets and uploads will work for another 7 days.</p>
+        <p className="yt-ok">Done. A fresh token is in GitHub Secrets.</p>
       )}
+
+      {(() => {
+        const described = describeToken(tokenInfo);
+        if (!described) return null;
+        return <p className={`yt-token yt-token-${described.tone}`}>{described.text}</p>;
+      })()}
       {state === "error" && <p className="yt-error">{error}</p>}
     </section>
   );

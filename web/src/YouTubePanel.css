@@ -42,3 +42,10 @@
   color: var(--text-h);
   user-select: all;
 }
+
+/* The only warning that a seven-day token is running out -- nothing else
+   announces it, an upload simply starts failing. */
+.yt-token { margin-top: 16px; font-size: .92rem; font-weight: 600; }
+.yt-token-ok { color: var(--text); }
+.yt-token-soon { color: #d08b2c; }
+.yt-token-dead { color: #e0574a; }

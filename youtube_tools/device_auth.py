@@ -205,7 +205,17 @@ def main():
         raise SystemExit("GH_PAT and GITHUB_REPOSITORY are needed to store the new token.")
     store_secret(repository, pat, args.secret_name, refresh_token)
 
-    stored_payload = {"status": "stored", "expires_at": int(expires_at)}
+    # Google reports how long the refresh token lasts: about seven days
+    # while the OAuth app is in Testing, and 0 once it is published, meaning
+    # it does not expire. The dashboard shows this, so it has to be the
+    # token's life -- not expires_at above, which is the device code's
+    # thirty minutes and would have the panel claiming the token dies today.
+    lifetime = int(token.get("refresh_token_expires_in") or 0)
+    stored_payload = {
+        "status": "stored",
+        "authorised_at": int(time.time()),
+        "token_expires_at": int(time.time()) + lifetime if lifetime else 0,
+    }
     with open(args.code_file, "w") as handle:
         json.dump(stored_payload, handle, indent=2)
     if args.publish_branch and repository and publish_token:
