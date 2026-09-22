@@ -82,7 +82,12 @@ def test_the_code_file_never_carries_the_token(tmp_path, monkeypatch):
     monkeypatch.setattr(device_auth, "store_secret",
                         lambda repo, pat, name, value: stored.update(name=name, value=value))
     code_file = tmp_path / "code.json"
-    monkeypatch.setattr("sys.argv", ["device_auth", "--code-file", str(code_file)])
+    # --state-file defaults to the working directory, so without this the
+    # test drops a device-code file into the repo root -- which is exactly
+    # how one got committed.
+    state_file = tmp_path / "state.json"
+    monkeypatch.setattr("sys.argv", ["device_auth", "--code-file", str(code_file),
+                                     "--state-file", str(state_file)])
 
     device_auth.main()
 

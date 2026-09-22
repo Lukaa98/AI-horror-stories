@@ -18,3 +18,5 @@ narrator/render/sprites/
 # Isolated venv for background_removal.py (rembg needs pillow>=12, which
 # conflicts with this repo's own Pillow pin -- kept out of the shared env)
 /.cache/
+# Holds a live device code mid-authorisation.
+.device-auth-state.json

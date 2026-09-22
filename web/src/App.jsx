@@ -4,7 +4,6 @@ import PhotoSlots from "./PhotoSlots";
 import PhotoThumb from "./PhotoThumb";
 import YouTubePanel from "./YouTubePanel";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
-import jobsData from "./jobs-data.json";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
@@ -804,7 +803,6 @@ export default function App() {
   const [battle, setBattle] = useState(null);
   const [battleVideoUrl, setBattleVideoUrl] = useState(null);
   const [view, setView] = useState("create");
-  const [jobSearch, setJobSearch] = useState("");
   const [dashboardItems, setDashboardItems] = useState([]);
   const [dashboardLoading, setDashboardLoading] = useState(false);
   const [dashboardError, setDashboardError] = useState(null);
@@ -1636,104 +1634,12 @@ export default function App() {
         <button type="button" className={view === "dashboard" ? "active" : ""} onClick={() => setView("dashboard")}>
           Dashboard
         </button>
-        <button type="button" className={view === "jobs" ? "active" : ""} onClick={() => setView("jobs")}>
-          Jobs
-        </button>
         <button type="button" className={view === "youtube" ? "active" : ""} onClick={() => setView("youtube")}>
           YouTube
         </button>
       </nav>
 
       {view === "youtube" && <YouTubePanel settings={settings} />}
-
-      {view === "jobs" && (() => {
-        const query = jobSearch.trim().toLowerCase();
-        const companies = jobsData.companyDirectory.filter((company) => !query || company.name.toLowerCase().includes(query));
-        const allOpenRoles = jobsData.companyDirectory
-          .flatMap((company) => (company.openRoles || []).map((role) => ({ ...role, company: company.name })));
-        return (
-          <section className="jobs-panel">
-            <div className="jobs-header">
-              <div>
-                <span className="preview-label">Ongoing company-by-company scrape</span>
-                <h2>Employer Careers &amp; Open Roles</h2>
-                <p className="hint">
-                  {jobsData.peopleFromCsv} alumni map to {jobsData.companiesFromCsv} unique employers, current and past — a past employer still means an alum who may be able to refer Khatia in. {allOpenRoles.length} open Project Manager / Program Manager / Operations Manager / Business Analyst role links found so far ({jobsData.companiesResearched} of {jobsData.companiesFromCsv} companies checked). No fit filtering is applied — every matching-titled role found gets listed here regardless of seniority or location, so Khatia can judge compatibility herself. Checked {jobsData.checkedAt}.
-                </p>
-              </div>
-              <input
-                className="jobs-search"
-                value={jobSearch}
-                onChange={(event) => setJobSearch(event.target.value)}
-                placeholder="Filter the employer directory..."
-              />
-            </div>
-            <div className="jobs-recommendations">
-              <div className="jobs-section-heading">
-                <div>
-                  <span className="preview-label">Every open role found</span>
-                  <h3>Open roles across all companies</h3>
-                </div>
-                <strong>{allOpenRoles.length} links found</strong>
-              </div>
-              <div className="jobs-list">
-                {allOpenRoles.map((role) => (
-                  <a className="job-row" href={role.url} target="_blank" rel="noreferrer" key={`${role.company}-${role.title}-${role.url}`}>
-                    <div>
-                      <strong>{role.title}</strong>
-                      <span>{role.company}</span>
-                    </div>
-                    <div className="job-tags">
-                      <span>Open posting ↗</span>
-                    </div>
-                  </a>
-                ))}
-                {!allOpenRoles.length && <p className="hint">No open roles found yet — still working through the company list.</p>}
-              </div>
-            </div>
-            <div className="jobs-section-heading jobs-directory-heading">
-              <div>
-                <span className="preview-label">Complete source-company list</span>
-                <h3>Official employer career pages</h3>
-              </div>
-              <strong>{jobsData.companyDirectory.length} companies</strong>
-            </div>
-            <div className="jobs-grid">
-              {companies.map((company) => (
-                <article className="jobs-company" key={company.name}>
-                  <div className="jobs-company-heading">
-                    <h3>{company.name}</h3>
-                    {company.careersUrl ? (
-                      <a className="jobs-careers-link" href={company.careersUrl} target="_blank" rel="noreferrer">Official careers page ↗</a>
-                    ) : (
-                      <span className="jobs-unavailable">No public careers page located</span>
-                    )}
-                  </div>
-                  {!!company.alumni?.length && (
-                    <p className="jobs-alumni">
-                      {company.alumni.map((alum, index) => (
-                        <span key={alum.name} className={alum.current ? "jobs-alum-current" : "jobs-alum-previous"}>
-                          {alum.name}{alum.current ? "" : " (past)"}{index < company.alumni.length - 1 ? ", " : ""}
-                        </span>
-                      ))}
-                    </p>
-                  )}
-                  {!!company.openRoles?.length && (
-                    <ul className="jobs-open-roles">
-                      {company.openRoles.map((role) => (
-                        <li key={role.url}>
-                          <a href={role.url} target="_blank" rel="noreferrer">{role.title}</a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </article>
-              ))}
-              {!companies.length && <p className="hint">No employer matches that filter.</p>}
-            </div>
-          </section>
-        );
-      })()}
 
       {view === "dashboard" && (
         <section className="dashboard-panel">
