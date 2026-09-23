@@ -70,8 +70,14 @@ async function extractFacts(page, auctionUrl, timeoutMs) {
     // 993 Turbo returned a base Carrera's $70K against a car bid to $267K.
     const soldMatch = bodyText.match(/(Sold for|Winning bid)\s*\$[\d,]+/i);
     const liveMatch = bodyText.match(/(High Bid|Current Bid|Bid to)\s*\$[\d,]+/i);
-    const priceMatch = soldMatch || liveMatch;
-    const auctionState = soldMatch ? "sold" : liveMatch ? "bidding" : "unknown";
+    // Whichever appears first, not whichever kind we prefer. This car's
+    // price is in the header; a page also lists other auctions further
+    // down, so a live listing that shows a sold comparable underneath it
+    // would otherwise report that car's price as this one's.
+    const found = [soldMatch, liveMatch].filter(Boolean).sort((a, b) => a.index - b.index);
+    const priceMatch = found[0] || null;
+    const auctionState = !priceMatch ? "unknown"
+      : priceMatch === soldMatch ? "sold" : "bidding";
 
     const sections = {};
     for (const heading of document.querySelectorAll("h2, h3, h4")) {

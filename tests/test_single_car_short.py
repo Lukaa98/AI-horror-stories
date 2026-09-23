@@ -1641,3 +1641,18 @@ def test_the_listing_scraper_reads_both_auction_states():
     for wording in ("Sold for", "Winning bid", "High Bid", "Current Bid", "Bid to"):
         assert wording in source, f"{wording} is a real Cars & Bids price label"
     assert "auction_state" in source, "live and sold are different facts and must be distinguishable"
+
+
+def test_the_price_comes_from_the_top_of_the_page_not_the_first_match_of_a_kind():
+    """A listing page carries other auctions further down. Preferring sold
+    wording over live wording meant a live listing showing a sold comparable
+    underneath it would report that car's price as this one's -- $67,500
+    from a Carrera on a Turbo bid to $267,000, which is the exact pair of
+    numbers this pipeline already confused once."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "scraper/car-source-scraper/src/scrape-carsandbids-facts.js").read_text()
+    # The rule is positional, not a preference between the two patterns.
+    assert "a.index - b.index" in source, "the earliest match on the page is this car's"
+    assert "soldMatch || liveMatch" not in source, "preferring a kind reintroduces the bug"
