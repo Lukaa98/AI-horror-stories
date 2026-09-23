@@ -79,33 +79,30 @@ def test_stale_sales_are_dropped_only_when_enough_recent_ones_remain():
                                         "Porsche", today_year=2026)["count"] == 2
 
 
-def test_the_two_price_sources_give_one_instruction_not_two():
-    """Both the comps block and the listing block describe the price beat.
-    Written independently they contradicted each other -- one said lead with
-    the comparable range, the other said lead with this car's sale -- and a
-    prompt that argues with itself gets whichever the model prefers."""
-    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
-    import single_car_short
-
-    market = {"count": 2, "median": 185000, "low": 180000, "high": 190000,
-              "examples": [{"title": "1996 Porsche 911 Turbo", "price": 180000, "ended": "4/5/23"}]}
-    comps_block = single_car_short._market_block(market)
-    # The comps block owns the decision and states both branches.
-    assert "SOLD" in comps_block and "STILL BIDDING" in comps_block
-
-    listing_block = single_car_short._listing_facts_block(
-        {"title": "1996 Porsche 911 Turbo", "price_text": "High Bid $267,000",
-         "auction_state": "bidding", "facts": {}, "sections": {}})
-    # The listing block defers rather than issuing a competing order.
-    assert "that section says" in listing_block
-    assert "use it for the value beat instead of estimating" not in listing_block
-
-
-def test_a_live_bid_is_never_presented_as_what_the_car_is_worth():
+def test_the_script_is_never_told_to_mention_where_the_price_came_from():
+    """A viewer is being told what the car costs, not shown a listing. The
+    auction is how we know the number, not part of the story -- and it also
+    dates the video the moment that auction ends."""
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
     import single_car_short
 
     block = single_car_short._market_block(
         {"count": 2, "median": 185000, "low": 180000, "high": 190000, "examples": []})
-    assert "A bid is not a price" in block
-    assert "never stated as what the car sold for" in block
+    assert "they go for about $185,000 today" in block
+    assert "Never mention the auction" in block
+    for phrasing in ("this one sold for", "currently bid to", "one recently went for"):
+        assert phrasing in block, f"{phrasing!r} should be named as banned"
+
+
+def test_an_unfinished_auction_alone_is_not_used_as_a_price():
+    """With no comparable sales and only a live bid, there is no number
+    worth saying: the auction could land anywhere, and no figure beats a
+    wrong one."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+
+    block = single_car_short._listing_facts_block(
+        {"title": "1996 Porsche 911 Turbo", "price_text": "High Bid $267,000",
+         "auction_state": "bidding", "facts": {}, "sections": {}})
+    assert "skip the current-value claim entirely" in block
+    assert "Never narrate the auction" in block
