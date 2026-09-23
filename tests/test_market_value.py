@@ -77,3 +77,35 @@ def test_stale_sales_are_dropped_only_when_enough_recent_ones_remain():
     # Only old ones: kept, because the alternative is silence.
     assert market_value.summarise_comps(COMPS_993, "1996 Porsche 911 Turbo",
                                         "Porsche", today_year=2026)["count"] == 2
+
+
+def test_the_two_price_sources_give_one_instruction_not_two():
+    """Both the comps block and the listing block describe the price beat.
+    Written independently they contradicted each other -- one said lead with
+    the comparable range, the other said lead with this car's sale -- and a
+    prompt that argues with itself gets whichever the model prefers."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+
+    market = {"count": 2, "median": 185000, "low": 180000, "high": 190000,
+              "examples": [{"title": "1996 Porsche 911 Turbo", "price": 180000, "ended": "4/5/23"}]}
+    comps_block = single_car_short._market_block(market)
+    # The comps block owns the decision and states both branches.
+    assert "SOLD" in comps_block and "STILL BIDDING" in comps_block
+
+    listing_block = single_car_short._listing_facts_block(
+        {"title": "1996 Porsche 911 Turbo", "price_text": "High Bid $267,000",
+         "auction_state": "bidding", "facts": {}, "sections": {}})
+    # The listing block defers rather than issuing a competing order.
+    assert "that section says" in listing_block
+    assert "use it for the value beat instead of estimating" not in listing_block
+
+
+def test_a_live_bid_is_never_presented_as_what_the_car_is_worth():
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+
+    block = single_car_short._market_block(
+        {"count": 2, "median": 185000, "low": 180000, "high": 190000, "examples": []})
+    assert "A bid is not a price" in block
+    assert "never stated as what the car sold for" in block

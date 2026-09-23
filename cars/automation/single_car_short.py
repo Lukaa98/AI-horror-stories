@@ -267,12 +267,20 @@ WHAT THIS MODEL ACTUALLY SELLS FOR -- {market['count']} completed sales of the s
 auction site's own results: they run ${market['low']:,} to ${market['high']:,}, with the middle around
 ${market['median']:,}. Examples: {examples}.
 
-Use the middle figure for the current-value half of the price beat, as an approximate round number
-("about ${market['median']:,}"), and say it is what they go for now rather than what one car did. These
-are sales of THIS variant; do not blend in a cheaper or dearer version of the same model. If the listing
-above shows a live auction well above or below this range, that contrast is worth one clause -- a
-well-known example running past the going rate is a fact about this car, not the model's value -- but
-the going rate is the number, not the bid."""
+These are sales of THIS variant; never blend in a cheaper or dearer version of the same model.
+
+Which number the price beat leads with depends on the listing above:
+
+When that listing has SOLD, lead with what it sold for -- it is a real, finished price for the exact car
+in these photos. Then place it against this range in the same breath when the two differ enough to be
+worth saying ("sold for $268,000, well clear of the ${market['median']:,} these usually bring").
+
+When that listing is STILL BIDDING, the going rate is the number: say they go for about
+${market['median']:,} now, as a round approximation. A bid is not a price -- the auction has days to run
+and could land anywhere -- so it is at most one clause of colour ("this one is already past that with a
+day left"), never stated as what the car sold for or what it is worth.
+
+When there is no listing price at all, this range is the whole answer."""
 
 
 def _listing_facts_block(listing_facts):
@@ -308,10 +316,11 @@ web search tells you about this car's own configuration:
 {body}
 
 Use it this way. The engine, output, drivetrain and transmission above describe THIS car; where they
-disagree with a figure you find by search, the listing wins and key_specs must match it. The price above
-is a real, dated figure for THIS car -- use it for the value beat instead of estimating, and say what it
-sold for rather than what it is "worth". When it is labelled as bidding still running, say the bidding is
-at that number, never that it sold for it. And take the trim seriously when no listing price is given at
+disagree with a figure you find by search, the listing wins and key_specs must match it. A price above
+is a real, dated figure for THIS car. If a range of comparable sales was given earlier, that section says
+which of the two the price beat leads with; if it was not, use this one and say what it sold for rather
+than what the car is "worth". When it is labelled as bidding still running, that is a bid and not a
+price: say bidding is at that number, never that it sold for it. And take the trim seriously when no listing price is given at
 all: a search for "993 911" returns base Carrera money and this is a Turbo, so a value beat that quotes
 the wrong variant is worse than no value beat -- run #217 told a viewer a 400hp Turbo trades for about
 $70,000 while the actual car in the photos was bid to $267,000. Any history or generation background in the text above is a starting
