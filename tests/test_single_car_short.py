@@ -1656,3 +1656,23 @@ def test_the_price_comes_from_the_top_of_the_page_not_the_first_match_of_a_kind(
     # The rule is positional, not a preference between the two patterns.
     assert "a.index - b.index" in source, "the earliest match on the page is this car's"
     assert "soldMatch || liveMatch" not in source, "preferring a kind reintroduces the bug"
+
+
+def test_the_scraper_wrapper_keeps_whether_the_auction_finished():
+    """The scraper reports it and the wrapper rebuilt the dict without it,
+    so a live bid reached the prompt labelled "what it actually sold for".
+    Run #218 then told a viewer that 993 Turbos fetch $267,000 -- the
+    standing bid on one no-reserve car, stated as the model's value."""
+    import cars_and_bids
+    import inspect
+
+    source = inspect.getsource(cars_and_bids.scrape_auction_facts)
+    assert '"auction_state"' in source, "the wrapper must pass the state through"
+
+    import single_car_short
+
+    # An unknown state must not be presented as a completed sale either.
+    block = single_car_short._listing_facts_block(
+        {"title": "1996 Porsche 911 Turbo", "price_text": "High Bid $267,000",
+         "auction_state": "unknown", "facts": {}, "sections": {}})
+    assert "What it actually sold for" not in block

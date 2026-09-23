@@ -526,6 +526,12 @@ def scrape_auction_facts(scraper_dir, auction_url, out_dir):
         "auction_url": data.get("auction_url") or auction_url,
         "title": data.get("title") or "",
         "price_text": data.get("price_text") or "",
+        # Whether that price is a completed sale or a bid on a running
+        # auction. Dropping it here made the prompt call a live high bid
+        # "what it actually sold for", and run #218 duly told a viewer that
+        # 993 Turbos fetch $267,000 -- the standing bid on one exceptional
+        # car, stated as the model's value.
+        "auction_state": data.get("auction_state") or "unknown",
         "facts": facts,
         "sections": sections,
     }

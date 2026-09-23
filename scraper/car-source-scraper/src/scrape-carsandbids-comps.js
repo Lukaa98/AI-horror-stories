@@ -38,14 +38,37 @@ function chromeExecutableOverride() {
 
 async function findModelPage(page, auctionUrl, timeoutMs) {
   await page.goto(auctionUrl, { waitUntil: "domcontentloaded", timeout: timeoutMs });
+  // The quick-facts table holds the model link, and it is rendered client
+  // side. The first version looked for it the instant the document was
+  // ready and always found nothing: run #218 reported "No model results
+  // link on the listing page" on a page that has one.
+  await page.waitForSelector('dl dt, a[href*="/search/"]', { timeout: Math.min(20000, timeoutMs) })
+    .catch(() => {});
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
   return page.evaluate(() => {
-    const links = [...document.querySelectorAll('a[href*="/search/"]')];
+    const full = (href) => new URL(href, location.origin).toString().split("?")[0];
     // The model link has two path segments after /search/ (make and model);
     // a bare /search/porsche is the make page and too broad to be comps.
-    const scored = links
-      .map((a) => a.getAttribute("href") || "")
-      .filter((href) => /\/search\/[^/?#]+\/[^/?#]+/.test(href));
-    return scored.length ? new URL(scored[0], location.origin).toString() : "";
+    for (const anchor of document.querySelectorAll('a[href*="/search/"]')) {
+      const href = anchor.getAttribute("href") || "";
+      if (/\/search\/[^/?#]+\/[^/?#]+/.test(href)) return full(href);
+    }
+    // Fallback: build it from the Make and Model rows. A live auction has
+    // no "this auction has ended, see more X here" banner, so on those the
+    // quick-facts rows may be the only route to the model page.
+    const rows = {};
+    for (const dt of document.querySelectorAll("dt")) {
+      const key = String(dt.innerText || "").replace(/\s+/g, " ").trim().toLowerCase();
+      const value = String(dt.nextElementSibling?.innerText || "")
+        .replace(/\s+(Save|Follow|Watch|Share)$/i, "").replace(/\s+/g, " ").trim();
+      if (key && value) rows[key] = value;
+    }
+    const slug = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    if (rows.make && rows.model) {
+      return `${location.origin}/search/${slug(rows.make)}/${slug(rows.model)}`;
+    }
+    return "";
   });
 }
 

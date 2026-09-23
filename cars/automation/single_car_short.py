@@ -290,9 +290,16 @@ def _listing_facts_block(listing_facts):
     if listing_facts.get("title"):
         lines.append(f"Listing title: {listing_facts['title']}")
     if listing_facts.get("price_text"):
+        # Only a confirmed sale is described as one. "bidding" is a running
+        # auction, and "unknown" means the page did not say -- neither is
+        # evidence that money changed hands, and calling either a sale is
+        # how run #218 reported a standing bid as the model's value.
         state = listing_facts.get("auction_state")
-        label = ("Bidding is currently at (the auction is still running)"
-                 if state == "bidding" else "What it actually sold for")
+        label = {
+            "sold": "What it actually sold for",
+            "bidding": "Bidding is currently at (the auction is still running, so this is NOT a sale)",
+        }.get(state, "A price shown on the listing (the page did not say whether it sold, so do not "
+                     "call it a sale)")
         lines.append(f"{label}: {listing_facts['price_text']}")
     for key, value in (listing_facts.get("facts") or {}).items():
         lines.append(f"{key}: {value}")

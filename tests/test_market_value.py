@@ -106,3 +106,36 @@ def test_an_unfinished_auction_alone_is_not_used_as_a_price():
          "auction_state": "bidding", "facts": {}, "sections": {}})
     assert "skip the current-value claim entirely" in block
     assert "Never narrate the auction" in block
+
+
+def test_the_comps_scraper_waits_for_the_model_link_and_can_derive_it():
+    """Run #218 reported "No model results link on the listing page" for a
+    page that has one: the quick-facts table is client-rendered and the link
+    was looked for the instant the document was ready. A live auction also
+    lacks the "this auction has ended, see more X here" banner, so the rows
+    may be the only route -- hence the fallback that builds the URL from
+    Make and Model."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "scraper/car-source-scraper/src/scrape-carsandbids-comps.js").read_text()
+    assert "waitForSelector" in source, "the model link is rendered client side"
+    assert "/search/${slug(rows.make)}/${slug(rows.model)}" in source, \
+        "a live listing may only expose the model through its quick-facts rows"
+
+
+def test_the_price_label_only_claims_a_sale_when_there_was_one():
+    """Three states reach the prompt and only one of them is a sale. Run
+    #218 got "unknown" -- the wrapper had dropped the field -- fell to the
+    sold wording, and reported a standing bid as the model's value."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+
+    def label_for(state):
+        return single_car_short._listing_facts_block(
+            {"title": "1996 Porsche 911 Turbo", "price_text": "High Bid $267,000",
+             "auction_state": state, "facts": {}, "sections": {}})
+
+    assert "What it actually sold for" in label_for("sold")
+    assert "NOT a sale" in label_for("bidding")
+    assert "do not" in label_for("unknown") and "What it actually sold for" not in label_for("unknown")
