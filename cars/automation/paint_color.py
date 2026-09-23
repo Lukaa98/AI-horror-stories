@@ -36,8 +36,20 @@ MIN_COLOURED_FRACTION = 0.10
 # colour is not the body's.
 MIN_SUBJECT_FRACTION = 0.06
 
-# What a white, silver or black car gets instead: the channel's own red.
+# When there is nothing to sample at all -- no cut-out, no pixels -- the
+# channel's own red.
 DEFAULT_COLOR = (226, 32, 32)
+# A car with no hue still has a lightness, and that decides what its text
+# can be. White and silver cannot supply their own colour: white type on a
+# white frame is invisible and silver is barely better, so they get gold --
+# the same treatment pale paint already gets, and the one warm colour that
+# still reads at headline size on white.
+PALE_CAR_COLOR = (209, 148, 32)
+# Black and charcoal keep theirs, because black type on white is the one
+# case where matching the car and staying legible are the same answer.
+DARK_CAR_COLOR = (26, 26, 28)
+# Where the line between them falls, on the median value of the body.
+PALE_CAR_VALUE = 0.42
 # Text sits on white, so a pale colour has to be taken down before it is
 # legible -- a yellow car at its own brightness is unreadable as type.
 MAX_TEXT_VALUE = 0.82
@@ -89,17 +101,29 @@ def dominant_paint_color(path_or_image, default=DEFAULT_COLOR):
         buckets[bucket] += 1
         members.setdefault(bucket, []).append((hue, saturation, value))
 
-    if not buckets:
-        return default
-    bucket, count = buckets.most_common(1)[0]
-    if count / len(pixels) < MIN_COLOURED_FRACTION:
-        return default
+    if not buckets or buckets.most_common(1)[0][1] / len(pixels) < MIN_COLOURED_FRACTION:
+        return _achromatic_color(pixels, default)
+    bucket = buckets.most_common(1)[0][0]
 
     # The median of the winning bucket, not the mean: one blown-out highlight
     # drags a mean but not a median.
     group = sorted(members[bucket], key=lambda hsv: hsv[2])
     hue, saturation, value = group[len(group) // 2]
     return text_safe(hue, saturation, value)
+
+
+def _achromatic_color(pixels, default):
+    """What a white, silver or black car gets.
+
+    Falling back to the house red for all of them threw away the one thing
+    these cars do tell you, which is whether they are light or dark -- and a
+    white car is the case where matching the paint literally cannot work.
+    """
+    if not pixels:
+        return default
+    values = sorted(colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)[2] for r, g, b in pixels)
+    median = values[len(values) // 2]
+    return DARK_CAR_COLOR if median < PALE_CAR_VALUE else PALE_CAR_COLOR
 
 
 def text_safe(hue, saturation, value):

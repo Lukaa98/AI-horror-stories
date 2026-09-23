@@ -35,12 +35,29 @@ def test_a_photo_with_its_background_still_attached_is_refused():
     assert paint_color.dominant_paint_color(opaque) == paint_color.DEFAULT_COLOR
 
 
-def test_a_black_white_or_silver_car_keeps_the_channel_colour():
-    """There is no hue to borrow, and inventing one from a stray reflection
-    would be worse than the house red. The black Supra build is the real
-    case this is taken from."""
-    for rgb in ((18, 18, 20), (245, 245, 245), (160, 162, 165)):
-        assert paint_color.dominant_paint_color(_cutout(rgb)) == paint_color.DEFAULT_COLOR
+def test_a_white_car_gets_gold_because_it_cannot_get_white():
+    """Matching the paint is the rule, and white is where it breaks: white
+    type on a white frame is invisible and silver is barely better. Gold is
+    the one warm colour that still reads at headline size on white, and it
+    is what pale paint already gets."""
+    for rgb in ((248, 248, 248), (178, 180, 184), (120, 122, 126)):
+        assert paint_color.dominant_paint_color(_cutout(rgb)) == paint_color.PALE_CAR_COLOR
+
+
+def test_a_black_car_keeps_its_own_colour():
+    """Black is the case where matching the car and staying legible are the
+    same answer. The black Supra build is the real one."""
+    for rgb in ((18, 18, 20), (56, 56, 60)):
+        assert paint_color.dominant_paint_color(_cutout(rgb)) == paint_color.DARK_CAR_COLOR
+
+
+def test_the_house_red_is_only_for_having_nothing_to_read():
+    """Not for a car without a hue -- that car still has a lightness. The
+    red is for a photo that cannot be sampled at all."""
+    from PIL import Image
+
+    opaque = Image.new("RGBA", (120, 120), (120, 170, 220, 255))
+    assert paint_color.dominant_paint_color(opaque) == paint_color.DEFAULT_COLOR
 
 
 def test_a_colour_that_is_barely_there_is_not_used():
