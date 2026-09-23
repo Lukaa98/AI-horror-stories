@@ -4,6 +4,11 @@ import "./UploadPanel.css";
 const UPLOAD_WORKFLOW = "youtube-upload.yml";
 const OUTPUT_BRANCH = "cars-output";
 const BUILD_ROOT = "cars/single-car-shorts";
+
+function rawUrl(settings, buildId, name) {
+  return `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
+    + `/${OUTPUT_BRANCH}/${BUILD_ROOT}/${buildId}/${name}`;
+}
 const POLL_MS = 6000;
 // The workflow gives up at 30 minutes; past that there is nothing coming.
 const GIVE_UP_MS = 31 * 60 * 1000;
@@ -122,6 +127,17 @@ export default function UploadPanel({ settings, buildId }) {
     <section className="upload-panel">
       <h3>YouTube</h3>
 
+      {/* Everything that is about to be published, in one place: the still
+          a browsing viewer sees first, then the words under it. */}
+      <div className="upload-review">
+        {listing.thumbnail && (
+          <a className="upload-thumb" href={rawUrl(settings, buildId, listing.thumbnail)}
+             target="_blank" rel="noreferrer">
+            <img src={rawUrl(settings, buildId, listing.thumbnail)} alt="Channel thumbnail" />
+          </a>
+        )}
+        <div className="upload-review-body">
+
       {state === "done" && listing.video_id ? (
         <p className="upload-done">
           Uploaded as <a href={`https://youtu.be/${listing.video_id}`} target="_blank" rel="noreferrer">
@@ -149,6 +165,8 @@ export default function UploadPanel({ settings, buildId }) {
         </>
       )}
       {state === "error" && <p className="upload-error">{error}</p>}
+        </div>
+      </div>
     </section>
   );
 }

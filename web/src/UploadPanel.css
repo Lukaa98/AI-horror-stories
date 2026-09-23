@@ -42,3 +42,19 @@
   letter-spacing: .04em;
   vertical-align: middle;
 }
+
+/* Thumbnail beside the words, because the two are judged together -- the
+   still is what a viewer sees before any of the text. */
+.upload-review { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+.upload-review-body { flex: 1 1 320px; min-width: 0; }
+
+.upload-thumb { flex: 0 0 auto; display: block; }
+.upload-thumb img {
+  /* The render is 1080x1920; shown at a size where the title is still
+     legible, which is the only thing worth checking here. */
+  width: 150px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: block;
+}
+.upload-thumb img:hover { border-color: var(--accent); }
