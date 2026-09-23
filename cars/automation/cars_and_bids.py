@@ -529,3 +529,40 @@ def scrape_auction_facts(scraper_dir, auction_url, out_dir):
         "facts": facts,
         "sections": sections,
     }
+
+
+# The comps page is one extra page load, and it is the difference between a
+# number that is true for this model and one taken from a single auction.
+AUCTION_COMPS_TIMEOUT_SECONDS = 150
+
+
+def scrape_auction_comps(scraper_dir, auction_url, out_dir):
+    """Dated sale results for the same model, from the site's own listing.
+
+    A single auction prices one car: a live one is unfinished, an ended one
+    is whatever that example was worth. A video outlives both. The model's
+    results page carries real, dated sales, and the listing links to it --
+    which also solves not knowing that "911 Turbo" lives under 993-911.
+
+    Best-effort like the facts read: any failure returns [] and the value
+    beat is written the way it was before this existed.
+    """
+    if not auction_url:
+        return []
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = out_dir / "carsandbids-comps.json"
+    try:
+        subprocess.run(
+            ["node", "src/scrape-carsandbids-comps.js",
+             f"--auction-url={auction_url}", f"--out-json={manifest_path}"],
+            cwd=scraper_dir, check=False, timeout=AUCTION_COMPS_TIMEOUT_SECONDS,
+        )
+        data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (subprocess.TimeoutExpired, OSError, json.JSONDecodeError) as exc:
+        print(f"[cars-and-bids] Comparable sales unavailable, continuing without them: {exc}")
+        return []
+    if data.get("error"):
+        print(f"[cars-and-bids] Comparable sales unavailable, continuing without them: {data['error']}")
+        return []
+    return data.get("comps") or []
