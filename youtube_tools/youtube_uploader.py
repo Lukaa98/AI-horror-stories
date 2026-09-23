@@ -66,3 +66,19 @@ def post_top_level_comment(youtube, video_id, text):
         },
     ).execute()
     return response["id"]
+
+
+def set_thumbnail(youtube, video_id, file_path):
+    """Attach a custom thumbnail to an already-uploaded video.
+
+    Separate from the upload because it is a separate API call and a
+    separate failure: the video is live by the time this runs, so a refused
+    thumbnail is worth reporting but never worth losing the upload over.
+    Custom thumbnails need a verified channel, which is the usual reason
+    this is refused on a new one.
+    """
+    from googleapiclient.http import MediaFileUpload
+
+    media = MediaFileUpload(str(file_path), mimetype="image/jpeg")
+    youtube.thumbnails().set(videoId=video_id, media_body=media).execute()
+    return video_id

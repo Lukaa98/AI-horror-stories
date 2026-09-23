@@ -44,6 +44,7 @@ def _run(monkeypatch, listing, uploaded, written, **extra):
         return "vid123"
 
     uploader.upload_video = fake_upload
+    uploader.set_thumbnail = lambda youtube, video_id, file_path: video_id
     monkeypatch.setitem(sys.modules, "youtube_tools.youtube_client", client)
     monkeypatch.setitem(sys.modules, "youtube_tools.youtube_uploader", uploader)
     monkeypatch.setattr("sys.argv", ["upload_build", "--build-id", "a-build", *extra.get("argv", [])])
@@ -113,3 +114,42 @@ def test_the_upload_workflow_passes_its_inputs_through_the_environment():
         assert "${{" not in block.split("\n      - ")[0], \
             "workflow inputs must reach the script through env vars, not inline"
     assert "BUILD_ID: ${{ inputs.build_id }}" in text
+
+
+def test_a_refused_thumbnail_does_not_fail_an_upload_that_worked(monkeypatch):
+    """Custom thumbnails need a verified channel, which a new one is not.
+    By the time this runs the video is already live, so a refusal is worth
+    recording and never worth turning a successful upload into a failure."""
+    listing = {"title": "T", "video": "v.mp4", "thumbnail": "thumbnail.jpg",
+               "privacy": "private", "tags": []}
+    uploaded, written = {}, {}
+    monkeypatch.setattr(upload_build.gh, "read_json", lambda *a: listing)
+    monkeypatch.setenv("GITHUB_REPOSITORY", "owner/repo")
+    monkeypatch.setenv("GH_PAT", "pat")
+    monkeypatch.setattr(upload_build.gh, "write_json",
+                        lambda repo, token, branch, path, payload, message:
+                        written.update(payload=payload))
+
+    def fake_download(url, destination, **kwargs):
+        destination.write_bytes(b"x" * (2 << 20))
+        return destination
+
+    monkeypatch.setattr(upload_build.gh, "download", fake_download)
+
+    client = types.ModuleType("youtube_tools.youtube_client")
+    client.get_authenticated_service = lambda: "service"
+    uploader = types.ModuleType("youtube_tools.youtube_uploader")
+    uploader.upload_video = lambda youtube, **kwargs: "vid123"
+
+    def refuse(youtube, video_id, file_path):
+        raise RuntimeError("thumbnailNotVerified")
+
+    uploader.set_thumbnail = refuse
+    monkeypatch.setitem(sys.modules, "youtube_tools.youtube_client", client)
+    monkeypatch.setitem(sys.modules, "youtube_tools.youtube_uploader", uploader)
+    monkeypatch.setattr("sys.argv", ["upload_build", "--build-id", "a-build"])
+
+    assert upload_build.main() == 0
+    assert written["payload"]["video_id"] == "vid123"
+    assert written["payload"]["thumbnail_set"] is False
+    assert "thumbnailNotVerified" in written["payload"]["thumbnail_error"]

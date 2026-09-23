@@ -92,7 +92,7 @@ def main():
         # Imported here so a missing google library is an error from this
         # command rather than from importing the module.
         from youtube_tools.youtube_client import get_authenticated_service
-        from youtube_tools.youtube_uploader import upload_video
+        from youtube_tools.youtube_uploader import set_thumbnail, upload_video
 
         youtube = get_authenticated_service()
         print(f"[upload] Sending as {privacy}: {title}", flush=True)
@@ -104,6 +104,24 @@ def main():
             tags=listing.get("tags") or [],
             privacy=privacy,
         )
+
+        thumbnail_name = listing.get("thumbnail")
+        if thumbnail_name:
+            local_thumb = Path(workspace) / thumbnail_name
+            try:
+                gh.download(raw_url(repository, args.branch, f"{build_dir}/{thumbnail_name}"),
+                            local_thumb)
+                set_thumbnail(youtube, video_id, local_thumb)
+                listing["thumbnail_set"] = True
+                print("[upload] Thumbnail set.", flush=True)
+            except Exception as error:  # noqa: BLE001 - the video is already live
+                # Custom thumbnails need a verified channel, which a new one
+                # is not. Worth saying; never worth failing an upload that
+                # has already succeeded.
+                listing["thumbnail_set"] = False
+                listing["thumbnail_error"] = str(error)[:300]
+                print(f"[upload] Thumbnail refused ({error}). The video is up regardless.",
+                      flush=True)
 
     listing.update({
         "video_id": video_id,

@@ -19,6 +19,7 @@ from openai import OpenAI
 import requests
 
 from background_removal import remove_background
+from thumbnail import build_thumbnail
 from youtube_metadata import build_metadata as build_youtube_metadata
 from cars_and_bids import (enrich_entry_from_manifest, scrape_auction_facts, scrape_auction_images,
                            scrape_entry_images)
@@ -1965,14 +1966,24 @@ def build_short(args):
     # can show the exact title and description before anything is published
     # -- and that the upload reads a reviewed file rather than regenerating
     # something nobody has seen.
+    # The channel still, built from the same photos. Failing to draw one
+    # must not lose the video that is already rendered, so it is caught.
+    thumbnail_name = None
+    try:
+        thumbnail_name = build_thumbnail(manifest, output_dir, output_dir / "thumbnail.jpg").name
+    except Exception as error:  # noqa: BLE001 - a thumbnail is not worth the build
+        print(f"[single-car] Thumbnail failed ({error}); the video is unaffected.")
+
     upload_path = output_dir / "upload.json"
     upload_path.write_text(json.dumps({
         **build_youtube_metadata(manifest, credit_url=str(getattr(args, "auction_url", "") or "")),
         "video": video_path.name,
+        "thumbnail": thumbnail_name,
         "privacy": "private",
         "status": "ready",
     }, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"[single-car] Wrote {upload_path.name}")
+    print(f"[single-car] Wrote {upload_path.name}"
+          + (f" and {thumbnail_name}" if thumbnail_name else ""))
     return manifest
 
 
