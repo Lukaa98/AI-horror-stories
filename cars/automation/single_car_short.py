@@ -97,7 +97,7 @@ ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 PACKAGE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
-    "required": ["title", "key_specs", "scenes", "sources", "start_year", "end_year"],
+    "required": ["title", "youtube_title", "key_specs", "scenes", "sources", "start_year", "end_year"],
     "properties": {
         "title": {"type": "string"},
         # The YouTube title. Separate from "title", which is a scene headline
