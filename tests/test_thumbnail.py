@@ -46,11 +46,41 @@ def test_it_renders_without_any_photos_at_all(tmp_path):
 
 
 def test_only_the_specs_that_survive_being_small_are_shown(tmp_path):
-    """Six rows at thumbnail scale is a grey smudge. Three is the limit, and
-    engine and price are the two that read worst."""
+    """Engine and price are long strings -- "3.9L Turbocharged V8", "$250K
+    new, ~$200K now" -- and stop being readable well before the rest does."""
     assert "engine" not in thumbnail.THUMBNAIL_SPEC_FIELDS
     assert "price" not in thumbnail.THUMBNAIL_SPEC_FIELDS
-    assert len(thumbnail.THUMBNAIL_SPEC_FIELDS) <= 3
+    assert len(thumbnail.THUMBNAIL_SPEC_FIELDS) <= thumbnail.MAX_SPEC_ROWS
+
+
+def test_a_long_model_is_shortened_rather_than_shrunk():
+    """The model is the one thing a viewer reads in a grid, so it stays big.
+    A full name only fits by dropping to type too small to read, and the
+    tail is the part nobody says out loud anyway."""
+    from PIL import Image, ImageDraw
+
+    draw = ImageDraw.Draw(Image.new("RGB", thumbnail.THUMBNAIL_SIZE))
+    width = thumbnail.THUMBNAIL_SIZE[0] - 70
+
+    text, font = draw and thumbnail._headline(draw, "S680 4MATIC EXECUTIVE LONG", width)
+    assert text == "S680 4MATIC"
+    assert font.size >= thumbnail.COMFORTABLE_TITLE_SIZE
+
+    # A name that already fits is left alone.
+    text, font = thumbnail._headline(draw, "488 SPIDER", width)
+    assert text == "488 SPIDER"
+
+    # Never cut below two words: one word is usually not the car.
+    text, _font = thumbnail._headline(draw, "CHALLENGER SRT SUPER STOCK", width)
+    assert len(text.split()) == 2
+
+
+def test_the_make_goes_under_the_car_only_when_it_adds_something():
+    """The model is the headline; the make is what a viewer scanning a grid
+    recognises. But when the title already fell back to the make, repeating
+    it twice says nothing."""
+    assert thumbnail._make_text(_manifest()) == "FERRARI"
+    assert thumbnail._make_text(_manifest(car={"make": "Audi", "model": ""})) == ""
 
 
 def test_the_narrator_asset_carries_the_current_channel_name():
