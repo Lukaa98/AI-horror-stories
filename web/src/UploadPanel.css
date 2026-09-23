@@ -1,0 +1,44 @@
+/* Built from index.css's tokens, which are redefined under
+   prefers-color-scheme -- a hardcoded colour breaks one of the two themes. */
+.upload-panel { margin: 20px 0 6px; padding-top: 16px; border-top: 1px solid var(--border); }
+.upload-panel h3 { margin: 0 0 12px; color: var(--text-h); font-size: 1rem; }
+
+.upload-fields { display: grid; grid-template-columns: 110px 1fr; gap: 6px 14px; margin: 0 0 16px; }
+.upload-fields dt { color: var(--text); font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+.upload-fields dd { margin: 0; color: var(--text-h); font-size: .9rem; word-break: break-word; }
+/* The description is the long one and the one most worth reading before
+   it is published, so it keeps its line breaks. */
+.upload-description { white-space: pre-wrap; line-height: 1.45; }
+
+.upload-go {
+  padding: 9px 16px;
+  font: inherit;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--accent);
+  cursor: pointer;
+}
+.upload-go:hover:not(:disabled) { border-color: var(--accent); }
+.upload-go:disabled { opacity: .5; cursor: default; }
+
+.upload-done { color: #46c983; font-weight: 600; }
+.upload-done a { color: inherit; }
+.upload-error { color: #e0574a; font-size: .9rem; white-space: pre-wrap; }
+
+/* On the card grid: small enough not to compete with the title, obvious
+   enough to answer "did I already post this one?" at a glance. */
+.dashboard-uploaded {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(70, 201, 131, .16);
+  border: 1px solid rgba(70, 201, 131, .5);
+  color: #46c983;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  vertical-align: middle;
+}

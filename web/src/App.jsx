@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import PhotoSlots from "./PhotoSlots";
 import PhotoThumb from "./PhotoThumb";
+import UploadPanel from "./UploadPanel";
 import YouTubePanel from "./YouTubePanel";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 
@@ -9,7 +10,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v11";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.33 — Token expiry on the YouTube tab";
+const UI_VERSION = "V11.34 — Upload a build to YouTube";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v11";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -612,6 +613,12 @@ async function attachDashboardPreviews(items, owner, repo, token) {
       if (item.type === "single-car" && !item.hasResult) return;
       const preview = await fetchFileViaApi(owner, repo, OUTPUT_BRANCH, `${prefix}/${item.id}/${file}`, token);
       if (preview) item.preview = preview;
+      if (item.type === "single-car") {
+        // 404s for builds rendered before listings existed, which is fine
+        // -- fetchFileViaApi returns null rather than throwing.
+        item.upload = await fetchFileViaApi(
+          owner, repo, OUTPUT_BRANCH, `${prefix}/${item.id}/upload.json`, token);
+      }
     })
   );
   return items;
@@ -1699,6 +1706,7 @@ export default function App() {
                     {thumbUrl && <img src={thumbUrl} alt={title} />}
                     <div className="dashboard-card-body">
                       <span className={`dashboard-type ${item.type}`}>{typeLabel}</span>
+                      {item.upload?.video_id && <span className="dashboard-uploaded">UPLOADED</span>}
                       <h3>{title}</h3>
                       <p className="hint">{item.timestamp ? item.timestamp.toLocaleString() : item.id}</p>
                       {item.type === "draft" && (
@@ -1996,6 +2004,10 @@ export default function App() {
                 )}
 
                 {!item.preview && <p className="hint">No JSON data found for this item (files: {item.files.join(", ")}).</p>}
+
+                {item.type === "single-car" && item.hasVideo && (
+                  <UploadPanel settings={settings} buildId={item.id} />
+                )}
 
                 <div className="dashboard-card-actions">
                   {confirmDeleteId === key ? (
