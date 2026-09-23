@@ -814,6 +814,11 @@ def accent_for(media_paths):
         text = str(path)
         if "nobg" not in text:
             continue
+        # The rival's cut-out is in this list too, and the order follows the
+        # scenes -- a build whose comparison beat lands early would paint the
+        # whole video in the other car's colour.
+        if "rival" in text:
+            continue
         try:
             found = dominant_paint_color(text, default=None)
         except OSError:

@@ -67,3 +67,30 @@ def test_the_video_falls_back_when_no_cut_out_is_available():
     assert narrator_video.accent_for([]) == narrator_video.ACCENT_COLOR
     assert narrator_video.accent_for(["a/front.jpg", "b/side.jpg"]) == narrator_video.ACCENT_COLOR
     assert narrator_video.accent_for(["missing/front-nobg.png"]) == narrator_video.ACCENT_COLOR
+
+
+def test_the_rival_car_never_supplies_the_colour():
+    """The comparison car's cut-out sits in the same media list as this
+    car's, and the order follows the scenes -- so a build whose comparison
+    beat lands early would take the rival's paint for the whole video."""
+    import narrator_video
+
+    paths = ["images/manual-rival/rival-nobg.png", "images/manual/front-nobg.png"]
+    picked = []
+    original = narrator_video.accent_for
+
+    # Record which file actually gets sampled.
+    import paint_color as pc
+
+    real = pc.dominant_paint_color
+
+    def spy(path, default=None):
+        picked.append(str(path))
+        return (1, 2, 3)
+
+    pc.dominant_paint_color = spy
+    try:
+        assert original(paths) == (1, 2, 3)
+    finally:
+        pc.dominant_paint_color = real
+    assert picked == ["images/manual/front-nobg.png"], picked
