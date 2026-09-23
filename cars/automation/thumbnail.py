@@ -18,9 +18,11 @@ from PIL import Image, ImageDraw
 from generate_sample import _font
 from narrator_video import ACCENT_COLOR, TABLE_COLOR, TABLE_TINT, _spec_rows
 
-# YouTube's own thumbnail size. A Short plays vertically, but the still is
-# shown in 16:9 wherever it is shown at all.
-THUMBNAIL_SIZE = (1280, 720)
+# The video's own shape. These are Shorts, and a Short's tile on the channel
+# page and in the Shorts feed is vertical -- a 16:9 still gets cropped to
+# fit it, which takes the sides off the car and half the spec table with
+# them. Same aspect as the render, so nothing is lost.
+THUMBNAIL_SIZE = (1080, 1920)
 BACKGROUND = (255, 255, 255)
 MAX_UPLOAD_BYTES = 2 * 1024 * 1024  # YouTube rejects anything larger.
 
@@ -96,56 +98,70 @@ def _draw_specs(frame, manifest, origin, width):
     if not rows:
         return 0
     draw = ImageDraw.Draw(frame)
-    label_font, value_font = _font(26), _font(36)
-    row_h, x, y = 60, origin[0], origin[1]
-    header_h = 46
+    label_font, value_font = _font(38), _font(52)
+    row_h, x, y = 84, origin[0], origin[1]
+    header_h = 64
     total_h = header_h + row_h * len(rows)
     draw.rectangle([x, y, x + width, y + header_h], fill=TABLE_COLOR)
-    draw.text((x + 16, y + 9), "KEY SPECS", font=_font(28), fill=(255, 255, 255))
+    draw.text((x + 22, y + 12), "KEY SPECS", font=_font(40), fill=(255, 255, 255))
     draw.rectangle([x, y + header_h, x + width, y + total_h], fill=TABLE_TINT)
     for index, (_field, label, value) in enumerate(rows):
         top = y + header_h + index * row_h
-        draw.text((x + 16, top + 14), label.upper(), font=label_font, fill=TABLE_COLOR)
+        draw.text((x + 22, top + 22), label.upper(), font=label_font, fill=TABLE_COLOR)
         value_w = draw.textlength(value, font=value_font)
-        draw.text((x + width - 16 - value_w, top + 10), value, font=value_font, fill=(20, 20, 20))
+        draw.text((x + width - 22 - value_w, top + 14), value, font=value_font, fill=(20, 20, 20))
         if index:
-            draw.line([(x + 12, top), (x + width - 12, top)], fill=(255, 255, 255), width=2)
+            draw.line([(x + 16, top), (x + width - 16, top)], fill=(255, 255, 255), width=3)
     return total_h
 
 
 def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
-    """Compose the thumbnail. Returns the path, or None with nothing to draw."""
+    """Compose the thumbnail. Returns the path, or None with nothing to draw.
+
+    Stacked rather than side by side, because the frame is taller than it is
+    wide: the model across the top, the car through the middle at the size
+    that actually sells it, and the numbers and the narrator sharing the
+    bottom band.
+    """
     width, height = size
     frame = Image.new("RGB", size, BACKGROUND)
     draw = ImageDraw.Draw(frame)
 
     title = _title_text(manifest)
-    title_font = _fit_text(draw, title, width - 80, start_size=132)
+    title_font = _fit_text(draw, title, width - 70, start_size=190, min_size=60)
     title_w = draw.textlength(title, font=title_font)
-    title_h = title_font.size
-    draw.text(((width - title_w) / 2, 18), title, font=title_font, fill=ACCENT_COLOR)
+    draw.text(((width - title_w) / 2, int(height * 0.025)), title,
+              font=title_font, fill=ACCENT_COLOR)
+    top = int(height * 0.025) + title_font.size + int(height * 0.03)
 
-    top = int(title_h + 46)
+    # A car photo is far wider than it is tall, so fitting one to this frame's
+    # width leaves a band of white above and below it. Rather than let that
+    # sit as two gaps, the car hangs directly under the title and the
+    # narrator is tall enough to close the space from below.
+    band_h = int(height * 0.52)
+    band_top = height - band_h
 
-    # The narrator, anchored bottom-right, sized so the car keeps the frame.
     narrator_path = Path(__file__).resolve().parents[2] / NARRATOR_SPRITE
-    narrator_w = 0
+    narrator_top = height
     if narrator_path.is_file():
         narrator = _fit(_trim(Image.open(narrator_path).convert("RGBA")),
-                        int(width * 0.22), int(height - top - 10))
-        narrator_w = narrator.width
-        frame.paste(narrator, (width - narrator_w - 24, height - narrator.height), narrator)
+                        int(width * 0.42), band_h)
+        narrator_top = height - narrator.height
+        frame.paste(narrator, (width - narrator.width - int(width * 0.03),
+                               narrator_top), narrator)
 
     hero = _hero_path(manifest, build_dir)
     if hero:
         car = _fit(_trim(Image.open(hero).convert("RGBA")),
-                   int(width - narrator_w - 90), int((height - top) * 0.78))
-        car_x = int((width - narrator_w - car.width) / 2) + 10
-        frame.paste(car, (max(20, car_x), top), car)
+                   width - 30, int((narrator_top - top) * 1.1))
+        frame.paste(car, (int((width - car.width) / 2),
+                          top + max(0, int((narrator_top - top - car.height) * 0.55))), car)
 
-    # Wide enough for "HORSEPOWER" and its value side by side. At 0.28 the
-    # label ran straight through the number.
-    _draw_specs(frame, manifest, (30, height - 240), width=int(width * 0.36))
+    # Sat against the narrator's feet rather than floating, so the two read
+    # as one band instead of two objects adrift in white.
+    _draw_specs(frame, manifest,
+                (int(width * 0.04), narrator_top + int(band_h * 0.30)),
+                width=int(width * 0.55))
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
