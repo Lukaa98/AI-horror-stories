@@ -25,6 +25,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+from youtube_tools import gh
+
 DEVICE_CODE_URL = "https://oauth2.googleapis.com/device/code"
 TOKEN_URL = "https://oauth2.googleapis.com/token"
 # youtube.force-ssl is rejected by the device endpoint -- it is not on the
@@ -77,27 +79,6 @@ def poll_for_token(client_id, client_secret, device_code, interval, deadline):
     raise SystemExit("The code expired before it was approved. Start again.")
 
 
-def _github(repository, token, path, method="GET", body=None):
-    request = urllib.request.Request(
-        f"https://api.github.com/repos/{repository}{path}",
-        data=json.dumps(body).encode() if body is not None else None,
-        method=method,
-        headers={
-            "Authorization": f"Bearer {token}",
-            "Accept": "application/vnd.github+json",
-            "Content-Type": "application/json",
-        },
-    )
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            raw = response.read()
-            return json.loads(raw) if raw else {}
-    except urllib.error.HTTPError as error:
-        if error.code == 404:
-            return None
-        raise
-
-
 def publish_code(repository, token, branch, path, payload):
     """Put the user code on the output branch through the contents API.
 
@@ -108,15 +89,8 @@ def publish_code(repository, token, branch, path, payload):
     fetching a 2.5GB branch to write 200 bytes, which is most of the time a
     person is sat waiting for a code that expires.
     """
-    existing = _github(repository, token, f"/contents/{path}?ref={branch}")
-    body = {
-        "message": "youtube: publish device code for approval",
-        "content": base64.b64encode(json.dumps(payload, indent=2).encode()).decode(),
-        "branch": branch,
-    }
-    if existing and existing.get("sha"):
-        body["sha"] = existing["sha"]
-    _github(repository, token, f"/contents/{path}", method="PUT", body=body)
+    gh.write_json(repository, token, branch, path, payload,
+                  "youtube: publish device code for approval")
 
 
 def store_secret(repository, pat, name, value):

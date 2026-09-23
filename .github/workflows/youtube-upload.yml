@@ -1,0 +1,64 @@
+name: YouTube - Upload a build (Manual)
+
+run-name: "youtube_upload: ${{ inputs.build_id }}"
+
+# Sends one finished build to the channel, as private. It reads the
+# upload.json written when the build rendered -- the title and description
+# already visible in the dashboard -- so what goes up is text someone has
+# read, not something generated at the moment of publishing.
+#
+# Nothing is cloned. cars-output is a 2.5GB branch of rendered video, so the
+# listing comes through the contents API and the MP4 through its raw URL.
+on:
+  workflow_dispatch:
+    inputs:
+      build_id:
+        description: "Build folder under cars/single-car-shorts"
+        required: true
+        type: string
+      force:
+        description: "Upload again even if this build already has a video id"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  # One at a time. Two uploads racing would both read upload.json before
+  # either wrote back, and neither would see the other's video id.
+  group: youtube-upload
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install the Google client libraries
+        run: pip install --quiet google-api-python-client google-auth google-auth-oauthlib
+
+      - name: Upload
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          # Writes the video id back onto upload.json on the output branch.
+          GH_PAT: ${{ secrets.GH_PAT }}
+          # Through the environment, never interpolated into the script --
+          # ${{ }} is substituted as literal text before bash parses, which
+          # is how a JSON input lost its quotes in cars-research.yml.
+          BUILD_ID: ${{ inputs.build_id }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          set -euo pipefail
+          extra=""
+          if [ "${FORCE}" = "true" ]; then extra="--force"; fi
+          python -m youtube_tools.upload_build --build-id "${BUILD_ID}" ${extra}
