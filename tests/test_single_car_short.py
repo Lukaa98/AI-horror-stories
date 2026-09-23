@@ -1608,3 +1608,36 @@ def test_scoped_superlatives_across_real_builds_are_not_flagged():
         "the greatest car of all time",
     ]:
         assert m.UNSCOPED_SUPERLATIVE_RE.search(line), line
+
+
+def test_a_live_auction_price_is_not_described_as_a_sale():
+    """A high bid on a running auction has not bought anything. Run #217's
+    listing was live, the scraper matched only ended-auction wording, and the
+    price came back empty -- so the script took a number from search and told
+    a viewer a 400hp 993 Turbo trades for about $70,000 while the car in the
+    photos was bid to $267,000."""
+    import single_car_short
+
+    live = single_car_short._listing_facts_block(
+        {"title": "1996 Porsche 911 Turbo", "price_text": "High Bid $267,000",
+         "auction_state": "bidding", "facts": {}, "sections": {}})
+    assert "High Bid $267,000" in live
+    assert "still running" in live
+    assert "sold for: High Bid" not in live
+
+    ended = single_car_short._listing_facts_block(
+        {"title": "1995 Porsche 911 Carrera", "price_text": "Sold for $67,500",
+         "auction_state": "sold", "facts": {}, "sections": {}})
+    assert "What it actually sold for: Sold for $67,500" in ended
+
+
+def test_the_listing_scraper_reads_both_auction_states():
+    """The regex only matched ended auctions, so every live listing arrived
+    with no price and the value beat was written from search instead."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "scraper/car-source-scraper/src/scrape-carsandbids-facts.js").read_text()
+    for wording in ("Sold for", "Winning bid", "High Bid", "Current Bid", "Bid to"):
+        assert wording in source, f"{wording} is a real Cars & Bids price label"
+    assert "auction_state" in source, "live and sold are different facts and must be distinguishable"

@@ -259,7 +259,10 @@ def _listing_facts_block(listing_facts):
     if listing_facts.get("title"):
         lines.append(f"Listing title: {listing_facts['title']}")
     if listing_facts.get("price_text"):
-        lines.append(f"What it actually sold for: {listing_facts['price_text']}")
+        state = listing_facts.get("auction_state")
+        label = ("Bidding is currently at (the auction is still running)"
+                 if state == "bidding" else "What it actually sold for")
+        lines.append(f"{label}: {listing_facts['price_text']}")
     for key, value in (listing_facts.get("facts") or {}).items():
         lines.append(f"{key}: {value}")
     for key, value in (listing_facts.get("sections") or {}).items():
@@ -274,9 +277,13 @@ web search tells you about this car's own configuration:
 {body}
 
 Use it this way. The engine, output, drivetrain and transmission above describe THIS car; where they
-disagree with a figure you find by search, the listing wins and key_specs must match it. The sale price
-above is a real, dated result -- use it for the value beat instead of estimating, and say what it sold
-for rather than what it is "worth". Any history or generation background in the text above is a starting
+disagree with a figure you find by search, the listing wins and key_specs must match it. The price above
+is a real, dated figure for THIS car -- use it for the value beat instead of estimating, and say what it
+sold for rather than what it is "worth". When it is labelled as bidding still running, say the bidding is
+at that number, never that it sold for it. And take the trim seriously when no listing price is given at
+all: a search for "993 911" returns base Carrera money and this is a Turbo, so a value beat that quotes
+the wrong variant is worse than no value beat -- run #217 told a viewer a 400hp Turbo trades for about
+$70,000 while the actual car in the photos was bid to $267,000. Any history or generation background in the text above is a starting
 point, not a quote: verify it and write it in your own words, and never read the listing aloud.
 
 Ignore anything in there about this one used example's paperwork -- mileage, VIN, title status, service

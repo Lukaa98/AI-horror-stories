@@ -55,12 +55,23 @@ async function extractFacts(page, auctionUrl, timeoutMs) {
     const facts = {};
     for (const dt of document.querySelectorAll("dt")) {
       const key = clean(dt.innerText);
-      const value = clean(dt.nextElementSibling?.innerText);
+      // Trailing UI words ride along in innerText -- the Model row came back
+      // as "993 911 Save" because a Save button sits inside the cell.
+      const value = clean(dt.nextElementSibling?.innerText)
+        .replace(/\s+(Save|Follow|Watch|Share)$/i, "");
       if (key && value && key.length < 40 && value.length < 200) facts[key] = value;
     }
 
     const bodyText = clean(document.body?.innerText).slice(0, 20000);
-    const priceMatch = bodyText.match(/(Sold for|Bid to|Winning bid)\s*\$[\d,]+/i);
+    // Both states, because they are different facts. An ended auction has a
+    // sale price; a live one has a bid that has not bought anything yet.
+    // Matching only the ended wording left a live listing with no price at
+    // all, and the script then took a number from search -- which for a
+    // 993 Turbo returned a base Carrera's $70K against a car bid to $267K.
+    const soldMatch = bodyText.match(/(Sold for|Winning bid)\s*\$[\d,]+/i);
+    const liveMatch = bodyText.match(/(High Bid|Current Bid|Bid to)\s*\$[\d,]+/i);
+    const priceMatch = soldMatch || liveMatch;
+    const auctionState = soldMatch ? "sold" : liveMatch ? "bidding" : "unknown";
 
     const sections = {};
     for (const heading of document.querySelectorAll("h2, h3, h4")) {
@@ -82,6 +93,7 @@ async function extractFacts(page, auctionUrl, timeoutMs) {
     return {
       title: clean(document.querySelector("h1")?.innerText) || clean(document.title),
       price_text: priceMatch ? clean(priceMatch[0]) : "",
+      auction_state: auctionState,
       facts,
       sections,
     };
