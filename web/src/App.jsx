@@ -10,7 +10,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v11";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.35 — Review the thumbnail before uploading";
+const UI_VERSION = "V11.36 — Refill the form from a failed run";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v11";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -630,6 +630,39 @@ async function attachDashboardPreviews(items, owner, repo, token) {
 // `build_inputs` snapshot inside it. Filling the form is all this does --
 // the build still goes out through the normal dispatch on the configured
 // branch, so it runs whatever the pipeline code does today.
+// Builds that were dispatched from this browser, kept so the form can be
+// refilled from one that never finished. A failed run commits nothing to the
+// output branch, so it cannot appear in the list built from result.json --
+// which is exactly when refilling the form matters most, because the inputs
+// are otherwise gone the moment the page is left.
+const RECENT_BUILDS_KEY = "cars-ui-recent-builds";
+const RECENT_BUILDS_LIMIT = 10;
+
+function rememberDispatchedBuild(id, title, inputs) {
+  try {
+    const kept = JSON.parse(localStorage.getItem(RECENT_BUILDS_KEY) || "[]");
+    const next = [{ id, title, at: Date.now(), inputs },
+                  ...kept.filter((item) => item.id !== id)].slice(0, RECENT_BUILDS_LIMIT);
+    localStorage.setItem(RECENT_BUILDS_KEY, JSON.stringify(next));
+  } catch {
+    // A full or blocked localStorage must not stop a build being dispatched.
+  }
+}
+
+function loadDispatchedBuilds() {
+  try {
+    return JSON.parse(localStorage.getItem(RECENT_BUILDS_KEY) || "[]").map((item) => ({
+      id: item.id,
+      title: item.title || item.id,
+      timestamp: item.at ? new Date(item.at) : null,
+      inputs: item.inputs || {},
+      unfinished: true,
+    }));
+  } catch {
+    return [];
+  }
+}
+
 const PREVIOUS_BUILD_LIMIT = 12;
 
 async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
@@ -652,9 +685,16 @@ async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
   }));
   // A build whose result.json predates build_inputs has nothing to fill the
   // form with, so it is left out rather than offered as an empty choice.
-  return loaded
+  const finished = loaded
     .filter((r) => r.status === "fulfilled" && r.value)
     .map((r) => r.value);
+  // Anything dispatched from here that has not produced a result.json yet --
+  // still running, or failed. A finished build wins, since its result.json
+  // is what the pipeline actually received.
+  const done = new Set(finished.map((item) => item.id));
+  const unfinished = loadDispatchedBuilds().filter((item) => !done.has(item.id));
+  return [...unfinished, ...finished]
+    .sort((a, b) => (b.timestamp?.getTime() || 0) - (a.timestamp?.getTime() || 0));
 }
 
 async function loadDashboardEntries({ owner, repo, token }) {
@@ -1070,6 +1110,29 @@ export default function App() {
     setStage("single-car-building");
     setStatusDetail(`Researching and building a one-minute ${titleCaseWords(make)} ${titleCaseWords(model)} story...`);
     abortRef.current = new AbortController();
+    // Recorded before dispatch, in the shape result.json's build_inputs uses,
+    // so applyPreviousBuild reads a failed run exactly like a finished one.
+    rememberDispatchedBuild(id, `${titleCaseWords(make)} ${titleCaseWords(model)}`.trim(), {
+      make: make.trim(),
+      model: model.trim(),
+      query: focus.trim(),
+      start_year: startYear,
+      end_year: endYear,
+      voice,
+      auction_url: useAuctionUrl ? auctionUrl.trim() : "",
+      disable_comparison: String(!compareEnabled),
+      rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
+      photo_front: useManualPhotos ? (photoUrls.front || "").trim() : "",
+      photo_side: useManualPhotos ? (photoUrls.side || "").trim() : "",
+      photo_rear: useManualPhotos ? (photoUrls.rear || "").trim() : "",
+      photo_engine: useManualPhotos ? (photoUrls.engine || "").trim() : "",
+      photo_interior: useManualPhotos ? (photoUrls.interior || "").trim() : "",
+      photo_rival: compareEnabled ? (photoUrls.rival || "").trim() : "",
+      photo_race: compareEnabled ? racePhoto.trim() : "",
+      photo_race_flip: raceFlipped ? "1" : "",
+      photo_rival_flip: rivalFlipped ? "1" : "",
+      extra_photos: useManualPhotos ? JSON.stringify(serializePhotos(extraPhotos)) : "",
+    });
     try {
       const startedAt = Date.now();
       await dispatchWorkflow({
@@ -2342,6 +2405,7 @@ export default function App() {
                           <option key={build.id} value={build.id}>
                             {build.title}
                             {build.timestamp ? ` — ${build.timestamp.toLocaleString()}` : ""}
+                            {build.unfinished ? " — did not finish" : ""}
                           </option>
                         ))}
                       </select>
