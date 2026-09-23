@@ -17,6 +17,7 @@ from PIL import Image, ImageDraw
 
 from generate_sample import _font
 from narrator_video import ACCENT_COLOR, TABLE_COLOR, TABLE_TINT, _spec_rows
+from paint_color import dominant_paint_color
 
 # The video's own shape. These are Shorts, and a Short's tile on the channel
 # page and in the Shorts feed is vertical -- a 16:9 still gets cropped to
@@ -48,6 +49,11 @@ def _fit(image, width, height):
     copy = image.copy()
     copy.thumbnail((width, height), Image.Resampling.LANCZOS)
     return copy
+
+
+def _deepen(color, factor=0.72):
+    """The same colour, darker. Used to separate the marque from the model."""
+    return tuple(max(0, int(channel * factor)) for channel in color)
 
 
 def _make_text(manifest):
@@ -179,10 +185,16 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
     frame = Image.new("RGB", size, BACKGROUND)
     draw = ImageDraw.Draw(frame)
 
+    # The model is set in the car's own paint, so a red Ferrari and a green
+    # AMG look like different videos rather than one template. A black,
+    # white or silver car has no hue to borrow and keeps the channel red.
+    hero = _hero_path(manifest, build_dir)
+    accent = dominant_paint_color(hero, default=ACCENT_COLOR) if hero else ACCENT_COLOR
+
     title, title_font = _headline(draw, _title_text(manifest), width - 70)
     title_w = draw.textlength(title, font=title_font)
     draw.text(((width - title_w) / 2, int(height * 0.025)), title,
-              font=title_font, fill=ACCENT_COLOR)
+              font=title_font, fill=accent)
     top = int(height * 0.025) + title_font.size + int(height * 0.03)
 
     # A car photo is far wider than it is tall, so fitting one to this frame's
@@ -202,7 +214,6 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
         narrator_x = width - narrator.width - int(width * 0.03)
         frame.paste(narrator, (narrator_x, narrator_top), narrator)
 
-    hero = _hero_path(manifest, build_dir)
     car_bottom = top
     if hero:
         car = _fit(_trim(Image.open(hero).convert("RGBA")),
@@ -220,7 +231,10 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
         make_w = draw.textlength(make, font=make_font)
         gap_top, gap_bottom = car_bottom, narrator_top + int(band_h * 0.30)
         make_y = gap_top + max(8, int((gap_bottom - gap_top - make_font.size) / 2))
-        draw.text(((lane - make_w) / 2, make_y), make, font=make_font, fill=(24, 24, 24))
+        # The marque takes the paint colour too, a shade deeper than the
+        # model above it so the two lines read as a hierarchy rather than
+        # one block of colour.
+        draw.text(((lane - make_w) / 2, make_y), make, font=make_font, fill=_deepen(accent))
 
     # Sat against the narrator's feet rather than floating, so the two read
     # as one band instead of two objects adrift in white.

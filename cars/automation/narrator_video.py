@@ -797,6 +797,30 @@ def _merged_boundaries(interval_lists, duration):
 # blue. Word-by-word captions stay black; colouring the spoken ticker too
 # turns the frame into noise.
 ACCENT_COLOR = (226, 32, 32)
+
+
+def accent_for(media_paths):
+    """The headline colour for this build: the car's own paint.
+
+    A red headline over a red Ferrari and a green one over a green AMG make
+    each video look made for its car rather than stamped from a template.
+    Only cut-outs are sampled -- a photo with its background still attached
+    gives the sky's blue, not the car's red -- and a black, white or silver
+    car has no hue to borrow, so it keeps the channel red.
+    """
+    from paint_color import dominant_paint_color
+
+    for path in media_paths or []:
+        text = str(path)
+        if "nobg" not in text:
+            continue
+        try:
+            found = dominant_paint_color(text, default=None)
+        except OSError:
+            continue
+        if found:
+            return found
+    return ACCENT_COLOR
 TABLE_COLOR = (30, 84, 166)
 TABLE_TINT = (238, 244, 252, 255)
 
@@ -1637,6 +1661,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     audio = AudioFileClip(manifest["audio_path"])
     duration = audio.duration
 
+    accent = accent_for(car_media_paths)
     headline_center_y, media_box, caption_center_y = _media_zone_geometry(size)
     media_x, media_y, media_w, media_h = media_box
     scenes = list(manifest.get("scenes") or [])
@@ -1762,7 +1787,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
                 # silently stops being right when the stack moves.
                 stat_y = int((size[1] * TOP_STACK_RATIO + narrator_top_y) / 2)
                 _caption_frame(size, " · ".join(stats), stat_y, path, font_size=32,
-                               fill=ACCENT_COLOR)
+                               fill=accent)
                 stat_tracker_clips.append(ImageClip(str(path)).set_start(start).set_duration(end-start))
     else:
         stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y, size[1] * TOP_STACK_RATIO)
@@ -1785,7 +1810,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         for char_index, (prefix, seg_start, seg_duration) in enumerate(positions):
             frame_path = output_path.parent / "_frames" / f"headline-{index}-{char_index}.png"
             _caption_frame(size, prefix, int(headline_center_y), frame_path, font_size=92,
-                           fill=ACCENT_COLOR)
+                           fill=accent)
             headline_clips.append(
                 ImageClip(str(frame_path)).set_start(seg_start).set_duration(seg_duration).set_position((0, 0))
             )
