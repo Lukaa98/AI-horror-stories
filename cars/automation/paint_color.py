@@ -39,17 +39,11 @@ MIN_SUBJECT_FRACTION = 0.06
 # When there is nothing to sample at all -- no cut-out, no pixels -- the
 # channel's own red.
 DEFAULT_COLOR = (226, 32, 32)
-# A car with no hue still has a lightness, and that decides what its text
-# can be. White and silver cannot supply their own colour: white type on a
-# white frame is invisible and silver is barely better, so they get gold --
-# the same treatment pale paint already gets, and the one warm colour that
-# still reads at headline size on white.
-PALE_CAR_COLOR = (209, 148, 32)
-# Black and charcoal keep theirs, because black type on white is the one
-# case where matching the car and staying legible are the same answer.
+# Every car without a hue -- black, charcoal, silver, white -- gets near
+# black. White and silver cannot supply their own colour at all, since white
+# type on a white frame is invisible, and black is the legible neutral that
+# does not invent a colour the car does not have.
 DARK_CAR_COLOR = (26, 26, 28)
-# Where the line between them falls, on the median value of the body.
-PALE_CAR_VALUE = 0.42
 # Text sits on white, so a pale colour has to be taken down before it is
 # legible -- a yellow car at its own brightness is unreadable as type.
 MAX_TEXT_VALUE = 0.82
@@ -113,17 +107,13 @@ def dominant_paint_color(path_or_image, default=DEFAULT_COLOR):
 
 
 def _achromatic_color(pixels, default):
-    """What a white, silver or black car gets.
+    """What a black, silver or white car gets: near black.
 
-    Falling back to the house red for all of them threw away the one thing
-    these cars do tell you, which is whether they are light or dark -- and a
-    white car is the case where matching the paint literally cannot work.
+    There is no hue to match, and a white car is the case where matching the
+    paint cannot work at all. Black stays legible on the frame and invents
+    nothing, which the house red did.
     """
-    if not pixels:
-        return default
-    values = sorted(colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)[2] for r, g, b in pixels)
-    median = values[len(values) // 2]
-    return DARK_CAR_COLOR if median < PALE_CAR_VALUE else PALE_CAR_COLOR
+    return DARK_CAR_COLOR if pixels else default
 
 
 def text_safe(hue, saturation, value):

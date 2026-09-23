@@ -35,19 +35,12 @@ def test_a_photo_with_its_background_still_attached_is_refused():
     assert paint_color.dominant_paint_color(opaque) == paint_color.DEFAULT_COLOR
 
 
-def test_a_white_car_gets_gold_because_it_cannot_get_white():
-    """Matching the paint is the rule, and white is where it breaks: white
-    type on a white frame is invisible and silver is barely better. Gold is
-    the one warm colour that still reads at headline size on white, and it
-    is what pale paint already gets."""
-    for rgb in ((248, 248, 248), (178, 180, 184), (120, 122, 126)):
-        assert paint_color.dominant_paint_color(_cutout(rgb)) == paint_color.PALE_CAR_COLOR
-
-
-def test_a_black_car_keeps_its_own_colour():
-    """Black is the case where matching the car and staying legible are the
-    same answer. The black Supra build is the real one."""
-    for rgb in ((18, 18, 20), (56, 56, 60)):
+def test_a_car_with_no_hue_gets_black():
+    """Black, charcoal, silver and white all land here. There is nothing to
+    match -- and white is the case where matching the paint cannot work at
+    all, since white type on a white frame is invisible. Black is legible
+    and invents no colour the car does not have."""
+    for rgb in ((18, 18, 20), (56, 56, 60), (120, 122, 126), (178, 180, 184), (248, 248, 248)):
         assert paint_color.dominant_paint_color(_cutout(rgb)) == paint_color.DARK_CAR_COLOR
 
 
