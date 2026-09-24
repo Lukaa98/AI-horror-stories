@@ -35,12 +35,13 @@ export default function UploadPanel({ settings, buildId }) {
   const [state, setState] = useState("idle");   // idle | sending | watching | done | error
   const [error, setError] = useState(null);
   const [scheduled, setScheduled] = useState(false);
-  // Tomorrow at 00:15, which is the slot the channel posts in. Prefilled
-  // rather than blank so scheduling is one click when it is the usual time.
+  // The next 12:15, which is the slot the channel posts in -- today if that
+  // has not happened yet, otherwise tomorrow. Prefilled rather than blank so
+  // scheduling is one click on the usual day.
   const [publishAt, setPublishAt] = useState(() => {
     const at = new Date();
-    at.setDate(at.getDate() + 1);
-    at.setHours(0, 15, 0, 0);
+    at.setHours(12, 15, 0, 0);
+    if (at <= new Date()) at.setDate(at.getDate() + 1);
     const pad = (n) => String(n).padStart(2, "0");
     return `${at.getFullYear()}-${pad(at.getMonth() + 1)}-${pad(at.getDate())}`
       + `T${pad(at.getHours())}:${pad(at.getMinutes())}`;
