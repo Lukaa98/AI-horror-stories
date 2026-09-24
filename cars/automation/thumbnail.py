@@ -201,7 +201,7 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
     # width leaves a band of white above and below it. Rather than let that
     # sit as two gaps, the car hangs directly under the title and the
     # narrator is tall enough to close the space from below.
-    band_h = int(height * 0.52)
+    band_h = int(height * 0.66)
     band_top = height - band_h
 
     narrator_path = Path(__file__).resolve().parents[2] / NARRATOR_SPRITE
@@ -218,7 +218,7 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
     if hero:
         car = _fit(_trim(Image.open(hero).convert("RGBA")),
                    width - 30, int((narrator_top - top) * 1.02))
-        car_y = top + max(0, int((narrator_top - top - car.height) * 0.42))
+        car_y = top + max(0, int((narrator_top - top - car.height) * 0.38))
         frame.paste(car, (int((width - car.width) / 2), car_y), car)
         car_bottom = car_y + car.height
 
@@ -229,8 +229,12 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
         lane = max(int(width * 0.5), narrator_x - int(width * 0.02))
         make_font = _fit_text(draw, make, lane - 60, start_size=104, min_size=40)
         make_w = draw.textlength(make, font=make_font)
-        gap_top, gap_bottom = car_bottom, narrator_top + int(band_h * 0.30)
-        make_y = gap_top + max(8, int((gap_bottom - gap_top - make_font.size) / 2))
+        # Sat right under the car rather than centred in the space below it.
+        # A car photo is wide and short, so that space is enormous, and
+        # centring in it left the marque floating a long way from anything.
+        gap_bottom = narrator_top + int(band_h * 0.30)
+        make_y = min(car_bottom + int(height * 0.02),
+                     gap_bottom - make_font.size - int(height * 0.02))
         # The marque takes the paint colour too, a shade deeper than the
         # model above it so the two lines read as a hierarchy rather than
         # one block of colour.
@@ -239,7 +243,7 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
     # Sat against the narrator's feet rather than floating, so the two read
     # as one band instead of two objects adrift in white.
     _draw_specs(frame, manifest,
-                (int(width * 0.04), narrator_top + int(band_h * 0.30)),
+                (int(width * 0.04), narrator_top + int(band_h * 0.46)),
                 width=int(width * 0.55))
 
     out_path = Path(out_path)
