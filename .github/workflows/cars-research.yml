@@ -91,6 +91,10 @@ on:
         description: "single_car mode: a specific carsandbids.com/auctions/... listing to pull photos from instead of searching"
         required: false
         type: string
+      current_price:
+        description: "single_car mode: what the car is worth today, e.g. 185k. Given, it is used as-is; left empty, comparable sales are read from the auction site"
+        required: false
+        type: string
       photos:
         description: >-
           single_car mode: JSON object of direct photo URLs, one per slot --
@@ -263,6 +267,7 @@ jobs:
           if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
           if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
           if [ -n "${{ inputs.auction_url }}" ]; then YEAR_ARGS+=(--auction-url "${{ inputs.auction_url }}"); fi
+          if [ -n "${{ inputs.current_price }}" ]; then YEAR_ARGS+=(--current-price "${{ inputs.current_price }}"); fi
           if [ -n "$PHOTOS" ]; then YEAR_ARGS+=(--photos "$PHOTOS"); fi
           if [ -n "${{ inputs.rival_car }}" ]; then YEAR_ARGS+=(--rival-car "${{ inputs.rival_car }}"); fi
           if [ "${{ inputs.disable_comparison }}" = "true" ]; then YEAR_ARGS+=(--disable-comparison); fi

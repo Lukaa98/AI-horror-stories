@@ -196,3 +196,69 @@ def test_a_finished_build_is_not_thrown_away_on_a_failed_push():
     step = step[:step.index("- name: Commit voice audition")]
     assert "for attempt in" in step, "one push attempt is not enough"
     assert step.count("git pull --rebase") >= 1, "rebase between attempts, not just retry"
+
+
+def test_an_invented_current_value_is_caught_rather_than_discouraged():
+    """Run #219 declined to name a figure and run #220 put "$70,000" on a
+    993 Turbo worth nearly three times that -- same code, same prompt, two
+    different answers. With no comparable sales the original price is the
+    only money figure there is evidence for, so a second one is checked for
+    rather than asked against."""
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+
+    package = {"scenes": [
+        {"narration": "Four hundred horsepower, and the badge barely says so."},
+        {"narration": "Originally priced at around $110,000, these models now trade "
+                      "for about $70,000, reflecting strong enthusiast demand."},
+    ]}
+    problems = single_car_short._script_violations(package, "Porsche", "911 Turbo", market=None)
+    assert any("$70,000" in problem for problem in problems)
+
+    # One figure is the original price, which is a fact, not a guess.
+    package["scenes"][1]["narration"] = "Originally priced at around $110,000, and the good ones have not been cheap since."
+    assert not [p for p in single_car_short._script_violations(package, "Porsche", "911 Turbo", market=None)
+                if "more than one price" in p]
+
+    # With comparable sales behind it, a second figure is the whole point.
+    package["scenes"][1]["narration"] = "Originally $110,000; they go for about $185,000 today."
+    assert not [p for p in single_car_short._script_violations(
+        package, "Porsche", "911 Turbo", market={"median": 185000}) if "more than one price" in p]
+
+
+def test_a_price_you_type_is_the_price_that_is_used():
+    """Scraping got this wrong twice in a week on the same car -- $70,000
+    once, $267,000 the other -- and both times the right answer was four
+    characters somebody already knew."""
+    assert market_value.stated_value("300k") == 300_000
+    assert market_value.stated_value("$185,000") == 185_000
+    assert market_value.stated_value("~$1.2m") == 1_200_000
+    assert market_value.stated_value("") is None
+    assert market_value.stated_value(None) is None
+    assert market_value.stated_value("tbd") is None
+
+    stated = market_value.value_from_input("185k")
+    assert stated["median"] == 185_000 and stated["source"] == "stated"
+    # No range and no examples: there is no sample behind a stated figure,
+    # and inventing a spread around it would be the same lie in a new place.
+    assert stated["low"] == stated["high"] == 185_000
+    assert stated["examples"] == []
+
+
+def test_a_stated_price_skips_the_scraper_entirely():
+    """The point of the field is to stop the pipeline arguing with itself."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "cars/automation/single_car_short.py").read_text()
+    assert "market = value_from_input(args.current_price)" in source
+    assert "if market is None and args.auction_url:" in source, \
+        "comps are the fallback, not a second opinion"
+
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/cars-research.yml").read_text()
+    assert "current_price:" in workflow
+    assert "--current-price" in workflow

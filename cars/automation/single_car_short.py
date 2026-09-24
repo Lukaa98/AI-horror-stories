@@ -19,7 +19,7 @@ from openai import OpenAI
 import requests
 
 from background_removal import remove_background
-from market_value import summarise_comps
+from market_value import summarise_comps, value_from_input
 from thumbnail import build_thumbnail
 from youtube_metadata import build_metadata as build_youtube_metadata
 from cars_and_bids import (enrich_entry_from_manifest, scrape_auction_comps, scrape_auction_facts,
@@ -256,6 +256,13 @@ def _market_block(market):
     """
     if not market:
         return ""
+    if market.get("source") == "stated":
+        return f"""
+
+WHAT THIS CAR IS WORTH -- ${market['median']:,} today. This figure was given by the person making the
+video, who knows the car; it is not up for debate and not to be adjusted, averaged or hedged. Use it as
+the current-value half of the price beat, as one plain figure -- "they go for about ${market['median']:,}
+today". Never mention the auction, the listing, a bid, or where the number came from."""
     examples = "; ".join(
         f"{item['title']} sold for ${item['price']:,}"
         + (f" ({item['ended']})" if item.get("ended") else "")
@@ -273,6 +280,26 @@ Say it as one plain figure -- "they go for about ${market['median']:,} today" --
 half of the price beat. Never mention the auction, the listing, a bid, a sale, or any single example.
 The viewer is being told what this car costs, not where the number came from: no "this one sold for",
 no "currently bid to", no "one recently went for". Just the going rate."""
+
+
+def _no_market_block(market):
+    """What to say about value when nothing verifies a current figure.
+
+    The empty string used to be the answer here, which left the writer free
+    to invent one -- and run #220 put "these models now trade for about
+    $70,000" on a 993 Turbo worth nearly three times that, in the same
+    sentence as "reflecting strong enthusiast demand". The original price is
+    a fact; today's is not, unless comparable sales say so.
+    """
+    if market:
+        return ""
+    return """
+
+NO VERIFIED CURRENT VALUE IS AVAILABLE for this car. State the original price if you know it, and stop
+there. Do not say what it trades for, sells for, goes for, is worth or fetches today, and do not give a
+percentage of appreciation or depreciation -- there is no number behind any of it, and a guess reads as
+a fact to the viewer. "Originally around $110,000, and the good ones have not been cheap since" is
+fine. "Originally around $110,000, now about $70,000" is not, because the second figure is invented."""
 
 
 def _listing_facts_block(listing_facts):
@@ -406,7 +433,7 @@ rival_horsepower/main_quarter_mile_seconds/rival_quarter_mile_seconds on ANY sce
 null). Replace that beat with a different one instead -- an ownership/value insight, a character/driving-feel
 observation, or another history/mechanical beat -- so the script still hits its word target and beat variety
 without any head-to-head."""
-    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{forced_rival_block}{no_comparison_block}
+    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{forced_rival_block}{no_comparison_block}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-{max_scenes} scenes (the higher end of that range only when you have several pasted photos each requiring their own scene, per above) in speaking order, each scene being ONE OR TWO complete sentences -- prefer fewer, fuller scenes over many thin one-liners, which read choppy when spoken back to back so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -636,7 +663,7 @@ HORSEPOWER_RE = r"\d[\d,.]*\s*-?\s*(hp\b|horsepower|bhp\b)"
 TORQUE_RE = r"\d[\d,.]*\s*-?\s*(lb-ft|lb\.?\s?ft|pound-feet|nm\b)"
 
 
-def _script_violations(package, make, model):
+def _script_violations(package, make, model, market=None):
     """The house rules that can actually be checked, checked.
 
     Stating them in the prompt was not enough: audited across runs #180-#182
@@ -649,6 +676,19 @@ def _script_violations(package, make, model):
     if not scenes:
         return []
     violations = []
+    # With no comparable sales, the original price is the only money figure
+    # there is evidence for. A second one is an invention, whatever words
+    # surround it -- which is why this counts figures rather than hunting
+    # for the phrasings that introduce them.
+    if not market:
+        script = " ".join(scene.get("narration") or "" for scene in scenes)
+        figures = {match.group(0) for match in re.finditer(r"\$[\d,]+(?:\.\d+)?\s*(?:k|K|million)?", script)}
+        if len(figures) > 1:
+            violations.append(
+                "you gave more than one price (" + ", ".join(sorted(figures)) + ") but nothing "
+                "verifies what this car is worth today. Keep the original price and drop every "
+                "other figure -- no current value, no appreciation percentage."
+            )
     opening = _SENTENCE_SPLIT_RE.split((scenes[0].get("narration") or "").strip())[0]
     if not re.search(r"\d", opening):
         violations.append(
@@ -862,7 +902,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     max_scenes = _scene_cap_for_photo_hints(photo_hints)
     package = None
     for attempt in range(1, max_attempts + 1):
-        previous_violations = _script_violations(package, make, model) if package else []
+        previous_violations = _script_violations(package, make, model, market) if package else []
         violation_feedback = (
             " Your previous attempt also broke these rules, which are not negotiable -- fix every one: "
             + " ".join(previous_violations) if previous_violations else ""
@@ -881,7 +921,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             max_scenes=max_scenes,
         )
         count = package["word_count"]
-        violations = _script_violations(package, make, model)
+        violations = _script_violations(package, make, model, market)
         if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1] and not violations:
             break
         problems = []
@@ -1866,8 +1906,14 @@ def build_short(args):
     # What the model sells for, rather than what this one example did. Read
     # from the results page the listing links to, so no slug has to be
     # guessed.
-    market = None
-    if args.auction_url:
+    # A price the person typed outranks everything. They know the car, and
+    # four characters in a form settle an argument that a scraper and a
+    # search engine between them got wrong twice -- $70,000 on a 993 Turbo
+    # and $267,000 on the same car in the same week.
+    market = value_from_input(args.current_price)
+    if market:
+        print(f"[single-car] Market: ${market['median']:,}, as stated on the build form.")
+    if market is None and args.auction_url:
         comps = scrape_auction_comps(SCRAPER_DIR, args.auction_url, images_dir / "listing")
         market = summarise_comps(
             comps, listing_facts.get("title") or f"{args.make} {args.model}",
@@ -2065,6 +2111,12 @@ def main():
         "--auction-url", default=None,
         help="A specific carsandbids.com/auctions/... listing to pull photos from instead of "
              "searching by make/model -- for a car whose search page doesn't turn up results.",
+    )
+    parser.add_argument(
+        "--current-price", default=None,
+        help="What this car is worth today, e.g. 185k or $185,000. Given, it is used as-is and "
+             "nothing is scraped or guessed; left empty, comparable sales are read from the "
+             "auction site instead.",
     )
     parser.add_argument("--photo-front", default=None, help="Direct URL for the main car's front exterior photo.")
     parser.add_argument("--photo-side", default=None, help="Direct URL for the main car's side exterior photo.")

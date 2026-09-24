@@ -105,3 +105,42 @@ def summarise_comps(comps, our_title, make="", today_year=None):
             for c in matched[:4]
         ],
     }
+
+
+def stated_value(text):
+    """A price the user typed, as a plain number -- or None.
+
+    Accepts what a person actually writes: "300k", "$300,000", "300000",
+    "~$1.2m". The whole point of this field is that somebody who knows the
+    car can end the argument in four characters, so it should not be fussy
+    about which four.
+    """
+    match = re.search(r"\$?\s*([\d,]+(?:\.\d+)?)\s*([kKmM])?", str(text or ""))
+    if not match:
+        return None
+    try:
+        amount = float(match.group(1).replace(",", ""))
+    except ValueError:
+        return None
+    suffix = (match.group(2) or "").lower()
+    if suffix == "k":
+        amount *= 1_000
+    elif suffix == "m":
+        amount *= 1_000_000
+    if amount <= 0:
+        return None
+    return int(round(amount))
+
+
+def value_from_input(text):
+    """The market summary for a price the user stated, in comps' shape.
+
+    Carries no examples and no range, because there is no sample behind it
+    -- it is somebody who knows the car saying what it costs, which beats
+    both a live bid and an average over the wrong variant.
+    """
+    amount = stated_value(text)
+    if amount is None:
+        return None
+    return {"count": 0, "median": amount, "low": amount, "high": amount,
+            "examples": [], "source": "stated"}

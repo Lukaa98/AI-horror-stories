@@ -115,3 +115,31 @@ def test_the_old_channel_name_is_nowhere_in_the_repo():
     workflow = (root / ".github/workflows/cars-research.yml").read_text()
     assert "narrator_character" not in workflow
     assert "NARRATOR_RENDERER: v21" in workflow
+
+
+def test_the_print_clears_the_hoodie_outline():
+    """At 158 the car ran to the seams on both sides, so the torso's own
+    outline touched the photo's edge and the print read as a decal stuck
+    over the garment rather than something on it."""
+    import re
+
+    rig = (Path(__file__).resolve().parents[1] / "narrator/narrator-rig-v21.html").read_text()
+    box = re.search(r'<image id="chest-car" x="([\d.]+)" y="[\d.]+" width="([\d.]+)"', rig)
+    assert box
+    left, width = float(box.group(1)), float(box.group(2))
+    # The torso spans rig x 104-276.
+    assert left - 104 >= 12, "clearance on the left seam"
+    assert 276 - (left + width) >= 12, "clearance on the right seam"
+
+
+def test_the_video_holds_a_beat_after_the_last_word():
+    """It used to end on the exact sample the narration did: the closing
+    question's decay was cut and the music stopped mid-fade, which read as
+    the file running out rather than the video finishing."""
+    import narrator_video
+
+    assert narrator_video.END_PAD_SECONDS >= 0.4
+    source = (Path(__file__).resolve().parents[1]
+              / "cars/automation/narrator_video.py").read_text()
+    assert "duration = audio.duration + END_PAD_SECONDS" in source
+    assert ".set_duration(duration)" in source, "the mix has to cover the pad too"

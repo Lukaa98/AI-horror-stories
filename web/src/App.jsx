@@ -10,7 +10,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v11";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V11.36 — Refill the form from a failed run";
+const UI_VERSION = "V11.37 — Say the price yourself";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v11";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -792,6 +792,12 @@ export default function App() {
   const [useAuctionUrl, setUseAuctionUrl] = useState(false);
   const [useManualPhotos, setUseManualPhotos] = useState(false);
   const [auctionUrl, setAuctionUrl] = useState("");
+  // What the car is worth today. Typed, it is used as-is; left empty, the
+  // build reads comparable sales off the auction site. Two runs in one week
+  // got this wrong from scraping alone -- $70,000 on a 993 Turbo and
+  // $267,000 on the same car -- and either was four characters away from
+  // being right.
+  const [currentPrice, setCurrentPrice] = useState("");
   const [photoUrls, setPhotoUrls] = useState({ front: "", side: "", rear: "", engine: "", interior: "", rival: "" });
   // Freely-named extra photos (e.g. "Gauge Cluster") on top of the fixed
   // fields above -- each becomes its own detail beat the script is told
@@ -1120,6 +1126,7 @@ export default function App() {
       end_year: endYear,
       voice,
       auction_url: useAuctionUrl ? auctionUrl.trim() : "",
+      current_price: currentPrice.trim(),
       disable_comparison: String(!compareEnabled),
       rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
       photo_front: useManualPhotos ? (photoUrls.front || "").trim() : "",
@@ -1152,6 +1159,7 @@ export default function App() {
           end_year: endYear,
           voice,
           auction_url: useAuctionUrl ? auctionUrl.trim() : "",
+          current_price: currentPrice.trim(),
           // One JSON input rather than six string ones: workflow_dispatch
           // allows only 25 inputs in total and the photo URLs were using up
           // a quarter of them.
@@ -1292,6 +1300,7 @@ export default function App() {
     setEndYear(inputs.end_year ? String(inputs.end_year) : "");
     if (inputs.voice) setVoice(inputs.voice);
     setAuctionUrl(inputs.auction_url || "");
+    setCurrentPrice(inputs.current_price || "");
     setUseAuctionUrl(!!inputs.auction_url);
     const slots = {
       front: inputs.photo_front || "", side: inputs.photo_side || "", rear: inputs.photo_rear || "",
@@ -2476,6 +2485,16 @@ export default function App() {
                         <Tip text="A listing page URL, not a search-results link. Make/Model/Year fill in automatically (still editable)." />
                       </label>
                     )}
+
+                    <label className="field-row">
+                      <input
+                        value={currentPrice}
+                        onChange={(e) => setCurrentPrice(e.target.value)}
+                        placeholder="What it's worth today, e.g. 185k (optional)"
+                        disabled={stage === "single-car-building"}
+                      />
+                      <Tip text="Say what the car goes for and the video uses exactly that, with no scraping and no guessing. Leave it empty and the build reads comparable sales off the auction site instead -- which is right most of the time, and expensive when it isn't." />
+                    </label>
 
                     {useManualPhotos && (
                       <PhotoSlots

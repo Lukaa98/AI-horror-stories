@@ -1696,6 +1696,10 @@ def _progress_bar_track(size, duration):
     return VideoClip(make_frame, duration=duration).set_position((0, 0))
 
 
+# Silence held after the narration stops, before the video does.
+END_PAD_SECONDS = 0.6
+
+
 # The channel mark, bottom left. It used to ride on the narrator's chest,
 # where it competed with the car print and vanished whenever a shot cropped
 # to his head. In the corner it is on screen for the whole video and never
@@ -1742,7 +1746,11 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     output_path = Path(output_path)
 
     audio = AudioFileClip(manifest["audio_path"])
-    duration = audio.duration
+    # The video used to end on the exact sample the narration did, so the
+    # last word's decay was cut and the music stopped dead mid-fade. It read
+    # as the file running out rather than the video finishing. A beat of
+    # silence after the closing question is what makes it land.
+    duration = audio.duration + END_PAD_SECONDS
 
     accent = accent_for(car_media_paths)
     headline_center_y, media_box, caption_center_y = _media_zone_geometry(size)
@@ -1964,7 +1972,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     music_clip = _background_music_clip(duration)
     extra_audio = [*sfx_clips, *([music_clip] if music_clip is not None else [])]
     full_audio = CompositeAudioClip([audio, *extra_audio]) if extra_audio else audio
-    full_audio = full_audio.volumex(MASTER_VOLUME)
+    full_audio = full_audio.volumex(MASTER_VOLUME).set_duration(duration)
     video = CompositeVideoClip(
         [
             background, car_positioned, *headline_clips, *caption_clips, *detail_clips, narrator_positioned,
