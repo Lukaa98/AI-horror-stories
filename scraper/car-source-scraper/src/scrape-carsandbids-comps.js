@@ -72,12 +72,48 @@ async function findModelPage(page, auctionUrl, timeoutMs) {
   });
 }
 
+// The results page shows one screenful at a time. Run #219 asked for 993
+// Turbo comps, got the first twenty 993 results, and not one of them was a
+// Turbo -- the page is dominated by base Carreras, and the rarer variant we
+// actually wanted was further down. So keep asking for more before reading
+// anything.
+//
+// Written blind to which mechanism the site uses: it clicks anything that
+// says "load more" and also scrolls to the bottom, then stops as soon as a
+// round adds no new cards. Under either pattern -- button or infinite
+// scroll -- that terminates, and on a page with neither it costs one round.
+const MAX_LOAD_ROUNDS = 8;
+const MAX_CARDS = 160;
+
+async function loadMoreResults(page) {
+  let previous = 0;
+  for (let round = 0; round < MAX_LOAD_ROUNDS; round += 1) {
+    const count = await page.evaluate(() => document.querySelectorAll('a[href*="/auctions/"]').length);
+    if (count >= MAX_CARDS || (round > 0 && count <= previous)) return count;
+    previous = count;
+    await page.evaluate(() => {
+      const wanted = /^(load|show|view)\s+more|^more\s+results?$/i;
+      for (const el of document.querySelectorAll("button, a")) {
+        const text = String(el.innerText || "").replace(/\s+/g, " ").trim();
+        if (wanted.test(text) && !el.disabled) {
+          el.click();
+          return;
+        }
+      }
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+  return page.evaluate(() => document.querySelectorAll('a[href*="/auctions/"]').length);
+}
+
 async function readResults(page, modelUrl, timeoutMs) {
   await page.goto(modelUrl, { waitUntil: "domcontentloaded", timeout: timeoutMs });
   await page.waitForSelector('a[href*="/auctions/"]', { timeout: Math.min(20000, timeoutMs) })
     .catch(() => {});
   // Give the client-rendered result list a moment to fill in.
   await new Promise((resolve) => setTimeout(resolve, 2500));
+  await loadMoreResults(page);
 
   return page.evaluate(() => {
     const clean = (value) => String(value || "").replace(/\s+/g, " ").trim();
@@ -111,7 +147,20 @@ async function readResults(page, modelUrl, timeoutMs) {
       seen.add(slug);
 
       const price = card.match(PRICE);
-      const title = (card.match(/\b((19|20)\d{2}[^,\n]{0,70})/) || [])[1] || "";
+      // The title comes off the title link itself, not off the card's text.
+      // A card carries the listing's subtitle too ("6-Speed Manual",
+      // "1 Owner Since 2002"), and sweeping 70 characters of card text
+      // swallowed it -- which made every comp look like a different variant
+      // from ours and left run #219 with no comparable sales at all.
+      let title = "";
+      for (const link of document.querySelectorAll(`a[href^="${slug}"]`)) {
+        const text = clean(link.innerText);
+        if (/^(19|20)\d{2}\s/.test(text) && text.length < 90) {
+          title = text;
+          break;
+        }
+      }
+      if (!title) title = (card.match(/\b((19|20)\d{2}[^,\n]{0,70})/) || [])[1] || "";
       const ended = (card.match(/Ended\s+([\d/]+)/i) || [])[1] || "";
       out.push({
         title: clean(title),

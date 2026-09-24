@@ -539,7 +539,10 @@ def scrape_auction_facts(scraper_dir, auction_url, out_dir):
 
 # The comps page is one extra page load, and it is the difference between a
 # number that is true for this model and one taken from a single auction.
-AUCTION_COMPS_TIMEOUT_SECONDS = 150
+# Paging for more results costs up to eight two-second rounds on top of two
+# page loads, so this has room for that and still fails open well inside the
+# build rather than holding it up.
+AUCTION_COMPS_TIMEOUT_SECONDS = 200
 
 
 def scrape_auction_comps(scraper_dir, auction_url, out_dir):

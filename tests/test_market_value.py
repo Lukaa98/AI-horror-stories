@@ -139,3 +139,31 @@ def test_the_price_label_only_claims_a_sale_when_there_was_one():
     assert "What it actually sold for" in label_for("sold")
     assert "NOT a sale" in label_for("bidding")
     assert "do not" in label_for("unknown") and "What it actually sold for" not in label_for("unknown")
+
+
+def test_a_page_of_the_wrong_variant_yields_no_price():
+    """Run #219's real scrape: twenty 993 results, every one a Carrera, not a
+    Turbo among them. The guard has to produce nothing rather than pricing a
+    400hp Turbo off base-Carrera sales -- which is what the run did."""
+    carreras = [
+        {"title": "1998 Porsche 911 Carrera 4S Coupe", "price": 192500, "sold": True},
+        {"title": "1997 Porsche 911 Carrera Cabriolet", "price": 86500, "sold": True},
+        {"title": "1996 Porsche 911 Carrera Coupe", "price": 76500, "sold": True},
+        {"title": "1998 Porsche 911 Carrera S Coupe", "price": 101500, "sold": True},
+    ]
+    assert market_value.summarise_comps(carreras, "1996 Porsche 911 Turbo", "Porsche") is None
+
+
+def test_the_comps_scraper_takes_the_title_from_the_link_not_the_card():
+    """A results card carries the listing's subtitle under its title, and
+    sweeping the card's text swallowed it: "1995 Porsche 911 Carrera Coupe
+    6-Speed Manual". Those trailing words are not trim words, but an exact
+    token match cannot know that, so every comp read as a different variant
+    and run #219 found no comparable sales at all."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "scraper/car-source-scraper/src/scrape-carsandbids-comps.js").read_text()
+    assert 'a[href^="${slug}"]' in source, "the title comes off the title link"
+    assert "loadMoreResults" in source, \
+        "one screenful of a popular model can contain none of the rarer variant"
