@@ -76,3 +76,49 @@ def test_missing_counts_do_not_crash_the_snapshot():
     assert channel_status._int(None) == 0
     assert channel_status._int("not a number") == 0
     assert channel_status._int("41") == 41
+
+
+def test_the_snapshot_says_whether_youtube_is_happy_with_the_video():
+    """Processing state, rejection reasons and Studio's own warnings, so a
+    video that failed somewhere does not just sit there looking fine."""
+    class _Rejected(_FakeYouTube):
+        def videos(self):
+            return type("V", (), {"list": lambda _self, **kw: _Call({"items": [{
+                "id": "vid_bad",
+                "snippet": {"title": "Bad", "publishedAt": "2026-09-24T00:00:00Z",
+                            "categoryId": "2", "tags": ["a", "b"], "description": "x",
+                            "thumbnails": {}},
+                "status": {"privacyStatus": "private", "uploadStatus": "rejected",
+                           "rejectionReason": "copyright", "madeForKids": True,
+                           "license": "youtube", "embeddable": False},
+                "statistics": {},
+                "contentDetails": {"duration": "PT54S"},
+                "suggestions": {"processingWarnings": ["unknownAudioFormat"]},
+            }]})})()
+
+    video = channel_status.collect(_Rejected())["videos"][0]
+    assert video["upload_status"] == "rejected"
+    assert video["problem"] == "copyright"
+    assert video["made_for_kids"] is True
+    assert video["embeddable"] is False
+    assert video["tags"] == 2 and video["described"] is True
+    assert video["warnings"] == ["unknownAudioFormat"]
+
+
+def test_an_optional_part_being_refused_does_not_lose_the_snapshot():
+    """suggestions needs ownership and is not always granted. Losing every
+    video over an optional part would be a bad trade."""
+    class _NoSuggestions(_FakeYouTube):
+        def videos(self):
+            def _list(_self, part="", id=""):
+                if "suggestions" in part:
+                    raise RuntimeError("forbidden")
+                return _Call({"items": [{
+                    "id": "vid", "snippet": {"title": "T", "publishedAt": "2026-09-24T00:00:00Z",
+                                             "categoryId": "2", "thumbnails": {}},
+                    "status": {"privacyStatus": "public"}, "statistics": {},
+                    "contentDetails": {"duration": "PT54S"}}]})
+            return type("V", (), {"list": _list})()
+
+    snapshot = channel_status.collect(_NoSuggestions())
+    assert snapshot["videos"][0]["warnings"] == []

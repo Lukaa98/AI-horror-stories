@@ -31,6 +31,19 @@ def _int(value):
         return 0
 
 
+def _list_videos(youtube, video_ids, parts):
+    """videos.list, falling back if a part is refused.
+
+    "suggestions" needs ownership and is not always granted; losing the
+    whole snapshot over an optional part would be a bad trade.
+    """
+    try:
+        return youtube.videos().list(part=parts, id=",".join(video_ids)).execute()
+    except Exception:
+        reduced = ",".join(part for part in parts.split(",") if part != "suggestions")
+        return youtube.videos().list(part=reduced, id=",".join(video_ids)).execute()
+
+
 def collect(youtube):
     """Everything the dashboard shows, in one request per page of videos."""
     channels = youtube.channels().list(
@@ -51,14 +64,17 @@ def collect(youtube):
 
     videos = []
     if video_ids:
-        detail = youtube.videos().list(
-            part="snippet,status,statistics,contentDetails",
-            id=",".join(video_ids)).execute()
+        # "suggestions" is what Studio shows as processing problems and
+        # editor hints. It is only available for a channel's own videos,
+        # and it is the closest thing to an audit the API offers.
+        detail = _list_videos(youtube, video_ids,
+                              "snippet,status,statistics,contentDetails,suggestions")
         for row in detail.get("items") or []:
             snippet = row.get("snippet") or {}
             status = row.get("status") or {}
             counts = row.get("statistics") or {}
             thumbnails = snippet.get("thumbnails") or {}
+            suggestions = row.get("suggestions") or {}
             videos.append({
                 "id": row["id"],
                 "title": snippet.get("title") or "",
@@ -76,6 +92,21 @@ def collect(youtube):
                 "synthetic": bool(status.get("containsSyntheticMedia")),
                 "thumbnail": (thumbnails.get("medium") or thumbnails.get("default")
                               or {}).get("url") or "",
+                # Whether YouTube is happy with the file itself. "processed"
+                # is the only good answer; "rejected" and "failed" carry a
+                # reason, and a video stuck on "uploaded" never finished.
+                "upload_status": status.get("uploadStatus") or "",
+                "problem": (status.get("rejectionReason")
+                            or status.get("failureReason") or ""),
+                "made_for_kids": bool(status.get("madeForKids")),
+                "license": status.get("license") or "",
+                "embeddable": bool(status.get("embeddable")),
+                "tags": len(snippet.get("tags") or []),
+                "described": bool((snippet.get("description") or "").strip()),
+                # What Studio would show as warnings on the video.
+                "warnings": list(suggestions.get("processingWarnings") or [])
+                            + list(suggestions.get("processingErrors") or []),
+                "suggestions": list(suggestions.get("editorSuggestions") or []),
             })
     videos.sort(key=lambda v: v.get("published_at") or "", reverse=True)
 

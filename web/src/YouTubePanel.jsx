@@ -335,8 +335,27 @@ export default function YouTubePanel({ settings }) {
                   <span className={video.language ? "" : "yt-flag"}>
                     {video.language || "no language"}
                   </span>
-                  {video.synthetic && <span className="yt-flag">AI label on</span>}
+                  <span className={video.synthetic ? "yt-flag" : ""}>
+                    {video.synthetic ? "AI label on" : "no AI label"}
+                  </span>
+                  {video.upload_status && video.upload_status !== "processed" && (
+                    <span className="yt-flag">{video.upload_status}</span>
+                  )}
+                  {video.made_for_kids && <span className="yt-flag">made for kids</span>}
+                  {video.described === false && <span className="yt-flag">no description</span>}
+                  {typeof video.tags === "number" && (
+                    <span>{video.tags} tags</span>
+                  )}
+                  {video.embeddable === false && <span>not embeddable</span>}
                 </div>
+                {video.problem && (
+                  <p className="yt-video-problem">YouTube rejected this: {video.problem}</p>
+                )}
+                {(video.warnings || []).length > 0 && (
+                  <p className="yt-video-problem">
+                    {video.warnings.join(", ").replace(/([A-Z])/g, " $1").toLowerCase()}
+                  </p>
+                )}
               </div>
             </div>
           );

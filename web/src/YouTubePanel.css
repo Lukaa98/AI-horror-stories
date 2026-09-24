@@ -119,3 +119,9 @@
 /* Something that went up misconfigured, so it is visible without opening
    Studio to check. */
 .yt-flag { color: var(--danger, #f87171); }
+
+.yt-video-problem {
+  margin: 5px 0 0;
+  font-size: 0.76rem;
+  color: var(--danger, #f87171);
+}
