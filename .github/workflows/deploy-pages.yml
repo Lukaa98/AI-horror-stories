@@ -6,7 +6,7 @@ on:
       # The branch being developed on. This has to move with it -- it sat on
       # v10 after work had already moved, which would have left the dashboard
       # frozen at an old build while changes were pushed past it.
-      - v11
+      - v12
       - develop
   workflow_dispatch: # allow manual runs
 

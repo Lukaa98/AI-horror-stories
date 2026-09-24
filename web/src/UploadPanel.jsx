@@ -195,7 +195,7 @@ export default function UploadPanel({ settings, buildId }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ref: branch || "v11",
+            ref: branch || "v12",
             inputs: {
               build_id: buildId,
               ...(publishAt ? { publish_at: withLocalOffset(publishAt) } : {}),

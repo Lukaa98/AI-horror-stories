@@ -185,3 +185,22 @@ def test_a_scheduled_video_goes_up_private():
     source = Path(upload_build.__file__).read_text()
     assert 'if publish_at:\n        privacy = "private"' in source
     assert "publish_at=publish_at," in source
+
+
+def test_the_upload_workflow_is_dispatchable():
+    """workflow_dispatch resolves a workflow by filename on the DEFAULT
+    branch -- the ref only chooses which copy runs. youtube-upload.yml
+    lived on v11 alone, so every upload came back 404 before it reached a
+    runner, and the button had never worked since the day it was built."""
+    import subprocess
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    assert (root / ".github/workflows/youtube-upload.yml").is_file()
+    listed = subprocess.run(
+        ["git", "ls-tree", "--name-only", "origin/main", ".github/workflows/"],
+        cwd=root, capture_output=True, text=True,
+    )
+    if listed.returncode == 0 and listed.stdout.strip():
+        assert "youtube-upload.yml" in listed.stdout, \
+            "the workflow has to be on the default branch to be dispatchable at all"
