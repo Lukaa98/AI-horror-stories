@@ -1701,8 +1701,12 @@ def _progress_bar_track(size, duration):
 # to his head. In the corner it is on screen for the whole video and never
 # moves out of frame.
 CHANNEL_MARK = "narrator/channel-mark.png"
-CHANNEL_MARK_WIDTH = 0.085      # of the frame's width
-CHANNEL_MARK_MARGIN = 0.035     # from the left and bottom edges
+CHANNEL_MARK_WIDTH = 0.11       # of the frame's width
+CHANNEL_MARK_LEFT = 0.035       # of the frame's width
+# Tighter than the left margin, and measured rather than chosen: at 11% the
+# mark's bounce peak clipped the bottom border of a full spec table. Sitting
+# this low, nothing in the frame touches it at any point in a build.
+CHANNEL_MARK_BOTTOM = 0.018     # of the frame's height
 # A bounce rather than a bob: the mark falls to the floor and comes back up,
 # so it reads as a physical thing settling in the corner instead of drifting.
 CHANNEL_MARK_BOUNCE_PX = 14
@@ -1719,8 +1723,8 @@ def _channel_mark_clip(size, duration):
     image = Image.open(path).convert("RGBA")
     image = image.resize((mark_w, max(1, round(image.height * mark_w / image.width))),
                          Image.Resampling.LANCZOS)
-    left = int(width * CHANNEL_MARK_MARGIN)
-    rest = height - int(height * CHANNEL_MARK_MARGIN) - image.height
+    left = int(width * CHANNEL_MARK_LEFT)
+    rest = height - int(height * CHANNEL_MARK_BOTTOM) - image.height
 
     def position(t):
         # abs(sin) leaves a cusp at the bottom of every cycle, which is what
