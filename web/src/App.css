@@ -933,3 +933,201 @@ button.secondary {
   border-color: #1e54a6;
   color: #fff;
 }
+
+/* ---------------------------------------------------------------------
+   Refreshed controls.
+   
+   index.css sets a light page (--bg: #fff) while the rules above hardcode
+   dark controls -- #1d1d1f inputs, near-black buttons -- so in a light
+   browser the form was dark fields on white with placeholder text that
+   could not be read. This layer gives the controls the same tokens the
+   page uses, in both schemes, and brings the shapes up to date while it
+   is there. It is appended last so it wins ties without rewriting the
+   rules above.
+   --------------------------------------------------------------------- */
+:root {
+  --surface: #fff;
+  --surface-2: #f7f7f9;
+  --surface-3: #eeeef2;
+  --line: #e2e2e8;
+  --line-strong: #c9c9d3;
+  --ink: #17171c;
+  --ink-soft: #5d5d6b;
+  --brand: #f0a500;
+  --brand-ink: #1a1405;
+  --danger: #d33a3a;
+  --ok: #17915b;
+  --ring: rgba(240, 165, 0, 0.35);
+  --r-sm: 8px;
+  --r-md: 11px;
+  --r-lg: 16px;
+  --lift: 0 1px 2px rgba(16, 16, 24, 0.06), 0 2px 8px rgba(16, 16, 24, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #17181d;
+    --surface-2: #1e1f26;
+    --surface-3: #262832;
+    --line: #2f313c;
+    --line-strong: #414455;
+    --ink: #f0f1f5;
+    --ink-soft: #9ea2b3;
+    --brand: #ffc23d;
+    --brand-ink: #1a1405;
+    --danger: #ff6b6b;
+    --ok: #4ad295;
+    --ring: rgba(255, 194, 61, 0.28);
+    --lift: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.page { color: var(--ink); }
+
+/* Fields ------------------------------------------------------------- */
+.page input[type="text"],
+.page input[type="url"],
+.page input[type="password"],
+.page input[type="number"],
+.page input[type="datetime-local"],
+.page input:not([type]),
+.page select,
+.page textarea,
+.builder-grid input,
+.builder-grid select,
+.request-input,
+.request-textarea,
+.extra-photo-row input {
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.page input::placeholder,
+.page textarea::placeholder { color: var(--ink-soft); opacity: 0.8; }
+
+.page input:focus-visible,
+.page select:focus-visible,
+.page textarea:focus-visible,
+.builder-grid input:focus,
+.builder-grid select:focus,
+.request-input:focus,
+.request-textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.page input:disabled,
+.page select:disabled,
+.page textarea:disabled {
+  background: var(--surface-2);
+  color: var(--ink-soft);
+  cursor: not-allowed;
+}
+
+/* Buttons ------------------------------------------------------------ */
+.page button {
+  padding: 9px 15px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--brand-ink);
+  background: var(--brand);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: filter 120ms ease, box-shadow 120ms ease, transform 60ms ease;
+}
+
+.page button:hover:not(:disabled) { filter: brightness(1.06); }
+.page button:active:not(:disabled) { transform: translateY(1px); }
+.page button:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--ring); }
+.page button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.page button.secondary,
+.page .view-tabs button {
+  color: var(--ink);
+  background: var(--surface);
+  border-color: var(--line-strong);
+  font-weight: 500;
+}
+
+.page button.secondary:hover:not(:disabled),
+.page .view-tabs button:hover:not(:disabled) { background: var(--surface-2); filter: none; }
+
+.page .view-tabs button.active {
+  color: var(--brand-ink);
+  background: var(--brand);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.page button.danger {
+  color: #fff;
+  background: var(--danger);
+  border-color: transparent;
+}
+
+/* Surfaces ----------------------------------------------------------- */
+.page .progress-panel,
+.page .settings-panel,
+.page .workflow-card,
+.page .rival-card,
+.page .upload-panel,
+.page .build-link {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--lift);
+}
+
+/* The workflow choices are buttons, so the brand fill above claims them
+   unless they are named. They are cards, not actions. */
+.page .workflow-card {
+  color: var(--ink);
+  font-weight: 400;
+  text-align: left;
+  padding: 14px 16px;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.page .workflow-card:hover:not(:disabled) { border-color: var(--line-strong); filter: none; }
+.page .workflow-card.active {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--ring), var(--lift);
+}
+.page .workflow-card strong { color: var(--ink); }
+.page .workflow-card span { color: var(--ink-soft); }
+.page .hint, .page .section-label { color: var(--ink-soft); }
+
+.page .check-pill,
+.page .radio-pill {
+  padding: 7px 12px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 0.86rem;
+}
+
+.page .progress-step span { background: var(--surface-3); border-color: var(--line-strong); color: var(--ink-soft); }
+.page .progress-step::before { background: var(--line); }
+.page .progress-step.active span { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); }
+.page .progress-step.complete span { background: var(--ok); border-color: var(--ok); color: #fff; }
+.page .progress-step.complete::before, .page .progress-step.active::before { background: var(--ok); }
+
+.page .version {
+  background: var(--brand);
+  color: var(--brand-ink);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.page .live-state { border-color: var(--line-strong); color: var(--ink-soft); }
