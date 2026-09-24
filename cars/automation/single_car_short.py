@@ -19,7 +19,7 @@ from openai import OpenAI
 import requests
 
 from background_removal import remove_background
-from market_value import summarise_comps, value_from_input
+from market_value import summarise_comps, value_from_input, value_from_sale
 from thumbnail import build_thumbnail
 from youtube_metadata import build_metadata as build_youtube_metadata
 from cars_and_bids import (enrich_entry_from_manifest, scrape_auction_comps, scrape_auction_facts,
@@ -256,6 +256,13 @@ def _market_block(market):
     """
     if not market:
         return ""
+    if market.get("source") == "sale":
+        return f"""
+
+WHAT THIS CAR IS WORTH -- ${market['median']:,} today. That is what this exact car changed hands for,
+in a completed sale. Use it as the current-value half of the price beat, as one plain figure -- "they go
+for about ${market['median']:,} today". Never mention the auction, the listing, a bid, a sale, or where
+the number came from. The viewer is being told what the car costs, not how we know."""
     if market.get("source") == "stated":
         return f"""
 
@@ -1910,9 +1917,27 @@ def build_short(args):
     # four characters in a form settle an argument that a scraper and a
     # search engine between them got wrong twice -- $70,000 on a 993 Turbo
     # and $267,000 on the same car in the same week.
+    # Three sources, in order of how much they know about this car.
+    #
+    # A price the person typed outranks everything: they know the car, and
+    # four characters in a form settle an argument that a scraper and a
+    # search engine between them got wrong twice.
+    #
+    # Then a finished auction, which is one real dated transaction for the
+    # exact car on screen. It can sit some way from the model's general
+    # market -- but it is what somebody paid for this one.
+    #
+    # Then comparable sales, for a car still under the hammer, where no
+    # price exists yet and the model's own results are the best available
+    # answer to "what does it cost".
     market = value_from_input(args.current_price)
     if market:
         print(f"[single-car] Market: ${market['median']:,}, as stated on the build form.")
+    if market is None and listing_facts:
+        market = value_from_sale(listing_facts.get("price_text"),
+                                 listing_facts.get("auction_state"))
+        if market:
+            print(f"[single-car] Market: ${market['median']:,}, what this car sold for.")
     if market is None and args.auction_url:
         comps = scrape_auction_comps(SCRAPER_DIR, args.auction_url, images_dir / "listing")
         market = summarise_comps(

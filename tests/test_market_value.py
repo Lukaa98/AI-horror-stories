@@ -262,3 +262,27 @@ def test_a_stated_price_skips_the_scraper_entirely():
                 / ".github/workflows/cars-research.yml").read_text()
     assert "current_price:" in workflow
     assert "--current-price" in workflow
+
+
+def test_the_price_comes_from_the_best_source_available():
+    """Three sources, ordered by how much each knows about the car on
+    screen: what the person typed, then what this exact car sold for, then
+    what the model generally goes for."""
+    # A finished sale is a price. An unfinished one is not.
+    sale = market_value.value_from_sale("Sold for $277,000", "sold")
+    assert sale["median"] == 277_000 and sale["source"] == "sale"
+    assert market_value.value_from_sale("Sold After for $113,000", "sold")["median"] == 113_000
+    assert market_value.value_from_sale("High Bid $267,000", "bidding") is None
+    assert market_value.value_from_sale("Bid to $331,000", "bidding") is None
+    # Sold wording on a page still bidding is a comparable further down it,
+    # not this car.
+    assert market_value.value_from_sale("Sold for $277,000", "bidding") is None
+    assert market_value.value_from_sale("", "sold") is None
+
+    from pathlib import Path
+    source = (Path(__file__).resolve().parents[1]
+              / "cars/automation/single_car_short.py").read_text()
+    typed = source.index("market = value_from_input(args.current_price)")
+    sold = source.index("market = value_from_sale(listing_facts.get(\"price_text\")")
+    comps = source.index("comps = scrape_auction_comps(")
+    assert typed < sold < comps, "typed price, then this car's sale, then the model's"

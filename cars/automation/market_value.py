@@ -144,3 +144,27 @@ def value_from_input(text):
         return None
     return {"count": 0, "median": amount, "low": amount, "high": amount,
             "examples": [], "source": "stated"}
+
+
+def value_from_sale(price_text, auction_state=""):
+    """What this car actually sold for, from a finished auction -- or None.
+
+    Only a completed sale. "High Bid" and "Bid to" are unfinished or
+    unsuccessful, and neither is a price anything changed hands at.
+
+    This is one car rather than a sample, so it can sit some way from what
+    the model generally does: the 993 Turbo that prompted it went for
+    $277,000 against a $185,000 median, on a celebrity seller and a $24,470
+    service. It is still a real, dated transaction for the exact car in the
+    video, which a median of other cars is not.
+    """
+    text = str(price_text or "")
+    if str(auction_state or "").strip().lower() not in ("", "sold"):
+        return None
+    if not re.search(r"\bsold\b|\bwinning bid\b", text, re.I):
+        return None
+    amount = stated_value(re.sub(r"^[^$]*", "", text))
+    if amount is None:
+        return None
+    return {"count": 1, "median": amount, "low": amount, "high": amount,
+            "examples": [], "source": "sale"}
