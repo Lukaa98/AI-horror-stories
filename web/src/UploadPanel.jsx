@@ -34,6 +34,17 @@ export default function UploadPanel({ settings, buildId }) {
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState("idle");   // idle | sending | watching | done | error
   const [error, setError] = useState(null);
+  const [scheduled, setScheduled] = useState(false);
+  // Tomorrow at 00:15, which is the slot the channel posts in. Prefilled
+  // rather than blank so scheduling is one click when it is the usual time.
+  const [publishAt, setPublishAt] = useState(() => {
+    const at = new Date();
+    at.setDate(at.getDate() + 1);
+    at.setHours(0, 15, 0, 0);
+    const pad = (n) => String(n).padStart(2, "0");
+    return `${at.getFullYear()}-${pad(at.getMonth() + 1)}-${pad(at.getDate())}`
+      + `T${pad(at.getHours())}:${pad(at.getMinutes())}`;
+  });
   const startedAt = useRef(0);
   const timer = useRef(null);
 
@@ -84,6 +95,19 @@ export default function UploadPanel({ settings, buildId }) {
     }
   }, [settings, path, stop]);
 
+  // A local datetime-local value carries no offset, so it is turned into
+  // one here using this browser's own zone. Midnight means a different
+  // instant in every zone, and YouTube is being told an instant.
+  function withLocalOffset(value) {
+    if (!value) return "";
+    const at = new Date(value);
+    if (Number.isNaN(at.getTime())) return "";
+    const minutes = -at.getTimezoneOffset();
+    const sign = minutes < 0 ? "-" : "+";
+    const pad = (n) => String(Math.floor(Math.abs(n))).padStart(2, "0");
+    return `${value}:00${sign}${pad(minutes / 60)}:${pad(minutes % 60)}`;
+  }
+
   async function upload() {
     setError(null);
     setState("sending");
@@ -99,7 +123,13 @@ export default function UploadPanel({ settings, buildId }) {
             Accept: "application/vnd.github+json",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ref: branch || "v11", inputs: { build_id: buildId } }),
+          body: JSON.stringify({
+            ref: branch || "v11",
+            inputs: {
+              build_id: buildId,
+              ...(publishAt ? { publish_at: withLocalOffset(publishAt) } : {}),
+            },
+          }),
         }
       );
       if (!res.ok) throw new Error(`Dispatch failed (${res.status}): ${await res.text()}`);
@@ -142,7 +172,9 @@ export default function UploadPanel({ settings, buildId }) {
         <p className="upload-done">
           Uploaded as <a href={`https://youtu.be/${listing.video_id}`} target="_blank" rel="noreferrer">
             youtu.be/{listing.video_id}</a>{" "}
-          — it is private. Review it, then publish from YouTube Studio.
+          — {listing.publish_at
+              ? `scheduled for ${new Date(listing.publish_at).toLocaleString()}`
+              : "it is private. Review it, then publish from YouTube Studio."}
           {listing.thumbnail_set === false && " The custom thumbnail was refused; the channel may not be verified yet."}
         </p>
       ) : (
@@ -155,9 +187,30 @@ export default function UploadPanel({ settings, buildId }) {
             <dt>Tags</dt>
             <dd>{(listing.tags || []).join(", ")}</dd>
           </dl>
+          <label className="upload-schedule">
+            <span>Publish</span>
+            <select value={scheduled ? "at" : "now"}
+                    onChange={(e) => setScheduled(e.target.value === "at")}
+                    disabled={state === "sending" || state === "watching"}>
+              <option value="now">Keep private</option>
+              <option value="at">Schedule</option>
+            </select>
+            {scheduled && (
+              <input type="datetime-local" value={publishAt}
+                     onChange={(e) => setPublishAt(e.target.value)}
+                     disabled={state === "sending" || state === "watching"} />
+            )}
+          </label>
+          {scheduled && (
+            <p className="hint">
+              YouTube makes it public at that moment, in this computer's timezone.
+              It stays private until then.
+            </p>
+          )}
           <button type="button" className="upload-go" onClick={upload}
                   disabled={!ready || state === "sending" || state === "watching"}>
-            {state === "watching" ? "Uploading…" : state === "sending" ? "Starting…" : "Upload to YouTube (private)"}
+            {state === "watching" ? "Uploading…" : state === "sending" ? "Starting…"
+              : scheduled ? "Upload and schedule" : "Upload to YouTube (private)"}
           </button>
           {state === "watching" && (
             <p className="hint">Sending the video. This usually takes a couple of minutes.</p>

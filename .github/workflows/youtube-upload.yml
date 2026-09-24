@@ -21,6 +21,10 @@ on:
         required: false
         type: boolean
         default: false
+      publish_at:
+        description: "Go public at this ISO 8601 time with an offset, e.g. 2026-09-25T00:15:00+04:00. Empty uploads private."
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -57,8 +61,10 @@ jobs:
           # is how a JSON input lost its quotes in cars-research.yml.
           BUILD_ID: ${{ inputs.build_id }}
           FORCE: ${{ inputs.force }}
+          PUBLISH_AT: ${{ inputs.publish_at }}
         run: |
           set -euo pipefail
           extra=""
           if [ "${FORCE}" = "true" ]; then extra="--force"; fi
-          python -m youtube_tools.upload_build --build-id "${BUILD_ID}" ${extra}
+          python -m youtube_tools.upload_build --build-id "${BUILD_ID}" ${extra} \
+            --publish-at "${PUBLISH_AT:-}"

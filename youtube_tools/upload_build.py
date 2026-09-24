@@ -47,6 +47,34 @@ def check_not_already_uploaded(listing, force):
         )
 
 
+def normalize_publish_at(raw_value):
+    """An ISO 8601 instant for YouTube, or "".
+
+    Rejected here rather than at the API, because a publish time YouTube
+    does not understand comes back as a generic 400 after the whole video
+    has already been uploaded.
+    """
+    from datetime import datetime, timezone
+
+    value = str(raw_value or "").strip()
+    if not value:
+        return ""
+    if value.endswith("Z"):
+        value = value[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(value)
+    except ValueError:
+        raise SystemExit(f"--publish-at must be ISO 8601, not {raw_value!r}.")
+    if parsed.tzinfo is None:
+        raise SystemExit(
+            f"--publish-at needs a timezone offset, e.g. {value}+04:00 -- otherwise "
+            "midnight means a different moment on every machine that reads it."
+        )
+    if parsed <= datetime.now(timezone.utc):
+        raise SystemExit(f"--publish-at is in the past ({parsed.isoformat()}).")
+    return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-id", required=True, help="Folder name under cars/single-car-shorts")
@@ -54,6 +82,11 @@ def main():
     parser.add_argument("--build-root", default=BUILD_ROOT)
     parser.add_argument("--force", action="store_true",
                         help="Upload even if this build already has a video id.")
+    parser.add_argument(
+        "--publish-at", default="",
+        help="ISO 8601 time with an offset, e.g. 2026-09-25T00:15:00+04:00. Given, the video "
+             "goes up private and YouTube makes it public at that moment.",
+    )
     args = parser.parse_args()
 
     repository = os.environ.get("GITHUB_REPOSITORY", "").strip()
@@ -77,6 +110,12 @@ def main():
     privacy = listing.get("privacy") or "private"
     if privacy not in ALLOWED_PRIVACY:
         raise SystemExit(f"privacy must be one of {ALLOWED_PRIVACY}, not {privacy!r}.")
+    # A scheduled video has to go up private: YouTube ignores publishAt on
+    # anything else, which would publish it the instant it finished
+    # uploading rather than at the time that was asked for.
+    publish_at = normalize_publish_at(args.publish_at or listing.get("publish_at") or "")
+    if publish_at:
+        privacy = "private"
 
     video_name = listing.get("video") or "single_car_short.mp4"
     source = raw_url(repository, args.branch, f"{build_dir}/{video_name}")
@@ -95,7 +134,8 @@ def main():
         from youtube_tools.youtube_uploader import set_thumbnail, upload_video
 
         youtube = get_authenticated_service()
-        print(f"[upload] Sending as {privacy}: {title}", flush=True)
+        when = f", public at {publish_at}" if publish_at else ""
+        print(f"[upload] Sending as {privacy}{when}: {title}", flush=True)
         video_id = upload_video(
             youtube,
             file_path=local,
@@ -103,7 +143,11 @@ def main():
             description=listing.get("description") or "",
             tags=listing.get("tags") or [],
             privacy=privacy,
+            publish_at=publish_at,
         )
+
+        if publish_at:
+            listing["publish_at"] = publish_at
 
         thumbnail_name = listing.get("thumbnail")
         if thumbnail_name:

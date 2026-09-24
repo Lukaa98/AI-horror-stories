@@ -58,3 +58,23 @@
   display: block;
 }
 .upload-thumb img:hover { border-color: var(--accent); }
+
+/* The schedule row sits above the upload button, so the choice is made
+   before the thing that acts on it. */
+.upload-schedule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 4px;
+  font-size: 13px;
+}
+
+.upload-schedule > span {
+  color: var(--muted, #6b7280);
+}
+
+.upload-schedule select,
+.upload-schedule input {
+  padding: 5px 8px;
+  font: inherit;
+}

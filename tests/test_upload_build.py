@@ -39,8 +39,10 @@ def _run(monkeypatch, listing, uploaded, written, **extra):
     client.get_authenticated_service = lambda: "service"
     uploader = types.ModuleType("youtube_tools.youtube_uploader")
 
-    def fake_upload(youtube, file_path, title, description, tags, privacy="public"):
-        uploaded.update(title=title, description=description, tags=tags, privacy=privacy)
+    def fake_upload(youtube, file_path, title, description, tags, privacy="public",
+                    publish_at=""):
+        uploaded.update(title=title, description=description, tags=tags, privacy=privacy,
+                        publish_at=publish_at)
         return "vid123"
 
     uploader.upload_video = fake_upload
@@ -153,3 +155,33 @@ def test_a_refused_thumbnail_does_not_fail_an_upload_that_worked(monkeypatch):
     assert written["payload"]["video_id"] == "vid123"
     assert written["payload"]["thumbnail_set"] is False
     assert "thumbnailNotVerified" in written["payload"]["thumbnail_error"]
+
+
+def test_a_scheduled_upload_must_name_an_instant():
+    """Midnight is a different moment in every timezone, and the machine
+    that runs the upload is a GitHub runner in UTC -- not the one the time
+    was typed on."""
+    import pytest
+
+    assert upload_build.normalize_publish_at("2099-09-25T00:15:00+04:00") == "2099-09-24T20:15:00Z"
+    assert upload_build.normalize_publish_at("2099-09-24T20:15:00Z") == "2099-09-24T20:15:00Z"
+    assert upload_build.normalize_publish_at("") == ""
+
+    with pytest.raises(SystemExit, match="timezone offset"):
+        upload_build.normalize_publish_at("2099-09-25T00:15:00")
+    with pytest.raises(SystemExit, match="ISO 8601"):
+        upload_build.normalize_publish_at("tomorrow")
+    # Caught before the video is uploaded rather than after.
+    with pytest.raises(SystemExit, match="in the past"):
+        upload_build.normalize_publish_at("2020-01-01T00:00:00+00:00")
+
+
+def test_a_scheduled_video_goes_up_private():
+    """YouTube ignores publishAt on anything but a private video -- set
+    public with a publish time, it goes live the instant the upload
+    finishes, which is the one outcome scheduling exists to avoid."""
+    from pathlib import Path
+
+    source = Path(upload_build.__file__).read_text()
+    assert 'if publish_at:\n        privacy = "private"' in source
+    assert "publish_at=publish_at," in source
