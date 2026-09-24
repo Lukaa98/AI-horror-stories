@@ -86,3 +86,19 @@ def test_the_channel_mark_bounces_in_the_bottom_left():
     assert left < 1080 * 0.1, "hugs the left edge"
     assert low > 1920 * 0.8, "sits near the bottom"
     assert low - high == narrator_video.CHANNEL_MARK_BOUNCE_PX
+
+
+def test_the_hoodie_carries_the_car_and_nothing_else():
+    """The tach badge lived on the chest before it moved to the frame's
+    corner. Nothing of it is allowed to survive on the garment -- a second
+    mark competes with the print at the size the character actually appears."""
+    import re
+
+    for name in ("narrator-rig-v21.html", "narrator-rig-v4.html"):
+        rig = (Path(__file__).resolve().parents[1] / "narrator" / name).read_text()
+        block = re.search(r'<g id="chest-art">(.*?)</g>', rig, re.S)
+        assert block, name
+        assert block.group(1).count("<") == 1, f"{name}: the print is the only thing on it"
+        assert block.group(1).lstrip().startswith('<image id="chest-car"'), name
+        # The tach's two signature colours, anywhere in the rig.
+        assert "#E52020" not in rig and "#8E9096" not in rig, name
