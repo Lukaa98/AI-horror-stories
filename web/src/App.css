@@ -953,11 +953,13 @@ button.secondary {
   --line-strong: #c9c9d3;
   --ink: #17171c;
   --ink-soft: #5d5d6b;
-  --brand: #f0a500;
-  --brand-ink: #1a1405;
-  --danger: #d33a3a;
-  --ok: #17915b;
-  --ring: rgba(240, 165, 0, 0.35);
+  --brand: #4f46e5;
+  --brand-ink: #ffffff;
+  --accent: #8b3fd6;
+  --accent-ink: #ffffff;
+  --danger: #dc2626;
+  --ok: #15803d;
+  --ring: rgba(79, 70, 229, 0.3);
   --r-sm: 8px;
   --r-md: 11px;
   --r-lg: 16px;
@@ -973,11 +975,13 @@ button.secondary {
     --line-strong: #414455;
     --ink: #f0f1f5;
     --ink-soft: #9ea2b3;
-    --brand: #ffc23d;
-    --brand-ink: #1a1405;
-    --danger: #ff6b6b;
-    --ok: #4ad295;
-    --ring: rgba(255, 194, 61, 0.28);
+    --brand: #6366f1;
+    --brand-ink: #ffffff;
+    --accent: #a855f7;
+    --accent-ink: #14101f;
+    --danger: #f87171;
+    --ok: #34d399;
+    --ring: rgba(99, 102, 241, 0.38);
     --lift: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 }
@@ -1122,8 +1126,8 @@ button.secondary {
 .page .progress-step.complete::before, .page .progress-step.active::before { background: var(--ok); }
 
 .page .version {
-  background: var(--brand);
-  color: var(--brand-ink);
+  background: var(--accent);
+  color: var(--accent-ink);
   border-radius: 999px;
   padding: 5px 11px;
   font-weight: 700;
@@ -1131,3 +1135,71 @@ button.secondary {
 }
 
 .page .live-state { border-color: var(--line-strong); color: var(--ink-soft); }
+
+
+/* Colour, after the rebrand --------------------------------------------
+   Blue carries actions, purple carries identity and selection, green
+   carries progress and success. Red is kept for the one thing it should
+   mean: something is about to be destroyed or has gone wrong.
+   --------------------------------------------------------------------- */
+.page .live-state.researching,
+.page .live-state.generating { border-color: var(--brand); color: var(--brand); }
+.page .live-state.done { border-color: var(--ok); color: var(--ok); }
+.page .live-state.failed, .page .live-state.error { border-color: var(--danger); color: var(--danger); }
+
+.page .progress-step.active span {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--brand-ink);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.page .build-link:hover { border-color: var(--brand); }
+.page .build-link strong { color: var(--brand); }
+.page .build-dot.queued,
+.page .build-dot.in_progress { background: var(--brand); box-shadow: 0 0 0 3px var(--ring); }
+.page .build-dot.success { background: var(--ok); }
+.page .build-dot.failure,
+.page .build-dot.cancelled,
+.page .build-dot.timed_out { background: var(--danger); }
+
+.page .dashboard-type.draft { border-color: var(--ok); color: var(--ok); }
+.page .dashboard-type.battle { border-color: var(--accent); color: var(--accent); }
+
+.page .check-pill input[type="checkbox"],
+.page .radio-pill input[type="radio"] { accent-color: var(--brand); }
+.page .check-pill:has(input:checked),
+.page .radio-pill:has(input:checked) {
+  border-color: var(--brand);
+  color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 8%, transparent);
+}
+
+/* Selects. The open list is drawn by the operating system and cannot be
+   styled from here -- what CAN be done is tell it which scheme to draw in,
+   so it comes up dark on a dark page instead of white, and replace the
+   default arrow on the closed control. */
+.page select {
+  color-scheme: light dark;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 34px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236b7280' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6.5 8 10.5l4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  background-size: 15px;
+  cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page select {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%239ea2b3' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6.5 8 10.5l4-4'/%3E%3C/svg%3E");
+  }
+}
+
+/* The workflow cards mark selection with the identity colour, so a chosen
+   card and a primary button are not the same shade. */
+.page .workflow-card.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent), var(--lift);
+}
