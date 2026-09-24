@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import "./YouTubePanel.css";
 
 const AUTH_WORKFLOW = "youtube-auth.yml";
+const STATUS_WORKFLOW = "youtube-status.yml";
+const STATUS_PATH = "youtube/channel.json";
 const CODE_PATH = "youtube/auth-code.json";
 const OUTPUT_BRANCH = "cars-output";
 const POLL_MS = 4000;
@@ -22,6 +24,34 @@ async function readJson(settings, path) {
 }
 
 const DAY_MS = 86400000;
+
+// PT1M34S -> 1:34. Shorts are always under a minute, but the channel will
+// not always be only Shorts.
+function readDuration(iso) {
+  const match = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/.exec(String(iso || ""));
+  if (!match) return "";
+  const [h, m, sec] = [Number(match[1] || 0), Number(match[2] || 0), Number(match[3] || 0)];
+  const pad = (n) => String(n).padStart(2, "0");
+  return h ? `${h}:${pad(m)}:${pad(sec)}` : `${m}:${pad(sec)}`;
+}
+
+// What the person actually wants to know about a video, in one phrase:
+// is it out, is it coming, or is it sitting there.
+function describeVideo(video) {
+  if (video.privacy === "public") return { tone: "live", text: "Public" };
+  if (video.publish_at) {
+    const when = new Date(video.publish_at);
+    const soon = when.getTime() - Date.now();
+    const label = when.toLocaleString(undefined,
+      { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+    return {
+      tone: soon > 0 ? "scheduled" : "live",
+      text: soon > 0 ? `Scheduled ${label}` : `Was due ${label}`,
+    };
+  }
+  if (video.privacy === "unlisted") return { tone: "scheduled", text: "Unlisted" };
+  return { tone: "private", text: "Private" };
+}
 
 // What the stored expiry means, in the terms the person cares about: is it
 // still good, and for how long. 0 means the OAuth app was published and the
@@ -48,6 +78,9 @@ function describeToken(info) {
 // the workflow publishes it here, the approval happens on Google, and the new
 // token is written into Actions secrets without ever passing through here.
 export default function YouTubePanel({ settings }) {
+  const [status, setStatus] = useState(null);
+  const [statusState, setStatusState] = useState("idle");
+  const statusTimer = useRef(null);
   const [state, setState] = useState("idle");   // idle | starting | waiting | stored | error
   const [code, setCode] = useState(null);
   const [error, setError] = useState(null);
@@ -154,6 +187,59 @@ export default function YouTubePanel({ settings }) {
     }
   }
 
+  useEffect(() => {
+    if (!ready) return undefined;
+    let live = true;
+    readJson(settings, STATUS_PATH)
+      .then((found) => { if (live && found) setStatus(found); })
+      .catch(() => {});
+    return () => { live = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, settings.owner, settings.repo, settings.token]);
+
+  // The snapshot is written by the workflow, so refreshing means asking it
+  // to run and then watching the file for a newer timestamp.
+  const refreshStatus = useCallback(async () => {
+    const { owner, repo, branch, token } = settings;
+    const before = status?.checked_at || "";
+    setStatusState("refreshing");
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${STATUS_WORKFLOW}/dispatches`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/vnd.github+json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ref: branch || "v12", inputs: {} }),
+        }
+      );
+      if (!res.ok) throw new Error(`Dispatch failed (${res.status}): ${await res.text()}`);
+      const startedAt = Date.now();
+      if (statusTimer.current) clearInterval(statusTimer.current);
+      statusTimer.current = setInterval(async () => {
+        const found = await readJson(settings, STATUS_PATH).catch(() => null);
+        if (found && found.checked_at !== before) {
+          clearInterval(statusTimer.current);
+          statusTimer.current = null;
+          setStatus(found);
+          setStatusState("idle");
+        } else if (Date.now() - startedAt > 4 * 60 * 1000) {
+          clearInterval(statusTimer.current);
+          statusTimer.current = null;
+          setStatusState("idle");
+        }
+      }, POLL_MS);
+    } catch (err) {
+      setStatusState("idle");
+      setError(String(err.message || err));
+    }
+  }, [settings, status]);
+
+  useEffect(() => () => { if (statusTimer.current) clearInterval(statusTimer.current); }, []);
+
   return (
     <section className="yt-panel">
       <h2>YouTube</h2>
@@ -194,6 +280,68 @@ export default function YouTubePanel({ settings }) {
         return <p className={`yt-token yt-token-${described.tone}`}>{described.text}</p>;
       })()}
       {state === "error" && <p className="yt-error">{error}</p>}
+
+      <div className="yt-videos">
+        <div className="yt-videos-head">
+          <h3>Videos</h3>
+          <button type="button" className="secondary" onClick={refreshStatus}
+                  disabled={!ready || statusState === "refreshing"}>
+            {statusState === "refreshing" ? "Asking YouTube…" : "Refresh from YouTube"}
+          </button>
+        </div>
+
+        {!status && statusState !== "refreshing" && (
+          <p className="yt-note">
+            No snapshot yet. Press refresh and the channel is read through the workflow --
+            this page has no token of its own, by design.
+          </p>
+        )}
+
+        {status?.channel && (
+          <p className="yt-channel-line">
+            <strong>{status.channel.title}</strong>
+            {" — "}
+            {status.channel.hidden_subscribers
+              ? "subscribers hidden"
+              : `${status.channel.subscribers.toLocaleString()} subscribers`}
+            {" · "}{status.channel.views.toLocaleString()} views
+            {" · "}{status.channel.videos.toLocaleString()} videos
+            {status.checked_at && (
+              <span className="yt-note"> (read {new Date(status.checked_at).toLocaleString()})</span>
+            )}
+          </p>
+        )}
+
+        {(status?.videos || []).map((video) => {
+          const described = describeVideo(video);
+          return (
+            <div className="yt-video" key={video.id}>
+              {video.thumbnail && <img src={video.thumbnail} alt="" />}
+              <div className="yt-video-body">
+                <a href={`https://youtu.be/${video.id}`} target="_blank" rel="noreferrer">
+                  {video.title}
+                </a>
+                <div className="yt-video-meta">
+                  <span className={`yt-badge yt-badge-${described.tone}`}>{described.text}</span>
+                  {readDuration(video.duration) && <span>{readDuration(video.duration)}</span>}
+                  <span>{video.views.toLocaleString()} views</span>
+                  <span>{video.likes.toLocaleString()} likes</span>
+                  <span>{video.comments.toLocaleString()} comments</span>
+                </div>
+                <div className="yt-video-meta yt-video-settings">
+                  <span className={video.category === "Autos & Vehicles" ? "" : "yt-flag"}>
+                    {video.category || "no category"}
+                  </span>
+                  <span className={video.language ? "" : "yt-flag"}>
+                    {video.language || "no language"}
+                  </span>
+                  {video.synthetic && <span className="yt-flag">AI label on</span>}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 }
