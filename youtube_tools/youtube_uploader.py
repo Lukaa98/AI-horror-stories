@@ -101,3 +101,52 @@ def set_thumbnail(youtube, video_id, file_path):
     media = MediaFileUpload(str(file_path), mimetype="image/jpeg")
     youtube.thumbnails().set(videoId=video_id, media_body=media).execute()
     return video_id
+
+
+def update_video(youtube, video_id, title, description, tags, category_id="2",
+                 language="en", contains_synthetic_media=False):
+    """Push a listing onto a video that is already on the channel.
+
+    videos.update replaces whole parts rather than merging fields, so the
+    snippet has to be sent complete -- a partial one silently wipes what it
+    leaves out. That is also why this is driven from upload.json: the file
+    is the whole listing, so nothing can go missing from it.
+    """
+    body = {
+        "id": video_id,
+        "snippet": {
+            "title": title,
+            "description": description,
+            "tags": tags,
+            "categoryId": category_id,
+            **({"defaultLanguage": language} if language else {}),
+        },
+        "status": {
+            "containsSyntheticMedia": contains_synthetic_media,
+        },
+    }
+    if language:
+        body["snippet"]["defaultAudioLanguage"] = language
+    return youtube.videos().update(part="snippet,status", body=body).execute()
+
+
+def publish_now(youtube, video_id):
+    """Make a scheduled video public immediately.
+
+    The current status is read first and written back with only the privacy
+    changed, because videos.update replaces a whole part: sending a status
+    of just privacyStatus would blank the made-for-kids declaration, the
+    licence and the AI answer along with the schedule.
+    """
+    found = youtube.videos().list(part="status", id=video_id).execute()
+    items = found.get("items") or []
+    if not items:
+        raise RuntimeError(f"No video {video_id} on this channel.")
+    status = dict(items[0].get("status") or {})
+    status.pop("publishAt", None)
+    status["privacyStatus"] = "public"
+    # Read-only fields the API rejects on the way back in.
+    for field in ("uploadStatus", "failureReason", "rejectionReason"):
+        status.pop(field, None)
+    return youtube.videos().update(
+        part="status", body={"id": video_id, "status": status}).execute()

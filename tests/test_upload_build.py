@@ -260,3 +260,56 @@ def test_the_video_goes_up_as_a_car_video_in_a_stated_language():
     source = Path(upload_build.__file__).read_text()
     assert 'category_id=str(listing.get("category_id") or "2")' in source
     assert 'language=str(listing.get("language") or "en")' in source
+
+
+def test_a_published_listing_can_be_corrected_without_re_uploading():
+    """The first video went up as Entertainment, with no language, and the
+    only way to fix that was by hand in Studio. videos.update can apply the
+    build's own listing to a video that is already on the channel."""
+    import inspect
+    from pathlib import Path
+    from youtube_tools import youtube_uploader
+
+    assert hasattr(youtube_uploader, "update_video")
+    signature = inspect.signature(youtube_uploader.update_video)
+    assert signature.parameters["category_id"].default == "2"
+    assert signature.parameters["language"].default == "en"
+
+    # videos.update replaces whole parts rather than merging fields, so a
+    # partial snippet wipes what it leaves out.
+    body = Path(youtube_uploader.__file__).read_text()
+    block = body[body.index("def update_video"):]
+    for field in ('"title"', '"description"', '"tags"', '"categoryId"'):
+        assert field in block, f"a partial snippet would blank {field}"
+
+    source = Path(upload_build.__file__).read_text()
+    assert "def update_existing" in source
+    assert 'raise SystemExit("upload.json has no title' in source, \
+        "refuse rather than blanking a published title"
+
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/youtube-upload.yml").read_text()
+    assert "update_metadata:" in workflow and "--update-metadata" in workflow
+
+
+def test_publishing_now_keeps_the_rest_of_the_video_s_status():
+    """videos.update replaces a whole part, so writing a status of just
+    privacyStatus would blank the made-for-kids declaration, the licence and
+    the AI answer along with the schedule. The current status is read first
+    and written back with only the privacy changed."""
+    from pathlib import Path
+    from youtube_tools import youtube_uploader
+
+    block = Path(youtube_uploader.__file__).read_text()
+    block = block[block.index("def publish_now"):]
+    assert 'part="status", id=video_id' in block, "read the status before replacing it"
+    assert 'status.pop("publishAt", None)' in block
+    assert 'status["privacyStatus"] = "public"' in block
+    # The API refuses these back, so they have to come out.
+    assert '"uploadStatus"' in block and '"rejectionReason"' in block
+
+    source = Path(upload_build.__file__).read_text()
+    assert "def publish_existing" in source
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/youtube-upload.yml").read_text()
+    assert "publish_now:" in workflow and "--publish-now" in workflow

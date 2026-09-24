@@ -75,6 +75,46 @@ def normalize_publish_at(raw_value):
     return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def publish_existing(listing):
+    """Take a scheduled video public now, whatever it was scheduled for."""
+    video_id = listing.get("video_id")
+    if not video_id:
+        raise SystemExit("This build has no video_id -- upload it before publishing it.")
+
+    from youtube_tools.youtube_client import get_authenticated_service
+    from youtube_tools.youtube_uploader import publish_now
+
+    print(f"[upload] Publishing {video_id} now", flush=True)
+    publish_now(get_authenticated_service(), video_id)
+    print(f"[upload] Public: https://youtu.be/{video_id}", flush=True)
+
+
+def update_existing(repository, token, args, listing, build_dir):
+    """Apply the build's listing to the video it already uploaded."""
+    video_id = listing.get("video_id")
+    if not video_id:
+        raise SystemExit("This build has no video_id -- upload it before updating it.")
+    title = (listing.get("title") or "").strip()
+    if not title:
+        raise SystemExit("upload.json has no title. Refusing to blank a published title.")
+
+    from youtube_tools.youtube_client import get_authenticated_service
+    from youtube_tools.youtube_uploader import update_video
+
+    print(f"[upload] Updating {video_id}: {title}", flush=True)
+    update_video(
+        get_authenticated_service(),
+        video_id,
+        title=title,
+        description=listing.get("description") or "",
+        tags=listing.get("tags") or [],
+        category_id=str(listing.get("category_id") or "2"),
+        language=str(listing.get("language") or "en"),
+        contains_synthetic_media=bool(listing.get("contains_synthetic_media")),
+    )
+    print(f"[upload] Updated: https://youtu.be/{video_id}", flush=True)
+
+
 def set_thumbnail_on_existing(repository, token, args, listing, listing_path, build_dir):
     """Attach the thumbnail to a video that is already on the channel.
 
@@ -113,6 +153,17 @@ def main():
     parser.add_argument("--force", action="store_true",
                         help="Upload even if this build already has a video id.")
     parser.add_argument(
+        "--publish-now", action="store_true",
+        help="Make the already-uploaded video public immediately, overriding whatever "
+             "publish time it was scheduled for.",
+    )
+    parser.add_argument(
+        "--update-metadata", action="store_true",
+        help="Push this build's title, description, tags, category, language and AI "
+             "declaration onto the video it already uploaded, without sending the video "
+             "again. For fixing a listing after it went up.",
+    )
+    parser.add_argument(
         "--thumbnail-only", action="store_true",
         help="Attach the build's thumbnail to the video it already uploaded, without "
              "sending the video again. For a video that went up before the channel was "
@@ -138,6 +189,12 @@ def main():
             f"No upload.json at {listing_path} on {args.branch}. Builds made before "
             "this existed do not have one; re-render to get it."
         )
+    if args.publish_now:
+        publish_existing(listing)
+        return
+    if args.update_metadata:
+        update_existing(repository, token, args, listing, build_dir)
+        return
     if args.thumbnail_only:
         set_thumbnail_on_existing(repository, token, args, listing, listing_path, build_dir)
         return

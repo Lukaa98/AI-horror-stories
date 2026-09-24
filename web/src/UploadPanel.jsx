@@ -251,7 +251,67 @@ export default function UploadPanel({ settings, buildId }) {
         </p>
       ) : null}
       {state === "done" && listing.video_id ? (
-        listing.thumbnail_set === false ? (
+        <>
+          {listing.publish_at && (
+            <p className="hint">
+              <button type="button" className="secondary"
+                      onClick={() => {
+                        if (window.confirm("Make this public right now, ignoring its schedule?")) {
+                          upload({ publish_now: true });
+                        }
+                      }}>
+                Publish now
+              </button>{" "}
+              Overrides the scheduled time and takes it public immediately.
+            </p>
+          )}
+          <p className="hint">
+            <button type="button" className="secondary"
+                    onClick={() => upload({ update_metadata: true })}>
+              Push the listing to YouTube
+            </button>{" "}
+            Applies this build's title, description, tags, category, language and AI
+            answer to the video that is already up. Edit it first if you want it
+            changed -- the listing is what gets pushed.
+          </p>
+          {editing ? null : (
+            <p className="hint">
+              <button type="button" className="secondary" onClick={() => setEditing(true)}>
+                Edit the listing
+              </button>{" "}
+              Changing it here does not touch YouTube until you push it.
+            </p>
+          )}
+          {editing && (
+            <div className="upload-edit">
+              <label>
+                <span>Title <em>{draft.title.length}/{TITLE_LIMIT}</em></span>
+                <input value={draft.title} maxLength={TITLE_LIMIT}
+                       onChange={(e) => setDraft({ ...draft, title: e.target.value })} />
+              </label>
+              <label>
+                <span>Description <em>{draft.description.length}/{DESCRIPTION_LIMIT}</em></span>
+                <textarea rows={8} value={draft.description} maxLength={DESCRIPTION_LIMIT}
+                          onChange={(e) => setDraft({ ...draft, description: e.target.value })} />
+              </label>
+              <label>
+                <span>Tags <em>comma separated</em></span>
+                <input value={draft.tags}
+                       onChange={(e) => setDraft({ ...draft, tags: e.target.value })} />
+              </label>
+              <div className="upload-edit-actions">
+                <button type="button" className="upload-go" onClick={save}
+                        disabled={saving || !draft.title.trim()}>
+                  {saving ? "Saving…" : "Save"}
+                </button>
+                <button type="button" className="secondary" disabled={saving}
+                        onClick={() => setEditing(false)}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+          {listing.thumbnail_set === false ? (
           <p className="hint">
             <button type="button" className="secondary"
                     onClick={() => upload({ thumbnail_only: true })}>
@@ -259,8 +319,9 @@ export default function UploadPanel({ settings, buildId }) {
             </button>{" "}
             Verify the channel first, then this attaches the build's own thumbnail without
             uploading the video again.
-          </p>
-        ) : null
+            </p>
+          ) : null}
+        </>
       ) : (
         <>
           {editing ? (

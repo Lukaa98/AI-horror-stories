@@ -21,6 +21,16 @@ on:
         required: false
         type: boolean
         default: false
+      publish_now:
+        description: "Make the already-uploaded video public now, overriding its scheduled time"
+        required: false
+        type: boolean
+        default: false
+      update_metadata:
+        description: "Push the build's listing onto the video it already uploaded, without sending the video again"
+        required: false
+        type: boolean
+        default: false
       thumbnail_only:
         description: "Attach the build's thumbnail to the video it already uploaded, without sending the video again"
         required: false
@@ -68,10 +78,14 @@ jobs:
           FORCE: ${{ inputs.force }}
           PUBLISH_AT: ${{ inputs.publish_at }}
           THUMBNAIL_ONLY: ${{ inputs.thumbnail_only }}
+          UPDATE_METADATA: ${{ inputs.update_metadata }}
+          PUBLISH_NOW: ${{ inputs.publish_now }}
         run: |
           set -euo pipefail
           extra=""
           if [ "${FORCE}" = "true" ]; then extra="--force"; fi
           if [ "${THUMBNAIL_ONLY}" = "true" ]; then extra="${extra} --thumbnail-only"; fi
+          if [ "${UPDATE_METADATA}" = "true" ]; then extra="${extra} --update-metadata"; fi
+          if [ "${PUBLISH_NOW}" = "true" ]; then extra="${extra} --publish-now"; fi
           python -m youtube_tools.upload_build --build-id "${BUILD_ID}" ${extra} \
             --publish-at "${PUBLISH_AT:-}"
