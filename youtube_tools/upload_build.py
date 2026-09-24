@@ -144,6 +144,7 @@ def main():
             tags=listing.get("tags") or [],
             privacy=privacy,
             publish_at=publish_at,
+            contains_synthetic_media=bool(listing.get("contains_synthetic_media")),
         )
 
         if publish_at:

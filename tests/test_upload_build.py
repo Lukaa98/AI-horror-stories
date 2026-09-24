@@ -40,9 +40,10 @@ def _run(monkeypatch, listing, uploaded, written, **extra):
     uploader = types.ModuleType("youtube_tools.youtube_uploader")
 
     def fake_upload(youtube, file_path, title, description, tags, privacy="public",
-                    publish_at=""):
+                    publish_at="", contains_synthetic_media=False):
         uploaded.update(title=title, description=description, tags=tags, privacy=privacy,
-                        publish_at=publish_at)
+                        publish_at=publish_at,
+                        contains_synthetic_media=contains_synthetic_media)
         return "vid123"
 
     uploader.upload_video = fake_upload
@@ -204,3 +205,20 @@ def test_the_upload_workflow_is_dispatchable():
     if listed.returncode == 0 and listed.stdout.strip():
         assert "youtube-upload.yml" in listed.stdout, \
             "the workflow has to be on the default branch to be dispatchable at all"
+
+
+def test_the_ai_disclosure_is_not_answered_on_the_channel_s_behalf():
+    """The uploader used to declare synthetic media on every video without
+    asking. YouTube's disclosure asks three specific things -- a real person
+    made to say something, real footage altered, a realistic scene that
+    never happened -- and a cartoon narrator over unaltered car photos is
+    none of them. It is the channel's answer to give, not the uploader's."""
+    from pathlib import Path
+
+    uploader = (Path(__file__).resolve().parents[1]
+                / "youtube_tools/youtube_uploader.py").read_text()
+    assert "contains_synthetic_media=False," in uploader
+
+    source = Path(upload_build.__file__).read_text()
+    assert 'contains_synthetic_media=bool(listing.get("contains_synthetic_media"))' in source, \
+        "a build can still turn it on for itself"

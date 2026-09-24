@@ -16,7 +16,16 @@ def upload_video(
     publish_at=None,
     is_for_kids=False,
     category_id="24",
-    contains_synthetic_media=True,
+    # YouTube's disclosure asks three specific questions: does it make a
+    # real person appear to say or do something they did not, does it alter
+    # footage of a real event or place, does it generate a realistic scene
+    # that never occurred. A cartoon narrator is not a real person, the car
+    # photos are real and unaltered beyond having their backgrounds cut out,
+    # and nothing in the frame is passed off as real footage. So this is off
+    # by default and a build turns it on if it ever needs to -- rather than
+    # the uploader answering a compliance question on the channel's behalf,
+    # which is what it used to do.
+    contains_synthetic_media=False,
 ):
     file_path = Path(file_path)
     request_body = {
