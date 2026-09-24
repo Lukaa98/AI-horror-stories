@@ -1,0 +1,2847 @@
+{
+  "car": {
+    "make": "Porsche",
+    "model": "911 Turbo",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Porsche",
+    "model": "911 Turbo",
+    "query": "",
+    "start_year": 1996,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/KYak81qw/1996-porsche-911-turbo",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/KmAM2510-q_6bDDdojP/edit/OzNcZ.jpg?t=178951108701",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-QgK4oQ7wNC.jpg?t=178940217999",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/KmAM2510-gOlFJ019D3/edit/lL6s8.jpg?t=178951108701",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-E07xutntFV.jpg?t=178940388069",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/KmAM2510-vgHB5KaLce/edit/NSzvW.jpg?t=178949405229",
+    "photo_rival": "",
+    "rival_car": "",
+    "photo_race": "",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "true",
+    "extra_photos": "[{\"id\":\"closeup-restored-1790219661457-0\",\"label\":\"Front side\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/KmAM2510-GKrE31yf9-/edit/qbjey.jpg?t=178951108701\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-1\",\"label\":\"Wide body back\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/KmAM2510-xB9gRtCT1h/edit/WUY71.jpg?t=178951161766\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-2\",\"label\":\"Front close\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-urNHXkP58n.jpg?t=178940241958\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-3\",\"label\":\"Classic round headlights\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-l_G_qVjRHc.jpg?t=178940245559\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-4\",\"label\":\"Huge wing on rear side\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-Rxh86VfUxS.jpg?t=178940270040\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-5\",\"label\":\"Turbo badge, dual exhaust\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-Coc0aGpPDS.jpg?t=178940277973\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-6\",\"label\":\"Classic 5 spoke wheel, with red break calipers\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-8M3w4xQcqG.jpg?t=178940288461\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-7\",\"label\":\"Classic Porsche gauge cluster\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/KmAM2510-4zRgbyWe3Q/edit/Hs2NN.jpg?t=178949405229\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-8\",\"label\":\"6 speed manual\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/KmAM2510-zk1oVdKMiE/edit/vZ1Uu.jpg?t=178949405229\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-9\",\"label\":\"Practical for the whole family\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-mkHSTrP_Am.jpg?t=178940313061\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-10\",\"label\":\"Enginer under large spoler i guess?\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-_EGmAJkWax.jpg?t=178940396000\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-11\",\"label\":\"Air cooled 911 engine\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-bl2uaKFZ2O.jpg?t=178940389727\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-12\",\"label\":\"Practical front trunk\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-6IzHlONre1.jpg?t=178940383042\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-13\",\"label\":\"Rear quarter with huge spoler\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-EuEkV1c9Yz.jpg?t=178940239743\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790219661457-14\",\"label\":\"Wide body on sides\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/KmAM2510-i7-EgWI2Gk.jpg?t=178940262051\",\"slot\":\"side\",\"note\":\"\"}]"
+  },
+  "title": "1996 Porsche 911 Turbo: Last of the Air-Cooled Legends",
+  "youtube_title": "Is This the Greatest Air-Cooled Porsche 911 Turbo? \ud83d\udd25",
+  "key_specs": {
+    "horsepower": "400 hp",
+    "torque": "398 lb-ft",
+    "zero_to_sixty": "3.9 sec",
+    "redline": "6,800 rpm",
+    "engine": "3.6L twin-turbo flat-six",
+    "price": "$110K new"
+  },
+  "start_year": 1996,
+  "end_year": 1996,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "400 hp",
+      "photo_label": "Classic round headlights",
+      "narration": "With 400 horsepower on tap, the experience is nothing short of thrilling.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "400 hp",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "First AWD Turbo",
+      "photo_label": "exterior side",
+      "narration": "That\u2019s the Porsche 911 Turbo of 1996, a legend for being the first all-wheel-drive Turbo in the lineup.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Torque",
+      "stat_value": "398 lb-ft",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Arena Red",
+      "photo_label": "exterior rear",
+      "narration": "Finished in Arena Red Metallic, this 993 variant immortalized the Porsche's iconic 'Kills Bugs Fast' campaign.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "",
+      "photo_label": "Front close",
+      "narration": "The glass-domed headlights are a hallmark of its era, emphasizing the classic Porsche aesthetic.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "wheel",
+      "headline": "AWD",
+      "photo_label": "side-closeup-restored-1790219661457-6-6] Classic 5 spoke wheel, with red break calipers",
+      "narration": "The 911 Turbo\u2019s all-wheel-drive system and 18-inch Turbo Twist wheels ensure unparalleled stability and performance.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Value",
+      "photo_label": "exterior front",
+      "narration": "Originally priced around $110K, many 993 Turbos today fetch significantly more, reflecting their enduring value and desirability.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "$110K new",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "interior",
+      "headline": "Driver Engagement",
+      "photo_label": "interior-closeup-restored-1790219661457-8-8] 6 speed manual",
+      "narration": "The 6-speed manual transmission keeps drivers engaged, offering a true mechanical connection.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Iconic Review",
+      "photo_label": "exterior rear",
+      "narration": "Auto journalists and enthusiasts still praise its balance of power and handling, renowned as one of the best incarnations of the 911 Turbo.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Reader Question",
+      "photo_label": "Huge wing on rear side",
+      "narration": "So, with its renowned all-wheel drive and timeless design, does the 1996 Porsche 911 Turbo earn a spot in your dream garage?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://www.porsche.com/usa/aboutporsche/christophorusmagazine/archive/384/articleoverview/article01/",
+    "https://www.carscoops.com/2020/02/is-a-porsche-993-turbo-the-last-best-air-cooled-911-ever-made/",
+    "https://www.caranddriver.com/news/a15145627/1996-porsche-911-turbo-first-drive-review/"
+  ],
+  "script": "With 400 horsepower on tap, the experience is nothing short of thrilling. That\u2019s the Porsche 911 Turbo of 1996, a legend for being the first all-wheel-drive Turbo in the lineup. Finished in Arena Red Metallic, this 993 variant immortalized the Porsche's iconic 'Kills Bugs Fast' campaign. The glass-domed headlights are a hallmark of its era, emphasizing the classic Porsche aesthetic. The 911 Turbo\u2019s all-wheel-drive system and 18-inch Turbo Twist wheels ensure unparalleled stability and performance. Originally priced around $110K, many 993 Turbos today fetch significantly more, reflecting their enduring value and desirability. The 6-speed manual transmission keeps drivers engaged, offering a true mechanical connection. Auto journalists and enthusiasts still praise its balance of power and handling, renowned as one of the best incarnations of the 911 Turbo. So, with its renowned all-wheel drive and timeless design, does the 1996 Porsche 911 Turbo earn a spot in your dream garage?",
+  "word_count": 151,
+  "voice_preset": "onyx",
+  "tts_speed": 1.35,
+  "target_duration_seconds": 58.0,
+  "normalized_audio_duration_seconds": 55.513,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-porsche-911-turbo-20260924031427/narration.mp3",
+  "duration_seconds": 55.44,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.45,
+      "end": 0.63,
+      "mouth": "small"
+    },
+    {
+      "start": 0.63,
+      "end": 0.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.72,
+      "end": 0.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.99,
+      "end": 1.44,
+      "mouth": "small"
+    },
+    {
+      "start": 1.44,
+      "end": 1.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.53,
+      "end": 1.98,
+      "mouth": "small"
+    },
+    {
+      "start": 1.98,
+      "end": 2.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.25,
+      "end": 2.61,
+      "mouth": "small"
+    },
+    {
+      "start": 2.61,
+      "end": 2.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.79,
+      "end": 2.97,
+      "mouth": "small"
+    },
+    {
+      "start": 2.97,
+      "end": 3.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.06,
+      "end": 3.87,
+      "mouth": "small"
+    },
+    {
+      "start": 3.87,
+      "end": 4.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.41,
+      "end": 4.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.5,
+      "end": 4.77,
+      "mouth": "small"
+    },
+    {
+      "start": 4.77,
+      "end": 4.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.95,
+      "end": 5.04,
+      "mouth": "small"
+    },
+    {
+      "start": 5.04,
+      "end": 5.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.49,
+      "end": 5.85,
+      "mouth": "small"
+    },
+    {
+      "start": 5.85,
+      "end": 5.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.94,
+      "end": 6.84,
+      "mouth": "small"
+    },
+    {
+      "start": 6.84,
+      "end": 7.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.38,
+      "end": 7.47,
+      "mouth": "small"
+    },
+    {
+      "start": 7.47,
+      "end": 7.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.83,
+      "end": 7.92,
+      "mouth": "small"
+    },
+    {
+      "start": 7.92,
+      "end": 8.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.1,
+      "end": 8.19,
+      "mouth": "small"
+    },
+    {
+      "start": 8.19,
+      "end": 8.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.28,
+      "end": 8.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.37,
+      "end": 8.46,
+      "mouth": "small"
+    },
+    {
+      "start": 8.46,
+      "end": 8.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.55,
+      "end": 8.64,
+      "mouth": "small"
+    },
+    {
+      "start": 8.64,
+      "end": 9.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.0,
+      "end": 9.09,
+      "mouth": "small"
+    },
+    {
+      "start": 9.09,
+      "end": 9.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.18,
+      "end": 9.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.27,
+      "end": 9.99,
+      "mouth": "small"
+    },
+    {
+      "start": 9.99,
+      "end": 10.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.8,
+      "end": 10.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "small"
+    },
+    {
+      "start": 11.07,
+      "end": 11.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.52,
+      "end": 11.7,
+      "mouth": "small"
+    },
+    {
+      "start": 11.7,
+      "end": 11.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.79,
+      "end": 11.97,
+      "mouth": "small"
+    },
+    {
+      "start": 11.97,
+      "end": 12.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.33,
+      "end": 12.51,
+      "mouth": "small"
+    },
+    {
+      "start": 12.51,
+      "end": 12.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.96,
+      "end": 13.05,
+      "mouth": "small"
+    },
+    {
+      "start": 13.05,
+      "end": 13.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.5,
+      "end": 13.68,
+      "mouth": "small"
+    },
+    {
+      "start": 13.68,
+      "end": 14.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.13,
+      "end": 14.4,
+      "mouth": "small"
+    },
+    {
+      "start": 14.4,
+      "end": 14.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.49,
+      "end": 14.76,
+      "mouth": "small"
+    },
+    {
+      "start": 14.76,
+      "end": 14.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.85,
+      "end": 15.12,
+      "mouth": "small"
+    },
+    {
+      "start": 15.12,
+      "end": 15.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.39,
+      "end": 15.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.57,
+      "end": 15.66,
+      "mouth": "small"
+    },
+    {
+      "start": 15.66,
+      "end": 15.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.75,
+      "end": 16.11,
+      "mouth": "small"
+    },
+    {
+      "start": 16.11,
+      "end": 16.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.2,
+      "end": 16.56,
+      "mouth": "small"
+    },
+    {
+      "start": 16.56,
+      "end": 17.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.37,
+      "end": 17.55,
+      "mouth": "small"
+    },
+    {
+      "start": 17.55,
+      "end": 17.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.64,
+      "end": 17.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.73,
+      "end": 18.54,
+      "mouth": "small"
+    },
+    {
+      "start": 18.54,
+      "end": 18.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.63,
+      "end": 19.26,
+      "mouth": "small"
+    },
+    {
+      "start": 19.26,
+      "end": 19.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.71,
+      "end": 19.98,
+      "mouth": "small"
+    },
+    {
+      "start": 19.98,
+      "end": 20.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.07,
+      "end": 20.61,
+      "mouth": "small"
+    },
+    {
+      "start": 20.61,
+      "end": 20.7,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.7,
+      "end": 21.06,
+      "mouth": "small"
+    },
+    {
+      "start": 21.06,
+      "end": 21.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.15,
+      "end": 21.33,
+      "mouth": "small"
+    },
+    {
+      "start": 21.33,
+      "end": 22.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.05,
+      "end": 22.14,
+      "mouth": "small"
+    },
+    {
+      "start": 22.14,
+      "end": 22.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.5,
+      "end": 22.59,
+      "mouth": "small"
+    },
+    {
+      "start": 22.59,
+      "end": 22.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.68,
+      "end": 22.86,
+      "mouth": "small"
+    },
+    {
+      "start": 22.86,
+      "end": 22.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.95,
+      "end": 23.04,
+      "mouth": "small"
+    },
+    {
+      "start": 23.04,
+      "end": 23.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.31,
+      "end": 23.4,
+      "mouth": "small"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.49,
+      "end": 23.58,
+      "mouth": "small"
+    },
+    {
+      "start": 23.58,
+      "end": 23.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.67,
+      "end": 24.03,
+      "mouth": "small"
+    },
+    {
+      "start": 24.03,
+      "end": 24.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.21,
+      "end": 24.57,
+      "mouth": "small"
+    },
+    {
+      "start": 24.57,
+      "end": 24.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.66,
+      "end": 24.93,
+      "mouth": "small"
+    },
+    {
+      "start": 24.93,
+      "end": 25.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.02,
+      "end": 25.83,
+      "mouth": "small"
+    },
+    {
+      "start": 25.83,
+      "end": 26.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.01,
+      "end": 26.73,
+      "mouth": "small"
+    },
+    {
+      "start": 26.73,
+      "end": 26.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.82,
+      "end": 27.0,
+      "mouth": "small"
+    },
+    {
+      "start": 27.0,
+      "end": 27.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.09,
+      "end": 27.99,
+      "mouth": "small"
+    },
+    {
+      "start": 27.99,
+      "end": 28.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.8,
+      "end": 28.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.98,
+      "end": 29.07,
+      "mouth": "small"
+    },
+    {
+      "start": 29.07,
+      "end": 29.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.16,
+      "end": 29.25,
+      "mouth": "small"
+    },
+    {
+      "start": 29.25,
+      "end": 29.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.34,
+      "end": 30.69,
+      "mouth": "small"
+    },
+    {
+      "start": 30.69,
+      "end": 30.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.96,
+      "end": 31.05,
+      "mouth": "small"
+    },
+    {
+      "start": 31.05,
+      "end": 31.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.5,
+      "end": 32.13,
+      "mouth": "small"
+    },
+    {
+      "start": 32.13,
+      "end": 32.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.22,
+      "end": 32.49,
+      "mouth": "small"
+    },
+    {
+      "start": 32.49,
+      "end": 32.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.67,
+      "end": 33.75,
+      "mouth": "small"
+    },
+    {
+      "start": 33.75,
+      "end": 34.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.02,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 34.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.83,
+      "end": 36.0,
+      "mouth": "small"
+    },
+    {
+      "start": 36.0,
+      "end": 36.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.54,
+      "end": 36.72,
+      "mouth": "small"
+    },
+    {
+      "start": 36.72,
+      "end": 36.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.81,
+      "end": 36.9,
+      "mouth": "small"
+    },
+    {
+      "start": 36.9,
+      "end": 36.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.99,
+      "end": 37.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.08,
+      "end": 37.17,
+      "mouth": "small"
+    },
+    {
+      "start": 37.17,
+      "end": 37.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.44,
+      "end": 38.25,
+      "mouth": "small"
+    },
+    {
+      "start": 38.25,
+      "end": 38.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.34,
+      "end": 38.88,
+      "mouth": "small"
+    },
+    {
+      "start": 38.88,
+      "end": 39.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.33,
+      "end": 39.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.42,
+      "end": 39.69,
+      "mouth": "small"
+    },
+    {
+      "start": 39.69,
+      "end": 39.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.78,
+      "end": 39.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.96,
+      "end": 40.86,
+      "mouth": "small"
+    },
+    {
+      "start": 40.86,
+      "end": 41.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.67,
+      "end": 42.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.21,
+      "end": 42.3,
+      "mouth": "small"
+    },
+    {
+      "start": 42.3,
+      "end": 42.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.39,
+      "end": 42.48,
+      "mouth": "small"
+    },
+    {
+      "start": 42.48,
+      "end": 42.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.57,
+      "end": 42.66,
+      "mouth": "small"
+    },
+    {
+      "start": 42.66,
+      "end": 42.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.75,
+      "end": 43.02,
+      "mouth": "small"
+    },
+    {
+      "start": 43.02,
+      "end": 43.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.11,
+      "end": 43.29,
+      "mouth": "small"
+    },
+    {
+      "start": 43.29,
+      "end": 43.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.38,
+      "end": 43.47,
+      "mouth": "small"
+    },
+    {
+      "start": 43.47,
+      "end": 43.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.56,
+      "end": 43.65,
+      "mouth": "small"
+    },
+    {
+      "start": 43.65,
+      "end": 43.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.74,
+      "end": 43.92,
+      "mouth": "small"
+    },
+    {
+      "start": 43.92,
+      "end": 44.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.01,
+      "end": 44.1,
+      "mouth": "small"
+    },
+    {
+      "start": 44.1,
+      "end": 44.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.28,
+      "end": 44.73,
+      "mouth": "small"
+    },
+    {
+      "start": 44.73,
+      "end": 45.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.09,
+      "end": 45.18,
+      "mouth": "small"
+    },
+    {
+      "start": 45.18,
+      "end": 45.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.45,
+      "end": 45.9,
+      "mouth": "small"
+    },
+    {
+      "start": 45.9,
+      "end": 45.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.99,
+      "end": 46.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.08,
+      "end": 47.61,
+      "mouth": "small"
+    },
+    {
+      "start": 47.61,
+      "end": 48.42,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.42,
+      "end": 48.51,
+      "mouth": "small"
+    },
+    {
+      "start": 48.51,
+      "end": 48.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.6,
+      "end": 48.87,
+      "mouth": "small"
+    },
+    {
+      "start": 48.87,
+      "end": 49.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.23,
+      "end": 49.32,
+      "mouth": "small"
+    },
+    {
+      "start": 49.32,
+      "end": 49.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.41,
+      "end": 49.5,
+      "mouth": "small"
+    },
+    {
+      "start": 49.5,
+      "end": 49.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.68,
+      "end": 49.86,
+      "mouth": "small"
+    },
+    {
+      "start": 49.86,
+      "end": 49.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.95,
+      "end": 50.67,
+      "mouth": "small"
+    },
+    {
+      "start": 50.67,
+      "end": 50.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.85,
+      "end": 51.12,
+      "mouth": "small"
+    },
+    {
+      "start": 51.12,
+      "end": 51.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.21,
+      "end": 51.39,
+      "mouth": "small"
+    },
+    {
+      "start": 51.39,
+      "end": 51.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.57,
+      "end": 51.84,
+      "mouth": "small"
+    },
+    {
+      "start": 51.84,
+      "end": 51.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.93,
+      "end": 52.47,
+      "mouth": "small"
+    },
+    {
+      "start": 52.47,
+      "end": 52.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.56,
+      "end": 52.92,
+      "mouth": "small"
+    },
+    {
+      "start": 52.92,
+      "end": 53.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.01,
+      "end": 53.1,
+      "mouth": "small"
+    },
+    {
+      "start": 53.1,
+      "end": 53.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.19,
+      "end": 53.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.28,
+      "end": 53.64,
+      "mouth": "small"
+    },
+    {
+      "start": 53.64,
+      "end": 53.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.73,
+      "end": 54.54,
+      "mouth": "small"
+    },
+    {
+      "start": 54.54,
+      "end": 55.44,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "With",
+      "start": 0.0,
+      "end": 0.6200000047683716
+    },
+    {
+      "word": "400",
+      "start": 0.6200000047683716,
+      "end": 1.100000023841858
+    },
+    {
+      "word": "horsepower",
+      "start": 1.100000023841858,
+      "end": 1.559999942779541
+    },
+    {
+      "word": "on",
+      "start": 1.559999942779541,
+      "end": 1.840000033378601
+    },
+    {
+      "word": "tap",
+      "start": 1.840000033378601,
+      "end": 2.0399999618530273
+    },
+    {
+      "word": "the",
+      "start": 2.380000114440918,
+      "end": 2.440000057220459
+    },
+    {
+      "word": "experience",
+      "start": 2.440000057220459,
+      "end": 2.799999952316284
+    },
+    {
+      "word": "is",
+      "start": 2.799999952316284,
+      "end": 3.0399999618530273
+    },
+    {
+      "word": "nothing",
+      "start": 3.0399999618530273,
+      "end": 3.299999952316284
+    },
+    {
+      "word": "short",
+      "start": 3.299999952316284,
+      "end": 3.5
+    },
+    {
+      "word": "of",
+      "start": 3.5,
+      "end": 3.9200000762939453
+    },
+    {
+      "word": "thrilling",
+      "start": 3.9200000762939453,
+      "end": 3.9200000762939453
+    },
+    {
+      "word": "That's",
+      "start": 4.519999980926514,
+      "end": 4.639999866485596
+    },
+    {
+      "word": "the",
+      "start": 4.639999866485596,
+      "end": 4.840000152587891
+    },
+    {
+      "word": "Porsche",
+      "start": 4.840000152587891,
+      "end": 5.019999980926514
+    },
+    {
+      "word": "911",
+      "start": 5.019999980926514,
+      "end": 5.539999961853027
+    },
+    {
+      "word": "Turbo",
+      "start": 5.539999961853027,
+      "end": 5.880000114440918
+    },
+    {
+      "word": "of",
+      "start": 5.880000114440918,
+      "end": 6.119999885559082
+    },
+    {
+      "word": "1996",
+      "start": 6.119999885559082,
+      "end": 6.920000076293945
+    },
+    {
+      "word": "a",
+      "start": 7.440000057220459,
+      "end": 7.679999828338623
+    },
+    {
+      "word": "legend",
+      "start": 7.679999828338623,
+      "end": 7.760000228881836
+    },
+    {
+      "word": "for",
+      "start": 7.760000228881836,
+      "end": 7.960000038146973
+    },
+    {
+      "word": "being",
+      "start": 7.960000038146973,
+      "end": 8.100000381469727
+    },
+    {
+      "word": "the",
+      "start": 8.100000381469727,
+      "end": 8.300000190734863
+    },
+    {
+      "word": "first",
+      "start": 8.300000190734863,
+      "end": 8.5600004196167
+    },
+    {
+      "word": "all",
+      "start": 8.5600004196167,
+      "end": 9.0
+    },
+    {
+      "word": "wheel",
+      "start": 9.0,
+      "end": 9.0
+    },
+    {
+      "word": "drive",
+      "start": 9.0,
+      "end": 9.239999771118164
+    },
+    {
+      "word": "turbo",
+      "start": 9.239999771118164,
+      "end": 9.520000457763672
+    },
+    {
+      "word": "in",
+      "start": 9.520000457763672,
+      "end": 9.680000305175781
+    },
+    {
+      "word": "the",
+      "start": 9.680000305175781,
+      "end": 9.800000190734863
+    },
+    {
+      "word": "lineup",
+      "start": 9.800000190734863,
+      "end": 10.079999923706055
+    },
+    {
+      "word": "Finished",
+      "start": 11.020000457763672,
+      "end": 11.020000457763672
+    },
+    {
+      "word": "in",
+      "start": 11.020000457763672,
+      "end": 11.15999984741211
+    },
+    {
+      "word": "Arena",
+      "start": 11.15999984741211,
+      "end": 11.399999618530273
+    },
+    {
+      "word": "Red",
+      "start": 11.399999618530273,
+      "end": 11.5600004196167
+    },
+    {
+      "word": "Metallic",
+      "start": 11.5600004196167,
+      "end": 12.039999961853027
+    },
+    {
+      "word": "this",
+      "start": 12.319999694824219,
+      "end": 12.520000457763672
+    },
+    {
+      "word": "993",
+      "start": 12.520000457763672,
+      "end": 13.239999771118164
+    },
+    {
+      "word": "variant",
+      "start": 13.239999771118164,
+      "end": 13.5600004196167
+    },
+    {
+      "word": "immortalized",
+      "start": 13.5600004196167,
+      "end": 14.260000228881836
+    },
+    {
+      "word": "the",
+      "start": 14.260000228881836,
+      "end": 14.4399995803833
+    },
+    {
+      "word": "Porsche's",
+      "start": 14.4399995803833,
+      "end": 15.140000343322754
+    },
+    {
+      "word": "iconic",
+      "start": 15.140000343322754,
+      "end": 15.140000343322754
+    },
+    {
+      "word": "kills",
+      "start": 15.5600004196167,
+      "end": 15.619999885559082
+    },
+    {
+      "word": "bugs",
+      "start": 15.619999885559082,
+      "end": 15.819999694824219
+    },
+    {
+      "word": "fast",
+      "start": 15.819999694824219,
+      "end": 16.18000030517578
+    },
+    {
+      "word": "campaign",
+      "start": 16.18000030517578,
+      "end": 16.559999465942383
+    },
+    {
+      "word": "The",
+      "start": 17.34000015258789,
+      "end": 17.520000457763672
+    },
+    {
+      "word": "glass",
+      "start": 17.520000457763672,
+      "end": 17.739999771118164
+    },
+    {
+      "word": "domed",
+      "start": 17.739999771118164,
+      "end": 17.940000534057617
+    },
+    {
+      "word": "headlights",
+      "start": 17.940000534057617,
+      "end": 18.219999313354492
+    },
+    {
+      "word": "are",
+      "start": 18.219999313354492,
+      "end": 18.399999618530273
+    },
+    {
+      "word": "a",
+      "start": 18.399999618530273,
+      "end": 18.639999389648438
+    },
+    {
+      "word": "hallmark",
+      "start": 18.639999389648438,
+      "end": 18.760000228881836
+    },
+    {
+      "word": "of",
+      "start": 18.760000228881836,
+      "end": 18.979999542236328
+    },
+    {
+      "word": "its",
+      "start": 18.979999542236328,
+      "end": 19.200000762939453
+    },
+    {
+      "word": "era",
+      "start": 19.200000762939453,
+      "end": 19.31999969482422
+    },
+    {
+      "word": "emphasizing",
+      "start": 19.899999618530273,
+      "end": 20.18000030517578
+    },
+    {
+      "word": "the",
+      "start": 20.18000030517578,
+      "end": 20.34000015258789
+    },
+    {
+      "word": "classic",
+      "start": 20.34000015258789,
+      "end": 20.68000030517578
+    },
+    {
+      "word": "Porsche",
+      "start": 20.68000030517578,
+      "end": 20.940000534057617
+    },
+    {
+      "word": "aesthetic",
+      "start": 20.940000534057617,
+      "end": 21.360000610351562
+    },
+    {
+      "word": "The",
+      "start": 22.020000457763672,
+      "end": 22.18000030517578
+    },
+    {
+      "word": "911",
+      "start": 22.18000030517578,
+      "end": 22.540000915527344
+    },
+    {
+      "word": "Turbo's",
+      "start": 22.540000915527344,
+      "end": 22.940000534057617
+    },
+    {
+      "word": "all",
+      "start": 22.940000534057617,
+      "end": 23.219999313354492
+    },
+    {
+      "word": "wheel",
+      "start": 23.219999313354492,
+      "end": 23.360000610351562
+    },
+    {
+      "word": "drive",
+      "start": 23.360000610351562,
+      "end": 23.600000381469727
+    },
+    {
+      "word": "system",
+      "start": 23.600000381469727,
+      "end": 23.920000076293945
+    },
+    {
+      "word": "and",
+      "start": 23.920000076293945,
+      "end": 24.420000076293945
+    },
+    {
+      "word": "18",
+      "start": 24.420000076293945,
+      "end": 24.780000686645508
+    },
+    {
+      "word": "inch",
+      "start": 24.780000686645508,
+      "end": 24.959999084472656
+    },
+    {
+      "word": "turbo",
+      "start": 24.959999084472656,
+      "end": 25.280000686645508
+    },
+    {
+      "word": "twist",
+      "start": 25.280000686645508,
+      "end": 25.479999542236328
+    },
+    {
+      "word": "wheels",
+      "start": 25.479999542236328,
+      "end": 25.84000015258789
+    },
+    {
+      "word": "ensure",
+      "start": 25.84000015258789,
+      "end": 26.34000015258789
+    },
+    {
+      "word": "unparalleled",
+      "start": 26.34000015258789,
+      "end": 26.959999084472656
+    },
+    {
+      "word": "stability",
+      "start": 26.959999084472656,
+      "end": 27.399999618530273
+    },
+    {
+      "word": "and",
+      "start": 27.399999618530273,
+      "end": 27.65999984741211
+    },
+    {
+      "word": "performance",
+      "start": 27.65999984741211,
+      "end": 28.040000915527344
+    },
+    {
+      "word": "Originally",
+      "start": 28.760000228881836,
+      "end": 29.1200008392334
+    },
+    {
+      "word": "priced",
+      "start": 29.1200008392334,
+      "end": 29.440000534057617
+    },
+    {
+      "word": "around",
+      "start": 29.440000534057617,
+      "end": 29.719999313354492
+    },
+    {
+      "word": "110K",
+      "start": 29.719999313354492,
+      "end": 30.540000915527344
+    },
+    {
+      "word": "many",
+      "start": 30.959999084472656,
+      "end": 31.239999771118164
+    },
+    {
+      "word": "993",
+      "start": 31.239999771118164,
+      "end": 31.860000610351562
+    },
+    {
+      "word": "Turbos",
+      "start": 31.860000610351562,
+      "end": 32.099998474121094
+    },
+    {
+      "word": "today",
+      "start": 32.099998474121094,
+      "end": 32.63999938964844
+    },
+    {
+      "word": "fetch",
+      "start": 32.63999938964844,
+      "end": 32.900001525878906
+    },
+    {
+      "word": "significantly",
+      "start": 32.900001525878906,
+      "end": 33.439998626708984
+    },
+    {
+      "word": "more",
+      "start": 33.439998626708984,
+      "end": 33.779998779296875
+    },
+    {
+      "word": "reflecting",
+      "start": 34.36000061035156,
+      "end": 34.36000061035156
+    },
+    {
+      "word": "their",
+      "start": 34.36000061035156,
+      "end": 34.619998931884766
+    },
+    {
+      "word": "enduring",
+      "start": 34.619998931884766,
+      "end": 34.880001068115234
+    },
+    {
+      "word": "value",
+      "start": 34.880001068115234,
+      "end": 35.2400016784668
+    },
+    {
+      "word": "and",
+      "start": 35.2400016784668,
+      "end": 35.400001525878906
+    },
+    {
+      "word": "desirability",
+      "start": 35.400001525878906,
+      "end": 35.939998626708984
+    },
+    {
+      "word": "The",
+      "start": 36.599998474121094,
+      "end": 36.7400016784668
+    },
+    {
+      "word": "six",
+      "start": 36.7400016784668,
+      "end": 36.97999954223633
+    },
+    {
+      "word": "speed",
+      "start": 36.97999954223633,
+      "end": 37.13999938964844
+    },
+    {
+      "word": "manual",
+      "start": 37.13999938964844,
+      "end": 37.47999954223633
+    },
+    {
+      "word": "transmission",
+      "start": 37.47999954223633,
+      "end": 37.959999084472656
+    },
+    {
+      "word": "keeps",
+      "start": 37.959999084472656,
+      "end": 38.18000030517578
+    },
+    {
+      "word": "drivers",
+      "start": 38.18000030517578,
+      "end": 38.52000045776367
+    },
+    {
+      "word": "engaged",
+      "start": 38.52000045776367,
+      "end": 38.959999084472656
+    },
+    {
+      "word": "offering",
+      "start": 39.599998474121094,
+      "end": 39.599998474121094
+    },
+    {
+      "word": "a",
+      "start": 39.599998474121094,
+      "end": 39.7599983215332
+    },
+    {
+      "word": "true",
+      "start": 39.7599983215332,
+      "end": 39.97999954223633
+    },
+    {
+      "word": "mechanical",
+      "start": 39.97999954223633,
+      "end": 40.380001068115234
+    },
+    {
+      "word": "connection",
+      "start": 40.380001068115234,
+      "end": 40.84000015258789
+    },
+    {
+      "word": "Auto",
+      "start": 41.7599983215332,
+      "end": 41.939998626708984
+    },
+    {
+      "word": "journalists",
+      "start": 41.939998626708984,
+      "end": 42.20000076293945
+    },
+    {
+      "word": "and",
+      "start": 42.20000076293945,
+      "end": 42.41999816894531
+    },
+    {
+      "word": "enthusiasts",
+      "start": 42.41999816894531,
+      "end": 42.779998779296875
+    },
+    {
+      "word": "still",
+      "start": 42.779998779296875,
+      "end": 43.41999816894531
+    },
+    {
+      "word": "praise",
+      "start": 43.41999816894531,
+      "end": 43.41999816894531
+    },
+    {
+      "word": "its",
+      "start": 43.41999816894531,
+      "end": 43.560001373291016
+    },
+    {
+      "word": "balance",
+      "start": 43.560001373291016,
+      "end": 43.86000061035156
+    },
+    {
+      "word": "of",
+      "start": 43.86000061035156,
+      "end": 44.060001373291016
+    },
+    {
+      "word": "power",
+      "start": 44.060001373291016,
+      "end": 44.2599983215332
+    },
+    {
+      "word": "and",
+      "start": 44.2599983215332,
+      "end": 44.720001220703125
+    },
+    {
+      "word": "handling",
+      "start": 44.720001220703125,
+      "end": 44.720001220703125
+    },
+    {
+      "word": "renowned",
+      "start": 45.220001220703125,
+      "end": 45.36000061035156
+    },
+    {
+      "word": "as",
+      "start": 45.36000061035156,
+      "end": 45.560001373291016
+    },
+    {
+      "word": "one",
+      "start": 45.560001373291016,
+      "end": 45.65999984741211
+    },
+    {
+      "word": "of",
+      "start": 45.65999984741211,
+      "end": 45.7400016784668
+    },
+    {
+      "word": "the",
+      "start": 45.7400016784668,
+      "end": 45.86000061035156
+    },
+    {
+      "word": "best",
+      "start": 45.86000061035156,
+      "end": 46.099998474121094
+    },
+    {
+      "word": "incarnations",
+      "start": 46.099998474121094,
+      "end": 46.58000183105469
+    },
+    {
+      "word": "of",
+      "start": 46.58000183105469,
+      "end": 46.7400016784668
+    },
+    {
+      "word": "the",
+      "start": 46.7400016784668,
+      "end": 46.86000061035156
+    },
+    {
+      "word": "911",
+      "start": 46.86000061035156,
+      "end": 47.220001220703125
+    },
+    {
+      "word": "Turbo",
+      "start": 47.220001220703125,
+      "end": 47.52000045776367
+    },
+    {
+      "word": "So",
+      "start": 48.400001525878906,
+      "end": 48.58000183105469
+    },
+    {
+      "word": "with",
+      "start": 48.58000183105469,
+      "end": 48.68000030517578
+    },
+    {
+      "word": "its",
+      "start": 48.68000030517578,
+      "end": 48.84000015258789
+    },
+    {
+      "word": "renowned",
+      "start": 48.84000015258789,
+      "end": 49.08000183105469
+    },
+    {
+      "word": "all",
+      "start": 49.08000183105469,
+      "end": 49.439998626708984
+    },
+    {
+      "word": "wheel",
+      "start": 49.439998626708984,
+      "end": 49.439998626708984
+    },
+    {
+      "word": "drive",
+      "start": 49.439998626708984,
+      "end": 49.7599983215332
+    },
+    {
+      "word": "and",
+      "start": 49.7599983215332,
+      "end": 49.939998626708984
+    },
+    {
+      "word": "timeless",
+      "start": 49.939998626708984,
+      "end": 50.220001220703125
+    },
+    {
+      "word": "design",
+      "start": 50.220001220703125,
+      "end": 50.599998474121094
+    },
+    {
+      "word": "does",
+      "start": 50.959999084472656,
+      "end": 51.02000045776367
+    },
+    {
+      "word": "the",
+      "start": 51.02000045776367,
+      "end": 51.15999984741211
+    },
+    {
+      "word": "1996",
+      "start": 51.15999984741211,
+      "end": 51.880001068115234
+    },
+    {
+      "word": "Porsche",
+      "start": 51.880001068115234,
+      "end": 52.20000076293945
+    },
+    {
+      "word": "911",
+      "start": 52.20000076293945,
+      "end": 52.68000030517578
+    },
+    {
+      "word": "Turbo",
+      "start": 52.68000030517578,
+      "end": 53.040000915527344
+    },
+    {
+      "word": "earn",
+      "start": 53.040000915527344,
+      "end": 53.29999923706055
+    },
+    {
+      "word": "a",
+      "start": 53.29999923706055,
+      "end": 53.5
+    },
+    {
+      "word": "spot",
+      "start": 53.5,
+      "end": 53.65999984741211
+    },
+    {
+      "word": "in",
+      "start": 53.65999984741211,
+      "end": 53.84000015258789
+    },
+    {
+      "word": "your",
+      "start": 53.84000015258789,
+      "end": 53.959999084472656
+    },
+    {
+      "word": "dream",
+      "start": 53.959999084472656,
+      "end": 54.18000030517578
+    },
+    {
+      "word": "garage",
+      "start": 54.18000030517578,
+      "end": 54.52000045776367
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual-extra/0-front-side.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Front side",
+      "slot": "front",
+      "role": "detail",
+      "photo_id": "front-closeup-restored-1790219661457-0-0",
+      "cue_label": "[front-closeup-restored-1790219661457-0-0] Front side",
+      "note": ""
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-front-side.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front side",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790219661457-0-0",
+          "cue_label": "[front-closeup-restored-1790219661457-0-0] Front side",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/2-front-close.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front close",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790219661457-2-2",
+          "cue_label": "[front-closeup-restored-1790219661457-2-2] Front close",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/3-classic-round-headlights.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Classic round headlights",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790219661457-3-3",
+          "cue_label": "[front-closeup-restored-1790219661457-3-3] Classic round headlights",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/4-huge-wing-on-rear-side.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Huge wing on rear side",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790219661457-4-4",
+          "cue_label": "[side-closeup-restored-1790219661457-4-4] Huge wing on rear side",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/6-classic-5-spoke-wheel-with-red-break-calipers.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Classic 5 spoke wheel, with red break calipers",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790219661457-6-6",
+          "cue_label": "[side-closeup-restored-1790219661457-6-6] Classic 5 spoke wheel, with red break calipers",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/14-wide-body-on-sides.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Wide body on sides",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790219661457-14-14",
+          "cue_label": "[side-closeup-restored-1790219661457-14-14] Wide body on sides",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/1-wide-body-back.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Wide body back",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790219661457-1-1",
+          "cue_label": "[rear-closeup-restored-1790219661457-1-1] Wide body back",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/5-turbo-badge-dual-exhaust.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Turbo badge, dual exhaust",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790219661457-5-5",
+          "cue_label": "[rear-closeup-restored-1790219661457-5-5] Turbo badge, dual exhaust",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/13-rear-quarter-with-huge-spoler.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear quarter with huge spoler",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790219661457-13-13",
+          "cue_label": "[rear-closeup-restored-1790219661457-13-13] Rear quarter with huge spoler",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/10-enginer-under-large-spoler-i-guess.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Enginer under large spoler i guess?",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1790219661457-10-10",
+          "cue_label": "[engine-closeup-restored-1790219661457-10-10] Enginer under large spoler i guess?",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/11-air-cooled-911-engine.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Air cooled 911 engine",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1790219661457-11-11",
+          "cue_label": "[engine-closeup-restored-1790219661457-11-11] Air cooled 911 engine",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/12-practical-front-trunk.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Practical front trunk",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1790219661457-12-12",
+          "cue_label": "[engine-closeup-restored-1790219661457-12-12] Practical front trunk",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/7-classic-porsche-gauge-cluster.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Classic Porsche gauge cluster",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1790219661457-7-7",
+          "cue_label": "[interior-closeup-restored-1790219661457-7-7] Classic Porsche gauge cluster",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/8-6-speed-manual.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "6 speed manual",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1790219661457-8-8",
+          "cue_label": "[interior-closeup-restored-1790219661457-8-8] 6 speed manual",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/9-practical-for-the-whole-family.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Practical for the whole family",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1790219661457-9-9",
+          "cue_label": "[interior-closeup-restored-1790219661457-9-9] Practical for the whole family",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {},
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/KYak81qw/1996-porsche-911-turbo",
+    "title": "1996 Porsche 911 Turbo",
+    "price_text": "High Bid $267,000",
+    "auction_state": "bidding",
+    "facts": {
+      "Make": "Porsche",
+      "Engine": "3.6L Turbocharged Flat-6",
+      "Model": "993 911",
+      "Drivetrain": "4WD/AWD",
+      "Transmission": "Manual (6-Speed)",
+      "Body Style": "Coupe"
+    },
+    "sections": {
+      "Highlights": "THIS\u2026 is a 1996 Porsche 911 Turbo, finished in Arena Red Metallic with a black interior. This 911 Turbo is owned by journalist and Cars & Bids founder Doug DeMuro, and associated videos are viewable below. This Porsche is equipped with a 6-speed manual transmission, and the odometer currently displays approximately 62,800 miles. This 993 is offered with a clean Carfax vehicle history report, and it has reportedly been registered in California since new. According to the window sticker provided in the gallery, notable factory equipment includes 18-inch Turbo Twist wheels, a limited-slip differential, a sunroof, supple leather upholstery, power-adjustable front seats, and air conditioning. Notable modifications reported by the seller are limited to a Porsche Classic Communication Management (PCCM) head unit. Documentation of maintenance and repairs performed is extensive and reportedly dates back to new. Recent highlights include a $24,470 service in February 2026 that included replacing the valve covers, timing chain covers, crankshaft seal, turbo oil feed lines, and more, as detailed by documentation in the gallery. The 993-generation 911 Turbo, introduced in 1995, was the first 911 Turbo with all-wheel drive, providing enhanced traction and stability. Its twin-turbocharged flat-6 engine, distinctive wide-body design, and status as the final air-cooled Porsche have made it a favorite among Porsche enthusiasts -- and Arena Red Metallic remains one of the most famous 993 Turbo colors thanks to the iconic \"Kills Bugs Fast\" advertisement. Power comes from a 3.6-liter twin-turbocharged flat-6, rated at 400 horsepower and 398 lb-ft of torque. Power is sent to all four wheels via a 6-speed manual transmission.",
+      "Equipment": "A window sticker is provided in the photo gallery, and a partial list of notable equipment reported by the seller includes: 18-inch Turbo Twist wheels Xenon headlights Power-operated sunroof Rear wiper Supple leather upholstery Power-adjustable front seats Air conditioning Cruise control",
+      "Seller Notes": "The seller reports that some touch-up paintwork has been performed on forward-facing surfaces at some point in the past, and a full-body paint protection film and a ceramic coating have since been applied to this 911 Turbo."
+    }
+  },
+  "market_value": null,
+  "voice_auditions": {
+    "onyx": "single-porsche-911-turbo-20260924031427/voice_auditions/onyx.mp3",
+    "british_narrator": "single-porsche-911-turbo-20260924031427/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-porsche-911-turbo-20260924031427/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-porsche-911-turbo-20260924031427/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-porsche-911-turbo-20260924031427/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-porsche-911-turbo-20260924031427/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "right",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 4.2200000286102295,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 10.350000381469727,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 16.949999809265137,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 27.859999656677246,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 36.26999855041504,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 41.06999969482422,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 47.96000099182129,
+        "layout": "close-right",
+        "framing": "bust"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 5.37,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 6.82,
+        "pose": "rest"
+      },
+      {
+        "start": 8.77,
+        "pose": "open"
+      },
+      {
+        "start": 10.22,
+        "pose": "rest"
+      },
+      {
+        "start": 12.17,
+        "pose": "chest"
+      },
+      {
+        "start": 13.62,
+        "pose": "rest"
+      },
+      {
+        "start": 15.57,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 17.02,
+        "pose": "rest"
+      },
+      {
+        "start": 18.97,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 20.42,
+        "pose": "rest"
+      },
+      {
+        "start": 22.37,
+        "pose": "open"
+      },
+      {
+        "start": 23.82,
+        "pose": "rest"
+      },
+      {
+        "start": 25.77,
+        "pose": "chest"
+      },
+      {
+        "start": 27.22,
+        "pose": "rest"
+      },
+      {
+        "start": 29.17,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 30.62,
+        "pose": "rest"
+      },
+      {
+        "start": 32.57,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 34.02,
+        "pose": "rest"
+      },
+      {
+        "start": 37.419999,
+        "pose": "open"
+      },
+      {
+        "start": 38.869999,
+        "pose": "rest"
+      },
+      {
+        "start": 42.22,
+        "pose": "chest"
+      },
+      {
+        "start": 43.67,
+        "pose": "rest"
+      },
+      {
+        "start": 45.62,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 47.07,
+        "pose": "rest"
+      },
+      {
+        "start": 49.110001,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 50.560001,
+        "pose": "rest"
+      },
+      {
+        "start": 52.510001,
+        "pose": "open"
+      },
+      {
+        "start": 53.960001,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 4.2200000286102295,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-restored-1790219661457-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-front-close.jpg",
+            "label": "Front close",
+            "photo_id": "front-closeup-restored-1790219661457-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-classic-round-headlights.jpg",
+            "label": "Classic round headlights",
+            "photo_id": "front-closeup-restored-1790219661457-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 4.2200000286102295
+      },
+      {
+        "start": 4.2200000286102295,
+        "end": 10.350000381469727,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-huge-wing-on-rear-side.jpg",
+            "label": "Huge wing on rear side",
+            "photo_id": "side-closeup-restored-1790219661457-4-4"
+          },
+          {
+            "path": "images/manual-extra/6-classic-5-spoke-wheel-with-red-break-calipers.jpg",
+            "label": "Classic 5 spoke wheel, with red break calipers",
+            "photo_id": "side-closeup-restored-1790219661457-6-6"
+          },
+          {
+            "path": "images/manual-extra/14-wide-body-on-sides.jpg",
+            "label": "Wide body on sides",
+            "photo_id": "side-closeup-restored-1790219661457-14-14"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 4.2200000286102295,
+        "chapter_end": 10.350000381469727
+      },
+      {
+        "start": 10.350000381469727,
+        "end": 16.949999809265137,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/1-wide-body-back.jpg",
+            "label": "Wide body back",
+            "photo_id": "rear-closeup-restored-1790219661457-1-1"
+          },
+          {
+            "path": "images/manual-extra/5-turbo-badge-dual-exhaust.jpg",
+            "label": "Turbo badge, dual exhaust",
+            "photo_id": "rear-closeup-restored-1790219661457-5-5"
+          },
+          {
+            "path": "images/manual-extra/13-rear-quarter-with-huge-spoler.jpg",
+            "label": "Rear quarter with huge spoler",
+            "photo_id": "rear-closeup-restored-1790219661457-13-13"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 10.350000381469727,
+        "chapter_end": 16.949999809265137
+      },
+      {
+        "start": 16.949999809265137,
+        "end": 21.480000495910645,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-restored-1790219661457-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-front-close.jpg",
+            "label": "Front close",
+            "photo_id": "front-closeup-restored-1790219661457-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-classic-round-headlights.jpg",
+            "label": "Classic round headlights",
+            "photo_id": "front-closeup-restored-1790219661457-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 16.949999809265137,
+        "chapter_end": 36.26999855041504
+      },
+      {
+        "start": 21.480000495910645,
+        "end": 27.859999656677246,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-restored-1790219661457-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-front-close.jpg",
+            "label": "Front close",
+            "photo_id": "front-closeup-restored-1790219661457-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-classic-round-headlights.jpg",
+            "label": "Classic round headlights",
+            "photo_id": "front-closeup-restored-1790219661457-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 16.949999809265137,
+        "chapter_end": 36.26999855041504
+      },
+      {
+        "start": 27.859999656677246,
+        "end": 36.26999855041504,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-restored-1790219661457-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-front-close.jpg",
+            "label": "Front close",
+            "photo_id": "front-closeup-restored-1790219661457-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-classic-round-headlights.jpg",
+            "label": "Classic round headlights",
+            "photo_id": "front-closeup-restored-1790219661457-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 16.949999809265137,
+        "chapter_end": 36.26999855041504
+      },
+      {
+        "start": 36.26999855041504,
+        "end": 41.06999969482422,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/7-classic-porsche-gauge-cluster.jpg",
+            "label": "Classic Porsche gauge cluster",
+            "photo_id": "interior-closeup-restored-1790219661457-7-7"
+          },
+          {
+            "path": "images/manual-extra/8-6-speed-manual.jpg",
+            "label": "6 speed manual",
+            "photo_id": "interior-closeup-restored-1790219661457-8-8"
+          },
+          {
+            "path": "images/manual-extra/9-practical-for-the-whole-family.jpg",
+            "label": "Practical for the whole family",
+            "photo_id": "interior-closeup-restored-1790219661457-9-9"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 36.26999855041504,
+        "chapter_end": 41.06999969482422
+      },
+      {
+        "start": 41.06999969482422,
+        "end": 47.96000099182129,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-restored-1790219661457-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-front-close.jpg",
+            "label": "Front close",
+            "photo_id": "front-closeup-restored-1790219661457-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-classic-round-headlights.jpg",
+            "label": "Classic round headlights",
+            "photo_id": "front-closeup-restored-1790219661457-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 41.06999969482422,
+        "chapter_end": 55.49
+      },
+      {
+        "start": 47.96000099182129,
+        "end": 55.49,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front-side.jpg",
+            "label": "Front side",
+            "photo_id": "front-closeup-restored-1790219661457-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-front-close.jpg",
+            "label": "Front close",
+            "photo_id": "front-closeup-restored-1790219661457-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-classic-round-headlights.jpg",
+            "label": "Classic round headlights",
+            "photo_id": "front-closeup-restored-1790219661457-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 41.06999969482422,
+        "chapter_end": 55.49
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790219661457-0-0",
+          "front-closeup-restored-1790219661457-2-2",
+          "front-closeup-restored-1790219661457-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 4.2200000286102295,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-restored-1790219661457-4-4",
+          "side-closeup-restored-1790219661457-6-6",
+          "side-closeup-restored-1790219661457-14-14"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 10.350000381469727,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-restored-1790219661457-1-1",
+          "rear-closeup-restored-1790219661457-5-5",
+          "rear-closeup-restored-1790219661457-13-13"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 16.949999809265137,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790219661457-0-0",
+          "front-closeup-restored-1790219661457-2-2",
+          "front-closeup-restored-1790219661457-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 21.480000495910645,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790219661457-0-0",
+          "front-closeup-restored-1790219661457-2-2",
+          "front-closeup-restored-1790219661457-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 5,
+        "start": 27.859999656677246,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790219661457-0-0",
+          "front-closeup-restored-1790219661457-2-2",
+          "front-closeup-restored-1790219661457-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 6,
+        "start": 36.26999855041504,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-restored-1790219661457-7-7",
+          "interior-closeup-restored-1790219661457-8-8",
+          "interior-closeup-restored-1790219661457-9-9"
+        ],
+        "active": null
+      },
+      {
+        "scene": 7,
+        "start": 41.06999969482422,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790219661457-0-0",
+          "front-closeup-restored-1790219661457-2-2",
+          "front-closeup-restored-1790219661457-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 8,
+        "start": 47.96000099182129,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790219661457-0-0",
+          "front-closeup-restored-1790219661457-2-2",
+          "front-closeup-restored-1790219661457-3-3"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
