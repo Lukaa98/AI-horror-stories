@@ -10,6 +10,7 @@ import argparse
 import json
 from pathlib import Path
 
+from audition_voices import VOICE_PRESETS
 from generate_sample import ROOT
 from single_car_short import generate_voice_auditions
 
@@ -35,11 +36,21 @@ DEFAULT_SCRIPT = (
 )
 
 
-def build_voice_auditions(audition_id, text=None, chosen_preset="onyx"):
+def build_voice_auditions(audition_id, text=None, chosen_preset="onyx", presets=None):
+    """Every preset by default.
+
+    A build renders a handful, because it is making a video and the
+    auditions are a side effect. This script exists only to be listened to,
+    so it reads the whole list -- picking a voice from four of ten is not
+    picking a voice.
+    """
     text = (text or DEFAULT_SCRIPT).strip()
     output_dir = OUTPUT_ROOT / audition_id
     output_dir.mkdir(parents=True, exist_ok=True)
-    files = generate_voice_auditions(text, output_dir, chosen_preset)
+    wanted = [name for name in (presets or list(VOICE_PRESETS)) if name in VOICE_PRESETS]
+    files = {}
+    for name in dict.fromkeys([chosen_preset, *wanted]):
+        files.update(generate_voice_auditions(text, output_dir, name))
     result = {"text": text, "chosen_preset": chosen_preset, "files": files}
     (output_dir / "result.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
     return result
@@ -50,8 +61,14 @@ def main():
     parser.add_argument("--audition-id", required=True)
     parser.add_argument("--text", default=None, help="Override the default sample script.")
     parser.add_argument("--preset", default="onyx", help="Current chosen voice preset, included for comparison.")
+    parser.add_argument(
+        "--presets", default="",
+        help=f"Comma-separated presets to read. Default is all of them: {', '.join(VOICE_PRESETS)}",
+    )
     args = parser.parse_args()
-    result = build_voice_auditions(args.audition_id, text=args.text, chosen_preset=args.preset)
+    chosen = [name.strip() for name in args.presets.split(",") if name.strip()]
+    result = build_voice_auditions(args.audition_id, text=args.text,
+                                   chosen_preset=args.preset, presets=chosen or None)
     print(json.dumps(result))
 
 

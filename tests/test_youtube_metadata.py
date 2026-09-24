@@ -99,3 +99,21 @@ def test_the_photos_are_credited_by_name_not_by_link():
     assert "https://" not in described, "no link in the description"
 
     assert "Photos via" not in ym.description_for(package, credit_url="")
+
+
+def test_the_audition_tool_reads_every_voice_not_a_quarter_of_them():
+    """A build renders a handful because the auditions are a side effect of
+    making a video. The standalone tool exists only to be listened to, and
+    picking a voice from four of ten is not picking a voice."""
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import voice_audition_request
+    from audition_voices import VOICE_PRESETS
+
+    source = Path(voice_audition_request.__file__).read_text()
+    assert "presets or list(VOICE_PRESETS)" in source
+    # The American presets exist and are reachable, which was the gap.
+    for preset in ("car_host", "warm_enthusiast", "trailer_hype", "clean_news"):
+        assert preset in VOICE_PRESETS
