@@ -95,3 +95,34 @@ def test_the_narrator_asset_carries_the_current_channel_name():
 def test_it_stays_under_youtubes_two_megabyte_ceiling(tmp_path):
     out = thumbnail.build_thumbnail(_manifest(), tmp_path, tmp_path / "t.jpg")
     assert out.stat().st_size <= thumbnail.MAX_UPLOAD_BYTES
+
+
+def test_the_thumbnail_hoodie_carries_the_same_car_as_the_video(tmp_path):
+    """The sprite ships with a blank hoodie so the two never disagree: if the
+    print did not land, the thumbnail shows a plain hoodie rather than last
+    build's car."""
+    from PIL import Image
+
+    build = tmp_path / "build" / "images" / "manual"
+    build.mkdir(parents=True)
+    car = Image.new("RGBA", (400, 200), (0, 0, 0, 0))
+    for y in range(60, 150):
+        for x in range(40, 360):
+            car.putpixel((x, y), (200, 40, 40, 255))
+    car.save(build / "side-nobg.png")
+
+    manifest = {"media": [{"path": "images/manual/side-nobg.png"}]}
+    blank = Image.open(Path(thumbnail.__file__).resolve().parents[2]
+                       / thumbnail.NARRATOR_SPRITE).convert("RGBA")
+    printed = thumbnail._print_the_car_on(
+        blank, thumbnail._media_paths(manifest, tmp_path / "build"), tmp_path / "build")
+    assert printed.tobytes() != blank.tobytes(), "the car should be on the hoodie"
+
+    left, top, width, height = thumbnail.CHEST_RECT
+    box = (int(blank.width * left), int(blank.height * top),
+           int(blank.width * (left + width)), int(blank.height * (top + height)))
+    assert printed.crop(box).tobytes() != blank.crop(box).tobytes()
+    # Everything outside the chest is untouched -- the print does not leak
+    # onto the face or the sleeves.
+    above = (0, 0, blank.width, int(blank.height * top))
+    assert printed.crop(above).tobytes() == blank.crop(above).tobytes()

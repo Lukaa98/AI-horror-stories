@@ -20,8 +20,8 @@ from PIL import Image, ImageEnhance, ImageOps
 PRINT_WIDTH = 300
 # Enough contrast to read as a print rather than a washed-out photo, and
 # dark enough to sit on a white hoodie without disappearing into it.
-CONTRAST = 1.45
-BRIGHTNESS = 0.80
+CONTRAST = 2.30
+BRIGHTNESS = 0.72
 # A photo with its background still attached has no silhouette to print.
 MIN_TRANSPARENT_FRACTION = 0.10
 

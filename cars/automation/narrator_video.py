@@ -799,6 +799,43 @@ def _merged_boundaries(interval_lists, duration):
 ACCENT_COLOR = (226, 32, 32)
 
 
+def chest_car_source(media_paths):
+    """The cut-out to print on the hoodie: our car, in profile, alone.
+
+    The same two exclusions the headline colour makes, for the same reason.
+    The rival's cut-out is in this list, and so is the race composite that
+    has both cars pasted into one frame -- either would put somebody else's
+    car on the narrator's chest.
+    """
+    candidates = [str(path) for path in media_paths or []
+                  if "nobg" in str(path)
+                  and "rival" not in str(path) and "race" not in str(path)]
+    for path in candidates:
+        if "side" in path:
+            return path
+    return candidates[0] if candidates else None
+
+
+def chest_print_for(media_paths, work_dir):
+    """Write the hoodie print for this build, or None if there is no car."""
+    from chest_print import build_chest_print
+
+    source = chest_car_source(media_paths)
+    if not source:
+        return None
+    try:
+        print_image = build_chest_print(source)
+    except OSError:
+        return None
+    if print_image is None:
+        return None
+    work_dir = Path(work_dir)
+    work_dir.mkdir(parents=True, exist_ok=True)
+    out_path = work_dir / "chest-car.png"
+    print_image.save(out_path, "PNG", optimize=True)
+    return out_path
+
+
 def accent_for(media_paths):
     """The headline colour for this build: the car's own paint.
 
@@ -1659,6 +1696,43 @@ def _progress_bar_track(size, duration):
     return VideoClip(make_frame, duration=duration).set_position((0, 0))
 
 
+# The channel mark, bottom left. It used to ride on the narrator's chest,
+# where it competed with the car print and vanished whenever a shot cropped
+# to his head. In the corner it is on screen for the whole video and never
+# moves out of frame.
+CHANNEL_MARK = "narrator/channel-mark.png"
+CHANNEL_MARK_WIDTH = 0.085      # of the frame's width
+CHANNEL_MARK_MARGIN = 0.035     # from the left and bottom edges
+# A bounce rather than a bob: the mark falls to the floor and comes back up,
+# so it reads as a physical thing settling in the corner instead of drifting.
+CHANNEL_MARK_BOUNCE_PX = 14
+CHANNEL_MARK_BOUNCE_SECONDS = 2.4
+
+
+def _channel_mark_clip(size, duration):
+    """The mark in the corner, bouncing gently, or None if it is missing."""
+    path = Path(__file__).resolve().parents[2] / CHANNEL_MARK
+    if not path.is_file():
+        return None
+    width, height = size
+    mark_w = max(1, int(width * CHANNEL_MARK_WIDTH))
+    image = Image.open(path).convert("RGBA")
+    image = image.resize((mark_w, max(1, round(image.height * mark_w / image.width))),
+                         Image.Resampling.LANCZOS)
+    left = int(width * CHANNEL_MARK_MARGIN)
+    rest = height - int(height * CHANNEL_MARK_MARGIN) - image.height
+
+    def position(t):
+        # abs(sin) leaves a cusp at the bottom of every cycle, which is what
+        # makes a bounce look like a bounce rather than a float.
+        phase = abs(math.sin(math.pi * t / CHANNEL_MARK_BOUNCE_SECONDS))
+        return left, rest - CHANNEL_MARK_BOUNCE_PX * phase
+
+    return (ImageClip(np.array(image))
+            .set_duration(duration)
+            .set_position(position))
+
+
 def render_narrator_video(car_media_paths, manifest, output_path):
     size = CANVAS
     output_path = Path(output_path)
@@ -1681,6 +1755,9 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     if renderer == "v21":
         motion_plan = build_motion_plan(manifest, duration, scene_boundaries, size, fps=24,
                                         media_box=media_box)
+        chest = chest_print_for(car_media_paths, output_path.parent / "_frames" / "narrator")
+        if chest:
+            motion_plan["chest_car"] = str(chest)
         live_path, plan_path = render_live_narrator(motion_plan, output_path.parent / "_frames" / "narrator")
         live_source = VideoFileClip(str(live_path), has_mask=True, audio=False)
         narrator_positioned = live_source.set_duration(duration).set_position((0, 0))
@@ -1874,6 +1951,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     )
 
     progress_clip = _progress_bar_track(size, duration)
+    mark_clip = _channel_mark_clip(size, duration)
 
     background = ColorClip(size=size, color=(255, 255, 255)).set_duration(duration)
     sfx_clips = [
@@ -1887,6 +1965,7 @@ def render_narrator_video(car_media_paths, manifest, output_path):
         [
             background, car_positioned, *headline_clips, *caption_clips, *detail_clips, narrator_positioned,
             *decorative_clips, *stat_tracker_clips, *spec_clips, progress_clip,
+            *([mark_clip] if mark_clip is not None else []),
         ],
         size=size,
     ).set_duration(duration).set_audio(full_audio)

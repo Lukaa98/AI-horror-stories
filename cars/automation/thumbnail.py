@@ -36,7 +36,44 @@ MAX_SPEC_ROWS = 4
 # sprites under narrator/sprites-v4 still read "CAR SHORTS LAB" on the
 # hoodie -- the old channel name -- and a thumbnail carrying it would put
 # that on the channel page under every video.
+#
+# The sprite is exported with a blank hoodie and the car printed on at build
+# time, so the thumbnail carries the same car the video does. The rect is
+# where #chest-car lands in the sprite, measured off a render of the rig
+# rather than worked out from the rig's coordinates -- the stage applies a
+# transform between the two.
 NARRATOR_SPRITE = "narrator/thumbnail-narrator.png"
+CHEST_RECT = (0.21143, 0.36414, 0.56762, 0.0612)
+
+
+def _print_the_car_on(narrator, media_paths, build_dir):
+    """Put this build's car on the hoodie. Returns the sprite either way."""
+    from narrator_video import chest_car_source
+    from chest_print import build_chest_print
+
+    source = chest_car_source(media_paths)
+    if not source:
+        return narrator
+    try:
+        art = build_chest_print(source)
+    except OSError:
+        return narrator
+    if art is None:
+        return narrator
+
+    left, top, width, height = CHEST_RECT
+    box_w = int(narrator.width * width)
+    box_h = int(narrator.height * height)
+    # The rig scales the print to fit its box and centres it, so a car with
+    # a different aspect sits in the middle rather than being stretched.
+    art = _fit(art, box_w, box_h)
+    narrator = narrator.copy()
+    narrator.alpha_composite(
+        art,
+        (int(narrator.width * left) + (box_w - art.width) // 2,
+         int(narrator.height * top) + (box_h - art.height) // 2),
+    )
+    return narrator
 
 
 def _trim(image):
@@ -115,6 +152,20 @@ def _headline(draw, model, max_width):
         words = words[:-1]
     text = " ".join(words)
     return text, _fit_text(draw, text, max_width, start_size=190, min_size=56)
+
+
+def _media_paths(manifest, build_dir):
+    """Every media file this build actually has on disk, as full paths."""
+    build_dir = Path(build_dir)
+    paths = []
+    for item in manifest.get("media") or []:
+        relative = item.get("path")
+        if not relative:
+            continue
+        full = build_dir / relative
+        if full.is_file() and str(full) not in paths:
+            paths.append(str(full))
+    return paths
 
 
 def _hero_path(manifest, build_dir):
@@ -208,8 +259,10 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
     narrator_top = height
     narrator_x = width
     if narrator_path.is_file():
-        narrator = _fit(_trim(Image.open(narrator_path).convert("RGBA")),
-                        int(width * 0.42), band_h)
+        narrator = _print_the_car_on(
+            Image.open(narrator_path).convert("RGBA"),
+            _media_paths(manifest, build_dir), build_dir)
+        narrator = _fit(_trim(narrator), int(width * 0.42), band_h)
         narrator_top = height - narrator.height
         narrator_x = width - narrator.width - int(width * 0.03)
         frame.paste(narrator, (narrator_x, narrator_top), narrator)

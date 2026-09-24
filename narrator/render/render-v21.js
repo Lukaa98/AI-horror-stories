@@ -56,6 +56,21 @@ async function main() {
       ".stage{position:absolute!important;inset:0!important;width:100vw!important;height:100vh!important;border:0!important;border-radius:0!important}",
       "*,*::before,*::after{animation:none!important;transition:none!important}",
     ].join("\n") });
+    // The hoodie carries the car the video is about, not a fixed one. The
+    // print is swapped into the loaded page rather than written into the rig
+    // file, so a build never has to copy a 90KB rig to change one image.
+    if (plan.chest_car) {
+      const png = await fs.readFile(path.resolve(plan.chest_car));
+      const href = `data:image/png;base64,${png.toString("base64")}`;
+      const swapped = await page.evaluate((value) => {
+        const node = document.getElementById("chest-car");
+        if (!node) return false;
+        node.setAttribute("href", value);
+        node.removeAttribute("xlink:href");
+        return true;
+      }, href);
+      if (!swapped) throw new Error("The rig has no #chest-car to print on.");
+    }
     await page.evaluate(p => window.narratorRig.beginRender(p), plan);
     if (errors.length) throw new Error(errors.join("\n"));
     // QTRLE preserves the alpha channel for MoviePy's has_mask=True reader.

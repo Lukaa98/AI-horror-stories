@@ -44,3 +44,45 @@ def test_the_print_keeps_the_car_shaped_hole_around_it(tmp_path):
     print_image = chest_print.build_chest_print(_cutout(tmp_path, (206, 32, 38)))
     assert print_image.split()[3].getextrema() == (255, 255)
     assert print_image.width == chest_print.PRINT_WIDTH
+
+
+def test_the_hoodie_never_carries_the_other_car():
+    """The rival's cut-out and the race composite are both in the media list.
+    Either would print somebody else's car on the narrator's chest -- the
+    race frame would print two."""
+    import narrator_video
+
+    paths = [
+        "build/images/manual/front-nobg.png",
+        "build/images/manual/rival-side-nobg.png",
+        "build/images/manual/race-side-nobg.png",
+        "build/images/manual/side-nobg.png",
+    ]
+    assert narrator_video.chest_car_source(paths).endswith("manual/side-nobg.png")
+    assert narrator_video.chest_car_source(
+        ["build/images/manual/rival-front-nobg.png"]) is None
+
+
+def test_the_rig_prints_on_an_addressable_node_with_a_clear_chest():
+    """The renderer swaps the car into the loaded page rather than rewriting
+    a 90KB rig per build, so the node has to be findable. The drawstrings
+    are gone because they crossed the print."""
+    rig = (Path(__file__).resolve().parents[1]
+           / "narrator/narrator-rig-v21.html").read_text()
+    assert '<image id="chest-car"' in rig
+    assert 'd="M177 258V322M226 258V322"' not in rig, "the drawstrings crossed the print"
+    assert '<circle class="black" cx="177" cy="326"' not in rig
+
+
+def test_the_channel_mark_bounces_in_the_bottom_left():
+    """It moved off the narrator's chest, where a head-and-shoulders shot
+    cropped it out of the video entirely."""
+    import narrator_video
+
+    clip = narrator_video._channel_mark_clip((1080, 1920), 10.0)
+    assert clip is not None
+    left, low = clip.pos(0.0)
+    _, high = clip.pos(narrator_video.CHANNEL_MARK_BOUNCE_SECONDS / 2)
+    assert left < 1080 * 0.1, "hugs the left edge"
+    assert low > 1920 * 0.8, "sits near the bottom"
+    assert low - high == narrator_video.CHANNEL_MARK_BOUNCE_PX
