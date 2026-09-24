@@ -75,6 +75,36 @@ def normalize_publish_at(raw_value):
     return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def set_thumbnail_on_existing(repository, token, args, listing, listing_path, build_dir):
+    """Attach the thumbnail to a video that is already on the channel.
+
+    YouTube refuses custom thumbnails from an unverified channel, so a video
+    uploaded before verification keeps a frame picked out of itself. Once
+    the channel is verified the thumbnail can be attached without sending
+    the video a second time -- which would publish a duplicate.
+    """
+    video_id = listing.get("video_id")
+    if not video_id:
+        raise SystemExit("This build has no video_id -- upload it before setting a thumbnail.")
+    thumbnail_name = listing.get("thumbnail")
+    if not thumbnail_name:
+        raise SystemExit("This build has no thumbnail to set.")
+
+    from youtube_tools.youtube_client import get_authenticated_service
+    from youtube_tools.youtube_uploader import set_thumbnail
+
+    with tempfile.TemporaryDirectory() as workspace:
+        local_thumb = Path(workspace) / thumbnail_name
+        gh.download(raw_url(repository, args.branch, f"{build_dir}/{thumbnail_name}"), local_thumb)
+        print(f"[upload] Attaching {thumbnail_name} to {video_id}", flush=True)
+        set_thumbnail(get_authenticated_service(), video_id, local_thumb)
+
+    listing["thumbnail_set"] = True
+    gh.write_json(repository, token, args.branch, listing_path, listing,
+                  f"youtube: thumbnail for {args.build_id}")
+    print(f"[upload] Thumbnail set: https://youtu.be/{video_id}", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-id", required=True, help="Folder name under cars/single-car-shorts")
@@ -82,6 +112,12 @@ def main():
     parser.add_argument("--build-root", default=BUILD_ROOT)
     parser.add_argument("--force", action="store_true",
                         help="Upload even if this build already has a video id.")
+    parser.add_argument(
+        "--thumbnail-only", action="store_true",
+        help="Attach the build's thumbnail to the video it already uploaded, without "
+             "sending the video again. For a video that went up before the channel was "
+             "verified, when YouTube refused the thumbnail at the time.",
+    )
     parser.add_argument(
         "--publish-at", default="",
         help="ISO 8601 time with an offset, e.g. 2026-09-25T00:15:00+04:00. Given, the video "
@@ -102,6 +138,9 @@ def main():
             f"No upload.json at {listing_path} on {args.branch}. Builds made before "
             "this existed do not have one; re-render to get it."
         )
+    if args.thumbnail_only:
+        set_thumbnail_on_existing(repository, token, args, listing, listing_path, build_dir)
+        return
     check_not_already_uploaded(listing, args.force)
 
     title = (listing.get("title") or "").strip()

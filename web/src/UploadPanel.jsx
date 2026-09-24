@@ -179,7 +179,7 @@ export default function UploadPanel({ settings, buildId }) {
     return `${value}:00${sign}${pad(minutes / 60)}:${pad(minutes % 60)}`;
   }
 
-  async function upload() {
+  async function upload(extraInputs = {}) {
     setError(null);
     setState("sending");
     startedAt.current = Date.now();
@@ -198,7 +198,8 @@ export default function UploadPanel({ settings, buildId }) {
             ref: branch || "v12",
             inputs: {
               build_id: buildId,
-              ...(publishAt ? { publish_at: withLocalOffset(publishAt) } : {}),
+              ...(scheduled && publishAt ? { publish_at: withLocalOffset(publishAt) } : {}),
+              ...extraInputs,
             },
           }),
         }
@@ -248,6 +249,18 @@ export default function UploadPanel({ settings, buildId }) {
               : "it is private. Review it, then publish from YouTube Studio."}
           {listing.thumbnail_set === false && " The custom thumbnail was refused; the channel may not be verified yet."}
         </p>
+      ) : null}
+      {state === "done" && listing.video_id ? (
+        listing.thumbnail_set === false ? (
+          <p className="hint">
+            <button type="button" className="secondary"
+                    onClick={() => upload({ thumbnail_only: true })}>
+              Set the thumbnail now
+            </button>{" "}
+            Verify the channel first, then this attaches the build's own thumbnail without
+            uploading the video again.
+          </p>
+        ) : null
       ) : (
         <>
           {editing ? (

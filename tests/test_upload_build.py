@@ -222,3 +222,21 @@ def test_the_ai_disclosure_is_not_answered_on_the_channel_s_behalf():
     source = Path(upload_build.__file__).read_text()
     assert 'contains_synthetic_media=bool(listing.get("contains_synthetic_media"))' in source, \
         "a build can still turn it on for itself"
+
+
+def test_a_thumbnail_can_be_attached_without_uploading_twice():
+    """YouTube refuses custom thumbnails from an unverified channel, so a
+    video that went up before verification keeps a frame picked out of
+    itself. Re-running the upload would publish a duplicate, so the
+    thumbnail is attachable on its own."""
+    from pathlib import Path
+
+    source = Path(upload_build.__file__).read_text()
+    assert "def set_thumbnail_on_existing" in source
+    assert "--thumbnail-only" in source
+    # It refuses rather than guessing when there is nothing to attach to.
+    assert 'raise SystemExit("This build has no video_id' in source
+
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/youtube-upload.yml").read_text()
+    assert "thumbnail_only:" in workflow and "--thumbnail-only" in workflow
