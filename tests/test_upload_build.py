@@ -40,10 +40,12 @@ def _run(monkeypatch, listing, uploaded, written, **extra):
     uploader = types.ModuleType("youtube_tools.youtube_uploader")
 
     def fake_upload(youtube, file_path, title, description, tags, privacy="public",
-                    publish_at="", contains_synthetic_media=False):
+                    publish_at="", contains_synthetic_media=False,
+                    category_id="2", language="en"):
         uploaded.update(title=title, description=description, tags=tags, privacy=privacy,
                         publish_at=publish_at,
-                        contains_synthetic_media=contains_synthetic_media)
+                        contains_synthetic_media=contains_synthetic_media,
+                        category_id=category_id, language=language)
         return "vid123"
 
     uploader.upload_video = fake_upload
