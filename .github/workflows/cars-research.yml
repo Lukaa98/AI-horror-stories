@@ -434,8 +434,21 @@ jobs:
           cp -R "$tmp_dir/cars/single-car-shorts/${{ inputs.draft_id }}" "cars/single-car-shorts/${{ inputs.draft_id }}"
           git add "cars/single-car-shorts/${{ inputs.draft_id }}"
           git commit -m "cars: single-car short ${{ inputs.draft_id }}" || exit 0
-          git pull --rebase origin "${OUTPUT_BRANCH}" || true
-          git push origin "${OUTPUT_BRANCH}"
+          # Four builds pushing to one branch at once, and GitHub answering
+          # one of them with a 500: run #223 finished its video, its
+          # thumbnail and its metadata, then threw all of it away on the
+          # last line. Rebase and retry -- the loser of a race and a flaky
+          # remote both look like this, and both are fixed by going again.
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin "${OUTPUT_BRANCH}" || true
+            if git push origin "${OUTPUT_BRANCH}"; then
+              exit 0
+            fi
+            echo "push failed (attempt ${attempt}); retrying in $((attempt * 5))s"
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push ${OUTPUT_BRANCH} after 5 attempts; the build is lost."
+          exit 1
 
       - name: Commit voice audition
         if: ${{ inputs.mode == 'voice_audition' }}

@@ -82,29 +82,76 @@ async function findModelPage(page, auctionUrl, timeoutMs) {
 // says "load more" and also scrolls to the bottom, then stops as soon as a
 // round adds no new cards. Under either pattern -- button or infinite
 // scroll -- that terminates, and on a page with neither it costs one round.
-const MAX_LOAD_ROUNDS = 8;
-const MAX_CARDS = 160;
+// The results page shows one screenful at a time and is virtualised: rows
+// that scroll out of view are unmounted. Run #219 read the first twenty and
+// found no 993 Turbo among them, so this began scrolling for more -- and
+// runs #220 and #222 came back with FIVE, because scrolling to the bottom
+// and then reading left only the rows still on screen in the DOM.
+//
+// So the page is harvested as it scrolls rather than after. Each pass takes
+// whatever is currently mounted and merges it in by auction URL; nothing
+// depends on a row still being there at the end.
+const MAX_SCROLL_ROUNDS = 14;
+const MAX_CARDS = 200;
+// Two barren passes in a row, not one: a single slow render should not be
+// mistaken for the end of the list.
+const BARREN_ROUNDS_BEFORE_STOP = 2;
 
-async function loadMoreResults(page) {
-  let previous = 0;
-  for (let round = 0; round < MAX_LOAD_ROUNDS; round += 1) {
-    const count = await page.evaluate(() => document.querySelectorAll('a[href*="/auctions/"]').length);
-    if (count >= MAX_CARDS || (round > 0 && count <= previous)) return count;
-    previous = count;
-    await page.evaluate(() => {
-      const wanted = /^(load|show|view)\s+more|^more\s+results?$/i;
-      for (const el of document.querySelectorAll("button, a")) {
-        const text = String(el.innerText || "").replace(/\s+/g, " ").trim();
-        if (wanted.test(text) && !el.disabled) {
-          el.click();
-          return;
-        }
+function readMountedCards() {
+  const clean = (value) => String(value || "").replace(/\s+/g, " ").trim();
+  // "Sold for" and "Sold After for" are sales. "Bid to" is an auction that
+  // did NOT meet its reserve -- nothing changed hands, so it is not
+  // evidence of what the car sells for, only of what it failed to sell
+  // for. The two must stay distinguishable.
+  const PRICE = /(Sold After for|Sold for|Bid to|Winning bid)\s*\$([\d,]+)/i;
+  const YEAR_TITLE = /\b(19|20)\d{2}\b/;
+
+  const out = [];
+  for (const anchor of document.querySelectorAll('a[href*="/auctions/"]')) {
+    const href = anchor.getAttribute("href") || "";
+    const slug = href.split("?")[0];
+    if (!slug) continue;
+
+    // Walk up until an ancestor carries both a title and a price. Capped,
+    // so a page-wide container cannot swallow every card into one.
+    let node = anchor;
+    let card = null;
+    for (let depth = 0; depth < 5 && node; depth += 1) {
+      const text = clean(node.innerText);
+      if (PRICE.test(text) && YEAR_TITLE.test(text) && text.length < 400) {
+        card = text;
+        break;
       }
-      window.scrollTo(0, document.body.scrollHeight);
+      node = node.parentElement;
+    }
+    if (!card) continue;
+
+    const price = card.match(PRICE);
+    // The title comes off the title link itself, not off the card's text.
+    // A card carries the listing's subtitle too ("6-Speed Manual",
+    // "1 Owner Since 2002"), and sweeping 70 characters of card text
+    // swallowed it -- which made every comp read as a different variant
+    // from ours and left run #219 with no comparable sales at all.
+    let title = "";
+    for (const link of document.querySelectorAll(`a[href^="${slug}"]`)) {
+      const text = clean(link.innerText);
+      if (/^(19|20)\d{2}\s/.test(text) && text.length < 90) {
+        title = text;
+        break;
+      }
+    }
+    if (!title) title = (card.match(/\b((19|20)\d{2}[^,\n]{0,70})/) || [])[1] || "";
+
+    out.push({
+      title: clean(title),
+      label: clean(price[1]),
+      price: Number(price[2].replace(/,/g, "")),
+      sold: /sold/i.test(price[1]),
+      ended: (card.match(/Ended\s+([\d/]+)/i) || [])[1] || "",
+      url: slug,
     });
-    await new Promise((resolve) => setTimeout(resolve, 2000));
   }
-  return page.evaluate(() => document.querySelectorAll('a[href*="/auctions/"]').length);
+  return out;
 }
 
 async function readResults(page, modelUrl, timeoutMs) {
@@ -113,66 +160,31 @@ async function readResults(page, modelUrl, timeoutMs) {
     .catch(() => {});
   // Give the client-rendered result list a moment to fill in.
   await new Promise((resolve) => setTimeout(resolve, 2500));
-  await loadMoreResults(page);
 
-  return page.evaluate(() => {
-    const clean = (value) => String(value || "").replace(/\s+/g, " ").trim();
-    // "Sold for" and "Sold After for" are sales. "Bid to" is an auction that
-    // did NOT meet its reserve -- nothing changed hands, so it is not
-    // evidence of what the car sells for, only of what it failed to sell
-    // for. The two must stay distinguishable.
-    const PRICE = /(Sold After for|Sold for|Bid to|Winning bid)\s*\$([\d,]+)/i;
-    const YEAR_TITLE = /\b(19|20)\d{2}\b/;
-
-    const seen = new Set();
-    const out = [];
-    for (const anchor of document.querySelectorAll('a[href*="/auctions/"]')) {
-      const href = anchor.getAttribute("href") || "";
-      const slug = href.split("?")[0];
-      if (!slug || seen.has(slug)) continue;
-
-      // Walk up until an ancestor carries both a title and a price. Capped,
-      // so a page-wide container cannot swallow every card into one.
-      let node = anchor;
-      let card = null;
-      for (let depth = 0; depth < 5 && node; depth += 1) {
-        const text = clean(node.innerText);
-        if (PRICE.test(text) && YEAR_TITLE.test(text) && text.length < 400) {
-          card = text;
-          break;
-        }
-        node = node.parentElement;
-      }
-      if (!card) continue;
-      seen.add(slug);
-
-      const price = card.match(PRICE);
-      // The title comes off the title link itself, not off the card's text.
-      // A card carries the listing's subtitle too ("6-Speed Manual",
-      // "1 Owner Since 2002"), and sweeping 70 characters of card text
-      // swallowed it -- which made every comp look like a different variant
-      // from ours and left run #219 with no comparable sales at all.
-      let title = "";
-      for (const link of document.querySelectorAll(`a[href^="${slug}"]`)) {
-        const text = clean(link.innerText);
-        if (/^(19|20)\d{2}\s/.test(text) && text.length < 90) {
-          title = text;
-          break;
-        }
-      }
-      if (!title) title = (card.match(/\b((19|20)\d{2}[^,\n]{0,70})/) || [])[1] || "";
-      const ended = (card.match(/Ended\s+([\d/]+)/i) || [])[1] || "";
-      out.push({
-        title: clean(title),
-        label: clean(price[1]),
-        price: Number(price[2].replace(/,/g, "")),
-        sold: /sold/i.test(price[1]),
-        ended,
-        url: slug,
-      });
+  const found = new Map();
+  let barren = 0;
+  for (let round = 0; round < MAX_SCROLL_ROUNDS; round += 1) {
+    const before = found.size;
+    for (const comp of await page.evaluate(readMountedCards)) {
+      if (!found.has(comp.url)) found.set(comp.url, comp);
     }
-    return out;
-  });
+    if (found.size >= MAX_CARDS) break;
+    barren = found.size > before ? 0 : barren + 1;
+    if (barren >= BARREN_ROUNDS_BEFORE_STOP) break;
+
+    // One viewport at a time rather than straight to the bottom, so no row
+    // is scrolled past between two harvests.
+    await page.evaluate(() => {
+      const more = [...document.querySelectorAll("button")].find((el) => {
+        const text = String(el.innerText || "").replace(/\s+/g, " ").trim();
+        return /^(load|show|view)\s+more|^more\s+results?$/i.test(text) && !el.disabled;
+      });
+      if (more) more.click();
+      else window.scrollBy(0, Math.round(window.innerHeight * 0.85));
+    });
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+  }
+  return [...found.values()];
 }
 
 async function main() {

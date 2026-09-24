@@ -165,5 +165,34 @@ def test_the_comps_scraper_takes_the_title_from_the_link_not_the_card():
     source = (Path(__file__).resolve().parents[1]
               / "scraper/car-source-scraper/src/scrape-carsandbids-comps.js").read_text()
     assert 'a[href^="${slug}"]' in source, "the title comes off the title link"
-    assert "loadMoreResults" in source, \
-        "one screenful of a popular model can contain none of the rarer variant"
+
+
+def test_the_comps_scraper_harvests_while_it_scrolls():
+    """Run #219 read one screenful, so #220 scrolled for more -- and came
+    back with five instead of twenty. The list is virtualised: rows that
+    scroll out of view are unmounted, so scrolling to the bottom and then
+    reading leaves only what is still on screen. Every pass has to bank what
+    it can see before moving on."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "scraper/car-source-scraper/src/scrape-carsandbids-comps.js").read_text()
+    assert "readMountedCards" in source
+    assert "scrollBy" in source and "scrollHeight" not in source, \
+        "one viewport at a time, so no row is passed between two harvests"
+    assert "found.has(comp.url)" in source, "merged by auction url across passes"
+
+
+def test_a_finished_build_is_not_thrown_away_on_a_failed_push():
+    """Run #223 rendered its video, wrote its thumbnail and its metadata,
+    then lost all of it to a GitHub 500 on the last line. Four builds
+    pushing to one branch at once makes the race routine, and the loser of
+    a race and a flaky remote both look the same from here."""
+    from pathlib import Path
+
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/cars-research.yml").read_text()
+    step = workflow[workflow.index("Commit single-car short"):]
+    step = step[:step.index("- name: Commit voice audition")]
+    assert "for attempt in" in step, "one push attempt is not enough"
+    assert step.count("git pull --rebase") >= 1, "rebase between attempts, not just retry"
