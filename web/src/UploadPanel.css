@@ -78,3 +78,47 @@
   padding: 5px 8px;
   font: inherit;
 }
+
+/* Editing the listing. The fields are full width because a description is
+   several lines and a title is often near the 100-character limit. */
+.upload-edit label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.upload-edit label > span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted, #6b7280);
+}
+
+.upload-edit label > span em {
+  float: right;
+  font-style: normal;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.upload-edit input,
+.upload-edit textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 9px;
+  font: inherit;
+}
+
+.upload-edit textarea {
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.upload-edit-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.upload-edit-open {
+  margin-top: 6px;
+}

@@ -13,7 +13,17 @@ const POLL_MS = 6000;
 // The workflow gives up at 30 minutes; past that there is nothing coming.
 const GIVE_UP_MS = 31 * 60 * 1000;
 
+// YouTube's own limits. Enforced here so an over-long title is a disabled
+// Save rather than a failed upload after the video has gone across.
+const TITLE_LIMIT = 100;
+const DESCRIPTION_LIMIT = 5000;
+
 async function readJson(settings, path) {
+  const found = await readListing(settings, path);
+  return found ? found.listing : null;
+}
+
+async function readListing(settings, path) {
   const { owner, repo, token } = settings;
   const res = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(OUTPUT_BRANCH)}`,
@@ -22,7 +32,35 @@ async function readJson(settings, path) {
   if (!res.ok) return null;
   const data = await res.json();
   const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, "")), (c) => c.charCodeAt(0));
-  return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+  // The blob sha, so a later write can say which version it is replacing --
+  // without it GitHub refuses the update rather than clobbering.
+  return { listing: JSON.parse(new TextDecoder("utf-8").decode(bytes)), sha: data.sha };
+}
+
+async function writeJson(settings, path, sha, value) {
+  const { owner, repo, token } = settings;
+  const text = JSON.stringify(value, null, 2) + "\n";
+  const encoded = btoa(String.fromCharCode(...new TextEncoder().encode(text)));
+  const res = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: `cars: edit listing for ${path.split("/").slice(-2)[0]}`,
+        content: encoded,
+        sha,
+        branch: OUTPUT_BRANCH,
+      }),
+    }
+  );
+  if (!res.ok) throw new Error(`Saving failed (${res.status}): ${await res.text()}`);
+  const data = await res.json();
+  return data.content.sha;
 }
 
 // The listing for one finished build, and the button that sends it. The
@@ -35,6 +73,10 @@ export default function UploadPanel({ settings, buildId }) {
   const [state, setState] = useState("idle");   // idle | sending | watching | done | error
   const [error, setError] = useState(null);
   const [scheduled, setScheduled] = useState(false);
+  const [sha, setSha] = useState(null);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState({ title: "", description: "", tags: "" });
+  const [saving, setSaving] = useState(false);
   // The next 12:15, which is the slot the channel posts in -- today if that
   // has not happened yet, otherwise tomorrow. Prefilled rather than blank so
   // scheduling is one click on the usual day.
@@ -63,11 +105,17 @@ export default function UploadPanel({ settings, buildId }) {
     if (!ready) return undefined;
     let live = true;
     setLoading(true);
-    readJson(settings, path)
+    readListing(settings, path)
       .then((found) => {
         if (!live) return;
-        setListing(found);
-        if (found?.video_id) setState("done");
+        setListing(found ? found.listing : null);
+        setSha(found ? found.sha : null);
+        if (found?.listing?.video_id) setState("done");
+        if (found) setDraft({
+          title: found.listing.title || "",
+          description: found.listing.description || "",
+          tags: (found.listing.tags || []).join(", "),
+        });
       })
       .catch(() => {})
       .finally(() => live && setLoading(false));
@@ -95,6 +143,28 @@ export default function UploadPanel({ settings, buildId }) {
       setError(String(err.message || err));
     }
   }, [settings, path, stop]);
+
+  // Edits are written back to upload.json rather than passed to the
+  // workflow, so the file stays the one source of what gets published --
+  // the dashboard shows the edited text afterwards, and a re-upload sends
+  // the same words rather than the ones the build first wrote.
+  async function save() {
+    setError(null);
+    setSaving(true);
+    try {
+      const tags = draft.tags.split(",").map((t) => t.trim()).filter(Boolean);
+      const updated = { ...listing, title: draft.title.trim(),
+                        description: draft.description, tags };
+      const nextSha = await writeJson(settings, path, sha, updated);
+      setListing(updated);
+      setSha(nextSha);
+      setEditing(false);
+    } catch (err) {
+      setError(String(err.message || err));
+    } finally {
+      setSaving(false);
+    }
+  }
 
   // A local datetime-local value carries no offset, so it is turned into
   // one here using this browser's own zone. Midnight means a different
@@ -180,15 +250,59 @@ export default function UploadPanel({ settings, buildId }) {
         </p>
       ) : (
         <>
-          <dl className="upload-fields">
-            <dt>Title</dt>
-            <dd>{listing.title}</dd>
-            <dt>Description</dt>
-            <dd className="upload-description">{listing.description}</dd>
-            <dt>Tags</dt>
-            <dd>{(listing.tags || []).join(", ")}</dd>
-          </dl>
-          <label className="upload-schedule">
+          {editing ? (
+            <div className="upload-edit">
+              <label>
+                <span>Title <em>{draft.title.length}/{TITLE_LIMIT}</em></span>
+                <input value={draft.title} maxLength={TITLE_LIMIT}
+                       onChange={(e) => setDraft({ ...draft, title: e.target.value })} />
+              </label>
+              <label>
+                <span>Description <em>{draft.description.length}/{DESCRIPTION_LIMIT}</em></span>
+                <textarea rows={10} value={draft.description} maxLength={DESCRIPTION_LIMIT}
+                          onChange={(e) => setDraft({ ...draft, description: e.target.value })} />
+              </label>
+              <label>
+                <span>Tags <em>comma separated</em></span>
+                <input value={draft.tags}
+                       onChange={(e) => setDraft({ ...draft, tags: e.target.value })} />
+              </label>
+              <div className="upload-edit-actions">
+                <button type="button" className="upload-go" onClick={save}
+                        disabled={saving || !draft.title.trim()}>
+                  {saving ? "Saving…" : "Save"}
+                </button>
+                <button type="button" className="secondary" disabled={saving}
+                        onClick={() => {
+                          setDraft({
+                            title: listing.title || "",
+                            description: listing.description || "",
+                            tags: (listing.tags || []).join(", "),
+                          });
+                          setEditing(false);
+                        }}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <dl className="upload-fields">
+                <dt>Title</dt>
+                <dd>{listing.title}</dd>
+                <dt>Description</dt>
+                <dd className="upload-description">{listing.description}</dd>
+                <dt>Tags</dt>
+                <dd>{(listing.tags || []).join(", ")}</dd>
+              </dl>
+              <button type="button" className="secondary upload-edit-open"
+                      onClick={() => setEditing(true)}
+                      disabled={state === "sending" || state === "watching"}>
+                Edit title & description
+              </button>
+            </>
+          )}
+          {!editing && <label className="upload-schedule">
             <span>Publish</span>
             <select value={scheduled ? "at" : "now"}
                     onChange={(e) => setScheduled(e.target.value === "at")}
@@ -201,15 +315,15 @@ export default function UploadPanel({ settings, buildId }) {
                      onChange={(e) => setPublishAt(e.target.value)}
                      disabled={state === "sending" || state === "watching"} />
             )}
-          </label>
-          {scheduled && (
+          </label>}
+          {!editing && scheduled && (
             <p className="hint">
               YouTube makes it public at that moment, in this computer's timezone.
               It stays private until then.
             </p>
           )}
           <button type="button" className="upload-go" onClick={upload}
-                  disabled={!ready || state === "sending" || state === "watching"}>
+                  disabled={!ready || editing || state === "sending" || state === "watching"}>
             {state === "watching" ? "Uploading…" : state === "sending" ? "Starting…"
               : scheduled ? "Upload and schedule" : "Upload to YouTube (private)"}
           </button>
