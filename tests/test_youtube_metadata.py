@@ -78,3 +78,24 @@ def test_a_build_with_nothing_filled_in_still_produces_a_usable_listing():
     assert meta["title"].strip() and len(meta["title"]) <= ym.TITLE_LIMIT
     assert "Audi R8" in meta["description"]
     assert meta["tags"]
+
+
+def test_the_photos_are_credited_by_name_not_by_link():
+    """A listing URL dies when the auction is archived, and the video
+    outlives it by years. The point of the line is the credit, not the
+    click."""
+    assert ym.photo_credit(
+        "https://carsandbids.com/auctions/KYak81qw/1996-porsche-911-turbo") == "Cars & Bids"
+    assert ym.photo_credit("https://www.carsandbids.com/x") == "Cars & Bids"
+    assert ym.photo_credit("https://bringatrailer.com/listing/y") == "Bring a Trailer"
+    # A host we have no name for gets no line at all, rather than a bare URL.
+    assert ym.photo_credit("https://example.com/z") == ""
+    assert ym.photo_credit("") == ""
+
+    package = {"car": {"make": "Porsche", "model": "911 Turbo"}, "key_specs": {"horsepower": "400 hp"}}
+    described = ym.description_for(
+        package, credit_url="https://carsandbids.com/auctions/KYak81qw/1996-porsche-911-turbo")
+    assert "Photos via Cars & Bids" in described
+    assert "https://" not in described, "no link in the description"
+
+    assert "Photos via" not in ym.description_for(package, credit_url="")

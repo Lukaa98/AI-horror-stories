@@ -127,6 +127,28 @@ def _hashtags(package):
     return " ".join(dict.fromkeys(tags))
 
 
+# Where the photos came from, by name. Not a link: the listing is taken
+# down when the auction is archived, which leaves a dead URL at the bottom
+# of a video that outlives it by years, and the point of the line is the
+# credit rather than the click.
+PHOTO_SOURCES = {
+    "carsandbids.com": "Cars & Bids",
+    "bringatrailer.com": "Bring a Trailer",
+}
+
+
+def photo_credit(url):
+    """The name of the site a listing URL belongs to, or ""."""
+    host = re.sub(r"^https?://", "", str(url or "")).split("/")[0].lower()
+    host = host.split(":")[0]
+    if host.startswith("www."):
+        host = host[4:]
+    for domain, name in PHOTO_SOURCES.items():
+        if host == domain or host.endswith("." + domain):
+            return name
+    return ""
+
+
 def description_for(package, credit_url=""):
     car = package.get("car") or {}
     make, model = fix_name(car.get("make")), fix_name(car.get("model"))
@@ -146,8 +168,9 @@ def description_for(package, credit_url=""):
         spec_line += " — " + ", ".join(figures)
     lines.append(f"{spec_line}. {flag}💨".strip())
     lines += ["", "Subscribe for more fire car content. 🔥", "", _hashtags(package)]
-    if credit_url:
-        lines += ["", f"Photos: {credit_url}"]
+    credit = photo_credit(credit_url)
+    if credit:
+        lines += ["", f"Photos via {credit}"]
     return "\n".join(lines)[:DESCRIPTION_LIMIT]
 
 
