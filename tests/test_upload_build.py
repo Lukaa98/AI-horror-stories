@@ -240,3 +240,21 @@ def test_a_thumbnail_can_be_attached_without_uploading_twice():
     workflow = (Path(__file__).resolve().parents[1]
                 / ".github/workflows/youtube-upload.yml").read_text()
     assert "thumbnail_only:" in workflow and "--thumbnail-only" in workflow
+
+
+def test_the_video_goes_up_as_a_car_video_in_a_stated_language():
+    """It was going up as Entertainment with no language declared -- the
+    category where a car channel is least likely to sit beside other car
+    videos, and no language means YouTube guesses, which is how auto-
+    captions and translations go wrong."""
+    import inspect
+    from youtube_tools import youtube_uploader
+
+    signature = inspect.signature(youtube_uploader.upload_video)
+    assert signature.parameters["category_id"].default == "2", "Autos & Vehicles"
+    assert signature.parameters["language"].default == "en"
+
+    from pathlib import Path
+    source = Path(upload_build.__file__).read_text()
+    assert 'category_id=str(listing.get("category_id") or "2")' in source
+    assert 'language=str(listing.get("language") or "en")' in source

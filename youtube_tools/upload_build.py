@@ -184,6 +184,8 @@ def main():
             privacy=privacy,
             publish_at=publish_at,
             contains_synthetic_media=bool(listing.get("contains_synthetic_media")),
+            category_id=str(listing.get("category_id") or "2"),
+            language=str(listing.get("language") or "en"),
         )
 
         if publish_at:

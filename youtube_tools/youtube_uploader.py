@@ -15,7 +15,11 @@ def upload_video(
     privacy="public",
     publish_at=None,
     is_for_kids=False,
-    category_id="24",
+    # 2 is Autos & Vehicles. The default was 24, Entertainment, which is
+    # where a car channel's videos are least likely to be placed next to
+    # other car videos.
+    category_id="2",
+    language="en",
     # YouTube's disclosure asks three specific questions: does it make a
     # real person appear to say or do something they did not, does it alter
     # footage of a real event or place, does it generate a realistic scene
@@ -34,6 +38,12 @@ def upload_video(
             "description": description,
             "tags": tags,
             "categoryId": category_id,
+            # Both, deliberately: defaultLanguage is what the title and
+            # description are written in, defaultAudioLanguage what is
+            # spoken. Left unset, YouTube guesses, and auto-captions and
+            # translation are the things that get it wrong.
+            **({"defaultLanguage": language, "defaultAudioLanguage": language}
+               if language else {}),
         },
         "status": {
             "privacyStatus": privacy,
