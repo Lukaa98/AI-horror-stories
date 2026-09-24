@@ -102,3 +102,16 @@ def test_the_hoodie_carries_the_car_and_nothing_else():
         assert block.group(1).lstrip().startswith('<image id="chest-car"'), name
         # The tach's two signature colours, anywhere in the rig.
         assert "#E52020" not in rig and "#8E9096" not in rig, name
+
+
+def test_the_old_channel_name_is_nowhere_in_the_repo():
+    """It survived as pixels in two pre-rendered sprite sets long after the
+    channel was renamed. Those sets are also the reason this is a hard
+    deletion rather than a re-export: a pre-rendered character cannot carry
+    the build's own car, so every video would wear the same one."""
+    root = Path(__file__).resolve().parents[1]
+    assert not (root / "narrator" / "sprites-v4").exists()
+    assert not (root / "narrator" / "sprites-v3").exists()
+    workflow = (root / ".github/workflows/cars-research.yml").read_text()
+    assert "narrator_character" not in workflow
+    assert "NARRATOR_RENDERER: v21" in workflow

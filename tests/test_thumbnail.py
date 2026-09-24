@@ -84,12 +84,12 @@ def test_the_make_goes_under_the_car_only_when_it_adds_something():
 
 
 def test_the_narrator_asset_carries_the_current_channel_name():
-    """The exported sprites still read "CAR SHORTS LAB". A thumbnail built
-    from one would put the old channel name on the channel page under every
-    single video."""
+    """The exported sprite sets read "CAR SHORTS LAB", and are deleted for
+    it. A thumbnail built from one would have put the old channel name on
+    the channel page under every single video."""
     asset = Path(__file__).resolve().parents[1] / thumbnail.NARRATOR_SPRITE
     assert asset.is_file(), f"{thumbnail.NARRATOR_SPRITE} is missing"
-    assert "sprites-v4" not in thumbnail.NARRATOR_SPRITE
+    assert "sprites" not in thumbnail.NARRATOR_SPRITE
 
 
 def test_it_stays_under_youtubes_two_megabyte_ceiling(tmp_path):

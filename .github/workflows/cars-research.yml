@@ -87,16 +87,6 @@ on:
         required: false
         type: string
         default: onyx
-      narrator_character:
-        description: "Narrator character: v21 has continuous gestures and smooth video placements; other choices use legacy sprites"
-        required: false
-        type: choice
-        default: "v21"
-        options:
-          - "v21"
-          - "v4"
-          - "default"
-          - "v3"
       auction_url:
         description: "single_car mode: a specific carsandbids.com/auctions/... listing to pull photos from instead of searching"
         required: false
@@ -183,7 +173,7 @@ jobs:
           fi
 
       - name: Check V21 narrator motion
-        if: ${{ inputs.mode == 'single_car' && (inputs.narrator_character == 'v21' || inputs.narrator_character == '') }}
+        if: ${{ inputs.mode == 'single_car' }}
         run: |
           python -m pytest -q tests/test_narrator_motion.py tests/test_narrator_video.py tests/test_photo_story.py
           node narrator/render/test-v21.js
@@ -264,10 +254,10 @@ jobs:
           # unparseable, silently ignored, and run #201 quietly fell back to
           # scraping the gallery instead of using the pasted photos.
           PHOTOS: ${{ inputs.photos }}
-          # V21 captures every frame of the approved live HTML rig.
-          # Explicit older selections retain their existing sprite sets.
-          NARRATOR_RENDERER: ${{ (inputs.narrator_character == 'v21' || inputs.narrator_character == '') && 'v21' || 'sprites' }}
-          NARRATOR_SPRITES_DIR: ${{ inputs.narrator_character == 'v4' && format('{0}/narrator/sprites-v4', github.workspace) || inputs.narrator_character == 'v3' && format('{0}/narrator/sprites-v3', github.workspace) || '' }}
+          # The live rig, always. The sprite sets it used to be switchable
+          # to are pre-rendered PNGs, so they cannot carry the build's own
+          # car on the hoodie -- every video would wear the same one.
+          NARRATOR_RENDERER: v21
         run: |
           YEAR_ARGS=()
           if [ -n "${{ inputs.start_year }}" ]; then YEAR_ARGS+=(--start-year "${{ inputs.start_year }}"); fi
