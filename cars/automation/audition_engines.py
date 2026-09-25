@@ -53,7 +53,50 @@ ENGINES = {
     "g-gpt-audio-sage": {"engine": "audio", "voice": "sage", "instructions": BRISK},
     "h-gpt-audio-verse": {"engine": "audio", "voice": "verse", "instructions": BRISK},
     "i-gpt-audio-ballad": {"engine": "audio", "voice": "ballad", "instructions": BRISK},
+    # How fast the model can be pushed. The word budget is set from its
+    # pace, so the pace is worth measuring rather than accepting: at 2.1
+    # words a second a 55-second video says 40% less than the old one did.
+    "p1-echo-brisk": {"engine": "audio", "voice": "echo", "instructions": BRISK},
+    "p2-echo-faster": {
+        "engine": "audio", "voice": "echo",
+        "instructions": (
+            "Speak like an American car-YouTube host who is deliberately talking fast to fit a "
+            "lot into a short clip. Rapid, urgent, high energy, barely pausing between "
+            "sentences. Keep every word clear, but move. "
+            "Say the user's message back word for word. Add nothing and skip nothing."
+        ),
+    },
+    "p3-echo-fastest": {
+        "engine": "audio", "voice": "echo",
+        "instructions": (
+            "Speak as fast as you can while staying completely intelligible -- an excited car "
+            "enthusiast rattling off facts before the clip runs out. No pauses between "
+            "sentences. Do not slow down for emphasis. "
+            "Say the user's message back word for word. Add nothing and skip nothing."
+        ),
+    },
+    # Initialisms come out as a mangled word rather than letters -- "AMG"
+    # was the complaint. Spacing the letters is the usual fix; whether it
+    # works on this model is a question for the ear, not the docs.
+    "p4-echo-fastest-spelled": {
+        "engine": "audio", "voice": "echo", "spell": True,
+        "instructions": (
+            "Speak as fast as you can while staying completely intelligible -- an excited car "
+            "enthusiast rattling off facts before the clip runs out. No pauses between "
+            "sentences. Read initialisms one letter at a time. "
+            "Say the user's message back word for word. Add nothing and skip nothing."
+        ),
+    },
 }
+
+# Applied to what is spoken only, never to what is written on screen.
+SPOKEN_SPELLINGS = {"AMG": "A-M-G", "GT2 RS": "G-T-2 R-S", "R63": "R-63"}
+
+
+def _spell_initialisms(text):
+    for written, spoken in SPOKEN_SPELLINGS.items():
+        text = text.replace(written, spoken)
+    return text
 
 
 def _tts(client, spec, text, out_path):
@@ -116,7 +159,8 @@ def render(text, out_dir, engines=None):
             continue
         out_path = out_dir / f"{name}.mp3"
         try:
-            (_tts if spec["engine"] == "tts" else _gpt_audio)(client, spec, text, out_path)
+            spoken = _spell_initialisms(text) if spec.get("spell") else text
+            (_tts if spec["engine"] == "tts" else _gpt_audio)(client, spec, spoken, out_path)
             # A call can return a few hundred bytes of silence and no error,
             # which is how a broken sample gets shipped looking fine.
             size = out_path.stat().st_size
