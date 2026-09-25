@@ -643,6 +643,18 @@ BANNED_SHAPES = (
     "design ethos", "adding a touch of", "just for looks", "catering to",
     "sporty feel", "blending luxury", "design language of",
 )
+# A rate of depreciation is stat-shaped padding: it sounds like data and
+# tells the viewer nothing they can act on, because the two prices it was
+# computed from are already in the sentence. The prompt has banned it in
+# prose since run #176; the Mazdaspeed3 build still shipped "depreciating
+# roughly 4% per year" because the ban was a list of literal phrases and
+# this is a shape, not a phrase.
+DEPRECIATION_PADDING_RE = re.compile(
+    r"(?:\b\d+(?:\.\d+)?\s*%[^.]{0,40}?\b(?:per\s+year|a\s+year|annually|yearly|per\s+annum)"
+    r"|\b(?:annual|yearly)\s+depreciation"
+    r"|\bdepreciat\w*[^.]{0,40}?\b\d+(?:\.\d+)?\s*%)",
+    re.I,
+)
 
 
 # Horsepower has to arrive inside the opening beats, not merely somewhere in
@@ -774,6 +786,12 @@ def _script_violations(package, make, model, market=None):
     for shape in BANNED_SHAPES:
         if shape in script:
             violations.append(f'you used the banned phrase "{shape}". Rewrite that sentence around a fact.')
+    padding = DEPRECIATION_PADDING_RE.search(script)
+    if padding:
+        violations.append(
+            f'"{padding.group(0).strip()}" is stat-shaped padding -- you already gave both prices, '
+            "so the rate tells the viewer nothing. Drop it and spend the words on a fact about the car."
+        )
     return violations
 
 
@@ -994,7 +1012,18 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"[single-car] Proceeding with {count} words outside the preferred "
             f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} range; audio timing will normalize the final runtime."
         )
-    return _enforce_word_cap(_repair_script(package, make, model))
+    final = _enforce_word_cap(_repair_script(package, make, model))
+    # Shipping after four failed attempts is deliberate -- a build is worth
+    # more than a perfect script -- but it was silent, so a script that broke
+    # the rules looked exactly like one that kept them. The Mazdaspeed3 build
+    # went out with no torque figure and a closing statement instead of a
+    # question, and nothing downstream said so.
+    remaining = _script_violations(final, make, model, market)
+    if remaining:
+        final["rule_violations"] = remaining
+        print(f"[single-car] Shipping with {len(remaining)} rule(s) still broken after "
+              f"{max_attempts} attempts: " + "; ".join(remaining))
+    return final
 
 
 def _visual_highlight_for_scenes(scenes):

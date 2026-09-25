@@ -2065,6 +2065,15 @@ export default function App() {
                     <p className="rationale">
                       {narrationLine(item.preview)}
                     </p>
+                    {(item.preview.rule_violations || []).length > 0 && (
+                      // The build shipped after exhausting its retries. That
+                      // is on purpose, but it should not look like a clean one.
+                      <ul className="rule-violations">
+                        {item.preview.rule_violations.map((rule, index) => (
+                          <li key={index}>{rule}</li>
+                        ))}
+                      </ul>
+                    )}
                     {item.hasVideo && (
                       <div className="video-player">
                         <video controls src={dashboardRawUrl(item, item.preview.video || "single_car_short.mp4")} width="360" preload="metadata" />

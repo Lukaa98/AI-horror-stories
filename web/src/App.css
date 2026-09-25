@@ -1203,3 +1203,15 @@ button.secondary {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent), var(--lift);
 }
+
+/* A build that shipped with rules still broken -- visible, not silent. */
+.rule-violations {
+  margin: 0 0 12px;
+  padding: 10px 12px 10px 28px;
+  border-left: 3px solid var(--warn, #c2410c);
+  background: color-mix(in srgb, var(--warn, #c2410c) 8%, transparent);
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.rule-violations li { margin: 2px 0; }

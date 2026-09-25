@@ -1268,6 +1268,33 @@ def test_an_unrepairable_hook_is_left_alone_rather_than_mangled():
         "Only 500 were ever built, and almost nobody knows it.", "Dodge", "Challenger") is None
 
 
+def test_a_depreciation_rate_is_caught_as_padding():
+    """The prompt has banned stat-shaped padding since run #176, but the ban
+    was a list of literal phrases and this is a shape. The Mazdaspeed3 build
+    shipped "depreciating roughly 4% per year" -- a number computed from two
+    prices already in the same sentence."""
+    import single_car_short
+
+    def rules(sentence):
+        return single_car_short._script_violations(
+            {"scenes": [{"narration": "Making 263 horsepower and 280 lb-ft, it flies."},
+                        {"narration": sentence},
+                        {"narration": "So would you daily one?"}]},
+            "Mazda", "Mazdaspeed3", market={"median": 16000})
+
+    for padded in ("It went from $24,000 to $16,000, depreciating roughly 4% per year.",
+                   "That is an annual depreciation of about 8%.",
+                   "Call it 5% a year off the sticker."):
+        assert any("padding" in rule for rule in rules(padded)), padded
+
+    # The two prices on their own are the point -- they are not padding.
+    assert not any("padding" in rule
+                   for rule in rules("It cost $24,000 new and goes for $16,000 today."))
+    # Nor is a percentage that is about the car rather than its price.
+    assert not any("padding" in rule
+                   for rule in rules("Torque split can send 50% of it rearward."))
+
+
 def test_a_name_revealed_at_the_end_is_not_swapped_for_a_stand_in():
     """Run #231 shipped "thanks to the touch of car - this one." The hook
     had built up to naming the car after a dash; taking the name out left
