@@ -147,3 +147,16 @@ def test_a_video_with_no_build_is_left_alone():
     videos = [{"id": "orphan"}]
     channel_status._attach_build_ids(videos, repository="", token="")
     assert videos[0].get("build_id", "") == "" or "build_id" not in videos[0]
+
+
+def test_the_build_listing_asks_for_a_path_the_api_understands():
+    """gh.api builds the URL as /repos/{repository}{path}, so the path needs
+    its leading slash. Without it the request 404s, every video comes back
+    with no build, and the dashboard blames the branch for a typo."""
+    from pathlib import Path
+
+    source = Path(channel_status.__file__).read_text()
+    assert 'gh.api(repository, token, f"/contents/' in source
+    # And a failure says so, rather than returning quietly.
+    assert "could not list builds" in source
+    assert "no builds at" in source

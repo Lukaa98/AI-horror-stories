@@ -76,8 +76,14 @@ def _attach_build_ids(videos, repository=None, token=None, branch=OUTPUT_BRANCH)
         return
 
     try:
-        listing = gh.api(repository, token, f"contents/{BUILD_ROOT}?ref={branch}")
-    except Exception:
+        listing = gh.api(repository, token, f"/contents/{BUILD_ROOT}?ref={branch}")
+    except Exception as error:
+        print(f"[status] could not list builds: {error}", flush=True)
+        return
+    if not listing:
+        # A silent return here is what hid a malformed path: every video
+        # came back with no build and the message blamed the branch.
+        print(f"[status] no builds at {BUILD_ROOT} on {branch}", flush=True)
         return
     names = sorted((row["name"] for row in listing if row.get("type") == "dir"), reverse=True)
 
