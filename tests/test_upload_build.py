@@ -339,10 +339,8 @@ def test_deleting_a_video_keeps_the_build_that_made_it():
 
     source = Path(upload_build.__file__).read_text()
     block = source[source.index("def delete_existing"):]
-    # The record of the upload is cleared, which is what puts the dashboard
-    # back to offering one.
-    for field in ('"video_id"', '"publish_at"', '"thumbnail_set"'):
-        assert field in block
+    assert "for field in UPLOAD_RECORD_FIELDS" in block, \
+        "the delete has to clear the whole upload record, not a hand-listed part of it"
     assert 'listing["deleted_video_id"] = video_id' in block, \
         "a deleted upload is not the same as one that never happened"
     assert 'raise SystemExit("This build has no video_id -- there is nothing to delete' in source
@@ -351,6 +349,31 @@ def test_deleting_a_video_keeps_the_build_that_made_it():
                 / ".github/workflows/youtube-upload.yml").read_text()
     for flag in ("unschedule:", "delete_video:", "--unschedule", "--delete-video"):
         assert flag in workflow
+
+
+def test_a_deleted_build_keeps_nothing_that_describes_the_deleted_video(monkeypatch):
+    """A half-cleared record is worse than none: the dashboard offers an
+    upload while the file still says the build is "uploaded" at a URL that
+    404s. Whatever the upload writes, the delete has to take back."""
+    before = {"title": "A Title", "description": "Body", "tags": [],
+              "video": "single_car_short.mp4", "privacy": "private", "status": "ready"}
+    written = {}
+    _run(monkeypatch, dict(before), {}, written,
+         argv=["--publish-at", "2030-01-01T12:15:00-05:00"])
+
+    after_upload = written["payload"]
+    added = set(after_upload) - set(before)
+    changed = {k for k in before if after_upload.get(k) != before[k]}
+    assert added, "the upload records nothing, so this test is watching the wrong thing"
+    # Every trace the upload leaves is a trace the delete knows to remove.
+    assert (added | changed) - {"privacy"} <= set(upload_build.UPLOAD_RECORD_FIELDS)
+
+    listing = dict(after_upload)
+    for field in upload_build.UPLOAD_RECORD_FIELDS:
+        listing.pop(field, None)
+    assert "vid123" not in json.dumps(listing), \
+        "something still names the video that was just deleted"
+    assert listing.get("status") != "uploaded"
 
 
 def test_a_schedule_can_be_moved_rather_than_only_cancelled():

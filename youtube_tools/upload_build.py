@@ -26,6 +26,19 @@ OUTPUT_BRANCH = "cars-output"
 BUILD_ROOT = "cars/single-car-shorts"
 ALLOWED_PRIVACY = ("private", "unlisted", "public")
 
+# Everything the uploader writes into upload.json to record a YouTube upload.
+# Deleting the video clears exactly this set, so a deleted build cannot be
+# left half-describing a video that no longer exists.
+UPLOAD_RECORD_FIELDS = (
+    "video_id",
+    "video_url",
+    "uploaded_at",
+    "status",
+    "publish_at",
+    "thumbnail_set",
+    "thumbnail_error",
+)
+
 
 def raw_url(repository, branch, path):
     return f"https://raw.githubusercontent.com/{repository}/{branch}/{path}"
@@ -124,7 +137,7 @@ def delete_existing(repository, token, args, listing, listing_path):
     print(f"[upload] Deleting {video_id} from the channel", flush=True)
     delete_video(get_authenticated_service(), video_id).execute()
 
-    for field in ("video_id", "publish_at", "thumbnail_set", "uploaded_at"):
+    for field in UPLOAD_RECORD_FIELDS:
         listing.pop(field, None)
     # Kept so a deleted upload is distinguishable from one that never
     # happened, which matters when the same build is uploaded twice.
