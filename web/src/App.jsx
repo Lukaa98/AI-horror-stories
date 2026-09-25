@@ -138,6 +138,24 @@ const ENTHUSIAST_CARS = {
   "Aston Martin": { Vantage: [], DB11: [], DBS: [] },
 };
 
+function narrationLine(result) {
+  // The engine has changed twice; the label had not, so it read "114 words
+  // at x voice speed" once tts_speed stopped existing. It describes what
+  // the build recorded rather than assuming a field is there.
+  const words = result.word_count;
+  const seconds = Number(result.duration_seconds || 0).toFixed(1);
+  const narration = result.narration;
+  if (narration?.engine === "gpt-audio") {
+    const hz = narration.pitch?.result_hz ?? narration.target_hz;
+    const register = hz ? `, ${Math.round(hz)} Hz` : "";
+    return `${words} words in ${seconds}s — ${narration.voice}${register}.`;
+  }
+  const speed = result.tts_speed ?? narration?.tts_speed;
+  return speed
+    ? `${words} words at ${speed}x voice speed; ${seconds} seconds.`
+    : `${words} words in ${seconds}s.`;
+}
+
 function makeBattleCarRow() {
   return { make: "", model: "", trim: "", year: "", makeCustom: "", modelCustom: "", trimCustom: "" };
 }
@@ -2045,7 +2063,7 @@ export default function App() {
                   <section className="video-probe-panel">
                     <h2>{item.preview.title || `${item.preview.car?.make || ""} ${item.preview.car?.model || ""}`.trim()}</h2>
                     <p className="rationale">
-                      {item.preview.word_count} words at {item.preview.tts_speed}x voice speed; {Number(item.preview.duration_seconds || 0).toFixed(1)} seconds.
+                      {narrationLine(item.preview)}
                     </p>
                     {item.hasVideo && (
                       <div className="video-player">
@@ -3011,7 +3029,7 @@ export default function App() {
         <section className="video-probe-panel">
           <h2>{singleCarResult.title || `${singleCarResult.car?.make} ${singleCarResult.car?.model}`}</h2>
           <p className="rationale">
-            {singleCarResult.word_count} words at {singleCarResult.tts_speed}x voice speed; {Number(singleCarResult.duration_seconds || 0).toFixed(1)} seconds.
+            {narrationLine(singleCarResult)}
           </p>
           {singleCarResult.video && <video controls src={rawSingleCarUrl(singleCarResult.video)} preload="metadata" />}
           <div className="narration-scroll">

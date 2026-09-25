@@ -26,12 +26,75 @@ def test_the_register_is_dropped_without_changing_the_performance():
     """gpt-audio has no pitch control, so the take is lowered afterwards:
     asetrate drops the pitch and slows it, atempo puts the speed back. The
     phrasing, emphasis and accent survive -- only the register moves."""
-    assert narrator_script.AUDIO_PITCH == 0.91
-
     source = Path(narrator_script.__file__).read_text()
-    block = source[source.index("def _deepen"):]
+    block = source[source.index("def _shift_pitch"):]
     assert "asetrate=" in block and "atempo=" in block
-    assert "if not factor or abs(factor - 1.0) < 0.001:" in block, "1.0 should be a no-op"
+
+
+def test_the_take_is_moved_onto_a_register_rather_than_down_by_a_factor():
+    """gpt-audio does not hand back the same voice twice. Across three
+    builds of one script its takes measured 133, 142 and 157 Hz. A fixed
+    multiplier carries that spread through: one build shipped at 143 Hz
+    when the approved take was 130 -- same settings, audibly not the same
+    voice. So the shift is computed per take."""
+    assert narrator_script.AUDIO_TARGET_HZ == 130
+
+    # A high take is pushed down further than an already-low one, so the
+    # three land within a couple of Hz of each other instead of 24 apart.
+    landed = [m * narrator_script.pitch_factor_for(m) for m in (157.0, 142.9, 133.2)]
+    assert max(landed) - min(landed) < 4.0, f"still a spread: {landed}"
+    assert all(abs(hz - 130) < 4.0 for hz in landed), landed
+
+    # The shift is a time-stretch, so it is clamped rather than allowed to
+    # sound processed: a take far from the target is left slightly off. 0.91
+    # is the largest drop anyone has approved by ear, so the clamp sits just
+    # past it and nothing gets stretched into a register nobody has heard.
+    low, high = narrator_script.PITCH_FACTOR_LIMITS
+    assert low < 0.91, "the approved drop has to be reachable"
+    assert narrator_script.pitch_factor_for(400.0) == low
+    assert narrator_script.pitch_factor_for(80.0) == high
+
+    # An unmeasurable take has no factor -- the caller decides what to do,
+    # rather than being handed a made-up number.
+    assert narrator_script.pitch_factor_for(None) is None
+
+
+def test_an_unmeasurable_take_is_not_shifted_by_a_guess(monkeypatch, tmp_path):
+    """Falling back is fine; falling back quietly is how a build ships in a
+    register nobody chose. Which one happened has to reach the manifest."""
+    monkeypatch.setattr(narrator_script, "median_f0", lambda *a, **k: None)
+    shifted = []
+    monkeypatch.setattr(narrator_script, "_shift_pitch",
+                        lambda path, factor: shifted.append(factor) or path)
+
+    narrator_script._deepen(tmp_path / "narration.mp3")
+
+    assert shifted == [narrator_script.AUDIO_PITCH], "the fixed factor is the fallback"
+    assert narrator_script._LAST_PITCH["source"] == "fallback"
+    assert narrator_script.narration_settings()["pitch"]["source"] == "fallback"
+
+
+def test_pitch_is_measured_from_the_audio(monkeypatch):
+    """The estimator is the whole fix, so it is checked against tones of a
+    known pitch rather than trusted."""
+    import numpy as np
+
+    for wanted in (110.0, 130.0, 180.0):
+        rate = 16000
+        t = np.arange(int(3 * rate)) / rate
+        # A harmonic on top, because a pure sine is easier to track than
+        # speech and would not prove much.
+        tone = (0.5 * np.sin(2 * np.pi * wanted * t)
+                + 0.25 * np.sin(4 * np.pi * wanted * t)).astype("<f4")
+        monkeypatch.setattr(narrator_script, "_decode_mono",
+                            lambda path, sample_rate=16000: (tone, rate))
+        measured = narrator_script.median_f0("ignored.mp3")
+        assert abs(measured - wanted) < 2.0, f"{wanted} Hz read as {measured}"
+
+    # Silence is unmeasurable, and says so rather than returning a number.
+    monkeypatch.setattr(narrator_script, "_decode_mono",
+                        lambda path, sample_rate=16000: (np.zeros(48000, "<f4"), 16000))
+    assert narrator_script.median_f0("ignored.mp3") is None
 
 
 def test_a_silent_response_is_an_error_not_a_narration():
@@ -110,7 +173,7 @@ def test_the_build_records_how_its_voice_was_actually_made():
     settings = narrator_script.narration_settings()
     assert settings["engine"] == "gpt-audio"
     assert settings["voice"] == "echo"
-    assert settings["pitch"] == 0.91
+    assert settings["target_hz"] == 130
     assert settings["tts_speed"] is None, "nothing is sped up any more"
 
     from pathlib import Path
