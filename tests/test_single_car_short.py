@@ -1268,6 +1268,68 @@ def test_an_unrepairable_hook_is_left_alone_rather_than_mangled():
         "Only 500 were ever built, and almost nobody knows it.", "Dodge", "Challenger") is None
 
 
+def test_the_closing_is_rewritten_into_a_question_on_its_own(monkeypatch):
+    """The whole-script retry asks for the closing question among six other
+    constraints and loses it -- the Mazdaspeed3 build failed the rule on all
+    four attempts and shipped "the Mazdaspeed3's legacy is built on balance
+    and excitement." Asked on its own, with just the hook to call back to,
+    it is a much easier request."""
+    import single_car_short
+
+    asked = {}
+
+    def fake(hook, closing, label):
+        asked.update(hook=hook, closing=closing, label=label)
+        return "So would you daily a 263-horsepower hatch, or is that too much?"
+
+    monkeypatch.setattr(single_car_short, "_rewrite_closing_as_question", fake)
+    package = {"scenes": [
+        {"narration": "Unleashing 263 horsepower, this hatchback hides serious performance."},
+        {"narration": "Revered in enthusiast circles, its legacy is built on balance."},
+    ]}
+    single_car_short._repair_closing(package, "Mazdaspeed3")
+
+    assert package["scenes"][-1]["narration"].endswith("?")
+    assert package["word_count"] == single_car_short._word_count(package["script"])
+    # It is given the hook so the question can call back to it.
+    assert "263 horsepower" in asked["hook"]
+
+
+def test_a_closing_that_already_asks_something_is_left_alone(monkeypatch):
+    import single_car_short
+
+    monkeypatch.setattr(single_car_short, "_rewrite_closing_as_question",
+                        lambda *a: pytest.fail("nothing to rewrite"))
+    package = {"scenes": [{"narration": "It makes 263 hp."},
+                          {"narration": "So would you daily one?"}]}
+    single_car_short._repair_closing(package, "Mazdaspeed3")
+    assert package["scenes"][-1]["narration"] == "So would you daily one?"
+
+
+def test_an_unusable_rewrite_is_discarded_rather_than_shipped(monkeypatch):
+    """Same rule the hook surgery follows: a repair that is not an
+    improvement is thrown away, not shipped."""
+    import single_car_short
+
+    original = "Revered in enthusiast circles, its legacy is built on balance."
+    for bad in ("It is a great car.",                       # not a question
+                "So " + "really " * 30 + "would you?"):     # blows the budget
+        monkeypatch.setattr(single_car_short, "_rewrite_closing_as_question",
+                            lambda *a, _b=bad: _b)
+        package = {"scenes": [{"narration": "It makes 263 hp."}, {"narration": original}]}
+        single_car_short._repair_closing(package, "Mazdaspeed3")
+        assert package["scenes"][-1]["narration"] == original
+
+    # A failed call is not a failed build either.
+    def boom(*a):
+        raise RuntimeError("no")
+
+    monkeypatch.setattr(single_car_short, "_rewrite_closing_as_question", boom)
+    package = {"scenes": [{"narration": "It makes 263 hp."}, {"narration": original}]}
+    single_car_short._repair_closing(package, "Mazdaspeed3")
+    assert package["scenes"][-1]["narration"] == original
+
+
 def test_a_depreciation_rate_is_caught_as_padding():
     """The prompt has banned stat-shaped padding since run #176, but the ban
     was a list of literal phrases and this is a shape. The Mazdaspeed3 build

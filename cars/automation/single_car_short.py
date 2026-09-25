@@ -927,6 +927,58 @@ def _strip_car_name(sentence, make, model):
     return repaired
 
 
+def _rewrite_closing_as_question(hook, closing, label):
+    """Ask for one sentence: the closing turned into a viewer question.
+
+    The whole-script retry asks for this among six other constraints and
+    loses it -- the Mazdaspeed3 build failed the rule on all four attempts.
+    On its own, with the hook to call back to and nothing else to satisfy,
+    it is a much easier request.
+    """
+    prompt = (
+        "You are fixing the last line of a short car video's narration.\n\n"
+        f"The video opens: \"{hook}\"\n"
+        f"It currently closes: \"{closing}\"\n\n"
+        f"Rewrite that closing line as ONE spoken question aimed straight at the viewer about the "
+        f"{label}, calling back to the claim in the opening. Keep it under 20 words, conversational, "
+        "with contractions. It must end in a question mark. Do not add facts, do not summarise the "
+        "video, and reply with the sentence alone -- no quotes, no preamble."
+    )
+    response = with_openai_retry(lambda: OpenAI().responses.create(
+        model="gpt-4o", input=prompt,
+    ))
+    return _strip_citations(response.output_text.strip()).strip().strip('"\u201c\u201d')
+
+
+def _repair_closing(package, label):
+    """Make the last scene end on a question, or leave it exactly as it was.
+
+    A rewrite that comes back without a question mark, empty, or long enough
+    to blow the word budget is not an improvement, so it is discarded rather
+    than shipped -- same rule the hook surgery follows.
+    """
+    scenes = package.get("scenes") or []
+    if not scenes:
+        return package
+    closing = (scenes[-1].get("narration") or "").strip()
+    if not closing or closing.endswith("?"):
+        return package
+    hook = _SENTENCE_SPLIT_RE.split((scenes[0].get("narration") or "").strip())[0]
+    try:
+        rewritten = _rewrite_closing_as_question(hook, closing, label)
+    except Exception as error:  # noqa: BLE001 - a build is worth more than a question mark
+        print(f"[single-car] Could not rewrite the closing ({error}); leaving it as written.")
+        return package
+    if not rewritten.endswith("?") or len(rewritten.split()) > 25:
+        print(f'[single-car] The rewritten closing was not usable ("{rewritten}"); leaving it as written.')
+        return package
+    scenes[-1]["narration"] = rewritten
+    package["script"] = " ".join(scene["narration"] for scene in scenes)
+    package["word_count"] = _word_count(package["script"])
+    print(f'[single-car] Rewrote the closing as a question: "{rewritten}"')
+    return package
+
+
 def _repair_script(package, make, model):
     """Deterministic fixes for violations the model would not fix itself.
 
@@ -1012,7 +1064,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"[single-car] Proceeding with {count} words outside the preferred "
             f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} range; audio timing will normalize the final runtime."
         )
-    final = _enforce_word_cap(_repair_script(package, make, model))
+    final = _enforce_word_cap(_repair_closing(_repair_script(package, make, model), label))
     # Shipping after four failed attempts is deliberate -- a build is worth
     # more than a perfect script -- but it was silent, so a script that broke
     # the rules looked exactly like one that kept them. The Mazdaspeed3 build
