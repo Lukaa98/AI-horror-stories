@@ -122,3 +122,28 @@ def test_an_optional_part_being_refused_does_not_lose_the_snapshot():
 
     snapshot = channel_status.collect(_NoSuggestions())
     assert snapshot["videos"][0]["warnings"] == []
+
+
+def test_each_video_says_which_build_made_it():
+    """Every action -- delete, reschedule, push the listing -- is addressed
+    by build id, and the YouTube API knows nothing about builds. The link
+    lives in each build's upload.json and is read back rather than kept in
+    a second place that could disagree."""
+    from pathlib import Path
+
+    source = Path(channel_status.__file__).read_text()
+    assert "def _attach_build_ids" in source
+    assert 'video["build_id"] = found.get(video["id"], "")' in source
+    # Newest first with an early exit, so an unmatched video cannot walk
+    # the whole branch.
+    assert "MAX_BUILDS_SEARCHED" in source
+    assert "reverse=True" in source
+    assert "if not wanted - set(found):" in source
+
+
+def test_a_video_with_no_build_is_left_alone():
+    """Best effort: offering an action that would fail is worse than
+    offering none."""
+    videos = [{"id": "orphan"}]
+    channel_status._attach_build_ids(videos, repository="", token="")
+    assert videos[0].get("build_id", "") == "" or "build_id" not in videos[0]

@@ -4,6 +4,18 @@ import "./YouTubePanel.css";
 const AUTH_WORKFLOW = "youtube-auth.yml";
 const STATUS_WORKFLOW = "youtube-status.yml";
 const STATUS_PATH = "youtube/channel.json";
+const UPLOAD_WORKFLOW = "youtube-upload.yml";
+
+// A datetime-local value carries no offset, and the runner is in UTC.
+function withLocalOffset(value) {
+  if (!value) return "";
+  const at = new Date(value);
+  if (Number.isNaN(at.getTime())) return "";
+  const minutes = -at.getTimezoneOffset();
+  const sign = minutes < 0 ? "-" : "+";
+  const pad = (n) => String(Math.floor(Math.abs(n))).padStart(2, "0");
+  return `${value}:00${sign}${pad(minutes / 60)}:${pad(minutes % 60)}`;
+}
 const CODE_PATH = "youtube/auth-code.json";
 const OUTPUT_BRANCH = "cars-output";
 const POLL_MS = 4000;
@@ -81,6 +93,7 @@ export default function YouTubePanel({ settings }) {
   const [status, setStatus] = useState(null);
   const [statusState, setStatusState] = useState("idle");
   const statusTimer = useRef(null);
+  const [acting, setActing] = useState("");
   const [state, setState] = useState("idle");   // idle | starting | waiting | stored | error
   const [code, setCode] = useState(null);
   const [error, setError] = useState(null);
@@ -196,6 +209,39 @@ export default function YouTubePanel({ settings }) {
     return () => { live = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, settings.owner, settings.repo, settings.token]);
+
+  // Every action on a video is addressed by the build that made it, which
+  // is why the snapshot carries build_id. Without one there is nothing to
+  // dispatch against, so the buttons are not offered.
+  const act = useCallback(async (video, inputs, label) => {
+    const { owner, repo, branch, token } = settings;
+    setActing(`${video.id}:${label}`);
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${UPLOAD_WORKFLOW}/dispatches`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/vnd.github+json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ref: branch || "v12",
+            inputs: { build_id: video.build_id, ...inputs },
+          }),
+        }
+      );
+      if (!res.ok) throw new Error(`${label} failed (${res.status}): ${await res.text()}`);
+      // The channel is re-read rather than the row being edited in place,
+      // so what is shown is what YouTube says, not what we hoped.
+      setTimeout(() => refreshStatus(), 8000);
+    } catch (err) {
+      setError(String(err.message || err));
+    } finally {
+      setActing("");
+    }
+  }, [settings]);
 
   // The snapshot is written by the workflow, so refreshing means asking it
   // to run and then watching the file for a newer timestamp.
@@ -328,6 +374,61 @@ export default function YouTubePanel({ settings }) {
                   <span>{video.likes.toLocaleString()} likes</span>
                   <span>{video.comments.toLocaleString()} comments</span>
                 </div>
+                {video.build_id ? (
+                  <div className="yt-video-actions">
+                    {video.privacy !== "public" && (
+                      <button type="button" className="secondary"
+                              disabled={Boolean(acting)}
+                              onClick={() => {
+                                if (window.confirm("Make this public right now?")) {
+                                  act(video, { publish_now: "true" }, "publish");
+                                }
+                              }}>
+                        Publish now
+                      </button>
+                    )}
+                    {video.publish_at && (
+                      <button type="button" className="secondary"
+                              disabled={Boolean(acting)}
+                              onClick={() => act(video, { unschedule: "true" }, "unschedule")}>
+                        Cancel schedule
+                      </button>
+                    )}
+                    <button type="button" className="secondary"
+                            disabled={Boolean(acting)}
+                            onClick={() => {
+                              const when = window.prompt(
+                                "New publish time, in this computer's timezone (YYYY-MM-DDTHH:MM)",
+                                video.publish_at
+                                  ? new Date(video.publish_at).toISOString().slice(0, 16)
+                                  : "");
+                              const stamped = withLocalOffset(when);
+                              if (stamped) {
+                                act(video, { reschedule: "true", publish_at: stamped }, "reschedule");
+                              }
+                            }}>
+                      Reschedule
+                    </button>
+                    <button type="button" className="danger"
+                            disabled={Boolean(acting)}
+                            onClick={() => {
+                              if (window.confirm(
+                                `Delete "${video.title}" from YouTube? There is no undo. `
+                                + "The build keeps its files and can be uploaded again.")) {
+                                act(video, { delete_video: "true" }, "delete");
+                              }
+                            }}>
+                      Delete
+                    </button>
+                    {acting.startsWith(`${video.id}:`) && (
+                      <span className="yt-note">{acting.split(":")[1]}…</span>
+                    )}
+                  </div>
+                ) : (
+                  <p className="yt-note">
+                    No build on this branch made this video, so there is nothing to act on here.
+                  </p>
+                )}
                 <div className="yt-video-meta yt-video-settings">
                   <span className={video.category === "Autos & Vehicles" ? "" : "yt-flag"}>
                     {video.category || "no category"}

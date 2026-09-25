@@ -16,6 +16,7 @@ from youtube_tools import gh
 
 OUTPUT_BRANCH = "cars-output"
 STATUS_PATH = "youtube/channel.json"
+BUILD_ROOT = "cars/single-car-shorts"
 # One page. A channel posting daily takes months to outgrow it, and the
 # dashboard shows the newest first anyway.
 MAX_VIDEOS = 50
@@ -42,6 +43,58 @@ def _list_videos(youtube, video_ids, parts):
     except Exception:
         reduced = ",".join(part for part in parts.split(",") if part != "suggestions")
         return youtube.videos().list(part=reduced, id=",".join(video_ids)).execute()
+
+
+# Newest first, and stop once every video is accounted for. A channel
+# posting daily will always find its uploads in the first handful of
+# builds; the cap is there so an unmatched video cannot walk the whole
+# branch.
+MAX_BUILDS_SEARCHED = 80
+
+
+def _attach_build_ids(videos, repository=None, token=None, branch=OUTPUT_BRANCH):
+    """Say which build made each video, so the dashboard can act on it.
+
+    The YouTube API knows nothing about builds, and every action -- delete,
+    reschedule, push the listing -- is addressed by build id. The link
+    exists in each build's upload.json, so it is read back here rather than
+    kept in a second place that could disagree.
+
+    Best effort: a video whose build cannot be found simply has no build_id
+    and the dashboard offers no actions for it, which is better than
+    offering one that would fail.
+    """
+    import os
+
+    wanted = {video["id"] for video in videos}
+    if not wanted:
+        return
+    repository = repository or os.environ.get("GITHUB_REPOSITORY", "").strip()
+    token = token or (os.environ.get("GH_PAT", "").strip()
+                      or os.environ.get("GITHUB_TOKEN", "").strip())
+    if not (repository and token):
+        return
+
+    try:
+        listing = gh.api(repository, token, f"contents/{BUILD_ROOT}?ref={branch}")
+    except Exception:
+        return
+    names = sorted((row["name"] for row in listing if row.get("type") == "dir"), reverse=True)
+
+    found = {}
+    for name in names[:MAX_BUILDS_SEARCHED]:
+        if not wanted - set(found):
+            break
+        try:
+            upload = gh.read_json(repository, token, branch,
+                                  f"{BUILD_ROOT}/{name}/upload.json")
+        except Exception:
+            continue
+        video_id = (upload or {}).get("video_id")
+        if video_id in wanted:
+            found[video_id] = name
+    for video in videos:
+        video["build_id"] = found.get(video["id"], "")
 
 
 def collect(youtube):
@@ -109,6 +162,7 @@ def collect(youtube):
                 "suggestions": list(suggestions.get("editorSuggestions") or []),
             })
     videos.sort(key=lambda v: v.get("published_at") or "", reverse=True)
+    _attach_build_ids(videos)
 
     return {
         "channel": {

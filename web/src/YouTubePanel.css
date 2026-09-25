@@ -125,3 +125,16 @@
   font-size: 0.76rem;
   color: var(--danger, #f87171);
 }
+
+.yt-video-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 7px;
+}
+
+.yt-video-actions button {
+  padding: 4px 10px;
+  font-size: 0.76rem;
+}

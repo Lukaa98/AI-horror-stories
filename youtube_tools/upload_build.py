@@ -75,6 +75,23 @@ def normalize_publish_at(raw_value):
     return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def reschedule_existing(args, listing):
+    """Move a scheduled publish to a different time."""
+    video_id = listing.get("video_id")
+    if not video_id:
+        raise SystemExit("This build has no video_id -- upload it before scheduling it.")
+    publish_at = normalize_publish_at(args.publish_at)
+    if not publish_at:
+        raise SystemExit("--reschedule needs --publish-at.")
+
+    from youtube_tools.youtube_client import get_authenticated_service
+    from youtube_tools.youtube_uploader import set_publish_time
+
+    print(f"[upload] Rescheduling {video_id} for {publish_at}", flush=True)
+    set_publish_time(get_authenticated_service(), video_id, publish_at)
+    print(f"[upload] Scheduled: https://youtu.be/{video_id}", flush=True)
+
+
 def unschedule_existing(listing):
     """Cancel a scheduled publish. The video stays up, privately."""
     video_id = listing.get("video_id")
@@ -195,6 +212,10 @@ def main():
     parser.add_argument("--force", action="store_true",
                         help="Upload even if this build already has a video id.")
     parser.add_argument(
+        "--reschedule", action="store_true",
+        help="Move the already-uploaded video's publish time to --publish-at.",
+    )
+    parser.add_argument(
         "--unschedule", action="store_true",
         help="Cancel the scheduled publish and leave the video private. The video stays "
              "on the channel; only the schedule goes.",
@@ -243,6 +264,9 @@ def main():
         )
     if args.delete_video:
         delete_existing(repository, token, args, listing, listing_path)
+        return
+    if args.reschedule:
+        reschedule_existing(args, listing)
         return
     if args.unschedule:
         unschedule_existing(listing)

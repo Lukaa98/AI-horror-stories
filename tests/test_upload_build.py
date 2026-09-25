@@ -351,3 +351,24 @@ def test_deleting_a_video_keeps_the_build_that_made_it():
                 / ".github/workflows/youtube-upload.yml").read_text()
     for flag in ("unschedule:", "delete_video:", "--unschedule", "--delete-video"):
         assert flag in workflow
+
+
+def test_a_schedule_can_be_moved_rather_than_only_cancelled():
+    """Changing when a video goes out should not mean cancelling it and
+    scheduling a new upload."""
+    from pathlib import Path
+    from youtube_tools import youtube_uploader
+
+    block = Path(youtube_uploader.__file__).read_text()
+    block = block[block.index("def set_publish_time"):]
+    assert 'status["privacyStatus"] = "private"' in block, \
+        "a schedule means nothing on a public video"
+    assert 'status["publishAt"] = publish_at' in block
+
+    source = Path(upload_build.__file__).read_text()
+    assert "def reschedule_existing" in source
+    assert 'raise SystemExit("--reschedule needs --publish-at' in source
+
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/youtube-upload.yml").read_text()
+    assert "reschedule:" in workflow and "--reschedule" in workflow

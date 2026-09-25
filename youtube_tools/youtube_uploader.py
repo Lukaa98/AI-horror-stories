@@ -176,3 +176,23 @@ def unschedule(youtube, video_id):
 def delete_video(youtube, video_id):
     """Remove the video from the channel. There is no undo for this."""
     return youtube.videos().delete(id=video_id)
+
+
+def set_publish_time(youtube, video_id, publish_at):
+    """Move a video's scheduled publish to a new time.
+
+    It has to stay private for a schedule to mean anything -- YouTube
+    ignores publishAt on a public video -- and the rest of the status is
+    read and written back, because videos.update replaces a whole part.
+    """
+    found = youtube.videos().list(part="status", id=video_id).execute()
+    items = found.get("items") or []
+    if not items:
+        raise RuntimeError(f"No video {video_id} on this channel.")
+    status = dict(items[0].get("status") or {})
+    status["privacyStatus"] = "private"
+    status["publishAt"] = publish_at
+    for field in ("uploadStatus", "failureReason", "rejectionReason"):
+        status.pop(field, None)
+    return youtube.videos().update(
+        part="status", body={"id": video_id, "status": status}).execute()

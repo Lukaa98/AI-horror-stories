@@ -21,6 +21,11 @@ on:
         required: false
         type: boolean
         default: false
+      reschedule:
+        description: "Move the video's publish time to publish_at"
+        required: false
+        type: boolean
+        default: false
       unschedule:
         description: "Cancel the scheduled publish and leave the video private"
         required: false
@@ -91,6 +96,7 @@ jobs:
           UPDATE_METADATA: ${{ inputs.update_metadata }}
           PUBLISH_NOW: ${{ inputs.publish_now }}
           UNSCHEDULE: ${{ inputs.unschedule }}
+          RESCHEDULE: ${{ inputs.reschedule }}
           DELETE_VIDEO: ${{ inputs.delete_video }}
         run: |
           set -euo pipefail
@@ -100,6 +106,7 @@ jobs:
           if [ "${UPDATE_METADATA}" = "true" ]; then extra="${extra} --update-metadata"; fi
           if [ "${PUBLISH_NOW}" = "true" ]; then extra="${extra} --publish-now"; fi
           if [ "${UNSCHEDULE}" = "true" ]; then extra="${extra} --unschedule"; fi
+          if [ "${RESCHEDULE}" = "true" ]; then extra="${extra} --reschedule"; fi
           if [ "${DELETE_VIDEO}" = "true" ]; then extra="${extra} --delete-video"; fi
           python -m youtube_tools.upload_build --build-id "${BUILD_ID}" ${extra} \
             --publish-at "${PUBLISH_AT:-}"
