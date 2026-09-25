@@ -979,6 +979,74 @@ def _repair_closing(package, label):
     return package
 
 
+# One targeted pass per broken rule, and a ceiling so a rule the model
+# cannot satisfy costs a few calls rather than an unbounded run.
+MAX_TARGETED_REPAIRS = 5
+
+
+def _rewrite_scene_for(violation, numbered_scenes, label):
+    """Ask for one scene rewritten to fix one rule, and nothing else.
+
+    The retry loop's only move is to rewrite the whole script, which throws
+    away six good beats to fix a seventh -- and often loses a different rule
+    on the way back. This asks the smaller question.
+    """
+    prompt = (
+        f"You are fixing one line of a short car video's narration about the {label}.\n\n"
+        f"The scenes, in spoken order:\n{numbered_scenes}\n\n"
+        f"One rule is broken: {violation}\n\n"
+        "Rewrite the ONE scene that fixes it, changing as little as possible and leaving every "
+        "other scene alone. Keep it to roughly the same length, keep it spoken and conversational "
+        "with contractions, and do not invent facts -- if the fix needs a number you are not sure "
+        "of, use one already in the script. Reply as JSON: "
+        '{"index": <the scene number you rewrote>, "narration": "<the new line>"}'
+    )
+    response = with_openai_retry(lambda: OpenAI().responses.create(
+        model="gpt-4o", input=prompt,
+        text={"format": {"type": "json_object"}},
+    ))
+    answer = json.loads(response.output_text.strip())
+    return int(answer["index"]), _strip_citations(str(answer["narration"])).strip()
+
+
+def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_REPAIRS):
+    """Fix what the retries left broken, one rule at a time.
+
+    Every edit is kept only if it actually helps: the rule it targeted is
+    gone and no new one appeared. That check is the whole reason this is
+    safe to do -- the same function that found the problem decides whether
+    the fix was one, so a rewrite that trades one violation for another is
+    thrown away instead of shipped.
+    """
+    for _ in range(limit):
+        violations = _script_violations(package, make, model, market)
+        if not violations:
+            break
+        violation = violations[0]
+        scenes = package.get("scenes") or []
+        numbered = "\n".join(f"{i}. {s.get('narration') or ''}" for i, s in enumerate(scenes, 1))
+        try:
+            index, narration = _rewrite_scene_for(violation, numbered, label)
+        except Exception as error:  # noqa: BLE001 - a build is worth more than a rule
+            print(f"[single-car] Could not repair \"{violation[:60]}...\" ({error}); leaving it.")
+            break
+        if not (1 <= index <= len(scenes)) or not narration:
+            print(f"[single-car] The repair named scene {index}, which does not exist; leaving it.")
+            break
+
+        candidate = copy.deepcopy(package)
+        candidate["scenes"][index - 1]["narration"] = narration
+        candidate["script"] = " ".join(s["narration"] for s in candidate["scenes"])
+        candidate["word_count"] = _word_count(candidate["script"])
+        after = _script_violations(candidate, make, model, market)
+        if violation in after or len(after) >= len(violations):
+            print(f"[single-car] The repair for \"{violation[:60]}...\" did not help; keeping the original.")
+            break
+        package = candidate
+        print(f'[single-car] Repaired scene {index}: "{narration}"')
+    return package
+
+
 def _repair_script(package, make, model):
     """Deterministic fixes for violations the model would not fix itself.
 
@@ -1064,7 +1132,10 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"[single-car] Proceeding with {count} words outside the preferred "
             f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} range; audio timing will normalize the final runtime."
         )
-    final = _enforce_word_cap(_repair_closing(_repair_script(package, make, model), label))
+    repaired = _repair_closing(_repair_script(package, make, model), label)
+    # Whatever the retries could not fix, fixed one rule at a time rather
+    # than by rewriting the whole script again.
+    final = _enforce_word_cap(_repair_violations(repaired, make, model, market, label))
     # Shipping after four failed attempts is deliberate -- a build is worth
     # more than a perfect script -- but it was silent, so a script that broke
     # the rules looked exactly like one that kept them. The Mazdaspeed3 build

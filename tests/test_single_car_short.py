@@ -1268,6 +1268,93 @@ def test_an_unrepairable_hook_is_left_alone_rather_than_mangled():
         "Only 500 were ever built, and almost nobody knows it.", "Dodge", "Challenger") is None
 
 
+def _mazdaspeed_package():
+    """The Mazdaspeed3 script as it shipped, minus the torque figure: seven
+    good beats and one broken rule."""
+    import single_car_short
+
+    scenes = [
+        {"narration": "Unleashing 263 horsepower, this compact hatchback hides serious performance."},
+        {"narration": "The second-generation Mazdaspeed3 got stiffer springs and a bigger intake."},
+        {"narration": "The MZR 2.3 DISI turbo spools quickly and pulls hard."},
+        {"narration": "So would you daily one, or is it too much?"},
+    ]
+    script = " ".join(scene["narration"] for scene in scenes)
+    return {"scenes": scenes, "script": script,
+            "word_count": single_car_short._word_count(script)}
+
+
+def test_a_broken_rule_is_fixed_one_scene_at_a_time(monkeypatch):
+    """The retry loop's only move is to rewrite the whole script, which
+    throws away six good beats to fix a seventh -- the Mazdaspeed3 build
+    lost its closing on all four attempts while everything else came out
+    well. A rule that survives the retries is now asked about on its own."""
+    import single_car_short
+
+    asked = []
+
+    def fake(violation, numbered, label):
+        asked.append(violation)
+        return 3, "The MZR 2.3 DISI turbo makes 263 horsepower and 280 lb-ft, and pulls hard."
+
+    monkeypatch.setattr(single_car_short, "_rewrite_scene_for", fake)
+    package = single_car_short._repair_violations(
+        _mazdaspeed_package(), "Mazda", "Mazdaspeed3", {"median": 16000}, "Mazdaspeed3")
+
+    assert "torque" in asked[0], "the missing torque figure is what it was asked about"
+    assert "280 lb-ft" in package["script"]
+    assert package["word_count"] == single_car_short._word_count(package["script"])
+    assert not single_car_short._script_violations(
+        package, "Mazda", "Mazdaspeed3", {"median": 16000})
+
+
+def test_a_repair_that_trades_one_violation_for_another_is_thrown_away(monkeypatch):
+    """This is the whole reason a model is safe to let loose on a finished
+    script: the same checker that found the problem decides whether the fix
+    was one."""
+    import single_car_short
+
+    # Adds the torque figure, but smuggles in a banned phrase.
+    monkeypatch.setattr(
+        single_car_short, "_rewrite_scene_for",
+        lambda *a: (3, "It makes 280 lb-ft, and the bolstered seats give it a sporty feel."))
+    package = single_car_short._repair_violations(
+        _mazdaspeed_package(), "Mazda", "Mazdaspeed3", {"median": 16000}, "Mazdaspeed3")
+
+    assert "sporty feel" not in package["script"]
+    assert "280 lb-ft" not in package["script"], "the whole edit is discarded, not half of it"
+
+
+def test_a_repair_that_cannot_be_made_does_not_fail_the_build(monkeypatch):
+    import single_car_short
+
+    def boom(*a):
+        raise RuntimeError("no")
+
+    monkeypatch.setattr(single_car_short, "_rewrite_scene_for", boom)
+    before = _mazdaspeed_package()
+    after = single_car_short._repair_violations(
+        _mazdaspeed_package(), "Mazda", "Mazdaspeed3", {"median": 16000}, "Mazdaspeed3")
+    assert after["scenes"] == before["scenes"]
+
+    # A scene number that does not exist is refused rather than applied.
+    monkeypatch.setattr(single_car_short, "_rewrite_scene_for", lambda *a: (99, "Anything."))
+    after = single_car_short._repair_violations(
+        _mazdaspeed_package(), "Mazda", "Mazdaspeed3", {"median": 16000}, "Mazdaspeed3")
+    assert after["scenes"] == before["scenes"]
+
+
+def test_repairs_stop_rather_than_looping_on_a_rule_nothing_can_fix(monkeypatch):
+    import single_car_short
+
+    calls = []
+    monkeypatch.setattr(single_car_short, "_rewrite_scene_for",
+                        lambda v, n, l: calls.append(v) or (3, "It pulls hard."))
+    single_car_short._repair_violations(
+        _mazdaspeed_package(), "Mazda", "Mazdaspeed3", {"median": 16000}, "Mazdaspeed3")
+    assert len(calls) <= single_car_short.MAX_TARGETED_REPAIRS
+
+
 def test_the_closing_is_rewritten_into_a_question_on_its_own(monkeypatch):
     """The whole-script retry asks for the closing question among six other
     constraints and loses it -- the Mazdaspeed3 build failed the rule on all
