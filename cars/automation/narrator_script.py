@@ -21,6 +21,26 @@ from audition_voices import VOICE_PRESETS
 
 DEFAULT_SCRIPT_MODEL = os.getenv("OPENAI_NARRATOR_SCRIPT_MODEL", "gpt-4o-mini")
 DEFAULT_TTS_MODEL = os.getenv("OPENAI_TTS_MODEL", "gpt-4o-mini-tts")
+
+# The narration engine. gpt-4o-mini-tts reads text and infers prosody from
+# punctuation, which is what put pauses in odd places and read as machine.
+# gpt-audio generates speech instead -- the model behind spoken
+# conversation -- and was picked by ear over every text-to-speech preset.
+NARRATION_ENGINE = os.getenv("NARRATION_ENGINE", "gpt-audio")
+AUDIO_MODEL = os.getenv("OPENAI_AUDIO_MODEL", "gpt-audio")
+AUDIO_VOICE = os.getenv("OPENAI_AUDIO_VOICE", "echo")
+# gpt-audio has no speed or pitch control: one voice, one natural read. The
+# register is dropped afterwards instead, which keeps the performance --
+# the phrasing, the emphasis, the accent -- and moves only the pitch.
+# 0.91 was chosen by ear; below about 0.90 the vowels start to sound
+# processed, because this is a time-stretch underneath.
+AUDIO_PITCH = float(os.getenv("OPENAI_AUDIO_PITCH", "0.91"))
+AUDIO_DELIVERY = (
+    "Speak like a confident American car-YouTube host talking fast because the clip is "
+    "short. Quick and energetic, natural rhythm, clear consonants. Do not sound like an "
+    "announcer reading a script, and do not pause between every clause. "
+    "Say the user's message back word for word. Add nothing and skip nothing."
+)
 DEFAULT_VOICE_PRESET = "trailer_hype"
 RAW_TTS_VOICES = {"alloy", "ash", "ballad", "cedar", "coral", "echo", "fable", "marin", "nova", "onyx", "sage", "shimmer", "verse"}
 RAW_VOICE_INSTRUCTIONS = (
@@ -92,6 +112,61 @@ def _resolve_voice(preset):
     )
 
 
+def _deepen(audio_path, factor=AUDIO_PITCH):
+    """Drop the pitch without changing how long the file is.
+
+    asetrate lowers pitch and slows the audio together; atempo puts the
+    speed back. The result is the same take in a lower register rather than
+    a different performance.
+    """
+    if not factor or abs(factor - 1.0) < 0.001:
+        return audio_path
+    probe = subprocess.run(
+        [os.environ.get("FFPROBE_BINARY", "ffprobe"), "-v", "error", "-select_streams", "a:0",
+         "-show_entries", "stream=sample_rate", "-of", "default=nw=1:nk=1", str(audio_path)],
+        check=True, capture_output=True, text=True,
+    )
+    rate = int(probe.stdout.strip() or 24000)
+    lowered = audio_path.with_name(f"{audio_path.stem}-deep{audio_path.suffix}")
+    subprocess.run(
+        [os.environ.get("FFMPEG_BINARY", "ffmpeg"), "-y", "-i", str(audio_path), "-filter:a",
+         f"asetrate={rate}*{factor},aresample={rate},atempo={1 / factor:.6f}",
+         "-q:a", "3", str(lowered)],
+        check=True, capture_output=True, text=True,
+    )
+    lowered.replace(audio_path)
+    return audio_path
+
+
+def _synthesize_with_audio_model(text, output_path):
+    """One chat call that answers in speech rather than text.
+
+    The script is handed over as something to say verbatim, because a
+    conversational model given a script as a user turn would otherwise
+    reply to it.
+    """
+    import base64
+
+    completion = with_openai_retry(lambda: OpenAI().chat.completions.create(
+        model=AUDIO_MODEL,
+        modalities=["text", "audio"],
+        audio={"voice": AUDIO_VOICE, "format": "mp3"},
+        messages=[
+            {"role": "system", "content": AUDIO_DELIVERY},
+            {"role": "user", "content": text},
+        ],
+    ))
+    audio = completion.choices[0].message.audio
+    output_path.write_bytes(base64.b64decode(audio.data))
+    # A call can come back with a few hundred bytes of silence and no
+    # error, which is how a four-second narration ships looking fine.
+    if output_path.stat().st_size < 20_000:
+        raise RuntimeError(
+            f"{AUDIO_MODEL} returned only {output_path.stat().st_size} bytes of audio."
+        )
+    return _deepen(output_path)
+
+
 def synthesize_narration(text, output_path, preset=DEFAULT_VOICE_PRESET, model=DEFAULT_TTS_MODEL, speed=None):
     """Render `text` to speech using one of audition_voices.py's presets,
     so a voice already chosen during auditioning carries straight through
@@ -99,9 +174,11 @@ def synthesize_narration(text, output_path, preset=DEFAULT_VOICE_PRESET, model=D
     api_key = os.getenv("OPENAI_API_KEY")
     if not _looks_like_real_openai_key(api_key):
         raise RuntimeError("OPENAI_API_KEY is missing or a placeholder; cannot synthesize narration.")
-    voice = _resolve_voice(preset)
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    if NARRATION_ENGINE == "gpt-audio":
+        return _synthesize_with_audio_model(text, output_path)
+    voice = _resolve_voice(preset)
     response = with_openai_retry(lambda: OpenAI().audio.speech.create(
         model=model,
         voice=voice["voice"],
