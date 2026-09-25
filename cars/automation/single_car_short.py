@@ -33,7 +33,8 @@ from research_request import (
     review_and_rename_entry_images,
 )
 from generate_sample import ROOT
-from narrator_script import _extract_wav, build_mouth_timeline, synthesize_narration
+from narrator_script import (_extract_wav, build_mouth_timeline, narration_settings,
+                             synthesize_narration)
 from narrator_video import render_narrator_video
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
@@ -50,8 +51,9 @@ TARGET_DURATION_SECONDS = 55.0
 # rather than assumed: 138 words in 61.6 seconds. This is the number that
 # sets the word budget, and it belongs to the engine -- gpt-audio has no
 # speed control, so its pace is fixed and a script either fits or gets
-# compressed afterwards.
-NARRATION_WORDS_PER_SECOND = 138 / 61.6
+# compressed afterwards. 138 words in 56.8 seconds, on the delivery
+# instruction that measured fastest of the three tried.
+NARRATION_WORDS_PER_SECOND = 138 / 56.8
 # The old cap was 175, written for text-to-speech generated at 1.35x. At
 # the conversational model's own pace that is a 78-second read, which would
 # need a 1.42x squeeze to reach 55 -- reintroducing exactly the compression
@@ -2064,7 +2066,8 @@ def build_short(args):
         },
         **package,
         "voice_preset": args.voice,
-        "tts_speed": FAST_TTS_SPEED,
+        "tts_speed": FAST_TTS_SPEED if narration_settings()["engine"] == "tts" else None,
+        "narration": narration_settings(),
         "target_duration_seconds": TARGET_DURATION_SECONDS,
         "normalized_audio_duration_seconds": round(normalized_duration, 3),
         "audio_path": str(audio_path),

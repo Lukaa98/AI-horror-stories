@@ -35,10 +35,15 @@ AUDIO_VOICE = os.getenv("OPENAI_AUDIO_VOICE", "echo")
 # 0.91 was chosen by ear; below about 0.90 the vowels start to sound
 # processed, because this is a time-stretch underneath.
 AUDIO_PITCH = float(os.getenv("OPENAI_AUDIO_PITCH", "0.91"))
+# Measured, not chosen. Three instructions of increasing urgency were read
+# against the same script: this one came back at 2.43 words a second,
+# "brisk" at 2.17, and "as fast as you can" at 2.34 -- asking harder made
+# it slower, presumably by over-enunciating. The model has a pace it will
+# not leave, and this is the closest it gets to leaving it.
 AUDIO_DELIVERY = (
-    "Speak like a confident American car-YouTube host talking fast because the clip is "
-    "short. Quick and energetic, natural rhythm, clear consonants. Do not sound like an "
-    "announcer reading a script, and do not pause between every clause. "
+    "Speak like an American car-YouTube host who is deliberately talking fast to fit a "
+    "lot into a short clip. Rapid, urgent, high energy, barely pausing between "
+    "sentences. Keep every word clear, but move. "
     "Say the user's message back word for word. Add nothing and skip nothing."
 )
 DEFAULT_VOICE_PRESET = "trailer_hype"
@@ -110,6 +115,20 @@ def _resolve_voice(preset):
         f"Unknown narrator voice or preset: {preset}. "
         f"Use a preset ({', '.join(VOICE_PRESETS)}) or supported voice ({', '.join(sorted(RAW_TTS_VOICES))})."
     )
+
+
+def narration_settings():
+    """What the narration was actually made with.
+
+    Recorded in the manifest, because the build was writing voice_preset
+    "onyx" and tts_speed 1.35 long after neither was true -- a build that
+    cannot say how it was made cannot be compared with another one.
+    """
+    if NARRATION_ENGINE == "gpt-audio":
+        return {"engine": NARRATION_ENGINE, "model": AUDIO_MODEL,
+                "voice": AUDIO_VOICE, "pitch": AUDIO_PITCH, "tts_speed": None}
+    return {"engine": "tts", "model": DEFAULT_TTS_MODEL, "voice": None,
+            "pitch": None, "tts_speed": None}
 
 
 def _deepen(audio_path, factor=AUDIO_PITCH):

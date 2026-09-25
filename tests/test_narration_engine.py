@@ -83,3 +83,37 @@ def test_the_untouched_window_sits_around_the_target():
     high = signature.parameters["maximum"].default
     assert low < single_car_short.TARGET_DURATION_SECONDS < high
     assert high <= 58.0, "nothing should be left sitting at a minute"
+
+
+def test_the_delivery_is_the_one_that_measured_fastest():
+    """Three instructions were read against the same script: this at 2.43
+    words a second, "brisk" at 2.17, "as fast as you can" at 2.34 --
+    asking harder made it slower. The wording is a measurement, not a
+    preference."""
+    assert "deliberately talking fast" in narrator_script.AUDIO_DELIVERY
+    assert "barely pausing between" in narrator_script.AUDIO_DELIVERY
+
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+
+    # And the word budget tracks it, rather than being set once and left.
+    assert abs(single_car_short.NARRATION_WORDS_PER_SECOND - 138 / 56.8) < 0.001
+    assert single_car_short.WORD_CAP == 134
+
+
+def test_the_build_records_how_its_voice_was_actually_made():
+    """It was writing voice_preset "onyx" and tts_speed 1.35 long after
+    neither was true. A build that cannot say how it was made cannot be
+    compared with another one."""
+    settings = narrator_script.narration_settings()
+    assert settings["engine"] == "gpt-audio"
+    assert settings["voice"] == "echo"
+    assert settings["pitch"] == 0.91
+    assert settings["tts_speed"] is None, "nothing is sped up any more"
+
+    from pathlib import Path
+    source = (Path(__file__).resolve().parents[1]
+              / "cars/automation/single_car_short.py").read_text()
+    assert '"narration": narration_settings(),' in source
