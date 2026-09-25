@@ -44,6 +44,15 @@ ENGINES = {
     },
     "c-gpt-audio": {"engine": "audio", "voice": "alloy", "instructions": BRISK},
     "d-gpt-audio-echo": {"engine": "audio", "voice": "echo", "instructions": BRISK},
+    # Same model, same instructions, same script -- only the voice differs,
+    # so a comparison against echo is a comparison of register and nothing
+    # else. A voice the API does not know is recorded as a failure rather
+    # than guessed at from a list that moves.
+    "e-gpt-audio-ash": {"engine": "audio", "voice": "ash", "instructions": BRISK},
+    "f-gpt-audio-cedar": {"engine": "audio", "voice": "cedar", "instructions": BRISK},
+    "g-gpt-audio-sage": {"engine": "audio", "voice": "sage", "instructions": BRISK},
+    "h-gpt-audio-verse": {"engine": "audio", "voice": "verse", "instructions": BRISK},
+    "i-gpt-audio-ballad": {"engine": "audio", "voice": "ballad", "instructions": BRISK},
 }
 
 

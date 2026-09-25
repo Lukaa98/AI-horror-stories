@@ -290,11 +290,15 @@ jobs:
           AUDITION_ID: ${{ inputs.draft_id }}
         run: |
           set -euo pipefail
+          # engines[:<build-id>][:<engine,engine>]
           args=(--audition-id "${AUDITION_ID}")
-          build="${ENGINE_QUERY#engines:}"
-          if [ "${build}" != "${ENGINE_QUERY}" ] && [ -n "${build}" ]; then
-            args+=(--from-build "${build}")
-          fi
+          rest="${ENGINE_QUERY#engines}"
+          rest="${rest#:}"
+          build="${rest%%:*}"
+          picked=""
+          case "${rest}" in *:*) picked="${rest#*:}";; esac
+          if [ -n "${build}" ]; then args+=(--from-build "${build}"); fi
+          if [ -n "${picked}" ]; then args+=(--engines "${picked}"); fi
           python cars/automation/audition_engines.py "${args[@]}"
 
       - name: Run voice audition
