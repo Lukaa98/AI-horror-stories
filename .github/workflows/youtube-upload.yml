@@ -21,6 +21,16 @@ on:
         required: false
         type: boolean
         default: false
+      unschedule:
+        description: "Cancel the scheduled publish and leave the video private"
+        required: false
+        type: boolean
+        default: false
+      delete_video:
+        description: "Remove the video from the channel entirely (no undo; the build keeps its files)"
+        required: false
+        type: boolean
+        default: false
       publish_now:
         description: "Make the already-uploaded video public now, overriding its scheduled time"
         required: false
@@ -80,6 +90,8 @@ jobs:
           THUMBNAIL_ONLY: ${{ inputs.thumbnail_only }}
           UPDATE_METADATA: ${{ inputs.update_metadata }}
           PUBLISH_NOW: ${{ inputs.publish_now }}
+          UNSCHEDULE: ${{ inputs.unschedule }}
+          DELETE_VIDEO: ${{ inputs.delete_video }}
         run: |
           set -euo pipefail
           extra=""
@@ -87,5 +99,7 @@ jobs:
           if [ "${THUMBNAIL_ONLY}" = "true" ]; then extra="${extra} --thumbnail-only"; fi
           if [ "${UPDATE_METADATA}" = "true" ]; then extra="${extra} --update-metadata"; fi
           if [ "${PUBLISH_NOW}" = "true" ]; then extra="${extra} --publish-now"; fi
+          if [ "${UNSCHEDULE}" = "true" ]; then extra="${extra} --unschedule"; fi
+          if [ "${DELETE_VIDEO}" = "true" ]; then extra="${extra} --delete-video"; fi
           python -m youtube_tools.upload_build --build-id "${BUILD_ID}" ${extra} \
             --publish-at "${PUBLISH_AT:-}"

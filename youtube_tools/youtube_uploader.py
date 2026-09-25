@@ -150,3 +150,29 @@ def publish_now(youtube, video_id):
         status.pop(field, None)
     return youtube.videos().update(
         part="status", body={"id": video_id, "status": status}).execute()
+
+
+def unschedule(youtube, video_id):
+    """Cancel a scheduled publish and leave the video private.
+
+    Same care as publish_now: the current status is read and written back
+    with only the schedule and privacy changed, because videos.update
+    replaces a whole part and a bare status would blank the made-for-kids
+    declaration, the licence and the AI answer.
+    """
+    found = youtube.videos().list(part="status", id=video_id).execute()
+    items = found.get("items") or []
+    if not items:
+        raise RuntimeError(f"No video {video_id} on this channel.")
+    status = dict(items[0].get("status") or {})
+    status.pop("publishAt", None)
+    status["privacyStatus"] = "private"
+    for field in ("uploadStatus", "failureReason", "rejectionReason"):
+        status.pop(field, None)
+    return youtube.videos().update(
+        part="status", body={"id": video_id, "status": status}).execute()
+
+
+def delete_video(youtube, video_id):
+    """Remove the video from the channel. There is no undo for this."""
+    return youtube.videos().delete(id=video_id)

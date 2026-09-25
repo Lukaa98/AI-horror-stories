@@ -75,6 +75,48 @@ def normalize_publish_at(raw_value):
     return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def unschedule_existing(listing):
+    """Cancel a scheduled publish. The video stays up, privately."""
+    video_id = listing.get("video_id")
+    if not video_id:
+        raise SystemExit("This build has no video_id -- nothing is scheduled.")
+
+    from youtube_tools.youtube_client import get_authenticated_service
+    from youtube_tools.youtube_uploader import unschedule
+
+    print(f"[upload] Cancelling the schedule on {video_id}", flush=True)
+    unschedule(get_authenticated_service(), video_id)
+    print(f"[upload] Private, unscheduled: https://youtu.be/{video_id}", flush=True)
+
+
+def delete_existing(repository, token, args, listing, listing_path):
+    """Take the video off the channel and forget it was ever uploaded.
+
+    The build's own files are untouched -- the video, the thumbnail and the
+    listing all stay on the output branch, so it can be uploaded again. Only
+    the record of the YouTube upload is cleared, which is what puts the
+    dashboard back to offering an upload.
+    """
+    video_id = listing.get("video_id")
+    if not video_id:
+        raise SystemExit("This build has no video_id -- there is nothing to delete.")
+
+    from youtube_tools.youtube_client import get_authenticated_service
+    from youtube_tools.youtube_uploader import delete_video
+
+    print(f"[upload] Deleting {video_id} from the channel", flush=True)
+    delete_video(get_authenticated_service(), video_id).execute()
+
+    for field in ("video_id", "publish_at", "thumbnail_set", "uploaded_at"):
+        listing.pop(field, None)
+    # Kept so a deleted upload is distinguishable from one that never
+    # happened, which matters when the same build is uploaded twice.
+    listing["deleted_video_id"] = video_id
+    gh.write_json(repository, token, args.branch, listing_path, listing,
+                  f"youtube: deleted video for {args.build_id}")
+    print(f"[upload] Deleted {video_id}. The build can be uploaded again.", flush=True)
+
+
 def publish_existing(listing):
     """Take a scheduled video public now, whatever it was scheduled for."""
     video_id = listing.get("video_id")
@@ -153,6 +195,16 @@ def main():
     parser.add_argument("--force", action="store_true",
                         help="Upload even if this build already has a video id.")
     parser.add_argument(
+        "--unschedule", action="store_true",
+        help="Cancel the scheduled publish and leave the video private. The video stays "
+             "on the channel; only the schedule goes.",
+    )
+    parser.add_argument(
+        "--delete-video", action="store_true",
+        help="Remove the video from the channel entirely. There is no undo, and the "
+             "build keeps its files so it can be uploaded again.",
+    )
+    parser.add_argument(
         "--publish-now", action="store_true",
         help="Make the already-uploaded video public immediately, overriding whatever "
              "publish time it was scheduled for.",
@@ -189,6 +241,12 @@ def main():
             f"No upload.json at {listing_path} on {args.branch}. Builds made before "
             "this existed do not have one; re-render to get it."
         )
+    if args.delete_video:
+        delete_existing(repository, token, args, listing, listing_path)
+        return
+    if args.unschedule:
+        unschedule_existing(listing)
+        return
     if args.publish_now:
         publish_existing(listing)
         return

@@ -313,3 +313,41 @@ def test_publishing_now_keeps_the_rest_of_the_video_s_status():
     workflow = (Path(__file__).resolve().parents[1]
                 / ".github/workflows/youtube-upload.yml").read_text()
     assert "publish_now:" in workflow and "--publish-now" in workflow
+
+
+def test_a_scheduled_video_can_be_unscheduled_without_publishing_it():
+    """Changing your mind about a schedule should not mean publishing it or
+    deleting it. The video stays on the channel, private, with no date."""
+    from pathlib import Path
+    from youtube_tools import youtube_uploader
+
+    block = Path(youtube_uploader.__file__).read_text()
+    block = block[block.index("def unschedule"):]
+    assert 'part="status", id=video_id' in block, "read the status before replacing it"
+    assert 'status.pop("publishAt", None)' in block
+    assert 'status["privacyStatus"] = "private"' in block
+
+    source = Path(upload_build.__file__).read_text()
+    assert "def unschedule_existing" in source
+
+
+def test_deleting_a_video_keeps_the_build_that_made_it():
+    """The point of deleting is to undo the upload, not the work. The
+    video, thumbnail and listing stay on the output branch so the same
+    build can go up again."""
+    from pathlib import Path
+
+    source = Path(upload_build.__file__).read_text()
+    block = source[source.index("def delete_existing"):]
+    # The record of the upload is cleared, which is what puts the dashboard
+    # back to offering one.
+    for field in ('"video_id"', '"publish_at"', '"thumbnail_set"'):
+        assert field in block
+    assert 'listing["deleted_video_id"] = video_id' in block, \
+        "a deleted upload is not the same as one that never happened"
+    assert 'raise SystemExit("This build has no video_id -- there is nothing to delete' in source
+
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/youtube-upload.yml").read_text()
+    for flag in ("unschedule:", "delete_video:", "--unschedule", "--delete-video"):
+        assert flag in workflow

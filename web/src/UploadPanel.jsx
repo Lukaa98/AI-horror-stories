@@ -262,9 +262,28 @@ export default function UploadPanel({ settings, buildId }) {
                       }}>
                 Publish now
               </button>{" "}
-              Overrides the scheduled time and takes it public immediately.
+              <button type="button" className="secondary"
+                      onClick={() => upload({ unschedule: true })}>
+                Cancel the schedule
+              </button>{" "}
+              Publish now overrides the time and goes public. Cancelling leaves the video
+              on the channel, private, with no publish date.
             </p>
           )}
+          <p className="hint">
+            <button type="button" className="danger"
+                    onClick={() => {
+                      if (window.confirm(
+                        "Delete this video from YouTube? There is no undo. The build keeps "
+                        + "its files, so it can be uploaded again.")) {
+                        upload({ delete_video: true });
+                      }
+                    }}>
+              Delete from YouTube
+            </button>{" "}
+            Removes the video from the channel. The build's video, thumbnail and listing
+            stay here, so it can go up again.
+          </p>
           <p className="hint">
             <button type="button" className="secondary"
                     onClick={() => upload({ update_metadata: true })}>
