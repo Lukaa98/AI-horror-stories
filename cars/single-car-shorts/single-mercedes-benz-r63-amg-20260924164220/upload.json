@@ -17,10 +17,7 @@
   "thumbnail": "thumbnail.jpg",
   "privacy": "private",
   "status": "uploaded",
-  "publish_at": "2026-09-25T16:15:00Z",
-  "thumbnail_set": false,
   "thumbnail_error": "<HttpError 403 when requesting https://youtube.googleapis.com/upload/youtube/v3/thumbnails/set?videoId=Y_V8bCJ18Pw&alt=json&uploadType=media returned \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\". Details: \"[{'message': \"The authenticated user doesn't h",
-  "video_id": "Y_V8bCJ18Pw",
   "video_url": "https://youtu.be/Y_V8bCJ18Pw",
-  "uploaded_at": 1790274970
+  "deleted_video_id": "Y_V8bCJ18Pw"
 }
