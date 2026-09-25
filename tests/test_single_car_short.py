@@ -1268,6 +1268,36 @@ def test_an_unrepairable_hook_is_left_alone_rather_than_mangled():
         "Only 500 were ever built, and almost nobody knows it.", "Dodge", "Challenger") is None
 
 
+def test_a_name_revealed_at_the_end_is_not_swapped_for_a_stand_in():
+    """Run #231 shipped "thanks to the touch of car - this one." The hook
+    had built up to naming the car after a dash; taking the name out left
+    the build-up pointing at nothing. No stand-in repairs that, so the hook
+    keeps its name instead."""
+    import single_car_short
+
+    assert single_car_short._strip_car_name(
+        "This is the only minivan that rockets from zero to sixty in just 4.4 seconds, "
+        "thanks to the touch of AMG \u2014 the R63 AMG.", "Mercedes-Benz", "R63 AMG") is None
+
+
+def test_a_bare_noun_is_only_used_where_the_phrase_has_an_article():
+    """"the most powerful road-legal 911" supplies one, so "car" drops
+    straight in. "the touch of Mercedes-Benz AMG" does not -- the name
+    there is the maker, not the phrase's head noun -- and substituting
+    produced "the touch of car"."""
+    import single_car_short
+
+    assert single_car_short._strip_car_name(
+        "This is the only minivan that rockets from zero to sixty in just 4.4 seconds, "
+        "thanks to the touch of Mercedes-Benz AMG.", "Mercedes-Benz", "R63 AMG") is None
+
+    # A possessive counts as the phrase's article; a preposition ends the
+    # phrase before one is found.
+    assert single_car_short._phrase_has_determiner("is Porsche's most powerful ")
+    assert single_car_short._phrase_has_determiner("makes this the most powerful road-legal ")
+    assert not single_car_short._phrase_has_determiner("thanks to the touch of ")
+
+
 def test_repair_runs_on_the_package_and_keeps_the_word_count_honest():
     import single_car_short
 

@@ -801,6 +801,30 @@ def _name_span_re(make, model):
     )
 
 
+_DETERMINERS = {"the", "a", "an", "this", "that", "these", "those",
+                "its", "his", "her", "their", "our", "your", "my"}
+# Walking back from the name stops here: a preposition starts a new phrase,
+# so a determiner on its far side belongs to a different noun.
+_PHRASE_BOUNDARY = {"of", "for", "from", "with", "by", "to", "in", "on", "at",
+                    "than", "like", "about", "into", "over", "under", "and", "or"}
+
+
+def _phrase_has_determiner(before):
+    """Whether the noun phrase the name sits in already has an article.
+
+    Walks back over the adjectives in front of the name. A possessive
+    ("Porsche's most powerful 911") counts as the article; a preposition
+    ("the touch of AMG") ends the phrase before one is found.
+    """
+    for token in reversed(re.findall(r"[\w\u2019'\-]+", before)):
+        lowered = token.lower()
+        if lowered in _DETERMINERS or re.search(r"(?:'s|\u2019s)$", lowered):
+            return True
+        if lowered in _PHRASE_BOUNDARY:
+            return False
+    return False
+
+
 def _strip_car_name(sentence, make, model):
     """The first sentence with the car's name taken out of it, or None.
 
@@ -819,7 +843,7 @@ def _strip_car_name(sentence, make, model):
     if pattern is None:
         return None
     long_tokens = [t for t in _name_tokens(make, model) if len(t) > 2]
-    seen = {"count": 0}
+    seen = {"count": 0, "abort": False}
 
     def replace(match):
         text = match.group(0)
@@ -828,6 +852,15 @@ def _strip_car_name(sentence, make, model):
         if not any(re.search(rf"\b{re.escape(token)}\b", text, re.I) for token in long_tokens):
             return text
         seen["count"] += 1
+        before = sentence[:match.start()]
+        # A name revealed at the end after a dash or colon is an appositive:
+        # the sentence has built up to naming the car. Take the name out and
+        # the build-up points at nothing -- run #231 shipped "thanks to the
+        # touch of car - this one." There is no stand-in that repairs that,
+        # so the hook is left naming the car instead.
+        if re.search(r"[\u2014\u2013:-]\s*$", before) and match.end() >= len(sentence.rstrip(" .!?")):
+            seen["abort"] = True
+            return text
         # Padded on both sides and the whitespace collapsed afterwards: the
         # match can swallow the space in front of it ("is Porsche's" -> "is"
         # + replacement), which silently welded two words together.
@@ -845,10 +878,20 @@ def _strip_car_name(sentence, make, model):
         heads_its_own_phrase = (
             match.start() == 0 or re.match(r"\s*(?:the|a|an|this)\b", text, re.I)
         )
-        return " this one " if heads_its_own_phrase else " car "
+        if heads_its_own_phrase:
+            return " this one "
+        # A bare noun only works where the phrase already supplied an
+        # article: "the most powerful road-legal 911" has one, "the touch of
+        # AMG" does not, and became "the touch of car". Without one the name
+        # is not the phrase's head noun at all -- it is usually the maker,
+        # standing where no stand-in belongs -- so the hook is left alone.
+        if not _phrase_has_determiner(before):
+            seen["abort"] = True
+            return text
+        return " car "
 
     repaired = pattern.sub(replace, sentence)
-    if not seen["count"]:
+    if seen["abort"] or not seen["count"]:
         return None
     repaired = re.sub(r"\s+", " ", repaired).strip()
     repaired = re.sub(r"\s+([,.;:!?])", r"\1", repaired)

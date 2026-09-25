@@ -33,16 +33,17 @@ AUDIO_VOICE = os.getenv("OPENAI_AUDIO_VOICE", "echo")
 # register is dropped afterwards instead, which keeps the performance --
 # the phrasing, the emphasis, the accent -- and moves only the pitch.
 #
-# It is dropped TO a register rather than BY a factor. The model does not
-# hand back the same voice twice: measured across three builds of the same
-# script its takes came back at 133, 142 and 157 Hz, an 18% spread. A fixed
-# multiplier carries that spread straight through, which is how a build
-# shipped at 143 Hz when the approved take was 130 -- same settings, audibly
-# not the same voice. Measuring each take and shifting it onto the target is
-# the only way the register is the same every time.
-AUDIO_TARGET_HZ = float(os.getenv("OPENAI_AUDIO_TARGET_HZ", "130"))
-# Used only when a take is too short or too breathy to measure. Never as a
-# silent fallback: which one was applied is recorded in the manifest.
+# Off. Lowering the register was tried two ways -- by a fixed 0.91, then
+# onto a measured 130 Hz -- and the second did land every take on the same
+# number. It still sounded processed, because the shift is a time-stretch
+# and no amount of aiming it changes that. The model's own take ships.
+#
+# Set OPENAI_AUDIO_TARGET_HZ to a frequency to turn it back on; the
+# machinery and its tests are kept for that, and the pitch is measured and
+# recorded either way so takes stay comparable.
+AUDIO_TARGET_HZ = float(os.getenv("OPENAI_AUDIO_TARGET_HZ", "0"))
+# Used only when a target is set and a take is too breathy to measure.
+# Never as a silent fallback: which path ran is recorded in the manifest.
 AUDIO_PITCH = float(os.getenv("OPENAI_AUDIO_PITCH", "0.91"))
 # This is a time-stretch underneath, so a large shift sounds processed --
 # below about 0.85 the vowels go hollow, above about 1.05 it chipmunks. A
@@ -242,8 +243,17 @@ def _deepen(audio_path, target_hz=AUDIO_TARGET_HZ):
     try:
         measured = median_f0(audio_path)
     except Exception as error:  # noqa: BLE001 - a build is worth more than a semitone
-        print(f"[narration] Could not measure pitch ({error}); using the fixed factor.",
-              flush=True)
+        print(f"[narration] Could not measure pitch ({error}).", flush=True)
+
+    if not target_hz:
+        # Measured anyway: the number is how one build's voice gets compared
+        # with another's, whether or not anything is done about it.
+        _LAST_PITCH.clear()
+        _LAST_PITCH.update(measured_hz=measured, target_hz=None, factor=1.0,
+                           source="off", result_hz=measured)
+        print(f"[narration] Take measured {measured:.1f} Hz; shipping it as recorded."
+              if measured else "[narration] Shipping the take as recorded.", flush=True)
+        return audio_path
 
     factor = pitch_factor_for(measured, target_hz)
     if factor is None:
