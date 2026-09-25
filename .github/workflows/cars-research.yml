@@ -280,8 +280,15 @@ jobs:
             --voice "${{ inputs.voice || 'onyx' }}" \
             "${YEAR_ARGS[@]}"
 
+      - name: Run engine audition
+        if: ${{ inputs.mode == 'voice_audition' && inputs.query == 'engines' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python cars/automation/audition_engines.py --audition-id "${{ inputs.draft_id }}"
+
       - name: Run voice audition
-        if: ${{ inputs.mode == 'voice_audition' }}
+        if: ${{ inputs.mode == 'voice_audition' && inputs.query != 'engines' }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
