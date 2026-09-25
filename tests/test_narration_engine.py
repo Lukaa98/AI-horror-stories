@@ -42,3 +42,44 @@ def test_a_silent_response_is_an_error_not_a_narration():
     block = source[source.index("def _synthesize_with_audio_model"):]
     assert "< 20_000" in block
     assert "word for word" in source, "a conversational model would otherwise reply to the script"
+
+
+def test_the_word_budget_comes_from_how_fast_the_narrator_really_talks():
+    """The cap was 175, written for text-to-speech generated at 1.35x. The
+    conversational model has no speed control, so at its own pace that is a
+    78-second read needing a 1.42x squeeze to reach target -- which is
+    exactly the compression that made the old voice sound like a machine."""
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+
+    assert single_car_short.TARGET_DURATION_SECONDS == 55.0, "under a minute, deliberately"
+
+    pace = single_car_short.NARRATION_WORDS_PER_SECOND
+    assert 2.0 < pace < 2.5, "measured from a real read, not assumed"
+
+    # The cap is what the narrator can say in the target without hurrying.
+    spoken = single_car_short.WORD_CAP / pace
+    assert abs(spoken - single_car_short.TARGET_DURATION_SECONDS) < 1.0
+
+    # And the correction left over is small enough not to be heard.
+    assert spoken / single_car_short.TARGET_DURATION_SECONDS < 1.10
+
+
+def test_the_untouched_window_sits_around_the_target():
+    """A window written for 58 seconds would stretch a 55-second read to
+    fit it, which is the opposite of the point."""
+    import inspect
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+
+    signature = inspect.signature(single_car_short.normalize_audio_duration)
+    low = signature.parameters["minimum"].default
+    high = signature.parameters["maximum"].default
+    assert low < single_car_short.TARGET_DURATION_SECONDS < high
+    assert high <= 58.0, "nothing should be left sitting at a minute"

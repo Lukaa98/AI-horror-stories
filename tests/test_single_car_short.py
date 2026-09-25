@@ -31,13 +31,15 @@ def test_word_count_handles_contractions_and_hyphenated_terms():
     assert _word_count("It's a four-wheel-drive Golf R.") == 5
 
 
-def test_target_words_is_a_fixed_center_not_tied_to_tts_speed():
-    # 175 is a ceiling, not a midpoint. A target that floated up with
-    # FAST_TTS_SPEED (it drifted to ~220 at 1.35x) produced scripts that
-    # needed real atempo speed-up on top of the already-fast TTS to hit
-    # ~58s, which read as rushed.
-    from single_car_short import WORD_CAP
-    assert WORD_CAP == 175
+def test_the_word_cap_is_a_ceiling_set_by_the_narrator_s_own_pace():
+    # A ceiling, not a midpoint, and derived rather than chosen: the cap is
+    # what the narrator can say inside the target without being hurried.
+    # It was 175 when the voice was text-to-speech generated at 1.35x; the
+    # conversational model talks at its own fixed pace and 175 of its words
+    # is a 78-second read.
+    from single_car_short import (NARRATION_WORDS_PER_SECOND, TARGET_DURATION_SECONDS,
+                                  WORD_CAP)
+    assert WORD_CAP == round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND)
     assert TARGET_WORDS[1] == WORD_CAP and ACCEPTABLE_WORDS[1] == WORD_CAP
     assert ACCEPTABLE_WORDS[0] < TARGET_WORDS[0] < TARGET_WORDS[1]
 
@@ -1340,7 +1342,10 @@ def test_listing_facts_reach_the_writer_as_ground_truth():
     assert "3.0L Turbocharged Flat-6" in prompt
     # It supplements the research rather than replacing it: the rules the
     # script already follows have to still be in the prompt.
-    assert "165-175 words" in prompt or "155-175" in prompt
+    # The band the prompt asks for is the one the constants define, rather
+    # than a number pasted into the test and left behind when it moves.
+    from single_car_short import TARGET_WORDS as _target
+    assert f"{_target[0]}-{_target[1]} words" in prompt
 
 
 def test_a_build_without_a_listing_is_unchanged():

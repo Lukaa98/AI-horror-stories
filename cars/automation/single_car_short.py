@@ -43,38 +43,35 @@ load_dotenv(ROOT / ".env")
 SCRAPER_DIR = ROOT / "scraper" / "car-source-scraper"
 OUTPUT_ROOT = ROOT / "cars" / "single-car-shorts"
 FAST_TTS_SPEED = 1.35
-TARGET_DURATION_SECONDS = 58.0
-# Calibrated from the original working numbers -- 175-190 words (center
-# 182.5) hit the 55-60s target at the old 1.12x speed, giving a baseline
-# spoken pace independent of playback speed. HARD_WORD_RANGE (the actual
-# atempo-safety-net failure gate below) is still derived from that pace at
-# the *current* FAST_TTS_SPEED so it can't silently desync from a future
-# speed change. TARGET_WORDS itself, though, is a fixed ~180-word center
-# on request -- letting it float up with speed (it drifted to ~220 at
-# 1.35x) produced scripts that needed real atempo speed-up on top of the
-# already-fast TTS to hit ~58s, which is exactly what read as rushed.
-_BASE_WORDS_PER_SECOND = (182.5 / 58.0) / 1.12
-# A hard ceiling, not a target to hover around. Above this the TTS has to be
-# sped up on top of the already-fast playback to still land at ~58s, and the
-# result is the rushed delivery this number exists to prevent: run #172
-# shipped 257 words (4.4 words/sec) because nothing actually enforced it.
-WORD_CAP = 175
+# Under a minute, deliberately. A Short is judged on how much of it people
+# watch, and asking a stranger for a full minute is the hard part.
+TARGET_DURATION_SECONDS = 55.0
+# How fast the narrator actually talks, measured off a real gpt-audio read
+# rather than assumed: 138 words in 61.6 seconds. This is the number that
+# sets the word budget, and it belongs to the engine -- gpt-audio has no
+# speed control, so its pace is fixed and a script either fits or gets
+# compressed afterwards.
+NARRATION_WORDS_PER_SECOND = 138 / 61.6
+# The old cap was 175, written for text-to-speech generated at 1.35x. At
+# the conversational model's own pace that is a 78-second read, which would
+# need a 1.42x squeeze to reach 55 -- reintroducing exactly the compression
+# that made the old voice sound like a machine. The cap is what the
+# narrator can say in the target without being hurried.
+WORD_CAP = round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND)
 TARGET_WORD_CENTER = WORD_CAP
 TARGET_WORD_FLEX = 5
+# Kept for the text-to-speech path, which is still reachable with
+# NARRATION_ENGINE=tts and does generate speech at FAST_TTS_SPEED.
+_BASE_WORDS_PER_SECOND = (182.5 / 58.0) / 1.12
 
 
-def _hard_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECONDS, min_tempo=0.5, max_tempo=2.0):
-    """The word count actually stops being safe to ship -- derived from
-    normalize_audio_duration's own atempo clamp (0.5-2.0), not an arbitrary
-    guess. A script this short/long still gets its runtime corrected to
-    ~target_seconds by that atempo stretch; only outside this range does
-    the correction have to exceed what atempo can do without sounding
-    broken. ACCEPTABLE_WORDS used to be the actual pass/fail gate at a much
-    tighter +-25% band, rejecting scripts (e.g. 146 words, when the target
-    center is ~220) that normalize_audio_duration would have handled fine
-    with a ~0.66x slowdown -- comfortably inside the 0.5-2.0 clamp -- so a
-    build failed over nothing actually broken."""
-    words_per_second = _BASE_WORDS_PER_SECOND * speed
+def _hard_word_range(words_per_second=NARRATION_WORDS_PER_SECOND,
+                     target_seconds=TARGET_DURATION_SECONDS, min_tempo=0.5, max_tempo=2.0):
+    """Where a script stops being safe to ship -- derived from
+    normalize_audio_duration's own atempo clamp rather than guessed. Inside
+    this range a script still reaches ~target_seconds with a tempo
+    correction that does not sound broken; outside it, the correction would
+    have to exceed what atempo can do."""
     min_words = words_per_second * (min_tempo * target_seconds)
     max_words = words_per_second * (max_tempo * target_seconds)
     return (round(min_words), round(max_words))
@@ -82,17 +79,11 @@ def _hard_word_range(speed=FAST_TTS_SPEED, target_seconds=TARGET_DURATION_SECOND
 
 # The cap is the top of the range, never its midpoint.
 TARGET_WORDS = (WORD_CAP - 2 * TARGET_WORD_FLEX, WORD_CAP)
-# The prompt targets the tight range above, and this wider band is used to
-# decide whether to retry the model with corrective feedback (see
-# research_script) -- neither one is the actual failure gate anymore. A
-# fixed +-10 margin around TARGET_WORDS (not a percentage of it) so a script
-# that overshoots by, say, 14 words -- comfortably "acceptable" under the
-# old +-25% band -- still triggers a retry instead of shipping noticeably
-# over the stated hard target.
+# Used to decide whether to retry the model with corrective feedback, not
+# as the failure gate. A fixed margin rather than a percentage, so a script
+# that overshoots by a dozen words still triggers a retry.
 ACCEPTABLE_WORDS = (TARGET_WORDS[0] - 10, WORD_CAP)
-# The real failure gate: only a script this far outside the atempo-safe
-# range gets rejected, since anything inside it still reaches ~target
-# runtime with an audio-quality-preserving tempo correction.
+# The real failure gate.
 HARD_WORD_RANGE = _hard_word_range()
 ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 
@@ -1693,7 +1684,7 @@ def add_narration_lead_in(audio_path, seconds=NARRATION_LEAD_IN_SECONDS):
     return audio_path
 
 
-def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum=55.0, maximum=60.0):
+def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum=52.0, maximum=58.0):
     """Keep the final voice close to one minute without asking TTS twice."""
     probe = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=nw=1:nk=1", str(audio_path)],
