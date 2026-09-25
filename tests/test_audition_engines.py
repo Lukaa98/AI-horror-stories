@@ -34,3 +34,20 @@ def test_the_audio_model_is_told_to_read_rather_than_reply():
     it would answer it instead of saying it."""
     source = Path(audition_engines.__file__).read_text()
     assert "word for word" in source
+
+
+def test_the_comparison_can_run_on_a_real_build_s_narration():
+    """A sample Mustang script is fine for picking a timbre. Judging
+    naturalness wants the words that actually ship, with their numbers,
+    em-dashes and closing question."""
+    source = Path(audition_engines.__file__).read_text()
+    assert "def script_from_build" in source
+    # Over HTTP, because the output branch is 2.5GB of video and is never
+    # cloned into the runner.
+    assert "raw.githubusercontent.com" in source
+    assert "has no script in its result.json" in source, "refuse rather than read silence"
+
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/cars-research.yml").read_text()
+    assert "startsWith(inputs.query, 'engines')" in workflow
+    assert "--from-build" in workflow

@@ -75,6 +75,26 @@ def _gpt_audio(client, spec, text, out_path):
     out_path.write_bytes(base64.b64decode(audio.data))
 
 
+def script_from_build(build_id, repository=None, branch="cars-output"):
+    """The narration a finished build actually used.
+
+    Read over HTTP rather than from the checkout: the output branch is
+    2.5GB of rendered video and is deliberately never cloned here.
+    """
+    import os
+    import urllib.request
+
+    repository = repository or os.environ.get("GITHUB_REPOSITORY") or "Lukaa98/AI-horror-stories"
+    url = (f"https://raw.githubusercontent.com/{repository}/{branch}"
+           f"/cars/single-car-shorts/{build_id}/result.json")
+    with urllib.request.urlopen(url, timeout=60) as response:
+        manifest = json.loads(response.read().decode("utf-8"))
+    script = (manifest.get("script") or "").strip()
+    if not script:
+        raise SystemExit(f"{build_id} has no script in its result.json.")
+    return script
+
+
 def render(text, out_dir, engines=None):
     from openai import OpenAI
 
@@ -106,12 +126,23 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--audition-id", required=True)
     parser.add_argument("--text-file", type=Path, default=None)
+    parser.add_argument(
+        "--from-build", default="",
+        help="A build id under cars/single-car-shorts on the output branch. Its narration "
+             "is read instead of the sample script, so the comparison is on real content.",
+    )
     parser.add_argument("--engines", default="")
     args = parser.parse_args()
 
     from voice_audition_request import DEFAULT_SCRIPT
 
-    text = (args.text_file.read_text(encoding="utf-8") if args.text_file else DEFAULT_SCRIPT).strip()
+    if args.from_build:
+        text = script_from_build(args.from_build)
+    elif args.text_file:
+        text = args.text_file.read_text(encoding="utf-8")
+    else:
+        text = DEFAULT_SCRIPT
+    text = text.strip()
     wanted = [name.strip() for name in args.engines.split(",") if name.strip()]
     out_dir = OUT_ROOT / args.audition_id / "engines"
     result = render(text, out_dir, engines=wanted or None)

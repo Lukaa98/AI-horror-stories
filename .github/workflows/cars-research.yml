@@ -281,14 +281,24 @@ jobs:
             "${YEAR_ARGS[@]}"
 
       - name: Run engine audition
-        if: ${{ inputs.mode == 'voice_audition' && inputs.query == 'engines' }}
+        if: ${{ inputs.mode == 'voice_audition' && startsWith(inputs.query, 'engines') }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # "engines" for the sample script, or "engines:<build-id>" to read
+          # the narration a real build used.
+          ENGINE_QUERY: ${{ inputs.query }}
+          AUDITION_ID: ${{ inputs.draft_id }}
         run: |
-          python cars/automation/audition_engines.py --audition-id "${{ inputs.draft_id }}"
+          set -euo pipefail
+          args=(--audition-id "${AUDITION_ID}")
+          build="${ENGINE_QUERY#engines:}"
+          if [ "${build}" != "${ENGINE_QUERY}" ] && [ -n "${build}" ]; then
+            args+=(--from-build "${build}")
+          fi
+          python cars/automation/audition_engines.py "${args[@]}"
 
       - name: Run voice audition
-        if: ${{ inputs.mode == 'voice_audition' && inputs.query != 'engines' }}
+        if: ${{ inputs.mode == 'voice_audition' && !startsWith(inputs.query, 'engines') }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
