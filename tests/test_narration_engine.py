@@ -32,6 +32,64 @@ def test_the_register_is_dropped_without_changing_the_performance():
     assert "asetrate=" in block and "atempo=" in block
 
 
+def test_a_take_that_lands_out_of_register_is_asked_for_again(monkeypatch, tmp_path):
+    """gpt-audio picks its own register every call -- 133 to 157 Hz on the
+    same script. Shifting a high one down sounds processed, because that is
+    a time-stretch. Asking for another take is not: it is a real
+    performance, just a different one."""
+    takes = iter([157.0, 148.1, 134.5])
+    heard = []
+
+    def fake_take(text, path):
+        path.write_bytes(b"x" * 30_000)
+        return path
+
+    monkeypatch.setattr(narrator_script, "_one_take", fake_take)
+    monkeypatch.setattr(narrator_script, "median_f0",
+                        lambda *a, **k: heard.append(next(takes)) or heard[-1])
+
+    narrator_script._synthesize_with_audio_model("script", tmp_path / "n.mp3", retakes=2)
+
+    assert heard == [157.0, 148.1, 134.5], "it kept asking until one landed in the band"
+    assert narrator_script._LAST_PITCH["take_hz"] == 134.5
+    assert narrator_script._LAST_PITCH["takes"] == 3
+
+
+def test_a_take_already_in_register_is_not_re_recorded(monkeypatch, tmp_path):
+    monkeypatch.setattr(narrator_script, "_one_take",
+                        lambda text, path: path.write_bytes(b"x" * 30_000) or path)
+    monkeypatch.setattr(narrator_script, "median_f0", lambda *a, **k: 134.0)
+
+    narrator_script._synthesize_with_audio_model("script", tmp_path / "n.mp3", retakes=2)
+
+    assert narrator_script._LAST_PITCH["takes"] == 1
+
+
+def test_when_no_take_lands_in_register_the_closest_one_ships(monkeypatch, tmp_path):
+    """Retakes are generations, so they are capped. Ending on a bad one
+    would make the cap actively harmful -- the best of what was heard is
+    what ships."""
+    takes = iter([157.0, 143.0, 151.0])
+    written = {}
+
+    def fake_take(text, path):
+        hz = next(takes)
+        path.write_bytes(str(hz).encode() + b"x" * 30_000)
+        written["last"] = hz
+        return path
+
+    monkeypatch.setattr(narrator_script, "_one_take", fake_take)
+    monkeypatch.setattr(narrator_script, "median_f0",
+                        lambda path, *a, **k: float(Path(path).read_bytes().split(b"x")[0]))
+
+    out = tmp_path / "n.mp3"
+    narrator_script._synthesize_with_audio_model("script", out, retakes=2)
+
+    assert written["last"] == 151.0, "the last take was the worst one"
+    assert narrator_script._LAST_PITCH["take_hz"] == 143.0
+    assert out.read_bytes().startswith(b"143.0"), "the closest take is the one on disk"
+
+
 def test_the_model_s_own_take_ships_unshifted(monkeypatch, tmp_path):
     """Lowering the register was tried twice -- a fixed 0.91, then a
     measured 130 Hz that did land every take on the same number. It still
@@ -121,7 +179,7 @@ def test_a_silent_response_is_an_error_not_a_narration():
     back 4.3 seconds long that way, and nothing noticed until it was
     played."""
     source = Path(narrator_script.__file__).read_text()
-    block = source[source.index("def _synthesize_with_audio_model"):]
+    block = source[source.index("def _one_take"):]
     assert "< 20_000" in block
     assert "word for word" in source, "a conversational model would otherwise reply to the script"
 
