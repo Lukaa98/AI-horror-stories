@@ -1225,3 +1225,41 @@ button.secondary {
 .repair-log summary { cursor: pointer; opacity: 0.75; }
 .repair-log ul { margin: 6px 0 0; padding-left: 20px; }
 .repair-log em { opacity: 0.8; }
+
+/* Previous builds: one row per car, not per run. Re-running a car to test
+   a pipeline change is normal, so the list was the same few cars repeated
+   and picking one meant reading timestamps. */
+.prev-builds {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+.prev-build {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border: 1px solid var(--line, #2a2a35);
+  border-radius: 10px;
+}
+.prev-build img,
+.prev-build-blank {
+  width: 72px;
+  height: 48px;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--sunken, #1b1b23);
+}
+.prev-build-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+.prev-build-body strong { overflow-wrap: anywhere; }
+.prev-build-when { font-size: 12px; opacity: 0.7; }
+.prev-build-body select { font-size: 12px; padding: 3px 6px; }

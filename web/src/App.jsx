@@ -681,7 +681,42 @@ function loadDispatchedBuilds() {
   }
 }
 
-const PREVIOUS_BUILD_LIMIT = 12;
+// Runs, not cars. Re-running one car to test a pipeline change is the
+// normal way this gets used, so a dozen entries can be three cars.
+const PREVIOUS_BUILD_LIMIT = 40;
+
+/** One row per car, newest first, each keeping every run that made it.
+ *
+ * Re-running the same car is how the pipeline gets tested, so the list was
+ * mostly the same few cars repeated and picking one meant reading
+ * timestamps. Grouping is by what was actually asked for -- make, model,
+ * trim and year range -- because that is what makes two builds the same
+ * car, rather than a title the script wrote differently each time.
+ *
+ * Every run is kept inside its group rather than collapsed away: a build
+ * whose video was deleted is still the inputs that made it, and still worth
+ * starting from.
+ */
+function groupPreviousBuilds(builds) {
+  const groups = new Map();
+  for (const build of builds) {
+    const inputs = build.inputs || {};
+    const key = ["make", "model", "trim", "start_year", "end_year"]
+      .map((field) => String(inputs[field] || "").trim().toLowerCase())
+      .join("|");
+    if (!groups.has(key)) groups.set(key, { key, title: build.title, runs: [] });
+    const group = groups.get(key);
+    group.runs.push(build);
+    // The finished build's own title reads better than a half-built one's.
+    if (!build.unfinished && build.title) group.title = build.title;
+  }
+  for (const group of groups.values()) {
+    group.runs.sort((a, b) => (b.timestamp?.getTime() || 0) - (a.timestamp?.getTime() || 0));
+    group.newest = group.runs[0];
+  }
+  return [...groups.values()]
+    .sort((a, b) => (b.newest.timestamp?.getTime() || 0) - (a.newest.timestamp?.getTime() || 0));
+}
 
 async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
   const { entries } = await fetchOutputTree({ owner, repo, token });
@@ -699,6 +734,12 @@ async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
         || `${preview.car?.make || preview.build_inputs.make || ""} ${preview.car?.model || preview.build_inputs.model || ""}`.trim()
         || item.id,
       inputs: preview.build_inputs,
+      // The build's own thumbnail, so a car can be recognised rather than
+      // read. result.json does not name it -- every build writes it under
+      // the same name -- and the <img> simply fails to load for one that
+      // did not get that far, which the pasted photo then covers.
+      thumbnail: `cars/single-car-shorts/${item.id}/thumbnail.jpg`,
+      photo: preview.build_inputs.photo_side || preview.build_inputs.photo_front || "",
     };
   }));
   // A build whose result.json predates build_inputs has nothing to fill the
@@ -848,6 +889,8 @@ export default function App() {
   const [previousBuildsStage, setPreviousBuildsStage] = useState("idle");
   const [previousBuildsError, setPreviousBuildsError] = useState(null);
   const [filledFromBuild, setFilledFromBuild] = useState(null);
+  // Which run of a car is selected, when it has been built more than once.
+  const [chosenRun, setChosenRun] = useState({});
   const [voice, setVoice] = useState("onyx");
   const [renderQuality, setRenderQuality] = useState(null);
   const [draftId, setDraftId] = useState(null);
@@ -2441,27 +2484,74 @@ export default function App() {
                       Start From A Previous Build
                       <Tip text="Fills this form with a past build's car, photos and settings so you don't repaste the links. Nothing is dispatched until you press Build, and that build runs the current pipeline code -- not the code the original ran on." />
                     </div>
-                    <div className="field-row">
-                      <select
-                        value=""
-                        onFocus={ensurePreviousBuilds}
-                        onMouseDown={ensurePreviousBuilds}
-                        onChange={(e) => applyPreviousBuild(e.target.value)}
-                        disabled={!repoOk || stage === "single-car-building"}
-                      >
-                        <option value="">
-                          {previousBuildsStage === "loading" ? "Loading previous builds..."
-                            : previousBuildsStage === "ready" && !previousBuilds.length ? "No previous builds found"
-                            : "Pick a build to copy its inputs..."}
-                        </option>
-                        {previousBuilds.map((build) => (
-                          <option key={build.id} value={build.id}>
-                            {build.title}
-                            {build.timestamp ? ` — ${build.timestamp.toLocaleString()}` : ""}
-                            {build.unfinished ? " — did not finish" : ""}
-                          </option>
-                        ))}
-                      </select>
+                    {previousBuildsStage === "idle" && (
+                      <button type="button" className="secondary"
+                              onClick={ensurePreviousBuilds} disabled={!repoOk}>
+                        Show previous builds
+                      </button>
+                    )}
+                    {previousBuildsStage === "loading" && (
+                      <p className="hint">Loading previous builds…</p>
+                    )}
+                    {previousBuildsStage === "ready" && !previousBuilds.length && (
+                      <p className="hint">No previous builds found.</p>
+                    )}
+
+                    <div className="prev-builds">
+                      {groupPreviousBuilds(previousBuilds).map((group) => {
+                        // The newest run unless one was picked; a group with
+                        // one run needs no choosing at all.
+                        const chosenId = chosenRun[group.key] || group.newest.id;
+                        const chosen = group.runs.find((run) => run.id === chosenId) || group.newest;
+                        const image = chosen.thumbnail
+                          ? `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/${chosen.thumbnail}`
+                          : chosen.photo;
+                        return (
+                          <div className="prev-build" key={group.key}>
+                            {image
+                              ? <img src={image} alt="" loading="lazy"
+                                     onError={(e) => {
+                                       // An unfinished build has no thumbnail;
+                                       // what was pasted in is the next best.
+                                       if (chosen.photo && e.target.src !== chosen.photo) {
+                                         e.target.src = chosen.photo;
+                                       } else {
+                                         e.target.style.visibility = "hidden";
+                                       }
+                                     }} />
+                              : <span className="prev-build-blank" />}
+                            <div className="prev-build-body">
+                              <strong>{group.title}</strong>
+                              <span className="prev-build-when">
+                                {chosen.timestamp ? chosen.timestamp.toLocaleString() : "no date"}
+                                {chosen.unfinished ? " — did not finish" : ""}
+                              </span>
+                              {group.runs.length > 1 && (
+                                // Every run is kept: a build whose video was
+                                // deleted is still the inputs that made it.
+                                <select
+                                  value={chosenId}
+                                  onChange={(e) => setChosenRun(
+                                    (picked) => ({ ...picked, [group.key]: e.target.value }))}
+                                >
+                                  {group.runs.map((run, index) => (
+                                    <option key={run.id} value={run.id}>
+                                      {index === 0 ? "Newest" : `Run ${group.runs.length - index}`}
+                                      {run.timestamp ? ` — ${run.timestamp.toLocaleString()}` : ""}
+                                      {run.unfinished ? " — did not finish" : ""}
+                                    </option>
+                                  ))}
+                                </select>
+                              )}
+                            </div>
+                            <button type="button" className="secondary"
+                                    disabled={stage === "single-car-building"}
+                                    onClick={() => applyPreviousBuild(chosen.id)}>
+                              Use
+                            </button>
+                          </div>
+                        );
+                      })}
                     </div>
                     {previousBuildsError && (
                       <p className="error">Could not load previous builds: {previousBuildsError}</p>
