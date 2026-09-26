@@ -138,3 +138,18 @@
   padding: 4px 10px;
   font-size: 0.76rem;
 }
+
+/* Signing in to Google from the page, which is a different thing from
+   renewing the pipeline's token below it. */
+.yt-signin {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.yt-live {
+  font-size: 14px;
+  color: var(--ok, #16a34a);
+  font-weight: 600;
+}

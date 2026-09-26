@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./YouTubePanel.css";
+import { completeSignIn, signIn, signOut, signedIn } from "./googleAuth";
+import {
+  collect as collectLive, deleteVideo, publishNow, setPublishTime, unschedule as unscheduleLive,
+} from "./youtubeLive";
 
 const AUTH_WORKFLOW = "youtube-auth.yml";
 const STATUS_WORKFLOW = "youtube-status.yml";
@@ -33,6 +37,24 @@ async function readJson(settings, path) {
   const data = await res.json();
   const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, "")), (c) => c.charCodeAt(0));
   return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+}
+
+// Only the workflow's snapshot knows which build made each video -- the
+// YouTube API has never heard of builds, and the link lives in each build's
+// upload.json on the output branch. A browser snapshot would therefore drop
+// every action button, so the ids from the last workflow snapshot are
+// carried across by video id instead.
+function carryBuildIds(fresh, previous) {
+  const known = new Map(
+    (previous?.videos || []).filter((v) => v.build_id).map((v) => [v.id, v.build_id])
+  );
+  if (!known.size) return fresh;
+  return {
+    ...fresh,
+    videos: fresh.videos.map((video) =>
+      video.build_id ? video : { ...video, build_id: known.get(video.id) || "" }
+    ),
+  };
 }
 
 const DAY_MS = 86400000;
@@ -92,6 +114,7 @@ function describeToken(info) {
 export default function YouTubePanel({ settings }) {
   const [status, setStatus] = useState(null);
   const [statusState, setStatusState] = useState("idle");
+  const [live, setLive] = useState(() => signedIn());
   const statusTimer = useRef(null);
   const [acting, setActing] = useState("");
   const [state, setState] = useState("idle");   // idle | starting | waiting | stored | error
@@ -112,6 +135,21 @@ export default function YouTubePanel({ settings }) {
   }, []);
 
   useEffect(() => stop, [stop]);
+
+  // Google sends the browser back here with a ?code=. Swapping it for a
+  // token has to happen before anything reads the address bar, and exactly
+  // once -- the code is spent on use.
+  useEffect(() => {
+    let livePage = true;
+    completeSignIn()
+      .then((token) => {
+        if (!livePage || !token) return;
+        setLive(true);
+        setError(null);
+      })
+      .catch((err) => { if (livePage) setError(String(err.message || err)); });
+    return () => { livePage = false; };
+  }, []);
 
   // Read on mount so the expiry survives a refresh or a tab switch. The
   // token lives seven days while the OAuth app is in Testing and nothing
@@ -217,6 +255,20 @@ export default function YouTubePanel({ settings }) {
     const { owner, repo, branch, token } = settings;
     setActing(`${video.id}:${label}`);
     try {
+      // Signed in, this is one call to YouTube and the row is right again
+      // before the button finishes animating. The workflow does exactly the
+      // same thing; it just has to be dispatched, queued and checked out
+      // first. The build id is what the workflow needs, not YouTube, so a
+      // video with no build behind it can still be acted on here.
+      if (signedIn()) {
+        if (inputs.publish_now) await publishNow(video.id);
+        else if (inputs.unschedule) await unscheduleLive(video.id);
+        else if (inputs.reschedule) await setPublishTime(video.id, inputs.publish_at);
+        else if (inputs.delete_video) await deleteVideo(video.id);
+        else throw new Error(`${label} has no direct equivalent.`);
+        await refreshStatus();
+        return;
+      }
       const res = await fetch(
         `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${UPLOAD_WORKFLOW}/dispatches`,
         {
@@ -241,14 +293,33 @@ export default function YouTubePanel({ settings }) {
     } finally {
       setActing("");
     }
+    // refreshStatus is declared below; it is stable enough for this and
+    // naming it here would be a use-before-declaration.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings]);
 
-  // The snapshot is written by the workflow, so refreshing means asking it
-  // to run and then watching the file for a newer timestamp.
+  // Signed in, the browser can ask YouTube itself and the answer is back in
+  // a moment. Signed out there is no credential here, so the question has
+  // to be asked where the refresh token lives: dispatch the workflow and
+  // watch the output branch for a newer snapshot.
   const refreshStatus = useCallback(async () => {
     const { owner, repo, branch, token } = settings;
     const before = status?.checked_at || "";
     setStatusState("refreshing");
+
+    if (signedIn()) {
+      try {
+        setStatus(carryBuildIds(await collectLive(), status));
+        setStatusState("idle");
+        setError(null);
+        return;
+      } catch (err) {
+        // An expired sign-in is not a dead end -- the workflow still works.
+        setLive(signedIn());
+        setError(String(err.message || err));
+      }
+    }
+
     try {
       const res = await fetch(
         `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${STATUS_WORKFLOW}/dispatches`,
@@ -292,6 +363,26 @@ export default function YouTubePanel({ settings }) {
       <p className="yt-lead">
         The channel's OAuth app is in Testing, so its token lasts seven days. Renew it here —
         no terminal, and the token itself never reaches this page.
+      </p>
+
+      <div className="yt-signin">
+        {live ? (
+          <>
+            <span className="yt-live">Signed in — reading YouTube directly.</span>
+            <button type="button" className="secondary"
+                    onClick={() => { signOut(); setLive(false); }}>Sign out</button>
+          </>
+        ) : (
+          <button type="button" className="yt-start"
+                  onClick={() => signIn().catch((err) => setError(String(err.message || err)))}>
+            Sign in with Google
+          </button>
+        )}
+      </div>
+      <p className="yt-note">
+        Signing in makes this page ask YouTube itself, so the tab answers in a moment instead of
+        waiting on a workflow. It lasts about an hour and covers only what you do here — the
+        pipeline keeps using its own token to upload on schedule.
       </p>
 
       <button type="button" className="yt-start" onClick={start}
@@ -338,8 +429,8 @@ export default function YouTubePanel({ settings }) {
 
         {!status && statusState !== "refreshing" && (
           <p className="yt-note">
-            No snapshot yet. Press refresh and the channel is read through the workflow --
-            this page has no token of its own, by design.
+            No snapshot yet. Press refresh — signed in, the page asks YouTube directly;
+            otherwise the workflow is dispatched and its answer read back.
           </p>
         )}
 
@@ -374,7 +465,7 @@ export default function YouTubePanel({ settings }) {
                   <span>{video.likes.toLocaleString()} likes</span>
                   <span>{video.comments.toLocaleString()} comments</span>
                 </div>
-                {video.build_id ? (
+                {video.build_id || live ? (
                   <div className="yt-video-actions">
                     {video.privacy !== "public" && (
                       <button type="button" className="secondary"
@@ -426,7 +517,8 @@ export default function YouTubePanel({ settings }) {
                   </div>
                 ) : (
                   <p className="yt-note">
-                    No build on this branch made this video, so there is nothing to act on here.
+                    No build on this branch made this video, so the workflow has nothing to act
+                    on. Sign in above and these work anyway — YouTube is addressed by video id.
                   </p>
                 )}
                 <div className="yt-video-meta yt-video-settings">
