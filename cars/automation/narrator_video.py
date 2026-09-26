@@ -816,11 +816,20 @@ def chest_car_source(media_paths):
     return candidates[0] if candidates else None
 
 
-def chest_print_for(media_paths, work_dir):
-    """Write the hoodie print for this build, or None if there is no car."""
+def chest_print_for(media_paths, work_dir, side_profile_path=None):
+    """Write the hoodie print for this build, or None if there is no car.
+
+    The build already resolves which cut-out is the true side profile --
+    it is what the drag race runs -- and that is the shot the print wants.
+    Scanning the media list was the fallback and became the default
+    whenever the side profile was not among the scenes' own photos: the SLR
+    build printed its head-on front cut-out, which is nearly square, so it
+    scaled down to fit the chest and read as a badge rather than a car.
+    """
     from chest_print import build_chest_print
 
-    source = chest_car_source(media_paths)
+    source = side_profile_path if side_profile_path and Path(side_profile_path).exists() else None
+    source = source or chest_car_source(media_paths)
     if not source:
         return None
     try:
@@ -1767,7 +1776,8 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     if renderer == "v21":
         motion_plan = build_motion_plan(manifest, duration, scene_boundaries, size, fps=24,
                                         media_box=media_box)
-        chest = chest_print_for(car_media_paths, output_path.parent / "_frames" / "narrator")
+        chest = chest_print_for(car_media_paths, output_path.parent / "_frames" / "narrator",
+                                manifest.get("side_profile_media_path"))
         if chest:
             motion_plan["chest_car"] = str(chest)
         live_path, plan_path = render_live_narrator(motion_plan, output_path.parent / "_frames" / "narrator")

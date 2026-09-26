@@ -143,3 +143,70 @@ def test_the_video_holds_a_beat_after_the_last_word():
               / "cars/automation/narrator_video.py").read_text()
     assert "duration = audio.duration + END_PAD_SECONDS" in source
     assert ".set_duration(duration)" in source, "the mix has to cover the pad too"
+
+
+def test_the_print_is_made_from_the_side_profile_the_build_already_resolved(tmp_path):
+    """The SLR build printed its head-on front cut-out. Its side profile was
+    a manual photo that never entered the scenes' media list, so the scan
+    fell through to the only "nobg" path there was -- a nearly square front
+    shot, which scales down to fit the chest and reads as a badge rather
+    than a car. The build knows which cut-out is the side profile; it is
+    what the drag race runs."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import narrator_video
+
+    from PIL import Image
+
+    def cutout(name, size):
+        path = tmp_path / name
+        image = Image.new("RGBA", size, (0, 0, 0, 0))
+        # A solid block inside a transparent margin: a silhouette to print.
+        block = Image.new("RGBA", (size[0] // 2, size[1] // 2), (90, 90, 90, 255))
+        image.paste(block, (size[0] // 4, size[1] // 4))
+        image.save(path)
+        return str(path)
+
+    front = cutout("front-nobg.png", (400, 400))
+    side = cutout("side-nobg.png", (1200, 400))
+
+    # The scan alone finds only the front, exactly as the SLR build did.
+    assert narrator_video.chest_car_source([front]) == front
+
+    made = narrator_video.chest_print_for([front], tmp_path / "work", side)
+    from PIL import Image as _Image
+    printed = _Image.open(made)
+    assert printed.width > printed.height * 2, \
+        "the side profile is a wide shot; a square print means the front was used"
+
+    # Without one, the scan is still the fallback rather than nothing.
+    assert narrator_video.chest_print_for([front], tmp_path / "work2", None) is not None
+    # And a path that is not on disk does not take precedence over one that is.
+    assert narrator_video.chest_print_for([front], tmp_path / "work3",
+                                          str(tmp_path / "gone.png")) is not None
+
+
+def test_a_cutout_is_trimmed_by_its_alpha_alone(tmp_path):
+    """getbbox() on RGBA calls a pixel non-zero if any channel is, so a
+    cut-out that left colour behind its transparent pixels would not trim,
+    and an untrimmed print is a small car in a large empty box once it is
+    scaled to fit the chest."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    from chest_print import build_chest_print
+
+    from PIL import Image
+
+    # Transparent everywhere, but every pixel still carries colour.
+    image = Image.new("RGBA", (1200, 400), (120, 40, 40, 0))
+    block = Image.new("RGBA", (600, 100), (90, 90, 90, 255))
+    image.paste(block, (300, 150))
+    path = tmp_path / "coloured-transparency.png"
+    image.save(path)
+
+    printed = build_chest_print(path)
+    assert printed is not None
+    assert abs(printed.width / printed.height - 6.0) < 0.5, \
+        "it should trim to the 600x100 block, not keep the 1200x400 frame"

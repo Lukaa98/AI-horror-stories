@@ -1491,6 +1491,41 @@ def test_a_repair_that_cannot_be_made_does_not_fail_the_build(monkeypatch):
     assert after["scenes"] == before["scenes"]
 
 
+def test_a_rule_that_cannot_be_fixed_does_not_block_the_ones_that_can(monkeypatch):
+    """The SLR build shipped with three violations because the first one --
+    its history -- could not be repaired and the loop stopped there. The
+    padding and the empty scene were never attempted."""
+    import single_car_short
+
+    scenes = [
+        "In 2003 the SLR debuted, which is when it went on sale.",
+        "It makes 617 hp and 575 lb-ft.",
+        "The gear shifter emphasizes its race-bred DNA.",
+        "So would you?",
+    ]
+    package = {"scenes": [{"narration": t} for t in scenes], "script": " ".join(scenes),
+               "start_year": 2003, "end_year": 2009,
+               "history": {"year": 2003, "fact": "The SLR debuted in 2003."}}
+
+    seen = []
+
+    def fake(violation, numbered, label, specs=""):
+        seen.append(violation)
+        if "history" in violation:
+            return 1, "In 2003 the SLR debuted, which is when it went on sale."  # no change
+        return 3, "The shifter sits where the 300 SLR's did, 8 inches further back."
+
+    monkeypatch.setattr(single_car_short, "_rewrite_scene_for", fake)
+    fixed = single_car_short._repair_violations(
+        package, "Mercedes-Benz", "SLR McLaren", {"median": 300000}, "SLR McLaren")
+
+    assert any("history" in rule for rule in seen), "it tried the history first"
+    assert any("without saying anything" in rule for rule in seen), \
+        "and went on to the rule it could fix"
+    assert "8 inches" in fixed["script"]
+    single_car_short._REPAIR_LOG.clear()
+
+
 def test_repairs_stop_rather_than_looping_on_a_rule_nothing_can_fix(monkeypatch):
     import single_car_short
 

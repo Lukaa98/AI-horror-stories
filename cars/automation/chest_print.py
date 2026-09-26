@@ -27,7 +27,11 @@ MIN_TRANSPARENT_FRACTION = 0.10
 
 
 def _trim(image):
-    box = image.getbbox()
+    # The alpha channel alone. getbbox() on RGBA calls a pixel non-zero if
+    # any channel is, so a cut-out that left colour behind its transparent
+    # pixels would not trim at all -- and an untrimmed print is a small car
+    # in a large empty box once it is scaled to fit the chest.
+    box = image.split()[3].getbbox()
     return image.crop(box) if box else image
 
 

@@ -1139,8 +1139,14 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
     the fix was one, so a rewrite that trades one violation for another is
     thrown away instead of shipped.
     """
+    # Rules it has already failed at. A rule nothing can fix must not block
+    # the ones that can: the SLR build left three violations because its
+    # history could not be repaired and the loop stopped there, with the
+    # padding and the empty scene never even attempted.
+    refused = set()
     for _ in range(limit):
-        violations = _script_violations(package, make, model, market)
+        violations = [rule for rule in _script_violations(package, make, model, market)
+                      if rule not in refused]
         if not violations:
             break
         violation = violations[0]
@@ -1152,24 +1158,31 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
         except Exception as error:  # noqa: BLE001 - a build is worth more than a rule
             _note_repair(what=violation[:120], outcome="call failed", detail=str(error)[:300])
             print(f"[single-car] Could not repair \"{violation[:60]}...\" ({error}); leaving it.")
-            break
+            refused.add(violation)
+            continue
         if not (1 <= index <= len(scenes)) or not narration:
             _note_repair(what=violation[:120], outcome="bad scene number", returned=str(index))
             print(f"[single-car] The repair named scene {index}, which does not exist; leaving it.")
-            break
+            refused.add(violation)
+            continue
 
         candidate = copy.deepcopy(package)
         candidate["scenes"][index - 1]["narration"] = narration
         candidate["script"] = " ".join(s["narration"] for s in candidate["scenes"])
         candidate["word_count"] = _word_count(candidate["script"])
         after = _script_violations(candidate, make, model, market)
-        if violation in after or len(after) >= len(violations):
+        # Counted the same way on both sides -- `violations` is filtered by
+        # what has already been refused, so comparing it against the full
+        # list would call every repair a regression.
+        before_count = len(_script_violations(package, make, model, market))
+        if violation in after or len(after) >= before_count:
             _note_repair(what=violation[:120],
                          outcome="did not help" if violation in after else "traded for another",
                          returned=narration[:300],
                          still=[rule[:120] for rule in after])
             print(f"[single-car] The repair for \"{violation[:60]}...\" did not help; keeping the original.")
-            break
+            refused.add(violation)
+            continue
         package = candidate
         _note_repair(what=violation[:120], outcome="applied", scene=index, returned=narration[:300])
         print(f'[single-car] Repaired scene {index}: "{narration}"')
