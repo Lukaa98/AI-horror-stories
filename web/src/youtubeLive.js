@@ -11,11 +11,67 @@
  */
 import { youtube } from "./googleAuth";
 
+const OUTPUT_BRANCH = "cars-output";
+const BUILD_ROOT = "cars/single-car-shorts";
+// Newest first, and stop once every video is accounted for. A channel
+// posting daily always finds its uploads in the first handful of builds;
+// the cap is there so one unmatched video cannot walk the whole branch.
+const MAX_BUILDS_SEARCHED = 80;
+
 const MAX_VIDEOS = 50;
 const CATEGORY_NAMES = {
   2: "Autos & Vehicles", 24: "Entertainment", 22: "People & Blogs",
   17: "Sports", 28: "Science & Technology",
 };
+
+async function readBranchJson(settings, path) {
+  const { owner, repo, token } = settings;
+  const res = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${OUTPUT_BRANCH}`,
+    { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+      cache: "no-store" }
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, "")), (c) => c.charCodeAt(0));
+  return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+}
+
+/** Say which build made each video, so the dashboard can act on it.
+ *
+ * YouTube has never heard of builds, and every workflow action -- delete,
+ * reschedule, push the listing -- is addressed by build id. The link lives
+ * in each build's upload.json, so it is read back from the output branch
+ * rather than kept in a second place that could disagree.
+ *
+ * Best effort: a video whose build cannot be found simply has no build_id,
+ * and the actions that need one are not offered for it.
+ */
+async function attachBuildIds(videos, settings) {
+  const wanted = new Set(videos.map((video) => video.id));
+  if (!wanted.size || !settings?.owner || !settings?.repo || !settings?.token) return;
+
+  const { owner, repo, token } = settings;
+  const listing = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${BUILD_ROOT}?ref=${OUTPUT_BRANCH}`,
+    { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+      cache: "no-store" }
+  ).then((res) => (res.ok ? res.json() : null)).catch(() => null);
+  if (!Array.isArray(listing)) return;
+
+  const names = listing.filter((row) => row.type === "dir").map((row) => row.name)
+    .sort().reverse().slice(0, MAX_BUILDS_SEARCHED);
+
+  const found = new Map();
+  for (const name of names) {
+    if (found.size >= wanted.size) break;
+    const upload = await readBranchJson(settings, `${BUILD_ROOT}/${name}/upload.json`)
+      .catch(() => null);
+    const videoId = upload?.video_id;
+    if (videoId && wanted.has(videoId)) found.set(videoId, name);
+  }
+  for (const video of videos) video.build_id = found.get(video.id) || "";
+}
 
 const count = (value) => {
   const n = Number(value);
@@ -34,7 +90,7 @@ async function listVideos(ids, parts) {
   }
 }
 
-export async function collect() {
+export async function collect(settings) {
   const channels = await youtube("channels", {
     params: { part: "snippet,contentDetails,statistics", mine: "true" },
   });
@@ -94,6 +150,7 @@ export async function collect() {
     }
   }
   videos.sort((a, b) => String(b.published_at).localeCompare(String(a.published_at)));
+  await attachBuildIds(videos, settings);
 
   return {
     channel: {
@@ -105,10 +162,6 @@ export async function collect() {
     },
     videos,
     checked_at: new Date().toISOString(),
-    // Which of the two built this. The workflow's snapshot knows which
-    // build made each video; this one cannot, so the panel needs to tell
-    // them apart rather than assume a missing build id means "no build".
-    source: "browser",
   };
 }
 

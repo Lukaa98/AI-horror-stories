@@ -6,8 +6,6 @@ import {
 } from "./youtubeLive";
 
 const AUTH_WORKFLOW = "youtube-auth.yml";
-const STATUS_WORKFLOW = "youtube-status.yml";
-const STATUS_PATH = "youtube/channel.json";
 const UPLOAD_WORKFLOW = "youtube-upload.yml";
 
 // A datetime-local value carries no offset, and the runner is in UTC.
@@ -37,24 +35,6 @@ async function readJson(settings, path) {
   const data = await res.json();
   const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, "")), (c) => c.charCodeAt(0));
   return JSON.parse(new TextDecoder("utf-8").decode(bytes));
-}
-
-// Only the workflow's snapshot knows which build made each video -- the
-// YouTube API has never heard of builds, and the link lives in each build's
-// upload.json on the output branch. A browser snapshot would therefore drop
-// every action button, so the ids from the last workflow snapshot are
-// carried across by video id instead.
-function carryBuildIds(fresh, previous) {
-  const known = new Map(
-    (previous?.videos || []).filter((v) => v.build_id).map((v) => [v.id, v.build_id])
-  );
-  if (!known.size) return fresh;
-  return {
-    ...fresh,
-    videos: fresh.videos.map((video) =>
-      video.build_id ? video : { ...video, build_id: known.get(video.id) || "" }
-    ),
-  };
 }
 
 const DAY_MS = 86400000;
@@ -115,7 +95,6 @@ export default function YouTubePanel({ settings }) {
   const [status, setStatus] = useState(null);
   const [statusState, setStatusState] = useState("idle");
   const [live, setLive] = useState(() => signedIn());
-  const statusTimer = useRef(null);
   const [acting, setActing] = useState("");
   const [state, setState] = useState("idle");   // idle | starting | waiting | stored | error
   const [code, setCode] = useState(null);
@@ -238,16 +217,6 @@ export default function YouTubePanel({ settings }) {
     }
   }
 
-  useEffect(() => {
-    if (!ready) return undefined;
-    let live = true;
-    readJson(settings, STATUS_PATH)
-      .then((found) => { if (live && found) setStatus(found); })
-      .catch(() => {});
-    return () => { live = false; };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, settings.owner, settings.repo, settings.token]);
-
   // Every action on a video is addressed by the build that made it, which
   // is why the snapshot carries build_id. Without one there is nothing to
   // dispatch against, so the buttons are not offered.
@@ -298,64 +267,23 @@ export default function YouTubePanel({ settings }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings]);
 
-  // Signed in, the browser can ask YouTube itself and the answer is back in
-  // a moment. Signed out there is no credential here, so the question has
-  // to be asked where the refresh token lives: dispatch the workflow and
-  // watch the output branch for a newer snapshot.
+  // One question, asked directly. This used to dispatch a workflow, wait
+  // for it to commit a snapshot to the output branch, and poll the branch
+  // for a newer timestamp -- because the page held no credential. Signed
+  // in it does, so the snapshot is built here instead and the file, the
+  // workflow and the second copy of collect() that produced it are gone.
   const refreshStatus = useCallback(async () => {
-    const { owner, repo, branch, token } = settings;
-    const before = status?.checked_at || "";
     setStatusState("refreshing");
-
-    if (signedIn()) {
-      try {
-        setStatus(carryBuildIds(await collectLive(), status));
-        setStatusState("idle");
-        setError(null);
-        return;
-      } catch (err) {
-        // An expired sign-in is not a dead end -- the workflow still works.
-        setLive(signedIn());
-        setError(String(err.message || err));
-      }
-    }
-
     try {
-      const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${STATUS_WORKFLOW}/dispatches`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/vnd.github+json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ref: branch || "v12", inputs: {} }),
-        }
-      );
-      if (!res.ok) throw new Error(`Dispatch failed (${res.status}): ${await res.text()}`);
-      const startedAt = Date.now();
-      if (statusTimer.current) clearInterval(statusTimer.current);
-      statusTimer.current = setInterval(async () => {
-        const found = await readJson(settings, STATUS_PATH).catch(() => null);
-        if (found && found.checked_at !== before) {
-          clearInterval(statusTimer.current);
-          statusTimer.current = null;
-          setStatus(found);
-          setStatusState("idle");
-        } else if (Date.now() - startedAt > 4 * 60 * 1000) {
-          clearInterval(statusTimer.current);
-          statusTimer.current = null;
-          setStatusState("idle");
-        }
-      }, POLL_MS);
+      setStatus(await collectLive(settings));
+      setError(null);
     } catch (err) {
-      setStatusState("idle");
+      setLive(signedIn());
       setError(String(err.message || err));
+    } finally {
+      setStatusState("idle");
     }
-  }, [settings, status]);
-
-  useEffect(() => () => { if (statusTimer.current) clearInterval(statusTimer.current); }, []);
+  }, [settings]);
 
   return (
     <section className="yt-panel">
@@ -431,8 +359,8 @@ export default function YouTubePanel({ settings }) {
 
         {!status && statusState !== "refreshing" && (
           <p className="yt-note">
-            No snapshot yet. Press refresh — signed in, the page asks YouTube directly;
-            otherwise the workflow is dispatched and its answer read back.
+            Sign in above to see the channel. The page asks YouTube for this itself, so
+            there is nothing to show until it can.
           </p>
         )}
 
