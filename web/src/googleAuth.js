@@ -1,12 +1,21 @@
-/* Signing in to Google from the browser, with PKCE.
+/* Signing in to Google from the browser.
  *
  * The dashboard is a static page on GitHub Pages, so it can hold no secret
  * -- which is why every YouTube question has gone through a workflow: the
  * refresh token lives in Actions secrets and deliberately never reaches
- * here. PKCE needs no secret. The client id is public by design, and the
- * proof of possession is generated fresh per sign-in and never leaves this
- * tab, so the page can talk to YouTube as you without ever holding a
- * credential that would be worth stealing from it.
+ * here.
+ *
+ * This is the implicit flow, not authorization-code with PKCE. PKCE was
+ * tried first and cannot work here: Google treats a "Web application"
+ * client as confidential and its token endpoint demands the client secret
+ * even when a code verifier is supplied, and putting that secret in a
+ * public page is the one thing this is avoiding. The implicit flow never
+ * calls the token endpoint -- Google returns the access token in the URL
+ * fragment, which the browser never sends anywhere.
+ *
+ * The cost is that there is no refresh token: the grant is good for about
+ * an hour and then you sign in again. That is the right trade for a page
+ * whose job is answering questions on demand.
  *
  * The workflow path stays exactly as it was. It is what uploads on a
  * schedule, with nobody signed in.
@@ -14,31 +23,24 @@
 const CLIENT_ID =
   "809577058313-kdvnf2r0mej4e9jmgfls4odelapgjv24.apps.googleusercontent.com";
 const AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
-const TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
 // Read and write, because unscheduling and deleting are the same trip.
 const SCOPE = "https://www.googleapis.com/auth/youtube";
 
-const VERIFIER_KEY = "yt.pkce.verifier";
-const RETURN_KEY = "yt.pkce.return";
+const STATE_KEY = "yt.oauth.state";
+const RETURN_KEY = "yt.oauth.return";
 const TOKEN_KEY = "yt.access";
 // Google's tokens last an hour. Treating one as spent a minute early means
 // a request never dies halfway because it aged mid-flight.
 const EXPIRY_MARGIN_MS = 60_000;
 
-function randomVerifier() {
-  const bytes = crypto.getRandomValues(new Uint8Array(64));
-  return base64url(bytes);
+function randomState() {
+  return base64url(crypto.getRandomValues(new Uint8Array(24)));
 }
 
 function base64url(bytes) {
   let binary = "";
   for (const byte of bytes) binary += String.fromCharCode(byte);
   return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-}
-
-async function challengeFor(verifier) {
-  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(verifier));
-  return base64url(new Uint8Array(digest));
 }
 
 /** Where Google is told to come back to: this page, with nothing on it. */
@@ -78,59 +80,49 @@ export function signOut() {
 
 /** Send the browser to Google. Returns only if the redirect fails. */
 export async function signIn() {
-  const verifier = randomVerifier();
-  sessionStorage.setItem(VERIFIER_KEY, verifier);
-  // The hash carries which tab was open; without it, signing in from the
-  // YouTube tab lands you back on whichever tab is the default.
+  const state = randomState();
+  sessionStorage.setItem(STATE_KEY, state);
+  // Which tab was open. Without it, signing in from the YouTube tab lands
+  // you back on whichever tab is the default.
   sessionStorage.setItem(RETURN_KEY, window.location.hash || "");
   const params = new URLSearchParams({
     client_id: CLIENT_ID,
     redirect_uri: redirectUri(),
-    response_type: "code",
+    response_type: "token",
     scope: SCOPE,
-    code_challenge: await challengeFor(verifier),
-    code_challenge_method: "S256",
-    // Already signed in to Google in this browser: no second prompt.
-    prompt: "",
+    state,
     include_granted_scopes: "true",
   });
   window.location.assign(`${AUTH_ENDPOINT}?${params}`);
 }
 
-/** Swap the ?code= Google left in the URL for a token. Safe to call always. */
+/** Read the token Google left in the fragment. Safe to call always. */
 export async function completeSignIn() {
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
-  const failure = params.get("error");
-  if (!code && !failure) return null;
+  // The fragment, not the query: an implicit grant comes back after the #,
+  // which browsers never send to a server. But the return-to-tab hash
+  // lives there too, so a hash without a token is just a route.
+  const raw = window.location.hash.replace(/^#/, "");
+  const params = new URLSearchParams(raw);
+  const token = params.get("access_token");
+  const failure = params.get("error") || new URLSearchParams(window.location.search).get("error");
+  if (!token && !failure) return null;
 
-  const verifier = sessionStorage.getItem(VERIFIER_KEY);
-  sessionStorage.removeItem(VERIFIER_KEY);
-  const back = sessionStorage.getItem(RETURN_KEY) || window.location.hash || "";
+  const expected = sessionStorage.getItem(STATE_KEY);
+  sessionStorage.removeItem(STATE_KEY);
+  const back = sessionStorage.getItem(RETURN_KEY) || "";
   sessionStorage.removeItem(RETURN_KEY);
-  // Take the code out of the address bar either way: leaving it there means
-  // a refresh retries a code Google has already spent.
+  // Take the grant out of the address bar either way, so a refresh or a
+  // shared link does not carry a live token with it.
   window.history.replaceState({}, "", window.location.pathname + back);
 
   if (failure) throw new Error(`Google refused the sign-in (${failure}).`);
-  if (!verifier) throw new Error("This sign-in did not start in this tab; try again.");
+  if (!expected || params.get("state") !== expected) {
+    throw new Error("This sign-in did not start in this tab; try again.");
+  }
 
-  const res = await fetch(TOKEN_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      client_id: CLIENT_ID,
-      code,
-      code_verifier: verifier,
-      grant_type: "authorization_code",
-      redirect_uri: redirectUri(),
-    }),
-  });
-  if (!res.ok) throw new Error(`Could not finish signing in (${res.status}): ${await res.text()}`);
-  const token = await res.json();
   const kept = {
-    access_token: token.access_token,
-    expires_at: Date.now() + Number(token.expires_in || 3600) * 1000,
+    access_token: token,
+    expires_at: Date.now() + Number(params.get("expires_in") || 3600) * 1000,
   };
   keepToken(kept);
   return kept;

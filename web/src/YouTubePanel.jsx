@@ -416,7 +416,9 @@ export default function YouTubePanel({ settings }) {
         if (!described) return null;
         return <p className={`yt-token yt-token-${described.tone}`}>{described.text}</p>;
       })()}
-      {state === "error" && <p className="yt-error">{error}</p>}
+      {/* Rendered whenever there is one. It used to be gated on the device
+          flow's own state, so a failed Google sign-in said nothing at all. */}
+      {error && <p className="yt-error">{error}</p>}
 
       <div className="yt-videos">
         <div className="yt-videos-head">
