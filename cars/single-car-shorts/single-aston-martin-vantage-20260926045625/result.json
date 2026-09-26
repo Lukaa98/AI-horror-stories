@@ -1,0 +1,3101 @@
+{
+  "car": {
+    "make": "Aston Martin",
+    "model": "Vantage",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Aston Martin",
+    "model": "Vantage",
+    "query": "",
+    "start_year": 2025,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/rNMk2LA7/2025-aston-martin-vantage",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AstonMartinVantage2025008/edit/aRzTB.jpg?t=179021192900",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AstonMartinVantage2025003/edit/b-reF.jpg?t=179021133645",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AstonMartinVantage2025004/edit/ibizX.jpg?t=179021138274",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025058.jpg?t=178975843845",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AstonMartinVantage2025061/edit/7Gdbq.jpg?t=179020774942",
+    "photo_rival": "",
+    "rival_car": "",
+    "photo_race": "",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "true",
+    "extra_photos": "[{\"id\":\"closeup-restored-1790398576268-0\",\"label\":\"Front\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AstonMartinVantage2025001/edit/IDJCx.jpg?t=179021132376\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-1\",\"label\":\"Cloeer back\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/AstonMartinVantage2025026/edit/p4tST.jpg?t=179021140646\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-2\",\"label\":\"Close headlight\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025024.jpg?t=178975843845\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-3\",\"label\":\"Swan doors\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025098.jpg?t=178975843845\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-4\",\"label\":\"Back headlight\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025028.jpg?t=178975843845\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-5\",\"label\":\"Exhaust and rear diffuser\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025049.jpg?t=178975843845\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-6\",\"label\":\"Fraihmless windows\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025038.jpg?t=178975843845\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-7\",\"label\":\"Wheeles\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025013.jpg?t=178975843845\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-8\",\"label\":\"Giant grill for airflow\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025039.jpg?t=178975843845\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-9\",\"label\":\"Red interior\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025078.jpg?t=178975843845\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-10\",\"label\":\"New stearing wheel with metal or csrbon fiber paddel shifters\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025077.jpg?t=178975843845\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-11\",\"label\":\"Hand built\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025120.jpg?t=178975843845\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-restored-1790398576268-12\",\"label\":\"Luxuary interior\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1200,quality=80/7751472a1fdcd0f55a9202aa594a1ad81bdc9ce8/photos/AstonMartinVantage2025065.jpg?t=178975843845\",\"slot\":\"interior\",\"note\":\"\"}]"
+  },
+  "title": "2025 Aston Martin Vantage Performance Unleashed",
+  "youtube_title": "2025 Aston Martin Vantage: 656 hp of Pure Brilliance \ud83e\udd2f",
+  "key_specs": {
+    "horsepower": "656 hp",
+    "torque": "590 lb-ft",
+    "zero_to_sixty": "3.4 sec",
+    "redline": "7,000 rpm",
+    "engine": "4.0L twin-turbo V8",
+    "price": "Originally ~$140K"
+  },
+  "history": {
+    "year": 2025,
+    "fact": "Aston Martin launched the updated Vantage in 2025 with significant revisions over its predecessor."
+  },
+  "start_year": 2025,
+  "end_year": 2025,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Impressive Power",
+      "photo_label": null,
+      "narration": "656 horsepower and a striking visual presence define this car.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "656 hp",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Exterior Front",
+      "photo_label": "exterior front",
+      "narration": "The Vantage features an aggressive, angular mesh grille enhancing aerodynamics and style.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Engine Detailing",
+      "photo_label": "engine bay",
+      "narration": "The dual intake manifolds with carbon fiber accents emphasize the Vantage's performance, with 590 lb-ft of torque for unmatched power.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Torque",
+      "stat_value": "590 lb-ft",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "interior",
+      "headline": "Interior Design",
+      "photo_label": "interior",
+      "narration": "Circular air vents framed by metallic accents highlight the modern design of the Vantage's cabin.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Exterior Side",
+      "photo_label": "exterior side",
+      "narration": "The Vantage's rear haunches and sharp character lines emphasize its aerodynamic profile.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Hand-Built Craftsmanship",
+      "photo_label": "[engine-closeup-restored-1790398576268-11-11] Hand built",
+      "narration": "The hand-built inspection plaque highlights the bespoke craftsmanship of the Vantage.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Exterior Rear",
+      "photo_label": "exterior rear",
+      "narration": "Notable for its distinctive LED taillight strip, the Vantage stands out in its design language.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Driving Feel",
+      "photo_label": null,
+      "narration": "With enhanced mechanics and chassis improvements, the Vantage promises a dynamic driving experience.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Value Insight",
+      "photo_label": null,
+      "narration": "Originally around $140,000, its scarcity maintains desirability as a modern classic.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "Originally ~$140K",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Question",
+      "photo_label": null,
+      "narration": "Do the extensive updates make the 2025 Vantage the ultimate grand tourer?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://www.astonmartin.com/en/models/vantage",
+    "https://www.caranddriver.com/aston-martin/vantage"
+  ],
+  "script": "656 horsepower and a striking visual presence define this car. The Vantage features an aggressive, angular mesh grille enhancing aerodynamics and style. The dual intake manifolds with carbon fiber accents emphasize the Vantage's performance, with 590 lb-ft of torque for unmatched power. Circular air vents framed by metallic accents highlight the modern design of the Vantage's cabin. The Vantage's rear haunches and sharp character lines emphasize its aerodynamic profile. The hand-built inspection plaque highlights the bespoke craftsmanship of the Vantage. Notable for its distinctive LED taillight strip, the Vantage stands out in its design language. With enhanced mechanics and chassis improvements, the Vantage promises a dynamic driving experience. Originally around $140,000, its scarcity maintains desirability as a modern classic. Do the extensive updates make the 2025 Vantage the ultimate grand tourer?",
+  "word_count": 132,
+  "repair_log": [
+    {
+      "what": "your narration never states the car's torque as a number. Say it in the engine beat.",
+      "outcome": "applied",
+      "scene": 4,
+      "returned": "The dual intake manifolds with carbon fiber accents emphasize the Vantage's performance, with 590 lb-ft of torque for unmatched power."
+    }
+  ],
+  "voice_preset": "onyx",
+  "tts_speed": null,
+  "narration": {
+    "engine": "gpt-audio",
+    "model": "gpt-audio",
+    "voice": "echo",
+    "target_hz": 0.0,
+    "pitch": {
+      "measured_hz": 132.23140495867767,
+      "target_hz": null,
+      "factor": 1.0,
+      "source": "off",
+      "result_hz": 132.23140495867767,
+      "takes": 1,
+      "take_hz": 132.23140495867767,
+      "band": [
+        122.0,
+        140.0
+      ]
+    },
+    "tts_speed": null
+  },
+  "target_duration_seconds": 55.0,
+  "normalized_audio_duration_seconds": 57.504,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-aston-martin-vantage-20260926045625/narration.mp3",
+  "duration_seconds": 57.51,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.36,
+      "end": 0.45,
+      "mouth": "small"
+    },
+    {
+      "start": 0.45,
+      "end": 0.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.54,
+      "end": 1.44,
+      "mouth": "small"
+    },
+    {
+      "start": 1.44,
+      "end": 1.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.53,
+      "end": 2.25,
+      "mouth": "small"
+    },
+    {
+      "start": 2.25,
+      "end": 2.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.34,
+      "end": 2.88,
+      "mouth": "small"
+    },
+    {
+      "start": 2.88,
+      "end": 2.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.97,
+      "end": 3.24,
+      "mouth": "small"
+    },
+    {
+      "start": 3.24,
+      "end": 3.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.33,
+      "end": 3.87,
+      "mouth": "small"
+    },
+    {
+      "start": 3.87,
+      "end": 3.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.96,
+      "end": 4.14,
+      "mouth": "small"
+    },
+    {
+      "start": 4.14,
+      "end": 4.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.95,
+      "end": 5.13,
+      "mouth": "small"
+    },
+    {
+      "start": 5.13,
+      "end": 5.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.22,
+      "end": 6.03,
+      "mouth": "small"
+    },
+    {
+      "start": 6.03,
+      "end": 6.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.12,
+      "end": 6.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.21,
+      "end": 6.39,
+      "mouth": "small"
+    },
+    {
+      "start": 6.39,
+      "end": 6.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.57,
+      "end": 7.38,
+      "mouth": "small"
+    },
+    {
+      "start": 7.38,
+      "end": 7.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.47,
+      "end": 7.56,
+      "mouth": "small"
+    },
+    {
+      "start": 7.56,
+      "end": 7.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.83,
+      "end": 8.01,
+      "mouth": "small"
+    },
+    {
+      "start": 8.01,
+      "end": 8.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.1,
+      "end": 8.19,
+      "mouth": "small"
+    },
+    {
+      "start": 8.19,
+      "end": 8.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.28,
+      "end": 8.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.37,
+      "end": 8.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.64,
+      "end": 8.73,
+      "mouth": "small"
+    },
+    {
+      "start": 8.73,
+      "end": 8.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.91,
+      "end": 9.27,
+      "mouth": "small"
+    },
+    {
+      "start": 9.27,
+      "end": 9.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.36,
+      "end": 9.45,
+      "mouth": "small"
+    },
+    {
+      "start": 9.45,
+      "end": 10.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.35,
+      "end": 10.53,
+      "mouth": "small"
+    },
+    {
+      "start": 10.53,
+      "end": 10.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.8,
+      "end": 10.89,
+      "mouth": "small"
+    },
+    {
+      "start": 10.89,
+      "end": 10.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "small"
+    },
+    {
+      "start": 11.07,
+      "end": 11.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.16,
+      "end": 11.25,
+      "mouth": "small"
+    },
+    {
+      "start": 11.25,
+      "end": 11.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.34,
+      "end": 11.43,
+      "mouth": "small"
+    },
+    {
+      "start": 11.43,
+      "end": 11.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.52,
+      "end": 11.88,
+      "mouth": "small"
+    },
+    {
+      "start": 11.88,
+      "end": 11.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.97,
+      "end": 12.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.06,
+      "end": 12.33,
+      "mouth": "small"
+    },
+    {
+      "start": 12.33,
+      "end": 12.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.42,
+      "end": 12.69,
+      "mouth": "small"
+    },
+    {
+      "start": 12.69,
+      "end": 12.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.78,
+      "end": 12.87,
+      "mouth": "small"
+    },
+    {
+      "start": 12.87,
+      "end": 13.32,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.32,
+      "end": 13.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.41,
+      "end": 13.68,
+      "mouth": "small"
+    },
+    {
+      "start": 13.68,
+      "end": 13.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.77,
+      "end": 14.04,
+      "mouth": "small"
+    },
+    {
+      "start": 14.04,
+      "end": 14.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.13,
+      "end": 14.4,
+      "mouth": "small"
+    },
+    {
+      "start": 14.4,
+      "end": 14.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.49,
+      "end": 14.85,
+      "mouth": "small"
+    },
+    {
+      "start": 14.85,
+      "end": 15.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.21,
+      "end": 15.3,
+      "mouth": "small"
+    },
+    {
+      "start": 15.3,
+      "end": 15.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.39,
+      "end": 15.48,
+      "mouth": "small"
+    },
+    {
+      "start": 15.48,
+      "end": 15.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.66,
+      "end": 16.74,
+      "mouth": "small"
+    },
+    {
+      "start": 16.74,
+      "end": 16.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.83,
+      "end": 17.01,
+      "mouth": "small"
+    },
+    {
+      "start": 17.01,
+      "end": 17.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.28,
+      "end": 17.37,
+      "mouth": "small"
+    },
+    {
+      "start": 17.37,
+      "end": 17.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.46,
+      "end": 17.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.55,
+      "end": 17.82,
+      "mouth": "small"
+    },
+    {
+      "start": 17.82,
+      "end": 18.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.0,
+      "end": 18.18,
+      "mouth": "small"
+    },
+    {
+      "start": 18.18,
+      "end": 18.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.99,
+      "end": 19.17,
+      "mouth": "small"
+    },
+    {
+      "start": 19.17,
+      "end": 19.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.26,
+      "end": 19.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.35,
+      "end": 19.44,
+      "mouth": "small"
+    },
+    {
+      "start": 19.44,
+      "end": 19.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.53,
+      "end": 19.62,
+      "mouth": "small"
+    },
+    {
+      "start": 19.62,
+      "end": 19.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.71,
+      "end": 19.89,
+      "mouth": "small"
+    },
+    {
+      "start": 19.89,
+      "end": 20.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.07,
+      "end": 20.7,
+      "mouth": "small"
+    },
+    {
+      "start": 20.7,
+      "end": 20.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.79,
+      "end": 20.97,
+      "mouth": "small"
+    },
+    {
+      "start": 20.97,
+      "end": 21.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.06,
+      "end": 21.24,
+      "mouth": "small"
+    },
+    {
+      "start": 21.24,
+      "end": 21.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.6,
+      "end": 21.69,
+      "mouth": "small"
+    },
+    {
+      "start": 21.69,
+      "end": 21.87,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.87,
+      "end": 22.14,
+      "mouth": "small"
+    },
+    {
+      "start": 22.14,
+      "end": 22.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.5,
+      "end": 22.59,
+      "mouth": "small"
+    },
+    {
+      "start": 22.59,
+      "end": 22.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.77,
+      "end": 22.95,
+      "mouth": "small"
+    },
+    {
+      "start": 22.95,
+      "end": 23.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.04,
+      "end": 23.58,
+      "mouth": "small"
+    },
+    {
+      "start": 23.58,
+      "end": 24.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.48,
+      "end": 24.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.57,
+      "end": 24.66,
+      "mouth": "small"
+    },
+    {
+      "start": 24.66,
+      "end": 24.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.75,
+      "end": 24.93,
+      "mouth": "small"
+    },
+    {
+      "start": 24.93,
+      "end": 25.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.02,
+      "end": 25.11,
+      "mouth": "small"
+    },
+    {
+      "start": 25.11,
+      "end": 25.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.29,
+      "end": 25.38,
+      "mouth": "small"
+    },
+    {
+      "start": 25.38,
+      "end": 25.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.47,
+      "end": 25.56,
+      "mouth": "small"
+    },
+    {
+      "start": 25.56,
+      "end": 25.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.65,
+      "end": 26.01,
+      "mouth": "small"
+    },
+    {
+      "start": 26.01,
+      "end": 26.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.1,
+      "end": 26.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.19,
+      "end": 26.28,
+      "mouth": "small"
+    },
+    {
+      "start": 26.28,
+      "end": 26.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.37,
+      "end": 26.82,
+      "mouth": "small"
+    },
+    {
+      "start": 26.82,
+      "end": 27.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.09,
+      "end": 27.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.27,
+      "end": 27.45,
+      "mouth": "small"
+    },
+    {
+      "start": 27.45,
+      "end": 27.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.54,
+      "end": 27.81,
+      "mouth": "small"
+    },
+    {
+      "start": 27.81,
+      "end": 27.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.99,
+      "end": 28.08,
+      "mouth": "small"
+    },
+    {
+      "start": 28.08,
+      "end": 28.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.35,
+      "end": 28.53,
+      "mouth": "small"
+    },
+    {
+      "start": 28.53,
+      "end": 28.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.62,
+      "end": 28.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.71,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 29.7,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.7,
+      "end": 30.15,
+      "mouth": "small"
+    },
+    {
+      "start": 30.15,
+      "end": 30.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.24,
+      "end": 30.96,
+      "mouth": "small"
+    },
+    {
+      "start": 30.96,
+      "end": 31.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.05,
+      "end": 31.14,
+      "mouth": "small"
+    },
+    {
+      "start": 31.14,
+      "end": 31.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.41,
+      "end": 31.5,
+      "mouth": "small"
+    },
+    {
+      "start": 31.5,
+      "end": 31.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.59,
+      "end": 32.22,
+      "mouth": "small"
+    },
+    {
+      "start": 32.22,
+      "end": 32.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.31,
+      "end": 32.4,
+      "mouth": "small"
+    },
+    {
+      "start": 32.4,
+      "end": 32.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.49,
+      "end": 32.67,
+      "mouth": "small"
+    },
+    {
+      "start": 32.67,
+      "end": 32.76,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.76,
+      "end": 33.03,
+      "mouth": "small"
+    },
+    {
+      "start": 33.03,
+      "end": 33.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.12,
+      "end": 33.66,
+      "mouth": "small"
+    },
+    {
+      "start": 33.66,
+      "end": 34.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.65,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 35.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.1,
+      "end": 35.19,
+      "mouth": "small"
+    },
+    {
+      "start": 35.19,
+      "end": 35.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.28,
+      "end": 35.82,
+      "mouth": "small"
+    },
+    {
+      "start": 35.82,
+      "end": 35.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.91,
+      "end": 36.09,
+      "mouth": "small"
+    },
+    {
+      "start": 36.09,
+      "end": 36.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.27,
+      "end": 36.54,
+      "mouth": "small"
+    },
+    {
+      "start": 36.54,
+      "end": 36.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.63,
+      "end": 37.08,
+      "mouth": "small"
+    },
+    {
+      "start": 37.08,
+      "end": 37.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.35,
+      "end": 37.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.44,
+      "end": 37.53,
+      "mouth": "small"
+    },
+    {
+      "start": 37.53,
+      "end": 37.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.62,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.8,
+      "end": 37.89,
+      "mouth": "small"
+    },
+    {
+      "start": 37.89,
+      "end": 37.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.98,
+      "end": 38.07,
+      "mouth": "small"
+    },
+    {
+      "start": 38.07,
+      "end": 38.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.43,
+      "end": 38.88,
+      "mouth": "small"
+    },
+    {
+      "start": 38.88,
+      "end": 39.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.06,
+      "end": 39.33,
+      "mouth": "small"
+    },
+    {
+      "start": 39.33,
+      "end": 40.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.41,
+      "end": 41.04,
+      "mouth": "small"
+    },
+    {
+      "start": 41.04,
+      "end": 41.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.13,
+      "end": 41.67,
+      "mouth": "small"
+    },
+    {
+      "start": 41.67,
+      "end": 41.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.76,
+      "end": 42.48,
+      "mouth": "small"
+    },
+    {
+      "start": 42.48,
+      "end": 42.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.66,
+      "end": 42.84,
+      "mouth": "small"
+    },
+    {
+      "start": 42.84,
+      "end": 43.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.02,
+      "end": 43.29,
+      "mouth": "small"
+    },
+    {
+      "start": 43.29,
+      "end": 43.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.47,
+      "end": 43.56,
+      "mouth": "small"
+    },
+    {
+      "start": 43.56,
+      "end": 43.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.65,
+      "end": 43.92,
+      "mouth": "small"
+    },
+    {
+      "start": 43.92,
+      "end": 44.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.01,
+      "end": 44.1,
+      "mouth": "small"
+    },
+    {
+      "start": 44.1,
+      "end": 44.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.28,
+      "end": 44.37,
+      "mouth": "small"
+    },
+    {
+      "start": 44.37,
+      "end": 44.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.55,
+      "end": 45.18,
+      "mouth": "small"
+    },
+    {
+      "start": 45.18,
+      "end": 45.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.27,
+      "end": 45.36,
+      "mouth": "small"
+    },
+    {
+      "start": 45.36,
+      "end": 46.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.26,
+      "end": 46.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.71,
+      "end": 46.89,
+      "mouth": "small"
+    },
+    {
+      "start": 46.89,
+      "end": 46.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.98,
+      "end": 47.25,
+      "mouth": "small"
+    },
+    {
+      "start": 47.25,
+      "end": 47.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.34,
+      "end": 47.79,
+      "mouth": "small"
+    },
+    {
+      "start": 47.79,
+      "end": 47.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.88,
+      "end": 48.06,
+      "mouth": "small"
+    },
+    {
+      "start": 48.06,
+      "end": 48.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.15,
+      "end": 48.33,
+      "mouth": "small"
+    },
+    {
+      "start": 48.33,
+      "end": 48.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.42,
+      "end": 48.51,
+      "mouth": "small"
+    },
+    {
+      "start": 48.51,
+      "end": 48.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.6,
+      "end": 48.69,
+      "mouth": "small"
+    },
+    {
+      "start": 48.69,
+      "end": 48.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.87,
+      "end": 49.23,
+      "mouth": "small"
+    },
+    {
+      "start": 49.23,
+      "end": 49.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.41,
+      "end": 49.68,
+      "mouth": "small"
+    },
+    {
+      "start": 49.68,
+      "end": 49.86,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.86,
+      "end": 50.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.04,
+      "end": 50.13,
+      "mouth": "small"
+    },
+    {
+      "start": 50.13,
+      "end": 50.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.31,
+      "end": 50.4,
+      "mouth": "small"
+    },
+    {
+      "start": 50.4,
+      "end": 50.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.76,
+      "end": 50.85,
+      "mouth": "small"
+    },
+    {
+      "start": 50.85,
+      "end": 51.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.03,
+      "end": 51.21,
+      "mouth": "small"
+    },
+    {
+      "start": 51.21,
+      "end": 51.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.3,
+      "end": 51.39,
+      "mouth": "small"
+    },
+    {
+      "start": 51.39,
+      "end": 51.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.84,
+      "end": 52.2,
+      "mouth": "small"
+    },
+    {
+      "start": 52.2,
+      "end": 53.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.28,
+      "end": 53.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.55,
+      "end": 53.73,
+      "mouth": "small"
+    },
+    {
+      "start": 53.73,
+      "end": 53.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.82,
+      "end": 54.0,
+      "mouth": "small"
+    },
+    {
+      "start": 54.0,
+      "end": 54.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.09,
+      "end": 54.18,
+      "mouth": "small"
+    },
+    {
+      "start": 54.18,
+      "end": 54.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.27,
+      "end": 54.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.36,
+      "end": 54.9,
+      "mouth": "small"
+    },
+    {
+      "start": 54.9,
+      "end": 54.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.99,
+      "end": 55.17,
+      "mouth": "small"
+    },
+    {
+      "start": 55.17,
+      "end": 55.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.26,
+      "end": 55.35,
+      "mouth": "small"
+    },
+    {
+      "start": 55.35,
+      "end": 55.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.53,
+      "end": 55.89,
+      "mouth": "small"
+    },
+    {
+      "start": 55.89,
+      "end": 56.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 56.16,
+      "end": 56.34,
+      "mouth": "small"
+    },
+    {
+      "start": 56.34,
+      "end": 56.43,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.43,
+      "end": 56.52,
+      "mouth": "small"
+    },
+    {
+      "start": 56.52,
+      "end": 56.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.61,
+      "end": 56.7,
+      "mouth": "small"
+    },
+    {
+      "start": 56.7,
+      "end": 56.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.88,
+      "end": 57.06,
+      "mouth": "small"
+    },
+    {
+      "start": 57.06,
+      "end": 57.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 57.24,
+      "end": 57.33,
+      "mouth": "small"
+    },
+    {
+      "start": 57.33,
+      "end": 57.51,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "656",
+      "start": 0.0,
+      "end": 1.4199999570846558
+    },
+    {
+      "word": "horsepower",
+      "start": 1.4199999570846558,
+      "end": 1.7999999523162842
+    },
+    {
+      "word": "and",
+      "start": 1.7999999523162842,
+      "end": 2.0
+    },
+    {
+      "word": "a",
+      "start": 2.0,
+      "end": 2.5199999809265137
+    },
+    {
+      "word": "striking",
+      "start": 2.5199999809265137,
+      "end": 2.5199999809265137
+    },
+    {
+      "word": "visual",
+      "start": 2.5199999809265137,
+      "end": 2.940000057220459
+    },
+    {
+      "word": "presence",
+      "start": 2.940000057220459,
+      "end": 3.2799999713897705
+    },
+    {
+      "word": "define",
+      "start": 3.2799999713897705,
+      "end": 3.7200000286102295
+    },
+    {
+      "word": "this",
+      "start": 3.7200000286102295,
+      "end": 3.940000057220459
+    },
+    {
+      "word": "car",
+      "start": 3.940000057220459,
+      "end": 4.239999771118164
+    },
+    {
+      "word": "The",
+      "start": 5.159999847412109,
+      "end": 5.179999828338623
+    },
+    {
+      "word": "Vantage",
+      "start": 5.179999828338623,
+      "end": 5.440000057220459
+    },
+    {
+      "word": "features",
+      "start": 5.440000057220459,
+      "end": 5.860000133514404
+    },
+    {
+      "word": "an",
+      "start": 5.860000133514404,
+      "end": 6.539999961853027
+    },
+    {
+      "word": "aggressive",
+      "start": 6.539999961853027,
+      "end": 6.539999961853027
+    },
+    {
+      "word": "angular",
+      "start": 6.539999961853027,
+      "end": 6.980000019073486
+    },
+    {
+      "word": "mesh",
+      "start": 6.980000019073486,
+      "end": 7.28000020980835
+    },
+    {
+      "word": "grille",
+      "start": 7.28000020980835,
+      "end": 7.619999885559082
+    },
+    {
+      "word": "enhancing",
+      "start": 7.619999885559082,
+      "end": 8.260000228881836
+    },
+    {
+      "word": "aerodynamics",
+      "start": 8.260000228881836,
+      "end": 8.920000076293945
+    },
+    {
+      "word": "and",
+      "start": 8.920000076293945,
+      "end": 9.619999885559082
+    },
+    {
+      "word": "style",
+      "start": 9.619999885559082,
+      "end": 9.619999885559082
+    },
+    {
+      "word": "The",
+      "start": 10.5,
+      "end": 10.520000457763672
+    },
+    {
+      "word": "dual",
+      "start": 10.520000457763672,
+      "end": 10.880000114440918
+    },
+    {
+      "word": "intake",
+      "start": 10.880000114440918,
+      "end": 11.199999809265137
+    },
+    {
+      "word": "manifolds",
+      "start": 11.199999809265137,
+      "end": 11.65999984741211
+    },
+    {
+      "word": "with",
+      "start": 11.65999984741211,
+      "end": 11.979999542236328
+    },
+    {
+      "word": "carbon",
+      "start": 11.979999542236328,
+      "end": 12.239999771118164
+    },
+    {
+      "word": "fiber",
+      "start": 12.239999771118164,
+      "end": 12.600000381469727
+    },
+    {
+      "word": "accents",
+      "start": 12.600000381469727,
+      "end": 13.0
+    },
+    {
+      "word": "emphasize",
+      "start": 13.100000381469727,
+      "end": 13.819999694824219
+    },
+    {
+      "word": "the",
+      "start": 13.819999694824219,
+      "end": 14.140000343322754
+    },
+    {
+      "word": "Vantage's",
+      "start": 14.140000343322754,
+      "end": 14.460000038146973
+    },
+    {
+      "word": "performance",
+      "start": 14.460000038146973,
+      "end": 14.920000076293945
+    },
+    {
+      "word": "with",
+      "start": 14.920000076293945,
+      "end": 15.479999542236328
+    },
+    {
+      "word": "590",
+      "start": 15.479999542236328,
+      "end": 16.260000228881836
+    },
+    {
+      "word": "pound",
+      "start": 16.260000228881836,
+      "end": 16.600000381469727
+    },
+    {
+      "word": "feet",
+      "start": 16.600000381469727,
+      "end": 16.639999389648438
+    },
+    {
+      "word": "of",
+      "start": 16.639999389648438,
+      "end": 17.040000915527344
+    },
+    {
+      "word": "torque",
+      "start": 17.040000915527344,
+      "end": 17.040000915527344
+    },
+    {
+      "word": "for",
+      "start": 17.040000915527344,
+      "end": 17.6200008392334
+    },
+    {
+      "word": "unmatched",
+      "start": 17.6200008392334,
+      "end": 17.860000610351562
+    },
+    {
+      "word": "power",
+      "start": 17.860000610351562,
+      "end": 18.31999969482422
+    },
+    {
+      "word": "Circular",
+      "start": 19.3799991607666,
+      "end": 19.479999542236328
+    },
+    {
+      "word": "air",
+      "start": 19.479999542236328,
+      "end": 19.979999542236328
+    },
+    {
+      "word": "vents",
+      "start": 19.979999542236328,
+      "end": 19.979999542236328
+    },
+    {
+      "word": "framed",
+      "start": 19.979999542236328,
+      "end": 20.280000686645508
+    },
+    {
+      "word": "by",
+      "start": 20.280000686645508,
+      "end": 20.579999923706055
+    },
+    {
+      "word": "metallic",
+      "start": 20.579999923706055,
+      "end": 20.920000076293945
+    },
+    {
+      "word": "accents",
+      "start": 20.920000076293945,
+      "end": 21.31999969482422
+    },
+    {
+      "word": "highlight",
+      "start": 21.31999969482422,
+      "end": 21.8799991607666
+    },
+    {
+      "word": "the",
+      "start": 21.8799991607666,
+      "end": 22.18000030517578
+    },
+    {
+      "word": "modern",
+      "start": 22.18000030517578,
+      "end": 22.440000534057617
+    },
+    {
+      "word": "design",
+      "start": 22.440000534057617,
+      "end": 22.739999771118164
+    },
+    {
+      "word": "of",
+      "start": 22.739999771118164,
+      "end": 22.940000534057617
+    },
+    {
+      "word": "the",
+      "start": 22.940000534057617,
+      "end": 23.100000381469727
+    },
+    {
+      "word": "Vantage's",
+      "start": 23.100000381469727,
+      "end": 23.5
+    },
+    {
+      "word": "cabin",
+      "start": 23.5,
+      "end": 23.719999313354492
+    },
+    {
+      "word": "The",
+      "start": 24.520000457763672,
+      "end": 24.65999984741211
+    },
+    {
+      "word": "Vantage's",
+      "start": 24.65999984741211,
+      "end": 25.139999389648438
+    },
+    {
+      "word": "rear",
+      "start": 25.139999389648438,
+      "end": 25.5
+    },
+    {
+      "word": "haunches",
+      "start": 25.5,
+      "end": 25.739999771118164
+    },
+    {
+      "word": "and",
+      "start": 25.739999771118164,
+      "end": 26.0
+    },
+    {
+      "word": "sharp",
+      "start": 26.0,
+      "end": 26.200000762939453
+    },
+    {
+      "word": "character",
+      "start": 26.200000762939453,
+      "end": 26.559999465942383
+    },
+    {
+      "word": "lines",
+      "start": 26.559999465942383,
+      "end": 26.940000534057617
+    },
+    {
+      "word": "emphasize",
+      "start": 26.940000534057617,
+      "end": 27.600000381469727
+    },
+    {
+      "word": "its",
+      "start": 27.600000381469727,
+      "end": 27.8799991607666
+    },
+    {
+      "word": "aerodynamic",
+      "start": 27.8799991607666,
+      "end": 28.399999618530273
+    },
+    {
+      "word": "profile",
+      "start": 28.399999618530273,
+      "end": 28.940000534057617
+    },
+    {
+      "word": "The",
+      "start": 29.8799991607666,
+      "end": 29.899999618530273
+    },
+    {
+      "word": "hand",
+      "start": 29.899999618530273,
+      "end": 30.219999313354492
+    },
+    {
+      "word": "built",
+      "start": 30.219999313354492,
+      "end": 30.34000015258789
+    },
+    {
+      "word": "inspection",
+      "start": 30.34000015258789,
+      "end": 30.860000610351562
+    },
+    {
+      "word": "plaque",
+      "start": 30.860000610351562,
+      "end": 31.200000762939453
+    },
+    {
+      "word": "highlights",
+      "start": 31.200000762939453,
+      "end": 31.799999237060547
+    },
+    {
+      "word": "the",
+      "start": 31.799999237060547,
+      "end": 32.15999984741211
+    },
+    {
+      "word": "bespoke",
+      "start": 32.15999984741211,
+      "end": 32.41999816894531
+    },
+    {
+      "word": "craftsmanship",
+      "start": 32.41999816894531,
+      "end": 33.02000045776367
+    },
+    {
+      "word": "of",
+      "start": 33.02000045776367,
+      "end": 33.36000061035156
+    },
+    {
+      "word": "the",
+      "start": 33.36000061035156,
+      "end": 33.7599983215332
+    },
+    {
+      "word": "Vantage",
+      "start": 33.7599983215332,
+      "end": 33.7599983215332
+    },
+    {
+      "word": "Notable",
+      "start": 34.81999969482422,
+      "end": 35.060001373291016
+    },
+    {
+      "word": "for",
+      "start": 35.060001373291016,
+      "end": 35.29999923706055
+    },
+    {
+      "word": "its",
+      "start": 35.29999923706055,
+      "end": 35.540000915527344
+    },
+    {
+      "word": "distinctive",
+      "start": 35.540000915527344,
+      "end": 35.97999954223633
+    },
+    {
+      "word": "LED",
+      "start": 35.97999954223633,
+      "end": 36.400001525878906
+    },
+    {
+      "word": "taillight",
+      "start": 36.400001525878906,
+      "end": 36.81999969482422
+    },
+    {
+      "word": "strip",
+      "start": 36.81999969482422,
+      "end": 37.099998474121094
+    },
+    {
+      "word": "the",
+      "start": 37.439998626708984,
+      "end": 37.81999969482422
+    },
+    {
+      "word": "Vantage",
+      "start": 37.81999969482422,
+      "end": 37.81999969482422
+    },
+    {
+      "word": "stands",
+      "start": 37.81999969482422,
+      "end": 38.2400016784668
+    },
+    {
+      "word": "out",
+      "start": 38.2400016784668,
+      "end": 38.52000045776367
+    },
+    {
+      "word": "in",
+      "start": 38.52000045776367,
+      "end": 38.65999984741211
+    },
+    {
+      "word": "its",
+      "start": 38.65999984741211,
+      "end": 38.86000061035156
+    },
+    {
+      "word": "design",
+      "start": 38.86000061035156,
+      "end": 39.18000030517578
+    },
+    {
+      "word": "language",
+      "start": 39.18000030517578,
+      "end": 39.540000915527344
+    },
+    {
+      "word": "With",
+      "start": 39.91999816894531,
+      "end": 40.58000183105469
+    },
+    {
+      "word": "enhanced",
+      "start": 40.58000183105469,
+      "end": 40.939998626708984
+    },
+    {
+      "word": "mechanics",
+      "start": 40.939998626708984,
+      "end": 41.380001068115234
+    },
+    {
+      "word": "and",
+      "start": 41.380001068115234,
+      "end": 41.65999984741211
+    },
+    {
+      "word": "chassis",
+      "start": 41.65999984741211,
+      "end": 41.900001525878906
+    },
+    {
+      "word": "improvements",
+      "start": 41.900001525878906,
+      "end": 42.380001068115234
+    },
+    {
+      "word": "the",
+      "start": 42.7599983215332,
+      "end": 43.15999984741211
+    },
+    {
+      "word": "Vantage",
+      "start": 43.15999984741211,
+      "end": 43.15999984741211
+    },
+    {
+      "word": "promises",
+      "start": 43.15999984741211,
+      "end": 43.63999938964844
+    },
+    {
+      "word": "a",
+      "start": 43.63999938964844,
+      "end": 44.02000045776367
+    },
+    {
+      "word": "dynamic",
+      "start": 44.02000045776367,
+      "end": 44.34000015258789
+    },
+    {
+      "word": "driving",
+      "start": 44.34000015258789,
+      "end": 44.720001220703125
+    },
+    {
+      "word": "experience",
+      "start": 44.720001220703125,
+      "end": 45.31999969482422
+    },
+    {
+      "word": "Originally",
+      "start": 46.20000076293945,
+      "end": 46.70000076293945
+    },
+    {
+      "word": "around",
+      "start": 46.70000076293945,
+      "end": 47.119998931884766
+    },
+    {
+      "word": "140",
+      "start": 47.119998931884766,
+      "end": 47.97999954223633
+    },
+    {
+      "word": "000",
+      "start": 47.97999954223633,
+      "end": 48.220001220703125
+    },
+    {
+      "word": "its",
+      "start": 48.91999816894531,
+      "end": 49.18000030517578
+    },
+    {
+      "word": "scarcity",
+      "start": 49.18000030517578,
+      "end": 49.65999984741211
+    },
+    {
+      "word": "maintains",
+      "start": 49.65999984741211,
+      "end": 50.34000015258789
+    },
+    {
+      "word": "desirability",
+      "start": 50.34000015258789,
+      "end": 51.040000915527344
+    },
+    {
+      "word": "as",
+      "start": 51.040000915527344,
+      "end": 51.47999954223633
+    },
+    {
+      "word": "a",
+      "start": 51.47999954223633,
+      "end": 51.70000076293945
+    },
+    {
+      "word": "modern",
+      "start": 51.70000076293945,
+      "end": 51.91999816894531
+    },
+    {
+      "word": "classic",
+      "start": 51.91999816894531,
+      "end": 52.29999923706055
+    },
+    {
+      "word": "Do",
+      "start": 52.63999938964844,
+      "end": 53.400001525878906
+    },
+    {
+      "word": "the",
+      "start": 53.400001525878906,
+      "end": 53.68000030517578
+    },
+    {
+      "word": "extensive",
+      "start": 53.68000030517578,
+      "end": 54.060001373291016
+    },
+    {
+      "word": "updates",
+      "start": 54.060001373291016,
+      "end": 54.41999816894531
+    },
+    {
+      "word": "make",
+      "start": 54.41999816894531,
+      "end": 54.63999938964844
+    },
+    {
+      "word": "the",
+      "start": 54.63999938964844,
+      "end": 54.91999816894531
+    },
+    {
+      "word": "2025",
+      "start": 54.91999816894531,
+      "end": 55.540000915527344
+    },
+    {
+      "word": "Vantage",
+      "start": 55.540000915527344,
+      "end": 55.84000015258789
+    },
+    {
+      "word": "the",
+      "start": 55.84000015258789,
+      "end": 56.2599983215332
+    },
+    {
+      "word": "ultimate",
+      "start": 56.2599983215332,
+      "end": 56.65999984741211
+    },
+    {
+      "word": "grand",
+      "start": 56.65999984741211,
+      "end": 57.0
+    },
+    {
+      "word": "tourer",
+      "start": 57.0,
+      "end": 57.31999969482422
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual-extra/11-hand-built.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Hand built",
+      "slot": "engine",
+      "role": "detail",
+      "photo_id": "engine-closeup-restored-1790398576268-11-11",
+      "cue_label": "[engine-closeup-restored-1790398576268-11-11] Hand built",
+      "note": ""
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-front.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790398576268-0-0",
+          "cue_label": "[front-closeup-restored-1790398576268-0-0] Front",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/2-close-headlight.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Close headlight",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790398576268-2-2",
+          "cue_label": "[front-closeup-restored-1790398576268-2-2] Close headlight",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/8-giant-grill-for-airflow.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Giant grill for airflow",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790398576268-8-8",
+          "cue_label": "[front-closeup-restored-1790398576268-8-8] Giant grill for airflow",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/3-swan-doors.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Swan doors",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790398576268-3-3",
+          "cue_label": "[side-closeup-restored-1790398576268-3-3] Swan doors",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/6-fraihmless-windows.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Fraihmless windows",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790398576268-6-6",
+          "cue_label": "[side-closeup-restored-1790398576268-6-6] Fraihmless windows",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/7-wheeles.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Wheeles",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790398576268-7-7",
+          "cue_label": "[side-closeup-restored-1790398576268-7-7] Wheeles",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/1-cloeer-back.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Cloeer back",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790398576268-1-1",
+          "cue_label": "[rear-closeup-restored-1790398576268-1-1] Cloeer back",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/4-back-headlight.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Back headlight",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790398576268-4-4",
+          "cue_label": "[rear-closeup-restored-1790398576268-4-4] Back headlight",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/5-exhaust-and-rear-diffuser.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Exhaust and rear diffuser",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790398576268-5-5",
+          "cue_label": "[rear-closeup-restored-1790398576268-5-5] Exhaust and rear diffuser",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/11-hand-built.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Hand built",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1790398576268-11-11",
+          "cue_label": "[engine-closeup-restored-1790398576268-11-11] Hand built",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/9-red-interior.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Red interior",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1790398576268-9-9",
+          "cue_label": "[interior-closeup-restored-1790398576268-9-9] Red interior",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/10-new-stearing-wheel-with-metal-or-csrbon-fiber-paddel-shifters.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "New stearing wheel with metal or csrbon fiber paddel shifters",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1790398576268-10-10",
+          "cue_label": "[interior-closeup-restored-1790398576268-10-10] New stearing wheel with metal or csrbon fiber paddel shifters",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/12-luxuary-interior.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Luxuary interior",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1790398576268-12-12",
+          "cue_label": "[interior-closeup-restored-1790398576268-12-12] Luxuary interior",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {},
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/rNMk2LA7/2025-aston-martin-vantage",
+    "title": "2025 Aston Martin Vantage",
+    "price_text": "High Bid $10,000",
+    "auction_state": "bidding",
+    "facts": {
+      "Make": "Aston Martin",
+      "Engine": "4.0L Turbocharged V8",
+      "Model": "Vantage",
+      "Drivetrain": "Rear-wheel drive",
+      "Transmission": "Automatic (8-Speed)",
+      "Body Style": "Coupe"
+    },
+    "sections": {
+      "Highlights": "THIS\u2026 is a 2025 Aston Martin Vantage, finished in Ultramarine Black with an Onyx Black and Spicy Red interior. This Vantage is a US-market coupe currently titled in Florida. The instrument cluster is set to metric, and the odometer currently displays approximately 2,400 kilometers, which represents about 1,500 miles. According to the window sticker provided in the gallery, notable factory equipment includes the Dark Chrome Jewelry pack, 21-inch forged wheels, an electronic rear differential, semi-aniline leather upholstery, power-adjustable heated and ventilated seats, a heated steering wheel, and a Bowers & Wilkins sound system. The selling dealer reports no notable modifications. Aston Martin launched the updated Vantage for 2025. Far from a simple facelift, Aston\u2019s 911 Turbo rival received an impressively long list of revisions, including a stiffer chassis, a redesigned front end, a new and improved interior, and a reworked AMG twin-turbo V8 engine with a massive power increase over its predecessor. Power comes from a 4.0-liter twin-turbocharged V8, rated at 656 horsepower and 590 lb-ft of torque. Output is sent to the rear wheels via an 8-speed automatic transmission.",
+      "Equipment": "A window sticker is provided in the photo gallery, and a partial list of notable equipment reported by the selling dealer includes: Dark Chrome Jewelry Pack 21-inch forged wheels Electronic rear differential Semi-aniline leather upholstery Power-adjustable heated and ventilated seats Heated steering wheel Bowers & Wilkins sound system",
+      "Seller Notes": "The selling dealer states that the windows have been tinted. The tires on this Vantage carry 2024 date codes."
+    }
+  },
+  "market_value": null,
+  "voice_auditions": {
+    "onyx": "single-aston-martin-vantage-20260926045625/voice_auditions/onyx.mp3",
+    "british_narrator": "single-aston-martin-vantage-20260926045625/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-aston-martin-vantage-20260926045625/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-aston-martin-vantage-20260926045625/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-aston-martin-vantage-20260926045625/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-aston-martin-vantage-20260926045625/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "left",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 4.699999809265137,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 10.059999942779541,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 24.119999885559082,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 29.40999984741211,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 34.28999900817871,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 39.72999954223633,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 45.760000228881836,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 52.279998779296875,
+        "layout": "bottom-center",
+        "framing": "full"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 7.45,
+        "pose": "open"
+      },
+      {
+        "start": 8.9,
+        "pose": "rest"
+      },
+      {
+        "start": 11.21,
+        "pose": "chest"
+      },
+      {
+        "start": 12.66,
+        "pose": "rest"
+      },
+      {
+        "start": 14.61,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 16.06,
+        "pose": "rest"
+      },
+      {
+        "start": 18.01,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 19.46,
+        "pose": "rest"
+      },
+      {
+        "start": 21.41,
+        "pose": "open"
+      },
+      {
+        "start": 22.86,
+        "pose": "rest"
+      },
+      {
+        "start": 25.27,
+        "pose": "chest"
+      },
+      {
+        "start": 26.72,
+        "pose": "rest"
+      },
+      {
+        "start": 28.67,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 30.12,
+        "pose": "rest"
+      },
+      {
+        "start": 30.96,
+        "pose": "presentLeft"
+      },
+      {
+        "start": 33.41,
+        "pose": "rest"
+      },
+      {
+        "start": 33.52,
+        "pose": "rest"
+      },
+      {
+        "start": 35.47,
+        "pose": "open"
+      },
+      {
+        "start": 36.92,
+        "pose": "rest"
+      },
+      {
+        "start": 38.87,
+        "pose": "chest"
+      },
+      {
+        "start": 40.32,
+        "pose": "rest"
+      },
+      {
+        "start": 42.27,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 43.72,
+        "pose": "rest"
+      },
+      {
+        "start": 46.91,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 48.36,
+        "pose": "rest"
+      },
+      {
+        "start": 50.31,
+        "pose": "open"
+      },
+      {
+        "start": 51.76,
+        "pose": "rest"
+      },
+      {
+        "start": 53.71,
+        "pose": "chest"
+      },
+      {
+        "start": 55.16,
+        "pose": "rest"
+      },
+      {
+        "start": 57.11,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 57.9,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 4.699999809265137,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front.jpg",
+            "label": "Front",
+            "photo_id": "front-closeup-restored-1790398576268-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-close-headlight.jpg",
+            "label": "Close headlight",
+            "photo_id": "front-closeup-restored-1790398576268-2-2"
+          },
+          {
+            "path": "images/manual-extra/8-giant-grill-for-airflow.jpg",
+            "label": "Giant grill for airflow",
+            "photo_id": "front-closeup-restored-1790398576268-8-8"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 10.059999942779541
+      },
+      {
+        "start": 4.699999809265137,
+        "end": 10.059999942779541,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front.jpg",
+            "label": "Front",
+            "photo_id": "front-closeup-restored-1790398576268-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-close-headlight.jpg",
+            "label": "Close headlight",
+            "photo_id": "front-closeup-restored-1790398576268-2-2"
+          },
+          {
+            "path": "images/manual-extra/8-giant-grill-for-airflow.jpg",
+            "label": "Giant grill for airflow",
+            "photo_id": "front-closeup-restored-1790398576268-8-8"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 10.059999942779541
+      },
+      {
+        "start": 10.059999942779541,
+        "end": 18.619999885559082,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/11-hand-built.jpg",
+            "label": "Hand built",
+            "photo_id": "engine-closeup-restored-1790398576268-11-11"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 10.059999942779541,
+        "chapter_end": 18.619999885559082
+      },
+      {
+        "start": 18.619999885559082,
+        "end": 24.119999885559082,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/9-red-interior.jpg",
+            "label": "Red interior",
+            "photo_id": "interior-closeup-restored-1790398576268-9-9"
+          },
+          {
+            "path": "images/manual-extra/10-new-stearing-wheel-with-metal-or-csrbon-fiber-paddel-shifters.jpg",
+            "label": "New stearing wheel with metal or csrbon fiber paddel shifters",
+            "photo_id": "interior-closeup-restored-1790398576268-10-10"
+          },
+          {
+            "path": "images/manual-extra/12-luxuary-interior.jpg",
+            "label": "Luxuary interior",
+            "photo_id": "interior-closeup-restored-1790398576268-12-12"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 18.619999885559082,
+        "chapter_end": 24.119999885559082
+      },
+      {
+        "start": 24.119999885559082,
+        "end": 29.40999984741211,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/3-swan-doors.jpg",
+            "label": "Swan doors",
+            "photo_id": "side-closeup-restored-1790398576268-3-3"
+          },
+          {
+            "path": "images/manual-extra/6-fraihmless-windows.jpg",
+            "label": "Fraihmless windows",
+            "photo_id": "side-closeup-restored-1790398576268-6-6"
+          },
+          {
+            "path": "images/manual-extra/7-wheeles.jpg",
+            "label": "Wheeles",
+            "photo_id": "side-closeup-restored-1790398576268-7-7"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 24.119999885559082,
+        "chapter_end": 29.40999984741211
+      },
+      {
+        "start": 29.40999984741211,
+        "end": 34.28999900817871,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/11-hand-built.jpg",
+            "label": "Hand built",
+            "photo_id": "engine-closeup-restored-1790398576268-11-11"
+          }
+        ],
+        "active": "engine-closeup-restored-1790398576268-11-11",
+        "active_index": 0,
+        "chapter_start": 29.40999984741211,
+        "chapter_end": 34.28999900817871
+      },
+      {
+        "start": 34.28999900817871,
+        "end": 39.72999954223633,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/1-cloeer-back.jpg",
+            "label": "Cloeer back",
+            "photo_id": "rear-closeup-restored-1790398576268-1-1"
+          },
+          {
+            "path": "images/manual-extra/4-back-headlight.jpg",
+            "label": "Back headlight",
+            "photo_id": "rear-closeup-restored-1790398576268-4-4"
+          },
+          {
+            "path": "images/manual-extra/5-exhaust-and-rear-diffuser.jpg",
+            "label": "Exhaust and rear diffuser",
+            "photo_id": "rear-closeup-restored-1790398576268-5-5"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 34.28999900817871,
+        "chapter_end": 39.72999954223633
+      },
+      {
+        "start": 39.72999954223633,
+        "end": 45.760000228881836,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front.jpg",
+            "label": "Front",
+            "photo_id": "front-closeup-restored-1790398576268-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-close-headlight.jpg",
+            "label": "Close headlight",
+            "photo_id": "front-closeup-restored-1790398576268-2-2"
+          },
+          {
+            "path": "images/manual-extra/8-giant-grill-for-airflow.jpg",
+            "label": "Giant grill for airflow",
+            "photo_id": "front-closeup-restored-1790398576268-8-8"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 39.72999954223633,
+        "chapter_end": 52.279998779296875
+      },
+      {
+        "start": 45.760000228881836,
+        "end": 52.279998779296875,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-front.jpg",
+            "label": "Front",
+            "photo_id": "front-closeup-restored-1790398576268-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-close-headlight.jpg",
+            "label": "Close headlight",
+            "photo_id": "front-closeup-restored-1790398576268-2-2"
+          },
+          {
+            "path": "images/manual-extra/8-giant-grill-for-airflow.jpg",
+            "label": "Giant grill for airflow",
+            "photo_id": "front-closeup-restored-1790398576268-8-8"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 39.72999954223633,
+        "chapter_end": 52.279998779296875
+      },
+      {
+        "start": 52.279998779296875,
+        "end": 58.1,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/9-red-interior.jpg",
+            "label": "Red interior",
+            "photo_id": "interior-closeup-restored-1790398576268-9-9"
+          },
+          {
+            "path": "images/manual-extra/10-new-stearing-wheel-with-metal-or-csrbon-fiber-paddel-shifters.jpg",
+            "label": "New stearing wheel with metal or csrbon fiber paddel shifters",
+            "photo_id": "interior-closeup-restored-1790398576268-10-10"
+          },
+          {
+            "path": "images/manual-extra/12-luxuary-interior.jpg",
+            "label": "Luxuary interior",
+            "photo_id": "interior-closeup-restored-1790398576268-12-12"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 52.279998779296875,
+        "chapter_end": 58.1
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790398576268-0-0",
+          "front-closeup-restored-1790398576268-2-2",
+          "front-closeup-restored-1790398576268-8-8"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 4.699999809265137,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790398576268-0-0",
+          "front-closeup-restored-1790398576268-2-2",
+          "front-closeup-restored-1790398576268-8-8"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 10.059999942779541,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-restored-1790398576268-11-11"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 18.619999885559082,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-restored-1790398576268-9-9",
+          "interior-closeup-restored-1790398576268-10-10",
+          "interior-closeup-restored-1790398576268-12-12"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 24.119999885559082,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-restored-1790398576268-3-3",
+          "side-closeup-restored-1790398576268-6-6",
+          "side-closeup-restored-1790398576268-7-7"
+        ],
+        "active": null
+      },
+      {
+        "scene": 5,
+        "start": 29.40999984741211,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-restored-1790398576268-11-11"
+        ],
+        "active": "engine-closeup-restored-1790398576268-11-11"
+      },
+      {
+        "scene": 6,
+        "start": 34.28999900817871,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-restored-1790398576268-1-1",
+          "rear-closeup-restored-1790398576268-4-4",
+          "rear-closeup-restored-1790398576268-5-5"
+        ],
+        "active": null
+      },
+      {
+        "scene": 7,
+        "start": 39.72999954223633,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790398576268-0-0",
+          "front-closeup-restored-1790398576268-2-2",
+          "front-closeup-restored-1790398576268-8-8"
+        ],
+        "active": null
+      },
+      {
+        "scene": 8,
+        "start": 45.760000228881836,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790398576268-0-0",
+          "front-closeup-restored-1790398576268-2-2",
+          "front-closeup-restored-1790398576268-8-8"
+        ],
+        "active": null
+      },
+      {
+        "scene": 9,
+        "start": 52.279998779296875,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-restored-1790398576268-9-9",
+          "interior-closeup-restored-1790398576268-10-10",
+          "interior-closeup-restored-1790398576268-12-12"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
