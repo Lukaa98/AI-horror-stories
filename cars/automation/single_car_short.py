@@ -681,6 +681,19 @@ BANNED_SHAPES = (
 # prose since run #176; the Mazdaspeed3 build still shipped "depreciating
 # roughly 4% per year" because the ban was a list of literal phrases and
 # this is a shape, not a phrase.
+# The verbs an empty sentence reaches for. Each one asserts that a part
+# matters without saying anything about it: "the calipers highlight its
+# performance aura", "the taillight emphasizes its sleek look", "the
+# plaque highlights the bespoke craftsmanship". Banned only in a sentence
+# with no number in it -- "the diffuser cuts lift by 15%" uses the same
+# verb and is a real claim.
+EMPTY_CLAIM_RE = re.compile(
+    r"\b(?:emphasi[sz]\w*|highlight\w*|underscor\w*|elevat\w*|accentuat\w*"
+    r"|exemplif\w*|epitomi[sz]\w*|showcas\w*|enhanc\w*|define[sd]?|promis\w*"
+    r"|stands? out|hint\w* at|speak\w* to)\b",
+    re.I,
+)
+
 DEPRECIATION_PADDING_RE = re.compile(
     r"(?:\b\d+(?:\.\d+)?\s*%[^.]{0,40}?\b(?:per\s+year|a\s+year|annually|yearly|per\s+annum)"
     r"|\b(?:annual|yearly)\s+depreciation"
@@ -824,11 +837,38 @@ def _script_violations(package, make, model, market=None):
     # in the package; whether the narration ever says it is checkable.
     history = (package.get("history") or {})
     year = history.get("year")
-    if year and not re.search(rf"\b{int(year)}\b", script):
+    fact = str(history.get("fact") or "")
+    # "Aston Martin launched the updated Vantage in 2025" is not history,
+    # it is the car existing. A fact dated inside the car's own model years
+    # and phrased as its arrival is the loophole the first build found.
+    own_years = [y for y in (package.get("start_year"), package.get("end_year")) if y]
+    launched = re.search(r"\b(?:launch\w*|introduc\w*|unveil\w*|debut\w*|released|"
+                         r"went on sale|arrived|came out|premier\w*)\b", fact, re.I)
+    if year and launched and own_years and min(own_years) <= int(year) <= max(own_years):
+        violations.append(
+            f'your history is "{fact[:120]}" -- that is the car going on sale, not something '
+            "that happened to it. Find a race result, a record, a production decision, what it "
+            "replaced, a limited run, or an engineering choice and why it was made."
+        )
+    elif year and not re.search(rf"\b{int(year)}\b", script):
         violations.append(
             f'you researched what happened in {year} ("{str(history.get("fact"))[:120]}") and '
             "never said it. That beat belongs right after the hook, in the narration, with the "
             "year in it."
+        )
+    # A scene using one of these verbs with no number in it is asserting
+    # that a part matters instead of saying anything about it. The Vantage
+    # build spent eight of ten scenes this way -- grille, air vents, rear
+    # haunches, character lines, inspection plaque, taillight -- with the
+    # ban sitting in the prompt being ignored, because nothing read it.
+    empty = [scene.get("narration") or "" for scene in scenes
+             if EMPTY_CLAIM_RE.search(scene.get("narration") or "")
+             and not re.search(r"\d", scene.get("narration") or "")]
+    if empty:
+        violations.append(
+            f'{len(empty)} scene(s) assert that something matters without saying anything about '
+            f'it, starting with "{empty[0]}". Say what the part is for, what it replaced, what '
+            "it costs, or why it is unusual -- or spend the scene on a fact instead."
         )
     padding = DEPRECIATION_PADDING_RE.search(script)
     if padding:

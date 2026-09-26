@@ -1364,6 +1364,53 @@ def test_the_repair_can_reach_the_researched_history():
     assert "history -- 1988: Won its class at Le Mans." in sheet
 
 
+def _rules(narrations, **extra):
+    import single_car_short
+    package = {"scenes": [{"narration": t} for t in narrations], "script": " ".join(narrations),
+               "start_year": 2025, "end_year": 2025,
+               "history": {"year": 1988, "fact": "Won its class at Le Mans."}}
+    package.update(extra)
+    return single_car_short._script_violations(package, "Aston Martin", "Vantage",
+                                               market={"median": 200000})
+
+
+def test_the_car_going_on_sale_does_not_count_as_its_history():
+    """The first build with a history field answered it with "Aston Martin
+    launched the updated Vantage in 2025", and passed, because 2025 was in
+    the script. A fact dated inside the car's own model years and phrased
+    as its arrival is the car existing, not something that happened to it."""
+    launched = {"year": 2025,
+                "fact": "Aston Martin launched the updated Vantage in 2025 with revisions."}
+    assert any("going on sale" in rule
+               for rule in _rules(["It makes 656 hp and 590 lb-ft in 2025.", "So would you?"],
+                                  history=launched))
+
+    # A dated event is fine even when it falls in the model years.
+    won = {"year": 2025, "fact": "Won the Nurburgring 24 outright in 2025."}
+    assert not any("going on sale" in rule
+                   for rule in _rules(["It makes 656 hp and 590 lb-ft in 2025.", "So would you?"],
+                                      history=won))
+
+
+def test_a_scene_that_asserts_a_part_matters_without_saying_why_is_caught():
+    """The Vantage build spent eight of ten scenes on the grille, the air
+    vents, the rear haunches, the character lines, the inspection plaque
+    and the taillight. The ban was in the prompt and nothing read it."""
+    caught = _rules([
+        "In 1988 it won its class at Le Mans, and it makes 656 hp and 590 lb-ft.",
+        "The hand-built inspection plaque highlights the bespoke craftsmanship of the Vantage.",
+        "So would you?",
+    ])
+    assert any("without saying anything about it" in rule for rule in caught)
+
+    # The same verb with a real claim attached is not padding.
+    assert not any("without saying anything about it" in rule for rule in _rules([
+        "In 1988 it won its class at Le Mans, and it makes 656 hp and 590 lb-ft.",
+        "That rear diffuser cuts lift by 15% over the old car.",
+        "So would you?",
+    ]))
+
+
 def test_a_refused_repair_says_what_it_was_offered(monkeypatch):
     """The closing question failed twice running with two independent
     repairs both declining it, and the reason each printed sat in a runner
