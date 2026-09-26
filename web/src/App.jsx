@@ -734,12 +734,12 @@ async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
         || `${preview.car?.make || preview.build_inputs.make || ""} ${preview.car?.model || preview.build_inputs.model || ""}`.trim()
         || item.id,
       inputs: preview.build_inputs,
-      // The build's own thumbnail, so a car can be recognised rather than
-      // read. result.json does not name it -- every build writes it under
-      // the same name -- and the <img> simply fails to load for one that
-      // did not get that far, which the pasted photo then covers.
+      // The front main photo, which is the one picked for this car and the
+      // one that identifies it at a glance. The rendered thumbnail is the
+      // narrator card -- every build's looks the same, so it tells you
+      // nothing here. It is the last resort, behind the side shot.
+      photo: preview.build_inputs.photo_front || preview.build_inputs.photo_side || "",
       thumbnail: `cars/single-car-shorts/${item.id}/thumbnail.jpg`,
-      photo: preview.build_inputs.photo_side || preview.build_inputs.photo_front || "",
     };
   }));
   // A build whose result.json predates build_inputs has nothing to fill the
@@ -2503,18 +2503,19 @@ export default function App() {
                         // one run needs no choosing at all.
                         const chosenId = chosenRun[group.key] || group.newest.id;
                         const chosen = group.runs.find((run) => run.id === chosenId) || group.newest;
-                        const image = chosen.thumbnail
+                        const fallback = chosen.thumbnail
                           ? `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}/${OUTPUT_BRANCH}/${chosen.thumbnail}`
-                          : chosen.photo;
+                          : "";
+                        const image = chosen.photo || fallback;
                         return (
                           <div className="prev-build" key={group.key}>
                             {image
                               ? <img src={image} alt="" loading="lazy"
                                      onError={(e) => {
-                                       // An unfinished build has no thumbnail;
-                                       // what was pasted in is the next best.
-                                       if (chosen.photo && e.target.src !== chosen.photo) {
-                                         e.target.src = chosen.photo;
+                                       // A pasted link can rot. The rendered
+                                       // thumbnail is worse but it is there.
+                                       if (fallback && e.target.src !== fallback) {
+                                         e.target.src = fallback;
                                        } else {
                                          e.target.style.visibility = "hidden";
                                        }
