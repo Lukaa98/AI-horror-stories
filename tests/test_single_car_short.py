@@ -1312,6 +1312,58 @@ def test_a_broken_rule_is_fixed_one_scene_at_a_time(monkeypatch):
         package, "Mazda", "Mazdaspeed3", {"median": 16000})
 
 
+def _with_history(narrations):
+    import single_car_short
+    scenes = [{"narration": text} for text in narrations]
+    script = " ".join(narrations)
+    return {"scenes": scenes, "script": script,
+            "word_count": single_car_short._word_count(script),
+            "key_specs": {"horsepower": "656 hp", "torque": "590 lb-ft"},
+            "history": {"year": 1988, "fact": "Won its class at Le Mans."}}
+
+
+def test_a_researched_history_fact_that_never_gets_spoken_is_a_violation():
+    """The prompt has asked for a history beat right after the hook for a
+    long time, and three builds running came back with the specs and then
+    four beats about how the car looks. Whether the narration says the fact
+    is checkable even though "has history" is not."""
+    import single_car_short
+
+    unsaid = _with_history([
+        "With 656 horsepower and 590 lb-ft, this thing moves.",
+        "The red calipers look sharp against the black wheels.",
+        "So would you buy one?",
+    ])
+    assert any("1988" in rule for rule in
+               single_car_short._script_violations(unsaid, "Aston Martin", "Vantage",
+                                                   market={"median": 200000}))
+
+    said = _with_history([
+        "With 656 horsepower and 590 lb-ft, this thing moves.",
+        "In 1988 it won its class at Le Mans.",
+        "So would you buy one?",
+    ])
+    assert not any("1988" in rule for rule in
+                   single_car_short._script_violations(said, "Aston Martin", "Vantage",
+                                                       market={"median": 200000}))
+
+    # A build whose research found no dateable fact is not punished for it.
+    undated = _with_history(["It makes 656 hp and 590 lb-ft.", "So would you?"])
+    undated["history"] = {"year": None, "fact": "Well liked."}
+    assert not any("never said it" in rule for rule in
+                   single_car_short._script_violations(undated, "Aston Martin", "Vantage",
+                                                       market={"median": 200000}))
+
+
+def test_the_repair_can_reach_the_researched_history():
+    """A scene that says nothing is usually a scene with nothing to say.
+    The repair has no web search, so the fact has to be handed to it."""
+    import single_car_short
+
+    sheet = single_car_short._spec_sheet(_with_history(["anything"]))
+    assert "history -- 1988: Won its class at Le Mans." in sheet
+
+
 def test_a_refused_repair_says_what_it_was_offered(monkeypatch):
     """The closing question failed twice running with two independent
     repairs both declining it, and the reason each printed sat in a runner

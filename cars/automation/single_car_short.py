@@ -92,7 +92,8 @@ ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 PACKAGE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
-    "required": ["title", "youtube_title", "key_specs", "scenes", "sources", "start_year", "end_year"],
+    "required": ["title", "youtube_title", "key_specs", "history", "scenes", "sources",
+                 "start_year", "end_year"],
     "properties": {
         "title": {"type": "string"},
         # The YouTube title. Separate from "title", which is a scene headline
@@ -113,6 +114,24 @@ PACKAGE_SCHEMA = {
                 "redline": {"type": "string"},
                 "engine": {"type": "string"},
                 "price": {"type": "string"},
+            },
+        },
+        # One researched historical fact, held apart from the narration for
+        # the same reason key_specs is. The prompt has asked for a history
+        # beat "early, right after the hook" for a long time and it keeps
+        # not arriving: three builds running came back with the specs and
+        # then four beats about how the car looks. Naming it as a field
+        # makes it a thing the model has to go and find, and gives the
+        # repair pass something to put in a scene that says nothing --
+        # which, having no web search of its own, it otherwise cannot do.
+        "history": {
+            "type": "object", "additionalProperties": False,
+            "required": ["year", "fact"],
+            "properties": {
+                # The year it happened, which is what stops "revered by
+                # enthusiasts" from counting as history.
+                "year": {"type": ["integer", "null"]},
+                "fact": {"type": "string"},
             },
         },
         # Whichever generation the script actually settles on -- especially
@@ -443,7 +462,12 @@ Never name a specific individual as the designer unless that person is a real, e
 
 Every sentence has to earn its place with a specific, concrete fact -- a real number, a named comparison, a verifiable detail -- not a vague enthusiast-copy adjective doing the work instead. Cut lines like "adding to its sporty agility" or "making every drive engaging and dynamic" or "celebrated for its precise steering" that describe a *feeling* about the car without any fact backing it up -- if you can't attach a real number, a named comparison, or a specific verifiable detail to a claim, cut the claim and replace it with one you can verify, don't soften it into vague praise. This applies to every beat, not just the hook.
 
-Write like an excited, knowledgeable friend talking fast about a car they love, not a brochure. These exact constructions are banned outright, because they read as generated copy: "a testament to", "design ethos", "blending luxury with practicality", "adding a touch of exclusivity", "catering to family needs", "creating a motorsport feel", "highlighting its performance lineage", and any sentence built on "isn't just for looks", on "blending X with Y", or on "provides a sporty feel". Run #176 still slipped through with "the brushed aluminum pedals and bolstered seats provide a sporty feel, blending luxury with performance intentions" -- three clauses saying nothing. Name what the pedal material is actually for, or which seat it is, or cut the sentence. Also banned is stat-shaped padding -- a number that sounds like data but tells the viewer nothing they can use, like "reflecting an annual depreciation of about 8%". Give the two prices and let them do the subtraction. Favor punchy, stacked, specific claims over smooth marketing prose -- "that's more horsepower per liter than the [famous engine], and it's only got three cylinders" reads as genuinely engaging; "it delivers a dynamic and engaging driving experience" reads as filler no matter how true it is. A strong hook is a bold, specific, verifiable superlative or comparison (most powerful, quickest, cheapest, rarest -- something with a real number and a real point of comparison attached), not a generic "this car blends performance and luxury" opener. Every superlative must name the group it actually wins: "the most powerful 911 ever built", "the most expensive Spyder Porsche has sold", "the quickest minivan ever made". Never aim one at cars in general -- "the most luxurious car ever produced" about a $217,545 718 Spyder is not a bold claim, it is a false one, and the true version was available. Casual contractions and informal phrasing are good here -- this should sound spoken, not written.
+Write like an excited, knowledgeable friend talking fast about a car they love, not a brochure. These exact constructions are banned outright, because they read as generated copy: "a testament to", "design ethos", "blending luxury with practicality", "adding a touch of exclusivity", "catering to family needs", "creating a motorsport feel", "highlighting its performance lineage", and any sentence built on "isn't just for looks", on "blending X with Y", or on "provides a sporty feel". Run #176 still slipped through with "the brushed aluminum pedals and bolstered seats provide a sporty feel, blending luxury with performance intentions" -- three clauses saying nothing. Name what the pedal material is actually for, or which seat it is, or cut the sentence. Also banned is the appearance beat that carries no fact: "the red brake calipers highlight its
+performance aura", "the full-width taillight emphasizes its sleek look", "the circular air vents
+elevate the aesthetics". Three builds running spent four of their eight scenes this way and had
+no room left for anything the viewer did not already get from the photo. Describing a part is
+only worth a scene if you say something about it the picture cannot -- what it is for, what it
+replaced, what it costs, why it is unusual. Also banned is stat-shaped padding -- a number that sounds like data but tells the viewer nothing they can use, like "reflecting an annual depreciation of about 8%". Give the two prices and let them do the subtraction. Favor punchy, stacked, specific claims over smooth marketing prose -- "that's more horsepower per liter than the [famous engine], and it's only got three cylinders" reads as genuinely engaging; "it delivers a dynamic and engaging driving experience" reads as filler no matter how true it is. A strong hook is a bold, specific, verifiable superlative or comparison (most powerful, quickest, cheapest, rarest -- something with a real number and a real point of comparison attached), not a generic "this car blends performance and luxury" opener. Every superlative must name the group it actually wins: "the most powerful 911 ever built", "the most expensive Spyder Porsche has sold", "the quickest minivan ever made". Never aim one at cars in general -- "the most luxurious car ever produced" about a $217,545 718 Spyder is not a bold claim, it is a false one, and the true version was available. Casual contractions and informal phrasing are good here -- this should sound spoken, not written.
 
 Also write "youtube_title" -- the video's title on the channel, under 100 characters, ending in a
 fire emoji. It is the only thing a viewer reads before deciding to watch, so it carries the same
@@ -496,6 +520,14 @@ trim piece is finished are all fair subjects. What is banned is a beat that ONLY
 viewer can already see. Every appearance beat still has to carry a fact the picture cannot give
 them: what that vent actually cools, which other model shares that wheel, what the option cost new,
 how many were built in that colour. Point at the thing, then say the part that isn't visible.
+
+"history" is one specific, well-documented thing that happened to this car, with the year it
+happened, found with web search -- a race result, a record, a production decision, what it
+replaced or was replaced by, a limited run, an engineering choice and why it was made, a person
+who signed it off. "Revered by enthusiasts", "a performance legacy" and "became iconic" are not
+history: they are opinions with no date on them. That fact has to be SPOKEN in the history beat,
+not merely recorded in the field -- the field exists so it has been researched before the
+narration needs it.
 
 Headlines are only for important facts and must be 1-4 words (examples: model/chassis, engine code, AWD, horsepower, price gap); use an empty string for ordinary beats. Use exterior media for the hook/close, engine for powertrain, wheel for drivetrain when useful, detail for modification/technical beats, and interior only when the script specifically discusses the cabin, seats, controls, or practicality -- most scripts should lean on exterior shots with only a couple of interior beats, not the other way around. Sources must be direct URLs supporting the claims.
 
@@ -786,6 +818,18 @@ def _script_violations(package, make, model, market=None):
     for shape in BANNED_SHAPES:
         if shape in script:
             violations.append(f'you used the banned phrase "{shape}". Rewrite that sentence around a fact.')
+    # The history beat has been asked for in the prompt for a long time and
+    # keeps not arriving -- three builds running came back with the specs
+    # and then four beats about how the car looks. The researched fact is
+    # in the package; whether the narration ever says it is checkable.
+    history = (package.get("history") or {})
+    year = history.get("year")
+    if year and not re.search(rf"\b{int(year)}\b", script):
+        violations.append(
+            f'you researched what happened in {year} ("{str(history.get("fact"))[:120]}") and '
+            "never said it. That beat belongs right after the hook, in the narration, with the "
+            "year in it."
+        )
     padding = DEPRECIATION_PADDING_RE.search(script)
     if padding:
         violations.append(
@@ -1008,6 +1052,12 @@ def _spec_sheet(package):
     """
     specs = package.get("key_specs") or {}
     known = [f"{name.replace('_', ' ')}: {value}" for name, value in specs.items() if value]
+    # The researched history too: a scene that says nothing is usually a
+    # scene with nothing to say, and this is the thing to put in it.
+    history = package.get("history") or {}
+    if history.get("fact"):
+        year = f"{history['year']}: " if history.get("year") else ""
+        known.append(f"history -- {year}{history['fact']}")
     return "\n".join(known)
 
 
