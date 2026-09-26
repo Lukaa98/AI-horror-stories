@@ -967,14 +967,17 @@ def _repair_closing(package, label):
     try:
         rewritten = _rewrite_closing_as_question(hook, closing, label)
     except Exception as error:  # noqa: BLE001 - a build is worth more than a question mark
+        _note_repair(what="closing", outcome="call failed", detail=str(error)[:300])
         print(f"[single-car] Could not rewrite the closing ({error}); leaving it as written.")
         return package
     if not rewritten.endswith("?") or len(rewritten.split()) > 25:
+        _note_repair(what="closing", outcome="unusable", returned=rewritten[:300])
         print(f'[single-car] The rewritten closing was not usable ("{rewritten}"); leaving it as written.')
         return package
     scenes[-1]["narration"] = rewritten
     package["script"] = " ".join(scene["narration"] for scene in scenes)
     package["word_count"] = _word_count(package["script"])
+    _note_repair(what="closing", outcome="applied", returned=rewritten[:300])
     print(f'[single-car] Rewrote the closing as a question: "{rewritten}"')
     return package
 
@@ -982,6 +985,17 @@ def _repair_closing(package, label):
 # One targeted pass per broken rule, and a ceiling so a rule the model
 # cannot satisfy costs a few calls rather than an unbounded run.
 MAX_TARGETED_REPAIRS = 5
+# Every repair attempt and what became of it, written into the build.
+#
+# The closing question has now failed twice in a row with two independent
+# repairs both declining to fix it, and the reason each printed sits in a
+# runner log that is unreachable by the time anyone asks. A build that
+# cannot say why it shipped broken cannot be debugged without guessing.
+_REPAIR_LOG = []
+
+
+def _note_repair(**entry):
+    _REPAIR_LOG.append(entry)
 
 
 def _spec_sheet(package):
@@ -1046,9 +1060,11 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
             index, narration = _rewrite_scene_for(violation, numbered, label,
                                                   _spec_sheet(package))
         except Exception as error:  # noqa: BLE001 - a build is worth more than a rule
+            _note_repair(what=violation[:120], outcome="call failed", detail=str(error)[:300])
             print(f"[single-car] Could not repair \"{violation[:60]}...\" ({error}); leaving it.")
             break
         if not (1 <= index <= len(scenes)) or not narration:
+            _note_repair(what=violation[:120], outcome="bad scene number", returned=str(index))
             print(f"[single-car] The repair named scene {index}, which does not exist; leaving it.")
             break
 
@@ -1058,9 +1074,14 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
         candidate["word_count"] = _word_count(candidate["script"])
         after = _script_violations(candidate, make, model, market)
         if violation in after or len(after) >= len(violations):
+            _note_repair(what=violation[:120],
+                         outcome="did not help" if violation in after else "traded for another",
+                         returned=narration[:300],
+                         still=[rule[:120] for rule in after])
             print(f"[single-car] The repair for \"{violation[:60]}...\" did not help; keeping the original.")
             break
         package = candidate
+        _note_repair(what=violation[:120], outcome="applied", scene=index, returned=narration[:300])
         print(f'[single-car] Repaired scene {index}: "{narration}"')
     return package
 
@@ -1159,6 +1180,9 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     # the rules looked exactly like one that kept them. The Mazdaspeed3 build
     # went out with no torque figure and a closing statement instead of a
     # question, and nothing downstream said so.
+    if _REPAIR_LOG:
+        final["repair_log"] = list(_REPAIR_LOG)
+        _REPAIR_LOG.clear()
     remaining = _script_violations(final, make, model, market)
     if remaining:
         final["rule_violations"] = remaining

@@ -1312,6 +1312,36 @@ def test_a_broken_rule_is_fixed_one_scene_at_a_time(monkeypatch):
         package, "Mazda", "Mazdaspeed3", {"median": 16000})
 
 
+def test_a_refused_repair_says_what_it_was_offered(monkeypatch):
+    """The closing question failed twice running with two independent
+    repairs both declining it, and the reason each printed sat in a runner
+    log unreachable by the time anyone asked. A build that cannot say why
+    it shipped broken can only be debugged by guessing."""
+    import single_car_short
+
+    single_car_split = single_car_short._REPAIR_LOG
+    single_car_split.clear()
+    monkeypatch.setattr(single_car_short, "_rewrite_closing_as_question",
+                        lambda *a: "It really is a great car.")
+    package = {"scenes": [{"narration": "It makes 263 hp."},
+                          {"narration": "Revered in enthusiast circles."}]}
+    single_car_short._repair_closing(package, "Mazdaspeed3")
+
+    assert single_car_split[-1]["outcome"] == "unusable"
+    assert "great car" in single_car_split[-1]["returned"], "what came back is what matters"
+
+    # And a repair that trades one rule for another says which rule it left.
+    single_car_split.clear()
+    monkeypatch.setattr(
+        single_car_short, "_rewrite_scene_for",
+        lambda *a, **k: (3, "It makes 280 lb-ft, and the seats give it a sporty feel."))
+    single_car_short._repair_violations(
+        _mazdaspeed_package(), "Mazda", "Mazdaspeed3", {"median": 16000}, "Mazdaspeed3")
+    assert single_car_split[-1]["outcome"] in ("did not help", "traded for another")
+    assert single_car_split[-1]["still"], "the rules it left behind are named"
+    single_car_split.clear()
+
+
 def test_the_repair_is_given_the_figures_the_build_already_looked_up():
     """The Mazdaspeed3 build knew its torque was 280 lb-ft -- it is in
     key_specs -- and still shipped with the rule broken, because the repair

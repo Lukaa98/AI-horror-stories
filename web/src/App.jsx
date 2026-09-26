@@ -2074,6 +2074,23 @@ export default function App() {
                         ))}
                       </ul>
                     )}
+                    {(item.preview.repair_log || []).length > 0 && (
+                      // What was tried and what came back. Without it a
+                      // refused repair is only visible in a runner log that
+                      // has scrolled away by the time anyone looks.
+                      <details className="repair-log">
+                        <summary>{item.preview.repair_log.length} repair attempt(s)</summary>
+                        <ul>
+                          {item.preview.repair_log.map((entry, index) => (
+                            <li key={index}>
+                              <strong>{entry.outcome}</strong> — {entry.what}
+                              {entry.returned && <em> got: "{entry.returned}"</em>}
+                              {entry.detail && <em> {entry.detail}</em>}
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    )}
                     {item.hasVideo && (
                       <div className="video-player">
                         <video controls src={dashboardRawUrl(item, item.preview.video || "single_car_short.mp4")} width="360" preload="metadata" />
