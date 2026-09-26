@@ -1281,7 +1281,10 @@ def _mazdaspeed_package():
     ]
     script = " ".join(scene["narration"] for scene in scenes)
     return {"scenes": scenes, "script": script,
-            "word_count": single_car_short._word_count(script)}
+            "word_count": single_car_short._word_count(script),
+            # The build did look the torque up; the script just never said it.
+            "key_specs": {"horsepower": "263 hp", "torque": "280 lb-ft",
+                          "engine": "2.3L Turbo I4"}}
 
 
 def test_a_broken_rule_is_fixed_one_scene_at_a_time(monkeypatch):
@@ -1293,19 +1296,34 @@ def test_a_broken_rule_is_fixed_one_scene_at_a_time(monkeypatch):
 
     asked = []
 
-    def fake(violation, numbered, label):
-        asked.append(violation)
+    def fake(violation, numbered, label, specs=""):
+        asked.append((violation, specs))
         return 3, "The MZR 2.3 DISI turbo makes 263 horsepower and 280 lb-ft, and pulls hard."
 
     monkeypatch.setattr(single_car_short, "_rewrite_scene_for", fake)
     package = single_car_short._repair_violations(
         _mazdaspeed_package(), "Mazda", "Mazdaspeed3", {"median": 16000}, "Mazdaspeed3")
 
-    assert "torque" in asked[0], "the missing torque figure is what it was asked about"
+    assert "torque" in asked[0][0], "the missing torque figure is what it was asked about"
+    assert "280 lb-ft" in asked[0][1], "and it was handed the figure to use"
     assert "280 lb-ft" in package["script"]
     assert package["word_count"] == single_car_short._word_count(package["script"])
     assert not single_car_short._script_violations(
         package, "Mazda", "Mazdaspeed3", {"median": 16000})
+
+
+def test_the_repair_is_given_the_figures_the_build_already_looked_up():
+    """The Mazdaspeed3 build knew its torque was 280 lb-ft -- it is in
+    key_specs -- and still shipped with the rule broken, because the repair
+    was handed the scenes alone and told not to invent anything. It had no
+    way to supply the one fact it was asked for."""
+    import single_car_short
+
+    sheet = single_car_short._spec_sheet(_mazdaspeed_package())
+    assert "torque: 280 lb-ft" in sheet
+    # Blank fields are left out rather than offered as facts.
+    assert single_car_short._spec_sheet({"key_specs": {"torque": ""}}) == ""
+    assert single_car_short._spec_sheet({}) == ""
 
 
 def test_a_repair_that_trades_one_violation_for_another_is_thrown_away(monkeypatch):

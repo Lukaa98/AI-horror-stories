@@ -984,21 +984,38 @@ def _repair_closing(package, label):
 MAX_TARGETED_REPAIRS = 5
 
 
-def _rewrite_scene_for(violation, numbered_scenes, label):
+def _spec_sheet(package):
+    """The verified figures the build already looked up, for the repair.
+
+    Without these a repair that needs a number has nowhere to get one. The
+    Mazdaspeed3 build knew its torque was 280 lb-ft -- it is in key_specs --
+    and still shipped with the rule broken, because the repair was handed
+    the scenes alone and told not to invent anything.
+    """
+    specs = package.get("key_specs") or {}
+    known = [f"{name.replace('_', ' ')}: {value}" for name, value in specs.items() if value]
+    return "\n".join(known)
+
+
+def _rewrite_scene_for(violation, numbered_scenes, label, specs=""):
     """Ask for one scene rewritten to fix one rule, and nothing else.
 
     The retry loop's only move is to rewrite the whole script, which throws
     away six good beats to fix a seventh -- and often loses a different rule
     on the way back. This asks the smaller question.
     """
+    spec_block = (
+        f"\n\nVerified figures for this car, already researched -- use these and no others:\n{specs}"
+        if specs else ""
+    )
     prompt = (
         f"You are fixing one line of a short car video's narration about the {label}.\n\n"
-        f"The scenes, in spoken order:\n{numbered_scenes}\n\n"
+        f"The scenes, in spoken order:\n{numbered_scenes}{spec_block}\n\n"
         f"One rule is broken: {violation}\n\n"
         "Rewrite the ONE scene that fixes it, changing as little as possible and leaving every "
         "other scene alone. Keep it to roughly the same length, keep it spoken and conversational "
-        "with contractions, and do not invent facts -- if the fix needs a number you are not sure "
-        "of, use one already in the script. Reply as JSON: "
+        "with contractions, and do not invent facts -- every number must come from the figures "
+        "above or from the script itself. Reply as JSON: "
         '{"index": <the scene number you rewrote>, "narration": "<the new line>"}'
     )
     response = with_openai_retry(lambda: OpenAI().responses.create(
@@ -1026,7 +1043,8 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
         scenes = package.get("scenes") or []
         numbered = "\n".join(f"{i}. {s.get('narration') or ''}" for i, s in enumerate(scenes, 1))
         try:
-            index, narration = _rewrite_scene_for(violation, numbered, label)
+            index, narration = _rewrite_scene_for(violation, numbered, label,
+                                                  _spec_sheet(package))
         except Exception as error:  # noqa: BLE001 - a build is worth more than a rule
             print(f"[single-car] Could not repair \"{violation[:60]}...\" ({error}); leaving it.")
             break
