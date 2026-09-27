@@ -10,7 +10,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v12";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V13 — Tell it what to cover";
+const UI_VERSION = "V13.1 — Mark the ones worth uploading";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v12";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -502,6 +502,41 @@ function parseIdTimestamp(id) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+// Which builds are worth uploading, kept on the output branch rather than
+// in this browser. The point of the mark is to find them again later, and
+// "later" is routinely a different device from the one that made it.
+const FAVOURITES_PATH = "cars/favourites.json";
+
+async function readFavourites({ owner, repo, token }) {
+  const res = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${FAVOURITES_PATH}?ref=${OUTPUT_BRANCH}`,
+    { headers: ghHeaders(token), cache: "no-store" }
+  );
+  // No file yet is not an error; nothing has been marked.
+  if (res.status === 404) return { ids: [], sha: null };
+  if (!res.ok) throw new Error(`Could not read favourites (${res.status})`);
+  const data = await res.json();
+  const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, "")), (c) => c.charCodeAt(0));
+  const parsed = JSON.parse(new TextDecoder("utf-8").decode(bytes));
+  return { ids: Array.isArray(parsed.ids) ? parsed.ids : [], sha: data.sha };
+}
+
+async function writeFavourites({ owner, repo, token }, ids, sha) {
+  const body = JSON.stringify({ ids, updated_at: new Date().toISOString() }, null, 2);
+  const encoded = btoa(String.fromCharCode(...new TextEncoder().encode(body)));
+  return ghJson(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${FAVOURITES_PATH}`,
+    {
+      method: "PUT",
+      headers: { ...ghHeaders(token), "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: "dashboard: favourites", content: encoded, branch: OUTPUT_BRANCH,
+        ...(sha ? { sha } : {}),
+      }),
+    }
+  );
+}
+
 function ghHeaders(token) {
   return { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" };
 }
@@ -927,6 +962,9 @@ export default function App() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [favourites, setFavourites] = useState([]);
+  const [favouritesOnly, setFavouritesOnly] = useState(false);
+  const [savingFavourite, setSavingFavourite] = useState("");
   const [dashboardRenderingId, setDashboardRenderingId] = useState(null);
   const [runningRuns, setRunningRuns] = useState([]);
   const [runningError, setRunningError] = useState(null);
@@ -1692,10 +1730,37 @@ export default function App() {
     try {
       const items = await loadDashboardEntries({ owner: settings.owner, repo: settings.repo, token: settings.token });
       setDashboardItems(items);
+      // Not fatal: a dashboard that loads without its marks is still a
+      // dashboard, and nothing has been lost.
+      readFavourites(settings).then(({ ids }) => setFavourites(ids)).catch(() => {});
     } catch (err) {
       setDashboardError(String(err.message || err));
     } finally {
       setDashboardLoading(false);
+    }
+  }
+
+  // Marking is a write to a shared file, so it is done read-modify-write
+  // against the current sha. The row flips immediately and is put back if
+  // the write is refused -- waiting on a round trip to see a heart fill in
+  // would make the whole thing feel broken.
+  async function toggleFavourite(item) {
+    const key = `${item.type}:${item.id}`;
+    const wanted = !favourites.includes(item.id);
+    setSavingFavourite(key);
+    setFavourites((prev) => (wanted ? [...prev, item.id] : prev.filter((id) => id !== item.id)));
+    try {
+      const { ids, sha } = await readFavourites(settings);
+      const next = wanted
+        ? [...new Set([...ids, item.id])]
+        : ids.filter((id) => id !== item.id);
+      await writeFavourites(settings, next, sha);
+      setFavourites(next);
+    } catch (err) {
+      setFavourites((prev) => (wanted ? prev.filter((id) => id !== item.id) : [...prev, item.id]));
+      setDashboardError(String(err.message || err));
+    } finally {
+      setSavingFavourite("");
     }
   }
 
@@ -1825,9 +1890,22 @@ export default function App() {
             </div>
           )}
 
+          {!selectedItem && favourites.length > 0 && (
+            <label className="check-pill fav-filter">
+              <input
+                type="checkbox"
+                checked={favouritesOnly}
+                onChange={(e) => setFavouritesOnly(e.target.checked)}
+              />
+              ♥ Marked for YouTube ({favourites.length})
+            </label>
+          )}
+
           {!selectedItem && (
             <div className="dashboard-grid">
-              {dashboardItems.map((item) => {
+              {dashboardItems
+                .filter((item) => !favouritesOnly || favourites.includes(item.id))
+                .map((item) => {
                 const key = `${item.type}:${item.id}`;
                 const title =
                   item.type === "draft" ? item.preview?.title || item.id
@@ -1865,6 +1943,18 @@ export default function App() {
                       <div className="dashboard-card-actions">
                         <button type="button" onClick={() => setSelectedItem({ type: item.type, id: item.id })}>
                           View
+                        </button>
+                        <button
+                          type="button"
+                          className={`fav-button${favourites.includes(item.id) ? " on" : ""}`}
+                          title={favourites.includes(item.id)
+                            ? "Marked for YouTube — click to unmark"
+                            : "Mark this one for YouTube"}
+                          aria-pressed={favourites.includes(item.id)}
+                          disabled={savingFavourite === key}
+                          onClick={() => toggleFavourite(item)}
+                        >
+                          {favourites.includes(item.id) ? "♥" : "♡"}
                         </button>
                         {confirmDeleteId === key ? (
                           <>

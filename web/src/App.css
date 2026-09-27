@@ -1272,3 +1272,18 @@ button.secondary {
   font: inherit;
   line-height: 1.45;
 }
+
+/* Marked for YouTube. The mark lives on the output branch rather than in
+   this browser, because finding these again later is the point and later
+   is routinely a different device. */
+.fav-button {
+  min-width: 40px;
+  padding: 6px 10px;
+  font-size: 16px;
+  line-height: 1;
+}
+.fav-button.on {
+  color: #e0245e;
+  border-color: #e0245e;
+}
+.fav-filter { margin-bottom: 12px; }
