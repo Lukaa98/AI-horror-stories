@@ -10,7 +10,7 @@ const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v12";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V13.1 — Mark the ones worth uploading";
+const UI_VERSION = "V13.2 — Mark the ones worth uploading";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v12";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -534,6 +534,23 @@ async function writeFavourites({ owner, repo, token }, ids, sha) {
         ...(sha ? { sha } : {}),
       }),
     }
+  );
+}
+
+function FavouriteButton({ item, favourites, saving, onToggle, className = "" }) {
+  const marked = favourites.includes(item.id);
+  return (
+    <button
+      type="button"
+      className={`fav-button${marked ? " on" : ""}${className ? ` ${className}` : ""}`}
+      title={marked ? "Marked for YouTube — click to unmark" : "Mark this one for YouTube"}
+      aria-label={marked ? "Unmark for YouTube" : "Mark for YouTube"}
+      aria-pressed={marked}
+      disabled={saving}
+      onClick={() => onToggle(item)}
+    >
+      {marked ? "\u2665" : "\u2661"}
+    </button>
   );
 }
 
@@ -1921,6 +1938,9 @@ export default function App() {
                 const typeLabel = item.type === "draft" ? "Draft" : item.type === "battle" ? "Battle" : item.type === "single-car" ? "Single Car Story" : "Video Test";
                 return (
                   <article className="dashboard-card" key={key}>
+                    <FavouriteButton item={item} favourites={favourites}
+                                     saving={savingFavourite === key}
+                                     onToggle={toggleFavourite} className="fav-corner" />
                     {thumbUrl && <img src={thumbUrl} alt={title} />}
                     <div className="dashboard-card-body">
                       <span className={`dashboard-type ${item.type}`}>{typeLabel}</span>
@@ -1943,18 +1963,6 @@ export default function App() {
                       <div className="dashboard-card-actions">
                         <button type="button" onClick={() => setSelectedItem({ type: item.type, id: item.id })}>
                           View
-                        </button>
-                        <button
-                          type="button"
-                          className={`fav-button${favourites.includes(item.id) ? " on" : ""}`}
-                          title={favourites.includes(item.id)
-                            ? "Marked for YouTube — click to unmark"
-                            : "Mark this one for YouTube"}
-                          aria-pressed={favourites.includes(item.id)}
-                          disabled={savingFavourite === key}
-                          onClick={() => toggleFavourite(item)}
-                        >
-                          {favourites.includes(item.id) ? "♥" : "♡"}
                         </button>
                         {confirmDeleteId === key ? (
                           <>
@@ -1999,6 +2007,9 @@ export default function App() {
             const key = `${item.type}:${item.id}`;
             return (
               <div className="dashboard-detail">
+                <FavouriteButton item={item} favourites={favourites}
+                                 saving={savingFavourite === key}
+                                 onToggle={toggleFavourite} className="fav-corner" />
                 <button type="button" className="secondary" onClick={() => setSelectedItem(null)}>Back to list</button>
 
                 {item.type === "draft" && item.preview && (
