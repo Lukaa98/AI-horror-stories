@@ -1374,22 +1374,36 @@ def _rules(narrations, **extra):
                                                market={"median": 200000})
 
 
-def test_the_car_going_on_sale_does_not_count_as_its_history():
-    """The first build with a history field answered it with "Aston Martin
-    launched the updated Vantage in 2025", and passed, because 2025 was in
-    the script. A fact dated inside the car's own model years and phrased
-    as its arrival is the car existing, not something that happened to it."""
-    launched = {"year": 2025,
-                "fact": "Aston Martin launched the updated Vantage in 2025 with revisions."}
-    assert any("going on sale" in rule
-               for rule in _rules(["It makes 656 hp and 590 lb-ft in 2025.", "So would you?"],
-                                  history=launched))
+def test_a_history_with_nothing_specific_in_it_is_rejected():
+    """The first rule keyed on "debuted" and threw out "debuted as a
+    limited-production supercar, blending Mercedes luxury with McLaren's
+    racing pedigree" -- which is thin, but thin is the reason, and the year
+    a car arrived is a real part of its story. What makes a fact specific
+    is something to hold on to: a figure that is not just its own year, or
+    a name that is not the car's own."""
+    import single_car_short
 
-    # A dated event is fine even when it falls in the model years.
-    won = {"year": 2025, "fact": "Won the Nurburgring 24 outright in 2025."}
-    assert not any("going on sale" in rule
-                   for rule in _rules(["It makes 656 hp and 590 lb-ft in 2025.", "So would you?"],
-                                      history=won))
+    def rejected(fact, year, make="Mercedes Benz", model="Slr Mclaren Roadster"):
+        scenes = [f"It makes 617 hp and 575 lb-ft in {year}.", "So would you?"]
+        package = {"scenes": [{"narration": t} for t in scenes], "script": " ".join(scenes),
+                   "start_year": year, "end_year": year + 1,
+                   "history": {"year": year, "fact": fact}}
+        return any("nothing specific" in rule for rule in
+                   single_car_short._script_violations(package, make, model,
+                                                       market={"median": 300000}))
+
+    # A figure, or a name that is not the car's own.
+    assert not rejected("Only 2,157 were built before Mercedes ended production.", 2009)
+    assert not rejected("The tub was built by McLaren in Woking while the V8 "
+                        "was assembled at Affalterbach.", 2003)
+
+    # Neither.
+    assert rejected("Revered by enthusiasts, it has a real performance legacy.", 2008)
+    assert rejected("Aston Martin launched the updated Vantage in 2025 with significant "
+                    "revisions over its predecessor.", 2025, "Aston Martin", "Vantage")
+
+    # Its own year is not a figure, and its own name is not a name.
+    assert rejected("In 2008 the SLR McLaren Roadster arrived as a supercar.", 2008)
 
 
 def test_a_scene_that_asserts_a_part_matters_without_saying_why_is_caught():
@@ -1514,12 +1528,13 @@ def test_a_rejected_history_is_researched_again_rather_than_reworded(monkeypatch
               "So would you?"]
     package = {"scenes": [{"narration": t} for t in scenes], "script": " ".join(scenes),
                "start_year": 2008, "end_year": 2009,
-               "history": {"year": 2008, "fact": "The SLR Roadster debuted in 2008."}}
+               "history": {"year": 2008, "fact": "It arrived as a supercar."}}
 
     fixed = single_car_short._repair_violations(
         package, "Mercedes-Benz", "SLR McLaren", {"median": 300000}, "SLR McLaren")
 
-    assert "debuted" in asked["rejected"], "the rejected fact is named so it is not returned again"
+    assert "arrived as a supercar" in asked["rejected"], \
+        "the rejected fact is named so it is not returned again"
     assert fixed["history"]["year"] == 1999
     assert "75 of the 300 SLR" in fixed["script"], "and the narration actually says it"
     single_car_short._REPAIR_LOG.clear()
@@ -1529,14 +1544,14 @@ def test_a_researched_history_that_is_no_better_is_discarded(monkeypatch):
     import single_car_short
 
     monkeypatch.setattr(single_car_short, "_research_replacement_history",
-                        lambda *a, **k: {"year": 2008, "fact": "The SLR Roadster was released in 2008."})
+                        lambda *a, **k: {"year": 2008, "fact": "It was a supercar."})
     scenes = ["It makes 617 hp and 575 lb-ft.",
               "In 2008 the SLR Roadster debuted as a limited-production model.",
               "So would you?"]
     original = list(scenes)
     package = {"scenes": [{"narration": t} for t in scenes], "script": " ".join(scenes),
                "start_year": 2008, "end_year": 2009,
-               "history": {"year": 2008, "fact": "The SLR Roadster debuted in 2008."}}
+               "history": {"year": 2008, "fact": "It arrived as a supercar."}}
 
     fixed = single_car_short._repair_violations(
         package, "Mercedes-Benz", "SLR McLaren", {"median": 300000}, "SLR McLaren")

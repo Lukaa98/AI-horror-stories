@@ -521,11 +521,15 @@ viewer can already see. Every appearance beat still has to carry a fact the pict
 them: what that vent actually cools, which other model shares that wheel, what the option cost new,
 how many were built in that colour. Point at the thing, then say the part that isn't visible.
 
-"history" is one specific, well-documented thing that happened to this car, with the year it
-happened, found with web search -- a race result, a record, a production decision, what it
-replaced or was replaced by, a limited run, an engineering choice and why it was made, a person
-who signed it off. "Revered by enthusiasts", "a performance legacy" and "became iconic" are not
-history: they are opinions with no date on them. That fact has to be SPOKEN in the history beat,
+"history" is one specific, well-documented thing about this car's background, with the year,
+found with web search -- a race result, how many were built and why that number, what it
+replaced, who engineered which part of it, a special edition and what made it different, an
+engineering decision and the reason for it. What makes it specific is something to hold on to: a
+figure, or a name that is not the car's own. "Only 2,157 were built" has one. "The tub was built
+by McLaren in Woking while the V8 was assembled at Affalterbach" has the other. "A
+limited-production supercar blending luxury with racing pedigree" has neither, and neither does
+"revered by enthusiasts" or "became iconic". When the car arrived is part of its story and worth
+saying -- it is just not, on its own, the beat. That fact has to be SPOKEN in the history beat,
 not merely recorded in the field -- the field exists so it has been researched before the
 narration needs it.
 
@@ -838,17 +842,31 @@ def _script_violations(package, make, model, market=None):
     history = (package.get("history") or {})
     year = history.get("year")
     fact = str(history.get("fact") or "")
-    # "Aston Martin launched the updated Vantage in 2025" is not history,
-    # it is the car existing. A fact dated inside the car's own model years
-    # and phrased as its arrival is the loophole the first build found.
-    own_years = [y for y in (package.get("start_year"), package.get("end_year")) if y]
-    launched = re.search(r"\b(?:launch\w*|introduc\w*|unveil\w*|debut\w*|released|"
-                         r"went on sale|arrived|came out|premier\w*)\b", fact, re.I)
-    if year and launched and own_years and min(own_years) <= int(year) <= max(own_years):
+    # A history is rejected for carrying no specifics, not for how it is
+    # worded. The first rule keyed on "debuted" and threw out "debuted as a
+    # limited-production supercar, blending Mercedes luxury with McLaren's
+    # racing pedigree" -- which is thin, but thin is the reason, and the
+    # year a car arrived is a real part of its story.
+    #
+    # What makes a fact specific is something to hold on to: a figure that
+    # is not just its own year, or a name that is not the car's own. "Built
+    # 75 for homologation" has one. "Won its class at Le Mans" has the
+    # other. "A limited-production supercar blending luxury with racing
+    # pedigree" has neither, and neither does "revered by enthusiasts".
+    own = {token.lower() for token in _name_tokens(make, model)}
+    own |= {"the", "a", "an", "it", "its", "this", "was", "in", "and"}
+    figures = [n for n in re.findall(r"\b\d[\d,]*\b", fact)
+               if not (year and n.replace(",", "") == str(int(year)))]
+    names = [word for word in re.findall(r"\b[A-Z][a-zA-Z'\-]+", fact)
+             if word.lower() not in own]
+    # The opening word is capitalised because it opens the sentence.
+    if names and fact.strip().startswith(names[0]):
+        names = names[1:]
+    if fact and not figures and not names:
         violations.append(
-            f'your history is "{fact[:120]}" -- that is the car going on sale, not something '
-            "that happened to it. Find a race result, a record, a production decision, what it "
-            "replaced, a limited run, or an engineering choice and why it was made."
+            f'your history is "{fact[:120]}" -- there is nothing specific in it. Give a figure '
+            "or a name: how many were built and why, a race and where it finished, who "
+            "engineered it, what it replaced, what it beat."
         )
     elif year and not re.search(rf"\b{int(year)}\b", script):
         violations.append(
@@ -1144,12 +1162,10 @@ def _research_replacement_history(label, rejected, year_scope=""):
         f"{f' ({year_scope})' if year_scope else ''}, with the year it happened. "
         "Use web search and verify it.\n\n"
         f"It must NOT be this, which was already rejected: \"{rejected}\"\n\n"
-        "The car being launched, released, unveiled or going on sale does not count -- that is "
-        "the car existing. Neither does anything undated, like being revered by enthusiasts or "
-        "having a performance legacy. What counts: a race result, a record, how many were built "
-        "and why that number, what it replaced or was replaced by, a special edition and what "
-        "made it different, an engineering decision and the reason for it, or a person who made "
-        "one of those calls.\n\n"
+        "It has to carry something to hold on to: a figure, or a name that is not the car's "
+        "own. \"Only 2,157 were built\" has one. \"The tub was built by McLaren in Woking\" has "
+        "the other. \"A limited-production supercar blending luxury with racing pedigree\" has "
+        "neither, and neither does \"revered by enthusiasts\".\n\n"
         'Reply as JSON: {"year": <integer>, "fact": "<one sentence, spoken, verified>"}'
     )
     response = with_openai_retry(lambda: OpenAI().responses.create(
@@ -1186,7 +1202,7 @@ def _repair_history(package, make, model, market, label):
     scenes[1]["narration"] = f"In {found['year']}, {found['fact'][0].lower()}{found['fact'][1:]}"
     candidate["script"] = " ".join(scene["narration"] for scene in scenes)
     candidate["word_count"] = _word_count(candidate["script"])
-    if any("going on sale" in rule or "never said it" in rule
+    if any("nothing specific in it" in rule or "never said it" in rule
            for rule in _script_violations(candidate, make, model, market)):
         _note_repair(what="history", outcome="did not help", returned=found["fact"][:300])
         return None
@@ -1217,7 +1233,7 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
         violation = violations[0]
         # A rule that needs a fact the build does not have cannot be fixed
         # by rewriting a sentence around the fact it already rejected.
-        if "going on sale" in violation or "never said it" in violation:
+        if "nothing specific in it" in violation or "never said it" in violation:
             replaced = _repair_history(package, make, model, market, label)
             if replaced is None:
                 refused.add(violation)
