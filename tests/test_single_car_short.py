@@ -2142,3 +2142,47 @@ def test_the_scraper_wrapper_keeps_whether_the_auction_finished():
         {"title": "1996 Porsche 911 Turbo", "price_text": "High Bid $267,000",
          "auction_state": "unknown", "facts": {}, "sections": {}})
     assert "What it actually sold for" not in block
+
+
+def test_asked_for_angles_replace_a_beat_rather_than_lengthening_the_video():
+    """The person knows things research will not surface on its own -- that
+    the SLR launched against the Enzo and the Carrera GT at roughly the same
+    money and is the only one of the three that did not go up. Asked for,
+    that is a beat; not asked for, the script is exactly what it was."""
+    import single_car_short
+
+    assert single_car_short._angles_block("") == ""
+    assert single_car_short._angles_block(None) == ""
+    assert single_car_short._angles_block("   \n\n  ") == ""
+
+    block = single_car_short._angles_block(
+        "- the trinity: Enzo, Carrera GT, SLR\n\n  only the SLR didn't go up\n")
+    assert "- the trinity: Enzo, Carrera GT, SLR" in block
+    assert "- only the SLR didn't go up" in block, "bullets and blank lines are tidied"
+    # The video does not get longer; a styling beat goes first.
+    assert "REPLACES one you would otherwise have written" in block
+    assert "how the car looks first" in block
+
+    # Three tiers, so a theory is not dressed up as a fact and a wrong claim
+    # is not repeated back.
+    assert "state it as fact" in block
+    assert "say it as what people say" in block
+    assert "do NOT repeat it" in block
+    assert "never say the person asked for it" in block
+
+
+def test_the_angles_reach_the_prompt_and_the_workflow_can_send_them():
+    import single_car_short
+    from pathlib import Path
+
+    prompt = single_car_short._research_script_prompt(
+        "Mercedes-Benz SLR McLaren", "model years 2004-2009",
+        angles="the trinity: Enzo, Carrera GT, SLR")
+    assert "the trinity: Enzo, Carrera GT, SLR" in prompt
+    # And nothing is added to a build that asked for nothing.
+    assert "ASKED FOR THESE SPECIFICALLY" not in single_car_short._research_script_prompt(
+        "Mercedes-Benz SLR McLaren", "model years 2004-2009")
+
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/cars-research.yml").read_text()
+    assert "angles:" in workflow and "--angles" in workflow

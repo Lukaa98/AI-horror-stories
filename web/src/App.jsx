@@ -857,6 +857,10 @@ export default function App() {
   // $267,000 on the same car -- and either was four characters away from
   // being right.
   const [currentPrice, setCurrentPrice] = useState("");
+  // Things to cover, in the person's own words. They know what research
+  // will not surface -- that the SLR launched against the Enzo and the
+  // Carrera GT and is the only one of the three that did not go up.
+  const [angles, setAngles] = useState("");
   const [photoUrls, setPhotoUrls] = useState({ front: "", side: "", rear: "", engine: "", interior: "", rival: "" });
   // Freely-named extra photos (e.g. "Gauge Cluster") on top of the fixed
   // fields above -- each becomes its own detail beat the script is told
@@ -1188,6 +1192,7 @@ export default function App() {
       voice,
       auction_url: useAuctionUrl ? auctionUrl.trim() : "",
       current_price: currentPrice.trim(),
+      angles: angles.trim(),
       disable_comparison: String(!compareEnabled),
       rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
       photo_front: useManualPhotos ? (photoUrls.front || "").trim() : "",
@@ -1221,6 +1226,7 @@ export default function App() {
           voice,
           auction_url: useAuctionUrl ? auctionUrl.trim() : "",
           current_price: currentPrice.trim(),
+      angles: angles.trim(),
           // One JSON input rather than six string ones: workflow_dispatch
           // allows only 25 inputs in total and the photo URLs were using up
           // a quarter of them.
@@ -1362,6 +1368,7 @@ export default function App() {
     if (inputs.voice) setVoice(inputs.voice);
     setAuctionUrl(inputs.auction_url || "");
     setCurrentPrice(inputs.current_price || "");
+    setAngles(inputs.angles || "");
     setUseAuctionUrl(!!inputs.auction_url);
     const slots = {
       front: inputs.photo_front || "", side: inputs.photo_side || "", rear: inputs.photo_rear || "",
@@ -2629,6 +2636,19 @@ export default function App() {
                         disabled={stage === "single-car-building"}
                       />
                       <Tip text="Say what the car goes for and the video uses exactly that, with no scraping and no guessing. Leave it empty and the build reads comparable sales off the auction site instead -- which is right most of the time, and expensive when it isn't." />
+                    </label>
+
+                    <label className="field-row field-row-tall">
+                      <textarea
+                        value={angles}
+                        onChange={(e) => setAngles(e.target.value)}
+                        rows={4}
+                        placeholder={"Things you want it to cover, one per line (optional)\n"
+                          + "e.g. the trinity — Enzo, Carrera GT and the SLR launched around the same "
+                          + "money, and only the SLR didn't go up"}
+                        disabled={stage === "single-car-building"}
+                      />
+                      <Tip text="Things you know that research won't surface on its own. Each becomes a beat and replaces one the model would have written, so the video doesn't get longer -- a styling beat goes first. Claims are checked: a fact is stated, a theory enthusiasts widely hold is said as one, and anything wrong is corrected rather than repeated." />
                     </label>
 
                     {useManualPhotos && (

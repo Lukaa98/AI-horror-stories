@@ -1263,3 +1263,12 @@ button.secondary {
 .prev-build-body strong { overflow-wrap: anywhere; }
 .prev-build-when { font-size: 12px; opacity: 0.7; }
 .prev-build-body select { font-size: 12px; padding: 3px 6px; }
+
+/* A field whose control is a textarea rather than a single line. */
+.field-row-tall { align-items: flex-start; }
+.field-row-tall textarea {
+  width: 100%;
+  resize: vertical;
+  font: inherit;
+  line-height: 1.45;
+}
