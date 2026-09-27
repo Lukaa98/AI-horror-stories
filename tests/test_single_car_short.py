@@ -2186,3 +2186,28 @@ def test_the_angles_reach_the_prompt_and_the_workflow_can_send_them():
     workflow = (Path(__file__).resolve().parents[1]
                 / ".github/workflows/cars-research.yml").read_text()
     assert "angles:" in workflow and "--angles" in workflow
+
+
+def test_the_manifest_records_what_the_build_was_asked_for():
+    """The build that proved the angles feature worked could not say it had
+    been used: the trinity beat was in the narration and build_inputs read
+    as though nobody had asked for it. current_price was missing the same
+    way, so the create form read it back empty however it had been set."""
+    import re
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "cars/automation/single_car_short.py").read_text()
+    recorded = source[source.index('"build_inputs": {'):]
+    recorded = recorded[:recorded.index("\n        },")]
+
+    for field in ('"angles": args.angles', '"current_price": args.current_price'):
+        assert field in recorded, f"{field} never reaches the manifest"
+
+    # Every key the create form refills itself from has to be written here,
+    # or the field silently comes back blank.
+    form = (Path(__file__).resolve().parents[1] / "web/src/App.jsx").read_text()
+    read_back = set(re.findall(r"inputs\.([a-z_]+)", form))
+    written = set(re.findall(r'"([a-z_]+)":', recorded))
+    missing = read_back - written - {"photos"}
+    assert not missing, f"the form refills from {sorted(missing)}, which no build records"

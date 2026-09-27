@@ -2533,6 +2533,14 @@ def build_short(args):
             "photo_race_flip": photos.get("race_flip") or "",
             "photo_rival_flip": photos.get("rival_flip") or "",
             "disable_comparison": "true" if args.disable_comparison else "false",
+            # What the script was asked to cover, and what the car was said
+            # to be worth. Both were left out, so the create form read them
+            # back as empty however they were set -- and the build that
+            # proved the angles feature worked could not say it had been
+            # used: the trinity beat was in the narration while the manifest
+            # read as though nobody had asked for it.
+            "angles": args.angles or "",
+            "current_price": args.current_price or "",
             "extra_photos": args.extra_photos or "",
         },
         **package,
