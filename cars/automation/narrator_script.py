@@ -52,27 +52,17 @@ PITCH_FACTOR_LIMITS = (0.85, 1.05)
 # What the last synthesis actually did, so narration_settings() reports a
 # measurement instead of the constant it was configured with.
 _LAST_PITCH = {}
-# gpt-audio picks a different register every call -- takes have come back
-# anywhere from 133 to 157 Hz on the same script and settings. Shifting a
-# high one down sounds processed, so a high one is simply asked for again:
-# a fresh take is a real performance rather than a stretched one, and the
-# model usually lands inside the band within an extra try or two.
+# gpt-audio picks its own register every call -- measured across this
+# channel its takes came back anywhere from 132 to 157 Hz. Two attempts
+# were made at evening that out: shifting the pitch, which sounded
+# processed because it is a time-stretch, and then re-recording anything
+# outside a band, which kept the voice honest but spent two extra
+# generations per build to reject a read the model meant.
 #
-# The band is where the approved takes were, at 130 and 134 Hz. 148 was the
-# one that came back sounding wrong.
-# Measured across this channel's builds, echo's takes came back at 132,
-# 134, 140, 141, 143, 148, 148 and 157 Hz. 134 was approved by ear and 148
-# was reported as wrong, so the line sits between them -- but the first
-# ceiling was 140, below the median of what the voice actually does, and
-# two builds running spent three generations to keep a take at 141 and 142
-# anyway. A band the voice misses most of the time is a tax, not a filter.
-AUDIO_PITCH_BAND = (
-    float(os.getenv("OPENAI_AUDIO_PITCH_MIN", "122")),
-    float(os.getenv("OPENAI_AUDIO_PITCH_MAX", "145")),
-)
-# Each retake is another generation, so this is a small number. Whatever it
-# ends on, the closest take of the ones heard is the one that ships.
-AUDIO_PITCH_RETAKES = int(os.getenv("OPENAI_AUDIO_PITCH_RETAKES", "2"))
+# Neither is wanted. The take is the performance, and a script is the thing
+# to change when a video is not good enough. The pitch is still measured,
+# because it is how one build's voice gets compared with another's, and
+# nothing is done about it.
 # Measured, not chosen. Three instructions of increasing urgency were read
 # against the same script: this one came back at 2.43 words a second,
 # "brisk" at 2.17, and "as fast as you can" at 2.34 -- asking harder made
@@ -331,48 +321,10 @@ def _one_take(text, output_path):
     return output_path
 
 
-def _distance_from_band(hz, band=AUDIO_PITCH_BAND):
-    """How far outside the wanted register a take is; 0 when inside it."""
-    if hz is None:
-        return float("inf")
-    return max(band[0] - hz, hz - band[1], 0.0)
-
-
-def _synthesize_with_audio_model(text, output_path, retakes=AUDIO_PITCH_RETAKES):
-    """Record the script, asking again if the take comes back out of register.
-
-    The model picks its own register each call -- 133 to 157 Hz across takes
-    of the same script -- and shifting a high one down sounds processed,
-    because that is a time-stretch. Asking for another take is not: it is a
-    real performance, just a different one. The closest take of those heard
-    is the one that ships.
-    """
-    best = None
-    for take in range(1, max(1, retakes + 1) + 1):
-        _one_take(text, output_path)
-        try:
-            measured = median_f0(output_path)
-        except Exception as error:  # noqa: BLE001 - a build is worth more than a register
-            print(f"[narration] Could not measure take {take} ({error}); keeping it.", flush=True)
-            measured = None
-            best = (0.0, measured, output_path.read_bytes())
-            break
-        distance = _distance_from_band(measured)
-        if best is None or distance < best[0]:
-            best = (distance, measured, output_path.read_bytes())
-        if distance == 0:
-            print(f"[narration] Take {take} measured {measured:.1f} Hz, in register.", flush=True)
-            break
-        print(f"[narration] Take {take} measured {measured:.1f} Hz, outside "
-              f"{AUDIO_PITCH_BAND[0]:.0f}-{AUDIO_PITCH_BAND[1]:.0f} Hz"
-              + ("; asking for another." if take <= retakes else "; keeping the closest."),
-              flush=True)
-
-    output_path.write_bytes(best[2])
-    # After _deepen, which clears the record before writing its own.
-    result = _deepen(output_path)
-    _LAST_PITCH.update(takes=take, take_hz=best[1], band=list(AUDIO_PITCH_BAND))
-    return result
+def _synthesize_with_audio_model(text, output_path):
+    """Record the script once and keep what comes back."""
+    _one_take(text, output_path)
+    return _deepen(output_path)
 
 
 def synthesize_narration(text, output_path, preset=DEFAULT_VOICE_PRESET, model=DEFAULT_TTS_MODEL, speed=None):
