@@ -1,0 +1,2943 @@
+{
+  "car": {
+    "make": "Mercedes Benz",
+    "model": "Slr Mclaren Roadster",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Mercedes Benz",
+    "model": "Slr Mclaren Roadster",
+    "query": "",
+    "start_year": 2008,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/3LadvLR0/2008-mercedes-benz-slr-mclaren-roadster",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/30AYZgMK-d30NQLEH79/edit/4ISTW.jpg?t=179011424309",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/30AYZgMK-GAj0bJ3oe3/edit/QKico.jpg?t=179011430137",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/30AYZgMK-YgN6DNr5yC/edit/mTkYA.jpg?t=179011432896",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-CUwRc0Rej7.jpg?t=179010095053",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/30AYZgMK--dWzUMF723/edit/mh66i.jpg?t=179010788367",
+    "photo_rival": "",
+    "rival_car": "",
+    "photo_race": "",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "true",
+    "extra_photos": "[{\"id\":\"closeup-restored-1790487556726-0\",\"label\":\"frotn close\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/30AYZgMK-hx6Wsm0Ulv/edit/2fYU0.jpg?t=179011427036\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-1\",\"label\":\"doors up\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-qa40r225Yq.jpg?t=179009957590\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-2\",\"label\":\"side back with doorsup\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-KXEWCn8BDs.jpg?t=179009975208\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-3\",\"label\":\"back with doors up\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-Nzl7C1hhtC.jpg?t=179009962874\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-4\",\"label\":\"side doord up\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-idMxux4xIi.jpg?t=179009988064\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-5\",\"label\":\"sood doors up\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=1388,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/30AYZgMK-l8EOMvGynu.jpeg?t=179011301728\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-6\",\"label\":\"beatufiul merc 2 headlights\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-9zN8J6bpf9.jpg?t=179009992409\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-7\",\"label\":\"grills multiple for heat dissopation as exhcaust is just right there\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-sL7cEUXY73.jpg?t=179010020423\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-8\",\"label\":\"back lights\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK--Vts4rXpV-.jpg?t=179009989522\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-9\",\"label\":\"spoler up when car is fars more then 200 miles hour\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-hBzswZgQfN.jpg?t=179010033647\",\"slot\":\"rear\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-10\",\"label\":\"grill for supercharger\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-flAa1zjeNh.jpg?t=179009996900\",\"slot\":\"front\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-11\",\"label\":\"beautiful properler inspired wheel\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-0VVfYdSph1.jpg?t=179010036211\",\"slot\":\"side\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-12\",\"label\":\"interior bucket seats\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-zedAXBHb04.jpg?t=179010076112\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-13\",\"label\":\"sporty gauges blue\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/30AYZgMK-GDgsCk4Nml/edit/IRwV4.jpg?t=179010784565\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-14\",\"label\":\"starts from the button from auto trasn biggest down\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-OTzQaS46IK.jpg?t=179010082202\",\"slot\":\"interior\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-15\",\"label\":\"spuercharger v8\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-5r6Agp4Met.jpg?t=179010094054\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-16\",\"label\":\"anoteher angle\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-vV4ebrsnoc.jpg?t=179010097766\",\"slot\":\"engine\",\"note\":\"\"},{\"id\":\"closeup-restored-1790487556726-17\",\"label\":\"difussior at the back\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/6ecff324d6a35c8b07adf7704b062aa5f7d497a5/photos/30AYZgMK-ckfd_qpaF0.jpg?t=179010016900\",\"slot\":\"engine\",\"note\":\"\"}]"
+  },
+  "title": "Why the SLR McLaren Roadster Is Underrated",
+  "youtube_title": "Is the SLR McLaren Roadster a Hidden Gem? \ud83d\udd25",
+  "key_specs": {
+    "horsepower": "617 hp",
+    "torque": "575 lb-ft",
+    "zero_to_sixty": "3.8 sec",
+    "redline": "7,000 rpm",
+    "engine": "5.4L supercharged V8",
+    "price": "~$300K today"
+  },
+  "history": {
+    "year": 2008,
+    "fact": "One of 204 Roadster examples sold in the US, inspired by the 300 SLR Uhlenhaut Coup\u00e9."
+  },
+  "start_year": 2007,
+  "end_year": 2009,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Price Depreciation",
+      "photo_label": "exterior front",
+      "narration": "This car originally retailed for approximately $500,000, but you can grab one today for about $300,000.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "$500K -> $300K (-13%/yr)",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Uhlenhaut Inspired",
+      "photo_label": "interior",
+      "narration": "In 2008, the SLR McLaren Roadster was one of only 204 sold in the US, drawing inspiration from the iconic 300 SLR Uhlenhaut Coup\u00e9.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "Supercharged Power",
+      "photo_label": "engine bay",
+      "narration": "Under the hood lies a McLaren-designed 5.4-liter supercharged V8 producing 617 horsepower and 575 lb-ft of torque.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "617 hp",
+      "stat_label_2": "Torque",
+      "stat_value_2": "575 lb-ft"
+    },
+    {
+      "media_type": "detail",
+      "headline": "Automatic Transmission",
+      "photo_label": "[side-closeup-restored-1790487556726-7-7] grills multiple for heat dissopation as exhcaust is just right there",
+      "narration": "Despite its automatic transmission, the SLR offers a high-performance, low-hassle drive that many enthusiasts appreciate for long journeys.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Aerodynamic Masterpiece",
+      "photo_label": "[side-closeup-restored-1790487556726-5-5] sood doors up",
+      "narration": "The striking gullwing doors aren\u2019t just stylish; they pay homage to Mercedes' racing heritage while improving cabin access.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Driving Feel",
+      "photo_label": "exterior rear",
+      "narration": "In performance, this car feels raw, combining its Mercurial V8 with luxury appointments.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Unique Value",
+      "photo_label": "exterior side",
+      "narration": "So, would you choose the SLR McLaren for its unique blend of attributes, or is something else calling your name?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Mercedes-Benz_SLR_McLaren",
+    "https://www.caranddriver.com/reviews/a18202660/2008-mercedes-benz-slr-mclaren-roadster-short-take-road-test/",
+    "https://www.roadandtrack.com/car-culture/a31207201/you-can-drive-home-a-mercedes-benz-slr-mclaren-roadster-for-less-than-250k/"
+  ],
+  "script": "This car originally retailed for approximately $500,000, but you can grab one today for about $300,000. In 2008, the SLR McLaren Roadster was one of only 204 sold in the US, drawing inspiration from the iconic 300 SLR Uhlenhaut Coup\u00e9. Under the hood lies a McLaren-designed 5.4-liter supercharged V8 producing 617 horsepower and 575 lb-ft of torque. Despite its automatic transmission, the SLR offers a high-performance, low-hassle drive that many enthusiasts appreciate for long journeys. The striking gullwing doors aren\u2019t just stylish; they pay homage to Mercedes' racing heritage while improving cabin access. In performance, this car feels raw, combining its Mercurial V8 with luxury appointments. So, would you choose the SLR McLaren for its unique blend of attributes, or is something else calling your name?",
+  "word_count": 130,
+  "repair_log": [
+    {
+      "what": "1 scene(s) assert that something matters without saying anything about it, starting with \"The striking gullwing doors ar",
+      "outcome": "applied",
+      "scene": 5,
+      "returned": "The striking gullwing doors aren\u2019t just stylish; they pay homage to Mercedes' racing heritage while improving cabin access."
+    }
+  ],
+  "voice_preset": "onyx",
+  "tts_speed": null,
+  "narration": {
+    "engine": "gpt-audio",
+    "model": "gpt-audio",
+    "voice": "echo",
+    "target_hz": 0.0,
+    "pitch": {
+      "measured_hz": 153.84615384615384,
+      "target_hz": null,
+      "factor": 1.0,
+      "source": "off",
+      "result_hz": 153.84615384615384
+    },
+    "tts_speed": null
+  },
+  "target_duration_seconds": 55.0,
+  "normalized_audio_duration_seconds": 54.261,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-mercedes-benz-slr-mclaren-roadste-20260927054036/narration.mp3",
+  "duration_seconds": 54.18,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.45,
+      "end": 0.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.54,
+      "end": 0.63,
+      "mouth": "small"
+    },
+    {
+      "start": 0.63,
+      "end": 0.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.72,
+      "end": 0.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.81,
+      "end": 2.07,
+      "mouth": "small"
+    },
+    {
+      "start": 2.07,
+      "end": 2.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.16,
+      "end": 2.25,
+      "mouth": "small"
+    },
+    {
+      "start": 2.25,
+      "end": 2.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.34,
+      "end": 2.88,
+      "mouth": "small"
+    },
+    {
+      "start": 2.88,
+      "end": 2.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.97,
+      "end": 3.96,
+      "mouth": "small"
+    },
+    {
+      "start": 3.96,
+      "end": 4.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.05,
+      "end": 4.68,
+      "mouth": "small"
+    },
+    {
+      "start": 4.68,
+      "end": 4.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.86,
+      "end": 4.95,
+      "mouth": "small"
+    },
+    {
+      "start": 4.95,
+      "end": 5.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.04,
+      "end": 5.22,
+      "mouth": "small"
+    },
+    {
+      "start": 5.22,
+      "end": 5.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.31,
+      "end": 5.58,
+      "mouth": "small"
+    },
+    {
+      "start": 5.58,
+      "end": 5.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.67,
+      "end": 5.76,
+      "mouth": "small"
+    },
+    {
+      "start": 5.76,
+      "end": 5.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.85,
+      "end": 5.94,
+      "mouth": "small"
+    },
+    {
+      "start": 5.94,
+      "end": 6.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.03,
+      "end": 6.39,
+      "mouth": "small"
+    },
+    {
+      "start": 6.39,
+      "end": 6.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.48,
+      "end": 6.84,
+      "mouth": "small"
+    },
+    {
+      "start": 6.84,
+      "end": 7.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.74,
+      "end": 8.1,
+      "mouth": "small"
+    },
+    {
+      "start": 8.1,
+      "end": 8.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.19,
+      "end": 8.55,
+      "mouth": "small"
+    },
+    {
+      "start": 8.55,
+      "end": 8.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.82,
+      "end": 9.18,
+      "mouth": "small"
+    },
+    {
+      "start": 9.18,
+      "end": 9.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.36,
+      "end": 9.54,
+      "mouth": "small"
+    },
+    {
+      "start": 9.54,
+      "end": 9.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.63,
+      "end": 9.99,
+      "mouth": "small"
+    },
+    {
+      "start": 9.99,
+      "end": 10.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.08,
+      "end": 11.07,
+      "mouth": "small"
+    },
+    {
+      "start": 11.07,
+      "end": 11.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.16,
+      "end": 11.61,
+      "mouth": "small"
+    },
+    {
+      "start": 11.61,
+      "end": 11.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.7,
+      "end": 11.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.79,
+      "end": 11.88,
+      "mouth": "small"
+    },
+    {
+      "start": 11.88,
+      "end": 11.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.97,
+      "end": 12.15,
+      "mouth": "small"
+    },
+    {
+      "start": 12.15,
+      "end": 12.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.33,
+      "end": 12.87,
+      "mouth": "small"
+    },
+    {
+      "start": 12.87,
+      "end": 12.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.96,
+      "end": 13.05,
+      "mouth": "small"
+    },
+    {
+      "start": 13.05,
+      "end": 13.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.41,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.59,
+      "end": 13.95,
+      "mouth": "small"
+    },
+    {
+      "start": 13.95,
+      "end": 14.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.04,
+      "end": 14.13,
+      "mouth": "small"
+    },
+    {
+      "start": 14.13,
+      "end": 14.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.22,
+      "end": 14.76,
+      "mouth": "small"
+    },
+    {
+      "start": 14.76,
+      "end": 14.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.85,
+      "end": 15.12,
+      "mouth": "small"
+    },
+    {
+      "start": 15.12,
+      "end": 15.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.3,
+      "end": 16.83,
+      "mouth": "small"
+    },
+    {
+      "start": 16.83,
+      "end": 16.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.92,
+      "end": 17.28,
+      "mouth": "small"
+    },
+    {
+      "start": 17.28,
+      "end": 17.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.82,
+      "end": 18.27,
+      "mouth": "small"
+    },
+    {
+      "start": 18.27,
+      "end": 18.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.36,
+      "end": 18.45,
+      "mouth": "small"
+    },
+    {
+      "start": 18.45,
+      "end": 18.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.63,
+      "end": 18.72,
+      "mouth": "small"
+    },
+    {
+      "start": 18.72,
+      "end": 18.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.81,
+      "end": 19.08,
+      "mouth": "small"
+    },
+    {
+      "start": 19.08,
+      "end": 19.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.17,
+      "end": 19.8,
+      "mouth": "small"
+    },
+    {
+      "start": 19.8,
+      "end": 19.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.89,
+      "end": 19.98,
+      "mouth": "small"
+    },
+    {
+      "start": 19.98,
+      "end": 20.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.07,
+      "end": 20.16,
+      "mouth": "small"
+    },
+    {
+      "start": 20.16,
+      "end": 20.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.25,
+      "end": 20.43,
+      "mouth": "small"
+    },
+    {
+      "start": 20.43,
+      "end": 20.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.52,
+      "end": 20.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.61,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.51,
+      "end": 21.6,
+      "mouth": "small"
+    },
+    {
+      "start": 21.6,
+      "end": 21.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.78,
+      "end": 22.05,
+      "mouth": "small"
+    },
+    {
+      "start": 22.05,
+      "end": 22.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.41,
+      "end": 24.12,
+      "mouth": "small"
+    },
+    {
+      "start": 24.12,
+      "end": 24.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.21,
+      "end": 24.3,
+      "mouth": "small"
+    },
+    {
+      "start": 24.3,
+      "end": 24.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.39,
+      "end": 24.48,
+      "mouth": "small"
+    },
+    {
+      "start": 24.48,
+      "end": 24.66,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.66,
+      "end": 24.84,
+      "mouth": "small"
+    },
+    {
+      "start": 24.84,
+      "end": 24.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.93,
+      "end": 25.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.11,
+      "end": 25.47,
+      "mouth": "small"
+    },
+    {
+      "start": 25.47,
+      "end": 25.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.56,
+      "end": 25.92,
+      "mouth": "small"
+    },
+    {
+      "start": 25.92,
+      "end": 26.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.01,
+      "end": 26.1,
+      "mouth": "small"
+    },
+    {
+      "start": 26.1,
+      "end": 26.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.19,
+      "end": 26.46,
+      "mouth": "small"
+    },
+    {
+      "start": 26.46,
+      "end": 26.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.55,
+      "end": 26.73,
+      "mouth": "small"
+    },
+    {
+      "start": 26.73,
+      "end": 27.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.27,
+      "end": 27.54,
+      "mouth": "small"
+    },
+    {
+      "start": 27.54,
+      "end": 27.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.63,
+      "end": 27.9,
+      "mouth": "small"
+    },
+    {
+      "start": 27.9,
+      "end": 27.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.99,
+      "end": 28.17,
+      "mouth": "small"
+    },
+    {
+      "start": 28.17,
+      "end": 28.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.26,
+      "end": 28.35,
+      "mouth": "small"
+    },
+    {
+      "start": 28.35,
+      "end": 28.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.44,
+      "end": 28.98,
+      "mouth": "small"
+    },
+    {
+      "start": 28.98,
+      "end": 29.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.25,
+      "end": 29.34,
+      "mouth": "small"
+    },
+    {
+      "start": 29.34,
+      "end": 29.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.43,
+      "end": 29.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.52,
+      "end": 29.61,
+      "mouth": "small"
+    },
+    {
+      "start": 29.61,
+      "end": 29.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.7,
+      "end": 29.79,
+      "mouth": "small"
+    },
+    {
+      "start": 29.79,
+      "end": 29.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.97,
+      "end": 30.06,
+      "mouth": "small"
+    },
+    {
+      "start": 30.06,
+      "end": 30.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.15,
+      "end": 30.42,
+      "mouth": "small"
+    },
+    {
+      "start": 30.42,
+      "end": 30.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.51,
+      "end": 30.6,
+      "mouth": "small"
+    },
+    {
+      "start": 30.6,
+      "end": 30.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.69,
+      "end": 30.96,
+      "mouth": "small"
+    },
+    {
+      "start": 30.96,
+      "end": 31.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.05,
+      "end": 31.32,
+      "mouth": "small"
+    },
+    {
+      "start": 31.32,
+      "end": 31.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.5,
+      "end": 31.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.86,
+      "end": 32.13,
+      "mouth": "small"
+    },
+    {
+      "start": 32.13,
+      "end": 32.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.4,
+      "end": 32.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.67,
+      "end": 32.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.76,
+      "end": 32.94,
+      "mouth": "small"
+    },
+    {
+      "start": 32.94,
+      "end": 33.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.21,
+      "end": 33.3,
+      "mouth": "small"
+    },
+    {
+      "start": 33.3,
+      "end": 33.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.39,
+      "end": 33.48,
+      "mouth": "small"
+    },
+    {
+      "start": 33.48,
+      "end": 33.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.57,
+      "end": 33.93,
+      "mouth": "small"
+    },
+    {
+      "start": 33.93,
+      "end": 34.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.02,
+      "end": 34.29,
+      "mouth": "small"
+    },
+    {
+      "start": 34.29,
+      "end": 34.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.38,
+      "end": 34.56,
+      "mouth": "small"
+    },
+    {
+      "start": 34.56,
+      "end": 34.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.65,
+      "end": 35.01,
+      "mouth": "small"
+    },
+    {
+      "start": 35.01,
+      "end": 35.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.1,
+      "end": 35.28,
+      "mouth": "small"
+    },
+    {
+      "start": 35.28,
+      "end": 35.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.64,
+      "end": 36.0,
+      "mouth": "small"
+    },
+    {
+      "start": 36.0,
+      "end": 36.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.09,
+      "end": 36.45,
+      "mouth": "small"
+    },
+    {
+      "start": 36.45,
+      "end": 36.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.63,
+      "end": 36.9,
+      "mouth": "small"
+    },
+    {
+      "start": 36.9,
+      "end": 37.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.08,
+      "end": 37.26,
+      "mouth": "small"
+    },
+    {
+      "start": 37.26,
+      "end": 37.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.35,
+      "end": 37.44,
+      "mouth": "small"
+    },
+    {
+      "start": 37.44,
+      "end": 37.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.53,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.8,
+      "end": 38.07,
+      "mouth": "small"
+    },
+    {
+      "start": 38.07,
+      "end": 38.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.34,
+      "end": 38.61,
+      "mouth": "small"
+    },
+    {
+      "start": 38.61,
+      "end": 38.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.7,
+      "end": 38.97,
+      "mouth": "small"
+    },
+    {
+      "start": 38.97,
+      "end": 39.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.15,
+      "end": 39.6,
+      "mouth": "small"
+    },
+    {
+      "start": 39.6,
+      "end": 39.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.69,
+      "end": 39.96,
+      "mouth": "small"
+    },
+    {
+      "start": 39.96,
+      "end": 40.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.14,
+      "end": 40.77,
+      "mouth": "small"
+    },
+    {
+      "start": 40.77,
+      "end": 41.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.04,
+      "end": 41.49,
+      "mouth": "small"
+    },
+    {
+      "start": 41.49,
+      "end": 41.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.58,
+      "end": 41.85,
+      "mouth": "small"
+    },
+    {
+      "start": 41.85,
+      "end": 41.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.94,
+      "end": 42.21,
+      "mouth": "small"
+    },
+    {
+      "start": 42.21,
+      "end": 42.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.3,
+      "end": 42.39,
+      "mouth": "small"
+    },
+    {
+      "start": 42.39,
+      "end": 42.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.48,
+      "end": 42.57,
+      "mouth": "small"
+    },
+    {
+      "start": 42.57,
+      "end": 43.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.02,
+      "end": 43.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.11,
+      "end": 43.29,
+      "mouth": "small"
+    },
+    {
+      "start": 43.29,
+      "end": 43.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.38,
+      "end": 43.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.65,
+      "end": 43.74,
+      "mouth": "small"
+    },
+    {
+      "start": 43.74,
+      "end": 43.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.92,
+      "end": 44.01,
+      "mouth": "small"
+    },
+    {
+      "start": 44.01,
+      "end": 44.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.1,
+      "end": 44.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.19,
+      "end": 44.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.37,
+      "end": 44.46,
+      "mouth": "small"
+    },
+    {
+      "start": 44.46,
+      "end": 44.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.55,
+      "end": 44.82,
+      "mouth": "small"
+    },
+    {
+      "start": 44.82,
+      "end": 45.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.0,
+      "end": 45.09,
+      "mouth": "small"
+    },
+    {
+      "start": 45.09,
+      "end": 45.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.36,
+      "end": 45.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.63,
+      "end": 46.08,
+      "mouth": "small"
+    },
+    {
+      "start": 46.08,
+      "end": 46.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.17,
+      "end": 46.26,
+      "mouth": "small"
+    },
+    {
+      "start": 46.26,
+      "end": 46.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.53,
+      "end": 46.71,
+      "mouth": "small"
+    },
+    {
+      "start": 46.71,
+      "end": 46.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.8,
+      "end": 46.98,
+      "mouth": "small"
+    },
+    {
+      "start": 46.98,
+      "end": 47.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.16,
+      "end": 47.43,
+      "mouth": "small"
+    },
+    {
+      "start": 47.43,
+      "end": 47.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.52,
+      "end": 48.06,
+      "mouth": "small"
+    },
+    {
+      "start": 48.06,
+      "end": 48.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.24,
+      "end": 48.33,
+      "mouth": "small"
+    },
+    {
+      "start": 48.33,
+      "end": 48.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.78,
+      "end": 48.87,
+      "mouth": "small"
+    },
+    {
+      "start": 48.87,
+      "end": 48.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.96,
+      "end": 49.5,
+      "mouth": "small"
+    },
+    {
+      "start": 49.5,
+      "end": 49.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.59,
+      "end": 50.04,
+      "mouth": "small"
+    },
+    {
+      "start": 50.04,
+      "end": 50.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.13,
+      "end": 50.22,
+      "mouth": "small"
+    },
+    {
+      "start": 50.22,
+      "end": 50.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.31,
+      "end": 50.4,
+      "mouth": "small"
+    },
+    {
+      "start": 50.4,
+      "end": 50.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.49,
+      "end": 51.39,
+      "mouth": "small"
+    },
+    {
+      "start": 51.39,
+      "end": 51.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.48,
+      "end": 51.75,
+      "mouth": "small"
+    },
+    {
+      "start": 51.75,
+      "end": 51.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.84,
+      "end": 52.38,
+      "mouth": "small"
+    },
+    {
+      "start": 52.38,
+      "end": 52.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.65,
+      "end": 52.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.74,
+      "end": 53.19,
+      "mouth": "small"
+    },
+    {
+      "start": 53.19,
+      "end": 53.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.28,
+      "end": 54.09,
+      "mouth": "small"
+    },
+    {
+      "start": 54.09,
+      "end": 54.18,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "This",
+      "start": 0.0,
+      "end": 0.6200000047683716
+    },
+    {
+      "word": "car",
+      "start": 0.6200000047683716,
+      "end": 0.9200000166893005
+    },
+    {
+      "word": "originally",
+      "start": 0.9200000166893005,
+      "end": 1.600000023841858
+    },
+    {
+      "word": "retailed",
+      "start": 1.600000023841858,
+      "end": 2.119999885559082
+    },
+    {
+      "word": "for",
+      "start": 2.119999885559082,
+      "end": 2.259999990463257
+    },
+    {
+      "word": "approximately",
+      "start": 2.259999990463257,
+      "end": 2.8399999141693115
+    },
+    {
+      "word": "500",
+      "start": 2.8399999141693115,
+      "end": 3.700000047683716
+    },
+    {
+      "word": "000",
+      "start": 3.700000047683716,
+      "end": 3.7799999713897705
+    },
+    {
+      "word": "but",
+      "start": 4.28000020980835,
+      "end": 4.340000152587891
+    },
+    {
+      "word": "you",
+      "start": 4.340000152587891,
+      "end": 4.460000038146973
+    },
+    {
+      "word": "can",
+      "start": 4.460000038146973,
+      "end": 4.679999828338623
+    },
+    {
+      "word": "grab",
+      "start": 4.679999828338623,
+      "end": 4.900000095367432
+    },
+    {
+      "word": "one",
+      "start": 4.900000095367432,
+      "end": 5.139999866485596
+    },
+    {
+      "word": "today",
+      "start": 5.139999866485596,
+      "end": 5.360000133514404
+    },
+    {
+      "word": "for",
+      "start": 5.360000133514404,
+      "end": 5.519999980926514
+    },
+    {
+      "word": "about",
+      "start": 5.519999980926514,
+      "end": 5.800000190734863
+    },
+    {
+      "word": "300",
+      "start": 5.800000190734863,
+      "end": 6.400000095367432
+    },
+    {
+      "word": "000",
+      "start": 6.400000095367432,
+      "end": 6.699999809265137
+    },
+    {
+      "word": "In",
+      "start": 7.900000095367432,
+      "end": 7.900000095367432
+    },
+    {
+      "word": "2008",
+      "start": 7.900000095367432,
+      "end": 8.5600004196167
+    },
+    {
+      "word": "the",
+      "start": 8.84000015258789,
+      "end": 9.119999885559082
+    },
+    {
+      "word": "SLR",
+      "start": 9.119999885559082,
+      "end": 9.460000038146973
+    },
+    {
+      "word": "McLaren",
+      "start": 9.460000038146973,
+      "end": 9.880000114440918
+    },
+    {
+      "word": "Roadster",
+      "start": 9.880000114440918,
+      "end": 10.279999732971191
+    },
+    {
+      "word": "was",
+      "start": 10.279999732971191,
+      "end": 10.520000457763672
+    },
+    {
+      "word": "one",
+      "start": 10.520000457763672,
+      "end": 10.739999771118164
+    },
+    {
+      "word": "of",
+      "start": 10.739999771118164,
+      "end": 10.920000076293945
+    },
+    {
+      "word": "only",
+      "start": 10.920000076293945,
+      "end": 11.15999984741211
+    },
+    {
+      "word": "204",
+      "start": 11.15999984741211,
+      "end": 12.079999923706055
+    },
+    {
+      "word": "sold",
+      "start": 12.079999923706055,
+      "end": 12.380000114440918
+    },
+    {
+      "word": "in",
+      "start": 12.380000114440918,
+      "end": 12.520000457763672
+    },
+    {
+      "word": "the",
+      "start": 12.520000457763672,
+      "end": 12.640000343322754
+    },
+    {
+      "word": "U",
+      "start": 12.640000343322754,
+      "end": 12.84000015258789
+    },
+    {
+      "word": "S",
+      "start": 12.84000015258789,
+      "end": 13.220000267028809
+    },
+    {
+      "word": "drawing",
+      "start": 13.739999771118164,
+      "end": 13.760000228881836
+    },
+    {
+      "word": "inspiration",
+      "start": 13.760000228881836,
+      "end": 14.319999694824219
+    },
+    {
+      "word": "from",
+      "start": 14.319999694824219,
+      "end": 14.579999923706055
+    },
+    {
+      "word": "the",
+      "start": 14.579999923706055,
+      "end": 14.819999694824219
+    },
+    {
+      "word": "iconic",
+      "start": 14.819999694824219,
+      "end": 15.140000343322754
+    },
+    {
+      "word": "300",
+      "start": 15.140000343322754,
+      "end": 15.819999694824219
+    },
+    {
+      "word": "SLR",
+      "start": 15.819999694824219,
+      "end": 16.479999542236328
+    },
+    {
+      "word": "Uhlenhut",
+      "start": 16.479999542236328,
+      "end": 16.8799991607666
+    },
+    {
+      "word": "Coupe",
+      "start": 16.8799991607666,
+      "end": 17.15999984741211
+    },
+    {
+      "word": "Under",
+      "start": 17.940000534057617,
+      "end": 18.040000915527344
+    },
+    {
+      "word": "the",
+      "start": 18.040000915527344,
+      "end": 18.420000076293945
+    },
+    {
+      "word": "hood",
+      "start": 18.420000076293945,
+      "end": 18.420000076293945
+    },
+    {
+      "word": "lies",
+      "start": 18.420000076293945,
+      "end": 18.81999969482422
+    },
+    {
+      "word": "a",
+      "start": 18.81999969482422,
+      "end": 19.059999465942383
+    },
+    {
+      "word": "McLaren",
+      "start": 19.059999465942383,
+      "end": 19.399999618530273
+    },
+    {
+      "word": "designed",
+      "start": 19.399999618530273,
+      "end": 19.799999237060547
+    },
+    {
+      "word": "5",
+      "start": 19.799999237060547,
+      "end": 20.260000228881836
+    },
+    {
+      "word": "4",
+      "start": 20.260000228881836,
+      "end": 20.719999313354492
+    },
+    {
+      "word": "liter",
+      "start": 20.719999313354492,
+      "end": 20.979999542236328
+    },
+    {
+      "word": "supercharged",
+      "start": 20.979999542236328,
+      "end": 21.639999389648438
+    },
+    {
+      "word": "V8",
+      "start": 21.639999389648438,
+      "end": 22.15999984741211
+    },
+    {
+      "word": "producing",
+      "start": 22.360000610351562,
+      "end": 23.1200008392334
+    },
+    {
+      "word": "617",
+      "start": 23.1200008392334,
+      "end": 23.8799991607666
+    },
+    {
+      "word": "horsepower",
+      "start": 23.8799991607666,
+      "end": 24.399999618530273
+    },
+    {
+      "word": "and",
+      "start": 24.399999618530273,
+      "end": 24.899999618530273
+    },
+    {
+      "word": "575",
+      "start": 24.899999618530273,
+      "end": 25.940000534057617
+    },
+    {
+      "word": "pound",
+      "start": 25.940000534057617,
+      "end": 26.399999618530273
+    },
+    {
+      "word": "feet",
+      "start": 26.399999618530273,
+      "end": 26.399999618530273
+    },
+    {
+      "word": "of",
+      "start": 26.399999618530273,
+      "end": 26.8799991607666
+    },
+    {
+      "word": "torque",
+      "start": 26.8799991607666,
+      "end": 26.8799991607666
+    },
+    {
+      "word": "Despite",
+      "start": 26.8799991607666,
+      "end": 27.6200008392334
+    },
+    {
+      "word": "its",
+      "start": 27.6200008392334,
+      "end": 27.899999618530273
+    },
+    {
+      "word": "automatic",
+      "start": 27.899999618530273,
+      "end": 28.3799991607666
+    },
+    {
+      "word": "transmission",
+      "start": 28.3799991607666,
+      "end": 28.899999618530273
+    },
+    {
+      "word": "the",
+      "start": 29.5,
+      "end": 29.579999923706055
+    },
+    {
+      "word": "SLR",
+      "start": 29.579999923706055,
+      "end": 29.959999084472656
+    },
+    {
+      "word": "offers",
+      "start": 29.959999084472656,
+      "end": 30.299999237060547
+    },
+    {
+      "word": "a",
+      "start": 30.299999237060547,
+      "end": 30.520000457763672
+    },
+    {
+      "word": "high",
+      "start": 30.520000457763672,
+      "end": 30.760000228881836
+    },
+    {
+      "word": "performance",
+      "start": 30.760000228881836,
+      "end": 31.219999313354492
+    },
+    {
+      "word": "low",
+      "start": 31.6200008392334,
+      "end": 31.799999237060547
+    },
+    {
+      "word": "hassle",
+      "start": 31.799999237060547,
+      "end": 32.099998474121094
+    },
+    {
+      "word": "drive",
+      "start": 32.099998474121094,
+      "end": 32.41999816894531
+    },
+    {
+      "word": "that",
+      "start": 32.41999816894531,
+      "end": 32.900001525878906
+    },
+    {
+      "word": "many",
+      "start": 32.900001525878906,
+      "end": 33.2400016784668
+    },
+    {
+      "word": "enthusiasts",
+      "start": 33.2400016784668,
+      "end": 33.720001220703125
+    },
+    {
+      "word": "appreciate",
+      "start": 33.720001220703125,
+      "end": 34.279998779296875
+    },
+    {
+      "word": "for",
+      "start": 34.279998779296875,
+      "end": 34.540000915527344
+    },
+    {
+      "word": "long",
+      "start": 34.540000915527344,
+      "end": 34.84000015258789
+    },
+    {
+      "word": "journeys",
+      "start": 34.84000015258789,
+      "end": 35.15999984741211
+    },
+    {
+      "word": "The",
+      "start": 35.70000076293945,
+      "end": 35.939998626708984
+    },
+    {
+      "word": "striking",
+      "start": 35.939998626708984,
+      "end": 36.29999923706055
+    },
+    {
+      "word": "gull",
+      "start": 36.29999923706055,
+      "end": 36.720001220703125
+    },
+    {
+      "word": "wing",
+      "start": 36.720001220703125,
+      "end": 36.79999923706055
+    },
+    {
+      "word": "doors",
+      "start": 36.79999923706055,
+      "end": 37.099998474121094
+    },
+    {
+      "word": "are",
+      "start": 37.099998474121094,
+      "end": 37.41999816894531
+    },
+    {
+      "word": "just",
+      "start": 37.41999816894531,
+      "end": 38.040000915527344
+    },
+    {
+      "word": "stylish",
+      "start": 38.040000915527344,
+      "end": 38.040000915527344
+    },
+    {
+      "word": "They",
+      "start": 38.459999084472656,
+      "end": 38.560001373291016
+    },
+    {
+      "word": "pay",
+      "start": 38.560001373291016,
+      "end": 38.779998779296875
+    },
+    {
+      "word": "homage",
+      "start": 38.779998779296875,
+      "end": 39.18000030517578
+    },
+    {
+      "word": "to",
+      "start": 39.18000030517578,
+      "end": 39.84000015258789
+    },
+    {
+      "word": "Mercedes",
+      "start": 39.84000015258789,
+      "end": 39.84000015258789
+    },
+    {
+      "word": "racing",
+      "start": 40.040000915527344,
+      "end": 40.36000061035156
+    },
+    {
+      "word": "heritage",
+      "start": 40.36000061035156,
+      "end": 40.7599983215332
+    },
+    {
+      "word": "while",
+      "start": 40.7599983215332,
+      "end": 41.2599983215332
+    },
+    {
+      "word": "improving",
+      "start": 41.2599983215332,
+      "end": 41.720001220703125
+    },
+    {
+      "word": "cabin",
+      "start": 41.720001220703125,
+      "end": 42.08000183105469
+    },
+    {
+      "word": "access",
+      "start": 42.08000183105469,
+      "end": 42.560001373291016
+    },
+    {
+      "word": "In",
+      "start": 43.040000915527344,
+      "end": 43.20000076293945
+    },
+    {
+      "word": "performance",
+      "start": 43.20000076293945,
+      "end": 43.70000076293945
+    },
+    {
+      "word": "this",
+      "start": 44.0,
+      "end": 44.18000030517578
+    },
+    {
+      "word": "car",
+      "start": 44.18000030517578,
+      "end": 44.36000061035156
+    },
+    {
+      "word": "feels",
+      "start": 44.36000061035156,
+      "end": 44.65999984741211
+    },
+    {
+      "word": "raw",
+      "start": 44.65999984741211,
+      "end": 45.060001373291016
+    },
+    {
+      "word": "combining",
+      "start": 45.720001220703125,
+      "end": 45.720001220703125
+    },
+    {
+      "word": "its",
+      "start": 45.720001220703125,
+      "end": 46.0
+    },
+    {
+      "word": "mercurial",
+      "start": 46.0,
+      "end": 46.52000045776367
+    },
+    {
+      "word": "V8",
+      "start": 46.52000045776367,
+      "end": 46.939998626708984
+    },
+    {
+      "word": "with",
+      "start": 46.939998626708984,
+      "end": 47.34000015258789
+    },
+    {
+      "word": "luxury",
+      "start": 47.34000015258789,
+      "end": 47.7400016784668
+    },
+    {
+      "word": "appointments",
+      "start": 47.7400016784668,
+      "end": 48.29999923706055
+    },
+    {
+      "word": "So",
+      "start": 48.779998779296875,
+      "end": 49.060001373291016
+    },
+    {
+      "word": "would",
+      "start": 49.060001373291016,
+      "end": 49.13999938964844
+    },
+    {
+      "word": "you",
+      "start": 49.13999938964844,
+      "end": 49.380001068115234
+    },
+    {
+      "word": "choose",
+      "start": 49.380001068115234,
+      "end": 49.68000030517578
+    },
+    {
+      "word": "the",
+      "start": 49.68000030517578,
+      "end": 50.02000045776367
+    },
+    {
+      "word": "SLR",
+      "start": 50.02000045776367,
+      "end": 50.36000061035156
+    },
+    {
+      "word": "McLaren",
+      "start": 50.36000061035156,
+      "end": 50.720001220703125
+    },
+    {
+      "word": "for",
+      "start": 50.720001220703125,
+      "end": 50.939998626708984
+    },
+    {
+      "word": "its",
+      "start": 50.939998626708984,
+      "end": 51.15999984741211
+    },
+    {
+      "word": "unique",
+      "start": 51.15999984741211,
+      "end": 51.47999954223633
+    },
+    {
+      "word": "blend",
+      "start": 51.47999954223633,
+      "end": 51.70000076293945
+    },
+    {
+      "word": "of",
+      "start": 51.70000076293945,
+      "end": 52.31999969482422
+    },
+    {
+      "word": "attributes",
+      "start": 52.31999969482422,
+      "end": 52.31999969482422
+    },
+    {
+      "word": "or",
+      "start": 52.380001068115234,
+      "end": 52.7400016784668
+    },
+    {
+      "word": "is",
+      "start": 52.7400016784668,
+      "end": 52.91999816894531
+    },
+    {
+      "word": "something",
+      "start": 52.91999816894531,
+      "end": 53.18000030517578
+    },
+    {
+      "word": "else",
+      "start": 53.18000030517578,
+      "end": 53.5
+    },
+    {
+      "word": "calling",
+      "start": 53.5,
+      "end": 53.619998931884766
+    },
+    {
+      "word": "your",
+      "start": 53.619998931884766,
+      "end": 53.84000015258789
+    },
+    {
+      "word": "name",
+      "start": 53.84000015258789,
+      "end": 54.02000045776367
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual-extra/7-grills-multiple-for-heat-dissopation-as-exhcaust-is-just-right-there.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "grills multiple for heat dissopation as exhcaust is just right there",
+      "slot": "side",
+      "role": "detail",
+      "photo_id": "side-closeup-restored-1790487556726-7-7",
+      "cue_label": "[side-closeup-restored-1790487556726-7-7] grills multiple for heat dissopation as exhcaust is just right there",
+      "note": ""
+    },
+    {
+      "path": "images/manual-extra/5-sood-doors-up.jpeg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "sood doors up",
+      "slot": "side",
+      "role": "detail",
+      "photo_id": "side-closeup-restored-1790487556726-5-5",
+      "cue_label": "[side-closeup-restored-1790487556726-5-5] sood doors up",
+      "note": ""
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "right"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-frotn-close.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "frotn close",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790487556726-0-0",
+          "cue_label": "[front-closeup-restored-1790487556726-0-0] frotn close",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/1-doors-up.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "doors up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790487556726-1-1",
+          "cue_label": "[front-closeup-restored-1790487556726-1-1] doors up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/6-beatufiul-merc-2-headlights.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "beatufiul merc 2 headlights",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790487556726-6-6",
+          "cue_label": "[front-closeup-restored-1790487556726-6-6] beatufiul merc 2 headlights",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/10-grill-for-supercharger.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "grill for supercharger",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1790487556726-10-10",
+          "cue_label": "[front-closeup-restored-1790487556726-10-10] grill for supercharger",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/4-side-doord-up.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "side doord up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790487556726-4-4",
+          "cue_label": "[side-closeup-restored-1790487556726-4-4] side doord up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/5-sood-doors-up.jpeg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "sood doors up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790487556726-5-5",
+          "cue_label": "[side-closeup-restored-1790487556726-5-5] sood doors up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/7-grills-multiple-for-heat-dissopation-as-exhcaust-is-just-right-there.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "grills multiple for heat dissopation as exhcaust is just right there",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790487556726-7-7",
+          "cue_label": "[side-closeup-restored-1790487556726-7-7] grills multiple for heat dissopation as exhcaust is just right there",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/11-beautiful-properler-inspired-wheel.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "beautiful properler inspired wheel",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1790487556726-11-11",
+          "cue_label": "[side-closeup-restored-1790487556726-11-11] beautiful properler inspired wheel",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/2-side-back-with-doorsup.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "side back with doorsup",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790487556726-2-2",
+          "cue_label": "[rear-closeup-restored-1790487556726-2-2] side back with doorsup",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/3-back-with-doors-up.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "back with doors up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790487556726-3-3",
+          "cue_label": "[rear-closeup-restored-1790487556726-3-3] back with doors up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/8-back-lights.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "back lights",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790487556726-8-8",
+          "cue_label": "[rear-closeup-restored-1790487556726-8-8] back lights",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/9-spoler-up-when-car-is-fars-more-then-200-miles-hour.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "spoler up when car is fars more then 200 miles hour",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1790487556726-9-9",
+          "cue_label": "[rear-closeup-restored-1790487556726-9-9] spoler up when car is fars more then 200 miles hour",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/15-spuercharger-v8.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "spuercharger v8",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1790487556726-15-15",
+          "cue_label": "[engine-closeup-restored-1790487556726-15-15] spuercharger v8",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/16-anoteher-angle.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "anoteher angle",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1790487556726-16-16",
+          "cue_label": "[engine-closeup-restored-1790487556726-16-16] anoteher angle",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/17-difussior-at-the-back.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "difussior at the back",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1790487556726-17-17",
+          "cue_label": "[engine-closeup-restored-1790487556726-17-17] difussior at the back",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/12-interior-bucket-seats.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "interior bucket seats",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1790487556726-12-12",
+          "cue_label": "[interior-closeup-restored-1790487556726-12-12] interior bucket seats",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/13-sporty-gauges-blue.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "sporty gauges blue",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1790487556726-13-13",
+          "cue_label": "[interior-closeup-restored-1790487556726-13-13] sporty gauges blue",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/14-starts-from-the-button-from-auto-trasn-biggest-down.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "starts from the button from auto trasn biggest down",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1790487556726-14-14",
+          "cue_label": "[interior-closeup-restored-1790487556726-14-14] starts from the button from auto trasn biggest down",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {},
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/3LadvLR0/2008-mercedes-benz-slr-mclaren-roadster",
+    "title": "2008 Mercedes-Benz SLR McLaren Roadster",
+    "price_text": "High Bid $205,000",
+    "auction_state": "bidding",
+    "facts": {
+      "Make": "Mercedes-Benz",
+      "Engine": "5.4L Supercharged V8",
+      "Model": "McLaren SLR",
+      "Drivetrain": "Rear-wheel drive",
+      "Transmission": "Automatic (5-Speed)",
+      "Body Style": "Convertible"
+    },
+    "sections": {
+      "Highlights": "THIS\u2026 is a 2008 Mercedes-Benz SLR McLaren Roadster, finished in Crystal Laurit Silver Metallic with a grey soft top and a black interior. This SLR McLaren is owned by YouTube content creator and This Car Pod! host \"Crazy Nick\" Roshon, and was recently reviewed by Doug DeMuro. It was also previously owned by automotive media personalities Wayne Carini, Dennis Collins, and Tyler Hoover. Various associated videos are viewable below. This SLR McLaren is one of reportedly 204 Roadster examples delivered in the United States, and the odometer currently displays approximately 7,800 miles. According to the build sheet provided in the gallery, notable factory equipment includes 19-inch staggered Turbine wheels, carbon ceramic brakes, an active airbrake, butterfly doors, a power-operated soft top, semi-aniline leather upholstery, carbon fiber extra-large bucket seats, and a Bose premium sound system. The seller reports no notable modifications. Born out of a collaboration between Mercedes-Benz and McLaren, the SLR took inspiration from the legendary 300 SLR \u201cUhlenhaut Coup\u00e9\u201d to become the Silver Arrow of the 21st century. \u0392ased on a carbon fiber chassis and a front-mid-mounted supercharged V8 providing a tsunami of torque and a biblical soundtrack, the SLR left its mark as one of the most special Mercedes models in recent history. A total of 2,157 examples were reportedly produced in Coupe, and Roadster body styles, including 75 Stirling Moss speedsters. Power comes from a hand-built M155 5.4-liter supercharged V8, rated at 617 horsepower and 575 lb-ft of torque. Output is sent to the rear wheels via a 5-speed AMG Speedshift R automatic transmission.",
+      "Equipment": "A build sheet is provided in the photo gallery, and a partial list of notable equipment reported by the seller includes: 19-inch staggered Turbine wheels Carbon ceramic brakes Active airbrake Butterfly doors Power-operated soft top Semi-aniline leather upholstery Aluminum interior trim Power-adjustable carbon fiber extra-large bucket seats Bose premium sound system Dual-zone automatic climate control",
+      "Seller Notes": "The seller states that paint protection film has been applied to the front end and quarter panels of this SLR McLaren. The seller adds that a paint correction was performed and a ceramic coating was applied by Elite Finish San Diego during the course of his ownership."
+    }
+  },
+  "market_value": {
+    "count": 0,
+    "median": 300000,
+    "low": 300000,
+    "high": 300000,
+    "examples": [],
+    "source": "stated"
+  },
+  "voice_auditions": {
+    "onyx": "single-mercedes-benz-slr-mclaren-roadste-20260927054036/voice_auditions/onyx.mp3",
+    "british_narrator": "single-mercedes-benz-slr-mclaren-roadste-20260927054036/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-mercedes-benz-slr-mclaren-roadste-20260927054036/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-mercedes-benz-slr-mclaren-roadste-20260927054036/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-mercedes-benz-slr-mclaren-roadste-20260927054036/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-mercedes-benz-slr-mclaren-roadste-20260927054036/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "right",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 6.8500001430511475,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 17.40999984741211,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 26.40999984741211,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 35.1200008392334,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 42.560001373291016,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 48.53999900817871,
+        "layout": "bottom-right",
+        "framing": "full"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 8.0,
+        "pose": "open"
+      },
+      {
+        "start": 9.45,
+        "pose": "rest"
+      },
+      {
+        "start": 11.4,
+        "pose": "chest"
+      },
+      {
+        "start": 12.85,
+        "pose": "rest"
+      },
+      {
+        "start": 14.8,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 16.25,
+        "pose": "rest"
+      },
+      {
+        "start": 18.56,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 20.01,
+        "pose": "rest"
+      },
+      {
+        "start": 21.96,
+        "pose": "open"
+      },
+      {
+        "start": 23.41,
+        "pose": "rest"
+      },
+      {
+        "start": 25.36,
+        "pose": "chest"
+      },
+      {
+        "start": 26.81,
+        "pose": "rest"
+      },
+      {
+        "start": 28.76,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 30.21,
+        "pose": "rest"
+      },
+      {
+        "start": 32.16,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 33.61,
+        "pose": "rest"
+      },
+      {
+        "start": 35.620001,
+        "pose": "presentLeft"
+      },
+      {
+        "start": 38.070001,
+        "pose": "rest"
+      },
+      {
+        "start": 39.670001,
+        "pose": "chest"
+      },
+      {
+        "start": 41.120001,
+        "pose": "rest"
+      },
+      {
+        "start": 43.710001,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 45.160001,
+        "pose": "rest"
+      },
+      {
+        "start": 47.110001,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 48.560001,
+        "pose": "rest"
+      },
+      {
+        "start": 50.510001,
+        "pose": "open"
+      },
+      {
+        "start": 51.960001,
+        "pose": "rest"
+      },
+      {
+        "start": 53.910001,
+        "pose": "chest"
+      },
+      {
+        "start": 54.62,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 6.8500001430511475,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-frotn-close.jpg",
+            "label": "frotn close",
+            "photo_id": "front-closeup-restored-1790487556726-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-doors-up.jpg",
+            "label": "doors up",
+            "photo_id": "front-closeup-restored-1790487556726-1-1"
+          },
+          {
+            "path": "images/manual-extra/6-beatufiul-merc-2-headlights.jpg",
+            "label": "beatufiul merc 2 headlights",
+            "photo_id": "front-closeup-restored-1790487556726-6-6"
+          },
+          {
+            "path": "images/manual-extra/10-grill-for-supercharger.jpg",
+            "label": "grill for supercharger",
+            "photo_id": "front-closeup-restored-1790487556726-10-10"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 6.8500001430511475
+      },
+      {
+        "start": 6.8500001430511475,
+        "end": 17.40999984741211,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/12-interior-bucket-seats.jpg",
+            "label": "interior bucket seats",
+            "photo_id": "interior-closeup-restored-1790487556726-12-12"
+          },
+          {
+            "path": "images/manual-extra/13-sporty-gauges-blue.jpg",
+            "label": "sporty gauges blue",
+            "photo_id": "interior-closeup-restored-1790487556726-13-13"
+          },
+          {
+            "path": "images/manual-extra/14-starts-from-the-button-from-auto-trasn-biggest-down.jpg",
+            "label": "starts from the button from auto trasn biggest down",
+            "photo_id": "interior-closeup-restored-1790487556726-14-14"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 6.8500001430511475,
+        "chapter_end": 17.40999984741211
+      },
+      {
+        "start": 17.40999984741211,
+        "end": 26.40999984741211,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/15-spuercharger-v8.jpg",
+            "label": "spuercharger v8",
+            "photo_id": "engine-closeup-restored-1790487556726-15-15"
+          },
+          {
+            "path": "images/manual-extra/16-anoteher-angle.jpg",
+            "label": "anoteher angle",
+            "photo_id": "engine-closeup-restored-1790487556726-16-16"
+          },
+          {
+            "path": "images/manual-extra/17-difussior-at-the-back.jpg",
+            "label": "difussior at the back",
+            "photo_id": "engine-closeup-restored-1790487556726-17-17"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 17.40999984741211,
+        "chapter_end": 26.40999984741211
+      },
+      {
+        "start": 26.40999984741211,
+        "end": 35.1200008392334,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-side-doord-up.jpg",
+            "label": "side doord up",
+            "photo_id": "side-closeup-restored-1790487556726-4-4"
+          },
+          {
+            "path": "images/manual-extra/5-sood-doors-up.jpeg",
+            "label": "sood doors up",
+            "photo_id": "side-closeup-restored-1790487556726-5-5"
+          },
+          {
+            "path": "images/manual-extra/7-grills-multiple-for-heat-dissopation-as-exhcaust-is-just-right-there.jpg",
+            "label": "grills multiple for heat dissopation as exhcaust is just right there",
+            "photo_id": "side-closeup-restored-1790487556726-7-7"
+          },
+          {
+            "path": "images/manual-extra/11-beautiful-properler-inspired-wheel.jpg",
+            "label": "beautiful properler inspired wheel",
+            "photo_id": "side-closeup-restored-1790487556726-11-11"
+          }
+        ],
+        "active": "side-closeup-restored-1790487556726-7-7",
+        "active_index": 2,
+        "chapter_start": 26.40999984741211,
+        "chapter_end": 42.560001373291016
+      },
+      {
+        "start": 35.1200008392334,
+        "end": 42.560001373291016,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-side-doord-up.jpg",
+            "label": "side doord up",
+            "photo_id": "side-closeup-restored-1790487556726-4-4"
+          },
+          {
+            "path": "images/manual-extra/5-sood-doors-up.jpeg",
+            "label": "sood doors up",
+            "photo_id": "side-closeup-restored-1790487556726-5-5"
+          },
+          {
+            "path": "images/manual-extra/7-grills-multiple-for-heat-dissopation-as-exhcaust-is-just-right-there.jpg",
+            "label": "grills multiple for heat dissopation as exhcaust is just right there",
+            "photo_id": "side-closeup-restored-1790487556726-7-7"
+          },
+          {
+            "path": "images/manual-extra/11-beautiful-properler-inspired-wheel.jpg",
+            "label": "beautiful properler inspired wheel",
+            "photo_id": "side-closeup-restored-1790487556726-11-11"
+          }
+        ],
+        "active": "side-closeup-restored-1790487556726-5-5",
+        "active_index": 1,
+        "chapter_start": 26.40999984741211,
+        "chapter_end": 42.560001373291016
+      },
+      {
+        "start": 42.560001373291016,
+        "end": 48.53999900817871,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/2-side-back-with-doorsup.jpg",
+            "label": "side back with doorsup",
+            "photo_id": "rear-closeup-restored-1790487556726-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-back-with-doors-up.jpg",
+            "label": "back with doors up",
+            "photo_id": "rear-closeup-restored-1790487556726-3-3"
+          },
+          {
+            "path": "images/manual-extra/8-back-lights.jpg",
+            "label": "back lights",
+            "photo_id": "rear-closeup-restored-1790487556726-8-8"
+          },
+          {
+            "path": "images/manual-extra/9-spoler-up-when-car-is-fars-more-then-200-miles-hour.jpg",
+            "label": "spoler up when car is fars more then 200 miles hour",
+            "photo_id": "rear-closeup-restored-1790487556726-9-9"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 42.560001373291016,
+        "chapter_end": 48.53999900817871
+      },
+      {
+        "start": 48.53999900817871,
+        "end": 54.82,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-side-doord-up.jpg",
+            "label": "side doord up",
+            "photo_id": "side-closeup-restored-1790487556726-4-4"
+          },
+          {
+            "path": "images/manual-extra/5-sood-doors-up.jpeg",
+            "label": "sood doors up",
+            "photo_id": "side-closeup-restored-1790487556726-5-5"
+          },
+          {
+            "path": "images/manual-extra/7-grills-multiple-for-heat-dissopation-as-exhcaust-is-just-right-there.jpg",
+            "label": "grills multiple for heat dissopation as exhcaust is just right there",
+            "photo_id": "side-closeup-restored-1790487556726-7-7"
+          },
+          {
+            "path": "images/manual-extra/11-beautiful-properler-inspired-wheel.jpg",
+            "label": "beautiful properler inspired wheel",
+            "photo_id": "side-closeup-restored-1790487556726-11-11"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 48.53999900817871,
+        "chapter_end": 54.82
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1790487556726-0-0",
+          "front-closeup-restored-1790487556726-1-1",
+          "front-closeup-restored-1790487556726-6-6",
+          "front-closeup-restored-1790487556726-10-10"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 6.8500001430511475,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-restored-1790487556726-12-12",
+          "interior-closeup-restored-1790487556726-13-13",
+          "interior-closeup-restored-1790487556726-14-14"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 17.40999984741211,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-restored-1790487556726-15-15",
+          "engine-closeup-restored-1790487556726-16-16",
+          "engine-closeup-restored-1790487556726-17-17"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 26.40999984741211,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-restored-1790487556726-4-4",
+          "side-closeup-restored-1790487556726-5-5",
+          "side-closeup-restored-1790487556726-7-7",
+          "side-closeup-restored-1790487556726-11-11"
+        ],
+        "active": "side-closeup-restored-1790487556726-7-7"
+      },
+      {
+        "scene": 4,
+        "start": 35.1200008392334,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-restored-1790487556726-4-4",
+          "side-closeup-restored-1790487556726-5-5",
+          "side-closeup-restored-1790487556726-7-7",
+          "side-closeup-restored-1790487556726-11-11"
+        ],
+        "active": "side-closeup-restored-1790487556726-5-5"
+      },
+      {
+        "scene": 5,
+        "start": 42.560001373291016,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-restored-1790487556726-2-2",
+          "rear-closeup-restored-1790487556726-3-3",
+          "rear-closeup-restored-1790487556726-8-8",
+          "rear-closeup-restored-1790487556726-9-9"
+        ],
+        "active": null
+      },
+      {
+        "scene": 6,
+        "start": 48.53999900817871,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-restored-1790487556726-4-4",
+          "side-closeup-restored-1790487556726-5-5",
+          "side-closeup-restored-1790487556726-7-7",
+          "side-closeup-restored-1790487556726-11-11"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
