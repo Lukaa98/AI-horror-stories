@@ -1130,6 +1130,71 @@ def _rewrite_scene_for(violation, numbered_scenes, label, specs=""):
     return int(answer["index"]), _strip_citations(str(answer["narration"])).strip()
 
 
+def _research_replacement_history(label, rejected, year_scope=""):
+    """Go and find a different historical fact, with web search.
+
+    A rule that needs a fact the build does not have cannot be repaired by
+    rewriting a sentence. Asked to fix its history twice, the model returned
+    "the SLR debuted as a limited-production supercar" and then "in 2008,
+    the SLR Roadster debuted as a limited-production model" -- the same fact
+    in new words, because rewording is all the scene rewrite can do.
+    """
+    prompt = (
+        f"Find one specific, well-documented thing that happened to the {label}"
+        f"{f' ({year_scope})' if year_scope else ''}, with the year it happened. "
+        "Use web search and verify it.\n\n"
+        f"It must NOT be this, which was already rejected: \"{rejected}\"\n\n"
+        "The car being launched, released, unveiled or going on sale does not count -- that is "
+        "the car existing. Neither does anything undated, like being revered by enthusiasts or "
+        "having a performance legacy. What counts: a race result, a record, how many were built "
+        "and why that number, what it replaced or was replaced by, a special edition and what "
+        "made it different, an engineering decision and the reason for it, or a person who made "
+        "one of those calls.\n\n"
+        'Reply as JSON: {"year": <integer>, "fact": "<one sentence, spoken, verified>"}'
+    )
+    response = with_openai_retry(lambda: OpenAI().responses.create(
+        model="gpt-4o", input=prompt,
+        tools=[{"type": "web_search_preview"}],
+        text={"format": {"type": "json_object"}},
+    ))
+    answer = json.loads(response.output_text.strip())
+    return {"year": answer.get("year"), "fact": _strip_citations(str(answer.get("fact") or "")).strip()}
+
+
+def _repair_history(package, make, model, market, label):
+    """Replace a rejected history with a researched one, or leave it."""
+    rejected = str((package.get("history") or {}).get("fact") or "")
+    try:
+        found = _research_replacement_history(
+            label, rejected,
+            year_scope=" ".join(str(y) for y in
+                                (package.get("start_year"), package.get("end_year")) if y))
+    except Exception as error:  # noqa: BLE001 - a build is worth more than a fact
+        _note_repair(what="history", outcome="call failed", detail=str(error)[:300])
+        return None
+    if not found.get("fact") or not found.get("year"):
+        _note_repair(what="history", outcome="unusable", returned=json.dumps(found)[:300])
+        return None
+
+    candidate = copy.deepcopy(package)
+    candidate["history"] = found
+    # The narration has to say it, so the beat that carried the old one is
+    # where the new one goes -- the second scene, where the prompt puts it.
+    scenes = candidate.get("scenes") or []
+    if len(scenes) < 2:
+        return None
+    scenes[1]["narration"] = f"In {found['year']}, {found['fact'][0].lower()}{found['fact'][1:]}"
+    candidate["script"] = " ".join(scene["narration"] for scene in scenes)
+    candidate["word_count"] = _word_count(candidate["script"])
+    if any("going on sale" in rule or "never said it" in rule
+           for rule in _script_violations(candidate, make, model, market)):
+        _note_repair(what="history", outcome="did not help", returned=found["fact"][:300])
+        return None
+    _note_repair(what="history", outcome="applied", scene=2, returned=scenes[1]["narration"][:300])
+    print(f'[single-car] Researched a new history: "{scenes[1]["narration"]}"')
+    return candidate
+
+
 def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_REPAIRS):
     """Fix what the retries left broken, one rule at a time.
 
@@ -1150,6 +1215,15 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
         if not violations:
             break
         violation = violations[0]
+        # A rule that needs a fact the build does not have cannot be fixed
+        # by rewriting a sentence around the fact it already rejected.
+        if "going on sale" in violation or "never said it" in violation:
+            replaced = _repair_history(package, make, model, market, label)
+            if replaced is None:
+                refused.add(violation)
+                continue
+            package = replaced
+            continue
         scenes = package.get("scenes") or []
         numbered = "\n".join(f"{i}. {s.get('narration') or ''}" for i, s in enumerate(scenes, 1))
         try:

@@ -1491,6 +1491,60 @@ def test_a_repair_that_cannot_be_made_does_not_fail_the_build(monkeypatch):
     assert after["scenes"] == before["scenes"]
 
 
+def test_a_rejected_history_is_researched_again_rather_than_reworded(monkeypatch):
+    """Asked twice to fix its history, the SLR build returned "the SLR
+    debuted as a limited-production supercar" and then "in 2008, the SLR
+    Roadster debuted as a limited-production model" -- the same fact in new
+    words. Rewording is all a scene rewrite can do, and the rule needs a
+    different fact."""
+    import single_car_short
+
+    asked = {}
+
+    def research(label, rejected, year_scope=""):
+        asked.update(label=label, rejected=rejected)
+        return {"year": 1999, "fact": "Mercedes built 75 of the 300 SLR's successor for homologation."}
+
+    monkeypatch.setattr(single_car_short, "_research_replacement_history", research)
+    monkeypatch.setattr(single_car_short, "_rewrite_scene_for",
+                        lambda *a, **k: pytest.fail("the history is not a wording problem"))
+
+    scenes = ["It makes 617 hp and 575 lb-ft.",
+              "In 2008 the SLR Roadster debuted as a limited-production model.",
+              "So would you?"]
+    package = {"scenes": [{"narration": t} for t in scenes], "script": " ".join(scenes),
+               "start_year": 2008, "end_year": 2009,
+               "history": {"year": 2008, "fact": "The SLR Roadster debuted in 2008."}}
+
+    fixed = single_car_short._repair_violations(
+        package, "Mercedes-Benz", "SLR McLaren", {"median": 300000}, "SLR McLaren")
+
+    assert "debuted" in asked["rejected"], "the rejected fact is named so it is not returned again"
+    assert fixed["history"]["year"] == 1999
+    assert "75 of the 300 SLR" in fixed["script"], "and the narration actually says it"
+    single_car_short._REPAIR_LOG.clear()
+
+
+def test_a_researched_history_that_is_no_better_is_discarded(monkeypatch):
+    import single_car_short
+
+    monkeypatch.setattr(single_car_short, "_research_replacement_history",
+                        lambda *a, **k: {"year": 2008, "fact": "The SLR Roadster was released in 2008."})
+    scenes = ["It makes 617 hp and 575 lb-ft.",
+              "In 2008 the SLR Roadster debuted as a limited-production model.",
+              "So would you?"]
+    original = list(scenes)
+    package = {"scenes": [{"narration": t} for t in scenes], "script": " ".join(scenes),
+               "start_year": 2008, "end_year": 2009,
+               "history": {"year": 2008, "fact": "The SLR Roadster debuted in 2008."}}
+
+    fixed = single_car_short._repair_violations(
+        package, "Mercedes-Benz", "SLR McLaren", {"median": 300000}, "SLR McLaren")
+    assert [s["narration"] for s in fixed["scenes"]] == original
+    assert single_car_short._REPAIR_LOG[-1]["outcome"] == "did not help"
+    single_car_short._REPAIR_LOG.clear()
+
+
 def test_a_rule_that_cannot_be_fixed_does_not_block_the_ones_that_can(monkeypatch):
     """The SLR build shipped with three violations because the first one --
     its history -- could not be repaired and the loop stopped there. The
@@ -1516,6 +1570,10 @@ def test_a_rule_that_cannot_be_fixed_does_not_block_the_ones_that_can(monkeypatc
         return 3, "The shifter sits where the 300 SLR's did, 8 inches further back."
 
     monkeypatch.setattr(single_car_short, "_rewrite_scene_for", fake)
+    # The history rule goes to the researcher, not the scene rewrite; here
+    # it finds nothing better, which is the refusal being tested.
+    monkeypatch.setattr(single_car_short, "_repair_history",
+                        lambda *a: seen.append("history rule") or None)
     fixed = single_car_short._repair_violations(
         package, "Mercedes-Benz", "SLR McLaren", {"median": 300000}, "SLR McLaren")
 

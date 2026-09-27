@@ -69,7 +69,7 @@ def test_when_no_take_lands_in_register_the_closest_one_ships(monkeypatch, tmp_p
     """Retakes are generations, so they are capped. Ending on a bad one
     would make the cap actively harmful -- the best of what was heard is
     what ships."""
-    takes = iter([157.0, 143.0, 151.0])
+    takes = iter([157.0, 150.0, 152.0])
     written = {}
 
     def fake_take(text, path):
@@ -85,9 +85,9 @@ def test_when_no_take_lands_in_register_the_closest_one_ships(monkeypatch, tmp_p
     out = tmp_path / "n.mp3"
     narrator_script._synthesize_with_audio_model("script", out, retakes=2)
 
-    assert written["last"] == 151.0, "the last take was the worst one"
-    assert narrator_script._LAST_PITCH["take_hz"] == 143.0
-    assert out.read_bytes().startswith(b"143.0"), "the closest take is the one on disk"
+    assert written["last"] == 152.0, "the last take was the worst one"
+    assert narrator_script._LAST_PITCH["take_hz"] == 150.0
+    assert out.read_bytes().startswith(b"150.0"), "the closest take is the one on disk"
 
 
 def test_the_model_s_own_take_ships_unshifted(monkeypatch, tmp_path):

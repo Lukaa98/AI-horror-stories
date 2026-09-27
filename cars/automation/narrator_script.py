@@ -60,9 +60,15 @@ _LAST_PITCH = {}
 #
 # The band is where the approved takes were, at 130 and 134 Hz. 148 was the
 # one that came back sounding wrong.
+# Measured across this channel's builds, echo's takes came back at 132,
+# 134, 140, 141, 143, 148, 148 and 157 Hz. 134 was approved by ear and 148
+# was reported as wrong, so the line sits between them -- but the first
+# ceiling was 140, below the median of what the voice actually does, and
+# two builds running spent three generations to keep a take at 141 and 142
+# anyway. A band the voice misses most of the time is a tax, not a filter.
 AUDIO_PITCH_BAND = (
     float(os.getenv("OPENAI_AUDIO_PITCH_MIN", "122")),
-    float(os.getenv("OPENAI_AUDIO_PITCH_MAX", "140")),
+    float(os.getenv("OPENAI_AUDIO_PITCH_MAX", "145")),
 )
 # Each retake is another generation, so this is a small number. Whatever it
 # ends on, the closest take of the ones heard is the one that ships.
