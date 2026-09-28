@@ -567,8 +567,9 @@ how many were built in that colour. Point at the thing, then say the part that i
 "history" is one specific, well-documented thing about this car's background, found with web
 search, written as a complete spoken sentence that carries its own date -- it is used verbatim.
 Scope the date to the fact: a one-off event gets its year ("won its class at Le Mans in 1989"),
-but a fact about the whole production run says so ("only about 200 were built across the run"),
-and "year" is null for those. About 200 R63s exist in total, not in 2007, and pinning that to a
+but a fact about the whole production run says so, and naming the span is better than either
+number alone: "only about 200 were built across the 2006-2013 run" tells the viewer how rare it
+is AND how long it was on sale. "year" is null for those. About 200 R63s exist in total, not in 2007, and pinning that to a
 single model year is both awkward and wrong -- a race result, how many were built and why that number, what it
 replaced, who engineered which part of it, a special edition and what made it different, an
 engineering decision and the reason for it. What makes it specific is something to hold on to: a
@@ -1272,8 +1273,8 @@ def _research_replacement_history(label, rejected, year_scope=""):
         f"{f' ({year_scope})' if year_scope else ''}. Use web search and verify it.\n\n"
         "Write it as one complete spoken sentence that carries its own date, because it is used "
         "verbatim. Scope the date to the fact: a one-off event gets its year, a fact about the "
-        "whole production run says so instead -- 'only about 200 were built across the run', not "
-        "'in 2007 they built 200'. Use null for \"year\" when the fact spans the run.\n\n"
+        "whole production run names the span -- 'only about 200 were built across the 2006-2013 run', "
+        "not 'in 2007 they built 200'. Use null for \"year\" when the fact spans the run.\n\n"
         f"It must NOT be this, which was already rejected: \"{rejected}\"\n\n"
         "It has to carry something to hold on to: a figure, or a name that is not the car's "
         "own. \"Only 2,157 were built\" has one. \"The tub was built by McLaren in Woking\" has "
