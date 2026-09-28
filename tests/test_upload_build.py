@@ -395,3 +395,18 @@ def test_a_schedule_can_be_moved_rather_than_only_cancelled():
     workflow = (Path(__file__).resolve().parents[1]
                 / ".github/workflows/youtube-upload.yml").read_text()
     assert "reschedule:" in workflow and "--reschedule" in workflow
+
+
+def test_the_upload_button_does_not_hand_react_s_event_to_the_workflow():
+    """upload(extraInputs) spreads its argument into the dispatch body.
+    Passed to onClick bare it receives React's synthetic event instead, so a
+    DOM node reaches JSON.stringify and the click dies on "Converting
+    circular structure to JSON". Every other caller wrapped it in an arrow;
+    the main Upload button did not."""
+    from pathlib import Path
+
+    panel = (Path(__file__).resolve().parents[1] / "web/src/UploadPanel.jsx").read_text()
+    assert "onClick={upload}" not in panel, "that hands the click event to the workflow inputs"
+    assert "onClick={() => upload()}" in panel
+    # And the function refuses an event whoever passes one.
+    assert 'typeof extraInputs.preventDefault === "function"' in panel

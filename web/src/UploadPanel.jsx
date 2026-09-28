@@ -180,6 +180,11 @@ export default function UploadPanel({ settings, buildId }) {
   }
 
   async function upload(extraInputs = {}) {
+    // Guard, not decoration: passed straight to onClick this receives
+    // React's synthetic event, which spreads a DOM node into the request
+    // body and dies in JSON.stringify on a circular structure. Every other
+    // caller wraps it in an arrow; the main Upload button did not.
+    if (extraInputs && typeof extraInputs.preventDefault === "function") extraInputs = {};
     setError(null);
     setState("sending");
     startedAt.current = Date.now();
@@ -415,7 +420,7 @@ export default function UploadPanel({ settings, buildId }) {
               It stays private until then.
             </p>
           )}
-          <button type="button" className="upload-go" onClick={upload}
+          <button type="button" className="upload-go" onClick={() => upload()}
                   disabled={!ready || editing || state === "sending" || state === "watching"}>
             {state === "watching" ? "Uploading…" : state === "sending" ? "Starting…"
               : scheduled ? "Upload and schedule" : "Upload to YouTube (private)"}
