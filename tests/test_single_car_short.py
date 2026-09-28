@@ -2211,3 +2211,44 @@ def test_the_manifest_records_what_the_build_was_asked_for():
     written = set(re.findall(r'"([a-z_]+)":', recorded))
     missing = read_back - written - {"photos"}
     assert not missing, f"the form refills from {sorted(missing)}, which no build records"
+
+
+def test_the_history_research_call_does_not_ask_for_json_mode():
+    """The API refuses web search together with JSON mode -- "Web Search
+    cannot be used with JSON mode", a 400 that made every history repair
+    fail before it started. Research is the point of that call, so the
+    shape gives way and the answer is parsed."""
+    from pathlib import Path
+    import single_car_short
+
+    source = (Path(__file__).resolve().parents[1]
+              / "cars/automation/single_car_short.py").read_text()
+    block = source[source.index("def _research_replacement_history"):]
+    block = block[:block.index("def _repair_history")]
+    assert "web_search_preview" in block, "the whole point is that it researches"
+    assert "json_object" not in block, "the two cannot be asked for together"
+
+    # So the reply is parsed however it arrives.
+    assert single_car_short._loose_json(
+        '```json\n{"year": 2007, "fact": "Only 178 were sold in the US."}\n```'
+    )["year"] == 2007
+    assert single_car_short._loose_json(
+        'Here you go: {"year": 2007, "fact": "x"} hope that helps')["fact"] == "x"
+    with pytest.raises(ValueError):
+        single_car_short._loose_json("no object here")
+
+
+def test_the_empty_scene_rewrite_is_told_what_would_satisfy_the_rule():
+    """Offered "the quad exhaust tips not only underscore its AMG sporting
+    credentials but also enhance the engine's deep growl" for exactly that
+    violation -- the verb kept, another clause added, still no number. What
+    satisfies the rule is worth saying outright."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "cars/automation/single_car_short.py").read_text()
+    block = source[source.index("def _rewrite_scene_for"):]
+    block = block[:block.index("def _repair_violations")]
+    assert 'if "without saying anything about it" in violation:' in block
+    assert "put a real number in" in block
+    assert "Do not keep" in block and "add another clause" in block

@@ -1170,10 +1170,22 @@ def _rewrite_scene_for(violation, numbered_scenes, label, specs=""):
         f"\n\nVerified figures for this car, already researched -- use these and no others:\n{specs}"
         if specs else ""
     )
+    # The empty-scene rule fires on a verb with no number beside it, and a
+    # rewrite that keeps both fails again: "the quad exhaust tips not only
+    # underscore its AMG sporting credentials but also enhance the engine's
+    # deep growl" was offered for exactly that violation. What satisfies it
+    # is worth saying outright rather than leaving to be inferred.
+    how = ""
+    if "without saying anything about it" in violation:
+        how = ("\n\nThis rule is satisfied two ways and only these two: put a real number in "
+               "the sentence, or cut the claim and say the concrete thing instead. Do not keep "
+               "the verb and add another clause -- emphasises, highlights, underscores, "
+               "elevates, showcases, enhances, defines and promises all fail this rule on "
+               "their own.")
     prompt = (
         f"You are fixing one line of a short car video's narration about the {label}.\n\n"
         f"The scenes, in spoken order:\n{numbered_scenes}{spec_block}\n\n"
-        f"One rule is broken: {violation}\n\n"
+        f"One rule is broken: {violation}{how}\n\n"
         "Rewrite the ONE scene that fixes it, changing as little as possible and leaving every "
         "other scene alone. Keep it to roughly the same length, keep it spoken and conversational "
         "with contractions, and do not invent facts -- every number must come from the figures "
@@ -1186,6 +1198,23 @@ def _rewrite_scene_for(violation, numbered_scenes, label, specs=""):
     ))
     answer = json.loads(response.output_text.strip())
     return int(answer["index"]), _strip_citations(str(answer["narration"])).strip()
+
+
+def _loose_json(text):
+    """The first JSON object in a reply, however it is wrapped.
+
+    Without JSON mode the answer can arrive fenced in a code block or with
+    a sentence in front of it, and losing a researched fact to a stray
+    backtick would be a poor trade.
+    """
+    body = str(text or "").strip()
+    fenced = re.search(r"```(?:json)?\s*(.+?)```", body, re.S)
+    if fenced:
+        body = fenced.group(1).strip()
+    start, end = body.find("{"), body.rfind("}")
+    if start == -1 or end <= start:
+        raise ValueError(f"no JSON object in the reply: {body[:120]}")
+    return json.loads(body[start:end + 1])
 
 
 def _research_replacement_history(label, rejected, year_scope=""):
@@ -1208,12 +1237,15 @@ def _research_replacement_history(label, rejected, year_scope=""):
         "neither, and neither does \"revered by enthusiasts\".\n\n"
         'Reply as JSON: {"year": <integer>, "fact": "<one sentence, spoken, verified>"}'
     )
+    # No text format here: the API refuses web search together with JSON
+    # mode -- "Web Search cannot be used with JSON mode", a 400 that made
+    # every history repair fail before it started. Research is the whole
+    # point of this call, so the shape gives way and the answer is parsed.
     response = with_openai_retry(lambda: OpenAI().responses.create(
         model="gpt-4o", input=prompt,
         tools=[{"type": "web_search_preview"}],
-        text={"format": {"type": "json_object"}},
     ))
-    answer = json.loads(response.output_text.strip())
+    answer = _loose_json(response.output_text)
     return {"year": answer.get("year"), "fact": _strip_citations(str(answer.get("fact") or "")).strip()}
 
 
