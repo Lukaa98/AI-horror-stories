@@ -2304,3 +2304,47 @@ def test_a_question_mark_is_not_an_ending():
     assert not rules("So would you daily it?")  # short, but about this car
     assert not rules("So would you daily a five-hundred-horsepower minivan, "
                      "or is that a step too far?")
+
+
+def test_a_pasted_photo_with_no_beat_is_a_violation():
+    """The R63 build downloaded the engine photo, described it, handed it to
+    the model under "you MUST write one scene for each" -- and wrote seven
+    scenes, none of them typed engine. So the photo was not in the video.
+    The prompt had said it the whole time; nothing checked."""
+    import single_car_short
+
+    scenes = [("exterior", "Four-point-four seconds to sixty in a minivan with 503 horsepower."),
+              ("exterior", "In 2007 Mercedes built around 200 R63 AMGs, and it makes 465 lb-ft."),
+              ("interior", "Six or seven seats, and the middle row folds flat."),
+              ("exterior", "So would you daily a 503-horsepower minivan?")]
+    package = {"scenes": [{"media_type": t, "narration": n} for t, n in scenes],
+               "script": " ".join(n for _, n in scenes),
+               "start_year": 2007, "end_year": 2007,
+               "history": {"year": 2007, "fact": "Only 200 were built."}}
+
+    def orphans(slots):
+        return [v for v in single_car_short._script_violations(
+            package, "Mercedes-Benz", "R63 AMG", market={"median": 64500},
+            pasted_slots=slots) if "photo and no scene" in v]
+
+    assert orphans(("front", "side", "rear", "engine", "interior"))
+    # The interior photo does have a beat, so only the engine is named.
+    assert "engine" in orphans(("engine", "interior"))[0]
+    assert len(orphans(("engine", "interior"))) == 1
+    # A slot that was never pasted is not demanded.
+    assert not orphans(("front", "side", "rear", "interior"))
+    assert not orphans(())
+
+
+def test_the_pasted_slots_reach_the_checker():
+    """A rule nothing passes its input to is a rule that never fires."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "cars/automation/single_car_short.py").read_text()
+    assert "pasted_slots=tuple(slot for slot in MANUAL_PHOTO_FIELDS" in source, \
+        "build_short has to tell research_script which photos were pasted"
+    # And the retry loop has to see it, or the model is never told to fix it.
+    loop = source[source.index("def research_script("):]
+    loop = loop[:loop.index("def _visual_highlight_for_scenes")]
+    assert loop.count("pasted_slots") >= 4

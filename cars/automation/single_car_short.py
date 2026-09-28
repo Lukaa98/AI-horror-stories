@@ -773,7 +773,7 @@ HORSEPOWER_RE = r"\d[\d,.]*\s*-?\s*(hp\b|horsepower|bhp\b)"
 TORQUE_RE = r"\d[\d,.]*\s*-?\s*(lb-ft|lb\.?\s?ft|pound-feet|nm\b)"
 
 
-def _script_violations(package, make, model, market=None):
+def _script_violations(package, make, model, market=None, pasted_slots=()):
     """The house rules that can actually be checked, checked.
 
     Stating them in the prompt was not enough: audited across runs #180-#182
@@ -945,6 +945,23 @@ def _script_violations(package, make, model, market=None):
             f'it, starting with "{empty[0]}". Say what the part is for, what it replaced, what '
             "it costs, or why it is unusual -- or spend the scene on a fact instead."
         )
+    # A pasted photo the script never gives a beat to is simply not in the
+    # video. The prompt has said "you MUST write one scene for each" the
+    # whole time and it is not enough: with four asked-for angles also
+    # wanting beats, the R63 build wrote seven scenes and none of them was
+    # typed engine, so the engine photo was downloaded, described, handed
+    # over and dropped. Only the slots with their own media_type can be
+    # checked this way -- front, side and rear are all "exterior" and the
+    # picker shares those out.
+    _article = lambda word: "an" if word[0] in "aeiou" else "a"
+    typed = {scene.get("media_type") for scene in scenes}
+    for slot in ("engine", "interior"):
+        if slot in (pasted_slots or ()) and slot not in typed:
+            violations.append(
+                f"you were given {_article(slot)} {slot} photo and no scene is about the {slot} -- set one "
+                f'scene\'s media_type to "{slot}" and give it a beat, or that photo is not in '
+                "the video at all."
+            )
     padding = DEPRECIATION_PADDING_RE.search(script)
     if padding:
         violations.append(
@@ -1310,7 +1327,7 @@ def _repair_history(package, make, model, market, label):
     return candidate
 
 
-def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_REPAIRS):
+def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_REPAIRS, pasted_slots=()):
     """Fix what the retries left broken, one rule at a time.
 
     Every edit is kept only if it actually helps: the rule it targeted is
@@ -1325,7 +1342,7 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
     # padding and the empty scene never even attempted.
     refused = set()
     for _ in range(limit):
-        violations = [rule for rule in _script_violations(package, make, model, market)
+        violations = [rule for rule in _script_violations(package, make, model, market, pasted_slots)
                       if rule not in refused]
         if not violations:
             break
@@ -1359,11 +1376,11 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
         candidate["scenes"][index - 1]["narration"] = narration
         candidate["script"] = " ".join(s["narration"] for s in candidate["scenes"])
         candidate["word_count"] = _word_count(candidate["script"])
-        after = _script_violations(candidate, make, model, market)
+        after = _script_violations(candidate, make, model, market, pasted_slots)
         # Counted the same way on both sides -- `violations` is filtered by
         # what has already been refused, so comparing it against the full
         # list would call every repair a regression.
-        before_count = len(_script_violations(package, make, model, market))
+        before_count = len(_script_violations(package, make, model, market, pasted_slots))
         if violation in after or len(after) >= before_count:
             _note_repair(what=violation[:120],
                          outcome="did not help" if violation in after else "traded for another",
@@ -1405,7 +1422,7 @@ def _repair_script(package, make, model):
     return package
 
 
-def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False, listing_facts=None, market=None, angles=None):
+def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False, listing_facts=None, market=None, angles=None, pasted_slots=()):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
         f"model years {start_year}-{end_year}" if start_year and end_year
@@ -1414,7 +1431,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     max_scenes = _scene_cap_for_photo_hints(photo_hints)
     package = None
     for attempt in range(1, max_attempts + 1):
-        previous_violations = _script_violations(package, make, model, market) if package else []
+        previous_violations = _script_violations(package, make, model, market, pasted_slots) if package else []
         violation_feedback = (
             " Your previous attempt also broke these rules, which are not negotiable -- fix every one: "
             + " ".join(previous_violations) if previous_violations else ""
@@ -1433,7 +1450,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             max_scenes=max_scenes,
         )
         count = package["word_count"]
-        violations = _script_violations(package, make, model, market)
+        violations = _script_violations(package, make, model, market, pasted_slots)
         if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1] and not violations:
             break
         problems = []
@@ -1466,7 +1483,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     repaired = _repair_closing(_repair_script(package, make, model), label)
     # Whatever the retries could not fix, fixed one rule at a time rather
     # than by rewriting the whole script again.
-    final = _enforce_word_cap(_repair_violations(repaired, make, model, market, label))
+    final = _enforce_word_cap(_repair_violations(repaired, make, model, market, label, pasted_slots=pasted_slots))
     # Shipping after four failed attempts is deliberate -- a build is worth
     # more than a perfect script -- but it was silent, so a script that broke
     # the rules looked exactly like one that kept them. The Mazdaspeed3 build
@@ -1475,7 +1492,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     if _REPAIR_LOG:
         final["repair_log"] = list(_REPAIR_LOG)
         _REPAIR_LOG.clear()
-    remaining = _script_violations(final, make, model, market)
+    remaining = _script_violations(final, make, model, market, pasted_slots)
     if remaining:
         final["rule_violations"] = remaining
         print(f"[single-car] Shipping with {len(remaining)} rule(s) still broken after "
@@ -2476,6 +2493,7 @@ def build_short(args):
         listing_facts=listing_facts,
         market=market,
         angles=args.angles,
+        pasted_slots=tuple(slot for slot in MANUAL_PHOTO_FIELDS if manual_photo_urls.get(slot)),
     )
     if args.disable_comparison:
         # Belt-and-suspenders: the prompt already tells the model never to
