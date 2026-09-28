@@ -752,6 +752,15 @@ DEPRECIATION_PADDING_RE = re.compile(
 EARLY_TECH_SCENES = 3
 # The hook withholds the name on purpose; this is where it has to arrive.
 INTRODUCE_BY_SCENE = 3
+# A closing that could end any video ever made. Length is not the test --
+# "so would you daily it?" is five words and proposes something, while "but
+# what do you think?" is five words and proposes nothing. What separates
+# them is whether anything in the question is about this car.
+EMPTY_CLOSING_RE = re.compile(
+    r"^(?:so|but|now|well)?[\s,]*(?:what|how)?\s*(?:do|are|about)?\s*you\s*(?:think|decide|"
+    r"reckon|feel)?\s*\??$|^\s*(?:thoughts|your call|you decide|let me know)\s*\??$",
+    re.I,
+)
 # Words inside a model field that name a performance division, a trim or a
 # body style rather than the model itself. Saying one of these does not tell
 # a viewer what car they are looking at.
@@ -834,6 +843,14 @@ def _script_violations(package, make, model, market=None):
         violations.append(
             f'your last scene does not end on a question -- it was "{closing}". It must ask the '
             "viewer something that calls back to the hook."
+        )
+    elif EMPTY_CLOSING_RE.match(closing):
+        # A question mark is not a closing. Squeezed for words by four
+        # asked-for angles, one build finished on "But what do you think?"
+        # -- which passes the rule above and could end any video ever made.
+        violations.append(
+            f'your last scene is "{closing}", which could end any video ever made. Ask something '
+            "about THIS car that calls back to the hook's claim."
         )
     script = " ".join(scene.get("narration") or "" for scene in scenes).lower()
     # Horsepower is the number that sells the car, so it has to land while the
@@ -1271,7 +1288,17 @@ def _repair_history(package, make, model, market, label):
     scenes = candidate.get("scenes") or []
     if len(scenes) < 2:
         return None
-    scenes[1]["narration"] = f"In {found['year']}, {found['fact'][0].lower()}{found['fact'][1:]}"
+    # The fact usually carries its own year already -- prepending one
+    # produced "In 2007, in 2007, Mercedes-Benz produced approximately 200
+    # units". Only added when the year is genuinely missing from it.
+    fact = found["fact"].strip()
+    if re.search(rf"\b{int(found['year'])}\b", fact):
+        spoken = fact[0].upper() + fact[1:]
+    else:
+        # Not lower-cased: the fact often opens on a proper noun, and
+        # "In 2007, mercedes built..." is worse than the join it fixes.
+        spoken = f"In {found['year']}, {fact}"
+    scenes[1]["narration"] = spoken
     candidate["script"] = " ".join(scene["narration"] for scene in scenes)
     candidate["word_count"] = _word_count(candidate["script"])
     if any("nothing specific in it" in rule or "never said it" in rule

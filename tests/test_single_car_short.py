@@ -2252,3 +2252,55 @@ def test_the_empty_scene_rewrite_is_told_what_would_satisfy_the_rule():
     assert 'if "without saying anything about it" in violation:' in block
     assert "put a real number in" in block
     assert "Do not keep" in block and "add another clause" in block
+
+
+def test_the_researched_year_is_not_said_twice(monkeypatch):
+    """A researched fact usually carries its own year, and prepending one
+    produced "In 2007, in 2007, Mercedes-Benz produced approximately 200
+    units of the R63 AMG"."""
+    import single_car_short
+
+    def package():
+        return {"scenes": [{"narration": "Hook."}, {"narration": "old history"},
+                           {"narration": "So would you daily a 503-horsepower minivan?"}],
+                "start_year": 2007, "end_year": 2007,
+                "history": {"year": 2007, "fact": "old"}}
+
+    monkeypatch.setattr(single_car_short, "_research_replacement_history",
+                        lambda *a, **k: {"year": 2007,
+                                         "fact": "In 2007, Mercedes built around 200 R63 AMGs."})
+    said = single_car_short._repair_history(
+        package(), "Mercedes-Benz", "R63 AMG", {"median": 64500}, "R63 AMG")
+    assert said["scenes"][1]["narration"].count("2007") == 1
+
+    # A fact without its year still gets one, and keeps its capitals.
+    monkeypatch.setattr(single_car_short, "_research_replacement_history",
+                        lambda *a, **k: {"year": 2007,
+                                         "fact": "Mercedes built around 200 of them."})
+    dated = single_car_short._repair_history(
+        package(), "Mercedes-Benz", "R63 AMG", {"median": 64500}, "R63 AMG")
+    assert dated["scenes"][1]["narration"] == "In 2007, Mercedes built around 200 of them."
+    single_car_short._REPAIR_LOG.clear()
+
+
+def test_a_question_mark_is_not_an_ending():
+    """Squeezed for words by four asked-for angles, one build finished on
+    "But what do you think?" -- which passes the ends-on-a-question rule and
+    could end any video ever made. Length is not the test: "so would you
+    daily it?" is the same five words and proposes something."""
+    import single_car_short
+
+    def rules(closing):
+        scenes = ["It makes 503 hp and 465 lb-ft in 2007.", closing]
+        package = {"scenes": [{"narration": t} for t in scenes], "script": " ".join(scenes),
+                   "start_year": 2007, "end_year": 2007,
+                   "history": {"year": 2007, "fact": "Only 200 were built."}}
+        return [v for v in single_car_short._script_violations(
+            package, "Mercedes-Benz", "R63 AMG", market={"median": 64500}) if "last scene" in v]
+
+    assert rules("But what do you think?")
+    assert rules("Thoughts?")
+    assert rules("It is a great car.")          # not a question at all
+    assert not rules("So would you daily it?")  # short, but about this car
+    assert not rules("So would you daily a five-hundred-horsepower minivan, "
+                     "or is that a step too far?")
