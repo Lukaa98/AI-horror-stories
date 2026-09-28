@@ -19,6 +19,11 @@ from generate_sample import _font
 from narrator_video import ACCENT_COLOR, TABLE_COLOR, TABLE_TINT, _spec_rows
 from paint_color import dominant_paint_color
 
+# How far down the headline starts. The frame is 9:16 and YouTube's Shorts
+# grid cell is squarer, so it crops top and bottom: a title sat 2.5% down
+# came out of the feed with its letters sliced off.
+SAFE_TOP = 0.09
+
 # The video's own shape. These are Shorts, and a Short's tile on the channel
 # page and in the Shorts feed is vertical -- a 16:9 still gets cropped to
 # fit it, which takes the sides off the car and half the spec table with
@@ -244,9 +249,13 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
 
     title, title_font = _headline(draw, _title_text(manifest), width - 70)
     title_w = draw.textlength(title, font=title_font)
-    draw.text(((width - title_w) / 2, int(height * 0.025)), title,
+    # Below the safe top, not against the edge. The frame is 9:16 and
+    # YouTube's grid cell is not, so it crops top and bottom: "R63 AMG" sat
+    # 4% down, which is inside the trim, and came out of the feed with its
+    # letters sliced off. Nothing that has to be read goes in the top band.
+    draw.text(((width - title_w) / 2, int(height * SAFE_TOP)), title,
               font=title_font, fill=accent)
-    top = int(height * 0.025) + title_font.size + int(height * 0.03)
+    top = int(height * SAFE_TOP) + title_font.size + int(height * 0.03)
 
     # A car photo is far wider than it is tall, so fitting one to this frame's
     # width leaves a band of white above and below it. Rather than let that

@@ -126,3 +126,17 @@ def test_the_thumbnail_hoodie_carries_the_same_car_as_the_video(tmp_path):
     # onto the face or the sleeves.
     above = (0, 0, blank.width, int(blank.height * top))
     assert printed.crop(above).tobytes() == blank.crop(above).tobytes()
+
+
+def test_the_headline_clears_youtube_s_crop():
+    """The frame is 9:16 and YouTube's Shorts grid cell is squarer, so it
+    trims top and bottom. "R63 AMG" was drawn 2.5% down and came out of the
+    feed with its letters sliced off."""
+    import thumbnail
+
+    assert thumbnail.SAFE_TOP >= 0.08, "a headline this high is inside the trim"
+    source = Path(thumbnail.__file__).read_text()
+    block = source[source.index("title, title_font = _headline"):]
+    block = block[:block.index("band_h = ")]
+    assert "int(height * SAFE_TOP)" in block, "the title has to start below the safe top"
+    assert "int(height * 0.025)" not in block, "that was the cropped position"
