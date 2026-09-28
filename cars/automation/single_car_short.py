@@ -128,8 +128,11 @@ PACKAGE_SCHEMA = {
             "type": "object", "additionalProperties": False,
             "required": ["year", "fact"],
             "properties": {
-                # The year it happened, which is what stops "revered by
-                # enthusiasts" from counting as history.
+                # When it happened. A single year for a dated event, null
+                # for a fact about the whole production run -- roughly 200
+                # R63s were built across 2006-2013, and requiring a year
+                # turned that into "in 2007, Mercedes produced approximately
+                # 200 units", which is both awkward and wrong.
                 "year": {"type": ["integer", "null"]},
                 "fact": {"type": "string"},
             },
@@ -561,8 +564,12 @@ viewer can already see. Every appearance beat still has to carry a fact the pict
 them: what that vent actually cools, which other model shares that wheel, what the option cost new,
 how many were built in that colour. Point at the thing, then say the part that isn't visible.
 
-"history" is one specific, well-documented thing about this car's background, with the year,
-found with web search -- a race result, how many were built and why that number, what it
+"history" is one specific, well-documented thing about this car's background, found with web
+search, written as a complete spoken sentence that carries its own date -- it is used verbatim.
+Scope the date to the fact: a one-off event gets its year ("won its class at Le Mans in 1989"),
+but a fact about the whole production run says so ("only about 200 were built across the run"),
+and "year" is null for those. About 200 R63s exist in total, not in 2007, and pinning that to a
+single model year is both awkward and wrong -- a race result, how many were built and why that number, what it
 replaced, who engineered which part of it, a special edition and what made it different, an
 engineering decision and the reason for it. What makes it specific is something to hold on to: a
 figure, or a name that is not the car's own. "Only 2,157 were built" has one. "The tub was built
@@ -1261,9 +1268,12 @@ def _research_replacement_history(label, rejected, year_scope=""):
     in new words, because rewording is all the scene rewrite can do.
     """
     prompt = (
-        f"Find one specific, well-documented thing that happened to the {label}"
-        f"{f' ({year_scope})' if year_scope else ''}, with the year it happened. "
-        "Use web search and verify it.\n\n"
+        f"Find one specific, well-documented thing about the {label}"
+        f"{f' ({year_scope})' if year_scope else ''}. Use web search and verify it.\n\n"
+        "Write it as one complete spoken sentence that carries its own date, because it is used "
+        "verbatim. Scope the date to the fact: a one-off event gets its year, a fact about the "
+        "whole production run says so instead -- 'only about 200 were built across the run', not "
+        "'in 2007 they built 200'. Use null for \"year\" when the fact spans the run.\n\n"
         f"It must NOT be this, which was already rejected: \"{rejected}\"\n\n"
         "It has to carry something to hold on to: a figure, or a name that is not the car's "
         "own. \"Only 2,157 were built\" has one. \"The tub was built by McLaren in Woking\" has "
@@ -1294,9 +1304,18 @@ def _repair_history(package, make, model, market, label):
     except Exception as error:  # noqa: BLE001 - a build is worth more than a fact
         _note_repair(what="history", outcome="call failed", detail=str(error)[:300])
         return None
-    if not found.get("fact") or not found.get("year"):
+    # A null year is a real answer: a fact about the whole production run
+    # does not have one. Only a missing fact makes the reply unusable.
+    if not found.get("fact"):
         _note_repair(what="history", outcome="unusable", returned=json.dumps(found)[:300])
         return None
+
+    # The year is metadata; the sentence is the thing. If the fact does not
+    # say the year, the year field is dropped rather than the fact -- a
+    # answer whose date is only in the metadata would otherwise be thrown
+    # away by the rule that the narration must say it.
+    if found.get("year") and not re.search(rf"\b{int(found['year'])}\b", found["fact"]):
+        found = dict(found, year=None)
 
     candidate = copy.deepcopy(package)
     candidate["history"] = found
@@ -1305,17 +1324,13 @@ def _repair_history(package, make, model, market, label):
     scenes = candidate.get("scenes") or []
     if len(scenes) < 2:
         return None
-    # The fact usually carries its own year already -- prepending one
-    # produced "In 2007, in 2007, Mercedes-Benz produced approximately 200
-    # units". Only added when the year is genuinely missing from it.
+    # Spoken as written. Prepending the year produced "In 2007, in 2007,
+    # Mercedes-Benz produced approximately 200 units" when the fact already
+    # carried it, and pinned a whole-production-run figure to one model year
+    # when it did not. The fact is asked for as a complete sentence, so it
+    # is used as one.
     fact = found["fact"].strip()
-    if re.search(rf"\b{int(found['year'])}\b", fact):
-        spoken = fact[0].upper() + fact[1:]
-    else:
-        # Not lower-cased: the fact often opens on a proper noun, and
-        # "In 2007, mercedes built..." is worse than the join it fixes.
-        spoken = f"In {found['year']}, {fact}"
-    scenes[1]["narration"] = spoken
+    scenes[1]["narration"] = fact[0].upper() + fact[1:]
     candidate["script"] = " ".join(scene["narration"] for scene in scenes)
     candidate["word_count"] = _word_count(candidate["script"])
     if any("nothing specific in it" in rule or "never said it" in rule

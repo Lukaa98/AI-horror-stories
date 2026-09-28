@@ -1535,7 +1535,9 @@ def test_a_rejected_history_is_researched_again_rather_than_reworded(monkeypatch
 
     assert "arrived as a supercar" in asked["rejected"], \
         "the rejected fact is named so it is not returned again"
-    assert fixed["history"]["year"] == 1999
+    # The fact does not state 1999, so the year field is dropped rather than
+    # the fact -- the sentence is the thing, the year is metadata.
+    assert fixed["history"]["year"] is None
     assert "75 of the 300 SLR" in fixed["script"], "and the narration actually says it"
     single_car_short._REPAIR_LOG.clear()
 
@@ -2254,32 +2256,36 @@ def test_the_empty_scene_rewrite_is_told_what_would_satisfy_the_rule():
     assert "Do not keep" in block and "add another clause" in block
 
 
-def test_the_researched_year_is_not_said_twice(monkeypatch):
-    """A researched fact usually carries its own year, and prepending one
-    produced "In 2007, in 2007, Mercedes-Benz produced approximately 200
-    units of the R63 AMG"."""
+def test_the_history_fact_is_spoken_as_written(monkeypatch):
+    """Prepending the year produced "In 2007, in 2007, Mercedes-Benz
+    produced approximately 200 units" when the fact already carried one,
+    and pinned a whole-production-run figure to a single model year when it
+    did not -- about 200 R63s exist in total, not in 2007. The fact is
+    asked for as a complete sentence, so it is used as one."""
     import single_car_short
 
     def package():
-        return {"scenes": [{"narration": "Hook."}, {"narration": "old history"},
+        return {"scenes": [{"narration": "503 hp and 465 lb-ft."}, {"narration": "old"},
                            {"narration": "So would you daily a 503-horsepower minivan?"}],
-                "start_year": 2007, "end_year": 2007,
-                "history": {"year": 2007, "fact": "old"}}
+                "start_year": 2006, "end_year": 2013,
+                "history": {"year": None, "fact": "old"}}
 
-    monkeypatch.setattr(single_car_short, "_research_replacement_history",
-                        lambda *a, **k: {"year": 2007,
-                                         "fact": "In 2007, Mercedes built around 200 R63 AMGs."})
-    said = single_car_short._repair_history(
-        package(), "Mercedes-Benz", "R63 AMG", {"median": 64500}, "R63 AMG")
-    assert said["scenes"][1]["narration"].count("2007") == 1
+    def spoken(found):
+        monkeypatch.setattr(single_car_short, "_research_replacement_history",
+                            lambda *a, **k: found)
+        fixed = single_car_short._repair_history(
+            package(), "Mercedes-Benz", "R63 AMG", {"median": 64500}, "R63 AMG")
+        return fixed["scenes"][1]["narration"] if fixed else None
 
-    # A fact without its year still gets one, and keeps its capitals.
-    monkeypatch.setattr(single_car_short, "_research_replacement_history",
-                        lambda *a, **k: {"year": 2007,
-                                         "fact": "Mercedes built around 200 of them."})
-    dated = single_car_short._repair_history(
-        package(), "Mercedes-Benz", "R63 AMG", {"median": 64500}, "R63 AMG")
-    assert dated["scenes"][1]["narration"] == "In 2007, Mercedes built around 200 of them."
+    # A fact spanning the run has no year, and that is a real answer.
+    assert spoken({"year": None,
+                   "fact": "only about 200 R63 AMGs were built across the whole run."}) == \
+        "Only about 200 R63 AMGs were built across the whole run."
+    # A dated event keeps its own year, and only says it once.
+    dated = spoken({"year": 1989, "fact": "In 1989 it won its class at Le Mans."})
+    assert dated.count("1989") == 1
+    # Nothing to say is still unusable.
+    assert spoken({"year": 1989, "fact": ""}) is None
     single_car_short._REPAIR_LOG.clear()
 
 
