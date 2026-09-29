@@ -157,16 +157,20 @@ def test_the_word_budget_comes_from_how_fast_the_narrator_really_talks():
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
     import single_car_short
 
-    assert single_car_short.TARGET_DURATION_SECONDS == 55.0, "under a minute, deliberately"
+    assert single_car_short.TARGET_DURATION_SECONDS == 53.0, "under a minute, deliberately"
 
     pace = single_car_short.NARRATION_WORDS_PER_SECOND
     assert 2.0 < pace < 2.5, "measured from a real read, not assumed"
 
-    # The cap is what the narrator can say in the target without hurrying.
+    # The cap is what fits the target once the normaliser's stretch is
+    # applied -- the model's pace cannot be raised by asking, so more words
+    # means compressing a little rather than making the video longer.
     spoken = single_car_short.WORD_CAP / pace
-    assert abs(spoken - single_car_short.TARGET_DURATION_SECONDS) < 1.0
+    assert spoken > single_car_short.TARGET_DURATION_SECONDS, \
+        "the cap is meant to need a squeeze; without one it is just a shorter video"
 
-    # And the correction left over is small enough not to be heard.
+    # And the squeeze stays small enough not to be heard. The one that made
+    # the old voice sound like a machine was 1.35x.
     assert spoken / single_car_short.TARGET_DURATION_SECONDS < 1.10
 
 
@@ -202,7 +206,9 @@ def test_the_delivery_is_the_one_that_measured_fastest():
 
     # And the word budget tracks it, rather than being set once and left.
     assert abs(single_car_short.NARRATION_WORDS_PER_SECOND - 138 / 56.8) < 0.001
-    assert single_car_short.WORD_CAP == 134
+    # 140 now, not 134: the extra words come from a 1.09x squeeze rather
+    # than a longer video, because the model's own pace cannot be raised.
+    assert single_car_short.WORD_CAP == 140
 
 
 def test_the_build_records_how_its_voice_was_actually_made():

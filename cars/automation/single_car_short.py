@@ -46,7 +46,7 @@ OUTPUT_ROOT = ROOT / "cars" / "single-car-shorts"
 FAST_TTS_SPEED = 1.35
 # Under a minute, deliberately. A Short is judged on how much of it people
 # watch, and asking a stranger for a full minute is the hard part.
-TARGET_DURATION_SECONDS = 55.0
+TARGET_DURATION_SECONDS = 53.0
 # How fast the narrator actually talks, measured off a real gpt-audio read
 # rather than assumed: 138 words in 61.6 seconds. This is the number that
 # sets the word budget, and it belongs to the engine -- gpt-audio has no
@@ -59,7 +59,16 @@ NARRATION_WORDS_PER_SECOND = 138 / 56.8
 # need a 1.42x squeeze to reach 55 -- reintroducing exactly the compression
 # that made the old voice sound like a machine. The cap is what the
 # narrator can say in the target without being hurried.
-WORD_CAP = round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND)
+# Said, not read at: the cap is what fits after the normaliser's gentle
+# stretch, not what the model would say unhurried. gpt-audio has no speed
+# control and will not be talked into going faster -- "brisk" measured 2.17
+# words a second, "deliberately talking fast" 2.43, "as fast as you can"
+# 2.34 -- so the only way to fit more in is to compress afterwards. 140
+# words at its own 2.43 is a 57.6-second read squeezed to 53, which is
+# 1.09x. The compression that made the old voice sound like a machine was
+# 1.35x; a tenth is a different order of thing and is meant to be inaudible.
+SPOKEN_TEMPO = 1.09
+WORD_CAP = round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND * SPOKEN_TEMPO)
 TARGET_WORD_CENTER = WORD_CAP
 TARGET_WORD_FLEX = 5
 # Kept for the text-to-speech path, which is still reachable with
@@ -92,8 +101,8 @@ ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 PACKAGE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
-    "required": ["title", "youtube_title", "key_specs", "history", "scenes", "sources",
-                 "start_year", "end_year"],
+    "required": ["title", "youtube_title", "thesis", "key_specs", "history", "scenes",
+                 "sources", "start_year", "end_year"],
     "properties": {
         "title": {"type": "string"},
         # The YouTube title. Separate from "title", which is a scene headline
@@ -116,6 +125,18 @@ PACKAGE_SCHEMA = {
                 "price": {"type": "string"},
             },
         },
+        # The one thing this video argues, written before any scene exists.
+        #
+        # Without it the script is captions: a photo of wheels gets a
+        # sentence about wheels, a photo of a spoiler gets "aids stability
+        # at high speeds" on a front-drive hatch. Seven true sentences
+        # about seven photos, and nothing to stay for.
+        #
+        # The channels that work on this format pick one claim and spend
+        # the whole video on it. "Mazda built it quick enough that they
+        # programmed it to hold itself back -- first gear capped, boost cut
+        # by steering angle, actively fighting you." Same car, same photos.
+        "thesis": {"type": "string"},
         # One researched historical fact, held apart from the narration for
         # the same reason key_specs is. The prompt has asked for a history
         # beat "early, right after the hook" for a long time and it keeps
@@ -497,6 +518,23 @@ observation, or another history/mechanical beat -- so the script still hits its 
 without any head-to-head."""
     return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{forced_rival_block}{no_comparison_block}
 
+FIRST decide what this video ARGUES, and put it in "thesis" as one sentence. Everything else
+serves it. A video is not a list of true things about a car -- it is one claim, made and paid off.
+"Mazda built this quick enough that they had to program it to hold itself back: first gear capped,
+boost cut by how far you turn the wheel, the car actively fighting you." That is a thesis: it is
+surprising, it is specific, it is checkable, and every beat after it is evidence. "The Mazdaspeed3
+is a fast, affordable hatchback" is not -- it is a category, and nobody watches a category.
+
+Find it in what is unusual, contested or hidden: an engineering decision that sounds insane until
+you hear why, something the maker did to stop the car destroying itself, a reputation the car does
+not deserve, what it beat that it had no business beating, why it is cheap now when it should not
+be. Research it -- the thesis has to be true, and the whole script rests on it.
+
+Then every scene either states the thesis, gives evidence for it, or pays it off. A scene that
+does none of those does not belong, no matter how true it is: "the rear spoiler aids stability at
+high speeds" on a front-drive hatchback is true, useless, and the reason a video gets skipped.
+Never write a sentence about how a part looks. The viewer is looking at it.
+
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-{max_scenes} scenes (the higher end of that range only when you have several pasted photos each requiring their own scene, per above) in speaking order, each scene being ONE OR TWO complete sentences -- prefer fewer, fuller scenes over many thin one-liners, which read choppy when spoken back to back so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
 The hook must be the very first words, no throat-clearing lead-in like "Check out the..." or "Let's talk about...". The FIRST SENTENCE must contain a real number or a hard superlative, and must NOT contain the car's name -- the name is the payoff, so it lands in the second sentence ("...that's the R63 AMG"). "A hand-built seven-seater that hits sixty in four-point-four, and almost nobody knows it exists" is the shape: a concrete claim that makes the viewer want the name. "The Mercedes-Benz R63 AMG might surprise you" is the failure mode -- it names the car, promises interest instead of delivering any, and could be said about any car ever made. Never open by asserting that something is surprising, interesting, special or underrated; state the fact that makes it so and let the viewer conclude it. The claim has to be genuinely verifiable, not just punchy.
@@ -743,8 +781,10 @@ BANNED_SHAPES = (
 # with no number in it -- "the diffuser cuts lift by 15%" uses the same
 # verb and is a real claim.
 EMPTY_CLAIM_RE = re.compile(
-    r"\b(?:emphasi[sz]\w*|highlight\w*|underscor\w*|elevat\w*|accentuat\w*"
+    r"\b(?:emphasi[sz]\w*|highlight\w*|underscor\w*|underlin\w*|elevat\w*|accentuat\w*"
     r"|exemplif\w*|epitomi[sz]\w*|showcas\w*|enhanc\w*|define[sd]?|promis\w*"
+    r"|contribut\w*|complement\w*|reflect\w*|convey\w*|exud\w*|ooze[sd]?|oozing"
+    r"|signal[sl]?\w*|lend[s]?|add[s]? to|provid\w*|offer\w*"
     r"|stands? out|hint\w* at|speak\w* to)\b",
     re.I,
 )
@@ -947,9 +987,19 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
     # build spent eight of ten scenes this way -- grille, air vents, rear
     # haunches, character lines, inspection plaque, taillight -- with the
     # ban sitting in the prompt being ignored, because nothing read it.
+    # A dimension is not a fact. "The polished 18-inch alloy wheels
+    # epitomize the car's performance-oriented approach" cleared this rule
+    # on the strength of "18", which tells the viewer nothing they cannot
+    # see. Sizes of the thing being described do not buy a pass; outputs,
+    # times, prices and counts do.
+    def _has_real_figure(text):
+        stripped = re.sub(r"\b\d+(?:\.\d+)?[\s-]*(?:inch|in|inches|mm|cm|spoke|door|"
+                          r"seat|seater|piece|point)\b", " ", text, flags=re.I)
+        return bool(re.search(r"\d", stripped))
+
     empty = [scene.get("narration") or "" for scene in scenes
              if EMPTY_CLAIM_RE.search(scene.get("narration") or "")
-             and not re.search(r"\d", scene.get("narration") or "")]
+             and not _has_real_figure(scene.get("narration") or "")]
     if empty:
         violations.append(
             f'{len(empty)} scene(s) assert that something matters without saying anything about '
