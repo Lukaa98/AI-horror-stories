@@ -4,13 +4,14 @@ import PhotoSlots from "./PhotoSlots";
 import PhotoThumb from "./PhotoThumb";
 import UploadPanel from "./UploadPanel";
 import YouTubePanel from "./YouTubePanel";
+import ResearchPanel from "./ResearchPanel";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v12";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V13.4 — Thumbnail clears the crop";
+const UI_VERSION = "V14 — Channel research";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v12";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -1863,11 +1864,15 @@ export default function App() {
         <button type="button" className={view === "dashboard" ? "active" : ""} onClick={() => setView("dashboard")}>
           Dashboard
         </button>
+        <button type="button" className={view === "research" ? "active" : ""} onClick={() => setView("research")}>
+          Research
+        </button>
         <button type="button" className={view === "youtube" ? "active" : ""} onClick={() => setView("youtube")}>
           YouTube
         </button>
       </nav>
 
+      {view === "research" && <ResearchPanel />}
       {view === "youtube" && <YouTubePanel settings={settings} />}
 
       {view === "dashboard" && (

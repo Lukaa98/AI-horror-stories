@@ -1300,3 +1300,33 @@ button.secondary {
   border-color: #e0245e;
 }
 .fav-filter { margin-bottom: 12px; }
+
+/* Channel research: dense tables and proportional bars, because the shape
+   of a view distribution is the finding, not any single number. */
+.research-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 18px;
+  font-size: 14px;
+}
+.research-table th {
+  text-align: left;
+  font-weight: 600;
+  opacity: 0.6;
+  padding-bottom: 4px;
+}
+.research-table td {
+  padding: 5px 10px 5px 0;
+  border-top: 1px solid var(--line, #2a2a35);
+  white-space: nowrap;
+}
+.research-table td:last-child { width: 45%; }
+.research-bar {
+  display: block;
+  height: 9px;
+  border-radius: 5px;
+  background: var(--brand, #6c5ce7);
+  min-width: 2px;
+}
+.research-top { margin: 4px 0 18px; padding-left: 22px; font-size: 14px; line-height: 1.6; }
+.research-top a { overflow-wrap: anywhere; }
