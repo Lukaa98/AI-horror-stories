@@ -225,3 +225,30 @@ def test_the_build_records_how_its_voice_was_actually_made():
     source = (Path(__file__).resolve().parents[1]
               / "cars/automation/single_car_short.py").read_text()
     assert '"narration": narration_settings(),' in source
+
+
+def test_the_tempo_preview_matches_what_the_pipeline_does():
+    """The pipeline fits more words in by compressing the finished take
+    with ffmpeg's atempo, which moves tempo and leaves pitch alone. An
+    audio element does the same thing, so the preview is the real operation
+    rather than an approximation -- but only with preservesPitch set, and
+    only on the narration: speeding the video up speeds the pictures too,
+    which is not what the pipeline does."""
+    from pathlib import Path
+
+    web = Path(__file__).resolve().parents[1] / "web/src"
+    tester = (web / "TempoTester.jsx").read_text()
+
+    assert "preservesPitch" in tester and "webkitPreservesPitch" in tester
+    assert "playbackRate" in tester
+    # A browser that cannot do it says so rather than playing a lie.
+    assert "cannot change tempo without moving pitch" in tester
+    # The rate the pipeline currently ships is one of the choices.
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+    assert f"{single_car_short.SPOKEN_TEMPO}" in tester
+
+    app = (web / "App.jsx").read_text()
+    assert 'TempoTester src={dashboardRawUrl(item, "narration.mp3")}' in app, \
+        "the video would speed the pictures up too"

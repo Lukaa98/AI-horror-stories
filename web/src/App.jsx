@@ -5,13 +5,14 @@ import PhotoThumb from "./PhotoThumb";
 import UploadPanel from "./UploadPanel";
 import YouTubePanel from "./YouTubePanel";
 import ResearchPanel from "./ResearchPanel";
+import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const DEFAULT_BRANCH = "v12";
 const OUTPUT_BRANCH = "cars-output";
-const UI_VERSION = "V14.1 — Scripts argue something";
+const UI_VERSION = "V14.2 — Try the tempo before you buy it";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 const SETTINGS_MIGRATION = "default-branch-v12";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
@@ -2251,6 +2252,10 @@ export default function App() {
                       <div className="video-player">
                         <video controls src={dashboardRawUrl(item, item.preview.video || "single_car_short.mp4")} width="360" preload="metadata" />
                       </div>
+                    )}
+                    {item.type === "single-car" && (
+                      <TempoTester src={dashboardRawUrl(item, "narration.mp3")}
+                                   seconds={item.preview.duration_seconds} />
                     )}
                     <div className="narration-scroll">
                       {(item.preview.scenes || []).map((scene, index) => (
