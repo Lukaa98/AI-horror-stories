@@ -157,20 +157,16 @@ def test_the_word_budget_comes_from_how_fast_the_narrator_really_talks():
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
     import single_car_short
 
-    assert single_car_short.TARGET_DURATION_SECONDS == 53.0, "under a minute, deliberately"
+    assert single_car_short.TARGET_DURATION_SECONDS == 55.0, "under a minute, deliberately"
 
     pace = single_car_short.NARRATION_WORDS_PER_SECOND
     assert 2.0 < pace < 2.5, "measured from a real read, not assumed"
 
-    # The cap is what fits the target once the normaliser's stretch is
-    # applied -- the model's pace cannot be raised by asking, so more words
-    # means compressing a little rather than making the video longer.
+    # The cap is what the narrator can say in the target without hurrying.
     spoken = single_car_short.WORD_CAP / pace
-    assert spoken > single_car_short.TARGET_DURATION_SECONDS, \
-        "the cap is meant to need a squeeze; without one it is just a shorter video"
+    assert abs(spoken - single_car_short.TARGET_DURATION_SECONDS) < 1.0
 
-    # And the squeeze stays small enough not to be heard. The one that made
-    # the old voice sound like a machine was 1.35x.
+    # And the correction left over is small enough not to be heard.
     assert spoken / single_car_short.TARGET_DURATION_SECONDS < 1.10
 
 
@@ -206,9 +202,7 @@ def test_the_delivery_is_the_one_that_measured_fastest():
 
     # And the word budget tracks it, rather than being set once and left.
     assert abs(single_car_short.NARRATION_WORDS_PER_SECOND - 138 / 56.8) < 0.001
-    # 140 now, not 134: the extra words come from a 1.09x squeeze rather
-    # than a longer video, because the model's own pace cannot be raised.
-    assert single_car_short.WORD_CAP == 140
+    assert single_car_short.WORD_CAP == 134
 
 
 def test_the_build_records_how_its_voice_was_actually_made():
@@ -243,11 +237,10 @@ def test_the_tempo_preview_matches_what_the_pipeline_does():
     assert "playbackRate" in tester
     # A browser that cannot do it says so rather than playing a lie.
     assert "cannot change tempo without moving pitch" in tester
-    # The rate the pipeline currently ships is one of the choices.
-    import sys
-    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
-    import single_car_short
-    assert f"{single_car_short.SPOKEN_TEMPO}" in tester
+    # Several rates to compare, spanning from untouched to the squeeze that
+    # once made the voice sound like a machine, so the judgement is a
+    # comparison rather than a guess.
+    assert "1.0" in tester and "1.09" in tester and "1.3" in tester
 
     app = (web / "App.jsx").read_text()
     assert 'TempoTester src={dashboardRawUrl(item, "narration.mp3")}' in app, \

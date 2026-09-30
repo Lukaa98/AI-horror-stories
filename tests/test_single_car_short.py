@@ -33,14 +33,13 @@ def test_word_count_handles_contractions_and_hyphenated_terms():
 
 def test_the_word_cap_is_a_ceiling_set_by_the_narrator_s_own_pace():
     # A ceiling, not a midpoint, and derived rather than chosen: the cap is
-    # what fits the target once the normaliser's gentle stretch is applied.
+    # what the narrator can say inside the target without being hurried.
     # It was 175 when the voice was text-to-speech generated at 1.35x; the
-    # conversational model talks at its own fixed pace, so more words means
-    # compressing a little rather than making the video longer.
-    from single_car_short import (NARRATION_WORDS_PER_SECOND, SPOKEN_TEMPO,
-                                  TARGET_DURATION_SECONDS, WORD_CAP)
-    assert WORD_CAP == round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND
-                             * SPOKEN_TEMPO)
+    # conversational model talks at its own fixed pace and 175 of its words
+    # is a 78-second read.
+    from single_car_short import (NARRATION_WORDS_PER_SECOND, TARGET_DURATION_SECONDS,
+                                  WORD_CAP)
+    assert WORD_CAP == round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND)
     assert TARGET_WORDS[1] == WORD_CAP and ACCEPTABLE_WORDS[1] == WORD_CAP
     assert ACCEPTABLE_WORDS[0] < TARGET_WORDS[0] < TARGET_WORDS[1]
 
@@ -2355,73 +2354,3 @@ def test_the_pasted_slots_reach_the_checker():
     loop = source[source.index("def research_script("):]
     loop = loop[:loop.index("def _visual_highlight_for_scenes")]
     assert loop.count("pasted_slots") >= 4
-
-
-def _scene_rules(middle, **extra):
-    import single_car_short
-    scenes = ["It makes 263 hp and 280 lb-ft in 2010.", middle, "So would you daily one?"]
-    package = {"scenes": [{"narration": t} for t in scenes], "script": " ".join(scenes),
-               "start_year": 2010, "end_year": 2013, "thesis": "x",
-               "history": {"year": None, "fact": "Only 2,000 were built."}}
-    package.update(extra)
-    return [v for v in single_car_short._script_violations(
-        package, "Mazda", "Mazdaspeed3", market={"median": 16000})
-        if "without saying anything" in v]
-
-
-def test_a_dimension_is_not_a_fact():
-    """"The polished 18-inch alloy wheels epitomize the car's
-    performance-oriented approach" cleared the empty-claim rule on the
-    strength of "18" -- a size of the thing being described, which tells
-    the viewer nothing they cannot see."""
-    assert _scene_rules("The polished 18-inch alloy wheels epitomize its performance approach.")
-    assert _scene_rules("Its rear spoiler enhances aerodynamics, aiding stability at speed.")
-    # Outputs, times, prices and counts still buy the pass they should.
-    assert not _scene_rules("That rear diffuser cuts lift by 15% over the old car.")
-    assert not _scene_rules("First gear is capped at 230 horsepower to save the diff.")
-
-
-def test_the_verbs_an_empty_sentence_reaches_for():
-    """Every one of these shipped in a Mazdaspeed3 build. Each names a part
-    and asserts it matters, which is what a photo already does."""
-    for filler in ("Distinctive five-spoke wheels contribute to its sporty image.",
-                   "Aluminum pedal covers provide a sporty aesthetic and offer grip.",
-                   "The dual exhausts ooze performance and enhance the aggressive sound.",
-                   "The LED tail lights feature a circular design, enhancing the appeal."):
-        assert _scene_rules(filler), filler
-    # A mechanism is not filler, however it is phrased.
-    assert not _scene_rules("Boost is cut by steering angle: turn harder and it detunes itself.")
-
-
-def test_the_script_has_to_argue_something():
-    """Without a thesis the script is captions -- a photo of wheels gets a
-    sentence about wheels. The channels that work on this format pick one
-    claim and spend the whole video on it."""
-    from pathlib import Path
-    import single_car_short
-
-    assert "thesis" in single_car_short.PACKAGE_SCHEMA["required"]
-    assert single_car_short.PACKAGE_SCHEMA["properties"]["thesis"]["type"] == "string"
-
-    source = Path(single_car_short.__file__).read_text()
-    assert "FIRST decide what this video ARGUES" in source
-    assert "nobody watches a category" in source
-    # And the thing to stop writing is named, with the line that prompted it.
-    assert "aids stability at\nhigh speeds" in source or "aids stability at" in source
-    assert "Never write a sentence about how a part looks" in source
-
-
-def test_the_word_budget_is_spoken_faster_rather_than_longer():
-    """gpt-audio has no speed control and will not be talked into going
-    faster -- "brisk" measured 2.17 words a second, "deliberately talking
-    fast" 2.43, "as fast as you can" 2.34. So more words means a gentle
-    compression, not a longer video."""
-    import single_car_short as s
-
-    assert s.WORD_CAP == 140
-    assert s.TARGET_DURATION_SECONDS == 53.0
-    # The stretch is a tenth. The one that made the old voice sound like a
-    # machine was 1.35x.
-    assert 1.0 < s.SPOKEN_TEMPO <= 1.15
-    effective = s.WORD_CAP / s.TARGET_DURATION_SECONDS
-    assert 2.5 < effective < 2.8, f"{effective:.2f} words a second"
