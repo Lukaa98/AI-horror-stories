@@ -59,7 +59,19 @@ NARRATION_WORDS_PER_SECOND = 138 / 56.8
 # need a 1.42x squeeze to reach 55 -- reintroducing exactly the compression
 # that made the old voice sound like a machine. The cap is what the
 # narrator can say in the target without being hurried.
-WORD_CAP = round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND)
+# How much the finished take is squeezed to fit the target, and therefore
+# how many more words fit in the same 55 seconds. gpt-audio has no speed
+# control and will not be talked into hurrying -- "brisk" measured 2.17
+# words a second, "deliberately talking fast" 2.43, "as fast as you can"
+# 2.34 -- so the only lever is compressing afterwards, which moves tempo
+# and leaves pitch alone.
+#
+# 1.15 was chosen by ear against a real build, not by arithmetic: the
+# dashboard plays any narration at 1.0, 1.09, 1.2 and 1.3, and 1.09 and 1.3
+# both passed, so this sits between them. For reference the squeeze that
+# made the old text-to-speech voice sound like a machine was 1.35.
+SPOKEN_TEMPO = 1.15
+WORD_CAP = round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND * SPOKEN_TEMPO)
 TARGET_WORD_CENTER = WORD_CAP
 TARGET_WORD_FLEX = 5
 # Kept for the text-to-speech path, which is still reachable with

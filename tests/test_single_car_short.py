@@ -37,9 +37,10 @@ def test_the_word_cap_is_a_ceiling_set_by_the_narrator_s_own_pace():
     # It was 175 when the voice was text-to-speech generated at 1.35x; the
     # conversational model talks at its own fixed pace and 175 of its words
     # is a 78-second read.
-    from single_car_short import (NARRATION_WORDS_PER_SECOND, TARGET_DURATION_SECONDS,
-                                  WORD_CAP)
-    assert WORD_CAP == round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND)
+    from single_car_short import (NARRATION_WORDS_PER_SECOND, SPOKEN_TEMPO,
+                                  TARGET_DURATION_SECONDS, WORD_CAP)
+    assert WORD_CAP == round(TARGET_DURATION_SECONDS * NARRATION_WORDS_PER_SECOND
+                             * SPOKEN_TEMPO)
     assert TARGET_WORDS[1] == WORD_CAP and ACCEPTABLE_WORDS[1] == WORD_CAP
     assert ACCEPTABLE_WORDS[0] < TARGET_WORDS[0] < TARGET_WORDS[1]
 
