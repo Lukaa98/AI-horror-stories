@@ -749,10 +749,15 @@ EMPTY_CLAIM_RE = re.compile(
     re.I,
 )
 
+# Either direction and either order. A rate of appreciation is the same
+# padding as a rate of depreciation -- both are arithmetic on two prices
+# the sentence already gave -- and "appreciating annually around 5%" walked
+# past a rule that only knew one word and one word order.
 DEPRECIATION_PADDING_RE = re.compile(
     r"(?:\b\d+(?:\.\d+)?\s*%[^.]{0,40}?\b(?:per\s+year|a\s+year|annually|yearly|per\s+annum)"
-    r"|\b(?:annual|yearly)\s+depreciation"
-    r"|\bdepreciat\w*[^.]{0,40}?\b\d+(?:\.\d+)?\s*%)",
+    r"|\b(?:annual|yearly)\s+(?:de|ap)preciation"
+    r"|\b(?:de|ap)preciat\w*[^.]{0,40}?\b\d+(?:\.\d+)?\s*%"
+    r"|\b(?:per\s+year|a\s+year|annually|yearly|per\s+annum)[^.]{0,25}?\d+(?:\.\d+)?\s*%)",
     re.I,
 )
 
@@ -1064,6 +1069,14 @@ def _strip_car_name(sentence, make, model):
         # touch of car - this one." There is no stand-in that repairs that,
         # so the hook is left naming the car instead.
         if re.search(r"[\u2014\u2013:-]\s*$", before) and match.end() >= len(sentence.rstrip(" .!?")):
+            seen["abort"] = True
+            return text
+        # A reveal exists to say the name. "...400 horsepower -- this is the
+        # Porsche 911 Turbo" became "this is this one", a sentence that
+        # introduces nothing. Whatever stands in, the construction is
+        # already pointing at it, so there is nothing to repair.
+        if re.search(r"\b(?:this|that|it|here|there)\s+(?:is|'s|was)\s*$", before, re.I) \
+                or re.search(r"\b(?:meet|say hello to|introducing|welcome)\s*$", before, re.I):
             seen["abort"] = True
             return text
         # Padded on both sides and the whitespace collapsed afterwards: the

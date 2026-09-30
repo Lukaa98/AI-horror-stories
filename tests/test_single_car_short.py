@@ -2354,3 +2354,35 @@ def test_the_pasted_slots_reach_the_checker():
     loop = source[source.index("def research_script("):]
     loop = loop[:loop.index("def _visual_highlight_for_scenes")]
     assert loop.count("pasted_slots") >= 4
+
+
+def test_a_reveal_cannot_be_stripped_of_the_name_it_exists_to_say():
+    """"...400 horsepower -- this is the Porsche 911 Turbo" came back as
+    "this is this one", a sentence that introduces nothing. The dash guard
+    missed it because the dash sits before "this is", not before the name."""
+    import single_car_short
+
+    for reveal in ("A twin-turbocharged air-cooled beauty that delivers 400 horsepower"
+                   "—this is the Porsche 911 Turbo.",
+                   "Four hundred horsepower, and that's the 911 Turbo.",
+                   "Meet the Porsche 911 Turbo, with 400 horsepower."):
+        assert single_car_short._strip_car_name(reveal, "Porsche", "911 Turbo") is None, reveal
+
+    # A name that is not being revealed is still repaired.
+    assert single_car_short._strip_car_name(
+        "A family vehicle with over 500 horsepower sounds unreal, but that's exactly "
+        "what the R63 AMG delivers.", "Mercedes-Benz", "R63 AMG"
+    ) == ("A family vehicle with over 500 horsepower sounds unreal, but that's exactly "
+          "what this one delivers.")
+
+
+def test_a_rate_of_appreciation_is_the_same_padding_as_depreciation():
+    """"appreciating annually around 5%" shipped in the 911 build. Both
+    directions are arithmetic on two prices the sentence already gave."""
+    import single_car_short
+
+    for padded in ("appreciating annually around 5%", "depreciating roughly 4% per year",
+                   "an annual appreciation of 8%", "a 5% annual depreciation rate"):
+        assert single_car_short.DEPRECIATION_PADDING_RE.search(padded), padded
+    for fine in ("it costs $277,000 today", "it makes 400 hp, up 5% on the old car"):
+        assert not single_car_short.DEPRECIATION_PADDING_RE.search(fine), fine
