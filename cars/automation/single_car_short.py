@@ -393,6 +393,49 @@ Ignore anything in there about this one used example's paperwork -- mileage, VIN
 records, flaws, ownership, location, seller. The video is about the car, not about one auction."""
 
 
+BULLET_MARKER_RE = re.compile(r"^\s*(?:[-*\u2022\u00b7\u2013\u2014]+|\d+[.)])\s+")
+
+
+def _split_angles(angles):
+    """The typed notes, as bullets, in the order they were typed.
+
+    Pasted notes wrap. The SLR run was handed three bullets in a box that
+    held five lines, because two of them ran over -- and splitting on
+    newlines made "sold ~1,400 by end of 2007." a bullet of its own, ranked
+    second, ahead of the gearbox note it had nothing to do with. Ranking
+    only means something if the bullets are the ones the person wrote.
+
+    A line continues the one above when it starts lower-case, carries no
+    marker of its own, and no blank line separates them. Nobody opens a new point in lower case and every
+    wrapped line does, which is the whole of the rule -- it needs no
+    trailing full stop to work, since notes are rarely punctuated that
+    carefully. An explicit marker always starts a bullet, so a deliberately
+    lower-case one can still be written.
+    """
+    bullets, broken = [], True
+    for raw in str(angles or "").splitlines():
+        line = raw.strip()
+        if not line:
+            # A line left blank between two notes separates them whatever
+            # the next one starts with -- it is the clearest thing a person
+            # can type to mean "new point", and wrapping never produces it.
+            broken = True
+            continue
+        marked = bool(BULLET_MARKER_RE.match(line))
+        line = BULLET_MARKER_RE.sub("", line, count=1).strip()
+        # A marker with nothing after it is not a note. The regex wants
+        # whitespace after the dash so "-40kg" keeps its sign, which leaves
+        # a lone "-" looking like a bullet that says "-".
+        if not re.search(r"[0-9A-Za-z]", line):
+            continue
+        if bullets and not broken and not marked and line[:1].islower():
+            bullets[-1] = f"{bullets[-1]} {line}"
+        else:
+            bullets.append(line)
+        broken = False
+    return bullets
+
+
 def _angles_block(angles):
     """What the person asked the script to cover, in their own words.
 
@@ -402,26 +445,40 @@ def _angles_block(angles):
     go up. Asked for, that is a beat. Not asked for, the script is exactly
     what it was.
 
+    The order is the instruction. Every note used to be mandatory, which
+    meant five of them bought five thin beats and squeezed the rest of the
+    script -- one build finished on "But what do you think?" because four
+    angles had eaten the words. Ranked instead, a long list degrades: the
+    top ones get written properly and the tail is dropped whole, rather
+    than all of them getting a clause each.
+
     Their claim is checked rather than repeated. Wrong is corrected; a
     widely-held enthusiast view is said as one, because "the complaint that
     sticks is the gearbox" is true about what people say even when it is
     not a fact about the car.
     """
-    wanted = [line.strip(" -*\t") for line in str(angles or "").splitlines()]
-    wanted = [line for line in wanted if line]
+    wanted = _split_angles(angles)
     if not wanted:
         return ""
-    listed = "\n".join(f"  - {line}" for line in wanted)
+    listed = "\n".join(f"  {i}. {line}" for i, line in enumerate(wanted, 1))
     return f"""
 
-THE PERSON COMMISSIONING THIS VIDEO ASKED FOR THESE SPECIFICALLY. Cover each one:
+THE PERSON COMMISSIONING THIS VIDEO ASKED FOR THESE, IN PRIORITY ORDER -- 1 matters most:
 {listed}
 
-Each is a beat and REPLACES one you would otherwise have written -- the video does not get
+Work down the list and cover as many as the word count genuinely allows, starting at 1.
+Each one you take REPLACES a beat you would otherwise have written -- the video does not get
 longer, and the word count is unchanged. Drop a beat about how the car looks first; the hook,
 the history, the engine figures, the price and the closing question all stay.
 
-Check each claim with web search before you say it, and say it at the level it deserves:
+Stop when there is no room left, and leave the rest out ENTIRELY. A note covered properly is
+worth more than three mentioned in passing: do not compress them all into one sentence each to
+fit them in, and never shorten or drop a higher-numbered note to make room for a lower one. If
+only the first two fit, write those two well and ignore the others completely -- that is the
+list working as intended, not a failure. Say nothing about the ones you leave out.
+
+Check each claim you use with web search before you say it, and say it at the level it
+deserves:
   - Verifiable: state it as fact.
   - A theory enthusiasts widely hold, not established fact (the SLR's automatic gearbox, the
     LFA's single-clutch): say it as what people say -- "the complaint that sticks is...",

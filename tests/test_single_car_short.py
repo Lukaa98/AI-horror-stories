@@ -2160,11 +2160,65 @@ def test_asked_for_angles_replace_a_beat_rather_than_lengthening_the_video():
 
     block = single_car_short._angles_block(
         "- the trinity: Enzo, Carrera GT, SLR\n\n  only the SLR didn't go up\n")
-    assert "- the trinity: Enzo, Carrera GT, SLR" in block
-    assert "- only the SLR didn't go up" in block, "bullets and blank lines are tidied"
+    assert "1. the trinity: Enzo, Carrera GT, SLR" in block
+    assert "2. only the SLR didn't go up" in block, "bullets and blank lines are tidied"
     # The video does not get longer; a styling beat goes first.
-    assert "REPLACES one you would otherwise have written" in block
+    assert "REPLACES a beat you would otherwise have written" in block
     assert "how the car looks first" in block
+
+
+def test_wrapped_notes_stay_one_bullet_so_the_ranking_is_the_one_typed():
+    """The SLR run was handed three notes in a box that held five lines,
+    because two of them ran over. Splitting on newlines made "sold ~1,400 by
+    end of 2007." a bullet of its own, ranked second, ahead of the gearbox
+    note it had nothing to do with -- which makes the ranking meaningless."""
+    import single_car_short
+
+    assert single_car_short._split_angles(
+        "McLaren wanted a sports car, Mercedes wanted a GT - planned 3,500 cars,\n"
+        "sold ~1,400 by end of 2007.\n"
+        "617hp carbon supercar with a 5-speed torque converter auto - the complaint\n"
+        "that sticks, and why it sat still while the Enzo and Carrera GT climbed.\n"
+        "722 Edition: 150 built, 641 bhp, 44kg lighter."
+    ) == [
+        "McLaren wanted a sports car, Mercedes wanted a GT - planned 3,500 cars, "
+        "sold ~1,400 by end of 2007.",
+        "617hp carbon supercar with a 5-speed torque converter auto - the complaint "
+        "that sticks, and why it sat still while the Enzo and Carrera GT climbed.",
+        "722 Edition: 150 built, 641 bhp, 44kg lighter.",
+    ]
+
+    # Notes are rarely punctuated carefully, so the join cannot depend on a
+    # trailing full stop -- a wrapped line starts lower-case either way.
+    assert single_car_short._split_angles(
+        "722 badge = Moss's 7:22am start\nat the 1955 Mille Miglia\n150 built, 641 bhp"
+    ) == ["722 badge = Moss's 7:22am start at the 1955 Mille Miglia", "150 built, 641 bhp"]
+
+    # Markers and blank lines both start a bullet whatever its case, so a
+    # deliberately lower-case note can still be written as one.
+    assert single_car_short._split_angles("- first\n- second\n- third") == [
+        "first", "second", "third"]
+    assert single_car_short._split_angles("1. first\n2. second") == ["first", "second"]
+    assert single_car_short._split_angles("the gearbox\n\nonly the SLR didn't go up") == [
+        "the gearbox", "only the SLR didn't go up"]
+    assert single_car_short._split_angles("") == []
+    assert single_car_short._split_angles(None) == []
+    assert single_car_short._split_angles("  \n\n - \n") == []
+
+
+def test_a_long_note_list_degrades_by_dropping_the_tail_whole():
+    """Every note used to be mandatory, so five of them bought five thin
+    beats -- one build finished on "But what do you think?" because four
+    angles had eaten the words. Ranked, the top ones are written properly
+    and the rest are left out, rather than all of them getting a clause."""
+    import single_car_short
+
+    block = single_car_short._angles_block("\n".join(f"Note {n}" for n in range(1, 6)))
+    assert "IN PRIORITY ORDER -- 1 matters most" in block
+    assert "  1. Note 1" in block and "  5. Note 5" in block
+    assert "leave the rest out ENTIRELY" in block
+    assert "never shorten or drop a higher-numbered note to make room for a lower one" in block
+    assert "Say nothing about the ones you leave out." in block
 
     # Three tiers, so a theory is not dressed up as a fact and a wrong claim
     # is not repeated back.

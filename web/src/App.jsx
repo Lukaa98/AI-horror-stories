@@ -2754,12 +2754,12 @@ export default function App() {
                         value={angles}
                         onChange={(e) => setAngles(e.target.value)}
                         rows={4}
-                        placeholder={"Things you want it to cover, one per line (optional)\n"
+                        placeholder={"Things you want it to cover, best first (optional)\n"
                           + "e.g. the trinity — Enzo, Carrera GT and the SLR launched around the same "
                           + "money, and only the SLR didn't go up"}
                         disabled={stage === "single-car-building"}
                       />
-                      <Tip text="Things you know that research won't surface on its own. Each becomes a beat and replaces one the model would have written, so the video doesn't get longer -- a styling beat goes first. Claims are checked: a fact is stated, a theory enthusiasts widely hold is said as one, and anything wrong is corrected rather than repeated." />
+                      <Tip text="Things you know that research won't surface on its own, in priority order -- the first line matters most. Each one taken becomes a beat and replaces one the model would have written, so the video doesn't get longer: a styling beat goes first. When there is only room for two, the top two get written properly and the rest are left out entirely rather than all of them getting a clause each. One note per line; a line that wraps is still one note. Claims are checked: a fact is stated, a theory enthusiasts widely hold is said as one, and anything wrong is corrected rather than repeated." />
                     </label>
 
                     {useManualPhotos && (
