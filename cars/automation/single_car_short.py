@@ -556,14 +556,28 @@ scene on whatever real, verifiable comparison you can make (value, character, a 
 dropping it."""
     no_comparison_block = ""
     if disable_comparison:
-        no_comparison_block = """
+        # The checkbox turns off the drag-race segment: the rival photo, the
+        # horsepower bars, the race on screen. It was written as "anywhere in
+        # the script", which also gagged the notes box -- twice the SLR was
+        # asked for "why it sat still while the Enzo and Carrera GT climbed"
+        # and twice neither car was nameable, so the point came back as
+        # "didn't quite rival contemporaries", which is a different claim.
+        # A car the person typed themselves outranks a checkbox about a scene.
+        notes_exception = """
+
+The ONE exception: a car named in the commissioning notes above. The person asked for that
+by name, so you may name it in a sentence -- as value, history or context. That is still not
+a head-to-head: no race on screen, and every rival_* field above stays null. Keep their
+comparison as the comparison they wrote; do not soften it into "rivals" or "contemporaries",
+which says nothing.""" if _split_angles(angles) else ""
+        no_comparison_block = f"""
 
 HARD REQUIREMENT: the user has explicitly turned off the rival-comparison scene for this video -- do NOT name
 any specific competitor car anywhere in the script, and do NOT set rival_make/rival_model/main_horsepower/
 rival_horsepower/main_quarter_mile_seconds/rival_quarter_mile_seconds on ANY scene (leave every one of those
 null). Replace that beat with a different one instead -- an ownership/value insight, a character/driving-feel
 observation, or another history/mechanical beat -- so the script still hits its word target and beat variety
-without any head-to-head."""
+without any head-to-head.{notes_exception}"""
     return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{forced_rival_block}{no_comparison_block}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-{max_scenes} scenes (the higher end of that range only when you have several pasted photos each requiring their own scene, per above) in speaking order, each scene being ONE OR TWO complete sentences -- prefer fewer, fuller scenes over many thin one-liners, which read choppy when spoken back to back so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.

@@ -2206,6 +2206,36 @@ def test_wrapped_notes_stay_one_bullet_so_the_ranking_is_the_one_typed():
     assert single_car_short._split_angles("  \n\n - \n") == []
 
 
+def test_a_typed_note_may_name_a_rival_the_comparison_checkbox_would_have_gagged():
+    """The checkbox turns off the drag-race segment. Written as "anywhere in
+    the script", it also gagged the notes box: twice the SLR was asked for
+    "why it sat still while the Enzo and Carrera GT climbed" and twice
+    neither car was nameable, so it came back as "didn't quite rival
+    contemporaries" -- a claim about driving feel, not the one about value
+    that was asked for. A car the person typed outranks a checkbox."""
+    import single_car_short
+
+    gagged = single_car_short._research_script_prompt(
+        "Mercedes-Benz SLR McLaren", "model years 2004-2009", disable_comparison=True)
+    assert "do NOT name" in gagged
+    assert "ONE exception" not in gagged, "nothing asked for, nothing to carve out"
+
+    asked = single_car_short._research_script_prompt(
+        "Mercedes-Benz SLR McLaren", "model years 2004-2009", disable_comparison=True,
+        angles="why it sat still while the Enzo and Carrera GT climbed")
+    assert "ONE exception" in asked
+    assert "you may name it in a sentence" in asked
+    # The segment is still off: no race on screen, and the fields stay null.
+    assert "rival_make/rival_model" in asked
+    assert "every rival_* field above stays null" in asked
+    assert 'do not soften it into "rivals" or "contemporaries"' in asked
+
+    # And the carve-out only exists when the comparison was turned off.
+    assert "ONE exception" not in single_car_short._research_script_prompt(
+        "Mercedes-Benz SLR McLaren", "model years 2004-2009",
+        angles="why it sat still while the Enzo and Carrera GT climbed")
+
+
 def test_a_long_note_list_degrades_by_dropping_the_tail_whole():
     """Every note used to be mandatory, so five of them bought five thin
     beats -- one build finished on "But what do you think?" because four
