@@ -7,6 +7,7 @@ import YouTubePanel from "./YouTubePanel";
 import ResearchPanel from "./ResearchPanel";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
+import { splitAngles } from "./angles";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
@@ -877,6 +878,36 @@ function Tip({ text }) {
       i
       <span className="tip-bubble">{text}</span>
     </span>
+  );
+}
+
+/* The ranking is otherwise invisible.
+ *
+ * The build splits the typed text into bullets and numbers them before the
+ * model ever sees it -- but that happens inside the prompt, so there was no
+ * way to tell whether a pasted note wrapped into two bullets or stayed one
+ * until the video came back wrong. Showing the split here costs nothing and
+ * is checked against the same cases as the Python copy.
+ */
+function AnglesPreview({ text }) {
+  const bullets = splitAngles(text);
+  if (!bullets.length) return null;
+  return (
+    <div className="angles-preview">
+      <p className="angles-preview-head">
+        Read as {bullets.length} {bullets.length === 1 ? "note" : "notes"}, best first
+      </p>
+      <ol>
+        {bullets.map((bullet, i) => (
+          <li key={i}>{bullet}</li>
+        ))}
+      </ol>
+      <p className="yt-note">
+        Covered from the top down for as long as the words last; whatever is left over is
+        dropped whole rather than squeezed in. A line that wraps stays one note &mdash; start a
+        new one on its own line, or with a dash.
+      </p>
+    </div>
   );
 }
 
@@ -2761,6 +2792,8 @@ export default function App() {
                       />
                       <Tip text="Things you know that research won't surface on its own, in priority order -- the first line matters most. Each one taken becomes a beat and replaces one the model would have written, so the video doesn't get longer: a styling beat goes first. When there is only room for two, the top two get written properly and the rest are left out entirely rather than all of them getting a clause each. One note per line; a line that wraps is still one note. Claims are checked: a fact is stated, a theory enthusiasts widely hold is said as one, and anything wrong is corrected rather than repeated." />
                     </label>
+
+                    <AnglesPreview text={angles} />
 
                     {useManualPhotos && (
                       <PhotoSlots

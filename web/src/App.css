@@ -1354,3 +1354,28 @@ button.secondary {
   font-weight: 600;
 }
 .tempo-seconds { font-size: 11px; opacity: 0.7; }
+
+/* The split the build will actually make, shown before a build is spent. */
+.angles-preview {
+  margin: -2px 0 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.angles-preview-head {
+  margin: 0 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.angles-preview ol {
+  margin: 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 6px;
+}
+.angles-preview li { font-size: 14px; line-height: 1.45; }
+.angles-preview li::marker { color: var(--accent); font-weight: 700; }
+.angles-preview .yt-note { margin: 8px 0 0; }
