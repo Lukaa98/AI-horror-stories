@@ -5,6 +5,7 @@ import PhotoThumb from "./PhotoThumb";
 import UploadPanel from "./UploadPanel";
 import YouTubePanel from "./YouTubePanel";
 import ResearchPanel from "./ResearchPanel";
+import { dispatchWorkflow } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
@@ -286,25 +287,6 @@ function buildStructuredRequest({ workflow, make, model, focus, startYear, endYe
   }
 
   return `Rank the 4 best ${makeLabel} ${modelLabel} generations overall across the full production run. Use 4 different generations when available, with one representative version from each generation. If the model has fewer than 4 true generations, use the most important era-defining versions across its history.`;
-}
-
-async function dispatchWorkflow({ owner, repo, branch, token, workflow, inputs }) {
-  const res = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow}/dispatches`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/vnd.github+json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ref: branch, inputs }),
-    }
-  );
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`Dispatch failed (${res.status}): ${body}`);
-  }
 }
 
 const RIVAL_SUGGESTIONS_SCHEMA = {
@@ -1904,7 +1886,7 @@ export default function App() {
         </button>
       </nav>
 
-      {view === "research" && <ResearchPanel />}
+      {view === "research" && <ResearchPanel settings={settings} />}
       {view === "youtube" && <YouTubePanel settings={settings} />}
 
       {view === "dashboard" && (

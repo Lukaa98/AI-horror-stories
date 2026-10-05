@@ -1379,3 +1379,15 @@ button.secondary {
 .angles-preview li { font-size: 14px; line-height: 1.45; }
 .angles-preview li::marker { color: var(--accent); font-weight: 700; }
 .angles-preview .yt-note { margin: 8px 0 0; }
+
+/* Competitors' script shapes, next to ours. */
+.research-videos { width: 100%; font-family: inherit; font-size: 14px; padding: 10px 12px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); }
+.research-row { display: flex; gap: 8px; margin: 10px 0 4px; flex-wrap: wrap; }
+.research-row input { flex: 1 1 200px; }
+.research-scripts { margin-top: 16px; }
+.research-script { border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; margin-bottom: 8px; }
+.research-script summary { cursor: pointer; font-size: 14px; }
+.research-beats { margin: 10px 0 2px; padding-left: 22px; display: grid; gap: 8px; }
+.research-beats li { font-size: 14px; line-height: 1.45; }
+.research-beat-meta { display: block; font-size: 12px; color: var(--ink-soft); letter-spacing: .02em; }

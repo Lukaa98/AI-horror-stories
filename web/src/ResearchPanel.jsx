@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { signIn, signedIn } from "./googleAuth";
 import { channelReport } from "./youtubeResearch";
+import { dispatchWorkflow, readOutputJson } from "./githubDispatch";
 
 /* What another channel's numbers look like from outside.
  *
@@ -47,11 +48,122 @@ function Cohorts({ videos }) {
   );
 }
 
-export default function ResearchPanel() {
+/* What the numbers alone could not show.
+ *
+ * Our own builds run 126-152 words at 2.4-2.8 words a second. Whether that
+ * is right has so far been judged against a measurement of our own voice,
+ * with nothing outside to compare it to. The medians here are that
+ * comparison; the beat columns are how a script is built.
+ */
+const OURS = { words: 139, rate: 2.6, seconds: 54, beats: 7 };
+
+function Scripts({ rows }) {
+  const usable = rows.filter((r) => r.words);
+  if (!usable.length) return <p className="yt-note">No captions came back for any of those.</p>;
+  const med = (pick) => median(usable.map(pick));
+  const cells = [
+    ["words", med((r) => r.words), OURS.words],
+    ["seconds", med((r) => r.seconds), OURS.seconds],
+    ["words / sec", med((r) => r.words_per_second), OURS.rate],
+    ["beats", med((r) => r.beats), OURS.beats],
+    ["opening words", med((r) => r.opening_words), null],
+    ["opening w/s", med((r) => r.opening_rate), null],
+  ];
+  const withNumber = usable.filter((r) => r.opening_has_number).length;
+  const asQuestion = usable.filter((r) => r.closes_on_question).length;
+
+  return (
+    <div className="research-scripts">
+      <table className="research-table">
+        <thead><tr><th /><th>theirs (median)</th><th>ours</th></tr></thead>
+        <tbody>
+          {cells.map(([name, theirs, ours]) => (
+            <tr key={name}>
+              <td>{name}</td>
+              <td>{theirs}</td>
+              <td>{ours === null ? "—" : ours}</td>
+            </tr>
+          ))}
+          <tr><td>opens on a number</td><td>{withNumber}/{usable.length}</td><td>required</td></tr>
+          <tr><td>ends on a question</td><td>{asQuestion}/{usable.length}</td><td>required</td></tr>
+        </tbody>
+      </table>
+
+      {usable.map((row) => (
+        <details key={row.video_id} className="research-script">
+          <summary>
+            {row.words} words · {row.seconds}s · {row.words_per_second} w/s · {row.beats} beats
+            {" — "}
+            <a href={`https://youtu.be/${row.video_id}`} target="_blank" rel="noreferrer">
+              {row.video_id}
+            </a>
+          </summary>
+          <ol className="research-beats">
+            {(row.beats_text || []).map((text, i) => (
+              <li key={i}>
+                <span className="research-beat-meta">
+                  {row.beat_words[i]}w · {row.beat_seconds[i]}s · {row.beat_rates[i]} w/s
+                </span>
+                {text}
+              </li>
+            ))}
+          </ol>
+        </details>
+      ))}
+    </div>
+  );
+}
+
+export default function ResearchPanel({ settings }) {
   const [handle, setHandle] = useState("");
   const [report, setReport] = useState(null);
   const [state, setState] = useState("idle");
   const [error, setError] = useState(null);
+  const [videos, setVideos] = useState("");
+  const [label, setLabel] = useState("");
+  const [scripts, setScripts] = useState(null);
+  const [scriptState, setScriptState] = useState("idle");
+  const [scriptError, setScriptError] = useState(null);
+
+  /* Reading a Short's spoken track has to happen on a runner.
+   *
+   * This page cannot fetch youtube.com -- no CORS header comes back -- and
+   * neither can a session, whose egress proxy refuses the tunnel outright.
+   * So the button starts a workflow and the answer arrives on the output
+   * branch a minute or two later, which is what "Load" then reads.
+   */
+  async function readScripts() {
+    setScriptError(null);
+    setScriptState("running");
+    try {
+      await dispatchWorkflow({
+        owner: settings.owner, repo: settings.repo, branch: settings.branch,
+        token: settings.token, workflow: "shorts-transcripts.yml",
+        inputs: { videos: videos.trim(), label: label.trim() || "batch", limit: "20" },
+      });
+      setScriptState("started");
+    } catch (err) {
+      setScriptError(String(err.message || err));
+      setScriptState("idle");
+    }
+  }
+
+  async function loadScripts() {
+    setScriptError(null);
+    setScriptState("loading");
+    try {
+      const found = await readOutputJson({
+        owner: settings.owner, repo: settings.repo,
+        path: `research/shorts-transcripts/${label.trim() || "batch"}/transcripts.json`,
+      });
+      if (!found) setScriptError("Nothing read under that label yet -- the run may still be going.");
+      setScripts(found);
+      setScriptState("idle");
+    } catch (err) {
+      setScriptError(String(err.message || err));
+      setScriptState("idle");
+    }
+  }
 
   async function look() {
     setError(null);
@@ -101,6 +213,34 @@ export default function ResearchPanel() {
       )}
 
       {error && <p className="yt-error">{error}</p>}
+
+      <h3>Read their scripts</h3>
+      <p className="yt-lead">
+        Paste Shorts links, video ids, or a whole channel page&rsquo;s source &mdash; anything with
+        ids in it. A runner reads the captions, because neither this page nor a session can
+        reach YouTube directly. Give it a label, run it, then Load it a minute later.
+      </p>
+      <textarea
+        className="research-videos"
+        rows={4}
+        value={videos}
+        onChange={(e) => setVideos(e.target.value)}
+        placeholder={"https://www.youtube.com/shorts/2dxa9oz1AZw\nhttps://www.youtube.com/shorts/..."}
+      />
+      <div className="research-row">
+        <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="label, e.g. driving-lab" />
+        <button type="button" onClick={readScripts} disabled={!videos.trim() || scriptState === "running"}>
+          {scriptState === "running" ? "Starting…" : "Read scripts"}
+        </button>
+        <button type="button" className="secondary" onClick={loadScripts} disabled={scriptState === "loading"}>
+          {scriptState === "loading" ? "Loading…" : "Load"}
+        </button>
+      </div>
+      {scriptState === "started" && (
+        <p className="yt-note">Started. It takes a minute or two &mdash; then press Load.</p>
+      )}
+      {scriptError && <p className="yt-error">{scriptError}</p>}
+      {scripts?.length > 0 && <Scripts rows={scripts} />}
 
       {report && (
         <>

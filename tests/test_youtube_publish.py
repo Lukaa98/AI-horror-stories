@@ -38,4 +38,6 @@ def test_channel_research_reads_the_api_rather_than_scraping():
     assert "hint rather than a cause" in panel
 
     app = (web / "App.jsx").read_text()
-    assert 'view === "research"' in app and "<ResearchPanel />" in app
+    # The panel takes settings now, for the workflow it starts to read other
+    # channels' scripts -- so this pins that it is mounted, not its props.
+    assert 'view === "research"' in app and "<ResearchPanel" in app
