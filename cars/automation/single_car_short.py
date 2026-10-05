@@ -1538,6 +1538,48 @@ def _repair_script(package, make, model):
     return package
 
 
+def script_package_from_build(build_id, repository=None, branch="cars-output"):
+    """A finished build's scenes, to be spoken and rendered again.
+
+    A build can be good and still ship broken -- run #37340574003 wrote a
+    script worth keeping and lost its caption alignment. Writing the car a
+    third time to get the same words back is a coin toss, because the script
+    is researched fresh every run; this takes the words that already worked
+    and does everything downstream of them again.
+
+    Read over HTTP, like audition_engines does: the output branch is 2.5GB
+    of rendered video and is deliberately never cloned into a build.
+
+    The narration is re-recorded, so the take will differ -- gpt-audio is not
+    deterministic and has measured anywhere from 2.1 to 3.7 words a second on
+    identical text. The words are the thing being reused, not the voice.
+    """
+    import os
+    import urllib.request
+
+    repository = repository or os.environ.get("GITHUB_REPOSITORY") or "Lukaa98/AI-horror-stories"
+    url = (f"https://raw.githubusercontent.com/{repository}/{branch}"
+           f"/cars/single-car-shorts/{build_id}/result.json")
+    with urllib.request.urlopen(url, timeout=60) as response:
+        manifest = json.loads(response.read().decode("utf-8"))
+    scenes = manifest.get("scenes") or []
+    if not scenes:
+        raise SystemExit(f"{build_id} has no scenes in its result.json.")
+    package = {
+        "title": manifest.get("title") or "",
+        "youtube_title": manifest.get("youtube_title") or "",
+        "scenes": scenes,
+        "history": manifest.get("history"),
+        "key_specs": manifest.get("key_specs"),
+        "sources": manifest.get("sources") or [],
+    }
+    package["script"] = " ".join(scene.get("narration") or "" for scene in scenes).strip()
+    package["word_count"] = _word_count(package["script"])
+    print(f"[single-car] Reusing the script from {build_id}: "
+          f"{package['word_count']} words across {len(scenes)} scenes.")
+    return package
+
+
 def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False, listing_facts=None, market=None, angles=None, pasted_slots=()):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
@@ -2379,8 +2421,24 @@ def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum
     return duration / tempo
 
 
+ALIGNMENT_ATTEMPTS = 3
+
+
 def transcribe_word_timeline(audio_path):
-    """Get real per-word timestamps for captions; rendering has a safe fallback."""
+    """Get real per-word timestamps for captions; rendering has a safe fallback.
+
+    An empty alignment is a failure wearing a success's clothes. The call
+    returns 200 with no per-word timings, nothing raises, and the renderer
+    quietly falls back to splitting the runtime evenly across the scenes --
+    which has no relation to how long each one takes to say, so captions,
+    headlines and photo changes all drift against the voice. Run
+    #37340574003 shipped exactly that way and looked perfectly healthy: 152
+    words, no violations, nothing in the log, and a visibly out-of-sync
+    video. with_openai_retry only retries rate limits, so an empty body is
+    retried here instead, and a run of empties is raised rather than
+    returned -- the caller's fallback should be a decision somebody can see
+    in the log, not the default.
+    """
     with Path(audio_path).open("rb") as audio_file:
         client = OpenAI()
         def request_alignment():
@@ -2391,16 +2449,26 @@ def transcribe_word_timeline(audio_path):
                 response_format="verbose_json",
                 timestamp_granularities=["word"],
             )
-        result = with_openai_retry(request_alignment)
-    words = []
-    for item in getattr(result, "words", None) or []:
-        if isinstance(item, dict):
-            word, start, end = item.get("word"), item.get("start"), item.get("end")
-        else:
-            word, start, end = getattr(item, "word", None), getattr(item, "start", None), getattr(item, "end", None)
-        if word and start is not None and end is not None:
-            words.append({"word": str(word).strip(), "start": float(start), "end": float(end)})
-    return words
+        for attempt in range(1, ALIGNMENT_ATTEMPTS + 1):
+            result = with_openai_retry(request_alignment)
+            words = []
+            for item in getattr(result, "words", None) or []:
+                if isinstance(item, dict):
+                    word, start, end = item.get("word"), item.get("start"), item.get("end")
+                else:
+                    word = getattr(item, "word", None)
+                    start = getattr(item, "start", None)
+                    end = getattr(item, "end", None)
+                if word and start is not None and end is not None:
+                    words.append({"word": str(word).strip(), "start": float(start), "end": float(end)})
+            if words:
+                return words
+            print(f"[single-car] Alignment {attempt}/{ALIGNMENT_ATTEMPTS} came back with no word "
+                  "timings; asking again.")
+    raise ValueError(
+        f"whisper returned no word timings in {ALIGNMENT_ATTEMPTS} attempts -- captions would be "
+        "spaced evenly instead of matched to the voice"
+    )
 
 
 def _normalize_photo_label(text):
@@ -2603,7 +2671,7 @@ def build_short(args):
                   f"median ${market['median']:,} (${market['low']:,}-${market['high']:,}).")
         elif comps:
             print(f"[single-car] {len(comps)} results on the model page, none comparable enough to use.")
-    package = research_script(
+    package = script_package_from_build(args.reuse_script) if args.reuse_script else research_script(
         args.make, args.model, args.trim, args.start_year, args.end_year,
         photo_hints=photo_hints, forced_rival=forced_rival, disable_comparison=args.disable_comparison,
         listing_facts=listing_facts,
@@ -2852,6 +2920,11 @@ def main():
         "--audition-voices", dest="audition_voices", action="store_true", default=True,
         help="Also synthesize the script in a few other voice presets (British included) to compare. On by default.",
     )
+    parser.add_argument(
+        "--reuse-script", default=None,
+        help="A previous build id. Takes that build's scenes verbatim instead of researching a "
+             "new script, and does everything after them again -- narration, alignment, render. "
+             "The take will differ; the words will not.")
     parser.add_argument("--no-audition-voices", dest="audition_voices", action="store_false")
     args = parser.parse_args()
     print(json.dumps(build_short(args), indent=2))

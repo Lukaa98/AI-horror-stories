@@ -2471,3 +2471,68 @@ def test_a_rate_of_appreciation_is_the_same_padding_as_depreciation():
         assert single_car_short.DEPRECIATION_PADDING_RE.search(padded), padded
     for fine in ("it costs $277,000 today", "it makes 400 hp, up 5% on the old car"):
         assert not single_car_short.DEPRECIATION_PADDING_RE.search(fine), fine
+
+
+def test_an_empty_alignment_is_a_failure_not_an_answer():
+    """Run #37340574003 shipped 152 words with an empty word_timeline. The
+    whisper call returned 200 with no per-word timings, nothing raised, and
+    the renderer split 55 seconds evenly across seven scenes -- so captions
+    drifted against a voice whose beats run from 3 to 9 seconds. No
+    violation, no log line, a healthy-looking build and a broken video."""
+    import single_car_short
+    from unittest.mock import patch
+
+    class Result:
+        def __init__(self, words): self.words = words
+
+    empty = Result([])
+    good = Result([{"word": "Only", "start": 0.0, "end": 0.4}])
+
+    with patch.object(single_car_short, "OpenAI"), \
+         patch.object(single_car_short, "with_openai_retry", return_value=empty) as call:
+        try:
+            single_car_short.transcribe_word_timeline(__file__)
+        except ValueError as exc:
+            assert "no word timings" in str(exc)
+        else:
+            raise AssertionError("an empty alignment must not be returned as a timeline")
+    assert call.call_count == single_car_short.ALIGNMENT_ATTEMPTS, "it asks again before giving up"
+
+    # And one good answer after an empty one is enough.
+    with patch.object(single_car_short, "OpenAI"), \
+         patch.object(single_car_short, "with_openai_retry", side_effect=[empty, good]):
+        assert single_car_short.transcribe_word_timeline(__file__) == [
+            {"word": "Only", "start": 0.0, "end": 0.4}]
+
+
+def test_a_build_can_speak_a_previous_build_s_script_again():
+    """A build can be good and still ship broken. Researching the car a third
+    time to get the same words back is a coin toss, because the script is
+    written fresh every run."""
+    import single_car_short
+    from unittest.mock import patch
+    import io, json as _json
+    from pathlib import Path
+
+    manifest = _json.dumps({
+        "title": "A Roadster Born from Legends",
+        "youtube_title": "How the SLR Became a Legend",
+        "scenes": [{"narration": "New, it was $495,000."}, {"narration": "Would that sway you?"}],
+        "history": {"year": 2007, "fact": "x"},
+    }).encode()
+
+    class Response(io.BytesIO):
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+
+    with patch("urllib.request.urlopen", return_value=Response(manifest)):
+        package = single_car_short.script_package_from_build("single-slr-20261001014518")
+    assert package["script"] == "New, it was $495,000. Would that sway you?"
+    assert package["word_count"] == 9
+    assert len(package["scenes"]) == 2
+    assert package["title"] == "A Roadster Born from Legends"
+
+    # The flag exists and the workflow can send it.
+    workflow = (Path(single_car_short.__file__).resolve().parents[2]
+                / ".github/workflows/cars-research.yml").read_text()
+    assert "reuse_script:" in workflow and "--reuse-script" in workflow

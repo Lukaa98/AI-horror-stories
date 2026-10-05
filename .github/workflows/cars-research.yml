@@ -101,6 +101,12 @@ on:
           line. Each becomes a beat and replaces one the model would have written
         required: false
         type: string
+      reuse_script:
+        description: >-
+          single_car mode: a previous build id. Speaks and renders that build's script again
+          instead of researching a new one -- same words, new take
+        required: false
+        type: string
       photos:
         description: >-
           single_car mode: JSON object of direct photo URLs, one per slot --
@@ -275,6 +281,7 @@ jobs:
           if [ -n "${{ inputs.auction_url }}" ]; then YEAR_ARGS+=(--auction-url "${{ inputs.auction_url }}"); fi
           if [ -n "${{ inputs.current_price }}" ]; then YEAR_ARGS+=(--current-price "${{ inputs.current_price }}"); fi
           if [ -n "${{ inputs.angles }}" ]; then YEAR_ARGS+=(--angles "${{ inputs.angles }}"); fi
+          if [ -n "${{ inputs.reuse_script }}" ]; then YEAR_ARGS+=(--reuse-script "${{ inputs.reuse_script }}"); fi
           if [ -n "$PHOTOS" ]; then YEAR_ARGS+=(--photos "$PHOTOS"); fi
           if [ -n "${{ inputs.rival_car }}" ]; then YEAR_ARGS+=(--rival-car "${{ inputs.rival_car }}"); fi
           if [ "${{ inputs.disable_comparison }}" = "true" ]; then YEAR_ARGS+=(--disable-comparison); fi
