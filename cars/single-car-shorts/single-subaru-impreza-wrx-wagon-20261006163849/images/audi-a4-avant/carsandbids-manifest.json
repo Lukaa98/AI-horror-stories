@@ -1,0 +1,440 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-06T16:47:05.988Z",
+  "query": "Audi A4 Avant",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/audi/a4?start_year=2002&end_year=2002&csort=10",
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3L650anR/2002-audi-a4-30-quattro-sedan",
+      "title": "2002 Audi A4 30 Quattro Sedan",
+      "text": "Sold for $5,600",
+      "titleYear": 2002,
+      "score": 60
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3L650anR/2002-audi-a4-30-quattro-sedan",
+      "title": "2002 Audi A4 30 Quattro Sedan",
+      "text": "Sold for $5,600",
+      "titleYear": 2002,
+      "score": 60,
+      "usable_image_count": 23,
+      "sale_price": 5600,
+      "sale_type": "sold",
+      "page_title": "2002 Audi A4 3.0 Quattro Sedan"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3L650anR/2002-audi-a4-30-quattro-sedan",
+    "title": "2002 Audi A4 30 Quattro Sedan",
+    "text": "Sold for $5,600",
+    "titleYear": 2002,
+    "score": 60,
+    "sale_price": 5600,
+    "sale_type": "sold",
+    "page_title": "2002 Audi A4 3.0 Quattro Sedan",
+    "year": 2002,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/9ldWnRM2-wuoNpBh2MU-(edit).jpg?t=172442842047",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Audi A4 3.0 Quattro Sedan",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 277281
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/59339d5e07287c702e69307de910cceaa69c1d04/photos/9ldWnRM2-nYqLWKYIEs-(edit).jpg?t=172486029854",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Audi A4 3.0 Quattro Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 160676
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/9ldWnRM2-7fPeHdqU09-(edit).jpg?t=172443092798",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Audi A4 3.0 Quattro Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 230034
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/9ldWnRM2-aMihZP1EXH-(edit).jpg?t=172443087469",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Audi A4 3.0 Quattro Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 128936
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/9ldWnRM2-Dqvr-UpRAh-(edit).jpg?t=172442844354",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Audi A4 3.0 Quattro Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 223382
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/9ldWnRM2-LpVRBVMMNb-(edit).jpg?t=172442847010",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Audi A4 3.0 Quattro Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 276972
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/9ldWnRM2-AhSkxesv4S-(edit).jpg?t=172443059177",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Audi A4 3.0 Quattro Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 300638
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/9ldWnRM2-rf6aWXClkW-(edit).jpg?t=172443065282",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Audi A4 3.0 Quattro Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 350062
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/d47344de6cc737a80d4fb6f7126461dd1537b288/photos/rNY8yjqE-4AIHcOmCW38.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 13677 bytes"
+    },
+    {
+      "path": "exterior-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/831d34b553d20ab13c50ad9aa31cd5bed7d9c129/photos/rE6EaVYb-IPklNOJpK.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 23592
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/309a1d8d356b6cf4f85b4c6ae28ad4f58fe2a649/photos/KD6O45Gv-q0u-3rN.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 11584 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1f526755cde23158771fda87dcaf2ffba2173c80/photos/lTeMudtxDO.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 13081 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/6fd42691b6637783c8c0a23d637bbc7aec1befff/photos/3zqjQX6B-LcCxnSv8m.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 12104 bytes"
+    },
+    {
+      "path": "interior-14.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da6e8a1d4896127a9d2adf83461993b45339474c/photos/9ldWnRM2-IzIArG4Qqp-(edit).jpg?t=172443080876",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Audi A4 3.0 Quattro Sedan",
+      "width": 542,
+      "height": 361,
+      "bytes": 138296
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "A4",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "front grille design",
+          "headlight shape",
+          "overall proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "A4",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi badge",
+          "Body shape matches A4",
+          "Headlight design specific to 2002 A4"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "a4",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "bodywork shape",
+          "side profile",
+          "tail light design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "side"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "a4",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi badge on trunk",
+          "A4 label on rear",
+          "Body shape consistent with 2002 model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "a4",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "3.0",
+        "visible_match_evidence": [
+          "Audi A4 badge",
+          "3.0 badge",
+          "general body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 4,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not clearly show the target vehicle.",
+        "path": "exterior-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Audi",
+        "detected_model": "A4",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Audi logo on steering wheel",
+          "Dashboard design aligns with 2002 Audi A4",
+          "Interior layout consistent with Audi A4 of this era"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "a4",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "leather seating",
+          "console layout"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not feature the target vehicle; it focuses on the interior detail.",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "interior-14.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
