@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { signIn, signedIn } from "./googleAuth";
+import { useEffect, useState } from "react";
+import { completeSignIn, signIn, signedIn } from "./googleAuth";
 import { channelReport } from "./youtubeResearch";
 import { dispatchWorkflow, readOutputJson } from "./githubDispatch";
 
@@ -124,6 +124,22 @@ export default function ResearchPanel({ settings }) {
   const [scripts, setScripts] = useState(null);
   const [scriptState, setScriptState] = useState("idle");
   const [scriptError, setScriptError] = useState(null);
+  const [live, setLive] = useState(() => signedIn());
+
+  /* Google comes back with the token in the address bar, and somebody has
+   * to take it out of there. Only the YouTube panel did, so signing in from
+   * this tab could never work: the grant arrived, nothing read it, and the
+   * button came straight back -- looking exactly like a sign-in that had
+   * not happened. The two panels are never mounted at once, so whichever
+   * one the redirect lands on handles it.
+   */
+  useEffect(() => {
+    let onPage = true;
+    completeSignIn()
+      .then((token) => { if (onPage && token) { setLive(true); setError(null); } })
+      .catch((err) => { if (onPage) setError(String(err.message || err)); });
+    return () => { onPage = false; };
+  }, []);
 
   /* Reading a Short's spoken track has to happen on a runner.
    *
@@ -177,7 +193,6 @@ export default function ResearchPanel({ settings }) {
     }
   }
 
-  const live = signedIn();
   const shouty = report?.videos.filter((v) => v.title === v.title.toUpperCase()) || [];
   const quiet = report?.videos.filter((v) => v.title !== v.title.toUpperCase()) || [];
 
@@ -190,10 +205,17 @@ export default function ResearchPanel({ settings }) {
       </p>
 
       {!live && (
-        <button type="button" className="yt-start"
-                onClick={() => signIn().catch((e) => setError(String(e.message || e)))}>
-          Sign in with Google
-        </button>
+        <>
+          <button type="button" className="yt-start"
+                  onClick={() => signIn().catch((e) => setError(String(e.message || e)))}>
+            Sign in with Google
+          </button>
+          <p className="yt-note">
+            A Google sign-in here lasts about an hour and cannot be refreshed &mdash; the page
+            holds no secret, so there is no refresh token. Seeing this again usually means the
+            last one simply aged out.
+          </p>
+        </>
       )}
 
       {live && (
