@@ -1,0 +1,465 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-06T05:15:48.218Z",
+  "query": "Acura RSX",
+  "visual_highlight": null,
+  "search_url": "https://carsandbids.com/search/acura/rsx?start_year=2002&end_year=2002&csort=10",
+  "search_result_count": 6,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rxLYLOnB/2002-acura-rsx-type-s",
+      "title": "2002 Acura Rsx Type S",
+      "text": "Sold for $14,000",
+      "titleYear": 2002,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmvyRBw6/2002-acura-rsx-type-s",
+      "title": "2002 Acura Rsx Type S",
+      "text": "Sold for $13,300",
+      "titleYear": 2002,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KDWRYaLv/2002-acura-rsx-type-s",
+      "title": "2002 Acura Rsx Type S",
+      "text": "Sold for $12,800",
+      "titleYear": 2002,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMVeD1kL/2002-acura-rsx-type-s",
+      "title": "Sold After for $12,750",
+      "text": "Sold After for $12,750",
+      "titleYear": 2002,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/3yLRjza9/2002-acura-rsx-type-s",
+      "title": "2002 Acura Rsx Type S",
+      "text": "Sold for $9,200",
+      "titleYear": 2002,
+      "score": 70
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KZA0bOmR/2002-acura-rsx-type-s",
+      "title": "2002 Acura Rsx Type S",
+      "text": "Sold for $8,900",
+      "titleYear": 2002,
+      "score": 70
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rxLYLOnB/2002-acura-rsx-type-s",
+      "title": "2002 Acura Rsx Type S",
+      "text": "Sold for $14,000",
+      "titleYear": 2002,
+      "score": 70,
+      "usable_image_count": 32,
+      "sale_price": 14000,
+      "sale_type": "sold",
+      "page_title": "2002 Acura RSX Type-S"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KmvyRBw6/2002-acura-rsx-type-s",
+      "title": "2002 Acura Rsx Type S",
+      "text": "Sold for $13,300",
+      "titleYear": 2002,
+      "score": 70,
+      "usable_image_count": 24,
+      "sale_price": 13300,
+      "sale_type": "sold",
+      "page_title": "2002 Acura RSX Type-S"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/KDWRYaLv/2002-acura-rsx-type-s",
+      "title": "2002 Acura Rsx Type S",
+      "text": "Sold for $12,800",
+      "titleYear": 2002,
+      "score": 70,
+      "usable_image_count": 15,
+      "sale_price": 12800,
+      "sale_type": "sold",
+      "page_title": "2002 Acura RSX Type-S"
+    },
+    {
+      "url": "https://carsandbids.com/auctions/rMVeD1kL/2002-acura-rsx-type-s",
+      "title": "Sold After for $12,750",
+      "text": "Sold After for $12,750",
+      "titleYear": 2002,
+      "score": 70,
+      "usable_image_count": 13,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2002 Acura RSX Type-S"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rxLYLOnB/2002-acura-rsx-type-s",
+    "title": "2002 Acura Rsx Type S",
+    "text": "Sold for $14,000",
+    "titleYear": 2002,
+    "score": 70,
+    "sale_price": 14000,
+    "sale_type": "sold",
+    "page_title": "2002 Acura RSX Type-S",
+    "year": 2002,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "exterior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/98d5O280-6DmGnkvt2V-(edit).jpg?t=167814687432",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Acura RSX Type-S",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 264348
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/98d5O280-tXFzeRb9yH-(edit).jpg?t=167833113894",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Acura RSX Type-S",
+      "width": 542,
+      "height": 361,
+      "bytes": 240889
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/98d5O280-5MlGPPJdEV-(edit).jpg?t=167814721856",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Acura RSX Type-S",
+      "width": 542,
+      "height": 361,
+      "bytes": 244985
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/98d5O280-wgbc4Oery3-(edit).jpg?t=167814723540",
+      "labels": [
+        "interior"
+      ],
+      "section": "2002 Acura RSX Type-S",
+      "width": 542,
+      "height": 361,
+      "bytes": 137643
+    },
+    {
+      "path": "exterior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/98d5O280-8GukinM9ai-(edit).jpg?t=167814709775",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Acura RSX Type-S",
+      "width": 542,
+      "height": 361,
+      "bytes": 252857
+    },
+    {
+      "path": "exterior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/98d5O280-z7UKfUzwe1-(edit).jpg?t=167814711691",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Acura RSX Type-S",
+      "width": 542,
+      "height": 361,
+      "bytes": 268194
+    },
+    {
+      "path": "exterior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/98d5O280-faQc_4MlAr-(edit).jpg?t=167814714614",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Acura RSX Type-S",
+      "width": 542,
+      "height": 361,
+      "bytes": 272909
+    },
+    {
+      "path": "exterior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/98d5O280-hbxvE4zl_P-(edit).jpg?t=167814718563",
+      "labels": [
+        "exterior"
+      ],
+      "section": "2002 Acura RSX Type-S",
+      "width": 542,
+      "height": 361,
+      "bytes": 229604
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/d6e31df20d6e171e7dda5654b0d51bdb7a062878/photos/rjNdBjvo-TmJ1-xF8x.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 6625 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/394ef606e753c66c7a3ff5008e2809017baaf5a4/photos/v3Rv1v83-FeaKbiI-1F.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 9072 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/91366744b3ba92006698d64c3b809a0b01707cd3/photos/KDXly5L8-zVCj5-Do4kN.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 3497 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/98d69556e30451c6180a99be75669b75e2a70bb0/photos/rEwvEqd3-4DmkSpnDU.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 8645 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c0cf58fe32a74820690fa32880d4b02322781af4/photos/9AlVxQOo-J0RAZGeCJNN.jpg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 17533 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/416addf56ebd09f217681315641aa3ee0b7cdeda/photos/9nqVDPEJ-XvF7Q-KEYKI.jpeg",
+      "labels": [
+        "exterior"
+      ],
+      "error": "Too small: 6041 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 8,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "RSX",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Acura badge",
+          "design features consistent with RSX",
+          "year-specific bodywork and proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "RSX",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Acura badge",
+          "RSX front design",
+          "body proportions consistent with RSX"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "RSX",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "body shape",
+          "side profile",
+          "wheel design",
+          "rear light design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "RSX",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "body shape",
+          "taillight design",
+          "rear window shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "RSX",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "RSX-S",
+        "visible_match_evidence": [
+          "Acura badge",
+          "RSX-S badge",
+          "2002 model year identifiers"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "exterior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "RSX",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Acura branding on steering wheel",
+          "speedometer and dashboard design consistent with RSX",
+          "interior layout matches RSX features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Acura",
+        "detected_model": "RSX",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "S",
+        "visible_match_evidence": [
+          "interior design",
+          "RSX floor mat",
+          "gear shifter"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 4,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not enough visual evidence to identify the target vehicle.",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
