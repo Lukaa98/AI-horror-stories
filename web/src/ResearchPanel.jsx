@@ -59,7 +59,24 @@ const OURS = { words: 139, rate: 2.6, seconds: 54, beats: 7 };
 
 function Scripts({ rows }) {
   const usable = rows.filter((r) => r.words);
-  if (!usable.length) return <p className="yt-note">No captions came back for any of those.</p>;
+  const skipped = rows.filter((r) => !r.words);
+  const skips = skipped.length ? (
+    <ul className="research-skips">
+      {skipped.map((row) => (
+        <li key={row.video_id}>
+          <code>{row.video_id}</code> — {row.skipped || "no captions"}
+        </li>
+      ))}
+    </ul>
+  ) : null;
+  if (!usable.length) {
+    return (
+      <div className="research-scripts">
+        <p className="yt-note">No captions came back for any of those. Why:</p>
+        {skips}
+      </div>
+    );
+  }
   const med = (pick) => median(usable.map(pick));
   const cells = [
     ["words", med((r) => r.words), OURS.words],
@@ -110,6 +127,7 @@ function Scripts({ rows }) {
           </ol>
         </details>
       ))}
+      {skips}
     </div>
   );
 }
@@ -172,7 +190,15 @@ export default function ResearchPanel({ settings }) {
         owner: settings.owner, repo: settings.repo,
         path: `research/shorts-transcripts/${label.trim() || "batch"}/transcripts.json`,
       });
-      if (!found) setScriptError("Nothing read under that label yet -- the run may still be going.");
+      // An empty array is truthy, which is how a run that read nothing
+      // rendered as neither a result nor an error -- just an empty box.
+      if (!found) {
+        setScriptError("Nothing under that label yet -- the run may still be going.");
+      } else if (!found.length) {
+        setScriptError("The run wrote an empty file: it read no videos at all.");
+      } else if (!found.some((row) => row.words)) {
+        setScriptError(`None of those ${found.length} had captions we could read. Reasons below.`);
+      }
       setScripts(found);
       setScriptState("idle");
     } catch (err) {

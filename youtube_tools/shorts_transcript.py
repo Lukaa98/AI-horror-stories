@@ -50,41 +50,69 @@ def video_ids_from_text(text):
     return ids
 
 
-def caption_track_url(video_id):
-    """The timed-text URL for a video's captions, or None if it has none."""
+def caption_track(video_id):
+    """(url, why) -- the timed-text URL, and what happened either way.
+
+    "No captions" is three different problems wearing one face: the video
+    genuinely has none, YouTube changed the shape of the page, or a
+    datacenter IP got a consent wall instead of a watch page. The first
+    needs nothing, the second needs a new regex, the third needs cookies.
+    Returning the reason is what makes them tellable apart from a log.
+    """
     try:
         page = _get(f"https://www.youtube.com/watch?v={video_id}")
-    except OSError:
+    except OSError as exc:
         # URLError and HTTPError are both OSError, but a bare socket timeout
         # or DNS failure is not a URLError -- catching only those would kill
         # a twenty-video run on the first flaky request.
-        return None
+        return None, f"fetch failed: {str(exc)[:80]}"
     match = PLAYER_RESPONSE_RE.search(page)
     if not match:
-        return None
+        if "consent.youtube.com" in page or "CONSENT" in page[:4000]:
+            return None, f"consent wall, not a watch page ({len(page)} bytes)"
+        if len(page) < 20000:
+            return None, f"page too small to be a watch page ({len(page)} bytes)"
+        return None, f"no ytInitialPlayerResponse in {len(page)} bytes"
     try:
         player = json.loads(match.group(1))
     except json.JSONDecodeError:
-        return None
+        return None, "player response is not valid JSON"
+    status = (player.get("playabilityStatus") or {}).get("status")
     tracks = (player.get("captions", {})
               .get("playerCaptionsTracklistRenderer", {})
               .get("captionTracks") or [])
     if not tracks:
-        return None
+        return None, f"no caption track on this video (playability: {status})"
     # An uploader's own track says what they meant; ASR is a guess at it.
     chosen = next((t for t in tracks if t.get("kind") != "asr"), tracks[0])
     url = chosen.get("baseUrl")
-    return f"{url}&fmt=json3" if url else None
+    if not url:
+        return None, "caption track carries no url"
+    kind = chosen.get("kind") or "written"
+    return f"{url}&fmt=json3", f"ok ({kind}, {len(tracks)} track(s))"
 
 
-def cues(video_id):
-    """[{text, start, duration}] in speaking order; [] when unavailable."""
-    url = caption_track_url(video_id)
+def caption_track_url(video_id):
+    """The timed-text URL for a video's captions, or None if it has none."""
+    return caption_track(video_id)[0]
+
+
+def cues(video_id, report_why=None):
+    """[{text, start, duration}] in speaking order; [] when unavailable.
+
+    report_why, if given a list, collects the reason -- so a run that comes
+    back with nothing can say which of the three things went wrong.
+    """
+    url, why = caption_track(video_id)
+    if report_why is not None:
+        report_why.append(why)
     if not url:
         return []
     try:
         payload = json.loads(_get(url))
-    except (OSError, json.JSONDecodeError):
+    except (OSError, json.JSONDecodeError) as exc:
+        if report_why is not None:
+            report_why.append(f"timed text failed: {str(exc)[:80]}")
         return []
     out = []
     for event in payload.get("events") or []:
@@ -173,15 +201,24 @@ def main():
         parser.error("no video ids found")
     ids = ids[:args.limit]
 
-    rows = []
+    rows, skipped = [], []
     for video_id in ids:
-        shape = summarise(video_id, cues(video_id), keep_text=args.keep_text)
+        why = []
+        shape = summarise(video_id, cues(video_id, report_why=why),
+                          keep_text=args.keep_text)
+        reason = "; ".join(why) or "unknown"
         if not shape.get("words"):
-            print(f"[shorts] {video_id}: no captions available, skipped.", file=sys.stderr)
+            print(f"[shorts] {video_id}: SKIPPED -- {reason}", file=sys.stderr)
+            skipped.append({"video_id": video_id, "skipped": reason})
             continue
         print(f"[shorts] {video_id}: {shape['words']} words in {shape['seconds']}s "
-              f"({shape['words_per_second']} w/s), {shape['beats']} beats.", file=sys.stderr)
+              f"({shape['words_per_second']} w/s), {shape['beats']} beats. [{reason}]",
+              file=sys.stderr)
         rows.append(shape)
+
+    # The skips go in the file too. A run that read nothing used to write an
+    # empty list, which told the dashboard nothing and looked like success.
+    rows.extend(skipped)
 
     payload = json.dumps(rows, indent=2, ensure_ascii=False)
     if args.out == "-":
@@ -191,6 +228,12 @@ def main():
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         Path(args.out).write_text(payload, encoding="utf-8")
         print(f"[shorts] Wrote {len(rows)} of {len(ids)} to {args.out}.", file=sys.stderr)
+    read = len([r for r in rows if r.get("words")])
+    if not read:
+        # Exiting green on nothing is how three runs looked fine while the
+        # dashboard showed an empty box.
+        print(f"[shorts] Read 0 of {len(ids)} videos.", file=sys.stderr)
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

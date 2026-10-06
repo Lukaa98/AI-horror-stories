@@ -28,6 +28,13 @@ on:
         default: "20"
         type: string
 
+# Three clicks in thirty seconds produced three runs, two of which could
+# not push: they raced each other on the same branch and the rejection was
+# swallowed by the retry loop. One at a time instead.
+concurrency:
+  group: shorts-transcripts
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -61,7 +68,13 @@ jobs:
           mkdir -p "$DEST"
           cp /tmp/transcripts.json "$DEST/transcripts.json"
           git add "$DEST"
-          git commit -m "Read ${{ inputs.label }} Shorts transcripts" || exit 0
+          # "|| exit 0" here meant a run that changed nothing reported green.
+          git commit -m "Read ${{ inputs.label }} Shorts transcripts"
           for attempt in 1 2 3 4; do
-            git push origin "$OUTPUT_BRANCH" && break || sleep $((2 ** attempt))
+            git push origin "$OUTPUT_BRANCH" && exit 0
+            # Somebody else moved the branch: take their commit and retry.
+            git fetch origin "$OUTPUT_BRANCH" && git rebase "origin/$OUTPUT_BRANCH" || true
+            sleep $((2 ** attempt))
           done
+          echo "Could not push to $OUTPUT_BRANCH after four attempts." >&2
+          exit 1

@@ -68,6 +68,34 @@ def test_the_shape_measures_the_opening_separately():
     assert numeric["closes_on_question"] is False
 
 
+def test_a_skip_says_which_of_the_three_things_went_wrong():
+    """"No captions" is three problems wearing one face: the video has none,
+    YouTube changed the page, or a datacenter IP got a consent wall. Three
+    runs reported green while the dashboard showed an empty box, and the
+    logs could not tell them apart."""
+    import shorts_transcript as st
+
+    with patch.object(st, "_get", side_effect=OSError("tunnel refused")):
+        assert "fetch failed" in st.caption_track("vid00000010")[1]
+
+    with patch.object(st, "_get", return_value="x" * 30000 + "consent.youtube.com"):
+        assert "consent wall" in st.caption_track("vid00000011")[1]
+
+    with patch.object(st, "_get", return_value="<html>tiny</html>"):
+        assert "too small" in st.caption_track("vid00000012")[1]
+
+    player = json.dumps({"playabilityStatus": {"status": "OK"}, "captions": {}})
+    with patch.object(st, "_get", return_value=f"ytInitialPlayerResponse = {player};var x"):
+        url, why = st.caption_track("vid00000013")
+    assert url is None and "no caption track" in why
+
+    # And the reason reaches the caller that collects them.
+    why = []
+    with patch.object(st, "_get", side_effect=OSError("boom")):
+        assert st.cues("vid00000014", report_why=why) == []
+    assert why and "fetch failed" in why[0]
+
+
 def test_a_video_without_captions_is_skipped_not_fatal():
     """Some Shorts have no caption track, and YouTube changes the player
     shape when it likes. A run over twenty videos must not die on one."""
@@ -104,7 +132,7 @@ def test_json3_events_become_cues():
         {"tStartMs": 1700, "dDurationMs": 900, "segs": [{"utf8": "\n"}]},
         {"tStartMs": 2000, "dDurationMs": 800, "segs": [{"utf8": "and nobody  noticed"}]},
     ]})
-    with patch.object(st, "caption_track_url", return_value="https://example.com/t"), \
+    with patch.object(st, "caption_track", return_value=("https://example.com/t", "ok")), \
          patch.object(st, "_get", return_value=payload):
         got = st.cues("vid00000007")
     assert [c["text"] for c in got] == ["three hundred horsepower", "and nobody noticed"]
