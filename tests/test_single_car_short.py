@@ -2574,6 +2574,11 @@ def test_a_second_writing_style_sits_beside_the_one_everything_shipped_with():
     assert "this overrides the pacing guidance above" in packed
     assert "Do NOT tour the" in packed
     assert "two- or three-word line on its own" in packed
+    # Every one of the nine transcripts read closes on a binary the viewer has
+    # to take a side in, which is what a 262-comment thread is made of. The
+    # base prompt only asks for "a question", which "would you buy one?" meets.
+    assert "makes the viewer pick a side" in packed
+    assert "Would you buy one?" in packed and "there is nothing to disagree with" in packed
 
     # The flag, the workflow and the dashboard all carry it.
     workflow = (Path(single_car_short.__file__).resolve().parents[2]

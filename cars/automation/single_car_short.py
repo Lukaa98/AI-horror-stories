@@ -154,7 +154,14 @@ as evidence for the argument, not as an opening fact.
 
 Conversational and spoken, not written. Contractions throughout. Plain words over formal
 ones. It should read like somebody telling you something they find genuinely interesting,
-not like a brochure being read aloud."""
+not like a brochure being read aloud.
+
+End on a question that makes the viewer pick a side, not one they can simply answer. Give
+them two camps and ask which they are in -- this car against the obvious thing somebody
+would buy instead, cheap against fast, old against new, one country's cars against
+another's. "Would you daily a fast Volvo, or does it have to be German?" is the shape:
+a real choice with an argument inside it. "Would you buy one?" and "Is it worth it?" are
+the failure -- there is nothing to disagree with, so nobody does."""
     },
 }
 
