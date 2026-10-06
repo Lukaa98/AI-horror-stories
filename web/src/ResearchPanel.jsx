@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { completeSignIn, signIn, signedIn } from "./googleAuth";
 import { channelReport } from "./youtubeResearch";
-import { dispatchWorkflow, readOutputJson } from "./githubDispatch";
+import { fromPaste } from "./transcriptPaste";
 
 /* What another channel's numbers look like from outside.
  *
@@ -132,16 +132,34 @@ function Scripts({ rows }) {
   );
 }
 
-export default function ResearchPanel({ settings }) {
+export default function ResearchPanel() {
   const [handle, setHandle] = useState("");
   const [report, setReport] = useState(null);
   const [state, setState] = useState("idle");
   const [error, setError] = useState(null);
-  const [videos, setVideos] = useState("");
-  const [label, setLabel] = useState("");
-  const [scripts, setScripts] = useState(null);
-  const [scriptState, setScriptState] = useState("idle");
+  const [paste, setPaste] = useState("");
+  const [pasteLabel, setPasteLabel] = useState("");
+  const [scripts, setScripts] = useState([]);
   const [scriptError, setScriptError] = useState(null);
+
+  /* Reading these on a runner is not possible. YouTube answers a datacenter
+   * IP with playability LOGIN_REQUIRED and hands over no player at all, so
+   * the workflow that tried it is gone. This browser is the one machine
+   * that can see them -- signed in, on a home address -- which makes the
+   * copying manual and leaves only the analysis automatic.
+   */
+  function addPaste() {
+    setScriptError(null);
+    const shape = fromPaste(paste, pasteLabel);
+    if (shape.skipped) {
+      setScriptError(`${shape.skipped} -- the panel copies as a time, then its line.`);
+      return;
+    }
+    setScripts((previous) => [...previous.filter((r) => r.video_id !== shape.video_id), shape]);
+    setPaste("");
+    setPasteLabel("");
+  }
+
   const [live, setLive] = useState(() => signedIn());
 
   /* Google comes back with the token in the address bar, and somebody has
@@ -158,54 +176,6 @@ export default function ResearchPanel({ settings }) {
       .catch((err) => { if (onPage) setError(String(err.message || err)); });
     return () => { onPage = false; };
   }, []);
-
-  /* Reading a Short's spoken track has to happen on a runner.
-   *
-   * This page cannot fetch youtube.com -- no CORS header comes back -- and
-   * neither can a session, whose egress proxy refuses the tunnel outright.
-   * So the button starts a workflow and the answer arrives on the output
-   * branch a minute or two later, which is what "Load" then reads.
-   */
-  async function readScripts() {
-    setScriptError(null);
-    setScriptState("running");
-    try {
-      await dispatchWorkflow({
-        owner: settings.owner, repo: settings.repo, branch: settings.branch,
-        token: settings.token, workflow: "shorts-transcripts.yml",
-        inputs: { videos: videos.trim(), label: label.trim() || "batch", limit: "20" },
-      });
-      setScriptState("started");
-    } catch (err) {
-      setScriptError(String(err.message || err));
-      setScriptState("idle");
-    }
-  }
-
-  async function loadScripts() {
-    setScriptError(null);
-    setScriptState("loading");
-    try {
-      const found = await readOutputJson({
-        owner: settings.owner, repo: settings.repo,
-        path: `research/shorts-transcripts/${label.trim() || "batch"}/transcripts.json`,
-      });
-      // An empty array is truthy, which is how a run that read nothing
-      // rendered as neither a result nor an error -- just an empty box.
-      if (!found) {
-        setScriptError("Nothing under that label yet -- the run may still be going.");
-      } else if (!found.length) {
-        setScriptError("The run wrote an empty file: it read no videos at all.");
-      } else if (!found.some((row) => row.words)) {
-        setScriptError(`None of those ${found.length} had captions we could read. Reasons below.`);
-      }
-      setScripts(found);
-      setScriptState("idle");
-    } catch (err) {
-      setScriptError(String(err.message || err));
-      setScriptState("idle");
-    }
-  }
 
   async function look() {
     setError(null);
@@ -264,31 +234,30 @@ export default function ResearchPanel({ settings }) {
 
       <h3>Read their scripts</h3>
       <p className="yt-lead">
-        Paste Shorts links, video ids, or a whole channel page&rsquo;s source &mdash; anything with
-        ids in it. A runner reads the captions, because neither this page nor a session can
-        reach YouTube directly. Give it a label, run it, then Load it a minute later.
+        Open a Short, <strong>&hellip; &rarr; Show transcript</strong>, copy the whole thing and
+        paste it here. YouTube will not serve these to a server &mdash; it answers a datacenter
+        address with <code>LOGIN_REQUIRED</code> &mdash; so this browser, signed in and at home,
+        is the only thing that can see them. Add as many as you like; they stack up.
       </p>
       <textarea
         className="research-videos"
-        rows={4}
-        value={videos}
-        onChange={(e) => setVideos(e.target.value)}
-        placeholder={"https://www.youtube.com/shorts/2dxa9oz1AZw\nhttps://www.youtube.com/shorts/..."}
+        rows={6}
+        value={paste}
+        onChange={(e) => setPaste(e.target.value)}
+        placeholder={"0:00\nfour hundred horsepower and nobody\n0:03\nknows it came from a factory"}
       />
       <div className="research-row">
-        <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="label, e.g. driving-lab" />
-        <button type="button" onClick={readScripts} disabled={!videos.trim() || scriptState === "running"}>
-          {scriptState === "running" ? "Starting…" : "Read scripts"}
-        </button>
-        <button type="button" className="secondary" onClick={loadScripts} disabled={scriptState === "loading"}>
-          {scriptState === "loading" ? "Loading…" : "Load"}
-        </button>
+        <input value={pasteLabel} onChange={(e) => setPasteLabel(e.target.value)}
+               placeholder="its link or id (optional)" />
+        <button type="button" onClick={addPaste} disabled={!paste.trim()}>Add it</button>
+        {scripts.length > 0 && (
+          <button type="button" className="secondary" onClick={() => setScripts([])}>
+            Clear {scripts.length}
+          </button>
+        )}
       </div>
-      {scriptState === "started" && (
-        <p className="yt-note">Started. It takes a minute or two &mdash; then press Load.</p>
-      )}
       {scriptError && <p className="yt-error">{scriptError}</p>}
-      {scripts?.length > 0 && <Scripts rows={scripts} />}
+      {scripts.length > 0 && <Scripts rows={scripts} />}
 
       {report && (
         <>

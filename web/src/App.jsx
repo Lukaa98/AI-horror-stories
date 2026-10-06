@@ -1886,7 +1886,7 @@ export default function App() {
         </button>
       </nav>
 
-      {view === "research" && <ResearchPanel settings={settings} />}
+      {view === "research" && <ResearchPanel />}
       {view === "youtube" && <YouTubePanel settings={settings} />}
 
       {view === "dashboard" && (

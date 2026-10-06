@@ -22,16 +22,3 @@ export async function dispatchWorkflow({ owner, repo, branch, token, workflow, i
     throw new Error(`Dispatch failed (${res.status}): ${body}`);
   }
 }
-
-/* A file on the output branch, cache-busted.
- *
- * raw.githubusercontent caches hard, and a batch that just finished reading
- * would otherwise come back as the previous one for minutes.
- */
-export async function readOutputJson({ owner, repo, path, branch = "cars-output" }) {
-  const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}?t=${Date.now()}`;
-  const res = await fetch(url);
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`Could not read ${path} (${res.status})`);
-  return res.json();
-}
