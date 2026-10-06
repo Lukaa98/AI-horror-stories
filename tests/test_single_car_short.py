@@ -2641,3 +2641,24 @@ def test_a_short_script_is_told_how_far_short_and_how_to_fix_it():
     assert "do not repeat a number or a fact you have already given" in retry
     # The first attempt has no shortfall to report.
     assert "words SHORT" not in seen["prompts"][0]
+
+
+def test_the_dense_scene_count_is_set_by_the_word_target_not_by_pasted_photos():
+    """Scene count is what actually makes the word count: scenes x sentences
+    x sentence length. Three dense builds sat at 144, 136 and 138 words while
+    the other two terms moved under instruction -- sentences per scene went
+    2.0 to 3.0 and sentence length 11.3 to 8.9 -- because the clause setting
+    the scene count gated it on pasted photos. None were pasted, so it took
+    the low end: five scenes, three sentences, nine words, 135."""
+    import single_car_short
+
+    plain = single_car_short._research_script_prompt("Subaru Impreza WRX", "2002")
+    packed = single_car_short._research_script_prompt("Subaru Impreza WRX", "2002", style="dense")
+
+    assert "split across 5-8 scenes (the higher end of that range only when you have" in plain
+    assert "split across 7-8 scenes" in packed
+    assert "The scene count is what makes the word count here" in packed
+    assert "How many photos were pasted does NOT limit it" in packed
+    # max_scenes still flows in rather than being hard-coded into the style.
+    assert "split across 7-6 scenes" in single_car_short._research_script_prompt(
+        "Subaru Impreza WRX", "2002", style="dense", max_scenes=6)
