@@ -1,0 +1,549 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-06T04:08:15.849Z",
+  "query": "Cadillac Ct5 V Blackwing",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9aAYMEeo/2023-cadillac-ct5-v-blackwing",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9aAYMEeo/2023-cadillac-ct5-v-blackwing",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 35,
+      "sale_price": 87000,
+      "sale_type": "sold",
+      "page_title": "2023 Cadillac CT5-V Blackwing"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9aAYMEeo/2023-cadillac-ct5-v-blackwing",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 87000,
+    "sale_type": "sold",
+    "page_title": "2023 Cadillac CT5-V Blackwing",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/exterior/rJDP017v-J4-XxFE/edit/T-tm6.jpg?t=179021323312",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Cadillac CT5-V Blackwing",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 343389
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/exterior/rJDP017v-NTRqC3p/edit/2CuQl.jpg?t=179021331720",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Cadillac CT5-V Blackwing",
+      "width": 542,
+      "height": 406,
+      "bytes": 342061
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/exterior/rJDP017v-SZgqI4B/edit/j476b.jpg?t=179021390486",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Cadillac CT5-V Blackwing",
+      "width": 542,
+      "height": 361,
+      "bytes": 313280
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/exterior/rJDP017v-COXc0S-/edit/1SLoI.jpg?t=179021321311",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Cadillac CT5-V Blackwing",
+      "width": 542,
+      "height": 361,
+      "bytes": 373050
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/exterior/rJDP017v-sTTS-gs/edit/UpGxa.jpg?t=179021325143",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Cadillac CT5-V Blackwing",
+      "width": 542,
+      "height": 361,
+      "bytes": 374668
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/interior/rJDP017v-OOY1wNn/edit/V4OXx.jpg?t=179021400430",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Cadillac CT5-V Blackwing",
+      "width": 542,
+      "height": 361,
+      "bytes": 248263
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/interior/rJDP017v-w8Tlw_t/edit/ioAub.jpg?t=179021415251",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Cadillac CT5-V Blackwing",
+      "width": 542,
+      "height": 361,
+      "bytes": 305026
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/interior/rJDP017v-ikJFPfs/edit/pMwgP.jpg?t=179021405385",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Cadillac CT5-V Blackwing",
+      "width": 542,
+      "height": 361,
+      "bytes": 239570
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f50baa0fded5bb62b35f8553a743bb81347efcf4/photos/rJDP017v-PfGuWdf/edit/0YxhI.jpg?t=179021409513",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Cadillac CT5-V Blackwing",
+      "width": 542,
+      "height": 361,
+      "bytes": 131313
+    },
+    {
+      "path": "interior-10.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/67290b1d5780c00e6c69aa0b5c6f97f75eff956c/attachments/9aAYMEeo-gpxJvAV.jpg?t=179115871296",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 135,
+      "bytes": 173376
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a042121fca1eb7e10b8b1fa85ed195ed7bb3c5a1/photos/rJMDVlR2-BKFooKa.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 3581 bytes"
+    },
+    {
+      "path": "interior-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/b5447def165b1a2d7b1c7d0eb7b88686ba5fc154/photos/rNkQGMdP-O2YXkWP.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 27667
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/e9e01e40cfbe77b123916316292142b3c29d02be/photos/rMe8G71m-Ea-ks6n.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 8840 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/ec146ab986bc827edda6e3f1bef27f0f2a670348/photos/3oeepAvE-hb3FKdF.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 10790 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/85a4245cbfbf80d8fef0cc7bd911e67d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/85a4245cbfbf80d8fef0cc7bd911e67d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Cadillac CT5-V Blackwing",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/85a4245cbfbf80d8fef0cc7bd911e67d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9aAYMEeo/2023-cadillac-ct5-v-blackwing",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/85a4245cbfbf80d8fef0cc7bd911e67d/manifest/video.m3u8",
+      "auction_title": "2023 Cadillac CT5-V Blackwing",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e5942e396b27c43171184dab9e8247d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e5942e396b27c43171184dab9e8247d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Cadillac CT5-V Blackwing",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e5942e396b27c43171184dab9e8247d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9aAYMEeo/2023-cadillac-ct5-v-blackwing",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8e5942e396b27c43171184dab9e8247d/manifest/video.m3u8",
+      "auction_title": "2023 Cadillac CT5-V Blackwing",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 11,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Cadillac",
+        "detected_model": "CT5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "CT5 V Blackwing",
+        "visible_match_evidence": [
+          "bodywork shape",
+          "front light design",
+          "V badge",
+          "overall proportions"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "side"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Cadillac",
+        "detected_model": "CT5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "V Blackwing",
+        "visible_match_evidence": [
+          "Cadillac badge",
+          "CT5 body design",
+          "V Blackwing exterior features"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "cadillac",
+        "detected_model": "ct5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Blackwing",
+        "visible_match_evidence": [
+          "specific bodywork",
+          "distinct grille design",
+          "headlight shape",
+          "overall proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Cadillac",
+        "detected_model": "CT5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "V Blackwing",
+        "visible_match_evidence": [
+          "Distinctive rear lights",
+          "V badge",
+          "Sporty exhaust"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Cadillac",
+        "detected_model": "CT5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "V Blackwing",
+        "visible_match_evidence": [
+          "Cadillac badge",
+          "CT5 badge",
+          "2023 generation bodywork"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Cadillac",
+        "detected_model": "CT5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Blackwing",
+        "visible_match_evidence": [
+          "Cadillac emblem on steering wheel",
+          "modern interior design",
+          "gear shifter design resembles Blackwing"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "cadillac",
+        "detected_model": "ct5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "seating materials",
+          "trim style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 5,
+        "composition_score": 6,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the exterior of the target vehicle and lacks relevant identifiers.",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [],
+        "quality_score": 3,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not a clear image of the target vehicle; only the interior display is visible.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict a car.",
+        "path": "interior-10.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 0,
+        "variant_match_confidence": 0,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 0,
+        "reject": true,
+        "reason": "Wrong vehicle or not the main subject.",
+        "path": "interior-12.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
