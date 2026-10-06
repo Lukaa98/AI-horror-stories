@@ -63,22 +63,42 @@ export function parseTranscript(text) {
   })).filter((cue) => cue.text);
 }
 
+/* Pasted cues run continuously -- each one ends exactly where the next
+ * starts -- so there are no pauses to group on, and pause-grouping put a
+ * whole script in one beat. The timed-text the Python reads has real gaps;
+ * this does not.
+ *
+ * What it does have is punctuation, because the tracks worth reading are
+ * written or well-punctuated ASR. So beats are sentences here, timed by
+ * where their words fall across the cues.
+ */
 export function beats(cues) {
-  const grouped = [];
+  // One entry per word: when it was said, and which cue it came from.
+  const words = [];
   for (const cue of cues) {
-    const last = grouped[grouped.length - 1];
-    const gap = last ? cue.start - last.end : 0;
-    if (last && gap < BEAT_GAP_SECONDS) {
-      last.text += " " + cue.text;
-      last.end = cue.start + cue.duration;
-    } else {
-      grouped.push({ text: cue.text, start: cue.start, end: cue.start + cue.duration });
+    const parts = cue.text.split(/\s+/).filter(Boolean);
+    parts.forEach((word, i) => {
+      words.push({ word, at: cue.start + (cue.duration * i) / Math.max(1, parts.length) });
+    });
+  }
+  if (!words.length) return [];
+
+  const grouped = [];
+  let current = [];
+  for (let i = 0; i < words.length; i += 1) {
+    current.push(words[i]);
+    const ends = /[.!?]["')\]]?$/.test(words[i].word);
+    if (ends || i === words.length - 1) {
+      const last = cues[cues.length - 1];
+      const end = i + 1 < words.length ? words[i + 1].at : last.start + last.duration;
+      grouped.push({ text: current.map((w) => w.word).join(" "), start: current[0].at, end });
+      current = [];
     }
   }
   return grouped.map((beat) => {
-    const words = beat.text.split(/\s+/).filter(Boolean).length;
+    const count = beat.text.split(/\s+/).filter(Boolean).length;
     const secs = Math.round((beat.end - beat.start) * 100) / 100;
-    return { ...beat, words, seconds: secs, rate: secs ? Math.round((words / secs) * 100) / 100 : 0 };
+    return { ...beat, words: count, seconds: secs, rate: secs ? Math.round((count / secs) * 100) / 100 : 0 };
   });
 }
 

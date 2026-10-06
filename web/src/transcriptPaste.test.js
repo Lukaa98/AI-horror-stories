@@ -31,22 +31,26 @@ test("the last cue gets the median gap, not zero", () => {
   assert.equal(cues[2].duration, 2, "guessed from the others rather than left at nothing");
 });
 
-test("beats group at the pauses", () => {
+test("beats are sentences, because pasted cues have no pauses to group on", () => {
+  // Each pasted cue ends exactly where the next begins -- the panel gives
+  // start times only -- so pause-grouping put a whole script in one beat.
   const grouped = beats([
-    { text: "three hundred horsepower", start: 0, duration: 1 },
-    { text: "and nobody noticed", start: 1.1, duration: 0.9 },  // 0.10 gap: same beat
-    { text: "it was built in Japan", start: 3.0, duration: 1.2 }, // 1.00 gap: new beat
+    { text: "People hated this car's headlights.", start: 0, duration: 4 },
+    { text: "This is the Impreza. The reaction was brutal.", start: 4, duration: 4 },
   ]);
-  assert.equal(grouped.length, 2);
-  assert.equal(grouped[0].words, 6);
-  assert.equal(grouped[1].words, 5);
+  assert.deepEqual(grouped.map((b) => b.text), [
+    "People hated this car's headlights.",
+    "This is the Impreza.",
+    "The reaction was brutal.",
+  ]);
+  assert.equal(grouped[0].words, 5);
+  assert.ok(grouped[1].start >= 4, "a sentence is timed from where its words fall");
 });
 
 test("the shape measures the opening on its own", () => {
   const shape = summarise("abcdefghijk", [
-    { text: "three hundred horsepower", start: 0.5, duration: 1.0 },
-    { text: "and nobody noticed", start: 1.6, duration: 0.9 },
-    { text: "would you buy one?", start: 4.0, duration: 1.5 },
+    { text: "Three hundred horsepower, and nobody noticed.", start: 0.5, duration: 2.0 },
+    { text: "Would you buy one?", start: 2.5, duration: 1.5 },
   ]);
   assert.equal(shape.words, 10);
   assert.equal(shape.beats, 2);
