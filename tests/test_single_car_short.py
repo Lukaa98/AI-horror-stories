@@ -2589,3 +2589,55 @@ def test_a_second_writing_style_sits_beside_the_one_everything_shipped_with():
     assert "Dense script" in app
     assert "useState(false)" in app.split("const [denseStyle, setDenseStyle] = ")[1][:20], \
         "off by default, so the daily upload is undisturbed"
+
+
+def test_the_dense_style_asks_for_more_sentences_not_merely_shorter_ones():
+    """Two dense builds came back at 144 and 136 words against a 170-185
+    target. They wrote the sentence length (10-11 words against the usual 20)
+    and not the volume -- twelve or thirteen sentences instead of sixteen to
+    twenty. The base prompt was telling them to "prefer fewer, fuller scenes
+    over many thin one-liners", which is the opposite, and a trailing
+    override does not beat a specific instruction."""
+    import single_car_short
+
+    plain = single_car_short._research_script_prompt("Subaru Impreza WRX", "2002")
+    packed = single_car_short._research_script_prompt("Subaru Impreza WRX", "2002", style="dense")
+
+    # Classic keeps the clause word for word; dense gets the opposite.
+    assert "prefer fewer, fuller scenes over many thin one-liners" in plain
+    assert "prefer fewer, fuller scenes" not in packed
+    assert "at least THREE in every scene" in packed
+    assert "Thin, punchy one-liners are wanted here, not avoided" in packed
+    # And the arithmetic is spelled out, since the failure is silent otherwise.
+    assert "six scenes of three sentences is" in packed
+    assert "there have to be MORE of them" in packed
+
+
+def test_a_short_script_is_told_how_far_short_and_how_to_fix_it():
+    """Four rewrites of "outside the target" produced 136 and 144 words. A
+    verdict is not an instruction: the retry now says the shortfall, converts
+    it to sentences, and rules out the two things the model reaches for --
+    longer sentences and repeating a number it already gave."""
+    import single_car_short
+    from unittest.mock import patch
+
+    seen = {}
+
+    def capture(prompt, max_scenes=8):
+        seen.setdefault("prompts", []).append(prompt)
+        return {"scenes": [{"narration": "Short.", "media_type": "exterior"}],
+                "script": "Short.", "word_count": 136, "title": "t", "youtube_title": "t"}
+
+    with patch.object(single_car_short, "_request_script_package", side_effect=capture), \
+         patch.object(single_car_short, "_script_violations", return_value=[]), \
+         patch.object(single_car_short, "_repair_history", side_effect=lambda p, *a, **k: p), \
+         patch.object(single_car_short, "_repair_violations", side_effect=lambda p, *a, **k: p):
+        single_car_short.research_script("Subaru", "Impreza WRX", max_attempts=2, style="dense")
+
+    retry = seen["prompts"][1]
+    assert "You were 34 words SHORT" in retry, "170 - 136"
+    assert "more short sentences spread across the scenes you already have" in retry
+    assert "do NOT make the existing sentences longer" in retry
+    assert "do not repeat a number or a fact you have already given" in retry
+    # The first attempt has no shortfall to report.
+    assert "words SHORT" not in seen["prompts"][0]

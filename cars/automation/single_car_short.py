@@ -126,6 +126,8 @@ SCRIPT_STYLES = {
         "words": TARGET_WORDS,
         "window": (52.0, 58.0),
         "sentences": "ONE OR TWO complete sentences",
+        "scene_note": ("prefer fewer, fuller scenes over many thin one-liners, which read choppy "
+                       "when spoken back to back so faster TTS lands near 55-60 seconds"),
         "block": "",
     },
     "dense": {
@@ -133,12 +135,21 @@ SCRIPT_STYLES = {
         "words": (170, 185),
         "window": (58.0, 68.0),
         "sentences": "TWO TO FOUR short sentences",
+        # The base clause told it the opposite -- prefer fewer, fuller scenes --
+        # and two builds landed at two sentences a scene and 136-144 words
+        # because of it. A general instruction does not beat a specific one.
+        "scene_note": ("at least THREE in every scene -- a scene carrying one or two sentences is "
+                       "under-written for this style and the script lands short. Thin, punchy "
+                       "one-liners are wanted here, not avoided"),
         "block": """
 
 HOW THIS ONE IS WRITTEN -- this overrides the pacing guidance above.
 
 Short sentences, and a lot of them. Aim for 16-20 sentences averaging about twelve words,
-not eight sentences of twenty-five. Vary them hard: a long sentence, then a short one, then
+not eight sentences of twenty-five. Count them as you write: six scenes of three sentences is
+eighteen, which is right; six scenes of two is twelve, which is a third short of the word
+count and is what happens if you do not count. Shorter sentences are not the whole job --
+there have to be MORE of them, carrying more material, or the script simply ends early. Vary them hard: a long sentence, then a short one, then
 a two- or three-word line on its own for emphasis ("Two years." "Nothing at all."). That
 rhythm is the point -- an even stream of same-length sentences is the failure mode here.
 
@@ -652,7 +663,7 @@ without any head-to-head.{notes_exception}"""
     low, high = chosen["words"]
     return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{forced_rival_block}{no_comparison_block}{chosen['block']}
 
-Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-{max_scenes} scenes (the higher end of that range only when you have several pasted photos each requiring their own scene, per above) in speaking order, each scene being {chosen['sentences']} -- prefer fewer, fuller scenes over many thin one-liners, which read choppy when spoken back to back so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-{max_scenes} scenes (the higher end of that range only when you have several pasted photos each requiring their own scene, per above) in speaking order, each scene being {chosen['sentences']} -- {chosen['scene_note']} -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
 The hook must be the very first words, no throat-clearing lead-in like "Check out the..." or "Let's talk about...". The FIRST SENTENCE must contain a real number or a hard superlative, and must NOT contain the car's name -- the name is the payoff, so it lands in the second sentence ("...that's the R63 AMG"). "A hand-built seven-seater that hits sixty in four-point-four, and almost nobody knows it exists" is the shape: a concrete claim that makes the viewer want the name. "The Mercedes-Benz R63 AMG might surprise you" is the failure mode -- it names the car, promises interest instead of delivering any, and could be said about any car ever made. Never open by asserting that something is surprising, interesting, special or underrated; state the fact that makes it so and let the viewer conclude it. The claim has to be genuinely verifiable, not just punchy.
 
@@ -1672,9 +1683,21 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             " Your previous attempt also broke these rules, which are not negotiable -- fix every one: "
             + " ".join(previous_violations) if previous_violations else ""
         )
+        # Four rewrites of "outside the target" produced 136 and 144 words.
+        # Saying how many words short, and that the fix is more sentences
+        # rather than longer ones, is a concrete instruction instead of a
+        # verdict.
+        shortfall = (target_low - package["word_count"]) if package else 0
+        short_note = (
+            f" You were {shortfall} words SHORT. Add roughly {shortfall} words as "
+            f"{max(2, round(shortfall / 11))} more short sentences spread across the scenes you "
+            "already have -- do NOT make the existing sentences longer, and do not repeat a "
+            "number or a fact you have already given."
+            if shortfall > 0 else ""
+        )
         retry_feedback = (
             f" Your previous attempt came back at {package['word_count']} words, outside the "
-            f"{target_low}-{target_high} target -- rewrite from scratch.{violation_feedback} If you were short, research "
+            f"{target_low}-{target_high} target -- rewrite from scratch.{short_note}{violation_feedback} If you were short, research "
             f"and add a genuinely new beat (history, design story, a race win or record, a special edition, "
             f"or a mechanical/engineering detail like the suspension or rear-axle setup, steering system, or "
             f"chassis platform) rather than padding existing sentences or repeating what you already said -- "
