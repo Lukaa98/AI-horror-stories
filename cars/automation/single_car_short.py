@@ -99,6 +99,69 @@ TARGET_WORDS = (WORD_CAP - 2 * TARGET_WORD_FLEX, WORD_CAP)
 ACCEPTABLE_WORDS = (TARGET_WORDS[0] - 10, WORD_CAP)
 # The real failure gate.
 HARD_WORD_RANGE = _hard_word_range()
+
+
+# A second way of writing the same video, opt-in and off by default.
+#
+# Four of Driving Lab's Shorts, read off their own transcripts, come out
+# remarkably alike: 192-204 words, 14-19 sentences, sentences averaging
+# twelve words with two- and three-word punches dropped between them. Ours
+# run 139 words in seven beats of about twenty, which reads as a tour of a
+# car rather than an argument about one.
+#
+# The density cannot be copied outright. 200 words in 55 seconds is 3.6 a
+# second; gpt-audio delivers about 2.5 and has no speed control, so that
+# needs a 1.45x squeeze and 1.35 is where the old voice started sounding
+# like a machine. Running to 63 seconds instead asks for 1.15x, which is
+# what the current build already uses -- and 63s sits inside their own
+# range, their E36 video being 67.
+#
+# Left alone deliberately: the tuning payoff every one of their scripts
+# ends on (fit these parts, get it mapped, you are at 400hp). It is the
+# most copyable thing they do and the channel does not want to sound like
+# a tuning shop.
+SCRIPT_STYLES = {
+    "classic": {
+        "seconds": TARGET_DURATION_SECONDS,
+        "words": TARGET_WORDS,
+        "window": (52.0, 58.0),
+        "sentences": "ONE OR TWO complete sentences",
+        "block": "",
+    },
+    "dense": {
+        "seconds": 63.0,
+        "words": (170, 185),
+        "window": (58.0, 68.0),
+        "sentences": "TWO TO FOUR short sentences",
+        "block": """
+
+HOW THIS ONE IS WRITTEN -- this overrides the pacing guidance above.
+
+Short sentences, and a lot of them. Aim for 16-20 sentences averaging about twelve words,
+not eight sentences of twenty-five. Vary them hard: a long sentence, then a short one, then
+a two- or three-word line on its own for emphasis ("Two years." "Nothing at all."). That
+rhythm is the point -- an even stream of same-length sentences is the failure mode here.
+
+ONE argument, prosecuted the whole way through. Pick the single most interesting true thing
+about this car -- what was taken out of it, why it was killed, what it beat that it should
+not have, who was brought in to fix it -- and make every beat serve that. Do NOT tour the
+car. A sentence about the interior, the wheels or the badge that does not serve the argument
+is a sentence wasted; cut it and spend the words on the argument instead.
+
+Specifications arrive when the argument has earned them, not before. The opening third is
+setup: the claim, the car, and why it matters. Horsepower and torque belong in the middle,
+as evidence for the argument, not as an opening fact.
+
+Conversational and spoken, not written. Contractions throughout. Plain words over formal
+ones. It should read like somebody telling you something they find genuinely interesting,
+not like a brochure being read aloud."""
+    },
+}
+
+
+def style_of(name):
+    """The named style, falling back to the one everything shipped with."""
+    return SCRIPT_STYLES.get((name or "classic").strip().lower(), SCRIPT_STYLES["classic"])
 ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 
 PACKAGE_SCHEMA = {
@@ -489,7 +552,7 @@ deserves:
 Never present a guess as a fact, and never say the person asked for it."""
 
 
-def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8, listing_facts=None, market=None, angles=None):
+def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8, listing_facts=None, market=None, angles=None, style="classic"):
     photo_hints_block = ""
     if photo_hints:
         bullet_list = "\n".join(f"- {hint}" for hint in photo_hints)
@@ -578,9 +641,11 @@ rival_horsepower/main_quarter_mile_seconds/rival_quarter_mile_seconds on ANY sce
 null). Replace that beat with a different one instead -- an ownership/value insight, a character/driving-feel
 observation, or another history/mechanical beat -- so the script still hits its word target and beat variety
 without any head-to-head.{notes_exception}"""
-    return f"""Write a narration of exactly {TARGET_WORDS[0]}-{TARGET_WORDS[1]} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {TARGET_WORDS[0]}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{forced_rival_block}{no_comparison_block}
+    chosen = style_of(style)
+    low, high = chosen["words"]
+    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{forced_rival_block}{no_comparison_block}{chosen['block']}
 
-Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-{max_scenes} scenes (the higher end of that range only when you have several pasted photos each requiring their own scene, per above) in speaking order, each scene being ONE OR TWO complete sentences -- prefer fewer, fuller scenes over many thin one-liners, which read choppy when spoken back to back so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across 5-{max_scenes} scenes (the higher end of that range only when you have several pasted photos each requiring their own scene, per above) in speaking order, each scene being {chosen['sentences']} -- prefer fewer, fuller scenes over many thin one-liners, which read choppy when spoken back to back so faster TTS lands near 55-60 seconds -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
 The hook must be the very first words, no throat-clearing lead-in like "Check out the..." or "Let's talk about...". The FIRST SENTENCE must contain a real number or a hard superlative, and must NOT contain the car's name -- the name is the payoff, so it lands in the second sentence ("...that's the R63 AMG"). "A hand-built seven-seater that hits sixty in four-point-four, and almost nobody knows it exists" is the shape: a concrete claim that makes the viewer want the name. "The Mercedes-Benz R63 AMG might surprise you" is the failure mode -- it names the car, promises interest instead of delivering any, and could be said about any car ever made. Never open by asserting that something is surprising, interesting, special or underrated; state the fact that makes it so and let the viewer conclude it. The claim has to be genuinely verifiable, not just punchy.
 
@@ -1580,13 +1645,19 @@ def script_package_from_build(build_id, repository=None, branch="cars-output"):
     return package
 
 
-def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False, listing_facts=None, market=None, angles=None, pasted_slots=()):
+def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False, listing_facts=None, market=None, angles=None, pasted_slots=(), style="classic"):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
         f"model years {start_year}-{end_year}" if start_year and end_year
         else f"model year {start_year or end_year}" if start_year or end_year else "the best-known generation"
     )
     max_scenes = _scene_cap_for_photo_hints(photo_hints)
+    chosen = style_of(style)
+    target_low, target_high = chosen["words"]
+    # Same margins the classic constants use, derived from the style's own
+    # range rather than hard-coded: retry a little outside, fail nowhere.
+    accept_low, accept_high = target_low - 10, target_high
+    hard_low, hard_high = _hard_word_range(target_seconds=chosen["seconds"])
     package = None
     for attempt in range(1, max_attempts + 1):
         previous_violations = _script_violations(package, make, model, market, pasted_slots) if package else []
@@ -1596,7 +1667,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
         )
         retry_feedback = (
             f" Your previous attempt came back at {package['word_count']} words, outside the "
-            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} target -- rewrite from scratch.{violation_feedback} If you were short, research "
+            f"{target_low}-{target_high} target -- rewrite from scratch.{violation_feedback} If you were short, research "
             f"and add a genuinely new beat (history, design story, a race win or record, a special edition, "
             f"or a mechanical/engineering detail like the suspension or rear-axle setup, steering system, or "
             f"chassis platform) rather than padding existing sentences or repeating what you already said -- "
@@ -1604,16 +1675,16 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
         )
         package = _request_script_package(
             _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival,
-                                    disable_comparison, max_scenes, listing_facts, market, angles),
+                                    disable_comparison, max_scenes, listing_facts, market, angles, style),
             max_scenes=max_scenes,
         )
         count = package["word_count"]
         violations = _script_violations(package, make, model, market, pasted_slots)
-        if ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1] and not violations:
+        if accept_low <= count <= accept_high and not violations:
             break
         problems = []
-        if not ACCEPTABLE_WORDS[0] <= count <= ACCEPTABLE_WORDS[1]:
-            problems.append(f"{count} words, outside the preferred {ACCEPTABLE_WORDS[0]}-{ACCEPTABLE_WORDS[1]} range")
+        if not accept_low <= count <= accept_high:
+            problems.append(f"{count} words, outside the preferred {accept_low}-{accept_high} range")
         problems.extend(violations)
         print(
             f"[single-car] Attempt {attempt}/{max_attempts}: " + "; ".join(problems)
@@ -1627,10 +1698,10 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     # the runtime any more -- the video plays noticeably off pace -- but
     # that's a quality tradeoff to proceed with, not a reason to throw the
     # whole build away.
-    if not HARD_WORD_RANGE[0] <= count <= HARD_WORD_RANGE[1]:
+    if not hard_low <= count <= hard_high:
         print(
             f"[single-car] Proceeding with {count} words even though it's outside the "
-            f"{HARD_WORD_RANGE[0]}-{HARD_WORD_RANGE[1]} range atempo can fully correct for -- "
+            f"{hard_low}-{hard_high} range atempo can fully correct for -- "
             "the video's pacing may be noticeably off."
         )
     elif not TARGET_WORDS[0] <= count <= TARGET_WORDS[1]:
@@ -2678,6 +2749,7 @@ def build_short(args):
         market=market,
         angles=args.angles,
         pasted_slots=tuple(slot for slot in MANUAL_PHOTO_FIELDS if manual_photo_urls.get(slot)),
+        style=args.style,
     )
     if args.disable_comparison:
         # Belt-and-suspenders: the prompt already tells the model never to
@@ -2733,7 +2805,14 @@ def build_short(args):
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
     add_narration_lead_in(audio_path)
-    normalized_duration = normalize_audio_duration(audio_path)
+    # The dense style runs longer on purpose: 180 words at gpt-audio's ~2.5
+    # a second is 72 seconds raw, and squeezing that into 55 would need
+    # 1.3x. Normalising to 63 asks for 1.15x, which is what the classic
+    # build already uses.
+    chosen_style = style_of(args.style)
+    normalized_duration = normalize_audio_duration(
+        audio_path, target=chosen_style["seconds"],
+        minimum=chosen_style["window"][0], maximum=chosen_style["window"][1])
     voice_auditions = (
         generate_voice_auditions(package["script"], output_dir, args.voice) if args.audition_voices else {}
     )
@@ -2774,6 +2853,7 @@ def build_short(args):
         "build_inputs": {
             "make": args.make,
             "model": args.model,
+            "script_style": args.style,
             "query": args.trim or "",
             "start_year": args.start_year if args.start_year is not None else "",
             "end_year": args.end_year if args.end_year is not None else "",
@@ -2808,7 +2888,7 @@ def build_short(args):
         "voice_preset": args.voice,
         "tts_speed": FAST_TTS_SPEED if narration_settings()["engine"] == "tts" else None,
         "narration": narration_settings(),
-        "target_duration_seconds": TARGET_DURATION_SECONDS,
+        "target_duration_seconds": chosen_style["seconds"],
         "normalized_audio_duration_seconds": round(normalized_duration, 3),
         "audio_path": str(audio_path),
         "duration_seconds": timeline[-1]["end"] if timeline else 0,
@@ -2920,6 +3000,11 @@ def main():
         "--audition-voices", dest="audition_voices", action="store_true", default=True,
         help="Also synthesize the script in a few other voice presets (British included) to compare. On by default.",
     )
+    parser.add_argument(
+        "--style", default="classic", choices=sorted(SCRIPT_STYLES),
+        help="How the script is written. \"classic\" is everything shipped so far. \"dense\" is "
+             "shorter sentences, more of them, one argument rather than a tour -- about 180 "
+             "words over 63 seconds.")
     parser.add_argument(
         "--reuse-script", default=None,
         help="A previous build id. Takes that build's scenes verbatim instead of researching a "

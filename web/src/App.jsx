@@ -917,6 +917,10 @@ export default function App() {
   // no listing at all, skip the scrape entirely and use only what's given.
   const [useAuctionUrl, setUseAuctionUrl] = useState(false);
   const [useManualPhotos, setUseManualPhotos] = useState(false);
+  // Off by default on purpose. Everything published so far was written the
+  // classic way, and the point of this is to run the new one alongside it
+  // without disturbing the daily upload.
+  const [denseStyle, setDenseStyle] = useState(false);
   const [auctionUrl, setAuctionUrl] = useState("");
   // What the car is worth today. Typed, it is used as-is; left empty, the
   // build reads comparable sales off the auction site. Two runs in one week
@@ -1263,6 +1267,7 @@ export default function App() {
       auction_url: useAuctionUrl ? auctionUrl.trim() : "",
       current_price: currentPrice.trim(),
       angles: angles.trim(),
+      script_style: denseStyle ? "dense" : "classic",
       disable_comparison: String(!compareEnabled),
       rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
       photo_front: useManualPhotos ? (photoUrls.front || "").trim() : "",
@@ -1297,6 +1302,7 @@ export default function App() {
           auction_url: useAuctionUrl ? auctionUrl.trim() : "",
           current_price: currentPrice.trim(),
       angles: angles.trim(),
+      script_style: denseStyle ? "dense" : "classic",
           // One JSON input rather than six string ones: workflow_dispatch
           // allows only 25 inputs in total and the photo URLs were using up
           // a quarter of them.
@@ -1456,6 +1462,7 @@ export default function App() {
     setRacePhoto(inputs.photo_race || "");
     setRaceFlipped(String(inputs.photo_race_flip || "") === "1");
     setRivalFlipped(String(inputs.photo_rival_flip || "") === "1");
+    setDenseStyle(String(inputs.script_style || "") === "dense");
     setWorkflow("single_car");
     setFilledFromBuild(build);
   }
@@ -2725,6 +2732,16 @@ export default function App() {
                           <Tip text={'Pin down exact shots with direct image links -- right-click a photo in the listing\'s gallery and "Copy image address." A page URL is rejected and that shot falls back to the automatic pick.'} />
                         </label>
                       )}
+                      <label className="check-pill">
+                        <input
+                          type="checkbox"
+                          checked={denseStyle}
+                          onChange={(e) => setDenseStyle(e.target.checked)}
+                          disabled={stage === "single-car-building"}
+                        />
+                        Dense script
+                        <Tip text="A second way of writing the same video, measured off four of Driving Lab's own transcripts: 16-20 short sentences averaging about twelve words with two- and three-word lines dropped between them, one argument prosecuted the whole way through instead of a tour of the car, and specs arriving once the argument has earned them. About 180 words over 63 seconds rather than 139 over 55 -- it cannot go further because gpt-audio reads at about 2.5 words a second and the squeeze needed to fit 200 words into 55 seconds is where the voice starts sounding like a machine. Leave it off and the build is exactly what it has always been." />
+                      </label>
                     </div>
 
                     {useAuctionUrl && (

@@ -2536,3 +2536,51 @@ def test_a_build_can_speak_a_previous_build_s_script_again():
     workflow = (Path(single_car_short.__file__).resolve().parents[2]
                 / ".github/workflows/cars-research.yml").read_text()
     assert "reuse_script:" in workflow and "--reuse-script" in workflow
+
+
+def test_a_second_writing_style_sits_beside_the_one_everything_shipped_with():
+    """Four of Driving Lab's Shorts, read off their own transcripts, come out
+    alike: 192-204 words in 14-19 sentences averaging twelve words. Ours run
+    139 in seven beats of twenty, which reads as a tour rather than an
+    argument. This is that shape, opt-in, with the published path untouched."""
+    import single_car_short
+    from pathlib import Path
+
+    classic = single_car_short.style_of("classic")
+    dense = single_car_short.style_of("dense")
+    assert classic["words"] == single_car_short.TARGET_WORDS, "the default is what shipped"
+    assert classic["seconds"] == single_car_short.TARGET_DURATION_SECONDS
+    assert classic["block"] == "", "nothing is added to a build that did not ask"
+    # Anything unrecognised falls back rather than failing a build.
+    assert single_car_short.style_of("nonsense") is classic
+    assert single_car_short.style_of(None) is classic
+    assert single_car_short.style_of("") is classic
+
+    # 200 words in 55s is 3.6 a second; gpt-audio reads at about 2.5 and has
+    # no speed control, so the density is bought with runtime, not squeeze.
+    assert dense["words"] == (170, 185)
+    assert dense["seconds"] == 63.0
+    assert dense["window"] == (58.0, 68.0)
+
+    plain = single_car_short._research_script_prompt("Subaru Impreza", "2001-2003")
+    packed = single_car_short._research_script_prompt("Subaru Impreza", "2001-2003", style="dense")
+    assert "144-154 words" in plain and "170-185 words" in packed
+    assert "ONE OR TWO complete sentences" in plain
+    assert "TWO TO FOUR short sentences" in packed
+    assert "HOW THIS ONE IS WRITTEN" not in plain
+    # The style has the last word: it lands after the angles and comparison
+    # blocks, and says so, because the base prompt asks for the opposite.
+    assert packed.index("HOW THIS ONE IS WRITTEN") > packed.index("Write a narration")
+    assert "this overrides the pacing guidance above" in packed
+    assert "Do NOT tour the" in packed
+    assert "two- or three-word line on its own" in packed
+
+    # The flag, the workflow and the dashboard all carry it.
+    workflow = (Path(single_car_short.__file__).resolve().parents[2]
+                / ".github/workflows/cars-research.yml").read_text()
+    assert "script_style:" in workflow and "--style" in workflow
+    app = (Path(single_car_short.__file__).resolve().parents[2] / "web/src/App.jsx").read_text()
+    assert 'script_style: denseStyle ? "dense" : "classic"' in app
+    assert "Dense script" in app
+    assert "useState(false)" in app.split("const [denseStyle, setDenseStyle] = ")[1][:20], \
+        "off by default, so the daily upload is undisturbed"

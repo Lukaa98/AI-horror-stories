@@ -101,6 +101,13 @@ on:
           line. Each becomes a beat and replaces one the model would have written
         required: false
         type: string
+      script_style:
+        description: >-
+          single_car mode: "classic" is how every video so far was written. "dense" is
+          shorter sentences, more of them, one argument instead of a tour
+        required: false
+        default: "classic"
+        type: string
       reuse_script:
         description: >-
           single_car mode: a previous build id. Speaks and renders that build's script again
@@ -281,6 +288,7 @@ jobs:
           if [ -n "${{ inputs.auction_url }}" ]; then YEAR_ARGS+=(--auction-url "${{ inputs.auction_url }}"); fi
           if [ -n "${{ inputs.current_price }}" ]; then YEAR_ARGS+=(--current-price "${{ inputs.current_price }}"); fi
           if [ -n "${{ inputs.angles }}" ]; then YEAR_ARGS+=(--angles "${{ inputs.angles }}"); fi
+          if [ -n "${{ inputs.script_style }}" ]; then YEAR_ARGS+=(--style "${{ inputs.script_style }}"); fi
           if [ -n "${{ inputs.reuse_script }}" ]; then YEAR_ARGS+=(--reuse-script "${{ inputs.reuse_script }}"); fi
           if [ -n "$PHOTOS" ]; then YEAR_ARGS+=(--photos "$PHOTOS"); fi
           if [ -n "${{ inputs.rival_car }}" ]; then YEAR_ARGS+=(--rival-car "${{ inputs.rival_car }}"); fi
