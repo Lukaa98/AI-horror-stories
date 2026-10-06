@@ -134,7 +134,7 @@ SCRIPT_STYLES = {
     },
     "dense": {
         "seconds": 63.0,
-        "words": (170, 185),
+        "words": (155, 165),
         "window": (58.0, 68.0),
         "sentences": "TWO TO FOUR short sentences",
         # The base clause told it the opposite -- prefer fewer, fuller scenes --
@@ -157,11 +157,11 @@ SCRIPT_STYLES = {
 
 HOW THIS ONE IS WRITTEN -- this overrides the pacing guidance above.
 
-Short sentences, and a lot of them. Aim for 16-20 sentences averaging about twelve words,
-not eight sentences of twenty-five. Count them as you write: six scenes of three sentences is
-eighteen, which is right; six scenes of two is twelve, which is a third short of the word
-count and is what happens if you do not count. Shorter sentences are not the whole job --
-there have to be MORE of them, carrying more material, or the script simply ends early. Vary them hard: a long sentence, then a short one, then
+Short sentences, and a lot of them. Aim for 15-18 sentences averaging about ten words, not
+eight sentences of twenty-five. Count them as you write: seven scenes carrying two or three
+sentences each is fifteen to twenty-one, which is the range; seven scenes of two short ones
+is fourteen and lands under the word count. Shorter sentences are not the whole job -- there
+have to be MORE of them, carrying more material, or the script simply ends early. Vary them hard: a long sentence, then a short one, then
 a two- or three-word line on its own for emphasis ("Two years." "Nothing at all."). That
 rhythm is the point -- an even stream of same-length sentences is the failure mode here.
 

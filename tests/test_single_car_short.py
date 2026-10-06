@@ -2556,15 +2556,19 @@ def test_a_second_writing_style_sits_beside_the_one_everything_shipped_with():
     assert single_car_short.style_of(None) is classic
     assert single_car_short.style_of("") is classic
 
-    # 200 words in 55s is 3.6 a second; gpt-audio reads at about 2.5 and has
-    # no speed control, so the density is bought with runtime, not squeeze.
-    assert dense["words"] == (170, 185)
+    # 177 words over 63s was 2.81 a second after a 1.12x squeeze and read too
+    # fast. At 155-165 the raw take is 62-66s, inside the 58-68 window, so
+    # nothing is compressed -- the density is entirely runtime.
+    assert dense["words"] == (155, 165)
+    low, high = dense["words"]
+    assert dense["window"][0] <= low / 2.5 and high / 2.5 <= dense["window"][1], \
+        "the whole range has to land inside the window or the voice gets squeezed"
     assert dense["seconds"] == 63.0
     assert dense["window"] == (58.0, 68.0)
 
     plain = single_car_short._research_script_prompt("Subaru Impreza", "2001-2003")
     packed = single_car_short._research_script_prompt("Subaru Impreza", "2001-2003", style="dense")
-    assert "144-154 words" in plain and "170-185 words" in packed
+    assert "144-154 words" in plain and "155-165 words" in packed
     assert "ONE OR TWO complete sentences" in plain
     assert "TWO TO FOUR short sentences" in packed
     assert "HOW THIS ONE IS WRITTEN" not in plain
@@ -2609,8 +2613,8 @@ def test_the_dense_style_asks_for_more_sentences_not_merely_shorter_ones():
     assert "at least THREE in every scene" in packed
     assert "Thin, punchy one-liners are wanted here, not avoided" in packed
     # And the arithmetic is spelled out, since the failure is silent otherwise.
-    assert "six scenes of three sentences is" in packed
-    assert "there have to be MORE of them" in packed
+    assert "seven scenes carrying two or three" in packed
+    assert "have to be MORE of them" in packed
 
 
 def test_a_short_script_is_told_how_far_short_and_how_to_fix_it():
@@ -2635,7 +2639,7 @@ def test_a_short_script_is_told_how_far_short_and_how_to_fix_it():
         single_car_short.research_script("Subaru", "Impreza WRX", max_attempts=2, style="dense")
 
     retry = seen["prompts"][1]
-    assert "You were 34 words SHORT" in retry, "170 - 136"
+    assert "You were 19 words SHORT" in retry, "155 - 136"
     assert "more short sentences spread across the scenes you already have" in retry
     assert "do NOT make the existing sentences longer" in retry
     assert "do not repeat a number or a fact you have already given" in retry
@@ -2686,11 +2690,11 @@ def test_the_trim_uses_the_style_s_cap_not_the_classic_constant():
     assert single_car_short._word_count(classic["script"]) <= 154
 
     dense_high = single_car_short.style_of("dense")["words"][1]
-    assert dense_high == 185
+    assert dense_high == 165
     packed = package(200)
     single_car_short._enforce_word_cap(packed, cap=dense_high)
     kept = single_car_short._word_count(packed["script"])
-    assert 170 <= kept <= 185, f"a dense script has to survive its own target, got {kept}"
+    assert 150 <= kept <= 165, f"a dense script has to survive its own target, got {kept}"
 
     # And the call site passes the style's cap rather than defaulting.
     from pathlib import Path
