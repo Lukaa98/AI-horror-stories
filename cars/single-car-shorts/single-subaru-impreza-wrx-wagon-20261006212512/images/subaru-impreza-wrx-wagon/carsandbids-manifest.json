@@ -1,0 +1,496 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-06T21:27:21.906Z",
+  "query": "Subaru Impreza Wrx Wagon",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KV6awYRx/2002-subaru-impreza-wrx-wagon?ss_id=7d7a6f35-4cc2-4924-a42e-8ee91fe582f4&ref=pr_1_2",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/KV6awYRx/2002-subaru-impreza-wrx-wagon?ss_id=7d7a6f35-4cc2-4924-a42e-8ee91fe582f4&ref=pr_1_2",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 31,
+      "sale_price": 19500,
+      "sale_type": "sold",
+      "page_title": "2002 Subaru Impreza WRX Wagon"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KV6awYRx/2002-subaru-impreza-wrx-wagon?ss_id=7d7a6f35-4cc2-4924-a42e-8ee91fe582f4&ref=pr_1_2",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 19500,
+    "sale_type": "sold",
+    "page_title": "2002 Subaru Impreza WRX Wagon",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/rbALQgXJ.IjTGOSict-(edit).jpg?t=163239388635",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2002 Subaru Impreza WRX Wagon",
+      "width": 1532,
+      "height": 1021,
+      "bytes": 181079
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/rbALQgXJ.s0hVBLLIh-(edit).jpg?t=163239411730",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2002 Subaru Impreza WRX Wagon",
+      "width": 542,
+      "height": 361,
+      "bytes": 198077
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/rbALQgXJ.t3RbGEDUf-(edit).jpg?t=163239380527",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2002 Subaru Impreza WRX Wagon",
+      "width": 542,
+      "height": 361,
+      "bytes": 230785
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/rbALQgXJ.6i_00QkUB-(edit).jpg?t=163239366511",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2002 Subaru Impreza WRX Wagon",
+      "width": 542,
+      "height": 361,
+      "bytes": 219378
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/rbALQgXJ.CtI5ukeld-(edit).jpg?t=163239372603",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2002 Subaru Impreza WRX Wagon",
+      "width": 542,
+      "height": 361,
+      "bytes": 155310
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/f87de1191d7aaf3c0d0133a489c24d53160c6744/photos/s-k25WT8yYJz.jpg?t=163224674593",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2002 Subaru Impreza WRX Wagon",
+      "width": 542,
+      "height": 361,
+      "bytes": 166781
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/rbALQgXJ.XtlnLQ3p9-(edit).jpg?t=163309600955",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2002 Subaru Impreza WRX Wagon",
+      "width": 542,
+      "height": 361,
+      "bytes": 300007
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/rbALQgXJ.pClTQsFZ1-(edit).jpg?t=163239358523",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2002 Subaru Impreza WRX Wagon",
+      "width": 542,
+      "height": 361,
+      "bytes": 131181
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8864cd06c16cf34eddf5229bf01bf6bfafe9d766/photos/rbALQgXJ.WCFm75o-J-(edit).jpg?t=163239359935",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2002 Subaru Impreza WRX Wagon",
+      "width": 542,
+      "height": 361,
+      "bytes": 125880
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c7c9333da09b1b164eebbedafb10cb15a53253b5/photos/3yy58V0E-sjumGCsQFNX.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 16447 bytes"
+    },
+    {
+      "path": "interior-11.png",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/f87de1191d7aaf3c0d0133a489c24d53160c6744/photos/3LoO4Zd7-U0Q2bB2pkT.png",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Sold to",
+      "width": 80,
+      "height": 80,
+      "bytes": 54914
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/c6cf93cb5f3e51a3053e0c15aa871977512f3515/photos/4sOI-Xual.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 7999 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/697e871dced00f3787a24e8f315bc2652b1f972a/photos/9lkqeZj5-VW4H-dD3tAD.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 5840 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a9d940ed63b8b5453b260ecaf20e696ddb5d062a/photos/KV087xkk-MsfXW2tpY-g.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 9356 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Subaru",
+        "detected_model": "Impreza",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Wrx Wagon",
+        "visible_match_evidence": [
+          "Subaru badge",
+          "generation-specific bodywork",
+          "wagon shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Subaru",
+        "detected_model": "Impreza",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Wrx Wagon",
+        "visible_match_evidence": [
+          "hood scoop",
+          "front bumper design",
+          "headlight shape",
+          "side profile"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Subaru",
+        "detected_model": "Impreza",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "Wrx Wagon",
+        "visible_match_evidence": [
+          "bodywork design",
+          "rear light shape",
+          "overall proportions",
+          "wagon body style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Subaru",
+        "detected_model": "Impreza",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "WRX Wagon",
+        "visible_match_evidence": [
+          "Distinctive hood scoop",
+          "Front fascia design",
+          "Headlight shape"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "subaru",
+        "detected_model": "impreza",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": "WRX Wagon",
+        "visible_match_evidence": [
+          "WRX badge",
+          "subaru lettering"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Subaru",
+        "detected_model": "Impreza",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "steering wheel design",
+          "dashboard layout"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 7,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "subaru",
+        "detected_model": "impreza",
+        "detected_generation_or_year": "2002",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior layout",
+          "seat design"
+        ],
+        "generation_match_confidence": 7,
+        "variant_match_confidence": 3,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 5,
+        "reject": true,
+        "reason": "Lacks clear identifiers for correct variant and not the main subject.",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 0,
+        "variant_match_confidence": 0,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 0,
+        "reject": true,
+        "reason": "Not the main subject or wrong vehicle.",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 3,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not depict the target vehicle.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show a car or the target vehicle",
+        "path": "interior-11.png",
+        "provider": "openai"
+      }
+    ]
+  }
+}
