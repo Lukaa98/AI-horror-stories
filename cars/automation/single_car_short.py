@@ -1754,7 +1754,15 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     repaired = _repair_closing(_repair_script(package, make, model), label)
     # Whatever the retries could not fix, fixed one rule at a time rather
     # than by rewriting the whole script again.
-    final = _enforce_word_cap(_repair_violations(repaired, make, model, market, label, pasted_slots=pasted_slots))
+    # The cap is the style's, not the classic constant. Hard-coded to 154 it
+    # made the dense target of 170-185 unreachable by construction: the trim
+    # runs last, drops whole sentences and then whole scenes, and overshoots
+    # downward -- which is how three dense builds landed at 136-144 from
+    # scripts that may well have been the right length when written.
+    final = _enforce_word_cap(
+        _repair_violations(repaired, make, model, market, label, pasted_slots=pasted_slots),
+        cap=target_high,
+    )
     # Shipping after four failed attempts is deliberate -- a build is worth
     # more than a perfect script -- but it was silent, so a script that broke
     # the rules looked exactly like one that kept them. The Mazdaspeed3 build

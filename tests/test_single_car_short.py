@@ -2662,3 +2662,37 @@ def test_the_dense_scene_count_is_set_by_the_word_target_not_by_pasted_photos():
     # max_scenes still flows in rather than being hard-coded into the style.
     assert "split across 7-6 scenes" in single_car_short._research_script_prompt(
         "Subaru Impreza WRX", "2002", style="dense", max_scenes=6)
+
+
+def test_the_trim_uses_the_style_s_cap_not_the_classic_constant():
+    """_enforce_word_cap runs last on every build and was hard-coded to
+    WORD_CAP, the classic 154. That made the dense target of 170-185
+    unreachable by construction: whatever the model wrote, the trim cut it
+    back, and because it drops whole sentences and then whole scenes it
+    overshoots downward. Three dense builds landed at 144, 136 and 138 while
+    every prompt change was aimed at a model that may have been writing the
+    right length all along."""
+    import single_car_short
+
+    def package(words):
+        sentence = ("word " * 9) + "end."
+        sentences = [sentence] * (words // 10)
+        scenes = [{"narration": " ".join(sentences[i:i + 3]), "media_type": "exterior"}
+                  for i in range(0, len(sentences), 3)]
+        return {"scenes": scenes, "script": " ".join(sentences)}
+
+    classic = package(200)
+    single_car_short._enforce_word_cap(classic, cap=single_car_short.TARGET_WORDS[1])
+    assert single_car_short._word_count(classic["script"]) <= 154
+
+    dense_high = single_car_short.style_of("dense")["words"][1]
+    assert dense_high == 185
+    packed = package(200)
+    single_car_short._enforce_word_cap(packed, cap=dense_high)
+    kept = single_car_short._word_count(packed["script"])
+    assert 170 <= kept <= 185, f"a dense script has to survive its own target, got {kept}"
+
+    # And the call site passes the style's cap rather than defaulting.
+    from pathlib import Path
+    source = Path(single_car_short.__file__).read_text()
+    assert "cap=target_high," in source, "the trim must take the style's cap"
