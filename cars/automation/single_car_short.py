@@ -691,14 +691,26 @@ only worth a scene if you say something about it the picture cannot -- what it i
 replaced, what it costs, why it is unusual. Also banned is stat-shaped padding -- a number that sounds like data but tells the viewer nothing they can use, like "reflecting an annual depreciation of about 8%". Give the two prices and let them do the subtraction. Favor punchy, stacked, specific claims over smooth marketing prose -- "that's more horsepower per liter than the [famous engine], and it's only got three cylinders" reads as genuinely engaging; "it delivers a dynamic and engaging driving experience" reads as filler no matter how true it is. A strong hook is a bold, specific, verifiable superlative or comparison (most powerful, quickest, cheapest, rarest -- something with a real number and a real point of comparison attached), not a generic "this car blends performance and luxury" opener. Every superlative must name the group it actually wins: "the most powerful 911 ever built", "the most expensive Spyder Porsche has sold", "the quickest minivan ever made". Never aim one at cars in general -- "the most luxurious car ever produced" about a $217,545 718 Spyder is not a bold claim, it is a false one, and the true version was available. Casual contractions and informal phrasing are good here -- this should sound spoken, not written.
 
 Also write "youtube_title" -- the video's title on the channel, under 100 characters, ending in a
-fire emoji. It is the only thing a viewer reads before deciding to watch, so it carries the same
-job as the hook. Pick whichever of these the car actually earns, in this order of preference:
-a question about the argument people have over it ("Is the 488 Spider still a real Ferrari? \U0001F525"),
-a price move when the move is genuinely notable and both figures are verified
-("$250,000 new. $95,000 now. \U0001F525"), or the plain spec form as the fallback
-("2018 Ferrari 488 Spider -- 661 hp of twin-turbo drama. \U0001F525"). The first two may leave the
-name out, because the description says what the car is. Never claim something the script does not
-support, and never promise a reveal the video does not contain.
+fire emoji. It is the only thing a viewer reads before deciding to watch, so two things about it
+are not negotiable.
+
+FIRST: it must NOT contain the make or the model. Not the make on its own, not the model on its
+own, not the year with them. The name is what the viewer is watching to find out, and the script
+gives it away in the second beat anyway. "This one was built for a single year. \U0001F525" works;
+"2024 BMW M3 CS: Track Weapon \U0001F525" does not. The description and the hashtags carry the name
+for search, so nothing is lost by keeping it out of the title.
+
+SECOND: the title must promise exactly what the FIRST SENTENCE of the narration delivers, in the
+same words. A title promising one thing over an opening about another is how a video loses nine
+viewers in ten: they swipe in for what was promised, hear something else in the first two seconds,
+and leave. If the title says a single model year, the first sentence is about that single model
+year. If the first sentence is about the weight, the title is about the weight. Write the hook
+first, then write the title from it -- not the other way round, and never independently.
+
+Within those two, pick whichever the car actually earns: a question about the argument people have
+over it, a price move when both figures are verified, or the single strangest true fact. Never
+claim something the script does not support, and never promise a reveal the video does not
+contain.
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
@@ -967,6 +979,22 @@ HORSEPOWER_RE = r"\d[\d,.]*\s*-?\s*(hp\b|horsepower|bhp\b)"
 TORQUE_RE = r"\d[\d,.]*\s*-?\s*(lb-ft|lb\.?\s?ft|pound-feet|nm\b)"
 
 
+# Words too common to prove a title and its hook are about the same thing.
+TITLE_FILLER = frozenset("""
+a an the this that these those there here is are was were be been being it its of for to in on at
+by with from and or but not no nor so if then than as too very can could will would should may
+might must do does did done have has had you your yours we our they their he she his her what
+which who whom whose how why when where while all any both each few more most other some such own
+same still just only really actually even about after before over under again once new now one
+""".split())
+
+
+def _title_terms(text):
+    """The words in a title that could carry its promise."""
+    words = re.findall(r"[A-Za-z0-9]+", str(text or "").lower())
+    return {w for w in words if len(w) > 2 and w not in TITLE_FILLER}
+
+
 def _script_violations(package, make, model, market=None, pasted_slots=()):
     """The house rules that can actually be checked, checked.
 
@@ -1162,6 +1190,34 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
             f'"{padding.group(0).strip()}" is stat-shaped padding -- you already gave both prices, '
             "so the rate tells the viewer nothing. Drop it and spend the words on a fact about the car."
         )
+    # The title is the only thing read before the decision to watch, so it
+    # gets the same two rules the hook does.
+    title = str(package.get("youtube_title") or "").strip()
+    scenes_for_title = package.get("scenes") or []
+    if title and scenes_for_title:
+        named = [token for token in _name_tokens(make, model)
+                 if re.search(rf"\b{re.escape(token)}\b", title, re.I)]
+        if named:
+            # Naming the car is what the viewer is watching to find out, and
+            # it is what the second beat exists to deliver. The description
+            # and hashtags still carry it for search.
+            violations.append(
+                f'your title names the car ("{", ".join(named)}") -- it was "{title}". The name is '
+                "the payoff, so it belongs in the second beat and not above the video. The "
+                "description and hashtags carry it for search."
+            )
+        opening = _SENTENCE_SPLIT_RE.split(
+            (scenes_for_title[0].get("narration") or "").strip())[0]
+        if opening and not (_title_terms(title) & _title_terms(opening)):
+            # A title promising one thing over an opening about another lost
+            # nine viewers in ten: swiped in for "built for a single year",
+            # heard "543 horsepower" instead, left inside two seconds.
+            violations.append(
+                f'your title and your first sentence are about different things -- the title is '
+                f'"{title}" and the video opens "{opening}". Whoever swiped in for the title hears '
+                "something else within two seconds and leaves. Rewrite the title so it promises "
+                "what that first sentence actually delivers, in the same words."
+            )
     return violations
 
 

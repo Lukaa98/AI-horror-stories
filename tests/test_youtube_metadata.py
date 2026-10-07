@@ -30,10 +30,19 @@ def test_title_caser_fixes_what_research_title_cased():
     assert ym.fix_name("488 Spider") == "488 Spider"
 
 
-def test_a_written_title_wins_and_the_spec_title_is_the_fallback():
-    assert ym.title_for(_package()) == "2016-2019 Ferrari 488 Spider — 661 hp 🔥"
+def test_a_written_title_wins_and_the_fallback_withholds_the_name():
+    """The fallback used to be year, make and model, which is the one thing a
+    title is now meant to withhold -- so a build whose research returned no
+    title would quietly undo the rule. The upload with a title that did not
+    name the car took 87% of its views from the Shorts feed against 12-30%
+    for everything else."""
+    fallback = ym.title_for(_package())
+    assert "Ferrari" not in fallback and "488" not in fallback, fallback
+    assert "661 hp" in fallback
+
     written = _package(youtube_title="Is the 488 Spider still a real Ferrari? 🔥")
-    assert ym.title_for(written) == "Is the 488 Spider still a real Ferrari? 🔥"
+    assert ym.title_for(written) == "Is the 488 Spider still a real Ferrari? 🔥", \
+        "a title research wrote is still used as written; the rule is enforced upstream"
 
 
 def test_titles_stay_inside_youtubes_limit_even_when_research_overruns():

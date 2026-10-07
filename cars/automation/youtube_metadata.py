@@ -91,16 +91,21 @@ def title_for(package):
     written = str(package.get("youtube_title") or "").strip()
     if written:
         return written[:TITLE_LIMIT].strip()
-    car = package.get("car") or {}
-    make, model = fix_name(car.get("make")), fix_name(car.get("model"))
-    year = _years(package)
-    name = " ".join(part for part in (year, make, model) if part)
+    # The fallback used to name the car, which is the one thing the title is
+    # now meant to withhold -- so a build whose research returned no title
+    # would quietly undo the rule. These say what is interesting without
+    # saying what it is; the description and hashtags carry the name.
     horsepower = _spec(package, "horsepower")
-    if _is_real(horsepower):
-        candidate = f"{name} — {horsepower} 🔥"
-        if len(candidate) <= TITLE_LIMIT:
+    engine = _spec(package, "engine")
+    sprint = _spec(package, "zero_to_sixty")
+    for candidate in (
+        f"{horsepower} from a {engine} 🔥" if _is_real(horsepower) and _is_real(engine) else "",
+        f"{horsepower}, and 0-60 in {sprint} 🔥" if _is_real(horsepower) and _is_real(sprint) else "",
+        f"{horsepower} 🔥" if _is_real(horsepower) else "",
+    ):
+        if candidate and len(candidate) <= TITLE_LIMIT:
             return candidate
-    return f"{name} 🔥"[:TITLE_LIMIT]
+    return "Worth a look 🔥"
 
 
 def _hashtags(package):

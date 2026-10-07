@@ -2700,3 +2700,55 @@ def test_the_trim_uses_the_style_s_cap_not_the_classic_constant():
     from pathlib import Path
     source = Path(single_car_short.__file__).read_text()
     assert "cap=target_high," in source, "the trim must take the style's cap"
+
+
+def test_the_title_withholds_the_name_and_pays_off_the_first_sentence():
+    """The one upload with a title that did not name the car took 87% of its
+    views from the Shorts feed against 12-30% for everything else, and 209
+    views in an hour against 75-138 in a week. It also lost 89.2% of them in
+    the first seconds, because the title promised a single model year and the
+    video opened on horsepower -- they swiped in for one thing and heard
+    another."""
+    import single_car_short
+
+    scenes = [{"narration": "543 horsepower, but more interesting than that is the weight.",
+               "media_type": "exterior"}]
+
+    named = single_car_short._script_violations(
+        {"youtube_title": "Can the 2024 M3 CS Really Dominate the Track? 🔥", "scenes": scenes},
+        "BMW", "M3 CS")
+    assert any("your title names the car" in v for v in named)
+    assert any("different things" in v for v in named), "and it promises the wrong thing"
+
+    # A title built from the hook, withholding the name, passes both.
+    good = single_car_short._script_violations(
+        {"youtube_title": "543 horsepower, and the weight is the real story 🔥", "scenes": scenes},
+        "BMW", "M3 CS")
+    assert not any("your title" in v for v in good), good
+
+    # Sharing one real word is enough; filler words are not evidence.
+    bare = single_car_short._script_violations(
+        {"youtube_title": "This is the one you want 🔥", "scenes": scenes}, "BMW", "M3 CS")
+    assert any("different things" in v for v in bare)
+
+    # Nothing to check when research returned no title -- the fallback covers it.
+    assert not any("your title" in v for v in single_car_short._script_violations(
+        {"youtube_title": "", "scenes": scenes}, "BMW", "M3 CS"))
+
+
+def test_the_fallback_title_withholds_the_name_too():
+    """A build whose research returned no title would otherwise quietly undo
+    the rule, since the fallback was built out of year, make and model."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars/automation"))
+    import youtube_metadata
+
+    package = {"car": {"make": "BMW", "model": "M3 CS"},
+               "key_specs": {"horsepower": "543 hp", "engine": "3.0L Turbocharged I6"}}
+    title = youtube_metadata.title_for(package)
+    assert "BMW" not in title and "M3" not in title, title
+    assert "543 hp" in title
+
+    # And with nothing to say, it still says nothing about the name.
+    assert "BMW" not in youtube_metadata.title_for({"car": {"make": "BMW", "model": "M3 CS"}})
