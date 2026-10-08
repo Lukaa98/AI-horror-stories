@@ -1,0 +1,300 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 12,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "mercedes",
+      "detected_model": "benz",
+      "detected_generation_or_year": "2012",
+      "detected_variant_or_engine": "C63 AMG Coupe Black Series",
+      "visible_match_evidence": [
+        "bodywork design",
+        "C63 badge",
+        "exhaust design",
+        "wheel style"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Benz",
+      "detected_generation_or_year": "2012",
+      "detected_variant_or_engine": "C63 AMG Coupe Black Series",
+      "visible_match_evidence": [
+        "distinctive bodywork",
+        "specific headlights",
+        "C63 AMG badging",
+        "proportions of the coupe"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "mercedes",
+      "detected_model": "benz",
+      "detected_generation_or_year": "2012",
+      "detected_variant_or_engine": "C63 AMG Coupe Black Series",
+      "visible_match_evidence": [
+        "bodywork",
+        "C63 badge",
+        "coupe design",
+        "wheel design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero",
+        "side"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "mercedes",
+      "detected_model": "benz",
+      "detected_generation_or_year": "2012",
+      "detected_variant_or_engine": "C63 AMG Coupe Black Series",
+      "visible_match_evidence": [
+        "distinctive front grille",
+        "specific bodywork",
+        "hood vents",
+        "front bumper design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Benz",
+      "detected_generation_or_year": "2012",
+      "detected_variant_or_engine": "C63 AMG Coupe Black Series",
+      "visible_match_evidence": [
+        "Rear design consistent with C63 AMG",
+        "C63 badge visible",
+        "AMG badge visible"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Benz",
+      "detected_generation_or_year": "2012",
+      "detected_variant_or_engine": "C63 AMG Coupe Black Series",
+      "visible_match_evidence": [
+        "AMG badge on floor mat",
+        "Sporty interior design",
+        "Dashboard layout"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Benz",
+      "detected_generation_or_year": "2012",
+      "detected_variant_or_engine": "C63 AMG Coupe Black Series",
+      "visible_match_evidence": [
+        "sports seats",
+        "interior design",
+        "unique red seatbelts"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "Benz",
+      "detected_generation_or_year": "2012",
+      "detected_variant_or_engine": "C63 AMG Coupe Black Series",
+      "visible_match_evidence": [
+        "Mercedes badge",
+        "gear shift design",
+        "interior styling"
+      ],
+      "generation_match_confidence": 8,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [],
+      "quality_score": 3,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image is of the instrument cluster, not the exterior of the vehicle.",
+      "path": "interior-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 1,
+      "composition_score": 1,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle; it appears to be an unrelated scene.",
+      "path": "interior-10.png",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 2,
+      "composition_score": 2,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Wrong cars are present in the image.",
+      "path": "interior-13.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 2,
+      "composition_score": 3,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not feature the target vehicle prominently and lacks identifiable attributes.",
+      "path": "interior-14.jpeg",
+      "provider": "openai"
+    }
+  ]
+}
