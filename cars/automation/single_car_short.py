@@ -1032,6 +1032,42 @@ def _title_terms(text):
     return {w for w in words if len(w) > 2 and w not in TITLE_FILLER}
 
 
+# A number carrying one of these is a specification; one without is usually a
+# name. "cars" is deliberately absent -- "this one 993 car" matched it, and a
+# chassis code is exactly what must not be flagged.
+SPEC_UNIT_RE = (r"(?:hp|bhp|horsepower|lb-?ft|pound-?feet|nm|newton-?met\w*|torque|units?|"
+                r"examples?|built|made|produced|kg|pounds|lbs|mph|km/h|seconds?|litre|liter|rpm)")
+
+
+def _repeated_specs(script, make, model):
+    """Hard numbers stated more than once, which at 95 words costs a third of
+    the video. "Only about 800 were made" twice in one short script; "227
+    horsepower" three times in another.
+
+    A name is not a repeat: the car's own numbers, a year, and anything that
+    never appears next to a unit are all left alone, so 993 and 722 pass.
+    """
+    from collections import Counter
+
+    name_numbers = set(re.findall(r"\d[\d.]*", f"{make} {model}"))
+    tokens = [t.replace(",", "") for t in re.findall(r"\d[\d,]*(?:\.\d+)?", script)]
+    found = []
+    for number, count in Counter(tokens).items():
+        if count < 2 or len(number.replace(".", "")) < 2:
+            continue
+        if number in name_numbers or re.fullmatch(r"(19|20)\d\d", number):
+            continue
+        spellings = {number}
+        if number.isdigit() and len(number) > 3:
+            spellings.add(f"{int(number):,}")
+        alternatives = "|".join(re.escape(form) for form in spellings)
+        if not re.search(rf"\b(?:{alternatives})\b(?:\s+\w+){{0,2}}\s+{SPEC_UNIT_RE}\b",
+                         script, re.I):
+            continue
+        found.append((number, count))
+    return sorted(found, key=lambda item: -item[1])
+
+
 def _script_violations(package, make, model, market=None, pasted_slots=()):
     """The house rules that can actually be checked, checked.
 
@@ -1226,6 +1262,13 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
         violations.append(
             f'"{padding.group(0).strip()}" is stat-shaped padding -- you already gave both prices, '
             "so the rate tells the viewer nothing. Drop it and spend the words on a fact about the car."
+        )
+    repeated = _repeated_specs(script, make, model)
+    if repeated:
+        worst = ", ".join(f'"{number}" {count} times' for number, count in repeated)
+        violations.append(
+            f"you state the same number more than once -- {worst}. Say each figure once and "
+            "spend the words you get back on something you have not said yet."
         )
     # The title is the only thing read before the decision to watch, so it
     # gets the same two rules the hook does.

@@ -1299,7 +1299,10 @@ def test_a_broken_rule_is_fixed_one_scene_at_a_time(monkeypatch):
 
     def fake(violation, numbered, label, specs=""):
         asked.append((violation, specs))
-        return 3, "The MZR 2.3 DISI turbo makes 263 horsepower and 280 lb-ft, and pulls hard."
+        # Not restating the 263 the script already opens on -- a repair that
+        # repeats a figure is discarded as no better, which is the point of
+        # the repetition rule and is what a real repair is told to avoid.
+        return 3, "The MZR 2.3 DISI turbo puts 280 lb-ft through the front wheels, and pulls hard."
 
     monkeypatch.setattr(single_car_short, "_rewrite_scene_for", fake)
     package = single_car_short._repair_violations(
@@ -2789,3 +2792,43 @@ def test_a_thirty_five_second_style_sits_beside_the_other_two():
     assert "if (e.target.checked) setShortStyle(false);" in app
     # Reopening a past build restores whichever it was.
     assert 'setShortStyle(String(inputs.script_style || "") === "short");' in app
+
+
+def test_a_number_said_twice_is_caught_but_a_name_is_not():
+    """At 95 words, "only about 800 were made" twice costs a third of the
+    video; an earlier build said "227 horsepower" three times in 136. Run
+    across sixteen finished builds this flags nine, every one a genuine
+    repeated specification."""
+    import single_car_short as s
+
+    assert s._repeated_specs(
+        "Only 800 units were produced worldwide. The arches are flared. "
+        "Only about 800 were made worldwide.", "Mercedes-Benz", "C63 AMG") == [("800", 2)]
+
+    assert s._repeated_specs(
+        "227 horsepower from the flat-four. It makes 227 horsepower through all four wheels. "
+        "227 horsepower is plenty.", "Subaru", "Impreza WRX") == [("227", 3)]
+
+    # A chassis code is not a specification. "this one 993 car" matched an
+    # earlier version because "cars" was in the unit list; it is not now.
+    assert s._repeated_specs(
+        "This one 993 car is renowned. Only 5,978 units of the 911 Turbo (993) were built. "
+        "The 993 Turbo's wide body is unmistakable.", "Porsche", "911 Turbo") == []
+
+    # Nor is an edition name, nor the car's own number, nor a year.
+    assert s._repeated_specs(
+        "The 722 badge recalls Moss. The 722 Edition was lighter.",
+        "Mercedes-Benz", "SLR McLaren") == []
+    assert s._repeated_specs(
+        "Built in 2007. By 2007 it was gone, 1,400 units sold.",
+        "Mercedes-Benz", "SLR") == []
+    assert s._repeated_specs(
+        "The 500 makes 471 hp. The LC 500 is rare.", "Lexus", "LC 500") == []
+
+    # And it reaches the violations a build is judged on.
+    found = s._script_violations(
+        {"scenes": [{"narration": "Only 800 units were produced. Only about 800 were made.",
+                     "media_type": "exterior"}],
+         "youtube_title": ""}, "Mercedes-Benz", "C63 AMG")
+    assert any("you state the same number more than once" in v for v in found)
+    assert any('"800" 2 times' in v for v in found)
