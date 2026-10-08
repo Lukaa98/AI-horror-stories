@@ -1893,8 +1893,12 @@ def render_narrator_video(car_media_paths, manifest, output_path):
                 _caption_frame(size, " · ".join(stats), stat_y, path, font_size=32,
                                fill=accent)
                 stat_tracker_clips.append(ImageClip(str(path)).set_start(start).set_duration(end-start))
-    else:
-        stat_tracker_clips = _stat_tracker_track(manifest, duration, output_path, size, narrator_top_y, size[1] * TOP_STACK_RATIO)
+    # No cumulative scoreboard any more. It anchored its bottom edge and grew
+    # upward as rows were added, so every row shifted each time a new one
+    # appeared -- which smeared into an unreadable stack of doubled labels
+    # over a frame, and sat right above the spec table that already shows
+    # horsepower, torque and engine. The per-scene stats above keep working;
+    # this was only ever the fallback when a build had no photo cues.
 
     # The caption band sits below the picture, not on top of it -- distinct
     # from the headline band above the picture.

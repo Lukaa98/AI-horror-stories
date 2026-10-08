@@ -691,3 +691,20 @@ def test_the_race_label_only_appears_when_there_are_times_to_show(tmp_path):
     )
     # flag + 3 lights + winner badge + 2 cars, and no label.
     assert len(clips) == 7
+
+
+def test_the_cumulative_scoreboard_is_not_composited_any_more():
+    """It anchored its bottom edge and grew upward, so every row moved each
+    time another was added -- which rendered as a stack of doubled, smeared
+    labels sitting directly above the spec table that already shows
+    horsepower, torque and engine. The function stays defined and tested so
+    it is recoverable; it is simply no longer drawn."""
+    from pathlib import Path
+    import narrator_video
+
+    source = Path(narrator_video.__file__).read_text()
+    composite = source[source.index("stat_tracker_clips = []"):source.index("*decorative_clips")]
+    assert "_stat_tracker_track(" not in composite, \
+        "the cumulative scoreboard is back in the render path"
+    # The per-scene stats, which were never the problem, still are.
+    assert "stat_tracker_clips.append" in composite
