@@ -921,6 +921,9 @@ export default function App() {
   // classic way, and the point of this is to run the new one alongside it
   // without disturbing the daily upload.
   const [denseStyle, setDenseStyle] = useState(false);
+  // Length, where dense is a way of writing. They set the same field, so
+  // ticking one unticks the other rather than leaving it ambiguous which won.
+  const [shortStyle, setShortStyle] = useState(false);
   const [auctionUrl, setAuctionUrl] = useState("");
   // What the car is worth today. Typed, it is used as-is; left empty, the
   // build reads comparable sales off the auction site. Two runs in one week
@@ -1267,7 +1270,7 @@ export default function App() {
       auction_url: useAuctionUrl ? auctionUrl.trim() : "",
       current_price: currentPrice.trim(),
       angles: angles.trim(),
-      script_style: denseStyle ? "dense" : "classic",
+      script_style: shortStyle ? "short" : denseStyle ? "dense" : "classic",
       disable_comparison: String(!compareEnabled),
       rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
       photo_front: useManualPhotos ? (photoUrls.front || "").trim() : "",
@@ -1302,7 +1305,7 @@ export default function App() {
           auction_url: useAuctionUrl ? auctionUrl.trim() : "",
           current_price: currentPrice.trim(),
       angles: angles.trim(),
-      script_style: denseStyle ? "dense" : "classic",
+      script_style: shortStyle ? "short" : denseStyle ? "dense" : "classic",
           // One JSON input rather than six string ones: workflow_dispatch
           // allows only 25 inputs in total and the photo URLs were using up
           // a quarter of them.
@@ -1463,6 +1466,7 @@ export default function App() {
     setRaceFlipped(String(inputs.photo_race_flip || "") === "1");
     setRivalFlipped(String(inputs.photo_rival_flip || "") === "1");
     setDenseStyle(String(inputs.script_style || "") === "dense");
+    setShortStyle(String(inputs.script_style || "") === "short");
     setWorkflow("single_car");
     setFilledFromBuild(build);
   }
@@ -2736,11 +2740,27 @@ export default function App() {
                         <input
                           type="checkbox"
                           checked={denseStyle}
-                          onChange={(e) => setDenseStyle(e.target.checked)}
+                          onChange={(e) => {
+                            setDenseStyle(e.target.checked);
+                            if (e.target.checked) setShortStyle(false);
+                          }}
                           disabled={stage === "single-car-building"}
                         />
                         Dense script
                         <Tip text="A second way of writing the same video, measured off four of Driving Lab's own transcripts: 16-20 short sentences averaging about twelve words with two- and three-word lines dropped between them, one argument prosecuted the whole way through instead of a tour of the car, and specs arriving once the argument has earned them. About 180 words over 63 seconds rather than 139 over 55 -- it cannot go further because gpt-audio reads at about 2.5 words a second and the squeeze needed to fit 200 words into 55 seconds is where the voice starts sounding like a machine. Leave it off and the build is exactly what it has always been." />
+                      </label>
+                      <label className="check-pill">
+                        <input
+                          type="checkbox"
+                          checked={shortStyle}
+                          onChange={(e) => {
+                            setShortStyle(e.target.checked);
+                            if (e.target.checked) setDenseStyle(false);
+                          }}
+                          disabled={stage === "single-car-building"}
+                        />
+                        35-second short
+                        <Tip text="A third of the usual length: 80-100 words over 30-40 seconds, four or five beats, one argument and nothing else. Average view duration sits at about nineteen seconds across every upload so far whatever the runtime, so the same nineteen seconds is 54% of a 35-second video against 30% of a 64-second one -- and the feed rewards the ratio. Everything else works as it always does: a specific listing, overridden photos and pasted notes all behave the same, there is simply less room, so the photos follow the shorter script the way they always follow it. Dense script is a way of writing and this is a length, but both set the same field, so ticking this unticks that." />
                       </label>
                     </div>
 

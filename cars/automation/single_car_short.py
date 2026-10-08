@@ -186,6 +186,43 @@ another's. "Would you daily a fast Volvo, or does it have to be German?" is the 
 a real choice with an argument inside it. "Would you buy one?" and "Is it worth it?" are
 the failure -- there is nothing to disagree with, so nobody does."""
     },
+    "short": {
+        # Average view duration sits at about nineteen seconds across eleven
+        # uploads, whatever the runtime -- 0:19 on a 0:49 video and 0:19 on a
+        # 1:04 one. Completion is then arithmetic: the same nineteen seconds
+        # is 39% of a 49-second video and 30% of a 64-second one, and the
+        # feed rewards the ratio. At 35 seconds it would be 54%.
+        #
+        # 90 words at gpt-audio's own ~2.5 a second is 36 seconds, and the
+        # whole 80-100 range lands inside the 30-40 window, so nothing is
+        # compressed here either.
+        "seconds": 35.0,
+        "words": (80, 100),
+        "window": (30.0, 40.0),
+        "sentences": "TWO OR THREE short sentences",
+        "scene_count": ("4-5 scenes -- no more. There is only room for four or five beats at this "
+                        "length, and a sixth makes every one of them too thin to say anything"),
+        "scene_note": ("short and punchy, and every one of them earning its place -- at this "
+                       "length there is no room for a beat that is merely true"),
+        "block": """
+
+HOW THIS ONE IS WRITTEN -- this overrides the pacing guidance above.
+
+This is a 35-second video, not a minute. 80-100 words, about 7-9 sentences, four or five beats.
+That is a third of the usual length, so most of what would normally go in has to be left out --
+and the cutting is the job, not an afterthought.
+
+ONE argument and nothing else. Pick the single most interesting true thing about this car and
+spend the whole video on it. There is no room for a tour: no interior beat, no wheels beat, no
+styling beat, unless that is the argument. A sentence that does not serve the one argument is
+the sentence to cut, every time.
+
+Specifications only where the argument needs them. One number stated well beats four listed.
+
+Short sentences, plainly spoken, with contractions. Open on the claim and close on a question
+that makes the viewer pick a side. Nothing in between that you would not say to someone who
+asked you about this car in a pub."""
+    },
 }
 
 

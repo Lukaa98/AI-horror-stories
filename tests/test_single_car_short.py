@@ -2589,7 +2589,8 @@ def test_a_second_writing_style_sits_beside_the_one_everything_shipped_with():
                 / ".github/workflows/cars-research.yml").read_text()
     assert "script_style:" in workflow and "--style" in workflow
     app = (Path(single_car_short.__file__).resolve().parents[2] / "web/src/App.jsx").read_text()
-    assert 'script_style: denseStyle ? "dense" : "classic"' in app
+    # Three values in one field now that a 35-second length sits beside it.
+    assert 'script_style: shortStyle ? "short" : denseStyle ? "dense" : "classic"' in app
     assert "Dense script" in app
     assert "useState(false)" in app.split("const [denseStyle, setDenseStyle] = ")[1][:20], \
         "off by default, so the daily upload is undisturbed"
@@ -2752,3 +2753,39 @@ def test_the_fallback_title_withholds_the_name_too():
 
     # And with nothing to say, it still says nothing about the name.
     assert "BMW" not in youtube_metadata.title_for({"car": {"make": "BMW", "model": "M3 CS"}})
+
+
+def test_a_thirty_five_second_style_sits_beside_the_other_two():
+    """Average view duration is about nineteen seconds across eleven uploads
+    whatever the runtime -- 0:19 on a 0:49 video and 0:19 on a 1:04 one. So
+    completion is arithmetic: the same nineteen seconds is 39% of 49 seconds
+    and 30% of 64, and the feed rewards the ratio. At 35 it is 54%."""
+    import single_car_short
+    from pathlib import Path
+
+    short = single_car_short.style_of("short")
+    assert short["words"] == (80, 100)
+    assert short["seconds"] == 35.0
+    assert short["window"] == (30.0, 40.0)
+    low, high = short["words"]
+    assert short["window"][0] <= low / 2.5 and high / 2.5 <= short["window"][1], \
+        "the whole range must land inside the window or the voice gets squeezed"
+
+    prompt = single_car_short._research_script_prompt("BMW M3", "2024", style="short")
+    assert "80-100 words" in prompt
+    assert "4-5 scenes" in prompt
+    assert "This is a 35-second video, not a minute" in prompt
+    assert "ONE argument and nothing else" in prompt
+    # The other two are untouched by it.
+    assert "80-100" not in single_car_short._research_script_prompt("BMW M3", "2024")
+    assert "80-100" not in single_car_short._research_script_prompt(
+        "BMW M3", "2024", style="dense")
+
+    # One field, three values, so the two boxes cannot both win.
+    app = (Path(single_car_short.__file__).resolve().parents[2] / "web/src/App.jsx").read_text()
+    assert 'script_style: shortStyle ? "short" : denseStyle ? "dense" : "classic"' in app
+    assert "35-second short" in app
+    assert "if (e.target.checked) setDenseStyle(false);" in app
+    assert "if (e.target.checked) setShortStyle(false);" in app
+    # Reopening a past build restores whichever it was.
+    assert 'setShortStyle(String(inputs.script_style || "") === "short");' in app
