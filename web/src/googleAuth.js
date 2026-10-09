@@ -24,7 +24,15 @@ const CLIENT_ID =
   "809577058313-kdvnf2r0mej4e9jmgfls4odelapgjv24.apps.googleusercontent.com";
 const AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
 // Read and write, because unscheduling and deleting are the same trip.
-const SCOPE = "https://www.googleapis.com/auth/youtube";
+// yt-analytics.readonly is a separate service: average view duration, watch
+// time, subscribers gained and the feed-versus-search split are owner-only
+// and the Data API has no equivalent. A token granted before this was added
+// comes back 403 from that service, which is why the analytics call says so
+// in words rather than returning nothing.
+const SCOPE = [
+  "https://www.googleapis.com/auth/youtube",
+  "https://www.googleapis.com/auth/yt-analytics.readonly",
+].join(" ");
 
 const STATE_KEY = "yt.oauth.state";
 const RETURN_KEY = "yt.oauth.return";
@@ -72,6 +80,14 @@ function keepToken(token) {
 
 export function signedIn() {
   return Boolean(storedToken());
+}
+
+/** The live access token, for a Google service this module has no helper
+ *  for -- the analytics API lives on its own host, so youtube() cannot
+ *  reach it. Null when there is nothing valid to use. */
+export function accessToken() {
+  const token = storedToken();
+  return token ? token.access_token : null;
 }
 
 export function signOut() {

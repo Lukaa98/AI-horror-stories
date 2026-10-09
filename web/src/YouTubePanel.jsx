@@ -91,6 +91,35 @@ function describeToken(info) {
 // days. This is the weekly renewal, reduced to reading a code off the screen:
 // the workflow publishes it here, the approval happens on Google, and the new
 // token is written into Actions secrets without ever passing through here.
+/* What Studio shows and videos.list does not.
+ *
+ * Views, likes and comments are public. Average view duration, watch time,
+ * subscribers gained and the feed-versus-search split are owner-only and
+ * come from the analytics service, so they arrive separately and may not
+ * arrive at all -- a sign-in older than that scope fails there while
+ * everything else succeeded.
+ */
+function Analytics({ stats }) {
+  const seconds = stats.average_view_seconds;
+  const percent = stats.average_view_percent;
+  const feed = (stats.traffic || []).find((item) => item.source === "Shorts feed");
+  return (
+    <div className="yt-analytics">
+      {seconds != null && (
+        <span>
+          watched {Math.floor(seconds / 60)}:{String(Math.round(seconds % 60)).padStart(2, "0")}
+          {percent != null ? ` (${Math.round(percent)}%)` : ""}
+        </span>
+      )}
+      {stats.minutes_watched != null && <span>{stats.minutes_watched} min total</span>}
+      {stats.subscribers_gained ? <span>+{stats.subscribers_gained} subs</span> : null}
+      {feed && <span className="yt-analytics-feed">{feed.share}% feed</span>}
+      {(stats.traffic || []).filter((item) => item.source !== "Shorts feed").slice(0, 2)
+        .map((item) => <span key={item.source}>{item.share}% {item.source.toLowerCase()}</span>)}
+    </div>
+  );
+}
+
 export default function YouTubePanel({ settings }) {
   const [status, setStatus] = useState(null);
   const [statusState, setStatusState] = useState("idle");
@@ -357,6 +386,13 @@ export default function YouTubePanel({ settings }) {
           </button>
         </div>
 
+        {status?.analytics_error && (
+          <p className="yt-note">
+            Views, likes and comments came back; the rest did not.{" "}
+            {status.analytics_error}
+          </p>
+        )}
+
         {!status && statusState !== "refreshing" && (
           <p className="yt-note">
             Sign in above to see the channel. The page asks YouTube for this itself, so
@@ -395,6 +431,7 @@ export default function YouTubePanel({ settings }) {
                   <span>{video.likes.toLocaleString()} likes</span>
                   <span>{video.comments.toLocaleString()} comments</span>
                 </div>
+                {video.analytics && <Analytics stats={video.analytics} />}
                 {video.build_id || live ? (
                   <div className="yt-video-actions">
                     {video.privacy !== "public" && (

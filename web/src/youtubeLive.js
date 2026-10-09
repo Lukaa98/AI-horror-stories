@@ -9,7 +9,8 @@
  * snapshot, so matching it means nothing downstream has to know which of
  * the two produced it. Whichever is newer wins.
  */
-import { youtube } from "./googleAuth";
+import { youtube, accessToken } from "./googleAuth";
+import { forVideos } from "./youtubeAnalytics";
 
 const OUTPUT_BRANCH = "cars-output";
 const BUILD_ROOT = "cars/single-car-shorts";
@@ -152,7 +153,26 @@ export async function collect(settings) {
   videos.sort((a, b) => String(b.published_at).localeCompare(String(a.published_at)));
   await attachBuildIds(videos, settings);
 
+  /* Average view duration, watch time, subscribers gained and the
+   * feed-versus-search split come from a different service with its own
+   * scope, so a token granted before that scope existed fails here while
+   * everything above succeeded. The snapshot says which happened rather
+   * than quietly carrying no analytics, since a video with none looks
+   * identical to one nobody watched.
+   */
+  let analytics_error = "";
+  try {
+    const { byVideo } = await forVideos(accessToken(), videos.map((video) => video.id));
+    for (const video of videos) {
+      const found = byVideo[video.id];
+      if (found) video.analytics = found;
+    }
+  } catch (err) {
+    analytics_error = String(err.message || err);
+  }
+
   return {
+    analytics_error,
     channel: {
       title: (channel.snippet || {}).title || "",
       subscribers: count(stats.subscriberCount),

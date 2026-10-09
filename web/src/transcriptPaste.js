@@ -13,8 +13,8 @@
  */
 
 // Matching the Python in youtube_tools/shorts_transcript.py, which is what
-// a run from a home machine would use.
-const BEAT_GAP_SECONDS = 0.45;
+// a run from a home machine would use. Its pause threshold is not here any
+// more: a pasted transcript has no gaps to group on, so beats are sentences.
 const STAMP = /^(?:(\d+):)?(\d{1,2}):(\d{2})(?:\.\d+)?$/;
 const LEADING_STAMP = /^(?:(\d+):)?(\d{1,2}):(\d{2})(?:\.\d+)?\s+(.*)$/;
 
