@@ -1,0 +1,507 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-09T13:51:55.428Z",
+  "query": "Audi Rs5 Sportback",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9lp0WBG9/2023-audi-rs5-sportback?ss_id=9089070c-fbd0-40a8-b4ce-3c3afc22f360&ref=pr_1_4",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/9lp0WBG9/2023-audi-rs5-sportback?ss_id=9089070c-fbd0-40a8-b4ce-3c3afc22f360&ref=pr_1_4",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 23,
+      "sale_price": 72000,
+      "sale_type": "sold",
+      "page_title": "2023 Audi RS5 Sportback"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9lp0WBG9/2023-audi-rs5-sportback?ss_id=9089070c-fbd0-40a8-b4ce-3c3afc22f360&ref=pr_1_4",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 72000,
+    "sale_type": "sold",
+    "page_title": "2023 Audi RS5 Sportback",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "rear-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/98mnQDDe-HXfQRMT8Gx-(edit).jpg?t=172831707372",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi RS5 Sportback",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 351249
+    },
+    {
+      "path": "engine-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/98mnQDDe-N5lSDBCkpL-(edit).jpg?t=172831710610",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi RS5 Sportback",
+      "width": 542,
+      "height": 361,
+      "bytes": 260293
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/98mnQDDe-JQjYKVFnTl-(edit).jpg?t=172831713980",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi RS5 Sportback",
+      "width": 542,
+      "height": 361,
+      "bytes": 400846
+    },
+    {
+      "path": "highlight-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/98mnQDDe-ydWGWv55l6-(edit).jpg?t=172831718787",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi RS5 Sportback",
+      "width": 542,
+      "height": 361,
+      "bytes": 333169
+    },
+    {
+      "path": "detail-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/98mnQDDe-2foZ9qQJmc-(edit).jpg?t=172831722745",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi RS5 Sportback",
+      "width": 542,
+      "height": 361,
+      "bytes": 250230
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/98mnQDDe-8esQx9YwbR-(edit).jpg?t=172831662631",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi RS5 Sportback",
+      "width": 542,
+      "height": 361,
+      "bytes": 229088
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/98mnQDDe-u53pti2TSh-(edit).jpg?t=172831660155",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi RS5 Sportback",
+      "width": 542,
+      "height": 361,
+      "bytes": 212197
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/98mnQDDe-IPYLYxTAK3-(edit).jpg?t=172831698302",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi RS5 Sportback",
+      "width": 542,
+      "height": 361,
+      "bytes": 176241
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/98mnQDDe-BNqWKMVSUa-(edit).jpg?t=172834542997",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Audi RS5 Sportback",
+      "width": 542,
+      "height": 361,
+      "bytes": 139125
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/18fdb14ee20b7f8286e2d4eabc35878ee63d36b3/photos/3zdDo4vd-py6pYGmdD.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 8815 bytes"
+    },
+    {
+      "path": "interior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/18fdb14ee20b7f8286e2d4eabc35878ee63d36b3/attachments/9lp0WBG9-k0bLaSCw_w1.jpeg?t=172851990094",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 276645
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1d39bcd24a033f8f4e3aeca15a28db6277601d09/photos/36MAGL5B-Q1E43JLVQzh.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2510 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/6f2e4f572d83c06bc35c7eef402d32445fd6011b/photos/3oMBXJZ2-Ry_QBNwMD.png",
+      "labels": [
+        "interior",
+        "engine",
+        "rear",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 5311 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Sportback",
+        "visible_match_evidence": [
+          "RS5 badge",
+          "2023 rear light design",
+          "Sportback body style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Sportback",
+        "visible_match_evidence": [
+          "hexagonal grille",
+          "RS badge",
+          "front design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Sportback",
+        "visible_match_evidence": [
+          "rear lights design",
+          "overall body shape",
+          "logo placement",
+          "fender flares"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Sportback",
+        "visible_match_evidence": [
+          "bodywork design",
+          "proportions",
+          "wheel design",
+          "brake calipers",
+          "S model emblems"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Audi Rs5 Sportback",
+        "visible_match_evidence": [
+          "Audi steering wheel with RS badge",
+          "Interior design consistent with RS5",
+          "Modern infotainment system layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Sportback",
+        "visible_match_evidence": [
+          "RS branding on seats",
+          "interior design consistent with Audi RS5",
+          "2023 model year styling cues"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Sportback",
+        "visible_match_evidence": [
+          "hexagonal stitching",
+          "interior design",
+          "seating configuration"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show exterior of the target vehicle.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Sportback",
+        "visible_match_evidence": [],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 8,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 7,
+        "reject": true,
+        "reason": "not a valid car photo; it's a document",
+        "path": "interior-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "audi",
+        "detected_model": "rs5",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Sportback",
+        "visible_match_evidence": [
+          "distinctive front grille",
+          "LED headlamps",
+          "sporty body styling",
+          "five-spoke wheels"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "rear-01.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
