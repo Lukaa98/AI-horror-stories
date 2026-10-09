@@ -431,7 +431,12 @@ export default function YouTubePanel({ settings }) {
                   <span>{video.likes.toLocaleString()} likes</span>
                   <span>{video.comments.toLocaleString()} comments</span>
                 </div>
-                {video.analytics && <Analytics stats={video.analytics} />}
+                {video.analytics
+                  ? <Analytics stats={video.analytics} />
+                  : <div className="yt-analytics"><span>
+                      watch time and traffic not finalised yet — the analytics service runs a
+                      couple of days behind, where Studio shows live estimates
+                    </span></div>}
                 {video.build_id || live ? (
                   <div className="yt-video-actions">
                     {video.privacy !== "public" && (
