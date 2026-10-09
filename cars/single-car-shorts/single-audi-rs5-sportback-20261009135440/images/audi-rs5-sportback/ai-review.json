@@ -1,0 +1,263 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 10,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "rs5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "Sportback",
+      "visible_match_evidence": [
+        "RS5 badge",
+        "Audi logo",
+        "2023 design elements"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 9,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "rs5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "Sportback",
+      "visible_match_evidence": [
+        "RS5 badge",
+        "honeycomb grille",
+        "overall body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "rs5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "Sportback",
+      "visible_match_evidence": [
+        "audi logo",
+        "rs5 badge",
+        "sportback body style",
+        "tail light design",
+        "exhaust configuration"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "rs5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "correct bodywork",
+        "curved roofline",
+        "wheel design",
+        "color scheme"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "rs5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "Sportback",
+      "visible_match_evidence": [
+        "RS badge on steering wheel",
+        "Interior design matches RS5",
+        "Touchscreen layout",
+        "Gauge cluster style"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "rs5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "Sportback",
+      "visible_match_evidence": [
+        "RS badge",
+        "interior design",
+        "seat pattern"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "audi",
+      "detected_model": "rs5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "high-quality leather seats",
+        "honeycomb pattern stitching"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 6,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Image does not show the target vehicle. It features an interior dashboard display, not the exterior or specific vehicle type.",
+      "path": "interior-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Audi",
+      "detected_model": "RS 5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "Sportback 2.9",
+      "visible_match_evidence": [
+        "Make: Audi",
+        "Model: RS 5",
+        "Year: 2023",
+        "Variant: Sportback"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 10,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 7,
+      "composition_score": 5,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "interior-11.jpeg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Audi",
+      "detected_model": "RS5",
+      "detected_generation_or_year": "2023",
+      "detected_variant_or_engine": "Sportback",
+      "visible_match_evidence": [
+        "distinct RS grille",
+        "characteristic bodywork",
+        "design elements typical for RS5"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "rear-01.jpg",
+      "provider": "openai"
+    }
+  ]
+}
