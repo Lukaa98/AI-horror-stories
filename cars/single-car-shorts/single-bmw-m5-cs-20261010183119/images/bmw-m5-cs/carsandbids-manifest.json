@@ -1,0 +1,513 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-10T18:33:26.675Z",
+  "query": "Bmw M5 Cs",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rjBDWR10/2022-bmw-m5-cs?ss_id=e49d719d-b2cd-4b2e-880b-740a244f1c58&ref=pr_1_1",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rjBDWR10/2022-bmw-m5-cs?ss_id=e49d719d-b2cd-4b2e-880b-740a244f1c58&ref=pr_1_1",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 23,
+      "sale_price": 172233,
+      "sale_type": "sold",
+      "page_title": "2022 BMW M5 CS"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rjBDWR10/2022-bmw-m5-cs?ss_id=e49d719d-b2cd-4b2e-880b-740a244f1c58&ref=pr_1_1",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 172233,
+    "sale_type": "sold",
+    "page_title": "2022 BMW M5 CS",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/da4b9237bacccdf19c0760cab7aec4a8359010b0/photos/rE0NDeQa.Em_X5KieP8.jpg?t=164151433618",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 BMW M5 CS",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 463613
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37e0d12ee547ba13beecbc1def609de677e2b565/photos/rE0NDeQa.wqannFFgi-(edit).jpg?t=164139421631",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 BMW M5 CS",
+      "width": 542,
+      "height": 361,
+      "bytes": 340731
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37e0d12ee547ba13beecbc1def609de677e2b565/photos/rE0NDeQa.D0DrdHLOu-(edit).jpg?t=164139409877",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 BMW M5 CS",
+      "width": 542,
+      "height": 361,
+      "bytes": 448958
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37e0d12ee547ba13beecbc1def609de677e2b565/photos/rE0NDeQa.7-mN5pPoX-(edit).jpg?t=164139412817",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 BMW M5 CS",
+      "width": 542,
+      "height": 361,
+      "bytes": 469329
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37e0d12ee547ba13beecbc1def609de677e2b565/photos/rE0NDeQa.ZtVmVQdRl-(edit).jpg?t=164139415620",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 BMW M5 CS",
+      "width": 542,
+      "height": 361,
+      "bytes": 448955
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37e0d12ee547ba13beecbc1def609de677e2b565/photos/rE0NDeQa.7t3vqSPI4-(edit).jpg?t=164139529791",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 BMW M5 CS",
+      "width": 542,
+      "height": 361,
+      "bytes": 247175
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37e0d12ee547ba13beecbc1def609de677e2b565/photos/rE0NDeQa.UPR6kSd1z-(edit).jpg?t=164142318244",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 BMW M5 CS",
+      "width": 542,
+      "height": 361,
+      "bytes": 254967
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37e0d12ee547ba13beecbc1def609de677e2b565/photos/rE0NDeQa.pbIloW2u8-(edit).jpg?t=164142322041",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 BMW M5 CS",
+      "width": 542,
+      "height": 361,
+      "bytes": 277528
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/37e0d12ee547ba13beecbc1def609de677e2b565/photos/rE0NDeQa.Kx_ipWOCT-(edit).jpg?t=164139533568",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 BMW M5 CS",
+      "width": 542,
+      "height": 361,
+      "bytes": 115917
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1d9694ba7ef6279017bedc4a119ff5c954779c7f/photos/6XsSSiwdV.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 9083 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/91032ad7bbcb6cf72875e8e8207dcfba80173f7c/photos/9AM7lVl8-mJGOmjW.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2787 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/5797b3c4bca65b9afb57cc0bb1fbabdab9201945/photos/qboRNN3r7.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 16178 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/fa72ca7edcf936e371d3b5f18a386f51214ec4af/photos/98gzeqZX-veU8f5EJN.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 3036 bytes"
+    },
+    {
+      "path": "interior-14.png",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/41059a487002528173e1d1cc767ec0d2079dc4d1/photos/9QxE8AXE-YnsePevAxHO.png",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 33027
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M5",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "CS",
+        "visible_match_evidence": [
+          "bodywork proportions consistent with M5",
+          "design elements match 2022 M5",
+          "specific wheel style associated with M5 CS"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M5",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "CS",
+        "visible_match_evidence": [
+          "BMW badge",
+          "M5 styling elements",
+          "brake calipers",
+          "front end design",
+          "wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M5",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW badge",
+          "M5 specific body design",
+          "Overall proportions match M5"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M5",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "CS",
+        "visible_match_evidence": [
+          "distinctive kidney grille",
+          "specific front bumper design",
+          "M badging",
+          "headlight shape",
+          "overall proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M5",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "M5 CS",
+        "visible_match_evidence": [
+          "M5 badge",
+          "specific rear design",
+          "unique wheel style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M5",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "M5 CS",
+        "visible_match_evidence": [
+          "M steering wheel",
+          "Interior layout aligns with M5",
+          "Digital display with M-specific features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M5",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "M5 CS",
+        "visible_match_evidence": [
+          "interior design",
+          "sport seats",
+          "digital display"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "bmw",
+        "detected_model": "m5",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "M5 CS",
+        "visible_match_evidence": [
+          "sport seats",
+          "carbon fiber elements",
+          "interior design features"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "bmw",
+        "detected_model": "m5",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": "m5 cs",
+        "visible_match_evidence": [
+          "m5 cs badge",
+          "design elements consistent with 2022 M5",
+          "instrument cluster displaying M5 CS representation"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 9,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "exterior"
+        ],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Visibly wrong generation or car.",
+        "path": "interior-14.png",
+        "provider": "openai"
+      }
+    ]
+  }
+}
