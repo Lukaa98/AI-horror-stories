@@ -1,0 +1,267 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 10,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M5",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "M5 CS",
+      "visible_match_evidence": [
+        "BMW badge",
+        "M sport wheels",
+        "Body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "side"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M5",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "CS",
+      "visible_match_evidence": [
+        "distinctive BMW grille",
+        "M-specific wheels",
+        "aerodynamic body kit",
+        "red brake calipers"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M5",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "M5 CS",
+      "visible_match_evidence": [
+        "M5 badge",
+        "body proportions",
+        "specific styling",
+        "wheel design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M5",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "M5 CS",
+      "visible_match_evidence": [
+        "front grille design",
+        "headlight shape",
+        "overall body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M5",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "M5 CS",
+      "visible_match_evidence": [
+        "BMW badge",
+        "M5 identification",
+        "body shape",
+        "rear design",
+        "exhaust tips"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "external",
+        "hero",
+        "rear"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M5",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "M5 CS",
+      "visible_match_evidence": [
+        "BMW logo on the steering wheel",
+        "M-specific steering wheel",
+        "Interior design matches M5 CS style",
+        "Digital display with M-drive configurations"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M5",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "CS",
+      "visible_match_evidence": [
+        "M-series interior design",
+        "sports seats",
+        "specific dashboard layout",
+        "M5 steering wheel"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "hero"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "bmw",
+      "detected_model": "m5",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "M5 CS",
+      "visible_match_evidence": [
+        "carbon fiber accents",
+        "distinctive rear seats",
+        "M color stitching"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M5",
+      "detected_generation_or_year": "2022",
+      "detected_variant_or_engine": "M5 CS",
+      "visible_match_evidence": [
+        "M5 CS badge",
+        "instrument cluster display"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 10,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "interior-09.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "other",
+      "scene_fit_tags": [],
+      "quality_score": 3,
+      "composition_score": 4,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Wrong generation or car type.",
+      "path": "interior-14.png",
+      "provider": "openai"
+    }
+  ]
+}
