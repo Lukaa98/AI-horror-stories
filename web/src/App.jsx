@@ -9,6 +9,7 @@ import { dispatchWorkflow } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
+import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
@@ -158,6 +159,27 @@ function narrationLine(result) {
   return speed
     ? `${words} words at ${speed}x voice speed; ${seconds} seconds.`
     : `${words} words in ${seconds}s.`;
+}
+
+/* What the build was asked to do, beside what it produced.
+ *
+ * Four runs of the same car -- dense, plain, listing-only, bare -- look
+ * identical in the list, and which was which was only recoverable by opening
+ * the raw JSON. The settings were always recorded; they were just never
+ * shown.
+ */
+function BuildOptions({ result, className = "" }) {
+  const badges = buildOptions(result);
+  if (!badges.length) return null;
+  return (
+    <p className={`build-options ${className}`.trim()}>
+      {badges.map((badge) => (
+        <span className={`build-option ${badge.key}`} key={badge.key} title={badge.title}>
+          {badge.label}
+        </span>
+      ))}
+    </p>
+  );
 }
 
 function makeBattleCarRow() {
@@ -1990,6 +2012,9 @@ export default function App() {
                       {item.type === "single-car" && (
                         <p className="hint">{item.hasVideo ? "Narrated video ready" : "Result saved without video"}</p>
                       )}
+                      {item.type === "single-car" && item.preview && (
+                        <BuildOptions result={item.preview} className="compact" />
+                      )}
                       <div className="dashboard-card-actions">
                         <button type="button" onClick={() => setSelectedItem({ type: item.type, id: item.id })}>
                           View
@@ -2246,6 +2271,7 @@ export default function App() {
                     <p className="rationale">
                       {narrationLine(item.preview)}
                     </p>
+                    <BuildOptions result={item.preview} />
                     {(item.preview.rule_violations || []).length > 0 && (
                       // The build shipped after exhausting its retries. That
                       // is on purpose, but it should not look like a clean one.
@@ -3331,6 +3357,7 @@ export default function App() {
           <p className="rationale">
             {narrationLine(singleCarResult)}
           </p>
+          <BuildOptions result={singleCarResult} />
           {singleCarResult.video && <video controls src={rawSingleCarUrl(singleCarResult.video)} preload="metadata" />}
           <div className="narration-scroll">
             {(singleCarResult.scenes || []).map((scene, index) => (

@@ -1399,3 +1399,17 @@ button.secondary {
 .yt-analytics { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;
   font-size: 12px; color: var(--ink-soft); }
 .yt-analytics-feed { font-weight: 700; color: var(--accent); }
+
+/* Which settings a build was run with -- beside what it produced. */
+.build-options { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; }
+.build-option { display: inline-block; padding: 2px 9px; border-radius: 999px;
+  font-size: 12px; line-height: 1.6; border: 1px solid var(--line-strong);
+  color: var(--ink-soft); background: var(--surface-2); cursor: help; }
+/* The style is the one that is always present, so it is the one that has to
+ * be readable at a glance -- the rest only mean something by being there. */
+.build-option.style { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.build-option.angles,
+.build-option.listing { border-color: var(--brand); color: var(--brand); }
+.build-option.no-comparison { border-color: var(--danger); color: var(--danger); }
+.build-options.compact { gap: 4px; margin-top: 4px; }
+.build-options.compact .build-option { font-size: 11px; padding: 1px 7px; }
