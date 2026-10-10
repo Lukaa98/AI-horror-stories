@@ -1100,7 +1100,11 @@ def test_research_script_prompt_reflects_a_raised_scene_cap():
         photo_hints=["Gauge Cluster photo: a distinctive analog cluster."], max_scenes=10,
     )
     assert "up to 10 scenes total" in prompt
-    assert "5-10 scenes" in prompt
+    # Classic's floor is seven scenes now, not five: the old "5-8, the higher
+    # end only when you have several pasted photos" told a build with no
+    # photos to use five or six, which is ~108 words at one 18-word sentence
+    # a scene against a 145-154 target.
+    assert "7-10 scenes" in prompt
 
 
 def test_research_script_prompt_omits_the_photo_hints_block_when_there_are_none():
@@ -2573,7 +2577,7 @@ def test_a_second_writing_style_sits_beside_the_one_everything_shipped_with():
     packed = single_car_short._research_script_prompt("Subaru Impreza", "2001-2003", style="dense")
     assert "144-154 words" in plain and "155-165 words" in packed
     assert "ONE OR TWO complete sentences" in plain
-    assert "TWO TO FOUR short sentences" in packed
+    assert "TWO OR THREE short sentences" in packed
     assert "HOW THIS ONE IS WRITTEN" not in plain
     # The style has the last word: it lands after the angles and comparison
     # blocks, and says so, because the base prompt asks for the opposite.
@@ -2612,12 +2616,20 @@ def test_the_dense_style_asks_for_more_sentences_not_merely_shorter_ones():
     packed = single_car_short._research_script_prompt("Subaru Impreza WRX", "2002", style="dense")
 
     # Classic keeps the clause word for word; dense gets the opposite.
-    assert "prefer fewer, fuller scenes over many thin one-liners" in plain
-    assert "prefer fewer, fuller scenes" not in packed
-    assert "at least THREE in every scene" in packed
+    assert "Prefer fewer, fuller scenes over many thin one-liners" in plain
     assert "Thin, punchy one-liners are wanted here, not avoided" in packed
+    # "At least THREE in every scene" was here and is deliberately gone:
+    # seven scenes of three is 21 sentences, roughly 210 words, against a
+    # 155-165 target -- so it contradicted both the per-scene range and the
+    # total, and ten dense builds spread from 110 to 177 words. One number,
+    # stated the same way in all three places.
+    assert "at least THREE in every scene" not in packed
+    assert "SIXTEEN OR SEVENTEEN sentences across the whole script" in packed
+    assert "SIXTEEN OR SEVENTEEN of them" in packed
     # And the arithmetic is spelled out, since the failure is silent otherwise.
-    assert "seven scenes carrying two or three" in packed
+    assert "seven scenes carrying two or three each" in packed
+    # Classic gets its own count for the same reason.
+    assert "EIGHT OR NINE sentences across the whole script" in plain
     assert "have to be MORE of them" in packed
 
 
@@ -2663,7 +2675,11 @@ def test_the_dense_scene_count_is_set_by_the_word_target_not_by_pasted_photos():
     plain = single_car_short._research_script_prompt("Subaru Impreza WRX", "2002")
     packed = single_car_short._research_script_prompt("Subaru Impreza WRX", "2002", style="dense")
 
-    assert "split across 5-8 scenes (the higher end of that range only when you have" in plain
+    # The photo gate is gone from classic too -- it was the same bug, fixed
+    # for dense and left in classic, and it is why the no-photo M5 CS builds
+    # came back at 126 and 119 words while the 12-photo RS5 build hit 147.
+    assert "only when you have" not in plain
+    assert "split across 7-8 scenes" in plain
     assert "split across 7-8 scenes" in packed
     assert "The scene count is what makes the word count here" in packed
     assert "How many photos were pasted does NOT limit it" in packed
@@ -2832,3 +2848,208 @@ def test_a_number_said_twice_is_caught_but_a_name_is_not():
          "youtube_title": ""}, "Mercedes-Benz", "C63 AMG")
     assert any("you state the same number more than once" in v for v in found)
     assert any('"800" 2 times' in v for v in found)
+
+
+# --- the word-count floor -------------------------------------------------
+#
+# _enforce_word_cap has always closed overshoot deterministically. Undershoot
+# was only ever asked for in the prompt, and measured across 29 real builds
+# the asking worked 11 times: classic averaged 137 words against a 145-154
+# target, dense 145 against 155-165, with dense ranging 110-177. These pin
+# the other half of that.
+
+
+def _floor_package(sentences, words_each=10):
+    """A package of `sentences` scenes, one sentence each, so the word count
+    is exactly predictable."""
+    import single_car_short
+
+    scenes = [{"narration": " ".join(f"w{i}x{j}" for j in range(words_each)) + "."}
+              for i in range(sentences)]
+    package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes)}
+    package["word_count"] = single_car_short._word_count(package["script"])
+    return package
+
+
+def test_a_short_script_is_lengthened_until_it_reaches_the_floor(monkeypatch):
+    import single_car_short
+
+    package = _floor_package(7)          # 7 scenes x 10 words = 70
+    assert package["word_count"] == 70
+    calls = []
+
+    def fake_sentences(numbered, label, shortfall, specs="", avoid=""):
+        calls.append(shortfall)
+        # Ten words into one middle scene per round.
+        return [(3, " ".join(f"new{len(calls)}n{j}" for j in range(10)) + ".")]
+
+    monkeypatch.setattr(single_car_short, "_more_sentences_for", fake_sentences)
+    monkeypatch.setattr(single_car_short, "_script_violations",
+                        lambda *a, **k: [])
+
+    out = single_car_short._extend_to_floor(
+        package, floor=90, cap=200, label="Test Car", make="Test", model="Car")
+    assert out["word_count"] >= 90, "the floor is the point"
+    # Measured each round rather than asked for once: the second call knows
+    # the first one landed.
+    assert calls == [20, 10]
+    assert out["script"] == " ".join(s["narration"] for s in out["scenes"])
+
+
+def test_a_script_already_at_the_floor_is_left_exactly_alone(monkeypatch):
+    import single_car_short
+
+    package = _floor_package(10)         # 100 words
+    before = dict(package)
+
+    def fail(*a, **k):
+        raise AssertionError("nothing should be asked for when the count is fine")
+
+    monkeypatch.setattr(single_car_short, "_more_sentences_for", fail)
+    monkeypatch.setattr(single_car_short, "_research_extra_beat", fail)
+    out = single_car_short._extend_to_floor(
+        package, floor=100, cap=200, label="Test Car", make="Test", model="Car")
+    assert out["word_count"] == before["word_count"] == 100
+
+
+def test_the_floor_never_writes_over_the_hook_or_the_closing_question(monkeypatch):
+    import single_car_short
+
+    package = _floor_package(5)
+    hook, closer = package["scenes"][0]["narration"], package["scenes"][-1]["narration"]
+
+    # Offered for scene 1 and the last scene, which are both out of bounds.
+    monkeypatch.setattr(single_car_short, "_more_sentences_for",
+                        lambda *a, **k: [(1, "Hook rewrite."), (5, "Closing rewrite.")])
+    monkeypatch.setattr(single_car_short, "_research_extra_beat", lambda *a, **k: "")
+    monkeypatch.setattr(single_car_short, "_script_violations", lambda *a, **k: [])
+
+    out = single_car_short._extend_to_floor(
+        package, floor=200, cap=400, label="Test Car", make="Test", model="Car")
+    assert out["scenes"][0]["narration"] == hook, "the hook carries the retention decision"
+    assert out["scenes"][-1]["narration"] == closer, "the closing question is shaped"
+
+
+def test_an_addition_that_breaks_a_rule_is_discarded_not_shipped(monkeypatch):
+    import single_car_short
+
+    package = _floor_package(7)
+    before = package["word_count"]
+
+    monkeypatch.setattr(single_car_short, "_more_sentences_for",
+                        lambda *a, **k: [(3, "Repeats 627 horsepower again and again here now.")])
+    monkeypatch.setattr(single_car_short, "_research_extra_beat", lambda *a, **k: "")
+    # Clean before, broken after: the same asymmetry _repair_violations uses
+    # to decide a repair was not one.
+    monkeypatch.setattr(single_car_short, "_script_violations",
+                        lambda pkg, *a, **k: ["you state the same number more than once"]
+                        if "627" in (pkg.get("script") or "") else [])
+
+    out = single_car_short._extend_to_floor(
+        package, floor=200, cap=400, label="Test Car", make="Test", model="Car")
+    assert out["word_count"] == before, "a longer script that broke a rule is not an improvement"
+
+
+def test_the_floor_will_not_push_the_script_past_the_cap(monkeypatch):
+    import single_car_short
+
+    package = _floor_package(14)         # 140 words
+    monkeypatch.setattr(single_car_short, "_more_sentences_for",
+                        lambda *a, **k: [(3, " ".join(f"big{j}" for j in range(80)) + ".")])
+    monkeypatch.setattr(single_car_short, "_research_extra_beat", lambda *a, **k: "")
+    monkeypatch.setattr(single_car_short, "_script_violations", lambda *a, **k: [])
+
+    out = single_car_short._extend_to_floor(
+        package, floor=155, cap=165, label="Test Car", make="Test", model="Car")
+    assert out["word_count"] <= 165, "overshooting the cap undoes the trim that ran before this"
+    assert out["word_count"] == 140, "so the oversized addition is dropped"
+
+
+def test_research_takes_over_once_the_spec_sheet_stops_landing(monkeypatch):
+    """The spec sheet gets spent -- it is one car's figures -- and every
+    further sentence off it repeats something the script already said, which
+    the rule check rejects. That is the M5 CS case, and it is where a build
+    stalls short unless something goes and finds new material."""
+    import single_car_short
+
+    package = _floor_package(7)
+    researched = []
+
+    monkeypatch.setattr(single_car_short, "_more_sentences_for",
+                        lambda *a, **k: [(3, "Nothing new to add from the sheet.")])
+
+    def fake_research(label, already, year_scope=""):
+        researched.append(label)
+        return " ".join(f"fact{j}" for j in range(30)) + "."
+
+    monkeypatch.setattr(single_car_short, "_research_extra_beat", fake_research)
+    # The spec-sheet sentence is a repeat; the researched beat is not.
+    monkeypatch.setattr(single_car_short, "_script_violations",
+                        lambda pkg, *a, **k: ["you state the same number more than once"]
+                        if "Nothing new to add" in (pkg.get("script") or "") else [])
+
+    out = single_car_short._extend_to_floor(
+        package, floor=95, cap=200, label="Test Car", make="Test", model="Car")
+    assert researched == ["Test Car"], "it went and found new material instead of stalling"
+    assert out["word_count"] >= 95
+
+
+def test_a_floor_it_cannot_reach_says_so_instead_of_shipping_quietly(monkeypatch, capsys):
+    import single_car_short
+
+    package = _floor_package(7)
+    monkeypatch.setattr(single_car_short, "_more_sentences_for", lambda *a, **k: [])
+    monkeypatch.setattr(single_car_short, "_research_extra_beat", lambda *a, **k: "")
+    monkeypatch.setattr(single_car_short, "_script_violations", lambda *a, **k: [])
+
+    out = single_car_short._extend_to_floor(
+        package, floor=160, cap=200, label="Test Car", make="Test", model="Car")
+    assert out["word_count"] == 70
+    printed = capsys.readouterr().out
+    assert "WARNING" in printed and "160-word floor" in printed
+
+
+def test_a_failed_lengthening_call_leaves_the_build_standing(monkeypatch):
+    """A build is worth more than a word count -- the same trade the repair
+    loop makes."""
+    import single_car_short
+
+    package = _floor_package(7)
+
+    def boom(*a, **k):
+        raise RuntimeError("the API said no")
+
+    monkeypatch.setattr(single_car_short, "_more_sentences_for", boom)
+    monkeypatch.setattr(single_car_short, "_script_violations", lambda *a, **k: [])
+    out = single_car_short._extend_to_floor(
+        package, floor=160, cap=200, label="Test Car", make="Test", model="Car")
+    assert out["word_count"] == 70
+
+
+def test_every_style_states_one_sentence_budget_not_three():
+    """Dense asked for "TWO TO FOUR" sentences a scene, "at least THREE" in
+    every scene, and "15-18" in total, all at once. Seven scenes of three is
+    21 sentences -- about 210 words against a 155-165 target -- so the
+    instructions could not all be met and which one won was luck, which is
+    how ten dense builds spread from 110 to 177 words."""
+    import single_car_short
+
+    dense = single_car_short.SCRIPT_STYLES["dense"]
+    assert "at least THREE in every scene" not in dense["scene_note"]
+    assert "SIXTEEN OR SEVENTEEN" in dense["scene_note"]
+    assert "SIXTEEN OR SEVENTEEN" in dense["block"]
+    assert "TWO OR THREE" in dense["sentences"]
+
+    # Classic gated its scene count on pasted photos, so a build with none
+    # was told to use five or six -- about 108 words at one 18-word sentence
+    # a scene, against a 145-154 target. Dense had this clause removed
+    # already; classic kept it.
+    classic = single_car_short.SCRIPT_STYLES["classic"]
+    assert "only when you have" not in classic["scene_count"]
+    assert classic["scene_count"].startswith("7-")
+
+    # The arithmetic has to actually reach each style's own target.
+    for name in ("classic", "dense"):
+        style = single_car_short.SCRIPT_STYLES[name]
+        low, high = style["words"]
+        assert low < high <= 200, name

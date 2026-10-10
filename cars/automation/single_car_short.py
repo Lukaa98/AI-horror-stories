@@ -126,17 +126,24 @@ SCRIPT_STYLES = {
         "words": TARGET_WORDS,
         "window": (52.0, 58.0),
         "sentences": "ONE OR TWO complete sentences",
-        "scene_count": ("5-{max_scenes} scenes (the higher end of that range only when you have "
-                        "several pasted photos each requiring their own scene, per above)"),
-        "scene_note": ("prefer fewer, fuller scenes over many thin one-liners, which read choppy "
-                       "when spoken back to back so faster TTS lands near 55-60 seconds"),
+        # The photo gate lived here -- "the higher end only when you have
+        # several pasted photos" -- which told a build with no photos to use
+        # five or six scenes. At roughly one 18-word sentence a scene that
+        # is 108 words against a 145-154 target. Pasted photos raise the
+        # ceiling on scenes; they were never meant to set the floor.
+        "scene_count": ("7-{max_scenes} scenes -- eight when photos were pasted and each needs its "
+                        "own. Fewer than seven cannot carry the word count at this sentence "
+                        "length, however well the sentences are written"),
+        "scene_note": ("EIGHT OR NINE sentences across the whole script, averaging about "
+                       "eighteen words -- count them. Prefer fewer, fuller scenes over many thin "
+                       "one-liners, which read choppy when spoken back to back"),
         "block": "",
     },
     "dense": {
         "seconds": 63.0,
         "words": (155, 165),
         "window": (58.0, 68.0),
-        "sentences": "TWO TO FOUR short sentences",
+        "sentences": "TWO OR THREE short sentences",
         # The base clause told it the opposite -- prefer fewer, fuller scenes --
         # and two builds landed at two sentences a scene and 136-144 words
         # because of it. A general instruction does not beat a specific one.
@@ -150,18 +157,26 @@ SCRIPT_STYLES = {
                         "ends short no matter how the sentences are written. How many photos "
                         "were pasted does NOT limit it; a scene can share a photo type with "
                         "another"),
-        "scene_note": ("at least THREE in every scene -- a scene carrying one or two sentences is "
-                       "under-written for this style and the script lands short. Thin, punchy "
-                       "one-liners are wanted here, not avoided"),
+        # "At least THREE in every scene" was here, which is 21+ sentences
+        # across seven scenes -- about 210 words against a 155-165 target.
+        # It contradicted both the per-scene range and the total below, so
+        # the model picked one and the word count came out wherever that
+        # landed: 110 to 177 across ten builds. The number is the same in
+        # all three places now.
+        "scene_note": ("SIXTEEN OR SEVENTEEN sentences across the whole script -- count them. A "
+                       "scene carrying one sentence is under-written for this style and the "
+                       "script lands short. Thin, punchy one-liners are wanted here, not avoided"),
         "block": """
 
 HOW THIS ONE IS WRITTEN -- this overrides the pacing guidance above.
 
-Short sentences, and a lot of them. Aim for 15-18 sentences averaging about ten words, not
-eight sentences of twenty-five. Count them as you write: seven scenes carrying two or three
-sentences each is fifteen to twenty-one, which is the range; seven scenes of two short ones
-is fourteen and lands under the word count. Shorter sentences are not the whole job -- there
-have to be MORE of them, carrying more material, or the script simply ends early. Vary them hard: a long sentence, then a short one, then
+Short sentences, and a lot of them: SIXTEEN OR SEVENTEEN of them, averaging about ten words,
+which is the 160 this format is built around. Not eight sentences of twenty-five. The
+arithmetic is seven scenes carrying two or three each -- five scenes of three and two of two
+is nineteen, five of two and two of three is sixteen. Seven scenes of two is fourteen, and
+fourteen lands short. Shorter sentences are not the whole job --
+there have to be MORE of them, carrying more material, or the script simply ends
+early. Vary them hard: a long sentence, then a short one, then
 a two- or three-word line on its own for emphasis ("Two years." "Nothing at all."). That
 rhythm is the point -- an even stream of same-length sentences is the failure mode here.
 
@@ -1499,6 +1514,9 @@ def _repair_closing(package, label):
 # One targeted pass per broken rule, and a ceiling so a rule the model
 # cannot satisfy costs a few calls rather than an unbounded run.
 MAX_TARGETED_REPAIRS = 5
+# Rounds of lengthening a short script. Three is two sources plus a retry:
+# spec-sheet sentences, then a researched beat, then one more of either.
+MAX_FLOOR_ROUNDS = 3
 # Every repair attempt and what became of it, written into the build.
 #
 # The closing question has now failed twice in a row with two independent
@@ -1742,6 +1760,209 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
     return package
 
 
+def _more_sentences_for(numbered_scenes, label, shortfall, specs="", avoid=""):
+    """Ask for whole new sentences to add to named scenes, and nothing else.
+
+    The retry loop's only move is to rewrite the whole script, and across
+    29 builds that did not close the gap: dense averaged 145 words against
+    a 155-165 target. This asks the smaller, countable question -- add this
+    many words, as new sentences, to these scenes -- so the answer can be
+    measured instead of trusted.
+    """
+    spec_block = (
+        f"\n\nVerified figures for this car, already researched -- use these and no others:\n{specs}"
+        if specs else ""
+    )
+    avoid_block = (
+        f"\n\nA previous attempt added these and they were rejected for repeating something the "
+        f"script already said. Do not offer them again:\n{avoid}" if avoid else ""
+    )
+    sentences = max(2, round(shortfall / 10))
+    prompt = (
+        f"You are lengthening a short car video's narration about the {label}.\n\n"
+        f"The scenes, in spoken order:\n{numbered_scenes}{spec_block}{avoid_block}\n\n"
+        f"The script is {shortfall} words SHORT. Add about {shortfall} words as roughly "
+        f"{sentences} NEW complete sentences, spread across the middle scenes.\n\n"
+        "Rules, all of them hard:\n"
+        "- Add whole new sentences. Do NOT lengthen or reword a sentence that is already there.\n"
+        "- Do NOT touch scene 1 or the last scene: the hook and the closing question are shaped.\n"
+        "- Every new sentence carries a real fact -- a figure from the list above, a named "
+        "comparison, or a specific verifiable detail. No adjectives doing the work.\n"
+        "- Do NOT restate a number or a fact the script already gives. Say something new.\n"
+        "- Spoken and conversational, with contractions. Keep each one about ten words.\n\n"
+        'Reply as JSON: {"additions": [{"index": <scene number>, "sentences": "<the new '
+        'sentence(s) to append to that scene>"}]}'
+    )
+    response = with_openai_retry(lambda: OpenAI().responses.create(
+        model="gpt-4o", input=prompt,
+        text={"format": {"type": "json_object"}},
+    ))
+    answer = json.loads(response.output_text.strip())
+    out = []
+    for item in answer.get("additions") or []:
+        try:
+            index = int(item["index"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        text = _strip_citations(str(item.get("sentences") or "")).strip()
+        if text:
+            out.append((index, text))
+    return out
+
+
+def _research_extra_beat(label, already, year_scope=""):
+    """Find one more real beat, with web search, for a script that is short.
+
+    When the spec sheet is spent, adding sentences from it means repeating
+    what the script already says -- which the floor check rejects, so it
+    stalls below target. This is where new material comes from. Same shape
+    as _research_replacement_history, and the same reason it cannot use
+    JSON mode: the API refuses web search alongside it.
+    """
+    prompt = (
+        f"Find one specific, well-documented thing about the {label}"
+        f"{f' ({year_scope})' if year_scope else ''} that is NOT already covered below. "
+        "Use web search and verify it.\n\n"
+        f"Already covered, so do not repeat any of it:\n{already}\n\n"
+        "Good material: a motorsport result, a production figure, who engineered it, what it "
+        "replaced, a specific engineering choice (suspension, axle, chassis, steering), a "
+        "notable option and what it cost. It has to carry a figure, or a name that is not the "
+        "car's own.\n\n"
+        "Write it as two or three complete spoken sentences, about twenty-five words in total, "
+        "used verbatim in the middle of the video. Conversational, with contractions.\n\n"
+        'Reply as JSON: {"beat": "<two or three spoken sentences, verified>"}'
+    )
+    response = with_openai_retry(lambda: OpenAI().responses.create(
+        model="gpt-4o", input=prompt,
+        tools=[{"type": "web_search_preview"}],
+    ))
+    text = response.output_text.strip()
+    match = re.search(r"\{.*\}", text, re.S)
+    answer = json.loads(match.group(0) if match else text)
+    return _strip_citations(str(answer.get("beat") or "")).strip()
+
+
+def _extend_to_floor(package, floor, cap, label, make, model, market=None,
+                     pasted_slots=(), rounds=MAX_FLOOR_ROUNDS):
+    """Bring a short script up to the floor, measuring every step.
+
+    The counterpart to _enforce_word_cap, and the reason it exists: that
+    function has always fixed overshoot deterministically, while undershoot
+    was only ever *asked* for in the prompt. Across 29 builds the asking
+    worked 11 times -- classic averaged 137 against a 145-154 target and
+    dense 145 against 155-165 -- because a model cannot count the words it
+    is writing. So the count is measured here and closed here.
+
+    Two sources, in order. First more sentences off the verified spec sheet,
+    which is free and cannot invent anything. When that stalls -- and it
+    stalls as soon as the spec sheet is spent, which is exactly what a thin
+    car like the M5 CS runs into -- a researched new beat, which is where
+    genuinely new material comes from.
+
+    Every round is kept only if it helped: the count went up, nothing new
+    broke, and the cap was not breached. A round that cannot be kept is
+    dropped and the next source is tried.
+    """
+    def rescript(target):
+        """Rebuild the script from the scenes and return its real length.
+
+        Only called on a candidate, never on the package being kept: like
+        _enforce_word_cap, this leaves a package it did not change exactly
+        as the model returned it, including that package's own reported
+        word_count. Writing a recomputed count over an untouched package
+        would quietly disagree with the model about a build nothing was
+        done to.
+        """
+        target["script"] = " ".join(scene["narration"] for scene in target.get("scenes") or [])
+        target["word_count"] = _word_count(target["script"])
+        return target["word_count"]
+
+    # Measured off the script, not off the package's own word_count -- that
+    # field is the model's claim, and a model miscounting its own output is
+    # the reason this function exists.
+    count = _word_count(package.get("script") or "")
+    if count >= floor:
+        return package
+
+    before = count
+    rejected = []
+    for round_number in range(1, rounds + 1):
+        shortfall = floor - count
+        scenes = package.get("scenes") or []
+        if len(scenes) < 3:
+            break
+        numbered = "\n".join(f"{i}. {s.get('narration') or ''}" for i, s in enumerate(scenes, 1))
+        candidate = copy.deepcopy(package)
+        # Sentences first; a researched beat once sentences stop landing.
+        use_research = bool(rejected)
+        try:
+            if use_research:
+                beat = _research_extra_beat(
+                    label, package.get("script") or "",
+                    year_scope=" ".join(str(y) for y in
+                                        (package.get("start_year"), package.get("end_year")) if y))
+                if not beat:
+                    _note_repair(what=f"{shortfall} words short", outcome="unusable",
+                                 detail="the research call returned no beat")
+                    break
+                # Into the scene before the closing question, which keeps the
+                # hook and the ending the shape they were written in.
+                target = max(1, len(candidate["scenes"]) - 2)
+                candidate["scenes"][target]["narration"] = (
+                    candidate["scenes"][target]["narration"].rstrip() + " " + beat)
+                offered = [(target + 1, beat)]
+            else:
+                offered = _more_sentences_for(numbered, label, shortfall,
+                                              _spec_sheet(package), avoid="\n".join(rejected))
+                if not offered:
+                    rejected.append("(nothing offered)")
+                    continue
+                for index, text in offered:
+                    # Never the hook or the closing question.
+                    if not 2 <= index <= len(candidate["scenes"]) - 1:
+                        continue
+                    candidate["scenes"][index - 1]["narration"] = (
+                        candidate["scenes"][index - 1]["narration"].rstrip() + " " + text)
+        except Exception as error:  # noqa: BLE001 - a build is worth more than a word count
+            _note_repair(what=f"{shortfall} words short", outcome="call failed",
+                         detail=str(error)[:300])
+            print(f"[single-car] Could not lengthen the script ({error}); leaving it at {count}.")
+            break
+
+        grown = rescript(candidate)
+        after = _script_violations(candidate, make, model, market, pasted_slots)
+        before_count = len(_script_violations(package, make, model, market, pasted_slots))
+        added = " ".join(text for _, text in offered)[:300]
+        if grown <= count or grown > cap or len(after) > before_count:
+            why = ("added nothing" if grown <= count
+                   else f"overshot the {cap}-word cap" if grown > cap
+                   else "broke a rule that was not broken before")
+            _note_repair(what=f"{shortfall} words short", outcome="did not help",
+                         returned=added, detail=why,
+                         still=[rule[:120] for rule in after])
+            print(f"[single-car] Round {round_number} of lengthening {why}; discarding it.")
+            rejected.append(added)
+            continue
+
+        package = candidate
+        count = grown
+        _note_repair(what=f"{shortfall} words short", outcome="applied",
+                     returned=added,
+                     detail=f"research beat" if use_research else "spec-sheet sentences",
+                     words=count)
+        print(f"[single-car] Lengthened the script to {count} words "
+              f"({'researched a new beat' if use_research else 'added sentences'}).")
+        if count >= floor:
+            break
+
+    if count < floor:
+        # Loud, because a script that quietly shipped short is the whole
+        # reason this function exists.
+        print(f"[single-car] WARNING: the script is {count} words after {rounds} round(s) of "
+              f"lengthening, still under the {floor}-word floor (started at {before}).")
+    return package
+
+
 def _repair_script(package, make, model):
     """Deterministic fixes for violations the model would not fix itself.
 
@@ -1882,10 +2103,13 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             f"{hard_low}-{hard_high} range atempo can fully correct for -- "
             "the video's pacing may be noticeably off."
         )
-    elif not TARGET_WORDS[0] <= count <= TARGET_WORDS[1]:
+    elif not target_low <= count <= target_high:
+        # This style's range, not the classic constants: a dense build used
+        # to print "outside the preferred 144-154 range" on the same line its
+        # retries called 145-165, which made the log contradict itself.
         print(
             f"[single-car] Proceeding with {count} words outside the preferred "
-            f"{TARGET_WORDS[0]}-{TARGET_WORDS[1]} range; audio timing will normalize the final runtime."
+            f"{target_low}-{target_high} range; the floor pass below will try to close the gap."
         )
     repaired = _repair_closing(_repair_script(package, make, model), label)
     # Whatever the retries could not fix, fixed one rule at a time rather
@@ -1895,9 +2119,17 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     # runs last, drops whole sentences and then whole scenes, and overshoots
     # downward -- which is how three dense builds landed at 136-144 from
     # scripts that may well have been the right length when written.
-    final = _enforce_word_cap(
-        _repair_violations(repaired, make, model, market, label, pasted_slots=pasted_slots),
-        cap=target_high,
+    # Both directions. The cap has always been enforced here; the floor was
+    # only ever asked for in the prompt, which is why 18 of 29 builds shipped
+    # under target. Floor first would be undone by the trim, so the cap runs
+    # first and the floor is given it as its ceiling.
+    final = _extend_to_floor(
+        _enforce_word_cap(
+            _repair_violations(repaired, make, model, market, label, pasted_slots=pasted_slots),
+            cap=target_high,
+        ),
+        floor=target_low, cap=target_high, label=label, make=make, model=model,
+        market=market, pasted_slots=pasted_slots,
     )
     # Shipping after four failed attempts is deliberate -- a build is worth
     # more than a perfect script -- but it was silent, so a script that broke
