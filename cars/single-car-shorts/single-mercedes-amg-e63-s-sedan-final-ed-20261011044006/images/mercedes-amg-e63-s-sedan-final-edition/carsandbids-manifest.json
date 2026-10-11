@@ -1,0 +1,496 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-11T04:42:22.101Z",
+  "query": "Mercedes Amg E63 S Sedan Final Edition",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3pnwlQ56/2023-mercedes-amg-e63-s-sedan-final-edition?ss_id=b3312d99-9fa2-4536-b557-d911f5708e72&ref=pr_1_3",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3pnwlQ56/2023-mercedes-amg-e63-s-sedan-final-edition?ss_id=b3312d99-9fa2-4536-b557-d911f5708e72&ref=pr_1_3",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 18,
+      "sale_price": 136500,
+      "sale_type": "sold",
+      "page_title": "2023 Mercedes-AMG E63 S Sedan Final Edition"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3pnwlQ56/2023-mercedes-amg-e63-s-sedan-final-edition?ss_id=b3312d99-9fa2-4536-b557-d911f5708e72&ref=pr_1_3",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 136500,
+    "sale_type": "sold",
+    "page_title": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3Rjn4y83-aVRedMvwUr-(edit).jpg?t=169645300770",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 170506
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3Rjn4y83-JmZsA-QC3K-(edit).jpg?t=169645303095",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 193531
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3Rjn4y83-ZnMObEeO9m-(edit).jpg?t=169645306579",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 260584
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3Rjn4y83-8-Oc4dOzmv-(edit).jpg?t=169645313650",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 221805
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3Rjn4y83-6Ra6748sxW-(edit).jpg?t=169645327681",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 227960
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3Rjn4y83-Cbjo7sEneM-(edit).jpg?t=169645330572",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 275272
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3Rjn4y83-NCob9Y50Wp-(edit).jpg?t=169645345095",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 262833
+    },
+    {
+      "path": "interior-08.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/fb32f413c68138e8d1a74fcb1a743909c47a7681/photos/3Rjn4y83-2VQV9jlRO1p.jpeg?t=169626582720",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 201384
+    },
+    {
+      "path": "interior-09.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/fb32f413c68138e8d1a74fcb1a743909c47a7681/photos/3Rjn4y83-Jh4cb8Nhyt3.jpeg?t=169626583903",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Mercedes-AMG E63 S Sedan Final Edition",
+      "width": 542,
+      "height": 361,
+      "bytes": 162089
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/ecd14e53deb2606787fdf99d0b2431c6f4e87efa/photos/rMLaony8-sU-tFcV.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 9853 bytes"
+    },
+    {
+      "path": "interior-11.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a0a3de4af1fe34866850d6a8b158bf9b404c9a6a/photos/K14o70Mj-c62tCb9Mc.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 28232
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a76a7a130ffabd0c89f450ce093a17553c5a9e89/photos/KV2RMbp6-3XskGJT8q.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 6797 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/08e17b9ed193342c1da645b9e6ef3abaff336969/photos/9QV4ajDM-tup57BRf-A.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 7907 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "AMG",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "E63 S Sedan Final Edition",
+        "visible_match_evidence": [
+          "Mercedes badge",
+          "AMG badge",
+          "E63 S badge",
+          "bodywork proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "mercedes",
+        "detected_model": "amg",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "E63 S Sedan Final Edition",
+        "visible_match_evidence": [
+          "Mercedes badges",
+          "specific bodywork",
+          "wheel design",
+          "proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "AMG",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "AMG grille design",
+          "body shape characteristics",
+          "current generation headlight design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "AMG",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "E63 S Sedan Final Edition",
+        "visible_match_evidence": [
+          "front grille design",
+          "headlight shape",
+          "AMG badging",
+          "overall vehicle proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 9,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "AMG",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "E 63 S",
+        "visible_match_evidence": [
+          "AMG badge",
+          "E 63 S badge",
+          "2023 license plate"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 10,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "AMG",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "E63 S Sedan Final Edition",
+        "visible_match_evidence": [
+          "Mercedes logo on steering wheel",
+          "Interior design consistent with AMG variant",
+          "AMG badge on center console"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "AMG",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "AMG badge on seats",
+          "2023 interior design features",
+          "distinctive stitching pattern"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "AMG",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "E63 S Sedan Final Edition",
+        "visible_match_evidence": [
+          "black leather interior",
+          "yellow stitching",
+          "rear seat design"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Mercedes",
+        "detected_model": "AMG",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "AMG logo",
+          "modern instrument cluster"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 7,
+        "reject": false,
+        "reason": "",
+        "path": "interior-09.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 2,
+        "composition_score": 2,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Visible wrong generation or a contradictory variant.",
+        "path": "interior-11.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
