@@ -42,7 +42,9 @@ def test_an_auction_that_did_not_sell_is_not_a_price():
     the figure down: here it would pull $185,000 toward $167,000."""
     summary = market_value.summarise_comps(COMPS_993, "1996 Porsche 911 Turbo", "Porsche")
     assert summary["count"] == 2
-    assert summary["median"] == 185000
+    # Rounded to the nearest ten thousand now, not five: at this size the
+    # point of rounding is the words it saves when the figure is spoken.
+    assert summary["median"] == 180000
     assert all(item["price"] > 170000 for item in summary["examples"])
 
 
@@ -88,7 +90,7 @@ def test_the_script_is_never_told_to_mention_where_the_price_came_from():
 
     block = single_car_short._market_block(
         {"count": 2, "median": 185000, "low": 180000, "high": 190000, "examples": []})
-    assert "they go for about $185,000 today" in block
+    assert "they go for about $190,000 today" in block
     assert "Never mention the auction" in block
     for phrasing in ("this one sold for", "currently bid to", "one recently went for"):
         assert phrasing in block, f"{phrasing!r} should be named as banned"
@@ -286,3 +288,59 @@ def test_the_price_comes_from_the_best_source_available():
     sold = source.index("market = value_from_sale(listing_facts.get(\"price_text\")")
     comps = source.index("comps = scrape_auction_comps(")
     assert typed < sold < comps, "typed price, then this car's sale, then the model's"
+
+
+# --- prices as they are spoken --------------------------------------------
+#
+# "they go for about $172,233 today" is nine words of speech -- "one hundred
+# seventy-two thousand two hundred thirty-three dollars" -- in a format where
+# every word costs a fraction of a second that a fact could have had. The
+# digits past the first two buy nothing: nobody buys a car off a 40-second
+# video.
+
+
+def test_a_price_is_rounded_to_what_a_person_would_say():
+    from market_value import spoken_price
+
+    # Nearest ten thousand once past six figures, which is where the saving is.
+    assert spoken_price(136_550) == "$140,000"
+    assert spoken_price(172_233) == "$170,000"
+    # Nearest thousand below that.
+    assert spoken_price(12_250) == "$12,000"
+    assert spoken_price(45_300) == "$45,000"
+    # Millions read as millions rather than as seven digits.
+    assert spoken_price(1_236_000) == "$1.25 million"
+    assert spoken_price(2_800_000) == "$2.8 million"
+    # Not "1.0 million".
+    assert spoken_price(1_000_000) == "$1 million"
+
+
+def test_rounding_is_half_up_so_it_is_predictable():
+    from market_value import spoken_price
+
+    # Python's round() is banker's rounding, which sends 125,000 down and
+    # 135,000 up -- a coin toss nobody expects from a rounding helper.
+    assert spoken_price(125_000) == "$130,000"
+    assert spoken_price(135_000) == "$140,000"
+    # A figure that is already round comes back unchanged.
+    assert spoken_price(140_000) == "$140,000"
+    assert spoken_price(12_000) == "$12,000"
+
+
+def test_an_option_price_is_not_dragged_to_the_nearest_thousand():
+    """Under ten thousand these are options, not cars. "$3,500 for the
+    adaptive suspension" is already short spoken, and rounding it to $4,000
+    moves a real figure 14% to save nothing."""
+    from market_value import spoken_price
+
+    assert spoken_price(3_500) == "$3,500"
+    assert spoken_price(2_500) == "$2,500"
+    # Still rounded when it genuinely is not a figure anyone says.
+    assert spoken_price(3_750) == "$4,000"
+
+
+def test_a_price_that_is_not_a_number_does_not_crash_the_build():
+    from market_value import spoken_price
+
+    assert spoken_price(None) == ""
+    assert spoken_price("not a price") == ""

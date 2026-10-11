@@ -1808,7 +1808,10 @@ def test_listing_facts_reach_the_writer_as_ground_truth():
     }
     prompt = single_car_short._research_script_prompt(
         "Porsche 911 Carrera 4S", "2024", listing_facts=facts)
-    assert "Bid to $146,000" in prompt
+    # Rounded on the way in: handed an exact figure as ground truth the
+    # writer repeats it, and "about $150,000" costs fewer spoken words than
+    # "a hundred and forty-six thousand" for the same information.
+    assert "Bid to $150,000" in prompt
     assert "443 horsepower" in prompt
     assert "3.0L Turbocharged Flat-6" in prompt
     # It supplements the research rather than replacing it: the rules the
@@ -2097,14 +2100,14 @@ def test_a_live_auction_price_is_not_described_as_a_sale():
     live = single_car_short._listing_facts_block(
         {"title": "1996 Porsche 911 Turbo", "price_text": "High Bid $267,000",
          "auction_state": "bidding", "facts": {}, "sections": {}})
-    assert "High Bid $267,000" in live
+    assert "High Bid $270,000" in live, "the figure is rounded for speaking"
     assert "still running" in live
     assert "sold for: High Bid" not in live
 
     ended = single_car_short._listing_facts_block(
         {"title": "1995 Porsche 911 Carrera", "price_text": "Sold for $67,500",
          "auction_state": "sold", "facts": {}, "sections": {}})
-    assert "What it actually sold for: Sold for $67,500" in ended
+    assert "What it actually sold for: Sold for $68,000" in ended
 
 
 def test_the_listing_scraper_reads_both_auction_states():
@@ -3053,3 +3056,112 @@ def test_every_style_states_one_sentence_budget_not_three():
         style = single_car_short.SCRIPT_STYLES[name]
         low, high = style["words"]
         assert low < high <= 200, name
+
+
+# --- prices, rounded ------------------------------------------------------
+
+
+def test_an_exact_price_in_the_narration_is_a_violation():
+    """Rounding has been asked for in the prompt and builds still shipped
+    "they go for about $172,233 today" -- nine words of speech where "about
+    a hundred and seventy grand" is six and says the same thing. So it is
+    checked, like every other rule that asking did not fix."""
+    import single_car_short
+
+    scenes = [
+        {"headline": "", "narration": "627 horsepower in a four-door. That's the M5 CS."},
+        {"headline": "", "narration": "Originally $142,995, they go for about $172,233 today."},
+        {"headline": "", "narration": "So would you daily it, or keep it for weekends?"},
+    ]
+    package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes),
+               "youtube_title": "Four Doors, 627 Horses"}
+    found = [v for v in single_car_short._script_violations(package, "Bmw", "M5 Cs")
+             if "exact price" in v]
+    assert found, "both figures are exact and both cost words"
+    # The repair is told what to say instead, not just what is wrong.
+    assert "$142,995" in found[0] and "about $140,000" in found[0]
+    assert "$172,233" in found[0] and "about $170,000" in found[0]
+
+
+def test_a_price_already_round_is_left_alone():
+    import single_car_short
+
+    scenes = [
+        {"headline": "", "narration": "627 horsepower in a four-door. That's the M5 CS."},
+        {"headline": "", "narration": "About $140,000 new, and about $170,000 today."},
+        {"headline": "", "narration": "So would you daily it, or keep it for weekends?"},
+    ]
+    package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes)}
+    assert not [v for v in single_car_short._script_violations(package, "Bmw", "M5 Cs")
+                if "exact price" in v]
+
+
+def test_an_option_price_under_ten_thousand_is_left_alone():
+    """The dense M5 build said "adaptive suspension costs $3,500" -- that is
+    an option, not the car, and it is already two words spoken."""
+    import single_car_short
+
+    scenes = [
+        {"headline": "", "narration": "627 horsepower in a four-door. That's the M5 CS."},
+        {"headline": "", "narration": "The adaptive suspension was a $3,500 option."},
+        {"headline": "", "narration": "So would you tick that box?"},
+    ]
+    package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes)}
+    assert not [v for v in single_car_short._script_violations(package, "Bmw", "M5 Cs")
+                if "exact price" in v]
+
+
+def test_a_year_is_not_mistaken_for_a_price():
+    """"In 2022" and "1,132 units" are four-digit numbers that are not
+    prices, and flagging them would make the rule noise."""
+    import single_car_short
+
+    scenes = [
+        {"headline": "", "narration": "In 2022, BMW built 1,132 of them. That's the M5 CS."},
+        {"headline": "", "narration": "It makes 627 horsepower and 553 lb-ft."},
+        {"headline": "", "narration": "So would you have one?"},
+    ]
+    package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes)}
+    assert not [v for v in single_car_short._script_violations(package, "Bmw", "M5 Cs")
+                if "exact price" in v]
+
+
+def test_the_exact_figure_never_reaches_the_writer_in_any_style():
+    """Rounding the prompt matters more than the rule: handed "$172,233" as
+    ground truth, the writer repeats it, and the rule then has to argue with
+    the evidence it was given."""
+    import single_car_short
+
+    for style in ("classic", "dense", "short"):
+        for source in ("sale", "stated"):
+            prompt = single_car_short._research_script_prompt(
+                "Bmw M5 Cs", "2022", style=style,
+                market={"median": 172233, "source": source})
+            worth = prompt[prompt.index("WHAT THIS CAR IS WORTH"):]
+            worth = worth[:worth.index("Round every price")]
+            assert "172,233" not in worth, (style, source)
+            assert "$170,000" in worth, (style, source)
+            assert "Round every price" in prompt, (style, source)
+
+
+def test_the_rounding_rule_reaches_a_build_with_no_verified_value():
+    """The no-market branch still lets the writer state an original price,
+    so it is the one case the rule has to cover on its own. It is also a
+    plain string, not an f-string, which is how the rule first landed in the
+    prompt as a literal "{_ROUND_PRICE_RULE}"."""
+    import single_car_short
+
+    prompt = single_car_short._research_script_prompt("Bmw M5 Cs", "2022")
+    assert "Round every price" in prompt
+    assert "{_ROUND_PRICE_RULE}" not in prompt
+
+
+def test_the_listing_s_own_price_is_rounded_on_the_way_in():
+    import single_car_short
+
+    block = single_car_short._listing_facts_block(
+        {"price_text": "Sold for $172,233", "auction_state": "sold",
+         "facts": {}, "sections": {}})
+    assert "$170,000" in block and "172,233" not in block
+    # And the label is not doubled up: price_text carries its own wording.
+    assert "about Sold for" not in block

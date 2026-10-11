@@ -16,6 +16,7 @@ A trim is not a substring. "911 Turbo S" contains "911 Turbo", and on the
 993 results page the Turbo S sold for $550,000 against the Turbo's $180,000
 -- three times the price, one letter apart.
 """
+import math
 import re
 import statistics
 
@@ -64,12 +65,42 @@ def _ended_year(comp):
 
 
 def _round_price(value):
-    """A price a person would say out loud."""
-    if value >= 100_000:
-        return round(value / 5_000) * 5_000
-    if value >= 20_000:
-        return round(value / 1_000) * 1_000
-    return round(value / 500) * 500
+    """A price a person would say out loud.
+
+    Coarser above six figures than it used to be: nearest 5,000 still gave
+    "$135,000", and the point of rounding is the words it saves when spoken,
+    not the tidiness of the digits.
+    """
+    value = float(value)
+    step = (50_000 if value >= 1_000_000 else
+            10_000 if value >= 100_000 else
+            1_000 if value >= 10_000 else 500)
+    return int(math.floor(value / step + 0.5)) * step
+
+
+def spoken_price(value):
+    """A rounded price, written the short way a person says it.
+
+    "$172,233" is nine words of speech -- "one hundred seventy-two thousand
+    two hundred thirty-three dollars" -- in a format where every word is
+    paid for in seconds. The exact figure buys nothing: nobody is making a
+    purchase off a 40-second video, and the digits after the first two are
+    read out at the cost of a fact that would have been worth hearing.
+
+    So: 136,550 -> "$140,000", 12,250 -> "$12,000", 1,236,000 ->
+    "$1.25 million". The rounding is deliberately visible rather than
+    hidden, which is why every caller pairs it with the word "about".
+    """
+    try:
+        rounded = _round_price(value)
+    except (TypeError, ValueError):
+        return ""
+    if rounded >= 1_000_000:
+        millions = rounded / 1_000_000
+        # 1.0 reads as "1 million", not "1.0 million".
+        text = f"{millions:.2f}".rstrip("0").rstrip(".")
+        return f"${text} million"
+    return f"${rounded:,}"
 
 
 def summarise_comps(comps, our_title, make="", today_year=None):

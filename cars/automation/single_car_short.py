@@ -19,7 +19,7 @@ from openai import OpenAI
 import requests
 
 from background_removal import remove_background
-from market_value import summarise_comps, value_from_input, value_from_sale
+from market_value import spoken_price, summarise_comps, value_from_input, value_from_sale
 from thumbnail import build_thumbnail
 from youtube_metadata import build_metadata as build_youtube_metadata
 from cars_and_bids import (enrich_entry_from_manifest, scrape_auction_comps, scrape_auction_facts,
@@ -418,6 +418,17 @@ def _strip_citations(text):
     return re.sub(r"[ \t]{2,}", " ", text).strip()
 
 
+# Said beside every price the writer is given. Prices are the one figure in
+# these scripts that arrives with more precision than the format can pay for:
+# "$172,233" takes nine spoken words, and the seven after "a hundred and
+# seventy" buy nothing a viewer of a 40-second video will act on.
+_ROUND_PRICE_RULE = """ Round every price you say to the nearest ten thousand above a hundred
+thousand, and to the nearest thousand below it, and say it the short way a person would --
+"about a hundred and seventy grand", "about $140,000", "about $12,000". NEVER speak an exact
+figure like "$172,233" or "$136,550": every digit past the first two is read out loud at the
+cost of a fact worth hearing. This applies to the original price too, not just today's."""
+
+
 def _market_block(market):
     """Recent comparable sales, as the number the value beat should use.
 
@@ -431,34 +442,38 @@ def _market_block(market):
     if market.get("source") == "sale":
         return f"""
 
-WHAT THIS CAR IS WORTH -- ${market['median']:,} today. That is what this exact car changed hands for,
-in a completed sale. Use it as the current-value half of the price beat, as one plain figure -- "they go
-for about ${market['median']:,} today". Never mention the auction, the listing, a bid, a sale, or where
-the number came from. The viewer is being told what the car costs, not how we know."""
+WHAT THIS CAR IS WORTH -- about {spoken_price(market['median'])} today. That is what this exact car
+changed hands for, in a completed sale, rounded. Use it as the current-value half of the price beat, as
+one plain figure -- "they go for about {spoken_price(market['median'])} today".{_ROUND_PRICE_RULE} Never
+mention the auction, the listing, a bid, a sale, or where the number came from. The viewer is being told
+what the car costs, not how we know."""
     if market.get("source") == "stated":
         return f"""
 
-WHAT THIS CAR IS WORTH -- ${market['median']:,} today. This figure was given by the person making the
-video, who knows the car; it is not up for debate and not to be adjusted, averaged or hedged. Use it as
-the current-value half of the price beat, as one plain figure -- "they go for about ${market['median']:,}
-today". Never mention the auction, the listing, a bid, or where the number came from."""
+WHAT THIS CAR IS WORTH -- about {spoken_price(market['median'])} today. This figure was given by the
+person making the video, who knows the car; the value is not up for debate and not to be adjusted,
+averaged or hedged, though it is rounded for speaking. Use it as the current-value half of the price
+beat, as one plain figure -- "they go for about {spoken_price(market['median'])} today".
+{_ROUND_PRICE_RULE} Never mention the auction, the listing, a bid, or where the number came from."""
     examples = "; ".join(
-        f"{item['title']} sold for ${item['price']:,}"
+        f"{item['title']} sold for about {spoken_price(item['price'])}"
         + (f" ({item['ended']})" if item.get("ended") else "")
         for item in market.get("examples") or []
     )
     return f"""
 
 WHAT THIS MODEL ACTUALLY SELLS FOR -- {market['count']} completed sales of the same variant, from the
-auction site's own results: they run ${market['low']:,} to ${market['high']:,}, with the middle around
-${market['median']:,}. Examples: {examples}.
+auction site's own results: they run about {spoken_price(market['low'])} to
+{spoken_price(market['high'])}, with the middle around {spoken_price(market['median'])}. Examples:
+{examples}.
 
 These are sales of THIS variant; never blend in a cheaper or dearer version of the same model.
 
-Say it as one plain figure -- "they go for about ${market['median']:,} today" -- as the current-value
-half of the price beat. Never mention the auction, the listing, a bid, a sale, or any single example.
-The viewer is being told what this car costs, not where the number came from: no "this one sold for",
-no "currently bid to", no "one recently went for". Just the going rate."""
+Say it as one plain figure -- "they go for about {spoken_price(market['median'])} today" -- as the current-value
+half of the price beat.{_ROUND_PRICE_RULE} Never mention the auction, the listing, a bid, a sale,
+or any single example. The viewer is being told what this car costs, not where the number came
+from: no "this one sold for", no "currently bid to", no "one recently went for". Just the going
+rate."""
 
 
 def _no_market_block(market):
@@ -472,13 +487,45 @@ def _no_market_block(market):
     """
     if market:
         return ""
-    return """
+    return f"""
 
 NO VERIFIED CURRENT VALUE IS AVAILABLE for this car. State the original price if you know it, and stop
 there. Do not say what it trades for, sells for, goes for, is worth or fetches today, and do not give a
 percentage of appreciation or depreciation -- there is no number behind any of it, and a guess reads as
 a fact to the viewer. "Originally around $110,000, and the good ones have not been cheap since" is
-fine. "Originally around $110,000, now about $70,000" is not, because the second figure is invented."""
+fine. "Originally around $110,000, now about $70,000" is not, because the second figure is
+invented.{_ROUND_PRICE_RULE}"""
+
+
+# A price with more than two significant figures: $172,233, $136,550,
+# $12,250. Two-figure prices ($140,000, $12,000) and anything under a
+# thousand are left alone. Years are not prices, and carry no $.
+_EXACT_PRICE_RE = re.compile(r"\$\s?(\d{1,3}(?:,\d{3})+|\d{4,})(?:\.\d+)?")
+
+
+def _price_is_round(value):
+    """True when a price is already as short as it needs to be spoken."""
+    if value >= 1_000_000:
+        return value % 50_000 == 0
+    if value >= 100_000:
+        return value % 10_000 == 0
+    if value >= 10_000:
+        return value % 1_000 == 0
+    # Below ten thousand these are option prices rather than car prices.
+    # "$3,500 for the adaptive suspension" is already short spoken, and
+    # calling it unrounded would push a real figure to $4,000 for nothing.
+    return value % 500 == 0
+
+
+def _round_price_text(text):
+    """Every exact price in a blob, rewritten as the short spoken form."""
+    def swap(match):
+        try:
+            value = int(float(match.group(1).replace(",", "")))
+        except ValueError:
+            return match.group(0)
+        return match.group(0) if _price_is_round(value) else spoken_price(value)
+    return _EXACT_PRICE_RE.sub(swap, str(text or "")) if text else ""
 
 
 def _listing_facts_block(listing_facts):
@@ -506,7 +553,11 @@ def _listing_facts_block(listing_facts):
             "bidding": "Bidding is currently at (the auction is still running, so this is NOT a sale)",
         }.get(state, "A price shown on the listing (the page did not say whether it sold, so do not "
                      "call it a sale)")
-        lines.append(f"{label}: {listing_facts['price_text']}")
+        # Rounded on the way in as well: handed "$172,233" verbatim, the
+        # writer repeats it verbatim, and the rule below then has to fight
+        # the evidence it was given.
+        rounded = _round_price_text(listing_facts["price_text"])
+        lines.append(f"{label}: {rounded or listing_facts['price_text']}")
     for key, value in (listing_facts.get("facts") or {}).items():
         lines.append(f"{key}: {value}")
     for key, value in (listing_facts.get("sections") or {}).items():
@@ -1277,6 +1328,24 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
         violations.append(
             f'"{padding.group(0).strip()}" is stat-shaped padding -- you already gave both prices, '
             "so the rate tells the viewer nothing. Drop it and spend the words on a fact about the car."
+        )
+    exact = []
+    for match in _EXACT_PRICE_RE.finditer(script):
+        try:
+            value = int(float(match.group(1).replace(",", "")))
+        except ValueError:
+            continue
+        if not _price_is_round(value):
+            exact.append((match.group(0).strip(), spoken_price(value)))
+    if exact:
+        # Checked rather than only asked for: the prompt has said to round
+        # for a while and builds still shipped "$172,233", which is nine
+        # spoken words where "about a hundred and seventy grand" is six and
+        # tells the viewer the same thing.
+        listed = ", ".join(f'{said} (say about {short})' for said, short in exact[:3])
+        violations.append(
+            f"you speak an exact price -- {listed}. Round it: every digit past the first two is "
+            "read out loud and buys the viewer nothing in a video this short."
         )
     repeated = _repeated_specs(script, make, model)
     if repeated:
