@@ -422,6 +422,15 @@ def _strip_citations(text):
 # these scripts that arrives with more precision than the format can pay for:
 # "$172,233" takes nine spoken words, and the seven after "a hundred and
 # seventy" buy nothing a viewer of a 40-second video will act on.
+_ORIGINAL_PRICE_RULE = """ If you give the original price, it must be the manufacturer's list
+price when the car was new, verified -- never an asking price from a classified, a dealer
+listing or a used-car ad, which is what the car costs NOW and is usually far higher on
+anything collectible. Getting this backwards inverts the whole beat: every E63 S Final
+Edition build said "$170,000 new, about $137,000 today" and called it depreciation, when the
+car listed near $113,000 and has gone UP. If you cannot verify the list price when new, leave
+it out and give today's figure alone. And never state a car has lost or held value unless
+both figures are verified and the arithmetic actually says so."""
+
 _ROUND_PRICE_RULE = """ Round every price you say to the nearest ten thousand above a hundred
 thousand, and to the nearest thousand below it, and say it the short way a person would --
 "about a hundred and seventy grand", "about $140,000", "about $12,000". NEVER speak an exact
@@ -444,7 +453,7 @@ def _market_block(market):
 
 WHAT THIS CAR IS WORTH -- about {spoken_price(market['median'])} today. That is what this exact car
 changed hands for, in a completed sale, rounded. Use it as the current-value half of the price beat, as
-one plain figure -- "they go for about {spoken_price(market['median'])} today".{_ROUND_PRICE_RULE} Never
+one plain figure -- "they go for about {spoken_price(market['median'])} today".{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE} Never
 mention the auction, the listing, a bid, a sale, or where the number came from. The viewer is being told
 what the car costs, not how we know."""
     if market.get("source") == "stated":
@@ -454,7 +463,7 @@ WHAT THIS CAR IS WORTH -- about {spoken_price(market['median'])} today. This fig
 person making the video, who knows the car; the value is not up for debate and not to be adjusted,
 averaged or hedged, though it is rounded for speaking. Use it as the current-value half of the price
 beat, as one plain figure -- "they go for about {spoken_price(market['median'])} today".
-{_ROUND_PRICE_RULE} Never mention the auction, the listing, a bid, or where the number came from."""
+{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE} Never mention the auction, the listing, a bid, or where the number came from."""
     examples = "; ".join(
         f"{item['title']} sold for about {spoken_price(item['price'])}"
         + (f" ({item['ended']})" if item.get("ended") else "")
@@ -470,7 +479,7 @@ auction site's own results: they run about {spoken_price(market['low'])} to
 These are sales of THIS variant; never blend in a cheaper or dearer version of the same model.
 
 Say it as one plain figure -- "they go for about {spoken_price(market['median'])} today" -- as the current-value
-half of the price beat.{_ROUND_PRICE_RULE} Never mention the auction, the listing, a bid, a sale,
+half of the price beat.{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE} Never mention the auction, the listing, a bid, a sale,
 or any single example. The viewer is being told what this car costs, not where the number came
 from: no "this one sold for", no "currently bid to", no "one recently went for". Just the going
 rate."""
@@ -494,7 +503,7 @@ there. Do not say what it trades for, sells for, goes for, is worth or fetches t
 percentage of appreciation or depreciation -- there is no number behind any of it, and a guess reads as
 a fact to the viewer. "Originally around $110,000, and the good ones have not been cheap since" is
 fine. "Originally around $110,000, now about $70,000" is not, because the second figure is
-invented.{_ROUND_PRICE_RULE}"""
+invented.{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE}"""
 
 
 # A price with more than two significant figures: $172,233, $136,550,
@@ -1046,11 +1055,21 @@ EMPTY_CLAIM_RE = re.compile(
 # padding as a rate of depreciation -- both are arithmetic on two prices
 # the sentence already gave -- and "appreciating annually around 5%" walked
 # past a rule that only knew one word and one word order.
+# The E63 builds got past this twice. "That's nearly a 2% annual drop" missed
+# because the rule wanted the literal word depreciation beside "annual", and
+# "reflecting a subtle depreciation over time" missed because it carries no
+# number at all -- which makes it worse, not better: it is a value claim with
+# nothing behind it, in the beat that already gave both prices.
+_TREND_WORD = r"(?:de|ap)preciat\w*|drop|dip|fall|decline|rise|gain|climb|growth|increase|jump"
 DEPRECIATION_PADDING_RE = re.compile(
     r"(?:\b\d+(?:\.\d+)?\s*%[^.]{0,40}?\b(?:per\s+year|a\s+year|annually|yearly|per\s+annum)"
-    r"|\b(?:annual|yearly)\s+(?:de|ap)preciation"
-    r"|\b(?:de|ap)preciat\w*[^.]{0,40}?\b\d+(?:\.\d+)?\s*%"
-    r"|\b(?:per\s+year|a\s+year|annually|yearly|per\s+annum)[^.]{0,25}?\d+(?:\.\d+)?\s*%)",
+    r"|\b(?:annual|yearly)\s+(?:" + _TREND_WORD + r")"
+    r"|\b(?:" + _TREND_WORD + r")[^.]{0,40}?\b\d+(?:\.\d+)?\s*%"
+    r"|\b\d+(?:\.\d+)?\s*%[^.]{0,25}?\b(?:" + _TREND_WORD + r")"
+    r"|\b(?:per\s+year|a\s+year|annually|yearly|per\s+annum)[^.]{0,25}?\d+(?:\.\d+)?\s*%"
+    # A value trend with no figure behind it at all.
+    r"|\b(?:de|ap)preciation\b[^.]{0,30}?\b(?:over\s+time|since|so\s+far)"
+    r"|\b(?:holding|held|retained|retaining)\s+(?:its\s+)?(?:significant\s+)?value\b)",
     re.I,
 )
 
@@ -2948,6 +2967,45 @@ def add_narration_lead_in(audio_path, seconds=NARRATION_LEAD_IN_SECONDS):
     return audio_path
 
 
+# Silence to leave after the last word is spoken. Measured across 25 shipped
+# builds the gap was whatever gpt-audio happened to leave -- 0.16s to 0.83s,
+# median 0.30 -- and the E63 build at 0.16s ends while the closing question's
+# last syllable is still decaying, which is what "the ending isn't good"
+# sounds like. A closing question needs the beat after it to land.
+MIN_TAIL_SILENCE = 0.45
+
+
+def pad_tail_silence(audio_path, last_word_end, minimum=MIN_TAIL_SILENCE):
+    """Make sure the voice has room to finish, and return the new duration.
+
+    This runs AFTER the tempo normalisation on purpose: atempo scales the
+    trailing silence along with the speech, so padding first would have the
+    pad squeezed by however much the script needed compressing. Padding
+    after means the gap is the gap.
+    """
+    probe = subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+         "-of", "default=nw=1:nk=1", str(audio_path)],
+        check=True, capture_output=True, text=True,
+    )
+    duration = float(probe.stdout.strip())
+    if not last_word_end or last_word_end <= 0:
+        return duration
+    shortfall = minimum - (duration - last_word_end)
+    if shortfall <= 0.01:
+        return duration
+    padded = audio_path.with_name(f"{audio_path.stem}-padded{audio_path.suffix}")
+    subprocess.run(
+        ["ffmpeg", "-y", "-i", str(audio_path), "-af", f"apad=pad_dur={shortfall:.3f}",
+         str(padded)],
+        check=True, capture_output=True, text=True,
+    )
+    padded.replace(audio_path)
+    print(f"[single-car] Padded {shortfall:.2f}s of silence after the last word, so the "
+          f"closing question has room to land ({duration:.2f}s -> {duration + shortfall:.2f}s).")
+    return duration + shortfall
+
+
 def normalize_audio_duration(audio_path, target=TARGET_DURATION_SECONDS, minimum=52.0, maximum=58.0):
     """Keep the final voice close to one minute without asking TTS twice."""
     probe = subprocess.run(
@@ -3324,6 +3382,12 @@ def build_short(args):
                 f"\"{' '.join(str(w.get('word')) for w in word_timeline[-6:])}\", against a script "
                 f"ending \"{' '.join(package['script'].split()[-6:])}\"."
             )
+    # After the alignment, because the pad needs to know where the last word
+    # actually ends, and before the mouth timeline, which is built off the
+    # file and would otherwise stop short of the padded end.
+    if word_timeline:
+        normalized_duration = pad_tail_silence(
+            audio_path, float(word_timeline[-1].get("end") or 0))
     wav_path = output_dir / "narration.wav"
     _extract_wav(audio_path, wav_path)
     timeline = build_mouth_timeline(wav_path)

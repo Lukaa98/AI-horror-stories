@@ -3165,3 +3165,95 @@ def test_the_listing_s_own_price_is_rounded_on_the_way_in():
     assert "$170,000" in block and "172,233" not in block
     # And the label is not doubled up: price_text carries its own wording.
     assert "about Sold for" not in block
+
+
+# --- the ending, and the value beat --------------------------------------
+
+
+def test_the_tail_pad_gives_the_closing_question_room_to_land(monkeypatch, tmp_path):
+    """Across 25 shipped builds the silence after the last word was whatever
+    gpt-audio happened to leave: 0.16s to 0.83s, median 0.30. The E63 build
+    at 0.16s ends while the question's last syllable is still decaying."""
+    import single_car_short
+
+    calls = []
+
+    class Done:
+        stdout = "55.00"
+
+    def fake_run(args, **kwargs):
+        calls.append(args)
+        return Done()
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
+    monkeypatch.setattr(single_car_short.Path, "replace", lambda self, other: None, raising=False)
+
+    audio = tmp_path / "narration.mp3"
+    audio.write_bytes(b"x")
+    # Last word ends at 54.84 of 55.00 -- 0.16s, the real E63 figure.
+    out = single_car_short.pad_tail_silence(audio, 54.84)
+    assert out == pytest.approx(55.0 + (single_car_short.MIN_TAIL_SILENCE - 0.16), abs=0.02)
+    pad = [a for a in calls if "ffmpeg" in a[0]]
+    assert pad, "it has to actually pad the file"
+    assert any("apad=pad_dur=" in str(part) for part in pad[0])
+
+
+def test_audio_that_already_ends_cleanly_is_left_alone(monkeypatch, tmp_path):
+    import single_car_short
+
+    class Done:
+        stdout = "55.00"
+
+    calls = []
+
+    def fake_run(args, **kwargs):
+        calls.append(args)
+        return Done()
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
+    audio = tmp_path / "narration.mp3"
+    audio.write_bytes(b"x")
+    # A full second of tail already.
+    assert single_car_short.pad_tail_silence(audio, 54.0) == 55.0
+    assert not [a for a in calls if "ffmpeg" in a[0]], "nothing to do, so nothing is re-encoded"
+    # And a build whose alignment failed has no last word to measure from.
+    assert single_car_short.pad_tail_silence(audio, 0) == 55.0
+
+
+def test_a_value_trend_with_no_figure_behind_it_is_still_padding():
+    """Both E63 phrasings got past this. "nearly a 2% annual drop" wanted
+    the literal word depreciation beside "annual"; "reflecting a subtle
+    depreciation over time" carries no number at all, which is worse -- a
+    value claim with nothing behind it, in the beat that gave both prices."""
+    from single_car_short import DEPRECIATION_PADDING_RE as rule
+
+    for padding in ("That's nearly a 2% annual drop.",
+                    "reflecting a subtle depreciation over time",
+                    "holding significant value",
+                    "appreciating around 8%",
+                    "a 2% annual rise"):
+        assert rule.search(padding), padding
+    # And the things that are not this: a spec, a count, an acceleration
+    # figure, or two prices stated plainly.
+    for fine in ("627 lb-ft of torque", "only 999 were built",
+                 "it drops to sixty in 3.4 seconds",
+                 "Originally $110,000, now about $137,000", "up 12% since 2020"):
+        assert not rule.search(fine), fine
+
+
+def test_the_original_price_must_be_the_sticker_not_a_used_asking_price():
+    """Every E63 build said "$170,000 new, about $137,000 today" and called
+    it depreciation. The car listed near $113,000 and has gone up -- $170,000
+    was an asking price off a classified, and having the original wrong
+    inverted the whole beat in all three builds."""
+    import single_car_short
+
+    for style in ("classic", "dense", "short"):
+        prompt = single_car_short._research_script_prompt(
+            "Mercedes Amg E63 S", "2023", style=style,
+            market={"median": 136500, "source": "sale"})
+        assert "manufacturer's list" in prompt, style
+        assert "never an asking price" in prompt, style
+    # Including the branch where nothing verifies today's value, which is
+    # the one case that only ever states an original price.
+    assert "manufacturer's list" in single_car_short._research_script_prompt("X", "2023")
