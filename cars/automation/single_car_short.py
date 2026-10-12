@@ -422,6 +422,20 @@ def _strip_citations(text):
 # these scripts that arrives with more precision than the format can pay for:
 # "$172,233" takes nine spoken words, and the seven after "a hundred and
 # seventy" buy nothing a viewer of a 40-second video will act on.
+# A redline is interesting above this and unremarkable below it. Ordinary
+# road cars, diesels included, sit in the sixes and low sevens; past eight
+# is where it is the reason somebody watches.
+NOTABLE_REDLINE_RPM = 8000
+
+
+_REDLINE_RULE = f""" Mention the redline ONLY if it is {NOTABLE_REDLINE_RPM:,} rpm or higher.
+Below that it is unremarkable -- ordinary road cars and even diesels sit in the sixes and low
+sevens -- so it reads as a spec dump instead of a reason to watch, and the words are better
+spent elsewhere. And never say a figure is not listed, published or available: one build said
+"this engine doesn't have a redline listed, but it roars", which tells the viewer nothing
+except that the research came up short. If you do not have a number, say something else."""
+
+
 _ORIGINAL_PRICE_RULE = """ If you give the original price, it must be the manufacturer's list
 price when the car was new, verified -- never an asking price from a classified, a dealer
 listing or a used-car ad, which is what the car costs NOW and is usually far higher on
@@ -453,7 +467,7 @@ def _market_block(market):
 
 WHAT THIS CAR IS WORTH -- about {spoken_price(market['median'])} today. That is what this exact car
 changed hands for, in a completed sale, rounded. Use it as the current-value half of the price beat, as
-one plain figure -- "they go for about {spoken_price(market['median'])} today".{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE} Never
+one plain figure -- "they go for about {spoken_price(market['median'])} today".{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE}{_REDLINE_RULE} Never
 mention the auction, the listing, a bid, a sale, or where the number came from. The viewer is being told
 what the car costs, not how we know."""
     if market.get("source") == "stated":
@@ -463,7 +477,7 @@ WHAT THIS CAR IS WORTH -- about {spoken_price(market['median'])} today. This fig
 person making the video, who knows the car; the value is not up for debate and not to be adjusted,
 averaged or hedged, though it is rounded for speaking. Use it as the current-value half of the price
 beat, as one plain figure -- "they go for about {spoken_price(market['median'])} today".
-{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE} Never mention the auction, the listing, a bid, or where the number came from."""
+{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE}{_REDLINE_RULE} Never mention the auction, the listing, a bid, or where the number came from."""
     examples = "; ".join(
         f"{item['title']} sold for about {spoken_price(item['price'])}"
         + (f" ({item['ended']})" if item.get("ended") else "")
@@ -479,7 +493,7 @@ auction site's own results: they run about {spoken_price(market['low'])} to
 These are sales of THIS variant; never blend in a cheaper or dearer version of the same model.
 
 Say it as one plain figure -- "they go for about {spoken_price(market['median'])} today" -- as the current-value
-half of the price beat.{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE} Never mention the auction, the listing, a bid, a sale,
+half of the price beat.{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE}{_REDLINE_RULE} Never mention the auction, the listing, a bid, a sale,
 or any single example. The viewer is being told what this car costs, not where the number came
 from: no "this one sold for", no "currently bid to", no "one recently went for". Just the going
 rate."""
@@ -503,7 +517,25 @@ there. Do not say what it trades for, sells for, goes for, is worth or fetches t
 percentage of appreciation or depreciation -- there is no number behind any of it, and a guess reads as
 a fact to the viewer. "Originally around $110,000, and the good ones have not been cheap since" is
 fine. "Originally around $110,000, now about $70,000" is not, because the second figure is
-invented.{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE}"""
+invented.{_ROUND_PRICE_RULE}{_ORIGINAL_PRICE_RULE}{_REDLINE_RULE}"""
+
+
+_REDLINE_FIGURE_RE = re.compile(
+    r"\bredlin\w*[^.]{0,30}?(\d{1,2}[,.]?\d{3})\s*(?:rpm)?"
+    r"|(\d{1,2}[,.]?\d{3})\s*(?:rpm)?[^.]{0,20}?\bredlin\w*", re.I)
+# The model saying out loud that it could not find a number.
+_MISSING_FIGURE_RE = re.compile(
+    r"\b(?:do(?:es)?n.t|did\s+not|does\s+not|no|isn.t|is\s+not|aren.t)\s+"
+    r"(?:\w+\s+){0,3}?(?:listed|stated|published|specified|available|disclosed|documented)\b"
+    r"|\bnot?\s+(?:\w+\s+){0,2}?(?:figure|number|spec)\s+(?:is\s+)?(?:listed|available|published)\b",
+    re.I)
+
+
+# Pictographs and dingbats. Deliberately not the whole Unicode emoji space:
+# this only has to catch what a title carries.
+_EMOJI_RE = re.compile(
+    "[\U0001F300-\U0001FAFF\U00002600-\U000027BF\U0001F000-\U0001F0FF\U00002B00-\U00002BFF\uFE0F]"
+)
 
 
 # A price with more than two significant figures: $172,233, $136,550,
@@ -675,6 +707,13 @@ Work down the list and cover as many as the word count genuinely allows, startin
 Each one you take REPLACES a beat you would otherwise have written -- the video does not get
 longer, and the word count is unchanged. Drop a beat about how the car looks first; the hook,
 the history, the engine figures, the price and the closing question all stay.
+
+NONE OF THESE NOTES IS THE OPENING. The first sentence is still the strongest claim YOUR OWN
+research found, chosen to make a viewer stay -- not note 1.
+Note 1 is the most important thing to COVER, not the thing to open with, and it goes in
+the body like the rest. Two builds opened
+on "they trade for about $130,000 today" because the price was note 1, which buried the reason
+anybody would watch. Priority orders the beats; it does not reorder the script.
 
 Stop when there is no room left, and leave the rest out ENTIRELY. A note covered properly is
 worth more than three mentioned in passing: do not compress them all into one sentence each to
@@ -1068,8 +1107,10 @@ DEPRECIATION_PADDING_RE = re.compile(
     r"|\b\d+(?:\.\d+)?\s*%[^.]{0,25}?\b(?:" + _TREND_WORD + r")"
     r"|\b(?:per\s+year|a\s+year|annually|yearly|per\s+annum)[^.]{0,25}?\d+(?:\.\d+)?\s*%"
     # A value trend with no figure behind it at all.
-    r"|\b(?:de|ap)preciation\b[^.]{0,30}?\b(?:over\s+time|since|so\s+far)"
-    r"|\b(?:holding|held|retained|retaining)\s+(?:its\s+)?(?:significant\s+)?value\b)",
+    r"|\b(?:de|ap)preciation\b[^.]{0,30}?\b(?:over\s+time|since|so\s+far|in\s+value)"
+    r"|\b(?:hold|holds|holding|held|keep|keeps|keeping|kept|retain|retains|retaining|retained)"
+    r"\s+(?:its\s+)?(?:significant\s+)?value\b"
+    r"|\b(?:hasn.t|has\s+not|never)\s+(?:really\s+|truly\s+)?(?:de|ap)preciat\w*)",
     re.I,
 )
 
@@ -1347,6 +1388,35 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
         violations.append(
             f'"{padding.group(0).strip()}" is stat-shaped padding -- you already gave both prices, '
             "so the rate tells the viewer nothing. Drop it and spend the words on a fact about the car."
+        )
+    # An emoji in the spoken words is always a leak: the title carries one by
+    # convention and the narration never should, because TTS either reads it
+    # as a word or stumbles over it.
+    emoji = _EMOJI_RE.search(script)
+    if emoji:
+        violations.append(
+            f'the narration contains "{emoji.group(0)}" -- that belongs in the title, not in the '
+            "words being spoken. Take the headline text out of the scene and leave only what is said."
+        )
+    for match in _REDLINE_FIGURE_RE.finditer(script):
+        raw = match.group(1) or match.group(2) or ""
+        try:
+            rpm = int(raw.replace(",", "").replace(".", ""))
+        except ValueError:
+            continue
+        if rpm < NOTABLE_REDLINE_RPM:
+            violations.append(
+                f"you mention a {rpm:,} rpm redline, which is not worth the words -- ordinary road "
+                f"cars sit there. Only call out a redline at {NOTABLE_REDLINE_RPM:,} or above, where "
+                "it is a reason to keep watching. Cut it and say something specific instead."
+            )
+            break
+    missing = _MISSING_FIGURE_RE.search(script)
+    if missing:
+        violations.append(
+            f'you say a figure is not available -- "{missing.group(0).strip()}". Never narrate what '
+            "you could not find: a viewer does not know a number was missing until you tell them. "
+            "Cut the sentence and put a fact you do have in its place."
         )
     exact = []
     for match in _EXACT_PRICE_RE.finditer(script):

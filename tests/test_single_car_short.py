@@ -3257,3 +3257,102 @@ def test_the_original_price_must_be_the_sticker_not_a_used_asking_price():
     # Including the branch where nothing verifies today's value, which is
     # the one case that only ever states an original price.
     assert "manufacturer's list" in single_car_short._research_script_prompt("X", "2023")
+
+
+# --- the RS6 round of fixes ----------------------------------------------
+
+
+def _three_scene_package(middle, title="Four Doors, Real Speed"):
+    scenes = [{"headline": "", "narration": "591 horsepower in a wagon. That's the RS6 Avant."},
+              {"headline": "", "narration": middle},
+              {"headline": "", "narration": "So would you daily one, or is a sedan enough?"}]
+    return {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes),
+            "youtube_title": title}
+
+
+def test_an_ordinary_redline_is_not_worth_the_words():
+    """A 7,200rpm limiter is where ordinary road cars sit -- a diesel SUV is
+    near it -- so saying it is a spec dump, not a reason to watch. Six of the
+    shipped builds spent words on redlines between 6,500 and 7,200."""
+    import single_car_short
+
+    flagged = [v for v in single_car_short._script_violations(
+        _three_scene_package("It redlines at 7,200 rpm and pulls hard."), "Audi", "Rs6 Avant")
+        if "redline" in v]
+    assert flagged and "7,200 rpm" in flagged[0]
+    # And the other way round: a genuinely high one is the point of the car.
+    for high in ("It redlines at 9,000 rpm, screaming all the way.",
+                 "An 8,500 rpm redline is the whole point."):
+        assert not [v for v in single_car_short._script_violations(
+            _three_scene_package(high), "Audi", "Rs6 Avant") if "redline" in v], high
+
+
+def test_the_script_never_says_a_figure_was_unavailable():
+    """One build said "this engine doesn't have a redline listed, but it
+    roars" -- the model narrating a hole in its own research. A viewer does
+    not know a number was missing until they are told."""
+    import single_car_short
+
+    flagged = [v for v in single_car_short._script_violations(
+        _three_scene_package("This engine doesn't have a redline listed, but it roars."),
+        "Audi", "Rs6 Avant") if "not available" in v]
+    assert flagged
+
+
+def test_an_emoji_in_the_spoken_words_is_a_leaked_title():
+    """The RS6 dense build opened by speaking "A Wagon That Bucks Typical
+    Depreciation" and a fire emoji out loud."""
+    import single_car_short
+
+    leaked = _three_scene_package("A Wagon That Bucks Depreciation 🔥 It holds on well.")
+    assert [v for v in single_car_short._script_violations(leaked, "Audi", "Rs6 Avant")
+            if "belongs in the title" in v]
+
+
+def test_a_title_echoing_its_own_hook_is_not_a_leak():
+    """A check on the title's words appearing in scene 1 flagged the M5 CS
+    build, whose title is echoed by its hook deliberately -- the opening is
+    supposed to pay off the title in the same words. Matching text cannot be
+    the signal; a spoken emoji can."""
+    import single_car_short
+
+    package = _three_scene_package(
+        "BMW built only 1,132 of them.",
+        title="The lightest, most powerful M5 ever built. 🔥")
+    package["scenes"][0]["narration"] = (
+        "With 627 horsepower, it's the lightest, most powerful M5 ever built. "
+        "This is the 2022 BMW M5 CS.")
+    package["script"] = " ".join(s["narration"] for s in package["scenes"])
+    assert not [v for v in single_car_short._script_violations(package, "Bmw", "M5 Cs")
+                if "belongs in the title" in v or "opens with the title" in v]
+
+
+def test_value_claims_without_a_figure_are_caught_in_every_phrasing():
+    """Three of the four RS6 builds had one. "holds its value" and "keeps its
+    value" use a verb form the rule did not have; "a rare appreciation in
+    value" carries no figure at all."""
+    from single_car_short import DEPRECIATION_PADDING_RE as rule
+
+    for padding in ("holds its value", "keeps its value", "retains its value",
+                    "reflecting a rare appreciation in value",
+                    "hasn't really depreciated", "has not depreciated"):
+        assert rule.search(padding), padding
+    for fine in ("they go for about $130,000 today", "the value of a good one is obvious",
+                 "591 horsepower and 590 lb-ft", "up 12% since 2020"):
+        assert not rule.search(fine), fine
+
+
+def test_a_note_is_never_the_opening_line():
+    """Both RS6 notes builds opened on "they trade for about $130,000 today"
+    because price was note 1, which buried the eighteen-year story that was
+    the reason to watch. Priority orders the beats, not the script."""
+    import single_car_short
+
+    prompt = single_car_short._research_script_prompt(
+        "Audi Rs6 Avant", "2022",
+        angles="- About $117,000 new and they trade near that today.\n"
+               "- Americans waited eighteen years for this wagon.")
+    assert "NONE OF THESE NOTES IS THE OPENING" in prompt
+    assert "Note 1 is the most important thing to COVER" in prompt
+    # The ranking itself still reaches the model.
+    assert "1. About $117,000" in prompt and "2. Americans waited" in prompt
