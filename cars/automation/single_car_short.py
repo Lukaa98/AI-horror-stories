@@ -542,7 +542,25 @@ _EMOJI_RE = re.compile(
 # A price with more than two significant figures: $172,233, $136,550,
 # $12,250. Two-figure prices ($140,000, $12,000) and anything under a
 # thousand are left alone. Years are not prices, and carry no $.
-_EXACT_PRICE_RE = re.compile(r"\$\s?(\d{1,3}(?:,\d{3})+|\d{4,})(?:\.\d+)?")
+_EXACT_PRICE_RE = re.compile(
+    r"\$\s?(\d{1,3}(?:,\d{3})+|\d{4,})(?:\.\d+)?"
+    # The spoken shorthand: $148K, $1.2M. Scaled to the real figure so one
+    # rule judges both notations the same way.
+    r"|\$\s?(\d{1,3}(?:\.\d+)?)\s?([KkMm])\b")
+
+
+def _price_value(match):
+    """The dollar figure a match stands for, whichever notation it used."""
+    if match.group(1):
+        try:
+            return int(float(match.group(1).replace(",", "")))
+        except ValueError:
+            return None
+    try:
+        scaled = float(match.group(2)) * (1_000_000 if match.group(3).lower() == "m" else 1_000)
+    except (TypeError, ValueError):
+        return None
+    return int(scaled)
 
 
 def _price_is_round(value):
@@ -562,9 +580,8 @@ def _price_is_round(value):
 def _round_price_text(text):
     """Every exact price in a blob, rewritten as the short spoken form."""
     def swap(match):
-        try:
-            value = int(float(match.group(1).replace(",", "")))
-        except ValueError:
+        value = _price_value(match)
+        if value is None:
             return match.group(0)
         return match.group(0) if _price_is_round(value) else spoken_price(value)
     return _EXACT_PRICE_RE.sub(swap, str(text or "")) if text else ""
@@ -705,7 +722,12 @@ def _angles_block(angles, style="classic"):
         "the hook, the engine figures and the closing question all stay -- and at this length "
         "that is nearly the whole video, so a note REPLACES the history beat or the price beat. "
         "Take one of those out rather than squeezing a note in beside it, and never say the "
-        "same figure in two scenes to make room."
+        "same figure in two scenes to make room.\n\nIf a note is about a DIFFERENT car or brand "
+        "-- a rival's sales, what a competitor stopped building, how the market is moving -- keep "
+        "it to one short clause inside a beat about THIS car, and never make it the opening. "
+        "Context needs setting up before it means anything, and there are no words here for the "
+        "setup: one build spent its hook on a rival's order books and came out titled after the "
+        "rival, in a video about this car."
         if (style or "").strip().lower() == "short"
         else "the hook, the history, the engine figures, the price and the closing question all stay."
     )
@@ -1431,9 +1453,8 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
         )
     exact = []
     for match in _EXACT_PRICE_RE.finditer(script):
-        try:
-            value = int(float(match.group(1).replace(",", "")))
-        except ValueError:
+        value = _price_value(match)
+        if value is None:
             continue
         if not _price_is_round(value):
             exact.append((match.group(0).strip(), spoken_price(value)))
@@ -2086,12 +2107,31 @@ def _extend_to_floor(package, floor, cap, label, make, model, market=None,
                 if not offered:
                     rejected.append("(nothing offered)")
                     continue
+                room = cap - _word_count(
+                    " ".join(x["narration"] for x in candidate.get("scenes") or []))
+                taken = []
                 for index, text in offered:
                     # Never the hook or the closing question.
                     if not 2 <= index <= len(candidate["scenes"]) - 1:
                         continue
-                    candidate["scenes"][index - 1]["narration"] = (
-                        candidate["scenes"][index - 1]["narration"].rstrip() + " " + text)
+                    for sentence in _SENTENCE_SPLIT_RE.split(text.strip()):
+                        sentence = sentence.strip()
+                        if not sentence:
+                            continue
+                        cost = _word_count(sentence)
+                        if cost > room:
+                            continue
+                        candidate["scenes"][index - 1]["narration"] = (
+                            candidate["scenes"][index - 1]["narration"].rstrip() + " " + sentence)
+                        room -= cost
+                        taken.append((index, sentence))
+                if not taken:
+                    _note_repair(what=f"{shortfall} words short", outcome="did not help",
+                                 returned=" ".join(t for _, t in offered)[:300],
+                                 detail="every sentence offered was longer than the room left")
+                    rejected.append(" ".join(t for _, t in offered))
+                    continue
+                offered = taken
         except Exception as error:  # noqa: BLE001 - a build is worth more than a word count
             _note_repair(what=f"{shortfall} words short", outcome="call failed",
                          detail=str(error)[:300])

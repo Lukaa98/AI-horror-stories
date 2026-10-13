@@ -3389,3 +3389,78 @@ def test_a_build_with_no_notes_is_unaffected_by_the_beat_scaling():
         prompt = single_car_short._research_script_prompt("X", "2023", style=style)
         assert "THE PERSON COMMISSIONING THIS VIDEO ASKED FOR THESE" not in prompt
         assert "{keeps}" not in prompt
+
+
+def test_the_floor_takes_the_sentences_that_fit_instead_of_dropping_them_all(monkeypatch):
+    """Asked for 16 words the model offers 25, and discarding the whole
+    offering put the classic S580 build three rounds deep and still six
+    words short of its floor: "overshot the cap" twice, nothing kept."""
+    import single_car_short
+
+    package = _floor_package(14)      # 140 words
+    # One short sentence that fits the 10 words of room, then a long one
+    # that cannot. The old code threw both away.
+    monkeypatch.setattr(single_car_short, "_more_sentences_for", lambda *a, **k: [
+        (3, "Alpha beta gamma delta epsilon zeta eta theta iota kappa. "
+            + " ".join(f"over{j}" for j in range(40)) + ".")])
+    monkeypatch.setattr(single_car_short, "_research_extra_beat", lambda *a, **k: "")
+    monkeypatch.setattr(single_car_short, "_script_violations", lambda *a, **k: [])
+
+    out = single_car_short._extend_to_floor(
+        package, floor=150, cap=150, label="X", make="X", model="X")
+    assert out["word_count"] == 150, "the sentence that fits is kept, the one that does not is not"
+    assert "Alpha beta gamma" in out["script"]
+    assert "over0" not in out["script"]
+
+
+def test_a_round_whose_every_sentence_is_too_long_is_still_reported(monkeypatch):
+    import single_car_short
+
+    package = _floor_package(14)
+    monkeypatch.setattr(single_car_short, "_more_sentences_for", lambda *a, **k: [
+        (3, " ".join(f"big{j}" for j in range(40)) + ".")])
+    monkeypatch.setattr(single_car_short, "_research_extra_beat", lambda *a, **k: "")
+    monkeypatch.setattr(single_car_short, "_script_violations", lambda *a, **k: [])
+    out = single_car_short._extend_to_floor(
+        package, floor=150, cap=145, label="X", make="X", model="X")
+    assert out["word_count"] == 140, "nothing fit, so nothing changed"
+
+
+def test_a_price_written_with_a_k_suffix_is_checked_too():
+    """The dense S580 build said "$148K" and the classic one said "$150,000"
+    for the same car. The pattern wanted comma-grouped digits or four-plus of
+    them, so the shorthand went straight past it."""
+    import single_car_short
+
+    assert single_car_short._round_price_text("a price tag of $148K") == "a price tag of $150,000"
+    assert single_car_short._round_price_text("about $120K new") == "about $120K new", \
+        "already round, so left as written"
+    for text, value in (("$148K", 148_000), ("$1.2M", 1_200_000), ("$3.5K", 3_500)):
+        match = single_car_short._EXACT_PRICE_RE.search(text)
+        assert single_car_short._price_value(match) == value, text
+
+    scenes = [{"headline": "", "narration": "496 horsepower in a limousine. That's the S580."},
+              {"headline": "", "narration": "With a price tag of $148K, it sets the benchmark."},
+              {"headline": "", "narration": "So would you have one?"}]
+    package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes)}
+    flagged = [v for v in single_car_short._script_violations(package, "Mercedes Benz", "S580")
+               if "exact price" in v]
+    assert flagged and "about $150,000" in flagged[0]
+
+
+def test_a_rival_note_cannot_take_the_opening_of_a_35_second_video():
+    """The S580 short build spent its hook on Audi's order books and came
+    out titled "Audi Says Goodbye to A8s in 2026" -- a video about a
+    Mercedes, named after an Audi. Context needs setting up before it means
+    anything, and at this length there are no words for the setup."""
+    import single_car_short
+
+    short = single_car_short._research_script_prompt(
+        "Mercedes Benz S580", "2023", style="short",
+        angles="- Audi stopped taking A8 orders\n- the suspension lifts the car")
+    assert "about a DIFFERENT car or brand" in short
+    assert "never make it the opening" in short
+    # The longer formats have room to set a rival up, so they are left alone.
+    for style in ("classic", "dense"):
+        assert "about a DIFFERENT car or brand" not in single_car_short._research_script_prompt(
+            "Mercedes Benz S580", "2023", style=style, angles="- Audi stopped taking A8 orders")
