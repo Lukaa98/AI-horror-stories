@@ -3356,3 +3356,36 @@ def test_a_note_is_never_the_opening_line():
     assert "Note 1 is the most important thing to COVER" in prompt
     # The ranking itself still reaches the model.
     assert "1. About $117,000" in prompt and "2. Americans waited" in prompt
+
+
+def test_the_reserved_beats_scale_down_for_the_35_second_format():
+    """Five protected beats -- hook, history, engine, price, closing -- is
+    nearly the whole video when there are only four or five scenes, so a
+    note had nowhere to land. The one short build that used notes said
+    "only 800 units" in two separate scenes and spent a third on "the bold
+    flared arches signify a wider track"."""
+    import single_car_short
+
+    short = single_car_short._research_script_prompt(
+        "Mercedes Benz S580", "2023", style="short", angles="- one thing\n- another thing")
+    assert "REPLACES the history beat or the price beat" in short
+    assert "never say the same figure in two scenes" in short
+    # The longer formats have room for all five, so they keep them.
+    for style in ("classic", "dense"):
+        prompt = single_car_short._research_script_prompt(
+            "Mercedes Benz S580", "2023", style=style, angles="- one thing\n- another thing")
+        assert "the history, the engine figures, the price and the closing question all stay" in prompt
+        assert "REPLACES the history beat" not in prompt
+    # And no style leaks the placeholder.
+    for style in ("classic", "dense", "short"):
+        assert "{keeps}" not in single_car_short._research_script_prompt(
+            "X", "2023", style=style, angles="- a")
+
+
+def test_a_build_with_no_notes_is_unaffected_by_the_beat_scaling():
+    import single_car_short
+
+    for style in ("classic", "dense", "short"):
+        prompt = single_car_short._research_script_prompt("X", "2023", style=style)
+        assert "THE PERSON COMMISSIONING THIS VIDEO ASKED FOR THESE" not in prompt
+        assert "{keeps}" not in prompt

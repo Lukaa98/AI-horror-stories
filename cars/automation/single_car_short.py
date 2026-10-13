@@ -674,7 +674,7 @@ def _split_angles(angles):
     return bullets
 
 
-def _angles_block(angles):
+def _angles_block(angles, style="classic"):
     """What the person asked the script to cover, in their own words.
 
     They know things about these cars that research will not surface on its
@@ -698,6 +698,17 @@ def _angles_block(angles):
     wanted = _split_angles(angles)
     if not wanted:
         return ""
+    # At 35 seconds there are four or five scenes in total, so protecting
+    # five beats leaves a note nowhere to land. Only three are irreducible
+    # there; the history and the price are what a note is allowed to take.
+    keeps = (
+        "the hook, the engine figures and the closing question all stay -- and at this length "
+        "that is nearly the whole video, so a note REPLACES the history beat or the price beat. "
+        "Take one of those out rather than squeezing a note in beside it, and never say the "
+        "same figure in two scenes to make room."
+        if (style or "").strip().lower() == "short"
+        else "the hook, the history, the engine figures, the price and the closing question all stay."
+    )
     listed = "\n".join(f"  {i}. {line}" for i, line in enumerate(wanted, 1))
     return f"""
 
@@ -706,8 +717,7 @@ THE PERSON COMMISSIONING THIS VIDEO ASKED FOR THESE, IN PRIORITY ORDER -- 1 matt
 
 Work down the list and cover as many as the word count genuinely allows, starting at 1.
 Each one you take REPLACES a beat you would otherwise have written -- the video does not get
-longer, and the word count is unchanged. Drop a beat about how the car looks first; the hook,
-the history, the engine figures, the price and the closing question all stay.
+longer, and the word count is unchanged. Drop a beat about how the car looks first; {keeps}
 
 NONE OF THESE NOTES IS THE OPENING. The first sentence is still the strongest claim YOUR OWN
 research found, chosen to make a viewer stay -- not note 1.
@@ -787,7 +797,7 @@ Keep each slot's scenes together and in the order the photos are listed, so the 
 rear, engine bay, interior rather than jumping back and forth. User notes are topic suggestions, not verified
 facts; verify factual claims with your research. Do not infer horsepower, modifications, or performance from
 appearance alone."""
-    angles_block = _angles_block(angles)
+    angles_block = _angles_block(angles, style)
     forced_rival_block = ""
     if forced_rival:
         forced_rival_block = f"""
