@@ -217,8 +217,9 @@ the failure -- there is nothing to disagree with, so nobody does."""
         "sentences": "TWO OR THREE short sentences",
         "scene_count": ("4-5 scenes -- no more. There is only room for four or five beats at this "
                         "length, and a sixth makes every one of them too thin to say anything"),
-        "scene_note": ("short and punchy, and every one of them earning its place -- at this "
-                       "length there is no room for a beat that is merely true"),
+        "scene_note": ("EIGHT TO TEN sentences across the whole script, averaging about ten "
+                       "words -- count them. Short and punchy, and every one earning its place: "
+                       "at this length there is no room for a beat that is merely true"),
         "block": """
 
 HOW THIS ONE IS WRITTEN -- this overrides the pacing guidance above.
