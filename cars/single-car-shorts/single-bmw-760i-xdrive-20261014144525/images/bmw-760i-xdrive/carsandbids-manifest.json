@@ -1,0 +1,489 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-14T14:47:44.698Z",
+  "query": "Bmw 760i Xdrive",
+  "visual_highlight": "interior dashboard steering wheel cabin engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rkOJ56e4/2026-bmw-760i-xdrive?ss_id=a93b340c-d2e7-4d7d-9d5b-bd2e187abbe5&ref=pr_1_1",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rkOJ56e4/2026-bmw-760i-xdrive?ss_id=a93b340c-d2e7-4d7d-9d5b-bd2e187abbe5&ref=pr_1_1",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 20,
+      "sale_price": 105500,
+      "sale_type": "bid_to",
+      "page_title": "2026 BMW 760i xDrive"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rkOJ56e4/2026-bmw-760i-xdrive?ss_id=a93b340c-d2e7-4d7d-9d5b-bd2e187abbe5&ref=pr_1_1",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 105500,
+    "sale_type": "bid_to",
+    "page_title": "2026 BMW 760i xDrive",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/exterior/rNjkkoGr-a3tSaF5/edit/Ci5nj.jpg?t=177787392817",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2026 BMW 760i xDrive",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 208292
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d265de7b277c217658771ddbbbc5d846200edc79/photos/mechanical/rNjkkoGr-wGT2Tjd.jpg?t=177784453631",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2026 BMW 760i xDrive",
+      "width": 542,
+      "height": 362,
+      "bytes": 202250
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d265de7b277c217658771ddbbbc5d846200edc79/photos/interior/rNjkkoGr-2PgwHpn.jpg?t=177784453631",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2026 BMW 760i xDrive",
+      "width": 542,
+      "height": 362,
+      "bytes": 125462
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d265de7b277c217658771ddbbbc5d846200edc79/photos/mechanical/rNjkkoGr-BTCCtc9.jpg?t=177784453631",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2026 BMW 760i xDrive",
+      "width": 542,
+      "height": 362,
+      "bytes": 120329
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/d265de7b277c217658771ddbbbc5d846200edc79/photos/mechanical/rNjkkoGr-alne8Sw.jpg?t=177784453631",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2026 BMW 760i xDrive",
+      "width": 542,
+      "height": 362,
+      "bytes": 84028
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/exterior/rNjkkoGr-BPM6npe/edit/fbwdT.jpg?t=177787396226",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2026 BMW 760i xDrive",
+      "width": 542,
+      "height": 361,
+      "bytes": 166062
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/exterior/rNjkkoGr-_GGoL5X/edit/IM_up.jpg?t=177787398843",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2026 BMW 760i xDrive",
+      "width": 542,
+      "height": 361,
+      "bytes": 230310
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/exterior/rNjkkoGr-TbLkJ7L/edit/4Q_3c.jpg?t=177787401537",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2026 BMW 760i xDrive",
+      "width": 542,
+      "height": 361,
+      "bytes": 183865
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/exterior/rNjkkoGr-ab9jHRt/edit/zWWkb.jpg?t=177787403861",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2026 BMW 760i xDrive",
+      "width": 542,
+      "height": 361,
+      "bytes": 129765
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/d265de7b277c217658771ddbbbc5d846200edc79/photos/36LznL4B-CuQ4lKjpKZ0.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 5058 bytes"
+    },
+    {
+      "path": "interior-11.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/fc19fd85e1c7a670fcbf7366122db42d96a10f50/photos/r4kGMW0g-ZMR8bwm.jpg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 80,
+      "height": 80,
+      "bytes": 21800
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/91032ad7bbcb6cf72875e8e8207dcfba80173f7c/photos/9AM7lVl8-mJGOmjW.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2787 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/642e9c8a18befa1d9dda19a97710d62db255b2d7/photos/3ydlQkE9-dcUXP6A5j.jpeg",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 14247 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "760i",
+        "detected_generation_or_year": "2026",
+        "detected_variant_or_engine": "Xdrive",
+        "visible_match_evidence": [
+          "BMW badge",
+          "design elements",
+          "bodywork proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "760i",
+        "detected_generation_or_year": "2026",
+        "detected_variant_or_engine": "Xdrive",
+        "visible_match_evidence": [
+          "interior design",
+          "material quality",
+          "seating layout"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "760i",
+        "detected_generation_or_year": "2026",
+        "detected_variant_or_engine": "Xdrive",
+        "visible_match_evidence": [
+          "BMW badge on steering wheel",
+          "modern interior design",
+          "dual-screen display layout"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "bmw",
+        "detected_model": "760i",
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "Image does not clearly show the target vehicle; it is an interior shot without specific identifiers.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "760i",
+        "detected_generation_or_year": "2026",
+        "detected_variant_or_engine": "Xdrive",
+        "visible_match_evidence": [
+          "front design matches 2026 BMW",
+          "large kidney grille characteristic of 760i",
+          "headlight shape aligns with model year",
+          "overall proportions consistent with luxury sedan"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "760i",
+        "detected_generation_or_year": "2026",
+        "detected_variant_or_engine": "Xdrive",
+        "visible_match_evidence": [
+          "bodywork style",
+          "BMW roundel logo",
+          "wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "760i",
+        "detected_generation_or_year": "2026",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "model badge visible",
+          "body proportions match",
+          "rear design aligns with generation"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 6,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "760i",
+        "detected_generation_or_year": "2026",
+        "detected_variant_or_engine": "Xdrive",
+        "visible_match_evidence": [
+          "BMW badge",
+          "760i badge",
+          "Xdrive badge",
+          "overall design cues consistent with 2026 model"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "detail",
+        "scene_fit_tags": [
+          "detail"
+        ],
+        "quality_score": 3,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not clearly show the target vehicle and lacks identifiable characteristics.",
+        "path": "interior-11.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
