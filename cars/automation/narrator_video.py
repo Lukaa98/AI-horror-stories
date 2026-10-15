@@ -404,6 +404,11 @@ def _caption_frame(size, text, center_y, out_path, fill=(0, 0, 0), font_size=64,
     canvas.save(out_path)
 
 
+# Less room than this at the end of the clip and a sound effect is not
+# worth starting: it would be cut to a click rather than heard.
+MIN_SFX_ROOM_SECONDS = 0.25
+
+
 def _sfx_clip(name, start, volume, duration=None):
     """A single sound-effect hit positioned at `start`, or None if the
     asset isn't present -- missing sfx should never break a render.
@@ -1885,7 +1890,10 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     # late" timing bug this whole boundary system exists to fix.
     pop_times = ([c["start"] for i, c in enumerate(photo_cues) if i == 0 or c.get("hero") != photo_cues[i-1].get("hero")]
                  if photo_cues else [start for start, _ in scene_boundaries])
-    photo_pop_clips = [_sfx_clip(PHOTO_POP_SFX, start, PHOTO_POP_VOLUME) for start in pop_times]
+    photo_pop_clips = [
+        _sfx_clip(PHOTO_POP_SFX, start, PHOTO_POP_VOLUME, duration=duration - start)
+        for start in pop_times if duration - start >= MIN_SFX_ROOM_SECONDS
+    ]
     stat_tracker_clips = []
     if photo_cues:
         # Compact current-scene stats above the card; the cumulative scoreboard
@@ -1937,7 +1945,9 @@ def render_narrator_video(car_media_paths, manifest, output_path):
             # long it actually took to type -- not one hit per character,
             # which stacked into an overly loud wall of sound.
             typing_duration = positions[-1][1] - positions[0][1]
-            typing_sfx_clips.append(_sfx_clip(TYPING_SFX, start, TYPING_VOLUME, duration=typing_duration))
+            typing_sfx_clips.append(_sfx_clip(
+                TYPING_SFX, start, TYPING_VOLUME,
+                duration=min(typing_duration, duration - start)))
 
     # Decorative extras: an ambient corner doodle reusing the car's own
     # side-profile cutout (single_car_short._select_side_profile_media),

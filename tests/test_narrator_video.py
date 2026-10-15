@@ -712,3 +712,55 @@ def test_the_cumulative_scoreboard_is_not_composited_any_more():
         "the cumulative scoreboard is back in the render path"
     # The per-scene stats, which were never the problem, still are.
     assert "stat_tracker_clips.append" in composite
+
+
+def test_a_sound_effect_never_plays_past_the_end_of_the_video(monkeypatch, tmp_path):
+    """photo_pop.wav runs over a second. Fired on a photo change in the last
+    moments it played on past the end of the picture -- the faint blip after
+    the narration has finished, and why one build's written audio stream
+    came out 0.6s longer than its video."""
+    import narrator_video
+
+    calls = []
+
+    class FakeClip:
+        duration = 1.4
+
+        def volumex(self, _):
+            return self
+
+        def subclip(self, start, end):
+            calls.append(("subclip", round(end, 3)))
+            return self
+
+        def set_start(self, start):
+            return self
+
+        def audio_fadeout(self, seconds):
+            calls.append(("fadeout", round(seconds, 3)))
+            return self
+
+    monkeypatch.setattr(narrator_video, "AudioFileClip", lambda path: FakeClip())
+    monkeypatch.setattr(narrator_video.Path, "exists", lambda self: True, raising=False)
+
+    # Plenty of room: the asset plays whole.
+    narrator_video._sfx_clip("photo_pop.wav", 10.0, 0.5, duration=5.0)
+    assert not calls, "nothing to trim when the clip fits"
+
+    # Near the end: trimmed to what is left rather than running over.
+    narrator_video._sfx_clip("photo_pop.wav", 54.8, 0.5, duration=0.3)
+    assert calls[0] == ("subclip", 0.3)
+    assert ("fadeout", 0.12) in calls, "a trimmed hit is faded, not cut to a click"
+
+
+def test_a_photo_pop_with_no_room_left_is_not_started_at_all():
+    """Under a quarter second it would be a click, not a sound."""
+    import narrator_video
+
+    assert narrator_video.MIN_SFX_ROOM_SECONDS == 0.25
+    source = Path(narrator_video.__file__).read_text()
+    # The pop is both trimmed to the room left and skipped when there is none.
+    assert "duration=duration - start" in source
+    assert "if duration - start >= MIN_SFX_ROOM_SECONDS" in source
+    # The typing bed is capped the same way.
+    assert "duration=min(typing_duration, duration - start)" in source
