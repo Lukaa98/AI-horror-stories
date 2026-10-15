@@ -33,24 +33,17 @@ AUDIO_VOICE = os.getenv("OPENAI_AUDIO_VOICE", "echo")
 # register is dropped afterwards instead, which keeps the performance --
 # the phrasing, the emphasis, the accent -- and moves only the pitch.
 #
-# Off. Lowering the register was tried two ways -- by a fixed 0.91, then
-# onto a measured 130 Hz -- and the second did land every take on the same
-# number. It still sounded processed, because the shift is a time-stretch
-# and no amount of aiming it changes that. The model's own take ships.
+# The model's own take ships. Lowering the register was tried two ways --
+# a fixed 0.91, then onto a measured 130 Hz -- and the second did land every
+# take on the same number, but both sounded processed, because the shift is
+# a time-stretch underneath and no amount of aiming it changes that. The
+# shifting is gone rather than switched off: it was dead code behind an env
+# var nobody was going to set.
 #
-# Set OPENAI_AUDIO_TARGET_HZ to a frequency to turn it back on; the
-# machinery and its tests are kept for that, and the pitch is measured and
-# recorded either way so takes stay comparable.
-AUDIO_TARGET_HZ = float(os.getenv("OPENAI_AUDIO_TARGET_HZ", "0"))
-# Used only when a target is set and a take is too breathy to measure.
-# Never as a silent fallback: which path ran is recorded in the manifest.
-AUDIO_PITCH = float(os.getenv("OPENAI_AUDIO_PITCH", "0.91"))
-# This is a time-stretch underneath, so a large shift sounds processed --
-# below about 0.85 the vowels go hollow, above about 1.05 it chipmunks. A
-# take that would need more than this is left where the clamp puts it.
-PITCH_FACTOR_LIMITS = (0.85, 1.05)
-# What the last synthesis actually did, so narration_settings() reports a
-# measurement instead of the constant it was configured with.
+# The pitch is still MEASURED, which is a different thing and worth keeping:
+# gpt-audio picks its own register per call and the takes land anywhere from
+# 132 to 160 Hz, so the number is how one build's voice gets compared with
+# another's. Recorded here for the manifest.
 _LAST_PITCH = {}
 # gpt-audio picks its own register every call -- measured across this
 # channel its takes came back anywhere from 132 to 157 Hz. Two attempts
@@ -154,12 +147,12 @@ def narration_settings():
     """
     if NARRATION_ENGINE == "gpt-audio":
         return {"engine": NARRATION_ENGINE, "model": AUDIO_MODEL,
-                "voice": AUDIO_VOICE, "target_hz": AUDIO_TARGET_HZ,
-                # What the shift actually did on this build, not what it was
-                # configured to do. Empty means nothing has been synthesized.
+                "voice": AUDIO_VOICE,
+                # What this build's take measured. Empty means nothing has
+                # been synthesized yet.
                 "pitch": dict(_LAST_PITCH) or None, "tts_speed": None}
     return {"engine": "tts", "model": DEFAULT_TTS_MODEL, "voice": None,
-            "target_hz": None, "pitch": None, "tts_speed": None}
+            "pitch": None, "tts_speed": None}
 
 
 def _decode_mono(audio_path, sample_rate=16000):
@@ -208,87 +201,24 @@ def median_f0(audio_path, floor_hz=60, ceiling_hz=300):
     return float(np.median(pitches))
 
 
-def _shift_pitch(audio_path, factor):
-    """Move the register without changing how long the file is.
+def measure_pitch(audio_path):
+    """Measure the take's register and record it, without changing it.
 
-    asetrate lowers pitch and slows the audio together; atempo puts the
-    speed back. The result is the same take in a lower register rather than
-    a different performance.
-    """
-    probe = subprocess.run(
-        [os.environ.get("FFPROBE_BINARY", "ffprobe"), "-v", "error", "-select_streams", "a:0",
-         "-show_entries", "stream=sample_rate", "-of", "default=nw=1:nk=1", str(audio_path)],
-        check=True, capture_output=True, text=True,
-    )
-    rate = int(probe.stdout.strip() or 24000)
-    lowered = audio_path.with_name(f"{audio_path.stem}-deep{audio_path.suffix}")
-    subprocess.run(
-        [os.environ.get("FFMPEG_BINARY", "ffmpeg"), "-y", "-i", str(audio_path), "-filter:a",
-         f"asetrate={rate}*{factor},aresample={rate},atempo={1 / factor:.6f}",
-         "-q:a", "3", str(lowered)],
-        check=True, capture_output=True, text=True,
-    )
-    lowered.replace(audio_path)
-    return audio_path
-
-
-def pitch_factor_for(measured_hz, target_hz=AUDIO_TARGET_HZ, limits=PITCH_FACTOR_LIMITS):
-    """How far to shift a take that came back at `measured_hz`.
-
-    Clamped, because the shift is a time-stretch: a take far from the
-    target is better left slightly high than made to sound processed.
-    """
-    if not measured_hz or not target_hz:
-        return None
-    return min(max(target_hz / measured_hz, limits[0]), limits[1])
-
-
-def _deepen(audio_path, target_hz=AUDIO_TARGET_HZ):
-    """Put the take into the target register, whatever register it arrived in.
-
-    Records what it did in _LAST_PITCH so the manifest can report the
-    measurement rather than the setting.
+    This used to shift the audio towards a target as well, which is why it
+    was called _deepen. The shifting is gone; the measurement stays because
+    it is the only way to tell one build's voice from another's, and it is
+    what the dashboard shows beside the word count.
     """
     audio_path = Path(audio_path)
     measured = None
     try:
         measured = median_f0(audio_path)
-    except Exception as error:  # noqa: BLE001 - a build is worth more than a semitone
+    except Exception as error:  # noqa: BLE001 - a build is worth more than a measurement
         print(f"[narration] Could not measure pitch ({error}).", flush=True)
-
-    if not target_hz:
-        # Measured anyway: the number is how one build's voice gets compared
-        # with another's, whether or not anything is done about it.
-        _LAST_PITCH.clear()
-        _LAST_PITCH.update(measured_hz=measured, target_hz=None, factor=1.0,
-                           source="off", result_hz=measured)
-        print(f"[narration] Take measured {measured:.1f} Hz; shipping it as recorded."
-              if measured else "[narration] Shipping the take as recorded.", flush=True)
-        return audio_path
-
-    factor = pitch_factor_for(measured, target_hz)
-    if factor is None:
-        # Never silently: a fallback that nobody can see is how a build
-        # ships in a register nobody chose.
-        factor = AUDIO_PITCH
-        source = "fallback"
-        print(f"[narration] Pitch not measurable; falling back to x{factor}.", flush=True)
-    else:
-        source = "measured"
-        print(f"[narration] Take measured {measured:.1f} Hz; "
-              f"shifting x{factor:.3f} towards {target_hz:.0f} Hz.", flush=True)
-
     _LAST_PITCH.clear()
-    _LAST_PITCH.update(measured_hz=measured, target_hz=target_hz,
-                       factor=round(factor, 4), source=source)
-
-    if abs(factor - 1.0) < 0.001:
-        return audio_path
-    _shift_pitch(audio_path, factor)
-    try:
-        _LAST_PITCH["result_hz"] = median_f0(audio_path)
-    except Exception:  # noqa: BLE001 - reporting, not correctness
-        _LAST_PITCH["result_hz"] = None
+    _LAST_PITCH.update(measured_hz=measured, result_hz=measured)
+    print(f"[narration] Take measured {measured:.1f} Hz; shipping it as recorded."
+          if measured else "[narration] Shipping the take as recorded.", flush=True)
     return audio_path
 
 
@@ -324,7 +254,7 @@ def _one_take(text, output_path):
 def _synthesize_with_audio_model(text, output_path):
     """Record the script once and keep what comes back."""
     _one_take(text, output_path)
-    return _deepen(output_path)
+    return measure_pitch(output_path)
 
 
 def synthesize_narration(text, output_path, preset=DEFAULT_VOICE_PRESET, model=DEFAULT_TTS_MODEL, speed=None):

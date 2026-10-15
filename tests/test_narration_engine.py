@@ -23,15 +23,6 @@ def test_narration_comes_from_the_conversational_model():
     assert "audio.speech.create" in source
 
 
-def test_the_register_is_dropped_without_changing_the_performance():
-    """gpt-audio has no pitch control, so the take is lowered afterwards:
-    asetrate drops the pitch and slows it, atempo puts the speed back. The
-    phrasing, emphasis and accent survive -- only the register moves."""
-    source = Path(narrator_script.__file__).read_text()
-    block = source[source.index("def _shift_pitch"):]
-    assert "asetrate=" in block and "atempo=" in block
-
-
 def test_the_take_is_recorded_once_and_kept(monkeypatch, tmp_path):
     """Two attempts were made at evening out the register gpt-audio picks:
     shifting the pitch, which sounded processed because it is a
@@ -49,68 +40,38 @@ def test_the_take_is_recorded_once_and_kept(monkeypatch, tmp_path):
     assert takes == [1], "a high take is still the take"
     # Measured anyway: it is how one build's voice is compared with another's.
     assert narrator_script._LAST_PITCH["measured_hz"] == 157.0
-    assert narrator_script._LAST_PITCH["source"] == "off"
 
 
-def test_the_model_s_own_take_ships_unshifted(monkeypatch, tmp_path):
+def test_nothing_shifts_the_take_any_more(monkeypatch, tmp_path):
     """Lowering the register was tried twice -- a fixed 0.91, then a
-    measured 130 Hz that did land every take on the same number. It still
-    sounded processed, because the shift is a time-stretch. So it is off,
-    and the pitch is measured only so builds stay comparable."""
-    assert narrator_script.AUDIO_TARGET_HZ == 0
+    measured 130 Hz that did land every take on the same number. Both
+    sounded processed, because the shift is a time-stretch underneath. So
+    the machinery is gone rather than switched off behind an env var nobody
+    was going to set, and what is left only measures."""
+    source = Path(narrator_script.__file__).read_text()
+    for gone in ("_shift_pitch", "pitch_factor_for", "AUDIO_TARGET_HZ",
+                 "AUDIO_PITCH", "PITCH_FACTOR_LIMITS", "asetrate="):
+        assert gone not in source.replace(
+            "was called _deepen. The shifting is gone; the measurement stays because", ""), gone
 
+    # Measuring is the part that stays: gpt-audio picks its own register per
+    # call, so the number is how one build's voice is compared with another's.
     monkeypatch.setattr(narrator_script, "median_f0", lambda *a, **k: 140.4)
-    monkeypatch.setattr(narrator_script, "_shift_pitch",
-                        lambda path, factor: pytest.fail("nothing should be shifted"))
-
-    narrator_script._deepen(tmp_path / "narration.mp3")
-
-    assert narrator_script._LAST_PITCH["source"] == "off"
+    narrator_script.measure_pitch(tmp_path / "narration.mp3")
     assert narrator_script._LAST_PITCH["measured_hz"] == 140.4
     assert narrator_script._LAST_PITCH["result_hz"] == 140.4
+    assert narrator_script.narration_settings()["pitch"]["measured_hz"] == 140.4
+    # And the setting that used to be reported is gone from the manifest too.
+    assert "target_hz" not in narrator_script.narration_settings()
 
 
-def test_the_take_is_moved_onto_a_register_rather_than_down_by_a_factor():
-    """gpt-audio does not hand back the same voice twice. Across three
-    builds of one script its takes measured 133, 142 and 157 Hz. A fixed
-    multiplier carries that spread through: one build shipped at 143 Hz
-    when the approved take was 130 -- same settings, audibly not the same
-    voice. So the shift is computed per take."""
-    target = 130.0
-
-    # A high take is pushed down further than an already-low one, so the
-    # three land within a couple of Hz of each other instead of 24 apart.
-    landed = [m * narrator_script.pitch_factor_for(m, target) for m in (157.0, 142.9, 133.2)]
-    assert max(landed) - min(landed) < 4.0, f"still a spread: {landed}"
-    assert all(abs(hz - 130) < 4.0 for hz in landed), landed
-
-    # The shift is a time-stretch, so it is clamped rather than allowed to
-    # sound processed: a take far from the target is left slightly off. 0.91
-    # is the largest drop anyone has approved by ear, so the clamp sits just
-    # past it and nothing gets stretched into a register nobody has heard.
-    low, high = narrator_script.PITCH_FACTOR_LIMITS
-    assert low < 0.91, "the approved drop has to be reachable"
-    assert narrator_script.pitch_factor_for(400.0, target) == low
-    assert narrator_script.pitch_factor_for(80.0, target) == high
-
-    # An unmeasurable take has no factor -- the caller decides what to do,
-    # rather than being handed a made-up number.
-    assert narrator_script.pitch_factor_for(None, target) is None
-
-
-def test_an_unmeasurable_take_is_not_shifted_by_a_guess(monkeypatch, tmp_path):
-    """Falling back is fine; falling back quietly is how a build ships in a
-    register nobody chose. Which one happened has to reach the manifest."""
+def test_an_unmeasurable_take_is_recorded_as_unmeasurable(monkeypatch, tmp_path):
+    """A build that could not be measured says so, rather than reporting a
+    number nobody took."""
     monkeypatch.setattr(narrator_script, "median_f0", lambda *a, **k: None)
-    shifted = []
-    monkeypatch.setattr(narrator_script, "_shift_pitch",
-                        lambda path, factor: shifted.append(factor) or path)
-
-    narrator_script._deepen(tmp_path / "narration.mp3", target_hz=130.0)
-
-    assert shifted == [narrator_script.AUDIO_PITCH], "the fixed factor is the fallback"
-    assert narrator_script._LAST_PITCH["source"] == "fallback"
-    assert narrator_script.narration_settings()["pitch"]["source"] == "fallback"
+    narrator_script.measure_pitch(tmp_path / "narration.mp3")
+    assert narrator_script._LAST_PITCH["measured_hz"] is None
+    assert narrator_script._LAST_PITCH["result_hz"] is None
 
 
 def test_pitch_is_measured_from_the_audio(monkeypatch):
@@ -217,8 +178,11 @@ def test_the_build_records_how_its_voice_was_actually_made():
     settings = narrator_script.narration_settings()
     assert settings["engine"] == "gpt-audio"
     assert settings["voice"] == "echo"
-    assert settings["target_hz"] == narrator_script.AUDIO_TARGET_HZ
     assert settings["tts_speed"] is None, "nothing is sped up any more"
+    # target_hz was the pitch setting, and there is no setting now that the
+    # shifting is gone -- only what the take measured.
+    assert "target_hz" not in settings
+    assert "pitch" in settings
 
     from pathlib import Path
     source = (Path(__file__).resolve().parents[1]

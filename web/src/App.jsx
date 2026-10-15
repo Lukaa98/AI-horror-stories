@@ -151,7 +151,7 @@ function narrationLine(result) {
   const seconds = Number(result.duration_seconds || 0).toFixed(1);
   const narration = result.narration;
   if (narration?.engine === "gpt-audio") {
-    const hz = narration.pitch?.result_hz ?? narration.target_hz;
+    const hz = narration.pitch?.result_hz ?? narration.pitch?.measured_hz ?? narration.target_hz;
     const register = hz ? `, ${Math.round(hz)} Hz` : "";
     return `${words} words in ${seconds}s — ${narration.voice}${register}.`;
   }
