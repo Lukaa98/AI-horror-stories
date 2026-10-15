@@ -2606,7 +2606,8 @@ def test_a_second_writing_style_sits_beside_the_one_everything_shipped_with():
     assert "script_style:" in workflow and "--style" in workflow
     app = (Path(single_car_short.__file__).resolve().parents[2] / "web/src/App.jsx").read_text()
     # Three values in one field now that a 35-second length sits beside it.
-    assert 'script_style: shortStyle ? "short" : denseStyle ? "dense" : "classic"' in app
+    assert ('script_style: shortStyle ? "short" : mediumStyle ? "medium" '
+            ': denseStyle ? "dense" : "classic"') in app
     assert "Dense script" in app
     assert "useState(false)" in app.split("const [denseStyle, setDenseStyle] = ")[1][:20], \
         "off by default, so the daily upload is undisturbed"
@@ -2811,10 +2812,11 @@ def test_a_thirty_five_second_style_sits_beside_the_other_two():
 
     # One field, three values, so the two boxes cannot both win.
     app = (Path(single_car_short.__file__).resolve().parents[2] / "web/src/App.jsx").read_text()
-    assert 'script_style: shortStyle ? "short" : denseStyle ? "dense" : "classic"' in app
+    assert ('script_style: shortStyle ? "short" : mediumStyle ? "medium" '
+            ': denseStyle ? "dense" : "classic"') in app
     assert "35-second short" in app
-    assert "if (e.target.checked) setDenseStyle(false);" in app
-    assert "if (e.target.checked) setShortStyle(false);" in app
+    assert "if (e.target.checked) { setDenseStyle(false); setMediumStyle(false); }" in app
+    assert "if (e.target.checked) { setShortStyle(false); setMediumStyle(false); }" in app
     # Reopening a past build restores whichever it was.
     assert 'setShortStyle(String(inputs.script_style || "") === "short");' in app
 
@@ -3569,3 +3571,63 @@ def test_a_researched_beat_is_also_trimmed_to_the_room_left(monkeypatch):
         package, floor=150, cap=150, label="X", make="X", model="X")
     assert out["word_count"] == 150, "the researched sentence that fits is kept"
     assert "Alpha beta gamma" in out["script"] and "over0" not in out["script"]
+
+
+def test_the_45_second_format_sits_between_the_short_one_and_the_classic():
+    """The 35-second cut kept the same watch time as a 56-second one, but
+    three of its five beats go to notes and nothing is left for a history
+    fact or the one feature worth seeing. This buys back a beat and stays
+    under a minute."""
+    import single_car_short
+
+    medium = single_car_short.SCRIPT_STYLES["medium"]
+    short = single_car_short.SCRIPT_STYLES["short"]
+    classic = single_car_short.SCRIPT_STYLES["classic"]
+    assert short["words"][1] < medium["words"][0] < medium["words"][1] < classic["words"][0]
+    assert short["seconds"] < medium["seconds"] < classic["seconds"]
+    # The whole range has to land inside its window or the voice gets squeezed.
+    low, high = medium["words"]
+    assert medium["window"][0] <= low / 2.5 and high / 2.5 <= medium["window"][1]
+
+    prompt = single_car_short._research_script_prompt(
+        "Chevrolet Corvette Zr1", "2026", style="medium")
+    assert "exactly 110-125 words" in prompt
+    assert "5-6 scenes" in prompt
+    # One arithmetic, stated the same way as the other styles.
+    assert "TWELVE OR THIRTEEN sentences across the whole script" in prompt
+    assert "about 12-13 sentences" in prompt
+    # And the rules that apply everywhere still reach it.
+    for shared in ("Round every price", "Mention the redline ONLY", "manufacturer's list"):
+        assert shared in prompt, shared
+
+
+def test_the_last_caption_holds_until_the_video_ends():
+    """The clip runs about half a second past the final word so the closing
+    question has room to land, and captions are timed off the speech -- so
+    the caption band sat empty over those last frames while the headline,
+    the photo and the narrator all stayed put. Watched back it reads as the
+    last word flickering out."""
+    import narrator_video
+
+    manifest = {"script": "one two three", "word_timeline": [
+        {"word": "one", "start": 0.0, "end": 0.4},
+        {"word": "two", "start": 0.4, "end": 0.8},
+        {"word": "three", "start": 0.8, "end": 1.2},
+    ]}
+    captions = narrator_video._caption_timeline(manifest, 1.65)
+    assert captions[-1] == ("three", 0.8, 1.65), "the last word holds to the end"
+    # The ones before it are untouched.
+    assert captions[0] == ("one", 0.0, 0.4)
+    assert captions[1] == ("two", 0.4, 0.8)
+    # And nothing is stretched backwards when the audio already fills the clip.
+    assert narrator_video._caption_timeline(manifest, 1.2)[-1] == ("three", 0.8, 1.2)
+
+
+def test_the_spec_table_rounds_its_price_like_the_narration_does():
+    """The short ZR1 build's table read "$224K new" while the classic one
+    read "About $220,000" for the same car -- the build disagreeing with
+    itself in two places a viewer can see at once."""
+    import single_car_short
+
+    assert single_car_short._round_price_text("$224K new") == "$220,000 new"
+    assert single_car_short._round_price_text("About $220,000") == "About $220,000"

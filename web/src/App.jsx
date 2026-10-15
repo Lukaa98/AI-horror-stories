@@ -946,6 +946,7 @@ export default function App() {
   // Length, where dense is a way of writing. They set the same field, so
   // ticking one unticks the other rather than leaving it ambiguous which won.
   const [shortStyle, setShortStyle] = useState(false);
+  const [mediumStyle, setMediumStyle] = useState(false);
   const [auctionUrl, setAuctionUrl] = useState("");
   // What the car is worth today. Typed, it is used as-is; left empty, the
   // build reads comparable sales off the auction site. Two runs in one week
@@ -1292,7 +1293,7 @@ export default function App() {
       auction_url: useAuctionUrl ? auctionUrl.trim() : "",
       current_price: currentPrice.trim(),
       angles: angles.trim(),
-      script_style: shortStyle ? "short" : denseStyle ? "dense" : "classic",
+      script_style: shortStyle ? "short" : mediumStyle ? "medium" : denseStyle ? "dense" : "classic",
       disable_comparison: String(!compareEnabled),
       rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
       photo_front: useManualPhotos ? (photoUrls.front || "").trim() : "",
@@ -1327,7 +1328,7 @@ export default function App() {
           auction_url: useAuctionUrl ? auctionUrl.trim() : "",
           current_price: currentPrice.trim(),
       angles: angles.trim(),
-      script_style: shortStyle ? "short" : denseStyle ? "dense" : "classic",
+      script_style: shortStyle ? "short" : mediumStyle ? "medium" : denseStyle ? "dense" : "classic",
           // One JSON input rather than six string ones: workflow_dispatch
           // allows only 25 inputs in total and the photo URLs were using up
           // a quarter of them.
@@ -2768,7 +2769,7 @@ export default function App() {
                           checked={denseStyle}
                           onChange={(e) => {
                             setDenseStyle(e.target.checked);
-                            if (e.target.checked) setShortStyle(false);
+                            if (e.target.checked) { setShortStyle(false); setMediumStyle(false); }
                           }}
                           disabled={stage === "single-car-building"}
                         />
@@ -2781,12 +2782,25 @@ export default function App() {
                           checked={shortStyle}
                           onChange={(e) => {
                             setShortStyle(e.target.checked);
-                            if (e.target.checked) setDenseStyle(false);
+                            if (e.target.checked) { setDenseStyle(false); setMediumStyle(false); }
                           }}
                           disabled={stage === "single-car-building"}
                         />
                         35-second short
                         <Tip text="A third of the usual length: 80-100 words over 30-40 seconds, four or five beats, one argument and nothing else. Average view duration sits at about nineteen seconds across every upload so far whatever the runtime, so the same nineteen seconds is 54% of a 35-second video against 30% of a 64-second one -- and the feed rewards the ratio. Everything else works as it always does: a specific listing, overridden photos and pasted notes all behave the same, there is simply less room, so the photos follow the shorter script the way they always follow it. Dense script is a way of writing and this is a length, but both set the same field, so ticking this unticks that." />
+                      </label>
+                      <label className="check-pill">
+                        <input
+                          type="checkbox"
+                          checked={mediumStyle}
+                          onChange={(e) => {
+                            setMediumStyle(e.target.checked);
+                            if (e.target.checked) { setDenseStyle(false); setShortStyle(false); }
+                          }}
+                          disabled={stage === "single-car-building"}
+                        />
+                        45-second short
+                        <Tip text="Between the 35-second cut and the usual 55: 110-125 words over 40-50 seconds, five or six beats. The 35-second format kept the same watch time as a 56-second one -- about sixteen seconds either way -- so the ratio roughly doubled while nothing was lost, but three of its five beats go to notes and there is no room left for a history fact or the one feature worth seeing. This buys back one beat and stays under a minute. Same as the others: a listing, overridden photos and pasted notes all behave normally. All three length and style boxes set the same field, so ticking one unticks the rest." />
                       </label>
                     </div>
 

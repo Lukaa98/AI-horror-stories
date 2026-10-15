@@ -19,6 +19,7 @@ import { parseExtraPhotos } from "./photoSections.js";
 const STYLE_LABELS = {
   dense: "Dense script",
   short: "35s short",
+  medium: "45s short",
   classic: "Classic script",
 };
 
@@ -47,6 +48,8 @@ export function buildOptions(result) {
       ? "Dense script: ~160 words over about 63 seconds, in short sentences."
       : style === "short"
       ? "35-second short: 80-100 words over 30-40 seconds."
+      : style === "medium"
+      ? "45-second short: 110-125 words over 40-50 seconds."
       : "Classic script: ~147 words over about 55 seconds.",
   });
 

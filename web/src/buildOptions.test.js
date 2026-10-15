@@ -87,3 +87,11 @@ test("the listing badge carries the url it was given", () => {
   const badges = buildOptions({ build_inputs: { auction_url: "https://bringatrailer.com/listing/x" } });
   assert.equal(badges[1].title, "https://bringatrailer.com/listing/x");
 });
+
+test("the 45-second format reads as its own badge", () => {
+  // It sits between the 35-second cut and the classic 55, and the badge has
+  // to tell the three apart at a glance when they sit in the same list.
+  assert.deepEqual(labels({ build_inputs: { script_style: "medium" } }), ["45s short"]);
+  assert.match(buildOptions({ build_inputs: { script_style: "medium" } })[0].title,
+               /110-125 words over 40-50 seconds/);
+});

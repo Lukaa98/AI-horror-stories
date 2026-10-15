@@ -63,7 +63,11 @@ def test_real_word_timestamps_override_estimated_caption_timing():
         "script": "exact turbo",
         "word_timeline": [{"word": "exact", "start": 0.2, "end": 0.7}, {"word": "turbo", "start": 0.8, "end": 1.4}],
     }
-    assert _caption_timeline(manifest, 2.0) == [("exact", 0.2, 0.7), ("turbo", 0.8, 1.4)]
+    captions = _caption_timeline(manifest, 2.0)
+    assert captions[0] == ("exact", 0.2, 0.7), "real timings, not an even split"
+    assert captions[1] == ("turbo", 0.8, 2.0), "the last word holds to the end of the clip"
+    # With no tail to cover, the last caption is left exactly as timed.
+    assert _caption_timeline(manifest, 1.4) == [("exact", 0.2, 0.7), ("turbo", 0.8, 1.4)]
 
 
 def test_pose_intervals_fall_back_to_a_fixed_clock_without_word_timeline():

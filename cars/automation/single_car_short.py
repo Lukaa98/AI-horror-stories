@@ -201,6 +201,33 @@ another's. "Would you daily a fast Volvo, or does it have to be German?" is the 
 a real choice with an argument inside it. "Would you buy one?" and "Is it worth it?" are
 the failure -- there is nothing to disagree with, so nobody does."""
     },
+    "medium": {
+        "seconds": 45.0,
+        "words": (110, 125),
+        "window": (40.0, 50.0),
+        "sentences": "TWO OR THREE short sentences",
+        "scene_count": ("5-6 scenes -- no more. Six beats is what fits at this length, and a "
+                        "seventh makes them all too thin to say anything"),
+        "scene_note": ("TWELVE OR THIRTEEN sentences across the whole script, averaging about ten "
+                       "words -- count them. Every one earning its place"),
+        "block": """
+
+HOW THIS ONE IS WRITTEN -- this overrides the pacing guidance above.
+
+This is a 45-second video. 110-125 words, about 12-13 sentences, five or six beats. That is
+three quarters of the usual length: there is room for the argument AND one supporting beat,
+but not for a tour of the car.
+
+ONE argument, plus at most one beat that is not strictly part of it -- a real history fact, or
+the one feature genuinely worth seeing. Everything else goes. No interior beat, no wheels beat
+and no styling beat unless that is the argument itself.
+
+Specifications where the argument needs them, not as a list. One number stated well beats four
+recited.
+
+Short sentences, plainly spoken, with contractions. Open on the claim, close on a question that
+makes the viewer pick a side.""",
+    },
     "short": {
         # Average view duration sits at about nineteen seconds across eleven
         # uploads, whatever the runtime -- 0:19 on a 0:49 video and 0:19 on a
@@ -1048,6 +1075,12 @@ def _request_script_package(prompt, max_scenes=8):
     for scene in package["scenes"]:
         scene["narration"] = _strip_citations(scene["narration"])
     package["script"] = " ".join(scene["narration"] for scene in package["scenes"])
+    specs = package.get("key_specs") or {}
+    if specs.get("price"):
+        # The table is read, not spoken, but it is the same figure and a
+        # viewer seeing "$224K new" under a script that says "about $220,000"
+        # is looking at the build disagreeing with itself.
+        specs["price"] = _round_price_text(specs["price"]) or specs["price"]
     package["word_count"] = _word_count(package["script"])
     return package
 

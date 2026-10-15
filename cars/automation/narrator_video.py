@@ -362,11 +362,21 @@ def _caption_chunks(script, duration, words_per_chunk=CAPTION_CHUNK_WORDS):
 def _caption_timeline(manifest, duration):
     aligned = list(manifest.get("word_timeline") or [])
     if aligned:
-        return [
+        captions = [
             (str(item["word"]).strip(), float(item["start"]), min(duration, float(item["end"])))
             for item in aligned
             if str(item.get("word") or "").strip() and float(item.get("end", 0)) > float(item.get("start", 0))
         ]
+        if captions:
+            # The last word holds until the video ends. Captions are timed off
+            # the speech, and the clip now runs about half a second past the
+            # final word so the closing question has room to land -- which
+            # left the caption band empty over those last frames while the
+            # headline, the photo and the narrator all stayed put. Watched
+            # back it reads as the last word flickering out.
+            text, start, _ = captions[-1]
+            captions[-1] = (text, start, max(duration, _))
+        return captions
     return _caption_chunks(manifest["script"], duration)
 
 
