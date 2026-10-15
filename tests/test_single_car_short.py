@@ -3464,3 +3464,73 @@ def test_a_rival_note_cannot_take_the_opening_of_a_35_second_video():
     for style in ("classic", "dense"):
         assert "about a DIFFERENT car or brand" not in single_car_short._research_script_prompt(
             "Mercedes Benz S580", "2023", style=style, angles="- Audi stopped taking A8 orders")
+
+
+def test_a_car_named_in_the_notes_has_to_be_named_in_the_script():
+    """All three ZR1 builds turned "more power than a Ferrari SF90 or a
+    Lamborghini Revuelto" into "hypercars costing three times as much" --
+    a vaguer claim about nothing in particular, when the comparison was the
+    whole story. The carve-out for notes was appended after an absolute
+    prohibition and the model resolved toward the absolute every time."""
+    import single_car_short
+
+    scenes = [{"headline": "", "narration": "1,064 horsepower and 828 lb-ft. That's the ZR1."},
+              {"headline": "", "narration": "More power than hypercars costing three times as much."},
+              {"headline": "", "narration": "So would you take one?"}]
+    package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes),
+               "_angles": "- more power than a Ferrari SF90 or a Lamborghini Revuelto"}
+    flagged = [v for v in single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
+               if "notes name" in v]
+    assert flagged and "Ferrari" in flagged[0] and "Lamborghini" in flagged[0]
+
+    # Named properly, it is clean.
+    scenes[1]["narration"] = "More power than a Ferrari SF90 or a Lamborghini Revuelto."
+    package["script"] = " ".join(s["narration"] for s in scenes)
+    assert not [v for v in single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
+                if "notes name" in v]
+
+    # A note with no marque in it asks for nothing, so nothing is required.
+    package["_angles"] = "- the C8 went mid-engine in 2020"
+    assert not [v for v in single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
+                if "notes name" in v]
+
+    # The subject car's own marque is not a comparison it has to make.
+    package["_angles"] = "- the Chevrolet Corvette went mid-engine in 2020"
+    assert not [v for v in single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
+                if "notes name" in v]
+
+
+def test_the_no_comparison_rule_is_scoped_rather_than_excepted():
+    import single_car_short
+
+    with_notes = single_car_short._research_script_prompt(
+        "Chevrolet Corvette Zr1", "2026", disable_comparison=True,
+        angles="- more power than a Ferrari SF90 or a Lamborghini Revuelto")
+    assert "EXCEPT the cars named in the notes above, which you MUST name in full" in with_notes
+    # With no notes there is nothing to carve out, so it stays absolute.
+    bare = single_car_short._research_script_prompt(
+        "Chevrolet Corvette Zr1", "2026", disable_comparison=True)
+    assert "EXCEPT the cars named in" not in bare
+    assert "do NOT name any specific competitor car anywhere in the script" in bare
+
+
+def test_a_researched_beat_is_also_trimmed_to_the_room_left(monkeypatch):
+    """One path applied its own addition and skipped the trim, so a
+    researched beat was still discarded whole for overshooting the cap --
+    which is how the dense ZR1 build shipped at 140 against a 155 floor
+    after three rounds."""
+    import single_car_short
+
+    package = _floor_package(14)      # 140 words
+    monkeypatch.setattr(single_car_short, "_more_sentences_for", lambda *a, **k: [(3, "Repeat.")])
+    monkeypatch.setattr(single_car_short, "_research_extra_beat", lambda *a, **k: (
+        "Alpha beta gamma delta epsilon zeta eta theta iota kappa. "
+        + " ".join(f"over{j}" for j in range(40)) + "."))
+    # First round's spec sentence is a repeat, which pushes it to research.
+    monkeypatch.setattr(single_car_short, "_script_violations",
+                        lambda pkg, *a, **k: ["repeats a figure"]
+                        if "Repeat." in (pkg.get("script") or "") else [])
+    out = single_car_short._extend_to_floor(
+        package, floor=150, cap=150, label="X", make="X", model="X")
+    assert out["word_count"] == 150, "the researched sentence that fits is kept"
+    assert "Alpha beta gamma" in out["script"] and "over0" not in out["script"]

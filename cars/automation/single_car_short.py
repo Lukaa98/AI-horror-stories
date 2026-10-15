@@ -549,6 +549,28 @@ _EXACT_PRICE_RE = re.compile(
     r"|\$\s?(\d{1,3}(?:\.\d+)?)\s?([KkMm])\b")
 
 
+# Marques a note might name as a comparison. Not exhaustive and not meant
+# to be: it only has to recognise the kind of car somebody types into the
+# notes box when they want it named on screen.
+COMPARISON_MARQUES = (
+    "Ferrari", "Lamborghini", "Porsche", "McLaren", "Aston Martin", "Bugatti", "Koenigsegg",
+    "Bentley", "Rolls-Royce", "Maserati", "Alfa Romeo", "Jaguar", "Lotus", "Pagani",
+    "Mercedes", "Mercedes-Benz", "BMW", "Audi", "Volkswagen", "Volvo", "Lexus", "Toyota",
+    "Honda", "Acura", "Nissan", "Subaru", "Mazda", "Mitsubishi", "Hyundai", "Kia", "Genesis",
+    "Chevrolet", "Corvette", "Ford", "Dodge", "Cadillac", "Tesla", "Rivian", "Lucid",
+    "Alpina", "Maybach", "Shelby", "Bowler",
+)
+
+
+def _marques_in(text):
+    """Which marques a blob names, in the order it names them."""
+    found = []
+    for marque in COMPARISON_MARQUES:
+        if re.search(rf"\b{re.escape(marque)}\b", str(text or ""), re.I) and marque not in found:
+            found.append(marque)
+    return found
+
+
 def _price_value(match):
     """The dollar figure a match stands for, whichever notation it used."""
     if match.group(1):
@@ -847,14 +869,18 @@ by name, so you may name it in a sentence -- as value, history or context. That 
 a head-to-head: no race on screen, and every rival_* field above stays null. Keep their
 comparison as the comparison they wrote; do not soften it into "rivals" or "contemporaries",
 which says nothing.""" if _split_angles(angles) else ""
+        scoped = (
+            "do NOT name any specific competitor car anywhere in the script EXCEPT the cars named in "
+            "the notes above, which you MUST name in full, exactly as the person wrote them"
+            if _split_angles(angles) else
+            "do NOT name any specific competitor car anywhere in the script")
         no_comparison_block = f"""
 
-HARD REQUIREMENT: the user has explicitly turned off the rival-comparison scene for this video -- do NOT name
-any specific competitor car anywhere in the script, and do NOT set rival_make/rival_model/main_horsepower/
-rival_horsepower/main_quarter_mile_seconds/rival_quarter_mile_seconds on ANY scene (leave every one of those
-null). Replace that beat with a different one instead -- an ownership/value insight, a character/driving-feel
-observation, or another history/mechanical beat -- so the script still hits its word target and beat variety
-without any head-to-head.{notes_exception}"""
+HARD REQUIREMENT: the user has explicitly turned off the rival-comparison scene for this video -- {scoped}, and
+do NOT set rival_make/rival_model/main_horsepower/rival_horsepower/main_quarter_mile_seconds/
+rival_quarter_mile_seconds on ANY scene (leave every one of those null). Replace that beat with a different one
+instead -- an ownership/value insight, a character/driving-feel observation, or another history/mechanical beat
+-- so the script still hits its word target and beat variety without any head-to-head.{notes_exception}"""
     chosen = style_of(style)
     low, high = chosen["words"]
     return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{forced_rival_block}{no_comparison_block}{chosen['block']}
@@ -1450,6 +1476,21 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
             f'you say a figure is not available -- "{missing.group(0).strip()}". Never narrate what '
             "you could not find: a viewer does not know a number was missing until you tell them. "
             "Cut the sentence and put a fact you do have in its place."
+        )
+    # A car the person typed into the notes and the script would not say.
+    # Three ZR1 builds turned "more power than a Ferrari SF90 or a
+    # Lamborghini Revuelto" into "hypercars costing three times as much",
+    # which is a vaguer claim about nothing in particular -- and the point
+    # of naming them was that the comparison is the whole story.
+    own = f"{make} {model}".lower()
+    asked_for = [m for m in _marques_in(package.get("_angles") or "")
+                 if m.lower() not in own
+                 and not re.search(rf"\b{re.escape(m)}\b", script, re.I)]
+    if asked_for:
+        violations.append(
+            f"your notes name {', '.join(asked_for)} and the script never says so. Name the car the "
+            "person asked you to name, in full -- softening it into \"supercars\" or \"rivals costing "
+            "three times as much\" is a different, vaguer claim."
         )
     exact = []
     for match in _EXACT_PRICE_RE.finditer(script):
@@ -2096,10 +2137,10 @@ def _extend_to_floor(package, floor, cap, label, make, model, market=None,
                                  detail="the research call returned no beat")
                     break
                 # Into the scene before the closing question, which keeps the
-                # hook and the ending the shape they were written in.
+                # hook and the ending the shape they were written in. Proposed
+                # rather than applied: the loop below is what trims it to the
+                # room left, and applying it here skipped that entirely.
                 target = max(1, len(candidate["scenes"]) - 2)
-                candidate["scenes"][target]["narration"] = (
-                    candidate["scenes"][target]["narration"].rstrip() + " " + beat)
                 offered = [(target + 1, beat)]
             else:
                 offered = _more_sentences_for(numbered, label, shortfall,
@@ -2107,31 +2148,34 @@ def _extend_to_floor(package, floor, cap, label, make, model, market=None,
                 if not offered:
                     rejected.append("(nothing offered)")
                     continue
-                room = cap - _word_count(
-                    " ".join(x["narration"] for x in candidate.get("scenes") or []))
-                taken = []
-                for index, text in offered:
-                    # Never the hook or the closing question.
-                    if not 2 <= index <= len(candidate["scenes"]) - 1:
-                        continue
-                    for sentence in _SENTENCE_SPLIT_RE.split(text.strip()):
-                        sentence = sentence.strip()
-                        if not sentence:
-                            continue
-                        cost = _word_count(sentence)
-                        if cost > room:
-                            continue
-                        candidate["scenes"][index - 1]["narration"] = (
-                            candidate["scenes"][index - 1]["narration"].rstrip() + " " + sentence)
-                        room -= cost
-                        taken.append((index, sentence))
-                if not taken:
-                    _note_repair(what=f"{shortfall} words short", outcome="did not help",
-                                 returned=" ".join(t for _, t in offered)[:300],
-                                 detail="every sentence offered was longer than the room left")
-                    rejected.append(" ".join(t for _, t in offered))
+
+            # One place where anything is applied, sentence at a time, while
+            # there is room under the cap.
+            room = cap - _word_count(
+                " ".join(x["narration"] for x in candidate.get("scenes") or []))
+            taken = []
+            for index, text in offered:
+                # Never the hook or the closing question.
+                if not 2 <= index <= len(candidate["scenes"]) - 1:
                     continue
-                offered = taken
+                for sentence in _SENTENCE_SPLIT_RE.split(text.strip()):
+                    sentence = sentence.strip()
+                    if not sentence:
+                        continue
+                    cost = _word_count(sentence)
+                    if cost > room:
+                        continue
+                    candidate["scenes"][index - 1]["narration"] = (
+                        candidate["scenes"][index - 1]["narration"].rstrip() + " " + sentence)
+                    room -= cost
+                    taken.append((index, sentence))
+            if not taken:
+                _note_repair(what=f"{shortfall} words short", outcome="did not help",
+                             returned=" ".join(t for _, t in offered)[:300],
+                             detail="every sentence offered was longer than the room left")
+                rejected.append(" ".join(t for _, t in offered))
+                continue
+            offered = taken
         except Exception as error:  # noqa: BLE001 - a build is worth more than a word count
             _note_repair(what=f"{shortfall} words short", outcome="call failed",
                          detail=str(error)[:300])
@@ -2286,6 +2330,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
                                     disable_comparison, max_scenes, listing_facts, market, angles, style),
             max_scenes=max_scenes,
         )
+        package["_angles"] = angles or ""
         count = package["word_count"]
         violations = _script_violations(package, make, model, market, pasted_slots)
         if accept_low <= count <= accept_high and not violations:
@@ -3556,7 +3601,7 @@ def build_short(args):
             "current_price": args.current_price or "",
             "extra_photos": args.extra_photos or "",
         },
-        **package,
+        **{k: v for k, v in package.items() if k != "_angles"},
         "voice_preset": args.voice,
         "tts_speed": FAST_TTS_SPEED if narration_settings()["engine"] == "tts" else None,
         "narration": narration_settings(),
