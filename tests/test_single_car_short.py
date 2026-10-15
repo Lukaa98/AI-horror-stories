@@ -1141,15 +1141,19 @@ def test_research_script_prompt_forbids_a_rival_scene_when_comparison_is_disable
     prompt = single_car_short._research_script_prompt(
         "1993 Toyota Supra Turbo", "model year 1993", disable_comparison=True,
     )
-    assert "do NOT name" in prompt
-    assert "explicitly turned off the rival-comparison scene" in prompt
+    # What it forbids is the segment's fields, which is what the segment is.
+    # It used to forbid naming any competitor in the words as well; that was
+    # never needed to suppress a visual.
+    assert "turned off the rival-comparison SEGMENT" in prompt
+    assert "do NOT set rival_make/rival_model/main_horsepower/" in prompt
+    assert "do NOT name any specific competitor car anywhere" not in prompt
 
 
 def test_research_script_prompt_omits_the_no_comparison_block_by_default():
     import single_car_short
 
     prompt = single_car_short._research_script_prompt("1993 Toyota Supra Turbo", "model year 1993")
-    assert "turned off the rival-comparison scene" not in prompt
+    assert "turned off the rival-comparison SEGMENT" not in prompt
 
 
 def test_british_voice_presets_are_registered():
@@ -2225,20 +2229,22 @@ def test_a_typed_note_may_name_a_rival_the_comparison_checkbox_would_have_gagged
     that was asked for. A car the person typed outranks a checkbox."""
     import single_car_short
 
-    gagged = single_car_short._research_script_prompt(
+    # No carve-out is needed any more, because nothing is being gagged: the
+    # checkbox switches off the segment and the words were never part of it.
+    plain = single_car_short._research_script_prompt(
         "Mercedes-Benz SLR McLaren", "model years 2004-2009", disable_comparison=True)
-    assert "do NOT name" in gagged
-    assert "ONE exception" not in gagged, "nothing asked for, nothing to carve out"
+    assert "What is NOT switched off is the words" in plain
+    assert "do NOT name any specific competitor car anywhere" not in plain
 
     asked = single_car_short._research_script_prompt(
         "Mercedes-Benz SLR McLaren", "model years 2004-2009", disable_comparison=True,
         angles="why it sat still while the Enzo and Carrera GT climbed")
-    assert "ONE exception" in asked
-    assert "you may name it in a sentence" in asked
-    # The segment is still off: no race on screen, and the fields stay null.
-    assert "rival_make/rival_model" in asked
-    assert "every rival_* field above stays null" in asked
-    assert 'do not soften it into "rivals" or "contemporaries"' in asked
+    # The segment is still off: the fields stay null whatever the words say.
+    assert "do NOT set rival_make/rival_model/main_horsepower/" in asked
+    assert "even if the narration does name " in asked
+    # And their phrasing is protected from the softening that actually happened.
+    assert 'do not soften it into "rivals"' in asked
+    assert "supercars costing three times as much" in asked
 
     # And the carve-out only exists when the comparison was turned off.
     assert "ONE exception" not in single_car_short._research_script_prompt(
@@ -3500,18 +3506,47 @@ def test_a_car_named_in_the_notes_has_to_be_named_in_the_script():
                 if "notes name" in v]
 
 
-def test_the_no_comparison_rule_is_scoped_rather_than_excepted():
+def test_the_no_comparison_checkbox_switches_off_the_segment_not_the_words():
+    """The checkbox turns off a visual -- the rival photo, the horsepower
+    bars and the drag race -- all of which are gated purely on the rival_*
+    and main_horsepower fields being set. It was also forbidding the
+    narration from naming any competitor, which it never needed to do, and
+    that cost the ZR1 builds their best line: "more power than a Ferrari
+    SF90 or a Lamborghini Revuelto, at a third of the price"."""
     import single_car_short
 
+    for angles in ("- more power than a Ferrari SF90 or a Lamborghini Revuelto", None):
+        prompt = single_car_short._research_script_prompt(
+            "Chevrolet Corvette Zr1", "2026", disable_comparison=True, angles=angles)
+        # The fields are what make the segment, so they are what is switched off.
+        assert "turned off the rival-comparison SEGMENT" in prompt
+        assert "Leave every one of those\nnull, on every scene, even if the narration does name " \
+               "another car" in prompt
+        # The words are explicitly not switched off.
+        assert "What is NOT switched off is the words" in prompt
+        # And the old blanket gag is gone for good.
+        assert "do NOT name any specific competitor car anywhere" not in prompt
+        # What stays banned is the duel itself, which is what the segment was.
+        assert "no scene\nbuilt as a spec-for-spec duel" in prompt
+
+    # With notes, their wording is protected from being softened.
     with_notes = single_car_short._research_script_prompt(
         "Chevrolet Corvette Zr1", "2026", disable_comparison=True,
-        angles="- more power than a Ferrari SF90 or a Lamborghini Revuelto")
-    assert "EXCEPT the cars named in the notes above, which you MUST name in full" in with_notes
-    # With no notes there is nothing to carve out, so it stays absolute.
-    bare = single_car_short._research_script_prompt(
-        "Chevrolet Corvette Zr1", "2026", disable_comparison=True)
-    assert "EXCEPT the cars named in" not in bare
-    assert "do NOT name any specific competitor car anywhere in the script" in bare
+        angles="- more power than a Ferrari SF90")
+    assert "supercars costing three times as much" in with_notes, \
+        "the exact softening that happened is named as the thing not to do"
+
+
+def test_the_drag_race_only_ever_depended_on_the_horsepower_fields():
+    """Why the rewrite above is safe: narrator_video builds a race window
+    only where both horsepower fields are non-null, so leaving them null is
+    sufficient to suppress the segment no matter what the words say."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1]
+              / "cars/automation/narrator_video.py").read_text()
+    assert ('if scene.get("main_horsepower") is None or scene.get("rival_horsepower") is None:'
+            in source), "the race gate moved; the no-comparison wording depends on it"
 
 
 def test_a_researched_beat_is_also_trimmed_to_the_room_left(monkeypatch):

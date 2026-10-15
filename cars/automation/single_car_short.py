@@ -864,23 +864,24 @@ dropping it."""
         # A car the person typed themselves outranks a checkbox about a scene.
         notes_exception = """
 
-The ONE exception: a car named in the commissioning notes above. The person asked for that
-by name, so you may name it in a sentence -- as value, history or context. That is still not
-a head-to-head: no race on screen, and every rival_* field above stays null. Keep their
-comparison as the comparison they wrote; do not soften it into "rivals" or "contemporaries",
-which says nothing.""" if _split_angles(angles) else ""
-        scoped = (
-            "do NOT name any specific competitor car anywhere in the script EXCEPT the cars named in "
-            "the notes above, which you MUST name in full, exactly as the person wrote them"
-            if _split_angles(angles) else
-            "do NOT name any specific competitor car anywhere in the script")
+A car named in the commissioning notes is asked for by name, so name it as they wrote it.
+Keep their comparison as the comparison they wrote; do not soften it into "rivals",
+"contemporaries" or "supercars costing three times as much", which says nothing.""" \
+            if _split_angles(angles) else ""
         no_comparison_block = f"""
 
-HARD REQUIREMENT: the user has explicitly turned off the rival-comparison scene for this video -- {scoped}, and
-do NOT set rival_make/rival_model/main_horsepower/rival_horsepower/main_quarter_mile_seconds/
-rival_quarter_mile_seconds on ANY scene (leave every one of those null). Replace that beat with a different one
-instead -- an ownership/value insight, a character/driving-feel observation, or another history/mechanical beat
--- so the script still hits its word target and beat variety without any head-to-head.{notes_exception}"""
+HARD REQUIREMENT: the user has turned off the rival-comparison SEGMENT for this video -- the rival photo, the
+horsepower bars and the drag race on screen. That means: do NOT set rival_make/rival_model/main_horsepower/
+rival_horsepower/main_quarter_mile_seconds/rival_quarter_mile_seconds on ANY scene. Leave every one of those
+null, on every scene, even if the narration does name another car -- those fields are what put the race on
+screen, and they are the only thing being switched off here.
+
+What is NOT switched off is the words. You may still name another car in the narration where it earns its
+place -- as value, history or context ("more power than a Ferrari that costs three times as much", "the one
+the Enzo and the Carrera GT left behind"). What you must not write is the head-to-head beat itself: no scene
+built as a spec-for-spec duel, no "420 hp versus its 455", no narrating a race. Spend that beat on an
+ownership/value insight, a character observation or another history/mechanical point instead, so the script
+still hits its word target and beat variety.{notes_exception}"""
     chosen = style_of(style)
     low, high = chosen["words"]
     return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{forced_rival_block}{no_comparison_block}{chosen['block']}
