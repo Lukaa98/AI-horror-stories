@@ -141,7 +141,9 @@ def test_the_video_holds_a_beat_after_the_last_word():
     assert narrator_video.END_PAD_SECONDS >= 0.4
     source = (Path(__file__).resolve().parents[1]
               / "cars/automation/narrator_video.py").read_text()
-    assert "duration = audio.duration + END_PAD_SECONDS" in source
+    assert "_narration_with_tail(Path(manifest[\"audio_path\"])" in source
+    assert "END_PAD_SECONDS)" in source, "the pad is what the tail is made of"
+    assert "duration = audio.duration" in source, "and the padded file sets the length"
     assert ".set_duration(duration)" in source, "the mix has to cover the pad too"
 
 

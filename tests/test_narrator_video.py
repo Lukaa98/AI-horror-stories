@@ -764,3 +764,60 @@ def test_a_photo_pop_with_no_room_left_is_not_started_at_all():
     assert "if duration - start >= MIN_SFX_ROOM_SECONDS" in source
     # The typing bed is capped the same way.
     assert "duration=min(typing_duration, duration - start)" in source
+
+
+def test_the_end_pad_is_real_silence_not_whatever_the_decoder_held(tmp_path, monkeypatch):
+    """The video runs past the narration on purpose so the closing question
+    has a beat to land in. Asked for audio past the end of an mp3 though,
+    moviepy's reader hands back what its decoder still holds rather than
+    zeros -- on the Ford GT build that was a voiced blip at nearly full
+    speech level, around 130 Hz with harmonics at 260 and 380, right as the
+    picture ended. A sound shaped like the voice that never says a word."""
+    import narrator_video
+
+    calls = []
+
+    def fake_run(args, **kwargs):
+        calls.append(args)
+        Path(args[-1]).write_bytes(b"padded")
+        class Done:
+            returncode = 0
+        return Done()
+
+    monkeypatch.setattr(narrator_video.subprocess, "run", fake_run)
+    out = narrator_video._narration_with_tail(tmp_path / "narration.mp3", tmp_path / "work", 0.6)
+
+    assert out.name == "narration-padded.wav"
+    args = calls[0]
+    # Padded with real silence, and decoded to PCM rather than re-encoded --
+    # the point is that the tail contains zeros.
+    assert "apad=pad_dur=0.600" in args
+    assert "pcm_s16le" in args
+    # The original is left alone; the dashboard offers it for download.
+    assert str(tmp_path / "narration.mp3") in args
+
+
+def test_a_failed_pad_leaves_the_build_standing(tmp_path, monkeypatch):
+    """A build is worth more than a tail."""
+    import narrator_video
+
+    def boom(*a, **k):
+        raise RuntimeError("no ffmpeg here")
+
+    monkeypatch.setattr(narrator_video.subprocess, "run", boom)
+    source = tmp_path / "narration.mp3"
+    source.write_bytes(b"x")
+    assert narrator_video._narration_with_tail(source, tmp_path / "work", 0.6) == source
+
+
+def test_the_video_length_still_comes_from_the_padded_audio():
+    """duration used to be audio.duration + END_PAD_SECONDS, which is what
+    asked the reader for audio the file did not have. The pad is in the file
+    now, so the file's own length is the video's length."""
+    from pathlib import Path
+
+    source = Path(__file__).resolve().parents[1] / "cars/automation/narrator_video.py"
+    body = source.read_text()
+    assert "duration = audio.duration + END_PAD_SECONDS" not in body
+    assert "_narration_with_tail(Path(manifest[\"audio_path\"])" in body
+    assert "duration = audio.duration" in body

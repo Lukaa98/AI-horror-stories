@@ -11,6 +11,7 @@ import argparse
 import json
 import math
 import os
+import subprocess
 import re
 from pathlib import Path
 
@@ -1765,16 +1766,49 @@ def _channel_mark_clip(size, duration):
             .set_position(position))
 
 
+def _narration_with_tail(audio_path, work_dir, tail_seconds):
+    """A copy of the narration with `tail_seconds` of real silence on the end.
+
+    Decoded to WAV rather than re-encoded: the whole point is that the tail
+    contains zeros and not whatever an mp3 decoder has left in its
+    filterbank. The original file is left alone -- it is an artifact the
+    dashboard offers for download.
+    """
+    work_dir.mkdir(parents=True, exist_ok=True)
+    padded = work_dir / "narration-padded.wav"
+    try:
+        subprocess.run(
+            [os.environ.get("FFMPEG_BINARY", "ffmpeg"), "-y", "-i", str(audio_path),
+             "-af", f"apad=pad_dur={max(0.0, float(tail_seconds)):.3f}",
+             "-c:a", "pcm_s16le", str(padded)],
+            check=True, capture_output=True, text=True,
+        )
+    except Exception as error:  # noqa: BLE001 - a build is worth more than a tail
+        print(f"[narrator-video] Could not pad the narration tail ({error}); "
+              "using the narration as recorded.", flush=True)
+        return audio_path
+    return padded
+
+
 def render_narrator_video(car_media_paths, manifest, output_path):
     size = CANVAS
     output_path = Path(output_path)
 
-    audio = AudioFileClip(manifest["audio_path"])
     # The video used to end on the exact sample the narration did, so the
     # last word's decay was cut and the music stopped dead mid-fade. It read
     # as the file running out rather than the video finishing. A beat of
     # silence after the closing question is what makes it land.
-    duration = audio.duration + END_PAD_SECONDS
+    #
+    # That beat has to be real silence IN the file. Asked for audio past the
+    # end of an mp3, moviepy's reader hands back whatever its decoder still
+    # holds rather than zeros -- voiced, around 130 Hz with harmonics at 260
+    # and 380, at nearly full speech level. On the Ford GT build that was an
+    # audible blip right as the picture ended: a sound shaped like the voice
+    # that never says a word.
+    audio_path = _narration_with_tail(Path(manifest["audio_path"]),
+                                      output_path.parent, END_PAD_SECONDS)
+    audio = AudioFileClip(str(audio_path))
+    duration = audio.duration
 
     accent = accent_for(car_media_paths)
     headline_center_y, media_box, caption_center_y = _media_zone_geometry(size)
