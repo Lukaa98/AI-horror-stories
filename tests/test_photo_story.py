@@ -213,9 +213,16 @@ def test_download_and_hints_use_identical_photo_identity(tmp_path, monkeypatch):
     monkeypatch.setattr(module, "_download_car_photo", lambda *a: path)
     monkeypatch.setattr(module, "blur_license_plates", lambda *a: None)
     monkeypatch.setattr(module, "_describe_photo_for_script", lambda *a: "Visible dials.")
-    items = [{"id": "gauges", "slot": "interior", "label": "Gauges", "url": "https://example.com/photo.jpg"}]
+    items = [{"id": "gauges", "slot": "interior", "label": "Gauges",
+               "url": "https://example.com/photo.jpg", "describe": True}]
     media = gather_extra_media(items, images_dir, {})
     hints = gather_photo_script_hints({}, items, images_dir, "Lotus")
     assert media[0]["type"] == "detail", "a nested close-up is never an overview"
     assert f'photo_label: "{media[0]["cue_label"]}"' in hints[0]
     assert hints[0].startswith("CLOSE-UP (nested under the Interior main photo)")
+
+    # Unticked, the same photo is still gathered as media but no hint is
+    # written for it -- and no vision call is spent describing it.
+    plain = [dict(items[0], describe=False)]
+    assert gather_extra_media(plain, images_dir, {}), "still in the video"
+    assert gather_photo_script_hints({}, plain, images_dir, "Lotus") == []

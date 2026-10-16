@@ -1007,10 +1007,11 @@ def test_gather_media_appends_extra_photos_alongside_scraped_media(tmp_path, mon
 
 
 def test_gather_photo_script_hints_describes_fixed_and_extra_photos(tmp_path, monkeypatch):
-    """The whole point of pasting a photo (especially a labeled extra like
+    """The whole point of ticking a pasted photo (like the labeled extra
     "Gauge Cluster") is that the script ends up talking about what's
     actually in it -- so each hint pairs a human-readable label with a
-    concrete AI-described detail."""
+    concrete AI-described detail. An unticked close-up is shown and not
+    narrated, which is covered in its own test."""
     import single_car_short
 
     images_dir = tmp_path / "images"
@@ -1029,7 +1030,7 @@ def test_gather_photo_script_hints_describes_fixed_and_extra_photos(tmp_path, mo
 
     hints = single_car_short.gather_photo_script_hints(
         {"interior": "https://example.com/int.jpg", "front": ""},
-        [{"label": "Gauge Cluster", "url": "https://example.com/gauges.jpg"}],
+        [{"label": "Gauge Cluster", "describe": True, "url": "https://example.com/gauges.jpg"}],
         images_dir, "1993 Toyota Supra Turbo",
     )
 
@@ -3631,3 +3632,68 @@ def test_the_spec_table_rounds_its_price_like_the_narration_does():
 
     assert single_car_short._round_price_text("$224K new") == "$220,000 new"
     assert single_car_short._round_price_text("About $220,000") == "About $220,000"
+
+
+def test_an_unticked_closeup_is_shown_but_never_described(monkeypatch, tmp_path):
+    """A close-up reaches the screen either way -- 452 of 455 pasted photos
+    across 27 builds did. The tick decides only whether the script is told
+    what is in it, and a hint is a demand for a beat: nineteen photos on
+    the Ford GT build took three of its seven beats for a rear wing, a
+    gearshift and an air intake, and why Ford built the car went unsaid."""
+    import single_car_short
+
+    described = []
+    monkeypatch.setattr(single_car_short, "_download_car_photo", lambda url, d, n: tmp_path / "x.jpg")
+    monkeypatch.setattr(single_car_short, "_describe_photo_for_script",
+                        lambda path, label, car: described.append(label) or f"a photo of {label}")
+
+    hints = single_car_short.gather_photo_script_hints(
+        {"front": "https://x/f.jpg"},
+        [{"url": "https://x/1.jpg", "label": "exhaust", "slot": "rear", "describe": True},
+         {"url": "https://x/2.jpg", "label": "wheel", "slot": "side", "describe": False},
+         {"url": "https://x/3.jpg", "label": "badge", "slot": "front"}],
+        tmp_path, "Ford GT")
+
+    # The main photo is always described; only the ticked close-up joins it.
+    assert described == ["exterior front", "exhaust"]
+    assert len(hints) == 2
+    # And an unticked one costs nothing: no hint means no vision call.
+    assert "wheel" not in described and "badge" not in described
+
+
+def test_the_prompt_says_how_many_beats_there_are_when_more_is_asked_for():
+    """A photo hint and a note are both requests for a beat, and nothing
+    ever told the model how many it had. Nineteen hints and five notes
+    against seven beats is arithmetic, not a judgement call."""
+    import single_car_short
+
+    notes = "\n".join(f"- note {i}" for i in range(1, 6))
+    hints = [f'CLOSE-UP -- photo_label: "p{i}" -- a thing' for i in range(14)]
+    prompt = single_car_short._research_script_prompt(
+        "Ford Gt", "2005", style="classic", photo_hints=hints, angles=notes)
+    assert "MORE HAS BEEN ASKED FOR THAN FITS" in prompt
+    assert "19 things for 4 beats" in prompt
+    # Notes outrank photos, because a photo is on screen either way.
+    assert "The notes, in the order they are numbered" in prompt
+    assert "A photo you leave out still appears in the" in prompt
+
+    # Inside the budget it says nothing -- the arithmetic only matters when
+    # it does not work out.
+    fits = single_car_short._research_script_prompt(
+        "Ford Gt", "2005", style="classic", photo_hints=hints[:1], angles="- one note")
+    assert "MORE HAS BEEN ASKED FOR" not in fits
+
+    # A shorter format has fewer beats, so it runs out sooner.
+    assert "MORE HAS BEEN ASKED FOR" in single_car_short._research_script_prompt(
+        "X", "2005", style="short", photo_hints=hints[:2], angles="- a\n- b")
+
+
+def test_every_style_declares_how_many_beats_it_has():
+    import single_car_short
+
+    expected = {"classic": 7, "dense": 7, "medium": 5, "short": 4}
+    for style, beats in expected.items():
+        assert single_car_short.SCRIPT_STYLES[style]["beats"] == beats, style
+        # The budget has to leave room for something after the three
+        # required beats, or every build would be over before it started.
+        assert beats > single_car_short.RESERVED_BEATS, style

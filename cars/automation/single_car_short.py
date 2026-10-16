@@ -122,6 +122,7 @@ HARD_WORD_RANGE = _hard_word_range()
 # a tuning shop.
 SCRIPT_STYLES = {
     "classic": {
+        "beats": 7,
         "seconds": TARGET_DURATION_SECONDS,
         "words": TARGET_WORDS,
         "window": (52.0, 58.0),
@@ -140,6 +141,7 @@ SCRIPT_STYLES = {
         "block": "",
     },
     "dense": {
+        "beats": 7,
         "seconds": 63.0,
         "words": (155, 165),
         "window": (58.0, 68.0),
@@ -202,6 +204,7 @@ a real choice with an argument inside it. "Would you buy one?" and "Is it worth 
 the failure -- there is nothing to disagree with, so nobody does."""
     },
     "medium": {
+        "beats": 5,
         "seconds": 45.0,
         "words": (110, 125),
         "window": (40.0, 50.0),
@@ -229,6 +232,7 @@ Short sentences, plainly spoken, with contractions. Open on the claim, close on 
 makes the viewer pick a side.""",
     },
     "short": {
+        "beats": 4,
         # Average view duration sits at about nineteen seconds across eleven
         # uploads, whatever the runtime -- 0:19 on a 0:49 video and 0:19 on a
         # 1:04 one. Completion is then arithmetic: the same nineteen seconds
@@ -815,6 +819,43 @@ deserves:
 Never present a guess as a fact, and never say the person asked for it."""
 
 
+# Beats that are spoken for before anything else asks for one: the hook,
+# the horsepower-and-torque beat and the closing question are all required
+# and all checked.
+RESERVED_BEATS = 3
+
+
+def _budget_block(style, photo_hints, angles):
+    """What has asked for a beat, against how many there are.
+
+    A photo hint and a note are both requests for a beat, and nothing ever
+    told the model how many it had. The Ford GT build had nineteen photos
+    hinted and five notes against seven beats, and resolved it by spending
+    three on a rear wing, a gearshift and an air intake while the reason
+    Ford built the car at all went unsaid.
+    """
+    wanted = _split_angles(angles)
+    hints = list(photo_hints or [])
+    spare = max(0, style["beats"] - RESERVED_BEATS)
+    asked = len(wanted) + len(hints)
+    if asked <= spare:
+        return ""
+    return f"""
+
+MORE HAS BEEN ASKED FOR THAN FITS. This script has about {style['beats']} beats. The hook, the
+horsepower-and-torque beat and the closing question take three of them, which leaves roughly
+{spare}. You have been given {len(wanted)} note(s) and {len(hints)} photo(s) to talk about -- {asked} things for {spare} beats.
+
+Do not try to fit them all. Squeezing them in is how a beat becomes a clause that says nothing.
+Choose in this order and stop when the beats are gone:
+  1. The notes, in the order they are numbered. They were typed by a person who knows this car.
+  2. The photos, in the order listed. A photo is already on screen whether or not you mention
+     it, so a photo beat is only worth spending when the photo shows something the script would
+     want to say anyway.
+Say nothing at all about whatever does not fit. A photo you leave out still appears in the
+video; it simply is not narrated, which is what it is there for."""
+
+
 def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8, listing_facts=None, market=None, angles=None, style="classic"):
     photo_hints_block = ""
     if photo_hints:
@@ -911,7 +952,7 @@ ownership/value insight, a character observation or another history/mechanical p
 still hits its word target and beat variety.{notes_exception}"""
     chosen = style_of(style)
     low, high = chosen["words"]
-    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{forced_rival_block}{no_comparison_block}{chosen['block']}
+    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{forced_rival_block}{no_comparison_block}{chosen['block']}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across {chosen['scene_count'].format(max_scenes=max_scenes)} in speaking order, each scene being {chosen['sentences']} -- {chosen['scene_note']} -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -2665,6 +2706,16 @@ def gather_photo_script_hints(manual_photo_urls, extra_photos, images_dir, car_l
         url = str(item.get("url") or "").strip()
         label = str(item.get("label") or "").strip()
         if not url:
+            continue
+        # A close-up is in the video either way -- it is placed as an insert
+        # inside its slot's chapter, and 452 of 455 pasted photos across 27
+        # builds reached the screen. The tick decides only whether the SCRIPT
+        # is told what is in it, and a hint is a demand for a beat: nineteen
+        # photos on the Ford GT build meant three of its seven beats went to a
+        # rear wing, a gearshift and an air intake, and Enzo walking out of the
+        # Ford deal never got said. Skipping the hint skips the vision call too,
+        # so a close-up nobody narrates costs nothing to describe.
+        if item.get("describe") is not True:
             continue
         path = _download_car_photo(url, dest_dir, f"hint-extra-{index}-{_slugify(label)}")
         if not path:

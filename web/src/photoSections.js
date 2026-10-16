@@ -14,7 +14,7 @@ export const MAX_CLOSEUPS = 4;
 export function serializePhotos(photos) {
   return photos.filter(p => (p.url || "").trim()).map(p => ({
     id: p.id, label: (p.label || "").trim(), url: p.url.trim(),
-    ...(p.slot ? { slot: p.slot, note: (p.note || "").trim() } : {}),
+    ...(p.slot ? { slot: p.slot, note: (p.note || "").trim(), describe: p.describe === true } : {}),
   }));
 }
 
@@ -44,5 +44,9 @@ export function parseExtraPhotos(raw, slots = SLOTS.map(([slot]) => slot)) {
       label: typeof p.label === "string" ? p.label : "",
       url: p.url.trim(),
       note: typeof p.note === "string" ? p.note : "",
+      // Opt-in: a close-up is shown either way, and only a ticked one is
+      // described to the script. Absent means not ticked, which is what
+      // builds made before the box existed should restore as.
+      describe: p.describe === true,
     }));
 }

@@ -9,6 +9,7 @@ import { SLOTS, MAX_CLOSEUPS, closeupsFor } from "./photoSections";
 export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseupsChange, disabled }) {
   const addCloseup = (slot) => onCloseupsChange([...closeups, {
     id: `closeup-${Date.now()}-${closeups.length}`, slot, label: "", url: "", note: "",
+    describe: false,
   }]);
   const update = (id, fields) => onCloseupsChange(closeups.map(p => p.id === id ? { ...p, ...fields } : p));
   const remove = (id) => onCloseupsChange(closeups.filter(p => p.id !== id));
@@ -37,10 +38,11 @@ export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseu
         </label>
         {!!nested.length && !hasMain &&
           <p className="photo-slot-warning">Add a main {title.toLowerCase()} photo — close-ups are shown underneath one, never on their own.</p>}
-        {!!nested.filter(p => p.url.trim() && !p.label.trim()).length &&
+        {!!nested.filter(p => p.url.trim() && !p.label.trim() && p.describe).length &&
           <p className="photo-slot-warning">
-            {nested.filter(p => p.url.trim() && !p.label.trim()).length} close-up(s) here have no name —
-            the script has nothing to say about them and the tile caption will read “{title} close-up”.
+            {nested.filter(p => p.url.trim() && !p.label.trim() && p.describe).length} close-up(s) here are
+            ticked to be said but have no name — the script has nothing to say about them and the tile
+            caption will read “{title} close-up”.
           </p>}
         {nested.map((photo, index) => <div key={photo.id} className="photo-closeup">
           <span className="photo-closeup-index">{index + 1}</span>
@@ -60,6 +62,17 @@ export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseu
             disabled={disabled}
             aria-invalid={!!photo.url.trim() && !photo.label.trim()}
           />
+          <label className="photo-closeup-describe"
+                 title="Ticked, the script is told what is in this photo and will write a beat about it. Unticked, it still appears in the video -- it just is not narrated. Every beat spent on a photo is a beat not spent on a note.">
+            <input
+              type="checkbox"
+              checked={photo.describe === true}
+              onChange={(e) => update(photo.id, { describe: e.target.checked })}
+              disabled={disabled}
+              aria-label={`Describe ${title} close-up ${index + 1} in the script`}
+            />
+            say
+          </label>
           <PhotoThumb url={photo.url} alt={photo.label || `${title} close-up ${index + 1}`} />
           <button type="button" onClick={() => remove(photo.id)} disabled={disabled}
                   aria-label={`Remove ${title} close-up ${index + 1}`}>×</button>

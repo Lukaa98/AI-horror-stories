@@ -1413,3 +1413,9 @@ button.secondary {
 .build-option.no-comparison { border-color: var(--danger); color: var(--danger); }
 .build-options.compact { gap: 4px; margin-top: 4px; }
 .build-options.compact .build-option { font-size: 11px; padding: 1px 7px; }
+
+/* Ticked, the script is told what is in a close-up and will write a beat
+ * about it. Unticked, it still appears -- it just is not narrated. */
+.photo-closeup-describe { display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; color: var(--ink-soft); cursor: help; user-select: none; white-space: nowrap; }
+.photo-closeup-describe input { margin: 0; cursor: pointer; }

@@ -8,9 +8,33 @@ test("nested close-ups carry their slot through serialization, blanks do not", (
     { id: "b", slot: "rear", label: "Blank", url: " " },
   ];
   assert.deepEqual(serializePhotos(input), [
-    { id: "a", slot: "front", label: "Exhaust tip", url: "https://example.com/a.jpg", note: "Carbon" },
+    { id: "a", slot: "front", label: "Exhaust tip", url: "https://example.com/a.jpg",
+      note: "Carbon", describe: false },
   ]);
   assert.equal(input[0].label, " Exhaust tip ", "serialization must not mutate the editor");
+});
+
+test("a ticked close-up says so, an unticked one says so too", () => {
+  // Shown either way. The flag only decides whether the script is told
+  // what is in it, and every photo the script talks about is a beat it
+  // does not spend on a note.
+  const [ticked] = serializePhotos([
+    { id: "a", slot: "front", label: "Exhaust", url: "https://x/a.jpg", describe: true }]);
+  assert.equal(ticked.describe, true);
+  const [plain] = serializePhotos([
+    { id: "b", slot: "rear", label: "Wheel", url: "https://x/b.jpg" }]);
+  assert.equal(plain.describe, false, "absent means not ticked");
+});
+
+test("the flag survives a round trip through a saved build", () => {
+  const json = JSON.stringify(serializePhotos([
+    { id: "a", slot: "front", label: "Exhaust", url: "https://x/a.jpg", describe: true },
+    { id: "b", slot: "rear", label: "Wheel", url: "https://x/b.jpg", describe: false }]));
+  assert.deepEqual(parseExtraPhotos(json).map(p => p.describe), [true, false]);
+  // A build made before the box existed restores as unticked rather than
+  // silently narrating every close-up it has.
+  const older = JSON.stringify([{ slot: "front", label: "Exhaust", url: "https://x/a.jpg" }]);
+  assert.deepEqual(parseExtraPhotos(older).map(p => p.describe), [false]);
 });
 
 test("legacy ungrouped extras keep their original contract", () => {
