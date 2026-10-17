@@ -3697,3 +3697,70 @@ def test_every_style_declares_how_many_beats_it_has():
         # The budget has to leave room for something after the three
         # required beats, or every build would be over before it started.
         assert beats > single_car_short.RESERVED_BEATS, style
+
+
+def test_truncation_is_measured_by_alignment_not_by_counting_words():
+    """Counting words does not work. Whisper splits hyphenated words and
+    numbers, so it usually returns MORE entries than the script has: across
+    49 builds the ratio ran 0.95 to 1.12 with no relation to whether
+    anything was missing, and the old "under 95% of the words" rule caught
+    none of the real cases."""
+    import single_car_short
+
+    script = ("So is a track beast without hybrid gimmicks your style, "
+              "or would you opt for electric assists?")
+    def timeline(text):
+        return [{"word": w} for w in text.split()]
+
+    # The Viper ACR: stopped after "your style", ratio 1.00, seven words
+    # of closing question never spoken.
+    cut = single_car_short.unspoken_tail(
+        script, timeline("So is a track beast without hybrid gimmicks your style"))
+    assert cut > single_car_short.TRUNCATION_CHARS
+    assert cut == 31
+
+    # The same script read to the end is clean.
+    assert single_car_short.unspoken_tail(script, timeline(script)) == 0
+
+
+def test_a_different_hearing_of_the_same_ending_is_not_truncation():
+    """"send-off" heard as "send off", "LC 500" as "LC500", "Mazdaspeed3"
+    as "Mazda Speed 3" -- a naive tail comparison called all of those cut
+    off, and none of them were."""
+    import single_car_short
+
+    for written, heard in (
+        ("So is it a worthy send-off?", "So is it a worthy send off"),
+        ("inside the LC 500 Inspiration Series?", "inside the LC500 Inspiration Series"),
+        ("would you drive the Mazdaspeed3 Sport?", "would you drive the Mazda Speed 3 Sport"),
+        ("supercharged heritage or modern-day speed?", "supercharged heritage or modern day speed"),
+    ):
+        unspoken = single_car_short.unspoken_tail(
+            written, [{"word": w} for w in heard.split()])
+        assert unspoken <= single_car_short.TRUNCATION_CHARS, (written, unspoken)
+
+
+def test_nothing_to_compare_is_not_reported_as_truncation():
+    import single_car_short
+
+    assert single_car_short.unspoken_tail("", [{"word": "a"}]) == 0
+    assert single_car_short.unspoken_tail("some words here", []) == 0
+    assert single_car_short.unspoken_tail("some words here", None) == 0
+
+
+def test_a_cut_off_narration_is_read_again_and_then_recorded():
+    """gpt-audio cutting off is not deterministic, so a retake is worth one
+    call where re-researching the script would not be -- and if the second
+    take is short too, the build says so instead of shipping a closing
+    question nobody hears."""
+    from pathlib import Path
+
+    body = (Path(__file__).resolve().parents[1]
+            / "cars/automation/single_car_short.py").read_text()
+    assert "reading it once more" in body
+    assert "synthesize_narration(package[\"script\"], audio_path" in body
+    # The retake re-measures rather than assuming it worked.
+    assert body.count("unspoken = unspoken_tail(package[\"script\"], word_timeline)") >= 1
+    assert 'package["narration_unspoken_chars"] = unspoken' in body
+    # And the old word-count rule is gone.
+    assert "spoken < written * 0.95" not in body

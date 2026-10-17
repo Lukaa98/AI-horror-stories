@@ -153,7 +153,10 @@ function narrationLine(result) {
   if (narration?.engine === "gpt-audio") {
     const hz = narration.pitch?.result_hz ?? narration.pitch?.measured_hz ?? narration.target_hz;
     const register = hz ? `, ${Math.round(hz)} Hz` : "";
-    return `${words} words in ${seconds}s — ${narration.voice}${register}.`;
+    const cut = result.narration_unspoken_chars
+      ? ` — ⚠ the voice stopped about ${result.narration_unspoken_chars} characters short of the script`
+      : "";
+    return `${words} words in ${seconds}s — ${narration.voice}${register}.${cut}`;
   }
   const speed = result.tts_speed ?? narration?.tts_speed;
   return speed

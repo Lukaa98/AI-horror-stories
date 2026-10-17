@@ -7,6 +7,7 @@ not feel frozen.
 """
 import argparse
 import copy
+import difflib
 import json
 import re
 import time
@@ -3226,6 +3227,41 @@ def add_narration_lead_in(audio_path, seconds=NARRATION_LEAD_IN_SECONDS):
 MIN_TAIL_SILENCE = 0.45
 
 
+# Script left unspoken, in characters, before a build counts as cut off.
+# Roughly five words. Below that the difference is whisper hearing
+# "send-off" as "send off", not audio going missing.
+TRUNCATION_CHARS = 25
+
+
+def unspoken_tail(script, word_timeline):
+    """How much of the script the narration never reached, in characters.
+
+    Counting words does not work. Whisper splits hyphenated words and
+    numbers, so it usually returns MORE entries than the script has words:
+    across 49 builds the ratio ran from 0.95 to 1.12 with no relation to
+    whether anything was missing, and the old "under 95% of the words"
+    rule caught none of the real cases. The Viper ACR stopped after
+    "...your style" and never said "or would you opt for electric
+    assists", at a ratio of 1.00.
+
+    So both texts are stripped to bare characters and aligned. Whatever is
+    left of the script after the last thing the audio matched is the part
+    that was never said, and tokenisation stops mattering.
+    """
+    def bare(words):
+        return "".join(re.sub(r"[^a-z0-9]", "", str(w).lower()) for w in words)
+
+    written = bare(str(script or "").split())
+    spoken = bare(w.get("word") or "" for w in (word_timeline or []))
+    if not written or not spoken:
+        return 0
+    blocks = [b for b in difflib.SequenceMatcher(None, written, spoken, autojunk=False)
+              .get_matching_blocks() if b.size > 8]
+    if not blocks:
+        return len(written)
+    return max(0, len(written) - (blocks[-1].a + blocks[-1].size))
+
+
 def pad_tail_silence(audio_path, last_word_end, minimum=MIN_TAIL_SILENCE):
     """Make sure the voice has room to finish, and return the new duration.
 
@@ -3624,15 +3660,35 @@ def build_short(args):
     # splits some tokens (hyphenated words, numbers) and so usually returns
     # *more* entries than the script has words; coming back materially short
     # means audio is missing.
-    if word_timeline:
-        spoken, written = len(word_timeline), _word_count(package["script"])
-        if spoken < written * 0.95:
-            print(
-                f"[single-car] WARNING: narration audio looks truncated -- the script is {written} "
-                f"words but only {spoken} were transcribed. The last words spoken were "
-                f"\"{' '.join(str(w.get('word')) for w in word_timeline[-6:])}\", against a script "
-                f"ending \"{' '.join(package['script'].split()[-6:])}\"."
-            )
+    unspoken = unspoken_tail(package["script"], word_timeline) if word_timeline else 0
+    if unspoken > TRUNCATION_CHARS:
+        # One more take. gpt-audio cutting off is not deterministic -- the
+        # same script read again usually finishes -- so a retake is worth a
+        # call in a way that re-researching the script would not be. It is
+        # about one build in ten: 5 of 50 stopped more than five words
+        # short, and the closing question is what gets lost.
+        print(f"[single-car] The narration stopped about {unspoken} characters before the end of "
+              f"the script; reading it once more.")
+        try:
+            synthesize_narration(package["script"], audio_path, preset=args.voice,
+                                 speed=FAST_TTS_SPEED)
+            normalized_duration = normalize_audio_duration(
+                audio_path, target=chosen_style["seconds"],
+                minimum=chosen_style["window"][0], maximum=chosen_style["window"][1])
+            word_timeline = transcribe_word_timeline(audio_path)
+            unspoken = unspoken_tail(package["script"], word_timeline)
+        except Exception as exc:  # noqa: BLE001 - a build is worth more than a retake
+            print(f"[single-car] The second take failed ({exc}); keeping the first.")
+    if unspoken > TRUNCATION_CHARS:
+        # Recorded, not just printed: a closing question that never gets
+        # asked is what a viewer notices, and nothing else reports it.
+        print(
+            f"[single-car] WARNING: the narration still stops about {unspoken} characters short. "
+            f"The last words spoken were "
+            f"\"{' '.join(str(w.get('word')) for w in word_timeline[-6:])}\", against a script "
+            f"ending \"{' '.join(package['script'].split()[-8:])}\"."
+        )
+        package["narration_unspoken_chars"] = unspoken
     # After the alignment, because the pad needs to know where the last word
     # actually ends, and before the mouth timeline, which is built off the
     # file and would otherwise stop short of the padded end.
