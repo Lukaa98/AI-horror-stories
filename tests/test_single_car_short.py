@@ -3755,12 +3755,20 @@ def test_a_cut_off_narration_is_read_again_and_then_recorded():
     question nobody hears."""
     from pathlib import Path
 
+    import single_car_short
+
     body = (Path(__file__).resolve().parents[1]
             / "cars/automation/single_car_short.py").read_text()
-    assert "reading it once more" in body
+    # Three reads before a short one ships: the cut-off is non-deterministic
+    # and independent, so at one in ten a single retake still leaves about
+    # one build in a hundred short.
+    assert single_car_short.MAX_NARRATION_TAKES == 3
+    assert "for take in range(2, MAX_NARRATION_TAKES + 1):" in body
     assert "synthesize_narration(package[\"script\"], audio_path" in body
-    # The retake re-measures rather than assuming it worked.
-    assert body.count("unspoken = unspoken_tail(package[\"script\"], word_timeline)") >= 1
+    # Each take re-measures rather than assuming it worked.
+    assert body.count("unspoken = unspoken_tail(package[\"script\"], word_timeline)") >= 2
+    # A failed take stops the loop rather than burning the rest on the same error.
+    assert "keeping the one before it" in body
     assert 'package["narration_unspoken_chars"] = unspoken' in body
     # And the old word-count rule is gone.
     assert "spoken < written * 0.95" not in body

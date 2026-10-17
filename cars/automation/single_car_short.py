@@ -3231,6 +3231,11 @@ MIN_TAIL_SILENCE = 0.45
 # Roughly five words. Below that the difference is whisper hearing
 # "send-off" as "send off", not audio going missing.
 TRUNCATION_CHARS = 25
+# Reads of the same script before a short one is shipped anyway. Three,
+# because the cut-off is non-deterministic and independent: at one in ten,
+# a single retake leaves about one build in a hundred still short and two
+# leaves one in a thousand.
+MAX_NARRATION_TAKES = 3
 
 
 def unspoken_tail(script, word_timeline):
@@ -3653,22 +3658,24 @@ def build_short(args):
     except Exception as exc:
         print(f"[single-car] Word alignment failed; falling back to estimated caption timing: {exc}")
         word_timeline = []
-    # The narration in run #182 stopped at "...not just a muscle car", leaving
-    # "it's a statement" unspoken -- the video simply ended mid-sentence and
-    # nothing noticed. The transcript is the only evidence of what was
-    # actually said, so compare it with what was meant to be said. Whisper
-    # splits some tokens (hyphenated words, numbers) and so usually returns
-    # *more* entries than the script has words; coming back materially short
-    # means audio is missing.
+    # Run #182 stopped at "...not just a muscle car", leaving "it's a
+    # statement" unspoken, and the Viper ACR stopped at "...your style"
+    # without asking the rest of its closing question. The transcript is the
+    # only evidence of what was actually said, so it is aligned against what
+    # was meant to be said -- see unspoken_tail, and note that counting
+    # words cannot do this.
+    #
+    # gpt-audio cutting off is not deterministic: the same script read again
+    # usually finishes. So a short take is re-read rather than shipped, which
+    # is worth a call in a way that re-researching the script would not be --
+    # it is about one build in ten, 5 of 50 stopped more than five words
+    # short, and what gets lost is the closing question.
     unspoken = unspoken_tail(package["script"], word_timeline) if word_timeline else 0
-    if unspoken > TRUNCATION_CHARS:
-        # One more take. gpt-audio cutting off is not deterministic -- the
-        # same script read again usually finishes -- so a retake is worth a
-        # call in a way that re-researching the script would not be. It is
-        # about one build in ten: 5 of 50 stopped more than five words
-        # short, and the closing question is what gets lost.
+    for take in range(2, MAX_NARRATION_TAKES + 1):
+        if unspoken <= TRUNCATION_CHARS:
+            break
         print(f"[single-car] The narration stopped about {unspoken} characters before the end of "
-              f"the script; reading it once more.")
+              f"the script; take {take} of {MAX_NARRATION_TAKES}.")
         try:
             synthesize_narration(package["script"], audio_path, preset=args.voice,
                                  speed=FAST_TTS_SPEED)
@@ -3678,7 +3685,8 @@ def build_short(args):
             word_timeline = transcribe_word_timeline(audio_path)
             unspoken = unspoken_tail(package["script"], word_timeline)
         except Exception as exc:  # noqa: BLE001 - a build is worth more than a retake
-            print(f"[single-car] The second take failed ({exc}); keeping the first.")
+            print(f"[single-car] Take {take} failed ({exc}); keeping the one before it.")
+            break
     if unspoken > TRUNCATION_CHARS:
         # Recorded, not just printed: a closing question that never gets
         # asked is what a viewer notices, and nothing else reports it.
