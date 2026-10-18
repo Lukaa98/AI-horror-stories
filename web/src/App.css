@@ -1265,6 +1265,18 @@ button.secondary {
 .prev-build-body strong { overflow-wrap: anywhere; }
 .prev-build-when { font-size: 12px; opacity: 0.7; }
 .prev-build-body select { font-size: 12px; padding: 3px 6px; }
+/* The list reaches back sixty cars now, which is more than fits the 340px
+   scroller, so it gets a filter box rather than a scroll hunt. */
+.prev-build-filter {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: inherit;
+  background: var(--sunken, #1b1b23);
+  border: 1px solid var(--line, #2a2a35);
+  border-radius: 8px;
+}
 
 /* A field whose control is a textarea rather than a single line. */
 .field-row-tall { align-items: flex-start; }

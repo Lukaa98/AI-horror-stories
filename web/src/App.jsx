@@ -706,7 +706,7 @@ async function attachDashboardPreviews(items, owner, repo, token) {
 
 // The dropdown that fills the single-car form from a build you already ran.
 // Deliberately lighter than loadDashboardEntries: only single-car folders,
-// only the newest few, and each result.json is fetched just for the
+// only the newest cars, and each result.json is fetched just for the
 // `build_inputs` snapshot inside it. Filling the form is all this does --
 // the build still goes out through the normal dispatch on the configured
 // branch, so it runs whatever the pipeline code does today.
@@ -743,9 +743,32 @@ function loadDispatchedBuilds() {
   }
 }
 
-// Runs, not cars. Re-running one car to test a pipeline change is the
-// normal way this gets used, so a dozen entries can be three cars.
-const PREVIOUS_BUILD_LIMIT = 40;
+// Cars, not runs. Re-running one car to test a pipeline change is the
+// normal way this gets used, so counting runs hid whole cars: a 40-run
+// window covered 13 cars and reached back barely two weeks, which put a
+// car built in September behind 94 newer runs and off the list entirely.
+// The window is counted in cars now, and every run of a car inside it is
+// kept, so re-running one car eight times costs one slot rather than eight.
+const PREVIOUS_BUILD_CAR_LIMIT = 60;
+// Each run's build_inputs is its own request, so a 60-car window is ~150 of
+// them. Fired all at once GitHub starts refusing them, so they go in batches.
+const PREVIOUS_BUILD_FETCH_BATCH = 8;
+
+// The car half of a build id: the folder name without its trailing
+// timestamp. Every run of one car shares it, which makes it a free grouping
+// key -- no result.json has to be fetched to work out which car a run is of.
+function previousBuildCarKey(id) {
+  return String(id || "").replace(/-\d{14}$/, "");
+}
+
+// Promise.allSettled over the whole list at once, in slices.
+async function settledInBatches(items, size, worker) {
+  const out = [];
+  for (let i = 0; i < items.length; i += size) {
+    out.push(...await Promise.allSettled(items.slice(i, i + size).map(worker)));
+  }
+  return out;
+}
 
 /** One row per car, newest first, each keeping every run that made it.
  *
@@ -780,12 +803,38 @@ function groupPreviousBuilds(builds) {
     .sort((a, b) => (b.newest.timestamp?.getTime() || 0) - (a.newest.timestamp?.getTime() || 0));
 }
 
+// Matches one car against the filter box. The haystack is the title plus
+// every run's make/model/trim and id, so "zr1" finds a build whose title
+// never says ZR1 and "3zr" tells the two ZR1 projects apart. Every word
+// has to land, so "corvette zr1" narrows rather than widens.
+function previousBuildMatches(group, filter) {
+  const words = String(filter || "").toLowerCase().split(/\s+/).filter(Boolean);
+  if (!words.length) return true;
+  const haystack = [
+    group.title,
+    ...group.runs.flatMap((run) => [
+      run.id, run.inputs?.make, run.inputs?.model, run.inputs?.trim,
+    ]),
+  ].join(" ").toLowerCase();
+  return words.every((word) => haystack.includes(word));
+}
+
 async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
   const { entries } = await fetchOutputTree({ owner, repo, token });
-  const ids = groupDashboardEntries(entries)
-    .filter((item) => item.type === "single-car" && item.hasResult)
-    .slice(0, PREVIOUS_BUILD_LIMIT);
-  const loaded = await Promise.allSettled(ids.map(async (item) => {
+  // Newest-first out of groupDashboardEntries, so the first run seen for a
+  // car is its newest, and the order cars appear in is the order of their
+  // newest run -- which is the order the window should cut on.
+  const byCar = new Map();
+  for (const item of groupDashboardEntries(entries)) {
+    if (item.type !== "single-car" || !item.hasResult) continue;
+    const key = previousBuildCarKey(item.id);
+    if (!byCar.has(key)) byCar.set(key, []);
+    byCar.get(key).push(item);
+  }
+  const wanted = [...byCar.keys()]
+    .slice(0, PREVIOUS_BUILD_CAR_LIMIT)
+    .flatMap((key) => byCar.get(key));
+  const loaded = await settledInBatches(wanted, PREVIOUS_BUILD_FETCH_BATCH, async (item) => {
     const preview = await fetchFileViaApi(
       owner, repo, OUTPUT_BRANCH, `cars/single-car-shorts/${item.id}/result.json`, token);
     if (!preview?.build_inputs) return null;
@@ -803,7 +852,7 @@ async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
       photo: preview.build_inputs.photo_front || preview.build_inputs.photo_side || "",
       thumbnail: `cars/single-car-shorts/${item.id}/thumbnail.jpg`,
     };
-  }));
+  });
   // A build whose result.json predates build_inputs has nothing to fill the
   // form with, so it is left out rather than offered as an empty choice.
   const finished = loaded
@@ -992,6 +1041,7 @@ export default function App() {
   const [previousBuilds, setPreviousBuilds] = useState([]);
   const [previousBuildsStage, setPreviousBuildsStage] = useState("idle");
   const [previousBuildsError, setPreviousBuildsError] = useState(null);
+  const [previousBuildFilter, setPreviousBuildFilter] = useState("");
   const [filledFromBuild, setFilledFromBuild] = useState(null);
   // Which run of a car is selected, when it has been built more than once.
   const [chosenRun, setChosenRun] = useState({});
@@ -2668,9 +2718,29 @@ export default function App() {
                     {previousBuildsStage === "ready" && !previousBuilds.length && (
                       <p className="hint">No previous builds found.</p>
                     )}
+                    {previousBuilds.length > 1 && (
+                      <input
+                        type="search"
+                        className="prev-build-filter"
+                        placeholder="Filter by car — e.g. zr1, 3zr, viper, gt2 rs"
+                        value={previousBuildFilter}
+                        onChange={(e) => setPreviousBuildFilter(e.target.value)}
+                      />
+                    )}
+                    {previousBuilds.length > 0
+                      && previousBuildFilter.trim()
+                      && !groupPreviousBuilds(previousBuilds)
+                        .some((group) => previousBuildMatches(group, previousBuildFilter)) && (
+                      <p className="hint">
+                        No build matches “{previousBuildFilter}”. Only the{" "}
+                        {PREVIOUS_BUILD_CAR_LIMIT} most recently built cars are listed.
+                      </p>
+                    )}
 
                     <div className="prev-builds">
-                      {groupPreviousBuilds(previousBuilds).map((group) => {
+                      {groupPreviousBuilds(previousBuilds)
+                        .filter((group) => previousBuildMatches(group, previousBuildFilter))
+                        .map((group) => {
                         // The newest run unless one was picked; a group with
                         // one run needs no choosing at all.
                         const chosenId = chosenRun[group.key] || group.newest.id;
