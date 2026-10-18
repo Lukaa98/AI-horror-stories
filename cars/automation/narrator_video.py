@@ -360,6 +360,50 @@ def _caption_chunks(script, duration, words_per_chunk=CAPTION_CHUNK_WORDS):
     ]
 
 
+# The closing question is the one caption that has to read as a question.
+# Captions are timed off the word timeline, which is whisper's transcript:
+# it carries no punctuation and one word per entry. A script ending "...in
+# a car this powerful?" therefore ended on the single word POWERFUL, frozen
+# in the caption band with no question mark anywhere on screen. Watched
+# back, the ending reads as the sentence being cut off rather than a
+# question being asked -- and a closing question nobody can see asked is a
+# closing question nobody answers in the comments.
+#
+# So the tail of the closing sentence is held instead, punctuation and all.
+# How much of it fits is measured against the real font rather than guessed
+# at: _wrap drops whole words past max_lines without saying so, which would
+# put a literally unfinished question on screen.
+CLOSING_CAPTION_MAX_WORDS = 8
+CLOSING_CAPTION_LINES = 2
+
+
+def _closing_caption(script, size=CANVAS, font_size=64):
+    """The longest tail of the script's closing question that still fits.
+
+    "" when the script does not end on a question -- a closing that is a
+    statement reads fine word by word, and the question mark is the whole
+    point of holding a phrase here.
+    """
+    text = str(script or "").strip()
+    if not text.endswith("?"):
+        return ""
+    words = re.split(r"(?<=[.!?])\s+", text)[-1].split()
+    if not words:
+        return ""
+    width = size[0]
+    draw = ImageDraw.Draw(Image.new("RGBA", size, (0, 0, 0, 0)))
+    font = _font(int(font_size * width / 1080))
+    limit = int(width * 0.85)
+    best = ""
+    for count in range(1, min(CLOSING_CAPTION_MAX_WORDS, len(words)) + 1):
+        phrase = " ".join(words[-count:])
+        wrapped = _wrap(draw, phrase.upper(), font, limit, max_lines=CLOSING_CAPTION_LINES)
+        if len(wrapped.split()) != len(phrase.split()):
+            break               # one more word and _wrap would silently drop it
+        best = phrase
+    return best
+
+
 def _caption_timeline(manifest, duration):
     aligned = list(manifest.get("word_timeline") or [])
     if aligned:
@@ -369,14 +413,24 @@ def _caption_timeline(manifest, duration):
             if str(item.get("word") or "").strip() and float(item.get("end", 0)) > float(item.get("start", 0))
         ]
         if captions:
-            # The last word holds until the video ends. Captions are timed off
-            # the speech, and the clip now runs about half a second past the
-            # final word so the closing question has room to land -- which
-            # left the caption band empty over those last frames while the
-            # headline, the photo and the narrator all stayed put. Watched
-            # back it reads as the last word flickering out.
-            text, start, _ = captions[-1]
-            captions[-1] = (text, start, max(duration, _))
+            # Whatever ends up last holds until the video ends. Captions are
+            # timed off the speech and the clip runs a beat past the final
+            # word so the closing question has room to land, which left the
+            # caption band empty over those last frames while the headline,
+            # the photo and the narrator all stayed put. Watched back it
+            # reads as the last word flickering out.
+            closing = _closing_caption(manifest.get("script"))
+            held = len(closing.split())
+            if closing and 0 < held <= len(captions):
+                # One entry per word in the transcript, so the phrase starts
+                # where its first word was spoken. Whisper occasionally
+                # splits a word into two entries, which shifts that start by
+                # a fraction of a second and nothing else.
+                captions[-held:] = [(closing, captions[-held][1],
+                                     max(duration, captions[-1][2]))]
+            else:
+                text, start, _ = captions[-1]
+                captions[-1] = (text, start, max(duration, _))
         return captions
     return _caption_chunks(manifest["script"], duration)
 
@@ -1721,8 +1775,24 @@ def _progress_bar_track(size, duration):
     return VideoClip(make_frame, duration=duration).set_position((0, 0))
 
 
-# Silence held after the narration stops, before the video does.
-END_PAD_SECONDS = 0.6
+# Silence added here, after the narration stops and before the video does.
+#
+# Deliberately tiny, because it is no longer what gives the ending its beat.
+# single_car_short pads the narration itself, to a measured gap after the
+# last spoken word -- it has the word timeline and so knows where the voice
+# actually stops. This pad used to add 0.6s on top of that, and the two
+# stacked: the Corvette build ended on 1.05s of silence over a frozen
+# picture, which reads as the video having run out rather than finished.
+#
+# What is still needed here is only the technical part. The clip's duration
+# comes from this file, so its last samples have to be real zeros: asked for
+# audio at the exact end of an mp3, moviepy's reader hands back whatever its
+# decoder still holds rather than silence -- voiced, around 130 Hz with
+# harmonics at 260 and 380, at nearly full speech level. On the Ford GT
+# build that was an audible blip right as the picture ended, a sound shaped
+# like the voice that never says a word. Rewriting to WAV with any pad at
+# all fixes that; the length of the pad was never the cure.
+END_PAD_SECONDS = 0.08
 
 
 # The channel mark, bottom left. It used to ride on the narrator's chest,
@@ -1796,15 +1866,10 @@ def render_narrator_video(car_media_paths, manifest, output_path):
 
     # The video used to end on the exact sample the narration did, so the
     # last word's decay was cut and the music stopped dead mid-fade. It read
-    # as the file running out rather than the video finishing. A beat of
-    # silence after the closing question is what makes it land.
-    #
-    # That beat has to be real silence IN the file. Asked for audio past the
-    # end of an mp3, moviepy's reader hands back whatever its decoder still
-    # holds rather than zeros -- voiced, around 130 Hz with harmonics at 260
-    # and 380, at nearly full speech level. On the Ford GT build that was an
-    # audible blip right as the picture ended: a sound shaped like the voice
-    # that never says a word.
+    # as the file running out rather than the video finishing. The beat of
+    # silence that makes the closing question land is padded onto the
+    # narration upstream, where the last word's timestamp is known; see
+    # END_PAD_SECONDS for why only a sliver is added here.
     audio_path = _narration_with_tail(Path(manifest["audio_path"]),
                                       output_path.parent, END_PAD_SECONDS)
     audio = AudioFileClip(str(audio_path))

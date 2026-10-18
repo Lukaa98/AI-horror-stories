@@ -16,6 +16,7 @@ from narrator_video import (  # noqa: E402
     _look_intervals,
     _caption_chunks,
     _caption_timeline,
+    _closing_caption,
     _drag_race_lane_clip,
     _drag_race_track,
     _merged_boundaries,
@@ -68,6 +69,64 @@ def test_real_word_timestamps_override_estimated_caption_timing():
     assert captions[1] == ("turbo", 0.8, 2.0), "the last word holds to the end of the clip"
     # With no tail to cover, the last caption is left exactly as timed.
     assert _caption_timeline(manifest, 1.4) == [("exact", 0.2, 0.7), ("turbo", 0.8, 1.4)]
+
+
+def test_the_closing_question_is_held_whole_with_its_question_mark():
+    # The word timeline is whisper's transcript: one word an entry and no
+    # punctuation anywhere. Left to it, a video ends frozen on the single
+    # word POWERFUL and the closing question is never legible as a question.
+    script = "It is quick. Would you go manual in a car this powerful?"
+    spoken = script.replace(".", "").replace("?", "").split()
+    manifest = {
+        "script": script,
+        "word_timeline": [
+            {"word": word, "start": 0.5 * i, "end": 0.5 * i + 0.4}
+            for i, word in enumerate(spoken)
+        ],
+    }
+    captions = _caption_timeline(manifest, 0.5 * len(spoken) + 1.0)
+
+    text, start, end = captions[-1]
+    assert text.endswith("?"), "the question has to read as a question on screen"
+    assert len(text.split()) > 1, "not a single orphaned word"
+    assert end == 0.5 * len(spoken) + 1.0, "held to the end of the clip"
+    # It starts where its own first word was spoken, not at the last word.
+    assert start < manifest["word_timeline"][-1]["start"]
+    # Everything before it is still one word at a time.
+    assert [t for t, _, _ in captions[:-1]] == spoken[:len(captions) - 1]
+
+
+def test_a_closing_that_is_not_a_question_stays_word_by_word():
+    manifest = {
+        "script": "Choose wisely.",
+        "word_timeline": [{"word": "Choose", "start": 0.0, "end": 0.4},
+                          {"word": "wisely", "start": 0.5, "end": 0.9}],
+    }
+    captions = _caption_timeline(manifest, 1.5)
+    assert captions[-1] == ("wisely", 0.5, 1.5)
+
+
+def test_the_closing_caption_never_holds_more_words_than_will_fit():
+    # _wrap drops whole words past max_lines without saying so, which would
+    # put a literally unfinished question on screen -- the exact thing this
+    # caption exists to prevent. The phrase is measured against the real
+    # font, so an unusually long question is trimmed to a shorter tail
+    # rather than rendered cut off.
+    from PIL import Image, ImageDraw
+    from generate_sample import _font, _wrap
+    from narrator_video import CLOSING_CAPTION_LINES
+
+    long_question = ("So with all of that said and every rival considered, "
+                     "would you really park this one in your own garage today?")
+    phrase = _closing_caption(long_question)
+    assert phrase and phrase.endswith("?")
+
+    draw = ImageDraw.Draw(Image.new("RGBA", CANVAS, (0, 0, 0, 0)))
+    font = _font(int(64 * CANVAS[0] / 1080))
+    wrapped = _wrap(draw, phrase.upper(), font, int(CANVAS[0] * 0.85),
+                    max_lines=CLOSING_CAPTION_LINES)
+    assert wrapped.split() == phrase.upper().split(), "no word may be silently dropped"
+    assert len(phrase.split()) < len(long_question.split()), "a long question is trimmed"
 
 
 def test_pose_intervals_fall_back_to_a_fixed_clock_without_word_timeline():

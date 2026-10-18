@@ -132,13 +132,28 @@ def test_the_print_clears_the_hoodie_outline():
     assert 276 - (left + width) >= 12, "clearance on the right seam"
 
 
-def test_the_video_holds_a_beat_after_the_last_word():
+def test_the_video_holds_one_beat_after_the_last_word_and_not_two():
     """It used to end on the exact sample the narration did: the closing
     question's decay was cut and the music stopped mid-fade, which read as
-    the file running out rather than the video finishing."""
-    import narrator_video
+    the file running out rather than the video finishing.
 
-    assert narrator_video.END_PAD_SECONDS >= 0.4
+    Then it held the beat twice. single_car_short pads the narration itself,
+    to a measured gap after the last spoken word, and this module added a
+    flat 0.6s on top of that: the Corvette build ended on 1.05s of silence
+    over a frozen picture, which reads as the file running out just the
+    same. The beat is owned upstream now, where the word timeline says where
+    the voice actually stops, and only a technical sliver is added here -- so
+    what has to hold is the total, not either constant on its own.
+    """
+    import narrator_video
+    import single_car_short
+
+    beat = single_car_short.MIN_TAIL_SILENCE + narrator_video.END_PAD_SECONDS
+    assert narrator_video.END_PAD_SECONDS > 0, (
+        "the clip's length comes from this file, so its last samples have to be "
+        "real zeros rather than whatever an mp3 decoder still holds")
+    assert 0.4 <= beat <= 0.7, f"one beat after the last word, not two (got {beat:.2f}s)"
+
     source = (Path(__file__).resolve().parents[1]
               / "cars/automation/narrator_video.py").read_text()
     assert "_narration_with_tail(Path(manifest[\"audio_path\"])" in source
