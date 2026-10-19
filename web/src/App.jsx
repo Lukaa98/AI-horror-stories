@@ -16,7 +16,15 @@ const DEFAULT_REPO = "AI-horror-stories";
 const OUTPUT_BRANCH = "cars-output";
 const UI_VERSION = "V14.5 — 154 words in the same 55 seconds";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
-const SETTINGS_MIGRATION = "default-branch-v12";
+// Bumping this rewrites the branch saved in every browser to
+// DEFAULT_BRANCH once. It is the only way a saved setting moves: a default
+// applies when nothing is stored, and a dashboard someone has used always
+// has something stored. It was last bumped for v12 and then left there
+// while the work moved to v13, so every browser went on dispatching at a
+// September workflow file that had never heard of script_style -- a 422,
+// no run, and nothing in Actions to look at. Bump it with DEFAULT_BRANCH,
+// not after someone notices their builds stopped happening.
+const SETTINGS_MIGRATION = "default-branch-v13";
 const PROGRESS_STEPS = ["Research", "Review", "Render", "Complete"];
 const RESEARCH_TIMEOUT_MS = 60 * 60 * 1000;
 const RENDER_TIMEOUT_MS = 30 * 60 * 1000;

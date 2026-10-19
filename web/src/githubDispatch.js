@@ -30,6 +30,20 @@ export async function dispatchWorkflow({ owner, repo, branch, token, workflow, i
   );
   if (!res.ok) {
     const body = await res.text();
+    // GitHub refuses a dispatch carrying an input the workflow file on that
+    // ref does not declare. The raw 422 names the input but not the reason,
+    // and the reason is always the same one: the branch is older than this
+    // dashboard. Said plainly, it is a settings change; said as JSON, it
+    // reads like the build broke.
+    if (res.status === 422 && body.includes("Unexpected inputs provided")) {
+      const named = (body.match(/Unexpected inputs provided: \[([^\]]*)\]/) || [])[1] || "";
+      const inputs = named.replace(/[\\"]/g, "") || "an input it was sent";
+      throw new Error(
+        `The workflow on branch "${branch}" does not accept ${inputs}. That branch's `
+        + `workflow file is older than this dashboard, so nothing was started and there is `
+        + `no build log. Set Branch to ${DEFAULT_BRANCH} in Settings and try again.`
+      );
+    }
     throw new Error(`Dispatch failed (${res.status}): ${body}`);
   }
 }
