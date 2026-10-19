@@ -60,6 +60,20 @@ def check_not_already_uploaded(listing, force):
         )
 
 
+# How far past a requested publish time may be and still be honoured. The
+# dashboard's "publish in five minutes" is dispatched from a browser, and
+# what happens next is a queue: the runner may not pick the job up for
+# minutes, and the upload takes a couple more. A time that slipped past
+# while that happened is still the schedule the person meant, and refusing
+# it loses the whole upload over a stopwatch. A time past by more than this
+# is a mistake worth stopping for.
+PUBLISH_AT_GRACE_MINUTES = 45
+# And the floor the request is moved to. YouTube rejects a publishAt that
+# falls before the upload finishes, so "as soon as possible" needs a couple
+# of minutes of room rather than being set to right now.
+PUBLISH_AT_FLOOR_MINUTES = 3
+
+
 def normalize_publish_at(raw_value):
     """An ISO 8601 instant for YouTube, or "".
 
@@ -67,7 +81,7 @@ def normalize_publish_at(raw_value):
     does not understand comes back as a generic 400 after the whole video
     has already been uploaded.
     """
-    from datetime import datetime, timezone
+    from datetime import datetime, timedelta, timezone
 
     value = str(raw_value or "").strip()
     if not value:
@@ -83,8 +97,14 @@ def normalize_publish_at(raw_value):
             f"--publish-at needs a timezone offset, e.g. {value}+04:00 -- otherwise "
             "midnight means a different moment on every machine that reads it."
         )
-    if parsed <= datetime.now(timezone.utc):
-        raise SystemExit(f"--publish-at is in the past ({parsed.isoformat()}).")
+    now = datetime.now(timezone.utc)
+    floor = now + timedelta(minutes=PUBLISH_AT_FLOOR_MINUTES)
+    if parsed < floor:
+        if now - parsed > timedelta(minutes=PUBLISH_AT_GRACE_MINUTES):
+            raise SystemExit(f"--publish-at is in the past ({parsed.isoformat()}).")
+        print(f"[upload] {parsed.isoformat()} is too close to now or just gone; "
+              f"publishing at {floor.isoformat()} instead.", flush=True)
+        parsed = floor
     return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 

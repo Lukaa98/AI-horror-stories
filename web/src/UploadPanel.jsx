@@ -67,12 +67,30 @@ async function writeJson(settings, path, sha, value) {
 // title and description are shown as they will appear, because the whole
 // reason upload.json is written at build time is so nobody publishes text
 // they have not read.
+// "Publish now" with a few minutes in hand rather than a true immediate
+// publish. The upload still goes up private and YouTube flips it public at
+// the stamp, which keeps one code path for every option here and leaves a
+// window to hit "Cancel the schedule" after watching it back.
+const PUBLISH_SOON_MINUTES = 5;
+
+
+// A Date as the string <input type="datetime-local"> and withLocalOffset
+// both expect: local wall-clock, to the minute, no zone.
+function localStamp(at) {
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${at.getFullYear()}-${pad(at.getMonth() + 1)}-${pad(at.getDate())}`
+    + `T${pad(at.getHours())}:${pad(at.getMinutes())}`;
+}
+
+
 export default function UploadPanel({ settings, buildId }) {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState("idle");   // idle | sending | watching | done | error
   const [error, setError] = useState(null);
-  const [scheduled, setScheduled] = useState(false);
+  // "now" keeps it private indefinitely, "soon" publishes a few minutes
+  // out, "at" takes a date. Was a boolean, which could not express "soon".
+  const [mode, setMode] = useState("now");
   const [sha, setSha] = useState(null);
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState({ title: "", description: "", tags: "" });
@@ -84,9 +102,7 @@ export default function UploadPanel({ settings, buildId }) {
     const at = new Date();
     at.setHours(12, 15, 0, 0);
     if (at <= new Date()) at.setDate(at.getDate() + 1);
-    const pad = (n) => String(n).padStart(2, "0");
-    return `${at.getFullYear()}-${pad(at.getMonth() + 1)}-${pad(at.getDate())}`
-      + `T${pad(at.getHours())}:${pad(at.getMinutes())}`;
+    return localStamp(at);
   });
   const startedAt = useRef(0);
   const timer = useRef(null);
@@ -203,7 +219,15 @@ export default function UploadPanel({ settings, buildId }) {
             ref: branch || "v12",
             inputs: {
               build_id: buildId,
-              ...(scheduled && publishAt ? { publish_at: withLocalOffset(publishAt) } : {}),
+              // Read at dispatch: "in five minutes" has to mean five
+              // minutes from the click, not from whenever this panel
+              // was last rendered.
+              ...(() => {
+                const when = mode === "soon"
+                  ? localStamp(new Date(Date.now() + PUBLISH_SOON_MINUTES * 60_000))
+                  : mode === "at" ? publishAt : "";
+                return when ? { publish_at: withLocalOffset(when) } : {};
+              })(),
               ...extraInputs,
             },
           }),
@@ -402,19 +426,28 @@ export default function UploadPanel({ settings, buildId }) {
           )}
           {!editing && <label className="upload-schedule">
             <span>Publish</span>
-            <select value={scheduled ? "at" : "now"}
-                    onChange={(e) => setScheduled(e.target.value === "at")}
+            <select value={mode}
+                    onChange={(e) => setMode(e.target.value)}
                     disabled={state === "sending" || state === "watching"}>
               <option value="now">Keep private</option>
+              <option value="soon">Publish in {PUBLISH_SOON_MINUTES} minutes</option>
               <option value="at">Schedule</option>
             </select>
-            {scheduled && (
+            {mode === "at" && (
               <input type="datetime-local" value={publishAt}
                      onChange={(e) => setPublishAt(e.target.value)}
                      disabled={state === "sending" || state === "watching"} />
             )}
           </label>}
-          {!editing && scheduled && (
+          {!editing && mode === "soon" && (
+            <p className="hint">
+              Goes up private and YouTube makes it public {PUBLISH_SOON_MINUTES} minutes
+              from the moment you press the button. The upload itself takes a couple of
+              those minutes, so watch it back and use &ldquo;Cancel the schedule&rdquo;
+              if something is wrong.
+            </p>
+          )}
+          {!editing && mode === "at" && (
             <p className="hint">
               YouTube makes it public at that moment, in this computer's timezone.
               It stays private until then.
@@ -423,7 +456,8 @@ export default function UploadPanel({ settings, buildId }) {
           <button type="button" className="upload-go" onClick={() => upload()}
                   disabled={!ready || editing || state === "sending" || state === "watching"}>
             {state === "watching" ? "Uploading…" : state === "sending" ? "Starting…"
-              : scheduled ? "Upload and schedule" : "Upload to YouTube (private)"}
+              : mode === "soon" ? `Upload and publish in ${PUBLISH_SOON_MINUTES} min`
+              : mode === "at" ? "Upload and schedule" : "Upload to YouTube (private)"}
           </button>
           {state === "watching" && (
             <p className="hint">Sending the video. This usually takes a couple of minutes.</p>

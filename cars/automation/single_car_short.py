@@ -581,28 +581,6 @@ _EXACT_PRICE_RE = re.compile(
     r"|\$\s?(\d{1,3}(?:\.\d+)?)\s?([KkMm])\b")
 
 
-# Marques a note might name as a comparison. Not exhaustive and not meant
-# to be: it only has to recognise the kind of car somebody types into the
-# notes box when they want it named on screen.
-COMPARISON_MARQUES = (
-    "Ferrari", "Lamborghini", "Porsche", "McLaren", "Aston Martin", "Bugatti", "Koenigsegg",
-    "Bentley", "Rolls-Royce", "Maserati", "Alfa Romeo", "Jaguar", "Lotus", "Pagani",
-    "Mercedes", "Mercedes-Benz", "BMW", "Audi", "Volkswagen", "Volvo", "Lexus", "Toyota",
-    "Honda", "Acura", "Nissan", "Subaru", "Mazda", "Mitsubishi", "Hyundai", "Kia", "Genesis",
-    "Chevrolet", "Corvette", "Ford", "Dodge", "Cadillac", "Tesla", "Rivian", "Lucid",
-    "Alpina", "Maybach", "Shelby", "Bowler",
-)
-
-
-def _marques_in(text):
-    """Which marques a blob names, in the order it names them."""
-    found = []
-    for marque in COMPARISON_MARQUES:
-        if re.search(rf"\b{re.escape(marque)}\b", str(text or ""), re.I) and marque not in found:
-            found.append(marque)
-    return found
-
-
 def _price_value(match):
     """The dollar figure a match stands for, whichever notation it used."""
     if match.group(1):
@@ -788,12 +766,17 @@ def _angles_block(angles, style="classic"):
     listed = "\n".join(f"  {i}. {line}" for i, line in enumerate(wanted, 1))
     return f"""
 
-THE PERSON COMMISSIONING THIS VIDEO ASKED FOR THESE, IN PRIORITY ORDER -- 1 matters most:
+TOPICS THE PERSON COMMISSIONING THIS VIDEO SUGGESTED, IN THEIR ORDER OF PREFERENCE -- 1 first:
 {listed}
 
-Work down the list and cover as many as the word count genuinely allows, starting at 1.
-Each one you take REPLACES a beat you would otherwise have written -- the video does not get
-longer, and the word count is unchanged. Drop a beat about how the car looks first; {keeps}
+These are offered, not required. Take the ones that genuinely make the video better and leave
+the rest out -- including every one of them, if your own research turns up something stronger.
+They are suggestions from somebody who likes this car, not a brief to discharge: a note that
+would cost a better beat is a note worth dropping, and a video that uses none of them is a
+valid outcome rather than a failed one.
+
+When you do take one it REPLACES a beat you would otherwise have written -- the video does not
+get longer, and the word count is unchanged. Drop a beat about how the car looks first; {keeps}
 
 NONE OF THESE NOTES IS THE OPENING. The first sentence is still the strongest claim YOUR OWN
 research found, chosen to make a viewer stay -- not note 1.
@@ -806,7 +789,8 @@ Stop when there is no room left, and leave the rest out ENTIRELY. A note covered
 worth more than three mentioned in passing: do not compress them all into one sentence each to
 fit them in, and never shorten or drop a higher-numbered note to make room for a lower one. If
 only the first two fit, write those two well and ignore the others completely -- that is the
-list working as intended, not a failure. Say nothing about the ones you leave out.
+list working as intended, not a failure. Say nothing about the ones you leave out, and never
+mention that topics were suggested at all.
 
 Check each claim you use with web search before you say it, and say it at the level it
 deserves:
@@ -817,6 +801,11 @@ deserves:
   - Unheard of, or contradicted by what you find: do NOT repeat it. Say what actually happened
     instead, and keep the beat -- the topic was chosen for a reason even when the detail was
     wrong.
+  - Naming another car or marque: if you take a note that names one, name it in full. Three
+    ZR1 builds turned "more power than a Ferrari SF90 or a Lamborghini Revuelto" into
+    "hypercars costing three times as much", which is a vaguer claim about nothing in
+    particular -- and the naming was the whole point of the note. Leaving the note out
+    entirely is fine; softening it into an unnamed rival is not.
 Never present a guess as a fact, and never say the person asked for it."""
 
 
@@ -1553,21 +1542,13 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
             "you could not find: a viewer does not know a number was missing until you tell them. "
             "Cut the sentence and put a fact you do have in its place."
         )
-    # A car the person typed into the notes and the script would not say.
-    # Three ZR1 builds turned "more power than a Ferrari SF90 or a
-    # Lamborghini Revuelto" into "hypercars costing three times as much",
-    # which is a vaguer claim about nothing in particular -- and the point
-    # of naming them was that the comparison is the whole story.
-    own = f"{make} {model}".lower()
-    asked_for = [m for m in _marques_in(package.get("_angles") or "")
-                 if m.lower() not in own
-                 and not re.search(rf"\b{re.escape(m)}\b", script, re.I)]
-    if asked_for:
-        violations.append(
-            f"your notes name {', '.join(asked_for)} and the script never says so. Name the car the "
-            "person asked you to name, in full -- softening it into \"supercars\" or \"rivals costing "
-            "three times as much\" is a different, vaguer claim."
-        )
+    # A marque named in the notes but absent from the script used to be a
+    # violation. It cannot be one any more: the notes are suggestions now,
+    # so a script that passes over one is doing what it was told. The
+    # instruction that a note WORTH taking must name its car in full lives
+    # in the prompt, where the model can weigh it against everything else
+    # competing for the same beat. Checking it here only re-imposed the
+    # requirement the prompt had just lifted.
     exact = []
     for match in _EXACT_PRICE_RE.finditer(script):
         value = _price_value(match)

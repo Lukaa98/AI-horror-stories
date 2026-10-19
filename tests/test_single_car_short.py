@@ -2261,11 +2261,11 @@ def test_a_long_note_list_degrades_by_dropping_the_tail_whole():
     import single_car_short
 
     block = single_car_short._angles_block("\n".join(f"Note {n}" for n in range(1, 6)))
-    assert "IN PRIORITY ORDER -- 1 matters most" in block
+    assert "IN THEIR ORDER OF PREFERENCE -- 1 first" in block
     assert "  1. Note 1" in block and "  5. Note 5" in block
     assert "leave the rest out ENTIRELY" in block
     assert "never shorten or drop a higher-numbered note to make room for a lower one" in block
-    assert "Say nothing about the ones you leave out." in block
+    assert "Say nothing about the ones you leave out" in block
 
     # Three tiers, so a theory is not dressed up as a fact and a wrong claim
     # is not repeated back.
@@ -3475,38 +3475,39 @@ def test_a_rival_note_cannot_take_the_opening_of_a_35_second_video():
             "Mercedes Benz S580", "2023", style=style, angles="- Audi stopped taking A8 orders")
 
 
-def test_a_car_named_in_the_notes_has_to_be_named_in_the_script():
-    """All three ZR1 builds turned "more power than a Ferrari SF90 or a
-    Lamborghini Revuelto" into "hypercars costing three times as much" --
-    a vaguer claim about nothing in particular, when the comparison was the
-    whole story. The carve-out for notes was appended after an absolute
-    prohibition and the model resolved toward the absolute every time."""
+def test_a_note_the_script_passes_over_is_not_a_violation():
+    """Notes are suggestions, not a brief to discharge. A script that leaves
+    one out is doing what it was told, so nothing may flag it -- a marque
+    named in the notes and absent from the script used to be a violation,
+    which re-imposed in the checker the requirement the prompt lifts."""
     import single_car_short
 
     scenes = [{"headline": "", "narration": "1,064 horsepower and 828 lb-ft. That's the ZR1."},
-              {"headline": "", "narration": "More power than hypercars costing three times as much."},
+              {"headline": "", "narration": "It out-accelerates almost anything on the road."},
               {"headline": "", "narration": "So would you take one?"}]
     package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes),
                "_angles": "- more power than a Ferrari SF90 or a Lamborghini Revuelto"}
-    flagged = [v for v in single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
-               if "notes name" in v]
-    assert flagged and "Ferrari" in flagged[0] and "Lamborghini" in flagged[0]
+    violations = single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
+    assert not [v for v in violations if "note" in v.lower()]
 
-    # Named properly, it is clean.
-    scenes[1]["narration"] = "More power than a Ferrari SF90 or a Lamborghini Revuelto."
-    package["script"] = " ".join(s["narration"] for s in scenes)
-    assert not [v for v in single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
-                if "notes name" in v]
+    # Taking the note and softening it is still wrong, but that is the
+    # model's judgement to make against everything else competing for the
+    # beat -- so the instruction lives in the prompt, not in a rule.
+    block = single_car_short._angles_block(package["_angles"])
+    assert "name it in full" in block
+    assert "hypercars costing three times as much" in block
 
-    # A note with no marque in it asks for nothing, so nothing is required.
-    package["_angles"] = "- the C8 went mid-engine in 2020"
-    assert not [v for v in single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
-                if "notes name" in v]
 
-    # The subject car's own marque is not a comparison it has to make.
-    package["_angles"] = "- the Chevrolet Corvette went mid-engine in 2020"
-    assert not [v for v in single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
-                if "notes name" in v]
+def test_the_notes_are_offered_rather_than_required():
+    """Every note was mandatory, which is how six notes split out of one
+    pasted paragraph took four beats and left the rarity and the comparison
+    unsaid. Ignoring all of them has to be a legitimate outcome."""
+    import single_car_short
+
+    block = single_car_short._angles_block("- talk about the Le Mans anniversary")
+    assert "offered, not required" in block
+    assert "valid outcome rather than a failed one" in block
+    assert "not a brief to discharge" in block
 
 
 def test_the_no_comparison_checkbox_switches_off_the_segment_not_the_words():

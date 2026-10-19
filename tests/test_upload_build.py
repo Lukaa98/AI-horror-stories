@@ -179,6 +179,38 @@ def test_a_scheduled_upload_must_name_an_instant():
         upload_build.normalize_publish_at("2020-01-01T00:00:00+00:00")
 
 
+def test_a_publish_time_that_slipped_past_in_the_queue_is_moved_not_refused():
+    """"Publish in five minutes" is dispatched from a browser and then
+    waits: for a runner, then for the upload. A stamp that went by while
+    that happened is still the schedule the person meant, and refusing it
+    throws away the upload over a stopwatch."""
+    from datetime import datetime, timedelta, timezone
+    import pytest
+
+    now = datetime.now(timezone.utc)
+
+    def parsed(value):
+        return datetime.fromisoformat(
+            upload_build.normalize_publish_at(value).replace("Z", "+00:00"))
+
+    # Gone by a few minutes: moved forward far enough for the upload to finish.
+    moved = parsed((now - timedelta(minutes=4)).isoformat())
+    assert moved > now, "a slipped time must not stay in the past"
+    assert moved - now >= timedelta(minutes=upload_build.PUBLISH_AT_FLOOR_MINUTES - 1)
+
+    # Technically ahead, but too close for the upload to land first.
+    assert parsed((now + timedelta(seconds=30)).isoformat()) > now + timedelta(minutes=1)
+
+    # Comfortably ahead: left exactly where it was asked for.
+    wanted = (now + timedelta(hours=6)).replace(microsecond=0)
+    assert parsed(wanted.isoformat()) == wanted
+
+    # Past the grace window it is a mistake, not a queue delay.
+    with pytest.raises(SystemExit, match="in the past"):
+        upload_build.normalize_publish_at(
+            (now - timedelta(minutes=upload_build.PUBLISH_AT_GRACE_MINUTES + 5)).isoformat())
+
+
 def test_a_scheduled_video_goes_up_private():
     """YouTube ignores publishAt on anything but a private video -- set
     public with a publish time, it goes live the instant the upload
