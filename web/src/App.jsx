@@ -5,7 +5,7 @@ import PhotoThumb from "./PhotoThumb";
 import UploadPanel from "./UploadPanel";
 import YouTubePanel from "./YouTubePanel";
 import ResearchPanel from "./ResearchPanel";
-import { dispatchWorkflow } from "./githubDispatch";
+import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
@@ -13,7 +13,6 @@ import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
-const DEFAULT_BRANCH = "v12";
 const OUTPUT_BRANCH = "cars-output";
 const UI_VERSION = "V14.5 — 154 words in the same 55 seconds";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];

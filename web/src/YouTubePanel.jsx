@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./YouTubePanel.css";
 import { completeSignIn, signIn, signOut, signedIn } from "./googleAuth";
+import { DEFAULT_BRANCH } from "./githubDispatch";
 import {
   collect as collectLive, deleteVideo, publishNow, setPublishTime, unschedule as unscheduleLive,
 } from "./youtubeLive";
@@ -277,7 +278,7 @@ export default function YouTubePanel({ settings }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ref: branch || "v12",
+            ref: branch || DEFAULT_BRANCH,
             inputs: { build_id: video.build_id, ...inputs },
           }),
         }

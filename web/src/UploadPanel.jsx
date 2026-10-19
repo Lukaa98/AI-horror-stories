@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./UploadPanel.css";
+import { DEFAULT_BRANCH } from "./githubDispatch";
 
 const UPLOAD_WORKFLOW = "youtube-upload.yml";
 const OUTPUT_BRANCH = "cars-output";
@@ -216,7 +217,7 @@ export default function UploadPanel({ settings, buildId }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ref: branch || "v12",
+            ref: branch || DEFAULT_BRANCH,
             inputs: {
               build_id: buildId,
               // Read at dispatch: "in five minutes" has to mean five
