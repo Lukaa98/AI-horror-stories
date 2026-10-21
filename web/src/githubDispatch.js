@@ -44,6 +44,22 @@ export async function dispatchWorkflow({ owner, repo, branch, token, workflow, i
         + `no build log. Set Branch to ${DEFAULT_BRANCH} in Settings and try again.`
       );
     }
+    // Git refs are case-sensitive, so "V13" is not "v13" -- it is a branch
+    // that does not exist. Typed into a settings box that already holds the
+    // right name in the wrong case, the raw 422 is one capital letter
+    // buried in JSON, and the second branch-setting typo in a week cost an
+    // upload before anybody spotted it.
+    if (res.status === 422 && body.includes("No ref found")) {
+      const named = (body.match(/No ref found for:\s*([^"\\\\]+)/) || [])[1] || branch;
+      const cased = named.trim();
+      const hint = cased.toLowerCase() !== cased
+        ? ` Branch names are case-sensitive — did you mean "${cased.toLowerCase()}"?`
+        : ` Check the Branch field in Settings; it should be "${DEFAULT_BRANCH}".`;
+      throw new Error(
+        `There is no branch called "${cased}" in this repository, so nothing was `
+        + `started.${hint}`
+      );
+    }
     throw new Error(`Dispatch failed (${res.status}): ${body}`);
   }
 }
