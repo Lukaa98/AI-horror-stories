@@ -1,0 +1,2872 @@
+{
+  "car": {
+    "make": "Renault",
+    "model": "Clio V6",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Renault",
+    "model": "Clio V6",
+    "script_style": "classic",
+    "query": "",
+    "start_year": 2001,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/rE0Ev7gV/2001-renault-clio-v6?ss_id=2bf8630c-938c-44cd-81bc-5434433f42e3&ref=pr_1_1",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/application/s-nJy57st/edit/6-OXo.jpg?t=179088494363",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-3t6NnTc.jpg?t=178736135817",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/application/s-fFuFvgr/edit/9i_Xo.jpg?t=178824293866",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-CCP9RPH.jpg?t=178736144484",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-Hk6Nl3U.jpg?t=178736142451",
+    "photo_rival": "",
+    "rival_car": "",
+    "photo_race": "",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "true",
+    "angles": "- Lead on this: Renault took a front-engine, front-wheel-drive economy hatchback and had TWR rebuild it as a mid-engine, rear-wheel-drive two-seater \u2014 hand-built in Uddevalla, Sweden, with the back seats replaced by a V6.\n- Cover the rarity and the reputation: only about 1,500 Phase 1 cars were built, roughly as many as the Ferrari F40, and it earned a name for handling that would bite drivers who got it wrong.\n- For the head-to-head use the Mk4 Volkswagen Golf R32 \u2014 the sensible way to put a V6 in a hatchback. Near-identical power and 0-60, front-engine and all-wheel drive, and today the Clio is worth about four times as much.",
+    "current_price": "",
+    "extra_photos": "[{\"id\":\"closeup-restored-1792602544312-0\",\"label\":\"Wide body panels\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/application/s-iilKOxh/edit/77I8R.jpg?t=178824289180\",\"slot\":\"front\",\"note\":\"\",\"describe\":true},{\"id\":\"closeup-restored-1792602544312-1\",\"label\":\"Wide body back\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/application/s-a3BG_Qw/edit/SkpFE.jpg?t=178824297670\",\"slot\":\"rear\",\"note\":\"\",\"describe\":true},{\"id\":\"closeup-restored-1792602544312-2\",\"label\":\"Head light\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-KHxmVnt.jpg?t=178736145056\",\"slot\":\"front\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792602544312-3\",\"label\":\"Back light\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-BRyd3I-.jpg?t=178736144835\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792602544312-4\",\"label\":\"Side intake for engine\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-5DgDQse.jpg?t=178736146014\",\"slot\":\"side\",\"note\":\"\",\"describe\":true},{\"id\":\"closeup-restored-1792602544312-5\",\"label\":\"Dual Exhaust\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-uwQNSr0.jpg?t=178736141058\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792602544312-6\",\"label\":\"Wide bidy on wheels\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-4QX5ns4.jpg?t=178736144910\",\"slot\":\"side\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792602544312-7\",\"label\":\"Not a same seats as normal cleo\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-MzqZOyy.jpg?t=178736142914\",\"slot\":\"interior\",\"note\":\"\",\"describe\":true},{\"id\":\"closeup-restored-1792602544312-8\",\"label\":\"Engine seats right behind you\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=80/aca189f60e0aab827a3796f14dcda2b3fad26267/photos/application/s-QAISfPJ.jpg?t=178736143110\",\"slot\":\"engine\",\"note\":\"\",\"describe\":true}]"
+  },
+  "title": "Hand-Built V6 Hatchback Icon \ud83d\udd25",
+  "youtube_title": "Rare Swedish-Made Mid-Engine Marvel \ud83d\ude97\ud83d\udd25",
+  "key_specs": {
+    "horsepower": "230 hp",
+    "torque": "221 lb-ft",
+    "zero_to_sixty": "6.2 sec",
+    "redline": "n/a",
+    "engine": "3.0L V6",
+    "price": "n/a, ~$90K today"
+  },
+  "history": {
+    "year": null,
+    "fact": "The Renault Clio V6 Phase 1 models were assembled by Tom Walkinshaw Racing (TWR) in Uddevalla, Sweden, before production shifted to Renault Sport in Dieppe, France, for Phase 2."
+  },
+  "start_year": 2001,
+  "end_year": 2001,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Hand-Built",
+      "photo_label": "exterior front",
+      "narration": "With only about 1,500 made, each hand-assembled in Sweden, this mid-engine marvel truly stands out.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Aerodynamic Design",
+      "photo_label": "[side-closeup-restored-1792602544312-4-4] Side intake for engine",
+      "narration": "The Renault Clio V6 Phase 1 models were assembled by Tom Walkinshaw Racing (TWR) in Uddevalla, Sweden, before production shifted to Renault Sport in Dieppe, France, for Phase 2.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "230 hp V6 Engine",
+      "photo_label": "engine bay",
+      "narration": "The Renault Clio V6 is powered by a 3.0-liter V6 engine, delivering 230 hp and 221 lb-ft of torque, making it a compact powerhouse.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "230 hp",
+      "stat_label_2": "Torque",
+      "stat_value_2": "221 lb-ft"
+    },
+    {
+      "media_type": "interior",
+      "headline": "Performance Interior",
+      "photo_label": "interior",
+      "narration": "Inside, the Clio V6 features suede-covered steering and Renaultsport seats, emphasizing its sporty character.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "detail",
+      "headline": "Reputation for Handling",
+      "photo_label": "[interior-closeup-restored-1792602544312-7-7] Not a same seats as normal cleo",
+      "narration": "This Clio earned a reputation for its challenging handling\u2014catching out drivers who underestimated its demands.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Distinctive Rear Design",
+      "photo_label": "exterior rear",
+      "narration": "The Clio V6\u2019s dual exhausts integrated into the rear bumper highlight its aggressive and performance-oriented appearance.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Value",
+      "photo_label": "[rear-closeup-restored-1792602544312-1-1] Wide body back",
+      "narration": "They go for about $90,000 today, holding their value remarkably well compared to standard models.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "$90K today",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "photo_label": "exterior side",
+      "narration": "With its unique build and racing roots, would you take the Renault Clio V6 over a more traditional hatchback?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://www.hemmings.com/stories/2021/03/10/the-most-ridiculous-hot-hatch-you-could-buy-is-suddenly-serious-money",
+    "https://www.topgear.com/car-reviews/renault/clio-v6",
+    "https://www.evo.co.uk/nissan/370z/13067/renault-clio-v6-the-greatest-hot-hatch-of-all-time"
+  ],
+  "script": "With only about 1,500 made, each hand-assembled in Sweden, this mid-engine marvel truly stands out. The Renault Clio V6 Phase 1 models were assembled by Tom Walkinshaw Racing (TWR) in Uddevalla, Sweden, before production shifted to Renault Sport in Dieppe, France, for Phase 2. The Renault Clio V6 is powered by a 3.0-liter V6 engine, delivering 230 hp and 221 lb-ft of torque, making it a compact powerhouse. Inside, the Clio V6 features suede-covered steering and Renaultsport seats, emphasizing its sporty character. This Clio earned a reputation for its challenging handling\u2014catching out drivers who underestimated its demands. The Clio V6\u2019s dual exhausts integrated into the rear bumper highlight its aggressive and performance-oriented appearance. They go for about $90,000 today, holding their value remarkably well compared to standard models. With its unique build and racing roots, would you take the Renault Clio V6 over a more traditional hatchback?",
+  "word_count": 152,
+  "repair_log": [
+    {
+      "what": "your first sentence names the car (\"Renault\") -- it was \"Only about 1,500 Phase 1 Renault Clio V6s were built, each hand",
+      "outcome": "applied",
+      "scene": 1,
+      "returned": "With only about 1,500 made, each hand-assembled in Sweden, this mid-engine marvel truly stands out. Meet the Phase 1 Renault Clio V6."
+    },
+    {
+      "what": "history",
+      "outcome": "applied",
+      "scene": 2,
+      "returned": "The Renault Clio V6 Phase 1 models were assembled by Tom Walkinshaw Racing (TWR) in Uddevalla, Sweden, before production shifted to Renault Sport in Dieppe, France, for Phase 2."
+    },
+    {
+      "what": "your title names the car (\"V6\") -- it was \"Hand-Built V6 Hatchback Icon \ud83d\udd25\". The name is the payoff, so it belongs in the",
+      "outcome": "applied",
+      "returned": "Rare Swedish-Made Mid-Engine Marvel \ud83d\ude97\ud83d\udd25"
+    }
+  ],
+  "voice_preset": "onyx",
+  "tts_speed": null,
+  "narration": {
+    "engine": "gpt-audio",
+    "model": "gpt-audio",
+    "voice": "echo",
+    "pitch": {
+      "measured_hz": 137.93103448275863,
+      "result_hz": 137.93103448275863
+    },
+    "tts_speed": null
+  },
+  "target_duration_seconds": 55.0,
+  "normalized_audio_duration_seconds": 55.35,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-renault-clio-v6-20261021170921/narration.mp3",
+  "duration_seconds": 55.35,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.27,
+      "end": 0.54,
+      "mouth": "small"
+    },
+    {
+      "start": 0.54,
+      "end": 0.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.63,
+      "end": 0.72,
+      "mouth": "small"
+    },
+    {
+      "start": 0.72,
+      "end": 0.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.81,
+      "end": 0.99,
+      "mouth": "small"
+    },
+    {
+      "start": 0.99,
+      "end": 1.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.08,
+      "end": 1.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.26,
+      "end": 1.35,
+      "mouth": "small"
+    },
+    {
+      "start": 1.35,
+      "end": 1.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.44,
+      "end": 1.71,
+      "mouth": "small"
+    },
+    {
+      "start": 1.71,
+      "end": 1.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.8,
+      "end": 2.25,
+      "mouth": "small"
+    },
+    {
+      "start": 2.25,
+      "end": 2.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.61,
+      "end": 3.51,
+      "mouth": "small"
+    },
+    {
+      "start": 3.51,
+      "end": 3.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.6,
+      "end": 3.87,
+      "mouth": "small"
+    },
+    {
+      "start": 3.87,
+      "end": 4.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.05,
+      "end": 4.32,
+      "mouth": "small"
+    },
+    {
+      "start": 4.32,
+      "end": 4.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.41,
+      "end": 4.95,
+      "mouth": "small"
+    },
+    {
+      "start": 4.95,
+      "end": 5.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.04,
+      "end": 5.13,
+      "mouth": "small"
+    },
+    {
+      "start": 5.13,
+      "end": 5.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.22,
+      "end": 5.76,
+      "mouth": "small"
+    },
+    {
+      "start": 5.76,
+      "end": 6.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.12,
+      "end": 6.39,
+      "mouth": "small"
+    },
+    {
+      "start": 6.39,
+      "end": 6.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.57,
+      "end": 6.66,
+      "mouth": "small"
+    },
+    {
+      "start": 6.66,
+      "end": 6.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.84,
+      "end": 8.64,
+      "mouth": "small"
+    },
+    {
+      "start": 8.64,
+      "end": 8.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.82,
+      "end": 9.0,
+      "mouth": "small"
+    },
+    {
+      "start": 9.0,
+      "end": 9.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.09,
+      "end": 10.26,
+      "mouth": "small"
+    },
+    {
+      "start": 10.26,
+      "end": 10.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.35,
+      "end": 10.44,
+      "mouth": "small"
+    },
+    {
+      "start": 10.44,
+      "end": 10.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.71,
+      "end": 10.8,
+      "mouth": "small"
+    },
+    {
+      "start": 10.8,
+      "end": 10.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.89,
+      "end": 10.98,
+      "mouth": "small"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.07,
+      "end": 11.16,
+      "mouth": "small"
+    },
+    {
+      "start": 11.16,
+      "end": 11.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.25,
+      "end": 11.61,
+      "mouth": "small"
+    },
+    {
+      "start": 11.61,
+      "end": 11.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.88,
+      "end": 11.97,
+      "mouth": "small"
+    },
+    {
+      "start": 11.97,
+      "end": 12.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.06,
+      "end": 12.15,
+      "mouth": "small"
+    },
+    {
+      "start": 12.15,
+      "end": 12.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.24,
+      "end": 13.14,
+      "mouth": "small"
+    },
+    {
+      "start": 13.14,
+      "end": 13.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.23,
+      "end": 13.32,
+      "mouth": "small"
+    },
+    {
+      "start": 13.32,
+      "end": 13.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.41,
+      "end": 13.86,
+      "mouth": "small"
+    },
+    {
+      "start": 13.86,
+      "end": 14.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.04,
+      "end": 14.22,
+      "mouth": "small"
+    },
+    {
+      "start": 14.22,
+      "end": 14.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.31,
+      "end": 14.85,
+      "mouth": "small"
+    },
+    {
+      "start": 14.85,
+      "end": 15.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.3,
+      "end": 15.48,
+      "mouth": "small"
+    },
+    {
+      "start": 15.48,
+      "end": 15.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.66,
+      "end": 15.75,
+      "mouth": "small"
+    },
+    {
+      "start": 15.75,
+      "end": 15.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.84,
+      "end": 16.74,
+      "mouth": "small"
+    },
+    {
+      "start": 16.74,
+      "end": 16.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.83,
+      "end": 16.92,
+      "mouth": "small"
+    },
+    {
+      "start": 16.92,
+      "end": 17.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.01,
+      "end": 17.37,
+      "mouth": "small"
+    },
+    {
+      "start": 17.37,
+      "end": 17.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.46,
+      "end": 18.36,
+      "mouth": "small"
+    },
+    {
+      "start": 18.36,
+      "end": 18.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.63,
+      "end": 18.72,
+      "mouth": "small"
+    },
+    {
+      "start": 18.72,
+      "end": 18.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.81,
+      "end": 19.17,
+      "mouth": "small"
+    },
+    {
+      "start": 19.17,
+      "end": 19.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.26,
+      "end": 19.44,
+      "mouth": "small"
+    },
+    {
+      "start": 19.44,
+      "end": 19.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.53,
+      "end": 20.16,
+      "mouth": "small"
+    },
+    {
+      "start": 20.16,
+      "end": 20.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.34,
+      "end": 20.43,
+      "mouth": "small"
+    },
+    {
+      "start": 20.43,
+      "end": 20.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.52,
+      "end": 20.61,
+      "mouth": "small"
+    },
+    {
+      "start": 20.61,
+      "end": 20.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.7,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.51,
+      "end": 21.6,
+      "mouth": "small"
+    },
+    {
+      "start": 21.6,
+      "end": 21.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.69,
+      "end": 21.87,
+      "mouth": "small"
+    },
+    {
+      "start": 21.87,
+      "end": 22.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.23,
+      "end": 22.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.32,
+      "end": 22.86,
+      "mouth": "small"
+    },
+    {
+      "start": 22.86,
+      "end": 22.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.95,
+      "end": 23.22,
+      "mouth": "small"
+    },
+    {
+      "start": 23.22,
+      "end": 23.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.31,
+      "end": 23.4,
+      "mouth": "small"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.49,
+      "end": 23.76,
+      "mouth": "small"
+    },
+    {
+      "start": 23.76,
+      "end": 24.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.21,
+      "end": 24.48,
+      "mouth": "small"
+    },
+    {
+      "start": 24.48,
+      "end": 24.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.57,
+      "end": 24.66,
+      "mouth": "small"
+    },
+    {
+      "start": 24.66,
+      "end": 24.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.93,
+      "end": 25.02,
+      "mouth": "small"
+    },
+    {
+      "start": 25.02,
+      "end": 25.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.11,
+      "end": 25.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.29,
+      "end": 27.09,
+      "mouth": "small"
+    },
+    {
+      "start": 27.09,
+      "end": 27.27,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.27,
+      "end": 27.54,
+      "mouth": "small"
+    },
+    {
+      "start": 27.54,
+      "end": 27.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.63,
+      "end": 28.17,
+      "mouth": "small"
+    },
+    {
+      "start": 28.17,
+      "end": 28.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.44,
+      "end": 28.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.53,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 28.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.89,
+      "end": 29.43,
+      "mouth": "small"
+    },
+    {
+      "start": 29.43,
+      "end": 29.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.52,
+      "end": 29.7,
+      "mouth": "small"
+    },
+    {
+      "start": 29.7,
+      "end": 29.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.79,
+      "end": 29.88,
+      "mouth": "small"
+    },
+    {
+      "start": 29.88,
+      "end": 30.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.24,
+      "end": 30.6,
+      "mouth": "small"
+    },
+    {
+      "start": 30.6,
+      "end": 30.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.78,
+      "end": 31.14,
+      "mouth": "small"
+    },
+    {
+      "start": 31.14,
+      "end": 31.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.23,
+      "end": 32.13,
+      "mouth": "small"
+    },
+    {
+      "start": 32.13,
+      "end": 32.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.31,
+      "end": 32.76,
+      "mouth": "small"
+    },
+    {
+      "start": 32.76,
+      "end": 33.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.12,
+      "end": 33.21,
+      "mouth": "small"
+    },
+    {
+      "start": 33.21,
+      "end": 33.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.3,
+      "end": 33.39,
+      "mouth": "small"
+    },
+    {
+      "start": 33.39,
+      "end": 33.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.48,
+      "end": 33.66,
+      "mouth": "small"
+    },
+    {
+      "start": 33.66,
+      "end": 33.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.75,
+      "end": 34.29,
+      "mouth": "small"
+    },
+    {
+      "start": 34.29,
+      "end": 34.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.38,
+      "end": 34.83,
+      "mouth": "small"
+    },
+    {
+      "start": 34.83,
+      "end": 34.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.92,
+      "end": 35.19,
+      "mouth": "small"
+    },
+    {
+      "start": 35.19,
+      "end": 35.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.64,
+      "end": 35.73,
+      "mouth": "small"
+    },
+    {
+      "start": 35.73,
+      "end": 35.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.82,
+      "end": 35.91,
+      "mouth": "small"
+    },
+    {
+      "start": 35.91,
+      "end": 36.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.09,
+      "end": 36.54,
+      "mouth": "small"
+    },
+    {
+      "start": 36.54,
+      "end": 36.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.63,
+      "end": 36.72,
+      "mouth": "small"
+    },
+    {
+      "start": 36.72,
+      "end": 36.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.9,
+      "end": 37.08,
+      "mouth": "small"
+    },
+    {
+      "start": 37.08,
+      "end": 37.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.17,
+      "end": 37.26,
+      "mouth": "small"
+    },
+    {
+      "start": 37.26,
+      "end": 37.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.35,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.8,
+      "end": 38.7,
+      "mouth": "small"
+    },
+    {
+      "start": 38.7,
+      "end": 38.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.97,
+      "end": 39.15,
+      "mouth": "small"
+    },
+    {
+      "start": 39.15,
+      "end": 39.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.24,
+      "end": 39.51,
+      "mouth": "small"
+    },
+    {
+      "start": 39.51,
+      "end": 39.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.6,
+      "end": 40.23,
+      "mouth": "small"
+    },
+    {
+      "start": 40.23,
+      "end": 40.32,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.32,
+      "end": 40.59,
+      "mouth": "small"
+    },
+    {
+      "start": 40.59,
+      "end": 40.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.68,
+      "end": 41.31,
+      "mouth": "small"
+    },
+    {
+      "start": 41.31,
+      "end": 41.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.4,
+      "end": 41.49,
+      "mouth": "small"
+    },
+    {
+      "start": 41.49,
+      "end": 41.76,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.76,
+      "end": 41.85,
+      "mouth": "small"
+    },
+    {
+      "start": 41.85,
+      "end": 42.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.12,
+      "end": 42.21,
+      "mouth": "small"
+    },
+    {
+      "start": 42.21,
+      "end": 42.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.39,
+      "end": 42.57,
+      "mouth": "small"
+    },
+    {
+      "start": 42.57,
+      "end": 42.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.66,
+      "end": 42.93,
+      "mouth": "small"
+    },
+    {
+      "start": 42.93,
+      "end": 43.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.02,
+      "end": 43.2,
+      "mouth": "small"
+    },
+    {
+      "start": 43.2,
+      "end": 43.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.29,
+      "end": 43.47,
+      "mouth": "small"
+    },
+    {
+      "start": 43.47,
+      "end": 43.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.56,
+      "end": 43.74,
+      "mouth": "small"
+    },
+    {
+      "start": 43.74,
+      "end": 44.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.1,
+      "end": 44.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.19,
+      "end": 44.37,
+      "mouth": "small"
+    },
+    {
+      "start": 44.37,
+      "end": 44.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.46,
+      "end": 44.55,
+      "mouth": "small"
+    },
+    {
+      "start": 44.55,
+      "end": 44.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.64,
+      "end": 45.0,
+      "mouth": "small"
+    },
+    {
+      "start": 45.0,
+      "end": 45.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.09,
+      "end": 45.45,
+      "mouth": "small"
+    },
+    {
+      "start": 45.45,
+      "end": 45.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.54,
+      "end": 45.63,
+      "mouth": "small"
+    },
+    {
+      "start": 45.63,
+      "end": 45.81,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.81,
+      "end": 45.99,
+      "mouth": "small"
+    },
+    {
+      "start": 45.99,
+      "end": 46.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.08,
+      "end": 46.8,
+      "mouth": "small"
+    },
+    {
+      "start": 46.8,
+      "end": 47.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.25,
+      "end": 47.61,
+      "mouth": "small"
+    },
+    {
+      "start": 47.61,
+      "end": 47.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.7,
+      "end": 47.79,
+      "mouth": "small"
+    },
+    {
+      "start": 47.79,
+      "end": 47.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.88,
+      "end": 48.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.06,
+      "end": 48.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.33,
+      "end": 48.51,
+      "mouth": "small"
+    },
+    {
+      "start": 48.51,
+      "end": 48.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.6,
+      "end": 49.14,
+      "mouth": "small"
+    },
+    {
+      "start": 49.14,
+      "end": 49.32,
+      "mouth": "closed"
+    },
+    {
+      "start": 49.32,
+      "end": 49.68,
+      "mouth": "small"
+    },
+    {
+      "start": 49.68,
+      "end": 49.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.86,
+      "end": 50.13,
+      "mouth": "small"
+    },
+    {
+      "start": 50.13,
+      "end": 50.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.31,
+      "end": 50.4,
+      "mouth": "small"
+    },
+    {
+      "start": 50.4,
+      "end": 50.58,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.58,
+      "end": 50.67,
+      "mouth": "small"
+    },
+    {
+      "start": 50.67,
+      "end": 50.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.76,
+      "end": 51.12,
+      "mouth": "small"
+    },
+    {
+      "start": 51.12,
+      "end": 51.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.48,
+      "end": 51.75,
+      "mouth": "small"
+    },
+    {
+      "start": 51.75,
+      "end": 51.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.84,
+      "end": 51.93,
+      "mouth": "small"
+    },
+    {
+      "start": 51.93,
+      "end": 52.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.11,
+      "end": 52.29,
+      "mouth": "small"
+    },
+    {
+      "start": 52.29,
+      "end": 52.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.38,
+      "end": 52.47,
+      "mouth": "small"
+    },
+    {
+      "start": 52.47,
+      "end": 55.35,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "With",
+      "start": 0.0,
+      "end": 0.46000000834465027
+    },
+    {
+      "word": "only",
+      "start": 0.46000000834465027,
+      "end": 0.7799999713897705
+    },
+    {
+      "word": "about",
+      "start": 0.7799999713897705,
+      "end": 1.1399999856948853
+    },
+    {
+      "word": "1",
+      "start": 1.1399999856948853,
+      "end": 1.4800000190734863
+    },
+    {
+      "word": "500",
+      "start": 1.4800000190734863,
+      "end": 2.0399999618530273
+    },
+    {
+      "word": "made",
+      "start": 2.0399999618530273,
+      "end": 2.4200000762939453
+    },
+    {
+      "word": "each",
+      "start": 2.6600000858306885,
+      "end": 2.859999895095825
+    },
+    {
+      "word": "hand",
+      "start": 2.859999895095825,
+      "end": 3.119999885559082
+    },
+    {
+      "word": "assembled",
+      "start": 3.119999885559082,
+      "end": 3.319999933242798
+    },
+    {
+      "word": "in",
+      "start": 3.319999933242798,
+      "end": 3.5799999237060547
+    },
+    {
+      "word": "Sweden",
+      "start": 3.5799999237060547,
+      "end": 3.799999952316284
+    },
+    {
+      "word": "this",
+      "start": 4.119999885559082,
+      "end": 4.239999771118164
+    },
+    {
+      "word": "mid",
+      "start": 4.239999771118164,
+      "end": 4.579999923706055
+    },
+    {
+      "word": "engine",
+      "start": 4.579999923706055,
+      "end": 4.639999866485596
+    },
+    {
+      "word": "marvel",
+      "start": 4.639999866485596,
+      "end": 4.980000019073486
+    },
+    {
+      "word": "truly",
+      "start": 4.980000019073486,
+      "end": 5.420000076293945
+    },
+    {
+      "word": "stands",
+      "start": 5.420000076293945,
+      "end": 5.639999866485596
+    },
+    {
+      "word": "out",
+      "start": 5.639999866485596,
+      "end": 5.940000057220459
+    },
+    {
+      "word": "The",
+      "start": 6.340000152587891,
+      "end": 6.360000133514404
+    },
+    {
+      "word": "Renault",
+      "start": 6.360000133514404,
+      "end": 6.579999923706055
+    },
+    {
+      "word": "Clio",
+      "start": 6.579999923706055,
+      "end": 6.840000152587891
+    },
+    {
+      "word": "V6",
+      "start": 6.840000152587891,
+      "end": 7.260000228881836
+    },
+    {
+      "word": "Phase",
+      "start": 7.260000228881836,
+      "end": 7.559999942779541
+    },
+    {
+      "word": "1",
+      "start": 7.559999942779541,
+      "end": 7.71999979019165
+    },
+    {
+      "word": "models",
+      "start": 7.71999979019165,
+      "end": 7.980000019073486
+    },
+    {
+      "word": "were",
+      "start": 7.980000019073486,
+      "end": 8.260000228881836
+    },
+    {
+      "word": "assembled",
+      "start": 8.260000228881836,
+      "end": 8.460000038146973
+    },
+    {
+      "word": "by",
+      "start": 8.460000038146973,
+      "end": 8.739999771118164
+    },
+    {
+      "word": "Tom",
+      "start": 8.739999771118164,
+      "end": 9.039999961853027
+    },
+    {
+      "word": "Walkinshaw",
+      "start": 9.039999961853027,
+      "end": 9.460000038146973
+    },
+    {
+      "word": "Racing",
+      "start": 9.460000038146973,
+      "end": 9.800000190734863
+    },
+    {
+      "word": "TWR",
+      "start": 9.800000190734863,
+      "end": 10.520000457763672
+    },
+    {
+      "word": "in",
+      "start": 10.520000457763672,
+      "end": 10.979999542236328
+    },
+    {
+      "word": "Uddevalla",
+      "start": 10.979999542236328,
+      "end": 11.279999732971191
+    },
+    {
+      "word": "Sweden",
+      "start": 11.65999984741211,
+      "end": 11.65999984741211
+    },
+    {
+      "word": "before",
+      "start": 11.979999542236328,
+      "end": 12.140000343322754
+    },
+    {
+      "word": "production",
+      "start": 12.140000343322754,
+      "end": 12.5600004196167
+    },
+    {
+      "word": "shifted",
+      "start": 12.5600004196167,
+      "end": 12.859999656677246
+    },
+    {
+      "word": "to",
+      "start": 12.859999656677246,
+      "end": 13.15999984741211
+    },
+    {
+      "word": "Renault",
+      "start": 13.15999984741211,
+      "end": 13.34000015258789
+    },
+    {
+      "word": "Sport",
+      "start": 13.34000015258789,
+      "end": 13.520000457763672
+    },
+    {
+      "word": "in",
+      "start": 13.520000457763672,
+      "end": 13.760000228881836
+    },
+    {
+      "word": "Dieppe",
+      "start": 13.760000228881836,
+      "end": 13.960000038146973
+    },
+    {
+      "word": "France",
+      "start": 14.239999771118164,
+      "end": 14.239999771118164
+    },
+    {
+      "word": "for",
+      "start": 14.239999771118164,
+      "end": 14.5
+    },
+    {
+      "word": "Phase",
+      "start": 14.5,
+      "end": 14.640000343322754
+    },
+    {
+      "word": "2",
+      "start": 14.640000343322754,
+      "end": 14.899999618530273
+    },
+    {
+      "word": "The",
+      "start": 15.0600004196167,
+      "end": 15.420000076293945
+    },
+    {
+      "word": "Renault",
+      "start": 15.420000076293945,
+      "end": 15.699999809265137
+    },
+    {
+      "word": "Clio",
+      "start": 15.699999809265137,
+      "end": 15.899999618530273
+    },
+    {
+      "word": "V6",
+      "start": 15.899999618530273,
+      "end": 16.280000686645508
+    },
+    {
+      "word": "is",
+      "start": 16.280000686645508,
+      "end": 16.479999542236328
+    },
+    {
+      "word": "powered",
+      "start": 16.479999542236328,
+      "end": 16.65999984741211
+    },
+    {
+      "word": "by",
+      "start": 16.65999984741211,
+      "end": 16.860000610351562
+    },
+    {
+      "word": "a",
+      "start": 16.860000610351562,
+      "end": 17.040000915527344
+    },
+    {
+      "word": "3",
+      "start": 17.040000915527344,
+      "end": 17.239999771118164
+    },
+    {
+      "word": "0",
+      "start": 17.239999771118164,
+      "end": 17.559999465942383
+    },
+    {
+      "word": "liter",
+      "start": 17.559999465942383,
+      "end": 17.700000762939453
+    },
+    {
+      "word": "V6",
+      "start": 17.700000762939453,
+      "end": 18.1200008392334
+    },
+    {
+      "word": "engine",
+      "start": 18.1200008392334,
+      "end": 18.440000534057617
+    },
+    {
+      "word": "delivering",
+      "start": 18.719999313354492,
+      "end": 18.940000534057617
+    },
+    {
+      "word": "230",
+      "start": 18.940000534057617,
+      "end": 19.6200008392334
+    },
+    {
+      "word": "horsepower",
+      "start": 19.6200008392334,
+      "end": 20.1200008392334
+    },
+    {
+      "word": "and",
+      "start": 20.1200008392334,
+      "end": 20.520000457763672
+    },
+    {
+      "word": "221",
+      "start": 20.520000457763672,
+      "end": 21.219999313354492
+    },
+    {
+      "word": "pound",
+      "start": 21.219999313354492,
+      "end": 21.559999465942383
+    },
+    {
+      "word": "feet",
+      "start": 21.559999465942383,
+      "end": 21.579999923706055
+    },
+    {
+      "word": "of",
+      "start": 21.579999923706055,
+      "end": 21.979999542236328
+    },
+    {
+      "word": "torque",
+      "start": 21.979999542236328,
+      "end": 21.979999542236328
+    },
+    {
+      "word": "making",
+      "start": 22.34000015258789,
+      "end": 22.479999542236328
+    },
+    {
+      "word": "it",
+      "start": 22.479999542236328,
+      "end": 22.639999389648438
+    },
+    {
+      "word": "a",
+      "start": 22.639999389648438,
+      "end": 23.020000457763672
+    },
+    {
+      "word": "compact",
+      "start": 23.020000457763672,
+      "end": 23.280000686645508
+    },
+    {
+      "word": "powerhouse",
+      "start": 23.280000686645508,
+      "end": 23.860000610351562
+    },
+    {
+      "word": "Inside",
+      "start": 23.860000610351562,
+      "end": 24.700000762939453
+    },
+    {
+      "word": "the",
+      "start": 24.979999542236328,
+      "end": 25.15999984741211
+    },
+    {
+      "word": "Clio",
+      "start": 25.15999984741211,
+      "end": 25.31999969482422
+    },
+    {
+      "word": "V6",
+      "start": 25.31999969482422,
+      "end": 25.700000762939453
+    },
+    {
+      "word": "features",
+      "start": 25.700000762939453,
+      "end": 26.040000915527344
+    },
+    {
+      "word": "suede",
+      "start": 26.040000915527344,
+      "end": 26.360000610351562
+    },
+    {
+      "word": "covered",
+      "start": 26.360000610351562,
+      "end": 26.760000228881836
+    },
+    {
+      "word": "steering",
+      "start": 26.760000228881836,
+      "end": 27.020000457763672
+    },
+    {
+      "word": "and",
+      "start": 27.020000457763672,
+      "end": 27.459999084472656
+    },
+    {
+      "word": "Renault",
+      "start": 27.459999084472656,
+      "end": 27.65999984741211
+    },
+    {
+      "word": "Sport",
+      "start": 27.65999984741211,
+      "end": 27.940000534057617
+    },
+    {
+      "word": "seats",
+      "start": 27.940000534057617,
+      "end": 28.18000030517578
+    },
+    {
+      "word": "emphasizing",
+      "start": 28.959999084472656,
+      "end": 28.959999084472656
+    },
+    {
+      "word": "its",
+      "start": 28.959999084472656,
+      "end": 29.239999771118164
+    },
+    {
+      "word": "sporty",
+      "start": 29.239999771118164,
+      "end": 29.479999542236328
+    },
+    {
+      "word": "character",
+      "start": 29.479999542236328,
+      "end": 29.860000610351562
+    },
+    {
+      "word": "This",
+      "start": 30.200000762939453,
+      "end": 30.5
+    },
+    {
+      "word": "Clio",
+      "start": 30.5,
+      "end": 30.760000228881836
+    },
+    {
+      "word": "earned",
+      "start": 30.760000228881836,
+      "end": 31.0
+    },
+    {
+      "word": "a",
+      "start": 31.0,
+      "end": 31.280000686645508
+    },
+    {
+      "word": "reputation",
+      "start": 31.280000686645508,
+      "end": 31.6200008392334
+    },
+    {
+      "word": "for",
+      "start": 31.6200008392334,
+      "end": 31.8799991607666
+    },
+    {
+      "word": "its",
+      "start": 31.8799991607666,
+      "end": 32.459999084472656
+    },
+    {
+      "word": "challenging",
+      "start": 32.459999084472656,
+      "end": 32.459999084472656
+    },
+    {
+      "word": "handling",
+      "start": 32.459999084472656,
+      "end": 32.81999969482422
+    },
+    {
+      "word": "catching",
+      "start": 33.380001068115234,
+      "end": 33.380001068115234
+    },
+    {
+      "word": "out",
+      "start": 33.380001068115234,
+      "end": 33.91999816894531
+    },
+    {
+      "word": "drivers",
+      "start": 33.91999816894531,
+      "end": 33.91999816894531
+    },
+    {
+      "word": "who",
+      "start": 33.91999816894531,
+      "end": 34.2400016784668
+    },
+    {
+      "word": "underestimated",
+      "start": 34.2400016784668,
+      "end": 34.720001220703125
+    },
+    {
+      "word": "its",
+      "start": 34.720001220703125,
+      "end": 35.0
+    },
+    {
+      "word": "demands",
+      "start": 35.0,
+      "end": 35.31999969482422
+    },
+    {
+      "word": "The",
+      "start": 35.68000030517578,
+      "end": 35.900001525878906
+    },
+    {
+      "word": "Clio",
+      "start": 35.900001525878906,
+      "end": 36.08000183105469
+    },
+    {
+      "word": "V6's",
+      "start": 36.08000183105469,
+      "end": 36.68000030517578
+    },
+    {
+      "word": "dual",
+      "start": 36.68000030517578,
+      "end": 36.91999816894531
+    },
+    {
+      "word": "exhausts",
+      "start": 36.91999816894531,
+      "end": 37.86000061035156
+    },
+    {
+      "word": "integrated",
+      "start": 37.86000061035156,
+      "end": 37.86000061035156
+    },
+    {
+      "word": "into",
+      "start": 37.86000061035156,
+      "end": 38.060001373291016
+    },
+    {
+      "word": "the",
+      "start": 38.060001373291016,
+      "end": 38.220001220703125
+    },
+    {
+      "word": "rear",
+      "start": 38.220001220703125,
+      "end": 38.439998626708984
+    },
+    {
+      "word": "bumper",
+      "start": 38.439998626708984,
+      "end": 38.68000030517578
+    },
+    {
+      "word": "highlight",
+      "start": 38.68000030517578,
+      "end": 39.279998779296875
+    },
+    {
+      "word": "its",
+      "start": 39.279998779296875,
+      "end": 39.5
+    },
+    {
+      "word": "aggressive",
+      "start": 39.5,
+      "end": 39.91999816894531
+    },
+    {
+      "word": "and",
+      "start": 39.91999816894531,
+      "end": 40.20000076293945
+    },
+    {
+      "word": "performance",
+      "start": 40.20000076293945,
+      "end": 40.63999938964844
+    },
+    {
+      "word": "oriented",
+      "start": 40.63999938964844,
+      "end": 41.02000045776367
+    },
+    {
+      "word": "appearance",
+      "start": 41.02000045776367,
+      "end": 41.400001525878906
+    },
+    {
+      "word": "They",
+      "start": 41.81999969482422,
+      "end": 41.939998626708984
+    },
+    {
+      "word": "go",
+      "start": 41.939998626708984,
+      "end": 42.119998931884766
+    },
+    {
+      "word": "for",
+      "start": 42.119998931884766,
+      "end": 42.2400016784668
+    },
+    {
+      "word": "about",
+      "start": 42.2400016784668,
+      "end": 42.52000045776367
+    },
+    {
+      "word": "90",
+      "start": 42.52000045776367,
+      "end": 43.02000045776367
+    },
+    {
+      "word": "000",
+      "start": 43.02000045776367,
+      "end": 43.099998474121094
+    },
+    {
+      "word": "today",
+      "start": 43.099998474121094,
+      "end": 43.84000015258789
+    },
+    {
+      "word": "holding",
+      "start": 44.2400016784668,
+      "end": 44.279998779296875
+    },
+    {
+      "word": "their",
+      "start": 44.279998779296875,
+      "end": 44.58000183105469
+    },
+    {
+      "word": "value",
+      "start": 44.58000183105469,
+      "end": 44.79999923706055
+    },
+    {
+      "word": "remarkably",
+      "start": 44.79999923706055,
+      "end": 45.31999969482422
+    },
+    {
+      "word": "well",
+      "start": 45.31999969482422,
+      "end": 45.86000061035156
+    },
+    {
+      "word": "compared",
+      "start": 45.86000061035156,
+      "end": 46.099998474121094
+    },
+    {
+      "word": "to",
+      "start": 46.099998474121094,
+      "end": 46.34000015258789
+    },
+    {
+      "word": "standard",
+      "start": 46.34000015258789,
+      "end": 46.599998474121094
+    },
+    {
+      "word": "models",
+      "start": 46.599998474121094,
+      "end": 46.880001068115234
+    },
+    {
+      "word": "With",
+      "start": 47.0,
+      "end": 47.380001068115234
+    },
+    {
+      "word": "its",
+      "start": 47.380001068115234,
+      "end": 47.540000915527344
+    },
+    {
+      "word": "unique",
+      "start": 47.540000915527344,
+      "end": 47.81999969482422
+    },
+    {
+      "word": "build",
+      "start": 47.81999969482422,
+      "end": 48.13999938964844
+    },
+    {
+      "word": "and",
+      "start": 48.13999938964844,
+      "end": 48.52000045776367
+    },
+    {
+      "word": "racing",
+      "start": 48.52000045776367,
+      "end": 48.79999923706055
+    },
+    {
+      "word": "roots",
+      "start": 48.79999923706055,
+      "end": 49.099998474121094
+    },
+    {
+      "word": "would",
+      "start": 49.380001068115234,
+      "end": 49.540000915527344
+    },
+    {
+      "word": "you",
+      "start": 49.540000915527344,
+      "end": 49.720001220703125
+    },
+    {
+      "word": "take",
+      "start": 49.720001220703125,
+      "end": 49.880001068115234
+    },
+    {
+      "word": "the",
+      "start": 49.880001068115234,
+      "end": 50.08000183105469
+    },
+    {
+      "word": "Renault",
+      "start": 50.08000183105469,
+      "end": 50.29999923706055
+    },
+    {
+      "word": "Clio",
+      "start": 50.29999923706055,
+      "end": 50.560001373291016
+    },
+    {
+      "word": "V6",
+      "start": 50.560001373291016,
+      "end": 51.0
+    },
+    {
+      "word": "over",
+      "start": 51.0,
+      "end": 51.279998779296875
+    },
+    {
+      "word": "a",
+      "start": 51.279998779296875,
+      "end": 51.400001525878906
+    },
+    {
+      "word": "more",
+      "start": 51.400001525878906,
+      "end": 51.68000030517578
+    },
+    {
+      "word": "traditional",
+      "start": 51.68000030517578,
+      "end": 52.0
+    },
+    {
+      "word": "hatchback",
+      "start": 52.0,
+      "end": 52.47999954223633
+    },
+    {
+      "word": "Thanks",
+      "start": 53.86000061035156,
+      "end": 54.900001525878906
+    },
+    {
+      "word": "for",
+      "start": 54.900001525878906,
+      "end": 54.900001525878906
+    },
+    {
+      "word": "watching",
+      "start": 54.900001525878906,
+      "end": 54.900001525878906
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual-extra/4-side-intake-for-engine.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Side intake for engine",
+      "slot": "side",
+      "role": "detail",
+      "photo_id": "side-closeup-restored-1792602544312-4-4",
+      "cue_label": "[side-closeup-restored-1792602544312-4-4] Side intake for engine",
+      "note": ""
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual-extra/7-not-a-same-seats-as-normal-cleo.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Not a same seats as normal cleo",
+      "slot": "interior",
+      "role": "detail",
+      "photo_id": "interior-closeup-restored-1792602544312-7-7",
+      "cue_label": "[interior-closeup-restored-1792602544312-7-7] Not a same seats as normal cleo",
+      "note": ""
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual-extra/1-wide-body-back.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear",
+      "label": "Wide body back",
+      "slot": "rear",
+      "role": "detail",
+      "photo_id": "rear-closeup-restored-1792602544312-1-1",
+      "cue_label": "[rear-closeup-restored-1792602544312-1-1] Wide body back",
+      "note": ""
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-wide-body-panels.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Wide body panels",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1792602544312-0-0",
+          "cue_label": "[front-closeup-restored-1792602544312-0-0] Wide body panels",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/2-head-light.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Head light",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1792602544312-2-2",
+          "cue_label": "[front-closeup-restored-1792602544312-2-2] Head light",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/4-side-intake-for-engine.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side intake for engine",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1792602544312-4-4",
+          "cue_label": "[side-closeup-restored-1792602544312-4-4] Side intake for engine",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/6-wide-bidy-on-wheels.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Wide bidy on wheels",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1792602544312-6-6",
+          "cue_label": "[side-closeup-restored-1792602544312-6-6] Wide bidy on wheels",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/1-wide-body-back.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Wide body back",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1792602544312-1-1",
+          "cue_label": "[rear-closeup-restored-1792602544312-1-1] Wide body back",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/3-back-light.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Back light",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1792602544312-3-3",
+          "cue_label": "[rear-closeup-restored-1792602544312-3-3] Back light",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/5-dual-exhaust.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Dual Exhaust",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1792602544312-5-5",
+          "cue_label": "[rear-closeup-restored-1792602544312-5-5] Dual Exhaust",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/8-engine-seats-right-behind-you.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Engine seats right behind you",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1792602544312-8-8",
+          "cue_label": "[engine-closeup-restored-1792602544312-8-8] Engine seats right behind you",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/7-not-a-same-seats-as-normal-cleo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Not a same seats as normal cleo",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1792602544312-7-7",
+          "cue_label": "[interior-closeup-restored-1792602544312-7-7] Not a same seats as normal cleo",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {},
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/rE0Ev7gV/2001-renault-clio-v6?ss_id=2bf8630c-938c-44cd-81bc-5434433f42e3&ref=pr_1_1",
+    "title": "2001 Renault Clio V6",
+    "price_text": "Sold for $90,000",
+    "auction_state": "sold",
+    "facts": {
+      "Make": "Renault",
+      "Engine": "3.0L V6",
+      "Model": "Clio",
+      "Drivetrain": "Rear-wheel drive",
+      "Transmission": "Manual (6-Speed)",
+      "Body Style": "Hatchback"
+    },
+    "sections": {
+      "Highlights": "THIS... is a 2001 Renault Clio V6, finished in Iceberg Silver with a blue and gray interior, and will be displayed live at Willow Springs Reimagined as part of the Cars & Bids Willow Springs Collection. This Renault is a Japanese-market, left-hand-drive hatchback currently titled in Washington state and located in California. Badged the \"Lut\u00e9cia V6\" for the Japanese market, this Clio V6 is equipped with a metric instrument cluster, and the odometer currently displays approximately 30,300 kilometers, or approximately 19,000 miles. A partial list of notable equipment reported by the selling dealer includes 17-inch wheels, a Clio V6-specific body kit, leather and synthetic suede upholstery, front sport seats, and a CD player. The selling dealer reports no notable modifications. Born from the Clio V6 Trophy race car, the road-going Renault Clio V6 arrived in 2001 as one of Renault Sport's most ambitious creations. For the \"Phase 1\" Clio V6, TWR transformed the humble front-engine, front-wheel-drive Clio into a wide-bodied, mid-engine, rear-wheel-drive two-seater, with each example hand-built in Uddevalla, Sweden. Its exotic layout, dramatic proportions, and famously demanding handling made it unlike virtually anything else on sale -- and its appearances in mid-'00s media like Top Gear, Need for Speed, and plenty more helped establish the Clio V6 as a modern Renault icon even in parts of the world where it was never originally sold. Power comes from a 3.0-liter V6, rated at 230 horsepower and 221 lb-ft of torque. Output is sent to the rear wheels via a 6-speed manual transmission.",
+      "Equipment": "A partial list of notable equipment reported by the selling dealer includes: 17-inch wheels Clio V6-specific body kit Rear wiper Leather and synthetic suede upholstery Front sport seats Air conditioning CD player",
+      "Seller Notes": "The selling dealer notes that this Clio V6 is sold as a Lut\u00e9cia V6 in the Japanese market, and the vehicle is titled as a 2001 Renault Lut\u00e9cia. Since this Clio is an imported vehicle, it may not pass emissions testing in some states. As always, it's the buyer's responsibility to perform all due diligence regarding registering this Renault in their respective state prior to placing a bid."
+    }
+  },
+  "market_value": {
+    "count": 1,
+    "median": 90000,
+    "low": 90000,
+    "high": 90000,
+    "examples": [],
+    "source": "sale"
+  },
+  "voice_auditions": {
+    "onyx": "single-renault-clio-v6-20261021170921/voice_auditions/onyx.mp3",
+    "british_narrator": "single-renault-clio-v6-20261021170921/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-renault-clio-v6-20261021170921/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-renault-clio-v6-20261021170921/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-renault-clio-v6-20261021170921/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-renault-clio-v6-20261021170921/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "left",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 5.6600000858306885,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 14.980000019073486,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 29.72000026702881,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 41.420000076293945,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 46.79999923706055,
+        "layout": "bottom-center",
+        "framing": "half"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 7.21,
+        "pose": "presentLeft"
+      },
+      {
+        "start": 9.66,
+        "pose": "rest"
+      },
+      {
+        "start": 10.85,
+        "pose": "chest"
+      },
+      {
+        "start": 12.3,
+        "pose": "rest"
+      },
+      {
+        "start": 14.25,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 15.7,
+        "pose": "rest"
+      },
+      {
+        "start": 17.65,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 19.1,
+        "pose": "rest"
+      },
+      {
+        "start": 21.05,
+        "pose": "open"
+      },
+      {
+        "start": 22.5,
+        "pose": "rest"
+      },
+      {
+        "start": 24.45,
+        "pose": "chest"
+      },
+      {
+        "start": 25.9,
+        "pose": "rest"
+      },
+      {
+        "start": 27.85,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 29.3,
+        "pose": "rest"
+      },
+      {
+        "start": 30.22,
+        "pose": "presentLeft"
+      },
+      {
+        "start": 32.67,
+        "pose": "rest"
+      },
+      {
+        "start": 32.7,
+        "pose": "rest"
+      },
+      {
+        "start": 34.65,
+        "pose": "open"
+      },
+      {
+        "start": 36.1,
+        "pose": "rest"
+      },
+      {
+        "start": 38.05,
+        "pose": "chest"
+      },
+      {
+        "start": 39.5,
+        "pose": "rest"
+      },
+      {
+        "start": 41.92,
+        "pose": "presentLeft"
+      },
+      {
+        "start": 44.37,
+        "pose": "rest"
+      },
+      {
+        "start": 45.97,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 47.42,
+        "pose": "rest"
+      },
+      {
+        "start": 49.37,
+        "pose": "open"
+      },
+      {
+        "start": 50.82,
+        "pose": "rest"
+      },
+      {
+        "start": 52.77,
+        "pose": "chest"
+      },
+      {
+        "start": 54.22,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 5.6600000858306885,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-wide-body-panels.jpg",
+            "label": "Wide body panels",
+            "photo_id": "front-closeup-restored-1792602544312-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-head-light.jpg",
+            "label": "Head light",
+            "photo_id": "front-closeup-restored-1792602544312-2-2"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 5.6600000858306885
+      },
+      {
+        "start": 5.6600000858306885,
+        "end": 14.980000019073486,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-side-intake-for-engine.jpg",
+            "label": "Side intake for engine",
+            "photo_id": "side-closeup-restored-1792602544312-4-4"
+          },
+          {
+            "path": "images/manual-extra/6-wide-bidy-on-wheels.jpg",
+            "label": "Wide bidy on wheels",
+            "photo_id": "side-closeup-restored-1792602544312-6-6"
+          }
+        ],
+        "active": "side-closeup-restored-1792602544312-4-4",
+        "active_index": 0,
+        "chapter_start": 5.6600000858306885,
+        "chapter_end": 14.980000019073486
+      },
+      {
+        "start": 14.980000019073486,
+        "end": 23.25,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/8-engine-seats-right-behind-you.jpg",
+            "label": "Engine seats right behind you",
+            "photo_id": "engine-closeup-restored-1792602544312-8-8"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 14.980000019073486,
+        "chapter_end": 23.25
+      },
+      {
+        "start": 23.25,
+        "end": 29.72000026702881,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/7-not-a-same-seats-as-normal-cleo.jpg",
+            "label": "Not a same seats as normal cleo",
+            "photo_id": "interior-closeup-restored-1792602544312-7-7"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 23.25,
+        "chapter_end": 35.34000015258789
+      },
+      {
+        "start": 29.72000026702881,
+        "end": 35.34000015258789,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/7-not-a-same-seats-as-normal-cleo.jpg",
+            "label": "Not a same seats as normal cleo",
+            "photo_id": "interior-closeup-restored-1792602544312-7-7"
+          }
+        ],
+        "active": "interior-closeup-restored-1792602544312-7-7",
+        "active_index": 0,
+        "chapter_start": 23.25,
+        "chapter_end": 35.34000015258789
+      },
+      {
+        "start": 35.34000015258789,
+        "end": 41.420000076293945,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/1-wide-body-back.jpg",
+            "label": "Wide body back",
+            "photo_id": "rear-closeup-restored-1792602544312-1-1"
+          },
+          {
+            "path": "images/manual-extra/3-back-light.jpg",
+            "label": "Back light",
+            "photo_id": "rear-closeup-restored-1792602544312-3-3"
+          },
+          {
+            "path": "images/manual-extra/5-dual-exhaust.jpg",
+            "label": "Dual Exhaust",
+            "photo_id": "rear-closeup-restored-1792602544312-5-5"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 35.34000015258789,
+        "chapter_end": 46.79999923706055
+      },
+      {
+        "start": 41.420000076293945,
+        "end": 46.79999923706055,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/1-wide-body-back.jpg",
+            "label": "Wide body back",
+            "photo_id": "rear-closeup-restored-1792602544312-1-1"
+          },
+          {
+            "path": "images/manual-extra/3-back-light.jpg",
+            "label": "Back light",
+            "photo_id": "rear-closeup-restored-1792602544312-3-3"
+          },
+          {
+            "path": "images/manual-extra/5-dual-exhaust.jpg",
+            "label": "Dual Exhaust",
+            "photo_id": "rear-closeup-restored-1792602544312-5-5"
+          }
+        ],
+        "active": "rear-closeup-restored-1792602544312-1-1",
+        "active_index": 0,
+        "chapter_start": 35.34000015258789,
+        "chapter_end": 46.79999923706055
+      },
+      {
+        "start": 46.79999923706055,
+        "end": 55.36,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-side-intake-for-engine.jpg",
+            "label": "Side intake for engine",
+            "photo_id": "side-closeup-restored-1792602544312-4-4"
+          },
+          {
+            "path": "images/manual-extra/6-wide-bidy-on-wheels.jpg",
+            "label": "Wide bidy on wheels",
+            "photo_id": "side-closeup-restored-1792602544312-6-6"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 46.79999923706055,
+        "chapter_end": 55.36
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1792602544312-0-0",
+          "front-closeup-restored-1792602544312-2-2"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 5.6600000858306885,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-restored-1792602544312-4-4",
+          "side-closeup-restored-1792602544312-6-6"
+        ],
+        "active": "side-closeup-restored-1792602544312-4-4"
+      },
+      {
+        "scene": 2,
+        "start": 14.980000019073486,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-restored-1792602544312-8-8"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 23.25,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-restored-1792602544312-7-7"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 29.72000026702881,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-restored-1792602544312-7-7"
+        ],
+        "active": "interior-closeup-restored-1792602544312-7-7"
+      },
+      {
+        "scene": 5,
+        "start": 35.34000015258789,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-restored-1792602544312-1-1",
+          "rear-closeup-restored-1792602544312-3-3",
+          "rear-closeup-restored-1792602544312-5-5"
+        ],
+        "active": null
+      },
+      {
+        "scene": 6,
+        "start": 41.420000076293945,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-restored-1792602544312-1-1",
+          "rear-closeup-restored-1792602544312-3-3",
+          "rear-closeup-restored-1792602544312-5-5"
+        ],
+        "active": "rear-closeup-restored-1792602544312-1-1"
+      },
+      {
+        "scene": 7,
+        "start": 46.79999923706055,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-restored-1792602544312-4-4",
+          "side-closeup-restored-1792602544312-6-6"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
