@@ -598,6 +598,20 @@ async function fetchOutputTree({ owner, repo, token }) {
     `https://api.github.com/repos/${owner}/${repo}/git/trees/${commit.tree.sha}?recursive=1`,
     { headers: ghHeaders(token) }
   );
+  // GitHub caps a recursive listing and says so rather than paginating. The
+  // cut is alphabetical by path, so what goes missing is not the oldest
+  // builds but the ones latest in the alphabet: at 45,820 entries it
+  // stopped inside the P's and every Renault, Subaru and Toyota simply was
+  // not there. The dashboard showed a complete-looking list with a build
+  // from an hour ago absent from it, which reads as a run that failed.
+  // Loud, because the silence is the whole problem.
+  if (treeData.truncated) {
+    throw new Error(
+      `GitHub truncated its listing of ${OUTPUT_BRANCH} at ${(treeData.tree || []).length} `
+      + "entries, so this list would be missing builds without saying which. "
+      + "The branch has outgrown one request -- old _frames folders are the usual cause."
+    );
+  }
   return { commitSha, treeSha: commit.tree.sha, entries: treeData.tree || [] };
 }
 

@@ -469,6 +469,16 @@ jobs:
           tmp_dir="$(mktemp -d)"
           mkdir -p "$tmp_dir/cars/single-car-shorts"
           cp -R "cars/single-car-shorts/${{ inputs.draft_id }}" "$tmp_dir/cars/single-car-shorts/${{ inputs.draft_id }}"
+          # _frames is what the renderer draws into: a caption PNG per word,
+          # a headline PNG per character, the narrator's poses. Hundreds of
+          # files per build, regenerated from result.json every render, and
+          # nothing reads them off this branch -- the dashboard skips the
+          # folder by name. Committed anyway they became 82% of the output
+          # tree, and GitHub truncates a recursive tree listing: at 45,820
+          # entries it stopped inside the P's, so every build whose make
+          # sorts after "porsche" vanished from the dashboard. A Renault
+          # looked like a run that never happened.
+          find "$tmp_dir" -type d -name _frames -prune -exec rm -rf {} +
 
           git fetch origin "${OUTPUT_BRANCH}" || true
           if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
