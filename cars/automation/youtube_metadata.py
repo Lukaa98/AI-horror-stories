@@ -199,11 +199,29 @@ def tags_for(package):
     return tags
 
 
+# The channel's own first comment, posted under the video. Four comments
+# across twenty-three videos is the number this exists to move: the closing
+# question is asked out loud and then the video ends, with nowhere to put an
+# answer. A pinned question under it is somewhere.
+#
+# Deliberately not the video's own closing question. That one has already
+# been asked and answered in the viewer's head by the time the comments
+# open; this asks for something only they can supply.
+def comment_for(package):
+    car = package.get("car") or {}
+    name = " ".join(part for part in (
+        fix_name(car.get("make")), fix_name(car.get("model"))) if part)
+    subject = f"the {name}" if name else "this one"
+    return (f"Would you spend the money on {subject}, or put it somewhere else? 👇\n\n"
+            "And tell me what you want to see next — I take requests.")
+
+
 def build_metadata(package, credit_url=""):
     return {
         "title": title_for(package),
         "description": description_for(package, credit_url=credit_url),
         "tags": tags_for(package),
+        "comment": comment_for(package),
     }
 
 

@@ -87,6 +87,30 @@ def post_top_level_comment(youtube, video_id, text):
     return response["id"]
 
 
+def post_comment(youtube, video_id, text):
+    """Leave the channel's own first comment under a video, and return its id.
+
+    A separate call and a separate failure, like the thumbnail: the video is
+    already live by the time this runs.
+
+    It needs the youtube.force-ssl scope, which the device-flow token does
+    NOT carry -- Google keeps force-ssl off the limited-input allowlist, so
+    the re-authorise button cannot mint one. On that token this raises, and
+    the caller reports it rather than losing an upload over a comment.
+
+    YouTube's API cannot pin a comment; that is Studio and the app only. So
+    this posts it and the pinning stays one tap by hand.
+    """
+    response = youtube.commentThreads().insert(
+        part="snippet",
+        body={"snippet": {
+            "videoId": video_id,
+            "topLevelComment": {"snippet": {"textOriginal": str(text)}},
+        }},
+    ).execute()
+    return response.get("id") or ""
+
+
 def set_thumbnail(youtube, video_id, file_path):
     """Attach a custom thumbnail to an already-uploaded video.
 

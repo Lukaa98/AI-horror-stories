@@ -50,6 +50,12 @@ def _run(monkeypatch, listing, uploaded, written, **extra):
 
     uploader.upload_video = fake_upload
     uploader.set_thumbnail = lambda youtube, video_id, file_path: video_id
+
+    def fake_comment(youtube, video_id, text):
+        uploaded.update(comment=text, comment_on=video_id)
+        return "cmt123"
+
+    uploader.post_comment = extra.get("post_comment", fake_comment)
     monkeypatch.setitem(sys.modules, "youtube_tools.youtube_client", client)
     monkeypatch.setitem(sys.modules, "youtube_tools.youtube_uploader", uploader)
     monkeypatch.setattr("sys.argv", ["upload_build", "--build-id", "a-build", *extra.get("argv", [])])
@@ -150,6 +156,7 @@ def test_a_refused_thumbnail_does_not_fail_an_upload_that_worked(monkeypatch):
         raise RuntimeError("thumbnailNotVerified")
 
     uploader.set_thumbnail = refuse
+    uploader.post_comment = lambda youtube, video_id, text: "cmt123"
     monkeypatch.setitem(sys.modules, "youtube_tools.youtube_client", client)
     monkeypatch.setitem(sys.modules, "youtube_tools.youtube_uploader", uploader)
     monkeypatch.setattr("sys.argv", ["upload_build", "--build-id", "a-build"])
@@ -220,6 +227,77 @@ def test_a_scheduled_video_goes_up_private():
     source = Path(upload_build.__file__).read_text()
     assert 'if publish_at:\n        privacy = "private"' in source
     assert "publish_at=publish_at," in source
+
+
+def test_the_channels_own_comment_goes_up_with_the_video(monkeypatch):
+    """Four comments across twenty-three videos. The closing question gets
+    asked out loud and then the video ends with nowhere to answer it."""
+    listing = {"title": "A Title", "description": "Body", "tags": [],
+               "video": "single_car_short.mp4", "privacy": "private", "status": "ready",
+               "comment": "Would you spend the money on the Audi R8? 👇"}
+    uploaded, written = {}, {}
+    _run(monkeypatch, listing, uploaded, written)
+
+    assert uploaded["comment"] == "Would you spend the money on the Audi R8? 👇"
+    assert uploaded["comment_on"] == "vid123", "posted on the video it just uploaded"
+    assert written["payload"]["comment_posted"] is True
+    assert written["payload"]["comment_id"] == "cmt123"
+
+
+def test_a_refused_comment_never_costs_the_upload(monkeypatch):
+    """It needs the force-ssl scope and the device-flow token does not carry
+    one, so this call is expected to fail on the current auth. It runs after
+    the video is already live, so a refusal is recorded exactly like a
+    refused thumbnail -- the one thing it must never do is raise past an
+    upload that has already succeeded."""
+    def refuse(youtube, video_id, text):
+        raise RuntimeError("insufficientPermissions")
+
+    listing = {"title": "A Title", "description": "Body", "tags": [],
+               "video": "single_car_short.mp4", "privacy": "private", "status": "ready",
+               "comment": "Would you spend the money on it? 👇"}
+    uploaded, written = {}, {}
+    assert _run(monkeypatch, listing, uploaded, written, post_comment=refuse) == 0
+
+    assert written["payload"]["video_id"] == "vid123", "the upload still counts"
+    assert written["payload"]["status"] == "uploaded"
+    assert written["payload"]["comment_posted"] is False
+    assert "insufficientPermissions" in written["payload"]["comment_error"]
+
+
+def test_a_build_with_no_comment_posts_nothing(monkeypatch):
+    """An older upload.json, from before comments existed, has no comment
+    in it -- and must not get an empty one."""
+    def refuse(youtube, video_id, text):
+        raise AssertionError("nothing should have been posted")
+
+    listing = {"title": "A Title", "description": "Body", "tags": [],
+               "video": "single_car_short.mp4", "privacy": "private", "status": "ready"}
+    uploaded, written = {}, {}
+    _run(monkeypatch, listing, uploaded, written, post_comment=refuse)
+    assert "comment_posted" not in written["payload"]
+
+
+def test_every_build_writes_a_comment_to_post():
+    """Four comments across twenty-three videos. The closing question is
+    asked out loud and then the video ends with nowhere to answer it."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    from youtube_metadata import build_metadata, comment_for
+
+    package = {"car": {"make": "Audi", "model": "R8 V10 Performance"},
+               "start_year": 2020, "end_year": 2024, "key_specs": {}}
+    comment = build_metadata(package)["comment"]
+    assert comment == comment_for(package)
+    assert "R8" in comment, "it asks about this car, not cars in general"
+    assert comment.strip().endswith("I take requests."), "and it asks for the next one"
+    assert "?" in comment, "a question, so there is something to answer"
+
+    # A package with no car still produces something postable rather than
+    # a sentence with a hole in it.
+    anonymous = comment_for({})
+    assert "this one" in anonymous and anonymous.count("  ") == 0
 
 
 def test_the_upload_workflow_is_dispatchable():

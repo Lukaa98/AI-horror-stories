@@ -3475,6 +3475,105 @@ def test_a_rival_note_cannot_take_the_opening_of_a_35_second_video():
             "Mercedes Benz S580", "2023", style=style, angles="- Audi stopped taking A8 orders")
 
 
+def test_a_broken_hook_outweighs_a_repeated_figure():
+    """The R8 shipped with its title promising one thing and its opening
+    delivering another, because the repair that fixed it introduced a
+    smaller rule and the violation COUNT did not drop. Counted, a hook and
+    a repeated number are worth the same; they are not."""
+    import single_car_short
+
+    hook = ('your title and your first sentence are about different things -- the title is '
+            '"A V10 powerhouse" and the video opens "The hexagonal grille boosts aerodynamics."')
+    polish = 'you state the same number more than once -- "602" 2 times. Say each figure once'
+    unknown = "some rule nobody has classified yet"
+
+    assert single_car_short._violation_weight(hook) == single_car_short.HOOK_WEIGHT
+    assert single_car_short._violation_weight(polish) == single_car_short.POLISH_WEIGHT
+    # Unclassified sits in the middle: it cannot outrank the hook, and it is
+    # not waved through as cosmetic either.
+    assert single_car_short._violation_weight(unknown) == single_car_short.CONTENT_WEIGHT
+    assert (single_car_short.POLISH_WEIGHT
+            < single_car_short.CONTENT_WEIGHT
+            < single_car_short.HOOK_WEIGHT)
+
+    # The exact trade the R8 refused: fix the hook, gain a repeated figure.
+    before = [hook, "you state the horsepower, but not until after scene 3."]
+    after = ["you state the horsepower, but not until after scene 3.", polish]
+    assert len(after) >= len(before), "counted, this trade looks like a wash"
+    assert single_car_short._violation_cost(after) < single_car_short._violation_cost(before), (
+        "weighed, fixing the hook is worth gaining a repeated figure")
+
+
+def test_a_title_rule_is_repaired_by_retitling_not_by_rewriting_a_scene(monkeypatch):
+    """Two of the R8's three shipped rules were about its title, and both
+    were handed to the scene rewriter -- asked to change a line of narration
+    to fix text that is not narration. One came back "did not help", the
+    other "traded for another"."""
+    import single_car_short
+
+    package = {
+        "youtube_title": "The Audi R8 Is A V10 Powerhouse",
+        "scenes": [{"headline": "", "narration": "Six hundred and two horsepower, no turbos."},
+                   {"headline": "", "narration": "This is the Audi R8 V10 Performance."},
+                   {"headline": "", "narration": "So would you take it over a Huracan?"}],
+    }
+    package["script"] = " ".join(s["narration"] for s in package["scenes"])
+
+    violations = single_car_short._script_violations(package, "Audi", "R8")
+    titled = [v for v in violations if v.startswith(single_car_short.TITLE_VIOLATION_MARKER)]
+    assert titled, "the title names the car, which is the rule under test"
+
+    asked = {}
+
+    def fake_rewrite(violation, title, opening, label):
+        asked.update(violation=violation, title=title, opening=opening)
+        return "Six Hundred Horsepower And Not One Turbo"
+
+    monkeypatch.setattr(single_car_short, "_rewrite_title_for", fake_rewrite)
+    repaired = single_car_short._repair_title(
+        package, titled[0], "Audi", "R8", None, "2020 Audi R8")
+
+    # It was given the title and the opening sentence, not the scene list.
+    assert asked["title"] == package["youtube_title"]
+    assert asked["opening"].startswith("Six hundred and two horsepower")
+    # The title moved and the narration did not.
+    assert repaired["youtube_title"] == "Six Hundred Horsepower And Not One Turbo"
+    assert [s["narration"] for s in repaired["scenes"]] == \
+           [s["narration"] for s in package["scenes"]]
+    assert titled[0] not in single_car_short._script_violations(repaired, "Audi", "R8")
+
+
+def test_a_new_title_that_does_not_help_is_thrown_away(monkeypatch):
+    """Same bargain as a scene repair: better or not at all."""
+    import single_car_short
+
+    package = {
+        "youtube_title": "The Audi R8 Is A V10 Powerhouse",
+        "scenes": [{"headline": "", "narration": "Six hundred and two horsepower, no turbos."},
+                   {"headline": "", "narration": "This is the Audi R8 V10 Performance."},
+                   {"headline": "", "narration": "So would you take it over a Huracan?"}],
+    }
+    package["script"] = " ".join(s["narration"] for s in package["scenes"])
+    titled = [v for v in single_car_short._script_violations(package, "Audi", "R8")
+              if v.startswith(single_car_short.TITLE_VIOLATION_MARKER)]
+
+    # Still names the car, so the rule it targeted survives.
+    monkeypatch.setattr(single_car_short, "_rewrite_title_for",
+                        lambda *a, **k: "The Audi R8 Is Still Named Here")
+    assert single_car_short._repair_title(
+        package, titled[0], "Audi", "R8", None, "2020 Audi R8"
+    )["youtube_title"] == package["youtube_title"]
+
+    # A call that blows up leaves the build alone rather than killing it.
+    def boom(*a, **k):
+        raise RuntimeError("the model is down")
+
+    monkeypatch.setattr(single_car_short, "_rewrite_title_for", boom)
+    assert single_car_short._repair_title(
+        package, titled[0], "Audi", "R8", None, "2020 Audi R8"
+    )["youtube_title"] == package["youtube_title"]
+
+
 def test_a_note_the_script_passes_over_is_not_a_violation():
     """Notes are suggestions, not a brief to discharge. A script that leaves
     one out is doing what it was told, so nothing may flag it -- a marque

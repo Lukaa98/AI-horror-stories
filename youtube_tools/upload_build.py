@@ -342,7 +342,7 @@ def main():
         # Imported here so a missing google library is an error from this
         # command rather than from importing the module.
         from youtube_tools.youtube_client import get_authenticated_service
-        from youtube_tools.youtube_uploader import set_thumbnail, upload_video
+        from youtube_tools.youtube_uploader import post_comment, set_thumbnail, upload_video
 
         youtube = get_authenticated_service()
         when = f", public at {publish_at}" if publish_at else ""
@@ -379,6 +379,26 @@ def main():
                 listing["thumbnail_set"] = False
                 listing["thumbnail_error"] = str(error)[:300]
                 print(f"[upload] Thumbnail refused ({error}). The video is up regardless.",
+                      flush=True)
+
+        # The channel's own first comment. Four comments across twenty-three
+        # videos is what this is for -- the closing question gets asked out
+        # loud and then the video ends with nowhere to answer it.
+        #
+        # Needs the force-ssl scope, which a device-flow token does not have,
+        # so this is expected to fail until the token is minted another way.
+        # It runs last and is caught for that reason: a refused comment must
+        # never cost an upload that has already succeeded.
+        comment = str(listing.get("comment") or "").strip()
+        if comment:
+            try:
+                listing["comment_id"] = post_comment(youtube, video_id, comment)
+                listing["comment_posted"] = True
+                print("[upload] Comment posted. Pin it in Studio -- the API cannot.", flush=True)
+            except Exception as error:  # noqa: BLE001 - the video is already live
+                listing["comment_posted"] = False
+                listing["comment_error"] = str(error)[:300]
+                print(f"[upload] Comment refused ({error}). The video is up regardless.",
                       flush=True)
 
     listing.update({

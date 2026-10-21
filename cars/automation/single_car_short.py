@@ -1837,6 +1837,86 @@ def _spec_sheet(package):
     return "\n".join(known)
 
 
+# Not every broken rule costs the same. A repeated figure is a blemish on a
+# video somebody is already watching; an opening that contradicts the title
+# decides whether they watch at all. Counting them equally is what let the
+# R8 ship: the repair that fixed its title/opening mismatch introduced a
+# smaller rule, the count did not drop, and the fix was thrown away. It went
+# out with the worst stay-to-watch of any build -- 17.3% against a 22.3%
+# channel average -- while the people who did get past the opening watched
+# longer than on almost any other video.
+HOOK_VIOLATIONS = (
+    "your title names the car",
+    "your title and your first sentence are about different things",
+    "you never say which car this is",
+    "but not until after scene",
+    "never states the car's horsepower",
+)
+# Worth fixing, but never at the price of the opening.
+POLISH_VIOLATIONS = (
+    "you state the same number more than once",
+    "which is not worth the words",
+    "the rate tells the viewer nothing",
+    "Take the headline text out of the scene",
+)
+HOOK_WEIGHT, CONTENT_WEIGHT, POLISH_WEIGHT = 3, 2, 1
+
+
+def _violation_weight(rule):
+    """What one broken rule costs, for weighing a repair against the script
+    it would replace.
+
+    Anything unrecognised counts as ordinary content: a rule nobody has
+    classified should not be able to outrank the hook, nor be waved through
+    as cosmetic.
+    """
+    text = str(rule or "")
+    if any(marker in text for marker in HOOK_VIOLATIONS):
+        return HOOK_WEIGHT
+    if any(marker in text for marker in POLISH_VIOLATIONS):
+        return POLISH_WEIGHT
+    return CONTENT_WEIGHT
+
+
+def _violation_cost(rules):
+    return sum(_violation_weight(rule) for rule in rules)
+
+
+# The rules about the title, which a scene rewrite cannot fix. Handing them
+# to _rewrite_scene_for asked for a line of narration to be changed in order
+# to fix text that is not narration, and on the R8 both failed for that
+# reason -- one "did not help", one "traded for another".
+TITLE_VIOLATION_MARKER = "your title"
+
+
+def _rewrite_title_for(violation, title, opening, label):
+    """One new YouTube title, fixing one title rule and nothing else.
+
+    The title is the only thing read before the decision to watch, so it is
+    repaired on its own terms rather than by rewriting the video under it.
+    """
+    prompt = (
+        "You are fixing the title of a short vertical car video about the "
+        + str(label) + ".\n\n"
+        'The current title is: "' + str(title) + '"\n'
+        'The video opens with this exact sentence: "' + str(opening) + '"\n\n'
+        "One rule is broken: " + str(violation) + "\n\n"
+        "Write ONE replacement title. It has to promise exactly what that opening sentence "
+        "delivers, in words a viewer would recognise from it when they hear it two seconds "
+        "later, and it must NOT name the car -- the name is the payoff the video itself "
+        "delivers, and the description carries it for search. Keep it under about sixty "
+        "characters, make it a claim or a question somebody would stop scrolling for, and do "
+        "not invent a single fact the opening does not already contain.\n"
+        'Reply as JSON: {"title": "<the new title>"}'
+    )
+    response = with_openai_retry(lambda: OpenAI().responses.create(
+        model="gpt-4o", input=prompt,
+        text={"format": {"type": "json_object"}},
+    ))
+    answer = json.loads(response.output_text.strip())
+    return _strip_citations(str(answer["title"])).strip()
+
+
 def _rewrite_scene_for(violation, numbered_scenes, label, specs=""):
     """Ask for one scene rewritten to fix one rule, and nothing else.
 
@@ -1980,6 +2060,43 @@ def _repair_history(package, make, model, market, label):
     return candidate
 
 
+def _repair_title(package, violation, make, model, market, label, pasted_slots=()):
+    """A new title for one title rule, kept only if it is actually better.
+
+    Same bargain as a scene repair: the rule it targeted has to be gone and
+    the script has to be cheaper overall, or the original title stands.
+    """
+    title = str(package.get("youtube_title") or "").strip()
+    scenes = package.get("scenes") or []
+    opening = _SENTENCE_SPLIT_RE.split((scenes[0].get("narration") or "").strip())[0] if scenes else ""
+    if not title or not opening:
+        return package
+    try:
+        rewritten = _rewrite_title_for(violation, title, opening, label)
+    except Exception as error:  # noqa: BLE001 - a build is worth more than a title
+        _note_repair(what=violation[:120], outcome="call failed", detail=str(error)[:300])
+        print(f"[single-car] Could not rewrite the title ({error}); leaving it.")
+        return package
+    if not rewritten:
+        _note_repair(what=violation[:120], outcome="unusable", returned=str(rewritten)[:300])
+        return package
+
+    candidate = copy.deepcopy(package)
+    candidate["youtube_title"] = rewritten
+    after = _script_violations(candidate, make, model, market, pasted_slots)
+    before_cost = _violation_cost(_script_violations(package, make, model, market, pasted_slots))
+    if violation in after or _violation_cost(after) >= before_cost:
+        _note_repair(what=violation[:120],
+                     outcome="did not help" if violation in after else "traded for another",
+                     returned=rewritten[:300],
+                     still=[rule[:120] for rule in after])
+        print(f'[single-car] The new title "{rewritten}" did not help; keeping the original.')
+        return package
+    _note_repair(what=violation[:120], outcome="applied", returned=rewritten[:300])
+    print(f'[single-car] Retitled: "{rewritten}"')
+    return candidate
+
+
 def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_REPAIRS, pasted_slots=()):
     """Fix what the retries left broken, one rule at a time.
 
@@ -2010,6 +2127,13 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
             package = replaced
             continue
         scenes = package.get("scenes") or []
+        # A title rule is not fixable by rewriting narration, so it gets the
+        # title rewritten instead. Everything after this point edits a scene.
+        if violation.startswith(TITLE_VIOLATION_MARKER):
+            package = _repair_title(package, violation, make, model, market, label, pasted_slots)
+            if violation in _script_violations(package, make, model, market, pasted_slots):
+                refused.add(violation)
+            continue
         numbered = "\n".join(f"{i}. {s.get('narration') or ''}" for i, s in enumerate(scenes, 1))
         try:
             index, narration = _rewrite_scene_for(violation, numbered, label,
@@ -2030,11 +2154,14 @@ def _repair_violations(package, make, model, market, label, limit=MAX_TARGETED_R
         candidate["script"] = " ".join(s["narration"] for s in candidate["scenes"])
         candidate["word_count"] = _word_count(candidate["script"])
         after = _script_violations(candidate, make, model, market, pasted_slots)
-        # Counted the same way on both sides -- `violations` is filtered by
+        # Weighed the same way on both sides -- `violations` is filtered by
         # what has already been refused, so comparing it against the full
-        # list would call every repair a regression.
-        before_count = len(_script_violations(package, make, model, market, pasted_slots))
-        if violation in after or len(after) >= before_count:
+        # list would call every repair a regression. Weight rather than
+        # count, so trading a broken hook for a repeated figure is a fix and
+        # not a wash.
+        before_cost = _violation_cost(
+            _script_violations(package, make, model, market, pasted_slots))
+        if violation in after or _violation_cost(after) >= before_cost:
             _note_repair(what=violation[:120],
                          outcome="did not help" if violation in after else "traded for another",
                          returned=narration[:300],
