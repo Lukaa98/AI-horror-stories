@@ -29,8 +29,17 @@ const AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
 // and the Data API has no equivalent. A token granted before this was added
 // comes back 403 from that service, which is why the analytics call says so
 // in words rather than returning nothing.
+// force-ssl is what posting a comment needs, and it is the reason the
+// comment is posted from here rather than from the upload workflow. Google
+// keeps force-ssl off the limited-input allowlist, so the device flow
+// behind the re-authorise button cannot mint a refresh token carrying it --
+// the workflow asks and is refused. This flow can ask for it, because it
+// never wants a refresh token in the first place: an hour-long access token
+// in a tab is all a comment needs, and it sidesteps both the seven-day
+// token expiry and the client secret a page like this must not hold.
 const SCOPE = [
   "https://www.googleapis.com/auth/youtube",
+  "https://www.googleapis.com/auth/youtube.force-ssl",
   "https://www.googleapis.com/auth/yt-analytics.readonly",
 ].join(" ");
 

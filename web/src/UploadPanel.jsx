@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./UploadPanel.css";
 import { DEFAULT_BRANCH } from "./githubDispatch";
+import { postComment } from "./youtubeLive";
+import { signedIn } from "./googleAuth";
 
 const UPLOAD_WORKFLOW = "youtube-upload.yml";
 const OUTPUT_BRANCH = "cars-output";
@@ -18,11 +20,6 @@ const GIVE_UP_MS = 31 * 60 * 1000;
 // Save rather than a failed upload after the video has gone across.
 const TITLE_LIMIT = 100;
 const DESCRIPTION_LIMIT = 5000;
-
-async function readJson(settings, path) {
-  const found = await readListing(settings, path);
-  return found ? found.listing : null;
-}
 
 async function readListing(settings, path) {
   const { owner, repo, token } = settings;
@@ -99,6 +96,8 @@ export default function UploadPanel({ settings, buildId }) {
   // The next 12:15, which is the slot the channel posts in -- today if that
   // has not happened yet, otherwise tomorrow. Prefilled rather than blank so
   // scheduling is one click on the usual day.
+  // "", "posting", "posted", or the reason it could not be.
+  const [commentState, setCommentState] = useState("");
   const [publishAt, setPublishAt] = useState(() => {
     const at = new Date();
     at.setHours(12, 15, 0, 0);
@@ -142,11 +141,41 @@ export default function UploadPanel({ settings, buildId }) {
 
   const poll = useCallback(async () => {
     try {
-      const found = await readJson(settings, path);
-      if (found?.video_id) {
+      // readListing rather than readJson: the workflow has just rewritten
+      // this file, so the sha held from the first load is stale, and
+      // recording the comment below needs the one that is current.
+      const found = await readListing(settings, path);
+      const live = found?.listing;
+      if (live?.video_id) {
         stop();
-        setListing(found);
+        setListing(live);
+        setSha(found.sha);
         setState("done");
+        // The workflow already tried this and was refused -- its token
+        // cannot carry force-ssl. This tab's can, so the comment goes up
+        // from here, the moment there is a video to put it under.
+        if (live.comment && !live.comment_posted && signedIn()) {
+          setCommentState("posting");
+          postComment(live.video_id, live.comment)
+            .then(async (id) => {
+              setCommentState("posted");
+              // Written back so a refresh does not post it a second time.
+              // The comment is already up by this point, so failing to
+              // record it is worth saying and not worth undoing.
+              try {
+                const updated = { ...live, comment_posted: true, comment_id: id,
+                                  comment_error: undefined };
+                setSha(await writeJson(settings, path, found.sha, updated));
+                setListing(updated);
+              } catch (err) {
+                setCommentState(`posted, but not recorded (${err.message || err}) -- `
+                                + "do not reload this panel or it will post again");
+              }
+            })
+            .catch((err) => setCommentState(String(err.message || err)));
+        } else if (live.comment && !live.comment_posted) {
+          setCommentState("Sign in on the YouTube tab and reopen this to post it.");
+        }
         return;
       }
       if (Date.now() - startedAt.current > GIVE_UP_MS) {
@@ -462,6 +491,16 @@ export default function UploadPanel({ settings, buildId }) {
           </button>
           {state === "watching" && (
             <p className="hint">Sending the video. This usually takes a couple of minutes.</p>
+          )}
+          {commentState === "posting" && <p className="hint">Posting the first comment…</p>}
+          {commentState === "posted" && (
+            <p className="hint">
+              First comment posted. <strong>Pin it in Studio</strong> — YouTube's API cannot,
+              so that part is still by hand.
+            </p>
+          )}
+          {commentState && !["posting", "posted"].includes(commentState) && (
+            <p className="hint">Comment not posted: {commentState}</p>
           )}
         </>
       )}

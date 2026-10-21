@@ -209,6 +209,26 @@ async function writeStatus(videoId, status) {
   });
 }
 
+/** Leave the channel's own first comment under a video, and return its id.
+ *
+ *  Posted from the browser rather than from the upload workflow: it needs
+ *  the force-ssl scope, which only this flow can be granted. YouTube's API
+ *  cannot pin a comment -- that is Studio and the app only -- so pinning
+ *  stays one tap by hand after this puts the comment there. */
+export async function postComment(videoId, text) {
+  const posted = await youtube("commentThreads", {
+    method: "POST",
+    params: { part: "snippet" },
+    body: {
+      snippet: {
+        videoId,
+        topLevelComment: { snippet: { textOriginal: String(text) } },
+      },
+    },
+  });
+  return posted.id || "";
+}
+
 /** Take a scheduled video public now, whatever it was scheduled for. */
 export async function publishNow(videoId) {
   const status = await currentStatus(videoId);

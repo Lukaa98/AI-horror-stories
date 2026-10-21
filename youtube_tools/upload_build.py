@@ -385,10 +385,13 @@ def main():
         # videos is what this is for -- the closing question gets asked out
         # loud and then the video ends with nowhere to answer it.
         #
-        # Needs the force-ssl scope, which a device-flow token does not have,
-        # so this is expected to fail until the token is minted another way.
-        # It runs last and is caught for that reason: a refused comment must
-        # never cost an upload that has already succeeded.
+        # Needs the force-ssl scope, which a device-flow token does not
+        # have, so on the current auth this is EXPECTED to be refused -- the
+        # dashboard posts it instead, from a browser token that can carry
+        # force-ssl, as soon as it sees the video id appear here. This stays
+        # because a token minted another way would make it work with no
+        # further change. It runs last and is caught either way: a comment
+        # must never cost an upload that has already succeeded.
         comment = str(listing.get("comment") or "").strip()
         if comment:
             try:
@@ -398,7 +401,8 @@ def main():
             except Exception as error:  # noqa: BLE001 - the video is already live
                 listing["comment_posted"] = False
                 listing["comment_error"] = str(error)[:300]
-                print(f"[upload] Comment refused ({error}). The video is up regardless.",
+                print(f"[upload] Comment refused ({error}). Expected on a device-flow "
+                      "token -- the dashboard posts it. The video is up regardless.",
                       flush=True)
 
     listing.update({
