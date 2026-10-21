@@ -139,6 +139,38 @@ export default function UploadPanel({ settings, buildId }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, path, settings.owner, settings.repo, settings.token]);
 
+  // Posting the comment, from wherever it is asked for: automatically when
+  // an upload lands, or from the button for a video whose upload landed
+  // while nobody was signed in. It used to live inside poll() alone, which
+  // meant a video that missed its one chance could never be given another
+  // -- the Clio's comment had nowhere to go but by hand.
+  const sendComment = useCallback(async (live, listingSha) => {
+    if (!live?.video_id || !live.comment) return;
+    if (!signedIn()) {
+      setCommentState('Sign in on the YouTube tab, then press "Post the first comment".');
+      return;
+    }
+    setCommentState("posting");
+    try {
+      const id = await postComment(live.video_id, live.comment);
+      setCommentState("posted");
+      // Written back so a refresh, or a second press, does not post it
+      // twice. The comment is already up by now, so failing to record it is
+      // worth saying and not worth undoing.
+      try {
+        const updated = { ...live, comment_posted: true, comment_id: id,
+                          comment_error: undefined };
+        setSha(await writeJson(settings, path, listingSha, updated));
+        setListing(updated);
+      } catch (err) {
+        setCommentState(`posted, but not recorded (${err.message || err}) -- `
+                        + "it is up, so do not press this again");
+      }
+    } catch (err) {
+      setCommentState(String(err.message || err));
+    }
+  }, [settings, path]);
+
   const poll = useCallback(async () => {
     try {
       // readListing rather than readJson: the workflow has just rewritten
@@ -154,28 +186,7 @@ export default function UploadPanel({ settings, buildId }) {
         // The workflow already tried this and was refused -- its token
         // cannot carry force-ssl. This tab's can, so the comment goes up
         // from here, the moment there is a video to put it under.
-        if (live.comment && !live.comment_posted && signedIn()) {
-          setCommentState("posting");
-          postComment(live.video_id, live.comment)
-            .then(async (id) => {
-              setCommentState("posted");
-              // Written back so a refresh does not post it a second time.
-              // The comment is already up by this point, so failing to
-              // record it is worth saying and not worth undoing.
-              try {
-                const updated = { ...live, comment_posted: true, comment_id: id,
-                                  comment_error: undefined };
-                setSha(await writeJson(settings, path, found.sha, updated));
-                setListing(updated);
-              } catch (err) {
-                setCommentState(`posted, but not recorded (${err.message || err}) -- `
-                                + "do not reload this panel or it will post again");
-              }
-            })
-            .catch((err) => setCommentState(String(err.message || err)));
-        } else if (live.comment && !live.comment_posted) {
-          setCommentState("Sign in on the YouTube tab and reopen this to post it.");
-        }
+        if (!live.comment_posted) sendComment(live, found.sha);
         return;
       }
       if (Date.now() - startedAt.current > GIVE_UP_MS) {
@@ -188,7 +199,7 @@ export default function UploadPanel({ settings, buildId }) {
       setState("error");
       setError(String(err.message || err));
     }
-  }, [settings, path, stop]);
+  }, [settings, path, stop, sendComment]);
 
   // Edits are written back to upload.json rather than passed to the
   // workflow, so the file stays the one source of what gets published --
@@ -491,6 +502,13 @@ export default function UploadPanel({ settings, buildId }) {
           </button>
           {state === "watching" && (
             <p className="hint">Sending the video. This usually takes a couple of minutes.</p>
+          )}
+          {listing?.video_id && listing?.comment && !listing?.comment_posted
+            && commentState !== "posting" && (
+            <button type="button" className="secondary"
+                    onClick={() => sendComment(listing, sha)}>
+              Post the first comment
+            </button>
           )}
           {commentState === "posting" && <p className="hint">Posting the first comment…</p>}
           {commentState === "posted" && (
