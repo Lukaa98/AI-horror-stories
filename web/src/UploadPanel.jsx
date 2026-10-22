@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./UploadPanel.css";
 import { DEFAULT_BRANCH } from "./githubDispatch";
-import { postComment } from "./youtubeLive";
+import { listComments, postComment } from "./youtubeLive";
 import { signedIn } from "./googleAuth";
 
 const UPLOAD_WORKFLOW = "youtube-upload.yml";
@@ -98,6 +98,9 @@ export default function UploadPanel({ settings, buildId }) {
   // scheduling is one click on the usual day.
   // "", "posting", "posted", or the reason it could not be.
   const [commentState, setCommentState] = useState("");
+  // What is actually under the video. null until asked for.
+  const [comments, setComments] = useState(null);
+  const [commentsState, setCommentsState] = useState("");
   const [publishAt, setPublishAt] = useState(() => {
     const at = new Date();
     at.setHours(12, 15, 0, 0);
@@ -117,6 +120,21 @@ export default function UploadPanel({ settings, buildId }) {
 
   useEffect(() => stop, [stop]);
 
+  const loadComments = useCallback(async (videoId) => {
+    if (!videoId) return;
+    if (!signedIn()) {
+      setCommentsState("Sign in on the YouTube tab to read them.");
+      return;
+    }
+    setCommentsState("loading");
+    try {
+      setComments(await listComments(videoId));
+      setCommentsState("");
+    } catch (err) {
+      setCommentsState(String(err.message || err));
+    }
+  }, []);
+
   useEffect(() => {
     if (!ready) return undefined;
     let live = true;
@@ -126,7 +144,10 @@ export default function UploadPanel({ settings, buildId }) {
         if (!live) return;
         setListing(found ? found.listing : null);
         setSha(found ? found.sha : null);
-        if (found?.listing?.video_id) setState("done");
+        if (found?.listing?.video_id) {
+          setState("done");
+          loadComments(found.listing.video_id);
+        }
         if (found) setDraft({
           title: found.listing.title || "",
           description: found.listing.description || "",
@@ -162,6 +183,7 @@ export default function UploadPanel({ settings, buildId }) {
                           comment_error: undefined };
         setSha(await writeJson(settings, path, listingSha, updated));
         setListing(updated);
+        loadComments(live.video_id);
       } catch (err) {
         setCommentState(`posted, but not recorded (${err.message || err}) -- `
                         + "it is up, so do not press this again");
@@ -169,7 +191,7 @@ export default function UploadPanel({ settings, buildId }) {
     } catch (err) {
       setCommentState(String(err.message || err));
     }
-  }, [settings, path]);
+  }, [settings, path, loadComments]);
 
   const poll = useCallback(async () => {
     try {
@@ -529,6 +551,46 @@ export default function UploadPanel({ settings, buildId }) {
       )}
       {commentState && !["posting", "posted"].includes(commentState) && (
         <p className="hint">Comment not posted: {commentState}</p>
+      )}
+
+      {listing?.video_id && (
+        <div className="yt-comments">
+          <div className="yt-comments-head">
+            <strong>
+              Comments{comments ? ` (${comments.length}${comments.length >= 50 ? "+" : ""})` : ""}
+            </strong>
+            <button type="button" className="secondary"
+                    onClick={() => loadComments(listing.video_id)}
+                    disabled={commentsState === "loading"}>
+              {commentsState === "loading" ? "Reading…" : "Refresh"}
+            </button>
+          </div>
+          {commentsState && commentsState !== "loading" && (
+            <p className="hint">{commentsState}</p>
+          )}
+          {comments && !comments.length && commentsState !== "loading" && (
+            <p className="hint">Nothing yet.</p>
+          )}
+          {(comments || []).map((item) => (
+            <div className="yt-comment" key={item.id}>
+              {item.authorImage
+                ? <img src={item.authorImage} alt="" loading="lazy" />
+                : <span className="yt-comment-blank" />}
+              <div className="yt-comment-body">
+                <span className="yt-comment-who">
+                  {item.author}
+                  {/* The channel's own, so the pinned question is obvious
+                      next to somebody answering it. */}
+                  {item.id === listing.comment_id ? " · yours" : ""}
+                  {item.at ? ` · ${new Date(item.at).toLocaleDateString()}` : ""}
+                  {item.likes ? ` · ${item.likes} like${item.likes === 1 ? "" : "s"}` : ""}
+                  {item.replies ? ` · ${item.replies} repl${item.replies === 1 ? "y" : "ies"}` : ""}
+                </span>
+                <span className="yt-comment-text">{item.text}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
       {state === "error" && <p className="upload-error">{error}</p>}
         </div>

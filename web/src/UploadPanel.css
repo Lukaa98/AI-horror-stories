@@ -122,3 +122,42 @@
 .upload-edit-open {
   margin-top: 6px;
 }
+
+/* Comments on the video this build became. Read live from YouTube, so the
+   question that was posted and anything answering it sit together. */
+.yt-comments {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line, #2a2a35);
+}
+.yt-comments-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.yt-comment {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line, #2a2a35);
+}
+.yt-comment:first-of-type { border-top: none; }
+.yt-comment img,
+.yt-comment-blank {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--sunken, #1b1b23);
+}
+.yt-comment-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.yt-comment-who { font-size: 12px; opacity: 0.7; }
+.yt-comment-text { white-space: pre-wrap; overflow-wrap: anywhere; }

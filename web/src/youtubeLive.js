@@ -209,6 +209,39 @@ async function writeStatus(videoId, status) {
   });
 }
 
+/** Every top-level comment on a video, newest first.
+ *
+ *  Read from here rather than through a workflow for the same reason the
+ *  posting is: this tab holds a token that can see them, and a round trip
+ *  through Actions to read a handful of comments would take minutes.
+ *
+ *  Returns [] for a video with comments switched off or none yet -- both
+ *  are ordinary states, not errors. */
+export async function listComments(videoId, max = 50) {
+  const found = await youtube("commentThreads", {
+    params: {
+      part: "snippet",
+      videoId,
+      order: "time",
+      maxResults: String(Math.min(100, Math.max(1, max))),
+      textFormat: "plainText",
+    },
+  });
+  return (found.items || []).map((thread) => {
+    const top = thread.snippet?.topLevelComment?.snippet || {};
+    return {
+      id: thread.id,
+      author: top.authorDisplayName || "",
+      authorImage: top.authorProfileImageUrl || "",
+      text: top.textOriginal || top.textDisplay || "",
+      likes: top.likeCount || 0,
+      at: top.publishedAt || "",
+      replies: thread.snippet?.totalReplyCount || 0,
+    };
+  });
+}
+
+
 /** Leave the channel's own first comment under a video, and return its id.
  *
  *  Posted from the browser rather than from the upload workflow: it needs
