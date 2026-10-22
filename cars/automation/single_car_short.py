@@ -3199,8 +3199,15 @@ def _photos_argument(raw):
         )
     if not isinstance(parsed, dict):
         raise SystemExit(f"--photos must be a JSON object of slot -> URL, got {type(parsed).__name__}.")
-    return {key: str(value).strip() for key, value in parsed.items()
+    # engine_clip is the one value here that is not a URL string. All 25
+    # workflow inputs are spoken for -- GitHub's limit -- so it travels in
+    # this object, and a filter that keeps only strings would drop it
+    # without a word, which is the failure this function exists to prevent.
+    kept = {key: str(value).strip() for key, value in parsed.items()
             if isinstance(value, str) and value.strip()}
+    if isinstance(parsed.get("engine_clip"), dict):
+        kept["engine_clip"] = parsed["engine_clip"]
+    return kept
 
 
 def _year_in(text):
@@ -3336,6 +3343,69 @@ def generate_voice_auditions(script, output_dir, chosen_preset):
 # swallowed. A short lead-in gives the encoder and the viewer's player
 # somewhere to start.
 NARRATION_LEAD_IN_SECONDS = 0.35
+
+
+# Between the engine note and the first word. Butted straight together
+# they read as one sound and the voice seems to interrupt the car.
+ENGINE_CLIP_GAP_SECONDS = 0.3
+# The clip is somebody's phone video and the narration is a studio voice,
+# so they arrive at wildly different levels. Both are brought to the same
+# loudness rather than trusting either.
+ENGINE_CLIP_LUFS = -18.0
+
+
+def prepend_engine_clip(audio_path, clip, seconds=NARRATION_LEAD_IN_SECONDS):
+    """Put a few seconds of the listing's own engine note in front.
+
+    Replaces the plain lead-in, and runs in the same place, which is what
+    makes this cheap: the word timeline is measured after it, so captions,
+    mouth shapes and every scene boundary shift to match without the
+    renderer knowing a clip is there at all.
+
+    Returns the clip's length in seconds, or 0.0 if nothing was prepended.
+    A hook is worth less than the build, so every failure here is caught
+    and leaves an ordinary narration behind.
+    """
+    url = str((clip or {}).get("url") or "").strip()
+    try:
+        start = float((clip or {}).get("start"))
+        end = float((clip or {}).get("end"))
+    except (TypeError, ValueError):
+        return 0.0
+    if not url or not (end > start >= 0):
+        return 0.0
+
+    audio_path = Path(audio_path)
+    mixed = audio_path.with_name(f"{audio_path.stem}-engine{audio_path.suffix}")
+    length = end - start
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y",
+             # Seek before -i: on an HLS manifest this skips the fetch of
+             # everything before the cut rather than downloading it to
+             # throw away.
+             "-ss", f"{start:.3f}", "-t", f"{length:.3f}", "-i", url,
+             "-i", str(audio_path),
+             "-filter_complex",
+             f"[0:a]aformat=sample_rates=24000:channel_layouts=mono,"
+             f"loudnorm=I={ENGINE_CLIP_LUFS}:TP=-2:LRA=11,"
+             f"apad=pad_dur={ENGINE_CLIP_GAP_SECONDS}[clip];"
+             f"[1:a]aformat=sample_rates=24000:channel_layouts=mono[voice];"
+             f"[clip][voice]concat=n=2:v=0:a=1[out]",
+             "-map", "[out]", str(mixed)],
+            check=True, capture_output=True, text=True, timeout=300,
+        )
+    except Exception as error:  # noqa: BLE001 - a hook is not worth the build
+        detail = getattr(error, "stderr", "") or str(error)
+        print(f"[single-car] Could not cut the engine clip ({str(detail)[-300:]}); "
+              "the narration goes out as it was.")
+        return 0.0
+    if not mixed.exists() or mixed.stat().st_size == 0:
+        print("[single-car] The engine clip came back empty; the narration is unchanged.")
+        return 0.0
+    mixed.replace(audio_path)
+    print(f"[single-car] Engine clip: {length:.1f}s from {start:.1f}s, before the narration.")
+    return length + ENGINE_CLIP_GAP_SECONDS
 
 
 def add_narration_lead_in(audio_path, seconds=NARRATION_LEAD_IN_SECONDS):
@@ -3778,7 +3848,18 @@ def build_short(args):
     )
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
-    add_narration_lead_in(audio_path)
+    # The engine note stands in for the lead-in when there is one: both
+    # exist to put something in front of the first word, and two of them
+    # would be a clip followed by silence followed by the voice.
+    engine_clip = photos.get("engine_clip") if isinstance(photos, dict) else None
+    engine_lead = prepend_engine_clip(audio_path, engine_clip) if engine_clip else 0.0
+    if not engine_lead:
+        add_narration_lead_in(audio_path)
+    else:
+        # Recorded so a build that shipped with a clip can be told apart
+        # from one that asked for a clip and did not get it -- the cut is
+        # best-effort and says so in the log, which nobody reads later.
+        package["engine_clip"] = {**engine_clip, "lead_seconds": round(engine_lead, 3)}
     # The dense style runs longer on purpose: 180 words at gpt-audio's ~2.5
     # a second is 72 seconds raw, and squeezing that into 55 would need
     # 1.3x. Normalising to 63 asks for 1.15x, which is what the classic
