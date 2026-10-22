@@ -503,24 +503,32 @@ export default function UploadPanel({ settings, buildId }) {
           {state === "watching" && (
             <p className="hint">Sending the video. This usually takes a couple of minutes.</p>
           )}
-          {listing?.video_id && listing?.comment && !listing?.comment_posted
-            && commentState !== "posting" && (
-            <button type="button" className="secondary"
-                    onClick={() => sendComment(listing, sha)}>
-              Post the first comment
-            </button>
-          )}
-          {commentState === "posting" && <p className="hint">Posting the first comment…</p>}
-          {commentState === "posted" && (
-            <p className="hint">
-              First comment posted. <strong>Pin it in Studio</strong> — YouTube's API cannot,
-              so that part is still by hand.
-            </p>
-          )}
-          {commentState && !["posting", "posted"].includes(commentState) && (
-            <p className="hint">Comment not posted: {commentState}</p>
-          )}
         </>
+      )}
+      {/* Outside the uploaded/not-yet-uploaded split on purpose. It lived in
+          the second branch, which is the one that stops rendering the moment
+          a video id exists -- so the button to post a comment was only ever
+          on screen for videos that did not yet have anywhere to put one. */}
+      {listing?.video_id && listing?.comment && !listing?.comment_posted
+        && commentState !== "posting" && (
+        <p className="hint">
+          <button type="button" className="secondary"
+                  onClick={() => sendComment(listing, sha)}>
+            Post the first comment
+          </button>{" "}
+          The upload workflow cannot: its token has no force-ssl scope. This tab
+          can, once you are signed in on the YouTube tab.
+        </p>
+      )}
+      {commentState === "posting" && <p className="hint">Posting the first comment…</p>}
+      {commentState === "posted" && (
+        <p className="hint">
+          First comment posted. <strong>Pin it in Studio</strong> — YouTube's API cannot,
+          so that part is still by hand.
+        </p>
+      )}
+      {commentState && !["posting", "posted"].includes(commentState) && (
+        <p className="hint">Comment not posted: {commentState}</p>
       )}
       {state === "error" && <p className="upload-error">{error}</p>}
         </div>
