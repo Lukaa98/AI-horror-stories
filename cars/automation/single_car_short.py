@@ -33,7 +33,7 @@ from research_request import (
     IMAGE_REVIEW_MODEL,
     review_and_rename_entry_images,
 )
-from generate_sample import ROOT
+from generate_sample import ROOT, CANVAS
 from narrator_script import (_extract_wav, build_mouth_timeline, narration_settings,
                              synthesize_narration)
 from narrator_video import render_narrator_video
@@ -3354,17 +3354,21 @@ ENGINE_CLIP_GAP_SECONDS = 0.3
 ENGINE_CLIP_LUFS = -18.0
 
 
-def prepend_engine_clip(audio_path, clip, seconds=NARRATION_LEAD_IN_SECONDS):
-    """Put a few seconds of the listing's own engine note in front.
+def prepend_engine_clip(video_path, clip, size=CANVAS, fps=24):
+    """Put the listing's own start-up on the front of the finished film.
 
-    Replaces the plain lead-in, and runs in the same place, which is what
-    makes this cheap: the word timeline is measured after it, so captions,
-    mouth shapes and every scene boundary shift to match without the
-    renderer knowing a clip is there at all.
+    Picture and sound both: a start-up is something to watch, and an engine
+    note over a still photo is half of it.
+
+    It runs on the rendered mp4 rather than inside it. The clip is its own
+    segment, so the narration, the word timeline and every caption stay
+    exactly where the renderer put them -- and it is not touched by the
+    tempo pass, which stretches speech to hit a target length and would
+    play an engine at 1.4x.
 
     Returns the clip's length in seconds, or 0.0 if nothing was prepended.
-    A hook is worth less than the build, so every failure here is caught
-    and leaves an ordinary narration behind.
+    A hook is worth less than the build, so every failure is caught and
+    leaves the film as it was rendered.
     """
     url = str((clip or {}).get("url") or "").strip()
     try:
@@ -3375,37 +3379,55 @@ def prepend_engine_clip(audio_path, clip, seconds=NARRATION_LEAD_IN_SECONDS):
     if not url or not (end > start >= 0):
         return 0.0
 
-    audio_path = Path(audio_path)
-    mixed = audio_path.with_name(f"{audio_path.stem}-engine{audio_path.suffix}")
+    video_path = Path(video_path)
+    joined = video_path.with_name(f"{video_path.stem}-engine{video_path.suffix}")
     length = end - start
+    width, height = size
     try:
         subprocess.run(
             ["ffmpeg", "-y",
-             # Seek before -i: on an HLS manifest this skips the fetch of
+             # Seek before -i: on an HLS manifest this skips fetching
              # everything before the cut rather than downloading it to
              # throw away.
              "-ss", f"{start:.3f}", "-t", f"{length:.3f}", "-i", url,
-             "-i", str(audio_path),
+             "-i", str(video_path),
              "-filter_complex",
-             f"[0:a]aformat=sample_rates=24000:channel_layouts=mono,"
+             # Phone video arrives in whatever shape it was shot. Fitted
+             # whole rather than cropped to fill: a start-up framed on the
+             # exhaust loses the exhaust to a centre crop. The padding is
+             # white because the film it joins is on a white canvas.
+             f"[0:v]scale={width}:{height}:force_original_aspect_ratio=decrease,"
+             f"pad={width}:{height}:(ow-iw)/2:(oh-ih)/2:color=white,"
+             f"setsar=1,fps={fps},format=yuv420p[clipv];"
+             # A phone recording of an engine and a studio voice arrive at
+             # completely different levels; both are brought to the same
+             # loudness rather than either being trusted.
+             # The second aformat is not a duplicate: loudnorm resamples to
+             # 192kHz internally and hands that on, so without it the concat
+             # inherits 192k and the file comes out as 96kHz AAC.
+             f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo,"
              f"loudnorm=I={ENGINE_CLIP_LUFS}:TP=-2:LRA=11,"
-             f"apad=pad_dur={ENGINE_CLIP_GAP_SECONDS}[clip];"
-             f"[1:a]aformat=sample_rates=24000:channel_layouts=mono[voice];"
-             f"[clip][voice]concat=n=2:v=0:a=1[out]",
-             "-map", "[out]", str(mixed)],
-            check=True, capture_output=True, text=True, timeout=300,
+             f"aformat=sample_rates=48000:channel_layouts=stereo[clipa];"
+             f"[1:v]scale={width}:{height},setsar=1,fps={fps},format=yuv420p[filmv];"
+             f"[1:a]aformat=sample_rates=48000:channel_layouts=stereo[filma];"
+             f"[clipv][clipa][filmv][filma]concat=n=2:v=1:a=1[v][a]",
+             "-map", "[v]", "-map", "[a]",
+             "-c:v", "libx264", "-preset", "medium", "-pix_fmt", "yuv420p",
+             "-c:a", "aac", "-ar", "48000", str(joined)],
+            check=True, capture_output=True, text=True, timeout=900,
         )
     except Exception as error:  # noqa: BLE001 - a hook is not worth the build
         detail = getattr(error, "stderr", "") or str(error)
-        print(f"[single-car] Could not cut the engine clip ({str(detail)[-300:]}); "
-              "the narration goes out as it was.")
+        print(f"[single-car] Could not join the engine clip ({str(detail)[-400:]}); "
+              "the video goes out as it was rendered.")
         return 0.0
-    if not mixed.exists() or mixed.stat().st_size == 0:
-        print("[single-car] The engine clip came back empty; the narration is unchanged.")
+    if not joined.exists() or joined.stat().st_size == 0:
+        print("[single-car] The engine clip came back empty; the video is unchanged.")
         return 0.0
-    mixed.replace(audio_path)
-    print(f"[single-car] Engine clip: {length:.1f}s from {start:.1f}s, before the narration.")
-    return length + ENGINE_CLIP_GAP_SECONDS
+    joined.replace(video_path)
+    print(f"[single-car] Engine clip: {length:.1f}s of video and sound from {start:.1f}s, "
+          "in front of the film.")
+    return length
 
 
 def add_narration_lead_in(audio_path, seconds=NARRATION_LEAD_IN_SECONDS):
@@ -3858,20 +3880,6 @@ def build_short(args):
     normalized_duration = normalize_audio_duration(
         audio_path, target=chosen_style["seconds"],
         minimum=chosen_style["window"][0], maximum=chosen_style["window"][1])
-    # After the tempo pass, not before. Normalisation stretches the whole
-    # file to hit a target length, and the first M2 build with a clip came
-    # back with its five seconds of exhaust played at about 1.4x: the first
-    # word landed at 3.76s against a 5.3s lead. Words survive that -- it is
-    # what the pass is for -- and an engine does not. Still before
-    # transcription, so the word timeline is measured over the finished
-    # audio and the captions stay in step without the renderer knowing.
-    engine_lead = prepend_engine_clip(audio_path, engine_clip) if engine_clip else 0.0
-    if engine_lead:
-        normalized_duration += engine_lead
-        # Recorded so a build that shipped with a clip can be told apart
-        # from one that asked for a clip and did not get it -- the cut is
-        # best-effort and says so in the log, which nobody reads later.
-        package["engine_clip"] = {**engine_clip, "lead_seconds": round(engine_lead, 3)}
     voice_auditions = (
         generate_voice_auditions(package["script"], output_dir, args.voice) if args.audition_voices else {}
     )
@@ -3905,15 +3913,6 @@ def build_short(args):
             normalized_duration = normalize_audio_duration(
                 audio_path, target=chosen_style["seconds"],
                 minimum=chosen_style["window"][0], maximum=chosen_style["window"][1])
-            # A retake throws away the audio the clip was joined to, so it
-            # has to be joined again -- otherwise asking for a second take
-            # is a quiet way to lose the engine note.
-            if engine_clip:
-                engine_lead = prepend_engine_clip(audio_path, engine_clip)
-                if engine_lead:
-                    normalized_duration += engine_lead
-                    package["engine_clip"] = {**engine_clip,
-                                              "lead_seconds": round(engine_lead, 3)}
             word_timeline = transcribe_word_timeline(audio_path)
             unspoken = unspoken_tail(package["script"], word_timeline)
         except Exception as exc:  # noqa: BLE001 - a build is worth more than a retake
@@ -4006,6 +4005,17 @@ def build_short(args):
     media_paths = [output_dir / item["path"] for item in media]
     video_path = output_dir / "single_car_short.mp4"
     render_narrator_video(media_paths, manifest, video_path)
+    # The start-up, picture and sound, joined onto the front of the
+    # finished film. Last, and on the rendered file, so the narration and
+    # every caption stay where the renderer put them.
+    engine_lead = prepend_engine_clip(video_path, engine_clip) if engine_clip else 0.0
+    if engine_lead:
+        # Recorded so a build that shipped with a clip can be told apart
+        # from one that asked for a clip and did not get it -- the join is
+        # best-effort and says so in a log nobody reads later.
+        manifest["engine_clip"] = {**engine_clip, "lead_seconds": round(engine_lead, 3)}
+        manifest["duration_seconds"] = round(
+            float(manifest.get("duration_seconds") or 0) + engine_lead, 3)
     manifest["video"] = video_path.name
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
