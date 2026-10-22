@@ -506,8 +506,20 @@ jobs:
           cp -R "$tmp_dir/cars/listing-videos/${{ inputs.draft_id }}" "cars/listing-videos/${{ inputs.draft_id }}"
           git add "cars/listing-videos/${{ inputs.draft_id }}"
           git commit -m "cars: listing videos ${{ inputs.draft_id }}" || exit 0
-          git pull --rebase origin "${OUTPUT_BRANCH}" || true
-          git push origin "${OUTPUT_BRANCH}"
+          # Two probes of the same listing write the same path, and one of
+          # them loses the push. Both had read the page fine, so a failure
+          # here is a race and not a result -- the same race the single-car
+          # step already retries through.
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin "${OUTPUT_BRANCH}" || true
+            if git push origin "${OUTPUT_BRANCH}"; then
+              exit 0
+            fi
+            echo "push failed (attempt ${attempt}); retrying in $((attempt * 5))s"
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push ${OUTPUT_BRANCH} after 5 attempts."
+          exit 1
 
       - name: Commit single-car short
         if: ${{ inputs.mode == 'single_car' }}
