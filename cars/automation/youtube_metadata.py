@@ -170,7 +170,7 @@ def description_for(package, credit_url=""):
     lines = [title_for(package), ""]
     spec_line = f"Taking a look at the {name}"
     if figures:
-        spec_line += " — " + ", ".join(figures)
+        spec_line += " - " + ", ".join(figures)
     lines.append(f"{spec_line}. {flag}💨".strip())
     lines += ["", "Subscribe for more fire car content. 🔥", "", _hashtags(package)]
     credit = photo_credit(credit_url)
@@ -213,15 +213,32 @@ def comment_for(package):
         fix_name(car.get("make")), fix_name(car.get("model"))) if part)
     subject = f"the {name}" if name else "this one"
     return (f"Would you spend the money on {subject}, or put it somewhere else? 👇\n\n"
-            "And tell me what you want to see next — I take requests.")
+            "And tell me what you want to see next - I take requests.")
+
+
+# An em dash is one of the few punctuation marks almost nobody types on a
+# phone, so a feed full of them reads as machine-written whatever the words
+# say. Every public string goes through this: the title and description a
+# viewer reads before deciding, and the comment under the video.
+_WIDE_DASH_RE = re.compile(r"\s*[—–]\s*")
+
+
+def plain_dashes(text):
+    """Em and en dashes as a spaced hyphen.
+
+    Spaced on purpose. "handling-catching out drivers" reads as one
+    hyphenated word, which is not what the sentence meant, and is also not
+    how a speech model would say it.
+    """
+    return _WIDE_DASH_RE.sub(" - ", str(text or "")).strip()
 
 
 def build_metadata(package, credit_url=""):
     return {
-        "title": title_for(package),
-        "description": description_for(package, credit_url=credit_url),
-        "tags": tags_for(package),
-        "comment": comment_for(package),
+        "title": plain_dashes(title_for(package)),
+        "description": plain_dashes(description_for(package, credit_url=credit_url)),
+        "tags": [plain_dashes(tag) for tag in tags_for(package)],
+        "comment": plain_dashes(comment_for(package)),
     }
 
 

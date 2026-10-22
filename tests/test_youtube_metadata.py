@@ -126,3 +126,53 @@ def test_the_audition_tool_reads_every_voice_not_a_quarter_of_them():
     # The American presets exist and are reachable, which was the gap.
     for preset in ("car_host", "warm_enthusiast", "trailer_hype", "clean_news"):
         assert preset in VOICE_PRESETS
+
+
+def test_no_em_dashes_reach_anything_public():
+    """An em dash is one of the few marks almost nobody types on a phone, so
+    a feed of them reads as machine-written whatever the words say. 74 of 89
+    shipped descriptions carried one, from a hardcoded " - " in the template
+    that was not a hyphen."""
+    from youtube_metadata import build_metadata, plain_dashes
+
+    package = {
+        "car": {"make": "Aston Martin", "model": "Vantage"},
+        "start_year": 2025, "end_year": 2025,
+        "key_specs": {"horsepower": "656 hp", "torque": "590 lb-ft"},
+        "youtube_title": "A 656-hp Send-off – The Last of Its Kind? \U0001f525",
+    }
+    built = build_metadata(package)
+    for field in ("title", "description", "comment"):
+        assert "—" not in built[field] and "–" not in built[field], field
+    assert all("—" not in t and "–" not in t for t in built["tags"])
+
+    # Spaced, because an unspaced hyphen welds two words into one.
+    assert plain_dashes("handling—catching out drivers") == "handling - catching out drivers"
+    assert plain_dashes("about $130,000 today— this one") == "about $130,000 today - this one"
+    # Hyphens that were always hyphens are left exactly as they are.
+    for untouched in ("A 603-hp farewell", "2005-2006 Ford GT", "590 lb-ft", "Air-Cooled"):
+        assert plain_dashes(untouched) == untouched
+    assert plain_dashes(None) == "" and plain_dashes("") == ""
+
+
+def test_the_narration_and_its_captions_lose_them_together():
+    """The script is public twice: spoken, and printed a word at a time in
+    the caption band. Normalising one and not the other is how they drift."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
+    import single_car_short
+
+    package = {"scenes": [
+        {"headline": "Hand—Built", "narration": "It is quick—genuinely quick."},
+        {"headline": "Value", "narration": "They trade at $90,000 today – and hold it."},
+    ]}
+    package["script"] = " ".join(s["narration"] for s in package["scenes"])
+    out = single_car_short._plain_dashes_everywhere(package)
+
+    joined = " ".join(s["narration"] for s in out["scenes"]) + " ".join(
+        s["headline"] for s in out["scenes"])
+    assert "—" not in joined and "–" not in joined
+    # The script stays exactly the scenes joined, so a caption timed off one
+    # cannot disagree with the audio read from the other.
+    assert out["script"] == " ".join(s["narration"] for s in out["scenes"])

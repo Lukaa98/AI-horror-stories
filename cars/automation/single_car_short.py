@@ -22,7 +22,7 @@ import requests
 from background_removal import remove_background
 from market_value import spoken_price, summarise_comps, value_from_input, value_from_sale
 from thumbnail import build_thumbnail
-from youtube_metadata import build_metadata as build_youtube_metadata
+from youtube_metadata import build_metadata as build_youtube_metadata, plain_dashes
 from cars_and_bids import (enrich_entry_from_manifest, scrape_auction_comps, scrape_auction_facts,
                            scrape_auction_images,
                            scrape_entry_images)
@@ -2060,6 +2060,28 @@ def _repair_history(package, make, model, market, label):
     return candidate
 
 
+def _plain_dashes_everywhere(package):
+    """Em and en dashes out of every string this build will show or speak.
+
+    The title and description are handled in youtube_metadata, which is
+    where they are built; this is the narration, the headlines typed across
+    the top, and the spoken script they are joined into.
+    """
+    for scene in package.get("scenes") or []:
+        for field in ("narration", "headline", "stat_label", "stat_value",
+                      "stat_label_2", "stat_value_2"):
+            if isinstance(scene.get(field), str):
+                scene[field] = plain_dashes(scene[field])
+    if isinstance(package.get("script"), str):
+        package["script"] = " ".join(
+            str(s.get("narration") or "") for s in (package.get("scenes") or [])
+        ).strip() or plain_dashes(package["script"])
+    for field in ("title", "youtube_title"):
+        if isinstance(package.get(field), str):
+            package[field] = plain_dashes(package[field])
+    return package
+
+
 def _repair_title(package, violation, make, model, market, label, pasted_slots=()):
     """A new title for one title rule, kept only if it is actually better.
 
@@ -2574,6 +2596,13 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
     # the rules looked exactly like one that kept them. The Mazdaspeed3 build
     # went out with no torque figure and a closing statement instead of a
     # question, and nothing downstream said so.
+    # The narration is public twice over: it is spoken, and it is printed in
+    # the caption band a word at a time. An em dash is one of the few marks
+    # almost nobody types on a phone, so a feed of them reads as
+    # machine-written whatever the words say. Done here, at the end, so the
+    # captions and the voice are reading the same characters -- normalising
+    # one and not the other is how they drift apart.
+    final = _plain_dashes_everywhere(final)
     if _REPAIR_LOG:
         final["repair_log"] = list(_REPAIR_LOG)
         _REPAIR_LOG.clear()
