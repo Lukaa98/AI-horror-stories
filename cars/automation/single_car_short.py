@@ -3345,13 +3345,13 @@ def generate_voice_auditions(script, output_dir, chosen_preset):
 NARRATION_LEAD_IN_SECONDS = 0.35
 
 
-# Between the engine note and the first word. Butted straight together
-# they read as one sound and the voice seems to interrupt the car.
-ENGINE_CLIP_GAP_SECONDS = 0.3
 # The clip is somebody's phone video and the narration is a studio voice,
-# so they arrive at wildly different levels. Both are brought to the same
-# loudness rather than trusting either.
-ENGINE_CLIP_LUFS = -18.0
+# so they arrive at wildly different levels and the clip is normalised
+# rather than trusted. Not to the voice's level, though: a few dB hotter,
+# because the hit is the whole point of putting it there. Against a voice
+# sitting near -18 this reads as noticeably louder without being the kind
+# of jump that sends somebody to the volume control.
+ENGINE_CLIP_LUFS = -14.0
 
 
 def prepend_engine_clip(video_path, clip, size=CANVAS, fps=24):
