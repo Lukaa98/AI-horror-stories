@@ -1585,7 +1585,14 @@ export default function App() {
     }
     // Polled rather than watched: the run writes one small file and there
     // is nothing else to report on the way.
-    const until = Date.now() + 8 * 60 * 1000;
+    //
+    // Fifteen minutes because eight was not enough. The first probe took
+    // four, the second just over eight, and the difference is a cold
+    // runner and a page that loads when it feels like it -- so the window
+    // has to cover the slow case, not the typical one. Giving up while the
+    // run is still going says "did not finish" about a probe that finishes
+    // a minute later and writes its answer to the branch regardless.
+    const until = Date.now() + 15 * 60 * 1000;
     while (Date.now() < until) {
       await new Promise((done) => setTimeout(done, 10000));
       let found = null;
@@ -3024,7 +3031,9 @@ export default function App() {
                         )}
                         {listingVideosState === "probing" && (
                           <p className="hint">
-                            Driving a browser over the listing. Two or three minutes.
+                            Driving a browser over the listing. Usually five minutes, sometimes
+                            ten. The answer is written to the branch either way, so pressing this
+                            again later picks it up rather than starting over.
                           </p>
                         )}
                         {listingVideosState && listingVideosState !== "probing" && (
