@@ -60,6 +60,19 @@ export async function dispatchWorkflow({ owner, repo, branch, token, workflow, i
         + `started.${hint}`
       );
     }
+    // Third shape of the same fault: the workflow on that ref is older
+    // than this dashboard and has never heard of a mode it offers. Reads
+    // as a broken dropdown rather than as a branch that is behind.
+    if (res.status === 422 && body.includes("not in the list of allowed values")) {
+      const named = (body.match(/Provided value '([^']*)' for input '([^']*)'/) || []);
+      const what = named[1] ? `"${named[1]}"` : "that value";
+      const where = named[2] ? `"${named[2]}"` : "an input";
+      throw new Error(
+        `The workflow on branch "${branch}" does not offer ${what} for ${where}, so nothing `
+        + "was started. That branch is older than this dashboard - switch Branch in Settings "
+        + "to the one carrying this feature."
+      );
+    }
     throw new Error(`Dispatch failed (${res.status}): ${body}`);
   }
 }
