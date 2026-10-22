@@ -1,0 +1,239 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 9,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M2",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "M2 badge",
+        "front fascia design",
+        "headlight shape"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M2",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "distinct front grille shape",
+        " headlights design specific to M2",
+        "overall coupe body style"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M2",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "blue color",
+        "M2 badge on side",
+        "two-door coupe shape",
+        "distinctive front and rear bodywork",
+        "M sport wheels"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M2",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "BMW badge",
+        "M2 badge",
+        "specific rear design",
+        "dual exhaust",
+        "body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M2",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "M2 badge",
+        "BMW styling",
+        "rear design elements characteristic of M2"
+      ],
+      "generation_match_confidence": 10,
+      "variant_match_confidence": 7,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 10,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "BMW",
+      "detected_model": "M2",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "BMW steering wheel",
+        "M specific interior design",
+        "Manual transmission lever"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": null,
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [],
+      "generation_match_confidence": 1,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 5,
+      "composition_score": 5,
+      "target_match_confidence": 1,
+      "reject": true,
+      "reason": "Not a clear image of the target vehicle; focuses only on the interior.",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "bmw",
+      "detected_model": "m2",
+      "detected_generation_or_year": "2018",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "gear shifter",
+        "sport mode buttons"
+      ],
+      "generation_match_confidence": 5,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 6,
+      "composition_score": 5,
+      "target_match_confidence": 6,
+      "reject": true,
+      "reason": "image does not provide a clear view of the vehicle's exterior or key identifiers for definitive match.",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": false,
+      "detected_make": "bmw",
+      "detected_model": null,
+      "detected_generation_or_year": null,
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "M badge"
+      ],
+      "generation_match_confidence": 2,
+      "variant_match_confidence": 1,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior"
+      ],
+      "quality_score": 6,
+      "composition_score": 5,
+      "target_match_confidence": 2,
+      "reject": true,
+      "reason": "Image does not show the outside of the vehicle; only the interior dashboard.",
+      "path": "interior-09.jpg",
+      "provider": "openai"
+    }
+  ]
+}

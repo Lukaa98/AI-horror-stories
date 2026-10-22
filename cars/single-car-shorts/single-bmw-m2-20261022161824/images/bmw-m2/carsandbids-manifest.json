@@ -1,0 +1,483 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-22T16:39:58.869Z",
+  "query": "Bmw M2",
+  "visual_highlight": "interior dashboard steering wheel cabin",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 17,
+      "sale_price": 44750,
+      "sale_type": "sold",
+      "page_title": "2018 BMW M2"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 44750,
+    "sale_type": "sold",
+    "page_title": "2018 BMW M2",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/rMaYN4G8-qhOlyuQ/edit/Tjel_.jpg?t=178604532014",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2018 BMW M2",
+      "width": 1800,
+      "height": 1200,
+      "bytes": 345185
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/rMaYN4G8-U02fd-4/edit/6Wonw.jpg?t=178604533936",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2018 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 249922
+    },
+    {
+      "path": "interior-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/rMaYN4G8-urpAuJy/edit/43vqG.jpg?t=178604537566",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2018 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 352309
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/rMaYN4G8-dlKidmJ/edit/_x0df.jpg?t=178604539725",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2018 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 243846
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/exterior/rMaYN4G8-vKP43FS/edit/TL5EQ.jpg?t=178604541742",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2018 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 184205
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/rMaYN4G8-48zmG1X/edit/g2mVJ.jpg?t=178604551420",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2018 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 212099
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/rMaYN4G8-pu1BQvq/edit/fPdIN.jpg?t=178604552573",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2018 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 167226
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/rMaYN4G8-ooOTre0/edit/1evw3.jpg?t=178604553865",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2018 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 177157
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8e6341e27a680ffab7d98e42bef83b0dd1b0fb94/photos/interior/rMaYN4G8-bXZRg5w/edit/bwmQm.jpg?t=178604556965",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "section": "2018 BMW M2",
+      "width": 542,
+      "height": 361,
+      "bytes": 178433
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/a7b08e7925a695e42a234b7fefae47ce33007d8a/photos/35GyZDxY-CGoNeP3.jpeg",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "error": "Too small: 12056 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/753a5bb737e88659a07527f2c653d64cad86b69f/photos/rNJRZBQb-wsrT9HkfA.jpg",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "error": "Too small: 19987 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/1c9fa100cac53e7cacfbfbbe3eb2d5d0946b8643/photos/K1gnd2p4-NQQ5VrxqXS.jpeg",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "error": "Too small: 15934 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/5958f8e68cd88f8b46609ff5fe0c0b8c484a157f/photos/SUwL4K_BU.jpeg",
+      "labels": [
+        "interior",
+        "wheel",
+        "highlight"
+      ],
+      "error": "Too small: 4885 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/manifest/video.m3u8",
+      "auction_title": "2018 BMW M2",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/manifest/video.m3u8",
+      "auction_title": "2018 BMW M2",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/manifest/video.m3u8",
+      "auction_title": "2018 BMW M2",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 9,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M2 badge",
+          "front fascia design",
+          "headlight shape"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "distinct front grille shape",
+          " headlights design specific to M2",
+          "overall coupe body style"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "blue color",
+          "M2 badge on side",
+          "two-door coupe shape",
+          "distinctive front and rear bodywork",
+          "M sport wheels"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW badge",
+          "M2 badge",
+          "specific rear design",
+          "dual exhaust",
+          "body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M2 badge",
+          "BMW styling",
+          "rear design elements characteristic of M2"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 7,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 10,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "BMW",
+        "detected_model": "M2",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "BMW steering wheel",
+          "M specific interior design",
+          "Manual transmission lever"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 5,
+        "composition_score": 5,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not a clear image of the target vehicle; focuses only on the interior.",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "bmw",
+        "detected_model": "m2",
+        "detected_generation_or_year": "2018",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "interior design",
+          "gear shifter",
+          "sport mode buttons"
+        ],
+        "generation_match_confidence": 5,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 6,
+        "reject": true,
+        "reason": "image does not provide a clear view of the vehicle's exterior or key identifiers for definitive match.",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": "bmw",
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "M badge"
+        ],
+        "generation_match_confidence": 2,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 6,
+        "composition_score": 5,
+        "target_match_confidence": 2,
+        "reject": true,
+        "reason": "Image does not show the outside of the vehicle; only the interior dashboard.",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
