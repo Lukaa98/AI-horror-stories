@@ -36,7 +36,7 @@ from research_request import (
 from generate_sample import ROOT, CANVAS
 from narrator_script import (_extract_wav, build_mouth_timeline, narration_settings,
                              synthesize_narration)
-from narrator_video import render_narrator_video
+from narrator_video import render_narrator_video, _scene_time_boundaries
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
 from photo_story import SLOTS, SLOT_LABELS, photo_metadata, collect_photo_sections
@@ -846,7 +846,7 @@ Say nothing at all about whatever does not fit. A photo you leave out still appe
 video; it simply is not narrated, which is what it is there for."""
 
 
-def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8, listing_facts=None, market=None, angles=None, style="classic"):
+def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8, listing_facts=None, market=None, angles=None, style="classic", engine_clip=False):
     photo_hints_block = ""
     if photo_hints:
         bullet_list = "\n".join(f"- {hint}" for hint in photo_hints)
@@ -942,7 +942,7 @@ ownership/value insight, a character observation or another history/mechanical p
 still hits its word target and beat variety.{notes_exception}"""
     chosen = style_of(style)
     low, high = chosen["words"]
-    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{forced_rival_block}{no_comparison_block}{chosen['block']}
+    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{_engine_clip_block() if engine_clip else ""}{forced_rival_block}{no_comparison_block}{chosen['block']}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across {chosen['scene_count'].format(max_scenes=max_scenes)} in speaking order, each scene being {chosen['sentences']} -- {chosen['scene_note']} -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -1889,6 +1889,34 @@ def _violation_cost(rules):
 TITLE_VIOLATION_MARKER = "your title"
 
 
+# Which scene the start-up follows. Two, so it lands around twelve to
+# eighteen seconds in on a 55-second build: late enough that the car has
+# been named and a reason to care has been given, early enough to be
+# inside the twenty seconds the average viewer actually watches.
+ENGINE_CLIP_AFTER_SCENE = 2
+# And the hard edge of that window. A boundary later than this is not
+# worth using -- the clip would play to people who have already gone.
+ENGINE_CLIP_LATEST_SECONDS = 20.0
+
+
+def _engine_clip_block(after_scene=ENGINE_CLIP_AFTER_SCENE):
+    """Tells the script a start-up clip interrupts it, and where."""
+    return f"""
+
+A CLIP OF THIS EXACT CAR STARTING UP PLAYS AFTER SCENE {after_scene}. Real video, with its
+real engine note, from the listing's own footage. It is not something you describe -- the
+viewer is about to hear it.
+
+So scene {after_scene} ENDS BY HANDING OVER TO IT, in its last sentence, out loud: "listen to
+it start", "here is what that sounds like", "wait for this". Something a person would say
+before shutting up and letting the car talk. Do not say the word "clip" or "video" -- as far
+as the viewer is concerned you are standing next to the car.
+
+Scene {after_scene + 1} picks up AFTER the engine has run. Do not open it by reacting to the
+sound as though you heard it with them -- no "incredible, right?" -- and do not re-describe
+the noise. Carry on with the next thing you were going to say."""
+
+
 def _rewrite_title_for(violation, title, opening, label):
     """One new YouTube title, fixing one title rule and nothing else.
 
@@ -2491,7 +2519,7 @@ def script_package_from_build(build_id, repository=None, branch="cars-output"):
     return package
 
 
-def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False, listing_facts=None, market=None, angles=None, pasted_slots=(), style="classic"):
+def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False, listing_facts=None, market=None, angles=None, pasted_slots=(), style="classic", engine_clip=False):
     label = " ".join(value for value in [make, model, trim] if value).strip()
     year_scope = (
         f"model years {start_year}-{end_year}" if start_year and end_year
@@ -2533,7 +2561,8 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
         )
         package = _request_script_package(
             _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival,
-                                    disable_comparison, max_scenes, listing_facts, market, angles, style),
+                                    disable_comparison, max_scenes, listing_facts, market, angles, style,
+                                    engine_clip),
             max_scenes=max_scenes,
         )
         package["_angles"] = angles or ""
@@ -3354,19 +3383,57 @@ NARRATION_LEAD_IN_SECONDS = 0.35
 ENGINE_CLIP_LUFS = -14.0
 
 
-def prepend_engine_clip(video_path, clip, size=CANVAS, fps=24):
-    """Put the listing's own start-up on the front of the finished film.
+def engine_clip_seam(manifest, after_scene=ENGINE_CLIP_AFTER_SCENE,
+                     latest=ENGINE_CLIP_LATEST_SECONDS):
+    """When the start-up should interrupt, in seconds, or None.
+
+    The end of scene `after_scene`, because that is the scene the script
+    was told to end by handing over to the sound. Taken from the same
+    boundaries the renderer timed its own captions against, so the cut
+    lands in the gap after a finished sentence rather than inside a word.
+
+    None when there is no usable seam: no timeline to measure against, or
+    the scene ends later than anybody is still watching.
+    """
+    scenes = manifest.get("scenes") or []
+    timeline = manifest.get("word_timeline") or []
+    duration = float(manifest.get("duration_seconds") or 0)
+    if not scenes or not timeline or duration <= 0 or len(scenes) <= after_scene:
+        return None
+    boundaries = _scene_time_boundaries(scenes, timeline, duration)
+    if len(boundaries) < after_scene:
+        return None
+    at = float(boundaries[after_scene - 1][1])
+    if not 0 < at < duration:
+        return None
+    if at > latest:
+        # The script ran long and the seam fell outside the window the
+        # clip exists to land in. Better no clip than one that plays to
+        # people who left ten seconds ago.
+        print(f"[single-car] Scene {after_scene} ends at {at:.1f}s, past the "
+              f"{latest:.0f}s mark; skipping the engine clip.")
+        return None
+    return at
+
+
+def insert_engine_clip(video_path, clip, manifest, size=CANVAS, fps=24):
+    """Cut the finished film at the seam and let the car fill the gap.
 
     Picture and sound both: a start-up is something to watch, and an engine
     note over a still photo is half of it.
 
-    It runs on the rendered mp4 rather than inside it. The clip is its own
-    segment, so the narration, the word timeline and every caption stay
-    exactly where the renderer put them -- and it is not touched by the
-    tempo pass, which stretches speech to hit a target length and would
-    play an engine at 1.4x.
+    Not on the front. The narrator introduces it and then stops talking,
+    so the clip belongs where that sentence ends -- which also means
+    nothing is said over the engine, and the viewer meets the car before
+    deciding whether to stay.
 
-    Returns the clip's length in seconds, or 0.0 if nothing was prepended.
+    It runs on the rendered mp4 rather than inside it. The film either side
+    of the seam is untouched, so the narration, the word timeline and every
+    caption stay where the renderer put them, and the clip never meets the
+    tempo pass that stretches speech to a target length and would play an
+    engine at 1.4x.
+
+    Returns the clip's length in seconds, or 0.0 if nothing was inserted.
     A hook is worth less than the build, so every failure is caught and
     leaves the film as it was rendered.
     """
@@ -3377,6 +3444,10 @@ def prepend_engine_clip(video_path, clip, size=CANVAS, fps=24):
     except (TypeError, ValueError):
         return 0.0
     if not url or not (end > start >= 0):
+        return 0.0
+
+    at = engine_clip_seam(manifest)
+    if at is None:
         return 0.0
 
     video_path = Path(video_path)
@@ -3408,11 +3479,23 @@ def prepend_engine_clip(video_path, clip, size=CANVAS, fps=24):
              f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo,"
              f"loudnorm=I={ENGINE_CLIP_LUFS}:TP=-2:LRA=11,"
              f"aformat=sample_rates=48000:channel_layouts=stereo[clipa];"
-             f"[1:v]scale={width}:{height},setsar=1,fps={fps},format=yuv420p[filmv];"
-             f"[1:a]aformat=sample_rates=48000:channel_layouts=stereo[filma];"
-             f"[clipv][clipa][filmv][filma]concat=n=2:v=1:a=1[v][a]",
+             # The film is split rather than appended to, so the same input
+             # is read twice: once up to the seam, once from it.
+             f"[1:v]scale={width}:{height},setsar=1,fps={fps},format=yuv420p,"
+             f"split=2[before][after];"
+             f"[1:a]aformat=sample_rates=48000:channel_layouts=stereo,"
+             f"asplit=2[beforea][aftera];"
+             f"[before]trim=0:{at:.3f},setpts=PTS-STARTPTS[v1];"
+             f"[beforea]atrim=0:{at:.3f},asetpts=PTS-STARTPTS[a1];"
+             f"[after]trim=start={at:.3f},setpts=PTS-STARTPTS[v2];"
+             f"[aftera]atrim=start={at:.3f},asetpts=PTS-STARTPTS[a2];"
+             f"[v1][a1][clipv][clipa][v2][a2]concat=n=3:v=1:a=1[v][a]",
              "-map", "[v]", "-map", "[a]",
-             "-c:v", "libx264", "-preset", "medium", "-pix_fmt", "yuv420p",
+             # Both rates pinned on the output. Concatenating three segments
+             # whose timebases differ let the frame rate drift to 25 on a
+             # 24fps film, and loudnorm hands on 192kHz, which shipped as
+             # 96kHz AAC until it was named here.
+             "-r", str(fps), "-c:v", "libx264", "-preset", "medium", "-pix_fmt", "yuv420p",
              "-c:a", "aac", "-ar", "48000", str(joined)],
             check=True, capture_output=True, text=True, timeout=900,
         )
@@ -3426,7 +3509,7 @@ def prepend_engine_clip(video_path, clip, size=CANVAS, fps=24):
         return 0.0
     joined.replace(video_path)
     print(f"[single-car] Engine clip: {length:.1f}s of video and sound from {start:.1f}s, "
-          "in front of the film.")
+          f"cut in at {at:.1f}s after scene {ENGINE_CLIP_AFTER_SCENE}.")
     return length
 
 
@@ -3719,6 +3802,9 @@ def build_short(args):
     images_dir = output_dir / "images"
     output_dir.mkdir(parents=True, exist_ok=True)
     photos = _photos_argument(args.photos)
+    # Read here rather than at the join, because the script has to know a
+    # start-up interrupts it: scene 2 ends by handing over to the sound.
+    engine_clip = photos.get("engine_clip") if isinstance(photos, dict) else None
     # An explicit --photo-* flag wins over the same slot in --photos, so the
     # individual flags keep behaving exactly as they always have.
     manual_photo_urls = {
@@ -3816,6 +3902,7 @@ def build_short(args):
         angles=args.angles,
         pasted_slots=tuple(slot for slot in MANUAL_PHOTO_FIELDS if manual_photo_urls.get(slot)),
         style=args.style,
+        engine_clip=bool(engine_clip),
     )
     if args.disable_comparison:
         # Belt-and-suspenders: the prompt already tells the model never to
@@ -3870,7 +3957,6 @@ def build_short(args):
     )
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
-    engine_clip = photos.get("engine_clip") if isinstance(photos, dict) else None
     add_narration_lead_in(audio_path)
     # The dense style runs longer on purpose: 180 words at gpt-audio's ~2.5
     # a second is 72 seconds raw, and squeezing that into 55 would need
@@ -4005,10 +4091,10 @@ def build_short(args):
     media_paths = [output_dir / item["path"] for item in media]
     video_path = output_dir / "single_car_short.mp4"
     render_narrator_video(media_paths, manifest, video_path)
-    # The start-up, picture and sound, joined onto the front of the
-    # finished film. Last, and on the rendered file, so the narration and
+    # The start-up, picture and sound, cut into the seam the script was
+    # written around. Last, and on the rendered file, so the narration and
     # every caption stay where the renderer put them.
-    engine_lead = prepend_engine_clip(video_path, engine_clip) if engine_clip else 0.0
+    engine_lead = insert_engine_clip(video_path, engine_clip, manifest) if engine_clip else 0.0
     if engine_lead:
         # Recorded so a build that shipped with a clip can be told apart
         # from one that asked for a clip and did not get it -- the join is

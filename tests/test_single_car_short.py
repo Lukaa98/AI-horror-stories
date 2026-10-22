@@ -3872,3 +3872,82 @@ def test_a_cut_off_narration_is_read_again_and_then_recorded():
     assert 'package["narration_unspoken_chars"] = unspoken' in body
     # And the old word-count rule is gone.
     assert "spoken < written * 0.95" not in body
+
+
+def _timeline(words, per=0.5):
+    return [{"word": w, "start": i * per, "end": i * per + per * 0.8}
+            for i, w in enumerate(words)]
+
+
+def test_the_start_up_cuts_in_where_the_script_hands_over_to_it():
+    """The script is told scene 2 ends by handing over to the sound, so the
+    clip belongs at the end of scene 2 -- in the gap after a finished
+    sentence, not inside a word, and before the twenty seconds the average
+    viewer actually watches."""
+    import single_car_short
+
+    scenes = [{"narration": "One two three four"},
+              {"narration": "Five six seven eight"},
+              {"narration": "Nine ten eleven twelve"},
+              {"narration": "So would you have one?"}]
+    words = " ".join(s["narration"] for s in scenes).split()
+    manifest = {"scenes": scenes, "word_timeline": _timeline(words),
+                "duration_seconds": len(words) * 0.5}
+
+    at = single_car_short.engine_clip_seam(manifest)
+    assert at is not None
+    # End of scene 2 -- after eight words at half a second each.
+    assert 3.5 <= at <= 4.5, at
+    assert at < single_car_short.ENGINE_CLIP_LATEST_SECONDS
+
+
+def test_no_seam_rather_than_one_nobody_is_still_watching():
+    """A script that runs long pushes scene 2 past the window the clip
+    exists to land inside. Better no clip than one that plays to people who
+    left ten seconds earlier."""
+    import single_car_short
+
+    scenes = [{"narration": " ".join(["word"] * 30)},
+              {"narration": " ".join(["word"] * 30)},
+              {"narration": "and then some more"},
+              {"narration": "So would you have one?"}]
+    words = " ".join(s["narration"] for s in scenes).split()
+    manifest = {"scenes": scenes, "word_timeline": _timeline(words),
+                "duration_seconds": len(words) * 0.5}
+    assert single_car_short.engine_clip_seam(manifest) is None
+
+
+def test_a_build_with_nothing_to_measure_gets_no_seam():
+    """Word alignment is allowed to fail -- the build falls back to
+    estimated caption timing. Cutting a film on a guess is worse than not
+    cutting it."""
+    import single_car_short
+
+    scenes = [{"narration": "One two"}, {"narration": "Three four"},
+              {"narration": "Five six"}]
+    assert single_car_short.engine_clip_seam(
+        {"scenes": scenes, "word_timeline": [], "duration_seconds": 30}) is None
+    assert single_car_short.engine_clip_seam(
+        {"scenes": [], "word_timeline": _timeline(["a", "b"]), "duration_seconds": 30}) is None
+    # Fewer scenes than the seam sits after: nothing follows the clip.
+    assert single_car_short.engine_clip_seam(
+        {"scenes": scenes[:2], "word_timeline": _timeline(["a", "b", "c", "d"]),
+         "duration_seconds": 2}) is None
+
+
+def test_the_script_is_told_to_hand_over_and_not_to_react():
+    """It introduces the sound and then stops talking. Scene 3 must not
+    open by reacting to a noise the narrator did not hear with the
+    viewer."""
+    import single_car_short
+
+    block = single_car_short._engine_clip_block()
+    assert "ENDS BY HANDING OVER TO IT" in block
+    assert "Do not say the word \"clip\" or \"video\"" in block
+    assert "incredible, right?" in block, "names the reaction it is forbidding"
+
+    with_clip = single_car_short._research_script_prompt("a car", "2020", engine_clip=True)
+    without = single_car_short._research_script_prompt("a car", "2020")
+    assert "STARTING UP PLAYS AFTER SCENE" in with_clip
+    assert "STARTING UP PLAYS AFTER SCENE" not in without, (
+        "a build with no clip must not be told to hand over to one")
