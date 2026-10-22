@@ -1,0 +1,43 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/rw2ym2NX/2022-ford-mustang-shelby-gt500-heritage-edition?ref=nr-3",
+  "scrape_ok": true,
+  "video_count": 4,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06a21a16b463b72b34b9c5fc3",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06a21a16b463b72b34b9c5fc353cd31b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06a21a16b463b72b34b9c5fc353cd31b/manifest/video.m3u8",
+      "duration_seconds": 41.44,
+      "poster": "poster-1.jpg"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/17b1db631cf498361a32de407",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/17b1db631cf498361a32de407c519e7d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/17b1db631cf498361a32de407c519e7d/manifest/video.m3u8",
+      "duration_seconds": 53.81,
+      "poster": "poster-2.jpg"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23a1b643c05d5c91aa5fd5d40",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23a1b643c05d5c91aa5fd5d40763d763/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23a1b643c05d5c91aa5fd5d40763d763/manifest/video.m3u8",
+      "duration_seconds": 31.21,
+      "poster": "poster-3.jpg"
+    },
+    {
+      "index": 4,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de3f2fc2d7b96879a95760cb7",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de3f2fc2d7b96879a95760cb7c28ede3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de3f2fc2d7b96879a95760cb7c28ede3/manifest/video.m3u8",
+      "duration_seconds": 86.16,
+      "poster": "poster-4.jpg"
+    }
+  ]
+}

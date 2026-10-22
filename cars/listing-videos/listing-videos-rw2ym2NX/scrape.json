@@ -1,0 +1,80 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-22T03:02:27.472Z",
+  "query": "",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rw2ym2NX/2022-ford-mustang-shelby-gt500-heritage-edition?ref=nr-3",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rw2ym2NX/2022-ford-mustang-shelby-gt500-heritage-edition?ref=nr-3",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06a21a16b463b72b34b9c5fc353cd31b/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06a21a16b463b72b34b9c5fc353cd31b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06a21a16b463b72b34b9c5fc353cd31b/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rw2ym2NX/2022-ford-mustang-shelby-gt500-heritage-edition?ref=nr-3",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06a21a16b463b72b34b9c5fc353cd31b/manifest/video.m3u8",
+      "auction_title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/17b1db631cf498361a32de407c519e7d/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/17b1db631cf498361a32de407c519e7d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/17b1db631cf498361a32de407c519e7d/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rw2ym2NX/2022-ford-mustang-shelby-gt500-heritage-edition?ref=nr-3",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/17b1db631cf498361a32de407c519e7d/manifest/video.m3u8",
+      "auction_title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23a1b643c05d5c91aa5fd5d40763d763/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23a1b643c05d5c91aa5fd5d40763d763/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23a1b643c05d5c91aa5fd5d40763d763/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rw2ym2NX/2022-ford-mustang-shelby-gt500-heritage-edition?ref=nr-3",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/23a1b643c05d5c91aa5fd5d40763d763/manifest/video.m3u8",
+      "auction_title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de3f2fc2d7b96879a95760cb7c28ede3/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de3f2fc2d7b96879a95760cb7c28ede3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de3f2fc2d7b96879a95760cb7c28ede3/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/rw2ym2NX/2022-ford-mustang-shelby-gt500-heritage-edition?ref=nr-3",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/de3f2fc2d7b96879a95760cb7c28ede3/manifest/video.m3u8",
+      "auction_title": "2022 Ford Mustang Shelby GT500 Heritage Edition",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ]
+}
