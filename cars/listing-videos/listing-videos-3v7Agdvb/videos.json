@@ -1,0 +1,34 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+  "scrape_ok": true,
+  "video_count": 3,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/manifest/video.m3u8",
+      "duration_seconds": 40.1,
+      "poster": "poster-1.jpg"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/manifest/video.m3u8",
+      "duration_seconds": 60.4,
+      "poster": "poster-2.jpg"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bf",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/manifest/video.m3u8",
+      "duration_seconds": 41.7,
+      "poster": "poster-3.jpg"
+    }
+  ]
+}

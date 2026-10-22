@@ -1,0 +1,67 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-10-22T15:49:19.172Z",
+  "query": "",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/02543da7bf33e49e82021a467a401735/manifest/video.m3u8",
+      "auction_title": "2018 BMW M2",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bae6f7576fcbc53359c33b03d5bf0e49/manifest/video.m3u8",
+      "auction_title": "2018 BMW M2",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2018 BMW M2",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3v7Agdvb/2018-bmw-m2?ss_id=d8e95ac0-740e-4ed1-b367-10cc743c2e62&ref=pr_1_17",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/efad7220401aab604312203bff9994bc/manifest/video.m3u8",
+      "auction_title": "2018 BMW M2",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ]
+}
