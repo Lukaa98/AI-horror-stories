@@ -3951,3 +3951,170 @@ def test_the_script_is_told_to_hand_over_and_not_to_react():
     assert "STARTING UP PLAYS AFTER SCENE" in with_clip
     assert "STARTING UP PLAYS AFTER SCENE" not in without, (
         "a build with no clip must not be told to hand over to one")
+
+
+def test_the_gap_moves_every_word_after_it_and_leaves_the_rest(monkeypatch, tmp_path):
+    """The silence is cut into the narration before the render, so the words
+    on the far side of it are spoken later than they were transcribed. Not
+    shifting them would leave every caption, scene boundary and mouth shape
+    after the seam reading off a timeline the audio no longer matches."""
+    import single_car_short
+
+    audio = tmp_path / "narration.mp3"
+    audio.write_bytes(b"x")
+    calls = []
+
+    def fake_run(args, **kwargs):
+        calls.append(args)
+        Path(str(args[-1])).write_bytes(b"gapped")
+        return type("Done", (), {"stdout": "", "stderr": ""})()
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
+    words = [{"word": "a", "start": 1.0, "end": 1.4},
+             {"word": "b", "start": 3.9, "end": 4.0},
+             {"word": "c", "start": 4.2, "end": 4.6},
+             {"word": "d", "start": 9.0, "end": 9.5}]
+    shifted = single_car_short.open_engine_gap(audio, words, 4.1, 5.0)
+
+    assert [w["start"] for w in shifted] == [1.0, 3.9, 9.2, 14.0]
+    assert [w["end"] for w in shifted] == [1.4, 4.0, 9.6, 14.5]
+    assert [w["word"] for w in shifted] == ["a", "b", "c", "d"]
+    assert words[2]["start"] == 4.2, "the timeline it was handed is not mutated"
+
+    filters = str(calls[0][calls[0].index("-filter_complex") + 1])
+    assert "anullsrc" in filters and "concat=n=3" in filters
+    # Both the narration and the silence pinned to one format. The concat
+    # negotiates between its inputs, and a mono 24kHz silence winning that
+    # negotiation would downsample the whole narration.
+    assert filters.count("aformat=sample_rates=48000:channel_layouts=stereo") == 1
+    assert "anullsrc=channel_layout=stereo:sample_rate=48000" in filters
+
+
+def test_a_failed_gap_leaves_the_narration_alone():
+    """Opening the gap is the one step that cannot be undone later: the film
+    is rendered around it. If it fails, the build has to be the build it
+    would have been without a clip, not one with five silent seconds in it."""
+    import single_car_short
+
+    assert single_car_short.open_engine_gap(
+        "/nonexistent/narration.mp3", [{"word": "a", "start": 0, "end": 1}],
+        4.0, 5.0) is None
+
+
+def test_a_clip_that_cannot_be_read_is_found_out_before_the_gap_is_opened():
+    """The fetch runs first precisely so an unreadable clip costs nothing.
+    Anything that is not a real url and a real span is refused without
+    ffmpeg being asked."""
+    import single_car_short
+
+    for clip in ({}, {"url": "", "start": 0, "end": 5},
+                 {"url": "http://x/v.m3u8", "start": 5, "end": 5},
+                 {"url": "http://x/v.m3u8", "start": 9, "end": 4},
+                 {"url": "http://x/v.m3u8", "start": "", "end": 5}):
+        assert single_car_short.fetch_engine_clip(clip, "/tmp/never.mp4") is None, clip
+
+
+def test_the_clip_is_cut_to_what_the_video_actually_has(monkeypatch, tmp_path):
+    """Asking for 12s-17s of a video that ends at 14 gets two seconds. The
+    gap has to match what there is to play, not what was typed, or the film
+    sits silent over a still photo for the difference."""
+    import single_car_short
+
+    dest = tmp_path / "engine_clip.mp4"
+
+    def fake_run(args, **kwargs):
+        dest.write_bytes(b"clip")
+        return type("Done", (), {"stdout": "", "stderr": ""})()
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
+    monkeypatch.setattr(single_car_short, "_media_duration", lambda path: 2.0)
+    path, length = single_car_short.fetch_engine_clip(
+        {"url": "http://x/v.m3u8", "start": 12, "end": 17}, dest)
+    assert path == dest
+    assert length == 2.0
+
+    # And a probe that cannot answer is not treated as a short clip.
+    monkeypatch.setattr(single_car_short, "_media_duration", lambda path: None)
+    assert single_car_short.fetch_engine_clip(
+        {"url": "http://x/v.m3u8", "start": 12, "end": 17}, dest)[1] == 5.0
+
+
+def test_the_clip_plays_in_the_photo_box_not_over_the_whole_frame(monkeypatch, tmp_path):
+    """The layout exists to keep the headline, the spec table and the
+    narrator on screen. Cutting to the clip full frame hid all three, so it
+    is overlaid into the same inset box the renderer fits photos into."""
+    import single_car_short
+    from narrator_video import _media_zone_geometry, CANVAS
+
+    video = tmp_path / "single_car_short.mp4"
+    video.write_bytes(b"film")
+    calls = []
+
+    def fake_run(args, **kwargs):
+        calls.append(args)
+        Path(str(args[-1])).write_bytes(b"joined")
+        return type("Done", (), {"stdout": "", "stderr": ""})()
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
+    monkeypatch.setattr(single_car_short.Path, "replace",
+                        lambda self, other: None, raising=False)
+    assert single_car_short.overlay_engine_clip(video, tmp_path / "clip.mp4",
+                                                at=11.5, length=5.0)
+
+    args = calls[0]
+    filters = str(args[args.index("-filter_complex") + 1])
+    _, (box_x, box_y, box_w, box_h), _ = _media_zone_geometry(CANVAS)
+    assert f"overlay=x={int(round(box_x))}:y={int(round(box_y))}" in filters
+    assert f"scale={int(round(box_w))}:{int(round(box_h))}" in filters
+    # Nothing is concatenated: the film's own length and timing are the
+    # render's, because the quiet was already made in the narration.
+    assert "concat" not in filters
+    assert "enable='between(t,11.500,16.500)'" in filters
+    # The box is filled by a blurred copy of the clip rather than bars, and
+    # the fitted copy is never cropped.
+    assert "gblur" in filters
+    assert "force_original_aspect_ratio=decrease" in filters
+    # The clip is held off until the seam, and the film outruns it.
+    assert "tpad=start_duration=11.500" in filters
+    assert "eof_action=pass" in filters
+    # Summed, not averaged -- normalize=1 would duck the narration for the
+    # whole film to make room for five seconds of engine.
+    assert "normalize=0" in filters
+    assert "adelay=11500|11500" in filters
+    assert f"loudnorm=I={single_car_short.ENGINE_CLIP_LUFS}" in filters
+    # Both rates pinned on the output: a drifting timebase took a 24fps film
+    # to 25, and loudnorm's internal 192kHz shipped as 96kHz AAC.
+    assert args[args.index("-r") + 1] == "24"
+    assert args[args.index("-ar") + 1] == "48000"
+
+
+def test_a_failed_overlay_ships_the_film_as_it_was_rendered():
+    """A hook is worth less than the build."""
+    import single_car_short
+
+    assert single_car_short.overlay_engine_clip(
+        "/nonexistent/film.mp4", "/nonexistent/clip.mp4", at=11.5, length=5.0) is False
+
+
+def test_the_build_makes_the_room_before_it_renders_and_fills_it_after(tmp_path):
+    """The order is the whole design. The clip plays inside the photo box,
+    so the film has to be running underneath it -- which means the quiet has
+    to be in the narration before the render, not cut into the finished mp4.
+    And the clip is fetched before the gap is opened, because a gap cannot
+    be taken back once the film is built around it."""
+    import inspect
+    import single_car_short
+
+    body = inspect.getsource(single_car_short.build_short)
+    fetch = body.index("fetch_engine_clip(")
+    gap = body.index("open_engine_gap(")
+    mouth = body.index("build_mouth_timeline(")
+    render = body.index("render_narrator_video(")
+    overlay = body.index("overlay_engine_clip(")
+    assert fetch < gap < mouth < render < overlay, (
+        "fetch, then the gap, then the mouth timeline reads the gapped file, "
+        "then the render, then the overlay")
+    # The seam is measured on the timeline before the shift -- recomputing it
+    # afterwards would find the midpoint of the gap it just opened.
+    assert body.index("engine_clip_seam(") < gap
+    assert "engine_clip_seam" not in body[render:]

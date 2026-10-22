@@ -36,7 +36,8 @@ from research_request import (
 from generate_sample import ROOT, CANVAS
 from narrator_script import (_extract_wav, build_mouth_timeline, narration_settings,
                              synthesize_narration)
-from narrator_video import render_narrator_video, _scene_time_boundaries
+from narrator_video import (render_narrator_video, _scene_time_boundaries,
+                            _media_zone_geometry)
 from openai_retry import with_openai_retry
 from plate_blur import blur_license_plates
 from photo_story import SLOTS, SLOT_LABELS, photo_metadata, collect_photo_sections
@@ -3416,44 +3417,80 @@ def engine_clip_seam(manifest, after_scene=ENGINE_CLIP_AFTER_SCENE,
     return at
 
 
-def insert_engine_clip(video_path, clip, manifest, size=CANVAS, fps=24):
-    """Cut the finished film at the seam and let the car fill the gap.
+def open_engine_gap(audio_path, word_timeline, at, length):
+    """Cut `length` seconds of silence into the narration at `at`.
 
-    Picture and sound both: a start-up is something to watch, and an engine
-    note over a still photo is half of it.
+    The gap is opened before the mouth timeline is built, which reads the
+    audio file rather than the words -- so the narrator's mouth closes for
+    the engine without being told to. Every word after the seam is moved
+    along by the same amount, which keeps the captions, the scene
+    boundaries and the drag-race windows on the syllables they belong to.
 
-    Not on the front. The narrator introduces it and then stops talking,
-    so the clip belongs where that sentence ends -- which also means
-    nothing is said over the engine, and the viewer meets the car before
-    deciding whether to stay.
+    Returns the shifted timeline, or None if the gap could not be opened
+    and the narration is unchanged.
+    """
+    audio_path = Path(audio_path)
+    gapped = audio_path.with_name(f"{audio_path.stem}-gap{audio_path.suffix}")
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-i", str(audio_path),
+             "-filter_complex",
+             # All three branches forced to one format before the concat.
+             # It joins whatever the inputs negotiate between them, and a
+             # mono 24kHz silence against a stereo narration is a coin
+             # toss that can come down on the silence -- which would ship
+             # the whole narration downsampled to mono for the sake of
+             # five quiet seconds.
+             f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo,"
+             f"asplit=2[head][tail];"
+             f"[head]atrim=0:{at:.3f},asetpts=PTS-STARTPTS[a1];"
+             f"[tail]atrim=start={at:.3f},asetpts=PTS-STARTPTS[a2];"
+             f"anullsrc=channel_layout=stereo:sample_rate=48000,"
+             f"atrim=0:{length:.3f}[sil];"
+             f"[a1][sil][a2]concat=n=3:v=0:a=1[out]",
+             "-map", "[out]", str(gapped)],
+            check=True, capture_output=True, text=True, timeout=300,
+        )
+    except Exception as error:  # noqa: BLE001 - a hook is not worth the build
+        detail = getattr(error, "stderr", "") or str(error)
+        print(f"[single-car] Could not open the engine gap ({str(detail)[-300:]}); "
+              "the narration is unchanged.")
+        return None
+    if not gapped.exists() or gapped.stat().st_size == 0:
+        return None
+    gapped.replace(audio_path)
+    shifted = []
+    for word in word_timeline:
+        start = float(word.get("start") or 0)
+        if start >= at:
+            shifted.append({**word, "start": start + length,
+                            "end": float(word.get("end") or 0) + length})
+        else:
+            shifted.append(dict(word))
+    return shifted
 
-    It runs on the rendered mp4 rather than inside it. The film either side
-    of the seam is untouched, so the narration, the word timeline and every
-    caption stay where the renderer put them, and the clip never meets the
-    tempo pass that stretches speech to a target length and would play an
-    engine at 1.4x.
 
-    Returns the clip's length in seconds, or 0.0 if nothing was inserted.
-    A hook is worth less than the build, so every failure is caught and
-    leaves the film as it was rendered.
+def fetch_engine_clip(clip, dest):
+    """Pull the chosen seconds of the listing video down to a local file.
+
+    Done before anything else is committed to, because the gap in the
+    narration is opened before the render and cannot be taken back: if the
+    fetch fails there, the film ships with five silent seconds over a still
+    photo. Failing here instead costs nothing -- the narration is never
+    touched and the build is the one it would have been without a clip.
+
+    Returns (path, length_seconds), or None if there is nothing usable.
     """
     url = str((clip or {}).get("url") or "").strip()
     try:
         start = float((clip or {}).get("start"))
         end = float((clip or {}).get("end"))
     except (TypeError, ValueError):
-        return 0.0
+        return None
     if not url or not (end > start >= 0):
-        return 0.0
-
-    at = engine_clip_seam(manifest)
-    if at is None:
-        return 0.0
-
-    video_path = Path(video_path)
-    joined = video_path.with_name(f"{video_path.stem}-engine{video_path.suffix}")
+        return None
     length = end - start
-    width, height = size
+    dest = Path(dest)
     try:
         subprocess.run(
             ["ffmpeg", "-y",
@@ -3461,56 +3498,134 @@ def insert_engine_clip(video_path, clip, manifest, size=CANVAS, fps=24):
              # everything before the cut rather than downloading it to
              # throw away.
              "-ss", f"{start:.3f}", "-t", f"{length:.3f}", "-i", url,
-             "-i", str(video_path),
+             # Re-encoded rather than copied: a stream copy starts at the
+             # nearest keyframe, which on a listing video can be a second
+             # or two off the revs the timestamps were written for.
+             "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p",
+             "-c:a", "aac", "-ar", "48000", str(dest)],
+            check=True, capture_output=True, text=True, timeout=900,
+        )
+    except Exception as error:  # noqa: BLE001 - a hook is not worth the build
+        detail = getattr(error, "stderr", "") or str(error)
+        print(f"[single-car] Could not read the engine clip ({str(detail)[-400:]}); "
+              "the build carries on without it.")
+        return None
+    if not dest.exists() or dest.stat().st_size == 0:
+        print("[single-car] The engine clip came back empty; the build carries on without it.")
+        return None
+    actual = _media_duration(dest)
+    if actual and actual < length - 0.5:
+        # Asking for 12s-17s of a video that ends at 14s gets two seconds,
+        # and the gap has to match what there is to play, not what was typed.
+        print(f"[single-car] The engine clip is {actual:.1f}s, not the {length:.1f}s asked for; "
+              "using what is there.")
+        length = actual
+    print(f"[single-car] Engine clip: {length:.1f}s from {start:.1f}s of the listing video.")
+    return dest, length
+
+
+def _media_duration(path):
+    """Length of a media file in seconds, or None if ffprobe cannot say."""
+    try:
+        probe = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "default=nw=1:nk=1", str(path)],
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        return float(probe.stdout.strip())
+    except Exception:  # noqa: BLE001 - the caller has a fallback
+        return None
+
+
+def overlay_engine_clip(video_path, clip_path, at, length, size=CANVAS, fps=24):
+    """Play the start-up inside the photo frame, not over the whole screen.
+
+    The clip goes where the photos go -- the same inset box the renderer
+    fits car pictures into -- so the headline, the spec table and the
+    narrator stay on screen while the car revs. Cutting to the clip full
+    frame hid all three, which is the one thing the layout exists to keep
+    visible.
+
+    It needs no room made for it: the gap was already opened in the
+    narration before the render (see open_engine_gap), so the stretch this
+    overlays is a stretch where the narrator has stopped talking and the
+    box is holding a still photo. Nothing is said over the engine and
+    nothing moves out of sync, because the film's own length never changes.
+
+    Fitted whole inside the box rather than cropped to fill it: a centre
+    crop of a vertical phone clip is as likely as not to cut off the
+    exhaust the start-up was filmed for. What fills the rest of the box is
+    a blurred, zoomed copy of the clip itself -- the Shorts treatment,
+    which reads as deliberate where white bars read as a mistake, and
+    which keeps the box as full as a photo leaves it.
+
+    Returns True if the clip is in the film, False if the film is as it
+    was rendered.
+    """
+    video_path = Path(video_path)
+    joined = video_path.with_name(f"{video_path.stem}-engine{video_path.suffix}")
+    _, media_box, _ = _media_zone_geometry(size)
+    box_x, box_y, box_w, box_h = (int(round(v)) for v in media_box)
+    until = at + length
+    delay_ms = int(round(at * 1000))
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-i", str(video_path), "-i", str(clip_path),
              "-filter_complex",
-             # Phone video arrives in whatever shape it was shot. Fitted
-             # whole rather than cropped to fill: a start-up framed on the
-             # exhaust loses the exhaust to a centre crop. The padding is
-             # white because the film it joins is on a white canvas.
-             f"[0:v]scale={width}:{height}:force_original_aspect_ratio=decrease,"
-             f"pad={width}:{height}:(ow-iw)/2:(oh-ih)/2:color=white,"
-             f"setsar=1,fps={fps},format=yuv420p[clipv];"
+             # Two copies of the clip: one zoomed past the box and cropped
+             # to fill it, blurred hard enough to carry no detail, and the
+             # whole frame fitted on top of that. Whatever shape the clip
+             # was shot in, the box ends up full and nothing is cut.
+             f"[1:v]split=2[back][front];"
+             f"[back]scale={box_w}:{box_h}:force_original_aspect_ratio=increase,"
+             f"crop={box_w}:{box_h},gblur=sigma=24[backdrop];"
+             f"[front]scale={box_w}:{box_h}:force_original_aspect_ratio=decrease[fitted];"
+             f"[backdrop][fitted]overlay=x=(W-w)/2:y=(H-h)/2,setsar=1,fps={fps},"
+             # The clip's own timestamps start at zero. tpad holds frames
+             # ahead of it so overlay always has something to composite --
+             # without it the filter stalls waiting on a stream that does
+             # not start until the seam. The padded frames are never drawn:
+             # `enable` is false until `at`.
+             f"tpad=start_duration={at:.3f}[clip];"
+             f"[0:v]fps={fps}[film];"
+             f"[film][clip]overlay=x={box_x}:y={box_y}:"
+             f"enable='between(t,{at:.3f},{until:.3f})':eof_action=pass,"
+             f"format=yuv420p[v];"
              # A phone recording of an engine and a studio voice arrive at
-             # completely different levels; both are brought to the same
-             # loudness rather than either being trusted.
+             # completely different levels, so both are brought to the same
+             # loudness rather than either being trusted -- the clip a
+             # little hotter than the voice, because the hit is the point.
              # The second aformat is not a duplicate: loudnorm resamples to
-             # 192kHz internally and hands that on, so without it the concat
+             # 192kHz internally and hands that on, so without it the mix
              # inherits 192k and the file comes out as 96kHz AAC.
-             f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo,"
-             f"loudnorm=I={ENGINE_CLIP_LUFS}:TP=-2:LRA=11,"
-             f"aformat=sample_rates=48000:channel_layouts=stereo[clipa];"
-             # The film is split rather than appended to, so the same input
-             # is read twice: once up to the seam, once from it.
-             f"[1:v]scale={width}:{height},setsar=1,fps={fps},format=yuv420p,"
-             f"split=2[before][after];"
              f"[1:a]aformat=sample_rates=48000:channel_layouts=stereo,"
-             f"asplit=2[beforea][aftera];"
-             f"[before]trim=0:{at:.3f},setpts=PTS-STARTPTS[v1];"
-             f"[beforea]atrim=0:{at:.3f},asetpts=PTS-STARTPTS[a1];"
-             f"[after]trim=start={at:.3f},setpts=PTS-STARTPTS[v2];"
-             f"[aftera]atrim=start={at:.3f},asetpts=PTS-STARTPTS[a2];"
-             f"[v1][a1][clipv][clipa][v2][a2]concat=n=3:v=1:a=1[v][a]",
+             f"loudnorm=I={ENGINE_CLIP_LUFS}:TP=-2:LRA=11,"
+             f"aformat=sample_rates=48000:channel_layouts=stereo,"
+             f"adelay={delay_ms}|{delay_ms}[clipa];"
+             f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo[filma];"
+             # Summed, not averaged: normalize=1 would halve the narration
+             # for the whole film to make room for five seconds of engine.
+             # The narration is silent across the gap, so the sum there is
+             # the clip alone.
+             f"[filma][clipa]amix=inputs=2:duration=first:"
+             f"dropout_transition=0:normalize=0[a]",
              "-map", "[v]", "-map", "[a]",
-             # Both rates pinned on the output. Concatenating three segments
-             # whose timebases differ let the frame rate drift to 25 on a
-             # 24fps film, and loudnorm hands on 192kHz, which shipped as
-             # 96kHz AAC until it was named here.
              "-r", str(fps), "-c:v", "libx264", "-preset", "medium", "-pix_fmt", "yuv420p",
              "-c:a", "aac", "-ar", "48000", str(joined)],
             check=True, capture_output=True, text=True, timeout=900,
         )
     except Exception as error:  # noqa: BLE001 - a hook is not worth the build
         detail = getattr(error, "stderr", "") or str(error)
-        print(f"[single-car] Could not join the engine clip ({str(detail)[-400:]}); "
-              "the video goes out as it was rendered.")
-        return 0.0
+        print(f"[single-car] Could not lay the engine clip into the frame "
+              f"({str(detail)[-400:]}); the video goes out as it was rendered.")
+        return False
     if not joined.exists() or joined.stat().st_size == 0:
-        print("[single-car] The engine clip came back empty; the video is unchanged.")
-        return 0.0
+        print("[single-car] The overlaid file came back empty; the video is unchanged.")
+        return False
     joined.replace(video_path)
-    print(f"[single-car] Engine clip: {length:.1f}s of video and sound from {start:.1f}s, "
-          f"cut in at {at:.1f}s after scene {ENGINE_CLIP_AFTER_SCENE}.")
-    return length
+    print(f"[single-car] Engine clip laid into the photo box at {at:.1f}s for {length:.1f}s, "
+          f"after scene {ENGINE_CLIP_AFTER_SCENE}.")
+    return True
 
 
 def add_narration_lead_in(audio_path, seconds=NARRATION_LEAD_IN_SECONDS):
@@ -4020,6 +4135,35 @@ def build_short(args):
     if word_timeline:
         normalized_duration = pad_tail_silence(
             audio_path, float(word_timeline[-1].get("end") or 0))
+    # The room for the start-up, made before anything is rendered. The clip
+    # plays inside the photo box rather than over the whole frame, so the
+    # film has to be running underneath it -- which means the quiet it
+    # needs has to be in the narration, not cut into the finished mp4.
+    #
+    # Fetched first: the gap cannot be taken back once the film is rendered
+    # around it, and a clip that turns out to be unreadable would leave
+    # five silent seconds over a still photo.
+    engine_clip_path = None
+    engine_clip_at = None
+    engine_clip_length = 0.0
+    if engine_clip:
+        fetched = fetch_engine_clip(engine_clip, output_dir / "engine_clip.mp4")
+        if fetched:
+            engine_clip_path, engine_clip_length = fetched
+            engine_clip_at = engine_clip_seam({
+                "scenes": package["scenes"],
+                "word_timeline": word_timeline,
+                "duration_seconds": normalized_duration,
+            })
+        if engine_clip_at is not None:
+            shifted = open_engine_gap(audio_path, word_timeline,
+                                      engine_clip_at, engine_clip_length)
+            if shifted is None:
+                engine_clip_at = None
+            else:
+                word_timeline = shifted
+        if engine_clip_at is None:
+            engine_clip_path = None
     wav_path = output_dir / "narration.wav"
     _extract_wav(audio_path, wav_path)
     timeline = build_mouth_timeline(wav_path)
@@ -4091,17 +4235,22 @@ def build_short(args):
     media_paths = [output_dir / item["path"] for item in media]
     video_path = output_dir / "single_car_short.mp4"
     render_narrator_video(media_paths, manifest, video_path)
-    # The start-up, picture and sound, cut into the seam the script was
-    # written around. Last, and on the rendered file, so the narration and
-    # every caption stay where the renderer put them.
-    engine_lead = insert_engine_clip(video_path, engine_clip, manifest) if engine_clip else 0.0
-    if engine_lead:
-        # Recorded so a build that shipped with a clip can be told apart
-        # from one that asked for a clip and did not get it -- the join is
-        # best-effort and says so in a log nobody reads later.
-        manifest["engine_clip"] = {**engine_clip, "lead_seconds": round(engine_lead, 3)}
-        manifest["duration_seconds"] = round(
-            float(manifest.get("duration_seconds") or 0) + engine_lead, 3)
+    # The start-up, laid into the photo box over the gap the narration
+    # already has. Last, and on the rendered file, so the film underneath
+    # it is exactly what the renderer timed -- nothing shifts, and the
+    # headline, the spec table and the narrator stay on screen through it.
+    if engine_clip_path and engine_clip_at is not None:
+        if overlay_engine_clip(video_path, engine_clip_path, engine_clip_at,
+                               engine_clip_length):
+            # Recorded so a build that shipped with a clip can be told apart
+            # from one that asked for a clip and did not get it -- the
+            # overlay is best-effort and otherwise says so only in a log
+            # nobody reads later.
+            manifest["engine_clip"] = {**engine_clip,
+                                       "at_seconds": round(engine_clip_at, 3),
+                                       "played_seconds": round(engine_clip_length, 3)}
+            manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        engine_clip_path.unlink(missing_ok=True)
     manifest["video"] = video_path.name
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
