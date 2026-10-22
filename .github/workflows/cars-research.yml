@@ -471,8 +471,12 @@ jobs:
           git pull --rebase origin "${OUTPUT_BRANCH}" || true
           git push origin "${OUTPUT_BRANCH}"
 
+      # always(), because the result is worth having most when the probe
+      # failed: an empty list that reached the branch says which of "the
+      # scrape broke" and "this listing has no videos" happened, and one
+      # that never got committed says neither.
       - name: Commit listing videos
-        if: ${{ inputs.mode == 'listing_videos' }}
+        if: ${{ always() && inputs.mode == 'listing_videos' }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -483,6 +487,12 @@ jobs:
           # The scraper's own working directory, which is a copy of the page
           # and of no use to anybody reading the result.
           rm -rf "$tmp_dir/cars/listing-videos/${{ inputs.draft_id }}/_scrape"
+          # Out of the working tree before switching branches. Probing one
+          # listing twice under the same id leaves a file here that
+          # cars-output already tracks, and git refuses to switch over an
+          # untracked file it would overwrite -- which is a re-run of the
+          # same probe failing for no reason of its own.
+          rm -rf "cars/listing-videos/${{ inputs.draft_id }}"
 
           git fetch origin "${OUTPUT_BRANCH}" || true
           if git show-ref --verify --quiet "refs/remotes/origin/${OUTPUT_BRANCH}"; then
