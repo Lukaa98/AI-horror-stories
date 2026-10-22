@@ -3848,18 +3848,8 @@ def build_short(args):
     )
     audio_path = output_dir / "narration.mp3"
     synthesize_narration(package["script"], audio_path, preset=args.voice, speed=FAST_TTS_SPEED)
-    # The engine note stands in for the lead-in when there is one: both
-    # exist to put something in front of the first word, and two of them
-    # would be a clip followed by silence followed by the voice.
     engine_clip = photos.get("engine_clip") if isinstance(photos, dict) else None
-    engine_lead = prepend_engine_clip(audio_path, engine_clip) if engine_clip else 0.0
-    if not engine_lead:
-        add_narration_lead_in(audio_path)
-    else:
-        # Recorded so a build that shipped with a clip can be told apart
-        # from one that asked for a clip and did not get it -- the cut is
-        # best-effort and says so in the log, which nobody reads later.
-        package["engine_clip"] = {**engine_clip, "lead_seconds": round(engine_lead, 3)}
+    add_narration_lead_in(audio_path)
     # The dense style runs longer on purpose: 180 words at gpt-audio's ~2.5
     # a second is 72 seconds raw, and squeezing that into 55 would need
     # 1.3x. Normalising to 63 asks for 1.15x, which is what the classic
@@ -3868,6 +3858,20 @@ def build_short(args):
     normalized_duration = normalize_audio_duration(
         audio_path, target=chosen_style["seconds"],
         minimum=chosen_style["window"][0], maximum=chosen_style["window"][1])
+    # After the tempo pass, not before. Normalisation stretches the whole
+    # file to hit a target length, and the first M2 build with a clip came
+    # back with its five seconds of exhaust played at about 1.4x: the first
+    # word landed at 3.76s against a 5.3s lead. Words survive that -- it is
+    # what the pass is for -- and an engine does not. Still before
+    # transcription, so the word timeline is measured over the finished
+    # audio and the captions stay in step without the renderer knowing.
+    engine_lead = prepend_engine_clip(audio_path, engine_clip) if engine_clip else 0.0
+    if engine_lead:
+        normalized_duration += engine_lead
+        # Recorded so a build that shipped with a clip can be told apart
+        # from one that asked for a clip and did not get it -- the cut is
+        # best-effort and says so in the log, which nobody reads later.
+        package["engine_clip"] = {**engine_clip, "lead_seconds": round(engine_lead, 3)}
     voice_auditions = (
         generate_voice_auditions(package["script"], output_dir, args.voice) if args.audition_voices else {}
     )
@@ -3897,9 +3901,19 @@ def build_short(args):
         try:
             synthesize_narration(package["script"], audio_path, preset=args.voice,
                                  speed=FAST_TTS_SPEED)
+            add_narration_lead_in(audio_path)
             normalized_duration = normalize_audio_duration(
                 audio_path, target=chosen_style["seconds"],
                 minimum=chosen_style["window"][0], maximum=chosen_style["window"][1])
+            # A retake throws away the audio the clip was joined to, so it
+            # has to be joined again -- otherwise asking for a second take
+            # is a quiet way to lose the engine note.
+            if engine_clip:
+                engine_lead = prepend_engine_clip(audio_path, engine_clip)
+                if engine_lead:
+                    normalized_duration += engine_lead
+                    package["engine_clip"] = {**engine_clip,
+                                              "lead_seconds": round(engine_lead, 3)}
             word_timeline = transcribe_word_timeline(audio_path)
             unspoken = unspoken_tail(package["script"], word_timeline)
         except Exception as exc:  # noqa: BLE001 - a build is worth more than a retake
