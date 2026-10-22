@@ -3491,27 +3491,54 @@ def fetch_engine_clip(clip, dest):
         return None
     length = end - start
     dest = Path(dest)
-    try:
-        subprocess.run(
-            ["ffmpeg", "-y",
-             # Seek before -i: on an HLS manifest this skips fetching
-             # everything before the cut rather than downloading it to
-             # throw away.
-             "-ss", f"{start:.3f}", "-t", f"{length:.3f}", "-i", url,
-             # Re-encoded rather than copied: a stream copy starts at the
-             # nearest keyframe, which on a listing video can be a second
-             # or two off the revs the timestamps were written for.
-             "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p",
-             "-c:a", "aac", "-ar", "48000", str(dest)],
-            check=True, capture_output=True, text=True, timeout=900,
-        )
-    except Exception as error:  # noqa: BLE001 - a hook is not worth the build
-        detail = getattr(error, "stderr", "") or str(error)
-        print(f"[single-car] Could not read the engine clip ({str(detail)[-400:]}); "
-              "the build carries on without it.")
-        return None
-    if not dest.exists() or dest.stat().st_size == 0:
-        print("[single-car] The engine clip came back empty; the build carries on without it.")
+    # Two ways of asking, because the first one came back silent.
+    #
+    # Seeking before -i is the cheap way: on an HLS manifest it skips
+    # fetching everything before the cut instead of downloading it to throw
+    # away. But a master playlist keeps its audio in a separate rendition,
+    # and a seek taken at open time can leave that rendition unopened -- the
+    # file then has a picture and no sound at all, and the overlay that
+    # wants [1:a] cannot be built. Seeking on the output reads from the
+    # start and decodes past it, which is slower and does not lose the
+    # audio, so it is worth one go when the fast way comes back mute.
+    attempts = (
+        ["ffmpeg", "-y", "-ss", f"{start:.3f}", "-t", f"{length:.3f}", "-i", url],
+        ["ffmpeg", "-y", "-i", url, "-ss", f"{start:.3f}", "-t", f"{length:.3f}"],
+    )
+    for index, head in enumerate(attempts):
+        try:
+            subprocess.run(
+                head + [
+                    # Re-encoded rather than copied: a stream copy starts at
+                    # the nearest keyframe, which on a listing video can be
+                    # a second or two off the revs the times were read for.
+                    "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-ar", "48000", str(dest)],
+                check=True, capture_output=True, text=True, timeout=900,
+            )
+        except Exception as error:  # noqa: BLE001 - a hook is not worth the build
+            detail = getattr(error, "stderr", "") or str(error)
+            print(f"[single-car] Could not read the engine clip ({str(detail)[-400:]}); "
+                  "the build carries on without it.")
+            return None
+        if not dest.exists() or dest.stat().st_size == 0:
+            print("[single-car] The engine clip came back empty; the build carries on "
+                  "without it.")
+            return None
+        if _has_audio(dest):
+            break
+        if index == 0:
+            print("[single-car] The clip came back without an audio track; reading it "
+                  "again from the start of the video.")
+    else:
+        # Checked here rather than found out by the overlay, which is three
+        # steps and one render later -- by which point the gap for the clip
+        # is already cut into the narration and the film is built around
+        # five seconds of nothing. The whole point of the clip is the
+        # sound, so no sound is no clip.
+        print("[single-car] That video has no sound -- nothing to play. Either the "
+              "listing uploaded it muted, or its audio is in a rendition ffmpeg "
+              "could not open. The build carries on without a clip.")
         return None
     actual = _media_duration(dest)
     if actual and actual < length - 0.5:
@@ -3522,6 +3549,27 @@ def fetch_engine_clip(clip, dest):
         length = actual
     print(f"[single-car] Engine clip: {length:.1f}s from {start:.1f}s of the listing video.")
     return dest, length
+
+
+def _has_audio(path):
+    """Whether a media file has an audio stream at all.
+
+    Separate from "is it loud enough": a listing video uploaded muted and
+    one whose audio rendition never opened both arrive here as a picture
+    with no sound, and either way there is nothing to play.
+    """
+    try:
+        probe = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", "a",
+             "-show_entries", "stream=codec_type", "-of", "csv=p=0", str(path)],
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        return "audio" in probe.stdout
+    except Exception:  # noqa: BLE001
+        # An unanswerable probe is not evidence of silence. The overlay
+        # fails cleanly on a file with no audio and the gap gets closed
+        # again, so guessing wrong here is recoverable.
+        return True
 
 
 def _media_duration(path):
@@ -3535,6 +3583,62 @@ def _media_duration(path):
         return float(probe.stdout.strip())
     except Exception:  # noqa: BLE001 - the caller has a fallback
         return None
+
+
+def close_engine_gap(video_path, at, length, size=CANVAS, fps=24):
+    """Take the room for the clip back out of the finished film.
+
+    The gap has to be opened before the render, so by the time anything can
+    go wrong with the clip the film is already built around five seconds of
+    nothing -- no voice, no picture, no engine. That is what shipped on the
+    first real build: the clip came down without an audio track, the
+    overlay could not be built, and the hole went out in the video.
+
+    Fetching the clip first stops a *fetch* from doing that, and checking it
+    has sound stops the known cause, but neither covers whatever fails
+    next. So the gap is reversible: the film either side of it is joined
+    back together and nobody can tell it was ever there.
+
+    Returns the seconds removed, or 0.0 if the film is unchanged.
+    """
+    video_path = Path(video_path)
+    closed = video_path.with_name(f"{video_path.stem}-closed{video_path.suffix}")
+    width, height = size
+    resume = at + length
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-i", str(video_path),
+             "-filter_complex",
+             f"[0:v]scale={width}:{height},setsar=1,fps={fps},format=yuv420p,"
+             f"split=2[before][after];"
+             f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo,"
+             f"asplit=2[beforea][aftera];"
+             f"[before]trim=0:{at:.3f},setpts=PTS-STARTPTS[v1];"
+             f"[beforea]atrim=0:{at:.3f},asetpts=PTS-STARTPTS[a1];"
+             f"[after]trim=start={resume:.3f},setpts=PTS-STARTPTS[v2];"
+             f"[aftera]atrim=start={resume:.3f},asetpts=PTS-STARTPTS[a2];"
+             f"[v1][a1][v2][a2]concat=n=2:v=1:a=1[v][a]",
+             "-map", "[v]", "-map", "[a]",
+             # Pinned for the same reason the overlay pins them: joining two
+             # segments whose timebases differ let a 24fps film drift to 25.
+             "-r", str(fps), "-c:v", "libx264", "-preset", "medium", "-pix_fmt", "yuv420p",
+             "-c:a", "aac", "-ar", "48000", str(closed)],
+            check=True, capture_output=True, text=True, timeout=900,
+        )
+    except Exception as error:  # noqa: BLE001
+        detail = getattr(error, "stderr", "") or str(error)
+        print(f"[single-car] WARNING: could not close the engine gap "
+              f"({str(detail)[-300:]}). The video has {length:.1f}s of silence at "
+              f"{at:.1f}s with nothing playing over it -- do not upload it as it is.")
+        return 0.0
+    if not closed.exists() or closed.stat().st_size == 0:
+        print(f"[single-car] WARNING: closing the engine gap came back empty. The video "
+              f"has {length:.1f}s of silence at {at:.1f}s -- do not upload it as it is.")
+        return 0.0
+    closed.replace(video_path)
+    print(f"[single-car] Took the {length:.1f}s engine gap back out at {at:.1f}s; "
+          "the video is the one it would have been without a clip.")
+    return length
 
 
 def overlay_engine_clip(video_path, clip_path, at, length, size=CANVAS, fps=24):
@@ -4262,7 +4366,18 @@ def build_short(args):
             manifest["engine_clip"] = {**engine_clip,
                                        "at_seconds": round(engine_clip_at, 3),
                                        "played_seconds": round(engine_clip_length, 3)}
-            manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        else:
+            # The room was made before the render, so a failure here leaves
+            # the film holding five seconds of nothing. Taking it back out
+            # is the difference between a build without a clip and a build
+            # with a hole in it -- which is what went out the first time.
+            removed = close_engine_gap(video_path, engine_clip_at, engine_clip_length)
+            manifest["duration_seconds"] = round(
+                float(manifest.get("duration_seconds") or 0) - removed, 3)
+            manifest["engine_clip_failed"] = {
+                **engine_clip, "at_seconds": round(engine_clip_at, 3),
+                "gap_closed": bool(removed)}
+        manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
         engine_clip_path.unlink(missing_ok=True)
     manifest["video"] = video_path.name
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")

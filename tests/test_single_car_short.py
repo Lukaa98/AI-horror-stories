@@ -4028,6 +4028,7 @@ def test_the_clip_is_cut_to_what_the_video_actually_has(monkeypatch, tmp_path):
 
     monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
     monkeypatch.setattr(single_car_short, "_media_duration", lambda path: 2.0)
+    monkeypatch.setattr(single_car_short, "_has_audio", lambda path: True)
     path, length = single_car_short.fetch_engine_clip(
         {"url": "http://x/v.m3u8", "start": 12, "end": 17}, dest)
     assert path == dest
@@ -4173,3 +4174,108 @@ def test_the_form_does_not_still_promise_a_clip_at_the_front():
     assert "ten to fifteen seconds in" in app
     # And that the pause is why length no longer costs words.
     assert "The narration pauses for it " in app
+
+
+def test_a_silent_video_is_caught_at_the_fetch_not_by_the_overlay(monkeypatch, tmp_path):
+    """The first real build picked a listing video with no audio track. The
+    fetch said nothing, the gap was cut into the narration, the film was
+    rendered around it, and only then did the overlay fail on "[1:a] matches
+    no streams" -- so five seconds of nothing shipped. The whole point of
+    the clip is the sound, so no sound has to mean no clip, decided before
+    anything is committed to."""
+    import single_car_short
+
+    dest = tmp_path / "engine_clip.mp4"
+    calls = []
+
+    def fake_run(args, **kwargs):
+        calls.append(args)
+        dest.write_bytes(b"clip")
+        return type("Done", (), {"stdout": "", "stderr": ""})()
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
+    monkeypatch.setattr(single_car_short, "_media_duration", lambda path: 5.0)
+    monkeypatch.setattr(single_car_short, "_has_audio", lambda path: False)
+
+    assert single_car_short.fetch_engine_clip(
+        {"url": "http://x/v.m3u8", "start": 8, "end": 13}, dest) is None
+    # Asked twice, the second time seeking on the output. A master playlist
+    # keeps its audio in a separate rendition and a seek taken at open time
+    # can leave it unopened, which reads as a video with no sound at all.
+    assert len(calls) == 2, "it tries the other way of asking before giving up"
+    first, second = calls
+    assert first.index("-ss") < first.index("-i"), "cheap seek first"
+    assert second.index("-i") < second.index("-ss"), "then seek on the output"
+
+    # And a clip that does have sound is taken on the first pass.
+    calls.clear()
+    monkeypatch.setattr(single_car_short, "_has_audio", lambda path: True)
+    assert single_car_short.fetch_engine_clip(
+        {"url": "http://x/v.m3u8", "start": 8, "end": 13}, dest)[1] == 5.0
+    assert len(calls) == 1
+
+
+def test_an_unanswerable_audio_probe_is_not_read_as_silence(monkeypatch, tmp_path):
+    """ffprobe failing says nothing about the file. Treating that as silence
+    would drop clips for an unrelated reason, and the overlay fails cleanly
+    on a file with no audio anyway -- after which the gap gets closed."""
+    import single_car_short
+
+    def fake_run(args, **kwargs):
+        raise OSError("no ffprobe here")
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
+    assert single_car_short._has_audio(tmp_path / "clip.mp4") is True
+
+
+def test_the_gap_is_taken_back_out_when_the_clip_does_not_arrive(monkeypatch, tmp_path):
+    """The room has to be made before the render, so anything that goes
+    wrong afterwards leaves the film holding five seconds of nothing -- no
+    voice, no picture, no engine. That is what shipped the first time. The
+    gap is reversible so a build without a clip is a build without a clip,
+    not a build with a hole in it."""
+    import single_car_short
+
+    video = tmp_path / "single_car_short.mp4"
+    video.write_bytes(b"film")
+    calls = []
+
+    def fake_run(args, **kwargs):
+        calls.append(args)
+        Path(str(args[-1])).write_bytes(b"closed")
+        return type("Done", (), {"stdout": "", "stderr": ""})()
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
+    monkeypatch.setattr(single_car_short.Path, "replace",
+                        lambda self, other: None, raising=False)
+    assert single_car_short.close_engine_gap(video, at=11.32, length=5.0) == 5.0
+
+    filters = str(calls[0][calls[0].index("-filter_complex") + 1])
+    # Everything up to the seam, then everything from where the clip would
+    # have ended -- two pieces, joined.
+    assert "trim=0:11.320" in filters and "trim=start=16.320" in filters
+    assert "atrim=0:11.320" in filters and "atrim=start=16.320" in filters
+    assert "concat=n=2:v=1:a=1" in filters
+    assert calls[0][calls[0].index("-r") + 1] == "24"
+
+    # A failure to close says so loudly, because what is left is a video
+    # nobody should upload.
+    assert single_car_short.close_engine_gap(
+        "/nonexistent/film.mp4", at=11.32, length=5.0) == 0.0
+
+
+def test_the_build_closes_the_gap_rather_than_shipping_the_hole():
+    """Fetching first stops a fetch from leaving a hole and checking for
+    sound stops the known cause, but neither covers whatever fails next."""
+    import inspect
+    import single_car_short
+
+    body = inspect.getsource(single_car_short.build_short)
+    overlay = body.index("overlay_engine_clip(")
+    close = body.index("close_engine_gap(")
+    assert overlay < close, "only reached when the overlay did not work"
+    # The length the viewer sees is the length that is recorded.
+    assert 'manifest.get("duration_seconds") or 0) - removed' in body
+    # And a build that asked for a clip and did not get one says so, rather
+    # than looking identical to one that never asked.
+    assert '"engine_clip_failed"' in body
