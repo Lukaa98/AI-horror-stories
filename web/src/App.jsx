@@ -9,7 +9,7 @@ import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
-import { clipSeconds } from "./clipTimes";
+import { clipSeconds, clipStamp, sameListingVideo } from "./clipTimes";
 import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
@@ -1072,9 +1072,10 @@ export default function App() {
   const [previousBuildsStage, setPreviousBuildsStage] = useState("idle");
   const [previousBuildsError, setPreviousBuildsError] = useState(null);
   const [previousBuildFilter, setPreviousBuildFilter] = useState("");
-  // An engine note cut out of one of the listing's own videos, played at
-  // the front of the Short. Off unless asked for: most listings have a
-  // walkaround and an interior tour and nothing worth hearing.
+  // A few seconds of one of the listing's own videos -- picture and sound
+  // -- played inside the photo frame where the script hands over to it.
+  // Off unless asked for: most listings have a walkaround and an interior
+  // tour and nothing worth hearing.
   const [useEngineClip, setUseEngineClip] = useState(false);
   const [listingVideos, setListingVideos] = useState(null);
   const [listingVideosState, setListingVideosState] = useState("");
@@ -1549,6 +1550,23 @@ export default function App() {
   // the output branch. Two or three minutes, because it drives a real
   // browser over a real page -- the dashboard cannot ask Cars & Bids
   // itself, being a static page on another origin.
+  // Settles a carried-over choice against the videos a probe just found,
+  // and returns the line to put under the picker.
+  //
+  // A clip refilled from a previous build is a url and nothing else, so the
+  // matching video replaces it and the poster frame lights up. A url that is
+  // not on this listing is dropped rather than kept: the auction box can
+  // have been changed since the refill, and building this car with another
+  // listing's engine is a worse outcome than asking for one more click.
+  function reconcileChosenVideo(found, carried) {
+    if (!carried?.playback_url) return "";
+    const match = (found?.videos || []).find(
+      (video) => sameListingVideo(video.playback_url, carried.playback_url));
+    setChosenVideo(match || null);
+    return match ? ""
+      : "The clip carried over from that build is not on this listing - pick one below.";
+  }
+
   async function findListingVideos() {
     const url = auctionUrl.trim();
     if (!repoOk || !url) {
@@ -1559,14 +1577,17 @@ export default function App() {
     const path = `cars/listing-videos/${probeId}/videos.json`;
     setListingVideosState("probing");
     setListingVideos(null);
-    setChosenVideo(null);
+    // Not cleared here. A choice carried over from a previous build is the
+    // only thing in the form that a probe cannot put back, so it is held
+    // until the videos arrive and then matched against them.
+    const carried = chosenVideo;
     try {
       // A previous probe of this listing is the answer already.
       const already = await fetchFileViaApi(
         settings.owner, settings.repo, OUTPUT_BRANCH, path, settings.token);
       if (already?.videos?.length) {
         setListingVideos(already);
-        setListingVideosState("");
+        setListingVideosState(reconcileChosenVideo(already, carried));
         return;
       }
       await dispatchWorkflow({
@@ -1604,7 +1625,8 @@ export default function App() {
       }
       if (found) {
         setListingVideos(found);
-        setListingVideosState(found.videos?.length ? ""
+        setListingVideosState(found.videos?.length
+          ? reconcileChosenVideo(found, carried)
           : found.scrape_ok === false
             ? "The scrape failed -- open the build log."
             : "This listing has no videos.");
@@ -1667,6 +1689,24 @@ export default function App() {
     setRivalFlipped(String(inputs.photo_rival_flip || "") === "1");
     setDenseStyle(String(inputs.script_style || "") === "dense");
     setShortStyle(String(inputs.script_style || "") === "short");
+    // The start-up clip, which did not come back with everything else: a
+    // rebuild of a build that used one arrived with the box unticked and
+    // the times blank, so it silently went out without the clip.
+    //
+    // Only the url and the two times are recorded, so the video comes back
+    // as a choice without its poster frame -- which is enough to build
+    // with. Pressing "Find videos" re-attaches the real one.
+    const clip = inputs.engine_clip;
+    const carried = !!(clip && clip.url);
+    setUseEngineClip(carried);
+    setChosenVideo(carried ? { index: -1, playback_url: clip.url } : null);
+    setClipStart(carried ? clipStamp(clip.start) : "");
+    setClipEnd(carried ? clipStamp(clip.end) : "");
+    setListingVideos(null);
+    setListingVideosState(carried
+      ? "Clip carried over from that build. Press \u201cFind videos\u201d to see the "
+        + "listing\u2019s videos again and check which one it is."
+      : "");
     setWorkflow("single_car");
     setFilledFromBuild(build);
   }
@@ -3007,7 +3047,7 @@ export default function App() {
                           disabled={stage === "single-car-building"}
                         />
                         Engine sound
-                        <Tip text="Cuts a few seconds out of one of the listing's own videos and plays it at the front, before the narration starts. Needs a specific listing, because the clip comes off that listing's page. Which video and which seconds are both yours to pick: choosing automatically is what the startup-battle pipeline does, and it manages it 4 times in 14." />
+                        <Tip text="Cuts a few seconds out of one of the listing's own videos and plays them -- picture and sound -- inside the photo frame, about ten to fifteen seconds in. Not at the front: the script is written to introduce the car and then hand over, so the narrator stops talking for it, and it lands inside the twenty seconds people actually watch. It plays in the same box the photos use, so the headline, the spec table and the character stay on screen. Needs a specific listing, because the clip comes off that listing's page. Which video and which seconds are both yours to pick: choosing automatically is what the startup-battle pipeline does, and it manages it 4 times in 14." />
                       </label>
                     </div>
 
@@ -3045,7 +3085,9 @@ export default function App() {
                               type="button"
                               key={video.index}
                               className={"listing-video"
-                                + (chosenVideo?.index === video.index ? " chosen" : "")}
+                                + (sameListingVideo(chosenVideo?.playback_url,
+                                                    video.playback_url)
+                                  ? " chosen" : "")}
                               onClick={() => setChosenVideo(video)}
                             >
                               {video.poster && (
@@ -3073,8 +3115,11 @@ export default function App() {
                               {clipSeconds(clipStart) !== null && clipSeconds(clipEnd) !== null
                                 && clipSeconds(clipEnd) > clipSeconds(clipStart)
                                 ? `${(clipSeconds(clipEnd) - clipSeconds(clipStart)).toFixed(1)}s `
-                                  + "from the clip above, played before the narration. Two or "
-                                  + "three seconds is a hook; much more eats the script."
+                                  + "of the clip above, played in the photo frame where the "
+                                  + "script hands over to it. The narration pauses for it "
+                                  + "rather than losing words, so length costs runtime, not "
+                                  + "script -- four or five seconds is a start-up, much more "
+                                  + "is a gap."
                                 : "Read the times off the listing's own player. m:ss or seconds."}
                             </p>
                           </>

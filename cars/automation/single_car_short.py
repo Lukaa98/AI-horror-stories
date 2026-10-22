@@ -4210,6 +4210,12 @@ def build_short(args):
             "angles": args.angles or "",
             "current_price": args.current_price or "",
             "extra_photos": args.extra_photos or "",
+            # The one value here that is not a string, and the one that was
+            # missing: a build that used a start-up clip came back from the
+            # "Start from a previous build" dropdown with the box unticked,
+            # the video unchosen and the times blank, so rebuilding it
+            # silently dropped the clip the original had.
+            "engine_clip": engine_clip or None,
         },
         **{k: v for k, v in package.items() if k != "_angles"},
         "voice_preset": args.voice,

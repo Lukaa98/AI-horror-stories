@@ -4118,3 +4118,53 @@ def test_the_build_makes_the_room_before_it_renders_and_fills_it_after(tmp_path)
     # afterwards would find the midpoint of the gap it just opened.
     assert body.index("engine_clip_seam(") < gap
     assert "engine_clip_seam" not in body[render:]
+
+
+def test_a_rebuild_carries_the_start_up_clip_with_the_rest_of_the_form():
+    """Everything else came back from "Start from a previous build" -- the
+    car, the notes, every photo url -- and the clip did not. The box arrived
+    unticked and the times blank, so pressing Build on a restored build
+    quietly produced the same Short without its engine."""
+    import inspect
+    import single_car_short
+
+    # The pipeline records it, in the same snapshot the dropdown reads.
+    body = inspect.getsource(single_car_short.build_short)
+    inputs = body.split('"build_inputs": {')[1].split("\n        },")[0]
+    assert '"engine_clip": engine_clip or None' in inputs
+
+    app = (Path(single_car_short.__file__).resolve().parents[2]
+           / "web/src/App.jsx").read_text()
+    # The dashboard writes it before dispatch too, so a run that never
+    # finished refills exactly like one that did.
+    assert "engine_clip: useEngineClip && chosenVideo" in app
+    # And reads all four pieces of it back onto the form.
+    assert "const clip = inputs.engine_clip;" in app
+    assert "setUseEngineClip(carried);" in app
+    assert "setClipStart(carried ? clipStamp(clip.start)" in app
+    assert "setClipEnd(carried ? clipStamp(clip.end)" in app
+    assert "playback_url: clip.url" in app
+    # The probe no longer throws a carried-over choice away before it has
+    # anything to replace it with.
+    assert "setChosenVideo(null);\n    const carried" not in app
+    assert "reconcileChosenVideo(" in app
+    # The picker highlights by video, not by position in the list: a
+    # restored clip has no index to match on.
+    assert "chosenVideo?.index === video.index" not in app
+    assert "sameListingVideo(chosenVideo?.playback_url" in app
+
+
+def test_the_form_does_not_still_promise_a_clip_at_the_front():
+    """It played at the front when it was audio only. It now interrupts the
+    script where the narrator hands over, inside the photo frame -- and the
+    help text is the only place anybody finds that out."""
+    import single_car_short
+
+    app = (Path(single_car_short.__file__).resolve().parents[2]
+           / "web/src/App.jsx").read_text()
+    assert "plays it at the front, before the narration starts" not in app
+    assert "played before the narration" not in app
+    assert "inside the photo frame" in app
+    assert "ten to fifteen seconds in" in app
+    # And that the pause is why length no longer costs words.
+    assert "The narration pauses for it " in app
