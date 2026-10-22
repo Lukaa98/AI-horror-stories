@@ -34,8 +34,8 @@ FFMPEG = os.environ.get("FFMPEG_BINARY", "ffmpeg")
 FFPROBE = os.environ.get("FFPROBE_BINARY", "ffprobe")
 
 
-def _run(command, timeout=180):
-    return subprocess.run(command, capture_output=True, text=True, timeout=timeout)
+def _run(command, timeout=180, cwd=None):
+    return subprocess.run(command, capture_output=True, text=True, timeout=timeout, cwd=cwd)
 
 
 def media_duration(source):
@@ -86,14 +86,17 @@ def tidy_label(context, section=""):
 def collect(auction_url, output_dir):
     output_dir.mkdir(parents=True, exist_ok=True)
     manifest_path = output_dir / "scrape.json"
+    # From the scraper's own directory: its entry point is a relative path
+    # and node resolves that against the process's cwd, not the script's.
     done = _run([
         "node", "src/scrape-carsandbids-gallery.js",
         f"--auction-url={auction_url}",
         "--skip-images=true",
         f"--out-dir={output_dir / '_scrape'}",
         f"--out-json={manifest_path}",
-    ], timeout=600)
-    if done.returncode != 0:
+    ], timeout=600, cwd=SCRAPER_DIR)
+    scrape_ok = done.returncode == 0
+    if not scrape_ok:
         print(done.stdout[-2000:], file=sys.stderr)
         print(done.stderr[-2000:], file=sys.stderr)
     manifest = {}
@@ -122,7 +125,12 @@ def collect(auction_url, output_dir):
             "duration_seconds": media_duration(url),
             "poster": poster.name if poster else None,
         })
-    return {"auction_url": auction_url, "video_count": len(videos), "videos": videos}
+    # "The scrape failed" and "this listing has no videos" are different
+    # answers and were indistinguishable: the first run of this reported 0
+    # videos for a listing with four, because node could not find its own
+    # entry point and nothing said so.
+    return {"auction_url": auction_url, "scrape_ok": scrape_ok,
+            "video_count": len(videos), "videos": videos}
 
 
 def main():
@@ -135,11 +143,15 @@ def main():
     found = collect(args.auction_url, output_dir)
     (output_dir / "videos.json").write_text(
         json.dumps(found, indent=2, ensure_ascii=False), encoding="utf-8")
+    if not found["scrape_ok"]:
+        print(f"[listing-videos] The scrape of {args.auction_url} failed; "
+              "the empty list below is that, not a listing without videos.",
+              file=sys.stderr)
     print(f"[listing-videos] {found['video_count']} video(s) on {args.auction_url}")
     for video in found["videos"]:
         print(f"  {video['index']}. {video['label'] or '(no label)'} "
               f"- {video['duration_seconds']}s - poster={video['poster']}")
-    return 0
+    return 0 if found["scrape_ok"] else 1
 
 
 if __name__ == "__main__":
