@@ -1431,3 +1431,35 @@ button.secondary {
 .photo-closeup-describe { display: inline-flex; align-items: center; gap: 4px;
   font-size: 11px; color: var(--ink-soft); cursor: help; user-select: none; white-space: nowrap; }
 .photo-closeup-describe input { margin: 0; cursor: pointer; }
+
+/* The listing's own videos, as poster frames. The page does not label them
+   in a way the scraper can read -- context comes back as the thumbnail URL
+   -- but an engine bay is unmistakable at this size, which is the whole
+   reason the picker shows pictures rather than names. */
+.listing-videos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.listing-video {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  font-size: 12px;
+  color: inherit;
+  background: var(--sunken, #1b1b23);
+  border: 2px solid var(--line, #2a2a35);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.listing-video img {
+  width: 132px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block;
+}
+.listing-video.chosen { border-color: var(--accent, #6c5ce7); }

@@ -6,8 +6,11 @@ on:
       # The branch being developed on. This has to move with it -- it sat on
       # v10 after work had already moved, which would have left the dashboard
       # frozen at an old build while changes were pushed past it.
-      - v12
       - develop
+      # The engine-sound work. Its dashboard half cannot be tried at all
+      # unless it deploys, and v14 is develop plus that work, so what lands
+      # here is the same dashboard with one more option on it.
+      - v14
   workflow_dispatch: # allow manual runs
 
 permissions:

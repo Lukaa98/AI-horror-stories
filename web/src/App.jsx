@@ -9,6 +9,7 @@ import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
+import { clipSeconds } from "./clipTimes";
 import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
@@ -840,6 +841,14 @@ function previousBuildMatches(group, filter) {
   return words.every((word) => haystack.includes(word));
 }
 
+// One probe folder per listing, named after the auction's own id so
+// probing the same listing twice lands in the same place instead of
+// littering the branch with a folder per attempt.
+function listingProbeId(auctionUrl) {
+  const id = String(auctionUrl || "").match(/\/auctions\/([A-Za-z0-9]+)/);
+  return `listing-videos-${id ? id[1] : "unknown"}`;
+}
+
 async function loadPreviousSingleCarBuilds({ owner, repo, token }) {
   const { entries } = await fetchOutputTree({ owner, repo, token });
   // Newest-first out of groupDashboardEntries, so the first run seen for a
@@ -1063,6 +1072,15 @@ export default function App() {
   const [previousBuildsStage, setPreviousBuildsStage] = useState("idle");
   const [previousBuildsError, setPreviousBuildsError] = useState(null);
   const [previousBuildFilter, setPreviousBuildFilter] = useState("");
+  // An engine note cut out of one of the listing's own videos, played at
+  // the front of the Short. Off unless asked for: most listings have a
+  // walkaround and an interior tour and nothing worth hearing.
+  const [useEngineClip, setUseEngineClip] = useState(false);
+  const [listingVideos, setListingVideos] = useState(null);
+  const [listingVideosState, setListingVideosState] = useState("");
+  const [chosenVideo, setChosenVideo] = useState(null);
+  const [clipStart, setClipStart] = useState("");
+  const [clipEnd, setClipEnd] = useState("");
   const [filledFromBuild, setFilledFromBuild] = useState(null);
   // Which run of a car is selected, when it has been built more than once.
   const [chosenRun, setChosenRun] = useState({});
@@ -1380,6 +1398,10 @@ export default function App() {
       photo_race_flip: raceFlipped ? "1" : "",
       photo_rival_flip: rivalFlipped ? "1" : "",
       extra_photos: useManualPhotos ? JSON.stringify(serializePhotos(extraPhotos)) : "",
+      engine_clip: useEngineClip && chosenVideo
+        ? { url: chosenVideo.playback_url,
+            start: clipSeconds(clipStart), end: clipSeconds(clipEnd) }
+        : null,
     });
     try {
       const startedAt = Date.now();
@@ -1422,6 +1444,18 @@ export default function App() {
             // mirrored photo cannot get separated from its instruction.
             if (race && raceFlipped) slots.race_flip = "1";
             if (rival && rivalFlipped) slots.rival_flip = "1";
+            // The engine clip rides here too, for the same reason: all 25
+            // inputs are spoken for, and this one is already a JSON object.
+            // Not a photo, which is why it is named for what it is.
+            const from = clipSeconds(clipStart);
+            const to = clipSeconds(clipEnd);
+            if (useEngineClip && chosenVideo && from !== null && to !== null && to > from) {
+              slots.engine_clip = {
+                url: chosenVideo.playback_url,
+                start: from,
+                end: to,
+              };
+            }
             return Object.keys(slots).length ? JSON.stringify(slots) : "";
           })(),
           rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
@@ -1509,6 +1543,68 @@ export default function App() {
       setRivalChoicesError(String(err.message || err));
       setRivalChoicesStage("error");
     }
+  }
+
+  // Scrapes one listing for its videos and waits for the answer to land on
+  // the output branch. Two or three minutes, because it drives a real
+  // browser over a real page -- the dashboard cannot ask Cars & Bids
+  // itself, being a static page on another origin.
+  async function findListingVideos() {
+    const url = auctionUrl.trim();
+    if (!repoOk || !url) {
+      setListingVideosState("Paste the listing URL above first.");
+      return;
+    }
+    const probeId = listingProbeId(url);
+    const path = `cars/listing-videos/${probeId}/videos.json`;
+    setListingVideosState("probing");
+    setListingVideos(null);
+    setChosenVideo(null);
+    try {
+      // A previous probe of this listing is the answer already.
+      const already = await fetchFileViaApi(
+        settings.owner, settings.repo, OUTPUT_BRANCH, path, settings.token);
+      if (already?.videos?.length) {
+        setListingVideos(already);
+        setListingVideosState("");
+        return;
+      }
+      await dispatchWorkflow({
+        owner: settings.owner, repo: settings.repo, branch: settings.branch,
+        token: settings.token, workflow: "cars-research.yml",
+        inputs: {
+          mode: "listing_videos",
+          draft_id: probeId,
+          request: `list the videos on ${url}`,
+          auction_url: url,
+        },
+      });
+    } catch (err) {
+      setListingVideosState(String(err.message || err));
+      return;
+    }
+    // Polled rather than watched: the run writes one small file and there
+    // is nothing else to report on the way.
+    const until = Date.now() + 8 * 60 * 1000;
+    while (Date.now() < until) {
+      await new Promise((done) => setTimeout(done, 10000));
+      let found = null;
+      try {
+        found = await fetchFileViaApi(
+          settings.owner, settings.repo, OUTPUT_BRANCH, path, settings.token);
+      } catch {
+        // A not-yet-written file is the normal answer here, not a problem.
+      }
+      if (found) {
+        setListingVideos(found);
+        setListingVideosState(found.videos?.length ? ""
+          : found.scrape_ok === false
+            ? "The scrape failed -- open the build log."
+            : "This listing has no videos.");
+        return;
+      }
+    }
+    setListingVideosState("The probe did not finish. Check the Actions log.");
   }
 
   async function ensurePreviousBuilds() {
@@ -2896,7 +2992,86 @@ export default function App() {
                         45-second short
                         <Tip text="Between the 35-second cut and the usual 55: 110-125 words over 40-50 seconds, five or six beats. The 35-second format kept the same watch time as a 56-second one -- about sixteen seconds either way -- so the ratio roughly doubled while nothing was lost, but three of its five beats go to notes and there is no room left for a history fact or the one feature worth seeing. This buys back one beat and stays under a minute. Same as the others: a listing, overridden photos and pasted notes all behave normally. All three length and style boxes set the same field, so ticking one unticks the rest." />
                       </label>
+                      <label className="check-pill">
+                        <input
+                          type="checkbox"
+                          checked={useEngineClip}
+                          onChange={(e) => setUseEngineClip(e.target.checked)}
+                          disabled={stage === "single-car-building"}
+                        />
+                        Engine sound
+                        <Tip text="Cuts a few seconds out of one of the listing's own videos and plays it at the front, before the narration starts. Needs a specific listing, because the clip comes off that listing's page. Which video and which seconds are both yours to pick: choosing automatically is what the startup-battle pipeline does, and it manages it 4 times in 14." />
+                      </label>
                     </div>
+
+                    {useEngineClip && (
+                      <div className="field-section">
+                        <div className="section-label">
+                          Engine Sound
+                          <Tip text="The listing's own videos, with a frame from each so you can tell them apart -- the page does not label them in a way the scraper can read, but an engine bay is obvious at a glance. Pick one, then type the seconds you want from the listing's own player." />
+                        </div>
+                        {!useAuctionUrl && (
+                          <p className="hint">Tick &ldquo;Specific listing&rdquo; and paste the auction URL first.</p>
+                        )}
+                        {useAuctionUrl && (
+                          <button type="button" className="secondary"
+                                  onClick={findListingVideos}
+                                  disabled={!repoOk || !auctionUrl.trim()
+                                            || listingVideosState === "probing"}>
+                            {listingVideosState === "probing"
+                              ? "Reading the listing…" : "Find videos"}
+                          </button>
+                        )}
+                        {listingVideosState === "probing" && (
+                          <p className="hint">
+                            Driving a browser over the listing. Two or three minutes.
+                          </p>
+                        )}
+                        {listingVideosState && listingVideosState !== "probing" && (
+                          <p className="hint">{listingVideosState}</p>
+                        )}
+                        <div className="listing-videos">
+                          {(listingVideos?.videos || []).map((video) => (
+                            <button
+                              type="button"
+                              key={video.index}
+                              className={"listing-video"
+                                + (chosenVideo?.index === video.index ? " chosen" : "")}
+                              onClick={() => setChosenVideo(video)}
+                            >
+                              {video.poster && (
+                                <img
+                                  src={`https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
+                                       + `/${OUTPUT_BRANCH}/cars/listing-videos/`
+                                       + `${listingProbeId(auctionUrl)}/${video.poster}`}
+                                  alt="" loading="lazy" />
+                              )}
+                              <span>{video.duration_seconds}s</span>
+                            </button>
+                          ))}
+                        </div>
+                        {chosenVideo && (
+                          <>
+                            <label className="field-row">
+                              <input value={clipStart}
+                                     onChange={(e) => setClipStart(e.target.value)}
+                                     placeholder="Start, e.g. 0:04" />
+                              <input value={clipEnd}
+                                     onChange={(e) => setClipEnd(e.target.value)}
+                                     placeholder="End, e.g. 0:07" />
+                            </label>
+                            <p className="hint">
+                              {clipSeconds(clipStart) !== null && clipSeconds(clipEnd) !== null
+                                && clipSeconds(clipEnd) > clipSeconds(clipStart)
+                                ? `${(clipSeconds(clipEnd) - clipSeconds(clipStart)).toFixed(1)}s `
+                                  + "from the clip above, played before the narration. Two or "
+                                  + "three seconds is a hook; much more eats the script."
+                                : "Read the times off the listing's own player. m:ss or seconds."}
+                            </p>
+                          </>
+                        )}
+                      </div>
+                    )}
 
                     {useAuctionUrl && (
                       <label className="field-row">
