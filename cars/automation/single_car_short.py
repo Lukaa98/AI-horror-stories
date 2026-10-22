@@ -3598,7 +3598,14 @@ def overlay_engine_clip(video_path, clip_path, at, length, size=CANVAS, fps=24):
              # The second aformat is not a duplicate: loudnorm resamples to
              # 192kHz internally and hands that on, so without it the mix
              # inherits 192k and the file comes out as 96kHz AAC.
+             # Trimmed to the length the gap was opened for, not the length
+             # the file happens to be. A seek into an HLS manifest does not
+             # land exactly, so a five-second ask can come back as 5.2 --
+             # and where the picture is bounded by `enable`, the sound is
+             # not: the overrun would play on top of the narration starting
+             # again.
              f"[1:a]aformat=sample_rates=48000:channel_layouts=stereo,"
+             f"atrim=0:{length:.3f},asetpts=PTS-STARTPTS,"
              f"loudnorm=I={ENGINE_CLIP_LUFS}:TP=-2:LRA=11,"
              f"aformat=sample_rates=48000:channel_layouts=stereo,"
              f"adelay={delay_ms}|{delay_ms}[clipa];"

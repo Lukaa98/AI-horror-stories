@@ -4081,6 +4081,11 @@ def test_the_clip_plays_in_the_photo_box_not_over_the_whole_frame(monkeypatch, t
     # whole film to make room for five seconds of engine.
     assert "normalize=0" in filters
     assert "adelay=11500|11500" in filters
+    # The sound is trimmed to the gap as well. The picture is bounded by
+    # `enable`, but a seek into an HLS manifest does not land exactly, so a
+    # clip that comes back long would play its overrun on top of the
+    # narration starting again.
+    assert "atrim=0:5.000" in filters
     assert f"loudnorm=I={single_car_short.ENGINE_CLIP_LUFS}" in filters
     # Both rates pinned on the output: a drifting timebase took a 24fps film
     # to 25, and loudnorm's internal 192kHz shipped as 96kHz AAC.
