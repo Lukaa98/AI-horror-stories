@@ -724,6 +724,53 @@ def _split_angles(angles):
     return bullets
 
 
+# How many notes the script is held to. The list is allowed to degrade --
+# the tail gets dropped whole when the words run out -- so only the top of
+# it can be enforced. Two at full length, where there is a history beat and
+# a price beat a note can take; one at 35 seconds, where the block itself
+# says only three beats are irreducible and a second note has nowhere to go.
+NOTES_ENFORCED = 2
+NOTES_ENFORCED_SHORT = 1
+
+# An engine layout is not evidence a note was used. Both the California T
+# notes said "V8" and so did the script, which would have passed note 2 --
+# the one about the 296 GTB, the 819 hp and the electric Luce, none of
+# which the script mentioned -- on a token that appears in practically
+# every script about a Ferrari.
+_GENERIC_ANCHOR_RE = re.compile(r"[VIWBLR]\d{1,2}|HP|BHP|PS|NM|MPH|KPH|RPM|AWD|RWD|FWD", re.I)
+
+
+def _note_anchors(note, make, model):
+    """The specifics in a note that prove the script actually used it.
+
+    A note is covered when its particulars survive into the narration, not
+    when its topic does. "Ferrari is embracing hybrid technology" keeps the
+    shape of "the mid-engine car is now a plug-in hybrid V6 - the 296 GTB,
+    819 hp" and discards everything that made it worth saying, and no
+    keyword check on the topic can tell those two apart.
+
+    So the anchors are the figures and the proper names that are not this
+    car's own -- 296, 819, GTB, Luce, Dino, F40 -- which is the same test
+    the history beat is already held to, for the same reason. A note with
+    no anchors in it cannot be checked this way and is not checked.
+    """
+    text = str(note or "")
+    own = {token.lower() for token in _name_tokens(make, model)}
+    # A single digit is not an anchor -- "2+2" contributed a "2" that any
+    # script mentioning two of anything would have satisfied.
+    figures = {n for n in re.findall(r"\b\d[\d,.]*\b", text) if len(n) > 1}
+    names = {word for word in re.findall(r"\b[A-Z][A-Za-z0-9'\-]+", text)
+             if word.lower() not in own and len(word) > 1
+             and not _GENERIC_ANCHOR_RE.fullmatch(word)}
+    # Sentence-opening capitals are not names, and nor is the leading word
+    # of the note itself.
+    for sentence in _SENTENCE_SPLIT_RE.split(text.strip()):
+        head = re.match(r"\b[A-Z][A-Za-z0-9'\-]+", sentence.strip())
+        if head:
+            names.discard(head.group(0))
+    return figures | names
+
+
 def _angles_block(angles, style="classic"):
     """What the person asked the script to cover, in their own words.
 
@@ -770,13 +817,31 @@ def _angles_block(angles, style="classic"):
 TOPICS THE PERSON COMMISSIONING THIS VIDEO SUGGESTED, IN THEIR ORDER OF PREFERENCE -- 1 first:
 {listed}
 
-These are offered, not required. Take the ones that genuinely make the video better and leave
-the rest out -- including every one of them, if your own research turns up something stronger.
-They are suggestions from somebody who likes this car, not a brief to discharge: a note that
-would cost a better beat is a note worth dropping, and a video that uses none of them is a
-valid outcome rather than a failed one.
+These were written by somebody who knows this car and they are the SPINE OF THE SCRIPT, not
+suggestions. Work down the list and cover each one properly until the words run out. What you
+research yourself fills in around them: the figures, the photo beats, the things a note does
+not mention.
 
-When you do take one it REPLACES a beat you would otherwise have written -- the video does not
+Where a note contains specifics -- a model name, a figure, a year, another car -- SAY THOSE
+SPECIFICS. A note saying "the mid-engine car is now a plug-in hybrid V6, the 296 GTB, 819 hp"
+is not covered by "Ferrari is embracing hybrid technology": the names and the numbers are the
+whole reason the point lands, and a script that keeps only the shape of them has said nothing.
+One build was handed that exact note and never mentioned the 296, the horsepower or the
+electric car, then closed by asking whether this car "offers the best of both worlds" -- a
+question its own script had given the viewer no way to answer.
+
+Where a note explains WHY something was true -- why a car was criticised, why it is thought of
+differently now -- the script has to carry the reasoning, not the verdict. "Criticised for
+straying from tradition, now hailed as a perfect blend of innovation and performance" is the
+verdict with the argument removed. The argument is what the note gave you: it was mocked for
+being turbocharged when rivals were naturally aspirated, and it reads differently now that the
+alternative is a hybrid V6. Say that.
+
+What you may leave out is the TAIL. If only the first two fit, write those two properly and
+drop the rest whole -- that is the list working as intended. What you may not do is mention
+all of them in passing, reorder them, or skip note 1 because note 3 was easier to write.
+
+When you take one it REPLACES a beat you would otherwise have written -- the video does not
 get longer, and the word count is unchanged. Drop a beat about how the car looks first; {keeps}
 
 NONE OF THESE NOTES IS THE OPENING. The first sentence is still the strongest claim YOUR OWN
@@ -1215,6 +1280,41 @@ EMPTY_CLAIM_RE = re.compile(
     re.I,
 )
 
+# The sentence that sounds like a verdict and contains none.
+#
+# Every one of these came out of a single Ferrari California T build, which
+# is what made the pattern obvious: "the return of turbo technology marks
+# the evolution in road cars", "showcasing its racing DNA", "delivering
+# thrilling performance with each acceleration", "a perfect blend of
+# innovation and performance", "highlight the fusion of performance and
+# luxury", and a closing question asking whether it "offers the best of
+# both worlds".
+#
+# They share a shape: two abstract nouns asserted to combine, or a feeling
+# asserted to be delivered. What makes them worth banning rather than
+# merely disliking is that none of them is false -- they are unfalsifiable,
+# so they survive every fact check in here while saying nothing. They are
+# also what a viewer hears as an advert, which is the opposite of the
+# reason anybody watches one of these.
+#
+# EMPTY_CLAIM_RE catches the verb; this catches the clause the verb is
+# reaching for, including where there is no such verb at all ("marks",
+# "delivering").
+MARKETING_FILLER_RE = re.compile(
+    r"\b(?:perfect\s+|ultimate\s+|seamless\s+)?"
+    r"(?:blend|fusion|marriage|melding|combination)\s+of\b"
+    r"|\bbest\s+of\s+both\s+worlds\b"
+    r"|\b(?:racing|motorsport|track|performance)\s+DNA\b"
+    r"|\b(?:thrilling|exhilarating|breathtaking|heart-pounding|spine-tingling"
+    r"|intoxicating|visceral|effortless|sublime)\s+"
+    r"(?:performance|acceleration|power|speed|drive|driving)\b"
+    r"|\bwith\s+(?:each|every)\s+"
+    r"(?:acceleration|downshift|upshift|rev|corner|gear\s+change|press\s+of)\b"
+    r"|\bmarks?\s+(?:a|the)\s+(?:evolution|new\s+era|turning\s+point|milestone)\b"
+    r"|\b(?:pure|raw)\s+(?:driving\s+)?(?:emotion|theatre|theater|adrenaline)\b",
+    re.I,
+)
+
 # Either direction and either order. A rate of appreciation is the same
 # padding as a rate of depreciation -- both are arithmetic on two prices
 # the sentence already gave -- and "appreciating annually around 5%" walked
@@ -1232,7 +1332,12 @@ DEPRECIATION_PADDING_RE = re.compile(
     r"|\b\d+(?:\.\d+)?\s*%[^.]{0,25}?\b(?:" + _TREND_WORD + r")"
     r"|\b(?:per\s+year|a\s+year|annually|yearly|per\s+annum)[^.]{0,25}?\d+(?:\.\d+)?\s*%"
     # A value trend with no figure behind it at all.
-    r"|\b(?:de|ap)preciation\b[^.]{0,30}?\b(?:over\s+time|since|so\s+far|in\s+value)"
+    # "over the years" is the same sentence as "over time", and the rule
+    # knew only the second: the California T shipped "reflecting significant
+    # depreciation over the years" in the beat that had just given both
+    # prices -- the third time this rule has been beaten by a synonym.
+    r"|\b(?:de|ap)preciation\b[^.]{0,30}?\b(?:over\s+(?:time|the\s+years?"
+    r"|the\s+decades?|its\s+life)|since|so\s+far|in\s+value)"
     r"|\b(?:hold|holds|holding|held|keep|keeps|keeping|kept|retain|retains|retaining|retained)"
     r"\s+(?:its\s+)?(?:significant\s+)?value\b"
     r"|\b(?:hasn.t|has\s+not|never)\s+(?:really\s+|truly\s+)?(?:de|ap)preciat\w*)",
@@ -1460,8 +1565,14 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
     own |= {"the", "a", "an", "it", "its", "this", "was", "in", "and"}
     figures = [n for n in re.findall(r"\b\d[\d,]*\b", fact)
                if not (year and n.replace(",", "") == str(int(year)))]
-    names = [word for word in re.findall(r"\b[A-Z][a-zA-Z'\-]+", fact)
-             if word.lower() not in own]
+    # Digits included in the name, because car names have digits in them.
+    # The pattern wanted letters after the capital, so F40, ZR1, GT3, M3
+    # and SF90 were not names as far as this rule was concerned: the
+    # California T's history, "first turbocharged Ferrari road car since
+    # the F40", was rejected for having nothing specific in it when the
+    # specific thing was right there.
+    names = [word for word in re.findall(r"\b[A-Z][A-Za-z0-9'\-]*", fact)
+             if word.lower() not in own and len(word) > 1]
     # The opening word is capitalised because it opens the sentence.
     if names and fact.strip().startswith(names[0]):
         names = names[1:]
@@ -1477,20 +1588,68 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
             "never said it. That beat belongs right after the hook, in the narration, with the "
             "year in it."
         )
-    # A scene using one of these verbs with no number in it is asserting
+    # A sentence using one of these verbs with no number in it is asserting
     # that a part matters instead of saying anything about it. The Vantage
     # build spent eight of ten scenes this way -- grille, air vents, rear
     # haunches, character lines, inspection plaque, taillight -- with the
     # ban sitting in the prompt being ignored, because nothing read it.
-    empty = [scene.get("narration") or "" for scene in scenes
-             if EMPTY_CLAIM_RE.search(scene.get("narration") or "")
-             and not re.search(r"\d", scene.get("narration") or "")]
+    #
+    # Measured per sentence, because per scene let every one of these
+    # through. A scene is often two sentences, and one real figure anywhere
+    # in it satisfied the "has a number" test for both: the California T
+    # shipped "calipers house carbon ceramic brakes, showcasing its racing
+    # DNA" and "steering wheels highlight the fusion of performance and
+    # luxury" with this rule switched on, because each sat next to a
+    # sentence that had a number in it.
+    empty = [sentence for scene in scenes
+             for sentence in _SENTENCE_SPLIT_RE.split((scene.get("narration") or "").strip())
+             if EMPTY_CLAIM_RE.search(sentence) and not re.search(r"\d", sentence)]
     if empty:
         violations.append(
-            f'{len(empty)} scene(s) assert that something matters without saying anything about '
+            f'{len(empty)} sentence(s) assert that something matters without saying anything about '
             f'it, starting with "{empty[0]}". Say what the part is for, what it replaced, what '
-            "it costs, or why it is unusual -- or spend the scene on a fact instead."
+            "it costs, or why it is unusual -- or spend the sentence on a fact instead."
         )
+    # The filler clause itself, with or without one of those verbs in front
+    # of it, and regardless of whether the sentence carries a figure: "553
+    # hp and 557 lb-ft, delivering thrilling performance with each
+    # acceleration" has two real numbers and still ends in nothing.
+    for match in MARKETING_FILLER_RE.finditer(script):
+        violations.append(
+            f'"{match.group(0).strip()}" is advert copy, not a claim -- it is true of every car '
+            "ever marketed, so it tells the viewer nothing and it sounds written rather than "
+            "said. Cut the clause, or replace it with what actually happens: what the part does, "
+            "what it costs, what it beat, what it gave up."
+        )
+        break
+    # A note the script was given and did not use.
+    #
+    # This is the rule that was missing. The instruction to cover the notes
+    # lived only in the prompt, and the California T build ignored two of
+    # three: it was handed the 296 GTB, its 819 hp and the electric Luce,
+    # said none of them, and closed by asking whether the car "offers the
+    # best of both worlds" -- a question nothing in its own script answered.
+    # Nothing checked, so nothing retried.
+    #
+    # Only the top of the list is enforced, because the list is meant to
+    # degrade: the tail is dropped whole when the words run out.
+    wanted = _split_angles(package.get("_angles"))
+    if wanted:
+        limit = (NOTES_ENFORCED_SHORT
+                 if (package.get("_style") or "").strip().lower() == "short"
+                 else NOTES_ENFORCED)
+        spoken = script.lower()
+        for position, note in enumerate(wanted[:limit], 1):
+            anchors = _note_anchors(note, make, model)
+            if not anchors:
+                continue
+            if not any(anchor.lower() in spoken for anchor in anchors):
+                violations.append(
+                    f'note {position} is not in the script. It asked for '
+                    f'"{note[:140]}" and the narration says none of {sorted(anchors)[:6]}. '
+                    "Write that note as a beat, with its own figures and names in it -- the "
+                    "specifics are the point, and the topic without them says nothing."
+                )
     # A pasted photo the script never gives a beat to is simply not in the
     # video. The prompt has said "you MUST write one scene for each" the
     # whole time and it is not enough: with four asked-for angles also
@@ -2567,6 +2726,9 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
             max_scenes=max_scenes,
         )
         package["_angles"] = angles or ""
+        # Carried for the same reason as the notes: the note check enforces
+        # fewer of them at 35 seconds, where there is no beat spare.
+        package["_style"] = style or ""
         count = package["word_count"]
         violations = _script_violations(package, make, model, market, pasted_slots)
         if accept_low <= count <= accept_high and not violations:
@@ -4328,7 +4490,7 @@ def build_short(args):
             # silently dropped the clip the original had.
             "engine_clip": engine_clip or None,
         },
-        **{k: v for k, v in package.items() if k != "_angles"},
+        **{k: v for k, v in package.items() if k not in ("_angles", "_style")},
         "voice_preset": args.voice,
         "tts_speed": FAST_TTS_SPEED if narration_settings()["engine"] == "tts" else None,
         "narration": narration_settings(),

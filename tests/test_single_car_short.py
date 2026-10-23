@@ -3574,11 +3574,11 @@ def test_a_new_title_that_does_not_help_is_thrown_away(monkeypatch):
     )["youtube_title"] == package["youtube_title"]
 
 
-def test_a_note_the_script_passes_over_is_not_a_violation():
-    """Notes are suggestions, not a brief to discharge. A script that leaves
-    one out is doing what it was told, so nothing may flag it -- a marque
-    named in the notes and absent from the script used to be a violation,
-    which re-imposed in the checker the requirement the prompt lifts."""
+def test_the_first_note_may_not_be_passed_over_though_the_tail_may():
+    """A note the script was handed and did not use is a violation now. It
+    was not, and that is how a build dropped the 296 GTB, the 819 hp and the
+    electric Luce while reporting itself clean -- the requirement sat in the
+    prompt where nothing could check it."""
     import single_car_short
 
     scenes = [{"headline": "", "narration": "1,064 horsepower and 828 lb-ft. That's the ZR1."},
@@ -3586,8 +3586,29 @@ def test_a_note_the_script_passes_over_is_not_a_violation():
               {"headline": "", "narration": "So would you take one?"}]
     package = {"scenes": scenes, "script": " ".join(s["narration"] for s in scenes),
                "_angles": "- more power than a Ferrari SF90 or a Lamborghini Revuelto"}
-    violations = single_car_short._script_violations(package, "Chevrolet", "Corvette Zr1")
-    assert not [v for v in violations if "note" in v.lower()]
+    missed = [v for v in single_car_short._script_violations(
+        package, "Chevrolet", "Corvette Zr1") if v.startswith("note ")]
+    assert len(missed) == 1 and missed[0].startswith("note 1"), missed
+    assert "SF90" in missed[0] and "Revuelto" in missed[0]
+
+    # Covering it clears the rule -- naming either car is enough, because
+    # either one is the specific the note was for.
+    covered = dict(package)
+    covered["scenes"] = scenes[:1] + [
+        {"headline": "", "narration": "More power than a Ferrari SF90, at a third of the price."},
+    ] + scenes[2:]
+    assert not [v for v in single_car_short._script_violations(
+        covered, "Chevrolet", "Corvette Zr1") if v.startswith("note ")]
+
+    # And the tail is still allowed to go. Two notes are enforced, so a
+    # third that nothing touched is the list degrading as designed.
+    deep = dict(covered)
+    deep["_angles"] = (package["_angles"]
+                       + "\n- the LT7 makes 1,064 hp from a flat-plane crank"
+                       + "\n- and mention the 1963 Grand Sport, all 5 of them")
+    missed = [v for v in single_car_short._script_violations(
+        deep, "Chevrolet", "Corvette Zr1") if v.startswith("note ")]
+    assert not [v for v in missed if v.startswith("note 3")], missed
 
     # Taking the note and softening it is still wrong, but that is the
     # model's judgement to make against everything else competing for the
@@ -3597,16 +3618,29 @@ def test_a_note_the_script_passes_over_is_not_a_violation():
     assert "hypercars costing three times as much" in block
 
 
-def test_the_notes_are_offered_rather_than_required():
-    """Every note was mandatory, which is how six notes split out of one
+def test_the_top_of_the_notes_list_is_binding_and_the_tail_is_not():
+    """Two failures, one on each side of this.
+
+    Every note used to be mandatory, which is how six notes split out of one
     pasted paragraph took four beats and left the rarity and the comparison
-    unsaid. Ignoring all of them has to be a legitimate outcome."""
+    unsaid. The fix made them all optional -- and a California T build then
+    ignored two notes of three, including the one the video was for.
+
+    Neither extreme is right. The list degrades from the bottom: the top of
+    it is covered properly or the script is wrong, and the tail is dropped
+    whole when the words run out."""
     import single_car_short
 
-    block = single_car_short._angles_block("- talk about the Le Mans anniversary")
-    assert "offered, not required" in block
-    assert "valid outcome rather than a failed one" in block
-    assert "not a brief to discharge" in block
+    block = " ".join(single_car_short._angles_block(
+        "- talk about the Le Mans anniversary").split())
+    assert "SPINE OF THE SCRIPT" in block
+    assert "not suggestions" in block
+    assert "What you may leave out is the TAIL" in block
+    assert "drop the rest whole" in block
+    # The permission that was read as permission to ignore a note it was
+    # given is gone.
+    assert "offered, not required" not in block
+    assert "valid outcome rather than a failed one" not in block
 
 
 def test_the_no_comparison_checkbox_switches_off_the_segment_not_the_words():
@@ -4279,3 +4313,211 @@ def test_the_build_closes_the_gap_rather_than_shipping_the_hole():
     # And a build that asked for a clip and did not get one says so, rather
     # than looking identical to one that never asked.
     assert '"engine_clip_failed"' in body
+
+
+# The Ferrari California T build, verbatim, as the one script that showed
+# every one of these faults at once.
+CALIFORNIA_T_SCENES = [
+    "The return of turbo technology marks the evolution in road cars. Since the legendary F40, "
+    "no Ferrari had embraced forced induction until the 2015 California T.",
+    "Ferrari California T's distinct yellow brake calipers house carbon ceramic brakes, "
+    "showcasing its racing DNA.",
+    "Twin-turbocharged V8 engines produce 553 hp and 557 lb-ft of torque, delivering thrilling "
+    "performance with each acceleration. It hits zero to sixty in 3.6 seconds.",
+    "The Ferrari California T's engine was criticized for straying from tradition, yet now it's "
+    "hailed as a perfect blend of innovation and performance.",
+    "Racetrack-inspired carbon fiber steering wheels highlight the fusion of performance and "
+    "luxury inside the California T.",
+    "Its engine is a 3.9L twin-turbo V8.",
+    "With Ferrari embracing turbo power and hybrid technology, does the California T offer the "
+    "best of both worlds?",
+]
+
+CALIFORNIA_T_NOTES = (
+    "1. Lead on this: it was called the poor man's Ferrari, but the thing it was actually "
+    "mocked for was the engine. The California T was the first turbocharged Ferrari road car "
+    "since the F40 went out of production. 552 hp and roughly 557 lb-ft, in the model nobody "
+    "took seriously.\n"
+    "2. Cover where Ferrari went next. The mid-engine car is now a plug-in hybrid V6 - the 296 "
+    "GTB, 819 hp, the first six-cylinder road car to wear the Ferrari badge, since the old Dino "
+    "never did - and Ferrari has revealed its first electric car, the Luce.\n"
+    "3. For the head-to-head use the naturally aspirated Ferrari California it replaced - "
+    "4.3-litre V8, 453 hp, no turbos, the same folding hardtop 2+2 shape."
+)
+
+
+def _california_package(scenes=None, notes=CALIFORNIA_T_NOTES, style="classic"):
+    lines = CALIFORNIA_T_SCENES if scenes is None else scenes
+    return {
+        "scenes": [{"narration": line, "headline": "", "media_type": "exterior"} for line in lines],
+        "word_count": sum(len(line.split()) for line in lines),
+        "title": "The return of turbo",
+        "history": {"year": 2015, "fact": "first turbocharged Ferrari road car since the F40"},
+        "_angles": notes,
+        "_style": style,
+    }
+
+
+def test_advert_copy_is_caught_in_a_sentence_that_also_carries_real_figures():
+    """Every phrase in this test shipped in one build. They share a shape --
+    two abstract nouns asserted to combine, or a feeling asserted to be
+    delivered -- and none of them is false, which is why they survived every
+    fact check in here while saying nothing."""
+    import single_car_short
+
+    for phrase, line in [
+        ("marks the evolution", "The return of turbo technology marks the evolution in road cars."),
+        ("racing DNA", "The calipers house carbon ceramic brakes, showcasing its racing DNA."),
+        # Two real numbers in the sentence and it still ends in nothing, so
+        # this one cannot be found by looking for sentences without figures.
+        ("thrilling performance",
+         "It makes 553 hp and 557 lb-ft, delivering thrilling performance with each acceleration."),
+        ("perfect blend of", "Now it's hailed as a perfect blend of innovation and performance."),
+        ("fusion of", "The wheels highlight the fusion of performance and luxury."),
+        ("best of both worlds", "Does the California T offer the best of both worlds?"),
+    ]:
+        found = single_car_short.MARKETING_FILLER_RE.search(line)
+        assert found, line
+        assert phrase.lower() in found.group(0).lower(), (phrase, found.group(0))
+
+    # Sentences that say something are left alone.
+    for line in [
+        "Since the F40, no Ferrari had used forced induction until the 2015 California T.",
+        "It hits zero to sixty in 3.6 seconds.",
+        "Its engine is a 3.9L twin-turbo V8.",
+        "The turbos were fitted because a naturally aspirated V8 could not meet emissions.",
+    ]:
+        assert not single_car_short.MARKETING_FILLER_RE.search(line), line
+
+
+def test_an_empty_sentence_is_not_excused_by_the_number_in_the_sentence_beside_it():
+    """The rule asked whether the scene had a number in it. A scene is
+    usually two sentences, so one real figure anywhere in it waved both
+    through -- which is how "showcasing its racing DNA" and "highlight the
+    fusion of performance and luxury" shipped with this rule switched on."""
+    import single_car_short
+
+    scene = ("Twin-turbocharged V8 engines produce 553 hp and 557 lb-ft. "
+             "The calipers showcase its racing DNA.")
+    package = _california_package(scenes=[scene], notes="")
+    empty = [rule for rule in single_car_short._script_violations(package, "Ferrari", "California T")
+             if "without saying anything about it" in rule]
+    assert empty, "the second sentence is empty whatever the first one says"
+    assert "sentence(s)" in empty[0], "counted in sentences, not scenes"
+
+
+def test_the_depreciation_rule_is_not_beaten_by_another_synonym():
+    """It knew "over time" and not "over the years", so the California T
+    shipped "reflecting significant depreciation over the years" in the beat
+    that had just given both prices -- the third time a synonym has walked
+    past this rule."""
+    import single_car_short
+
+    for line in ["reflecting significant depreciation over the years",
+                 "reflecting a subtle depreciation over time",
+                 "a steady depreciation over the decades",
+                 "appreciation over its life"]:
+        assert single_car_short.DEPRECIATION_PADDING_RE.search(line), line
+    # Still not a ban on the word itself.
+    assert not single_car_short.DEPRECIATION_PADDING_RE.search(
+        "It depreciated hard when new, which is why it is affordable now.")
+
+
+def test_a_note_the_script_ignored_is_a_violation():
+    """The instruction to cover the notes lived only in the prompt. The
+    California T build was handed the 296 GTB, its 819 hp and the electric
+    Luce, said none of them, and closed by asking whether the car offers the
+    best of both worlds -- a question nothing in its own script answered.
+    Nothing checked, so nothing retried."""
+    import single_car_short
+
+    violations = single_car_short._script_violations(
+        _california_package(), "Ferrari", "California T")
+    missed = [rule for rule in violations if rule.startswith("note ")]
+    assert len(missed) == 1, missed
+    assert missed[0].startswith("note 2 is not in the script")
+    for anchor in ("296", "819", "Luce"):
+        assert anchor in missed[0], anchor
+    # Note 1 was covered -- 557 and the F40 are both in the narration -- so
+    # it is not reported, and note 3 is the tail the list is allowed to drop.
+    assert not any(rule.startswith("note 1") for rule in violations)
+    assert not any(rule.startswith("note 3") for rule in violations)
+
+
+def test_an_engine_layout_is_not_evidence_a_note_was_used():
+    """Both notes said V8 and so did the script. Matching on any anchor
+    would have passed note 2 on a token that appears in practically every
+    script about a Ferrari."""
+    import single_car_short
+
+    anchors = single_car_short._note_anchors(
+        "The mid-engine car is now a plug-in hybrid V6 - the 296 GTB, 819 hp - and the first "
+        "electric Ferrari, the Luce.", "Ferrari", "California T")
+    assert anchors == {"296", "819", "GTB", "Luce"}, anchors
+    assert "V6" not in anchors and "V8" not in anchors
+
+    # A single digit is not an anchor either: "2+2" contributed a "2" that
+    # any script mentioning two of anything would have satisfied.
+    assert "2" not in single_car_short._note_anchors(
+        "the same folding hardtop 2+2 shape, 453 hp", "Ferrari", "California T")
+
+    # A note with no specifics in it cannot be checked this way, and is not.
+    assert single_car_short._note_anchors(
+        "talk about how it feels to drive", "Ferrari", "California T") == set()
+    package = _california_package(notes="1. talk about how it feels to drive")
+    assert not [rule for rule in single_car_short._script_violations(
+        package, "Ferrari", "California T") if rule.startswith("note ")]
+
+
+def test_the_thirty_five_second_cut_is_held_to_one_note_not_two():
+    """The notes block says only three beats are irreducible at that length,
+    so a second note has nowhere to land. Enforcing two would ask for a beat
+    that does not exist."""
+    import single_car_short
+
+    assert single_car_short.NOTES_ENFORCED_SHORT < single_car_short.NOTES_ENFORCED
+    short = single_car_short._script_violations(
+        _california_package(style="short"), "Ferrari", "California T")
+    assert not [rule for rule in short if rule.startswith("note 2")]
+
+
+def test_a_history_fact_may_be_specific_by_naming_a_car_with_digits_in_it():
+    """F40, ZR1, GT3, M3 and SF90 were not names as far as this rule was
+    concerned, because the pattern wanted letters after the capital. The
+    California T's history was rejected for having nothing specific in it
+    when the specific thing was the F40."""
+    import single_car_short
+
+    def rejected(fact):
+        package = _california_package(scenes=["It makes 553 hp and 557 lb-ft."], notes="")
+        package["history"] = {"year": 2015, "fact": fact}
+        return [rule for rule in single_car_short._script_violations(
+            package, "Ferrari", "California T") if "your history" in rule]
+
+    assert not rejected("first turbocharged Ferrari road car since the F40")
+    assert not rejected("it was the car the ZR1 was built to beat")
+    assert not rejected("built 75 for homologation")
+    # And the vague ones it exists to reject still are.
+    assert rejected("revered by enthusiasts")
+    assert rejected("a limited-production supercar blending luxury with racing pedigree")
+
+
+def test_the_notes_are_the_spine_of_the_script_not_a_suggestion():
+    """Written as optional when the ask was for the FIELD to be optional --
+    "if i put it there sure let it use". The prompt took that as permission
+    to ignore notes that were given, and a build did."""
+    import single_car_short
+
+    # Whitespace-normalised, because the block is hard-wrapped and every
+    # phrase worth asserting on falls across a line break somewhere.
+    block = " ".join(single_car_short._angles_block(CALIFORNIA_T_NOTES).split())
+    assert "SPINE OF THE SCRIPT" in block
+    assert "offered, not required" not in block
+    assert "uses none of them is a" not in block
+    # The two failures it now names, both from the same build.
+    assert "SAY THOSE SPECIFICS" in block
+    assert "296 GTB" in block, "names the note that was dropped"
+    assert "the verdict with the argument removed" in block
+    # The tail may still go: that is what stopped five notes buying five
+    # thin beats.
+    assert "What you may leave out is the TAIL" in block
