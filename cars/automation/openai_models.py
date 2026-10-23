@@ -1,0 +1,150 @@
+"""Which OpenAI model each stage asks for.
+
+Twenty-six call sites across thirteen files each named "gpt-4o" or
+"gpt-4o-mini" as a literal, so moving off 4o meant editing all of them and
+hoping none was missed. They ask here instead.
+
+Resolved against what the account can actually serve rather than pinned to
+a string somebody typed. The names move -- 4o, then the 5 family, then the
+6 family -- and a hard-coded id that the account does not have is not a
+degraded build, it is every build failing on the first call. So the
+preference is expressed as a ladder of patterns, matched against the
+model list the API itself returns, and anything unmatched falls back to
+the 4o pair that is known to work.
+
+The resolved choice is printed once per process, with the newer ids that
+were on offer. That log line is the only reliable way to find out what the
+current family is actually called from inside a build.
+"""
+import os
+import re
+
+# Known-good, and the floor. Every stage here worked on these.
+FALLBACK_TEXT = "gpt-4o"
+FALLBACK_CHEAP = "gpt-4o-mini"
+
+# Best first. Deliberately not the flagship: the writing stages are called
+# several times per build with web search on, and the mid and small tiers
+# of a newer family are both cheaper and better than the top of an older
+# one. A flagship is reachable by setting CARS_TEXT_MODEL.
+_TEXT_LADDER = (
+    r"^gpt-6(?:\.\d+)?-(?:sol|luna|mini|nano)$",
+    r"^gpt-6(?:\.\d+)?$",
+    r"^gpt-5(?:\.\d+)?-(?:sol|luna|mini|nano)$",
+    r"^gpt-5(?:\.\d+)?$",
+    r"^gpt-4o$",
+)
+# The classification and review calls: cheapest tier of the newest family.
+_CHEAP_LADDER = (
+    r"^gpt-6(?:\.\d+)?-(?:luna|nano|mini)$",
+    r"^gpt-5(?:\.\d+)?-(?:luna|nano|mini)$",
+    r"^gpt-4o-mini$",
+)
+
+_resolved = {}
+
+
+def _available():
+    """Every model id the account can serve, or None if the list cannot be
+    read. An unreadable list is not an empty one -- it means fall back."""
+    try:
+        from openai import OpenAI
+        return sorted({item.id for item in OpenAI().models.list()})
+    except Exception as error:  # noqa: BLE001 - a model list is not worth a build
+        print(f"[models] Could not read the model list ({error}); using {FALLBACK_TEXT}.")
+        return None
+
+
+def _pick(ladder, available, fallback):
+    for pattern in ladder:
+        matches = sorted(name for name in available if re.match(pattern, name))
+        if matches:
+            # Shortest id within a tier: "gpt-6-mini" over
+            # "gpt-6-mini-2026-10-01", so a build is not pinned to a dated
+            # snapshot that gets retired under it.
+            return min(matches, key=len)
+    return fallback
+
+
+def _resolve():
+    if "text" in _resolved:
+        return
+    override_text = os.environ.get("CARS_TEXT_MODEL", "").strip()
+    override_cheap = os.environ.get("CARS_CHEAP_MODEL", "").strip()
+    if override_text and override_cheap:
+        # Both pinned: nothing to look up, so the call is not made.
+        _resolved["text"], _resolved["cheap"] = override_text, override_cheap
+        print(f"[models] Pinned by environment: {override_text} / {override_cheap}.")
+        return
+    available = _available()
+    if available is None:
+        _resolved["text"] = override_text or FALLBACK_TEXT
+        _resolved["cheap"] = override_cheap or FALLBACK_CHEAP
+        return
+    _resolved["text"] = override_text or _pick(_TEXT_LADDER, available, FALLBACK_TEXT)
+    _resolved["cheap"] = override_cheap or _pick(_CHEAP_LADDER, available, FALLBACK_CHEAP)
+    # The ids that exist beyond 4o, named in the log on purpose: this is
+    # how the next build tells us what the current family is called.
+    newer = [name for name in available if re.match(r"^gpt-[56]", name)]
+    print(f"[models] Writing with {_resolved['text']}, classifying with "
+          f"{_resolved['cheap']}."
+          + (f" Newer ids on this account: {', '.join(newer[:12])}." if newer
+             else " No gpt-5 or gpt-6 ids on this account."))
+
+
+def text_model():
+    """The model for writing and researching a script."""
+    _resolve()
+    return _resolved["text"]
+
+
+def cheap_model():
+    """The model for classification, image review and other short calls."""
+    _resolve()
+    return _resolved["cheap"]
+
+
+# An error that means the model is the problem, not the request. Falling
+# back on any exception would hide a real failure and pay twice for it.
+_MODEL_ERRORS = ("model_not_found", "does not exist", "do not have access",
+                 "is not supported", "unsupported_model", "unsupported_value",
+                 "invalid_model", "deprecated")
+
+
+def is_model_error(message):
+    text = str(message).lower()
+    return any(code in text for code in _MODEL_ERRORS)
+
+
+def with_text_model(call):
+    """Run `call(model_id)` on the writing model, retrying on the 4o floor
+    if that model turns out to be the problem.
+
+    The resolver cannot tell whether a model accepts the shape of these
+    requests -- the strict JSON schema, the web-search tool -- only that
+    the account lists it. This is what makes it safe to resolve a model
+    nobody has tried: if the first call comes back saying the model is
+    wrong, the build continues on the one that is known to work.
+
+    The downgrade sticks for the rest of the process, so a model that does
+    not fit is paid for once rather than at every call site.
+    """
+    return _with_fallback(call, "text", FALLBACK_TEXT)
+
+
+def with_cheap_model(call):
+    """The same, for the classification and review calls."""
+    return _with_fallback(call, "cheap", FALLBACK_CHEAP)
+
+
+def _with_fallback(call, slot, fallback):
+    chosen = text_model() if slot == "text" else cheap_model()
+    try:
+        return call(chosen)
+    except Exception as error:  # noqa: BLE001 - re-raised unless it is the model
+        if chosen == fallback or not is_model_error(error):
+            raise
+        print(f"[models] {chosen} will not take this call ({str(error)[:200]}); "
+              f"falling back to {fallback} for the rest of this build.")
+        _resolved[slot] = fallback
+        return call(fallback)

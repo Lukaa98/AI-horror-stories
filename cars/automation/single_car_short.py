@@ -39,6 +39,7 @@ from narrator_script import (_extract_wav, build_mouth_timeline, narration_setti
 from narrator_video import (render_narrator_video, _scene_time_boundaries,
                             _media_zone_geometry)
 from openai_retry import with_openai_retry
+from openai_models import text_model, with_text_model
 from plate_blur import blur_license_plates
 from photo_story import SLOTS, SLOT_LABELS, photo_metadata, collect_photo_sections
 
@@ -1157,8 +1158,12 @@ def _schema_with_scene_cap(max_scenes):
 
 
 def _request_script_package(prompt, max_scenes=8):
-    response = with_openai_retry(lambda: OpenAI().responses.create(
-        model="gpt-4o",
+    # with_text_model here and text_model() at the other six call sites:
+    # this is the first model call of any build, and a model that cannot
+    # take this request is downgraded for the rest of the process, so one
+    # wrap in the right place covers the repairs too.
+    response = with_text_model(lambda chosen: with_openai_retry(lambda: OpenAI().responses.create(
+        model=chosen,
         input=prompt,
         tools=[{"type": "web_search_preview"}],
         text={
@@ -1167,7 +1172,7 @@ def _request_script_package(prompt, max_scenes=8):
                 "schema": _schema_with_scene_cap(max_scenes),
             },
         },
-    ))
+    )))
     package = json.loads(response.output_text.strip())
     for scene in package["scenes"]:
         scene["narration"] = _strip_citations(scene["narration"])
@@ -1922,7 +1927,7 @@ def _rewrite_closing_as_question(hook, closing, label):
         "video, and reply with the sentence alone -- no quotes, no preamble."
     )
     response = with_openai_retry(lambda: OpenAI().responses.create(
-        model="gpt-4o", input=prompt,
+        model=text_model(), input=prompt,
     ))
     return _strip_citations(response.output_text.strip()).strip().strip('"\u201c\u201d')
 
@@ -2098,7 +2103,7 @@ def _rewrite_title_for(violation, title, opening, label):
         'Reply as JSON: {"title": "<the new title>"}'
     )
     response = with_openai_retry(lambda: OpenAI().responses.create(
-        model="gpt-4o", input=prompt,
+        model=text_model(), input=prompt,
         text={"format": {"type": "json_object"}},
     ))
     answer = json.loads(response.output_text.strip())
@@ -2139,7 +2144,7 @@ def _rewrite_scene_for(violation, numbered_scenes, label, specs=""):
         '{"index": <the scene number you rewrote>, "narration": "<the new line>"}'
     )
     response = with_openai_retry(lambda: OpenAI().responses.create(
-        model="gpt-4o", input=prompt,
+        model=text_model(), input=prompt,
         text={"format": {"type": "json_object"}},
     ))
     answer = json.loads(response.output_text.strip())
@@ -2192,7 +2197,7 @@ def _research_replacement_history(label, rejected, year_scope=""):
     # every history repair fail before it started. Research is the whole
     # point of this call, so the shape gives way and the answer is parsed.
     response = with_openai_retry(lambda: OpenAI().responses.create(
-        model="gpt-4o", input=prompt,
+        model=text_model(), input=prompt,
         tools=[{"type": "web_search_preview"}],
     ))
     answer = _loose_json(response.output_text)
@@ -2419,7 +2424,7 @@ def _more_sentences_for(numbered_scenes, label, shortfall, specs="", avoid=""):
         'sentence(s) to append to that scene>"}]}'
     )
     response = with_openai_retry(lambda: OpenAI().responses.create(
-        model="gpt-4o", input=prompt,
+        model=text_model(), input=prompt,
         text={"format": {"type": "json_object"}},
     ))
     answer = json.loads(response.output_text.strip())
@@ -2458,7 +2463,7 @@ def _research_extra_beat(label, already, year_scope=""):
         'Reply as JSON: {"beat": "<two or three spoken sentences, verified>"}'
     )
     response = with_openai_retry(lambda: OpenAI().responses.create(
-        model="gpt-4o", input=prompt,
+        model=text_model(), input=prompt,
         tools=[{"type": "web_search_preview"}],
     ))
     text = response.output_text.strip()
