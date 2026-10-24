@@ -4746,3 +4746,39 @@ def test_an_opening_that_was_asked_for_and_ignored_is_a_hook_violation():
     assert not opening_rule("Everybody mocked this one when it arrived.")
     # And an opening about something else entirely is still caught.
     assert opening_rule("Seven speeds send drive to the rear wheels.")
+
+
+def test_the_cli_accepts_every_style_the_dashboard_can_send():
+    """Run #337 died on "invalid choice: 'classic+story'" before a line of
+    it ran. The dashboard sent the suffix, style_of parsed it and
+    story_first read it -- and argparse, which is the only thing that
+    validates this value, had never been told about it.
+
+    So the choices are derived from SCRIPT_STYLES rather than typed, and
+    this test asserts the two ends agree."""
+    import itertools
+    import re
+    import single_car_short
+
+    # Every string the dashboard's expression can produce.
+    app = (Path(single_car_short.__file__).resolve().parents[2]
+           / "web/src/App.jsx").read_text()
+    lengths = set(re.findall(r'\? "(short|medium|dense)"', app)) | {"classic"}
+    suffix = re.search(r'storyFirst \? "(\+story)" : ""', app)
+    assert suffix, "the dashboard no longer appends a suffix -- update this test"
+    sendable = {f"{length}{tail}"
+                for length, tail in itertools.product(lengths, ("", suffix.group(1)))}
+
+    for value in sorted(sendable):
+        assert value in single_car_short.STYLE_CHOICES, value
+        # And each one resolves to a real length rather than silently
+        # falling back to classic.
+        assert single_car_short.style_of(value) in single_car_short.SCRIPT_STYLES.values()
+
+    # The CLI itself, not just the constant.
+    parser_source = (Path(single_car_short.__file__)).read_text()
+    assert "choices=STYLE_CHOICES" in parser_source
+    # Derived, so a fifth length cannot arrive without its variant.
+    assert set(single_car_short.STYLE_CHOICES) == {
+        f"{name}{tail}" for name, tail in itertools.product(
+            single_car_short.SCRIPT_STYLES, ("", single_car_short.STORY_FIRST_SUFFIX))}

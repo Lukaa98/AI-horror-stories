@@ -284,6 +284,14 @@ asked you about this car in a pub."""
 STORY_FIRST_SUFFIX = "+story"
 
 
+def _style_choices():
+    """Every value --style accepts: each length, and each length leading
+    with the story. Derived rather than typed, so adding a length cannot
+    leave its story-first variant missing from the CLI."""
+    return sorted(list(SCRIPT_STYLES)
+                  + [f"{name}{STORY_FIRST_SUFFIX}" for name in SCRIPT_STYLES])
+
+
 def story_first(name):
     """Whether this build was asked to lead with the story.
 
@@ -293,6 +301,9 @@ def story_first(name):
     numbers once the viewer has a reason to care about them.
     """
     return str(name or "").strip().lower().endswith(STORY_FIRST_SUFFIX)
+
+
+STYLE_CHOICES = _style_choices()
 
 
 def style_of(name):
@@ -4869,10 +4880,16 @@ def main():
         help="Also synthesize the script in a few other voice presets (British included) to compare. On by default.",
     )
     parser.add_argument(
-        "--style", default="classic", choices=sorted(SCRIPT_STYLES),
+        # The "+story" variants are listed because argparse validates this
+        # list and nothing else does. The dashboard, style_of and
+        # story_first all understood the suffix and the CLI did not, so a
+        # story-first build died on "invalid choice: 'classic+story'"
+        # before a line of it ran.
+        "--style", default="classic", choices=STYLE_CHOICES,
         help="How the script is written. \"classic\" is everything shipped so far. \"dense\" is "
              "shorter sentences, more of them, one argument rather than a tour -- about 180 "
-             "words over 63 seconds.")
+             "words over 63 seconds. Any of them takes a \"+story\" suffix, which leads with the "
+             "history and lets the figures land later.")
     parser.add_argument(
         "--reuse-script", default=None,
         help="A previous build id. Takes that build's scenes verbatim instead of researching a "
