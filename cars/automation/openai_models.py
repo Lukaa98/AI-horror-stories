@@ -70,14 +70,28 @@ def _available():
         return None
 
 
+def _version(name):
+    """The numeric version in a model id, for ranking inside one tier.
+
+    "gpt-6.1-sol" is (6, 1) and "gpt-6-sol" is (6, 0), so the point release
+    wins. The first run of this picked gpt-6-sol on an account that had
+    gpt-6.1-sol too, because the tiebreak was the shorter name -- which
+    prefers an older release, the opposite of what was wanted. Dated
+    snapshots are already excluded by the anchors in the ladder, so length
+    was never doing the job it was there for.
+    """
+    found = re.search(r"gpt-(\d+)(?:\.(\d+))?", name)
+    if not found:
+        return (0, 0)
+    return (int(found.group(1)), int(found.group(2) or 0))
+
+
 def _pick(ladder, available, fallback):
     for pattern in ladder:
-        matches = sorted(name for name in available if re.match(pattern, name))
+        matches = [name for name in available if re.match(pattern, name)]
         if matches:
-            # Shortest id within a tier: "gpt-6-mini" over
-            # "gpt-6-mini-2026-10-01", so a build is not pinned to a dated
-            # snapshot that gets retired under it.
-            return min(matches, key=len)
+            # Highest version inside the tier, then the shorter name.
+            return min(matches, key=lambda name: (tuple(-n for n in _version(name)), len(name)))
     return fallback
 
 
@@ -100,11 +114,16 @@ def _resolve():
     _resolved["cheap"] = override_cheap or _pick(_CHEAP_LADDER, available, FALLBACK_CHEAP)
     # The ids that exist beyond 4o, named in the log on purpose: this is
     # how the next build tells us what the current family is called.
-    newer = [name for name in available if re.match(r"^gpt-[56]", name)]
+    # Newest first, not alphabetical. Sorted ascending and cut at twelve,
+    # this line reported a dozen gpt-5 ids and no gpt-6 ones on an account
+    # that had both and was writing on gpt-6-sol -- it hid exactly the
+    # names it exists to reveal.
+    newer = sorted((name for name in available if re.match(r"^gpt-[6-9]", name)),
+                   key=lambda name: (tuple(-n for n in _version(name)), name))
     print(f"[models] Writing with {_resolved['text']}, classifying with "
           f"{_resolved['cheap']}."
-          + (f" Newer ids on this account: {', '.join(newer[:12])}." if newer
-             else " No gpt-5 or gpt-6 ids on this account."))
+          + (f" Newest ids on this account: {', '.join(newer[:12])}." if newer
+             else " Nothing newer than gpt-5 on this account."))
 
 
 def text_model():

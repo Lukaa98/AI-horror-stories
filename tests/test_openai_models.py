@@ -50,6 +50,38 @@ def test_it_takes_the_cheaper_tier_of_the_newest_family(monkeypatch):
     assert openai_models.cheap_model() == "gpt-6-mini"
 
 
+def test_a_point_release_beats_the_release_it_followed(monkeypatch):
+    """Run #339 resolved gpt-6-sol on an account that also had gpt-6.1-sol,
+    because the tiebreak inside a tier was the shorter name -- which
+    prefers the OLDER release. Dated snapshots are excluded by the ladder's
+    anchors, so length was never doing the job it was there for."""
+    _fresh(monkeypatch, ["gpt-4o", "gpt-6-astra", "gpt-6-sol", "gpt-6-luna", "gpt-6.1-sol"])
+    assert openai_models.text_model() == "gpt-6.1-sol"
+    assert openai_models._version("gpt-6.1-sol") > openai_models._version("gpt-6-sol")
+    assert openai_models._version("gpt-6-sol") > openai_models._version("gpt-5-pro")
+
+
+def test_the_log_line_shows_the_ids_it_exists_to_reveal(monkeypatch, capsys):
+    """Sorted ascending and cut at twelve, it reported a dozen gpt-5 ids and
+    no gpt-6 ones on an account that had both and was writing on a gpt-6
+    model. That line is the only way to learn the current family names from
+    inside a build, and it hid them."""
+    account = (["gpt-4o", "gpt-4o-mini"]
+               + [f"gpt-5{tail}" for tail in
+                  ("", "-2025-08-07", "-chat-latest", "-codex", "-mini",
+                   "-mini-2025-08-07", "-nano", "-nano-2025-08-07", "-pro",
+                   "-pro-2025-10-06", "-search-api", "-search-api-2025-10-14")]
+               + ["gpt-6-astra", "gpt-6-luna", "gpt-6-sol", "gpt-6.1-sol"])
+    _fresh(monkeypatch, account)
+    openai_models._resolve()
+    line = capsys.readouterr().out
+    assert "Writing with gpt-6.1-sol" in line
+    for name in ("gpt-6.1-sol", "gpt-6-astra", "gpt-6-luna", "gpt-6-sol"):
+        assert name in line, name
+    # Twelve gpt-5 ids no longer crowd the newest family out of the list.
+    assert "gpt-5" not in line.split("Newest ids on this account:")[1]
+
+
 def test_a_dated_snapshot_never_wins_over_the_name_that_outlives_it(monkeypatch):
     """Pinning gpt-6-mini-2026-10-01 works until it is retired under the
     build."""
