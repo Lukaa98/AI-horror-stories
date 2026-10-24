@@ -1638,7 +1638,23 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
                 "other figure -- no current value, no appreciation percentage."
             )
     opening = _SENTENCE_SPLIT_RE.split((scenes[0].get("narration") or "").strip())[0]
-    if not re.search(r"\d", opening):
+    # Not in story-first, where requiring a figure in the first sentence is
+    # the opposite of the instruction.
+    #
+    # The first story-first build opened "553 horsepower, and they'd called
+    # it the poor man's car - but the real argument was whether turbos had
+    # killed its scream." The story is there and a number is bolted to the
+    # front of it, which is what a script does when it is told to lead with
+    # the story and also told the opening must carry a figure. Relaxing
+    # EARLY_TECH_SCENES was not enough on its own: that governs which scene
+    # the horsepower lands in, not what the first sentence must contain.
+    #
+    # The rest of the opening rules still apply -- it may not name the car,
+    # and it has to deliver what the title promised -- and the prompt still
+    # forbids opening on background or on the price. The retention evidence
+    # behind the figure rule is real, which is why this is opt-in and says
+    # so on the checkbox.
+    if not re.search(r"\d", opening) and not story_first(package.get("_style")):
         violations.append(
             f'your first sentence contains no number -- it was "{opening}". Open on a real '
             "figure or a hard superlative."

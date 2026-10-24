@@ -4782,3 +4782,48 @@ def test_the_cli_accepts_every_style_the_dashboard_can_send():
     assert set(single_car_short.STYLE_CHOICES) == {
         f"{name}{tail}" for name, tail in itertools.product(
             single_car_short.SCRIPT_STYLES, ("", single_car_short.STORY_FIRST_SUFFIX))}
+
+
+def test_story_first_does_not_still_demand_a_figure_in_the_first_sentence():
+    """The first story-first build opened "553 horsepower, and they'd called
+    it the poor man's car - but the real argument was whether turbos had
+    killed its scream." The story is there with a number bolted to the
+    front, which is what a script does when it is told to lead with the
+    story and also told the opening must carry a figure.
+
+    Relaxing EARLY_TECH_SCENES was not enough on its own: that governs which
+    scene the horsepower lands in, not what the first sentence must
+    contain."""
+    import single_car_short
+
+    story_opening = ("They called it the poor man's car, and the argument was whether turbos "
+                     "had killed its scream.")
+
+    def opening_rules(style):
+        scenes = [{"narration": story_opening, "media_type": "exterior"},
+                  {"narration": "It makes 553 horsepower and 557 pound-feet.",
+                   "media_type": "exterior"},
+                  {"narration": "So would you still sneer at it?", "media_type": "exterior"}]
+        package = {"scenes": scenes, "word_count": 60,
+                   "title": "They called it the poor man's car",
+                   "history": {"year": 2015, "fact": "first turbo Ferrari since the F40"},
+                   "_angles": "", "_style": style}
+        return [rule for rule in single_car_short._script_violations(
+            package, "Ferrari", "California T") if "first sentence" in rule]
+
+    assert opening_rules("classic"), "the default still wants a figure or a superlative"
+    assert "contains no number" in opening_rules("classic")[0]
+    assert not opening_rules("classic+story")
+
+    # The other opening rules are untouched: naming the car in the first
+    # sentence is still wrong either way, which is why that build said
+    # "poor man's car" rather than "poor man's Ferrari".
+    named = [{"narration": "They called it the poor man's Ferrari, and 553 horsepower did not help.",
+              "media_type": "exterior"},
+             {"narration": "So would you still sneer at it?", "media_type": "exterior"}]
+    for style in ("classic", "classic+story"):
+        package = {"scenes": named, "word_count": 40, "title": "The poor man's joke",
+                   "history": {"year": 2015, "fact": "first turbo Ferrari since the F40"},
+                   "_angles": "", "_style": style}
+        assert [rule for rule in single_car_short._script_violations(
+            package, "Ferrari", "California T") if "names the car" in rule], style
