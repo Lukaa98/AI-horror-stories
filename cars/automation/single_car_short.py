@@ -913,6 +913,39 @@ Say nothing at all about whatever does not fit. A photo you leave out still appe
 video; it simply is not narrated, which is what it is there for."""
 
 
+VOICE_BLOCK = """
+
+HOW IT SHOULD SOUND -- this applies whatever the length.
+
+"Conversational, not written" has been the instruction all along and every script has
+ignored it, because an instruction with no mechanism in it is a preference. Three habits
+are what make a script read as written, and all three are avoidable:
+
+1. NEVER TRAIL OFF INTO A COMMA CLAUSE. "It makes 553 horsepower, delivering thrilling
+   performance." "They sell for $100,000, reflecting significant depreciation." "The
+   calipers are carbon ceramic, showcasing its racing DNA." A quarter of every sentence
+   written for this channel has ended like that -- one in four, across every script --
+   and not one of them is speech. Put a full stop where the comma is, or cut the clause
+   entirely: what follows the comma is almost always a comment on what came before rather
+   than new information. "It makes 553 horsepower." Then stop. This holds even when the
+   clause carries a real figure -- "it is a 3.9 V8, making 553 horsepower" is still not
+   something anybody says out loud.
+
+2. VARY THE LENGTH. Half the sentences written for this channel are 13 to 18 words and
+   only one in twelve is under eight, which is why the delivery is flat even when the
+   facts are good. Land a short one after a long one. "Ferrari had not turbocharged a
+   road car since the F40. Thirty years. Then this." Three sentences, one of them two
+   words. That is rhythm, and it costs nothing against the word count.
+
+3. SAY IT WITH A VERB, NOT AN ABSTRACT NOUN. "The return of turbo technology marks the
+   evolution in road cars" has no person and no action in it. "Ferrari brought turbos
+   back" has both, and is six words shorter. If the subject of a sentence is a concept
+   rather than a car, a company or a person, rewrite it.
+
+The test for all three: would you say this out loud to a friend who likes cars? If it
+would sound odd coming out of your mouth it is wrong here, however correct it is."""
+
+
 def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8, listing_facts=None, market=None, angles=None, style="classic", engine_clip=False):
     photo_hints_block = ""
     if photo_hints:
@@ -1009,7 +1042,7 @@ ownership/value insight, a character observation or another history/mechanical p
 still hits its word target and beat variety.{notes_exception}"""
     chosen = style_of(style)
     low, high = chosen["words"]
-    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{_engine_clip_block() if engine_clip else ""}{forced_rival_block}{no_comparison_block}{chosen['block']}
+    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{VOICE_BLOCK}{_engine_clip_block() if engine_clip else ""}{forced_rival_block}{no_comparison_block}{chosen['block']}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across {chosen['scene_count'].format(max_scenes=max_scenes)} in speaking order, each scene being {chosen['sentences']} -- {chosen['scene_note']} -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -1284,6 +1317,35 @@ EMPTY_CLAIM_RE = re.compile(
     r"|stands? out|hint\w* at|speak\w* to)\b",
     re.I,
 )
+
+# The one construction that makes a script read as written rather than
+# said: a comma, then a present participle commenting on the sentence it
+# is hanging off.
+#
+#   "...carbon ceramic brakes, showcasing its racing DNA."
+#   "...557 lb-ft of torque, delivering thrilling performance."
+#   "...sell for about $100,000, reflecting significant depreciation."
+#
+# Measured across 39 shipped scripts: 104 of 409 sentences end this way,
+# one in four, in 35 of the 39. That is a grammatical habit, not a phrase
+# to blacklist, and it is why banning phrases one at a time was never
+# going to fix the voice. The commonest participles are the emptiest --
+# enhancing, reflecting, emphasizing, delivering, boasting, ensuring,
+# showcasing -- but the construction is the problem even when the clause
+# carries a fact: nobody says "it is a 3.9 V8, making 553 horsepower" out
+# loud. They say "it is a 3.9 V8. It makes 553 horsepower."
+#
+# So the fix is always the same and always available: full stop instead of
+# the comma, or cut the clause.
+#
+# -ing words that are not verbs here, which would otherwise match: a
+# stoplist is cheaper than parsing, and a wrong match costs one retry.
+_NOT_A_PARTICIPLE = frozenset("""
+during nothing anything something everything morning evening spring string thing things
+king being wing swing ceiling sibling offspring racing tuning styling handling braking
+engineering weighting upbringing
+""".split())
+TRAILING_PARTICIPLE_RE = re.compile(r",\s+([A-Za-z]+ing)\b")
 
 # The sentence that sounds like a verdict and contains none.
 #
@@ -1619,6 +1681,32 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
     # of it, and regardless of whether the sentence carries a figure: "553
     # hp and 557 lb-ft, delivering thrilling performance with each
     # acceleration" has two real numbers and still ends in nothing.
+    # The trailing participle, which is the voice rule that matters: it is
+    # one construction rather than a list of phrases, and it accounts for a
+    # quarter of every sentence this pipeline has ever written.
+    hanging = [match.group(0).strip() for match in TRAILING_PARTICIPLE_RE.finditer(script)
+               if match.group(1).lower() not in _NOT_A_PARTICIPLE]
+    if hanging:
+        violations.append(
+            f'{len(hanging)} sentence(s) trail off into a comment clause -- "{hanging[0]}". '
+            "That is writing, not speech: nobody says \"it is a 3.9 V8, making 553 horsepower\" "
+            "out loud. Put a full stop where the comma is and start a new sentence, or cut the "
+            "clause. Every one of them, not just the first."
+        )
+    # Rhythm. Half of every script this pipeline writes sits between 13 and
+    # 18 words a sentence and only 8% come in under 8, which is what makes
+    # the delivery flat however good the facts are -- a person telling you
+    # something lands a short one after a long one.
+    lengths = [len(sentence.split()) for scene in scenes
+               for sentence in _SENTENCE_SPLIT_RE.split((scene.get("narration") or "").strip())
+               if sentence.strip()]
+    if len(lengths) >= 8 and sum(1 for n in lengths if n < 8) < 2:
+        violations.append(
+            f"every sentence is about the same length ({min(lengths)}-{max(lengths)} words) and "
+            "it reads flat. Break at least two of them into something short -- four or five "
+            "words, landing after a long one. This is rhythm, not word count: the total is "
+            "unchanged."
+        )
     for match in MARKETING_FILLER_RE.finditer(script):
         violations.append(
             f'"{match.group(0).strip()}" is advert copy, not a claim -- it is true of every car '
@@ -2020,6 +2108,7 @@ HOOK_VIOLATIONS = (
 # Worth fixing, but never at the price of the opening.
 POLISH_VIOLATIONS = (
     "you state the same number more than once",
+    "every sentence is about the same length",
     "which is not worth the words",
     "the rate tells the viewer nothing",
     "Take the headline text out of the scene",

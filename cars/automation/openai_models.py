@@ -23,20 +23,35 @@ import re
 FALLBACK_TEXT = "gpt-4o"
 FALLBACK_CHEAP = "gpt-4o-mini"
 
-# Best first. Deliberately not the flagship: the writing stages are called
-# several times per build with web search on, and the mid and small tiers
-# of a newer family are both cheaper and better than the top of an older
-# one. A flagship is reachable by setting CARS_TEXT_MODEL.
+# The writing and research calls. Sol, not Astra and not Luna.
+#
+# The three GPT-6 tiers are Astra at $10/$50 per million tokens, Sol at
+# $2/$10 and Luna at $0.10/$0.50. Sol is the one to write on: it is
+# slightly CHEAPER than the gpt-4o it replaces ($2.50/$10) while being two
+# families newer, so this is not a trade at all. Astra at five times the
+# price is not worth it for a 150-word script, and Luna -- which a
+# shortest-name tiebreak picked at first -- is the wrong end of the range
+# for the one job in this pipeline where the writing quality is the
+# product.
+#
+# Named tiers first because they are what the API actually serves today;
+# the generic patterns behind them are for the next rename, so this still
+# resolves to something sensible when Sol and Luna are superseded.
 _TEXT_LADDER = (
-    r"^gpt-6(?:\.\d+)?-(?:sol|luna|mini|nano)$",
+    r"^gpt-6(?:\.\d+)?-sol$",
+    r"^gpt-6(?:\.\d+)?-(?:mini|medium)$",
     r"^gpt-6(?:\.\d+)?$",
-    r"^gpt-5(?:\.\d+)?-(?:sol|luna|mini|nano)$",
+    r"^gpt-5\.6$",
+    r"^gpt-5(?:\.\d+)?-(?:sol|mini)$",
     r"^gpt-5(?:\.\d+)?$",
     r"^gpt-4o$",
 )
-# The classification and review calls: cheapest tier of the newest family.
+# The classification and review calls: short prompts, one-word answers,
+# called many times. Luna at $0.50 per million output is 20x cheaper than
+# the gpt-4o-mini-class work it replaces and the job is not hard.
 _CHEAP_LADDER = (
-    r"^gpt-6(?:\.\d+)?-(?:luna|nano|mini)$",
+    r"^gpt-6(?:\.\d+)?-luna$",
+    r"^gpt-6(?:\.\d+)?-(?:nano|mini)$",
     r"^gpt-5(?:\.\d+)?-(?:luna|nano|mini)$",
     r"^gpt-4o-mini$",
 )

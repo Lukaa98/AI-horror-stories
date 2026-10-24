@@ -17,6 +17,23 @@ def _fresh(monkeypatch, available, env=None):
         monkeypatch.setenv(name, value)
 
 
+def test_the_real_account_resolves_to_sol_for_writing_and_luna_for_the_rest(monkeypatch):
+    """The ids OpenAI actually serves, and the one choice in here that is
+    about money rather than patterns.
+
+    Astra is $10/$50 per million tokens, Sol $2/$10, Luna $0.10/$0.50.
+    Sol is slightly cheaper than the gpt-4o it replaces ($2.50/$10) and two
+    families newer, so writing on it is not a trade. Luna is 20x cheaper
+    again and fine for one-word classifications. Astra is left out of
+    automatic selection on purpose -- five times the price for a 150-word
+    script -- and reachable with CARS_TEXT_MODEL.
+    """
+    _fresh(monkeypatch, ["gpt-4o", "gpt-4o-mini", "gpt-5.5", "gpt-5.6",
+                         "gpt-6-astra", "gpt-6.1-sol", "gpt-6-luna"])
+    assert openai_models.text_model() == "gpt-6.1-sol"
+    assert openai_models.cheap_model() == "gpt-6-luna"
+
+
 def test_it_takes_the_cheaper_tier_of_the_newest_family(monkeypatch):
     """The writing stages are called several times a build with web search
     on, so the mid and small tiers of a newer family are both cheaper and

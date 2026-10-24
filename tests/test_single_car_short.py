@@ -4521,3 +4521,97 @@ def test_the_notes_are_the_spine_of_the_script_not_a_suggestion():
     # The tail may still go: that is what stopped five notes buying five
     # thin beats.
     assert "What you may leave out is the TAIL" in block
+
+
+def test_the_voice_rule_is_a_construction_not_a_list_of_phrases():
+    """Blacklisting phrases one at a time was never going to fix the voice.
+    The habit is grammatical: a comma, then a present participle commenting
+    on the sentence it hangs off. Measured across 39 shipped scripts it is
+    104 of 409 sentences, in 35 of the 39."""
+    import single_car_short
+
+    def hanging(text):
+        return [m.group(0).strip() for m in single_car_short.TRAILING_PARTICIPLE_RE.finditer(text)
+                if m.group(1).lower() not in single_car_short._NOT_A_PARTICIPLE]
+
+    # All three of the complaints, one rule.
+    assert hanging("The calipers are carbon ceramic, showcasing its racing DNA.") == [", showcasing"]
+    assert hanging("It makes 557 lb-ft, delivering thrilling performance.") == [", delivering"]
+    assert hanging("They sell for $100,000, reflecting significant depreciation over the years.") \
+        == [", reflecting"]
+    # Including the one that was factually correct. The construction is the
+    # problem, not the content: nobody says this out loud.
+    assert hanging("It is a 3.9 V8, making 553 horsepower.") == [", making"]
+
+    # Said as speech instead, nothing fires.
+    assert not hanging("Ferrari brought turbos back. It makes 553 horsepower. That is a lot.")
+    # And -ing words that are not verbs here do not count. A stoplist is
+    # cheaper than parsing and a wrong match costs one retry.
+    assert not hanging("In 1987, during the F40's run, nothing else was turbocharged.")
+    assert not hanging("Two seats, nothing in the back, no screen.")
+
+
+def test_a_flat_script_is_reported_even_when_every_fact_is_right():
+    """Half the sentences written for this channel are 13 to 18 words and
+    one in twelve comes in under eight, which is why the delivery is flat
+    however good the facts are."""
+    import single_car_short
+
+    flat = ["This is a sentence of about fourteen words written to sit in the middle band."] * 9
+    violations = single_car_short._script_violations(
+        _california_package(scenes=flat, notes=""), "Ferrari", "California T")
+    assert [rule for rule in violations if "reads flat" in rule]
+
+    # Two short ones are enough -- this is rhythm, not a word budget.
+    with_rhythm = flat[:7] + ["Then this.", "Nobody cared."]
+    assert not [rule for rule in single_car_short._script_violations(
+        _california_package(scenes=with_rhythm, notes=""), "Ferrari", "California T")
+        if "reads flat" in rule]
+
+    # A short script is not held to it: there is no rhythm to find in five
+    # sentences, and the 35-second cut only has a handful.
+    assert not [rule for rule in single_car_short._script_violations(
+        _california_package(scenes=flat[:5], notes=""), "Ferrari", "California T")
+        if "reads flat" in rule]
+
+
+def test_rhythm_never_outranks_the_opening():
+    """It is worth fixing and it is not worth losing a hook over. A repair
+    that fixed the hook and flattened the rhythm used to be rejected on
+    count."""
+    import single_car_short
+
+    assert single_car_short._violation_weight(
+        "every sentence is about the same length (12-18 words) and it reads flat"
+    ) == single_car_short.POLISH_WEIGHT
+    # The construction itself is ordinary content: worth a retry, below the
+    # hook, above cosmetics.
+    assert single_car_short._violation_weight(
+        '3 sentence(s) trail off into a comment clause -- ", showcasing"'
+    ) == single_car_short.CONTENT_WEIGHT
+
+
+def test_the_prompt_says_how_to_sound_spoken_not_merely_that_it_should():
+    """"Conversational and spoken, not written" has been in the prompt the
+    whole time and every script ignored it -- the same way the notes
+    instruction was ignored. An instruction with no mechanism in it is a
+    preference, and the model cannot act on a preference."""
+    import single_car_short
+
+    # Every style, because the habit is not a property of one length. It
+    # went into the dense block first, where three of the four formats
+    # never saw it.
+    for style in ("classic", "dense", "short", "medium"):
+        prompt = " ".join(single_car_short._research_script_prompt(
+            "a car", "2020", style=style).split())
+        assert "NEVER TRAIL OFF INTO A COMMA CLAUSE" in prompt, style
+        assert "VARY THE LENGTH" in prompt, style
+    prompt = " ".join(single_car_short._research_script_prompt("a car", "2020").split())
+    assert "NEVER TRAIL OFF INTO A COMMA CLAUSE" in prompt
+    assert "VARY THE LENGTH" in prompt
+    assert "SAY IT WITH A VERB, NOT AN ABSTRACT NOUN" in prompt
+    # Each one carries the fix, not just the prohibition.
+    assert "Put a full stop where the comma is" in prompt
+    assert "Land a short one after a long one" in prompt
+    assert "Ferrari brought turbos back" in prompt
+    assert "would you say this out loud" in prompt
