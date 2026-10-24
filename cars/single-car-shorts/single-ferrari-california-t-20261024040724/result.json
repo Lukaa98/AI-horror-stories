@@ -1,0 +1,2946 @@
+{
+  "car": {
+    "make": "Ferrari",
+    "model": "California T",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Ferrari",
+    "model": "California T",
+    "script_style": "classic+story",
+    "query": "",
+    "start_year": 2015,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/r4VR6Zwn/2015-ferrari-california-t",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/FerrariCaliforniaT2015002/edit/4xGRV.jpg?t=179149573001",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015010.jpg?t=179053964865",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/FerrariCaliforniaT2015013/edit/u2eqf.jpg?t=179149580671",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015085.jpg?t=179053964865",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/FerrariCaliforniaT2015089/edit/Qqh1Y.jpg?t=179148888378",
+    "photo_rival": "",
+    "rival_car": "",
+    "photo_race": "",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "true",
+    "angles": "1. Lead on this: it was called the poor man's Ferrari, but the thing it was actually mocked for was the engine. The California T was the first turbocharged Ferrari road car since the F40 went out of production, and purists treated the twin-turbo V8 as Ferrari giving up the naturally aspirated scream to sell a cheaper car. 552 hp and roughly 557 lb-ft, in the model nobody took seriously.\n2. Cover where Ferrari went next, because it changes what this car is. The mid-engine car is now a plug-in hybrid V6 - the 296 GTB, 819 hp, the first six-cylinder road car to wear the Ferrari badge, since the old Dino never did - and Ferrari has revealed its first electric car, the Luce. So the engine this car was punished for is the one people now want, and this is the cheap way into that V8.\n3. For the head-to-head use the naturally aspirated Ferrari California it replaced - 4.3-litre V8, 453 hp, no turbos, the same folding hardtop 2+2 shape. The turbo car it was looked down on for is nearly 100 hp up on it.",
+    "current_price": "",
+    "extra_photos": "[{\"id\":\"closeup-restored-1792800442151-0\",\"label\":\"close\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/FerrariCaliforniaT2015031/edit/finSJ.jpg?t=179149577423\",\"slot\":\"front\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792800442151-1\",\"label\":\"headlight\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015032.jpg?t=179053964865\",\"slot\":\"front\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792800442151-2\",\"label\":\"exhaust\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015066.jpg?t=179053964865\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792800442151-3\",\"label\":\"lowew bumper?\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015065.jpg?t=179053964865\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792800442151-4\",\"label\":\"wheele\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015019.jpg?t=179053964865\",\"slot\":\"side\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792800442151-5\",\"label\":\"gauge\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/ee7f173e46ec801a48d1673c50f9cebaa1bf2854/photos/FerrariCaliforniaT2015090/edit/erfC1.jpg?t=179148884974\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792800442151-6\",\"label\":\"seats\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015101.jpg?t=179053964865\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792800442151-7\",\"label\":\"stearing wheele carbon fiber\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015100.jpg?t=179053964865\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792800442151-8\",\"label\":\"still a ferrari\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015149.jpg?t=179053964865\",\"slot\":\"engine\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-restored-1792800442151-9\",\"label\":\"llower side\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/27e98d19eb1bde44e73e702f52b8bb34f809f6cd/photos/FerrariCaliforniaT2015042.jpg?t=179053964865\",\"slot\":\"side\",\"note\":\"\",\"describe\":false}]",
+    "engine_clip": null
+  },
+  "title": "2015 Ferrari California T",
+  "youtube_title": "They called it the poor man's car - but had turbos killed its scream? \ud83d\udd25",
+  "key_specs": {
+    "horsepower": "553 hp",
+    "torque": "557 lb-ft",
+    "zero_to_sixty": "3.3 sec",
+    "redline": "7,500 rpm",
+    "engine": "3.9L twin-turbo V8",
+    "price": "~$200K new, ~$100K today"
+  },
+  "history": {
+    "year": 2015,
+    "fact": "For the 2015 model year, the California T restored turbocharging to Ferrari road cars for the first time since the F40."
+  },
+  "start_year": 2015,
+  "end_year": 2015,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "photo_label": null,
+      "narration": "553 horsepower, and they'd called it the poor man's car - but the real argument was whether turbos had killed its scream. Critics missed the wail.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Turbos Return",
+      "photo_label": "exterior front",
+      "narration": "The 2015 Ferrari California T ended the roadgoing turbo drought after the F40 with 553 horsepower and 557 pound-feet.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "553 hp",
+      "stat_label_2": "Torque",
+      "stat_value_2": "557 lb-ft"
+    },
+    {
+      "media_type": "wheel",
+      "headline": "Carbon-Ceramic Brakes",
+      "photo_label": "exterior side",
+      "narration": "Its carbon-ceramic brakes can stop it from 62 mph in 34 meters.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Initial Speed",
+      "stat_value": "62 mph",
+      "stat_label_2": "Stopping Distance",
+      "stat_value_2": "34 m"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Equal-Length Headers",
+      "photo_label": "exterior rear",
+      "narration": "Ferrari used equal-length exhaust headers to strengthen the harmonics that give its V8 a voice. The turbos still muffled it.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "Variable Boost Management",
+      "photo_label": "engine bay",
+      "narration": "Its 3.9-liter twin-turbo V8 drives the rear wheels through a seven-speed dual-clutch gearbox; Ferrari reserves maximum torque for top gear.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Displacement",
+      "stat_value": "3.9L",
+      "stat_label_2": "Transmission",
+      "stat_value_2": "7-speed DCT"
+    },
+    {
+      "media_type": "interior",
+      "headline": "Turbo Performance Engineer",
+      "photo_label": "interior",
+      "narration": "The dashboard's Turbo Performance Engineer actually coaches you on getting more from that engine.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Ferrari Moved On",
+      "photo_label": null,
+      "narration": "Ferrari's 296 GTB brought an 819-horsepower plug-in hybrid V6, its first Ferrari-badged six-cylinder road engine; then came the electric Luce.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "$200K \u2192 $100K",
+      "photo_label": null,
+      "narration": "It started around $200,000 new; they go for about $100,000 today, so would you still sneer at this V8?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "MSRP",
+      "stat_value": "~$200K",
+      "stat_label_2": "Today",
+      "stat_value_2": "~$100K"
+    }
+  ],
+  "sources": [
+    "https://www.motortrend.com/reviews/2015-ferrari-california-t-first-drive",
+    "https://www.ferrari.com/en-CA/magazine/articles/mythbusters-turbocharging",
+    "https://pictures.dealer.com/ferrariofsanantonio/709e4f720a0e0acb0c353895914fc451.pdf",
+    "https://www.edmunds.com/ferrari/california-t/2015/review/",
+    "https://www.caranddriver.com/reviews/a15107849/2015-ferrari-california-t-test-review/",
+    "https://www.ferrari.com/content/dam/ferrari-fcom/old/pdf/CS_296_GTB_final_gbr.pdf",
+    "https://cdn.ferrari.com/cms/network/media/pdf/2026_02_10%20-%20Ferrari%20FY%202025%20Results%20Press%20Release.pdf",
+    "https://www.reddit.com/r/Ferrari/comments/15r7obw/for_being_called_the_poor_mans_ferrari_the/"
+  ],
+  "script": "553 horsepower, and they'd called it the poor man's car - but the real argument was whether turbos had killed its scream. Critics missed the wail. The 2015 Ferrari California T ended the roadgoing turbo drought after the F40 with 553 horsepower and 557 pound-feet. Its carbon-ceramic brakes can stop it from 62 mph in 34 meters. Ferrari used equal-length exhaust headers to strengthen the harmonics that give its V8 a voice. The turbos still muffled it. Its 3.9-liter twin-turbo V8 drives the rear wheels through a seven-speed dual-clutch gearbox; Ferrari reserves maximum torque for top gear. The dashboard's Turbo Performance Engineer actually coaches you on getting more from that engine. Ferrari's 296 GTB brought an 819-horsepower plug-in hybrid V6, its first Ferrari-badged six-cylinder road engine; then came the electric Luce. It started around $200,000 new; they go for about $100,000 today, so would you still sneer at this V8?",
+  "word_count": 152,
+  "repair_log": [
+    {
+      "what": "your first sentence contains no number -- it was \"They called it the poor man's car, but the real argument was whether t",
+      "outcome": "applied",
+      "scene": 1,
+      "returned": "553 horsepower, and they'd called it the poor man's car\u2014but the real argument was whether turbos had killed its scream. Critics missed the wail."
+    },
+    {
+      "what": "you state the same number more than once -- \"553\" 2 times. Say each figure once and spend the words you get back on some",
+      "outcome": "traded for another",
+      "returned": "The 2015 Ferrari California T ended the roadgoing turbo drought after the F40 with a 7,500-rpm redline and 557 pound-feet.",
+      "still": [
+        "you mention a 7,500 rpm redline, which is not worth the words -- ordinary road cars sit there. Only call out a redline a"
+      ]
+    }
+  ],
+  "rule_violations": [
+    "you state the same number more than once -- \"553\" 2 times. Say each figure once and spend the words you get back on something you have not said yet."
+  ],
+  "voice_preset": "onyx",
+  "tts_speed": null,
+  "narration": {
+    "engine": "gpt-audio",
+    "model": "gpt-audio",
+    "voice": "echo",
+    "pitch": {
+      "measured_hz": 136.75213675213675,
+      "result_hz": 136.75213675213675
+    },
+    "tts_speed": null
+  },
+  "target_duration_seconds": 55.0,
+  "normalized_audio_duration_seconds": 55.11,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ferrari-california-t-20261024040724/narration.mp3",
+  "duration_seconds": 55.17,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.36,
+      "end": 1.35,
+      "mouth": "small"
+    },
+    {
+      "start": 1.35,
+      "end": 1.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.44,
+      "end": 1.62,
+      "mouth": "small"
+    },
+    {
+      "start": 1.62,
+      "end": 1.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.8,
+      "end": 2.07,
+      "mouth": "small"
+    },
+    {
+      "start": 2.07,
+      "end": 2.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.16,
+      "end": 2.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.25,
+      "end": 2.52,
+      "mouth": "small"
+    },
+    {
+      "start": 2.52,
+      "end": 2.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.61,
+      "end": 2.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.7,
+      "end": 2.97,
+      "mouth": "small"
+    },
+    {
+      "start": 2.97,
+      "end": 3.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.06,
+      "end": 3.24,
+      "mouth": "small"
+    },
+    {
+      "start": 3.24,
+      "end": 3.42,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.42,
+      "end": 3.78,
+      "mouth": "small"
+    },
+    {
+      "start": 3.78,
+      "end": 3.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.96,
+      "end": 4.59,
+      "mouth": "small"
+    },
+    {
+      "start": 4.59,
+      "end": 4.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.68,
+      "end": 5.04,
+      "mouth": "small"
+    },
+    {
+      "start": 5.04,
+      "end": 5.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.22,
+      "end": 5.85,
+      "mouth": "small"
+    },
+    {
+      "start": 5.85,
+      "end": 6.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.21,
+      "end": 7.11,
+      "mouth": "small"
+    },
+    {
+      "start": 7.11,
+      "end": 7.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.29,
+      "end": 7.74,
+      "mouth": "small"
+    },
+    {
+      "start": 7.74,
+      "end": 7.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.83,
+      "end": 8.01,
+      "mouth": "small"
+    },
+    {
+      "start": 8.01,
+      "end": 8.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.1,
+      "end": 8.19,
+      "mouth": "small"
+    },
+    {
+      "start": 8.19,
+      "end": 8.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.37,
+      "end": 9.27,
+      "mouth": "small"
+    },
+    {
+      "start": 9.27,
+      "end": 9.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.45,
+      "end": 9.54,
+      "mouth": "small"
+    },
+    {
+      "start": 9.54,
+      "end": 9.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.63,
+      "end": 9.9,
+      "mouth": "small"
+    },
+    {
+      "start": 9.9,
+      "end": 10.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.08,
+      "end": 10.17,
+      "mouth": "small"
+    },
+    {
+      "start": 10.17,
+      "end": 10.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.26,
+      "end": 10.44,
+      "mouth": "small"
+    },
+    {
+      "start": 10.44,
+      "end": 10.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.62,
+      "end": 10.71,
+      "mouth": "small"
+    },
+    {
+      "start": 10.71,
+      "end": 10.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.8,
+      "end": 11.7,
+      "mouth": "small"
+    },
+    {
+      "start": 11.7,
+      "end": 11.97,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.97,
+      "end": 12.06,
+      "mouth": "small"
+    },
+    {
+      "start": 12.06,
+      "end": 12.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.15,
+      "end": 12.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.33,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.77,
+      "end": 13.86,
+      "mouth": "small"
+    },
+    {
+      "start": 13.86,
+      "end": 13.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.95,
+      "end": 14.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.04,
+      "end": 14.31,
+      "mouth": "small"
+    },
+    {
+      "start": 14.31,
+      "end": 14.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.4,
+      "end": 14.67,
+      "mouth": "small"
+    },
+    {
+      "start": 14.67,
+      "end": 14.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.76,
+      "end": 15.39,
+      "mouth": "small"
+    },
+    {
+      "start": 15.39,
+      "end": 16.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.2,
+      "end": 16.38,
+      "mouth": "small"
+    },
+    {
+      "start": 16.38,
+      "end": 16.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.47,
+      "end": 17.37,
+      "mouth": "small"
+    },
+    {
+      "start": 17.37,
+      "end": 17.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.55,
+      "end": 17.82,
+      "mouth": "small"
+    },
+    {
+      "start": 17.82,
+      "end": 17.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.91,
+      "end": 18.0,
+      "mouth": "small"
+    },
+    {
+      "start": 18.0,
+      "end": 18.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.09,
+      "end": 18.99,
+      "mouth": "small"
+    },
+    {
+      "start": 18.99,
+      "end": 19.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.17,
+      "end": 19.35,
+      "mouth": "small"
+    },
+    {
+      "start": 19.35,
+      "end": 19.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.44,
+      "end": 19.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.62,
+      "end": 19.8,
+      "mouth": "small"
+    },
+    {
+      "start": 19.8,
+      "end": 19.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.89,
+      "end": 20.16,
+      "mouth": "small"
+    },
+    {
+      "start": 20.16,
+      "end": 20.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.61,
+      "end": 20.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.97,
+      "end": 21.15,
+      "mouth": "small"
+    },
+    {
+      "start": 21.15,
+      "end": 21.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.24,
+      "end": 21.51,
+      "mouth": "small"
+    },
+    {
+      "start": 21.51,
+      "end": 21.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.69,
+      "end": 21.96,
+      "mouth": "small"
+    },
+    {
+      "start": 21.96,
+      "end": 22.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.05,
+      "end": 22.41,
+      "mouth": "small"
+    },
+    {
+      "start": 22.41,
+      "end": 22.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.59,
+      "end": 22.86,
+      "mouth": "small"
+    },
+    {
+      "start": 22.86,
+      "end": 22.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.95,
+      "end": 23.04,
+      "mouth": "small"
+    },
+    {
+      "start": 23.04,
+      "end": 23.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.31,
+      "end": 23.4,
+      "mouth": "small"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.49,
+      "end": 23.85,
+      "mouth": "small"
+    },
+    {
+      "start": 23.85,
+      "end": 23.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.94,
+      "end": 24.21,
+      "mouth": "small"
+    },
+    {
+      "start": 24.21,
+      "end": 24.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.39,
+      "end": 24.75,
+      "mouth": "small"
+    },
+    {
+      "start": 24.75,
+      "end": 24.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.84,
+      "end": 24.93,
+      "mouth": "small"
+    },
+    {
+      "start": 24.93,
+      "end": 25.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.2,
+      "end": 26.01,
+      "mouth": "small"
+    },
+    {
+      "start": 26.01,
+      "end": 26.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.1,
+      "end": 26.19,
+      "mouth": "small"
+    },
+    {
+      "start": 26.19,
+      "end": 26.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.55,
+      "end": 26.73,
+      "mouth": "small"
+    },
+    {
+      "start": 26.73,
+      "end": 26.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.82,
+      "end": 27.0,
+      "mouth": "small"
+    },
+    {
+      "start": 27.0,
+      "end": 27.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.09,
+      "end": 27.63,
+      "mouth": "small"
+    },
+    {
+      "start": 27.63,
+      "end": 27.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.72,
+      "end": 27.99,
+      "mouth": "small"
+    },
+    {
+      "start": 27.99,
+      "end": 28.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.08,
+      "end": 28.26,
+      "mouth": "small"
+    },
+    {
+      "start": 28.26,
+      "end": 28.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.44,
+      "end": 28.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.71,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 28.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.98,
+      "end": 29.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.07,
+      "end": 29.25,
+      "mouth": "small"
+    },
+    {
+      "start": 29.25,
+      "end": 29.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.34,
+      "end": 29.43,
+      "mouth": "small"
+    },
+    {
+      "start": 29.43,
+      "end": 29.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.61,
+      "end": 29.7,
+      "mouth": "small"
+    },
+    {
+      "start": 29.7,
+      "end": 29.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.88,
+      "end": 29.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.97,
+      "end": 30.15,
+      "mouth": "small"
+    },
+    {
+      "start": 30.15,
+      "end": 30.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.24,
+      "end": 30.69,
+      "mouth": "small"
+    },
+    {
+      "start": 30.69,
+      "end": 30.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.78,
+      "end": 30.87,
+      "mouth": "small"
+    },
+    {
+      "start": 30.87,
+      "end": 30.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.96,
+      "end": 31.05,
+      "mouth": "small"
+    },
+    {
+      "start": 31.05,
+      "end": 31.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.14,
+      "end": 31.41,
+      "mouth": "small"
+    },
+    {
+      "start": 31.41,
+      "end": 31.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.5,
+      "end": 31.59,
+      "mouth": "small"
+    },
+    {
+      "start": 31.59,
+      "end": 31.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.77,
+      "end": 31.86,
+      "mouth": "small"
+    },
+    {
+      "start": 31.86,
+      "end": 32.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.13,
+      "end": 32.22,
+      "mouth": "small"
+    },
+    {
+      "start": 32.22,
+      "end": 32.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.31,
+      "end": 32.4,
+      "mouth": "small"
+    },
+    {
+      "start": 32.4,
+      "end": 32.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.49,
+      "end": 32.67,
+      "mouth": "small"
+    },
+    {
+      "start": 32.67,
+      "end": 32.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.76,
+      "end": 33.12,
+      "mouth": "small"
+    },
+    {
+      "start": 33.12,
+      "end": 33.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.21,
+      "end": 33.3,
+      "mouth": "small"
+    },
+    {
+      "start": 33.3,
+      "end": 33.48,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.48,
+      "end": 33.84,
+      "mouth": "small"
+    },
+    {
+      "start": 33.84,
+      "end": 33.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.93,
+      "end": 34.11,
+      "mouth": "small"
+    },
+    {
+      "start": 34.11,
+      "end": 34.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.47,
+      "end": 34.56,
+      "mouth": "small"
+    },
+    {
+      "start": 34.56,
+      "end": 34.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.65,
+      "end": 35.1,
+      "mouth": "small"
+    },
+    {
+      "start": 35.1,
+      "end": 35.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.19,
+      "end": 36.18,
+      "mouth": "small"
+    },
+    {
+      "start": 36.18,
+      "end": 36.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.36,
+      "end": 36.81,
+      "mouth": "small"
+    },
+    {
+      "start": 36.81,
+      "end": 36.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.9,
+      "end": 36.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.99,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.89,
+      "end": 38.34,
+      "mouth": "small"
+    },
+    {
+      "start": 38.34,
+      "end": 38.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.88,
+      "end": 38.97,
+      "mouth": "small"
+    },
+    {
+      "start": 38.97,
+      "end": 39.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.15,
+      "end": 40.41,
+      "mouth": "small"
+    },
+    {
+      "start": 40.41,
+      "end": 40.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.59,
+      "end": 40.68,
+      "mouth": "small"
+    },
+    {
+      "start": 40.68,
+      "end": 40.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.77,
+      "end": 40.86,
+      "mouth": "small"
+    },
+    {
+      "start": 40.86,
+      "end": 40.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.95,
+      "end": 42.03,
+      "mouth": "small"
+    },
+    {
+      "start": 42.03,
+      "end": 42.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.12,
+      "end": 42.21,
+      "mouth": "small"
+    },
+    {
+      "start": 42.21,
+      "end": 42.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.3,
+      "end": 42.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.39,
+      "end": 42.66,
+      "mouth": "small"
+    },
+    {
+      "start": 42.66,
+      "end": 42.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.75,
+      "end": 43.47,
+      "mouth": "small"
+    },
+    {
+      "start": 43.47,
+      "end": 43.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.65,
+      "end": 43.83,
+      "mouth": "small"
+    },
+    {
+      "start": 43.83,
+      "end": 43.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.92,
+      "end": 44.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.01,
+      "end": 44.1,
+      "mouth": "small"
+    },
+    {
+      "start": 44.1,
+      "end": 44.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.19,
+      "end": 44.28,
+      "mouth": "small"
+    },
+    {
+      "start": 44.28,
+      "end": 44.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.46,
+      "end": 44.55,
+      "mouth": "small"
+    },
+    {
+      "start": 44.55,
+      "end": 44.73,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.73,
+      "end": 45.27,
+      "mouth": "small"
+    },
+    {
+      "start": 45.27,
+      "end": 45.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.72,
+      "end": 45.99,
+      "mouth": "small"
+    },
+    {
+      "start": 45.99,
+      "end": 46.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.44,
+      "end": 46.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.62,
+      "end": 46.71,
+      "mouth": "small"
+    },
+    {
+      "start": 46.71,
+      "end": 46.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.8,
+      "end": 46.89,
+      "mouth": "small"
+    },
+    {
+      "start": 46.89,
+      "end": 46.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.98,
+      "end": 47.07,
+      "mouth": "small"
+    },
+    {
+      "start": 47.07,
+      "end": 47.16,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.16,
+      "end": 47.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.25,
+      "end": 47.7,
+      "mouth": "small"
+    },
+    {
+      "start": 47.7,
+      "end": 48.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.33,
+      "end": 48.6,
+      "mouth": "small"
+    },
+    {
+      "start": 48.6,
+      "end": 48.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.69,
+      "end": 49.23,
+      "mouth": "small"
+    },
+    {
+      "start": 49.23,
+      "end": 49.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.32,
+      "end": 49.5,
+      "mouth": "small"
+    },
+    {
+      "start": 49.5,
+      "end": 49.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.59,
+      "end": 49.77,
+      "mouth": "small"
+    },
+    {
+      "start": 49.77,
+      "end": 49.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.95,
+      "end": 50.22,
+      "mouth": "small"
+    },
+    {
+      "start": 50.22,
+      "end": 50.58,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.58,
+      "end": 50.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.67,
+      "end": 50.76,
+      "mouth": "small"
+    },
+    {
+      "start": 50.76,
+      "end": 51.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.21,
+      "end": 51.3,
+      "mouth": "small"
+    },
+    {
+      "start": 51.3,
+      "end": 51.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.93,
+      "end": 52.02,
+      "mouth": "small"
+    },
+    {
+      "start": 52.02,
+      "end": 52.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.29,
+      "end": 52.47,
+      "mouth": "small"
+    },
+    {
+      "start": 52.47,
+      "end": 52.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.56,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 53.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.01,
+      "end": 53.1,
+      "mouth": "small"
+    },
+    {
+      "start": 53.1,
+      "end": 53.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.19,
+      "end": 53.28,
+      "mouth": "small"
+    },
+    {
+      "start": 53.28,
+      "end": 53.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.46,
+      "end": 53.64,
+      "mouth": "small"
+    },
+    {
+      "start": 53.64,
+      "end": 53.73,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.73,
+      "end": 54.0,
+      "mouth": "small"
+    },
+    {
+      "start": 54.0,
+      "end": 54.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.27,
+      "end": 54.45,
+      "mouth": "small"
+    },
+    {
+      "start": 54.45,
+      "end": 54.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.63,
+      "end": 55.17,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "553",
+      "start": 0.6800000071525574,
+      "end": 1.2400000095367432
+    },
+    {
+      "word": "horsepower",
+      "start": 1.2400000095367432,
+      "end": 1.6200000047683716
+    },
+    {
+      "word": "and",
+      "start": 1.8600000143051147,
+      "end": 1.940000057220459
+    },
+    {
+      "word": "they'd",
+      "start": 1.940000057220459,
+      "end": 2.240000009536743
+    },
+    {
+      "word": "called",
+      "start": 2.240000009536743,
+      "end": 2.299999952316284
+    },
+    {
+      "word": "it",
+      "start": 2.299999952316284,
+      "end": 2.4600000381469727
+    },
+    {
+      "word": "the",
+      "start": 2.4600000381469727,
+      "end": 2.559999942779541
+    },
+    {
+      "word": "poor",
+      "start": 2.559999942779541,
+      "end": 2.759999990463257
+    },
+    {
+      "word": "man's",
+      "start": 2.759999990463257,
+      "end": 3.059999942779541
+    },
+    {
+      "word": "car",
+      "start": 3.059999942779541,
+      "end": 3.240000009536743
+    },
+    {
+      "word": "but",
+      "start": 3.4800000190734863,
+      "end": 3.5199999809265137
+    },
+    {
+      "word": "the",
+      "start": 3.5199999809265137,
+      "end": 3.700000047683716
+    },
+    {
+      "word": "real",
+      "start": 3.700000047683716,
+      "end": 3.9800000190734863
+    },
+    {
+      "word": "argument",
+      "start": 3.9800000190734863,
+      "end": 4.159999847412109
+    },
+    {
+      "word": "was",
+      "start": 4.159999847412109,
+      "end": 4.380000114440918
+    },
+    {
+      "word": "whether",
+      "start": 4.380000114440918,
+      "end": 4.599999904632568
+    },
+    {
+      "word": "turbos",
+      "start": 4.599999904632568,
+      "end": 4.960000038146973
+    },
+    {
+      "word": "had",
+      "start": 4.960000038146973,
+      "end": 5.199999809265137
+    },
+    {
+      "word": "killed",
+      "start": 5.199999809265137,
+      "end": 5.360000133514404
+    },
+    {
+      "word": "its",
+      "start": 5.360000133514404,
+      "end": 5.619999885559082
+    },
+    {
+      "word": "scream",
+      "start": 5.619999885559082,
+      "end": 5.900000095367432
+    },
+    {
+      "word": "Critics",
+      "start": 6.460000038146973,
+      "end": 6.460000038146973
+    },
+    {
+      "word": "missed",
+      "start": 6.460000038146973,
+      "end": 6.71999979019165
+    },
+    {
+      "word": "the",
+      "start": 6.71999979019165,
+      "end": 7.0
+    },
+    {
+      "word": "whale",
+      "start": 7.0,
+      "end": 7.079999923706055
+    },
+    {
+      "word": "The",
+      "start": 7.380000114440918,
+      "end": 7.400000095367432
+    },
+    {
+      "word": "2015",
+      "start": 7.400000095367432,
+      "end": 8.0600004196167
+    },
+    {
+      "word": "Ferrari",
+      "start": 8.0600004196167,
+      "end": 8.420000076293945
+    },
+    {
+      "word": "California",
+      "start": 8.420000076293945,
+      "end": 8.960000038146973
+    },
+    {
+      "word": "T",
+      "start": 8.960000038146973,
+      "end": 9.220000267028809
+    },
+    {
+      "word": "ended",
+      "start": 9.220000267028809,
+      "end": 9.760000228881836
+    },
+    {
+      "word": "the",
+      "start": 9.760000228881836,
+      "end": 9.960000038146973
+    },
+    {
+      "word": "road",
+      "start": 9.960000038146973,
+      "end": 10.220000267028809
+    },
+    {
+      "word": "going",
+      "start": 10.220000267028809,
+      "end": 10.300000190734863
+    },
+    {
+      "word": "turbo",
+      "start": 10.300000190734863,
+      "end": 10.680000305175781
+    },
+    {
+      "word": "drought",
+      "start": 10.680000305175781,
+      "end": 10.859999656677246
+    },
+    {
+      "word": "after",
+      "start": 10.859999656677246,
+      "end": 11.15999984741211
+    },
+    {
+      "word": "the",
+      "start": 11.15999984741211,
+      "end": 11.319999694824219
+    },
+    {
+      "word": "F40",
+      "start": 11.319999694824219,
+      "end": 11.680000305175781
+    },
+    {
+      "word": "with",
+      "start": 11.680000305175781,
+      "end": 12.119999885559082
+    },
+    {
+      "word": "553",
+      "start": 12.119999885559082,
+      "end": 13.0600004196167
+    },
+    {
+      "word": "horsepower",
+      "start": 13.0600004196167,
+      "end": 13.460000038146973
+    },
+    {
+      "word": "and",
+      "start": 13.460000038146973,
+      "end": 13.9399995803833
+    },
+    {
+      "word": "557",
+      "start": 13.9399995803833,
+      "end": 14.899999618530273
+    },
+    {
+      "word": "pound",
+      "start": 14.899999618530273,
+      "end": 15.300000190734863
+    },
+    {
+      "word": "feet",
+      "start": 15.300000190734863,
+      "end": 15.4399995803833
+    },
+    {
+      "word": "Its",
+      "start": 16.239999771118164,
+      "end": 16.459999084472656
+    },
+    {
+      "word": "carbon",
+      "start": 16.459999084472656,
+      "end": 16.760000228881836
+    },
+    {
+      "word": "ceramic",
+      "start": 16.760000228881836,
+      "end": 17.059999465942383
+    },
+    {
+      "word": "brakes",
+      "start": 17.059999465942383,
+      "end": 17.34000015258789
+    },
+    {
+      "word": "can",
+      "start": 17.34000015258789,
+      "end": 17.760000228881836
+    },
+    {
+      "word": "stop",
+      "start": 17.760000228881836,
+      "end": 17.920000076293945
+    },
+    {
+      "word": "it",
+      "start": 17.920000076293945,
+      "end": 18.059999465942383
+    },
+    {
+      "word": "from",
+      "start": 18.059999465942383,
+      "end": 18.260000228881836
+    },
+    {
+      "word": "62",
+      "start": 18.260000228881836,
+      "end": 18.6200008392334
+    },
+    {
+      "word": "mph",
+      "start": 18.6200008392334,
+      "end": 19.139999389648438
+    },
+    {
+      "word": "in",
+      "start": 19.139999389648438,
+      "end": 19.459999084472656
+    },
+    {
+      "word": "34",
+      "start": 19.459999084472656,
+      "end": 19.899999618530273
+    },
+    {
+      "word": "meters",
+      "start": 19.899999618530273,
+      "end": 20.200000762939453
+    },
+    {
+      "word": "Ferrari",
+      "start": 20.920000076293945,
+      "end": 20.920000076293945
+    },
+    {
+      "word": "used",
+      "start": 20.920000076293945,
+      "end": 21.239999771118164
+    },
+    {
+      "word": "equal",
+      "start": 21.239999771118164,
+      "end": 21.6200008392334
+    },
+    {
+      "word": "length",
+      "start": 21.6200008392334,
+      "end": 21.84000015258789
+    },
+    {
+      "word": "exhaust",
+      "start": 21.84000015258789,
+      "end": 22.18000030517578
+    },
+    {
+      "word": "headers",
+      "start": 22.18000030517578,
+      "end": 22.360000610351562
+    },
+    {
+      "word": "to",
+      "start": 22.360000610351562,
+      "end": 22.8799991607666
+    },
+    {
+      "word": "strengthen",
+      "start": 22.8799991607666,
+      "end": 23.079999923706055
+    },
+    {
+      "word": "the",
+      "start": 23.079999923706055,
+      "end": 23.34000015258789
+    },
+    {
+      "word": "harmonics",
+      "start": 23.34000015258789,
+      "end": 23.6200008392334
+    },
+    {
+      "word": "that",
+      "start": 23.6200008392334,
+      "end": 23.84000015258789
+    },
+    {
+      "word": "give",
+      "start": 23.84000015258789,
+      "end": 23.959999084472656
+    },
+    {
+      "word": "its",
+      "start": 23.959999084472656,
+      "end": 24.15999984741211
+    },
+    {
+      "word": "V8",
+      "start": 24.15999984741211,
+      "end": 24.399999618530273
+    },
+    {
+      "word": "a",
+      "start": 24.399999618530273,
+      "end": 24.68000030517578
+    },
+    {
+      "word": "voice",
+      "start": 24.68000030517578,
+      "end": 24.899999618530273
+    },
+    {
+      "word": "The",
+      "start": 25.040000915527344,
+      "end": 25.399999618530273
+    },
+    {
+      "word": "turbos",
+      "start": 25.399999618530273,
+      "end": 25.65999984741211
+    },
+    {
+      "word": "still",
+      "start": 25.65999984741211,
+      "end": 25.940000534057617
+    },
+    {
+      "word": "muffled",
+      "start": 25.940000534057617,
+      "end": 26.18000030517578
+    },
+    {
+      "word": "it",
+      "start": 26.18000030517578,
+      "end": 26.34000015258789
+    },
+    {
+      "word": "Its",
+      "start": 26.68000030517578,
+      "end": 26.799999237060547
+    },
+    {
+      "word": "3",
+      "start": 26.799999237060547,
+      "end": 27.0
+    },
+    {
+      "word": "9",
+      "start": 27.0,
+      "end": 27.420000076293945
+    },
+    {
+      "word": "liter",
+      "start": 27.420000076293945,
+      "end": 27.600000381469727
+    },
+    {
+      "word": "twin",
+      "start": 27.600000381469727,
+      "end": 27.920000076293945
+    },
+    {
+      "word": "turbo",
+      "start": 27.920000076293945,
+      "end": 28.1200008392334
+    },
+    {
+      "word": "V8",
+      "start": 28.1200008392334,
+      "end": 28.5
+    },
+    {
+      "word": "drives",
+      "start": 28.5,
+      "end": 29.0
+    },
+    {
+      "word": "the",
+      "start": 29.0,
+      "end": 29.280000686645508
+    },
+    {
+      "word": "rear",
+      "start": 29.280000686645508,
+      "end": 29.420000076293945
+    },
+    {
+      "word": "wheels",
+      "start": 29.420000076293945,
+      "end": 29.639999389648438
+    },
+    {
+      "word": "through",
+      "start": 29.639999389648438,
+      "end": 29.959999084472656
+    },
+    {
+      "word": "a",
+      "start": 29.959999084472656,
+      "end": 30.139999389648438
+    },
+    {
+      "word": "7",
+      "start": 30.139999389648438,
+      "end": 30.399999618530273
+    },
+    {
+      "word": "speed",
+      "start": 30.399999618530273,
+      "end": 30.579999923706055
+    },
+    {
+      "word": "dual",
+      "start": 30.579999923706055,
+      "end": 30.920000076293945
+    },
+    {
+      "word": "clutch",
+      "start": 30.920000076293945,
+      "end": 31.059999465942383
+    },
+    {
+      "word": "gearbox",
+      "start": 30.979999542236328,
+      "end": 31.520000457763672
+    },
+    {
+      "word": "Ferrari",
+      "start": 31.899999618530273,
+      "end": 32.15999984741211
+    },
+    {
+      "word": "reserves",
+      "start": 32.15999984741211,
+      "end": 32.540000915527344
+    },
+    {
+      "word": "maximum",
+      "start": 32.540000915527344,
+      "end": 33.040000915527344
+    },
+    {
+      "word": "torque",
+      "start": 33.040000915527344,
+      "end": 33.29999923706055
+    },
+    {
+      "word": "for",
+      "start": 33.29999923706055,
+      "end": 33.599998474121094
+    },
+    {
+      "word": "the",
+      "start": 33.599998474121094,
+      "end": 33.779998779296875
+    },
+    {
+      "word": "hop",
+      "start": 33.779998779296875,
+      "end": 33.91999816894531
+    },
+    {
+      "word": "gear",
+      "start": 33.91999816894531,
+      "end": 34.15999984741211
+    },
+    {
+      "word": "The",
+      "start": 34.41999816894531,
+      "end": 34.70000076293945
+    },
+    {
+      "word": "dashboard's",
+      "start": 34.70000076293945,
+      "end": 35.279998779296875
+    },
+    {
+      "word": "turbo",
+      "start": 35.279998779296875,
+      "end": 35.47999954223633
+    },
+    {
+      "word": "performance",
+      "start": 35.47999954223633,
+      "end": 35.86000061035156
+    },
+    {
+      "word": "engineer",
+      "start": 35.86000061035156,
+      "end": 36.18000030517578
+    },
+    {
+      "word": "actually",
+      "start": 36.18000030517578,
+      "end": 36.900001525878906
+    },
+    {
+      "word": "coaches",
+      "start": 36.900001525878906,
+      "end": 37.119998931884766
+    },
+    {
+      "word": "you",
+      "start": 37.119998931884766,
+      "end": 37.31999969482422
+    },
+    {
+      "word": "on",
+      "start": 37.31999969482422,
+      "end": 37.5
+    },
+    {
+      "word": "getting",
+      "start": 37.5,
+      "end": 37.68000030517578
+    },
+    {
+      "word": "more",
+      "start": 37.68000030517578,
+      "end": 37.939998626708984
+    },
+    {
+      "word": "from",
+      "start": 37.939998626708984,
+      "end": 38.060001373291016
+    },
+    {
+      "word": "that",
+      "start": 38.060001373291016,
+      "end": 38.279998779296875
+    },
+    {
+      "word": "engine",
+      "start": 38.279998779296875,
+      "end": 38.439998626708984
+    },
+    {
+      "word": "Ferrari's",
+      "start": 38.97999954223633,
+      "end": 39.34000015258789
+    },
+    {
+      "word": "296",
+      "start": 39.34000015258789,
+      "end": 39.900001525878906
+    },
+    {
+      "word": "GTB",
+      "start": 39.900001525878906,
+      "end": 40.439998626708984
+    },
+    {
+      "word": "brought",
+      "start": 40.439998626708984,
+      "end": 40.7599983215332
+    },
+    {
+      "word": "an",
+      "start": 40.7599983215332,
+      "end": 41.0
+    },
+    {
+      "word": "819",
+      "start": 41.0,
+      "end": 41.720001220703125
+    },
+    {
+      "word": "horsepower",
+      "start": 41.720001220703125,
+      "end": 42.119998931884766
+    },
+    {
+      "word": "plug",
+      "start": 42.119998931884766,
+      "end": 42.52000045776367
+    },
+    {
+      "word": "in",
+      "start": 42.52000045776367,
+      "end": 42.599998474121094
+    },
+    {
+      "word": "hybrid",
+      "start": 42.599998474121094,
+      "end": 42.900001525878906
+    },
+    {
+      "word": "V6",
+      "start": 42.900001525878906,
+      "end": 43.41999816894531
+    },
+    {
+      "word": "its",
+      "start": 43.65999984741211,
+      "end": 43.939998626708984
+    },
+    {
+      "word": "first",
+      "start": 43.939998626708984,
+      "end": 44.18000030517578
+    },
+    {
+      "word": "Ferrari",
+      "start": 44.18000030517578,
+      "end": 44.560001373291016
+    },
+    {
+      "word": "badged",
+      "start": 44.560001373291016,
+      "end": 44.880001068115234
+    },
+    {
+      "word": "six",
+      "start": 44.880001068115234,
+      "end": 45.29999923706055
+    },
+    {
+      "word": "cylinder",
+      "start": 45.29999923706055,
+      "end": 45.52000045776367
+    },
+    {
+      "word": "road",
+      "start": 45.52000045776367,
+      "end": 45.84000015258789
+    },
+    {
+      "word": "engine",
+      "start": 45.84000015258789,
+      "end": 46.040000915527344
+    },
+    {
+      "word": "Then",
+      "start": 46.18000030517578,
+      "end": 46.63999938964844
+    },
+    {
+      "word": "came",
+      "start": 46.63999938964844,
+      "end": 46.84000015258789
+    },
+    {
+      "word": "the",
+      "start": 46.84000015258789,
+      "end": 47.0
+    },
+    {
+      "word": "electric",
+      "start": 47.0,
+      "end": 47.400001525878906
+    },
+    {
+      "word": "Luce",
+      "start": 47.400001525878906,
+      "end": 47.619998931884766
+    },
+    {
+      "word": "It",
+      "start": 48.2599983215332,
+      "end": 48.540000915527344
+    },
+    {
+      "word": "started",
+      "start": 48.540000915527344,
+      "end": 48.7599983215332
+    },
+    {
+      "word": "around",
+      "start": 48.7599983215332,
+      "end": 49.040000915527344
+    },
+    {
+      "word": "200",
+      "start": 49.040000915527344,
+      "end": 49.68000030517578
+    },
+    {
+      "word": "000",
+      "start": 49.68000030517578,
+      "end": 49.720001220703125
+    },
+    {
+      "word": "new",
+      "start": 49.720001220703125,
+      "end": 50.279998779296875
+    },
+    {
+      "word": "They",
+      "start": 50.540000915527344,
+      "end": 50.7400016784668
+    },
+    {
+      "word": "go",
+      "start": 50.7400016784668,
+      "end": 50.91999816894531
+    },
+    {
+      "word": "for",
+      "start": 50.91999816894531,
+      "end": 51.060001373291016
+    },
+    {
+      "word": "about",
+      "start": 51.060001373291016,
+      "end": 51.34000015258789
+    },
+    {
+      "word": "100",
+      "start": 51.34000015258789,
+      "end": 51.7599983215332
+    },
+    {
+      "word": "000",
+      "start": 51.7599983215332,
+      "end": 52.040000915527344
+    },
+    {
+      "word": "today",
+      "start": 52.040000915527344,
+      "end": 52.65999984741211
+    },
+    {
+      "word": "So",
+      "start": 52.65999984741211,
+      "end": 53.2599983215332
+    },
+    {
+      "word": "would",
+      "start": 53.5,
+      "end": 53.599998474121094
+    },
+    {
+      "word": "you",
+      "start": 53.599998474121094,
+      "end": 53.779998779296875
+    },
+    {
+      "word": "still",
+      "start": 53.779998779296875,
+      "end": 53.97999954223633
+    },
+    {
+      "word": "sneer",
+      "start": 53.97999954223633,
+      "end": 54.15999984741211
+    },
+    {
+      "word": "at",
+      "start": 54.15999984741211,
+      "end": 54.2599983215332
+    },
+    {
+      "word": "this",
+      "start": 54.2599983215332,
+      "end": 54.400001525878906
+    },
+    {
+      "word": "V8",
+      "start": 54.400001525878906,
+      "end": 54.65999984741211
+    }
+  ],
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-close.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "close",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1792800442151-0-0",
+          "cue_label": "[front-closeup-restored-1792800442151-0-0] close",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/1-headlight.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "headlight",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-restored-1792800442151-1-1",
+          "cue_label": "[front-closeup-restored-1792800442151-1-1] headlight",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/4-wheele.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "wheele",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1792800442151-4-4",
+          "cue_label": "[side-closeup-restored-1792800442151-4-4] wheele",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/9-llower-side.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "llower side",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-restored-1792800442151-9-9",
+          "cue_label": "[side-closeup-restored-1792800442151-9-9] llower side",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/2-exhaust.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "exhaust",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1792800442151-2-2",
+          "cue_label": "[rear-closeup-restored-1792800442151-2-2] exhaust",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/3-lowew-bumper.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "lowew bumper?",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-restored-1792800442151-3-3",
+          "cue_label": "[rear-closeup-restored-1792800442151-3-3] lowew bumper?",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/8-still-a-ferrari.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "still a ferrari",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-restored-1792800442151-8-8",
+          "cue_label": "[engine-closeup-restored-1792800442151-8-8] still a ferrari",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/5-gauge.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "gauge",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1792800442151-5-5",
+          "cue_label": "[interior-closeup-restored-1792800442151-5-5] gauge",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/6-seats.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "seats",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1792800442151-6-6",
+          "cue_label": "[interior-closeup-restored-1792800442151-6-6] seats",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/7-stearing-wheele-carbon-fiber.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "stearing wheele carbon fiber",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-restored-1792800442151-7-7",
+          "cue_label": "[interior-closeup-restored-1792800442151-7-7] stearing wheele carbon fiber",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {},
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/r4VR6Zwn/2015-ferrari-california-t",
+    "title": "2015 Ferrari California T",
+    "price_text": "Sold for $102,100",
+    "auction_state": "sold",
+    "facts": {
+      "Make": "Ferrari",
+      "Engine": "3.9L Turbocharged V8",
+      "Model": "California",
+      "Drivetrain": "Rear-wheel drive",
+      "Transmission": "Automatic (7-Speed)",
+      "Body Style": "Convertible"
+    },
+    "sections": {
+      "Highlights": "THIS\u2026 is a 2015 Ferrari California T, finished in Rosso Corsa with a black interior. The odometer currently displays approximately 17,000 miles. This California T is offered with a clean Carfax vehicle history report. A partial list of notable equipment reported by the seller includes 20-inch wheels, carbon ceramic brakes, Scuderia Ferrari fender shields, a power-folding hardtop, leather upholstery, power-adjustable Daytona-style front seats, and carbon fiber interior trim. The seller reports no notable modifications. Service documentation in the gallery indicates that this California T had the transmission replaced in December 2025, at 14,215 miles. Designed by Pininfarina, the California made its debut for the 2009 model year as Ferrari's entry-level model. It was envisioned as a daily-drivable roadster, so it offered four seats and amenities not often associated with past models, such as a conventional navigation system. It was also Ferrari's first standard production model to feature a dual-clutch transmission, a power-folding hardtop, and a front-engine V8 configuration. The California T was introduced for the 2015 model year and featured a turbocharged power plant \u2013 the first in a Ferrari since the legendary F40. Power comes from a 3.9-liter twin-turbocharged V8, rated at 553 horsepower and 557 lb-ft of torque. Output is sent to the rear wheels via a 7-speed dual-clutch automatic transmission.",
+      "Equipment": "A partial list of notable equipment reported by the seller includes: 20-inch wheels Carbon ceramic brakes Scuderia Ferrari fender shields Power-folding hardtop Leather upholstery Carbon fiber interior trim Power-adjustable Daytona-style front seats",
+      "Seller Notes": "There is a loan on this vehicle, and sale proceeds will be used to satisfy the loan. We recommend handling the loan payoff securely through Cars & Bids SafePay if agreed to by both the buyer and the seller. Please note that the title may only be available after the loan has been paid off. The seller states that the windows have been tinted."
+    }
+  },
+  "market_value": {
+    "count": 1,
+    "median": 102100,
+    "low": 102100,
+    "high": 102100,
+    "examples": [],
+    "source": "sale"
+  },
+  "voice_auditions": {
+    "onyx": "single-ferrari-california-t-20261024040724/voice_auditions/onyx.mp3",
+    "british_narrator": "single-ferrari-california-t-20261024040724/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-ferrari-california-t-20261024040724/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-ferrari-california-t-20261024040724/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-ferrari-california-t-20261024040724/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ferrari-california-t-20261024040724/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "left",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 7.400000095367432,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 15.569999694824219,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 20.40999984741211,
+        "layout": "bottom-center",
+        "framing": "full"
+      },
+      {
+        "start": 26.43000030517578,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 38.459999084472656,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 47.44999885559082,
+        "layout": "bottom-center",
+        "framing": "half"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 8.55,
+        "pose": "open"
+      },
+      {
+        "start": 10.0,
+        "pose": "rest"
+      },
+      {
+        "start": 11.95,
+        "pose": "chest"
+      },
+      {
+        "start": 13.4,
+        "pose": "rest"
+      },
+      {
+        "start": 16.72,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 18.17,
+        "pose": "rest"
+      },
+      {
+        "start": 21.56,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 23.01,
+        "pose": "rest"
+      },
+      {
+        "start": 24.96,
+        "pose": "open"
+      },
+      {
+        "start": 26.41,
+        "pose": "rest"
+      },
+      {
+        "start": 28.36,
+        "pose": "chest"
+      },
+      {
+        "start": 29.81,
+        "pose": "rest"
+      },
+      {
+        "start": 31.76,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 33.21,
+        "pose": "rest"
+      },
+      {
+        "start": 35.16,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 36.61,
+        "pose": "rest"
+      },
+      {
+        "start": 39.609999,
+        "pose": "open"
+      },
+      {
+        "start": 41.059999,
+        "pose": "rest"
+      },
+      {
+        "start": 43.009999,
+        "pose": "chest"
+      },
+      {
+        "start": 44.459999,
+        "pose": "rest"
+      },
+      {
+        "start": 46.409999,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 47.859999,
+        "pose": "rest"
+      },
+      {
+        "start": 49.809999,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 51.259999,
+        "pose": "rest"
+      },
+      {
+        "start": 53.209999,
+        "pose": "open"
+      },
+      {
+        "start": 54.659999,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 7.400000095367432,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-close.jpg",
+            "label": "close",
+            "photo_id": "front-closeup-restored-1792800442151-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-headlight.jpg",
+            "label": "headlight",
+            "photo_id": "front-closeup-restored-1792800442151-1-1"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 15.569999694824219
+      },
+      {
+        "start": 7.400000095367432,
+        "end": 15.569999694824219,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-close.jpg",
+            "label": "close",
+            "photo_id": "front-closeup-restored-1792800442151-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-headlight.jpg",
+            "label": "headlight",
+            "photo_id": "front-closeup-restored-1792800442151-1-1"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 15.569999694824219
+      },
+      {
+        "start": 15.569999694824219,
+        "end": 20.40999984741211,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-wheele.jpg",
+            "label": "wheele",
+            "photo_id": "side-closeup-restored-1792800442151-4-4"
+          },
+          {
+            "path": "images/manual-extra/9-llower-side.jpg",
+            "label": "llower side",
+            "photo_id": "side-closeup-restored-1792800442151-9-9"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 15.569999694824219,
+        "chapter_end": 20.40999984741211
+      },
+      {
+        "start": 20.40999984741211,
+        "end": 26.43000030517578,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/2-exhaust.jpg",
+            "label": "exhaust",
+            "photo_id": "rear-closeup-restored-1792800442151-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-lowew-bumper.jpg",
+            "label": "lowew bumper?",
+            "photo_id": "rear-closeup-restored-1792800442151-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 20.40999984741211,
+        "chapter_end": 26.43000030517578
+      },
+      {
+        "start": 26.43000030517578,
+        "end": 33.06999969482422,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/8-still-a-ferrari.jpg",
+            "label": "still a ferrari",
+            "photo_id": "engine-closeup-restored-1792800442151-8-8"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 26.43000030517578,
+        "chapter_end": 33.06999969482422
+      },
+      {
+        "start": 33.06999969482422,
+        "end": 38.459999084472656,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/5-gauge.jpg",
+            "label": "gauge",
+            "photo_id": "interior-closeup-restored-1792800442151-5-5"
+          },
+          {
+            "path": "images/manual-extra/6-seats.jpg",
+            "label": "seats",
+            "photo_id": "interior-closeup-restored-1792800442151-6-6"
+          },
+          {
+            "path": "images/manual-extra/7-stearing-wheele-carbon-fiber.jpg",
+            "label": "stearing wheele carbon fiber",
+            "photo_id": "interior-closeup-restored-1792800442151-7-7"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 33.06999969482422,
+        "chapter_end": 38.459999084472656
+      },
+      {
+        "start": 38.459999084472656,
+        "end": 47.44999885559082,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-close.jpg",
+            "label": "close",
+            "photo_id": "front-closeup-restored-1792800442151-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-headlight.jpg",
+            "label": "headlight",
+            "photo_id": "front-closeup-restored-1792800442151-1-1"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 38.459999084472656,
+        "chapter_end": 55.19
+      },
+      {
+        "start": 47.44999885559082,
+        "end": 55.19,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-close.jpg",
+            "label": "close",
+            "photo_id": "front-closeup-restored-1792800442151-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-headlight.jpg",
+            "label": "headlight",
+            "photo_id": "front-closeup-restored-1792800442151-1-1"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 38.459999084472656,
+        "chapter_end": 55.19
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1792800442151-0-0",
+          "front-closeup-restored-1792800442151-1-1"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 7.400000095367432,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1792800442151-0-0",
+          "front-closeup-restored-1792800442151-1-1"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 15.569999694824219,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-restored-1792800442151-4-4",
+          "side-closeup-restored-1792800442151-9-9"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 20.40999984741211,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-restored-1792800442151-2-2",
+          "rear-closeup-restored-1792800442151-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 26.43000030517578,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-restored-1792800442151-8-8"
+        ],
+        "active": null
+      },
+      {
+        "scene": 5,
+        "start": 33.06999969482422,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-restored-1792800442151-5-5",
+          "interior-closeup-restored-1792800442151-6-6",
+          "interior-closeup-restored-1792800442151-7-7"
+        ],
+        "active": null
+      },
+      {
+        "scene": 6,
+        "start": 38.459999084472656,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1792800442151-0-0",
+          "front-closeup-restored-1792800442151-1-1"
+        ],
+        "active": null
+      },
+      {
+        "scene": 7,
+        "start": 47.44999885559082,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-restored-1792800442151-0-0",
+          "front-closeup-restored-1792800442151-1-1"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
