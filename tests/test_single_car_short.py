@@ -2607,8 +2607,11 @@ def test_a_second_writing_style_sits_beside_the_one_everything_shipped_with():
     assert "script_style:" in workflow and "--style" in workflow
     app = (Path(single_car_short.__file__).resolve().parents[2] / "web/src/App.jsx").read_text()
     # Three values in one field now that a 35-second length sits beside it.
-    assert ('script_style: shortStyle ? "short" : mediumStyle ? "medium" '
-            ': denseStyle ? "dense" : "classic"') in app
+    assert ('script_style: (shortStyle ? "short" : mediumStyle ? "medium" '
+            ': denseStyle ? "dense" : "classic")') in app
+    # And the story-first suffix rides on the same field, because the
+    # workflow has no room for another input.
+    assert 'storyFirst ? "+story" : ""' in app
     assert "Dense script" in app
     assert "useState(false)" in app.split("const [denseStyle, setDenseStyle] = ")[1][:20], \
         "off by default, so the daily upload is undisturbed"
@@ -2813,13 +2816,19 @@ def test_a_thirty_five_second_style_sits_beside_the_other_two():
 
     # One field, three values, so the two boxes cannot both win.
     app = (Path(single_car_short.__file__).resolve().parents[2] / "web/src/App.jsx").read_text()
-    assert ('script_style: shortStyle ? "short" : mediumStyle ? "medium" '
-            ': denseStyle ? "dense" : "classic"') in app
+    assert ('script_style: (shortStyle ? "short" : mediumStyle ? "medium" '
+            ': denseStyle ? "dense" : "classic")') in app
+    # And the story-first suffix rides on the same field, because the
+    # workflow has no room for another input.
+    assert 'storyFirst ? "+story" : ""' in app
     assert "35-second short" in app
     assert "if (e.target.checked) { setDenseStyle(false); setMediumStyle(false); }" in app
     assert "if (e.target.checked) { setShortStyle(false); setMediumStyle(false); }" in app
     # Reopening a past build restores whichever it was.
-    assert 'setShortStyle(String(inputs.script_style || "") === "short");' in app
+    # Restored off the base name, now that the field can carry a suffix.
+    assert 'setShortStyle(baseStyle === "short");' in app
+    assert 'setMediumStyle(baseStyle === "medium");' in app, \
+        "the 45-second length was never restored at all"
 
 
 def test_a_number_said_twice_is_caught_but_a_name_is_not():
@@ -4615,3 +4624,125 @@ def test_the_prompt_says_how_to_sound_spoken_not_merely_that_it_should():
     assert "Land a short one after a long one" in prompt
     assert "Ferrari brought turbos back" in prompt
     assert "would you say this out loud" in prompt
+
+
+def test_story_first_rides_on_the_style_field_and_composes_with_any_length():
+    """cars-research.yml is at the 25-input ceiling GitHub puts on
+    workflow_dispatch, so there is no room for a field of its own. It is
+    orthogonal to length -- any of the four can lead with the story -- so
+    it is a suffix rather than four more style names."""
+    import single_car_short
+
+    assert single_car_short.story_first("classic+story")
+    assert single_car_short.story_first("DENSE+STORY"), "case is not significant"
+    assert not single_car_short.story_first("classic")
+    assert not single_car_short.story_first("")
+    assert not single_car_short.story_first(None)
+
+    # The length still resolves off the base name.
+    for base in ("classic", "dense", "short", "medium"):
+        assert (single_car_short.style_of(base)["seconds"]
+                == single_car_short.style_of(f"{base}+story")["seconds"]), base
+    # And a suffix with nothing in front of it is still a valid build.
+    assert single_car_short.style_of("+story") == single_car_short.style_of("classic")
+
+
+def test_story_first_moves_the_figure_deadline_without_removing_it():
+    """A spec sheet arriving at the very end is a video that never gave the
+    viewer what they came for. The figure is still required -- just later,
+    so two or three beats of history fit in front of it."""
+    import single_car_short
+
+    def package(style):
+        scenes = ([{"narration": "Ferrari had not turbocharged a road car since the F40.",
+                    "media_type": "exterior"}] * 4
+                  + [{"narration": "It makes 553 horsepower and 557 lb-ft.", "media_type": "exterior"},
+                     {"narration": "So would you have one?", "media_type": "exterior"}])
+        return {"scenes": scenes, "word_count": 60, "title": "No turbo since the F40",
+                "history": {"year": 2015, "fact": "first turbo Ferrari since the F40"},
+                "_angles": "", "_style": style}
+
+    def horsepower_rule(style):
+        return [rule for rule in single_car_short._script_violations(
+            package(style), "Ferrari", "California T") if "horsepower" in rule]
+
+    # Scene 5 is too late by default and fine when leading with the story.
+    assert horsepower_rule("classic")
+    assert "after scene 3" in horsepower_rule("classic")[0]
+    assert not horsepower_rule("classic+story")
+    assert single_car_short.STORY_TECH_SCENES > single_car_short.EARLY_TECH_SCENES
+
+    # The prompt only carries the override when it is asked for, and the
+    # message quotes the deadline that is actually in force.
+    story = " ".join(single_car_short._research_script_prompt(
+        "a car", "2020", style="classic+story").split())
+    plain = " ".join(single_car_short._research_script_prompt("a car", "2020").split())
+    assert "LEAD WITH THE STORY" in story and "LEAD WITH THE STORY" not in plain
+    assert "Do not open on the price" in story
+    assert "NOT permission to open weakly" in story
+
+
+def test_a_note_can_ask_to_be_the_opening_in_the_words_somebody_would_type():
+    """The default -- no note opens the video -- is right when nobody said
+    otherwise and wrong when the person knows the story and wants to lead
+    on it. "Lead on this:" was the first words of the Ferrari notes and
+    meant exactly that, so the pronoun after the marker is swallowed too."""
+    import single_car_short
+
+    assert single_car_short.opening_note(
+        "1. Lead on this: it was called the poor man's Ferrari") \
+        == "it was called the poor man's Ferrari"
+    for phrasing in ("Open on: it was mocked", "open with it was mocked",
+                     "Lead with - it was mocked", "Start with it was mocked",
+                     "Hook: it was mocked"):
+        assert single_car_short.opening_note(phrasing) == "it was mocked", phrasing
+
+    # An ordinary note is not an instruction, and a marker with nothing
+    # after it is not one either.
+    assert single_car_short.opening_note("Cover where Ferrari went next") is None
+    assert single_car_short.opening_note("Hooks on the bumper are the giveaway") is None
+    assert single_car_short.opening_note("open") is None
+    assert single_car_short.opening_note("") is None
+
+    # The block swaps the rule rather than contradicting itself.
+    asked = single_car_short._angles_block("1. Lead on this: it was mocked for the turbos")
+    plain = single_car_short._angles_block("1. Cover the 296 GTB, 819 hp")
+    assert "THE OPENING IS SET" in asked
+    assert "NONE OF THESE NOTES IS THE OPENING" not in asked
+    assert "does not reorder the script" not in asked, "that caution is the default's, not this one's"
+    assert "NONE OF THESE NOTES IS THE OPENING" in plain
+    assert "THE OPENING IS SET" not in plain
+
+
+def test_an_opening_that_was_asked_for_and_ignored_is_a_hook_violation():
+    """Checked, because an instruction that lives only in the prompt is what
+    failed with the notes. Matched on stems, and one overlap is enough: a
+    hook is a rewrite of the note, not a quotation of it."""
+    import single_car_short
+
+    notes = ("1. Lead on this: it was called the poor man's Ferrari, mocked for its turbos\n"
+             "2. Cover the 296 GTB, 819 hp")
+
+    def opening_rule(first):
+        scenes = [{"narration": first, "media_type": "exterior"},
+                  {"narration": "It makes 553 horsepower and 557 lb-ft.", "media_type": "exterior"},
+                  {"narration": "The 296 GTB pairs a hybrid V6 with 819 horsepower.",
+                   "media_type": "exterior"},
+                  {"narration": "So would you have one?", "media_type": "exterior"}]
+        package = {"scenes": scenes, "word_count": 60, "title": "The poor man's joke",
+                   "history": {"year": 2015, "fact": "first turbo Ferrari since the F40"},
+                   "_angles": notes, "_style": "classic"}
+        return [rule for rule in single_car_short._script_violations(
+            package, "Ferrari", "California T") if rule.startswith("you were asked to open")]
+
+    # What the build actually did: opened on the price instead.
+    missed = opening_rule("This one cost about $200,000 new and now goes for about $100,000.")
+    assert missed
+    assert single_car_short._violation_weight(missed[0]) == single_car_short.HOOK_WEIGHT
+
+    # Said in the note's own words, and said in its own.
+    assert not opening_rule("They called it the poor man's Ferrari.")
+    assert not opening_rule("Purists sneered at the turbochargers."), "turbos/turbochargers"
+    assert not opening_rule("Everybody mocked this one when it arrived.")
+    # And an opening about something else entirely is still caught.
+    assert opening_rule("Seven speeds send drive to the rear wheels.")

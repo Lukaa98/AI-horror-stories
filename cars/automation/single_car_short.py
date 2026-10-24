@@ -276,9 +276,31 @@ asked you about this car in a pub."""
 }
 
 
+# Story-first rides as a suffix on script_style rather than as its own
+# workflow input, because cars-research.yml is at the 25-input ceiling
+# GitHub imposes on workflow_dispatch. It is orthogonal to length -- any of
+# the four lengths can be told to lead with the story -- so it is a suffix
+# rather than four more style names.
+STORY_FIRST_SUFFIX = "+story"
+
+
+def story_first(name):
+    """Whether this build was asked to lead with the story.
+
+    Default order opens on a figure and puts the horsepower inside the
+    first three scenes, which is the shape with the retention evidence
+    behind it. This reverses it: the history and the argument first, the
+    numbers once the viewer has a reason to care about them.
+    """
+    return str(name or "").strip().lower().endswith(STORY_FIRST_SUFFIX)
+
+
 def style_of(name):
     """The named style, falling back to the one everything shipped with."""
-    return SCRIPT_STYLES.get((name or "classic").strip().lower(), SCRIPT_STYLES["classic"])
+    text = (name or "classic").strip().lower()
+    if text.endswith(STORY_FIRST_SUFFIX):
+        text = text[:-len(STORY_FIRST_SUFFIX)].strip() or "classic"
+    return SCRIPT_STYLES.get(text, SCRIPT_STYLES["classic"])
 ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 
 PACKAGE_SCHEMA = {
@@ -725,6 +747,40 @@ def _split_angles(angles):
     return bullets
 
 
+# A note asked to be the opening, in the words somebody would actually
+# type. The default rule is that no note opens the video -- the first
+# sentence is whatever the research found strongest -- because two builds
+# opened on "they trade for about $130,000 today" when the price happened
+# to be note 1 and buried the reason to watch. That rule is right by
+# default and wrong when the person knows the story and wants to lead on
+# it, so there has to be a way to say so.
+# "Lead on this:" is the phrasing already in use -- it was the first words
+# of the Ferrari notes -- and it is exactly this instruction, so the
+# pronoun after the marker is swallowed too. Without that the note came
+# through as "this: it was called the poor man's Ferrari".
+OPENING_NOTE_RE = re.compile(
+    r"^\s*(?:open(?:ing)?\s+(?:on|with)|lead\s+(?:on|with)|start\s+(?:on|with)"
+    r"|hook)\b"
+    # Only when a separator follows, so "lead on this:" drops the pronoun
+    # and "open with it was mocked" keeps it -- there the "it" is the
+    # sentence, not a pointer at the note.
+    r"(?:\s+(?:this|that|it|here)\s*(?=[:,-]))?"
+    r"\s*[:,-]?\s*",
+    re.I,
+)
+
+
+def opening_note(angles):
+    """The note that was asked to open the video, stripped of the marker,
+    or None. The first such note wins if somebody marks two."""
+    for note in _split_angles(angles):
+        if OPENING_NOTE_RE.match(note):
+            text = OPENING_NOTE_RE.sub("", note, count=1).strip()
+            if re.search(r"[0-9A-Za-z]", text):
+                return text
+    return None
+
+
 # How many notes the script is held to. The list is allowed to degrade --
 # the tail gets dropped whole when the words run out -- so only the top of
 # it can be enforced. Two at full length, where there is a history beat and
@@ -812,6 +868,26 @@ def _angles_block(angles, style="classic"):
         if (style or "").strip().lower() == "short"
         else "the hook, the history, the engine figures, the price and the closing question all stay."
     )
+    # One note may ask to be the opening, in which case it is -- the
+    # default below is right when nobody said otherwise and wrong when
+    # somebody who knows the car wants to lead on it.
+    asked = opening_note(angles)
+    opening_rule = (
+        f"""THE OPENING IS SET. The first sentence of this video is about: {asked}
+
+Write it as the hook -- surprising, contested, worth stopping for -- not as a summary of
+that note. It still may not name the car and it still has to make somebody stay. The rest
+of the list follows it in order. Do not also open on a figure; this replaces that rule.
+"""
+        if asked else
+        """NONE OF THESE NOTES IS THE OPENING. The first sentence is still the strongest claim YOUR OWN
+research found, chosen to make a viewer stay -- not note 1.
+Note 1 is the most important thing to COVER, not the thing to open with, and it goes in
+the body like the rest. Two builds opened on "they trade for about $130,000 today" because
+the price was note 1, which buried the reason anybody would watch. Priority orders the
+beats; it does not reorder the script.
+"""
+    )
     listed = "\n".join(f"  {i}. {line}" for i, line in enumerate(wanted, 1))
     return f"""
 
@@ -845,13 +921,7 @@ all of them in passing, reorder them, or skip note 1 because note 3 was easier t
 When you take one it REPLACES a beat you would otherwise have written -- the video does not
 get longer, and the word count is unchanged. Drop a beat about how the car looks first; {keeps}
 
-NONE OF THESE NOTES IS THE OPENING. The first sentence is still the strongest claim YOUR OWN
-research found, chosen to make a viewer stay -- not note 1.
-Note 1 is the most important thing to COVER, not the thing to open with, and it goes in
-the body like the rest. Two builds opened
-on "they trade for about $130,000 today" because the price was note 1, which buried the reason
-anybody would watch. Priority orders the beats; it does not reorder the script.
-
+{opening_rule}
 Stop when there is no room left, and leave the rest out ENTIRELY. A note covered properly is
 worth more than three mentioned in passing: do not compress them all into one sentence each to
 fit them in, and never shorten or drop a higher-numbered note to make room for a lower one. If
@@ -911,6 +981,40 @@ Choose in this order and stop when the beats are gone:
      want to say anyway.
 Say nothing at all about whatever does not fit. A photo you leave out still appears in the
 video; it simply is not narrated, which is what it is there for."""
+
+
+def _story_first_block(tech_scenes=None):
+    """Lead with the story, put the figures after it.
+
+    The default shape -- open on a number, horsepower inside three scenes
+    -- is the one with evidence behind it, so this does not loosen the
+    opening, it changes what the opening is allowed to be. A hook still has
+    to make somebody stay; it just gets to do it with a fact about what
+    happened to this car rather than a spec.
+    """
+    scenes = tech_scenes or STORY_TECH_SCENES
+    return f"""
+
+LEAD WITH THE STORY -- this overrides the beat order given above.
+
+Open on what HAPPENED to this car, not on what it measures. Why it exists, what it
+replaced, what it was accused of, what it cost somebody, what it ended. Then earn the
+numbers: by the time the horsepower arrives the viewer should already want to know it.
+
+This is NOT permission to open weakly. The first sentence still has to stop a thumb, and a
+story hook does that by being surprising or contested, not by being background. "Ferrari
+had not turbocharged a road car since the F40" works. "The California T was introduced in
+2014 as a grand tourer" does not -- that is a date, not a claim. If the strongest thing
+your research found is a figure after all, use the figure; this changes the default, not
+the standard.
+
+The horsepower figure still has to be said, and it has to land inside the FIRST {scenes}
+SCENES. Later than the usual three, so the story gets room first -- but a spec sheet
+arriving at the very end is a video that never gave the viewer the thing they came for.
+
+Do not open on the price. Two builds led on what the car trades for today and buried the
+reason anybody would watch; money is the beat that pays off a story, not the one that
+starts it."""
 
 
 VOICE_BLOCK = """
@@ -1042,7 +1146,7 @@ ownership/value insight, a character observation or another history/mechanical p
 still hits its word target and beat variety.{notes_exception}"""
     chosen = style_of(style)
     low, high = chosen["words"]
-    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{VOICE_BLOCK}{_engine_clip_block() if engine_clip else ""}{forced_rival_block}{no_comparison_block}{chosen['block']}
+    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{VOICE_BLOCK}{_story_first_block() if story_first(style) else ""}{_engine_clip_block() if engine_clip else ""}{forced_rival_block}{no_comparison_block}{chosen['block']}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across {chosen['scene_count'].format(max_scenes=max_scenes)} in speaking order, each scene being {chosen['sentences']} -- {chosen['scene_note']} -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
@@ -1416,6 +1520,11 @@ DEPRECIATION_PADDING_RE = re.compile(
 # the script. Three scenes of an eleven-scene, sixty-second cut is roughly the
 # first fifteen seconds -- the window in which a viewer decides to stay.
 EARLY_TECH_SCENES = 3
+# Story-first still wants the figure in the script and still wants it
+# before the end. Six rather than three: late enough that two or three
+# beats of history can come first, early enough that a viewer who stayed
+# for the story is given the number while they are still there.
+STORY_TECH_SCENES = 6
 # The hook withholds the name on purpose; this is where it has to arrive.
 INTRODUCE_BY_SCENE = 3
 # A closing that could end any video ever made. Length is not the test --
@@ -1575,22 +1684,24 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
     # viewer is still deciding whether to stay -- run #184 buried its only
     # technical beat past the halfway mark. Checking the whole script was not
     # enough; the check is positional.
+    tech_scenes = (STORY_TECH_SCENES if story_first(package.get("_style"))
+                   else EARLY_TECH_SCENES)
     early = " ".join(
-        scene.get("narration") or "" for scene in scenes[:EARLY_TECH_SCENES]
+        scene.get("narration") or "" for scene in scenes[:tech_scenes]
     ).lower()
     # "807-horsepower" is as common as "807 horsepower", so the separator
     # between the number and the unit may be a hyphen, a space, or nothing.
     if not re.search(HORSEPOWER_RE, early):
         if re.search(HORSEPOWER_RE, script):
             violations.append(
-                f"you state the horsepower, but not until after scene {EARLY_TECH_SCENES}. Move that "
-                f"figure into the first {EARLY_TECH_SCENES} scenes -- it is the number that keeps the "
+                f"you state the horsepower, but not until after scene {tech_scenes}. Move that "
+                f"figure into the first {tech_scenes} scenes -- it is the number that keeps the "
                 "viewer watching."
             )
         else:
             violations.append(
                 f"your narration never states the car's horsepower as a number. Say it within the "
-                f"first {EARLY_TECH_SCENES} scenes."
+                f"first {tech_scenes} scenes."
             )
     if not re.search(TORQUE_RE, script):
         violations.append("your narration never states the car's torque as a number. Say it in the engine beat.")
@@ -1715,6 +1826,35 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
             "what it costs, what it beat, what it gave up."
         )
         break
+    # An opening that was asked for and not used.
+    #
+    # Checked on the words rather than the anchors the other note rule
+    # uses, because an opening note often has no figure and no name in it
+    # at all: "it was called the poor man's Ferrari" has neither once the
+    # marque is discounted as the car's own name. Overlapping content words
+    # are the only signal there is, and two of them is enough -- the first
+    # sentence is one sentence, so an accidental two-word overlap with a
+    # note is unlikely.
+    asked = opening_note(package.get("_angles"))
+    if asked and scenes:
+        own = {token.lower() for token in _name_tokens(make, model)}
+        # Matched on stems, and one is enough. A hook is a rewrite of the
+        # note, not a quotation of it: "purists sneered at the
+        # turbochargers" is "it was mocked for its turbos" said properly,
+        # and shares exactly one word with it -- and only after turbo and
+        # turbochargers are allowed to be the same word. Asking for two
+        # exact matches rejected a correct opening.
+        def stems(text):
+            return {word[:5] for word in _title_terms(text) if word not in own}
+
+        wanted_words = stems(asked)
+        opening = _SENTENCE_SPLIT_RE.split((scenes[0].get("narration") or "").strip())[0]
+        if len(wanted_words) >= 2 and not (wanted_words & stems(opening)):
+            violations.append(
+                f'you were asked to open on "{asked[:120]}" and the first sentence is '
+                f'"{opening[:120]}", which is about something else. Make that note the first '
+                "sentence -- as a hook, not a summary of it."
+            )
     # A note the script was given and did not use.
     #
     # This is the rule that was missing. The instruction to cover the notes
@@ -2099,6 +2239,7 @@ def _spec_sheet(package):
 # channel average -- while the people who did get past the opening watched
 # longer than on almost any other video.
 HOOK_VIOLATIONS = (
+    "you were asked to open on",
     "your title names the car",
     "your title and your first sentence are about different things",
     "you never say which car this is",

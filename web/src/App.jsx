@@ -1029,6 +1029,11 @@ export default function App() {
   // ticking one unticks the other rather than leaving it ambiguous which won.
   const [shortStyle, setShortStyle] = useState(false);
   const [mediumStyle, setMediumStyle] = useState(false);
+  // Orthogonal to the three lengths: any of them can be told to lead with
+  // the story. It rides as a suffix on script_style because the workflow
+  // is at the 25-input ceiling GitHub puts on workflow_dispatch, so there
+  // is no room for a field of its own.
+  const [storyFirst, setStoryFirst] = useState(false);
   const [auctionUrl, setAuctionUrl] = useState("");
   // What the car is worth today. Typed, it is used as-is; left empty, the
   // build reads comparable sales off the auction site. Two runs in one week
@@ -1386,7 +1391,8 @@ export default function App() {
       auction_url: useAuctionUrl ? auctionUrl.trim() : "",
       current_price: currentPrice.trim(),
       angles: angles.trim(),
-      script_style: shortStyle ? "short" : mediumStyle ? "medium" : denseStyle ? "dense" : "classic",
+      script_style: (shortStyle ? "short" : mediumStyle ? "medium" : denseStyle ? "dense" : "classic")
+        + (storyFirst ? "+story" : ""),
       disable_comparison: String(!compareEnabled),
       rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
       photo_front: useManualPhotos ? (photoUrls.front || "").trim() : "",
@@ -1425,7 +1431,8 @@ export default function App() {
           auction_url: useAuctionUrl ? auctionUrl.trim() : "",
           current_price: currentPrice.trim(),
       angles: angles.trim(),
-      script_style: shortStyle ? "short" : mediumStyle ? "medium" : denseStyle ? "dense" : "classic",
+      script_style: (shortStyle ? "short" : mediumStyle ? "medium" : denseStyle ? "dense" : "classic")
+        + (storyFirst ? "+story" : ""),
           // One JSON input rather than six string ones: workflow_dispatch
           // allows only 25 inputs in total and the photo URLs were using up
           // a quarter of them.
@@ -1687,8 +1694,16 @@ export default function App() {
     setRacePhoto(inputs.photo_race || "");
     setRaceFlipped(String(inputs.photo_race_flip || "") === "1");
     setRivalFlipped(String(inputs.photo_rival_flip || "") === "1");
-    setDenseStyle(String(inputs.script_style || "") === "dense");
-    setShortStyle(String(inputs.script_style || "") === "short");
+    // Compared on the base now that the field can carry a "+story"
+    // suffix: "dense+story" is still the dense length.
+    const style = String(inputs.script_style || "");
+    const baseStyle = style.toLowerCase().replace(/\+story$/, "");
+    setDenseStyle(baseStyle === "dense");
+    setShortStyle(baseStyle === "short");
+    // Never restored at all until now: a build made at the 45-second
+    // length came back from the dropdown as a 55-second one.
+    setMediumStyle(baseStyle === "medium");
+    setStoryFirst(/\+story$/i.test(style));
     // The start-up clip, which did not come back with everything else: a
     // rebuild of a build that used one arrived with the box unticked and
     // the times blank, so it silently went out without the clip.
@@ -3038,6 +3053,16 @@ export default function App() {
                         />
                         45-second short
                         <Tip text="Between the 35-second cut and the usual 55: 110-125 words over 40-50 seconds, five or six beats. The 35-second format kept the same watch time as a 56-second one -- about sixteen seconds either way -- so the ratio roughly doubled while nothing was lost, but three of its five beats go to notes and there is no room left for a history fact or the one feature worth seeing. This buys back one beat and stays under a minute. Same as the others: a listing, overridden photos and pasted notes all behave normally. All three length and style boxes set the same field, so ticking one unticks the rest." />
+                      </label>
+                      <label className="check-pill">
+                        <input
+                          type="checkbox"
+                          checked={storyFirst}
+                          onChange={(e) => setStoryFirst(e.target.checked)}
+                          disabled={stage === "single-car-building"}
+                        />
+                        Story first
+                        <Tip text="Reverses the beat order: what happened to this car first, the figures once you care about them. Normally the script opens on a number and has to state the horsepower inside three scenes, which is the shape with the retention evidence behind it -- the one build that opened weakly got 17.3% stayed-to-watch against a 22.3% average. This moves that deadline to six scenes so two or three beats of history fit first. The hook still has to stop a thumb: a story opening works by being surprising or contested, not by being background, and it still may not open on the price. Works with any of the three lengths. For control over just the first line instead, start one of your notes with “Open on” or “Lead with” and that note becomes the opening." />
                       </label>
                       <label className="check-pill">
                         <input
