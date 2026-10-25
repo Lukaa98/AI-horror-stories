@@ -1,0 +1,2523 @@
+{
+  "car": {
+    "make": "Honda",
+    "model": "S2000",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Honda",
+    "model": "S2000",
+    "script_style": "classic+story",
+    "query": "",
+    "start_year": 2006,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/r4RZ4MwV/2006-honda-s2000?ss_id=9a572185-9952-4bd8-9683-eeac7538d981&ref=pr_1_11",
+    "photo_front": "",
+    "photo_side": "",
+    "photo_rear": "",
+    "photo_engine": "",
+    "photo_interior": "",
+    "photo_rival": "",
+    "rival_car": "",
+    "photo_race": "",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "true",
+    "angles": "1. Lead on this: this is the AP2, the one that gave up the scream for torque. Honda dropped the 2.0 for a 2.2, added mid-range, and cut about a thousand rpm off the redline - and twenty years on, owners still argue about whether that fixed the car or ruined the point of it. The 2.0 revved to 9,000. This one does not.\n2. Cover the record, because it is why anyone cares. The earlier 2.0 made more horsepower per litre than any naturally aspirated production engine in the world - more power-dense than the Ferrari and Lamborghini V12s of its day, from a Honda four-cylinder - and it held that for about a decade until a Ferrari took it back. Then Honda stopped. There has never been another S2000.\n3. For the head-to-head use the 2006 Porsche Boxster S - same money when new, the sensible choice, 3.4 litres and a redline about a thousand rpm below this car's. The Honda is down on power and revs past where the Porsche stops.",
+    "current_price": "",
+    "extra_photos": "",
+    "engine_clip": null
+  },
+  "title": "2006 Honda S2000 - AP2",
+  "youtube_title": "They traded the scream for torque \ud83d\udd25",
+  "key_specs": {
+    "horsepower": "237 hp",
+    "torque": "162 lb-ft",
+    "zero_to_sixty": "5.5 sec",
+    "redline": "8,000 rpm",
+    "engine": "2.2L naturally aspirated I4",
+    "price": "$34K new, ~$43K today"
+  },
+  "history": {
+    "year": 1999,
+    "fact": "The original 1999 2.0 held the naturally aspirated production engine record for horsepower per liter for roughly a decade before the Ferrari 458 Italia."
+  },
+  "start_year": 2006,
+  "end_year": 2006,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Scream for Torque",
+      "photo_label": null,
+      "narration": "They traded the scream for torque by replacing a 2.0 with a 2.2, and owners still argue whether that ruined it. That's Honda's 2006 S2000.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Displacement",
+      "stat_value": "2.0L \u2192 2.2L",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "World Record",
+      "photo_label": null,
+      "narration": "The original 1999 2.0 held the naturally aspirated production engine record for horsepower per liter for roughly a decade before the Ferrari 458 Italia.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "F22C",
+      "photo_label": null,
+      "narration": "This AP2's naturally aspirated four makes 237 horsepower and 162 pound-feet; Honda stretched the stroke to deliver more midrange torque.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "237 hp",
+      "stat_label_2": "Torque",
+      "stat_value_2": "162 lb-ft"
+    },
+    {
+      "media_type": "detail",
+      "headline": "Longer Stroke",
+      "photo_label": null,
+      "narration": "The original spun to 9,000 rpm; this longer-stroke engine cuts fuel at 8,200, because extra piston travel raises piston speed.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Fuel Cutoff",
+      "stat_value": "8,200 rpm",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Production Ends",
+      "photo_label": null,
+      "narration": "Honda stopped building these in 2009; every one left with a six-speed manual, rear-wheel drive and a Torsen limited-slip differential.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Transmission",
+      "stat_value": "6-speed manual",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "$34K \u2192 $43K",
+      "photo_label": null,
+      "narration": "Honda charged about $34,000 new, and they go for about $43,000 today.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "New",
+      "stat_value": "~$34K",
+      "stat_label_2": "Today",
+      "stat_value_2": "~$43K"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "photo_label": null,
+      "narration": "Would you take this AP2's stronger midrange and lower rev ceiling, or keep chasing the original 2.0 all the way to nine grand?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://hondanews.com/en-US/releases/release-4f6f0a361216ba882f335c004c34c4b2-2004-honda-s2000-powertrain",
+    "https://hondanews.ca/en-CA/releases/release-519a23469582d80780152ae423022751-2006-s2000-specifications",
+    "https://hondanews.com/en-US/releases/release-5cde0969c7be1d5f5d0747004c34c86f-honda-s2000-introduction",
+    "https://brochureshub.com/wp-content/uploads/2020/04/Ferrari_int-458Italia.pdf",
+    "https://global.honda/en/newsroom/news/2009/4090127eng.html?from=rich_r",
+    "https://hondanews.com/en-US/releases/release-fb6dc30a1edf9d9cf12c1c004c34c090-2006-honda-s2000-prices-and-epa-data",
+    "https://roadtestdotorg.wordpress.com/2006/11/08/honda-s2000-2006/",
+    "https://www.reddit.com/r/S2000/comments/ec8e1s/"
+  ],
+  "script": "They traded the scream for torque by replacing a 2.0 with a 2.2, and owners still argue whether that ruined it. That's Honda's 2006 S2000. The original 1999 2.0 held the naturally aspirated production engine record for horsepower per liter for roughly a decade before the Ferrari 458 Italia. This AP2's naturally aspirated four makes 237 horsepower and 162 pound-feet; Honda stretched the stroke to deliver more midrange torque. The original spun to 9,000 rpm; this longer-stroke engine cuts fuel at 8,200, because extra piston travel raises piston speed. Honda stopped building these in 2009; every one left with a six-speed manual, rear-wheel drive and a Torsen limited-slip differential. Honda charged about $34,000 new, and they go for about $43,000 today. Would you take this AP2's stronger midrange and lower rev ceiling, or keep chasing the original 2.0 all the way to nine grand?",
+  "word_count": 152,
+  "rule_violations": [
+    "every sentence is about the same length (4-24 words) and it reads flat. Break at least two of them into something short -- four or five words, landing after a long one. This is rhythm, not word count: the total is unchanged."
+  ],
+  "voice_preset": "onyx",
+  "tts_speed": null,
+  "narration": {
+    "engine": "gpt-audio",
+    "model": "gpt-audio",
+    "voice": "echo",
+    "pitch": {
+      "measured_hz": 152.38095238095238,
+      "result_hz": 152.38095238095238
+    },
+    "tts_speed": null
+  },
+  "target_duration_seconds": 55.0,
+  "normalized_audio_duration_seconds": 57.63,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-honda-s2000-20261025010359/narration.mp3",
+  "duration_seconds": 57.69,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.36,
+      "end": 0.72,
+      "mouth": "small"
+    },
+    {
+      "start": 0.72,
+      "end": 0.9,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.9,
+      "end": 1.62,
+      "mouth": "small"
+    },
+    {
+      "start": 1.62,
+      "end": 1.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.8,
+      "end": 1.98,
+      "mouth": "small"
+    },
+    {
+      "start": 1.98,
+      "end": 2.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.34,
+      "end": 2.52,
+      "mouth": "small"
+    },
+    {
+      "start": 2.52,
+      "end": 2.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.61,
+      "end": 2.88,
+      "mouth": "small"
+    },
+    {
+      "start": 2.88,
+      "end": 3.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.06,
+      "end": 3.15,
+      "mouth": "small"
+    },
+    {
+      "start": 3.15,
+      "end": 3.24,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.24,
+      "end": 3.69,
+      "mouth": "small"
+    },
+    {
+      "start": 3.69,
+      "end": 3.78,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.78,
+      "end": 3.87,
+      "mouth": "small"
+    },
+    {
+      "start": 3.87,
+      "end": 3.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.96,
+      "end": 4.41,
+      "mouth": "small"
+    },
+    {
+      "start": 4.41,
+      "end": 4.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.59,
+      "end": 5.22,
+      "mouth": "small"
+    },
+    {
+      "start": 5.22,
+      "end": 5.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.31,
+      "end": 5.4,
+      "mouth": "small"
+    },
+    {
+      "start": 5.4,
+      "end": 5.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.49,
+      "end": 5.58,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.58,
+      "end": 6.39,
+      "mouth": "small"
+    },
+    {
+      "start": 6.39,
+      "end": 6.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.75,
+      "end": 7.74,
+      "mouth": "small"
+    },
+    {
+      "start": 7.74,
+      "end": 7.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.83,
+      "end": 8.37,
+      "mouth": "small"
+    },
+    {
+      "start": 8.37,
+      "end": 8.46,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.46,
+      "end": 8.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.55,
+      "end": 8.64,
+      "mouth": "small"
+    },
+    {
+      "start": 8.64,
+      "end": 8.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.73,
+      "end": 8.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.82,
+      "end": 9.0,
+      "mouth": "small"
+    },
+    {
+      "start": 9.0,
+      "end": 9.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.36,
+      "end": 11.34,
+      "mouth": "small"
+    },
+    {
+      "start": 11.34,
+      "end": 11.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.61,
+      "end": 12.51,
+      "mouth": "small"
+    },
+    {
+      "start": 12.51,
+      "end": 12.6,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.6,
+      "end": 13.05,
+      "mouth": "small"
+    },
+    {
+      "start": 13.05,
+      "end": 13.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.14,
+      "end": 13.77,
+      "mouth": "small"
+    },
+    {
+      "start": 13.77,
+      "end": 13.86,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.86,
+      "end": 13.95,
+      "mouth": "small"
+    },
+    {
+      "start": 13.95,
+      "end": 14.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.22,
+      "end": 14.31,
+      "mouth": "small"
+    },
+    {
+      "start": 14.31,
+      "end": 14.4,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.4,
+      "end": 14.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.49,
+      "end": 14.67,
+      "mouth": "small"
+    },
+    {
+      "start": 14.67,
+      "end": 14.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 14.85,
+      "end": 14.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.94,
+      "end": 15.3,
+      "mouth": "small"
+    },
+    {
+      "start": 15.3,
+      "end": 15.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.57,
+      "end": 15.75,
+      "mouth": "small"
+    },
+    {
+      "start": 15.75,
+      "end": 15.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.84,
+      "end": 15.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.93,
+      "end": 16.11,
+      "mouth": "small"
+    },
+    {
+      "start": 16.11,
+      "end": 16.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.2,
+      "end": 16.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.29,
+      "end": 16.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.38,
+      "end": 16.47,
+      "mouth": "small"
+    },
+    {
+      "start": 16.47,
+      "end": 16.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.74,
+      "end": 16.83,
+      "mouth": "small"
+    },
+    {
+      "start": 16.83,
+      "end": 16.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.92,
+      "end": 17.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.01,
+      "end": 17.1,
+      "mouth": "small"
+    },
+    {
+      "start": 17.1,
+      "end": 17.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.19,
+      "end": 17.55,
+      "mouth": "small"
+    },
+    {
+      "start": 17.55,
+      "end": 17.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.64,
+      "end": 18.18,
+      "mouth": "small"
+    },
+    {
+      "start": 18.18,
+      "end": 18.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.36,
+      "end": 18.63,
+      "mouth": "small"
+    },
+    {
+      "start": 18.63,
+      "end": 19.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.17,
+      "end": 19.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.26,
+      "end": 19.35,
+      "mouth": "small"
+    },
+    {
+      "start": 19.35,
+      "end": 19.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.44,
+      "end": 20.34,
+      "mouth": "small"
+    },
+    {
+      "start": 20.34,
+      "end": 20.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.43,
+      "end": 20.79,
+      "mouth": "small"
+    },
+    {
+      "start": 20.79,
+      "end": 20.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.88,
+      "end": 20.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.97,
+      "end": 21.06,
+      "mouth": "small"
+    },
+    {
+      "start": 21.06,
+      "end": 21.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.15,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.69,
+      "end": 21.87,
+      "mouth": "small"
+    },
+    {
+      "start": 21.87,
+      "end": 21.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.96,
+      "end": 22.05,
+      "mouth": "small"
+    },
+    {
+      "start": 22.05,
+      "end": 22.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.23,
+      "end": 22.41,
+      "mouth": "small"
+    },
+    {
+      "start": 22.41,
+      "end": 22.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.5,
+      "end": 22.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.59,
+      "end": 22.77,
+      "mouth": "small"
+    },
+    {
+      "start": 22.77,
+      "end": 22.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.86,
+      "end": 23.13,
+      "mouth": "small"
+    },
+    {
+      "start": 23.13,
+      "end": 23.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.22,
+      "end": 23.49,
+      "mouth": "small"
+    },
+    {
+      "start": 23.49,
+      "end": 23.67,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.67,
+      "end": 23.76,
+      "mouth": "small"
+    },
+    {
+      "start": 23.76,
+      "end": 23.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.85,
+      "end": 23.94,
+      "mouth": "small"
+    },
+    {
+      "start": 23.94,
+      "end": 24.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.03,
+      "end": 25.11,
+      "mouth": "small"
+    },
+    {
+      "start": 25.11,
+      "end": 25.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.56,
+      "end": 25.65,
+      "mouth": "small"
+    },
+    {
+      "start": 25.65,
+      "end": 25.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.74,
+      "end": 26.01,
+      "mouth": "small"
+    },
+    {
+      "start": 26.01,
+      "end": 26.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.1,
+      "end": 26.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.19,
+      "end": 26.55,
+      "mouth": "small"
+    },
+    {
+      "start": 26.55,
+      "end": 26.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.64,
+      "end": 26.73,
+      "mouth": "small"
+    },
+    {
+      "start": 26.73,
+      "end": 27.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.0,
+      "end": 27.81,
+      "mouth": "small"
+    },
+    {
+      "start": 27.81,
+      "end": 27.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.9,
+      "end": 27.99,
+      "mouth": "small"
+    },
+    {
+      "start": 27.99,
+      "end": 28.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.08,
+      "end": 28.44,
+      "mouth": "small"
+    },
+    {
+      "start": 28.44,
+      "end": 28.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.53,
+      "end": 28.62,
+      "mouth": "small"
+    },
+    {
+      "start": 28.62,
+      "end": 29.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.25,
+      "end": 30.33,
+      "mouth": "small"
+    },
+    {
+      "start": 30.33,
+      "end": 30.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.42,
+      "end": 30.6,
+      "mouth": "small"
+    },
+    {
+      "start": 30.6,
+      "end": 30.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.69,
+      "end": 30.96,
+      "mouth": "small"
+    },
+    {
+      "start": 30.96,
+      "end": 31.05,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.05,
+      "end": 31.23,
+      "mouth": "small"
+    },
+    {
+      "start": 31.23,
+      "end": 31.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.59,
+      "end": 31.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.68,
+      "end": 31.86,
+      "mouth": "small"
+    },
+    {
+      "start": 31.86,
+      "end": 31.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.95,
+      "end": 32.22,
+      "mouth": "small"
+    },
+    {
+      "start": 32.22,
+      "end": 32.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.31,
+      "end": 32.4,
+      "mouth": "small"
+    },
+    {
+      "start": 32.4,
+      "end": 32.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.49,
+      "end": 32.94,
+      "mouth": "small"
+    },
+    {
+      "start": 32.94,
+      "end": 33.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.03,
+      "end": 33.12,
+      "mouth": "small"
+    },
+    {
+      "start": 33.12,
+      "end": 33.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.21,
+      "end": 33.3,
+      "mouth": "small"
+    },
+    {
+      "start": 33.3,
+      "end": 33.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.39,
+      "end": 34.02,
+      "mouth": "small"
+    },
+    {
+      "start": 34.02,
+      "end": 34.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.47,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 34.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.83,
+      "end": 35.55,
+      "mouth": "small"
+    },
+    {
+      "start": 35.55,
+      "end": 35.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.64,
+      "end": 35.91,
+      "mouth": "small"
+    },
+    {
+      "start": 35.91,
+      "end": 36.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.18,
+      "end": 36.72,
+      "mouth": "small"
+    },
+    {
+      "start": 36.72,
+      "end": 36.81,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.81,
+      "end": 37.08,
+      "mouth": "small"
+    },
+    {
+      "start": 37.08,
+      "end": 37.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.62,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.8,
+      "end": 37.98,
+      "mouth": "small"
+    },
+    {
+      "start": 37.98,
+      "end": 38.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.07,
+      "end": 38.16,
+      "mouth": "small"
+    },
+    {
+      "start": 38.16,
+      "end": 38.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.25,
+      "end": 39.06,
+      "mouth": "small"
+    },
+    {
+      "start": 39.06,
+      "end": 39.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.15,
+      "end": 39.51,
+      "mouth": "small"
+    },
+    {
+      "start": 39.51,
+      "end": 39.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.87,
+      "end": 39.96,
+      "mouth": "small"
+    },
+    {
+      "start": 39.96,
+      "end": 40.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.32,
+      "end": 40.41,
+      "mouth": "small"
+    },
+    {
+      "start": 40.41,
+      "end": 40.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.5,
+      "end": 40.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.59,
+      "end": 40.86,
+      "mouth": "small"
+    },
+    {
+      "start": 40.86,
+      "end": 40.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.95,
+      "end": 41.31,
+      "mouth": "small"
+    },
+    {
+      "start": 41.31,
+      "end": 41.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.4,
+      "end": 41.58,
+      "mouth": "small"
+    },
+    {
+      "start": 41.58,
+      "end": 41.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.67,
+      "end": 41.76,
+      "mouth": "small"
+    },
+    {
+      "start": 41.76,
+      "end": 41.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.94,
+      "end": 42.03,
+      "mouth": "small"
+    },
+    {
+      "start": 42.03,
+      "end": 42.39,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.39,
+      "end": 42.48,
+      "mouth": "small"
+    },
+    {
+      "start": 42.48,
+      "end": 42.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.66,
+      "end": 42.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.93,
+      "end": 43.2,
+      "mouth": "small"
+    },
+    {
+      "start": 43.2,
+      "end": 43.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.29,
+      "end": 44.19,
+      "mouth": "small"
+    },
+    {
+      "start": 44.19,
+      "end": 44.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.28,
+      "end": 44.55,
+      "mouth": "small"
+    },
+    {
+      "start": 44.55,
+      "end": 45.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.09,
+      "end": 45.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.27,
+      "end": 45.45,
+      "mouth": "small"
+    },
+    {
+      "start": 45.45,
+      "end": 45.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.54,
+      "end": 45.9,
+      "mouth": "small"
+    },
+    {
+      "start": 45.9,
+      "end": 46.08,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.08,
+      "end": 46.17,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.17,
+      "end": 46.35,
+      "mouth": "small"
+    },
+    {
+      "start": 46.35,
+      "end": 46.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.44,
+      "end": 46.53,
+      "mouth": "small"
+    },
+    {
+      "start": 46.53,
+      "end": 46.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.71,
+      "end": 46.89,
+      "mouth": "small"
+    },
+    {
+      "start": 46.89,
+      "end": 46.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.98,
+      "end": 47.34,
+      "mouth": "small"
+    },
+    {
+      "start": 47.34,
+      "end": 47.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.61,
+      "end": 47.88,
+      "mouth": "small"
+    },
+    {
+      "start": 47.88,
+      "end": 48.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.06,
+      "end": 48.42,
+      "mouth": "small"
+    },
+    {
+      "start": 48.42,
+      "end": 48.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.51,
+      "end": 48.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.69,
+      "end": 49.05,
+      "mouth": "small"
+    },
+    {
+      "start": 49.05,
+      "end": 49.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.14,
+      "end": 49.32,
+      "mouth": "small"
+    },
+    {
+      "start": 49.32,
+      "end": 49.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.41,
+      "end": 49.86,
+      "mouth": "small"
+    },
+    {
+      "start": 49.86,
+      "end": 50.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.31,
+      "end": 50.67,
+      "mouth": "small"
+    },
+    {
+      "start": 50.67,
+      "end": 50.76,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.76,
+      "end": 50.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.85,
+      "end": 51.48,
+      "mouth": "small"
+    },
+    {
+      "start": 51.48,
+      "end": 51.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.57,
+      "end": 51.75,
+      "mouth": "small"
+    },
+    {
+      "start": 51.75,
+      "end": 51.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.93,
+      "end": 52.02,
+      "mouth": "small"
+    },
+    {
+      "start": 52.02,
+      "end": 52.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.11,
+      "end": 52.65,
+      "mouth": "small"
+    },
+    {
+      "start": 52.65,
+      "end": 52.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.74,
+      "end": 52.92,
+      "mouth": "small"
+    },
+    {
+      "start": 52.92,
+      "end": 53.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.28,
+      "end": 53.55,
+      "mouth": "small"
+    },
+    {
+      "start": 53.55,
+      "end": 53.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.64,
+      "end": 53.73,
+      "mouth": "small"
+    },
+    {
+      "start": 53.73,
+      "end": 53.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.91,
+      "end": 54.0,
+      "mouth": "small"
+    },
+    {
+      "start": 54.0,
+      "end": 54.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.09,
+      "end": 54.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.18,
+      "end": 54.27,
+      "mouth": "small"
+    },
+    {
+      "start": 54.27,
+      "end": 54.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.36,
+      "end": 54.45,
+      "mouth": "small"
+    },
+    {
+      "start": 54.45,
+      "end": 54.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.54,
+      "end": 54.72,
+      "mouth": "small"
+    },
+    {
+      "start": 54.72,
+      "end": 54.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.81,
+      "end": 54.9,
+      "mouth": "small"
+    },
+    {
+      "start": 54.9,
+      "end": 54.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.99,
+      "end": 55.17,
+      "mouth": "small"
+    },
+    {
+      "start": 55.17,
+      "end": 55.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 55.26,
+      "end": 55.8,
+      "mouth": "small"
+    },
+    {
+      "start": 55.8,
+      "end": 56.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 56.07,
+      "end": 56.16,
+      "mouth": "small"
+    },
+    {
+      "start": 56.16,
+      "end": 56.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.25,
+      "end": 56.34,
+      "mouth": "small"
+    },
+    {
+      "start": 56.34,
+      "end": 56.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.52,
+      "end": 57.06,
+      "mouth": "small"
+    },
+    {
+      "start": 57.06,
+      "end": 57.69,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "They",
+      "start": 0.0,
+      "end": 0.5400000214576721
+    },
+    {
+      "word": "traded",
+      "start": 0.5400000214576721,
+      "end": 0.8999999761581421
+    },
+    {
+      "word": "the",
+      "start": 0.8999999761581421,
+      "end": 1.2000000476837158
+    },
+    {
+      "word": "scream",
+      "start": 1.2000000476837158,
+      "end": 1.4800000190734863
+    },
+    {
+      "word": "for",
+      "start": 1.4800000190734863,
+      "end": 1.7799999713897705
+    },
+    {
+      "word": "torque",
+      "start": 1.7799999713897705,
+      "end": 2.0799999237060547
+    },
+    {
+      "word": "by",
+      "start": 2.0799999237060547,
+      "end": 2.5
+    },
+    {
+      "word": "replacing",
+      "start": 2.5,
+      "end": 2.8399999141693115
+    },
+    {
+      "word": "a",
+      "start": 2.8399999141693115,
+      "end": 3.0399999618530273
+    },
+    {
+      "word": "2",
+      "start": 3.0399999618530273,
+      "end": 3.240000009536743
+    },
+    {
+      "word": "0",
+      "start": 3.240000009536743,
+      "end": 3.5399999618530273
+    },
+    {
+      "word": "with",
+      "start": 3.5399999618530273,
+      "end": 3.640000104904175
+    },
+    {
+      "word": "a",
+      "start": 3.640000104904175,
+      "end": 3.799999952316284
+    },
+    {
+      "word": "2",
+      "start": 3.799999952316284,
+      "end": 3.9800000190734863
+    },
+    {
+      "word": "2",
+      "start": 3.9800000190734863,
+      "end": 4.420000076293945
+    },
+    {
+      "word": "and",
+      "start": 4.519999980926514,
+      "end": 4.900000095367432
+    },
+    {
+      "word": "owners",
+      "start": 4.900000095367432,
+      "end": 5.039999961853027
+    },
+    {
+      "word": "still",
+      "start": 5.039999961853027,
+      "end": 5.559999942779541
+    },
+    {
+      "word": "argue",
+      "start": 5.559999942779541,
+      "end": 5.679999828338623
+    },
+    {
+      "word": "whether",
+      "start": 5.679999828338623,
+      "end": 5.920000076293945
+    },
+    {
+      "word": "that",
+      "start": 5.920000076293945,
+      "end": 6.179999828338623
+    },
+    {
+      "word": "ruined",
+      "start": 6.179999828338623,
+      "end": 6.360000133514404
+    },
+    {
+      "word": "it",
+      "start": 6.360000133514404,
+      "end": 6.539999961853027
+    },
+    {
+      "word": "That's",
+      "start": 6.880000114440918,
+      "end": 7.159999847412109
+    },
+    {
+      "word": "Honda's",
+      "start": 7.159999847412109,
+      "end": 7.559999942779541
+    },
+    {
+      "word": "2006",
+      "start": 7.559999942779541,
+      "end": 8.260000228881836
+    },
+    {
+      "word": "S2000",
+      "start": 8.260000228881836,
+      "end": 9.020000457763672
+    },
+    {
+      "word": "The",
+      "start": 9.460000038146973,
+      "end": 9.5
+    },
+    {
+      "word": "original",
+      "start": 9.5,
+      "end": 9.859999656677246
+    },
+    {
+      "word": "1999",
+      "start": 9.859999656677246,
+      "end": 10.739999771118164
+    },
+    {
+      "word": "2",
+      "start": 10.739999771118164,
+      "end": 10.979999542236328
+    },
+    {
+      "word": "0",
+      "start": 10.979999542236328,
+      "end": 11.5
+    },
+    {
+      "word": "held",
+      "start": 11.5,
+      "end": 11.739999771118164
+    },
+    {
+      "word": "the",
+      "start": 11.739999771118164,
+      "end": 12.020000457763672
+    },
+    {
+      "word": "naturally",
+      "start": 12.020000457763672,
+      "end": 12.34000015258789
+    },
+    {
+      "word": "aspirated",
+      "start": 12.34000015258789,
+      "end": 12.819999694824219
+    },
+    {
+      "word": "production",
+      "start": 12.819999694824219,
+      "end": 13.34000015258789
+    },
+    {
+      "word": "engine",
+      "start": 13.34000015258789,
+      "end": 13.699999809265137
+    },
+    {
+      "word": "record",
+      "start": 13.699999809265137,
+      "end": 13.9399995803833
+    },
+    {
+      "word": "for",
+      "start": 13.9399995803833,
+      "end": 14.34000015258789
+    },
+    {
+      "word": "horsepower",
+      "start": 14.34000015258789,
+      "end": 14.779999732971191
+    },
+    {
+      "word": "per",
+      "start": 14.779999732971191,
+      "end": 15.180000305175781
+    },
+    {
+      "word": "liter",
+      "start": 15.180000305175781,
+      "end": 15.34000015258789
+    },
+    {
+      "word": "for",
+      "start": 15.34000015258789,
+      "end": 15.739999771118164
+    },
+    {
+      "word": "roughly",
+      "start": 15.739999771118164,
+      "end": 15.979999542236328
+    },
+    {
+      "word": "a",
+      "start": 15.979999542236328,
+      "end": 16.34000015258789
+    },
+    {
+      "word": "decade",
+      "start": 16.34000015258789,
+      "end": 16.520000457763672
+    },
+    {
+      "word": "before",
+      "start": 16.520000457763672,
+      "end": 16.979999542236328
+    },
+    {
+      "word": "the",
+      "start": 16.979999542236328,
+      "end": 17.239999771118164
+    },
+    {
+      "word": "Ferrari",
+      "start": 17.239999771118164,
+      "end": 17.479999542236328
+    },
+    {
+      "word": "458",
+      "start": 17.479999542236328,
+      "end": 18.219999313354492
+    },
+    {
+      "word": "Italia",
+      "start": 18.219999313354492,
+      "end": 18.68000030517578
+    },
+    {
+      "word": "This",
+      "start": 19.239999771118164,
+      "end": 19.420000076293945
+    },
+    {
+      "word": "AP2's",
+      "start": 19.420000076293945,
+      "end": 20.219999313354492
+    },
+    {
+      "word": "naturally",
+      "start": 20.219999313354492,
+      "end": 20.6200008392334
+    },
+    {
+      "word": "aspirated",
+      "start": 20.6200008392334,
+      "end": 21.079999923706055
+    },
+    {
+      "word": "4",
+      "start": 21.079999923706055,
+      "end": 21.440000534057617
+    },
+    {
+      "word": "makes",
+      "start": 21.440000534057617,
+      "end": 21.8799991607666
+    },
+    {
+      "word": "237",
+      "start": 21.8799991607666,
+      "end": 22.979999542236328
+    },
+    {
+      "word": "horsepower",
+      "start": 22.979999542236328,
+      "end": 23.420000076293945
+    },
+    {
+      "word": "and",
+      "start": 23.420000076293945,
+      "end": 23.84000015258789
+    },
+    {
+      "word": "162",
+      "start": 23.84000015258789,
+      "end": 24.760000228881836
+    },
+    {
+      "word": "pound",
+      "start": 24.760000228881836,
+      "end": 25.1200008392334
+    },
+    {
+      "word": "feet",
+      "start": 25.1200008392334,
+      "end": 25.200000762939453
+    },
+    {
+      "word": "Honda",
+      "start": 25.84000015258789,
+      "end": 25.899999618530273
+    },
+    {
+      "word": "stretched",
+      "start": 25.899999618530273,
+      "end": 26.299999237060547
+    },
+    {
+      "word": "the",
+      "start": 26.299999237060547,
+      "end": 26.559999465942383
+    },
+    {
+      "word": "strike",
+      "start": 26.559999465942383,
+      "end": 26.760000228881836
+    },
+    {
+      "word": "to",
+      "start": 26.760000228881836,
+      "end": 27.18000030517578
+    },
+    {
+      "word": "deliver",
+      "start": 27.18000030517578,
+      "end": 27.399999618530273
+    },
+    {
+      "word": "more",
+      "start": 27.399999618530273,
+      "end": 27.959999084472656
+    },
+    {
+      "word": "mid",
+      "start": 27.959999084472656,
+      "end": 28.239999771118164
+    },
+    {
+      "word": "range",
+      "start": 28.239999771118164,
+      "end": 28.420000076293945
+    },
+    {
+      "word": "torque",
+      "start": 28.420000076293945,
+      "end": 28.979999542236328
+    },
+    {
+      "word": "The",
+      "start": 28.979999542236328,
+      "end": 29.399999618530273
+    },
+    {
+      "word": "original",
+      "start": 29.399999618530273,
+      "end": 29.799999237060547
+    },
+    {
+      "word": "spun",
+      "start": 29.799999237060547,
+      "end": 30.040000915527344
+    },
+    {
+      "word": "to",
+      "start": 30.040000915527344,
+      "end": 30.260000228881836
+    },
+    {
+      "word": "9",
+      "start": 30.260000228881836,
+      "end": 30.559999465942383
+    },
+    {
+      "word": "000",
+      "start": 30.559999465942383,
+      "end": 30.84000015258789
+    },
+    {
+      "word": "RPM",
+      "start": 30.84000015258789,
+      "end": 31.280000686645508
+    },
+    {
+      "word": "This",
+      "start": 31.68000030517578,
+      "end": 31.860000610351562
+    },
+    {
+      "word": "longer",
+      "start": 31.860000610351562,
+      "end": 32.15999984741211
+    },
+    {
+      "word": "stroke",
+      "start": 32.15999984741211,
+      "end": 32.41999816894531
+    },
+    {
+      "word": "engine",
+      "start": 32.41999816894531,
+      "end": 32.7599983215332
+    },
+    {
+      "word": "cuts",
+      "start": 32.7599983215332,
+      "end": 32.97999954223633
+    },
+    {
+      "word": "fuel",
+      "start": 32.97999954223633,
+      "end": 33.2400016784668
+    },
+    {
+      "word": "at",
+      "start": 33.2400016784668,
+      "end": 33.41999816894531
+    },
+    {
+      "word": "8",
+      "start": 33.41999816894531,
+      "end": 33.68000030517578
+    },
+    {
+      "word": "200",
+      "start": 33.68000030517578,
+      "end": 34.02000045776367
+    },
+    {
+      "word": "because",
+      "start": 34.02000045776367,
+      "end": 34.7400016784668
+    },
+    {
+      "word": "extra",
+      "start": 34.7400016784668,
+      "end": 35.279998779296875
+    },
+    {
+      "word": "piston",
+      "start": 35.279998779296875,
+      "end": 35.540000915527344
+    },
+    {
+      "word": "travel",
+      "start": 35.540000915527344,
+      "end": 35.97999954223633
+    },
+    {
+      "word": "raises",
+      "start": 35.97999954223633,
+      "end": 36.47999954223633
+    },
+    {
+      "word": "piston",
+      "start": 36.47999954223633,
+      "end": 36.880001068115234
+    },
+    {
+      "word": "speed",
+      "start": 36.880001068115234,
+      "end": 37.2599983215332
+    },
+    {
+      "word": "Honda",
+      "start": 37.86000061035156,
+      "end": 37.880001068115234
+    },
+    {
+      "word": "stopped",
+      "start": 37.880001068115234,
+      "end": 38.220001220703125
+    },
+    {
+      "word": "building",
+      "start": 38.220001220703125,
+      "end": 38.5
+    },
+    {
+      "word": "these",
+      "start": 38.5,
+      "end": 38.720001220703125
+    },
+    {
+      "word": "in",
+      "start": 38.720001220703125,
+      "end": 38.84000015258789
+    },
+    {
+      "word": "2009",
+      "start": 38.84000015258789,
+      "end": 39.560001373291016
+    },
+    {
+      "word": "Everyone",
+      "start": 39.939998626708984,
+      "end": 40.31999969482422
+    },
+    {
+      "word": "left",
+      "start": 40.31999969482422,
+      "end": 40.58000183105469
+    },
+    {
+      "word": "with",
+      "start": 40.58000183105469,
+      "end": 40.7400016784668
+    },
+    {
+      "word": "a",
+      "start": 40.7400016784668,
+      "end": 40.91999816894531
+    },
+    {
+      "word": "6",
+      "start": 40.91999816894531,
+      "end": 41.13999938964844
+    },
+    {
+      "word": "speed",
+      "start": 41.13999938964844,
+      "end": 41.279998779296875
+    },
+    {
+      "word": "manual",
+      "start": 41.279998779296875,
+      "end": 41.65999984741211
+    },
+    {
+      "word": "rear",
+      "start": 42.099998474121094,
+      "end": 42.2400016784668
+    },
+    {
+      "word": "wheel",
+      "start": 42.2400016784668,
+      "end": 42.400001525878906
+    },
+    {
+      "word": "drive",
+      "start": 42.400001525878906,
+      "end": 42.70000076293945
+    },
+    {
+      "word": "and",
+      "start": 42.959999084472656,
+      "end": 43.040000915527344
+    },
+    {
+      "word": "a",
+      "start": 43.040000915527344,
+      "end": 43.279998779296875
+    },
+    {
+      "word": "Torsen",
+      "start": 43.279998779296875,
+      "end": 43.459999084472656
+    },
+    {
+      "word": "limited",
+      "start": 43.459999084472656,
+      "end": 43.86000061035156
+    },
+    {
+      "word": "slip",
+      "start": 43.86000061035156,
+      "end": 44.08000183105469
+    },
+    {
+      "word": "differential",
+      "start": 44.08000183105469,
+      "end": 44.560001373291016
+    },
+    {
+      "word": "Honda",
+      "start": 45.20000076293945,
+      "end": 45.29999923706055
+    },
+    {
+      "word": "charged",
+      "start": 45.29999923706055,
+      "end": 45.68000030517578
+    },
+    {
+      "word": "about",
+      "start": 45.68000030517578,
+      "end": 46.0
+    },
+    {
+      "word": "34",
+      "start": 46.0,
+      "end": 46.52000045776367
+    },
+    {
+      "word": "000",
+      "start": 46.52000045776367,
+      "end": 46.7599983215332
+    },
+    {
+      "word": "new",
+      "start": 46.7599983215332,
+      "end": 47.400001525878906
+    },
+    {
+      "word": "and",
+      "start": 47.47999954223633,
+      "end": 47.7599983215332
+    },
+    {
+      "word": "they",
+      "start": 47.7599983215332,
+      "end": 47.900001525878906
+    },
+    {
+      "word": "go",
+      "start": 47.900001525878906,
+      "end": 48.040000915527344
+    },
+    {
+      "word": "for",
+      "start": 48.040000915527344,
+      "end": 48.18000030517578
+    },
+    {
+      "word": "about",
+      "start": 48.18000030517578,
+      "end": 48.5
+    },
+    {
+      "word": "43",
+      "start": 48.5,
+      "end": 48.939998626708984
+    },
+    {
+      "word": "000",
+      "start": 48.939998626708984,
+      "end": 49.220001220703125
+    },
+    {
+      "word": "today",
+      "start": 49.220001220703125,
+      "end": 49.900001525878906
+    },
+    {
+      "word": "Would",
+      "start": 50.400001525878906,
+      "end": 50.52000045776367
+    },
+    {
+      "word": "you",
+      "start": 50.52000045776367,
+      "end": 50.68000030517578
+    },
+    {
+      "word": "take",
+      "start": 50.68000030517578,
+      "end": 50.84000015258789
+    },
+    {
+      "word": "this",
+      "start": 50.84000015258789,
+      "end": 51.08000183105469
+    },
+    {
+      "word": "AP2's",
+      "start": 51.08000183105469,
+      "end": 51.7400016784668
+    },
+    {
+      "word": "stronger",
+      "start": 51.7400016784668,
+      "end": 52.040000915527344
+    },
+    {
+      "word": "mid",
+      "start": 52.040000915527344,
+      "end": 52.380001068115234
+    },
+    {
+      "word": "range",
+      "start": 52.380001068115234,
+      "end": 52.560001373291016
+    },
+    {
+      "word": "and",
+      "start": 52.560001373291016,
+      "end": 52.959999084472656
+    },
+    {
+      "word": "lower",
+      "start": 52.959999084472656,
+      "end": 53.20000076293945
+    },
+    {
+      "word": "rev",
+      "start": 53.20000076293945,
+      "end": 53.41999816894531
+    },
+    {
+      "word": "ceiling",
+      "start": 53.41999816894531,
+      "end": 53.68000030517578
+    },
+    {
+      "word": "or",
+      "start": 53.84000015258789,
+      "end": 54.13999938964844
+    },
+    {
+      "word": "keep",
+      "start": 54.13999938964844,
+      "end": 54.380001068115234
+    },
+    {
+      "word": "chasing",
+      "start": 54.380001068115234,
+      "end": 54.63999938964844
+    },
+    {
+      "word": "the",
+      "start": 54.63999938964844,
+      "end": 54.84000015258789
+    },
+    {
+      "word": "original",
+      "start": 54.84000015258789,
+      "end": 55.15999984741211
+    },
+    {
+      "word": "2",
+      "start": 55.15999984741211,
+      "end": 55.47999954223633
+    },
+    {
+      "word": "0",
+      "start": 55.47999954223633,
+      "end": 55.880001068115234
+    },
+    {
+      "word": "all",
+      "start": 55.880001068115234,
+      "end": 56.279998779296875
+    },
+    {
+      "word": "the",
+      "start": 56.279998779296875,
+      "end": 56.380001068115234
+    },
+    {
+      "word": "way",
+      "start": 56.380001068115234,
+      "end": 56.52000045776367
+    },
+    {
+      "word": "to",
+      "start": 56.52000045776367,
+      "end": 56.65999984741211
+    },
+    {
+      "word": "9",
+      "start": 56.65999984741211,
+      "end": 56.939998626708984
+    },
+    {
+      "word": "grand",
+      "start": 56.939998626708984,
+      "end": 57.18000030517578
+    }
+  ],
+  "media": [
+    {
+      "path": "images/honda-s2000/exterior_side-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/honda-s2000/exterior_front-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/honda-s2000/exterior_front-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/honda-s2000/interior-02.jpg",
+      "type": "detail",
+      "category": "other_detail",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/honda-s2000/exterior_rear-01-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/honda-s2000/exterior_rear-02-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/honda-s2000/exterior_rear-03-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    }
+  ],
+  "photo_sections": [],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/r4RZ4MwV/2006-honda-s2000?ss_id=9a572185-9952-4bd8-9683-eeac7538d981&ref=pr_1_11",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 43000,
+    "sale_type": "sold",
+    "page_title": "2006 Honda S2000",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/r4RZ4MwV/2006-honda-s2000?ss_id=9a572185-9952-4bd8-9683-eeac7538d981&ref=pr_1_11",
+    "title": "2006 Honda S2000",
+    "price_text": "Sold for $43,000",
+    "auction_state": "sold",
+    "facts": {
+      "Make": "Honda",
+      "Engine": "2.2L I4",
+      "Model": "S2000",
+      "Drivetrain": "Rear-wheel drive",
+      "Transmission": "Manual (6-Speed)",
+      "Body Style": "Convertible"
+    },
+    "sections": {
+      "Highlights": "THIS... is a 2006 Honda S2000, finished in Laguna Blue Pearl with a black soft top and a black interior. The odometer on this S2000 currently indicates approximately 15,700 miles. The attached Carfax vehicle history report lists no accidents or mileage discrepancies in this Honda's past. It also confirms California registration from new. Photos of VIN stickers are available in the gallery, and indicate that the body panels of this S2000 are numbers-matching. A partial list of notable equipment reported by the seller includes a limited-slip differential, a power-operated soft top, leather upholstery, a digital instrument cluster, push-button start, and air conditioning. A list of notable modifications reported by the seller is detailed below. Highlights include Air Lift Performance suspension, 17-inch Advan Racing wheels, a Rotora big brake kit, an Injen engine air intake, carbon fiber exterior components, and an aftermarket shift knob. The Honda S2000 was introduced in 1999 to celebrate Honda's 50th anniversary and quickly gained favor for its high-revving engine and balanced handling. The 2004 model year marked the introduction of significant updates, including revised suspension tuning, updated styling, and, for North America, a new 2.2-liter engine with added torque; though max revs were down by 800, the so-called F22C still spun all the way to a spine-tingling 8,200 rpm. Power comes from an F22C 2.2-liter inline-4, rated at 237 horsepower and 162 lb-ft of torque. Output is sent to the rear wheels via a 6-speed manual transmission.",
+      "Equipment": "A partial list of notable equipment reported by the seller includes: Limited-slip differential Power-operated soft top Leather upholstery Digital instrument cluster Push-button start Air conditioning"
+    }
+  },
+  "market_value": {
+    "count": 1,
+    "median": 43000,
+    "low": 43000,
+    "high": 43000,
+    "examples": [],
+    "source": "sale"
+  },
+  "voice_auditions": {
+    "onyx": "single-honda-s2000-20261025010359/voice_auditions/onyx.mp3",
+    "british_narrator": "single-honda-s2000-20261025010359/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-honda-s2000-20261025010359/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-honda-s2000-20261025010359/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-honda-s2000-20261025010359/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-honda-s2000-20261025010359/images/honda-s2000/exterior_side-01-nobg.png",
+  "side_profile_facing_direction": "left",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 8.509999990463257,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 18.729999542236328,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 28.609999656677246,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 36.920000076293945,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 44.53000068664551,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 49.670000076293945,
+        "layout": "bottom-center",
+        "framing": "half"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 7.45,
+        "pose": "open"
+      },
+      {
+        "start": 8.9,
+        "pose": "rest"
+      },
+      {
+        "start": 10.85,
+        "pose": "chest"
+      },
+      {
+        "start": 12.3,
+        "pose": "rest"
+      },
+      {
+        "start": 14.25,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 15.7,
+        "pose": "rest"
+      },
+      {
+        "start": 17.65,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 19.1,
+        "pose": "rest"
+      },
+      {
+        "start": 21.05,
+        "pose": "open"
+      },
+      {
+        "start": 22.5,
+        "pose": "rest"
+      },
+      {
+        "start": 24.45,
+        "pose": "chest"
+      },
+      {
+        "start": 25.9,
+        "pose": "rest"
+      },
+      {
+        "start": 27.85,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 29.3,
+        "pose": "rest"
+      },
+      {
+        "start": 31.25,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 32.7,
+        "pose": "rest"
+      },
+      {
+        "start": 34.65,
+        "pose": "open"
+      },
+      {
+        "start": 36.1,
+        "pose": "rest"
+      },
+      {
+        "start": 38.07,
+        "pose": "chest"
+      },
+      {
+        "start": 39.52,
+        "pose": "rest"
+      },
+      {
+        "start": 41.47,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 42.92,
+        "pose": "rest"
+      },
+      {
+        "start": 45.680001,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 47.130001,
+        "pose": "rest"
+      },
+      {
+        "start": 49.080001,
+        "pose": "open"
+      },
+      {
+        "start": 50.530001,
+        "pose": "rest"
+      },
+      {
+        "start": 52.480001,
+        "pose": "chest"
+      },
+      {
+        "start": 53.930001,
+        "pose": "rest"
+      },
+      {
+        "start": 55.880001,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 57.330001,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.66,
+    "continuous_motion": true
+  },
+  "video": "single_car_short.mp4"
+}
