@@ -2245,6 +2245,27 @@ export default function App() {
                       {item.type === "single-car" && (
                         <p className="hint">{item.hasVideo ? "Narrated video ready" : "Result saved without video"}</p>
                       )}
+                      {/* The build renders either way, so this is the only
+                          warning there is: with no word alignment the
+                          captions and the photo changes are estimates
+                          rather than timed to the voice, and the scenes
+                          fall back to an even split. */}
+                      {item.preview?.word_alignment_failed && (
+                        <p className="error">
+                          Captions not timed to the voice - word alignment failed
+                          ({String(item.preview.word_alignment_failed).slice(0, 90)}). The photos
+                          change on an even split instead of with the narration. Worth rebuilding
+                          before you upload this one.
+                        </p>
+                      )}
+                      {item.preview?.engine_clip_failed && (
+                        <p className="error">
+                          The engine clip did not make it in
+                          {item.preview.engine_clip_failed.gap_closed
+                            ? " - the gap it needed was closed again, so this is a normal video."
+                            : " and the gap could not be closed. Do not upload this one."}
+                        </p>
+                      )}
                       {item.type === "single-car" && item.preview && (
                         <BuildOptions result={item.preview} className="compact" />
                       )}

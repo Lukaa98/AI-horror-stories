@@ -4687,11 +4687,24 @@ def build_short(args):
     voice_auditions = (
         generate_voice_auditions(package["script"], output_dir, args.voice) if args.audition_voices else {}
     )
+    # Recorded, not just printed. A build whose alignment fails still
+    # renders: the captions land on estimated timing and the scene
+    # boundaries fall back to an even split, so the photos change on a
+    # metronome instead of with the narration. The Maserati story-first
+    # build shipped exactly that and the only way to notice was spotting
+    # that every scene reported the same length -- the manifest said
+    # nothing, so neither could the dashboard.
+    alignment_error = None
     try:
         word_timeline = transcribe_word_timeline(audio_path)
+        if not word_timeline:
+            alignment_error = "the transcript came back empty"
     except Exception as exc:
-        print(f"[single-car] Word alignment failed; falling back to estimated caption timing: {exc}")
+        alignment_error = str(exc)
         word_timeline = []
+    if alignment_error:
+        print(f"[single-car] WARNING: word alignment failed, so captions and scene changes "
+              f"are on estimated timing rather than the voice: {alignment_error}")
     # Run #182 stopped at "...not just a muscle car", leaving "it's a
     # statement" unspoken, and the Viper ACR stopped at "...your style"
     # without asking the rest of its closing question. The transcript is the
@@ -4830,6 +4843,10 @@ def build_short(args):
         "duration_seconds": timeline[-1]["end"] if timeline else 0,
         "mouth_timeline": timeline,
         "word_timeline": word_timeline,
+        # Absent on a healthy build. Present means the captions and the
+        # photo changes are estimates, which is worth knowing before
+        # anything is uploaded.
+        "word_alignment_failed": alignment_error,
         "media": media,
         "photo_sections": photo_sections,
         "selected_auction": selected_auction,
@@ -4981,7 +4998,20 @@ def main():
              "The take will differ; the words will not.")
     parser.add_argument("--no-audition-voices", dest="audition_voices", action="store_false")
     args = parser.parse_args()
-    print(json.dumps(build_short(args), indent=2))
+    result = build_short(args)
+    # A summary, not the manifest. Printing the whole thing put tens of
+    # thousands of characters of photo urls and word timings at the end of
+    # the log, and the end of the log is the part you can actually fetch --
+    # so every warning the build had just emitted was pushed out of reach.
+    # result.json on the output branch is the manifest; this is for reading.
+    print(json.dumps({
+        key: result.get(key) for key in (
+            "title", "youtube_title", "word_count", "duration_seconds",
+            "video", "thumbnail", "engine_clip", "engine_clip_failed",
+            "word_alignment_failed", "narration_unspoken_chars",
+            "normalized_audio_duration_seconds",
+        ) if result.get(key) is not None
+    }, indent=2))
 
 
 if __name__ == "__main__":

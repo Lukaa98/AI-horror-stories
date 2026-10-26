@@ -4911,3 +4911,52 @@ def test_a_scene_too_short_to_see_is_a_violation():
     # eighteen shipped builds was eleven words.
     assert not flashes(["A rear-mounted six-speed dual-clutch transaxle feeds all four wheels.",
                         "So would you have one?"])
+
+
+def test_a_build_whose_word_alignment_failed_says_so_in_the_manifest():
+    """It renders either way, which is the problem. With no word timeline
+    the captions land on estimated timing and _scene_time_boundaries falls
+    back to an even split, so the photos change on a metronome instead of
+    with the narration.
+
+    The Maserati story-first build shipped exactly that, and the only way
+    to notice was spotting that every scene reported the same length. The
+    failure was printed and never recorded, so the dashboard could not warn
+    about it."""
+    import inspect
+    import single_car_short
+
+    body = inspect.getsource(single_car_short.build_short)
+    # Both ways it can fail: an exception, and a transcript that comes back
+    # empty without raising.
+    assert 'alignment_error = "the transcript came back empty"' in body
+    assert "alignment_error = str(exc)" in body
+    assert '"word_alignment_failed": alignment_error,' in body
+    # Recorded before the manifest is written, not after.
+    assert body.index("alignment_error = None") < body.index('"word_alignment_failed"')
+
+    app = (Path(single_car_short.__file__).resolve().parents[2]
+           / "web/src/App.jsx").read_text()
+    assert "word_alignment_failed" in app
+    assert "Captions not timed to the voice" in app
+
+
+def test_the_build_prints_a_summary_rather_than_the_whole_manifest():
+    """Dumping the manifest put tens of thousands of characters of photo
+    urls and word timings at the end of the log -- and the end of the log is
+    the part that can actually be fetched, so every warning the build had
+    just emitted was pushed out of reach. Three separate diagnoses in this
+    pipeline were slowed down by it."""
+    import single_car_short
+
+    source = Path(single_car_short.__file__).read_text()
+    assert "print(json.dumps(build_short(args), indent=2))" not in source
+    # The things worth reading back are named explicitly.
+    for key in ("word_alignment_failed", "engine_clip_failed", "duration_seconds",
+                "narration_unspoken_chars", "youtube_title"):
+        assert f'"{key}"' in source, key
+    # And nothing consumes that stdout, so trimming it is safe.
+    workflow = (Path(single_car_short.__file__).resolve().parents[2]
+                / ".github/workflows/cars-research.yml").read_text()
+    step = workflow.split("single_car_short.py")[1][:400]
+    assert "tee" not in step and "$(" not in step
