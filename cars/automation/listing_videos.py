@@ -38,6 +38,32 @@ def _run(command, timeout=180, cwd=None):
     return subprocess.run(command, capture_output=True, text=True, timeout=timeout, cwd=cwd)
 
 
+def audio_track(source):
+    """What the audio stream is, or None when there isn't one.
+
+    The one thing the picker could not tell you and the one thing that
+    matters: the M2 build picked a video, cut five seconds out of it, built
+    the film around the gap and only then found the clip had no audio
+    stream at all -- the whole point of the feature is the sound. Probed
+    here, where the choice is made, instead of discovered four steps later.
+
+    Returns a short description for the picker ("aac, 48 kHz") or None.
+    """
+    done = _run([FFPROBE, "-v", "error", "-select_streams", "a:0",
+                 "-show_entries", "stream=codec_name,sample_rate",
+                 "-of", "default=noprint_wrappers=1:nokey=1", str(source)])
+    parts = [line.strip() for line in done.stdout.splitlines() if line.strip()]
+    if not parts:
+        return None
+    codec = parts[0]
+    rate = parts[1] if len(parts) > 1 else ""
+    try:
+        rate = f", {round(int(rate) / 1000)} kHz"
+    except (TypeError, ValueError):
+        rate = ""
+    return f"{codec}{rate}"
+
+
 def media_duration(source):
     """Seconds, or None. An HLS manifest answers this as readily as a file."""
     done = _run([FFPROBE, "-v", "error", "-show_entries", "format=duration",
@@ -124,6 +150,8 @@ def collect(auction_url, output_dir):
             "playback_url": url,
             "duration_seconds": media_duration(url),
             "poster": poster.name if poster else None,
+            # None means silent, which means unusable for an engine clip.
+            "audio": audio_track(url),
         })
     # "The scrape failed" and "this listing has no videos" are different
     # answers and were indistinguishable: the first run of this reported 0
@@ -150,7 +178,8 @@ def main():
     print(f"[listing-videos] {found['video_count']} video(s) on {args.auction_url}")
     for video in found["videos"]:
         print(f"  {video['index']}. {video['label'] or '(no label)'} "
-              f"- {video['duration_seconds']}s - poster={video['poster']}")
+              f"- {video['duration_seconds']}s - poster={video['poster']} "
+              f"- audio={video['audio'] or 'NONE (unusable for an engine clip)'}")
     return 0 if found["scrape_ok"] else 1
 
 

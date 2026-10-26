@@ -3104,6 +3104,14 @@ export default function App() {
                         {listingVideosState && listingVideosState !== "probing" && (
                           <p className="hint">{listingVideosState}</p>
                         )}
+                        {(listingVideos?.videos || []).length > 0
+                          && (listingVideos.videos).every((v) => v.audio === null) && (
+                          <p className="error">
+                            None of this listing&rsquo;s videos have an audio track, so there is
+                            no engine note to take. Untick &ldquo;Engine sound&rdquo; and build
+                            it normally, or find a listing whose videos have sound.
+                          </p>
+                        )}
                         <div className="listing-videos">
                           {(listingVideos?.videos || []).map((video) => (
                             <button
@@ -3112,7 +3120,15 @@ export default function App() {
                               className={"listing-video"
                                 + (sameListingVideo(chosenVideo?.playback_url,
                                                     video.playback_url)
-                                  ? " chosen" : "")}
+                                  ? " chosen" : "")
+                                // A probe that predates the audio check
+                                // reports undefined, not null -- that is
+                                // "unknown", and unknown stays pickable.
+                                + (video.audio === null ? " silent" : "")}
+                              disabled={video.audio === null}
+                              title={video.audio === null
+                                ? "This video has no sound - nothing to play"
+                                : video.audio || ""}
                               onClick={() => setChosenVideo(video)}
                             >
                               {video.poster && (
@@ -3122,7 +3138,10 @@ export default function App() {
                                        + `${listingProbeId(auctionUrl)}/${video.poster}`}
                                   alt="" loading="lazy" />
                               )}
-                              <span>{video.duration_seconds}s</span>
+                              <span>
+                                {video.duration_seconds}s
+                                {video.audio === null && " \u00b7 no sound"}
+                              </span>
                             </button>
                           ))}
                         </div>

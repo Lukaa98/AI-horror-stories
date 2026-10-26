@@ -1463,3 +1463,6 @@ button.secondary {
   display: block;
 }
 .listing-video.chosen { border-color: var(--accent, #6c5ce7); }
+/* A video with no audio track is no use to a feature that exists to play a
+   sound, so it reads as unavailable rather than merely labelled. */
+.listing-video.silent { opacity: 0.4; cursor: not-allowed; filter: grayscale(1); }
