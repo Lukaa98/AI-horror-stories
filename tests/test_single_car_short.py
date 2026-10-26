@@ -218,7 +218,7 @@ def test_horsepower_has_to_arrive_in_the_opening_scenes():
     import single_car_short
 
     late = {"scenes": [
-        {"narration": "Only 300 were ever built."},
+        {"narration": "Only 300 of them were ever built, and this is one."},
         {"narration": "That's the Challenger SRT Super Stock."},
         {"narration": "The stance alone tells you it means it."},
         {"narration": "It makes 807 horsepower and 707 lb-ft."},
@@ -230,9 +230,9 @@ def test_horsepower_has_to_arrive_in_the_opening_scenes():
     assert "never states the car's horsepower" not in found
 
     early = dict(late, scenes=[
-        {"narration": "Only 300 were ever built."},
+        {"narration": "Only 300 of them were ever built, and this is one."},
         {"narration": "That's the Challenger SRT Super Stock, all 807 horsepower of it."},
-        {"narration": "707 lb-ft goes with it."},
+        {"narration": "707 lb-ft of torque goes along with all of that."},
         {"narration": "So would you daily it?"},
     ])
     assert single_car_short._script_violations(early, "Dodge", "Challenger SRT Super Stock") == []
@@ -1536,7 +1536,7 @@ def test_a_rejected_history_is_researched_again_rather_than_reworded(monkeypatch
     monkeypatch.setattr(single_car_short, "_rewrite_scene_for",
                         lambda *a, **k: pytest.fail("the history is not a wording problem"))
 
-    scenes = ["It makes 617 hp and 575 lb-ft.",
+    scenes = ["It makes 617 hp and 575 lb-ft, which was supercar money then.",
               "In 2008 the SLR Roadster debuted as a limited-production model.",
               "So would you?"]
     package = {"scenes": [{"narration": t} for t in scenes], "script": " ".join(scenes),
@@ -1560,7 +1560,7 @@ def test_a_researched_history_that_is_no_better_is_discarded(monkeypatch):
 
     monkeypatch.setattr(single_car_short, "_research_replacement_history",
                         lambda *a, **k: {"year": 2008, "fact": "It was a supercar."})
-    scenes = ["It makes 617 hp and 575 lb-ft.",
+    scenes = ["It makes 617 hp and 575 lb-ft, which was supercar money then.",
               "In 2008 the SLR Roadster debuted as a limited-production model.",
               "So would you?"]
     original = list(scenes)
@@ -1583,7 +1583,7 @@ def test_a_rule_that_cannot_be_fixed_does_not_block_the_ones_that_can(monkeypatc
 
     scenes = [
         "In 2003 the SLR debuted, which is when it went on sale.",
-        "It makes 617 hp and 575 lb-ft.",
+        "It makes 617 hp and 575 lb-ft, which was supercar money then.",
         "The gear shifter emphasizes its race-bred DNA.",
         "So would you?",
     ]
@@ -4656,7 +4656,8 @@ def test_story_first_moves_the_figure_deadline_without_removing_it():
     def package(style):
         scenes = ([{"narration": "Ferrari had not turbocharged a road car since the F40.",
                     "media_type": "exterior"}] * 4
-                  + [{"narration": "It makes 553 horsepower and 557 lb-ft.", "media_type": "exterior"},
+                  + [{"narration": "It makes 553 horsepower and 557 lb-ft at the crank.",
+                     "media_type": "exterior"},
                      {"narration": "So would you have one?", "media_type": "exterior"}])
         return {"scenes": scenes, "word_count": 60, "title": "No turbo since the F40",
                 "history": {"year": 2015, "fact": "first turbo Ferrari since the F40"},
@@ -4725,7 +4726,8 @@ def test_an_opening_that_was_asked_for_and_ignored_is_a_hook_violation():
 
     def opening_rule(first):
         scenes = [{"narration": first, "media_type": "exterior"},
-                  {"narration": "It makes 553 horsepower and 557 lb-ft.", "media_type": "exterior"},
+                  {"narration": "It makes 553 horsepower and 557 lb-ft at the crank.",
+                     "media_type": "exterior"},
                   {"narration": "The 296 GTB pairs a hybrid V6 with 819 horsepower.",
                    "media_type": "exterior"},
                   {"narration": "So would you have one?", "media_type": "exterior"}]
@@ -4866,3 +4868,46 @@ def test_a_note_covered_in_words_rather_than_digits_still_counts():
     both = single_car_short._with_digits("it hit sixty in 2.9 seconds")
     assert "sixty" in both and "60" in both and "2.9" in both
     assert single_car_short._with_digits("a hand-built V6") == "a hand-built v6"
+
+
+def test_a_scene_too_short_to_see_is_a_violation():
+    """A scene is one photo held for as long as its line takes to say, so
+    the word count is the shot length. The GT-R default build spent two
+    consecutive scenes on "SEIBON supplied this aftermarket splitter" and
+    "Zeal made the aftermarket side skirts" -- 2.0 and 1.8 seconds, two
+    photos flashing past inside the retention window, one with no headline
+    at all. It scored zero violations, because nothing here had ever
+    looked at how long a scene is on screen.
+
+    Measured across 18 shipped builds, 0 of 129 scenes fall under the bar,
+    so this catches the degenerate case and nothing else."""
+    import single_car_short
+
+    def flashes(narrations):
+        scenes = [{"narration": text, "media_type": "exterior"} for text in narrations]
+        package = {"scenes": scenes, "word_count": sum(len(t.split()) for t in narrations),
+                   "title": "Built to humble",
+                   "history": {"year": 2012, "fact": "output rose to 530 hp for 2012"},
+                   "_angles": "", "_style": "classic"}
+        return [rule for rule in single_car_short._script_violations(
+            package, "Nissan", "Gt R Premium") if "too short to see" in rule]
+
+    real = ["It cost about $90,000 new to chase cars at twice the money, and stock examples "
+            "hit 60 in 2.9 seconds.",
+            "SEIBON supplied this aftermarket splitter.",
+            "Zeal made the aftermarket side skirts.",
+            "So would you choose this over a newer car with a warranty?"]
+    found = flashes(real)
+    assert found, "the build that shipped these scored zero violations"
+    assert "2 scene(s)" in found[0]
+    assert "SEIBON" in found[0] and "1.8 seconds" in found[0]
+
+    # It does not fight the rhythm rule. That asks for short SENTENCES, and
+    # a scene can hold several of them.
+    assert not flashes(["It cost about $90,000 to chase cars at twice the money.",
+                        "Then this. Nobody cared. And it still does it today.",
+                        "So would you choose this over a newer car with a warranty?"])
+    # And an ordinary scene is nowhere near the bar -- the shortest scene in
+    # eighteen shipped builds was eleven words.
+    assert not flashes(["A rear-mounted six-speed dual-clutch transaxle feeds all four wheels.",
+                        "So would you have one?"])

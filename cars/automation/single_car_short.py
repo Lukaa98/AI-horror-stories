@@ -1563,6 +1563,22 @@ DEPRECIATION_PADDING_RE = re.compile(
 # Horsepower has to arrive inside the opening beats, not merely somewhere in
 # the script. Three scenes of an eleven-scene, sixty-second cut is roughly the
 # first fifteen seconds -- the window in which a viewer decides to stay.
+# The fewest words a scene can carry and still be a beat somebody sees.
+#
+# A scene is one photo on screen for as long as its narration takes to
+# say, so the word count IS the shot length: at the narrator's measured
+# 2.79 words a second, five words is 1.8 seconds. The GT-R default build
+# spent scenes 3 and 4 on "SEIBON supplied this aftermarket splitter" and
+# "Zeal made the aftermarket side skirts" -- 2.0 and 1.8 seconds, two
+# photos flashing past inside the retention window, one of them without
+# even a headline. It scored zero violations, because nothing here had
+# ever looked at how long a scene is on screen.
+#
+# Eight words is about three seconds, which is long enough to register a
+# photo and read a headline. This does not fight the rhythm rule: that
+# asks for short SENTENCES, and a scene can hold three of them.
+MIN_SCENE_WORDS = 8
+
 EARLY_TECH_SCENES = 3
 # Story-first still wants the figure in the script and still wants it
 # before the end. Six rather than three: late enough that two or three
@@ -1915,6 +1931,25 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
                 f'"{opening[:120]}", which is about something else. Make that note the first '
                 "sentence -- as a hook, not a summary of it."
             )
+    # A scene too short to see.
+    #
+    # The last one is exempt. The closing question is meant to be punchy --
+    # "So would you have one?" is five words and the prompt asks for
+    # exactly that -- and nothing follows it to flash past, because the
+    # video ends there. What the rule is for is a photo appearing and
+    # vanishing in the middle of the script, which is what the GT-R build
+    # did twice inside the retention window.
+    flashes = [(index, scene.get("narration") or "")
+               for index, scene in enumerate(scenes[:-1], 1)
+               if 0 < len(str(scene.get("narration") or "").split()) < MIN_SCENE_WORDS]
+    if flashes:
+        index, narration = flashes[0]
+        violations.append(
+            f"{len(flashes)} scene(s) are too short to see -- scene {index} is "
+            f'"{narration}", about {len(narration.split()) / 2.79:.1f} seconds on screen. '
+            f"Each scene is one photo held for as long as its line takes to say, so give "
+            f"every scene at least {MIN_SCENE_WORDS} words or fold it into the scene beside it."
+        )
     # A note the script was given and did not use.
     #
     # This is the rule that was missing. The instruction to cover the notes
