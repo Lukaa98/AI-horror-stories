@@ -4827,3 +4827,42 @@ def test_story_first_does_not_still_demand_a_figure_in_the_first_sentence():
                    "_angles": "", "_style": style}
         assert [rule for rule in single_car_short._script_violations(
             package, "Ferrari", "California T") if "names the car" in rule], style
+
+
+def test_a_note_covered_in_words_rather_than_digits_still_counts():
+    """The GT-R story-first build was reported as ignoring note 1 when it
+    had not. The note wrote "hits 60", the narration said "hit sixty", and
+    "60" was the only anchor that note carried.
+
+    Spelling a number out is the right thing for a script that gets read
+    aloud, so penalising it was backwards."""
+    import single_car_short
+
+    note = ("Lead on this: it cost close to a hundred thousand dollars new and it was built "
+            "to beat cars at twice the money. Today it is the cheap way into a car that hits "
+            "60 in under three seconds.")
+    assert single_car_short._note_anchors(note, "Nissan", "Gt R Premium") == {"60"}
+
+    def covered(opening):
+        scenes = [{"narration": opening, "media_type": "exterior"},
+                  {"narration": "It makes 530 horsepower and 448 pound-feet.",
+                   "media_type": "exterior"},
+                  {"narration": "So would you have one?", "media_type": "exterior"}]
+        package = {"scenes": scenes, "word_count": 60, "title": "Built to humble",
+                   "history": {"year": 2012, "fact": "output rose to 530 hp for 2012"},
+                   "_angles": note, "_style": "classic"}
+        return not [rule for rule in single_car_short._script_violations(
+            package, "Nissan", "Gt R Premium") if rule.startswith("note ")]
+
+    # What the build actually wrote.
+    assert covered("Built to humble cars costing twice as much, it hit sixty in 2.9 seconds.")
+    # And the digit form still works.
+    assert covered("Built to humble cars costing twice as much, it hit 60 in 2.9 seconds.")
+    # A script that genuinely skipped the note is still caught.
+    assert not covered("Nissan hand-assembles the V6 in Yokohama.")
+
+    # The helper adds digits rather than replacing words, so a sentence
+    # keeps whatever spelling it had.
+    both = single_car_short._with_digits("it hit sixty in 2.9 seconds")
+    assert "sixty" in both and "60" in both and "2.9" in both
+    assert single_car_short._with_digits("a hand-built V6") == "a hand-built v6"

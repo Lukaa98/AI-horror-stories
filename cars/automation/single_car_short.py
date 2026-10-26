@@ -808,6 +808,39 @@ NOTES_ENFORCED_SHORT = 1
 _GENERIC_ANCHOR_RE = re.compile(r"[VIWBLR]\d{1,2}|HP|BHP|PS|NM|MPH|KPH|RPM|AWD|RWD|FWD", re.I)
 
 
+# Numbers as a narrator says them, for matching a note's figures against a
+# script that will be read out loud.
+#
+# The GT-R story-first build was reported as having ignored note 1 when it
+# had not: the note wrote "hits 60", the narration said "hit sixty", and
+# the only anchor that note carried was "60". Spelling a number out is the
+# right thing for a script that gets spoken, so penalising it was exactly
+# backwards.
+_SPOKEN_NUMBERS = {
+    "zero": "0", "one": "1", "two": "2", "three": "3", "four": "4", "five": "5",
+    "six": "6", "seven": "7", "eight": "8", "nine": "9", "ten": "10",
+    "eleven": "11", "twelve": "12", "thirteen": "13", "fourteen": "14",
+    "fifteen": "15", "sixteen": "16", "seventeen": "17", "eighteen": "18",
+    "nineteen": "19", "twenty": "20", "thirty": "30", "forty": "40",
+    "fifty": "50", "sixty": "60", "seventy": "70", "eighty": "80",
+    "ninety": "90", "hundred": "100", "thousand": "1000",
+}
+_SPOKEN_NUMBER_RE = re.compile(
+    r"\b(" + "|".join(sorted(_SPOKEN_NUMBERS, key=len, reverse=True)) + r")\b", re.I)
+
+
+def _with_digits(text):
+    """The text with spoken numbers also written as digits, for matching.
+
+    Added rather than replaced, so a sentence keeps whatever it already had
+    and an anchor can match either spelling.
+    """
+    lowered = str(text or "").lower()
+    extra = " ".join(_SPOKEN_NUMBERS[word.lower()]
+                     for word in _SPOKEN_NUMBER_RE.findall(lowered))
+    return f"{lowered} {extra}" if extra else lowered
+
+
 def _note_anchors(note, make, model):
     """The specifics in a note that prove the script actually used it.
 
@@ -1898,7 +1931,7 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
         limit = (NOTES_ENFORCED_SHORT
                  if (package.get("_style") or "").strip().lower() == "short"
                  else NOTES_ENFORCED)
-        spoken = script.lower()
+        spoken = _with_digits(script)
         for position, note in enumerate(wanted[:limit], 1):
             anchors = _note_anchors(note, make, model)
             if not anchors:
