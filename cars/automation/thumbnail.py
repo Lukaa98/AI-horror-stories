@@ -10,6 +10,7 @@ Deliberately not the video's own opening frame, which is a collage -- six
 small photos read as noise at 210 pixels wide.
 """
 import json
+import hashlib
 import re
 from pathlib import Path
 
@@ -50,8 +51,49 @@ MAX_SPEC_ROWS = 4
 NARRATOR_SPRITE = "narrator/thumbnail-narrator.png"
 CHEST_RECT = (0.21143, 0.36414, 0.56762, 0.0612)
 
+# The same narrator in the same stance on twenty-eight thumbnails is why
+# they stopped being used. The video's own sprite library has 256 of him,
+# so the thumbnail borrows from it.
+#
+# Only the steady poses: the others cross an arm over the body, which is
+# where the print goes. Sixty-four of those, varying in eyes, brows and
+# mouth, which is expression enough.
+SPRITE_POSE_GLOB = "narrator/sprites/*pose-steady*.png"
+# And they are drawn to different proportions from the thumbnail sprite --
+# his head is far larger relative to his body -- so the same rect maps onto
+# the collar. Measured off a render of a steady sprite instead of
+# converted. Both rects are relative to the character's own bounding box,
+# which for the thumbnail sprite happens to be the whole canvas.
+SPRITE_CHEST_RECT = (0.33, 0.443, 0.50, 0.07)
+# How much of him a close framing keeps, from the top. Cropping at the
+# thigh reads as a deliberate crop; cropping at the knee reads as a
+# mistake.
+CLOSE_CROP = 0.62
 
-def _print_the_car_on(narrator, media_paths, build_dir):
+
+def _pick_narrator(manifest):
+    """A sprite for this build, and where its chest is.
+
+    Chosen from the build rather than at random so a rebuild of the same
+    car looks the same, while two different cars do not. Returns
+    (image, body-relative chest rect, close_crop).
+    """
+    root = Path(__file__).resolve().parents[2]
+    sprites = sorted(root.glob(SPRITE_POSE_GLOB))
+    legacy = root / NARRATOR_SPRITE
+    car = manifest.get("car") or {}
+    seed = f"{car.get('make')}|{car.get('model')}|{manifest.get('title')}|{manifest.get('word_count')}"
+    digest = int(hashlib.sha1(seed.encode("utf-8")).hexdigest(), 16)
+    if not sprites:
+        if not legacy.is_file():
+            return None, CHEST_RECT, False
+        return Image.open(legacy).convert("RGBA"), CHEST_RECT, False
+    sprite = sprites[digest % len(sprites)]
+    # Roughly one in three framed close, so the grid has both.
+    return Image.open(sprite).convert("RGBA"), SPRITE_CHEST_RECT, (digest // 7) % 3 == 0
+
+
+def _print_the_car_on(narrator, media_paths, build_dir, rect=CHEST_RECT):
     """Put this build's car on the hoodie. Returns the sprite either way."""
     from narrator_video import chest_car_source
     from chest_print import build_chest_print
@@ -66,17 +108,23 @@ def _print_the_car_on(narrator, media_paths, build_dir):
     if art is None:
         return narrator
 
-    left, top, width, height = CHEST_RECT
-    box_w = int(narrator.width * width)
-    box_h = int(narrator.height * height)
+    # Measured against the character, not the canvas: the sprites carry
+    # transparent margins and the thumbnail one does not, so an
+    # image-relative rect lands in a different place on each.
+    body = narrator.getbbox() or (0, 0, narrator.width, narrator.height)
+    body_x, body_y = body[0], body[1]
+    body_w, body_h = body[2] - body[0], body[3] - body[1]
+    left, top, width, height = rect
+    box_w = int(body_w * width)
+    box_h = int(body_h * height)
     # The rig scales the print to fit its box and centres it, so a car with
     # a different aspect sits in the middle rather than being stretched.
     art = _fit(art, box_w, box_h)
     narrator = narrator.copy()
     narrator.alpha_composite(
         art,
-        (int(narrator.width * left) + (box_w - art.width) // 2,
-         int(narrator.height * top) + (box_h - art.height) // 2),
+        (body_x + int(body_w * left) + (box_w - art.width) // 2,
+         body_y + int(body_h * top) + (box_h - art.height) // 2),
     )
     return narrator
 
@@ -209,9 +257,70 @@ def _media_paths(manifest, build_dir):
     return paths
 
 
-# What a detail shot is, best first. An engine bay and a cabin are the two
-# that read at thumbnail size and say something an exterior cannot.
+# What a detail shot is. Only a tiebreak now -- which beat leads is
+# decided by the headline, not by what the photo happens to be of.
 HIGHLIGHT_TYPES = ("engine", "interior", "detail", "wheel")
+
+# A fault is the most clickable thing a car thumbnail can promise, because
+# it is the question anybody considering one is already asking. "Sticky
+# Switchgear" beat "Assembled In Maranello" on the same build, and the
+# sticky interior is what a buyer on that listing asked about unprompted.
+FLAW_WORDS = frozenset("""
+sticky stickiness worn wear cracked cracks crack crumbling peeling sagging faded fading
+leak leaks leaking fail fails failure failing rust rusting recall recalled weak fragile
+brittle broken blown warped seized sticking melting delaminating
+""".split())
+
+# Parts vocabulary that is true of every car in the class and promises
+# nothing: "Premium Seats", "Rear Transaxle", "Wheel Horsepower".
+DULL_WORDS = frozenset("""
+seat seats package packages line lines edition series aerodynamics cooling valve valves
+splitter transaxle steering horsepower torque wheel wheels brake brakes intake intakes
+exhaust suspension interior trim badge spoiler gearbox transmission chassis bodywork
+headlight headlights taillight taillights grille bumper mirror mirrors
+""".split())
+
+# A borrowed name -- Maranello on a Maserati, Pininfarina on anything -- is
+# a surprise worth a click. Written as a capitalised word with lower-case
+# letters in it, which is what separates "Maranello" from "VR38DETT": the
+# engine code is for people who already know, the place name is not.
+# Headlines are Title Case, so every word in one looks like a proper noun:
+# "Premium Seats" and "Rear Transaxle" both scored as borrowed names, and
+# "Premium Seats" came out ahead of the engine beat on a GT-R build. A
+# capitalised word only counts as a name when it is not an ordinary one.
+COMMON_TITLE_WORDS = frozenset("""
+premium rear front side factory remote valved sport power cooling hydraulic assembled
+replaced built today changes seconds automatic manual special limited carbon twin turbo
+stock standard early late final first last more less under over wide short long light
+heavy fast quick clean full half single double rare only ever never still just about
+""".split())
+_BORROWED_NAME_RE = re.compile(r"\b[A-Z][a-z]{3,}\b")
+_MONEY_RE = re.compile(r"[$£€]\s?\d|\d\s?[kK]\b|→|->")
+
+
+def _clickability(headline, make, model):
+    """How much a headline earns its place on the thumbnail.
+
+    Ranked rather than chosen by photo type, because the interesting beat
+    is not reliably the engine one. Scored against every headline four
+    real builds produced: "Sticky Switchgear" and "Sticky switches" come
+    top, the Maranello pair next, and "Premium Seats", "Rear Transaxle"
+    and "Wheel Horsepower" sort to the bottom where they belong.
+    """
+    text = str(headline or "")
+    words = {word.strip(".,!?-").lower() for word in text.split()}
+    own = {token.lower() for token in f"{make} {model}".split()}
+    score = 0
+    if words & FLAW_WORDS:
+        score += 3
+    if _MONEY_RE.search(text):
+        score += 2
+    ordinary = COMMON_TITLE_WORDS | DULL_WORDS | {"the", "and", "with", "from", "this", "that"}
+    if any(name.lower() not in own and name.lower() not in ordinary
+           for name in _BORROWED_NAME_RE.findall(text)):
+        score += 2
+    score -= len(words & DULL_WORDS)
+    return score
 # A headline has to be readable in a grid cell, so it is a few words or it
 # is not used. "Sticky Switchgear" works; a sentence does not.
 MAX_HIGHLIGHT_WORDS = 4
@@ -250,11 +359,15 @@ def _highlight(manifest, build_dir):
             continue
         full = build_dir / relative
         if full.is_file():
-            found.append((HIGHLIGHT_TYPES.index(kind), index, full, headline))
+            car = manifest.get("car") or {}
+            score = _clickability(headline, car.get("make", ""), car.get("model", ""))
+            # Negated score first, so the most clickable sorts to the top;
+            # photo type only breaks ties.
+            found.append((-score, HIGHLIGHT_TYPES.index(kind), index, full, headline))
     if not found:
         return None
     found.sort()
-    _, _, path, headline = found[0]
+    _, _, _, path, headline = found[0]
     return path, headline
 
 
@@ -277,6 +390,26 @@ def _hero_path(manifest, build_dir):
         if full.is_file():
             return full
     return None
+
+
+def _specs_rows(manifest):
+    ordered = {field: index for index, field in enumerate(THUMBNAIL_SPEC_FIELDS)}
+    return sorted(
+        (row for row in _spec_rows(manifest.get("key_specs") or {}) if row[0] in ordered),
+        key=lambda row: ordered[row[0]],
+    )[:MAX_SPEC_ROWS]
+
+
+def _specs_height(manifest):
+    """How tall the table will be, before it is drawn.
+
+    Needed because where the table goes used to be derived from where the
+    narrator's feet are, which only held while he filled the band. A
+    close-framed narrator sits lower, and the table went off the bottom of
+    the frame with "KEY SPECS" half visible against the edge.
+    """
+    rows = _specs_rows(manifest)
+    return (64 + 84 * len(rows)) if rows else 0
 
 
 def _draw_specs(frame, manifest, origin, width):
@@ -360,14 +493,18 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
     band_h = int(height * (0.50 if highlight else 0.66))
     band_top = height - band_h
 
-    narrator_path = Path(__file__).resolve().parents[2] / NARRATOR_SPRITE
+    sprite, chest, close = _pick_narrator(manifest)
     narrator_top = height
     narrator_x = width
-    if narrator_path.is_file():
+    if sprite is not None:
         narrator = _print_the_car_on(
-            Image.open(narrator_path).convert("RGBA"),
-            _media_paths(manifest, build_dir), build_dir)
-        narrator = _fit(_trim(narrator), int(width * (0.34 if highlight else 0.42)), band_h)
+            sprite, _media_paths(manifest, build_dir), build_dir, chest)
+        narrator = _trim(narrator)
+        if close:
+            # Cut at the thigh and let him sit larger in the same band.
+            narrator = narrator.crop((0, 0, narrator.width, int(narrator.height * CLOSE_CROP)))
+        narrator = _fit(narrator, int(width * ((0.34 if highlight else 0.42)
+                                               * (1.5 if close else 1.0))), band_h)
         narrator_top = height - narrator.height
         narrator_x = width - narrator.width - int(width * 0.03)
         frame.paste(narrator, (narrator_x, narrator_top), narrator)
@@ -412,10 +549,12 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
         draw.text(((lane - make_w) / 2, make_y), make, font=make_font, fill=_deepen(accent))
 
     # Sat against the narrator's feet rather than floating, so the two read
-    # as one band instead of two objects adrift in white.
-    _draw_specs(frame, manifest,
-                (int(width * 0.04), narrator_top + int(band_h * 0.46)),
-                width=int(width * 0.55))
+    # as one band instead of two objects adrift in white -- but never past
+    # the bottom of the frame, whatever height he ended up.
+    specs_h = _specs_height(manifest)
+    specs_y = min(narrator_top + int(band_h * 0.46),
+                  height - specs_h - int(height * 0.04))
+    _draw_specs(frame, manifest, (int(width * 0.04), specs_y), width=int(width * 0.55))
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)

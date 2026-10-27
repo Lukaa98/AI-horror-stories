@@ -184,10 +184,15 @@ def test_the_thumbnail_leads_on_a_detail_shot_rather_than_another_white_coupe(tm
     found = thumbnail._highlight(_maserati(), tmp_path)
     assert found is not None
     path, headline = found
-    # Engine before cabin, and never an exterior cut-out: a detail is
-    # wanted whole, background and all, the way the video shows it.
-    assert path.name == "engine.jpg"
-    assert headline == "Assembled In Maranello"
+    # The flaw wins over the engine bay: "Sticky Switchgear" is the thing
+    # anybody considering one of these is already worried about, and a
+    # bidder on that listing asked about it unprompted. Photo type only
+    # breaks ties now.
+    assert headline == "Sticky Switchgear"
+    assert path.name == "interior.jpg"
+    # And never an exterior cut-out: a detail is wanted whole, background
+    # and all, the way the video shows it.
+    assert "nobg" not in path.name
 
     # A headline too long for a grid cell is not used, so scene 4 is
     # skipped even though it has a detail photo.
@@ -226,3 +231,60 @@ def test_a_headline_is_wrapped_rather_than_cut_short():
     assert "".join(lines).count("SUPERCALIFRAGILISTIC") == 3
     assert lines, "never returns nothing to draw"
     assert thumbnail._wrapped_headline(draw, "", 900)[0] == []
+
+
+def test_the_most_clickable_headline_wins_not_the_prettiest_photo():
+    """Scored against every headline four real builds produced. The two
+    sticky-interior beats come top, the Maranello pair next, and "Premium
+    Seats", "Rear Transaxle" and "Wheel Horsepower" sort to the bottom
+    where they belong."""
+    import thumbnail
+
+    def score(headline, make="Maserati", model="Granturismo Sport"):
+        return thumbnail._clickability(headline, make, model)
+
+    # A fault is the most clickable thing a car thumbnail can promise.
+    assert score("Sticky Switchgear") > score("Assembled In Maranello")
+    assert score("Sticky switches") > score("Maranello-built")
+    # A borrowed name beats parts vocabulary.
+    assert score("Assembled In Maranello") > score("Premium Seats", "Nissan", "Gt R")
+    assert score("Pininfarina") > score("Factory Aerodynamics")
+    # Money reads.
+    assert score("$130K → $43K") > score("MC Sport Line")
+
+    # Headlines are Title Case, so every word looks like a proper noun.
+    # "Premium Seats" scored as a borrowed name and beat the engine beat on
+    # a GT-R build until ordinary words were excluded.
+    for dull in ("Premium Seats", "Rear Transaxle", "Wheel Horsepower",
+                 "Hydraulic Steering", "Remote Exhaust Valves"):
+        assert score(dull, "Nissan", "Gt R Premium") <= 0, dull
+    # The car's own name is not a borrowed one.
+    assert score("Maserati Badge") <= 0
+
+
+def test_the_narrator_is_not_the_same_man_in_the_same_stance_every_time():
+    """Twenty-eight thumbnails with one pose is why they stopped being
+    used. Chosen from the build rather than at random, so a rebuild of the
+    same car matches and two different cars do not."""
+    import thumbnail
+
+    def pick(make, model, title, words):
+        return thumbnail._pick_narrator(
+            {"car": {"make": make, "model": model}, "title": title, "word_count": words})
+
+    a = pick("Maserati", "Granturismo Sport", "A", 150)
+    b = pick("Nissan", "Gt R Premium", "B", 154)
+    assert a[0] is not None and b[0] is not None
+    # Same build, same man.
+    assert pick("Maserati", "Granturismo Sport", "A", 150)[0].size == a[0].size
+    # Only the steady poses, because the others put an arm where the print
+    # goes.
+    sprites = sorted(Path(thumbnail.__file__).resolve().parents[2]
+                     .glob(thumbnail.SPRITE_POSE_GLOB))
+    assert sprites, "the sprite library moved"
+    assert all("pose-steady" in p.name for p in sprites)
+    assert len(sprites) > 20, "not enough variety to be worth it"
+
+    # Across a spread of builds both framings turn up.
+    framings = {pick("Make", f"Model{n}", f"T{n}", 140 + n)[2] for n in range(30)}
+    assert framings == {True, False}, "every build got the same framing"
