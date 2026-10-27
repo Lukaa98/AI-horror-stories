@@ -20,9 +20,9 @@
   "status": "uploaded",
   "publish_at": "2026-10-27T03:06:00Z",
   "thumbnail_set": true,
-  "comment_posted": false,
-  "comment_error": "<HttpError 403 when requesting https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&alt=json returned \"Request had insufficient authentication scopes.\". Details: \"[{'message': 'Insufficient Permission', 'domain': 'global', 'reason': 'insufficientPermissions'}]\">",
+  "comment_posted": true,
   "video_id": "T_0Nlvm23I0",
   "video_url": "https://youtu.be/T_0Nlvm23I0",
-  "uploaded_at": 1793070102
+  "uploaded_at": 1793070102,
+  "comment_id": "UgwGtbt-E5bsAPhLH9d4AaABAg"
 }
