@@ -9,8 +9,8 @@ like each other.
 Deliberately not the video's own opening frame, which is a collage -- six
 small photos read as noise at 210 pixels wide.
 """
-import json
 import hashlib
+import json
 import re
 from pathlib import Path
 
@@ -52,49 +52,62 @@ NARRATOR_SPRITE = "narrator/thumbnail-narrator.png"
 CHEST_RECT = (0.21143, 0.36414, 0.56762, 0.0612)
 
 # The same narrator in the same stance on twenty-eight thumbnails is why
-# they stopped being used. The video's own sprite library has 256 of him,
-# so the thumbnail borrows from it.
+# they stopped being used. These are stills of the v21 rig -- the one the
+# video actually draws -- in a few framings and poses, exported by
+# narrator/render/export-thumbnail-poses.js.
 #
-# Only the steady poses: the others cross an arm over the body, which is
-# where the print goes. Sixty-four of those, varying in eyes, brows and
-# mouth, which is expression enough.
-SPRITE_POSE_GLOB = "narrator/sprites/*pose-steady*.png"
-# And they are drawn to different proportions from the thumbnail sprite --
-# his head is far larger relative to his body -- so the same rect maps onto
-# the collar. Measured off a render of a steady sprite instead of
-# converted. Both rects are relative to the character's own bounding box,
-# which for the thumbnail sprite happens to be the whole canvas.
-SPRITE_CHEST_RECT = (0.33, 0.443, 0.50, 0.07)
-# How much of him a close framing keeps, from the top. Cropping at the
-# thigh reads as a deliberate crop; cropping at the knee reads as a
-# mistake.
-CLOSE_CROP = 0.62
+# narrator/sprites was tried first and was the wrong character: it is the
+# legacy set the video stopped using when it moved to v21, so every
+# thumbnail would have carried a narrator the channel no longer has.
+THUMBNAIL_POSES = "narrator/thumbnail-poses"
+# Each still records where #chest-car sits, read off the rig itself rather
+# than measured off a render. Eyeballing it put the print on his collar
+# once already.
+POSE_INDEX = "poses.json"
 
 
 def _pick_narrator(manifest):
-    """A sprite for this build, and where its chest is.
+    """A pose for this build, and the box on it the car is printed in.
 
-    Chosen from the build rather than at random so a rebuild of the same
-    car looks the same, while two different cars do not. Returns
-    (image, body-relative chest rect, close_crop).
+    Chosen from the build rather than at random, so a rebuild of the same
+    car looks the same while two different cars do not. Returns
+    (image, chest box in that image's own pixels).
     """
     root = Path(__file__).resolve().parents[2]
-    sprites = sorted(root.glob(SPRITE_POSE_GLOB))
-    legacy = root / NARRATOR_SPRITE
+    folder = root / THUMBNAIL_POSES
+    index_path = folder / POSE_INDEX
     car = manifest.get("car") or {}
     seed = f"{car.get('make')}|{car.get('model')}|{manifest.get('title')}|{manifest.get('word_count')}"
     digest = int(hashlib.sha1(seed.encode("utf-8")).hexdigest(), 16)
-    if not sprites:
-        if not legacy.is_file():
-            return None, CHEST_RECT, False
-        return Image.open(legacy).convert("RGBA"), CHEST_RECT, False
-    sprite = sprites[digest % len(sprites)]
-    # Roughly one in three framed close, so the grid has both.
-    return Image.open(sprite).convert("RGBA"), SPRITE_CHEST_RECT, (digest // 7) % 3 == 0
+
+    if index_path.is_file():
+        try:
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            index = {}
+        names = sorted(name for name in index if (folder / f"{name}.png").is_file())
+        if names:
+            name = names[digest % len(names)]
+            chest = index[name]["chest"]
+            return (Image.open(folder / f"{name}.png").convert("RGBA"),
+                    (chest["x"], chest["y"], chest["width"], chest["height"]))
+
+    legacy = root / NARRATOR_SPRITE
+    if not legacy.is_file():
+        return None, None
+    narrator = Image.open(legacy).convert("RGBA")
+    left, top, width, height = CHEST_RECT
+    return narrator, (narrator.width * left, narrator.height * top,
+                      narrator.width * width, narrator.height * height)
 
 
-def _print_the_car_on(narrator, media_paths, build_dir, rect=CHEST_RECT):
-    """Put this build's car on the hoodie. Returns the sprite either way."""
+def _print_the_car_on(narrator, media_paths, build_dir, box):
+    """Put this build's car on the hoodie. Returns the sprite either way.
+
+    `box` is in the sprite's own pixels, so the print happens before
+    anything is trimmed or scaled. Fractions were ambiguous between the
+    canvas and the character, and the two sprite sets disagree on both.
+    """
     from narrator_video import chest_car_source
     from chest_print import build_chest_print
 
@@ -108,23 +121,14 @@ def _print_the_car_on(narrator, media_paths, build_dir, rect=CHEST_RECT):
     if art is None:
         return narrator
 
-    # Measured against the character, not the canvas: the sprites carry
-    # transparent margins and the thumbnail one does not, so an
-    # image-relative rect lands in a different place on each.
-    body = narrator.getbbox() or (0, 0, narrator.width, narrator.height)
-    body_x, body_y = body[0], body[1]
-    body_w, body_h = body[2] - body[0], body[3] - body[1]
-    left, top, width, height = rect
-    box_w = int(body_w * width)
-    box_h = int(body_h * height)
+    left, top, box_w, box_h = (int(round(v)) for v in box)
     # The rig scales the print to fit its box and centres it, so a car with
     # a different aspect sits in the middle rather than being stretched.
     art = _fit(art, box_w, box_h)
     narrator = narrator.copy()
     narrator.alpha_composite(
         art,
-        (body_x + int(body_w * left) + (box_w - art.width) // 2,
-         body_y + int(body_h * top) + (box_h - art.height) // 2),
+        (left + (box_w - art.width) // 2, top + (box_h - art.height) // 2),
     )
     return narrator
 
@@ -493,18 +497,15 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
     band_h = int(height * (0.50 if highlight else 0.66))
     band_top = height - band_h
 
-    sprite, chest, close = _pick_narrator(manifest)
+    sprite, chest = _pick_narrator(manifest)
     narrator_top = height
     narrator_x = width
     if sprite is not None:
         narrator = _print_the_car_on(
             sprite, _media_paths(manifest, build_dir), build_dir, chest)
-        narrator = _trim(narrator)
-        if close:
-            # Cut at the thigh and let him sit larger in the same band.
-            narrator = narrator.crop((0, 0, narrator.width, int(narrator.height * CLOSE_CROP)))
-        narrator = _fit(narrator, int(width * ((0.34 if highlight else 0.42)
-                                               * (1.5 if close else 1.0))), band_h)
+        # The framing is baked into the still, so a close one is simply
+        # wider than it is tall and fits the band differently.
+        narrator = _fit(_trim(narrator), int(width * (0.34 if highlight else 0.42)), band_h)
         narrator_top = height - narrator.height
         narrator_x = width - narrator.width - int(width * 0.03)
         frame.paste(narrator, (narrator_x, narrator_top), narrator)

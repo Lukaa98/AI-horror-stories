@@ -1,0 +1,130 @@
+{
+  "stand-rest": {
+    "name": "stand-rest",
+    "framing": "full",
+    "pose": "rest",
+    "mouth": "smile",
+    "chest": {
+      "x": 235.1292266845703,
+      "y": 363.4910583496094,
+      "width": 154.01808166503906,
+      "height": 48.80108642578125
+    },
+    "canvas": {
+      "width": 620,
+      "height": 1040
+    }
+  },
+  "stand-open": {
+    "name": "stand-open",
+    "framing": "full",
+    "pose": "open",
+    "mouth": "smile",
+    "chest": {
+      "x": 235.1292266845703,
+      "y": 363.4910583496094,
+      "width": 154.01808166503906,
+      "height": 48.80108642578125
+    },
+    "canvas": {
+      "width": 620,
+      "height": 1040
+    }
+  },
+  "stand-closed": {
+    "name": "stand-closed",
+    "framing": "full",
+    "pose": "rest",
+    "mouth": "closed",
+    "chest": {
+      "x": 235.1292266845703,
+      "y": 363.4910583496094,
+      "width": 154.01808166503906,
+      "height": 48.80108642578125
+    },
+    "canvas": {
+      "width": 620,
+      "height": 1040
+    }
+  },
+  "stand-wave": {
+    "name": "stand-wave",
+    "framing": "full",
+    "pose": "wave",
+    "mouth": "smile",
+    "chest": {
+      "x": 235.1292266845703,
+      "y": 363.4910583496094,
+      "width": 154.01808166503906,
+      "height": 48.80108642578125
+    },
+    "canvas": {
+      "width": 620,
+      "height": 1040
+    }
+  },
+  "close-rest": {
+    "name": "close-rest",
+    "framing": "half",
+    "pose": "rest",
+    "mouth": "smile",
+    "chest": {
+      "x": 198.90145874023438,
+      "y": 528.8899536132812,
+      "width": 228.54293823242188,
+      "height": 72.41455078125
+    },
+    "canvas": {
+      "width": 620,
+      "height": 1040
+    }
+  },
+  "close-open": {
+    "name": "close-open",
+    "framing": "half",
+    "pose": "open",
+    "mouth": "small",
+    "chest": {
+      "x": 198.90145874023438,
+      "y": 528.8899536132812,
+      "width": 228.54293823242188,
+      "height": 72.41455078125
+    },
+    "canvas": {
+      "width": 620,
+      "height": 1040
+    }
+  },
+  "bust-rest": {
+    "name": "bust-rest",
+    "framing": "bust",
+    "pose": "rest",
+    "mouth": "smile",
+    "chest": {
+      "x": 145.8096466064453,
+      "y": 803.971435546875,
+      "width": 337.75885009765625,
+      "height": 107.01983642578125
+    },
+    "canvas": {
+      "width": 620,
+      "height": 1040
+    }
+  },
+  "bust-closed": {
+    "name": "bust-closed",
+    "framing": "bust",
+    "pose": "rest",
+    "mouth": "closed",
+    "chest": {
+      "x": 145.8096466064453,
+      "y": 803.971435546875,
+      "width": 337.75885009765625,
+      "height": 107.01983642578125
+    },
+    "canvas": {
+      "width": 620,
+      "height": 1040
+    }
+  }
+}

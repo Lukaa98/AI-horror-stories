@@ -1,4 +1,5 @@
 """The channel still: what it says, and what it refuses to inherit."""
+import json
 import sys
 from pathlib import Path
 
@@ -111,21 +112,28 @@ def test_the_thumbnail_hoodie_carries_the_same_car_as_the_video(tmp_path):
             car.putpixel((x, y), (200, 40, 40, 255))
     car.save(build / "side-nobg.png")
 
-    manifest = {"media": [{"path": "images/manual/side-nobg.png"}]}
-    blank = Image.open(Path(thumbnail.__file__).resolve().parents[2]
-                       / thumbnail.NARRATOR_SPRITE).convert("RGBA")
+    manifest = {"media": [{"path": "images/manual/side-nobg.png"}],
+                "car": {"make": "Maserati", "model": "Granturismo"}, "title": "T",
+                "word_count": 150}
+    blank, chest = thumbnail._pick_narrator(manifest)
+    assert blank is not None and chest is not None
     printed = thumbnail._print_the_car_on(
-        blank, thumbnail._media_paths(manifest, tmp_path / "build"), tmp_path / "build")
+        blank.copy(), thumbnail._media_paths(manifest, tmp_path / "build"),
+        tmp_path / "build", chest)
     assert printed.tobytes() != blank.tobytes(), "the car should be on the hoodie"
+    # The print lands inside the box the rig reported, not somewhere near it.
+    x, y, w, h = (int(round(v)) for v in chest)
+    assert printed.crop((x, y, x + w, y + h)).tobytes() \
+        != blank.crop((x, y, x + w, y + h)).tobytes()
 
-    left, top, width, height = thumbnail.CHEST_RECT
-    box = (int(blank.width * left), int(blank.height * top),
-           int(blank.width * (left + width)), int(blank.height * (top + height)))
-    assert printed.crop(box).tobytes() != blank.crop(box).tobytes()
-    # Everything outside the chest is untouched -- the print does not leak
-    # onto the face or the sleeves.
-    above = (0, 0, blank.width, int(blank.height * top))
+    # Everything outside that box is untouched -- the print does not leak
+    # onto the face or the sleeves. Checked against the box the rig gave
+    # rather than a fraction of the canvas: the fraction was measured for a
+    # sprite that is no longer the one being drawn.
+    above = (0, 0, blank.width, y)
     assert printed.crop(above).tobytes() == blank.crop(above).tobytes()
+    below = (0, y + h, blank.width, blank.height)
+    assert printed.crop(below).tobytes() == blank.crop(below).tobytes()
 
 
 def test_the_headline_clears_youtube_s_crop():
@@ -273,18 +281,20 @@ def test_the_narrator_is_not_the_same_man_in_the_same_stance_every_time():
             {"car": {"make": make, "model": model}, "title": title, "word_count": words})
 
     a = pick("Maserati", "Granturismo Sport", "A", 150)
-    b = pick("Nissan", "Gt R Premium", "B", 154)
-    assert a[0] is not None and b[0] is not None
+    assert a[0] is not None and a[1] is not None
     # Same build, same man.
-    assert pick("Maserati", "Granturismo Sport", "A", 150)[0].size == a[0].size
-    # Only the steady poses, because the others put an arm where the print
-    # goes.
-    sprites = sorted(Path(thumbnail.__file__).resolve().parents[2]
-                     .glob(thumbnail.SPRITE_POSE_GLOB))
-    assert sprites, "the sprite library moved"
-    assert all("pose-steady" in p.name for p in sprites)
-    assert len(sprites) > 20, "not enough variety to be worth it"
+    assert pick("Maserati", "Granturismo Sport", "A", 150)[1] == a[1]
 
-    # Across a spread of builds both framings turn up.
-    framings = {pick("Make", f"Model{n}", f"T{n}", 140 + n)[2] for n in range(30)}
-    assert framings == {True, False}, "every build got the same framing"
+    # Stills of the v21 rig -- the character the video actually draws --
+    # not narrator/sprites, which is the legacy set it stopped using.
+    folder = Path(thumbnail.__file__).resolve().parents[2] / thumbnail.THUMBNAIL_POSES
+    index = json.loads((folder / thumbnail.POSE_INDEX).read_text())
+    assert len(index) >= 4, "not enough variety to be worth it"
+    for name, entry in index.items():
+        assert (folder / f"{name}.png").is_file(), name
+        # Every still records where the print goes, read off the rig.
+        assert entry["chest"]["width"] > 0 and entry["chest"]["height"] > 0
+
+    # Standing and closer both turn up across a spread of builds.
+    chosen = {pick("Make", f"Model{n}", f"T{n}", 140 + n)[1] for n in range(40)}
+    assert len(chosen) > 1, "every build got the same pose"
