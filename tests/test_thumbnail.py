@@ -2,7 +2,7 @@
 import sys
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cars" / "automation"))
 
@@ -136,7 +136,93 @@ def test_the_headline_clears_youtube_s_crop():
 
     assert thumbnail.SAFE_TOP >= 0.08, "a headline this high is inside the trim"
     source = Path(thumbnail.__file__).read_text()
-    block = source[source.index("title, title_font = _headline"):]
+    block = source[source.index("highlight = _highlight("):]
     block = block[:block.index("band_h = ")]
-    assert "int(height * SAFE_TOP)" in block, "the title has to start below the safe top"
+    # Both shapes -- the detail headline and the model name -- start from
+    # the same safe top, and neither draws above it.
+    assert block.count("top = int(height * SAFE_TOP)") == 1
+    assert "draw.text(((width - line_w) / 2, top)" in block, "the wrapped headline"
+    assert "draw.text(((width - title_w) / 2, top)" in block, "the model name"
     assert "int(height * 0.025)" not in block, "that was the cropped position"
+
+
+def _maserati():
+    """The real GranTurismo build: an engine bay, a cabin and three cut-outs."""
+    return {
+        "car": {"make": "Maserati", "model": "Granturismo Sport"},
+        "scenes": [
+            {"headline": "Ferrari-Built V8", "media_type": "exterior"},
+            {"headline": "Assembled In Maranello", "media_type": "engine"},
+            {"headline": "Sticky Switchgear", "media_type": "interior"},
+            {"headline": "A headline far too long to read in a grid cell at all",
+             "media_type": "detail"},
+        ],
+        "media": [
+            {"path": "images/manual/front-nobg.png", "type": "exterior"},
+            {"path": "images/manual/engine.jpg", "type": "engine"},
+            {"path": "images/manual/interior.jpg", "type": "interior"},
+            {"path": "images/manual/detail.jpg", "type": "detail"},
+        ],
+    }
+
+
+def test_the_thumbnail_leads_on_a_detail_shot_rather_than_another_white_coupe(tmp_path):
+    """Twenty-eight thumbnails, all the same shape: the model name, a
+    cut-out of the car from the front, the specs and the narrator. Left to
+    pick its own frame YouTube chose "STICKY SWITCHGEAR" over a photo of
+    the cabin, and that is the one that reads in a feed.
+
+    The pieces were already here -- scenes carry a short headline and pair
+    with their photo by index."""
+    import thumbnail
+
+    for name in ("engine.jpg", "interior.jpg", "detail.jpg"):
+        path = tmp_path / "images" / "manual" / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        Image.new("RGB", (800, 600), (90, 90, 90)).save(path)
+
+    found = thumbnail._highlight(_maserati(), tmp_path)
+    assert found is not None
+    path, headline = found
+    # Engine before cabin, and never an exterior cut-out: a detail is
+    # wanted whole, background and all, the way the video shows it.
+    assert path.name == "engine.jpg"
+    assert headline == "Assembled In Maranello"
+
+    # A headline too long for a grid cell is not used, so scene 4 is
+    # skipped even though it has a detail photo.
+    long_only = _maserati()
+    long_only["scenes"] = long_only["scenes"][3:]
+    long_only["media"] = long_only["media"][3:]
+    assert thumbnail._highlight(long_only, tmp_path) is None
+
+    # With nothing but exteriors it falls back to the old shape.
+    exteriors = _maserati()
+    exteriors["scenes"] = exteriors["scenes"][:1]
+    exteriors["media"] = exteriors["media"][:1]
+    assert thumbnail._highlight(exteriors, tmp_path) is None
+
+
+def test_a_headline_is_wrapped_rather_than_cut_short():
+    """_headline drops trailing words to keep the type big, which is right
+    for a model name -- "S680 4MATIC Executive Long" is still the car as
+    "S680 4MATIC" -- and wrong for a sentence. Routed through it,
+    "Assembled In Maranello" came out as "ASSEMBLED IN", which says nothing
+    and names nowhere."""
+    import thumbnail
+
+    frame = Image.new("RGB", (1080, 1920), (255, 255, 255))
+    draw = ImageDraw.Draw(frame)
+
+    for text in ("ASSEMBLED IN MARANELLO", "STICKY SWITCHGEAR",
+                 "FERRARI-BUILT V8", "$130K TO $43K"):
+        lines, font = thumbnail._wrapped_headline(draw, text, 1080 - 70)
+        assert " ".join(lines).split() == text.split(), f"{text} lost words: {lines}"
+        assert len(lines) <= 2
+        assert font.size >= 58
+
+    # One word that cannot fit is set at the floor rather than altered.
+    lines, font = thumbnail._wrapped_headline(draw, "SUPERCALIFRAGILISTIC" * 3, 400)
+    assert "".join(lines).count("SUPERCALIFRAGILISTIC") == 3
+    assert lines, "never returns nothing to draw"
+    assert thumbnail._wrapped_headline(draw, "", 900)[0] == []

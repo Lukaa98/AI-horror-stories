@@ -159,6 +159,42 @@ def _headline(draw, model, max_width):
     return text, _fit_text(draw, text, max_width, start_size=190, min_size=56)
 
 
+def _wrapped_headline(draw, text, max_width, max_lines=2, start=176, min_size=58):
+    """A headline set across up to two lines, never shortened.
+
+    _headline drops trailing words to keep the type big, which is right for
+    a model name -- "S680 4MATIC Executive Long" is still the car as
+    "S680 4MATIC" -- and wrong for a sentence. Routed through it,
+    "Assembled In Maranello" came out as "ASSEMBLED IN", which says
+    nothing and names nowhere.
+
+    So this wraps instead. Words are never dropped: if it will not fit on
+    one line it goes on two, and if it will not fit on two it is set at the
+    floor and allowed to be small rather than altered.
+    """
+    words = [word for word in str(text or "").split() if word]
+    if not words:
+        return [], _font(min_size)
+    size = start
+    while size >= min_size:
+        font = _font(size)
+        lines, current = [], ""
+        for word in words:
+            trial = f"{current} {word}".strip()
+            if current and draw.textlength(trial, font=font) > max_width:
+                lines.append(current)
+                current = word
+            else:
+                current = trial
+        lines.append(current)
+        if len(lines) <= max_lines and all(
+                draw.textlength(line, font=font) <= max_width for line in lines):
+            return lines, font
+        size -= 4
+    font = _font(min_size)
+    return [" ".join(words)], font
+
+
 def _media_paths(manifest, build_dir):
     """Every media file this build actually has on disk, as full paths."""
     build_dir = Path(build_dir)
@@ -171,6 +207,55 @@ def _media_paths(manifest, build_dir):
         if full.is_file() and str(full) not in paths:
             paths.append(str(full))
     return paths
+
+
+# What a detail shot is, best first. An engine bay and a cabin are the two
+# that read at thumbnail size and say something an exterior cannot.
+HIGHLIGHT_TYPES = ("engine", "interior", "detail", "wheel")
+# A headline has to be readable in a grid cell, so it is a few words or it
+# is not used. "Sticky Switchgear" works; a sentence does not.
+MAX_HIGHLIGHT_WORDS = 4
+
+
+def _highlight(manifest, build_dir):
+    """The detail photo worth leading with, and the headline that goes with it.
+
+    Every thumbnail was the same shape: the model name, a cut-out of the
+    car from the front, the specs and the narrator. Twenty-eight of them
+    and the only thing that changed was the car. YouTube, left to pick its
+    own frame, chose "STICKY SWITCHGEAR" over a photo of the cabin -- a
+    specific, odd detail rather than another white coupe -- and that is the
+    one that reads in a feed.
+
+    The pieces were already here. Scenes carry a short headline and pair
+    with their photo by index, so the thumbnail can use the same beat the
+    video does. Returns (path, headline), or None to keep the old shape.
+    """
+    build_dir = Path(build_dir)
+    scenes = manifest.get("scenes") or []
+    media = manifest.get("media") or []
+    found = []
+    for index, scene in enumerate(scenes):
+        headline = str(scene.get("headline") or "").strip()
+        if not headline or len(headline.split()) > MAX_HIGHLIGHT_WORDS:
+            continue
+        kind = str(scene.get("media_type") or "").strip().lower()
+        if kind not in HIGHLIGHT_TYPES or index >= len(media):
+            continue
+        relative = media[index].get("path")
+        # The cut-outs are exteriors with their background removed; a
+        # detail shot is wanted whole, background and all, the way the
+        # video shows it.
+        if not relative or "nobg" in relative:
+            continue
+        full = build_dir / relative
+        if full.is_file():
+            found.append((HIGHLIGHT_TYPES.index(kind), index, full, headline))
+    if not found:
+        return None
+    found.sort()
+    _, _, path, headline = found[0]
+    return path, headline
 
 
 def _hero_path(manifest, build_dir):
@@ -247,21 +332,32 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
     hero = _hero_path(manifest, build_dir)
     accent = dominant_paint_color(hero, default=ACCENT_COLOR) if hero else ACCENT_COLOR
 
-    title, title_font = _headline(draw, _title_text(manifest), width - 70)
-    title_w = draw.textlength(title, font=title_font)
+    # A detail shot and its own headline when the build has one, the model
+    # name and a cut-out when it does not.
+    highlight = _highlight(manifest, build_dir)
     # Below the safe top, not against the edge. The frame is 9:16 and
     # YouTube's grid cell is not, so it crops top and bottom: "R63 AMG" sat
     # 4% down, which is inside the trim, and came out of the feed with its
     # letters sliced off. Nothing that has to be read goes in the top band.
-    draw.text(((width - title_w) / 2, int(height * SAFE_TOP)), title,
-              font=title_font, fill=accent)
-    top = int(height * SAFE_TOP) + title_font.size + int(height * 0.03)
+    top = int(height * SAFE_TOP)
+    if highlight:
+        lines, title_font = _wrapped_headline(draw, highlight[1].upper(), width - 70)
+        for line in lines:
+            line_w = draw.textlength(line, font=title_font)
+            draw.text(((width - line_w) / 2, top), line, font=title_font, fill=accent)
+            top += int(title_font.size * 1.06)
+        top += int(height * 0.02)
+    else:
+        title, title_font = _headline(draw, _title_text(manifest), width - 70)
+        title_w = draw.textlength(title, font=title_font)
+        draw.text(((width - title_w) / 2, top), title, font=title_font, fill=accent)
+        top += title_font.size + int(height * 0.03)
 
     # A car photo is far wider than it is tall, so fitting one to this frame's
     # width leaves a band of white above and below it. Rather than let that
     # sit as two gaps, the car hangs directly under the title and the
     # narrator is tall enough to close the space from below.
-    band_h = int(height * 0.66)
+    band_h = int(height * (0.50 if highlight else 0.66))
     band_top = height - band_h
 
     narrator_path = Path(__file__).resolve().parents[2] / NARRATOR_SPRITE
@@ -271,13 +367,26 @@ def build_thumbnail(manifest, build_dir, out_path, size=THUMBNAIL_SIZE):
         narrator = _print_the_car_on(
             Image.open(narrator_path).convert("RGBA"),
             _media_paths(manifest, build_dir), build_dir)
-        narrator = _fit(_trim(narrator), int(width * 0.42), band_h)
+        narrator = _fit(_trim(narrator), int(width * (0.34 if highlight else 0.42)), band_h)
         narrator_top = height - narrator.height
         narrator_x = width - narrator.width - int(width * 0.03)
         frame.paste(narrator, (narrator_x, narrator_top), narrator)
 
     car_bottom = top
-    if hero:
+    if highlight:
+        # A detail photo keeps its background, so it is placed as a panel
+        # rather than floated on the white the cut-outs sit on.
+        shot = Image.open(highlight[0]).convert("RGB")
+        shot = _fit(shot, width - 60, int((narrator_top - top) * 0.92))
+        shot_y = top + max(0, int((narrator_top - top - shot.height) * 0.30))
+        shot_x = int((width - shot.width) / 2)
+        # A hairline in the car's own paint, so the panel reads as placed
+        # rather than pasted.
+        draw.rectangle([shot_x - 4, shot_y - 4, shot_x + shot.width + 3,
+                        shot_y + shot.height + 3], outline=accent, width=4)
+        frame.paste(shot, (shot_x, shot_y))
+        car_bottom = shot_y + shot.height
+    elif hero:
         car = _fit(_trim(Image.open(hero).convert("RGBA")),
                    width - 30, int((narrator_top - top) * 1.02))
         car_y = top + max(0, int((narrator_top - top - car.height) * 0.38))
