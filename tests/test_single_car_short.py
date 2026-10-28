@@ -4831,6 +4831,60 @@ def test_story_first_does_not_still_demand_a_figure_in_the_first_sentence():
             package, "Ferrari", "California T") if "names the car" in rule], style
 
 
+def test_an_engine_designation_is_not_a_figure_in_the_opening():
+    """The Gallardo build opened "The cheap way into a V10 costs less than
+    half what the lightweight version does" -- not a quantity anywhere in it
+    -- and passed the rule that demands one, because of the 1 and the 0 in
+    V10. V8, M3, R8, GT3 and 4MATIC all passed it the same way, so the rule
+    was off on most builds whose hook mentioned the engine: 15 of the 169
+    openings on the output branch carry no figure and 14 of them shipped.
+
+    A spoken number still counts, for the reason the note check already
+    learned: the script exists to be read aloud.
+    """
+    import single_car_short
+
+    designations = [
+        ("The cheap way into a V10 costs less than half what the lightweight version does",
+         "Lamborghini", "Gallardo Coupe"),
+        ("Aluminum control arms from the M3 and M4 underpin this one", "BMW", "M2"),
+        ("The 911's aerodynamics were settled in a wind tunnel", "Porsche", "911 Turbo"),
+        ("The Corvette Z06 3LZ screams performance from the get-go", "Chevrolet", "Corvette Z06 3LZ"),
+    ]
+    for opening, make, model in designations:
+        assert not single_car_short._opening_figure(opening, make, model), opening
+
+    figures = [
+        ("454 horsepower doesn't have to cost six figures anymore", "Maserati", "GranTurismo Sport"),
+        ("Built to humble cars costing twice as much, it hit sixty in 2.9 seconds", "Nissan", "GT-R Premium"),
+        ("That 9,000 rpm scream's been traded for torque", "Honda", "S2000"),
+        ("Its 5.0-liter V10 makes 493 horsepower", "Lamborghini", "Gallardo Coupe"),
+        # No digits at all, and still a figure.
+        ("Fewer than six hundred were built, and most never left Japan", "Nissan", "GT-R"),
+    ]
+    for opening, make, model in figures:
+        assert single_car_short._opening_figure(opening, make, model), opening
+
+    # "one" is the article far more often than it is a number, and "this
+    # one" is how every build refers to the car on screen.
+    assert not single_car_short._opening_figure(
+        "This one is the quickest thing Ferrari would sell you", "Ferrari", "California T")
+
+    # End to end, through the rule the retry loop reads.
+    scenes = [{"narration": "The cheap way into a V10 costs less than half what the lightweight "
+                            "version does.", "media_type": "exterior"},
+              {"narration": "This one makes 493 horsepower and 376 pound-feet.",
+               "media_type": "exterior"},
+              {"narration": "So would you pay the premium?", "media_type": "exterior"}]
+    package = {"scenes": scenes, "word_count": 60, "title": "The cheap way into a V10",
+               "history": {"year": 2003, "fact": "Audi bought Lamborghini in 1998"},
+               "_angles": "", "_style": "classic"}
+    opening_rules = [rule for rule in single_car_short._script_violations(
+        package, "Lamborghini", "Gallardo Coupe") if "contains no number" in rule]
+    assert opening_rules
+    assert "designation is not a figure" in opening_rules[0]
+
+
 def test_a_note_covered_in_words_rather_than_digits_still_counts():
     """The GT-R story-first build was reported as ignoring note 1 when it
     had not. The note wrote "hits 60", the narration said "hit sixty", and

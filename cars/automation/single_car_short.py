@@ -841,6 +841,42 @@ def _with_digits(text):
     return f"{lowered} {extra}" if extra else lowered
 
 
+# A letter or two welded to a number is a name, not a quantity: V8, V10,
+# M3, R8, GT3, E30, F40, S2000, W12. Hyphens included, spaces never -- a
+# space would swallow "hit 60" as well.
+_DESIGNATION_RE = re.compile(r"\b[A-Za-z]{1,4}-?\d{1,4}[A-Za-z]{0,6}\b")
+# "one" and "zero" are the article and the exception; everything else in
+# the spoken set only turns up in a sentence where it is a number.
+_OPENING_SPOKEN_RE = re.compile(
+    r"\b(" + "|".join(sorted((w for w in _SPOKEN_NUMBERS if w not in ("one", "zero")),
+                             key=len, reverse=True)) + r")\b", re.I)
+
+
+def _opening_figure(opening, make="", model=""):
+    """Whether the opening sentence carries a real number.
+
+    The test used to be re.search(r"\d", opening), and every engine and
+    model designation satisfies it. The Gallardo build opened "The cheap
+    way into a V10 costs less than half what the lightweight version does"
+    -- no quantity anywhere in it -- and passed a rule written to demand
+    one, because of the 1 and the 0 in V10. V8, M3, R8, GT3 and 4MATIC all
+    pass it the same way, which is to say the rule has been off on most
+    builds whose hook mentions the engine.
+
+    Names come out first, then designations, and what is left has to hold a
+    digit. A spoken number counts too: the script exists to be read aloud,
+    so "fewer than six hundred were built" is a figure, and penalising the
+    spelling is the mistake the note check already made with "hits 60".
+    """
+    text = str(opening or "")
+    for token in re.split(r"[\s\-/]+", f"{make} {model}"):
+        if token and re.search(r"\d", token):
+            text = re.sub(rf"\b{re.escape(token)}\b", " ", text, flags=re.I)
+    if re.search(r"\d", _DESIGNATION_RE.sub(" ", text)):
+        return True
+    return bool(_OPENING_SPOKEN_RE.search(text))
+
+
 def _note_anchors(note, make, model):
     """The specifics in a note that prove the script actually used it.
 
@@ -1703,10 +1739,12 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
     # forbids opening on background or on the price. The retention evidence
     # behind the figure rule is real, which is why this is opt-in and says
     # so on the checkbox.
-    if not re.search(r"\d", opening) and not story_first(package.get("_style")):
+    if not _opening_figure(opening, make, model) and not story_first(package.get("_style")):
         violations.append(
             f'your first sentence contains no number -- it was "{opening}". Open on a real '
-            "figure or a hard superlative."
+            "figure or a hard superlative. A model or engine designation is not a figure: "
+            "V10, M3 and GT3 are names, and the number has to be a quantity -- power, "
+            "a price, a weight, a time, how many were built."
         )
     make_tokens = [t for t in re.split(r"[\s\-/]+", str(make)) if len(t) > 2]
     model_tokens = [t for t in re.split(r"[\s\-/]+", str(model)) if len(t) > 2]
