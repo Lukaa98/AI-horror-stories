@@ -18,5 +18,12 @@
   "video": "single_car_short.mp4",
   "thumbnail": "thumbnail.jpg",
   "privacy": "private",
-  "status": "ready"
+  "status": "uploaded",
+  "publish_at": "2026-10-29T15:40:00Z",
+  "thumbnail_set": true,
+  "comment_posted": false,
+  "comment_error": "<HttpError 403 when requesting https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&alt=json returned \"Request had insufficient authentication scopes.\". Details: \"[{'message': 'Insufficient Permission', 'domain': 'global', 'reason': 'insufficientPermissions'}]\">",
+  "video_id": "0MZbCVgWIEo",
+  "video_url": "https://youtu.be/0MZbCVgWIEo",
+  "uploaded_at": 1793288164
 }
