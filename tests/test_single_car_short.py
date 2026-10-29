@@ -4885,6 +4885,106 @@ def test_an_engine_designation_is_not_a_figure_in_the_opening():
     assert "designation is not a figure" in opening_rules[0]
 
 
+def test_a_title_longer_than_a_headline_is_a_violation_the_title_repair_can_take():
+    """Median title across 102 builds is eight words; the last four ran 12,
+    13, 15 and 15. The cause is the rule that a title must promise what the
+    hook promises -- the shortest way to obey it is to paste the hook in."""
+    import single_car_short
+
+    long_title = ("They traded the scream for torque, and owners still argue whether that "
+                  "ruined the point. \U0001F525")
+    assert single_car_short._title_words(long_title) == 15, "the emoji is not a word"
+    assert single_car_short._title_words("Last NA before the base car went turbo \U0001F525") == 8
+
+    def rules(title):
+        scenes = [{"narration": "That 9,000 rpm scream's been traded for torque, and owners "
+                                "still argue whether that ruined the point.",
+                   "media_type": "exterior"},
+                  {"narration": "It makes 237 horsepower and 162 pound-feet.", "media_type": "exterior"},
+                  {"narration": "So would you still want one?", "media_type": "exterior"}]
+        package = {"scenes": scenes, "word_count": 60, "youtube_title": title,
+                   "history": {"year": 2004, "fact": "the 2.2 replaced the 2.0"},
+                   "_angles": "", "_style": "classic"}
+        return [r for r in single_car_short._script_violations(package, "Honda", "S2000")
+                if "your title is" in r]
+
+    over = rules(long_title)
+    assert over, "fifteen words is over the cap"
+    assert "15 words long" in over[0]
+    # It has to route to the title repair rather than a scene rewrite.
+    assert over[0].startswith(single_car_short.TITLE_VIOLATION_MARKER)
+    assert not rules("They traded the scream for torque \U0001F525")
+
+
+def test_the_title_is_picked_from_the_candidates_by_score():
+    """Asking for one title gets the first competent one. Asking for four in
+    different shapes and scoring them gets a choice -- and the model's own
+    pick still wins every tie, so this only overrides it when another
+    candidate is measurably better."""
+    import single_car_short
+
+    own = ("This was the last naturally aspirated version before the base car went "
+           "turbocharged. \U0001F525")
+    scenes = [{"narration": "It revs to 7,800 rpm, and it is the last base model that does it "
+                            "without turbochargers.", "media_type": "exterior"}]
+    package = {
+        "youtube_title": own,
+        "youtube_title_options": [own,
+                                  "7,800 rpm, and then it was gone \U0001F525",
+                                  "A Naturally Aspirated Flat-Six Marvel \U0001F525"],
+        "scenes": scenes,
+    }
+    picked = single_car_short._pick_youtube_title(package, "Porsche", "911 Carrera Coupe")
+    assert picked["youtube_title"] == "7,800 rpm, and then it was gone \U0001F525"
+
+    # A candidate that would only be flagged is never preferred: this one
+    # names the car, this one is over the cap, and this one promises
+    # something the opening does not.
+    unusable = {
+        "youtube_title": "7,800 rpm, and then it was gone \U0001F525",
+        "youtube_title_options": [
+            "7,800 rpm, and then it was gone \U0001F525",
+            "The Porsche 911 that revs to 7,800 rpm \U0001F525",
+            "Only 618 were built and they all went to Japan \U0001F525",
+        ],
+        "scenes": scenes,
+    }
+    assert single_car_short._pick_youtube_title(
+        unusable, "Porsche", "911 Carrera Coupe")["youtube_title"] == (
+            "7,800 rpm, and then it was gone \U0001F525")
+
+    # Nothing usable is left alone, so the violations and the title repair
+    # deal with it rather than this quietly shipping the least bad option.
+    doomed = {"youtube_title": "2015 Porsche 911 Carrera: Pure Power \U0001F525",
+              "youtube_title_options": ["2015 Porsche 911 Carrera: Pure Power \U0001F525"],
+              "scenes": scenes}
+    assert single_car_short._pick_youtube_title(
+        doomed, "Porsche", "911 Carrera Coupe")["youtube_title"] == (
+            "2015 Porsche 911 Carrera: Pure Power \U0001F525")
+
+
+def test_a_cylinder_count_is_not_a_figure_in_a_title_either():
+    """Same trap as V10, spelled out: "a naturally aspirated flat-six" names
+    the engine and promises no quantity, and "six" satisfied the figure test
+    on its own."""
+    import single_car_short
+
+    assert not single_car_short._opening_figure(
+        "A naturally aspirated flat-six revving past redline", "Porsche", "911 Carrera")
+    assert single_car_short._opening_figure(
+        "A flat-six that revs to 7,800 rpm", "Porsche", "911 Carrera")
+    assert single_car_short._opening_figure(
+        "Six hundred were built, and most stayed in Japan", "Nissan", "Skyline")
+
+    # And the parts penalty only applies to a part with no figure on it:
+    # "Wheel Horsepower" promises nothing, "457 lb-ft of torque" is the
+    # number doing the work with the noun naming it.
+    assert (single_car_short._title_clickability("510 hp and 457 lb-ft of torque \U0001F525")
+            > single_car_short._title_clickability("Wheel Horsepower and Premium Seats \U0001F525"))
+    assert single_car_short._title_clickability(
+        "Rare Swedish-Made Mid-Engine Marvel \U0001F525") < 0
+
+
 def test_a_note_covered_in_words_rather_than_digits_still_counts():
     """The GT-R story-first build was reported as ignoring note 1 when it
     had not. The note wrote "hits 60", the narration said "hit sixty", and

@@ -317,13 +317,20 @@ ALLOWED_MEDIA_TYPES = {"exterior", "engine", "interior", "detail", "wheel"}
 PACKAGE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
-    "required": ["title", "youtube_title", "key_specs", "history", "scenes", "sources",
-                 "start_year", "end_year"],
+    "required": ["title", "youtube_title", "youtube_title_options", "key_specs", "history",
+                 "scenes", "sources", "start_year", "end_year"],
     "properties": {
         "title": {"type": "string"},
         # The YouTube title. Separate from "title", which is a scene headline
         # and reads as a fragment out of context ("Turbocharged Performance").
         "youtube_title": {"type": "string"},
+        # The candidates it chose that one from, in different shapes, so the
+        # pick is made between real alternatives instead of being whatever
+        # came out first. _pick_youtube_title scores them.
+        "youtube_title_options": {
+            "type": "array", "minItems": 2, "maxItems": 6,
+            "items": {"type": "string"},
+        },
         # The numbers a viewer came for, held apart from the narration so
         # they are guaranteed on screen. Run #184's script never said the
         # car's horsepower, never mentioned torque or 0-60 at all, and spent
@@ -845,6 +852,13 @@ def _with_digits(text):
 # M3, R8, GT3, E30, F40, S2000, W12. Hyphens included, spaces never -- a
 # space would swallow "hit 60" as well.
 _DESIGNATION_RE = re.compile(r"\b[A-Za-z]{1,4}-?\d{1,4}[A-Za-z]{0,6}\b")
+# A cylinder count spelled out is the same trap as V10: "a naturally
+# aspirated flat-six" names the engine and promises no quantity, and
+# "six" would otherwise satisfy the figure rule on its own.
+_ENGINE_LAYOUT_RE = re.compile(
+    r"\b(?:flat|straight|inline|boxer|slant|vee|v)[\s-]?"
+    r"(?:two|three|four|five|six|eight|ten|twelve)\b"
+    r"|\b(?:two|three|four|five|six|eight|ten|twelve)[\s-]?cylinder\b", re.I)
 # "one" and "zero" are the article and the exception; everything else in
 # the spoken set only turns up in a sentence where it is a number.
 _OPENING_SPOKEN_RE = re.compile(
@@ -874,7 +888,7 @@ def _opening_figure(opening, make="", model=""):
             text = re.sub(rf"\b{re.escape(token)}\b", " ", text, flags=re.I)
     if re.search(r"\d", _DESIGNATION_RE.sub(" ", text)):
         return True
-    return bool(_OPENING_SPOKEN_RE.search(text))
+    return bool(_OPENING_SPOKEN_RE.search(_ENGINE_LAYOUT_RE.sub(" ", text)))
 
 
 def _note_anchors(note, make, model):
@@ -1226,6 +1240,9 @@ ownership/value insight, a character observation or another history/mechanical p
 still hits its word target and beat variety.{notes_exception}"""
     chosen = style_of(style)
     low, high = chosen["words"]
+    title_options = TITLE_OPTIONS_WANTED
+    title_low, title_high = TITLE_WORDS_WANTED
+    title_max = MAX_TITLE_WORDS
     return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{VOICE_BLOCK}{_story_first_block() if story_first(style) else ""}{_engine_clip_block() if engine_clip else ""}{forced_rival_block}{no_comparison_block}{chosen['block']}
 
 Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across {chosen['scene_count'].format(max_scenes=max_scenes)} in speaking order, each scene being {chosen['sentences']} -- {chosen['scene_note']} -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
@@ -1243,27 +1260,51 @@ no room left for anything the viewer did not already get from the photo. Describ
 only worth a scene if you say something about it the picture cannot -- what it is for, what it
 replaced, what it costs, why it is unusual. Also banned is stat-shaped padding -- a number that sounds like data but tells the viewer nothing they can use, like "reflecting an annual depreciation of about 8%". Give the two prices and let them do the subtraction. Favor punchy, stacked, specific claims over smooth marketing prose -- "that's more horsepower per liter than the [famous engine], and it's only got three cylinders" reads as genuinely engaging; "it delivers a dynamic and engaging driving experience" reads as filler no matter how true it is. A strong hook is a bold, specific, verifiable superlative or comparison (most powerful, quickest, cheapest, rarest -- something with a real number and a real point of comparison attached), not a generic "this car blends performance and luxury" opener. Every superlative must name the group it actually wins: "the most powerful 911 ever built", "the most expensive Spyder Porsche has sold", "the quickest minivan ever made". Never aim one at cars in general -- "the most luxurious car ever produced" about a $217,545 718 Spyder is not a bold claim, it is a false one, and the true version was available. Casual contractions and informal phrasing are good here -- this should sound spoken, not written.
 
-Also write "youtube_title" -- the video's title on the channel, under 100 characters, ending in a
-fire emoji. It is the only thing a viewer reads before deciding to watch, so two things about it
-are not negotiable.
+Also write "youtube_title_options" -- {title_options} DIFFERENT candidate titles for this video on the
+channel -- and "youtube_title", whichever of those {title_options} you would put on it yourself. The
+one in "youtube_title" has to be copied from the list character for character, not another title
+written fresh.
 
-FIRST: it must NOT contain the make or the model. Not the make on its own, not the model on its
+Your job on these is to write the most clickable title this car can honestly carry, for a car
+Shorts feed as it is RIGHT NOW. Not a title that is correct, not a title that describes the video:
+the one that gets the thumb to stop. You have web search -- use it. Look at how the car Shorts
+actually pulling views this week and this month are titled, what shape of claim is landing, and
+write for that, rather than guessing from how titles were written a year ago. Assume this goes up
+within the next two weeks, so a hook tied to something in the news about this car, this brand or
+this kind of car beats a timeless one.
+
+HARD LIMITS on every one of the {title_options}:
+
+LENGTH: {title_low} to {title_high} words. {title_max} is the absolute ceiling and a title that hits
+it had better earn every word. This is the one the channel keeps getting wrong: the median title
+here is eight words and the recent ones run to fifteen, because the easiest way to promise what the
+hook promises is to paste the hook in. "They traded the scream for torque, and owners still argue
+whether that ruined the point." is a hook. "They traded the scream for torque" is the title. Cut
+every word a viewer does not need: articles, "that", "which", the second half of the sentence.
+Under 100 characters as well, and ending in a fire emoji.
+
+NO NAME: it must NOT contain the make or the model. Not the make on its own, not the model on its
 own, not the year with them. The name is what the viewer is watching to find out, and the script
 gives it away in the second beat anyway. "This one was built for a single year. \U0001F525" works;
 "2024 BMW M3 CS: Track Weapon \U0001F525" does not. The description and the hashtags carry the name
 for search, so nothing is lost by keeping it out of the title.
 
-SECOND: the title must promise exactly what the FIRST SENTENCE of the narration delivers, in the
-same words. A title promising one thing over an opening about another is how a video loses nine
-viewers in ten: they swipe in for what was promised, hear something else in the first two seconds,
-and leave. If the title says a single model year, the first sentence is about that single model
-year. If the first sentence is about the weight, the title is about the weight. Write the hook
-first, then write the title from it -- not the other way round, and never independently.
+SAME PROMISE AS THE HOOK: every candidate has to promise what the FIRST SENTENCE of the narration
+delivers, and share the words a viewer would recognise two seconds later. A title promising one
+thing over an opening about another is how a video loses nine viewers in ten: they swipe in for
+what was promised, hear something else, and leave. So write the hook first, then cut each title
+out of it -- never the other way round, and never independently. Shorter is not licence to promise
+something different.
 
-Within those two, pick whichever the car actually earns: a question about the argument people have
-over it, a price move when both figures are verified, or the single strangest true fact. Never
-claim something the script does not support, and never promise a reveal the video does not
-contain.
+MAKE THE {title_options} GENUINELY DIFFERENT, so there is a real choice rather than four
+rewordings. Across them, use at least three of these shapes: a flat claim built on one real
+number; a question about the argument people actually have over this car; a loss -- the last one,
+the one before it changed, what got taken away; and a money move, if both figures are verified.
+
+Never claim something the script does not support, never promise a reveal the video does not
+contain, and never pad a title with "ultimate", "legendary", "iconic", "pure power", "beast",
+"marvel" or "powerhouse" -- those are what a title says when it has no fact to offer, and this car
+has facts.
 
 Every scene's "narration" is read aloud as-is -- it must contain ONLY the spoken words. Never include citations, footnotes, markdown links, URLs, domain names (e.g. wikipedia.org), or phrases like "according to" a named site. If a claim needs a source, put that source's URL in the separate "sources" array instead, not inline in the narration.
 
@@ -2115,6 +2156,16 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
                 "the payoff, so it belongs in the second beat and not above the video. The "
                 "description and hashtags carry it for search."
             )
+        length = _title_words(title)
+        if length > MAX_TITLE_WORDS:
+            # A title this long is the hook with nothing cut out of it, and
+            # it is read in the half second before a thumb decides.
+            violations.append(
+                f'your title is {length} words long -- it was "{title}". A title is a headline, '
+                f'not the opening sentence: cut it to {MAX_TITLE_WORDS} words at the outside and '
+                f'{TITLE_WORDS_WANTED[0]}-{TITLE_WORDS_WANTED[1]} if it will go, keeping the part '
+                "a viewer would recognise when they hear the opening two seconds later."
+            )
         opening = _SENTENCE_SPLIT_RE.split(
             (scenes_for_title[0].get("narration") or "").strip())[0]
         if opening and not (_title_terms(title) & _title_terms(opening)):
@@ -2417,6 +2468,148 @@ def _violation_cost(rules):
 TITLE_VIOLATION_MARKER = "your title"
 
 
+# A Shorts title is read in the half second before a thumb decides, and
+# the channel's have been getting longer: median 8 words across 102
+# builds, but the last four ran 12, 13, 15 and 15. The cause is the rule
+# above -- a title has to promise what the hook promises, and the shortest
+# way to obey that is to paste the hook in. "They traded the scream for
+# torque, and owners still argue whether that ruined the point." is a hook.
+# "They traded the scream for torque" is a title. 93% of what this pipeline
+# has already written is inside ten words, so the ceiling costs almost
+# nothing and catches exactly the ones that need catching.
+MAX_TITLE_WORDS = 10
+TITLE_WORDS_WANTED = (4, 8)
+# Four candidates rather than one. Asking for the single best title gets
+# the first competent one; asking for four in different shapes and then
+# scoring them gets a choice, and the model's own pick still wins every
+# tie, so this only overrides it when another candidate is measurably
+# better.
+TITLE_OPTIONS_WANTED = 4
+_EMOJI_STRIP_RE = re.compile(r"[\U0001F000-\U0001FAFF\u2190-\u21FF\u2600-\u27BF\uFE0F\u200D]")
+_MONEY_IN_TITLE_RE = re.compile(r"[$\u00a3\u20ac]\s?\d|\d\s?[kK]\b|\u2192|->")
+
+# What a title promises, scored. The signals are the ones the channel's own
+# numbers back: a real figure, something lost, an argument, a fault. The
+# penalties are the words a title reaches for when it has no fact --
+# "Rare Swedish-Made Mid-Engine Marvel" and "700 hp of Pure Power!" both
+# came out of this pipeline.
+TITLE_LOSS_RE = re.compile(
+    r"\b(last|final|finally|ended?|ending|end|killed?|gone|died|dead|never|"
+    r"before|after|replaced|lost|losing|traded|gave up|took away|gets? worse|gone forever)\b", re.I)
+TITLE_ARGUMENT_RE = re.compile(
+    r"\b(argue|argues|argued|argument|nobody|everybody|dismissed|snobs|hate[sd]?|"
+    r"worth it|still|really|actually|wrong|myth|overrated|underrated|admit)\b", re.I)
+TITLE_EMPTY_WORDS = frozenset("""
+ultimate legendary legend iconic icon marvel powerhouse beast monster insane
+stunning gorgeous breathtaking incredible amazing unbelievable epic pure
+masterpiece perfection glorious magnificent timeless dream sublime
+""".split())
+
+
+def _title_words(title):
+    """How many words a viewer actually reads. The fire emoji is not one."""
+    bare = _EMOJI_STRIP_RE.sub(" ", str(title or ""))
+    return len([w for w in bare.split() if w.strip(".,:;-?!\u2014\u2013'\"")])
+
+
+def _title_clickability(title):
+    """How much a candidate title earns the click.
+
+    Scored, not chosen, for the same reason the thumbnail headline is: the
+    most clickable thing a car title can offer is rarely the one the model
+    reaches for first. Ranked against all 102 titles this pipeline has
+    written, "Only 1,500 Made. Enough Said.", "E30 M3's True Heir?" and
+    "They traded the scream for torque" come top, and "RS Legacy: Power
+    Meets Versatility", "Rare Swedish-Made Mid-Engine Marvel" and "A V10
+    powerhouse that's more than just a roar" sort to the bottom.
+    """
+    from thumbnail import DULL_WORDS, FLAW_WORDS
+
+    text = _EMOJI_STRIP_RE.sub(" ", str(title or "")).strip()
+    words = {w.strip(".,!?-'\"").lower() for w in text.split()}
+    score = 0
+    # A figure is the one thing a title can promise that cannot be said
+    # about every car in the class. Designations and cylinder counts are
+    # names, so they buy nothing: "A Naturally Aspirated Flat-Six Marvel"
+    # scored for the "six" until this came out.
+    plain = _ENGINE_LAYOUT_RE.sub(" ", _DESIGNATION_RE.sub(" ", text))
+    figure = bool(re.search(r"\d", plain) or _OPENING_SPOKEN_RE.search(plain))
+    if figure:
+        score += 2
+    if _MONEY_IN_TITLE_RE.search(text):
+        score += 2
+    if TITLE_LOSS_RE.search(text):
+        score += 2
+    if TITLE_ARGUMENT_RE.search(text) or text.rstrip().endswith("?"):
+        score += 2
+    if words & FLAW_WORDS:
+        score += 2
+    # Parts vocabulary is true of every car in the class -- but only when
+    # it stands alone. "Wheel Horsepower" promises nothing; "457 lb-ft of
+    # torque" is the number doing the work and the noun naming it, so the
+    # penalty is for a part with no figure attached.
+    if not figure:
+        score -= len(words & DULL_WORDS)
+    # The empty adjectives are what a title reaches for instead of a fact.
+    score -= 2 * len(words & TITLE_EMPTY_WORDS)
+    return score
+
+
+
+def _title_is_usable(title, opening, make, model):
+    """Whether a candidate may be used at all, before anything is scored.
+
+    The three rules that already exist as violations, applied up front so a
+    candidate that would simply be flagged is never picked over one that
+    would not.
+    """
+    title = str(title or "").strip()
+    if not title:
+        return False
+    if _title_words(title) > MAX_TITLE_WORDS:
+        return False
+    if any(re.search(rf"\b{re.escape(token)}\b", title, re.I)
+           for token in _name_tokens(make, model)):
+        return False
+    return not opening or bool(_title_terms(title) & _title_terms(opening))
+
+
+def _pick_youtube_title(package, make, model):
+    """The best of the candidates, or the model's own pick left alone.
+
+    The model is asked for four titles in different shapes and for its own
+    preference among them. That preference is listed first here, so it wins
+    every tie and is only overridden by a candidate that scores higher.
+
+    A package with nothing usable in it is returned untouched: the title
+    rules are checked as violations either way, and the repair loop rewrites
+    from there rather than this quietly choosing the least bad option.
+    """
+    own = str(package.get("youtube_title") or "").strip()
+    options = [str(t or "").strip() for t in (package.get("youtube_title_options") or [])]
+    scenes = package.get("scenes") or []
+    opening = _SENTENCE_SPLIT_RE.split(
+        (scenes[0].get("narration") or "").strip())[0] if scenes else ""
+    ordered, seen = [], set()
+    for title in [own, *options]:
+        key = title.lower()
+        if title and key not in seen:
+            seen.add(key)
+            ordered.append(title)
+    usable = [t for t in ordered if _title_is_usable(t, opening, make, model)]
+    if not usable:
+        return package
+    best = max(usable, key=lambda t: (_title_clickability(t), -usable.index(t)))
+    if best != own:
+        print(f'[single-car] Title: "{best}" '
+              f'(scored {_title_clickability(best)}; '
+              f'over its own pick "{own}" at {_title_clickability(own)})')
+        package = dict(package)
+        package["youtube_title"] = best
+    return package
+
+
+
 # Which scene the start-up follows. Two, so it lands around twelve to
 # eighteen seconds in on a 55-second build: late enough that the car has
 # been named and a reason to care has been given, early enough to be
@@ -2460,8 +2653,11 @@ def _rewrite_title_for(violation, title, opening, label):
         "Write ONE replacement title. It has to promise exactly what that opening sentence "
         "delivers, in words a viewer would recognise from it when they hear it two seconds "
         "later, and it must NOT name the car -- the name is the payoff the video itself "
-        "delivers, and the description carries it for search. Keep it under about sixty "
-        "characters, make it a claim or a question somebody would stop scrolling for, and do "
+        "delivers, and the description carries it for search. "
+        f"Hard limit {MAX_TITLE_WORDS} words, and aim for "
+        f"{TITLE_WORDS_WANTED[0]}-{TITLE_WORDS_WANTED[1]}: it is a headline, not the opening "
+        "sentence, so cut the articles and the second half of the claim rather than handing "
+        "back the hook. Make it something somebody would stop scrolling for, and do "
         "not invent a single fact the opening does not already contain.\n"
         'Reply as JSON: {"title": "<the new title>"}'
     )
@@ -3097,6 +3293,9 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
         # Carried for the same reason as the notes: the note check enforces
         # fewer of them at 35 seconds, where there is no beat spare.
         package["_style"] = style or ""
+        # Before the violations are counted, so the title that gets checked
+        # and the title that ships are the same one.
+        package = _pick_youtube_title(package, make, model)
         count = package["word_count"]
         violations = _script_violations(package, make, model, market, pasted_slots)
         if accept_low <= count <= accept_high and not violations:
