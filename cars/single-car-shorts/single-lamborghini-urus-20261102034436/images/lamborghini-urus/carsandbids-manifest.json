@@ -1,0 +1,478 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-11-02T03:48:17.207Z",
+  "query": "Lamborghini Urus",
+  "visual_highlight": "engine bay turbo horsepower wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/rGqzGbRO/2022-lamborghini-urus?ss_id=abb49dc5-ebe0-478c-915d-ec53942fb48e&ref=pr_1_3",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/rGqzGbRO/2022-lamborghini-urus?ss_id=abb49dc5-ebe0-478c-915d-ec53942fb48e&ref=pr_1_3",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 20,
+      "sale_price": null,
+      "sale_type": null,
+      "page_title": "2022 Lamborghini Urus"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/rGqzGbRO/2022-lamborghini-urus?ss_id=abb49dc5-ebe0-478c-915d-ec53942fb48e&ref=pr_1_3",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": null,
+    "sale_type": null,
+    "page_title": "2022 Lamborghini Urus",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "engine-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/9leLGkA2-PqOCvCGdIz-(edit).jpg?t=172797735338",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Lamborghini Urus",
+      "width": 2080,
+      "height": 1386,
+      "bytes": 267259
+    },
+    {
+      "path": "interior-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/9leLGkA2-WyR73QRqmM-(edit).jpg?t=172807641305",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Lamborghini Urus",
+      "width": 512,
+      "height": 341,
+      "bytes": 289340
+    },
+    {
+      "path": "highlight-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/9leLGkA2-NA5Tmik4ny-(edit).jpg?t=172797736874",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Lamborghini Urus",
+      "width": 512,
+      "height": 341,
+      "bytes": 184985
+    },
+    {
+      "path": "detail-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/9leLGkA2-tDg_l3X2A2-(edit).jpg?t=172797738292",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Lamborghini Urus",
+      "width": 512,
+      "height": 341,
+      "bytes": 211177
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/9leLGkA2-bHsgxsaRps-(edit).jpg?t=172797751008",
+      "labels": [
+        "interior",
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Lamborghini Urus",
+      "width": 512,
+      "height": 341,
+      "bytes": 129546
+    },
+    {
+      "path": "engine-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/9leLGkA2-J6DHFoVock-(edit).jpg?t=172797728477",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Lamborghini Urus",
+      "width": 512,
+      "height": 341,
+      "bytes": 203401
+    },
+    {
+      "path": "engine-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/9leLGkA2-Pyg4p4IgjM-(edit).jpg?t=172797731763",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Lamborghini Urus",
+      "width": 512,
+      "height": 341,
+      "bytes": 311196
+    },
+    {
+      "path": "engine-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/9leLGkA2-5gzEg_74Mp-(edit).jpg?t=172797733657",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Lamborghini Urus",
+      "width": 512,
+      "height": 341,
+      "bytes": 282098
+    },
+    {
+      "path": "engine-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/8bbf0f64fbfad81f6867cff798d92495738b23a7/photos/9leLGkA2-pYkq2R1xsC-(edit).jpg?t=172797747454",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2022 Lamborghini Urus",
+      "width": 512,
+      "height": 341,
+      "bytes": 205423
+    },
+    {
+      "path": "engine-10.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/b1b1b224bfae1370419b12fee233dc90bccb0015/photos/sFSgxZ1I8lS.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Sold after to",
+      "width": 80,
+      "height": 80,
+      "bytes": 29122
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/314c31694be50f02bbeb69855a03aa4eabdfd700/photos/KV0azmN0-YQtLxqc.jpg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 1971 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/91032ad7bbcb6cf72875e8e8207dcfba80173f7c/photos/9AM7lVl8-mJGOmjW.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 2787 bytes"
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/68f1f7c3a3eb56c07616e81cd52bf40194e1690b/photos/rN46VG8b-fFK70zGoC.jpeg",
+      "labels": [
+        "engine",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 12769 bytes"
+    }
+  ],
+  "videos": [],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 10,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "lamborghini",
+        "detected_model": "urus",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Lamborghini badge on seats",
+          "Interior design specific to Lamborghini Urus"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "detail-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "lamborghini",
+        "detected_model": "urus",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "body shape",
+          "light design",
+          "proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "hero",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "lamborghini",
+        "detected_model": "urus",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Lamborghini badge",
+          "distinctive front design",
+          "traditional Lamborghini styling"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "lamborghini",
+        "detected_model": "urus",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Lamborghini branding on wheels",
+          "Body shape consistent with Urus",
+          "Proportions match 2022 Urus"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "engine-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "lamborghini",
+        "detected_model": "urus",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Lamborghini badge",
+          "distinctive rear light design",
+          "body proportions",
+          "specific shape of rear"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 5,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "lamborghini",
+        "detected_model": "urus",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "lamborghini badge",
+          "Urus body shape",
+          "tail light design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "engine-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "other",
+        "scene_fit_tags": [],
+        "quality_score": 1,
+        "composition_score": 1,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "The image does not depict a car.",
+        "path": "engine-10.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "lamborghini",
+        "detected_model": "urus",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Lamborghini branding on seats",
+          "Interior design consistent with Urus"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "lamborghini",
+        "detected_model": "urus",
+        "detected_generation_or_year": "2022",
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [
+          "Lamborghini branding on dashboard",
+          "Interior design consistent with Urus 2022"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 5,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 3,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image does not show the target vehicle.",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
