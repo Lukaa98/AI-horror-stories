@@ -38,7 +38,7 @@ from narrator_script import (_extract_wav, build_mouth_timeline, narration_setti
                              synthesize_narration)
 from narrator_video import (render_narrator_video, _scene_time_boundaries,
                             _media_zone_geometry)
-from openai_retry import with_openai_retry
+from openai_retry import credits_available, with_openai_retry
 from openai_models import text_model, with_text_model
 from plate_blur import blur_license_plates
 from photo_story import SLOTS, SLOT_LABELS, photo_metadata, collect_photo_sections
@@ -4753,6 +4753,19 @@ def order_media_for_scenes(scenes, media):
 
 
 def build_short(args):
+    # Before anything expensive. Runs #347, #348 and #356 each scraped the
+    # listing, researched the car and wrote the whole script -- up to
+    # sixteen minutes of work and a scrape the host rate-limits -- and then
+    # found out the balance was empty on the narration call. The balance is
+    # knowable in about a second.
+    funded, reason = credits_available()
+    if not funded:
+        raise SystemExit(
+            "[single-car] Stopping before any work: the OpenAI balance will not cover this "
+            f"build.\n  {reason}\n  Add credits at "
+            "https://platform.openai.com/settings/organization/billing/ and run it again. "
+            "Nothing was scraped and nothing was written, so a re-run starts clean."
+        )
     output_dir = OUTPUT_ROOT / args.short_id
     images_dir = output_dir / "images"
     output_dir.mkdir(parents=True, exist_ok=True)
