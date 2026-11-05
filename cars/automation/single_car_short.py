@@ -3416,6 +3416,45 @@ _SHOT_TYPE_BY_CATEGORY = {
 # A pasted link is deliberate, so a blip should not cost it.
 PHOTO_DOWNLOAD_ATTEMPTS = 3
 
+
+def _preflight_pasted_photos(photo_urls):
+    """Stop before the research if a pasted photo will not come down.
+
+    The download itself is unchanged and still authoritative; this only
+    asks the question earlier. Headers are read and the body is dropped,
+    so five slots cost a second or two.
+
+    A link that answers is accepted here even if it later turns out not to
+    be an image -- the real download decodes it and rejects it properly.
+    This is for the refusal that is knowable immediately: a dead link, a
+    404, or a host that will not serve an automated request at all.
+    """
+    refused = []
+    for field, url in (photo_urls or {}).items():
+        if not url:
+            continue
+        try:
+            response = requests.get(url, timeout=20, stream=True,
+                                    headers={"User-Agent": "Mozilla/5.0"})
+            status = response.status_code
+            response.close()
+            if status >= 400:
+                refused.append((field, url, f"HTTP {status}"))
+        except Exception as exc:  # noqa: BLE001 - reported, not raised
+            refused.append((field, url, str(exc)[:120]))
+    if not refused:
+        return
+    listed = "\n".join(f"  - {field}: {reason}\n      {url}" for field, url, reason in refused)
+    raise SystemExit(
+        f"{len(refused)} pasted photo(s) cannot be downloaded, so the video would be built from "
+        f"photos you did not choose. Stopping before the research rather than after it:\n"
+        f"{listed}\n"
+        "Each link has to be the image itself -- right-click the photo in the listing gallery "
+        'and "Copy image address" -- not the listing page. A 403 on a link that opens fine in '
+        "your browser means the host is refusing automated requests for that file: pick a "
+        "different photo for that slot, or leave the slot empty and the gallery is scraped for it."
+    )
+
 MANUAL_PHOTO_FIELDS = {
     "front": "exterior_front",
     "side": "exterior_side",
@@ -4783,6 +4822,13 @@ def build_short(args):
         "interior": args.photo_interior or photos.get("interior"),
     }
     args.photo_rival = args.photo_rival or photos.get("rival") or None
+    # Asked now rather than after the research. A pasted photo that will not
+    # download is already fatal -- a video built from photos nobody chose is
+    # worse than no video -- but the check sat after the scrape and the four
+    # script attempts, so the same three refused links cost three ten-minute
+    # runs to learn about, thirty minutes to deliver a verdict available in
+    # twenty seconds. Same failure, same message, ten minutes earlier.
+    _preflight_pasted_photos(manual_photo_urls)
     try:
         extra_photos = json.loads(args.extra_photos) if args.extra_photos else []
         if not isinstance(extra_photos, list):

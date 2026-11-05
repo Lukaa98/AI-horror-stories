@@ -5114,3 +5114,54 @@ def test_the_build_prints_a_summary_rather_than_the_whole_manifest():
                 / ".github/workflows/cars-research.yml").read_text()
     step = workflow.split("single_car_short.py")[1][:400]
     assert "tee" not in step and "$(" not in step
+
+
+def test_a_refused_photo_stops_the_build_before_the_research(monkeypatch):
+    """The same three refused links cost three ten-minute runs to learn
+    about, because the check sat after the scrape and four script attempts.
+    The verdict was available in twenty seconds."""
+    import single_car_short
+
+    class _Response:
+        def __init__(self, status):
+            self.status_code = status
+
+        def close(self):
+            pass
+
+    served = {
+        "https://host/front.jpg": 200,
+        "https://host/side.JPG": 403,
+        "https://host/rear.JPG": 403,
+    }
+
+    def fake_get(url, **_kwargs):
+        if url not in served:
+            raise RuntimeError("Connection reset by peer")
+        return _Response(served[url])
+
+    monkeypatch.setattr(single_car_short.requests, "get", fake_get)
+
+    # Nothing pasted, and nothing to check.
+    single_car_short._preflight_pasted_photos({})
+    single_car_short._preflight_pasted_photos({"front": "", "side": None})
+    # Every link answering is the healthy case.
+    single_car_short._preflight_pasted_photos({"front": "https://host/front.jpg"})
+
+    with pytest.raises(SystemExit) as refused:
+        single_car_short._preflight_pasted_photos({
+            "front": "https://host/front.jpg",
+            "side": "https://host/side.JPG",
+            "rear": "https://host/rear.JPG",
+            "interior": "https://host/gone.jpg",
+        })
+    message = str(refused.value)
+    assert "3 pasted photo(s) cannot be downloaded" in message
+    # It says which slot and why, so the fix does not need the log.
+    assert "side: HTTP 403" in message
+    assert "rear: HTTP 403" in message
+    assert "Connection reset by peer" in message
+    assert "front" not in message.split("Each link")[0].replace("front.jpg", "")
+    # And what to do about a 403 on a link that opens in a browser.
+    assert "refusing automated requests" in message
+    assert "leave the slot empty" in message
