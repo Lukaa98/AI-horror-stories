@@ -288,6 +288,22 @@ jobs:
           # unparseable, silently ignored, and run #201 quietly fell back to
           # scraping the gallery instead of using the pasted photos.
           PHOTOS: ${{ inputs.photos }}
+          # And the notes, for the third time the same way. Interpolated
+          # inline, a double quote in a note closed the shell test's own
+          # quote, `[` got a pile of words instead of one, and a failed `[`
+          # makes the `if` false -- so --angles was dropped and the build
+          # wrote a generic spec tour. Two videos shipped like that, the
+          # Fiat 500c on a note reading "most fun under ten grand" and the
+          # Cayman on one reading "nearly matched". Nothing warned: a
+          # dropped argument looks exactly like an empty box.
+          ANGLES: ${{ inputs.angles }}
+          # The free-text fields a person types, for the same reason. An
+          # apostrophe in a model or a rival is enough: "Shelby's" ends the
+          # argument early and the rest becomes separate words.
+          MAKE: ${{ inputs.make }}
+          MODEL: ${{ inputs.model }}
+          TRIM_QUERY: ${{ inputs.query }}
+          RIVAL_CAR: ${{ inputs.rival_car }}
           # The live rig, always. The sprite sets it used to be switchable
           # to are pre-rendered PNGs, so they cannot carry the build's own
           # car on the hoodie -- every video would wear the same one.
@@ -298,17 +314,17 @@ jobs:
           if [ -n "${{ inputs.end_year }}" ]; then YEAR_ARGS+=(--end-year "${{ inputs.end_year }}"); fi
           if [ -n "${{ inputs.auction_url }}" ]; then YEAR_ARGS+=(--auction-url "${{ inputs.auction_url }}"); fi
           if [ -n "${{ inputs.current_price }}" ]; then YEAR_ARGS+=(--current-price "${{ inputs.current_price }}"); fi
-          if [ -n "${{ inputs.angles }}" ]; then YEAR_ARGS+=(--angles "${{ inputs.angles }}"); fi
+          if [ -n "$ANGLES" ]; then YEAR_ARGS+=(--angles "$ANGLES"); fi
           if [ -n "${{ inputs.script_style }}" ]; then YEAR_ARGS+=(--style "${{ inputs.script_style }}"); fi
           if [ -n "${{ inputs.reuse_script }}" ]; then YEAR_ARGS+=(--reuse-script "${{ inputs.reuse_script }}"); fi
           if [ -n "$PHOTOS" ]; then YEAR_ARGS+=(--photos "$PHOTOS"); fi
-          if [ -n "${{ inputs.rival_car }}" ]; then YEAR_ARGS+=(--rival-car "${{ inputs.rival_car }}"); fi
+          if [ -n "$RIVAL_CAR" ]; then YEAR_ARGS+=(--rival-car "$RIVAL_CAR"); fi
           if [ "${{ inputs.disable_comparison }}" = "true" ]; then YEAR_ARGS+=(--disable-comparison); fi
           if [ -n "$EXTRA_PHOTOS" ]; then YEAR_ARGS+=(--extra-photos "$EXTRA_PHOTOS"); fi
           python cars/automation/single_car_short.py \
-            --make "${{ inputs.make }}" \
-            --model "${{ inputs.model }}" \
-            --trim "${{ inputs.query }}" \
+            --make "$MAKE" \
+            --model "$MODEL" \
+            --trim "$TRIM_QUERY" \
             --short-id "${{ inputs.draft_id }}" \
             --voice "${{ inputs.voice || 'onyx' }}" \
             "${YEAR_ARGS[@]}"

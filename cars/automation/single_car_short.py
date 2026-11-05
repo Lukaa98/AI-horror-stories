@@ -4862,6 +4862,14 @@ def build_short(args):
                   f"median ${market['median']:,} (${market['low']:,}-${market['high']:,}).")
         elif comps:
             print(f"[single-car] {len(comps)} results on the model page, none comparable enough to use.")
+    # Said out loud, because a dropped --angles looks exactly like an empty
+    # box and three builds shipped as generic spec tours before anyone
+    # noticed. The notes are the spine of the script; if the count here is
+    # not the count that was typed, nothing below is what was asked for.
+    notes = _split_angles(args.angles)
+    print(f"[single-car] Notes: {len(notes)} "
+          + ("-- none given, so the script is researched from scratch."
+             if not notes else "(" + "; ".join(n[:48] for n in notes[:8]) + ")"))
     package = script_package_from_build(args.reuse_script) if args.reuse_script else research_script(
         args.make, args.model, args.trim, args.start_year, args.end_year,
         photo_hints=photo_hints, forced_rival=forced_rival, disable_comparison=args.disable_comparison,
@@ -5074,6 +5082,10 @@ def build_short(args):
             # used: the trinity beat was in the narration while the manifest
             # read as though nobody had asked for it.
             "angles": args.angles or "",
+            # The count as the build read it, so the dashboard can say the
+            # notes went missing rather than leaving it to be noticed in
+            # the finished video.
+            "notes_count": len(_split_angles(args.angles)),
             "current_price": args.current_price or "",
             "extra_photos": args.extra_photos or "",
             # The one value here that is not a string, and the one that was
