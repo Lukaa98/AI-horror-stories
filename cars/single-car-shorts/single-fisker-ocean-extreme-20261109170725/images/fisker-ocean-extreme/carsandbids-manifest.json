@@ -1,0 +1,573 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-11-09T17:17:05.898Z",
+  "query": "Fisker Ocean Extreme",
+  "visual_highlight": "interior dashboard steering wheel cabin wheel brake exhaust tailpipe detail",
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/3OZYwp8y/2023-fisker-ocean-one?ss_id=b8e71d59-c2ce-47a8-bff9-0c3c2b7077d0&ref=pr_1_3",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [
+    {
+      "url": "https://carsandbids.com/auctions/3OZYwp8y/2023-fisker-ocean-one?ss_id=b8e71d59-c2ce-47a8-bff9-0c3c2b7077d0&ref=pr_1_3",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100,
+      "usable_image_count": 14,
+      "sale_price": 15801,
+      "sale_type": "sold",
+      "page_title": "2023 Fisker Ocean One"
+    }
+  ],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/3OZYwp8y/2023-fisker-ocean-one?ss_id=b8e71d59-c2ce-47a8-bff9-0c3c2b7077d0&ref=pr_1_3",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100,
+    "sale_price": 15801,
+    "sale_type": "sold",
+    "page_title": "2023 Fisker Ocean One",
+    "year": null,
+    "make": null,
+    "model": null,
+    "location": null
+  },
+  "downloaded_images": [
+    {
+      "path": "interior-01.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/exterior/rNJXVZBW-pmEB-9L/edit/gQJ9p.jpg?t=179096099869",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Fisker Ocean One",
+      "width": 2080,
+      "height": 1386,
+      "bytes": 421671
+    },
+    {
+      "path": "highlight-02.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/exterior/rNJXVZBW-iuSvMDv/edit/tymdb.jpg?t=179096101804",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Fisker Ocean One",
+      "width": 512,
+      "height": 341,
+      "bytes": 303692
+    },
+    {
+      "path": "detail-03.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/exterior/rNJXVZBW-cpPpPmr/edit/7bTAP.jpg?t=179096103669",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Fisker Ocean One",
+      "width": 512,
+      "height": 341,
+      "bytes": 515009
+    },
+    {
+      "path": "interior-04.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/exterior/rNJXVZBW-nm9ZD42/edit/yv-GK.jpg?t=179096105573",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Fisker Ocean One",
+      "width": 512,
+      "height": 341,
+      "bytes": 421610
+    },
+    {
+      "path": "interior-05.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/exterior/rNJXVZBW-r2S2GYD/edit/ysRKs.jpg?t=179096107301",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Fisker Ocean One",
+      "width": 512,
+      "height": 341,
+      "bytes": 345036
+    },
+    {
+      "path": "interior-06.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/interior/rNJXVZBW-Als8pW8/edit/Q9vWt.jpg?t=179096108888",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Fisker Ocean One",
+      "width": 512,
+      "height": 341,
+      "bytes": 196640
+    },
+    {
+      "path": "interior-07.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/rNJXVZBW-GhXxJ2O/edit/zVnWL.jpg?t=179096109854",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Fisker Ocean One",
+      "width": 512,
+      "height": 341,
+      "bytes": 271017
+    },
+    {
+      "path": "interior-08.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/interior/rNJXVZBW-ICgC2Hi/edit/TAUoe.jpg?t=179096110711",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Fisker Ocean One",
+      "width": 512,
+      "height": 341,
+      "bytes": 268547
+    },
+    {
+      "path": "interior-09.jpg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/interior/rNJXVZBW-8KxYPXN/edit/eudqx.jpg?t=179096111844",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "2023 Fisker Ocean One",
+      "width": 512,
+      "height": 341,
+      "bytes": 145867
+    },
+    {
+      "path": "interior-10.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/b2eb291590995970b60d5dfe9e128ee31b6baf55/attachments/3OZYwp8y-fYtQoQJ.jpeg?t=179158364087",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 194990
+    },
+    {
+      "path": "interior-11.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/b2eb291590995970b60d5dfe9e128ee31b6baf55/attachments/3OZYwp8y-RQnRUAd.jpeg?t=179158364200",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 345683
+    },
+    {
+      "path": "interior-12.jpeg",
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/b2eb291590995970b60d5dfe9e128ee31b6baf55/attachments/3OZYwp8y-hx6mK-E.jpeg?t=179158364308",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "section": "Comments & Bids",
+      "width": 180,
+      "height": 240,
+      "bytes": 322428
+    },
+    {
+      "path": null,
+      "url": "https://media.carsandbids.com/cdn-cgi/image/width=1800,height=80,quality=70,fit=cover/8d066bd70b6af65fa97529a74c5dc0ca221f3106/photos/3O7WME0j-7b26g6G.jpeg",
+      "labels": [
+        "interior",
+        "wheel",
+        "detail",
+        "highlight"
+      ],
+      "error": "Too small: 9768 bytes"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8860a2e1d450e0b73ef049918a05be1/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8860a2e1d450e0b73ef049918a05be1/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Fisker Ocean One",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8860a2e1d450e0b73ef049918a05be1/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OZYwp8y/2023-fisker-ocean-one?ss_id=b8e71d59-c2ce-47a8-bff9-0c3c2b7077d0&ref=pr_1_3",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8860a2e1d450e0b73ef049918a05be1/manifest/video.m3u8",
+      "auction_title": "2023 Fisker Ocean One",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0fcd8620fac10a5cdcf1dd352160270/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0fcd8620fac10a5cdcf1dd352160270/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Fisker Ocean One",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0fcd8620fac10a5cdcf1dd352160270/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OZYwp8y/2023-fisker-ocean-one?ss_id=b8e71d59-c2ce-47a8-bff9-0c3c2b7077d0&ref=pr_1_3",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/f0fcd8620fac10a5cdcf1dd352160270/manifest/video.m3u8",
+      "auction_title": "2023 Fisker Ocean One",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/57601b0d94507beab557527d8d9caade/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/57601b0d94507beab557527d8d9caade/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Fisker Ocean One",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/57601b0d94507beab557527d8d9caade/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/3OZYwp8y/2023-fisker-ocean-one?ss_id=b8e71d59-c2ce-47a8-bff9-0c3c2b7077d0&ref=pr_1_3",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/57601b0d94507beab557527d8d9caade/manifest/video.m3u8",
+      "auction_title": "2023 Fisker Ocean One",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ],
+  "ai_review": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "review_count": 12,
+    "reviews": [
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Fisker",
+        "detected_model": "Ocean",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Extreme",
+        "visible_match_evidence": [
+          "bodywork shape",
+          "wheel design",
+          "color scheme"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "side",
+        "scene_fit_tags": [
+          "exterior",
+          "hero"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "detail-03.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "Fisker",
+        "detected_model": "Ocean",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Extreme",
+        "visible_match_evidence": [
+          "Fisker badge",
+          "specific front design",
+          "body proportions"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "front",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 9,
+        "composition_score": 8,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "highlight-02.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "fisker",
+        "detected_model": "ocean",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Fisker Ocean Extreme",
+        "visible_match_evidence": [
+          "bodywork design",
+          "light shape",
+          "proportions",
+          "interior design hint"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "front_3q",
+        "scene_fit_tags": [
+          "hero",
+          "exterior",
+          "front"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-01.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "fisker",
+        "detected_model": "ocean",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Extreme",
+        "visible_match_evidence": [
+          "Brand badge visible",
+          "Model name visible",
+          "Design features consistent with Fisker Ocean"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "rear_3q",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-04.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "fisker",
+        "detected_model": "ocean",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Extreme",
+        "visible_match_evidence": [
+          "Fisker logo",
+          "Ocean badge",
+          "Rear design characteristics"
+        ],
+        "generation_match_confidence": 10,
+        "variant_match_confidence": 8,
+        "shot_type": "rear",
+        "scene_fit_tags": [
+          "exterior",
+          "rear"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-05.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "fisker",
+        "detected_model": "ocean",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Extreme",
+        "visible_match_evidence": [
+          "interior design features",
+          "dashboard layout",
+          "steering wheel design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 8,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 9,
+        "reject": false,
+        "reason": "",
+        "path": "interior-06.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "fisker",
+        "detected_model": "ocean",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Extreme",
+        "visible_match_evidence": [
+          "interior design",
+          "dashboard layout",
+          "seats design"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-07.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "fisker",
+        "detected_model": "ocean",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Extreme",
+        "visible_match_evidence": [
+          "interior design",
+          "seat layout",
+          "back seat"
+        ],
+        "generation_match_confidence": 8,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "detail"
+        ],
+        "quality_score": 7,
+        "composition_score": 6,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-08.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": true,
+        "detected_make": "fisker",
+        "detected_model": "ocean",
+        "detected_generation_or_year": "2023",
+        "detected_variant_or_engine": "Fisker Ocean Extreme",
+        "visible_match_evidence": [
+          "interior design",
+          "screen layout",
+          "dashboard elements"
+        ],
+        "generation_match_confidence": 9,
+        "variant_match_confidence": 7,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior",
+          "exterior"
+        ],
+        "quality_score": 8,
+        "composition_score": 7,
+        "target_match_confidence": 8,
+        "reject": false,
+        "reason": "",
+        "path": "interior-09.jpg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 1,
+        "variant_match_confidence": 1,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 3,
+        "composition_score": 4,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Image is of the interior and does not show the exterior or identifiers of the target vehicle.",
+        "path": "interior-10.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 0,
+        "variant_match_confidence": 0,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 3,
+        "composition_score": 4,
+        "target_match_confidence": 0,
+        "reject": true,
+        "reason": "Image does not contain the target vehicle.",
+        "path": "interior-11.jpeg",
+        "provider": "openai"
+      },
+      {
+        "is_target_vehicle": false,
+        "detected_make": null,
+        "detected_model": null,
+        "detected_generation_or_year": null,
+        "detected_variant_or_engine": null,
+        "visible_match_evidence": [],
+        "generation_match_confidence": 0,
+        "variant_match_confidence": 0,
+        "shot_type": "interior",
+        "scene_fit_tags": [
+          "interior"
+        ],
+        "quality_score": 4,
+        "composition_score": 3,
+        "target_match_confidence": 1,
+        "reject": true,
+        "reason": "Not a photo of the target vehicle.",
+        "path": "interior-12.jpeg",
+        "provider": "openai"
+      }
+    ]
+  }
+}
