@@ -1,0 +1,3192 @@
+{
+  "car": {
+    "make": "Mercedes Benz",
+    "model": "Sls Amg Roadster",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Mercedes Benz",
+    "model": "Sls Amg Roadster",
+    "script_style": "classic",
+    "query": "",
+    "start_year": 2012,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/rbgJL8Ml/2012-mercedes-benz-sls-amg-roadster",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-4h75Lk9.jpg?t=179269553202",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-_BFtYt5.jpg?t=179269559824",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/application/s-6W1GRN4/edit/-DO6O.jpg?t=179328220950",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-TEdQ1uY.jpg?t=179269538645",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-4A-r0Kt.jpg?t=179269544449",
+    "photo_rival": "",
+    "rival_car": "",
+    "photo_race": "",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "true",
+    "angles": "",
+    "notes_count": 0,
+    "current_price": "",
+    "extra_photos": "[{\"id\":\"closeup-1794332524836-0\",\"label\":\"close\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/4822e9034b0b6b357b3f73fabdfc10e586c36f68/photos/application/s-CJYGkcR/edit/t8n3F.jpg?t=179328216336\",\"slot\":\"front\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332561586-1\",\"label\":\"eye\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-EPZ-33G.jpg?t=179269548898\",\"slot\":\"front\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332574769-2\",\"label\":\"eye\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-XSfnXBL.jpg?t=179269551600\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332587291-3\",\"label\":\"spoler\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-US50TFf.jpg?t=179269556362\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332606174-4\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-82wgcFQ.jpg?t=179269560315\",\"slot\":\"side\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332616283-5\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-drUAiMH.jpg?t=179269560156\",\"slot\":\"side\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332626152-6\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-Gc6Q08y.jpg?t=179269556470\",\"slot\":\"side\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332653816-7\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-96QnYCn.jpg?t=179269548069\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332679740-8\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-XltwqVS.jpg?t=179269544610\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332706552-9\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-8iUTdGN.jpg?t=179269537297\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794332721230-10\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/6b7ba6ca8ceb35850df399c3a663068fc463e3db/photos/application/s-ch7DB52.jpg?t=179269539524\",\"slot\":\"engine\",\"note\":\"\",\"describe\":false}]",
+    "engine_clip": null
+  },
+  "title": "2012 Mercedes-Benz SLS AMG Roadster",
+  "youtube_title": "Who Needs Turbos With 563 Horsepower? \ud83d\udd25",
+  "youtube_title_options": [
+    "563 Horsepower, No Turbos Required \ud83d\udd25",
+    "Would You Give Up Gullwing Doors? \ud83d\udd25",
+    "They Took Away The Gullwing Doors \ud83d\udd25",
+    "Who Needs Turbos With 563 Horsepower? \ud83d\udd25"
+  ],
+  "key_specs": {
+    "horsepower": "563 hp",
+    "torque": "479 lb-ft",
+    "zero_to_sixty": "3.7 sec",
+    "redline": "7,200 rpm",
+    "engine": "6.2L naturally aspirated V8",
+    "price": "$200K new, ~$120K today"
+  },
+  "history": {
+    "year": 2012,
+    "fact": "The 2012 Mercedes-Benz SLS AMG Roadster could open its fabric roof in just eleven seconds, even while traveling at up to thirty-one miles per hour."
+  },
+  "start_year": 2012,
+  "end_year": 2012,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "563 HP",
+      "photo_label": null,
+      "narration": "563 horsepower and 479 pound-feet come without turbos, and the gullwing doors are gone. That's the 2012 Mercedes-Benz SLS AMG Roadster.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "563 hp",
+      "stat_label_2": "Torque",
+      "stat_value_2": "479 lb-ft"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Developed Together",
+      "photo_label": "exterior front",
+      "narration": "The 2012 Mercedes-Benz SLS AMG Roadster could open its fabric roof in just eleven seconds, even while traveling at up to thirty-one miles per hour.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "wheel",
+      "headline": "Carbon Ceramics",
+      "photo_label": "exterior side",
+      "narration": "Ceramic discs weigh 40% less.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Disc Weight",
+      "stat_value": "40% lighter",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Exhaust Engineering",
+      "photo_label": "exterior rear",
+      "narration": "AMG tuned the exhaust header lengths to improve gas exchange and used large-diameter pipes to reduce back pressure before gases reach the rear silencer.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "M159",
+      "photo_label": "engine bay",
+      "narration": "Its dry-sumped 6.2-liter M159 V8 drives the rear wheels through a carbon-fiber shaft and rear-mounted seven-speed dual-clutch gearbox with a limited-slip differential.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Engine",
+      "stat_value": "6.2L V8",
+      "stat_label_2": "Transmission",
+      "stat_value_2": "7-speed DCT"
+    },
+    {
+      "media_type": "interior",
+      "headline": "",
+      "photo_label": "interior",
+      "narration": "Shift lights signal manual upshifts.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "$200K \u2192 $120K",
+      "photo_label": null,
+      "narration": "They started at about $200,000 new, but they go for about $120,000 today if you can live without the coupe's gullwings.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "MSRP",
+      "stat_value": "~$200K",
+      "stat_label_2": "Today",
+      "stat_value_2": "~$120K"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "photo_label": null,
+      "narration": "Would you give up those gullwing doors for open air and that naturally aspirated V8, or does the coupe still win for you?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://www.prnewswire.com/news-releases/mercedes-benz-previews-2012-sls-roadster-at-new-england-international-auto-show-137109683.html",
+    "https://ragtop.org/mbbrochures/2012/amg/12-AMG_111220.pdf",
+    "https://www.autointell.com/News-2011/June-2011/june-03-11-p1.htm",
+    "https://www.autoblog.gr/2011/09/22/photo-gallery-mercedes-sls-amg-roadster/",
+    "https://www.mbusa.com/content/dam/mb-nafta/us/owners/manuals/2012/operators/MY12_SLS_Operator.pdf",
+    "https://www.sfgate.com/cars/article/Mercedes-Benz-SLS-AMG-Roadster-is-a-sure-classic-3549886.php",
+    "https://viewgoblin.com/channels/autoregionba"
+  ],
+  "script": "563 horsepower and 479 pound-feet come without turbos, and the gullwing doors are gone. That's the 2012 Mercedes-Benz SLS AMG Roadster. The 2012 Mercedes-Benz SLS AMG Roadster could open its fabric roof in just eleven seconds, even while traveling at up to thirty-one miles per hour. Ceramic discs weigh 40% less. AMG tuned the exhaust header lengths to improve gas exchange and used large-diameter pipes to reduce back pressure before gases reach the rear silencer. Its dry-sumped 6.2-liter M159 V8 drives the rear wheels through a carbon-fiber shaft and rear-mounted seven-speed dual-clutch gearbox with a limited-slip differential. Shift lights signal manual upshifts. They started at about $200,000 new, but they go for about $120,000 today if you can live without the coupe's gullwings. Would you give up those gullwing doors for open air and that naturally aspirated V8, or does the coupe still win for you?",
+  "word_count": 149,
+  "repair_log": [
+    {
+      "what": "history",
+      "outcome": "applied",
+      "scene": 2,
+      "returned": "The 2012 Mercedes-Benz SLS AMG Roadster could open its fabric roof in just eleven seconds, even while traveling at up to thirty-one miles per hour."
+    },
+    {
+      "what": "2 scene(s) are too short to see -- scene 3 is \"Ceramic discs weigh 40% less.\", about 1.8 seconds on screen. Each scene i",
+      "outcome": "traded for another",
+      "returned": "Those ceramic discs weigh 40% less\u2014that's a big reduction.",
+      "still": [
+        "1 scene(s) are too short to see -- scene 6 is \"Shift lights signal manual upshifts.\", about 1.8 seconds on screen. Each "
+      ]
+    }
+  ],
+  "rule_violations": [
+    "2 scene(s) are too short to see -- scene 3 is \"Ceramic discs weigh 40% less.\", about 1.8 seconds on screen. Each scene is one photo held for as long as its line takes to say, so give every scene at least 8 words or fold it into the scene beside it."
+  ],
+  "voice_preset": "onyx",
+  "tts_speed": null,
+  "narration": {
+    "engine": "gpt-audio",
+    "model": "gpt-audio",
+    "voice": "echo",
+    "pitch": {
+      "measured_hz": 142.85714285714286,
+      "result_hz": 142.85714285714286
+    },
+    "tts_speed": null
+  },
+  "target_duration_seconds": 55.0,
+  "normalized_audio_duration_seconds": 58.05,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-mercedes-benz-sls-amg-roadster-20261110174600/narration.mp3",
+  "duration_seconds": 58.05,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.36,
+      "end": 1.26,
+      "mouth": "small"
+    },
+    {
+      "start": 1.26,
+      "end": 1.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.35,
+      "end": 1.53,
+      "mouth": "small"
+    },
+    {
+      "start": 1.53,
+      "end": 1.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 1.71,
+      "end": 1.98,
+      "mouth": "small"
+    },
+    {
+      "start": 1.98,
+      "end": 2.07,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.07,
+      "end": 2.97,
+      "mouth": "small"
+    },
+    {
+      "start": 2.97,
+      "end": 3.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.06,
+      "end": 3.15,
+      "mouth": "small"
+    },
+    {
+      "start": 3.15,
+      "end": 3.42,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.42,
+      "end": 3.69,
+      "mouth": "small"
+    },
+    {
+      "start": 3.69,
+      "end": 3.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.78,
+      "end": 4.23,
+      "mouth": "small"
+    },
+    {
+      "start": 4.23,
+      "end": 4.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.59,
+      "end": 4.77,
+      "mouth": "small"
+    },
+    {
+      "start": 4.77,
+      "end": 4.86,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.86,
+      "end": 4.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.95,
+      "end": 5.49,
+      "mouth": "small"
+    },
+    {
+      "start": 5.49,
+      "end": 5.58,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.58,
+      "end": 6.03,
+      "mouth": "small"
+    },
+    {
+      "start": 6.03,
+      "end": 6.39,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.39,
+      "end": 6.66,
+      "mouth": "small"
+    },
+    {
+      "start": 6.66,
+      "end": 6.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.84,
+      "end": 7.02,
+      "mouth": "small"
+    },
+    {
+      "start": 7.02,
+      "end": 7.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.11,
+      "end": 7.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.2,
+      "end": 7.29,
+      "mouth": "small"
+    },
+    {
+      "start": 7.29,
+      "end": 7.56,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.56,
+      "end": 7.74,
+      "mouth": "small"
+    },
+    {
+      "start": 7.74,
+      "end": 7.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.83,
+      "end": 8.01,
+      "mouth": "small"
+    },
+    {
+      "start": 8.01,
+      "end": 8.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.19,
+      "end": 8.28,
+      "mouth": "small"
+    },
+    {
+      "start": 8.28,
+      "end": 8.37,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.37,
+      "end": 8.55,
+      "mouth": "small"
+    },
+    {
+      "start": 8.55,
+      "end": 8.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.82,
+      "end": 8.91,
+      "mouth": "small"
+    },
+    {
+      "start": 8.91,
+      "end": 9.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.0,
+      "end": 9.72,
+      "mouth": "small"
+    },
+    {
+      "start": 9.72,
+      "end": 10.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.35,
+      "end": 10.62,
+      "mouth": "small"
+    },
+    {
+      "start": 10.62,
+      "end": 10.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.71,
+      "end": 10.89,
+      "mouth": "small"
+    },
+    {
+      "start": 10.89,
+      "end": 10.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "small"
+    },
+    {
+      "start": 11.07,
+      "end": 11.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.25,
+      "end": 11.7,
+      "mouth": "small"
+    },
+    {
+      "start": 11.7,
+      "end": 11.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.79,
+      "end": 11.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 11.88,
+      "end": 11.97,
+      "mouth": "small"
+    },
+    {
+      "start": 11.97,
+      "end": 12.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.06,
+      "end": 12.33,
+      "mouth": "small"
+    },
+    {
+      "start": 12.33,
+      "end": 12.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.42,
+      "end": 13.5,
+      "mouth": "small"
+    },
+    {
+      "start": 13.5,
+      "end": 13.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.77,
+      "end": 14.85,
+      "mouth": "small"
+    },
+    {
+      "start": 14.85,
+      "end": 14.94,
+      "mouth": "closed"
+    },
+    {
+      "start": 14.94,
+      "end": 15.48,
+      "mouth": "small"
+    },
+    {
+      "start": 15.48,
+      "end": 15.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.57,
+      "end": 15.84,
+      "mouth": "small"
+    },
+    {
+      "start": 15.84,
+      "end": 16.38,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.38,
+      "end": 16.65,
+      "mouth": "small"
+    },
+    {
+      "start": 16.65,
+      "end": 16.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.74,
+      "end": 17.19,
+      "mouth": "small"
+    },
+    {
+      "start": 17.19,
+      "end": 17.28,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.28,
+      "end": 17.55,
+      "mouth": "small"
+    },
+    {
+      "start": 17.55,
+      "end": 17.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.64,
+      "end": 17.73,
+      "mouth": "small"
+    },
+    {
+      "start": 17.73,
+      "end": 17.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.82,
+      "end": 18.45,
+      "mouth": "small"
+    },
+    {
+      "start": 18.45,
+      "end": 18.54,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.54,
+      "end": 18.81,
+      "mouth": "small"
+    },
+    {
+      "start": 18.81,
+      "end": 19.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.26,
+      "end": 19.71,
+      "mouth": "small"
+    },
+    {
+      "start": 19.71,
+      "end": 19.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.8,
+      "end": 19.98,
+      "mouth": "small"
+    },
+    {
+      "start": 19.98,
+      "end": 20.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.25,
+      "end": 20.43,
+      "mouth": "small"
+    },
+    {
+      "start": 20.43,
+      "end": 20.52,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.52,
+      "end": 20.61,
+      "mouth": "small"
+    },
+    {
+      "start": 20.61,
+      "end": 20.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.7,
+      "end": 20.79,
+      "mouth": "small"
+    },
+    {
+      "start": 20.79,
+      "end": 20.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.88,
+      "end": 21.42,
+      "mouth": "small"
+    },
+    {
+      "start": 21.42,
+      "end": 21.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.87,
+      "end": 22.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.14,
+      "end": 22.23,
+      "mouth": "small"
+    },
+    {
+      "start": 22.23,
+      "end": 22.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.32,
+      "end": 22.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.41,
+      "end": 22.5,
+      "mouth": "small"
+    },
+    {
+      "start": 22.5,
+      "end": 22.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.59,
+      "end": 22.77,
+      "mouth": "small"
+    },
+    {
+      "start": 22.77,
+      "end": 22.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.86,
+      "end": 22.95,
+      "mouth": "small"
+    },
+    {
+      "start": 22.95,
+      "end": 23.13,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.13,
+      "end": 23.22,
+      "mouth": "small"
+    },
+    {
+      "start": 23.22,
+      "end": 23.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.31,
+      "end": 23.4,
+      "mouth": "small"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.49,
+      "end": 23.58,
+      "mouth": "small"
+    },
+    {
+      "start": 23.58,
+      "end": 23.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.67,
+      "end": 23.76,
+      "mouth": "small"
+    },
+    {
+      "start": 23.76,
+      "end": 24.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.03,
+      "end": 24.12,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.12,
+      "end": 24.21,
+      "mouth": "small"
+    },
+    {
+      "start": 24.21,
+      "end": 24.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.3,
+      "end": 24.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.48,
+      "end": 24.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.57,
+      "end": 24.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.75,
+      "end": 25.11,
+      "mouth": "small"
+    },
+    {
+      "start": 25.11,
+      "end": 25.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.47,
+      "end": 25.74,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.74,
+      "end": 25.92,
+      "mouth": "small"
+    },
+    {
+      "start": 25.92,
+      "end": 26.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.1,
+      "end": 26.19,
+      "mouth": "small"
+    },
+    {
+      "start": 26.19,
+      "end": 26.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.64,
+      "end": 26.73,
+      "mouth": "small"
+    },
+    {
+      "start": 26.73,
+      "end": 26.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.82,
+      "end": 27.0,
+      "mouth": "small"
+    },
+    {
+      "start": 27.0,
+      "end": 27.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.18,
+      "end": 27.27,
+      "mouth": "small"
+    },
+    {
+      "start": 27.27,
+      "end": 27.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.36,
+      "end": 27.45,
+      "mouth": "small"
+    },
+    {
+      "start": 27.45,
+      "end": 27.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.54,
+      "end": 27.63,
+      "mouth": "small"
+    },
+    {
+      "start": 27.63,
+      "end": 27.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.72,
+      "end": 27.9,
+      "mouth": "small"
+    },
+    {
+      "start": 27.9,
+      "end": 27.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.99,
+      "end": 28.26,
+      "mouth": "small"
+    },
+    {
+      "start": 28.26,
+      "end": 28.44,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.44,
+      "end": 28.71,
+      "mouth": "small"
+    },
+    {
+      "start": 28.71,
+      "end": 28.8,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.8,
+      "end": 30.15,
+      "mouth": "small"
+    },
+    {
+      "start": 30.15,
+      "end": 30.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.69,
+      "end": 31.05,
+      "mouth": "small"
+    },
+    {
+      "start": 31.05,
+      "end": 31.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.23,
+      "end": 31.41,
+      "mouth": "small"
+    },
+    {
+      "start": 31.41,
+      "end": 31.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.59,
+      "end": 32.13,
+      "mouth": "small"
+    },
+    {
+      "start": 32.13,
+      "end": 32.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.22,
+      "end": 32.31,
+      "mouth": "small"
+    },
+    {
+      "start": 32.31,
+      "end": 32.4,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.4,
+      "end": 32.76,
+      "mouth": "small"
+    },
+    {
+      "start": 32.76,
+      "end": 32.85,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.85,
+      "end": 32.94,
+      "mouth": "small"
+    },
+    {
+      "start": 32.94,
+      "end": 33.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.03,
+      "end": 33.75,
+      "mouth": "small"
+    },
+    {
+      "start": 33.75,
+      "end": 33.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.84,
+      "end": 33.93,
+      "mouth": "small"
+    },
+    {
+      "start": 33.93,
+      "end": 34.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.29,
+      "end": 34.47,
+      "mouth": "wide"
+    },
+    {
+      "start": 34.47,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 35.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.1,
+      "end": 35.28,
+      "mouth": "small"
+    },
+    {
+      "start": 35.28,
+      "end": 35.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.46,
+      "end": 35.64,
+      "mouth": "small"
+    },
+    {
+      "start": 35.64,
+      "end": 35.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.73,
+      "end": 35.82,
+      "mouth": "small"
+    },
+    {
+      "start": 35.82,
+      "end": 36.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.0,
+      "end": 36.09,
+      "mouth": "small"
+    },
+    {
+      "start": 36.09,
+      "end": 36.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.27,
+      "end": 36.36,
+      "mouth": "small"
+    },
+    {
+      "start": 36.36,
+      "end": 36.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.45,
+      "end": 36.63,
+      "mouth": "small"
+    },
+    {
+      "start": 36.63,
+      "end": 36.81,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.81,
+      "end": 37.08,
+      "mouth": "small"
+    },
+    {
+      "start": 37.08,
+      "end": 37.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.44,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.8,
+      "end": 38.25,
+      "mouth": "small"
+    },
+    {
+      "start": 38.25,
+      "end": 38.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.34,
+      "end": 38.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.52,
+      "end": 38.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.61,
+      "end": 38.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.7,
+      "end": 38.88,
+      "mouth": "small"
+    },
+    {
+      "start": 38.88,
+      "end": 38.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.97,
+      "end": 39.33,
+      "mouth": "small"
+    },
+    {
+      "start": 39.33,
+      "end": 39.42,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.42,
+      "end": 39.78,
+      "mouth": "small"
+    },
+    {
+      "start": 39.78,
+      "end": 39.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.96,
+      "end": 40.14,
+      "mouth": "small"
+    },
+    {
+      "start": 40.14,
+      "end": 40.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.23,
+      "end": 40.68,
+      "mouth": "small"
+    },
+    {
+      "start": 40.68,
+      "end": 41.31,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.31,
+      "end": 41.4,
+      "mouth": "small"
+    },
+    {
+      "start": 41.4,
+      "end": 41.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.49,
+      "end": 41.76,
+      "mouth": "small"
+    },
+    {
+      "start": 41.76,
+      "end": 41.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.85,
+      "end": 41.94,
+      "mouth": "small"
+    },
+    {
+      "start": 41.94,
+      "end": 42.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.03,
+      "end": 42.12,
+      "mouth": "small"
+    },
+    {
+      "start": 42.12,
+      "end": 42.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.21,
+      "end": 42.48,
+      "mouth": "small"
+    },
+    {
+      "start": 42.48,
+      "end": 42.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.57,
+      "end": 43.11,
+      "mouth": "small"
+    },
+    {
+      "start": 43.11,
+      "end": 43.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.2,
+      "end": 43.29,
+      "mouth": "small"
+    },
+    {
+      "start": 43.29,
+      "end": 43.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.65,
+      "end": 43.92,
+      "mouth": "small"
+    },
+    {
+      "start": 43.92,
+      "end": 44.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.1,
+      "end": 44.55,
+      "mouth": "small"
+    },
+    {
+      "start": 44.55,
+      "end": 44.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.64,
+      "end": 44.73,
+      "mouth": "small"
+    },
+    {
+      "start": 44.73,
+      "end": 44.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.82,
+      "end": 45.0,
+      "mouth": "small"
+    },
+    {
+      "start": 45.0,
+      "end": 45.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 45.09,
+      "end": 45.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.18,
+      "end": 45.36,
+      "mouth": "small"
+    },
+    {
+      "start": 45.36,
+      "end": 45.45,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.45,
+      "end": 45.81,
+      "mouth": "small"
+    },
+    {
+      "start": 45.81,
+      "end": 46.17,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.17,
+      "end": 46.44,
+      "mouth": "small"
+    },
+    {
+      "start": 46.44,
+      "end": 46.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.62,
+      "end": 46.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 46.71,
+      "end": 46.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.8,
+      "end": 47.25,
+      "mouth": "small"
+    },
+    {
+      "start": 47.25,
+      "end": 47.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.34,
+      "end": 47.52,
+      "mouth": "small"
+    },
+    {
+      "start": 47.52,
+      "end": 47.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.61,
+      "end": 47.79,
+      "mouth": "small"
+    },
+    {
+      "start": 47.79,
+      "end": 47.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.88,
+      "end": 48.06,
+      "mouth": "small"
+    },
+    {
+      "start": 48.06,
+      "end": 48.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.24,
+      "end": 48.6,
+      "mouth": "small"
+    },
+    {
+      "start": 48.6,
+      "end": 48.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.87,
+      "end": 48.96,
+      "mouth": "small"
+    },
+    {
+      "start": 48.96,
+      "end": 49.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.05,
+      "end": 49.23,
+      "mouth": "small"
+    },
+    {
+      "start": 49.23,
+      "end": 49.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.32,
+      "end": 49.41,
+      "mouth": "small"
+    },
+    {
+      "start": 49.41,
+      "end": 49.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.59,
+      "end": 49.77,
+      "mouth": "small"
+    },
+    {
+      "start": 49.77,
+      "end": 49.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.86,
+      "end": 50.13,
+      "mouth": "small"
+    },
+    {
+      "start": 50.13,
+      "end": 50.22,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.22,
+      "end": 50.4,
+      "mouth": "small"
+    },
+    {
+      "start": 50.4,
+      "end": 50.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.49,
+      "end": 50.67,
+      "mouth": "small"
+    },
+    {
+      "start": 50.67,
+      "end": 51.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.21,
+      "end": 51.48,
+      "mouth": "small"
+    },
+    {
+      "start": 51.48,
+      "end": 51.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.57,
+      "end": 51.66,
+      "mouth": "small"
+    },
+    {
+      "start": 51.66,
+      "end": 51.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.75,
+      "end": 51.84,
+      "mouth": "small"
+    },
+    {
+      "start": 51.84,
+      "end": 51.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.93,
+      "end": 52.02,
+      "mouth": "small"
+    },
+    {
+      "start": 52.02,
+      "end": 52.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.2,
+      "end": 52.47,
+      "mouth": "small"
+    },
+    {
+      "start": 52.47,
+      "end": 52.65,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.65,
+      "end": 52.74,
+      "mouth": "small"
+    },
+    {
+      "start": 52.74,
+      "end": 52.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.92,
+      "end": 53.01,
+      "mouth": "small"
+    },
+    {
+      "start": 53.01,
+      "end": 53.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.1,
+      "end": 53.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.19,
+      "end": 53.46,
+      "mouth": "small"
+    },
+    {
+      "start": 53.46,
+      "end": 53.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.55,
+      "end": 53.64,
+      "mouth": "small"
+    },
+    {
+      "start": 53.64,
+      "end": 53.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.82,
+      "end": 54.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.0,
+      "end": 54.18,
+      "mouth": "small"
+    },
+    {
+      "start": 54.18,
+      "end": 54.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.27,
+      "end": 54.45,
+      "mouth": "small"
+    },
+    {
+      "start": 54.45,
+      "end": 54.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.63,
+      "end": 54.72,
+      "mouth": "small"
+    },
+    {
+      "start": 54.72,
+      "end": 54.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.81,
+      "end": 54.99,
+      "mouth": "small"
+    },
+    {
+      "start": 54.99,
+      "end": 55.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.08,
+      "end": 55.35,
+      "mouth": "small"
+    },
+    {
+      "start": 55.35,
+      "end": 55.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 55.53,
+      "end": 55.62,
+      "mouth": "small"
+    },
+    {
+      "start": 55.62,
+      "end": 55.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 55.89,
+      "end": 56.25,
+      "mouth": "small"
+    },
+    {
+      "start": 56.25,
+      "end": 56.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 56.34,
+      "end": 56.43,
+      "mouth": "small"
+    },
+    {
+      "start": 56.43,
+      "end": 56.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 56.52,
+      "end": 56.7,
+      "mouth": "closed"
+    },
+    {
+      "start": 56.7,
+      "end": 56.88,
+      "mouth": "small"
+    },
+    {
+      "start": 56.88,
+      "end": 57.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 57.06,
+      "end": 57.42,
+      "mouth": "small"
+    },
+    {
+      "start": 57.42,
+      "end": 58.05,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "563",
+      "start": 0.0,
+      "end": 1.0
+    },
+    {
+      "word": "horsepower",
+      "start": 1.0,
+      "end": 1.4600000381469727
+    },
+    {
+      "word": "and",
+      "start": 1.4600000381469727,
+      "end": 1.9199999570846558
+    },
+    {
+      "word": "479",
+      "start": 1.9199999570846558,
+      "end": 2.700000047683716
+    },
+    {
+      "word": "pound",
+      "start": 2.700000047683716,
+      "end": 3.0199999809265137
+    },
+    {
+      "word": "feet",
+      "start": 3.0199999809265137,
+      "end": 3.1600000858306885
+    },
+    {
+      "word": "come",
+      "start": 3.1600000858306885,
+      "end": 3.5999999046325684
+    },
+    {
+      "word": "without",
+      "start": 3.5999999046325684,
+      "end": 3.880000114440918
+    },
+    {
+      "word": "turbos",
+      "start": 3.880000114440918,
+      "end": 4.300000190734863
+    },
+    {
+      "word": "and",
+      "start": 4.619999885559082,
+      "end": 4.699999809265137
+    },
+    {
+      "word": "the",
+      "start": 4.699999809265137,
+      "end": 4.980000019073486
+    },
+    {
+      "word": "gull",
+      "start": 4.980000019073486,
+      "end": 5.199999809265137
+    },
+    {
+      "word": "wing",
+      "start": 5.199999809265137,
+      "end": 5.199999809265137
+    },
+    {
+      "word": "doors",
+      "start": 5.199999809265137,
+      "end": 5.5
+    },
+    {
+      "word": "are",
+      "start": 5.5,
+      "end": 5.980000019073486
+    },
+    {
+      "word": "gone",
+      "start": 5.980000019073486,
+      "end": 6.059999942779541
+    },
+    {
+      "word": "That's",
+      "start": 6.480000019073486,
+      "end": 6.639999866485596
+    },
+    {
+      "word": "the",
+      "start": 6.639999866485596,
+      "end": 6.78000020980835
+    },
+    {
+      "word": "2012",
+      "start": 6.78000020980835,
+      "end": 7.420000076293945
+    },
+    {
+      "word": "Mercedes",
+      "start": 7.420000076293945,
+      "end": 8.0
+    },
+    {
+      "word": "Benz",
+      "start": 8.0,
+      "end": 8.319999694824219
+    },
+    {
+      "word": "SLS",
+      "start": 8.319999694824219,
+      "end": 8.960000038146973
+    },
+    {
+      "word": "AMG",
+      "start": 8.960000038146973,
+      "end": 9.479999542236328
+    },
+    {
+      "word": "Roadster",
+      "start": 9.479999542236328,
+      "end": 9.899999618530273
+    },
+    {
+      "word": "The",
+      "start": 10.460000038146973,
+      "end": 10.520000457763672
+    },
+    {
+      "word": "2012",
+      "start": 10.520000457763672,
+      "end": 11.140000343322754
+    },
+    {
+      "word": "Mercedes",
+      "start": 11.140000343322754,
+      "end": 11.720000267028809
+    },
+    {
+      "word": "Benz",
+      "start": 11.720000267028809,
+      "end": 12.079999923706055
+    },
+    {
+      "word": "SLS",
+      "start": 12.079999923706055,
+      "end": 12.579999923706055
+    },
+    {
+      "word": "AMG",
+      "start": 12.579999923706055,
+      "end": 13.15999984741211
+    },
+    {
+      "word": "Roadster",
+      "start": 13.15999984741211,
+      "end": 13.460000038146973
+    },
+    {
+      "word": "could",
+      "start": 13.460000038146973,
+      "end": 13.899999618530273
+    },
+    {
+      "word": "open",
+      "start": 13.899999618530273,
+      "end": 14.140000343322754
+    },
+    {
+      "word": "its",
+      "start": 14.140000343322754,
+      "end": 14.380000114440918
+    },
+    {
+      "word": "fabric",
+      "start": 14.380000114440918,
+      "end": 14.65999984741211
+    },
+    {
+      "word": "roof",
+      "start": 14.65999984741211,
+      "end": 14.899999618530273
+    },
+    {
+      "word": "in",
+      "start": 14.899999618530273,
+      "end": 15.119999885559082
+    },
+    {
+      "word": "just",
+      "start": 15.119999885559082,
+      "end": 15.399999618530273
+    },
+    {
+      "word": "11",
+      "start": 15.399999618530273,
+      "end": 15.720000267028809
+    },
+    {
+      "word": "seconds",
+      "start": 15.720000267028809,
+      "end": 16.020000457763672
+    },
+    {
+      "word": "even",
+      "start": 16.399999618530273,
+      "end": 16.600000381469727
+    },
+    {
+      "word": "while",
+      "start": 16.600000381469727,
+      "end": 16.899999618530273
+    },
+    {
+      "word": "traveling",
+      "start": 16.899999618530273,
+      "end": 17.15999984741211
+    },
+    {
+      "word": "at",
+      "start": 17.15999984741211,
+      "end": 17.420000076293945
+    },
+    {
+      "word": "up",
+      "start": 17.420000076293945,
+      "end": 17.5
+    },
+    {
+      "word": "to",
+      "start": 17.5,
+      "end": 17.739999771118164
+    },
+    {
+      "word": "31",
+      "start": 17.739999771118164,
+      "end": 18.1200008392334
+    },
+    {
+      "word": "miles",
+      "start": 18.1200008392334,
+      "end": 18.440000534057617
+    },
+    {
+      "word": "per",
+      "start": 18.440000534057617,
+      "end": 18.700000762939453
+    },
+    {
+      "word": "hour",
+      "start": 18.700000762939453,
+      "end": 19.040000915527344
+    },
+    {
+      "word": "Ceramic",
+      "start": 19.639999389648438,
+      "end": 19.700000762939453
+    },
+    {
+      "word": "discs",
+      "start": 19.700000762939453,
+      "end": 20.079999923706055
+    },
+    {
+      "word": "weigh",
+      "start": 20.079999923706055,
+      "end": 20.5
+    },
+    {
+      "word": "40",
+      "start": 20.5,
+      "end": 20.8799991607666
+    },
+    {
+      "word": "less",
+      "start": 21.079999923706055,
+      "end": 21.459999084472656
+    },
+    {
+      "word": "AMG",
+      "start": 22.15999984741211,
+      "end": 22.34000015258789
+    },
+    {
+      "word": "tuned",
+      "start": 22.34000015258789,
+      "end": 22.639999389648438
+    },
+    {
+      "word": "the",
+      "start": 22.639999389648438,
+      "end": 22.979999542236328
+    },
+    {
+      "word": "exhaust",
+      "start": 22.979999542236328,
+      "end": 23.239999771118164
+    },
+    {
+      "word": "header",
+      "start": 23.239999771118164,
+      "end": 23.5
+    },
+    {
+      "word": "lengths",
+      "start": 23.5,
+      "end": 23.780000686645508
+    },
+    {
+      "word": "to",
+      "start": 23.780000686645508,
+      "end": 24.200000762939453
+    },
+    {
+      "word": "improve",
+      "start": 24.200000762939453,
+      "end": 24.5
+    },
+    {
+      "word": "gas",
+      "start": 24.5,
+      "end": 24.84000015258789
+    },
+    {
+      "word": "exchange",
+      "start": 24.84000015258789,
+      "end": 25.219999313354492
+    },
+    {
+      "word": "and",
+      "start": 25.399999618530273,
+      "end": 25.6200008392334
+    },
+    {
+      "word": "used",
+      "start": 25.6200008392334,
+      "end": 25.860000610351562
+    },
+    {
+      "word": "large",
+      "start": 25.860000610351562,
+      "end": 26.260000228881836
+    },
+    {
+      "word": "diameter",
+      "start": 26.260000228881836,
+      "end": 26.68000030517578
+    },
+    {
+      "word": "pipes",
+      "start": 26.68000030517578,
+      "end": 26.959999084472656
+    },
+    {
+      "word": "to",
+      "start": 26.959999084472656,
+      "end": 27.280000686645508
+    },
+    {
+      "word": "reduce",
+      "start": 27.280000686645508,
+      "end": 27.639999389648438
+    },
+    {
+      "word": "back",
+      "start": 27.639999389648438,
+      "end": 28.020000457763672
+    },
+    {
+      "word": "pressure",
+      "start": 28.020000457763672,
+      "end": 28.299999237060547
+    },
+    {
+      "word": "before",
+      "start": 28.299999237060547,
+      "end": 28.719999313354492
+    },
+    {
+      "word": "gases",
+      "start": 28.719999313354492,
+      "end": 29.15999984741211
+    },
+    {
+      "word": "reach",
+      "start": 29.15999984741211,
+      "end": 29.459999084472656
+    },
+    {
+      "word": "the",
+      "start": 29.459999084472656,
+      "end": 29.639999389648438
+    },
+    {
+      "word": "rear",
+      "start": 29.639999389648438,
+      "end": 29.8799991607666
+    },
+    {
+      "word": "silencer",
+      "start": 29.8799991607666,
+      "end": 30.219999313354492
+    },
+    {
+      "word": "Its",
+      "start": 30.799999237060547,
+      "end": 30.940000534057617
+    },
+    {
+      "word": "dry",
+      "start": 30.940000534057617,
+      "end": 31.479999542236328
+    },
+    {
+      "word": "sumped",
+      "start": 31.479999542236328,
+      "end": 31.6200008392334
+    },
+    {
+      "word": "6",
+      "start": 31.6200008392334,
+      "end": 31.959999084472656
+    },
+    {
+      "word": "2",
+      "start": 31.959999084472656,
+      "end": 32.439998626708984
+    },
+    {
+      "word": "liter",
+      "start": 32.439998626708984,
+      "end": 32.63999938964844
+    },
+    {
+      "word": "M159",
+      "start": 32.63999938964844,
+      "end": 33.68000030517578
+    },
+    {
+      "word": "V8",
+      "start": 33.68000030517578,
+      "end": 34.02000045776367
+    },
+    {
+      "word": "drives",
+      "start": 34.02000045776367,
+      "end": 34.540000915527344
+    },
+    {
+      "word": "the",
+      "start": 34.540000915527344,
+      "end": 34.79999923706055
+    },
+    {
+      "word": "rear",
+      "start": 34.79999923706055,
+      "end": 35.0
+    },
+    {
+      "word": "wheels",
+      "start": 35.0,
+      "end": 35.2400016784668
+    },
+    {
+      "word": "through",
+      "start": 35.2400016784668,
+      "end": 35.58000183105469
+    },
+    {
+      "word": "a",
+      "start": 35.58000183105469,
+      "end": 35.86000061035156
+    },
+    {
+      "word": "carbon",
+      "start": 35.86000061035156,
+      "end": 36.040000915527344
+    },
+    {
+      "word": "fiber",
+      "start": 36.040000915527344,
+      "end": 36.36000061035156
+    },
+    {
+      "word": "shaft",
+      "start": 36.36000061035156,
+      "end": 36.63999938964844
+    },
+    {
+      "word": "and",
+      "start": 36.63999938964844,
+      "end": 37.099998474121094
+    },
+    {
+      "word": "rear",
+      "start": 37.099998474121094,
+      "end": 37.34000015258789
+    },
+    {
+      "word": "mounted",
+      "start": 37.34000015258789,
+      "end": 37.7400016784668
+    },
+    {
+      "word": "7",
+      "start": 37.7400016784668,
+      "end": 38.02000045776367
+    },
+    {
+      "word": "speed",
+      "start": 38.02000045776367,
+      "end": 38.279998779296875
+    },
+    {
+      "word": "dual",
+      "start": 38.279998779296875,
+      "end": 38.599998474121094
+    },
+    {
+      "word": "clutch",
+      "start": 38.599998474121094,
+      "end": 38.779998779296875
+    },
+    {
+      "word": "gearbox",
+      "start": 38.779998779296875,
+      "end": 39.220001220703125
+    },
+    {
+      "word": "with",
+      "start": 39.220001220703125,
+      "end": 39.599998474121094
+    },
+    {
+      "word": "a",
+      "start": 39.599998474121094,
+      "end": 39.79999923706055
+    },
+    {
+      "word": "limited",
+      "start": 39.79999923706055,
+      "end": 40.040000915527344
+    },
+    {
+      "word": "slip",
+      "start": 40.040000915527344,
+      "end": 40.2599983215332
+    },
+    {
+      "word": "differential",
+      "start": 40.2599983215332,
+      "end": 40.7599983215332
+    },
+    {
+      "word": "Shift",
+      "start": 41.380001068115234,
+      "end": 41.619998931884766
+    },
+    {
+      "word": "lights",
+      "start": 41.619998931884766,
+      "end": 41.91999816894531
+    },
+    {
+      "word": "signal",
+      "start": 41.91999816894531,
+      "end": 42.380001068115234
+    },
+    {
+      "word": "manual",
+      "start": 42.380001068115234,
+      "end": 42.81999969482422
+    },
+    {
+      "word": "upshifts",
+      "start": 42.81999969482422,
+      "end": 43.20000076293945
+    },
+    {
+      "word": "They",
+      "start": 43.7400016784668,
+      "end": 43.84000015258789
+    },
+    {
+      "word": "started",
+      "start": 43.84000015258789,
+      "end": 44.20000076293945
+    },
+    {
+      "word": "at",
+      "start": 44.20000076293945,
+      "end": 44.380001068115234
+    },
+    {
+      "word": "about",
+      "start": 44.380001068115234,
+      "end": 44.70000076293945
+    },
+    {
+      "word": "200",
+      "start": 44.70000076293945,
+      "end": 45.13999938964844
+    },
+    {
+      "word": "000",
+      "start": 45.13999938964844,
+      "end": 45.279998779296875
+    },
+    {
+      "word": "new",
+      "start": 45.279998779296875,
+      "end": 45.939998626708984
+    },
+    {
+      "word": "but",
+      "start": 45.97999954223633,
+      "end": 46.29999923706055
+    },
+    {
+      "word": "they",
+      "start": 46.29999923706055,
+      "end": 46.439998626708984
+    },
+    {
+      "word": "go",
+      "start": 46.439998626708984,
+      "end": 46.63999938964844
+    },
+    {
+      "word": "for",
+      "start": 46.63999938964844,
+      "end": 46.779998779296875
+    },
+    {
+      "word": "about",
+      "start": 46.779998779296875,
+      "end": 47.060001373291016
+    },
+    {
+      "word": "120",
+      "start": 47.060001373291016,
+      "end": 47.65999984741211
+    },
+    {
+      "word": "000",
+      "start": 47.65999984741211,
+      "end": 48.0
+    },
+    {
+      "word": "today",
+      "start": 48.0,
+      "end": 48.65999984741211
+    },
+    {
+      "word": "if",
+      "start": 48.720001220703125,
+      "end": 49.13999938964844
+    },
+    {
+      "word": "you",
+      "start": 49.13999938964844,
+      "end": 49.2400016784668
+    },
+    {
+      "word": "can",
+      "start": 49.2400016784668,
+      "end": 49.5
+    },
+    {
+      "word": "live",
+      "start": 49.5,
+      "end": 49.65999984741211
+    },
+    {
+      "word": "without",
+      "start": 49.65999984741211,
+      "end": 49.939998626708984
+    },
+    {
+      "word": "the",
+      "start": 49.939998626708984,
+      "end": 50.2599983215332
+    },
+    {
+      "word": "coupe's",
+      "start": 50.2599983215332,
+      "end": 50.52000045776367
+    },
+    {
+      "word": "gull",
+      "start": 50.52000045776367,
+      "end": 50.63999938964844
+    },
+    {
+      "word": "wings",
+      "start": 50.63999938964844,
+      "end": 50.7599983215332
+    },
+    {
+      "word": "Would",
+      "start": 51.060001373291016,
+      "end": 51.36000061035156
+    },
+    {
+      "word": "you",
+      "start": 51.36000061035156,
+      "end": 51.540000915527344
+    },
+    {
+      "word": "give",
+      "start": 51.540000915527344,
+      "end": 51.68000030517578
+    },
+    {
+      "word": "up",
+      "start": 51.68000030517578,
+      "end": 51.81999969482422
+    },
+    {
+      "word": "those",
+      "start": 51.81999969482422,
+      "end": 52.20000076293945
+    },
+    {
+      "word": "gull",
+      "start": 52.20000076293945,
+      "end": 52.2599983215332
+    },
+    {
+      "word": "wing",
+      "start": 52.2599983215332,
+      "end": 52.41999816894531
+    },
+    {
+      "word": "doors",
+      "start": 52.41999816894531,
+      "end": 52.68000030517578
+    },
+    {
+      "word": "for",
+      "start": 52.68000030517578,
+      "end": 53.08000183105469
+    },
+    {
+      "word": "open",
+      "start": 53.08000183105469,
+      "end": 53.380001068115234
+    },
+    {
+      "word": "air",
+      "start": 53.380001068115234,
+      "end": 53.599998474121094
+    },
+    {
+      "word": "and",
+      "start": 53.599998474121094,
+      "end": 53.939998626708984
+    },
+    {
+      "word": "that",
+      "start": 53.939998626708984,
+      "end": 54.20000076293945
+    },
+    {
+      "word": "naturally",
+      "start": 54.20000076293945,
+      "end": 54.63999938964844
+    },
+    {
+      "word": "aspirated",
+      "start": 54.63999938964844,
+      "end": 55.20000076293945
+    },
+    {
+      "word": "V8",
+      "start": 55.20000076293945,
+      "end": 55.619998931884766
+    },
+    {
+      "word": "Or",
+      "start": 55.619998931884766,
+      "end": 55.97999954223633
+    },
+    {
+      "word": "does",
+      "start": 55.97999954223633,
+      "end": 56.15999984741211
+    },
+    {
+      "word": "the",
+      "start": 56.15999984741211,
+      "end": 56.41999816894531
+    },
+    {
+      "word": "coupe",
+      "start": 56.41999816894531,
+      "end": 56.63999938964844
+    },
+    {
+      "word": "still",
+      "start": 56.63999938964844,
+      "end": 57.099998474121094
+    },
+    {
+      "word": "win",
+      "start": 57.099998474121094,
+      "end": 57.2599983215332
+    },
+    {
+      "word": "for",
+      "start": 57.2599983215332,
+      "end": 57.47999954223633
+    },
+    {
+      "word": "you",
+      "start": 57.47999954223633,
+      "end": 57.599998474121094
+    }
+  ],
+  "word_alignment_failed": null,
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "right"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-close.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "close",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1794332524836-0-0",
+          "cue_label": "[front-closeup-1794332524836-0-0] close",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/1-eye.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "eye",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1794332561586-1-1",
+          "cue_label": "[front-closeup-1794332561586-1-1] eye",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/4-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1794332606174-4-4",
+          "cue_label": "[side-closeup-1794332606174-4-4] Side close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/5-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1794332616283-5-5",
+          "cue_label": "[side-closeup-1794332616283-5-5] Side close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/6-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1794332626152-6-6",
+          "cue_label": "[side-closeup-1794332626152-6-6] Side close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/2-eye.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "eye",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1794332574769-2-2",
+          "cue_label": "[rear-closeup-1794332574769-2-2] eye",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/3-spoler.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "spoler",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1794332587291-3-3",
+          "cue_label": "[rear-closeup-1794332587291-3-3] spoler",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/9-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1794332706552-9-9",
+          "cue_label": "[rear-closeup-1794332706552-9-9] Rear close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/10-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Engine bay close-up",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-1794332721230-10-10",
+          "cue_label": "[engine-closeup-1794332721230-10-10] Engine bay close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/7-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1794332653816-7-7",
+          "cue_label": "[interior-closeup-1794332653816-7-7] Interior close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/8-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1794332679740-8-8",
+          "cue_label": "[interior-closeup-1794332679740-8-8] Interior close-up",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {},
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/rbgJL8Ml/2012-mercedes-benz-sls-amg-roadster",
+    "title": "2012 Mercedes-Benz SLS AMG Roadster",
+    "price_text": "Sold for $120,000",
+    "auction_state": "sold",
+    "facts": {
+      "Make": "Mercedes-Benz",
+      "Engine": "6.2L V8",
+      "Model": "SLS AMG",
+      "Drivetrain": "Rear-wheel drive",
+      "Transmission": "Automatic (7-Speed)",
+      "Body Style": "Convertible"
+    },
+    "sections": {
+      "Highlights": "THIS... is a 2012 Mercedes-Benz SLS AMG Roadster, finished in Obsidian Black Metallic with a black soft top and a black interior. The odometer on this Roadster currently displays approximately 15,300 miles. According to the build sheet provided in the gallery, notable factory equipment includes 20-inch AMG wheels, a limited-slip differential, an AMG Ceramic Compound braking system, a power-operated soft top, Designo leather upholstery, an Airscarf neck-level heating system, and a rearview camera. Notable modifications reported by the selling dealer are limited to the removal of the catalytic converters. Released in 2010, the Mercedes-Benz SLS stood out as the first production car developed in-house from the ground up by AMG. It featured a front-mid-mounted engine, an aluminum chassis, and, in coupe form, gullwing doors that echoed the 300 SL built in the 1960s. Production ended after 2015. Power comes from a 6.2-liter V8, rated at 563 horsepower and 479 lb-ft of torque. Output is sent to the rear wheels via a 7-speed dual-clutch automatic transmission.",
+      "Equipment": "A build sheet is provided in the photo gallery, and a partial list of notable equipment reported by the selling dealer includes: 20-inch AMG wheels Limited-slip differential AMG Ceramic Compound braking system Power-operated rear spoiler Power-operated soft top Designo leather upholstery AirScarf neck-level heating system Rearview camera",
+      "Seller Notes": "Due to the modifications performed to this Roadster, it may not pass emissions testing in some states. As always, it's the buyer's responsibility to perform all due diligence regarding registering this Roadster in their respective state prior to placing a bid. The tires on this SLS carry 2026 date codes."
+    }
+  },
+  "market_value": {
+    "count": 1,
+    "median": 120000,
+    "low": 120000,
+    "high": 120000,
+    "examples": [],
+    "source": "sale"
+  },
+  "voice_auditions": {
+    "onyx": "single-mercedes-benz-sls-amg-roadster-20261110174600/voice_auditions/onyx.mp3",
+    "british_narrator": "single-mercedes-benz-sls-amg-roadster-20261110174600/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-mercedes-benz-sls-amg-roadster-20261110174600/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-mercedes-benz-sls-amg-roadster-20261110174600/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-mercedes-benz-sls-amg-roadster-20261110174600/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-mercedes-benz-sls-amg-roadster-20261110174600/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "left",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 9.389999866485596,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 19.170000076293945,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 30.339999198913574,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 38.279998779296875,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 47.65999984741211,
+        "layout": "bottom-center",
+        "framing": "half"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 7.45,
+        "pose": "open"
+      },
+      {
+        "start": 8.9,
+        "pose": "rest"
+      },
+      {
+        "start": 10.85,
+        "pose": "chest"
+      },
+      {
+        "start": 12.3,
+        "pose": "rest"
+      },
+      {
+        "start": 14.25,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 15.7,
+        "pose": "rest"
+      },
+      {
+        "start": 17.65,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 19.1,
+        "pose": "rest"
+      },
+      {
+        "start": 21.05,
+        "pose": "open"
+      },
+      {
+        "start": 22.5,
+        "pose": "rest"
+      },
+      {
+        "start": 24.45,
+        "pose": "chest"
+      },
+      {
+        "start": 25.9,
+        "pose": "rest"
+      },
+      {
+        "start": 27.85,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 29.3,
+        "pose": "rest"
+      },
+      {
+        "start": 31.489999,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 32.939999,
+        "pose": "rest"
+      },
+      {
+        "start": 34.889999,
+        "pose": "open"
+      },
+      {
+        "start": 36.339999,
+        "pose": "rest"
+      },
+      {
+        "start": 39.429999,
+        "pose": "chest"
+      },
+      {
+        "start": 40.879999,
+        "pose": "rest"
+      },
+      {
+        "start": 42.829999,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 44.279999,
+        "pose": "rest"
+      },
+      {
+        "start": 46.229999,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 47.679999,
+        "pose": "rest"
+      },
+      {
+        "start": 49.629999,
+        "pose": "open"
+      },
+      {
+        "start": 51.079999,
+        "pose": "rest"
+      },
+      {
+        "start": 53.029999,
+        "pose": "chest"
+      },
+      {
+        "start": 54.479999,
+        "pose": "rest"
+      },
+      {
+        "start": 56.429999,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 57.879999,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 9.389999866485596,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-close.jpg",
+            "label": "close",
+            "photo_id": "front-closeup-1794332524836-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-eye.jpg",
+            "label": "eye",
+            "photo_id": "front-closeup-1794332561586-1-1"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 19.170000076293945
+      },
+      {
+        "start": 9.389999866485596,
+        "end": 19.170000076293945,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-close.jpg",
+            "label": "close",
+            "photo_id": "front-closeup-1794332524836-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-eye.jpg",
+            "label": "eye",
+            "photo_id": "front-closeup-1794332561586-1-1"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 19.170000076293945
+      },
+      {
+        "start": 19.170000076293945,
+        "end": 21.809999465942383,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/4-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1794332606174-4-4"
+          },
+          {
+            "path": "images/manual-extra/5-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1794332616283-5-5"
+          },
+          {
+            "path": "images/manual-extra/6-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1794332626152-6-6"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 19.170000076293945,
+        "chapter_end": 21.809999465942383
+      },
+      {
+        "start": 21.809999465942383,
+        "end": 30.339999198913574,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/2-eye.jpg",
+            "label": "eye",
+            "photo_id": "rear-closeup-1794332574769-2-2"
+          },
+          {
+            "path": "images/manual-extra/3-spoler.jpg",
+            "label": "spoler",
+            "photo_id": "rear-closeup-1794332587291-3-3"
+          },
+          {
+            "path": "images/manual-extra/9-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1794332706552-9-9"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 21.809999465942383,
+        "chapter_end": 30.339999198913574
+      },
+      {
+        "start": 30.339999198913574,
+        "end": 38.279998779296875,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/10-photo.jpg",
+            "label": "Engine bay close-up",
+            "photo_id": "engine-closeup-1794332721230-10-10"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 30.339999198913574,
+        "chapter_end": 38.279998779296875
+      },
+      {
+        "start": 38.279998779296875,
+        "end": 39.79999923706055,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/7-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1794332653816-7-7"
+          },
+          {
+            "path": "images/manual-extra/8-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1794332679740-8-8"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 38.279998779296875,
+        "chapter_end": 39.79999923706055
+      },
+      {
+        "start": 39.79999923706055,
+        "end": 47.65999984741211,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-close.jpg",
+            "label": "close",
+            "photo_id": "front-closeup-1794332524836-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-eye.jpg",
+            "label": "eye",
+            "photo_id": "front-closeup-1794332561586-1-1"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 39.79999923706055,
+        "chapter_end": 58.13
+      },
+      {
+        "start": 47.65999984741211,
+        "end": 58.13,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-close.jpg",
+            "label": "close",
+            "photo_id": "front-closeup-1794332524836-0-0"
+          },
+          {
+            "path": "images/manual-extra/1-eye.jpg",
+            "label": "eye",
+            "photo_id": "front-closeup-1794332561586-1-1"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 39.79999923706055,
+        "chapter_end": 58.13
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1794332524836-0-0",
+          "front-closeup-1794332561586-1-1"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 9.389999866485596,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1794332524836-0-0",
+          "front-closeup-1794332561586-1-1"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 19.170000076293945,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-1794332606174-4-4",
+          "side-closeup-1794332616283-5-5",
+          "side-closeup-1794332626152-6-6"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 21.809999465942383,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-1794332574769-2-2",
+          "rear-closeup-1794332587291-3-3",
+          "rear-closeup-1794332706552-9-9"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 30.339999198913574,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-1794332721230-10-10"
+        ],
+        "active": null
+      },
+      {
+        "scene": 5,
+        "start": 38.279998779296875,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-1794332653816-7-7",
+          "interior-closeup-1794332679740-8-8"
+        ],
+        "active": null
+      },
+      {
+        "scene": 6,
+        "start": 39.79999923706055,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1794332524836-0-0",
+          "front-closeup-1794332561586-1-1"
+        ],
+        "active": null
+      },
+      {
+        "scene": 7,
+        "start": 47.65999984741211,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1794332524836-0-0",
+          "front-closeup-1794332561586-1-1"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
