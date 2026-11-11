@@ -17,5 +17,13 @@
   "video": "single_car_short.mp4",
   "thumbnail": "thumbnail.jpg",
   "privacy": "private",
-  "status": "ready"
+  "status": "uploaded",
+  "publish_at": "2026-11-11T18:40:00Z",
+  "thumbnail_set": false,
+  "thumbnail_error": "<HttpError 403 when requesting https://youtube.googleapis.com/upload/youtube/v3/thumbnails/set?videoId=L_krP7WZtJw&alt=json&uploadType=media returned \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\". Details: \"[{'message': \"The thumbnail can't be se",
+  "comment_posted": false,
+  "comment_error": "<HttpError 403 when requesting https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&alt=json returned \"Request had insufficient authentication scopes.\". Details: \"[{'message': 'Insufficient Permission', 'domain': 'global', 'reason': 'insufficientPermissions'}]\">",
+  "video_id": "L_krP7WZtJw",
+  "video_url": "https://youtu.be/L_krP7WZtJw",
+  "uploaded_at": 1794422140
 }
