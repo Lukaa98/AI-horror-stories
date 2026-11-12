@@ -1,0 +1,27 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-11-12T17:51:43.393Z",
+  "query": "",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/KmOkpwNY/2008-lamborghini-murcielago-lp640-coupe",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/KmOkpwNY/2008-lamborghini-murcielago-lp640-coupe",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100
+  },
+  "downloaded_images": [],
+  "videos": []
+}
