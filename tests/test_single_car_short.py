@@ -5201,8 +5201,11 @@ def test_a_pasted_video_link_skips_reading_the_listing():
                   '{!clipUrl.trim() && listingVideosState === "probing" && (',
                   '{!clipUrl.trim() && (listingVideos?.videos || []).length > 0'):
         assert gated in app, gated
-    # And the times and crop open for either source, not just a picked one.
-    assert "{clipSource && (" in app
+    # And the times and crop open for either source, not just a picked one
+    # -- but not for a link that is known to be unusable.
+    assert "{clipSource && !clipLinkProblem(clipUrl) && (" in app
+    # A page url reaches neither the preview nor the payload.
+    assert "engine_clip: useEngineClip && clipSource && !clipLinkProblem(clipUrl)" in app
     # A typed link gets the video itself under the crop box, which a poster
     # frame cannot do: the seconds and the framing come off the same player.
     # A still at the clip's own start second, because the listing's videos
