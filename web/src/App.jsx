@@ -1078,7 +1078,7 @@ export default function App() {
   const [previousBuildsError, setPreviousBuildsError] = useState(null);
   const [previousBuildFilter, setPreviousBuildFilter] = useState("");
   // A few seconds of one of the listing's own videos -- picture and sound
-  // -- played inside the photo frame where the script hands over to it.
+  // -- joined onto the front of the film, before the narration starts.
   // Off unless asked for: most listings have a walkaround and an interior
   // tour and nothing worth hearing.
   const [useEngineClip, setUseEngineClip] = useState(false);
@@ -3093,7 +3093,7 @@ export default function App() {
                           disabled={stage === "single-car-building"}
                         />
                         Engine sound
-                        <Tip text="Cuts a few seconds out of one of the listing's own videos and plays them -- picture and sound -- inside the photo frame, about ten to fifteen seconds in. Not at the front: the script is written to introduce the car and then hand over, so the narrator stops talking for it, and it lands inside the twenty seconds people actually watch. It plays in the same box the photos use, so the headline, the spec table and the character stay on screen. Needs a specific listing, because the clip comes off that listing's page. Which video and which seconds are both yours to pick: choosing automatically is what the startup-battle pipeline does, and it manages it 4 times in 14." />
+                        <Tip text="Cuts a few seconds out of one of the listing's own videos and puts them -- picture and sound -- on the front of the film, before the narrator says a word. The sound is the hook; the script then opens as it would without a clip, and is told not to introduce or react to it. The narration is never cut into, so if the clip cannot be used the video goes out whole instead of with a hole in it. Keep it short: more than about eight seconds is a long wait before anyone speaks. Needs a specific listing, because the clip comes off that listing's page. Which video and which seconds are both yours to pick: choosing automatically is what the startup-battle pipeline does, and it manages it 4 times in 14." />
                       </label>
                     </div>
 
@@ -3180,11 +3180,10 @@ export default function App() {
                               {clipSeconds(clipStart) !== null && clipSeconds(clipEnd) !== null
                                 && clipSeconds(clipEnd) > clipSeconds(clipStart)
                                 ? `${(clipSeconds(clipEnd) - clipSeconds(clipStart)).toFixed(1)}s `
-                                  + "of the clip above, played in the photo frame where the "
-                                  + "script hands over to it. The narration pauses for it "
-                                  + "rather than losing words, so length costs runtime, not "
-                                  + "script -- four or five seconds is a start-up, much more "
-                                  + "is a gap."
+                                  + "of the clip above, on the front of the film before the "
+                                  + "narration starts. It adds to the runtime rather than "
+                                  + "taking words out, so four or five seconds is a start-up "
+                                  + "and much more is a wait before anybody speaks."
                                 : "Read the times off the listing's own player. m:ss or seconds."}
                             </p>
                           </>
