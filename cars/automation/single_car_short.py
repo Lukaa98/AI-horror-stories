@@ -4282,7 +4282,38 @@ def _media_duration(path):
         return None
 
 
-def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24):
+def engine_clip_crop(crop):
+    """The chosen part of the clip's frame, as an ffmpeg crop, or "".
+
+    Taken as fractions of the source so the numbers mean the same thing
+    whatever the phone was held at: {"x": 0, "y": 0, "w": 1, "h": 0.33} is
+    the top third. A listing's start-up is often filmed from the hip with
+    the car in a corner and half the frame given to a driveway, and fitting
+    that whole into a vertical canvas spends most of the screen on concrete.
+
+    Anything malformed returns "" and the whole frame is used. A crop is a
+    framing preference and must never be the reason a build fails.
+    """
+    if not isinstance(crop, dict):
+        return ""
+    try:
+        x, y = float(crop.get("x", 0)), float(crop.get("y", 0))
+        w, h = float(crop.get("w", 1)), float(crop.get("h", 1))
+    except (TypeError, ValueError):
+        return ""
+    if not (0 <= x < 1 and 0 <= y < 1 and 0 < w <= 1 and 0 < h <= 1):
+        return ""
+    # Clamped rather than rejected: a box dragged past the edge is a box
+    # that meant "to the edge".
+    w, h = min(w, 1 - x), min(h, 1 - y)
+    if w <= 0 or h <= 0 or (x, y, w, h) == (0.0, 0.0, 1.0, 1.0):
+        return ""
+    # Even numbers, because yuv420p cannot encode an odd dimension.
+    return (f"crop=w='trunc(iw*{w:.4f}/2)*2':h='trunc(ih*{h:.4f}/2)*2':"
+            f"x='trunc(iw*{x:.4f}/2)*2':y='trunc(ih*{y:.4f}/2)*2',")
+
+
+def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop=None):
     """Put the start-up on the front of the film, before a word is spoken.
 
     This replaces playing it in the middle. The old way cut a gap into the
@@ -4298,6 +4329,9 @@ def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24):
     The clip is fitted inside the frame rather than cropped to fill it, with
     a blurred zoomed copy of itself behind: a centre crop of a vertical
     phone clip is as likely as not to cut off the exhaust it was filmed for.
+    Which part of the source that applies to is `crop` -- the whole frame
+    unless the build chose a box, because a start-up filmed from the hip
+    often puts the car in one corner and gives the rest to a driveway.
     Both segments are forced to the same size, SAR, frame rate and pixel
     format, because concat refuses to join streams that disagree about any
     of them, and both audio branches are brought to 48kHz stereo -- a mono
@@ -4313,7 +4347,10 @@ def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24):
         subprocess.run(
             ["ffmpeg", "-y", "-i", str(clip_path), "-i", str(video_path),
              "-filter_complex",
-             f"[0:v]split=2[back][front];"
+             # The chosen part of the frame first, so both the fitted copy
+             # and the blurred backdrop are made from it rather than the
+             # backdrop quietly showing the part that was cropped away.
+             f"[0:v]{engine_clip_crop(crop)}split=2[back][front];"
              f"[back]scale={width}:{height}:force_original_aspect_ratio=increase,"
              f"crop={width}:{height},gblur=sigma=24[backdrop];"
              f"[front]scale={width}:{height}:force_original_aspect_ratio=decrease[fitted];"
@@ -5000,7 +5037,8 @@ def build_short(args):
     # renderer timed: every caption, photo cue and mouth frame keeps the
     # timing it was built with and they all simply start later.
     if engine_clip_path:
-        played = prepend_engine_clip(video_path, engine_clip_path, engine_clip_length)
+        played = prepend_engine_clip(video_path, engine_clip_path, engine_clip_length,
+                                     crop=engine_clip.get("crop"))
         if played:
             # Recorded so a build that shipped with a clip can be told apart
             # from one that asked for a clip and did not get it.

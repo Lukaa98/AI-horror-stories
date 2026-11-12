@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { clipSeconds, clipLength, clipStamp, sameListingVideo } from "./clipTimes.js";
+import { clipSeconds, clipLength, clipStamp, cropFractions, sameListingVideo } from "./clipTimes.js";
 
 test("reads the m:ss a listing's player shows, and plain seconds", () => {
   assert.equal(clipSeconds("1:04"), 64);
@@ -62,4 +62,38 @@ test("the same listing video survives being re-signed", () => {
     assert.equal(sameListingVideo(bad, bad), false, JSON.stringify(bad));
     assert.equal(sameListingVideo(a, bad), false);
   }
+});
+
+
+test("a blank crop box means the whole frame, not a zero-sized one", () => {
+  assert.equal(cropFractions(null), null);
+  assert.equal(cropFractions({}), null);
+  assert.equal(cropFractions({ left: "", top: "", width: "", height: "" }), null);
+  // Explicitly the whole frame is still the whole frame.
+  assert.equal(cropFractions({ left: "0", top: "0", width: "100", height: "100" }), null);
+});
+
+test("a missing edge takes its default, so a band needs two numbers not four", () => {
+  // The common case: the car is at the top and the rest is driveway.
+  assert.deepEqual(cropFractions({ top: "0", height: "33" }),
+                   { x: 0, y: 0, w: 1, h: 0.33 });
+  // Cropping the sides in as well is what actually magnifies it.
+  assert.deepEqual(cropFractions({ left: "20", top: "0", width: "60", height: "33" }),
+                   { x: 0.2, y: 0, w: 0.6, h: 0.33 });
+});
+
+test("nonsense is clamped rather than passed on to ffmpeg", () => {
+  // Past the edge means to the edge.
+  assert.deepEqual(cropFractions({ left: "50", width: "90", height: "100" }),
+                   { x: 0.5, y: 0, w: 0.5, h: 1 });
+  // Out of range is clamped into range, and -10 to 150 clamps to the whole
+  // frame -- which is null, the same as having typed nothing.
+  assert.equal(cropFractions({ top: "-10", height: "150" }), null);
+  // Clamped but still a crop.
+  assert.deepEqual(cropFractions({ top: "-10", height: "40" }),
+                   { x: 0, y: 0, w: 1, h: 0.4 });
+  assert.equal(cropFractions({ height: "tall" }), null);
+  // A trailing % is what somebody types.
+  assert.deepEqual(cropFractions({ top: "0%", height: "33%" }),
+                   { x: 0, y: 0, w: 1, h: 0.33 });
 });

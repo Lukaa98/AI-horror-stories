@@ -22,6 +22,32 @@ export function clipSeconds(value) {
 /* Seconds of clip between two typed times, or null if the pair is not a
  * usable range. Kept beside the parser because every caller wants the two
  * questions answered together: is this valid, and how long is it. */
+/* The crop box as fractions of the source frame, or null for the whole
+ * frame. Typed as percentages because that is what somebody reading a
+ * poster frame can estimate; stored as fractions because the build has no
+ * idea what size the phone recorded at.
+ *
+ * Anything missing takes its edge: a top and a height with no left and
+ * width is a full-width band, which is the common case -- the car is at
+ * the top and the bottom two thirds are driveway.
+ */
+export function cropFractions(box) {
+  const pct = (value, fallback) => {
+    const text = String(value ?? "").trim().replace("%", "");
+    if (text === "") return fallback;
+    const n = Number(text);
+    return Number.isFinite(n) ? Math.min(100, Math.max(0, n)) / 100 : fallback;
+  };
+  const x = pct(box?.left, 0);
+  const y = pct(box?.top, 0);
+  const w = Math.min(pct(box?.width, 1), 1 - x);
+  const h = Math.min(pct(box?.height, 1), 1 - y);
+  if (w <= 0 || h <= 0) return null;
+  if (x === 0 && y === 0 && w === 1 && h === 1) return null;
+  return { x, y, w, h };
+}
+
+
 export function clipLength(start, end) {
   const from = clipSeconds(start);
   const to = clipSeconds(end);

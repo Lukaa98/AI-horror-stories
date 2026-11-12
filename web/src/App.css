@@ -1466,3 +1466,32 @@ button.secondary {
 /* A video with no audio track is no use to a feature that exists to play a
    sound, so it reads as unavailable rather than merely labelled. */
 .listing-video.silent { opacity: 0.4; cursor: not-allowed; filter: grayscale(1); }
+
+/* The engine clip's crop box: four percentages and the poster frame they
+   describe. Typing them at a video you cannot see is guesswork, so the
+   box is drawn on the frame as the numbers change. */
+.crop-row input {
+  min-width: 0;
+}
+.crop-preview {
+  position: relative;
+  display: inline-block;
+  margin-top: 8px;
+  line-height: 0;
+}
+.crop-preview img {
+  display: block;
+  max-width: 260px;
+  max-height: 200px;
+  border-radius: 6px;
+}
+/* Everything outside the box is dimmed by the box's own shadow rather
+   than by four more elements around it. */
+.crop-box {
+  position: absolute;
+  box-sizing: border-box;
+  border: 2px solid var(--accent, #f0b429);
+  border-radius: 2px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}

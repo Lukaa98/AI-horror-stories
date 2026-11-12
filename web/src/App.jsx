@@ -9,7 +9,7 @@ import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
-import { clipSeconds, clipStamp, sameListingVideo } from "./clipTimes";
+import { clipSeconds, cropFractions, clipStamp, sameListingVideo } from "./clipTimes";
 import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
@@ -1087,6 +1087,11 @@ export default function App() {
   const [chosenVideo, setChosenVideo] = useState(null);
   const [clipStart, setClipStart] = useState("");
   const [clipEnd, setClipEnd] = useState("");
+  // Which part of the clip's own frame to show, in percent. A start-up
+  // filmed from the hip often puts the car in one corner and gives the
+  // rest to a driveway, and fitting that whole into a vertical canvas
+  // spends most of the screen on concrete. Blank means the whole frame.
+  const [cropBox, setCropBox] = useState({ left: "", top: "", width: "", height: "" });
   const [filledFromBuild, setFilledFromBuild] = useState(null);
   // Which run of a car is selected, when it has been built more than once.
   const [chosenRun, setChosenRun] = useState({});
@@ -1407,7 +1412,8 @@ export default function App() {
       extra_photos: useManualPhotos ? JSON.stringify(serializePhotos(extraPhotos)) : "",
       engine_clip: useEngineClip && chosenVideo
         ? { url: chosenVideo.playback_url,
-            start: clipSeconds(clipStart), end: clipSeconds(clipEnd) }
+            start: clipSeconds(clipStart), end: clipSeconds(clipEnd),
+            crop: cropFractions(cropBox) }
         : null,
     });
     try {
@@ -1462,6 +1468,7 @@ export default function App() {
                 url: chosenVideo.playback_url,
                 start: from,
                 end: to,
+                crop: cropFractions(cropBox),
               };
             }
             return Object.keys(slots).length ? JSON.stringify(slots) : "";
@@ -1717,6 +1724,11 @@ export default function App() {
     setChosenVideo(carried ? { index: -1, playback_url: clip.url } : null);
     setClipStart(carried ? clipStamp(clip.start) : "");
     setClipEnd(carried ? clipStamp(clip.end) : "");
+    const box = carried && clip.crop ? clip.crop : null;
+    setCropBox(box
+      ? { left: String(Math.round(box.x * 100)), top: String(Math.round(box.y * 100)),
+          width: String(Math.round(box.w * 100)), height: String(Math.round(box.h * 100)) }
+      : { left: "", top: "", width: "", height: "" });
     setListingVideos(null);
     setListingVideosState(carried
       ? "Clip carried over from that build. Press \u201cFind videos\u201d to see the "
@@ -3185,6 +3197,53 @@ export default function App() {
                                   + "taking words out, so four or five seconds is a start-up "
                                   + "and much more is a wait before anybody speaks."
                                 : "Read the times off the listing's own player. m:ss or seconds."}
+                            </p>
+                            <label className="field-row crop-row">
+                              <input value={cropBox.left} inputMode="numeric"
+                                     onChange={(e) => setCropBox({ ...cropBox, left: e.target.value })}
+                                     placeholder="Left %" />
+                              <input value={cropBox.top} inputMode="numeric"
+                                     onChange={(e) => setCropBox({ ...cropBox, top: e.target.value })}
+                                     placeholder="Top %" />
+                              <input value={cropBox.width} inputMode="numeric"
+                                     onChange={(e) => setCropBox({ ...cropBox, width: e.target.value })}
+                                     placeholder="Width %" />
+                              <input value={cropBox.height} inputMode="numeric"
+                                     onChange={(e) => setCropBox({ ...cropBox, height: e.target.value })}
+                                     placeholder="Height %" />
+                            </label>
+                            {/* The poster frame with the box drawn on it. Typing
+                                four numbers at a video you cannot see is
+                                guesswork; against the frame it is a glance. */}
+                            {chosenVideo?.poster && (
+                              <div className="crop-preview">
+                                <img
+                                  src={`https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
+                                       + `/${OUTPUT_BRANCH}/cars/listing-videos/`
+                                       + `${listingProbeId(auctionUrl)}/${chosenVideo.poster}`}
+                                  alt="" />
+                                {(() => {
+                                  const box = cropFractions(cropBox);
+                                  if (!box) return null;
+                                  return (
+                                    <span className="crop-box" style={{
+                                      left: `${box.x * 100}%`, top: `${box.y * 100}%`,
+                                      width: `${box.w * 100}%`, height: `${box.h * 100}%`,
+                                    }} />
+                                  );
+                                })()}
+                              </div>
+                            )}
+                            <p className="hint">
+                              {cropFractions(cropBox)
+                                ? "Only what is inside the box is shown, and the blurred "
+                                  + "backdrop is made from it too, so whatever you crop away "
+                                  + "leaves the frame entirely. Cropping the height alone "
+                                  + "centres the subject and drops the dead ground; crop the "
+                                  + "sides in as well to make it bigger."
+                                : "Blank uses the whole frame. If the car sits in part of it "
+                                  + "-- top third, say -- put 0 / 0 / 100 / 33 here and the "
+                                  + "rest of the shot is dropped."}
                             </p>
                           </>
                         )}

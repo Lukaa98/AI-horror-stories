@@ -5108,3 +5108,71 @@ def test_the_clip_block_tells_the_script_to_answer_the_sound():
     assert "still has to carry a real number" in block
     # And the named failure mode is spelled out rather than implied.
     assert "is not an opening" in block
+
+
+def test_the_crop_box_is_fractions_and_never_fails_a_build():
+    """Fractions of the source, so the numbers mean the same thing whatever
+    the phone recorded at. Anything malformed falls back to the whole frame:
+    a crop is a framing preference and must never be why a build dies."""
+    import single_car_short as m
+
+    # The whole frame, however it is spelled.
+    for whole in (None, {}, "top", {"x": 0, "y": 0, "w": 1, "h": 1},
+                  {"x": 0, "y": 0, "w": 0, "h": 1},
+                  {"x": "top", "y": 0, "w": 1, "h": 1},
+                  {"x": 0, "y": 0, "w": None, "h": 1}):
+        assert m.engine_clip_crop(whole) == "", whole
+
+    top_third = m.engine_clip_crop({"x": 0, "y": 0, "w": 1, "h": 1 / 3})
+    assert top_third.startswith("crop=") and top_third.endswith(",")
+    assert "ih*0.3333" in top_third
+    # Even dimensions, because yuv420p cannot encode an odd one.
+    assert "/2)*2" in top_third
+
+    # A box dragged past the edge meant "to the edge", so it is clamped
+    # rather than rejected.
+    clamped = m.engine_clip_crop({"x": 0.5, "y": 0, "w": 0.9, "h": 1})
+    assert "iw*0.5000" in clamped and "x='trunc(iw*0.5000" in clamped
+
+
+def test_cropping_takes_the_dead_ground_out_of_the_backdrop_too(tmp_path):
+    """The crop runs before the split that feeds both the fitted copy and
+    the blurred backdrop. If it ran after, the backdrop would still be a
+    zoomed blur of the driveway that was just cropped away."""
+    import subprocess
+
+    from PIL import Image
+
+    import single_car_short as m
+
+    # A portrait clip with the subject in the top third and grey below.
+    clip = tmp_path / "clip.mp4"
+    subprocess.run(
+        ["ffmpeg", "-y", "-f", "lavfi", "-i",
+         "color=c=gray:size=540x960:rate=30:duration=2,"
+         "drawbox=x=0:y=0:w=540:h=320:color=red@1:t=fill",
+         "-f", "lavfi", "-i", "sine=frequency=200:sample_rate=24000:duration=2",
+         "-ac", "1", "-t", "2", "-c:v", "libx264", "-pix_fmt", "yuv420p",
+         "-c:a", "aac", str(clip)],
+        check=True, capture_output=True)
+
+    def opening_frame_red(crop):
+        film = tmp_path / f"film-{abs(hash(str(crop)))}.mp4"
+        subprocess.run(
+            ["ffmpeg", "-y", "-f", "lavfi",
+             "-i", "color=c=white:size=1080x1920:rate=24:duration=3",
+             "-f", "lavfi", "-i", "sine=frequency=440:sample_rate=48000:duration=3",
+             "-ac", "2", "-t", "3", "-c:v", "libx264", "-pix_fmt", "yuv420p",
+             "-c:a", "aac", "-ar", "48000", str(film)],
+            check=True, capture_output=True)
+        assert m.prepend_engine_clip(film, clip, 2.0, crop=crop) == 2.0
+        png = film.with_suffix(".png")
+        subprocess.run(["ffmpeg", "-y", "-ss", "0.5", "-i", str(film),
+                        "-vframes", "1", str(png)], check=True, capture_output=True)
+        pixels = list(Image.open(png).convert("RGB").getdata())
+        return sum(1 for r, g, b in pixels if r > 120 and g < 90 and b < 90) / len(pixels)
+
+    whole = opening_frame_red(None)
+    cropped = opening_frame_red({"x": 0, "y": 0, "w": 1, "h": 1 / 3})
+    assert whole < 0.5, "uncropped, most of the frame is the grey ground"
+    assert cropped > 0.9, "cropped, the ground is gone from the band and the backdrop"
