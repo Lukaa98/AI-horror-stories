@@ -1475,7 +1475,15 @@ button.secondary {
 }
 .crop-preview {
   position: relative;
+  /* Shrink-wrapped, and said twice on purpose. The parent is a column
+     flexbox, so align-items: stretch pulls an inline-block child out to
+     the full width of the panel -- and the box is positioned against this
+     element, so it stretched with it and dimmed empty space beside the
+     video instead of the video. */
   display: inline-block;
+  width: max-content;
+  max-width: 100%;
+  align-self: flex-start;
   margin-top: 8px;
   line-height: 0;
 }

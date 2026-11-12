@@ -5205,4 +5205,34 @@ def test_a_pasted_video_link_skips_reading_the_listing():
     assert "{clipSource && (" in app
     # A typed link gets the video itself under the crop box, which a poster
     # frame cannot do: the seconds and the framing come off the same player.
-    assert '<video src={clipUrl.trim()} controls preload="metadata" />' in app
+    assert "<video src={`${clipUrl.trim()}#t=0.5`}" in app
+
+
+def test_the_crop_box_is_drawn_on_the_video_and_can_be_turned_off():
+    """Two faults in the first version of this preview. The panel is a
+    column flexbox, so align-items: stretch pulled the shrink-wrapped
+    preview out to the full width -- and the box is positioned against that
+    element, so it dimmed empty space beside the video instead of the video.
+    And the box could not be dismissed, so there was no way to look at the
+    frame without the dimming over it."""
+    import single_car_short
+
+    root = Path(single_car_short.__file__).resolve().parents[2] / "web/src"
+    css = (root / "App.css").read_text()
+    app = (root / "App.jsx").read_text()
+
+    # Shrink-wrapped against the flex parent, not just declared inline-block.
+    block = css.split(".crop-preview {")[1].split("}")[0]
+    assert "width: max-content" in block
+    assert "align-self: flex-start" in block
+
+    # A frame paints rather than a black rectangle.
+    assert "#t=0.5" in app
+
+    # The box can be hidden, and hiding it changes nothing but the preview.
+    assert "const [showCropBox, setShowCropBox] = useState(true);" in app
+    assert "if (!box || !showCropBox) return null;" in app
+    # The crop still rides on the payload whatever the checkbox says: it is
+    # keyed off the numbers, not off what is being drawn.
+    assert "crop: cropFractions(cropBox)" in app
+    assert "showCropBox" not in app.split("engine_clip:")[1].split("\n    });")[0]

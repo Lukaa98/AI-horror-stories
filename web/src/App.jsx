@@ -1096,6 +1096,7 @@ export default function App() {
   // rest to a driveway, and fitting that whole into a vertical canvas
   // spends most of the screen on concrete. Blank means the whole frame.
   const [cropBox, setCropBox] = useState({ left: "", top: "", width: "", height: "" });
+  const [showCropBox, setShowCropBox] = useState(true);
   // Typed link wins over a picked one: it is the more deliberate of the
   // two, and it is the only one available when the probe was skipped.
   const clipSource = clipUrl.trim() || chosenVideo?.playback_url || "";
@@ -3237,6 +3238,14 @@ export default function App() {
                                      onChange={(e) => setCropBox({ ...cropBox, height: e.target.value })}
                                      placeholder="Height %" />
                             </label>
+                            {cropFractions(cropBox) && (
+                              <label className="check-pill">
+                                <input type="checkbox" checked={showCropBox}
+                                       onChange={(e) => setShowCropBox(e.target.checked)} />
+                                Show crop box
+                                <Tip text="Only changes what this preview draws. The crop itself is whatever the four numbers say, box shown or not -- untick it to see the frame without the dimming over it." />
+                              </label>
+                            )}
                             {/* The poster frame with the box drawn on it. Typing
                                 four numbers at a video you cannot see is
                                 guesswork; against the frame it is a glance. */}
@@ -3248,7 +3257,12 @@ export default function App() {
                                   // instead of off the listing's own player.
                                   // A format the browser cannot play shows
                                   // nothing and the numbers still work.
-                                  <video src={clipUrl.trim()} controls preload="metadata" />
+                                  // #t=0.5 asks for half a second in, which
+                                  // is what makes a frame paint: preload
+                                  // metadata alone leaves most browsers
+                                  // showing black until something is played.
+                                  <video src={`${clipUrl.trim()}#t=0.5`}
+                                         controls preload="metadata" />
                                 ) : (
                                   <img
                                     src={`https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
@@ -3258,7 +3272,7 @@ export default function App() {
                                 )}
                                 {(() => {
                                   const box = cropFractions(cropBox);
-                                  if (!box) return null;
+                                  if (!box || !showCropBox) return null;
                                   return (
                                     <span className="crop-box" style={{
                                       left: `${box.x * 100}%`, top: `${box.y * 100}%`,
