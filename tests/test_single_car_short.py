@@ -3996,13 +3996,19 @@ def test_a_rebuild_carries_the_start_up_clip_with_the_rest_of_the_form():
            / "web/src/App.jsx").read_text()
     # The dashboard writes it before dispatch too, so a run that never
     # finished refills exactly like one that did.
-    assert "engine_clip: useEngineClip && chosenVideo" in app
-    # And reads all four pieces of it back onto the form.
+    assert "engine_clip: useEngineClip && clipSource" in app
+    # And reads all of it back onto the form.
     assert "const clip = inputs.engine_clip;" in app
     assert "setUseEngineClip(carried);" in app
     assert "setClipStart(carried ? clipStamp(clip.start)" in app
     assert "setClipEnd(carried ? clipStamp(clip.end)" in app
-    assert "playback_url: clip.url" in app
+    # The url goes into the typed field rather than a fake picked video, so
+    # a rebuild needs no probe at all: the link is the only part of a
+    # carried clip anything downstream reads.
+    assert 'setClipUrl(carried ? String(clip.url || "") : "");' in app
+    # The crop comes back with it, or the box is cleared rather than left
+    # holding the last car's framing.
+    assert "carried && clip.crop ? clip.crop : null" in app
     # The probe no longer throws a carried-over choice away before it has
     # anything to replace it with.
     assert "setChosenVideo(null);\n    const carried" not in app
@@ -5176,3 +5182,27 @@ def test_cropping_takes_the_dead_ground_out_of_the_backdrop_too(tmp_path):
     cropped = opening_frame_red({"x": 0, "y": 0, "w": 1, "h": 1 / 3})
     assert whole < 0.5, "uncropped, most of the frame is the grey ground"
     assert cropped > 0.9, "cropped, the ground is gone from the band and the backdrop"
+
+
+def test_a_pasted_video_link_skips_reading_the_listing():
+    """The probe drives a real browser over the auction page and takes five
+    to ten minutes. Somebody who already has the link should not wait for
+    it, and nothing downstream needs anything the probe produces -- the
+    poster and the audio flag are both there to help pick, not to build."""
+    import single_car_short
+
+    app = (Path(single_car_short.__file__).resolve().parents[2]
+           / "web/src/App.jsx").read_text()
+    # One place decides the source, and the typed link wins.
+    assert 'const clipSource = clipUrl.trim() || chosenVideo?.playback_url || "";' in app
+    # The probe, its progress line, its result and its picker are all behind
+    # the field being empty, so a typed link hides the whole path.
+    for gated in ('{!clipUrl.trim() && useAuctionUrl && (\n                          <button',
+                  '{!clipUrl.trim() && listingVideosState === "probing" && (',
+                  '{!clipUrl.trim() && (listingVideos?.videos || []).length > 0'):
+        assert gated in app, gated
+    # And the times and crop open for either source, not just a picked one.
+    assert "{clipSource && (" in app
+    # A typed link gets the video itself under the crop box, which a poster
+    # frame cannot do: the seconds and the framing come off the same player.
+    assert '<video src={clipUrl.trim()} controls preload="metadata" />' in app

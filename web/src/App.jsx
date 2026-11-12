@@ -1085,6 +1085,10 @@ export default function App() {
   const [listingVideos, setListingVideos] = useState(null);
   const [listingVideosState, setListingVideosState] = useState("");
   const [chosenVideo, setChosenVideo] = useState(null);
+  // A video link typed straight in, which skips the listing probe. The
+  // probe drives a real browser over the auction page and takes five to
+  // ten minutes; somebody who already has the link should not wait for it.
+  const [clipUrl, setClipUrl] = useState("");
   const [clipStart, setClipStart] = useState("");
   const [clipEnd, setClipEnd] = useState("");
   // Which part of the clip's own frame to show, in percent. A start-up
@@ -1092,6 +1096,9 @@ export default function App() {
   // rest to a driveway, and fitting that whole into a vertical canvas
   // spends most of the screen on concrete. Blank means the whole frame.
   const [cropBox, setCropBox] = useState({ left: "", top: "", width: "", height: "" });
+  // Typed link wins over a picked one: it is the more deliberate of the
+  // two, and it is the only one available when the probe was skipped.
+  const clipSource = clipUrl.trim() || chosenVideo?.playback_url || "";
   const [filledFromBuild, setFilledFromBuild] = useState(null);
   // Which run of a car is selected, when it has been built more than once.
   const [chosenRun, setChosenRun] = useState({});
@@ -1410,8 +1417,8 @@ export default function App() {
       photo_race_flip: raceFlipped ? "1" : "",
       photo_rival_flip: rivalFlipped ? "1" : "",
       extra_photos: useManualPhotos ? JSON.stringify(serializePhotos(extraPhotos)) : "",
-      engine_clip: useEngineClip && chosenVideo
-        ? { url: chosenVideo.playback_url,
+      engine_clip: useEngineClip && clipSource
+        ? { url: clipSource,
             start: clipSeconds(clipStart), end: clipSeconds(clipEnd),
             crop: cropFractions(cropBox) }
         : null,
@@ -1463,9 +1470,9 @@ export default function App() {
             // Not a photo, which is why it is named for what it is.
             const from = clipSeconds(clipStart);
             const to = clipSeconds(clipEnd);
-            if (useEngineClip && chosenVideo && from !== null && to !== null && to > from) {
+            if (useEngineClip && clipSource && from !== null && to !== null && to > from) {
               slots.engine_clip = {
-                url: chosenVideo.playback_url,
+                url: clipSource,
                 start: from,
                 end: to,
                 crop: cropFractions(cropBox),
@@ -1721,7 +1728,11 @@ export default function App() {
     const clip = inputs.engine_clip;
     const carried = !!(clip && clip.url);
     setUseEngineClip(carried);
-    setChosenVideo(carried ? { index: -1, playback_url: clip.url } : null);
+    // Into the typed field rather than a fake picked video: the url is all
+    // a rebuild needs, and putting it there means the probe can be skipped
+    // entirely instead of run again to re-attach a poster nobody uses.
+    setClipUrl(carried ? String(clip.url || "") : "");
+    setChosenVideo(null);
     setClipStart(carried ? clipStamp(clip.start) : "");
     setClipEnd(carried ? clipStamp(clip.end) : "");
     const box = carried && clip.crop ? clip.crop : null;
@@ -1731,8 +1742,8 @@ export default function App() {
       : { left: "", top: "", width: "", height: "" });
     setListingVideos(null);
     setListingVideosState(carried
-      ? "Clip carried over from that build. Press \u201cFind videos\u201d to see the "
-        + "listing\u2019s videos again and check which one it is."
+      ? "Clip carried over from that build \u2014 its link is in the box below, so it "
+        + "will build without reading the listing again."
       : "");
     setWorkflow("single_car");
     setFilledFromBuild(build);
@@ -3105,7 +3116,7 @@ export default function App() {
                           disabled={stage === "single-car-building"}
                         />
                         Engine sound
-                        <Tip text="Cuts a few seconds out of one of the listing's own videos and puts them -- picture and sound -- on the front of the film, before the narrator says a word. The sound is the hook; the script then opens as it would without a clip, and is told not to introduce or react to it. The narration is never cut into, so if the clip cannot be used the video goes out whole instead of with a hole in it. Keep it short: more than about eight seconds is a long wait before anyone speaks. Needs a specific listing, because the clip comes off that listing's page. Which video and which seconds are both yours to pick: choosing automatically is what the startup-battle pipeline does, and it manages it 4 times in 14." />
+                        <Tip text="Cuts a few seconds out of one of the listing's own videos and puts them -- picture and sound -- on the front of the film, before the narrator says a word. The sound is the hook; the script then opens as it would without a clip, and is told not to introduce or react to it. The narration is never cut into, so if the clip cannot be used the video goes out whole instead of with a hole in it. Keep it short: more than about eight seconds is a long wait before anyone speaks. Paste a direct video link and it is used as-is; leave that blank and the listing is read for its own videos, which takes five to ten minutes. Which video and which seconds are both yours to pick: choosing automatically is what the startup-battle pipeline does, and it manages it 4 times in 14." />
                       </label>
                     </div>
 
@@ -3115,10 +3126,24 @@ export default function App() {
                           Engine Sound
                           <Tip text="The listing's own videos, with a frame from each so you can tell them apart -- the page does not label them in a way the scraper can read, but an engine bay is obvious at a glance. Pick one, then type the seconds you want from the listing's own player." />
                         </div>
-                        {!useAuctionUrl && (
+                        <label className="field-row">
+                          <input value={clipUrl}
+                                 onChange={(e) => setClipUrl(e.target.value)}
+                                 placeholder="Video link, if you already have it" />
+                        </label>
+                        <p className="hint">
+                          {clipUrl.trim()
+                            ? "Using this link. The listing is not read at all, so nothing "
+                              + "below is needed \u2014 just the seconds and the crop."
+                            : "Paste a direct link to the video file and the listing is "
+                              + "skipped entirely. It has to be the video itself, not the "
+                              + "page it sits on. Leave it blank to have the listing read "
+                              + "for you, which takes five to ten minutes."}
+                        </p>
+                        {!clipUrl.trim() && !useAuctionUrl && (
                           <p className="hint">Tick &ldquo;Specific listing&rdquo; and paste the auction URL first.</p>
                         )}
-                        {useAuctionUrl && (
+                        {!clipUrl.trim() && useAuctionUrl && (
                           <button type="button" className="secondary"
                                   onClick={findListingVideos}
                                   disabled={!repoOk || !auctionUrl.trim()
@@ -3127,17 +3152,17 @@ export default function App() {
                               ? "Reading the listing…" : "Find videos"}
                           </button>
                         )}
-                        {listingVideosState === "probing" && (
+                        {!clipUrl.trim() && listingVideosState === "probing" && (
                           <p className="hint">
                             Driving a browser over the listing. Usually five minutes, sometimes
                             ten. The answer is written to the branch either way, so pressing this
                             again later picks it up rather than starting over.
                           </p>
                         )}
-                        {listingVideosState && listingVideosState !== "probing" && (
+                        {!clipUrl.trim() && listingVideosState && listingVideosState !== "probing" && (
                           <p className="hint">{listingVideosState}</p>
                         )}
-                        {(listingVideos?.videos || []).length > 0
+                        {!clipUrl.trim() && (listingVideos?.videos || []).length > 0
                           && (listingVideos.videos).every((v) => v.audio === null) && (
                           <p className="error">
                             None of this listing&rsquo;s videos have an audio track, so there is
@@ -3178,7 +3203,7 @@ export default function App() {
                             </button>
                           ))}
                         </div>
-                        {chosenVideo && (
+                        {clipSource && (
                           <>
                             <label className="field-row">
                               <input value={clipStart}
@@ -3215,13 +3240,22 @@ export default function App() {
                             {/* The poster frame with the box drawn on it. Typing
                                 four numbers at a video you cannot see is
                                 guesswork; against the frame it is a glance. */}
-                            {chosenVideo?.poster && (
+                            {(clipUrl.trim() || chosenVideo?.poster) && (
                               <div className="crop-preview">
-                                <img
-                                  src={`https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
-                                       + `/${OUTPUT_BRANCH}/cars/listing-videos/`
-                                       + `${listingProbeId(auctionUrl)}/${chosenVideo.poster}`}
-                                  alt="" />
+                                {clipUrl.trim() ? (
+                                  // The video itself, so the seconds and the
+                                  // crop can both be read off the same frame
+                                  // instead of off the listing's own player.
+                                  // A format the browser cannot play shows
+                                  // nothing and the numbers still work.
+                                  <video src={clipUrl.trim()} controls preload="metadata" />
+                                ) : (
+                                  <img
+                                    src={`https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
+                                         + `/${OUTPUT_BRANCH}/cars/listing-videos/`
+                                         + `${listingProbeId(auctionUrl)}/${chosenVideo.poster}`}
+                                    alt="" />
+                                )}
                                 {(() => {
                                   const box = cropFractions(cropBox);
                                   if (!box) return null;

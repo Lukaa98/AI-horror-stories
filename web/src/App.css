@@ -1479,11 +1479,18 @@ button.secondary {
   margin-top: 8px;
   line-height: 0;
 }
-.crop-preview img {
+.crop-preview img,
+.crop-preview video {
   display: block;
   max-width: 260px;
   max-height: 200px;
   border-radius: 6px;
+}
+/* A typed link gets the video itself, which is worth more room: the
+   seconds and the crop are both read off it. */
+.crop-preview video {
+  max-width: 320px;
+  max-height: 260px;
 }
 /* Everything outside the box is dimmed by the box's own shadow rather
    than by four more elements around it. */
