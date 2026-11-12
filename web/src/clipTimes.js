@@ -48,6 +48,31 @@ export function cropFractions(box) {
 }
 
 
+/* A still from a Cloudflare Stream video, at a given second, or null.
+ *
+ * The listing's videos are HLS manifests. Chrome and Firefox cannot play
+ * HLS natively -- only Safari can -- so a <video> pointed at one renders
+ * controls, no duration and a black rectangle, which is what the crop box
+ * was being drawn on.
+ *
+ * Stream serves a thumbnail endpoint beside the manifest, which is better
+ * than a player for this anyway: asked for the clip's own start second it
+ * shows the exact frame the film will open on, so the crop box is drawn
+ * over the thing being cropped rather than over whatever frame a player
+ * happened to stop at.
+ *
+ * Null for anything that is not a Stream manifest, so a pasted mp4 keeps
+ * its player.
+ */
+export function streamThumbnail(url, seconds) {
+  const match = String(url || "").trim()
+    .match(/^(https:\/\/[^/]*cloudflarestream\.com\/[A-Za-z0-9]+)\/manifest\/[^/?#]+/);
+  if (!match) return null;
+  const at = Number.isFinite(seconds) && seconds > 0 ? seconds : 0;
+  return `${match[1]}/thumbnails/thumbnail.jpg?time=${at}s&height=480`;
+}
+
+
 export function clipLength(start, end) {
   const from = clipSeconds(start);
   const to = clipSeconds(end);

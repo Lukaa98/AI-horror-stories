@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { clipSeconds, clipLength, clipStamp, cropFractions, sameListingVideo } from "./clipTimes.js";
+import { clipSeconds, clipLength, clipStamp, cropFractions, sameListingVideo, streamThumbnail } from "./clipTimes.js";
 
 test("reads the m:ss a listing's player shows, and plain seconds", () => {
   assert.equal(clipSeconds("1:04"), 64);
@@ -96,4 +96,27 @@ test("nonsense is clamped rather than passed on to ffmpeg", () => {
   // A trailing % is what somebody types.
   assert.deepEqual(cropFractions({ top: "0%", height: "33%" }),
                    { x: 0, y: 0, w: 1, h: 0.33 });
+});
+
+test("a listing video gets a still, because browsers cannot play its HLS", () => {
+  const manifest = "https://customer-abc123.cloudflarestream.com/02543da7bf33e49e82021a467a401735"
+    + "/manifest/video.m3u8";
+  assert.equal(
+    streamThumbnail(manifest, 33),
+    "https://customer-abc123.cloudflarestream.com/02543da7bf33e49e82021a467a401735"
+      + "/thumbnails/thumbnail.jpg?time=33s&height=480");
+  // The clip's own start second, so the still is the frame it opens on.
+  assert.match(streamThumbnail(manifest, 7), /time=7s/);
+  // No start time yet is the first frame, not NaN.
+  assert.match(streamThumbnail(manifest, null), /time=0s/);
+  assert.match(streamThumbnail(manifest, undefined), /time=0s/);
+});
+
+test("anything that is not a Stream manifest keeps its own player", () => {
+  assert.equal(streamThumbnail("https://example.com/startup.mp4", 5), null);
+  assert.equal(streamThumbnail("", 5), null);
+  assert.equal(streamThumbnail(null, 5), null);
+  // The page a video sits on is not the video, and must not be rewritten
+  // into a thumbnail url that would 404.
+  assert.equal(streamThumbnail("https://carsandbids.com/auctions/abc/2008-lamborghini", 5), null);
 });

@@ -5205,7 +5205,9 @@ def test_a_pasted_video_link_skips_reading_the_listing():
     assert "{clipSource && (" in app
     # A typed link gets the video itself under the crop box, which a poster
     # frame cannot do: the seconds and the framing come off the same player.
-    assert "<video src={`${clipUrl.trim()}#t=0.5`}" in app
+    # A still at the clip's own start second, because the listing's videos
+    # are HLS and only Safari plays that natively.
+    assert "streamThumbnail(clipUrl.trim(), clipSeconds(clipStart))" in app
 
 
 def test_the_crop_box_is_drawn_on_the_video_and_can_be_turned_off():
@@ -5226,8 +5228,13 @@ def test_the_crop_box_is_drawn_on_the_video_and_can_be_turned_off():
     assert "width: max-content" in block
     assert "align-self: flex-start" in block
 
-    # A frame paints rather than a black rectangle.
-    assert "#t=0.5" in app
+    # A frame paints rather than a black rectangle. The listing's videos
+    # are HLS manifests, which Chrome and Firefox cannot play at all, so
+    # the preview is a still from Stream rather than a player -- and one
+    # that 404s falls back to the player instead of leaving an empty box.
+    assert "streamThumbnail(" in app
+    assert "onError={() => setStillFailed(true)}" in app
+    assert "const [stillFailed, setStillFailed] = useState(false);" in app
 
     # The box can be hidden, and hiding it changes nothing but the preview.
     assert "const [showCropBox, setShowCropBox] = useState(true);" in app

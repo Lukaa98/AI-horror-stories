@@ -9,7 +9,7 @@ import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
-import { clipSeconds, cropFractions, clipStamp, sameListingVideo } from "./clipTimes";
+import { clipSeconds, cropFractions, clipStamp, sameListingVideo, streamThumbnail } from "./clipTimes";
 import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
@@ -1097,6 +1097,10 @@ export default function App() {
   // spends most of the screen on concrete. Blank means the whole frame.
   const [cropBox, setCropBox] = useState({ left: "", top: "", width: "", height: "" });
   const [showCropBox, setShowCropBox] = useState(true);
+  // The still endpoint is a documented Stream feature but not every link
+  // is a Stream link, and a 404 must not leave an empty box. One failure
+  // drops back to the player for good.
+  const [stillFailed, setStillFailed] = useState(false);
   // Typed link wins over a picked one: it is the more deliberate of the
   // two, and it is the only one available when the probe was skipped.
   const clipSource = clipUrl.trim() || chosenVideo?.playback_url || "";
@@ -3252,17 +3256,20 @@ export default function App() {
                             {(clipUrl.trim() || chosenVideo?.poster) && (
                               <div className="crop-preview">
                                 {clipUrl.trim() ? (
-                                  // The video itself, so the seconds and the
-                                  // crop can both be read off the same frame
-                                  // instead of off the listing's own player.
-                                  // A format the browser cannot play shows
-                                  // nothing and the numbers still work.
-                                  // #t=0.5 asks for half a second in, which
-                                  // is what makes a frame paint: preload
-                                  // metadata alone leaves most browsers
-                                  // showing black until something is played.
-                                  <video src={`${clipUrl.trim()}#t=0.5`}
-                                         controls preload="metadata" />
+                                  // A still at the clip's own start second,
+                                  // which is the frame the film will open
+                                  // on. The listing's videos are HLS, and
+                                  // only Safari plays that natively -- a
+                                  // <video> on one is a black rectangle with
+                                  // the crop box drawn over nothing.
+                                  streamThumbnail(clipUrl.trim(), clipSeconds(clipStart))
+                                  && !stillFailed ? (
+                                    <img src={streamThumbnail(clipUrl.trim(),
+                                                              clipSeconds(clipStart))}
+                                         onError={() => setStillFailed(true)} alt="" />
+                                  ) : (
+                                    <video src={clipUrl.trim()} controls preload="metadata" />
+                                  )
                                 ) : (
                                   <img
                                     src={`https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
@@ -3281,6 +3288,14 @@ export default function App() {
                                   );
                                 })()}
                               </div>
+                            )}
+                            {clipUrl.trim()
+                              && streamThumbnail(clipUrl.trim(), clipSeconds(clipStart))
+                              && !stillFailed && (
+                              <p className="hint">
+                                The frame at {clipStart.trim() || "0:00"}, which is where the
+                                film will open. Change the start time and this follows it.
+                              </p>
                             )}
                             <p className="hint">
                               {cropFractions(cropBox)
