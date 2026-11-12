@@ -4677,6 +4677,11 @@ def build_short(args):
     # found out the balance was empty on the narration call. The balance is
     # knowable in about a second.
     funded, reason = credits_available()
+    # Said out loud on the way through. A balance that is nearly empty
+    # answers a one-token probe and then dies on the real work, so a pass
+    # here is not a promise -- but a log that never mentions the check at
+    # all cannot even be asked which happened.
+    print(f"[single-car] OpenAI balance: {'answers a paid call' if funded else 'empty'}.")
     if not funded:
         raise SystemExit(
             "[single-car] Stopping before any work: the OpenAI balance will not cover this "

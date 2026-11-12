@@ -126,3 +126,70 @@ def test_the_credit_check_stops_a_build_only_for_an_empty_balance(monkeypatch):
     assert answering(None) == (True, "")
     assert answering("Connection reset by peer") == (True, "")
     assert answering(BUSY) == (True, "")
+
+
+def test_a_probe_that_cannot_answer_says_so_instead_of_passing_quietly(monkeypatch):
+    """Run #366 died on credits six minutes in, with a check at the front
+    that is meant to catch exactly that. The log could not say which of the
+    two happened -- a balance that was fine at second one and gone by minute
+    six, or a probe that failed for its own reasons and fell open -- because
+    the check only ever spoke when it failed."""
+    import io
+    import sys
+    import types
+
+    import openai_retry
+
+    def answering(errors):
+        """errors: one message per attempt, or None for a call that works."""
+        attempts = []
+
+        class _Client:
+            def __init__(self):
+                self.chat = self
+
+            @property
+            def completions(self):
+                return self
+
+            def create(self, **kwargs):
+                attempts.append(kwargs)
+                err = errors[len(attempts) - 1]
+                if err:
+                    raise RuntimeError(err)
+                return "ok"
+
+        fake = types.ModuleType("openai")
+        fake.OpenAI = _Client
+        monkeypatch.setitem(sys.modules, "openai", fake)
+        models = types.ModuleType("openai_models")
+        models.cheap_model = lambda: "gpt-6-luna"
+        monkeypatch.setitem(sys.modules, "openai_models", models)
+        said = io.StringIO()
+        monkeypatch.setattr(sys, "stdout", said)
+        try:
+            return openai_retry.credits_available(), attempts, said.getvalue()
+        finally:
+            monkeypatch.undo()
+
+    # A model entitled to reject the token cap is asked again without it,
+    # rather than its 400 being read as "funded" and the check wasted.
+    (funded, _), attempts, said = answering(
+        ["Error code: 400 - Unsupported parameter: 'max_completion_tokens'", None])
+    assert funded is True
+    assert len(attempts) == 2
+    assert "max_completion_tokens" in attempts[0] and "max_completion_tokens" not in attempts[1]
+    assert said == "", "a probe that answered has nothing to report"
+
+    # Neither attempt answers and neither is about money: the build goes
+    # ahead, but the log says the check told us nothing.
+    (funded, _), attempts, said = answering(["Connection reset", "Connection reset"])
+    assert funded is True
+    assert "Could not check the OpenAI balance" in said
+
+    # An empty balance is still caught on the first attempt.
+    (funded, reason), attempts, said = answering(
+        ["Error code: 429 - You have no credits remaining.", None])
+    assert funded is False
+    assert "no credits remaining" in reason
+    assert len(attempts) == 1, "no point asking again"

@@ -62,14 +62,30 @@ def credits_available():
     from openai import OpenAI
     from openai_models import cheap_model
 
-    try:
-        OpenAI().chat.completions.create(
-            model=cheap_model(),
-            messages=[{"role": "user", "content": "ping"}],
-            max_completion_tokens=1,
-        )
-    except Exception as exc:  # noqa: BLE001 - any failure here is advisory
-        message = str(exc)
-        if is_permanent(message):
-            return False, message.strip()[:300]
+    # Twice, because the first attempt carries a parameter a model is
+    # entitled to reject. A 400 over max_completion_tokens is not a billing
+    # answer, and swallowing it as "funded" would leave this looking like it
+    # ran when it had told us nothing -- which is indistinguishable, in a
+    # log, from a balance that was fine.
+    asked = ({"max_completion_tokens": 1}, {})
+    trouble = ""
+    for extra in asked:
+        try:
+            OpenAI().chat.completions.create(
+                model=cheap_model(),
+                messages=[{"role": "user", "content": "ping"}],
+                **extra,
+            )
+            return True, ""
+        except Exception as exc:  # noqa: BLE001 - any failure here is advisory
+            message = str(exc)
+            if is_permanent(message):
+                return False, message.strip()[:300]
+            trouble = message.strip()[:200]
+    # Neither attempt answered, and neither was about money. The build goes
+    # ahead -- a check meant to save sixteen minutes must never cost a build
+    # that would have worked -- but it says so, because a silent pass here
+    # reads exactly like a healthy balance.
+    print(f"[single-car] Could not check the OpenAI balance before starting ({trouble}). "
+          "Carrying on; if this build dies on credits, that is why it was not caught.")
     return True, ""
