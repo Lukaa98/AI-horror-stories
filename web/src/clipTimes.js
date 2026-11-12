@@ -73,6 +73,36 @@ export function streamThumbnail(url, seconds) {
 }
 
 
+/* Why a typed clip link cannot be used, or "" if it looks usable.
+ *
+ * ffmpeg reads media, not web pages. A YouTube watch url fetches HTML and
+ * fails, and the build drops the clip without the video being any the
+ * wiser -- which is what happened on the Murcielago run, where the link
+ * was a youtube.com/watch page and the preview was correspondingly blank.
+ *
+ * Deliberately only certain about the cases that are certainly wrong. A
+ * link this cannot classify is left alone rather than refused.
+ */
+export function clipLinkProblem(url) {
+  const text = String(url || "").trim();
+  if (!text) return "";
+  if (!/^https?:\/\//i.test(text)) {
+    return "That is not a link. Paste the address of the video file itself.";
+  }
+  if (/(^|\.)(youtube\.com|youtu\.be|vimeo\.com|dailymotion\.com)(\/|$)/i.test(
+        new URL(text).hostname)) {
+    return "A YouTube or Vimeo page is not a video file, and the build cannot read one. "
+      + "Use the listing's own video instead \u2014 leave this box empty and press "
+      + "\u201cFind videos\u201d.";
+  }
+  if (/\/auctions?\//i.test(text) || /carsandbids\.com\/auctions/i.test(text)) {
+    return "That is the listing page, not a video on it. Leave this box empty and press "
+      + "\u201cFind videos\u201d.";
+  }
+  return "";
+}
+
+
 export function clipLength(start, end) {
   const from = clipSeconds(start);
   const to = clipSeconds(end);

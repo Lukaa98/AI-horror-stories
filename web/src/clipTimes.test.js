@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { clipSeconds, clipLength, clipStamp, cropFractions, sameListingVideo, streamThumbnail } from "./clipTimes.js";
+import { clipSeconds, clipLength, clipStamp, cropFractions, sameListingVideo, streamThumbnail, clipLinkProblem } from "./clipTimes.js";
 
 test("reads the m:ss a listing's player shows, and plain seconds", () => {
   assert.equal(clipSeconds("1:04"), 64);
@@ -119,4 +119,25 @@ test("anything that is not a Stream manifest keeps its own player", () => {
   // The page a video sits on is not the video, and must not be rewritten
   // into a thumbnail url that would 404.
   assert.equal(streamThumbnail("https://carsandbids.com/auctions/abc/2008-lamborghini", 5), null);
+});
+
+test("a page is not a video, and the build cannot read one", () => {
+  // The Murcielago run went out with this link and would have dropped the
+  // clip silently: ffmpeg fetches HTML and fails.
+  assert.match(clipLinkProblem("https://www.youtube.com/watch?v=ddgJK8dN7cM"),
+               /not a video file/);
+  assert.match(clipLinkProblem("https://youtu.be/ddgJK8dN7cM"), /not a video file/);
+  assert.match(clipLinkProblem("https://carsandbids.com/auctions/KmOkpwNY/2008-lambo"),
+               /the listing page/);
+  assert.match(clipLinkProblem("ddgJK8dN7cM"), /not a link/);
+});
+
+test("anything that could be a media file is left alone", () => {
+  // Only the certainly-wrong cases are refused; an unrecognised host is
+  // not the dashboard's business to veto.
+  assert.equal(clipLinkProblem(""), "");
+  assert.equal(clipLinkProblem(null), "");
+  assert.equal(clipLinkProblem("https://example.com/startup.mp4"), "");
+  assert.equal(clipLinkProblem(
+    "https://customer-abc.cloudflarestream.com/xyz/manifest/video.m3u8"), "");
 });

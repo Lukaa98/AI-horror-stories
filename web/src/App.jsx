@@ -9,7 +9,7 @@ import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
-import { clipSeconds, cropFractions, clipStamp, sameListingVideo, streamThumbnail } from "./clipTimes";
+import { clipSeconds, cropFractions, clipStamp, sameListingVideo, streamThumbnail, clipLinkProblem } from "./clipTimes";
 import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
@@ -1422,7 +1422,7 @@ export default function App() {
       photo_race_flip: raceFlipped ? "1" : "",
       photo_rival_flip: rivalFlipped ? "1" : "",
       extra_photos: useManualPhotos ? JSON.stringify(serializePhotos(extraPhotos)) : "",
-      engine_clip: useEngineClip && clipSource
+      engine_clip: useEngineClip && clipSource && !clipLinkProblem(clipUrl)
         ? { url: clipSource,
             start: clipSeconds(clipStart), end: clipSeconds(clipEnd),
             crop: cropFractions(cropBox) }
@@ -1475,7 +1475,8 @@ export default function App() {
             // Not a photo, which is why it is named for what it is.
             const from = clipSeconds(clipStart);
             const to = clipSeconds(clipEnd);
-            if (useEngineClip && clipSource && from !== null && to !== null && to > from) {
+            if (useEngineClip && clipSource && !clipLinkProblem(clipUrl)
+                && from !== null && to !== null && to > from) {
               slots.engine_clip = {
                 url: clipSource,
                 start: from,
@@ -3136,6 +3137,9 @@ export default function App() {
                                  onChange={(e) => setClipUrl(e.target.value)}
                                  placeholder="Video link, if you already have it" />
                         </label>
+                        {clipLinkProblem(clipUrl) && (
+                          <p className="error">{clipLinkProblem(clipUrl)}</p>
+                        )}
                         <p className="hint">
                           {clipUrl.trim()
                             ? "Using this link. The listing is not read at all, so nothing "
@@ -3208,7 +3212,7 @@ export default function App() {
                             </button>
                           ))}
                         </div>
-                        {clipSource && (
+                        {clipSource && !clipLinkProblem(clipUrl) && (
                           <>
                             <label className="field-row">
                               <input value={clipStart}
