@@ -1791,7 +1791,15 @@ def _script_violations(package, make, model, market=None, pasted_slots=()):
     model_tokens = [t for t in re.split(r"[\s\-/]+", str(model)) if len(t) > 2]
     names = [part for part in re.split(r"\s+", f"{make} {model}".strip()) if len(part) > 2]
     named = [part for part in names if re.search(rf"\b{re.escape(part)}\b", opening, re.I)]
-    if named:
+    # Unless the engine got there first. The rule exists because the name is
+    # the only payoff a cold opening has to withhold -- but a film that
+    # opens on four seconds of this car starting up has already spent its
+    # hook, and the question it leaves a viewer with is "what was that".
+    # Answering it is the natural next line; refusing to is perverse. The
+    # figure rule above is untouched, so the opening still has to carry a
+    # number either way, which is what keeps "this is the Ferrari 458" from
+    # becoming an acceptable first sentence.
+    if named and not package.get("_engine_clip"):
         violations.append(
             f'your first sentence names the car ("{named[0]}") -- it was "{opening}". The name is '
             "the payoff and belongs in the second sentence; the first has to make the viewer want it."
@@ -2631,8 +2639,15 @@ amazing", and do not describe the noise you just played them. A viewer who heard
 need it narrated, and one who swiped in late never heard it at all, so a line about it reads
 as a reference to nothing.
 
-Write the opening exactly as you would with no clip at all. The sound is the hook; your first
-sentence is the second hook and still has to stand on its own."""
+Because the sound was the hook, your first sentence may NAME THE CAR -- and it should read as
+the answer to what the viewer just heard, not as a fresh start. "That is a four-point-five
+litre V8 at nine thousand rpm, and it is the last one Ferrari built without turbos" is the
+shape. Normally the name is withheld for the second sentence; with a start-up in front of it
+the viewer is already asking what that was, so tell them.
+
+What does not change: the first sentence still has to carry a real number or a hard
+superlative. "This is the Ferrari 458 Italia" is not an opening -- it answers the question and
+gives the viewer nothing to stay for. Answer it with a figure attached."""
 
 
 def _rewrite_title_for(violation, title, opening, label):
@@ -3290,6 +3305,9 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
         # Carried for the same reason as the notes: the note check enforces
         # fewer of them at 35 seconds, where there is no beat spare.
         package["_style"] = style or ""
+        # Carried for the same reason: the opening rules change when four
+        # seconds of engine have already played in front of it.
+        package["_engine_clip"] = bool(engine_clip)
         # Before the violations are counted, so the title that gets checked
         # and the title that ships are the same one.
         package = _pick_youtube_title(package, make, model)

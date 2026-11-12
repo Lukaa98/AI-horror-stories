@@ -5057,3 +5057,54 @@ def test_a_join_that_fails_ships_the_film_as_it_was_rendered(tmp_path):
     assert single_car_short.prepend_engine_clip(
         film, tmp_path / "missing.mp4", 4.0) == 0.0
     assert film.read_bytes() == before, "the rendered film is untouched"
+
+
+def test_the_name_may_land_in_the_first_sentence_when_the_engine_played_first():
+    """The name is withheld because it is the only payoff a cold opening has.
+    A film that opens on four seconds of this car starting up has already
+    spent its hook, and the question it leaves is "what was that" -- so
+    answering it is the next line, not a rule broken.
+
+    The figure rule does not move, which is what stops "this is the Ferrari
+    458" being an acceptable opening."""
+    import single_car_short
+
+    def rules(opening, engine_clip):
+        scenes = [{"narration": opening, "media_type": "exterior"},
+                  {"narration": "It makes 562 horsepower and 398 pound-feet.",
+                   "media_type": "exterior"},
+                  {"narration": "So would you still want the turbo one?",
+                   "media_type": "exterior"}]
+        package = {"scenes": scenes, "word_count": 60,
+                   "title": "Would You Trade 9,000 RPM For Turbos?",
+                   "history": {"year": 2009, "fact": "replaced the F430"},
+                   "_angles": "", "_style": "classic", "_engine_clip": engine_clip}
+        return [r for r in single_car_short._script_violations(
+            package, "Ferrari", "458 Italia") if "first sentence" in r]
+
+    named_with_figure = ("That's a 4.5-litre V8 at 9,000 rpm, and it's the last one Ferrari "
+                         "built without turbos")
+    # Without a clip the name is still the payoff and belongs in sentence two.
+    assert any("names the car" in r for r in rules(named_with_figure, False))
+    # With one, naming it is the point.
+    assert not rules(named_with_figure, True)
+
+    # But the figure rule is untouched: a bare introduction is still not an
+    # opening, clip or no clip.
+    for clip in (True, False):
+        flagged = rules("This is the Ferrari 458 Italia", clip)
+        assert any("contains no number" in r for r in flagged), clip
+
+
+def test_the_clip_block_tells_the_script_to_answer_the_sound():
+    """The instruction has to say both halves: the name is now allowed, and
+    the figure is still required. Saying only the first produces "this is
+    the Ferrari 458" and nothing to stay for."""
+    import single_car_short
+
+    block = single_car_short._engine_clip_block()
+    assert "may NAME THE CAR" in block
+    assert "answer to what the viewer just heard" in block
+    assert "still has to carry a real number" in block
+    # And the named failure mode is spelled out rather than implied.
+    assert "is not an opening" in block
