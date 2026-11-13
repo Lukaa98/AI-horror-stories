@@ -11,7 +11,7 @@ import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
 import { clipSeconds, cropFractions, clipStamp, sameListingVideo, streamThumbnail,
          clipLinkProblem, dragCropBox, moveCropBox, cropHandleAt, cropAnchor,
-         fitCropRatio } from "./clipTimes";
+         fitCropRatio, engineClipPayload, engineClipProblem } from "./clipTimes";
 import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
@@ -1184,6 +1184,23 @@ export default function App() {
   /* Picking a shape. With a box already drawn it keeps the middle of it
    * and trims the long side; with nothing drawn it gives the largest box
    * of that shape in the frame, which for 9:16 is usually the answer. */
+  // One object, two questions: is there a clip, and if not, what to say.
+  const engineClipForm = { enabled: useEngineClip, source: clipSource, url: clipUrl,
+                           start: clipStart, end: clipEnd, crop: cropBox };
+  const enginePayload = engineClipPayload(engineClipForm);
+  const engineProblem = engineClipProblem(engineClipForm);
+
+  /* A refusal that is still on screen after it has been dealt with reads
+   * as a second, different problem. Cleared by matching the exact text
+   * this put there, so it never swallows somebody else's error. */
+  const engineErrorRef = useRef("");
+  useEffect(() => {
+    if (engineProblem || !engineErrorRef.current) return;
+    const shown = engineErrorRef.current;
+    engineErrorRef.current = "";
+    setError((current) => (current === shown ? null : current));
+  }, [engineProblem]);
+
   const chooseCropRatio = (ratio) => {
     setCropRatio(ratio);
     const el = cropPreviewRef.current;
@@ -1479,6 +1496,13 @@ export default function App() {
   async function handleSingleCarShort() {
     if (!repoOk || !make.trim() || !model.trim()) return;
     if (useAuctionUrl && !/^https:\/\/carsandbids\.com\/auctions\//i.test(auctionUrl.trim())) return;
+    // Fifteen minutes and a script to find out the clip was dropped is not
+    // a trade worth making silently.
+    if (engineProblem) {
+      engineErrorRef.current = engineProblem;
+      setError(engineProblem);
+      return;
+    }
     setError(null);
     setSingleCarResult(null);
     const id = makeDraftId(`single-${make}-${model}`);
@@ -1512,11 +1536,7 @@ export default function App() {
       photo_race_flip: raceFlipped ? "1" : "",
       photo_rival_flip: rivalFlipped ? "1" : "",
       extra_photos: useManualPhotos ? JSON.stringify(serializePhotos(extraPhotos)) : "",
-      engine_clip: useEngineClip && clipSource && !clipLinkProblem(clipUrl)
-        ? { url: clipSource,
-            start: clipSeconds(clipStart), end: clipSeconds(clipEnd),
-            crop: cropFractions(cropBox) }
-        : null,
+      engine_clip: enginePayload,
     });
     try {
       const startedAt = Date.now();
@@ -1563,17 +1583,7 @@ export default function App() {
             // The engine clip rides here too, for the same reason: all 25
             // inputs are spoken for, and this one is already a JSON object.
             // Not a photo, which is why it is named for what it is.
-            const from = clipSeconds(clipStart);
-            const to = clipSeconds(clipEnd);
-            if (useEngineClip && clipSource && !clipLinkProblem(clipUrl)
-                && from !== null && to !== null && to > from) {
-              slots.engine_clip = {
-                url: clipSource,
-                start: from,
-                end: to,
-                crop: cropFractions(cropBox),
-              };
-            }
+            if (enginePayload) slots.engine_clip = enginePayload;
             return Object.keys(slots).length ? JSON.stringify(slots) : "";
           })(),
           rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
@@ -3428,6 +3438,13 @@ export default function App() {
                                   + "the biggest box that fills a Shorts frame edge to edge."}
                             </p>
                           </>
+                        )}
+                        {/* Said here as well as on the build button, because
+                            by the time the button refuses the form has been
+                            filled in and the missing piece is a long way up
+                            the page. */}
+                        {engineProblem && !clipLinkProblem(clipUrl) && (
+                          <p className="error">{engineProblem}</p>
                         )}
                       </div>
                     )}

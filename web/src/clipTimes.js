@@ -257,3 +257,42 @@ export function fitCropRatio(box, ratio, rect) {
   const y = Math.min(H - h, Math.max(0, cy - h / 2));
   return cropPercents(x / W, y / H, w / W, h / H);
 }
+
+
+/* Whether a form's engine-clip settings amount to a clip, and if not, why.
+ *
+ * Decided in one place because it used to be decided in two. The build
+ * payload asked for a usable pair of times; the draft record kept beside
+ * it did not. The GT3 run is what the gap costs: "Engine sound" ticked, a
+ * clip chosen, a crop set against the poster frame, and the two seconds
+ * never filled in -- so the record said there was a clip, the dispatch
+ * left it out, the build never heard of one, and the first anybody knew
+ * was watching fifteen minutes of work back in silence.
+ */
+export function engineClipPayload(form) {
+  const { enabled, source, url, start, end, crop } = form || {};
+  if (!enabled || !source || clipLinkProblem(url)) return null;
+  const from = clipSeconds(start), to = clipSeconds(end);
+  if (from === null || to === null || to <= from) return null;
+  return { url: source, start: from, end: to, crop: cropFractions(crop) };
+}
+
+/* Why a ticked box is not going to make a sound, or "". Worth stopping the
+ * build for: it takes a quarter of an hour and spends a script, and the
+ * part that would have been missing is the part that was asked for. */
+export function engineClipProblem(form) {
+  const { enabled, source, url, start, end } = form || {};
+  if (!enabled || engineClipPayload(form)) return "";
+  if (!source) {
+    return "Engine sound is ticked but no clip is chosen. Paste a video link "
+      + "or pick one of the listing's videos, or untick it.";
+  }
+  if (clipLinkProblem(url)) return clipLinkProblem(url);
+  if (clipSeconds(start) === null || clipSeconds(end) === null) {
+    return "Engine sound is ticked but the start and end times are not both "
+      + "filled in, so there is nothing to cut and the film would go out with "
+      + "no start-up on the front. Read them off the player above.";
+  }
+  return "Engine sound is ticked but the end time is not after the start, so "
+    + "there is no clip to cut. Check the two times above.";
+}

@@ -2,7 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { clipSeconds, clipLength, clipStamp, cropFractions, sameListingVideo,
          streamThumbnail, clipLinkProblem, dragCropBox, moveCropBox,
-         cropHandleAt, cropAnchor, fitCropRatio } from "./clipTimes.js";
+         cropHandleAt, cropAnchor, fitCropRatio, engineClipPayload,
+         engineClipProblem } from "./clipTimes.js";
 
 test("reads the m:ss a listing's player shows, and plain seconds", () => {
   assert.equal(clipSeconds("1:04"), 64);
@@ -247,4 +248,61 @@ test("nothing is drawn against a preview that has no size yet", () => {
   assert.equal(cropHandleAt({ x: 1, y: 1 }, { x: 0, y: 0, w: 1, h: 1 }, empty), null);
   assert.equal(fitCropRatio(null, 9 / 16, empty), null);
   assert.equal(fitCropRatio(null, 0, PREVIEW), null);
+});
+
+
+/* Whether the ticked box actually produces a clip. */
+const CLIP = "https://customer-abc.cloudflarestream.com/d1f2e3/manifest/video.m3u8";
+const form = (over) => ({ enabled: true, source: CLIP, url: "", start: "0:04",
+                          end: "0:09", crop: {}, ...over });
+
+test("a complete form becomes the clip the build is sent", () => {
+  assert.deepEqual(engineClipPayload(form()),
+                   { url: CLIP, start: 4, end: 9, crop: null });
+  assert.equal(engineClipProblem(form()), "");
+});
+
+test("the crop rides with the clip when there is one", () => {
+  const box = engineClipPayload(form({ crop: { left: 0, top: 0, width: 100, height: 65 } }));
+  assert.deepEqual(box.crop, { x: 0, y: 0, w: 1, h: 0.65 });
+});
+
+test("missing times are a refusal, not a clip quietly dropped", () => {
+  // This is the GT3 run. Ticked, a clip chosen, a crop set, and no times:
+  // the build went out, took a quarter of an hour, and came back silent.
+  for (const times of [{ start: "", end: "" }, { start: "0:04", end: "" },
+                       { start: "", end: "0:09" }, { start: "x", end: "0:09" }]) {
+    const f = form(times);
+    assert.equal(engineClipPayload(f), null, JSON.stringify(times));
+    assert.match(engineClipProblem(f), /start and end times are not both/);
+  }
+});
+
+test("a backwards or empty range says which of the two is wrong", () => {
+  const f = form({ start: "0:09", end: "0:04" });
+  assert.equal(engineClipPayload(f), null);
+  assert.match(engineClipProblem(f), /end time is not after the start/);
+  assert.match(engineClipProblem(form({ start: "0:04", end: "0:04" })),
+               /end time is not after the start/);
+});
+
+test("ticked with nothing chosen says so rather than building in silence", () => {
+  const f = form({ source: "" });
+  assert.equal(engineClipPayload(f), null);
+  assert.match(engineClipProblem(f), /no clip is chosen/);
+});
+
+test("an unusable link keeps its own message", () => {
+  const f = form({ source: "https://www.youtube.com/watch?v=abc",
+                   url: "https://www.youtube.com/watch?v=abc" });
+  assert.equal(engineClipPayload(f), null);
+  assert.equal(engineClipProblem(f), clipLinkProblem(f.url));
+  assert.ok(engineClipProblem(f));
+});
+
+test("an unticked box is not a problem to report", () => {
+  // Nothing is wrong with not wanting an engine clip.
+  assert.equal(engineClipProblem(form({ enabled: false, start: "", end: "" })), "");
+  assert.equal(engineClipPayload(form({ enabled: false })), null);
+  assert.equal(engineClipProblem(undefined), "");
 });
