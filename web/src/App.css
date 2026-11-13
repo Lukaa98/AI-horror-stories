@@ -1475,6 +1475,11 @@ button.secondary {
 }
 .crop-preview {
   position: relative;
+  /* The box dims everything outside itself with a 9999px shadow, which
+     without this washes out the hints and half the panel along with the
+     frame. Clipped here so the dimming means "not in the crop" rather
+     than "somewhere on this page". */
+  overflow: hidden;
   /* Shrink-wrapped, and said twice on purpose. The parent is a column
      flexbox, so align-items: stretch pulls an inline-block child out to
      the full width of the panel -- and the box is positioned against this
@@ -1490,8 +1495,8 @@ button.secondary {
 .crop-preview img,
 .crop-preview video {
   display: block;
-  max-width: 260px;
-  max-height: 200px;
+  max-width: 360px;
+  max-height: 280px;
   border-radius: 6px;
 }
 /* A typed link gets the video itself, which is worth more room: the
@@ -1508,5 +1513,66 @@ button.secondary {
   border: 2px solid var(--accent, #f0b429);
   border-radius: 2px;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+  /* Inert on purpose. One element handles every pointer event on the
+     preview and works out what was grabbed from the numbers, so the box
+     and its corners must not swallow any of them. */
   pointer-events: none;
+}
+
+/* The still is a drawing surface: a drag on it is the crop box. The
+   image must not start a native drag of its own, and touch must not
+   scroll the panel while a box is being drawn. */
+.crop-preview.drawable {
+  cursor: crosshair;
+  touch-action: none;
+}
+.crop-preview.drawable img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+/* Corners worth aiming at. The hit area is a good deal larger than
+   these -- they say where to grab, they are not the target. */
+.crop-grip {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: var(--accent, #f0b429);
+  border-radius: 2px;
+}
+.crop-grip.nw { left: 1px; top: 1px; }
+.crop-grip.ne { right: 1px; top: 1px; }
+.crop-grip.sw { left: 1px; bottom: 1px; }
+.crop-grip.se { right: 1px; bottom: 1px; }
+
+/* The shape lock, beside the toggle that hides the box. */
+.crop-shapes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.crop-shapes > span {
+  font-size: 12px;
+  opacity: 0.7;
+}
+/* Qualified by the row on purpose. `.page button` fills every button in
+   the panel, so a bare `.crop-shape` lost to it and the chosen pill came
+   out accent text on an accent fill -- the one of the four you could not
+   read was the one that was selected. */
+.crop-shapes .crop-shape {
+  padding: 3px 11px;
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line, #3a3a4a);
+  background: transparent;
+  color: inherit;
+  opacity: 0.75;
+  cursor: pointer;
+}
+.crop-shapes .crop-shape.chosen {
+  border-color: var(--accent, #6c5ce7);
+  background: var(--accent, #6c5ce7);
+  color: #fff;
+  opacity: 1;
 }

@@ -145,3 +145,115 @@ export function sameListingVideo(a, b) {
   const bare = (url) => String(url || "").split("?")[0];
   return !!bare(a) && bare(a) === bare(b);
 }
+
+
+/* The crop box, drawn with the mouse instead of typed.
+ *
+ * Four percentages are an awkward way to say "that bit there": you
+ * estimate, type, look, and estimate again. Dragging a rectangle over the
+ * frame says it once. Everything below works in the preview element's own
+ * pixels and converts at the end, which is sound because the displayed
+ * still keeps the source frame's aspect ratio -- a shape that looks right
+ * on the preview is the same shape in the video.
+ */
+
+/* Percentages rounded to a tenth, which is finer than anybody can drag
+ * but keeps a locked shape honest: rounding a 9:16 box to whole percent
+ * can put it a percent off, and the point of the lock is that it is not. */
+function cropPercents(x, y, w, h) {
+  const pct = (v) => String(Math.round(Math.min(100, Math.max(0, v * 100)) * 10) / 10);
+  return { left: pct(x), top: pct(y), width: pct(w), height: pct(h) };
+}
+
+/* The box a drag from one point to another describes, or null if the drag
+ * was too small to mean anything -- a click rather than a drag, which the
+ * caller is free to read as "clear the box".
+ *
+ * `ratio` is width over height, or 0 for no lock. A locked drag keeps the
+ * corner the pointer started at, follows whichever side the pointer moved
+ * furthest, and shrinks both rather than letting the box leave the frame.
+ */
+export function dragCropBox(from, to, rect, ratio = 0) {
+  const W = Number(rect?.width), H = Number(rect?.height);
+  if (!(W > 0 && H > 0)) return null;
+  const x0 = Math.min(W, Math.max(0, from.x));
+  const y0 = Math.min(H, Math.max(0, from.y));
+  const x1 = Math.min(W, Math.max(0, to.x));
+  const y1 = Math.min(H, Math.max(0, to.y));
+  let w = Math.abs(x1 - x0);
+  let h = Math.abs(y1 - y0);
+  if (w < 6 || h < 6) return null;
+  if (ratio > 0) {
+    if (w / ratio > h) h = w / ratio; else w = h * ratio;
+    const roomX = x1 >= x0 ? W - x0 : x0;
+    const roomY = y1 >= y0 ? H - y0 : y0;
+    if (w > roomX) { w = roomX; h = w / ratio; }
+    if (h > roomY) { h = roomY; w = h * ratio; }
+    if (w < 6 || h < 6) return null;
+  }
+  return cropPercents((x1 >= x0 ? x0 : x0 - w) / W,
+                      (y1 >= y0 ? y0 : y0 - h) / H, w / W, h / H);
+}
+
+/* The same box shifted by a drag, kept whole and kept inside the frame.
+ * Moving is the half of this that four numbers are worst at: nudging a
+ * box left means editing one number and watching the far edge move too. */
+export function moveCropBox(box, dx, dy, rect) {
+  const W = Number(rect?.width), H = Number(rect?.height);
+  if (!box || !(W > 0 && H > 0)) return null;
+  const x = Math.min(1 - box.w, Math.max(0, box.x + dx / W));
+  const y = Math.min(1 - box.h, Math.max(0, box.y + dy / H));
+  return cropPercents(x, y, box.w, box.h);
+}
+
+/* Which part of an existing box a point is on: a corner by name, "inside"
+ * for the body of it, or null for bare frame. Hit-tested here rather than
+ * with four more elements so the drawn box can stay inert and let every
+ * pointer event through to the one element that handles them. */
+export function cropHandleAt(point, box, rect, slop = 14) {
+  const W = Number(rect?.width), H = Number(rect?.height);
+  if (!box || !(W > 0 && H > 0)) return null;
+  const left = box.x * W, top = box.y * H;
+  const right = left + box.w * W, bottom = top + box.h * H;
+  const nearX = Math.abs(point.x - left) <= slop ? "w"
+    : Math.abs(point.x - right) <= slop ? "e" : "";
+  const nearY = Math.abs(point.y - top) <= slop ? "n"
+    : Math.abs(point.y - bottom) <= slop ? "s" : "";
+  if (nearX && nearY) return nearY + nearX;
+  const inside = point.x >= left && point.x <= right
+    && point.y >= top && point.y <= bottom;
+  return inside ? "inside" : null;
+}
+
+/* The corner a resize pivots on: grab the bottom right and the top left
+ * stays put. Returned in element pixels so a resize is just a fresh drag
+ * from there, which is why there is no separate resize routine. */
+export function cropAnchor(box, grip, rect) {
+  const W = Number(rect?.width), H = Number(rect?.height);
+  if (!box || !grip || !(W > 0 && H > 0)) return null;
+  return {
+    x: (grip.includes("w") ? box.x + box.w : box.x) * W,
+    y: (grip.includes("n") ? box.y + box.h : box.y) * H,
+  };
+}
+
+/* An existing box forced to a shape, or the largest box of that shape in
+ * the middle of the frame if there is no box yet. Picking 9:16 with
+ * nothing drawn should give the right answer on its own: that is the one
+ * shape that fills a Shorts frame edge to edge, so it is the most common
+ * thing to want and the least rewarding thing to drag by hand. */
+export function fitCropRatio(box, ratio, rect) {
+  const W = Number(rect?.width), H = Number(rect?.height);
+  if (!(ratio > 0) || !(W > 0 && H > 0)) return null;
+  const have = box
+    ? { x: box.x * W, y: box.y * H, w: box.w * W, h: box.h * H }
+    : { x: 0, y: 0, w: W, h: H };
+  const cx = have.x + have.w / 2, cy = have.y + have.h / 2;
+  let w = have.w, h = have.h;
+  if (w / ratio > h) w = h * ratio; else h = w / ratio;
+  if (w > W) { w = W; h = w / ratio; }
+  if (h > H) { h = H; w = h * ratio; }
+  const x = Math.min(W - w, Math.max(0, cx - w / 2));
+  const y = Math.min(H - h, Math.max(0, cy - h / 2));
+  return cropPercents(x / W, y / H, w / W, h / H);
+}

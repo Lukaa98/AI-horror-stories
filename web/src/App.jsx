@@ -9,12 +9,25 @@ import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
-import { clipSeconds, cropFractions, clipStamp, sameListingVideo, streamThumbnail, clipLinkProblem } from "./clipTimes";
+import { clipSeconds, cropFractions, clipStamp, sameListingVideo, streamThumbnail,
+         clipLinkProblem, dragCropBox, moveCropBox, cropHandleAt, cropAnchor,
+         fitCropRatio } from "./clipTimes";
 import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
 const DEFAULT_REPO = "AI-horror-stories";
 const OUTPUT_BRANCH = "cars-output";
+
+/* Shapes for the engine clip's crop box. 9:16 is first among equals: the
+   build fits the clip inside a 1080x1920 frame instead of cropping it to
+   fill, so a 9:16 crop is the only one that reaches all four edges and
+   every other shape ships with a blurred backdrop showing around it. */
+const CROP_SHAPES = [
+  { label: "Free", ratio: 0 },
+  { label: "9:16", ratio: 9 / 16 },
+  { label: "4:5", ratio: 4 / 5 },
+  { label: "1:1", ratio: 1 },
+];
 const UI_VERSION = "V14.5 — 154 words in the same 55 seconds";
 const VOICES = ["marin", "cedar", "coral", "verse", "onyx"];
 // Bumping this rewrites the branch saved in every browser to
@@ -1097,6 +1110,13 @@ export default function App() {
   // spends most of the screen on concrete. Blank means the whole frame.
   const [cropBox, setCropBox] = useState({ left: "", top: "", width: "", height: "" });
   const [showCropBox, setShowCropBox] = useState(true);
+  // Width over height, 0 for none. 9:16 is the one that matters: the
+  // build fits the clip inside a 1080x1920 frame rather than cropping
+  // it to fill, so a 9:16 crop is the only shape that reaches all four
+  // edges -- anything else ships with blurred bars down the sides.
+  const [cropRatio, setCropRatio] = useState(0);
+  const cropPreviewRef = useRef(null);
+  const cropDragRef = useRef(null);
   // The still endpoint is a documented Stream feature but not every link
   // is a Stream link, and a 404 must not leave an empty box. One failure
   // drops back to the player for good.
@@ -1104,6 +1124,76 @@ export default function App() {
   // Typed link wins over a picked one: it is the more deliberate of the
   // two, and it is the only one available when the probe was skipped.
   const clipSource = clipUrl.trim() || chosenVideo?.playback_url || "";
+
+  /* Drawing the crop box with the pointer instead of typing it.
+   *
+   * One element handles all of it and the drawn box stays inert, so a
+   * press is hit-tested against the numbers rather than against four more
+   * divs: a corner resizes, the body of the box moves it whole, bare
+   * frame starts a new one, and a press that goes nowhere clears it. A
+   * resize is just a fresh drag anchored on the opposite corner, which is
+   * why there is no separate branch for it below.
+   */
+  const cropPointAt = (event) => {
+    const el = cropPreviewRef.current;
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    if (!(r.width > 0 && r.height > 0)) return null;
+    return { x: event.clientX - r.left, y: event.clientY - r.top,
+             rect: { width: r.width, height: r.height } };
+  };
+
+  const onCropPointerDown = (event) => {
+    const point = cropPointAt(event);
+    if (!point) return;
+    const box = cropFractions(cropBox);
+    const grip = cropHandleAt(point, box, point.rect);
+    cropDragRef.current = grip === "inside"
+      ? { mode: "move", from: point, box }
+      : { mode: "draw", from: cropAnchor(box, grip, point.rect) || point };
+    // A box you are in the middle of drawing and cannot see is no use.
+    setShowCropBox(true);
+    event.currentTarget.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  };
+
+  const onCropPointerMove = (event) => {
+    const drag = cropDragRef.current;
+    if (!drag) return;
+    const point = cropPointAt(event);
+    if (!point) return;
+    const next = drag.mode === "move"
+      ? moveCropBox(drag.box, point.x - drag.from.x, point.y - drag.from.y, point.rect)
+      : dragCropBox(drag.from, point, point.rect, cropRatio);
+    if (next) { drag.drew = true; setCropBox(next); }
+  };
+
+  const onCropPointerUp = (event) => {
+    const drag = cropDragRef.current;
+    cropDragRef.current = null;
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    // Pressed and let go without drawing anything: read that as "no crop",
+    // which is the one thing four text boxes make you do four times.
+    if (drag && drag.mode === "draw" && !drag.drew) {
+      setCropBox({ left: "", top: "", width: "", height: "" });
+    }
+  };
+
+  /* Picking a shape. With a box already drawn it keeps the middle of it
+   * and trims the long side; with nothing drawn it gives the largest box
+   * of that shape in the frame, which for 9:16 is usually the answer. */
+  const chooseCropRatio = (ratio) => {
+    setCropRatio(ratio);
+    const el = cropPreviewRef.current;
+    if (!ratio || !el) return;
+    const r = el.getBoundingClientRect();
+    const next = fitCropRatio(cropFractions(cropBox), ratio,
+                              { width: r.width, height: r.height });
+    if (next) { setShowCropBox(true); setCropBox(next); }
+  };
+
   const [filledFromBuild, setFilledFromBuild] = useState(null);
   // Which run of a car is selected, when it has been built more than once.
   const [chosenRun, setChosenRun] = useState({});
@@ -3246,6 +3336,68 @@ export default function App() {
                                      onChange={(e) => setCropBox({ ...cropBox, height: e.target.value })}
                                      placeholder="Height %" />
                             </label>
+                            <div className="crop-shapes">
+                              <span>Shape</span>
+                              {CROP_SHAPES.map((shape) => (
+                                <button key={shape.label} type="button"
+                                        className={"crop-shape"
+                                                   + (cropRatio === shape.ratio ? " chosen" : "")}
+                                        onClick={() => chooseCropRatio(shape.ratio)}>
+                                  {shape.label}
+                                </button>
+                              ))}
+                              <Tip text="Locks the shape you drag. 9:16 is the one the Shorts frame is: the clip is fitted inside 1080x1920 rather than cropped to fill it, so a 9:16 crop reaches all four edges and any other shape leaves a blurred backdrop showing around it. Pick one with nothing drawn and you get the biggest box of that shape, centred." />
+                            </div>
+                            {/* The poster frame with the box drawn on it. Typing
+                                four numbers at a video you cannot see is
+                                guesswork; against the frame it is a glance. */}
+                            {(clipUrl.trim() || chosenVideo?.poster) && (() => {
+                              // A still at the clip's own start second, which
+                              // is the frame the film will open on. The
+                              // listing's videos are HLS, and only Safari
+                              // plays that natively -- a <video> on one is a
+                              // black rectangle with the crop box drawn over
+                              // nothing.
+                              const still = clipUrl.trim()
+                                ? (stillFailed ? ""
+                                   : streamThumbnail(clipUrl.trim(),
+                                                     clipSeconds(clipStart)) || "")
+                                : `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
+                                  + `/${OUTPUT_BRANCH}/cars/listing-videos/`
+                                  + `${listingProbeId(auctionUrl)}/${chosenVideo.poster}`;
+                              const box = cropFractions(cropBox);
+                              // Dragging is for the still only. The fallback
+                              // is a player, and the whole reason it is there
+                              // is to read the seconds off its controls --
+                              // swallowing its clicks to draw a box would
+                              // take away the thing it is for.
+                              return (
+                                <div className={"crop-preview" + (still ? " drawable" : "")}
+                                     ref={cropPreviewRef}
+                                     onPointerDown={still ? onCropPointerDown : undefined}
+                                     onPointerMove={still ? onCropPointerMove : undefined}
+                                     onPointerUp={still ? onCropPointerUp : undefined}
+                                     onPointerCancel={still ? onCropPointerUp : undefined}>
+                                  {still ? (
+                                    <img src={still} alt="" draggable={false}
+                                         onError={() => clipUrl.trim() && setStillFailed(true)} />
+                                  ) : (
+                                    <video src={clipUrl.trim()} controls preload="metadata" />
+                                  )}
+                                  {box && showCropBox && (
+                                    <span className="crop-box" style={{
+                                      left: `${box.x * 100}%`, top: `${box.y * 100}%`,
+                                      width: `${box.w * 100}%`, height: `${box.h * 100}%`,
+                                    }}>
+                                      <i className="crop-grip nw" />
+                                      <i className="crop-grip ne" />
+                                      <i className="crop-grip sw" />
+                                      <i className="crop-grip se" />
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            })()}
                             {cropFractions(cropBox) && (
                               <label className="check-pill">
                                 <input type="checkbox" checked={showCropBox}
@@ -3254,51 +3406,14 @@ export default function App() {
                                 <Tip text="Only changes what this preview draws. The crop itself is whatever the four numbers say, box shown or not -- untick it to see the frame without the dimming over it." />
                               </label>
                             )}
-                            {/* The poster frame with the box drawn on it. Typing
-                                four numbers at a video you cannot see is
-                                guesswork; against the frame it is a glance. */}
-                            {(clipUrl.trim() || chosenVideo?.poster) && (
-                              <div className="crop-preview">
-                                {clipUrl.trim() ? (
-                                  // A still at the clip's own start second,
-                                  // which is the frame the film will open
-                                  // on. The listing's videos are HLS, and
-                                  // only Safari plays that natively -- a
-                                  // <video> on one is a black rectangle with
-                                  // the crop box drawn over nothing.
-                                  streamThumbnail(clipUrl.trim(), clipSeconds(clipStart))
-                                  && !stillFailed ? (
-                                    <img src={streamThumbnail(clipUrl.trim(),
-                                                              clipSeconds(clipStart))}
-                                         onError={() => setStillFailed(true)} alt="" />
-                                  ) : (
-                                    <video src={clipUrl.trim()} controls preload="metadata" />
-                                  )
-                                ) : (
-                                  <img
-                                    src={`https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
-                                         + `/${OUTPUT_BRANCH}/cars/listing-videos/`
-                                         + `${listingProbeId(auctionUrl)}/${chosenVideo.poster}`}
-                                    alt="" />
-                                )}
-                                {(() => {
-                                  const box = cropFractions(cropBox);
-                                  if (!box || !showCropBox) return null;
-                                  return (
-                                    <span className="crop-box" style={{
-                                      left: `${box.x * 100}%`, top: `${box.y * 100}%`,
-                                      width: `${box.w * 100}%`, height: `${box.h * 100}%`,
-                                    }} />
-                                  );
-                                })()}
-                              </div>
-                            )}
                             {clipUrl.trim()
                               && streamThumbnail(clipUrl.trim(), clipSeconds(clipStart))
                               && !stillFailed && (
                               <p className="hint">
                                 The frame at {clipStart.trim() || "0:00"}, which is where the
                                 film will open. Change the start time and this follows it.
+                                Drag on it to draw the crop box, drag the middle to move it,
+                                drag a corner to resize, and click once to clear it.
                               </p>
                             )}
                             <p className="hint">
@@ -3308,9 +3423,9 @@ export default function App() {
                                   + "leaves the frame entirely. Cropping the height alone "
                                   + "centres the subject and drops the dead ground; crop the "
                                   + "sides in as well to make it bigger."
-                                : "Blank uses the whole frame. If the car sits in part of it "
-                                  + "-- top third, say -- put 0 / 0 / 100 / 33 here and the "
-                                  + "rest of the shot is dropped."}
+                                : "Blank uses the whole frame. Drag a box on the frame above "
+                                  + "rather than working the numbers out, or pick 9:16 and get "
+                                  + "the biggest box that fills a Shorts frame edge to edge."}
                             </p>
                           </>
                         )}
