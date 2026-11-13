@@ -1,0 +1,87 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/KV0l6XnY/2023-porsche-911-gt3?ss_id=e7474c29-8b6a-42b2-b10f-785b0374f562&ref=pr_1_3",
+  "scrape_ok": true,
+  "video_count": 8,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d2f2fa9e2cb4d61a931989dc9",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d2f2fa9e2cb4d61a931989dc9fc59e3b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d2f2fa9e2cb4d61a931989dc9fc59e3b/manifest/video.m3u8",
+      "duration_seconds": 39.7,
+      "poster": "poster-1.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6ead7b7397698b405eeee93e4",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6ead7b7397698b405eeee93e4c838c05/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6ead7b7397698b405eeee93e4c838c05/manifest/video.m3u8",
+      "duration_seconds": 38.4,
+      "poster": "poster-2.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/001e3e4303c1fbdd7f3af3ce7",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/001e3e4303c1fbdd7f3af3ce707a50ba/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/001e3e4303c1fbdd7f3af3ce707a50ba/manifest/video.m3u8",
+      "duration_seconds": 78.7,
+      "poster": "poster-3.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 4,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ab07b4ca38c1c3c8372be310e",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ab07b4ca38c1c3c8372be310e01a2aa3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ab07b4ca38c1c3c8372be310e01a2aa3/manifest/video.m3u8",
+      "duration_seconds": 89.8,
+      "poster": "poster-4.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 5,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2b0d7062c27030a7ab405c594",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2b0d7062c27030a7ab405c594c6d1649/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2b0d7062c27030a7ab405c594c6d1649/manifest/video.m3u8",
+      "duration_seconds": 16.29,
+      "poster": "poster-5.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 6,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d48ed80bf60f30c0b5fccf0f4",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d48ed80bf60f30c0b5fccf0f4351f6c3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d48ed80bf60f30c0b5fccf0f4351f6c3/manifest/video.m3u8",
+      "duration_seconds": 19.79,
+      "poster": "poster-6.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 7,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fe89776b45becc811ee63d5a3",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fe89776b45becc811ee63d5a37fc2255/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/fe89776b45becc811ee63d5a37fc2255/manifest/video.m3u8",
+      "duration_seconds": 34.59,
+      "poster": "poster-7.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 8,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/079cfbe39a739ba359d9d5b2e",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/079cfbe39a739ba359d9d5b2e72c1e0f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/079cfbe39a739ba359d9d5b2e72c1e0f/manifest/video.m3u8",
+      "duration_seconds": 24.59,
+      "poster": "poster-8.jpg",
+      "audio": null
+    }
+  ]
+}
