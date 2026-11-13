@@ -37,34 +37,29 @@ LEGACY_SECTION_SLOTS = {"exterior": "front", "interior": "interior", "engine": "
 # that aims the narrator's eyes and hand at one. Keeping one copy is what
 # stops the character pointing at where a tile used to be.
 #
-# One row, however many close-ups there are. Two rows was the right answer
-# while the main photo was a short strip and there was height going spare;
-# once the main photo is the shape of the photo in it there is room for one
-# row and no more, and a single strip under a hero reads as what it is --
-# a contact sheet of details belonging to the thing above it.
-COLLAGE_ROWS = {0: [], 1: [1], 2: [2], 3: [3], 4: [4]}
-# A floor on the columns the cells are divided into, so a lone tile takes a
-# cell rather than the whole band. Rarely the binding constraint: TILE_ASPECT
-# caps a cell at 1.5x the row height long before this does.
+# Never more than two tiles across. Three in a row was cramped at phone size
+# -- each cell ends up a third of the band wide, so the photo inside it is
+# tiny -- so three close-ups stack as a pair plus a centred single instead.
+COLLAGE_ROWS = {0: [], 1: [1], 2: [2], 3: [2, 1], 4: [2, 2]}
+# The media band is much wider than it is tall, so a lone tile takes a
+# half-width cell rather than stretching across the whole band.
 MIN_TILE_COLUMNS = 2
 # Listing photos are almost all 3:2, and a close-up is shown whole, so cells
 # are cut to that shape -- a cell much wider than its photo is just white.
 TILE_ASPECT = 1.5
-# The main photo is as tall as a 3:2 photo spanning the full width of the
-# band, which makes its slot the shape of the thing going into it and the
-# same height in every chapter whatever the close-ups do.
+# The main photo is the same height in every chapter, whatever the close-ups
+# do. Sizing it from what the tiles left over meant a chapter with four
+# close-ups showed its main photo at 299px against 513px next door, and the
+# subject of the video visibly changed size from cut to cut. The close-ups
+# absorb the difference instead: two of them are large, four are smaller,
+# which is the part that is meant to vary.
 #
-# It used to be 47% of the band's height, which on a 1063x879 band is a slot
-# 1063x413 -- 2.57:1, while listing photos are 1.5:1. So the hero could only
-# ever reach 58% of the width and the other 42% was white, in every chapter,
-# while the tiles underneath -- cut to 1.5:1 -- filled theirs exactly. The
-# hero was the one box in the layout that was not photo-shaped, and it was
-# the one the video is about. Same band, same narrator, 2.9x the hero.
-HERO_ASPECT = TILE_ASPECT
-# ...unless honouring it would squeeze the tiles below this, which is what
-# happens when a race lane is reserved: the lane and a full-width hero
-# together want more than the band has, so the hero gives way for those
-# chapters rather than the tiles shipping unreadable.
+# 0.47 is chosen so a typical wide exterior cutout is limited by the band's
+# width rather than by this height -- it renders at exactly the same size as
+# it did in the old one-row layout, so nothing got smaller to buy this.
+MAIN_HEIGHT_RATIO = 0.47
+# ...unless honouring it would squeeze the tiles below this, which can only
+# happen when a race lane is reserved in a chapter that also has two rows.
 MIN_ROW_HEIGHT = 150
 GAP_RATIO = 0.018
 # A clear lane for the drag race, opened between the main photo and the
@@ -129,10 +124,10 @@ def collage_metrics(box_w, box_h, count, race_strip=False):
     aims the narrator's eyes and hand at one, so the character cannot point
     at a cell the renderer laid out somewhere else.
 
-    The main photo spans the width at HERO_ASPECT in every chapter; the
-    close-ups divide what is left, so more of them means smaller ones rather
-    than a smaller subject. With `race_strip`, a band is reserved between
-    the two for the drag race.
+    The main photo takes MAIN_HEIGHT_RATIO in every chapter; the close-ups
+    divide what is left, so more of them means smaller ones rather than a
+    smaller subject. With `race_strip`, a band is reserved between the two
+    for the drag race.
     """
     gap = max(4, round(min(box_w, box_h) * GAP_RATIO))
     strip_h = round(box_h * RACE_STRIP_RATIO) if race_strip else 0
@@ -141,15 +136,7 @@ def collage_metrics(box_w, box_h, count, race_strip=False):
     # constant height, and the lane has to land at the same y in every
     # chapter the race crosses or the cars jump mid-race.
     rows = collage_rows(min(count, MIN_TILE_COLUMNS) if race_strip else count)
-    # Capped at the band, for a band too short to hold a full-width hero.
-    main_h = min(round(box_w / HERO_ASPECT), box_h)
-    if race_strip:
-        # The lane lands at the same y in every chapter the race crosses, so
-        # the room a row of tiles needs is reserved whether this chapter has
-        # close-ups or not. Without that, a chapter with none would leave the
-        # hero full height and put the lane where the next chapter puts its
-        # tiles -- and the cars would jump between the two.
-        main_h = max(1, min(main_h, box_h - strip_h - gap * 2 - MIN_ROW_HEIGHT))
+    main_h = round(box_h * MAIN_HEIGHT_RATIO)
     if not rows:
         return {"rows": [], "gap": gap,
                 "main_h": main_h if race_strip else box_h, "row_h": 0, "tile_w": 0,
@@ -167,9 +154,9 @@ def collage_metrics(box_w, box_h, count, race_strip=False):
 
     tile_w, row_h = fit(main_h)
     if row_h < MIN_ROW_HEIGHT:
-        # Reached when a reserved race lane leaves the row too little room;
-        # give the tiles their floor and let the main photo take the hit for
-        # that one chapter rather than shipping unreadable thumbnails.
+        # Only reachable when a reserved race lane leaves two rows too little
+        # room; give the tiles their floor and let the main photo take the hit
+        # for that one chapter rather than shipping unreadable thumbnails.
         room = box_h - strip_h - gap * (len(rows) + (1 if race_strip else 0)) - MIN_ROW_HEIGHT * len(rows)
         main_h = max(1, min(main_h, room))
         tile_w, row_h = fit(main_h)

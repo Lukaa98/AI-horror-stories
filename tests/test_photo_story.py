@@ -142,27 +142,23 @@ def test_tile_centers_track_the_rendered_rows():
     two = tile_centers(*box, 2)
     assert two[0][0] < 0.5 < two[1][0]
     assert len(tile_centers(*box, 4)) == 4
-    # One row, so every tile sits at the same height and they run left to right.
-    four = tile_centers(*box, 4)
-    assert len({round(y, 4) for _x, y in four}) == 1
-    assert [x for x, _y in four] == sorted(x for x, _y in four)
-    # An odd number of tiles is centred as a row rather than hung off one end.
-    three = tile_centers(*box, 3)
-    assert abs((three[0][0] + three[-1][0]) / 2 - 0.5) < 0.01
+    # Two rows, so the last pair sits lower than the first.
+    assert tile_centers(*box, 4)[3][1] > tile_centers(*box, 4)[0][1]
+    # The odd tile in a 2+1 layout is centred under the pair.
+    assert abs(tile_centers(*box, 3)[2][0] - 0.5) < 0.01
     # Tiles always sit below the main photo.
     main = collage_metrics(*box, 3)["main_h"] / box[1]
     assert all(y > main for _, y in tile_centers(*box, 3))
 
 
-def test_close_ups_sit_in_one_row_under_the_hero():
+def test_collage_never_puts_more_than_two_tiles_across():
     assert collage_rows(0) == []
     assert collage_rows(1) == [1]
     assert collage_rows(2) == [2]
-    # One row whatever the count: a full-width hero leaves room for one, and
-    # a single strip of details under it reads as belonging to it.
-    assert collage_rows(3) == [3]
-    assert collage_rows(MAX_CLOSEUPS) == [4]
-    assert collage_rows(9) == [4]
+    # Three across was cramped; three close-ups stack as a pair plus a single.
+    assert collage_rows(3) == [2, 1]
+    assert collage_rows(MAX_CLOSEUPS) == [2, 2]
+    assert collage_rows(9) == [2, 2]
 
 
 def test_cells_are_photo_shaped_and_reach_the_band_edges():
@@ -179,30 +175,9 @@ def test_cells_are_photo_shaped_and_reach_the_band_edges():
         assert m["main_h"] >= round(box[1] * 0.34) - 1, count
         widest = max(rows)
         assert m["tile_w"] * widest + gap * (widest - 1) <= box[0], count
-    # Close-ups are the same size whatever the count, so the details do not
-    # change size from chapter to chapter either.
-    sizes = {(collage_metrics(*box, n)["tile_w"], collage_metrics(*box, n)["row_h"])
-             for n in (1, 2, 3, 4)}
-    assert len(sizes) == 1, sizes
-
-
-def test_the_hero_slot_is_the_shape_of_the_photo_going_in_it():
-    """The hero used to take a fixed 47% of the band's height, which on the
-    real band is a 1063x413 slot -- 2.57:1, against listing photos at 1.5:1.
-    A 3:2 photo fitted into that reached 58% of the width and the rest was
-    white, in every chapter, while the tiles below it filled theirs exactly.
-    """
-    box = (1063, 879)
-    for count in (0, 1, 2, 3, 4):
-        m = collage_metrics(*box, count)
-        if not m["rows"]:
-            continue
-        # Full width at the shape of the photo, so nothing is left over.
-        assert abs(box[0] / m["main_h"] - 1.5) < 0.01, count
-        # And it is still the biggest thing in the band by a long way.
-        assert m["main_h"] > m["row_h"] * 4, count
-    # Against the old 0.47 slot, on the real band.
-    assert collage_metrics(*box, 4)["main_h"] > round(box[1] * 0.47) * 1.7
+    # A full-width pair reaches the edges rather than floating in the middle.
+    two = collage_metrics(*box, 2)
+    assert two["tile_w"] * 2 + two["gap"] >= box[0] - 4
 
 
 def test_track_merges_chapters_and_survives_a_dead_closeup(tmp_path):
