@@ -1201,6 +1201,29 @@ export default function App() {
     setError((current) => (current === shown ? null : current));
   }, [engineProblem]);
 
+  /* A new clip starts framed to fill the frame.
+   *
+   * The build fits the clip inside 1080x1920 over a blurred zoomed copy of
+   * itself, so an uncropped 16:9 phone clip plays as a strip across the
+   * middle with two thirds of the screen given to blur. 9:16 is the only
+   * shape that reaches all four edges, so that is where the box starts --
+   * drawn on the frame, where it can be dragged onto the car or cleared
+   * with a click, rather than decided silently inside ffmpeg.
+   *
+   * Once per clip, and never over a box that is already set, so a crop
+   * carried from a previous build and a box cleared on purpose both stand.
+   */
+  const cropAutoRef = useRef("");
+  const startCropAtShortsShape = () => {
+    if (cropAutoRef.current === clipSource || cropFractions(cropBox)) return;
+    cropAutoRef.current = clipSource;
+    const el = cropPreviewRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const box = fitCropRatio(null, 9 / 16, { width: r.width, height: r.height });
+    if (box) { setCropRatio(9 / 16); setCropBox(box); }
+  };
+
   const chooseCropRatio = (ratio) => {
     setCropRatio(ratio);
     const el = cropPreviewRef.current;
@@ -3390,6 +3413,7 @@ export default function App() {
                                      onPointerCancel={still ? onCropPointerUp : undefined}>
                                   {still ? (
                                     <img src={still} alt="" draggable={false}
+                                         onLoad={startCropAtShortsShape}
                                          onError={() => clipUrl.trim() && setStillFailed(true)} />
                                   ) : (
                                     <video src={clipUrl.trim()} controls preload="metadata" />
@@ -3423,19 +3447,21 @@ export default function App() {
                                 The frame at {clipStart.trim() || "0:00"}, which is where the
                                 film will open. Change the start time and this follows it.
                                 Drag on it to draw the crop box, drag the middle to move it,
-                                drag a corner to resize, and click once to clear it.
+                                drag a corner to resize, and click the frame beside it to
+                                clear it.
                               </p>
                             )}
                             <p className="hint">
                               {cropFractions(cropBox)
                                 ? "Only what is inside the box is shown, and the blurred "
                                   + "backdrop is made from it too, so whatever you crop away "
-                                  + "leaves the frame entirely. Cropping the height alone "
-                                  + "centres the subject and drops the dead ground; crop the "
-                                  + "sides in as well to make it bigger."
-                                : "Blank uses the whole frame. Drag a box on the frame above "
-                                  + "rather than working the numbers out, or pick 9:16 and get "
-                                  + "the biggest box that fills a Shorts frame edge to edge."}
+                                  + "leaves the frame entirely. At 9:16 the clip fills the "
+                                  + "Shorts frame with no backdrop showing at all, which is "
+                                  + "why the box starts there -- drag it onto the car."
+                                : "Blank uses the whole frame, fitted inside 1080x1920 over "
+                                  + "a blurred copy of itself -- so a clip filmed sideways "
+                                  + "plays as a strip across the middle with blur above and "
+                                  + "below it. Pick 9:16 to fill the frame instead."}
                             </p>
                           </>
                         )}

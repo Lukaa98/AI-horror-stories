@@ -5288,3 +5288,26 @@ def test_a_ticked_engine_clip_cannot_be_dropped_without_saying_so():
     for reason in ("no clip is chosen", "start and end times are not both",
                    "end time is not after the start"):
         assert reason in clip_js, reason
+
+
+def test_a_new_clip_starts_framed_to_fill_the_shorts_frame():
+    """The build fits the clip inside 1080x1920 over a blurred zoomed copy
+    of itself, so an uncropped 16:9 phone clip plays as a strip across the
+    middle with two thirds of the screen given to blur. Measured on a real
+    render: no crop puts the clip in a band across the centre, a 9:16 crop
+    fills all 1080x1920 with no backdrop visible anywhere."""
+    import single_car_short
+
+    root = Path(single_car_short.__file__).resolve().parents[2] / "web/src"
+    app = (root / "App.jsx").read_text()
+
+    # The box starts at the one shape that reaches all four edges...
+    assert "fitCropRatio(null, 9 / 16," in app
+    assert "onLoad={startCropAtShortsShape}" in app
+    # ...on the frame, where it can be seen and dragged, rather than
+    # decided silently in the filter graph.
+    assert "setCropRatio(9 / 16); setCropBox(box);" in app
+    # Once per clip, and never over a box that is already there: a crop
+    # carried from a previous build and a box cleared on purpose stand.
+    assert "if (cropAutoRef.current === clipSource || cropFractions(cropBox)) return;" in app
+    assert "cropAutoRef.current = clipSource;" in app
