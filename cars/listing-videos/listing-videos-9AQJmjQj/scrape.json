@@ -1,0 +1,80 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-11-13T21:20:05.115Z",
+  "query": "",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9AQJmjQj/ferrari-330-p4-recreation-by-norwood-autocraft",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9AQJmjQj/ferrari-330-p4-recreation-by-norwood-autocraft",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b00cbf77c2547b4949b73b97f8270a9f/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b00cbf77c2547b4949b73b97f8270a9f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "Ferrari 330 P4 Recreation by Norwood Autocraft",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b00cbf77c2547b4949b73b97f8270a9f/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQJmjQj/ferrari-330-p4-recreation-by-norwood-autocraft",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b00cbf77c2547b4949b73b97f8270a9f/manifest/video.m3u8",
+      "auction_title": "Ferrari 330 P4 Recreation by Norwood Autocraft",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06fa0ba7dbb6381de573a89639e432a4/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06fa0ba7dbb6381de573a89639e432a4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "Ferrari 330 P4 Recreation by Norwood Autocraft",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06fa0ba7dbb6381de573a89639e432a4/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQJmjQj/ferrari-330-p4-recreation-by-norwood-autocraft",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06fa0ba7dbb6381de573a89639e432a4/manifest/video.m3u8",
+      "auction_title": "Ferrari 330 P4 Recreation by Norwood Autocraft",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52f07b58cc4d7abdd8321508b94b8036/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52f07b58cc4d7abdd8321508b94b8036/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "Ferrari 330 P4 Recreation by Norwood Autocraft",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52f07b58cc4d7abdd8321508b94b8036/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQJmjQj/ferrari-330-p4-recreation-by-norwood-autocraft",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52f07b58cc4d7abdd8321508b94b8036/manifest/video.m3u8",
+      "auction_title": "Ferrari 330 P4 Recreation by Norwood Autocraft",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c0949c3dbc59d1f391b4858f43928b2/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c0949c3dbc59d1f391b4858f43928b2/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "Ferrari 330 P4 Recreation by Norwood Autocraft",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c0949c3dbc59d1f391b4858f43928b2/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9AQJmjQj/ferrari-330-p4-recreation-by-norwood-autocraft",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c0949c3dbc59d1f391b4858f43928b2/manifest/video.m3u8",
+      "auction_title": "Ferrari 330 P4 Recreation by Norwood Autocraft",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/9AQJmjQj/ferrari-330-p4-recreation-by-norwood-autocraft",
+  "scrape_ok": true,
+  "video_count": 4,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b00cbf77c2547b4949b73b97f",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b00cbf77c2547b4949b73b97f8270a9f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b00cbf77c2547b4949b73b97f8270a9f/manifest/video.m3u8",
+      "duration_seconds": 107.09,
+      "poster": "poster-1.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06fa0ba7dbb6381de573a8963",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06fa0ba7dbb6381de573a89639e432a4/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/06fa0ba7dbb6381de573a89639e432a4/manifest/video.m3u8",
+      "duration_seconds": 63.59,
+      "poster": "poster-2.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52f07b58cc4d7abdd8321508b",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52f07b58cc4d7abdd8321508b94b8036/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/52f07b58cc4d7abdd8321508b94b8036/manifest/video.m3u8",
+      "duration_seconds": 33.89,
+      "poster": "poster-3.jpg",
+      "audio": "aac, 44 kHz"
+    },
+    {
+      "index": 4,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c0949c3dbc59d1f391b4858f",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c0949c3dbc59d1f391b4858f43928b2/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4c0949c3dbc59d1f391b4858f43928b2/manifest/video.m3u8",
+      "duration_seconds": 49.8,
+      "poster": "poster-4.jpg",
+      "audio": "aac, 48 kHz"
+    }
+  ]
+}
