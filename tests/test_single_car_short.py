@@ -3995,8 +3995,9 @@ def test_a_rebuild_carries_the_start_up_clip_with_the_rest_of_the_form():
     app = (Path(single_car_short.__file__).resolve().parents[2]
            / "web/src/App.jsx").read_text()
     # The dashboard writes it before dispatch too, so a run that never
-    # finished refills exactly like one that did.
-    assert "engine_clip: useEngineClip && clipSource" in app
+    # finished refills exactly like one that did -- from the same value the
+    # dispatch sends, so the record cannot claim a clip that was not sent.
+    assert "engine_clip: enginePayload," in app
     # And reads all of it back onto the form.
     assert "const clip = inputs.engine_clip;" in app
     assert "setUseEngineClip(carried);" in app
@@ -5205,7 +5206,10 @@ def test_a_pasted_video_link_skips_reading_the_listing():
     # -- but not for a link that is known to be unusable.
     assert "{clipSource && !clipLinkProblem(clipUrl) && (" in app
     # A page url reaches neither the preview nor the payload.
-    assert "engine_clip: useEngineClip && clipSource && !clipLinkProblem(clipUrl)" in app
+    clip_js = (Path(single_car_short.__file__).resolve().parents[2]
+               / "web/src/clipTimes.js").read_text()
+    assert "if (!enabled || !source || clipLinkProblem(url)) return null;" in clip_js
+    assert "engine_clip: enginePayload," in app
     # A typed link gets the video itself under the crop box, which a poster
     # frame cannot do: the seconds and the framing come off the same player.
     # A still at the clip's own start second, because the listing's videos
@@ -5236,13 +5240,51 @@ def test_the_crop_box_is_drawn_on_the_video_and_can_be_turned_off():
     # the preview is a still from Stream rather than a player -- and one
     # that 404s falls back to the player instead of leaving an empty box.
     assert "streamThumbnail(" in app
-    assert "onError={() => setStillFailed(true)}" in app
+    assert "onError={() => clipUrl.trim() && setStillFailed(true)}" in app
     assert "const [stillFailed, setStillFailed] = useState(false);" in app
 
     # The box can be hidden, and hiding it changes nothing but the preview.
     assert "const [showCropBox, setShowCropBox] = useState(true);" in app
-    assert "if (!box || !showCropBox) return null;" in app
+    assert "{box && showCropBox && (" in app
     # The crop still rides on the payload whatever the checkbox says: it is
     # keyed off the numbers, not off what is being drawn.
-    assert "crop: cropFractions(cropBox)" in app
+    clip_js = (root / "clipTimes.js").read_text()
+    assert "crop: cropFractions(crop)" in clip_js
+    assert "crop: cropBox }" in app
     assert "showCropBox" not in app.split("engine_clip:")[1].split("\n    });")[0]
+
+
+def test_a_ticked_engine_clip_cannot_be_dropped_without_saying_so():
+    """The GT3 run shipped with no start-up on the front and nothing said
+    why. Two conditions decided whether there was a clip and they
+    disagreed: the draft record wanted the box ticked, a source and a
+    usable link, the dispatch wanted all that plus a start and an end that
+    parse and run forwards. A form with a clip chosen, a crop set and the
+    two seconds blank recorded a clip and sent none -- fifteen minutes and
+    a script to find out, by watching it back in silence."""
+    import single_car_short
+
+    root = Path(single_car_short.__file__).resolve().parents[2] / "web/src"
+    app = (root / "App.jsx").read_text()
+    clip_js = (root / "clipTimes.js").read_text()
+
+    # Decided once. Both the record and the dispatch read that one value,
+    # so they cannot drift apart again.
+    assert "const enginePayload = engineClipPayload(engineClipForm);" in app
+    assert "engine_clip: enginePayload," in app
+    assert "if (enginePayload) slots.engine_clip = enginePayload;" in app
+    # The times are part of that one condition rather than an extra the
+    # dispatch applied on its own.
+    assert "if (from === null || to === null || to <= from) return null;" in clip_js
+
+    # And a ticked box that cannot produce a clip stops the build instead
+    # of spending a quarter of an hour on a film without the thing it was
+    # ticked for -- said in the section, and again on the way out.
+    assert "if (engineProblem) {" in app
+    assert "setError(engineProblem);" in app
+    assert '<p className="error">{engineProblem}</p>' in app
+    # Each cause says which one it is; "unavailable" would be no better
+    # than the silence it replaces.
+    for reason in ("no clip is chosen", "start and end times are not both",
+                   "end time is not after the start"):
+        assert reason in clip_js, reason
