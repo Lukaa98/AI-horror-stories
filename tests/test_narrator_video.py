@@ -880,3 +880,47 @@ def test_the_video_length_still_comes_from_the_padded_audio():
     assert "duration = audio.duration + END_PAD_SECONDS" not in body
     assert "_narration_with_tail(Path(manifest[\"audio_path\"])" in body
     assert "duration = audio.duration" in body
+
+
+def test_the_end_fades_instead_of_stopping_dead():
+    """The last word, 0.08s, black. Shorts cut hard enough on their own.
+
+    The fade only does anything if there is something to fade: with the old
+    0.08s pad, a fade is a fade of the closing sentence and the last thing
+    anybody hears is the line being swallowed. Measured on a composite mix
+    shaped like a real one, 0.8s took the closing word's tail to 62% of
+    level; 0.6s against a 0.45s hold leaves it above 80% and puts the decay
+    to silence in the silence.
+    """
+    from narrator_video import END_FADE_SECONDS, END_HOLD_SECONDS, END_PAD_SECONDS
+
+    assert END_FADE_SECONDS > 0
+    # Real silence to land in, not just the anti-blip sliver.
+    assert END_HOLD_SECONDS > END_PAD_SECONDS
+    # How far the fade reaches back into the closing word.
+    reach = END_FADE_SECONDS - END_HOLD_SECONDS
+    assert 0 < reach <= 0.25, reach
+    # A linear fade that far from its start is still at this much level, so
+    # the word trails off rather than being ducked.
+    assert (END_FADE_SECONDS - reach) / END_FADE_SECONDS >= 0.75
+    # Short on purpose: Shorts loop, and a long silent tail is a dead patch
+    # on every replay.
+    assert END_HOLD_SECONDS <= 0.6
+
+
+def test_the_fade_takes_the_whole_mix_down_together():
+    """Narration, effects and bed faded separately arrive at silence at
+    different times, which is the part that sounds wrong."""
+    import inspect
+    import narrator_video
+
+    body = inspect.getsource(narrator_video.render_narrator_video) \
+        if hasattr(narrator_video, "render_narrator_video") \
+        else Path(narrator_video.__file__).read_text()
+    # Applied to the composite, after the master volume, not to a part.
+    assert "full_audio.volumex(MASTER_VOLUME).set_duration(duration)" in body
+    tail = body.split("full_audio.volumex(MASTER_VOLUME)")[1][:600]
+    assert "afx.audio_fadeout, end_fade" in tail
+    assert "min(END_FADE_SECONDS, duration / 4)" in tail
+    # And the hold is what the narration is padded with.
+    assert "max(END_PAD_SECONDS, END_HOLD_SECONDS)" in body

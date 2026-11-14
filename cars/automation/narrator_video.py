@@ -1794,6 +1794,28 @@ def _progress_bar_track(size, duration):
 # all fixes that; the length of the pad was never the cure.
 END_PAD_SECONDS = 0.08
 
+# The end used to stop dead: the last word, 0.08s, black. Shorts cut hard
+# enough on their own without the audio helping, so the mix is taken down
+# gradually over the last END_FADE_SECONDS.
+#
+# Which only works if there is something to fade. With only the 0.08s pad
+# above, a one-second fade is a one-second fade of the closing sentence,
+# and the last thing anybody hears is the line being swallowed. So the
+# narration carries END_HOLD_SECONDS of real silence instead, and the fade
+# is set to land almost entirely inside it: the closing word plays at
+# nearly full level, then the bed and the room decay to nothing while the
+# last frame holds.
+#
+# Deliberately short, both of them. Shorts loop, so a long silent tail is
+# a dead patch on every replay -- this is a soft landing, not an outro.
+# Measured on a composite mix shaped like a real one. At 0.8 the fade
+# reached 0.35s back into the closing word and took its tail to 62% of
+# level, which is a swallowed last word rather than a soft landing. At 0.6
+# it reaches in 0.15s and the word still ends above 80%, so it trails off
+# instead of being ducked, and the decay to silence happens in the hold.
+END_HOLD_SECONDS = 0.45
+END_FADE_SECONDS = 0.6
+
 
 # The channel mark, bottom left. It used to ride on the narrator's chest,
 # where it competed with the car print and vanished whenever a shot cropped
@@ -1869,9 +1891,11 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     # as the file running out rather than the video finishing. The beat of
     # silence that makes the closing question land is padded onto the
     # narration upstream, where the last word's timestamp is known; see
-    # END_PAD_SECONDS for why only a sliver is added here.
+    # END_PAD_SECONDS for why a pad of any length is needed at all, and
+    # END_HOLD_SECONDS for why it is no longer just a sliver.
     audio_path = _narration_with_tail(Path(manifest["audio_path"]),
-                                      output_path.parent, END_PAD_SECONDS)
+                                      output_path.parent,
+                                      max(END_PAD_SECONDS, END_HOLD_SECONDS))
     audio = AudioFileClip(str(audio_path))
     duration = audio.duration
 
@@ -2106,6 +2130,12 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     extra_audio = [*sfx_clips, *([music_clip] if music_clip is not None else [])]
     full_audio = CompositeAudioClip([audio, *extra_audio]) if extra_audio else audio
     full_audio = full_audio.volumex(MASTER_VOLUME).set_duration(duration)
+    # Last, so it takes the whole mix down together -- narration, effects
+    # and bed. Faded one at a time they arrive at silence separately, which
+    # is the thing that sounds wrong rather than the cut itself.
+    end_fade = min(END_FADE_SECONDS, duration / 4)
+    if end_fade > 0:
+        full_audio = full_audio.fx(afx.audio_fadeout, end_fade).set_duration(duration)
     video = CompositeVideoClip(
         [
             background, car_positioned, *headline_clips, *caption_clips, *detail_clips, narrator_positioned,
