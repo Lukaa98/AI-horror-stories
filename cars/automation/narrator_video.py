@@ -1794,27 +1794,24 @@ def _progress_bar_track(size, duration):
 # all fixes that; the length of the pad was never the cure.
 END_PAD_SECONDS = 0.08
 
-# The end used to stop dead: the last word, 0.08s, black. Shorts cut hard
-# enough on their own without the audio helping, so the mix is taken down
-# gradually over the last END_FADE_SECONDS.
+# The closing word used to stop at full level and the file end a beat
+# later, which is what "it cuts too quickly" sounds like: there is already
+# silence after the voice, but the voice itself falls off a cliff. So the
+# whole mix is taken down gradually over the last END_FADE_SECONDS.
 #
-# Which only works if there is something to fade. With only the 0.08s pad
-# above, a one-second fade is a one-second fade of the closing sentence,
-# and the last thing anybody hears is the line being swallowed. So the
-# narration carries END_HOLD_SECONDS of real silence instead, and the fade
-# is set to land almost entirely inside it: the closing word plays at
-# nearly full level, then the bed and the room decay to nothing while the
-# last frame holds.
+# Sized against the silence that is already there, not by taste. The beat
+# after the last word is MIN_TAIL_SILENCE + END_PAD_SECONDS, 0.53s, padded
+# upstream where the word timeline knows when the voice actually stops. A
+# fade of 0.65 therefore reaches 0.12s back into the closing word and
+# leaves its last sample at about 82% of level -- a word trailing off
+# rather than one being ducked -- and spends the rest of itself decaying
+# through silence that was being held anyway.
 #
-# Deliberately short, both of them. Shorts loop, so a long silent tail is
-# a dead patch on every replay -- this is a soft landing, not an outro.
-# Measured on a composite mix shaped like a real one. At 0.8 the fade
-# reached 0.35s back into the closing word and took its tail to 62% of
-# level, which is a swallowed last word rather than a soft landing. At 0.6
-# it reaches in 0.15s and the word still ends above 80%, so it trails off
-# instead of being ducked, and the decay to silence happens in the hold.
-END_HOLD_SECONDS = 0.45
-END_FADE_SECONDS = 0.6
+# Do not add more silence to fade into. There already is some, and a
+# second beat on top of it is a bug this pipeline has shipped before: the
+# Corvette build ended on 1.05s of held frame and read as the file running
+# out, which is the same complaint from the other direction.
+END_FADE_SECONDS = 0.65
 
 
 # The channel mark, bottom left. It used to ride on the narrator's chest,
@@ -1891,11 +1888,9 @@ def render_narrator_video(car_media_paths, manifest, output_path):
     # as the file running out rather than the video finishing. The beat of
     # silence that makes the closing question land is padded onto the
     # narration upstream, where the last word's timestamp is known; see
-    # END_PAD_SECONDS for why a pad of any length is needed at all, and
-    # END_HOLD_SECONDS for why it is no longer just a sliver.
+    # END_PAD_SECONDS for why only a sliver is added here.
     audio_path = _narration_with_tail(Path(manifest["audio_path"]),
-                                      output_path.parent,
-                                      max(END_PAD_SECONDS, END_HOLD_SECONDS))
+                                      output_path.parent, END_PAD_SECONDS)
     audio = AudioFileClip(str(audio_path))
     duration = audio.duration
 

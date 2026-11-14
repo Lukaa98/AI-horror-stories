@@ -883,44 +883,43 @@ def test_the_video_length_still_comes_from_the_padded_audio():
 
 
 def test_the_end_fades_instead_of_stopping_dead():
-    """The last word, 0.08s, black. Shorts cut hard enough on their own.
+    """The closing word stopped at full level. There was already a beat of
+    silence after it -- MIN_TAIL_SILENCE plus the anti-blip pad, padded
+    upstream where the word timeline knows when the voice stops -- so what
+    sounded abrupt was the voice falling off a cliff, not the file ending.
 
-    The fade only does anything if there is something to fade: with the old
-    0.08s pad, a fade is a fade of the closing sentence and the last thing
-    anybody hears is the line being swallowed. Measured on a composite mix
-    shaped like a real one, 0.8s took the closing word's tail to 62% of
-    level; 0.6s against a 0.45s hold leaves it above 80% and puts the decay
-    to silence in the silence.
+    Which means the fade has to be sized against the silence that is
+    already there. Too short and it only fades silence, which is
+    inaudible; too long and it ducks the closing question. And it must not
+    bring its own silence: a second beat on top of the first is a bug this
+    pipeline has already shipped once, and test_chest_print guards it.
     """
-    from narrator_video import END_FADE_SECONDS, END_HOLD_SECONDS, END_PAD_SECONDS
+    import single_car_short
+    from narrator_video import END_FADE_SECONDS, END_PAD_SECONDS
 
-    assert END_FADE_SECONDS > 0
-    # Real silence to land in, not just the anti-blip sliver.
-    assert END_HOLD_SECONDS > END_PAD_SECONDS
-    # How far the fade reaches back into the closing word.
-    reach = END_FADE_SECONDS - END_HOLD_SECONDS
-    assert 0 < reach <= 0.25, reach
-    # A linear fade that far from its start is still at this much level, so
-    # the word trails off rather than being ducked.
-    assert (END_FADE_SECONDS - reach) / END_FADE_SECONDS >= 0.75
-    # Short on purpose: Shorts loop, and a long silent tail is a dead patch
-    # on every replay.
-    assert END_HOLD_SECONDS <= 0.6
+    beat = single_car_short.MIN_TAIL_SILENCE + END_PAD_SECONDS
+    # It has to reach past the silence to be audible at all...
+    assert END_FADE_SECONDS > beat, (END_FADE_SECONDS, beat)
+    # ...but only just: this is how far it reaches into the closing word.
+    reach = END_FADE_SECONDS - beat
+    assert reach <= 0.2, reach
+    # A linear fade that far in is still at this much level, so the word
+    # trails off rather than being ducked.
+    assert (END_FADE_SECONDS - reach) / END_FADE_SECONDS >= 0.78
 
 
 def test_the_fade_takes_the_whole_mix_down_together():
     """Narration, effects and bed faded separately arrive at silence at
     different times, which is the part that sounds wrong."""
-    import inspect
+    from pathlib import Path as _Path
+
     import narrator_video
 
-    body = inspect.getsource(narrator_video.render_narrator_video) \
-        if hasattr(narrator_video, "render_narrator_video") \
-        else Path(narrator_video.__file__).read_text()
+    body = _Path(narrator_video.__file__).read_text()
     # Applied to the composite, after the master volume, not to a part.
     assert "full_audio.volumex(MASTER_VOLUME).set_duration(duration)" in body
     tail = body.split("full_audio.volumex(MASTER_VOLUME)")[1][:600]
     assert "afx.audio_fadeout, end_fade" in tail
     assert "min(END_FADE_SECONDS, duration / 4)" in tail
-    # And the hold is what the narration is padded with.
-    assert "max(END_PAD_SECONDS, END_HOLD_SECONDS)" in body
+    # And it brings no silence of its own; the beat stays owned upstream.
+    assert "END_HOLD" not in body
