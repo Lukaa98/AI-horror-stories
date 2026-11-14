@@ -167,9 +167,20 @@ def main():
         # Only on the way out badly. Clearing it unconditionally would blink
         # "idle" between the approval and the store, and the dashboard reads
         # that as the run having died.
+        #
+        # And never at the cost of the reason. Run #21 expired waiting for
+        # its code, which is the one line anybody needed to read, and then
+        # this clear-up got an HTTP 500 from the contents API and that is
+        # what the log ended on -- a GitHub error on a Google failure. The
+        # dashboard being left showing a stale code is a smaller problem
+        # than not knowing why the run died.
         if args.publish_branch and repository and publish_token:
-            publish_code(repository, publish_token, args.publish_branch,
-                         args.publish_path, {"status": "idle"})
+            try:
+                publish_code(repository, publish_token, args.publish_branch,
+                             args.publish_path, {"status": "idle"})
+            except Exception as detail:
+                print(f"Could not clear the published code ({detail}); "
+                      "the dashboard may still show it.", flush=True)
         raise
     refresh_token = token.get("refresh_token")
     if not refresh_token:

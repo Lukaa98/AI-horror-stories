@@ -162,3 +162,20 @@ def test_a_failed_approval_takes_the_code_down(tmp_path, monkeypatch):
     with pytest.raises(SystemExit):
         device_auth.main()
     assert published[-1] == {"status": "idle"}
+
+
+def test_a_failed_clear_up_does_not_replace_the_reason_the_run_died():
+    """Run #21 expired waiting for its code -- "Expired user code" was the
+    one line worth reading. The clear-up that follows a failure then got an
+    HTTP 500 from the contents API, and that is what the log ended on: a
+    GitHub error standing in front of a Google one."""
+    from pathlib import Path
+
+    source = Path(device_auth.__file__).read_text()
+    handler = source.split("except BaseException:")[1].split("\n    refresh_token")[0]
+    # The clear-up is attempted, and is not allowed to be the last word.
+    assert "publish_code(" in handler
+    assert "except Exception as detail:" in handler
+    assert "Could not clear the published code" in handler
+    # The original still propagates.
+    assert handler.rstrip().endswith("raise")
