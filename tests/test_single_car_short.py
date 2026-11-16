@@ -5210,11 +5210,15 @@ def test_a_pasted_video_link_skips_reading_the_listing():
                / "web/src/clipTimes.js").read_text()
     assert "if (!enabled || !source || clipLinkProblem(url)) return null;" in clip_js
     assert "engine_clip: enginePayload," in app
-    # A typed link gets the video itself under the crop box, which a poster
-    # frame cannot do: the seconds and the framing come off the same player.
-    # A still at the clip's own start second, because the listing's videos
-    # are HLS and only Safari plays that natively.
-    assert "streamThumbnail(clipUrl.trim(), clipSeconds(clipStart))" in app
+    # A still rather than a player, because the listing's videos are HLS
+    # and only Safari plays that natively -- a <video> on one is a black
+    # rectangle with the crop box drawn over nothing. Stream is asked for
+    # the clip's own start second; YouTube only hands over a poster.
+    assert "clipStill(clipUrl.trim(), clipSeconds(clipStart))" in app
+    clip_js = (Path(single_car_short.__file__).resolve().parents[2]
+               / "web/src/clipTimes.js").read_text()
+    assert "export function clipStill(" in clip_js
+    assert "i.ytimg.com" in clip_js
 
 
 def test_the_crop_box_is_drawn_on_the_video_and_can_be_turned_off():
@@ -5239,7 +5243,7 @@ def test_the_crop_box_is_drawn_on_the_video_and_can_be_turned_off():
     # are HLS manifests, which Chrome and Firefox cannot play at all, so
     # the preview is a still from Stream rather than a player -- and one
     # that 404s falls back to the player instead of leaving an empty box.
-    assert "streamThumbnail(" in app
+    assert "clipStill(" in app
     assert "onError={() => clipUrl.trim() && setStillFailed(true)}" in app
     assert "const [stillFailed, setStillFailed] = useState(false);" in app
 
@@ -5311,3 +5315,99 @@ def test_a_new_clip_starts_framed_to_fill_the_shorts_frame():
     # carried from a previous build and a box cleared on purpose stand.
     assert "if (cropAutoRef.current === clipSource || cropFractions(cropBox)) return;" in app
     assert "cropAutoRef.current = clipSource;" in app
+
+
+def test_a_youtube_link_is_told_apart_from_a_media_file():
+    """Sellers embed a YouTube video instead of uploading to the listing
+    often enough that it was the usual reason a car had no start-up at
+    all: the probe cannot see an embed and ffmpeg fetches HTML."""
+    from single_car_short import is_youtube_link
+
+    for url in ("https://www.youtube.com/watch?v=oEB6uDRq0hU",
+                "https://youtu.be/oEB6uDRq0hU",
+                "https://m.youtube.com/watch?v=oEB6uDRq0hU",
+                "https://www.youtube-nocookie.com/embed/oEB6uDRq0hU",
+                "https://youtube.com/shorts/oEB6uDRq0hU"):
+        assert is_youtube_link(url), url
+    for url in ("https://customer-a.cloudflarestream.com/d1/manifest/video.m3u8",
+                "https://example.com/clip.mp4", "https://notyoutube.com/watch?v=x",
+                "notalink", "", None):
+        assert not is_youtube_link(url), url
+
+
+def test_only_the_chosen_seconds_are_fetched_from_youtube():
+    """A listing walkaround runs ten or twenty minutes and five seconds of
+    it are wanted. Downloading the whole thing to throw it away would add
+    minutes to a build that already takes a quarter of an hour."""
+    from single_car_short import youtube_clip_command
+
+    command = youtube_clip_command("https://youtu.be/oEB6uDRq0hU", 12, 17, "/tmp/clip.mp4")
+    assert command[0] == "yt-dlp"
+    # Just the section...
+    assert "--download-sections" in command
+    assert command[command.index("--download-sections") + 1] == "*12.000-17.000"
+    # ...cut where it was asked for rather than at the nearest keyframe,
+    # which on a listing video can be a second or two off the revs.
+    assert "--force-keyframes-at-cuts" in command
+    # Capped, because the clip is scaled into a 1080x1920 frame anyway.
+    assert "height<=1080" in command[command.index("-f") + 1]
+    # A playlist url must not drag in the whole playlist.
+    assert "--no-playlist" in command
+    assert command[-1] == "https://youtu.be/oEB6uDRq0hU"
+
+
+def test_a_youtube_fetch_that_fails_costs_the_build_nothing(tmp_path, monkeypatch):
+    """Same contract as every other way the clip can fail: say what
+    happened, hand back nothing, and let the film be the one it would have
+    been without a clip. The narration is never touched."""
+    import single_car_short
+
+    dest = tmp_path / "engine_clip.mp4"
+
+    def no_binary(*_args, **_kwargs):
+        raise FileNotFoundError("yt-dlp")
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", no_binary)
+    assert single_car_short.fetch_engine_clip(
+        {"url": "https://youtu.be/oEB6uDRq0hU", "start": 12, "end": 17}, dest) is None
+
+    def writes_nothing(*_args, **_kwargs):
+        return None
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", writes_nothing)
+    assert single_car_short.fetch_engine_clip(
+        {"url": "https://youtu.be/oEB6uDRq0hU", "start": 12, "end": 17}, dest) is None
+    # And nothing is left in the build directory, which gets committed.
+    assert sorted(p.name for p in tmp_path.iterdir()) == []
+
+
+def test_the_downloaded_source_never_rides_along_with_the_film(tmp_path, monkeypatch):
+    """The whole video is fetched to a file beside the clip, and the build
+    directory is committed to the output branch."""
+    import single_car_short
+
+    dest = tmp_path / "engine_clip.mp4"
+    source = dest.with_name("engine_clip-source.mp4")
+
+    def fake_run(command, **_kwargs):
+        if command and command[0] == "yt-dlp":
+            source.write_bytes(b"a downloaded walkaround")
+        else:
+            # The ffmpeg cut: fail, so the cleanup runs on the unhappy path.
+            raise RuntimeError("no ffmpeg here")
+        return None
+
+    monkeypatch.setattr(single_car_short.subprocess, "run", fake_run)
+    assert single_car_short.fetch_engine_clip(
+        {"url": "https://youtu.be/oEB6uDRq0hU", "start": 12, "end": 17}, dest) is None
+    assert not source.exists(), "the downloaded source is still in the build directory"
+
+
+def test_the_runner_installs_yt_dlp_for_a_single_car_build():
+    """It is a build-time dependency like ffmpeg, not something the code
+    can fall back on being there."""
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/cars-research.yml").read_text()
+    step = workflow.split("name: Install yt-dlp")[1].split("- name:")[0]
+    assert "pip install" in step and "yt-dlp" in step
+    assert "inputs.mode == 'single_car'" in step

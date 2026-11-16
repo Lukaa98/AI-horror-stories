@@ -9,9 +9,10 @@ import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
 import { splitAngles } from "./angles";
-import { clipSeconds, cropFractions, clipStamp, sameListingVideo, streamThumbnail,
+import { clipSeconds, cropFractions, clipStamp, sameListingVideo,
          clipLinkProblem, dragCropBox, moveCropBox, cropHandleAt, cropAnchor,
-         fitCropRatio, engineClipPayload, engineClipProblem } from "./clipTimes";
+         fitCropRatio, engineClipPayload, engineClipProblem, clipStill,
+         youtubeId } from "./clipTimes";
 import { buildOptions } from "./buildOptions";
 
 const DEFAULT_OWNER = "Lukaa98";
@@ -3265,8 +3266,12 @@ export default function App() {
                         )}
                         <p className="hint">
                           {clipUrl.trim()
-                            ? "Using this link. The listing is not read at all, so nothing "
-                              + "below is needed \u2014 just the seconds and the crop."
+                            ? (youtubeId(clipUrl)
+                              ? "A YouTube video. The build fetches just the seconds you ask "
+                                + "for rather than the whole thing, so a long walkaround "
+                                + "costs no more than a short one."
+                              : "Using this link. The listing is not read at all, so nothing "
+                                + "below is needed \u2014 just the seconds and the crop.")
                             : "Paste a direct link to the video file and the listing is "
                               + "skipped entirely. It has to be the video itself, not the "
                               + "page it sits on. Leave it blank to have the listing read "
@@ -3391,10 +3396,11 @@ export default function App() {
                               // plays that natively -- a <video> on one is a
                               // black rectangle with the crop box drawn over
                               // nothing.
+                              const typed = clipUrl.trim()
+                                ? clipStill(clipUrl.trim(), clipSeconds(clipStart))
+                                : null;
                               const still = clipUrl.trim()
-                                ? (stillFailed ? ""
-                                   : streamThumbnail(clipUrl.trim(),
-                                                     clipSeconds(clipStart)) || "")
+                                ? (stillFailed ? "" : (typed?.src || ""))
                                 : `https://raw.githubusercontent.com/${settings.owner}/${settings.repo}`
                                   + `/${OUTPUT_BRANCH}/cars/listing-videos/`
                                   + `${listingProbeId(auctionUrl)}/${chosenVideo.poster}`;
@@ -3440,15 +3446,27 @@ export default function App() {
                                 <Tip text="Only changes what this preview draws. The crop itself is whatever the four numbers say, box shown or not -- untick it to see the frame without the dimming over it." />
                               </label>
                             )}
-                            {clipUrl.trim()
-                              && streamThumbnail(clipUrl.trim(), clipSeconds(clipStart))
+                            {clipUrl.trim() && clipStill(clipUrl.trim(), clipSeconds(clipStart))
                               && !stillFailed && (
                               <p className="hint">
-                                The frame at {clipStart.trim() || "0:00"}, which is where the
-                                film will open. Change the start time and this follows it.
+                                {clipStill(clipUrl.trim(), clipSeconds(clipStart)).atSecond
+                                  ? `The frame at ${clipStart.trim() || "0:00"}, which is where `
+                                    + "the film will open. Change the start time and this "
+                                    + "follows it. "
+                                  : "YouTube only hands a browser the poster frame, so this is "
+                                    + "not the moment the film opens on -- it is here to frame "
+                                    + "the crop box, which is about where the car sits rather "
+                                    + "than which shot it is. "}
                                 Drag on it to draw the crop box, drag the middle to move it,
                                 drag a corner to resize, and click the frame beside it to
                                 clear it.
+                              </p>
+                            )}
+                            {youtubeId(clipUrl) && (
+                              <p className="hint">
+                                <a href={`https://www.youtube.com/watch?v=${youtubeId(clipUrl)}`}
+                                   target="_blank" rel="noreferrer">Open it on YouTube</a>
+                                {" "}to read the start and end seconds off its own player.
                               </p>
                             )}
                             <p className="hint">

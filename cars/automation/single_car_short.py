@@ -13,6 +13,7 @@ import re
 import time
 import subprocess
 from pathlib import Path
+from urllib.parse import urlparse, parse_qs
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -4167,6 +4168,82 @@ NARRATION_LEAD_IN_SECONDS = 0.35
 ENGINE_CLIP_LUFS = -14.0
 
 
+# A listing's start-up is not always hosted by the listing. Cars & Bids
+# sellers often embed a YouTube video instead, which the probe cannot see
+# and ffmpeg cannot read -- it fetches a web page and fails, which is how
+# the Murcielago build shipped silent. yt-dlp can read one, so the only
+# question is whether the url is a page or a file.
+YOUTUBE_HOSTS = {"youtube.com", "youtu.be", "youtube-nocookie.com"}
+
+
+def is_youtube_link(url):
+    """Whether this url is a YouTube page rather than a media file."""
+    try:
+        host = (urlparse(str(url or "").strip()).hostname or "").lower()
+    except ValueError:
+        return False
+    host = host[4:] if host.startswith("www.") else host
+    host = host[2:] if host.startswith("m.") else host
+    return host in YOUTUBE_HOSTS or any(
+        host.endswith("." + known) for known in YOUTUBE_HOSTS)
+
+
+def youtube_clip_command(url, start, end, dest):
+    """The yt-dlp call that fetches only the chosen seconds.
+
+    Sections rather than the whole file on purpose: a listing walkaround
+    runs ten or twenty minutes and five seconds of it are wanted, and the
+    build already waits long enough. Keyframes are forced at the cuts so
+    the seconds that arrive are the seconds that were asked for -- without
+    it the cut lands on the nearest keyframe, which can be a second or two
+    off the revs somebody read the times for.
+
+    Capped at 1080p because the clip is scaled into a 1080x1920 frame and
+    a 4K source is bytes spent to be thrown away.
+    """
+    return ["yt-dlp", "--no-playlist", "--no-warnings", "--no-progress",
+            "--download-sections", f"*{float(start):.3f}-{float(end):.3f}",
+            "--force-keyframes-at-cuts",
+            "-f", "bv*[height<=1080]+ba/b[height<=1080]/b",
+            "--merge-output-format", "mp4",
+            "-o", str(dest), str(url)]
+
+
+def fetch_youtube_section(url, start, end, dest):
+    """Download the chosen seconds of a YouTube video. True if it worked.
+
+    Never raises. A clip is a nice-to-have and the film is not: every way
+    this can fail says what happened and hands back False, and the caller
+    builds the video it would have built with no clip at all.
+    """
+    dest = Path(dest)
+    try:
+        subprocess.run(youtube_clip_command(url, start, end, dest),
+                       check=True, capture_output=True, text=True, timeout=900)
+    except FileNotFoundError:
+        print("[single-car] yt-dlp is not installed, so the YouTube link cannot be "
+              "read; the build carries on without the clip.")
+        return False
+    except Exception as error:  # noqa: BLE001 - a clip is not worth the build
+        detail = getattr(error, "stderr", "") or str(error)
+        print(f"[single-car] Could not fetch the YouTube clip ({str(detail)[-400:]}); "
+              "the build carries on without it.")
+        return False
+    if not dest.exists():
+        # yt-dlp chooses the container when the merge cannot be mp4, so it
+        # may have written the same name with another extension. Take what
+        # it actually wrote rather than failing on a filename.
+        for sibling in sorted(dest.parent.glob(f"{dest.stem}.*")):
+            if sibling.is_file() and sibling.stat().st_size:
+                sibling.replace(dest)
+                break
+    if not dest.exists() or dest.stat().st_size == 0:
+        print("[single-car] The YouTube clip came back empty; the build carries on "
+              "without it.")
+        return False
+    return True
+
+
 def fetch_engine_clip(clip, dest):
     """Pull the chosen seconds of the listing video down to a local file.
 
@@ -4188,6 +4265,28 @@ def fetch_engine_clip(clip, dest):
         return None
     length = end - start
     dest = Path(dest)
+    # A YouTube page is fetched first and then treated as a local file, so
+    # everything below -- the two ffmpeg attempts, the audio check, the
+    # re-encode -- is the same code for both kinds of source.
+    source, offset, downloaded = url, start, None
+    if is_youtube_link(url):
+        downloaded = dest.with_name(f"{dest.stem}-source.mp4")
+        if not fetch_youtube_section(url, start, end, downloaded):
+            return None
+        # Already cut to the seconds asked for, so read it from the top.
+        source, offset = str(downloaded), 0.0
+
+    try:
+        return _cut_engine_clip(source, offset, length, dest, start)
+    finally:
+        # The build directory is committed, so a half-gigabyte of
+        # somebody's walkaround must not ride along with the film.
+        if downloaded is not None:
+            downloaded.unlink(missing_ok=True)
+
+
+def _cut_engine_clip(source, offset, length, dest, start):
+    """The chosen seconds out of an openable source, normalised."""
     # Two ways of asking, because the first one came back silent.
     #
     # Seeking before -i is the cheap way: on an HLS manifest it skips
@@ -4199,8 +4298,8 @@ def fetch_engine_clip(clip, dest):
     # start and decodes past it, which is slower and does not lose the
     # audio, so it is worth one go when the fast way comes back mute.
     attempts = (
-        ["ffmpeg", "-y", "-ss", f"{start:.3f}", "-t", f"{length:.3f}", "-i", url],
-        ["ffmpeg", "-y", "-i", url, "-ss", f"{start:.3f}", "-t", f"{length:.3f}"],
+        ["ffmpeg", "-y", "-ss", f"{offset:.3f}", "-t", f"{length:.3f}", "-i", source],
+        ["ffmpeg", "-y", "-i", source, "-ss", f"{offset:.3f}", "-t", f"{length:.3f}"],
     )
     for index, head in enumerate(attempts):
         try:

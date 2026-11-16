@@ -75,10 +75,15 @@ export function streamThumbnail(url, seconds) {
 
 /* Why a typed clip link cannot be used, or "" if it looks usable.
  *
- * ffmpeg reads media, not web pages. A YouTube watch url fetches HTML and
- * fails, and the build drops the clip without the video being any the
- * wiser -- which is what happened on the Murcielago run, where the link
- * was a youtube.com/watch page and the preview was correspondingly blank.
+ * ffmpeg reads media, not web pages, and a link to a page fetches HTML and
+ * fails -- which is what happened on the Murcielago run, where the link
+ * was a youtube.com/watch page and the build dropped the clip without the
+ * video being any the wiser.
+ *
+ * YouTube is no longer one of those cases. Sellers embed a YouTube video
+ * instead of uploading to the listing often enough that it was the usual
+ * reason a car had no start-up available at all, and the build fetches one
+ * with yt-dlp now. A listing page is still a listing page.
  *
  * Deliberately only certain about the cases that are certainly wrong. A
  * link this cannot classify is left alone rather than refused.
@@ -89,10 +94,9 @@ export function clipLinkProblem(url) {
   if (!/^https?:\/\//i.test(text)) {
     return "That is not a link. Paste the address of the video file itself.";
   }
-  if (/(^|\.)(youtube\.com|youtu\.be|vimeo\.com|dailymotion\.com)(\/|$)/i.test(
-        new URL(text).hostname)) {
-    return "A YouTube or Vimeo page is not a video file, and the build cannot read one. "
-      + "Use the listing's own video instead \u2014 leave this box empty and press "
+  if (/(^|\.)(vimeo\.com|dailymotion\.com)(\/|$)/i.test(new URL(text).hostname)) {
+    return "The build can read a YouTube link but not this one. Paste the YouTube "
+      + "video if there is one, or leave this box empty and press "
       + "\u201cFind videos\u201d.";
   }
   if (/\/auctions?\//i.test(text) || /carsandbids\.com\/auctions/i.test(text)) {
@@ -295,4 +299,46 @@ export function engineClipProblem(form) {
   }
   return "Engine sound is ticked but the end time is not after the start, so "
     + "there is no clip to cut. Check the two times above.";
+}
+
+
+
+/* A YouTube video's id, or "". Covers the four shapes a link arrives in:
+ * a watch page, a youtu.be short link, an /embed/ url copied out of a
+ * listing's page source, and a /shorts/ url. */
+export function youtubeId(url) {
+  const text = String(url || "").trim();
+  if (!text) return "";
+  let parsed;
+  try {
+    parsed = new URL(text);
+  } catch {
+    return "";
+  }
+  const host = parsed.hostname.toLowerCase().replace(/^(www|m)\./, "");
+  const id = (value) => (/^[A-Za-z0-9_-]{11}$/.test(value || "") ? value : "");
+  if (host === "youtu.be") return id(parsed.pathname.slice(1).split("/")[0]);
+  if (!/(^|\.)(youtube\.com|youtube-nocookie\.com)$/.test(host)) return "";
+  const path = parsed.pathname.split("/").filter(Boolean);
+  if (path[0] === "embed" || path[0] === "shorts" || path[0] === "v") return id(path[1]);
+  return id(parsed.searchParams.get("v"));
+}
+
+
+/* A still to draw the crop box on, or null.
+ *
+ * Stream can be asked for a frame at a given second, so a listing video
+ * shows the exact frame the film will open on. YouTube cannot -- all that
+ * is reachable from a browser is the poster the uploader chose, which is
+ * some other moment entirely. It is still worth showing: the crop box is
+ * about where the car sits in the frame, and that rarely changes shot to
+ * shot in a walkaround. The caller says so rather than implying the
+ * picture is the opening frame.
+ */
+export function clipStill(url, seconds) {
+  const stream = streamThumbnail(url, seconds);
+  if (stream) return { src: stream, atSecond: true };
+  const id = youtubeId(url);
+  if (id) return { src: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`, atSecond: false };
+  return null;
 }

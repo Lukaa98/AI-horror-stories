@@ -178,6 +178,12 @@ jobs:
         working-directory: scraper/car-source-scraper
         run: npm ci
 
+      - name: Install yt-dlp
+        # Sellers often embed a YouTube video instead of uploading to the
+        # listing, and that is the only place the start-up exists.
+        if: ${{ inputs.mode == 'single_car' }}
+        run: pip install --quiet --upgrade yt-dlp
+
       - name: Install narrator renderer
         if: ${{ inputs.mode == 'single_car' }}
         working-directory: narrator/render

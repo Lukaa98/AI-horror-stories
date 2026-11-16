@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { clipSeconds, clipLength, clipStamp, cropFractions, sameListingVideo,
          streamThumbnail, clipLinkProblem, dragCropBox, moveCropBox,
          cropHandleAt, cropAnchor, fitCropRatio, engineClipPayload,
-         engineClipProblem } from "./clipTimes.js";
+         engineClipProblem, youtubeId, clipStill } from "./clipTimes.js";
 
 test("reads the m:ss a listing's player shows, and plain seconds", () => {
   assert.equal(clipSeconds("1:04"), 64);
@@ -125,11 +125,13 @@ test("anything that is not a Stream manifest keeps its own player", () => {
 });
 
 test("a page is not a video, and the build cannot read one", () => {
-  // The Murcielago run went out with this link and would have dropped the
-  // clip silently: ffmpeg fetches HTML and fails.
-  assert.match(clipLinkProblem("https://www.youtube.com/watch?v=ddgJK8dN7cM"),
-               /not a video file/);
-  assert.match(clipLinkProblem("https://youtu.be/ddgJK8dN7cM"), /not a video file/);
+  // The Murcielago run went out with a youtube link and dropped the clip
+  // silently, because ffmpeg fetched HTML and failed. The build reads a
+  // YouTube link with yt-dlp now, so that one is allowed through -- the
+  // listing page it was pasted from still is not a video.
+  assert.equal(clipLinkProblem("https://www.youtube.com/watch?v=ddgJK8dN7cM"), "");
+  assert.equal(clipLinkProblem("https://youtu.be/ddgJK8dN7cM"), "");
+  assert.match(clipLinkProblem("https://vimeo.com/123456789"), /not this one/);
   assert.match(clipLinkProblem("https://carsandbids.com/auctions/KmOkpwNY/2008-lambo"),
                /the listing page/);
   assert.match(clipLinkProblem("ddgJK8dN7cM"), /not a link/);
@@ -293,8 +295,8 @@ test("ticked with nothing chosen says so rather than building in silence", () =>
 });
 
 test("an unusable link keeps its own message", () => {
-  const f = form({ source: "https://www.youtube.com/watch?v=abc",
-                   url: "https://www.youtube.com/watch?v=abc" });
+  const f = form({ source: "https://vimeo.com/123456789",
+                   url: "https://vimeo.com/123456789" });
   assert.equal(engineClipPayload(f), null);
   assert.equal(engineClipProblem(f), clipLinkProblem(f.url));
   assert.ok(engineClipProblem(f));
@@ -305,4 +307,45 @@ test("an unticked box is not a problem to report", () => {
   assert.equal(engineClipProblem(form({ enabled: false, start: "", end: "" })), "");
   assert.equal(engineClipPayload(form({ enabled: false })), null);
   assert.equal(engineClipProblem(undefined), "");
+});
+
+
+/* Reading a YouTube link. */
+test("a youtube id is found in every shape a link arrives in", () => {
+  const want = "oEB6uDRq0hU";
+  for (const url of ["https://www.youtube.com/watch?v=oEB6uDRq0hU",
+                     "https://www.youtube.com/watch?v=oEB6uDRq0hU&t=14s",
+                     "https://youtu.be/oEB6uDRq0hU",
+                     "https://youtu.be/oEB6uDRq0hU?t=14",
+                     "https://m.youtube.com/watch?v=oEB6uDRq0hU",
+                     "https://www.youtube.com/embed/oEB6uDRq0hU",
+                     "https://www.youtube-nocookie.com/embed/oEB6uDRq0hU",
+                     "https://www.youtube.com/shorts/oEB6uDRq0hU"]) {
+    assert.equal(youtubeId(url), want, url);
+  }
+});
+
+test("nothing else is read as a youtube id", () => {
+  for (const url of ["", "notalink", "https://example.com/clip.mp4",
+                     "https://customer-a.cloudflarestream.com/d1/manifest/video.m3u8",
+                     "https://www.youtube.com/", "https://www.youtube.com/watch?v=short",
+                     "https://notyoutube.com/watch?v=oEB6uDRq0hU"]) {
+    assert.equal(youtubeId(url), "", url);
+  }
+});
+
+test("a still says whether it is the frame the film opens on", () => {
+  // Stream can be asked for a given second, so the crop box sits on the
+  // exact opening frame. YouTube cannot, and the caller has to say so
+  // rather than let the poster pass for the opening shot.
+  const stream = clipStill(
+    "https://customer-a.cloudflarestream.com/d1f2e3/manifest/video.m3u8", 4);
+  assert.equal(stream.atSecond, true);
+  assert.match(stream.src, /thumbnails\/thumbnail\.jpg\?time=4s/);
+
+  const tube = clipStill("https://youtu.be/oEB6uDRq0hU", 4);
+  assert.equal(tube.atSecond, false);
+  assert.equal(tube.src, "https://i.ytimg.com/vi/oEB6uDRq0hU/hqdefault.jpg");
+
+  assert.equal(clipStill("https://example.com/clip.mp4", 4), null);
 });
