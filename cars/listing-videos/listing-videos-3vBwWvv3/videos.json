@@ -1,0 +1,77 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/3vBwWvv3/2025-ferrari-sf90-spider",
+  "scrape_ok": true,
+  "video_count": 7,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c2753adb17485d9c3cd4154e6",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c2753adb17485d9c3cd4154e6ef07d8f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c2753adb17485d9c3cd4154e6ef07d8f/manifest/video.m3u8",
+      "duration_seconds": 121.89,
+      "poster": "poster-1.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/814cc2f55fb9e61ce8c020321",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/814cc2f55fb9e61ce8c0203216ea57c0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/814cc2f55fb9e61ce8c0203216ea57c0/manifest/video.m3u8",
+      "duration_seconds": 126.69,
+      "poster": "poster-2.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2b62eee20af70a08e801224be",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2b62eee20af70a08e801224be73b0ba9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2b62eee20af70a08e801224be73b0ba9/manifest/video.m3u8",
+      "duration_seconds": 12.1,
+      "poster": "poster-3.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 4,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8bc09329972d711fa04d1651c",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8bc09329972d711fa04d1651c1e67621/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/8bc09329972d711fa04d1651c1e67621/manifest/video.m3u8",
+      "duration_seconds": 13.5,
+      "poster": "poster-4.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 5,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/71e7edc98965e35602260c385",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/71e7edc98965e35602260c38588bd06e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/71e7edc98965e35602260c38588bd06e/manifest/video.m3u8",
+      "duration_seconds": 3.59,
+      "poster": "poster-5.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 6,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8457ea2428edb795610adb7e",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8457ea2428edb795610adb7e9a7fa5b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b8457ea2428edb795610adb7e9a7fa5b/manifest/video.m3u8",
+      "duration_seconds": 16.0,
+      "poster": "poster-6.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 7,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/123a5097efd33b65270f17df3",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/123a5097efd33b65270f17df3c70f612/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/123a5097efd33b65270f17df3c70f612/manifest/video.m3u8",
+      "duration_seconds": 9.19,
+      "poster": "poster-7.jpg",
+      "audio": "aac, 48 kHz"
+    }
+  ]
+}
