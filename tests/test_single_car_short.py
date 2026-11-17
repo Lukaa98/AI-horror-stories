@@ -5037,11 +5037,14 @@ def test_the_start_up_goes_on_the_front_and_carries_its_own_sound(tmp_path):
         check=True, capture_output=True)
 
     played = single_car_short.prepend_engine_clip(film, clip, 4.0)
-    assert played == 4.0
+    # The two halves cross rather than cut, and the overlap comes out of
+    # the clip, so what plays before the narration is shorter by the fade.
+    fade = single_car_short.ENGINE_CLIP_CROSSFADE_SECONDS
+    assert played == pytest.approx(4.0 - fade)
 
     info = probe(film, "width", "height", "r_frame_rate", "sample_rate", "channels")
-    assert float(info["format"]["duration"]) == pytest.approx(10.0, abs=0.5), \
-        "four seconds of clip in front of six of film"
+    assert float(info["format"]["duration"]) == pytest.approx(10.0 - fade, abs=0.5), \
+        "four seconds of clip in front of six of film, less the overlap"
     video = next(s for s in info["streams"] if "width" in s)
     audio = next(s for s in info["streams"] if "sample_rate" in s)
     assert (video["width"], video["height"]) == (1080, 1920), "the landscape clip was fitted"
@@ -5172,7 +5175,8 @@ def test_cropping_takes_the_dead_ground_out_of_the_backdrop_too(tmp_path):
              "-ac", "2", "-t", "3", "-c:v", "libx264", "-pix_fmt", "yuv420p",
              "-c:a", "aac", "-ar", "48000", str(film)],
             check=True, capture_output=True)
-        assert m.prepend_engine_clip(film, clip, 2.0, crop=crop) == 2.0
+        assert m.prepend_engine_clip(film, clip, 2.0, crop=crop) == pytest.approx(
+        2.0 - m.ENGINE_CLIP_CROSSFADE_SECONDS)
         png = film.with_suffix(".png")
         subprocess.run(["ffmpeg", "-y", "-ss", "0.5", "-i", str(film),
                         "-vframes", "1", str(png)], check=True, capture_output=True)
@@ -5465,3 +5469,56 @@ def test_which_subject_the_build_chose_is_in_the_log():
     body = inspect.getsource(single_car_short.research_script)
     assert "one_off = is_one_off(label)" in body
     assert "[single-car] Subject: " in body
+
+
+def test_the_clip_crosses_into_the_film_rather_than_cutting(tmp_path):
+    """The Boxster build ran the engine at full level through 9.9s and
+    showed the layout in near silence on the next frame -- a thirty-eight
+    fold drop inside a tenth of a second, in picture and sound at once.
+
+    Measured on real files, because this is an ffmpeg behaviour and a
+    mocked command would only prove the string was spelled right.
+    """
+    import array
+    import subprocess
+    import wave
+
+    import single_car_short
+
+    clip = tmp_path / "clip.mp4"
+    subprocess.run(
+        ["ffmpeg", "-y", "-f", "lavfi", "-i", "color=c=red:size=640x360:rate=30:duration=4",
+         "-f", "lavfi", "-i", "sine=frequency=200:duration=4",
+         "-t", "4", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", str(clip)],
+        check=True, capture_output=True)
+    film = tmp_path / "single_car_short.mp4"
+    # Silent for its lead-in, exactly as a narration is, then a tone.
+    subprocess.run(
+        ["ffmpeg", "-y", "-f", "lavfi", "-i", "color=c=white:size=1080x1920:rate=24:duration=6",
+         "-f", "lavfi", "-i", "sine=frequency=440:duration=6",
+         "-af", f"adelay={int(single_car_short.NARRATION_LEAD_IN_SECONDS * 1000)}:all=1",
+         "-t", "6", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", str(film)],
+        check=True, capture_output=True)
+
+    fade = single_car_short.ENGINE_CLIP_CROSSFADE_SECONDS
+    seam = single_car_short.prepend_engine_clip(film, clip, 4.0)
+    assert seam == pytest.approx(4.0 - fade)
+
+    wav = tmp_path / "joined.wav"
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(film),
+                    "-ac", "1", "-ar", "8000", str(wav)], check=True, capture_output=True)
+    with wave.open(str(wav)) as handle:
+        samples = array.array("h", handle.readframes(handle.getnframes()))
+
+    def level(at):
+        lo, hi = int(at * 8000), int((at + 0.05) * 8000)
+        window = samples[lo:hi]
+        return (sum(v * v for v in window) / max(1, len(window))) ** 0.5 / 32768
+
+    start = 4.0 - fade          # where the fade begins
+    # Full level before it, on the way down inside it, and quiet by the end
+    # -- which is a ramp, not the single-frame drop that shipped.
+    assert level(start - 0.3) > 0.05, "the clip should still be at level before the fade"
+    assert level(start - 0.3) > level(start + fade / 2) > level(start + fade - 0.06), \
+        "the engine should be falling across the fade"
+    assert level(start + fade - 0.06) < level(start - 0.3) / 3, "and well down by the end of it"

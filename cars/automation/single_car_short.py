@@ -4213,6 +4213,18 @@ NARRATION_LEAD_IN_SECONDS = 0.35
 # of jump that sends somebody to the volume control.
 ENGINE_CLIP_LUFS = -14.0
 
+# The clip and the film used to be concatenated, which is a cut: on the
+# Boxster build the engine ran at full level through 9.9s and the next
+# frame was the layout in near silence -- a thirty-eight-fold drop inside
+# one tenth of a second, in picture and sound at once.
+#
+# They cross now, and the length is not a taste: it is exactly the lead-in
+# silence the narration already carries, so the engine has finished fading
+# at the moment the first word would start and no spoken word is ever
+# underneath it. Raise it and the engine plays under the opening line,
+# which may be what you want, but it is a choice rather than free.
+ENGINE_CLIP_CROSSFADE_SECONDS = NARRATION_LEAD_IN_SECONDS
+
 
 # A listing's start-up is not always hosted by the listing. Cars & Bids
 # sellers often embed a YouTube video instead, which the probe cannot see
@@ -4488,6 +4500,9 @@ def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop
     video_path, clip_path = Path(video_path), Path(clip_path)
     joined = video_path.with_name(f"{video_path.stem}-engine{video_path.suffix}")
     width, height = (int(round(v)) for v in size)
+    # A clip too short to give the crossfade its seconds gets a shorter
+    # one rather than an offset that lands before the clip begins.
+    fade = max(0.0, min(ENGINE_CLIP_CROSSFADE_SECONDS, length / 3))
     try:
         subprocess.run(
             ["ffmpeg", "-y", "-i", str(clip_path), "-i", str(video_path),
@@ -4515,7 +4530,13 @@ def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop
              f"aformat=sample_rates=48000:channel_layouts=stereo[clipa];"
              f"[1:v]scale={width}:{height},setsar=1,fps={fps},format=yuv420p[filmv];"
              f"[1:a]aformat=sample_rates=48000:channel_layouts=stereo[filma];"
-             f"[clipv][clipa][filmv][filma]concat=n=2:v=1:a=1[v][a]",
+             # Crossed rather than cut. Both halves shorten by the fade,
+             # so the picture and the sound stay in step with each other
+             # and the film's own timing is untouched -- it simply starts
+             # its first silent moment under the end of the engine.
+             f"[clipv][filmv]xfade=transition=fade:"
+             f"duration={fade:.3f}:offset={length - fade:.3f}[v];"
+             f"[clipa][filma]acrossfade=d={fade:.3f}:c1=tri:c2=tri[a]",
              "-map", "[v]", "-map", "[a]",
              "-r", str(fps), "-c:v", "libx264", "-preset", "medium", "-pix_fmt", "yuv420p",
              "-c:a", "aac", "-ar", "48000", str(joined)],
@@ -4527,8 +4548,12 @@ def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop
               f"({str(detail)[-400:]}); the video goes out as it was rendered.")
         return 0.0
     joined.replace(video_path)
-    print(f"[single-car] Engine clip on the front: {length:.1f}s before the narration.")
-    return length
+    # The crossfade is taken out of the clip, so what plays before the
+    # narration is shorter than what was cut by exactly the fade.
+    front = max(0.0, length - fade)
+    print(f"[single-car] Engine clip on the front: {front:.1f}s before the narration, "
+          f"crossfading into it over {fade:.2f}s.")
+    return front
 
 
 def add_narration_lead_in(audio_path, seconds=NARRATION_LEAD_IN_SECONDS):
