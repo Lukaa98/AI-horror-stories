@@ -1,0 +1,2436 @@
+{
+  "car": {
+    "make": "Porsche",
+    "model": "718 Boxster Gts 40",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Porsche",
+    "model": "718 Boxster Gts 40",
+    "script_style": "classic",
+    "query": "",
+    "start_year": 2021,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/9n42QMWX/2021-porsche-718-boxster-gts-40",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021002.jpg?t=179372186223",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021003.jpg?t=179372186223",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021004.jpg?t=179372186223",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021021.jpg?t=179372186223",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/c7387fa5557775cb743f87fc02d6cb831afb20b2/photos/Porsche718BoxsterGTS40Roadster2021087/edit/ECVNQ.jpg?t=179376724378",
+    "photo_rival": "",
+    "rival_car": "",
+    "photo_race": "",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "true",
+    "angles": "1. Open on what the engine is: a 4.0-litre naturally aspirated flat-six making 394 horsepower and revving to 7,800 rpm. Lead with that number and that redline. Take the torque figure from the listing - sources split between 309 and 317 pound-feet.\n\n2. The argument the whole video rests on: in 2016 Porsche took the flat-six out of the Boxster and Cayman and fitted turbocharged flat-fours, and the sound of them drew close to universal criticism from the motoring press. The GTS 4.0 is Porsche putting the six back. Be honest about both sides - the turbo four was stronger in the midrange and more efficient, and the six is the slower, thirstier, better-sounding answer. That trade is the argument people will have underneath the video.\n\n3. The engineering beat, and the thing the photos cannot tell anybody: this naturally aspirated flat-six shuts down three of its cylinders under light load and runs as a three-cylinder, swapping which bank is working every twenty seconds so both catalytic converters stay evenly loaded. Porsche's own press material says it saves about eleven grams of CO2 per kilometre and that it can be switched off with the stop-start. The car people wanted because it brought the six back spends part of its life as a three.\n\n4. Where the engine came from: it is the same 4.0-litre unit as the Cayman GT4 and Boxster Spyder, detuned by about twenty horsepower from their 414. This is the GT4's engine in the car that costs considerably less. Say which gearbox the car in the photos has and argue from there - the manual is the one people want, the PDK is the quicker one.\n\n5. The money and the catch together. Around eighty thousand dollars, against roughly ninety new, so this has barely depreciated and that is the honest selling point: the market agrees with the enthusiasts for once. The catch is not reliability - it is that the sports exhaust carries a gasoline particulate filter taken from the Spyder and GT4, and that for all the talk of the six coming back, this is still an emissions-era engine doing emissions-era things.\n\n6. Close on the question: is a slower, thirstier six worth ten thousand dollars more than the four that replaced it, or did Porsche just sell the sound back to the people it took it from?",
+    "notes_count": 6,
+    "current_price": "",
+    "extra_photos": "[{\"id\":\"closeup-1794892667418-0\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021001.jpg?t=179372186223\",\"slot\":\"front\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794892677313-1\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021066.jpg?t=179372186223\",\"slot\":\"side\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794892697248-3\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021005.jpg?t=179372186223\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794892711389-3\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021036.jpg?t=179372186223\",\"slot\":\"front\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794892718260-4\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021040.jpg?t=179372186223\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794892744351-5\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021064.jpg?t=179372186223\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794892753177-6\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021018.jpg?t=179372186223\",\"slot\":\"side\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794892766794-7\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021088.jpg?t=179372186223\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794892796029-8\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021105.jpg?t=179372186223\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1794892852016-9\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9207eb2335e2ca3471cbaeba85320ddd7e5f79a8/photos/Porsche718BoxsterGTS40Roadster2021114.jpg?t=179372186223\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false}]",
+    "engine_clip": {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1a67d82cdb6c0059357b34124c4ee0f/manifest/video.m3u8",
+      "start": 2,
+      "end": 12,
+      "crop": {
+        "x": 0,
+        "y": 0.193,
+        "w": 0.867,
+        "h": 0.502
+      }
+    }
+  },
+  "title": "Porsche 718 Boxster GTS 4.0",
+  "youtube_title": "Was Bringing Six Cylinders Back Worth It? \ud83d\udd25",
+  "youtube_title_options": [
+    "394 Horsepower Without A Turbo \ud83d\udd25",
+    "Was Bringing Six Cylinders Back Worth It? \ud83d\udd25",
+    "They Took Two Cylinders Away \ud83d\udd25",
+    "Did Four Cylinders Really Need Replacing? \ud83d\udd25"
+  ],
+  "key_specs": {
+    "horsepower": "394 hp",
+    "torque": "309 lb-ft",
+    "zero_to_sixty": "3.8 sec",
+    "redline": "7,800 rpm",
+    "engine": "4.0L naturally aspirated flat-six",
+    "price": "$89K new, ~$86K today"
+  },
+  "history": {
+    "year": 2016,
+    "fact": "The 718 Boxster GTS 4.0 reverses the 2016 switch that gave the Boxster and Cayman turbocharged flat-fours instead of sixes."
+  },
+  "start_year": 2021,
+  "end_year": 2025,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "394 Horsepower",
+      "photo_label": null,
+      "narration": "A 4.0-litre naturally aspirated flat-six, 394 horsepower and 7,800 rpm: this is what car brought back after trying four cylinders.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "394 hp",
+      "stat_label_2": "Redline",
+      "stat_value_2": "7,800 rpm"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Six Cylinders Return",
+      "photo_label": null,
+      "narration": "The 718 Boxster GTS 4.0 reverses the 2016 switch that gave the Boxster and Cayman turbocharged flat-fours instead of sixes.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "",
+      "photo_label": null,
+      "narration": "Reviewers hated the four's soundtrack, but it delivered stronger midrange torque and better economy; the naturally aspirated six demands revs and more fuel.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "wheel",
+      "headline": "Six-Piston Brakes",
+      "photo_label": "exterior front",
+      "narration": "Up front, you've got calipers with six pistons.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Front calipers",
+      "stat_value": "6-piston",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "Three-Cylinder Cruising",
+      "photo_label": null,
+      "narration": "Under light loads, the six swaps banks every twenty seconds to keep the catalytic converters evenly loaded. Three cylinders shut down. That's half an engine.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Cylinders deactivated",
+      "stat_value": "3",
+      "stat_label_2": "Bank switching",
+      "stat_value_2": "Every 20 sec"
+    },
+    {
+      "media_type": "wheel",
+      "headline": "Seven-Speed PDK",
+      "photo_label": "exterior side",
+      "narration": "Its 309 pound-feet reach the rear wheels through a seven-speed PDK dual-clutch automatic, which cuts the sixty sprint to 3.8 seconds.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Torque",
+      "stat_value": "309 lb-ft",
+      "stat_label_2": "0 - 60",
+      "stat_value_2": "3.8 sec"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "$89K \u2192 $86K",
+      "photo_label": null,
+      "narration": "They started around $89,000 new before options; they go for about $86,000 today.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Base MSRP",
+      "stat_value": "~$89K",
+      "stat_label_2": "Current value",
+      "stat_value_2": "~$86K"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "",
+      "photo_label": null,
+      "narration": "Would you pay for six cylinders when the turbo four does the everyday work with less fuel?",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://newsroom.porsche.com/en_US/products/2020-porsche-718-gts-4-0-boxster-cayman-19748.html",
+    "https://newsroom.porsche.com/en_US/products/2021-porsche-718-boxster-cayman-pdk-gts-spyder-cayman-gt4-22097.html",
+    "https://newsroom.porsche.com/pdf/98d8ba30-e7cb-4800-96ef-42dc568b9a96?print=",
+    "https://www.newsroom.porsche.jp/dam/jcr%3A1ad127e8-f9c3-45cd-a993-c4e66665a927/PAG-GTS_Models_PM_EN.pdf",
+    "https://newsroom.porsche.com/dam/jcr%3A727a5d10-6baa-45c9-86db-bbc4d7516a04/06%20-%20The%20new%20Porsche%20718%20Boxster.pdf",
+    "https://www.caranddriver.com/reviews/a30955079/2020-porsche-boxster-cayman-gts-drive/",
+    "https://www.caranddriver.com/reviews/a33957716/2021-porsche-718-boxster-gts-40-german-spec-by-the-numbers/",
+    "https://newsroom.porsche.com/en_PAP/2026/company/porsche-deliveries-2025-41516.html",
+    "https://www.veedio.co/trending/youtube-shorts/usa/autos-and-vehicles"
+  ],
+  "script": "A 4.0-litre naturally aspirated flat-six, 394 horsepower and 7,800 rpm: this is what car brought back after trying four cylinders. The 718 Boxster GTS 4.0 reverses the 2016 switch that gave the Boxster and Cayman turbocharged flat-fours instead of sixes. Reviewers hated the four's soundtrack, but it delivered stronger midrange torque and better economy; the naturally aspirated six demands revs and more fuel. Up front, you've got calipers with six pistons. Under light loads, the six swaps banks every twenty seconds to keep the catalytic converters evenly loaded. Three cylinders shut down. That's half an engine. Its 309 pound-feet reach the rear wheels through a seven-speed PDK dual-clutch automatic, which cuts the sixty sprint to 3.8 seconds. They started around $89,000 new before options; they go for about $86,000 today. Would you pay for six cylinders when the turbo four does the everyday work with less fuel?",
+  "word_count": 153,
+  "_engine_clip": true,
+  "repair_log": [
+    {
+      "what": "1 scene(s) are too short to see -- scene 4 is \"Front calipers have six pistons.\", about 1.8 seconds on screen. Each scen",
+      "outcome": "applied",
+      "scene": 4,
+      "returned": "Up front, you've got calipers with six pistons."
+    },
+    {
+      "what": "every sentence is about the same length (4-23 words) and it reads flat. Break at least two of them into something short ",
+      "outcome": "applied",
+      "scene": 5,
+      "returned": "Under light loads, the six swaps banks every twenty seconds to keep the catalytic converters evenly loaded. Three cylinders shut down. That's half an engine."
+    },
+    {
+      "what": "you were given an interior photo and no scene is about the interior -- set one scene's media_type to \"interior\" and give",
+      "outcome": "did not help",
+      "returned": "But first, let's take a beat inside the Boxster.",
+      "still": [
+        "you were given an interior photo and no scene is about the interior -- set one scene's media_type to \"interior\" and give"
+      ]
+    }
+  ],
+  "rule_violations": [
+    "you were given an interior photo and no scene is about the interior -- set one scene's media_type to \"interior\" and give it a beat, or that photo is not in the video at all."
+  ],
+  "voice_preset": "onyx",
+  "tts_speed": null,
+  "narration": {
+    "engine": "gpt-audio",
+    "model": "gpt-audio",
+    "voice": "echo",
+    "pitch": {
+      "measured_hz": 163.26530612244898,
+      "result_hz": 163.26530612244898
+    },
+    "tts_speed": null
+  },
+  "target_duration_seconds": 55.0,
+  "normalized_audio_duration_seconds": 55.0,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-porsche-718-boxster-gts-40-20261117052105/narration.mp3",
+  "duration_seconds": 65.08,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.72,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.72,
+      "end": 0.99,
+      "mouth": "small"
+    },
+    {
+      "start": 0.99,
+      "end": 1.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.08,
+      "end": 1.17,
+      "mouth": "small"
+    },
+    {
+      "start": 1.17,
+      "end": 1.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 1.89,
+      "end": 2.07,
+      "mouth": "small"
+    },
+    {
+      "start": 2.07,
+      "end": 2.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.25,
+      "end": 2.7,
+      "mouth": "small"
+    },
+    {
+      "start": 2.7,
+      "end": 2.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 2.79,
+      "end": 2.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 2.88,
+      "end": 3.15,
+      "mouth": "small"
+    },
+    {
+      "start": 3.15,
+      "end": 3.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.51,
+      "end": 3.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.69,
+      "end": 3.87,
+      "mouth": "small"
+    },
+    {
+      "start": 3.87,
+      "end": 3.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.96,
+      "end": 4.14,
+      "mouth": "small"
+    },
+    {
+      "start": 4.14,
+      "end": 4.23,
+      "mouth": "wide"
+    },
+    {
+      "start": 4.23,
+      "end": 4.68,
+      "mouth": "small"
+    },
+    {
+      "start": 4.68,
+      "end": 4.77,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.77,
+      "end": 4.95,
+      "mouth": "small"
+    },
+    {
+      "start": 4.95,
+      "end": 5.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.49,
+      "end": 5.58,
+      "mouth": "small"
+    },
+    {
+      "start": 5.58,
+      "end": 5.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 5.67,
+      "end": 5.94,
+      "mouth": "small"
+    },
+    {
+      "start": 5.94,
+      "end": 6.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.3,
+      "end": 6.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.48,
+      "end": 6.75,
+      "mouth": "small"
+    },
+    {
+      "start": 6.75,
+      "end": 6.84,
+      "mouth": "closed"
+    },
+    {
+      "start": 6.84,
+      "end": 6.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.93,
+      "end": 7.11,
+      "mouth": "small"
+    },
+    {
+      "start": 7.11,
+      "end": 7.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.2,
+      "end": 7.47,
+      "mouth": "small"
+    },
+    {
+      "start": 7.47,
+      "end": 7.74,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.74,
+      "end": 7.83,
+      "mouth": "small"
+    },
+    {
+      "start": 7.83,
+      "end": 7.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 7.92,
+      "end": 8.1,
+      "mouth": "small"
+    },
+    {
+      "start": 8.1,
+      "end": 8.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.19,
+      "end": 8.46,
+      "mouth": "small"
+    },
+    {
+      "start": 8.46,
+      "end": 8.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.55,
+      "end": 8.82,
+      "mouth": "small"
+    },
+    {
+      "start": 8.82,
+      "end": 9.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.45,
+      "end": 9.63,
+      "mouth": "small"
+    },
+    {
+      "start": 9.63,
+      "end": 9.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 9.72,
+      "end": 9.9,
+      "mouth": "small"
+    },
+    {
+      "start": 9.9,
+      "end": 9.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.99,
+      "end": 10.26,
+      "mouth": "small"
+    },
+    {
+      "start": 10.26,
+      "end": 10.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.35,
+      "end": 10.89,
+      "mouth": "small"
+    },
+    {
+      "start": 10.89,
+      "end": 10.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 10.98,
+      "end": 11.07,
+      "mouth": "small"
+    },
+    {
+      "start": 11.07,
+      "end": 11.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.16,
+      "end": 11.25,
+      "mouth": "small"
+    },
+    {
+      "start": 11.25,
+      "end": 11.34,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.34,
+      "end": 11.7,
+      "mouth": "small"
+    },
+    {
+      "start": 11.7,
+      "end": 11.79,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.79,
+      "end": 12.06,
+      "mouth": "small"
+    },
+    {
+      "start": 12.06,
+      "end": 12.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.15,
+      "end": 12.6,
+      "mouth": "small"
+    },
+    {
+      "start": 12.6,
+      "end": 12.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.69,
+      "end": 13.23,
+      "mouth": "small"
+    },
+    {
+      "start": 13.23,
+      "end": 13.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.32,
+      "end": 13.41,
+      "mouth": "small"
+    },
+    {
+      "start": 13.41,
+      "end": 13.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 13.59,
+      "end": 13.68,
+      "mouth": "small"
+    },
+    {
+      "start": 13.68,
+      "end": 13.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 13.77,
+      "end": 14.85,
+      "mouth": "small"
+    },
+    {
+      "start": 14.85,
+      "end": 15.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.03,
+      "end": 15.12,
+      "mouth": "small"
+    },
+    {
+      "start": 15.12,
+      "end": 15.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.3,
+      "end": 15.57,
+      "mouth": "small"
+    },
+    {
+      "start": 15.57,
+      "end": 15.75,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.75,
+      "end": 15.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.84,
+      "end": 16.2,
+      "mouth": "small"
+    },
+    {
+      "start": 16.2,
+      "end": 16.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.29,
+      "end": 16.92,
+      "mouth": "small"
+    },
+    {
+      "start": 16.92,
+      "end": 17.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.01,
+      "end": 17.1,
+      "mouth": "small"
+    },
+    {
+      "start": 17.1,
+      "end": 17.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.46,
+      "end": 17.55,
+      "mouth": "small"
+    },
+    {
+      "start": 17.55,
+      "end": 17.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 17.91,
+      "end": 18.09,
+      "mouth": "small"
+    },
+    {
+      "start": 18.09,
+      "end": 18.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.27,
+      "end": 18.36,
+      "mouth": "small"
+    },
+    {
+      "start": 18.36,
+      "end": 18.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.45,
+      "end": 18.63,
+      "mouth": "wide"
+    },
+    {
+      "start": 18.63,
+      "end": 19.08,
+      "mouth": "small"
+    },
+    {
+      "start": 19.08,
+      "end": 19.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.35,
+      "end": 19.44,
+      "mouth": "small"
+    },
+    {
+      "start": 19.44,
+      "end": 19.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.53,
+      "end": 19.62,
+      "mouth": "small"
+    },
+    {
+      "start": 19.62,
+      "end": 19.89,
+      "mouth": "wide"
+    },
+    {
+      "start": 19.89,
+      "end": 20.16,
+      "mouth": "small"
+    },
+    {
+      "start": 20.16,
+      "end": 20.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.25,
+      "end": 20.43,
+      "mouth": "small"
+    },
+    {
+      "start": 20.43,
+      "end": 20.52,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.52,
+      "end": 20.61,
+      "mouth": "small"
+    },
+    {
+      "start": 20.61,
+      "end": 20.7,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.7,
+      "end": 20.79,
+      "mouth": "small"
+    },
+    {
+      "start": 20.79,
+      "end": 20.88,
+      "mouth": "closed"
+    },
+    {
+      "start": 20.88,
+      "end": 20.97,
+      "mouth": "small"
+    },
+    {
+      "start": 20.97,
+      "end": 21.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.06,
+      "end": 21.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.33,
+      "end": 21.51,
+      "mouth": "small"
+    },
+    {
+      "start": 21.51,
+      "end": 21.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 21.69,
+      "end": 21.96,
+      "mouth": "small"
+    },
+    {
+      "start": 21.96,
+      "end": 22.5,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.5,
+      "end": 22.68,
+      "mouth": "small"
+    },
+    {
+      "start": 22.68,
+      "end": 22.86,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.86,
+      "end": 22.95,
+      "mouth": "closed"
+    },
+    {
+      "start": 22.95,
+      "end": 23.4,
+      "mouth": "small"
+    },
+    {
+      "start": 23.4,
+      "end": 23.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 23.49,
+      "end": 23.94,
+      "mouth": "small"
+    },
+    {
+      "start": 23.94,
+      "end": 24.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.12,
+      "end": 24.57,
+      "mouth": "small"
+    },
+    {
+      "start": 24.57,
+      "end": 24.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.75,
+      "end": 24.84,
+      "mouth": "small"
+    },
+    {
+      "start": 24.84,
+      "end": 24.93,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.93,
+      "end": 25.47,
+      "mouth": "small"
+    },
+    {
+      "start": 25.47,
+      "end": 25.92,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.92,
+      "end": 26.01,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.01,
+      "end": 26.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.1,
+      "end": 26.19,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.19,
+      "end": 26.28,
+      "mouth": "small"
+    },
+    {
+      "start": 26.28,
+      "end": 26.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.46,
+      "end": 26.64,
+      "mouth": "small"
+    },
+    {
+      "start": 26.64,
+      "end": 26.73,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.73,
+      "end": 26.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.82,
+      "end": 26.91,
+      "mouth": "small"
+    },
+    {
+      "start": 26.91,
+      "end": 27.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.0,
+      "end": 27.09,
+      "mouth": "small"
+    },
+    {
+      "start": 27.09,
+      "end": 27.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.18,
+      "end": 27.27,
+      "mouth": "small"
+    },
+    {
+      "start": 27.27,
+      "end": 27.36,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.36,
+      "end": 27.63,
+      "mouth": "small"
+    },
+    {
+      "start": 27.63,
+      "end": 27.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.72,
+      "end": 27.9,
+      "mouth": "small"
+    },
+    {
+      "start": 27.9,
+      "end": 27.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.99,
+      "end": 28.26,
+      "mouth": "small"
+    },
+    {
+      "start": 28.26,
+      "end": 28.53,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.53,
+      "end": 28.62,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.62,
+      "end": 28.71,
+      "mouth": "small"
+    },
+    {
+      "start": 28.71,
+      "end": 28.8,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.8,
+      "end": 28.89,
+      "mouth": "small"
+    },
+    {
+      "start": 28.89,
+      "end": 28.98,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.98,
+      "end": 29.07,
+      "mouth": "small"
+    },
+    {
+      "start": 29.07,
+      "end": 29.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.25,
+      "end": 29.34,
+      "mouth": "small"
+    },
+    {
+      "start": 29.34,
+      "end": 29.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.43,
+      "end": 29.52,
+      "mouth": "small"
+    },
+    {
+      "start": 29.52,
+      "end": 29.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.79,
+      "end": 30.06,
+      "mouth": "small"
+    },
+    {
+      "start": 30.06,
+      "end": 30.24,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.24,
+      "end": 30.33,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.33,
+      "end": 30.42,
+      "mouth": "small"
+    },
+    {
+      "start": 30.42,
+      "end": 30.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.51,
+      "end": 30.69,
+      "mouth": "small"
+    },
+    {
+      "start": 30.69,
+      "end": 30.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.87,
+      "end": 31.05,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.05,
+      "end": 31.23,
+      "mouth": "small"
+    },
+    {
+      "start": 31.23,
+      "end": 31.32,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.32,
+      "end": 31.41,
+      "mouth": "small"
+    },
+    {
+      "start": 31.41,
+      "end": 31.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.5,
+      "end": 31.77,
+      "mouth": "small"
+    },
+    {
+      "start": 31.77,
+      "end": 31.86,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.86,
+      "end": 32.13,
+      "mouth": "small"
+    },
+    {
+      "start": 32.13,
+      "end": 32.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 32.22,
+      "end": 32.4,
+      "mouth": "small"
+    },
+    {
+      "start": 32.4,
+      "end": 32.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.49,
+      "end": 32.58,
+      "mouth": "small"
+    },
+    {
+      "start": 32.58,
+      "end": 32.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 32.67,
+      "end": 32.94,
+      "mouth": "small"
+    },
+    {
+      "start": 32.94,
+      "end": 33.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.03,
+      "end": 33.21,
+      "mouth": "small"
+    },
+    {
+      "start": 33.21,
+      "end": 33.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.3,
+      "end": 33.84,
+      "mouth": "small"
+    },
+    {
+      "start": 33.84,
+      "end": 34.29,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.29,
+      "end": 34.92,
+      "mouth": "small"
+    },
+    {
+      "start": 34.92,
+      "end": 35.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.1,
+      "end": 35.46,
+      "mouth": "small"
+    },
+    {
+      "start": 35.46,
+      "end": 35.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.82,
+      "end": 35.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.91,
+      "end": 36.0,
+      "mouth": "small"
+    },
+    {
+      "start": 36.0,
+      "end": 36.09,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.09,
+      "end": 36.54,
+      "mouth": "small"
+    },
+    {
+      "start": 36.54,
+      "end": 36.99,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.99,
+      "end": 37.17,
+      "mouth": "small"
+    },
+    {
+      "start": 37.17,
+      "end": 37.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.26,
+      "end": 37.44,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.44,
+      "end": 37.62,
+      "mouth": "small"
+    },
+    {
+      "start": 37.62,
+      "end": 37.71,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.71,
+      "end": 38.25,
+      "mouth": "small"
+    },
+    {
+      "start": 38.25,
+      "end": 38.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.43,
+      "end": 38.61,
+      "mouth": "small"
+    },
+    {
+      "start": 38.61,
+      "end": 38.7,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.7,
+      "end": 38.88,
+      "mouth": "small"
+    },
+    {
+      "start": 38.88,
+      "end": 38.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.97,
+      "end": 39.33,
+      "mouth": "small"
+    },
+    {
+      "start": 39.33,
+      "end": 39.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 39.51,
+      "end": 39.6,
+      "mouth": "small"
+    },
+    {
+      "start": 39.6,
+      "end": 39.69,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.69,
+      "end": 39.87,
+      "mouth": "small"
+    },
+    {
+      "start": 39.87,
+      "end": 39.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.96,
+      "end": 40.32,
+      "mouth": "small"
+    },
+    {
+      "start": 40.32,
+      "end": 40.41,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.41,
+      "end": 40.59,
+      "mouth": "small"
+    },
+    {
+      "start": 40.59,
+      "end": 40.68,
+      "mouth": "closed"
+    },
+    {
+      "start": 40.68,
+      "end": 40.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.77,
+      "end": 40.95,
+      "mouth": "small"
+    },
+    {
+      "start": 40.95,
+      "end": 41.04,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.04,
+      "end": 41.13,
+      "mouth": "small"
+    },
+    {
+      "start": 41.13,
+      "end": 41.31,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.31,
+      "end": 41.4,
+      "mouth": "small"
+    },
+    {
+      "start": 41.4,
+      "end": 41.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.49,
+      "end": 41.58,
+      "mouth": "small"
+    },
+    {
+      "start": 41.58,
+      "end": 41.67,
+      "mouth": "wide"
+    },
+    {
+      "start": 41.67,
+      "end": 41.76,
+      "mouth": "small"
+    },
+    {
+      "start": 41.76,
+      "end": 42.12,
+      "mouth": "closed"
+    },
+    {
+      "start": 42.12,
+      "end": 42.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.21,
+      "end": 42.39,
+      "mouth": "small"
+    },
+    {
+      "start": 42.39,
+      "end": 42.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.48,
+      "end": 42.75,
+      "mouth": "small"
+    },
+    {
+      "start": 42.75,
+      "end": 42.84,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.84,
+      "end": 43.11,
+      "mouth": "small"
+    },
+    {
+      "start": 43.11,
+      "end": 43.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.2,
+      "end": 43.29,
+      "mouth": "small"
+    },
+    {
+      "start": 43.29,
+      "end": 43.47,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.47,
+      "end": 43.74,
+      "mouth": "small"
+    },
+    {
+      "start": 43.74,
+      "end": 43.83,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.83,
+      "end": 43.92,
+      "mouth": "small"
+    },
+    {
+      "start": 43.92,
+      "end": 44.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.1,
+      "end": 44.37,
+      "mouth": "small"
+    },
+    {
+      "start": 44.37,
+      "end": 44.55,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.55,
+      "end": 44.64,
+      "mouth": "small"
+    },
+    {
+      "start": 44.64,
+      "end": 44.91,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.91,
+      "end": 45.0,
+      "mouth": "small"
+    },
+    {
+      "start": 45.0,
+      "end": 45.09,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.09,
+      "end": 45.18,
+      "mouth": "small"
+    },
+    {
+      "start": 45.18,
+      "end": 45.27,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.27,
+      "end": 45.45,
+      "mouth": "small"
+    },
+    {
+      "start": 45.45,
+      "end": 45.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.54,
+      "end": 45.72,
+      "mouth": "small"
+    },
+    {
+      "start": 45.72,
+      "end": 45.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.81,
+      "end": 45.9,
+      "mouth": "small"
+    },
+    {
+      "start": 45.9,
+      "end": 45.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.99,
+      "end": 46.08,
+      "mouth": "small"
+    },
+    {
+      "start": 46.08,
+      "end": 46.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.26,
+      "end": 46.35,
+      "mouth": "small"
+    },
+    {
+      "start": 46.35,
+      "end": 46.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.53,
+      "end": 46.89,
+      "mouth": "small"
+    },
+    {
+      "start": 46.89,
+      "end": 47.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.07,
+      "end": 47.16,
+      "mouth": "small"
+    },
+    {
+      "start": 47.16,
+      "end": 47.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.25,
+      "end": 47.34,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.34,
+      "end": 47.52,
+      "mouth": "small"
+    },
+    {
+      "start": 47.52,
+      "end": 48.06,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.06,
+      "end": 48.15,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.15,
+      "end": 48.24,
+      "mouth": "small"
+    },
+    {
+      "start": 48.24,
+      "end": 48.33,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.33,
+      "end": 48.6,
+      "mouth": "small"
+    },
+    {
+      "start": 48.6,
+      "end": 48.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 48.69,
+      "end": 49.59,
+      "mouth": "small"
+    },
+    {
+      "start": 49.59,
+      "end": 49.68,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.68,
+      "end": 50.13,
+      "mouth": "small"
+    },
+    {
+      "start": 50.13,
+      "end": 50.49,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.49,
+      "end": 50.94,
+      "mouth": "small"
+    },
+    {
+      "start": 50.94,
+      "end": 51.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.03,
+      "end": 51.84,
+      "mouth": "small"
+    },
+    {
+      "start": 51.84,
+      "end": 52.02,
+      "mouth": "closed"
+    },
+    {
+      "start": 52.02,
+      "end": 52.38,
+      "mouth": "small"
+    },
+    {
+      "start": 52.38,
+      "end": 52.56,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.56,
+      "end": 52.74,
+      "mouth": "small"
+    },
+    {
+      "start": 52.74,
+      "end": 52.92,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.92,
+      "end": 53.01,
+      "mouth": "small"
+    },
+    {
+      "start": 53.01,
+      "end": 53.1,
+      "mouth": "closed"
+    },
+    {
+      "start": 53.1,
+      "end": 53.46,
+      "mouth": "small"
+    },
+    {
+      "start": 53.46,
+      "end": 53.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.64,
+      "end": 53.73,
+      "mouth": "small"
+    },
+    {
+      "start": 53.73,
+      "end": 53.82,
+      "mouth": "wide"
+    },
+    {
+      "start": 53.82,
+      "end": 53.91,
+      "mouth": "small"
+    },
+    {
+      "start": 53.91,
+      "end": 54.0,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.0,
+      "end": 54.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 54.18,
+      "end": 54.45,
+      "mouth": "small"
+    },
+    {
+      "start": 54.45,
+      "end": 54.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.54,
+      "end": 54.72,
+      "mouth": "small"
+    },
+    {
+      "start": 54.72,
+      "end": 54.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 54.81,
+      "end": 54.9,
+      "mouth": "small"
+    },
+    {
+      "start": 54.9,
+      "end": 55.08,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [],
+  "word_alignment_failed": "Error code: 429 - You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.",
+  "media": [
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "right"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front close-up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1794892667418-0-0",
+          "cue_label": "[front-closeup-1794892667418-0-0] Front close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/3-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front close-up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1794892711389-3-3",
+          "cue_label": "[front-closeup-1794892711389-3-3] Front close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/1-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1794892677313-1-1",
+          "cue_label": "[side-closeup-1794892677313-1-1] Side close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/6-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1794892753177-6-6",
+          "cue_label": "[side-closeup-1794892753177-6-6] Side close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/2-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1794892697248-3-2",
+          "cue_label": "[rear-closeup-1794892697248-3-2] Rear close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/4-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1794892718260-4-4",
+          "cue_label": "[rear-closeup-1794892718260-4-4] Rear close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/5-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1794892744351-5-5",
+          "cue_label": "[rear-closeup-1794892744351-5-5] Rear close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/7-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1794892766794-7-7",
+          "cue_label": "[interior-closeup-1794892766794-7-7] Interior close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/8-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1794892796029-8-8",
+          "cue_label": "[interior-closeup-1794892796029-8-8] Interior close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/9-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1794892852016-9-9",
+          "cue_label": "[interior-closeup-1794892852016-9-9] Interior close-up",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {},
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/9n42QMWX/2021-porsche-718-boxster-gts-40",
+    "title": "2021 Porsche 718 Boxster GTS 4.0",
+    "price_text": "High Bid $57,218",
+    "auction_state": "bidding",
+    "facts": {
+      "Make": "Porsche",
+      "Engine": "4.0L Flat-6",
+      "Model": "718 Boxster",
+      "Drivetrain": "Rear-wheel drive",
+      "Transmission": "Automatic (7-Speed)",
+      "Body Style": "Convertible"
+    },
+    "sections": {
+      "Highlights": "THIS... is a 2021 Porsche 718 Boxster GTS 4.0, finished in Carrara White Metallic with a black soft top and a black interior. This 718 Boxster is offered with a clean Carfax vehicle history report. According to the build sheet provided in the gallery, notable factory equipment includes the Premium Package, a power-folding soft top, leather upholstery, and black brushed aluminum interior trim. The seller reports no notable modifications. Porsche's entry-level Boxster and Cayman sports cars gained the heritage-laced 718 designation for 2017. The changes made to the two-seaters also included styling updates, a redesigned interior with a 918 Spyder-inspired steering wheel, and a downsized flat-4 engine. While the engine lost two cylinders, the 718s were more powerful than their predecessors, though Porsche later brought the flat-6 back to the range for the GTS model. Power comes from a 4.0-liter flat-6, rated at 394 horsepower and 309 lb-ft of torque. Output is sent to the rear wheels via a 7-speed PDK dual-clutch automatic transmission.",
+      "Equipment": "A build sheet is provided in the photo gallery, and a partial list of notable equipment reported by the seller includes: Premium Package Power-folding soft top Leather upholstery Heated, ventilated, and 18-way power-adjustable Adaptive Sport Seats Plus Black brushed aluminum interior trim Steering wheel and gear lever in black leather Navigation with Porsche Connect",
+      "Seller Notes": "This Porsche is offered with a transferable CPO warranty valid until May 2028. The seller reports that the windows have been tinted and that paint protection film has been applied to the exterior of this 718 Boxster. The tires on this Boxster GTS 4.0 carry 2024 and 2025 date codes. The attached Carfax history report indicates a wheel replacement in June 2026. The seller reports that this is incorrect and that the wheels weren't replaced during their ownership"
+    }
+  },
+  "market_value": {
+    "count": 5,
+    "median": 86000,
+    "low": 72000,
+    "high": 110000,
+    "examples": [
+      {
+        "title": "2024 Porsche 718 Boxster GTS 4.0",
+        "price": 114500,
+        "ended": ""
+      },
+      {
+        "title": "2025 Porsche 718 Boxster GTS 4.0",
+        "price": 111000,
+        "ended": ""
+      },
+      {
+        "title": "2021 Porsche 718 Boxster GTS 4.0",
+        "price": 80500,
+        "ended": ""
+      },
+      {
+        "title": "2025 Porsche 718 Boxster GTS 4.0",
+        "price": 72000,
+        "ended": "7/17/26"
+      }
+    ]
+  },
+  "voice_auditions": {
+    "onyx": "single-porsche-718-boxster-gts-40-20261117052105/voice_auditions/onyx.mp3",
+    "british_narrator": "single-porsche-718-boxster-gts-40-20261117052105/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-porsche-718-boxster-gts-40-20261117052105/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-porsche-718-boxster-gts-40-20261117052105/voice_auditions/british_energetic.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-porsche-718-boxster-gts-40-20261117052105/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "left",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 6.88375,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 13.7675,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 27.535,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 34.41875,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 41.3025,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 48.18625,
+        "layout": "bottom-center",
+        "framing": "half"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 8.03375,
+        "pose": "open"
+      },
+      {
+        "start": 9.48375,
+        "pose": "rest"
+      },
+      {
+        "start": 11.43375,
+        "pose": "chest"
+      },
+      {
+        "start": 12.88375,
+        "pose": "rest"
+      },
+      {
+        "start": 14.9175,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 16.3675,
+        "pose": "rest"
+      },
+      {
+        "start": 18.3175,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 19.7675,
+        "pose": "rest"
+      },
+      {
+        "start": 21.7175,
+        "pose": "open"
+      },
+      {
+        "start": 23.1675,
+        "pose": "rest"
+      },
+      {
+        "start": 25.1175,
+        "pose": "chest"
+      },
+      {
+        "start": 26.5675,
+        "pose": "rest"
+      },
+      {
+        "start": 28.685,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 30.135,
+        "pose": "rest"
+      },
+      {
+        "start": 32.085,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 33.535,
+        "pose": "rest"
+      },
+      {
+        "start": 35.56875,
+        "pose": "open"
+      },
+      {
+        "start": 37.01875,
+        "pose": "rest"
+      },
+      {
+        "start": 38.96875,
+        "pose": "chest"
+      },
+      {
+        "start": 40.41875,
+        "pose": "rest"
+      },
+      {
+        "start": 42.4525,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 43.9025,
+        "pose": "rest"
+      },
+      {
+        "start": 45.8525,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 47.3025,
+        "pose": "rest"
+      },
+      {
+        "start": 49.33625,
+        "pose": "open"
+      },
+      {
+        "start": 50.78625,
+        "pose": "rest"
+      },
+      {
+        "start": 52.73625,
+        "pose": "chest"
+      },
+      {
+        "start": 54.18625,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 6.88375,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/2-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1794892697248-3-2"
+          },
+          {
+            "path": "images/manual-extra/4-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1794892718260-4-4"
+          },
+          {
+            "path": "images/manual-extra/5-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1794892744351-5-5"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 6.88375
+      },
+      {
+        "start": 6.88375,
+        "end": 13.7675,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1794892667418-0-0"
+          },
+          {
+            "path": "images/manual-extra/3-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1794892711389-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 6.88375,
+        "chapter_end": 13.7675
+      },
+      {
+        "start": 13.7675,
+        "end": 20.65125,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/1-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1794892677313-1-1"
+          },
+          {
+            "path": "images/manual-extra/6-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1794892753177-6-6"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 13.7675,
+        "chapter_end": 20.65125
+      },
+      {
+        "start": 20.65125,
+        "end": 27.535,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1794892667418-0-0"
+          },
+          {
+            "path": "images/manual-extra/3-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1794892711389-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 20.65125,
+        "chapter_end": 27.535
+      },
+      {
+        "start": 27.535,
+        "end": 34.41875,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/7-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1794892766794-7-7"
+          },
+          {
+            "path": "images/manual-extra/8-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1794892796029-8-8"
+          },
+          {
+            "path": "images/manual-extra/9-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1794892852016-9-9"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 27.535,
+        "chapter_end": 34.41875
+      },
+      {
+        "start": 34.41875,
+        "end": 41.3025,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/1-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1794892677313-1-1"
+          },
+          {
+            "path": "images/manual-extra/6-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1794892753177-6-6"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 34.41875,
+        "chapter_end": 41.3025
+      },
+      {
+        "start": 41.3025,
+        "end": 48.18625,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1794892667418-0-0"
+          },
+          {
+            "path": "images/manual-extra/3-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1794892711389-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 41.3025,
+        "chapter_end": 55.07
+      },
+      {
+        "start": 48.18625,
+        "end": 55.07,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1794892667418-0-0"
+          },
+          {
+            "path": "images/manual-extra/3-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1794892711389-3-3"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 41.3025,
+        "chapter_end": 55.07
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-1794892697248-3-2",
+          "rear-closeup-1794892718260-4-4",
+          "rear-closeup-1794892744351-5-5"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 6.88375,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1794892667418-0-0",
+          "front-closeup-1794892711389-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 13.7675,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-1794892677313-1-1",
+          "side-closeup-1794892753177-6-6"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 20.65125,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1794892667418-0-0",
+          "front-closeup-1794892711389-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 27.535,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-1794892766794-7-7",
+          "interior-closeup-1794892796029-8-8",
+          "interior-closeup-1794892852016-9-9"
+        ],
+        "active": null
+      },
+      {
+        "scene": 5,
+        "start": 34.41875,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-1794892677313-1-1",
+          "side-closeup-1794892753177-6-6"
+        ],
+        "active": null
+      },
+      {
+        "scene": 6,
+        "start": 41.3025,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1794892667418-0-0",
+          "front-closeup-1794892711389-3-3"
+        ],
+        "active": null
+      },
+      {
+        "scene": 7,
+        "start": 48.18625,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1794892667418-0-0",
+          "front-closeup-1794892711389-3-3"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "engine_clip": {
+    "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1a67d82cdb6c0059357b34124c4ee0f/manifest/video.m3u8",
+    "start": 2,
+    "end": 12,
+    "crop": {
+      "x": 0,
+      "y": 0.193,
+      "w": 0.867,
+      "h": 0.502
+    },
+    "at_seconds": 0.0,
+    "played_seconds": 10.0
+  },
+  "video": "single_car_short.mp4"
+}
