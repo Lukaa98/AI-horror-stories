@@ -662,6 +662,48 @@ def _round_price_text(text):
     return _EXACT_PRICE_RE.sub(swap, str(text or "")) if text else ""
 
 
+# Words that mean the car in the photos is not simply one example of a
+# model: somebody built this one, and what they built is the story. The
+# Norwood 330 P4 is the case -- three real P4s exist and this is not one
+# of them, so a video about "the 330 P4" would be about a car that is not
+# in the photos. Everything else is an example of a model, and nobody
+# watching a Short cares which model year the seller's car happens to be.
+ONE_OFF_RE = re.compile(
+    r"\b(recreation|replica|resto-?mod|continuation|tribute|homage|one[- ]off"
+    r"|custom|bespoke|coachbuilt|kit car|conversion|prototype)\b", re.I)
+
+
+def is_one_off(label):
+    """Whether the car in the photos is a build rather than a model."""
+    return bool(ONE_OFF_RE.search(str(label or "")))
+
+
+def _subject_block(year_scope, one_off):
+    """What the video is about: a model, or the one car in the photos."""
+    if one_off:
+        return """
+
+SUBJECT -- THIS EXACT CAR. It is a build rather than a model: somebody made this one, and what they
+made is the story. Who built it, what it is built from, what it is a copy of and how close it gets all
+belong in the script. The car it imitates is background, not the subject -- and never claim this is one
+of the originals."""
+    return f"""
+
+SUBJECT -- THE MODEL AND ITS GENERATION, not the one example in the photos. The year scope above
+({year_scope}) is there so you know which generation you are writing about. It is not a reason to narrow
+the video to a single model year, and it is not something to say out loud.
+
+So write about the generation: what it is, why it exists, what it replaced, what it costs to live with,
+what people argue about. Say "the 718 GTS 4.0" where you would have written "this 2021 Porsche 718
+Boxster GTS 4.0". A model year in the opening sentence spends words on a thing nobody is asking, and
+"this 2023 Porsche 911 GT3 gets the double-wishbone front suspension" is a sentence about a generation
+pretending to be a sentence about one car.
+
+What the listing is still for: deciding WHICH figures you quote, because the words have to match the car
+in the photos. If it is the manual, quote the manual's numbers. The variant is this car's; the subject
+is the model."""
+
+
 def _listing_facts_block(listing_facts):
     """The pasted listing's own text, handed to the writer as ground truth.
 
@@ -1145,7 +1187,7 @@ The test for all three: would you say this out loud to a friend who likes cars? 
 would sound odd coming out of your mouth it is wrong here, however correct it is."""
 
 
-def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8, listing_facts=None, market=None, angles=None, style="classic", engine_clip=False):
+def _research_script_prompt(label, year_scope, retry_feedback="", photo_hints=None, forced_rival=None, disable_comparison=False, max_scenes=8, listing_facts=None, market=None, angles=None, style="classic", engine_clip=False, one_off=False):
     photo_hints_block = ""
     if photo_hints:
         bullet_list = "\n".join(f"- {hint}" for hint in photo_hints)
@@ -1244,9 +1286,9 @@ still hits its word target and beat variety.{notes_exception}"""
     title_options = TITLE_OPTIONS_WANTED
     title_low, title_high = TITLE_WORDS_WANTED
     title_max = MAX_TITLE_WORDS
-    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{VOICE_BLOCK}{_story_first_block() if story_first(style) else ""}{_engine_clip_block() if engine_clip else ""}{forced_rival_block}{no_comparison_block}{chosen['block']}
+    return f"""Write a narration of exactly {low}-{high} words total -- count as you go. This word count is a hard requirement, not a suggestion. If you land under {low}, the fix is never to pad sentences or slow down -- it's to research and add another genuinely interesting beat, either historical or mechanical: who designed it, a notable race win/record/motorsport pedigree, a bit of production history (why it exists, what it replaced, a notable limited run or special edition), a fact about its reputation/legacy, or a specific engineering/mechanical detail (how the suspension or rear axle is set up, the steering system, chassis/platform sharing, a notable engineering trade-off) that's genuinely well-documented for this car. This format is meant to be packed with real, well-researched detail people want to listen to, not stretched -- a short, thin script is a failure to research deeply enough, not an acceptable outcome.{retry_feedback}{_market_block(market)}{_no_market_block(market)}{_listing_facts_block(listing_facts)}{photo_hints_block}{angles_block}{_budget_block(chosen, photo_hints, angles)}{VOICE_BLOCK}{_story_first_block() if story_first(style) else ""}{_subject_block(year_scope, one_off)}{_engine_clip_block() if engine_clip else ""}{forced_rival_block}{no_comparison_block}{chosen['block']}
 
-Research and write one original vertical car-video package about {label}, scoped to {year_scope}. Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across {chosen['scene_count'].format(max_scenes=max_scenes)} in speaking order, each scene being {chosen['sentences']} -- {chosen['scene_note']} -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the exact car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
+Research and write one original vertical car-video package about {label} ({year_scope}). Use web search and verify every technical comparison and historical claim. Write a quick, conversational narration split across {chosen['scene_count'].format(max_scenes=max_scenes)} in speaking order, each scene being {chosen['sentences']} -- {chosen['scene_note']} -- each scene's "narration" is the exact words spoken during that beat, and all of them concatenated in order form the entire script, so each one must read naturally both alone and flowing into the next (no "scene 1, scene 2" choppiness). Start with a strong value/performance hook, name the car early, then the history/design-legacy beat (a motorsport win or record, why this generation/model exists, a notable special edition -- whatever is genuinely well-documented for this car, verified with web search, not invented) comes next, early, right after the hook -- not saved for near the end -- then cover engine/turbo (state both horsepower AND torque as real numbers in this beat, not horsepower alone), drivetrain, a direct head-to-head comparison against one real, well-known cross-shop rival -- this beat is REQUIRED, and that scene must carry rival_make, rival_model, main_horsepower and rival_horsepower as real verified numbers, because a comparison scene with those four fields filled is what puts the head-to-head drag race on screen. Run #176 dropped the comparison altogether and lost that whole segment. Only skip it, using an ownership/value insight instead, if you genuinely cannot name a fair rival for this car, tuning potential only when supportable, and finish with a direct viewer-choice question -- spread across the scenes in that order. That closing question is a HARD REQUIREMENT, not an optional flourish: the final scene must end on a real question aimed at the viewer that calls back to the hook's claim ("so would you daily a five-hundred-horsepower minivan, or is that a step too far?"). A closing scene that summarises what you just said, or restates what the car is about, is a failed ending -- rewrite it as a question. Use short spoken sentences and natural contractions. Do not imitate or quote any creator.
 
 The hook must be the very first words, no throat-clearing lead-in like "Check out the..." or "Let's talk about...". The FIRST SENTENCE must contain a real number or a hard superlative, and must NOT contain the car's name -- the name is the payoff, so it lands in the second sentence ("...that's the R63 AMG"). "A hand-built seven-seater that hits sixty in four-point-four, and almost nobody knows it exists" is the shape: a concrete claim that makes the viewer want the name. "The Mercedes-Benz R63 AMG might surprise you" is the failure mode -- it names the car, promises interest instead of delivering any, and could be said about any car ever made. Never open by asserting that something is surprising, interesting, special or underrated; state the fact that makes it so and let the viewer conclude it. The claim has to be genuinely verifiable, not just punchy.
 
@@ -3258,6 +3300,10 @@ def script_package_from_build(build_id, repository=None, branch="cars-output"):
 
 def research_script(make, model, trim="", start_year=None, end_year=None, max_attempts=4, photo_hints=None, forced_rival=None, disable_comparison=False, listing_facts=None, market=None, angles=None, pasted_slots=(), style="classic", engine_clip=False):
     label = " ".join(value for value in [make, model, trim] if value).strip()
+    one_off = is_one_off(label)
+    print("[single-car] Subject: " + ("this exact car, which is a build rather than a model."
+                                      if one_off else
+                                      "the model and its generation, not this one example."))
     year_scope = (
         f"model years {start_year}-{end_year}" if start_year and end_year
         else f"model year {start_year or end_year}" if start_year or end_year else "the best-known generation"
@@ -3299,7 +3345,7 @@ def research_script(make, model, trim="", start_year=None, end_year=None, max_at
         package = _request_script_package(
             _research_script_prompt(label, year_scope, retry_feedback, photo_hints, forced_rival,
                                     disable_comparison, max_scenes, listing_facts, market, angles, style,
-                                    engine_clip),
+                                    engine_clip, one_off),
             max_scenes=max_scenes,
         )
         package["_angles"] = angles or ""

@@ -5411,3 +5411,57 @@ def test_the_runner_installs_yt_dlp_for_a_single_car_build():
     step = workflow.split("name: Install yt-dlp")[1].split("- name:")[0]
     assert "pip install" in step and "yt-dlp" in step
     assert "inputs.mode == 'single_car'" in step
+
+
+def test_the_video_is_about_the_model_not_the_seller_s_car():
+    """The dashboard fills the year in from the listing's own slug, and the
+    prompt then said "scoped to model year 2021" -- so a video about the
+    718 GTS 4.0 came out as a video about one 2021 example of it, down to
+    "this 2023 Porsche 911 GT3 gets the double-wishbone front suspension",
+    which is a sentence about a generation wearing one car's model year."""
+    from single_car_short import _research_script_prompt
+
+    prompt = _research_script_prompt("Porsche 718 Boxster GTS 4.0", "model year 2021")
+    assert "SUBJECT -- THE MODEL AND ITS GENERATION" in prompt
+    # The year identifies the generation; it is not the scope of the video.
+    assert "scoped to model year" not in prompt
+    assert "not a reason to narrow" in prompt
+    assert "not something to say out loud" in prompt
+    # And the listing still decides which variant's figures get quoted, so
+    # the words keep matching the car in the photos.
+    assert "quote the manual's numbers" in prompt
+
+
+def test_a_build_rather_than_a_model_is_still_about_the_one_car():
+    """Three real 330 P4s exist and the Norwood car is not one of them, so
+    a video about "the 330 P4" would be about a car that is not in the
+    photos."""
+    from single_car_short import _research_script_prompt, is_one_off
+
+    for label in ("Ferrari 330 P4 Recreation By Norwood Autocraft",
+                  "Shelby Cobra Replica", "Singer 911 Restomod",
+                  "Jaguar E-Type Continuation", "Porsche 911 Custom Build"):
+        assert is_one_off(label), label
+    for label in ("Porsche 718 Boxster GTS 4.0", "Porsche 911 GT3",
+                  "Lamborghini Murcielago LP640 Coupe", "Ferrari SF90 Spider", ""):
+        assert not is_one_off(label), label
+
+    prompt = _research_script_prompt("Ferrari 330 P4 Recreation By Norwood Autocraft",
+                                     "model year 2005", one_off=True)
+    assert "SUBJECT -- THIS EXACT CAR" in prompt
+    assert "THE MODEL AND ITS GENERATION" not in prompt
+    # The thing that would be worst to get wrong on a recreation.
+    assert "never claim this is one" in prompt
+
+
+def test_which_subject_the_build_chose_is_in_the_log():
+    """Worked out from the car's own name rather than asked for, so it has
+    to be visible: a wrong guess is otherwise only findable by watching the
+    video back."""
+    import inspect
+
+    import single_car_short
+
+    body = inspect.getsource(single_car_short.research_script)
+    assert "one_off = is_one_off(label)" in body
+    assert "[single-car] Subject: " in body
