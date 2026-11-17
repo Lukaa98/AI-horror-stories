@@ -1,0 +1,67 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/9n42QMWX/2021-porsche-718-boxster-gts-40",
+  "scrape_ok": true,
+  "video_count": 6,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e023cd533f65e6eef79147113",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e023cd533f65e6eef791471138f4c041/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e023cd533f65e6eef791471138f4c041/manifest/video.m3u8",
+      "duration_seconds": 54.38,
+      "poster": "poster-1.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5c2ee6d23a94c3b30687914f9",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5c2ee6d23a94c3b30687914f94419894/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/5c2ee6d23a94c3b30687914f94419894/manifest/video.m3u8",
+      "duration_seconds": 51.01,
+      "poster": "poster-2.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/14205ad2987849bf818abb50e",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/14205ad2987849bf818abb50eab4c9be/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/14205ad2987849bf818abb50eab4c9be/manifest/video.m3u8",
+      "duration_seconds": 34.66,
+      "poster": "poster-3.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 4,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/210229bfabf498dd8a6e0b028",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/210229bfabf498dd8a6e0b028c8cbca1/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/210229bfabf498dd8a6e0b028c8cbca1/manifest/video.m3u8",
+      "duration_seconds": 63.22,
+      "poster": "poster-4.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 5,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cb5d913b64be3a34959292209",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cb5d913b64be3a349592922092d55d8e/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cb5d913b64be3a349592922092d55d8e/manifest/video.m3u8",
+      "duration_seconds": 48.28,
+      "poster": "poster-5.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 6,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1a67d82cdb6c0059357b3412",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1a67d82cdb6c0059357b34124c4ee0f/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/d1a67d82cdb6c0059357b34124c4ee0f/manifest/video.m3u8",
+      "duration_seconds": 28.13,
+      "poster": "poster-6.jpg",
+      "audio": "aac, 48 kHz"
+    }
+  ]
+}
