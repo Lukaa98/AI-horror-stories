@@ -1,0 +1,57 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/3pBxW12g/2026-bmw-m2-cs",
+  "scrape_ok": true,
+  "video_count": 5,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6f6668e3c30fc50c799b5cd5b",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6f6668e3c30fc50c799b5cd5beed7a17/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/6f6668e3c30fc50c799b5cd5beed7a17/manifest/video.m3u8",
+      "duration_seconds": 28.25,
+      "poster": "poster-1.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a350bfe0aedd6557a0f7acc61",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a350bfe0aedd6557a0f7acc618adbe9b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a350bfe0aedd6557a0f7acc618adbe9b/manifest/video.m3u8",
+      "duration_seconds": 43.68,
+      "poster": "poster-2.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/03f3aa8eb73a56f8b2f25c956",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/03f3aa8eb73a56f8b2f25c956826a8dc/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/03f3aa8eb73a56f8b2f25c956826a8dc/manifest/video.m3u8",
+      "duration_seconds": 36.02,
+      "poster": "poster-3.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 4,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/16ca47b6aa2c2d11ee3fcf282",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/16ca47b6aa2c2d11ee3fcf282023412b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/16ca47b6aa2c2d11ee3fcf282023412b/manifest/video.m3u8",
+      "duration_seconds": 15.55,
+      "poster": "poster-4.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 5,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e885a0637fb38616a55064ad7",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e885a0637fb38616a55064ad76dd679b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e885a0637fb38616a55064ad76dd679b/manifest/video.m3u8",
+      "duration_seconds": 40.05,
+      "poster": "poster-5.jpg",
+      "audio": "aac, 48 kHz"
+    }
+  ]
+}
