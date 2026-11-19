@@ -4470,7 +4470,55 @@ def engine_clip_crop(crop):
             f"x='trunc(iw*{x:.4f}/2)*2':y='trunc(ih*{y:.4f}/2)*2',")
 
 
-def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop=None):
+def engine_clip_blur(blur):
+    """Soften one rectangle of the clip's frame, as an ffmpeg fragment.
+
+    For the plate. The automatic pass reads each photo with a vision model
+    and misses often enough to be worth overriding by hand, and it never
+    looked at the start-up clip at all -- so a listing video of the car's
+    rear broadcast a real, current registration for however many seconds
+    it played.
+
+    Taken as fractions of the source frame, like the crop, and applied
+    BEFORE it: the box is drawn on the whole frame in the dashboard, which
+    is the only thing anybody can see to aim at, and a crop afterwards
+    simply carries the blurred pixels along with everything else.
+
+    Anything malformed returns "" and nothing is blurred. A blur box is a
+    privacy preference and must never be the reason a build fails -- but
+    see the caller, which says so out loud when it drops one.
+    """
+    if not isinstance(blur, dict):
+        return ""
+    try:
+        x, y = float(blur.get("x", 0)), float(blur.get("y", 0))
+        w, h = float(blur.get("w", 0)), float(blur.get("h", 0))
+    except (TypeError, ValueError):
+        return ""
+    if not (0 <= x < 1 and 0 <= y < 1 and 0 < w <= 1 and 0 < h <= 1):
+        return ""
+    w, h = min(w, 1 - x), min(h, 1 - y)
+    if w <= 0 or h <= 0:
+        return ""
+    # Even numbers for the same reason the crop uses them, and the blur is
+    # scaled to the box rather than fixed: a radius that hides a plate
+    # filling a quarter of the frame is a smear on one filling a twentieth.
+    #
+    # boxblur and not avgblur, which reads its sizes as plain integers and
+    # refuses an expression -- the whole graph comes back "Invalid
+    # argument" and the clip is dropped, silently as far as the picture is
+    # concerned. boxblur takes w and h, and power=2 runs it twice.
+    box = (f"w='trunc(iw*{w:.4f}/2)*2':h='trunc(ih*{h:.4f}/2)*2':"
+           f"x='trunc(iw*{x:.4f}/2)*2':y='trunc(ih*{y:.4f}/2)*2'")
+    return (f"split=2[blurbase][blurcut];"
+            f"[blurcut]crop={box},"
+            f"boxblur=luma_radius='max(2,min(w,h)/4)':luma_power=2"
+            f":chroma_radius='max(2,min(cw,ch)/4)':chroma_power=2[blurred];"
+            f"[blurbase][blurred]overlay="
+            f"x='trunc(W*{x:.4f}/2)*2':y='trunc(H*{y:.4f}/2)*2',")
+
+
+def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop=None, blur=None):
     """Put the start-up on the front of the film, before a word is spoken.
 
     This replaces playing it in the middle. The old way cut a gap into the
@@ -4510,7 +4558,7 @@ def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop
              # The chosen part of the frame first, so both the fitted copy
              # and the blurred backdrop are made from it rather than the
              # backdrop quietly showing the part that was cropped away.
-             f"[0:v]{engine_clip_crop(crop)}split=2[back][front];"
+             f"[0:v]{engine_clip_blur(blur)}{engine_clip_crop(crop)}split=2[back][front];"
              f"[back]scale={width}:{height}:force_original_aspect_ratio=increase,"
              f"crop={width}:{height},gblur=sigma=24[backdrop];"
              f"[front]scale={width}:{height}:force_original_aspect_ratio=decrease[fitted];"

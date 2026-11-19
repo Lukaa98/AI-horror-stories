@@ -274,11 +274,27 @@ export function fitCropRatio(box, ratio, rect) {
  * was watching fifteen minutes of work back in silence.
  */
 export function engineClipPayload(form) {
-  const { enabled, source, url, start, end, crop } = form || {};
+  const { enabled, source, url, start, end, crop, blur } = form || {};
   if (!enabled || !source || clipLinkProblem(url)) return null;
   const from = clipSeconds(start), to = clipSeconds(end);
   if (from === null || to === null || to <= from) return null;
-  return { url: source, start: from, end: to, crop: cropFractions(crop) };
+  // The blur is read the same way as the crop -- same four percentages of
+  // the same frame -- but a full-frame box means something here, so it is
+  // not collapsed to null the way an uncropped crop is.
+  const plate = cropFractions(blur) || fullFrameBox(blur);
+  return { url: source, start: from, end: to, crop: cropFractions(crop), blur: plate };
+}
+
+
+/* The one box cropFractions throws away: all four edges, which is "no
+ * crop" but is a perfectly sensible thing to blur. */
+function fullFrameBox(box) {
+  const typed = ["left", "top", "width", "height"]
+    .map((key) => String(box?.[key] ?? "").trim());
+  if (typed.some((value) => value === "")) return null;
+  return typed[0] === "0" && typed[1] === "0"
+    && Number(typed[2]) >= 100 && Number(typed[3]) >= 100
+    ? { x: 0, y: 0, w: 1, h: 1 } : null;
 }
 
 /* Why a ticked box is not going to make a sound, or "". Worth stopping the

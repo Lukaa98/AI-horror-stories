@@ -260,8 +260,22 @@ const form = (over) => ({ enabled: true, source: CLIP, url: "", start: "0:04",
 
 test("a complete form becomes the clip the build is sent", () => {
   assert.deepEqual(engineClipPayload(form()),
-                   { url: CLIP, start: 4, end: 9, crop: null });
+                   { url: CLIP, start: 4, end: 9, crop: null, blur: null });
   assert.equal(engineClipProblem(form()), "");
+});
+
+test("a blur box rides with the clip, and covering the frame is allowed", () => {
+  // The plate box is read like the crop, but "all four edges" is nonsense
+  // as a crop and perfectly sensible as a blur, so it is not thrown away.
+  const plate = engineClipPayload(form({ blur: { left: 30, top: 55, width: 25, height: 12 } }));
+  assert.deepEqual(plate.blur, { x: 0.3, y: 0.55, w: 0.25, h: 0.12 });
+  assert.deepEqual(
+    engineClipPayload(form({ blur: { left: 0, top: 0, width: 100, height: 100 } })).blur,
+    { x: 0, y: 0, w: 1, h: 1 });
+  // And an empty box is no blur at all, not a blur of nothing.
+  assert.equal(engineClipPayload(form({ blur: {} })).blur, null);
+  // The crop is unaffected either way.
+  assert.equal(plate.crop, null);
 });
 
 test("the crop rides with the clip when there is one", () => {

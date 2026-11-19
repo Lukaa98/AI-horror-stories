@@ -5258,7 +5258,7 @@ def test_the_crop_box_is_drawn_on_the_video_and_can_be_turned_off():
     # keyed off the numbers, not off what is being drawn.
     clip_js = (root / "clipTimes.js").read_text()
     assert "crop: cropFractions(crop)" in clip_js
-    assert "crop: cropBox }" in app
+    assert "crop: cropBox, blur: blurBox }" in app
     assert "showCropBox" not in app.split("engine_clip:")[1].split("\n    });")[0]
 
 
@@ -5317,7 +5317,8 @@ def test_a_new_clip_starts_framed_to_fill_the_shorts_frame():
     assert "setCropRatio(9 / 16); setCropBox(box);" in app
     # Once per clip, and never over a box that is already there: a crop
     # carried from a previous build and a box cleared on purpose stand.
-    assert "if (cropAutoRef.current === clipSource || cropFractions(cropBox)) return;" in app
+    assert ("if (cropAutoRef.current === clipSource || cropFractions(cropBox)"
+            " || drawingBlur) return;") in app
     assert "cropAutoRef.current = clipSource;" in app
 
 
@@ -5522,3 +5523,133 @@ def test_the_clip_crosses_into_the_film_rather_than_cutting(tmp_path):
     assert level(start - 0.3) > level(start + fade / 2) > level(start + fade - 0.06), \
         "the engine should be falling across the fade"
     assert level(start + fade - 0.06) < level(start - 0.3) / 3, "and well down by the end of it"
+
+
+def test_a_plate_can_be_blurred_by_hand_on_the_clip(tmp_path):
+    """The automatic pass reads each photo with a vision model and misses
+    often enough to be worth overriding, and it never looked at the
+    start-up clip at all -- so a listing video of a car's rear broadcast a
+    real registration for as long as it played.
+
+    Rendered rather than asserted on the command string, because the first
+    version of this filter was spelled perfectly and refused by ffmpeg:
+    avgblur reads its sizes as plain integers and will not take the
+    expression that scales the blur to the box, so the whole graph came
+    back "Invalid argument" and the clip was dropped.
+    """
+    import subprocess
+
+    import numpy as np
+    from PIL import Image
+
+    import single_car_short
+
+    def source(path, extra=""):
+        subprocess.run(
+            ["ffmpeg", "-y", "-v", "error",
+             "-f", "lavfi", "-i", "testsrc2=size=640x360:rate=24:duration=3",
+             "-f", "lavfi", "-i", "sine=frequency=200:duration=3", "-t", "3",
+             *(["-filter_complex", extra, "-map", "[v]", "-map", "1:a"] if extra else []),
+             "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", str(path)],
+            check=True, capture_output=True)
+
+    # A clip with a readable "plate" in a known place: x 0.3, y 0.55, 0.25
+    # wide. Readable matters -- a flat white rectangle comes out of a blur
+    # as the same flat white rectangle, so a fixture without detail in it
+    # cannot tell a working blur from a missing one.
+    clip = tmp_path / "clip.mp4"
+    source(clip, "[0:v]drawbox=x=192:y=198:w=160:h=43:color=white@1:t=fill,"
+                 "drawtext=text='XZL7203':x=198:y=204:fontsize=32:fontcolor=black[v]")
+    film = tmp_path / "film.mp4"
+    subprocess.run(
+        ["ffmpeg", "-y", "-v", "error", "-f", "lavfi",
+         "-i", "color=c=white:size=1080x1920:rate=24:duration=4",
+         "-f", "lavfi", "-i", "sine=frequency=440:duration=4", "-t", "4",
+         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", str(film)],
+        check=True, capture_output=True)
+
+    def frame_of(blur):
+        out = tmp_path / f"out-{bool(blur)}.mp4"
+        out.write_bytes(film.read_bytes())
+        played = single_car_short.prepend_engine_clip(out, clip, 3.0, blur=blur)
+        # A dropped clip returns 0.0, which is how the avgblur version failed.
+        assert played > 0, "the clip was dropped, so the filter graph was refused"
+        png = tmp_path / f"frame-{bool(blur)}.png"
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "1", "-i", str(out),
+                        "-frames:v", "1", str(png)], check=True, capture_output=True)
+        return np.asarray(Image.open(png).convert("L"), dtype=float)
+
+    plain = frame_of(None)
+    hidden = frame_of({"x": 0.30, "y": 0.55, "w": 0.25, "h": 0.12})
+    assert plain.shape == hidden.shape
+
+    # Where the plate lands in the finished frame. The clip is 16:9 fitted
+    # into 1080x1920, so it occupies a 1080x607 band starting 656 down,
+    # and the plate sits at 0.30-0.55 across it and 0.55-0.67 down it.
+    top, tall = 656, 607
+    plate = (slice(int(top + 0.56 * tall), int(top + 0.66 * tall)),
+             slice(int(0.31 * 1080), int(0.54 * 1080)))
+    # An identically sized patch of the same clip, well clear of the plate.
+    elsewhere = (slice(int(top + 0.20 * tall), int(top + 0.30 * tall)),
+                 slice(int(0.31 * 1080), int(0.54 * 1080)))
+
+    changed = np.abs(hidden - plain)
+    assert changed[plate].mean() > 5, "the plate was not blurred"
+    # And only the plate: the rest of the picture is the picture.
+    assert changed[elsewhere].mean() < 1, "the blur leaked outside its box"
+
+
+def test_a_malformed_blur_box_is_never_the_reason_a_build_fails():
+    """Same contract as the crop: a framing or privacy preference that
+    cannot be read is ignored, not fatal."""
+    from single_car_short import engine_clip_blur
+
+    for bad in (None, {}, "0,0,1,1", {"x": "a"}, {"x": 0, "y": 0, "w": 0, "h": 0.5},
+                {"x": 1.2, "y": 0, "w": 0.3, "h": 0.3}, {"x": 0, "y": 0, "w": -1, "h": 1}):
+        assert engine_clip_blur(bad) == "", bad
+    good = engine_clip_blur({"x": 0.3, "y": 0.55, "w": 0.25, "h": 0.12})
+    assert good.endswith(","), "it is spliced into a filter chain"
+    # Scaled to the box rather than fixed, and boxblur because avgblur
+    # refuses the expression.
+    assert "boxblur" in good and "min(w,h)" in good
+    assert "avgblur" not in good
+
+
+def test_the_plate_is_blurred_before_the_crop_not_after():
+    """The box is drawn on the whole frame in the dashboard, because that
+    is the only thing anybody can see to aim at. A crop afterwards carries
+    the blurred pixels along, and the blurred backdrop is made from them
+    too -- so the part cropped away cannot reappear behind the clip."""
+    import inspect
+
+    import single_car_short
+
+    body = inspect.getsource(single_car_short.prepend_engine_clip)
+    chain = body.split('f"[0:v]')[1].split('"')[0]
+    assert chain.index("engine_clip_blur") < chain.index("engine_clip_crop")
+    assert chain.index("engine_clip_crop") < chain.index("split=2[back][front]")
+
+
+def test_the_plate_box_and_the_crop_box_share_one_drawing_surface():
+    """Two boxes on the same frame, and the drag code only knows about
+    whichever is being drawn -- so a shape lock, the grips and the
+    auto-fill all follow the mode rather than being duplicated."""
+    import single_car_short
+
+    root = Path(single_car_short.__file__).resolve().parents[2] / "web/src"
+    app = (root / "App.jsx").read_text()
+    css = (root / "App.css").read_text()
+
+    assert 'const [drawMode, setDrawMode] = useState("crop");' in app
+    assert 'const drawingBlur = drawMode === "blur";' in app
+    assert "const setActiveBox = drawingBlur ? setBlurBox : setCropBox;" in app
+    # A crop can be locked to a shape; a plate is whatever shape it is.
+    assert "const activeRatio = drawingBlur ? 0 : cropRatio;" in app
+    # The plate box does not dim the frame -- it is covering one thing
+    # inside the picture, not deciding what the picture is.
+    blur_rule = css.split(".blur-box {")[1].split("}")[0]
+    assert "box-shadow" not in blur_rule
+    assert "background:" in blur_rule
+    # [hidden] loses to `display: flex` on specificity, so the shape pills
+    # stayed on screen while drawing a blur box until this was added.
+    assert ".crop-shapes[hidden] { display: none; }" in css

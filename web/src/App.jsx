@@ -1116,6 +1116,12 @@ export default function App() {
   // it to fill, so a 9:16 crop is the only shape that reaches all four
   // edges -- anything else ships with blurred bars down the sides.
   const [cropRatio, setCropRatio] = useState(0);
+  // A second box on the same frame, for the number plate. The automatic
+  // pass reads each photo with a vision model and misses often enough to
+  // be worth overriding by hand, and it never looked at the clip at all.
+  const [blurBox, setBlurBox] = useState({ left: "", top: "", width: "", height: "" });
+  // Which of the two a drag draws. One surface, two boxes.
+  const [drawMode, setDrawMode] = useState("crop");
   const cropPreviewRef = useRef(null);
   const cropDragRef = useRef(null);
   // The still endpoint is a documented Stream feature but not every link
@@ -1135,6 +1141,12 @@ export default function App() {
    * resize is just a fresh drag anchored on the opposite corner, which is
    * why there is no separate branch for it below.
    */
+  const drawingBlur = drawMode === "blur";
+  const activeBox = drawingBlur ? blurBox : cropBox;
+  const setActiveBox = drawingBlur ? setBlurBox : setCropBox;
+  // A crop can be locked to a shape; a plate is whatever shape it is.
+  const activeRatio = drawingBlur ? 0 : cropRatio;
+
   const cropPointAt = (event) => {
     const el = cropPreviewRef.current;
     if (!el) return null;
@@ -1147,7 +1159,7 @@ export default function App() {
   const onCropPointerDown = (event) => {
     const point = cropPointAt(event);
     if (!point) return;
-    const box = cropFractions(cropBox);
+    const box = cropFractions(activeBox);
     const grip = cropHandleAt(point, box, point.rect);
     cropDragRef.current = grip === "inside"
       ? { mode: "move", from: point, box }
@@ -1165,8 +1177,8 @@ export default function App() {
     if (!point) return;
     const next = drag.mode === "move"
       ? moveCropBox(drag.box, point.x - drag.from.x, point.y - drag.from.y, point.rect)
-      : dragCropBox(drag.from, point, point.rect, cropRatio);
-    if (next) { drag.drew = true; setCropBox(next); }
+      : dragCropBox(drag.from, point, point.rect, activeRatio);
+    if (next) { drag.drew = true; setActiveBox(next); }
   };
 
   const onCropPointerUp = (event) => {
@@ -1178,7 +1190,7 @@ export default function App() {
     // Pressed and let go without drawing anything: read that as "no crop",
     // which is the one thing four text boxes make you do four times.
     if (drag && drag.mode === "draw" && !drag.drew) {
-      setCropBox({ left: "", top: "", width: "", height: "" });
+      setActiveBox({ left: "", top: "", width: "", height: "" });
     }
   };
 
@@ -1187,7 +1199,7 @@ export default function App() {
    * of that shape in the frame, which for 9:16 is usually the answer. */
   // One object, two questions: is there a clip, and if not, what to say.
   const engineClipForm = { enabled: useEngineClip, source: clipSource, url: clipUrl,
-                           start: clipStart, end: clipEnd, crop: cropBox };
+                           start: clipStart, end: clipEnd, crop: cropBox, blur: blurBox };
   const enginePayload = engineClipPayload(engineClipForm);
   const engineProblem = engineClipProblem(engineClipForm);
 
@@ -1216,7 +1228,7 @@ export default function App() {
    */
   const cropAutoRef = useRef("");
   const startCropAtShortsShape = () => {
-    if (cropAutoRef.current === clipSource || cropFractions(cropBox)) return;
+    if (cropAutoRef.current === clipSource || cropFractions(cropBox) || drawingBlur) return;
     cropAutoRef.current = clipSource;
     const el = cropPreviewRef.current;
     if (!el) return;
@@ -3360,21 +3372,25 @@ export default function App() {
                                   + "and much more is a wait before anybody speaks."
                                 : "Read the times off the listing's own player. m:ss or seconds."}
                             </p>
+                            <div className="draw-modes">
+                              {[["crop", "Crop"], ["blur", "Blur a plate"]].map(([mode, label]) => (
+                                <button key={mode} type="button"
+                                        className={"draw-mode" + (drawMode === mode ? " chosen" : "")}
+                                        onClick={() => setDrawMode(mode)}>
+                                  {label}
+                                </button>
+                              ))}
+                              <Tip text="Two boxes on the same frame. The crop decides what of the clip you see; the blur hides a number plate inside it. Whichever is selected here is what a drag draws, and the numbers below follow it." />
+                            </div>
                             <label className="field-row crop-row">
-                              <input value={cropBox.left} inputMode="numeric"
-                                     onChange={(e) => setCropBox({ ...cropBox, left: e.target.value })}
-                                     placeholder="Left %" />
-                              <input value={cropBox.top} inputMode="numeric"
-                                     onChange={(e) => setCropBox({ ...cropBox, top: e.target.value })}
-                                     placeholder="Top %" />
-                              <input value={cropBox.width} inputMode="numeric"
-                                     onChange={(e) => setCropBox({ ...cropBox, width: e.target.value })}
-                                     placeholder="Width %" />
-                              <input value={cropBox.height} inputMode="numeric"
-                                     onChange={(e) => setCropBox({ ...cropBox, height: e.target.value })}
-                                     placeholder="Height %" />
+                              {["left", "top", "width", "height"].map((edge) => (
+                                <input key={edge} value={activeBox[edge]} inputMode="numeric"
+                                       onChange={(e) => setActiveBox({ ...activeBox,
+                                                                       [edge]: e.target.value })}
+                                       placeholder={edge[0].toUpperCase() + edge.slice(1) + " %"} />
+                              ))}
                             </label>
-                            <div className="crop-shapes">
+                            <div className="crop-shapes" hidden={drawingBlur}>
                               <span>Shape</span>
                               {CROP_SHAPES.map((shape) => (
                                 <button key={shape.label} type="button"
@@ -3429,12 +3445,35 @@ export default function App() {
                                       left: `${box.x * 100}%`, top: `${box.y * 100}%`,
                                       width: `${box.w * 100}%`, height: `${box.h * 100}%`,
                                     }}>
-                                      <i className="crop-grip nw" />
-                                      <i className="crop-grip ne" />
-                                      <i className="crop-grip sw" />
-                                      <i className="crop-grip se" />
+                                      {!drawingBlur && <>
+                                        <i className="crop-grip nw" />
+                                        <i className="crop-grip ne" />
+                                        <i className="crop-grip sw" />
+                                        <i className="crop-grip se" />
+                                      </>}
                                     </span>
                                   )}
+                                  {/* Drawn over the crop, because that is
+                                      where it sits in the filter graph
+                                      too: the plate is blurred first and
+                                      the crop carries the result. */}
+                                  {(() => {
+                                    const plate = cropFractions(blurBox);
+                                    if (!plate) return null;
+                                    return (
+                                      <span className="blur-box" style={{
+                                        left: `${plate.x * 100}%`, top: `${plate.y * 100}%`,
+                                        width: `${plate.w * 100}%`, height: `${plate.h * 100}%`,
+                                      }}>
+                                        {drawingBlur && <>
+                                          <i className="crop-grip nw" />
+                                          <i className="crop-grip ne" />
+                                          <i className="crop-grip sw" />
+                                          <i className="crop-grip se" />
+                                        </>}
+                                      </span>
+                                    );
+                                  })()}
                                 </div>
                               );
                             })()}

@@ -1544,7 +1544,52 @@ button.secondary {
 .crop-grip.sw { left: 1px; bottom: 1px; }
 .crop-grip.se { right: 1px; bottom: 1px; }
 
+/* The plate box. No dimming shadow: it is not deciding what you see, it
+   is covering one thing inside it, so the frame around it has to stay
+   readable while you aim. Filled rather than outlined, because what it
+   does is hide what is underneath. */
+.blur-box {
+  position: absolute;
+  box-sizing: border-box;
+  border: 2px solid #e4572e;
+  border-radius: 2px;
+  background: rgba(228, 87, 46, 0.35);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+.blur-box .crop-grip { background: #e4572e; }
+
+/* Which of the two boxes a drag draws. */
+.draw-modes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.draw-modes .draw-mode {
+  padding: 3px 11px;
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line, #3a3a4a);
+  background: transparent;
+  color: inherit;
+  opacity: 0.75;
+  cursor: pointer;
+}
+.draw-modes .draw-mode.chosen {
+  border-color: var(--accent, #6c5ce7);
+  background: var(--accent, #6c5ce7);
+  color: #fff;
+  opacity: 1;
+}
+.draw-modes .draw-mode.chosen:last-of-type { border-color: #e4572e; background: #e4572e; }
+
 /* The shape lock, beside the toggle that hides the box. */
+/* [hidden] sets display:none at a specificity a bare element selector
+   beats, and `display: flex` here is exactly that -- so the shape pills
+   stayed on screen while drawing a blur box, where a shape means nothing. */
+.crop-shapes[hidden] { display: none; }
 .crop-shapes {
   display: flex;
   align-items: center;
