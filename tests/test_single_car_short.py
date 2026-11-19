@@ -5646,10 +5646,30 @@ def test_the_plate_box_and_the_crop_box_share_one_drawing_surface():
     # A crop can be locked to a shape; a plate is whatever shape it is.
     assert "const activeRatio = drawingBlur ? 0 : cropRatio;" in app
     # The plate box does not dim the frame -- it is covering one thing
-    # inside the picture, not deciding what the picture is.
+    # inside the picture, not deciding what the picture is. And it shows
+    # the softening rather than a coloured wash, because the build adds no
+    # colour at all: an orange-filled box reads as a promise of an orange
+    # rectangle in the finished video.
     blur_rule = css.split(".blur-box {")[1].split("}")[0]
     assert "box-shadow" not in blur_rule
-    assert "background:" in blur_rule
+    assert "backdrop-filter: blur(" in blur_rule
+    assert "background: transparent" in blur_rule
     # [hidden] loses to `display: flex` on specificity, so the shape pills
     # stayed on screen while drawing a blur box until this was added.
     assert ".crop-shapes[hidden] { display: none; }" in css
+
+
+def test_the_blur_adds_no_colour_to_the_picture():
+    """The box is drawn orange in the dashboard so it can be found. The
+    filter it stands for only softens -- nothing in it writes a pixel of
+    any colour, which is the whole difference between a redaction and a
+    blur."""
+    from single_car_short import engine_clip_blur
+
+    graph = engine_clip_blur({"x": 0.35, "y": 0.42, "w": 0.26, "h": 0.16}).lower()
+    assert graph
+    for writes_colour in ("color", "colour", "drawbox", "drawtext", "rgba",
+                          "hue", "eq=", "lut", "pad="):
+        assert writes_colour not in graph, writes_colour
+    # Only these three, in this order: take the box out, soften it, put it back.
+    assert graph.index("crop=") < graph.index("boxblur") < graph.index("overlay=")
