@@ -7,7 +7,7 @@ import YouTubePanel from "./YouTubePanel";
 import ResearchPanel from "./ResearchPanel";
 import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
 import TempoTester from "./TempoTester";
-import { SLOTS, parseExtraPhotos, serializePhotos } from "./photoSections";
+import { SLOTS, parseExtraPhotos, serializePhotos, blurFractions } from "./photoSections";
 import { splitAngles } from "./angles";
 import { clipSeconds, cropFractions, clipStamp, sameListingVideo,
          clipLinkProblem, dragCropBox, moveCropBox, cropHandleAt, cropAnchor,
@@ -1120,6 +1120,9 @@ export default function App() {
   // pass reads each photo with a vision model and misses often enough to
   // be worth overriding by hand, and it never looked at the clip at all.
   const [blurBox, setBlurBox] = useState({ left: "", top: "", width: "", height: "" });
+  // And one per main photo slot, keyed by slot name. Close-ups carry
+  // theirs on their own row, where the rest of a close-up already lives.
+  const [photoBlur, setPhotoBlur] = useState({});
   // Which of the two a drag draws. One surface, two boxes.
   const [drawMode, setDrawMode] = useState("crop");
   const cropPreviewRef = useRef(null);
@@ -1620,6 +1623,14 @@ export default function App() {
             // inputs are spoken for, and this one is already a JSON object.
             // Not a photo, which is why it is named for what it is.
             if (enginePayload) slots.engine_clip = enginePayload;
+            // The five main slots' plate boxes. Only the ones that have
+            // one, and only for slots that actually have a photo.
+            const plates = {};
+            for (const [slot] of SLOTS) {
+              const drawn = blurFractions(photoBlur[slot]);
+              if (drawn && (photoUrls[slot] || "").trim()) plates[slot] = drawn;
+            }
+            if (Object.keys(plates).length) slots.blur = plates;
             return Object.keys(slots).length ? JSON.stringify(slots) : "";
           })(),
           rival_car: compareEnabled ? rivalNameFromInput(rivalCar.trim()) : "",
@@ -3588,6 +3599,8 @@ export default function App() {
                         onUrlsChange={setPhotoUrls}
                         closeups={extraPhotos}
                         onCloseupsChange={setExtraPhotos}
+                        photoBlur={photoBlur}
+                        onPhotoBlurChange={setPhotoBlur}
                         disabled={stage === "single-car-building"}
                       />
                     )}

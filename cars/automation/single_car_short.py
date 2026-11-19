@@ -41,7 +41,7 @@ from narrator_video import (render_narrator_video, _scene_time_boundaries,
                             _media_zone_geometry)
 from openai_retry import credits_available, with_openai_retry
 from openai_models import text_model, with_text_model
-from plate_blur import blur_license_plates
+from plate_blur import blur_box, blur_license_plates
 from photo_story import SLOTS, SLOT_LABELS, photo_metadata, collect_photo_sections
 
 load_dotenv(ROOT / ".env")
@@ -3763,6 +3763,11 @@ def gather_manual_media(photo_urls, images_dir, entry):
             continue
         shot_type = _SHOT_TYPE_BY_CATEGORY.get(category, "exterior")
         facing_direction = _facing_direction_for_photo(path, entry) if shot_type == "exterior" else "unclear"
+        # A box drawn by hand first, then the automatic pass -- which can
+        # still find a second plate the hand missed, and costs nothing when
+        # there is none.
+        if blur_box(path, ((photo_urls or {}).get("blur") or {}).get(field)):
+            print(f"[single-car] Blurred the box drawn on the {field} photo.")
         blur_license_plates(path)
         if shot_type == "exterior":
             path = remove_background(path)
@@ -3815,6 +3820,8 @@ def gather_extra_media(extra_photos, images_dir, entry):
                 f"download as a real image (needs to be a direct image link, not a listing page URL): {url}"
             )
             continue
+        if blur_box(path, item.get("blur")):
+            print(f"[single-car] Blurred the box drawn on \"{label or 'extra'}\".")
         blur_license_plates(path)
         relative = str(path.relative_to(images_dir.parent)).replace("\\", "/")
         metadata = photo_metadata(item, index)
@@ -4067,6 +4074,12 @@ def _photos_argument(raw):
             if isinstance(value, str) and value.strip()}
     if isinstance(parsed.get("engine_clip"), dict):
         kept["engine_clip"] = parsed["engine_clip"]
+    # And neither is the plate map: slot name -> the box drawn on that
+    # slot's photo. Same reason it travels here, same reason the
+    # string-only filter would have eaten it.
+    if isinstance(parsed.get("blur"), dict):
+        kept["blur"] = {key: value for key, value in parsed["blur"].items()
+                        if isinstance(value, dict)}
     return kept
 
 

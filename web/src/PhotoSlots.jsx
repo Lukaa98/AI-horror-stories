@@ -1,12 +1,26 @@
 import "./PhotoSlots.css";
+import { useState } from "react";
 import PhotoThumb from "./PhotoThumb";
+import BlurEditor from "./BlurEditor";
 import { SLOTS, MAX_CLOSEUPS, closeupsFor } from "./photoSections";
 
 // The five slots the pipeline has always had, each with its one main photo
 // and up to four close-ups nested under it. The main photo is what a scene
 // is about; the close-ups ride along underneath it on screen for that whole
 // chapter, so they need a link and (optionally) a name, nothing more.
-export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseupsChange, disabled }) {
+export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseupsChange,
+                                    photoBlur = {}, onPhotoBlurChange, disabled }) {
+  // Which row has its plate editor open, by slot name or close-up id. One
+  // at a time: these are big, and nobody is blurring two plates at once.
+  const [editing, setEditing] = useState("");
+  const toggle = (key) => setEditing(editing === key ? "" : key);
+  const setSlotBlur = (slot, box) => onPhotoBlurChange?.({ ...photoBlur, [slot]: box });
+  const blurButton = (key, has) => (
+    <button type="button" className={"blur-open" + (has ? " set" : "")}
+            onClick={() => toggle(key)} disabled={disabled}>
+      {has ? "Plate hidden" : "Hide plate"}
+    </button>
+  );
   const addCloseup = (slot) => onCloseupsChange([...closeups, {
     id: `closeup-${Date.now()}-${closeups.length}`, slot, label: "", url: "", note: "",
     describe: false,
@@ -35,7 +49,14 @@ export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseu
             disabled={disabled}
           />
           <PhotoThumb url={photoUrls[slot]} alt={`${title} main photo`} />
+          {hasMain && blurButton(slot, !!photoBlur[slot])}
         </label>
+        {editing === slot && hasMain && (
+          <BlurEditor url={photoUrls[slot]} box={photoBlur[slot]}
+                      alt={`${title} main photo`}
+                      onChange={(box) => setSlotBlur(slot, box)}
+                      onClose={() => setEditing("")} />
+        )}
         {!!nested.length && !hasMain &&
           <p className="photo-slot-warning">Add a main {title.toLowerCase()} photo — close-ups are shown underneath one, never on their own.</p>}
         {!!nested.filter(p => p.url.trim() && !p.label.trim() && p.describe).length &&
@@ -74,9 +95,16 @@ export default function PhotoSlots({ photoUrls, onUrlsChange, closeups, onCloseu
             say
           </label>
           <PhotoThumb url={photo.url} alt={photo.label || `${title} close-up ${index + 1}`} />
+          {!!photo.url.trim() && blurButton(photo.id, !!photo.blur)}
           <button type="button" onClick={() => remove(photo.id)} disabled={disabled}
                   aria-label={`Remove ${title} close-up ${index + 1}`}>×</button>
         </div>)}
+        {nested.filter((photo) => editing === photo.id && photo.url.trim()).map((photo) => (
+          <BlurEditor key={photo.id} url={photo.url} box={photo.blur}
+                      alt={photo.label || `${title} close-up`}
+                      onChange={(box) => update(photo.id, { blur: box })}
+                      onClose={() => setEditing("")} />
+        ))}
         <div className="photo-slot-actions">
           <button type="button" disabled={disabled || nested.length >= MAX_CLOSEUPS}
                   onClick={() => addCloseup(slot)}>

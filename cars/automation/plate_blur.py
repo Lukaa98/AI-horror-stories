@@ -27,6 +27,49 @@ _PLATE_PROMPT = (
 )
 
 
+def blur_box(image_path, box):
+    """Soften one hand-drawn rectangle of a photo. True if it did.
+
+    The automatic pass below reads each photo with a vision model and
+    fails open, which is the right trade for a pass nobody asked for and
+    the wrong one when you can see the plate and it did not. So a box
+    drawn in the dashboard overrides it: the same blur, aimed by hand.
+
+    `box` is x, y, w, h as fractions of the image, the same four numbers
+    the crop and the clip's plate box use, so one drawing surface in the
+    dashboard serves all three. Anything unreadable is ignored rather than
+    raised -- a privacy preference must never be the reason a build dies,
+    and the automatic pass still gets its turn afterwards.
+    """
+    if not isinstance(box, dict):
+        return False
+    try:
+        x, y = float(box.get("x", 0)), float(box.get("y", 0))
+        w, h = float(box.get("w", 0)), float(box.get("h", 0))
+    except (TypeError, ValueError):
+        return False
+    if not (0 <= x < 1 and 0 <= y < 1 and 0 < w <= 1 and 0 < h <= 1):
+        return False
+    try:
+        image = Image.open(image_path).convert("RGB")
+    except Exception:
+        return False
+    width, height = image.size
+    left, top = int(x * width), int(y * height)
+    right = min(width, left + max(1, int(w * width)))
+    bottom = min(height, top + max(1, int(h * height)))
+    if right <= left or bottom <= top:
+        return False
+    region = image.crop((left, top, right, bottom))
+    # Scaled to the box, like the clip's: a radius that hides a plate
+    # filling a quarter of the frame is a smear on one filling a tenth.
+    region = region.filter(ImageFilter.GaussianBlur(
+        radius=max(6, min(right - left, bottom - top) // 4)))
+    image.paste(region, (left, top))
+    image.save(image_path, quality=92)
+    return True
+
+
 def _detect_plate_boxes(image_path):
     key = (os.getenv("OPENAI_API_KEY") or "").strip()
     if not key.startswith("sk-") or len(key) < 30:

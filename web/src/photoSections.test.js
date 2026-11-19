@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { serializePhotos, parseExtraPhotos, closeupsFor, SLOTS, MAX_CLOSEUPS } from "./photoSections.js";
+import { serializePhotos, parseExtraPhotos, closeupsFor, SLOTS, MAX_CLOSEUPS,
+         blurFractions } from "./photoSections.js";
 
 test("nested close-ups carry their slot through serialization, blanks do not", () => {
   const input = [
@@ -69,4 +70,31 @@ test("nothing usable in a stored value yields no close-up rows", () => {
   // slot editor -- better absent than rendered under the wrong heading.
   assert.deepEqual(parseExtraPhotos('[{"id":"old","label":"Gauges","url":"https://x/g.jpg"}]'), []);
   assert.deepEqual(parseExtraPhotos('[{"slot":"front","url":"  "}]'), []);
+});
+
+test("a plate box rides with the close-up it was drawn on", () => {
+  // Only when there is one: an empty key on twenty rows is twenty keys of
+  // nothing, in an input that already carries twenty long urls.
+  const [withBox, without] = serializePhotos([
+    { id: "a", label: "Rear", url: "https://example.com/a.jpg", slot: "rear",
+      blur: { left: "35", top: "55", width: "25", height: "15" } },
+    { id: "b", label: "Tips", url: "https://example.com/b.jpg", slot: "rear" },
+  ]);
+  assert.deepEqual(withBox.blur, { x: 0.35, y: 0.55, w: 0.25, h: 0.15 });
+  assert.ok(!("blur" in without));
+});
+
+test("a box that cannot be read is no box, not a wrong one", () => {
+  for (const bad of [undefined, null, {}, { left: "", top: "0", width: "10", height: "10" },
+                     { left: "x", top: "0", width: "10", height: "10" },
+                     { left: "0", top: "0", width: "0", height: "10" }]) {
+    assert.equal(blurFractions(bad), null, JSON.stringify(bad));
+  }
+  // Numbers already in fractions pass straight through, so a box restored
+  // from a previous build is not re-read as percentages.
+  const already = { x: 0.1, y: 0.2, w: 0.3, h: 0.4 };
+  assert.deepEqual(blurFractions(already), already);
+  // And a box dragged past the edge means "to the edge".
+  assert.deepEqual(blurFractions({ left: "80", top: "90", width: "50", height: "50" }),
+                   { x: 0.8, y: 0.9, w: 0.2, h: 0.1 });
 });

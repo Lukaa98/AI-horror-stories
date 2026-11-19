@@ -15,7 +15,33 @@ export function serializePhotos(photos) {
   return photos.filter(p => (p.url || "").trim()).map(p => ({
     id: p.id, label: (p.label || "").trim(), url: p.url.trim(),
     ...(p.slot ? { slot: p.slot, note: (p.note || "").trim(), describe: p.describe === true } : {}),
+    // Only when there is one: an empty key on twenty rows is twenty keys
+    // of nothing in an input that already carries twenty long urls.
+    ...(blurFractions(p.blur) ? { blur: blurFractions(p.blur) } : {}),
   }));
+}
+
+
+/* A plate box as fractions, or null. The four percentages the editor
+ * holds are strings while they are being typed, and the build wants
+ * numbers; anything unreadable is no box rather than a wrong one. */
+export function blurFractions(box) {
+  if (!box) return null;
+  if (["x", "y", "w", "h"].every((key) => typeof box[key] === "number")) return box;
+  const pct = (value) => {
+    const text = String(value ?? "").trim().replace("%", "");
+    if (text === "") return null;
+    const n = Number(text);
+    return Number.isFinite(n) ? Math.min(100, Math.max(0, n)) / 100 : null;
+  };
+  const x = pct(box.left), y = pct(box.top), w = pct(box.width), h = pct(box.height);
+  if ([x, y, w, h].some((value) => value === null)) return null;
+  // Rounded, because clamping to the edge goes through 1 - 0.8 and lands
+  // on 0.19999999999999996 -- which is the same box and an uglier payload.
+  const round = (value) => Math.round(value * 1e6) / 1e6;
+  const width = round(Math.min(w, 1 - x)), height = round(Math.min(h, 1 - y));
+  return width > 0 && height > 0
+    ? { x: round(x), y: round(y), w: width, h: height } : null;
 }
 
 export function closeupsFor(photos, slot) {
