@@ -1,0 +1,57 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/rkxwZZLO/2022-ford-mustang-shelby-super-snake-60th-anniversary?ss_id=6a079dbd-4dce-4f1e-8f29-340262a32233&ref=pr_1_17",
+  "scrape_ok": true,
+  "video_count": 5,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aa1075a77d00fc8ecc4400dd3",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aa1075a77d00fc8ecc4400dd34685c9d/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/aa1075a77d00fc8ecc4400dd34685c9d/manifest/video.m3u8",
+      "duration_seconds": 45.79,
+      "poster": "poster-1.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2790a9b934070498527c9bf32",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2790a9b934070498527c9bf3224b575b/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/2790a9b934070498527c9bf3224b575b/manifest/video.m3u8",
+      "duration_seconds": 96.7,
+      "poster": "poster-2.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bcb07ed1e6b2066753fea6242",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bcb07ed1e6b2066753fea6242417cdc9/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/bcb07ed1e6b2066753fea6242417cdc9/manifest/video.m3u8",
+      "duration_seconds": 25.39,
+      "poster": "poster-3.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 4,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4635594a10ee227fba374c17c",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4635594a10ee227fba374c17c1e8ce44/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/4635594a10ee227fba374c17c1e8ce44/manifest/video.m3u8",
+      "duration_seconds": 39.4,
+      "poster": "poster-4.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 5,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee45cebd412bf8588318013a3",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee45cebd412bf8588318013a39b36fb0/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ee45cebd412bf8588318013a39b36fb0/manifest/video.m3u8",
+      "duration_seconds": 17.7,
+      "poster": "poster-5.jpg",
+      "audio": "aac, 48 kHz"
+    }
+  ]
+}
