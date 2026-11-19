@@ -838,7 +838,7 @@ def test_gather_media_uses_manual_photo_urls_and_skips_scraping_entirely(tmp_pat
     def fail_scrape(*a, **k):
         raise AssertionError("scraping should be skipped when manual photo URLs are given")
 
-    def fake_gather_manual_media(photo_urls, images_dir_arg, entry):
+    def fake_gather_manual_media(photo_urls, images_dir_arg, entry, plate_boxes=None):
         assert photo_urls == {"front": "https://example.com/front.jpg", "side": "https://example.com/side.jpg"}
         return [
             {"path": "images/manual/front.jpg", "type": "exterior", "category": "exterior_front", "facing_direction": "right"},
@@ -890,7 +890,7 @@ def test_gather_media_merges_manual_photo_overrides_into_an_auction_scrape(tmp_p
         ]
         return entry
 
-    def fake_gather_manual_media(photo_urls, images_dir_arg, entry):
+    def fake_gather_manual_media(photo_urls, images_dir_arg, entry, plate_boxes=None):
         assert photo_urls == {"side": "https://example.com/side.jpg"}
         return [{"path": "images/manual/side.jpg", "type": "exterior", "category": "exterior_side", "facing_direction": "left"}]
 
@@ -5673,3 +5673,79 @@ def test_the_blur_adds_no_colour_to_the_picture():
         assert writes_colour not in graph, writes_colour
     # Only these three, in this order: take the box out, soften it, put it back.
     assert graph.index("crop=") < graph.index("boxblur") < graph.index("overlay=")
+
+
+def test_the_clip_is_never_longer_than_the_file_it_came_from(tmp_path):
+    """The Super Snake shipped with its picture frozen for the last seven
+    seconds while the narration played on.
+
+    Eight seconds of clip were asked for and 7.6 arrived. Nothing said so,
+    because the warning only fires past half a second, and the length went
+    downstream as 8.0. xfade then put its transition at 7.65 -- past the
+    end of its first input -- and an offset past the end does not stretch
+    the first input, it truncates the SECOND one. The film lost exactly
+    the seconds the clip was short.
+    """
+    import json
+    import subprocess
+
+    import single_car_short
+
+    def make(path, seconds, size, rate):
+        subprocess.run(
+            ["ffmpeg", "-y", "-v", "error",
+             "-f", "lavfi", "-i", f"testsrc2=size={size}:rate={rate}:duration={seconds}",
+             "-f", "lavfi", "-i", f"sine=frequency=200:duration={seconds}",
+             "-t", str(seconds), "-c:v", "libx264", "-pix_fmt", "yuv420p",
+             "-c:a", "aac", str(path)], check=True, capture_output=True)
+
+    def streams(path):
+        out = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "stream=codec_type,duration",
+             "-of", "json", str(path)], capture_output=True, text=True, check=True).stdout
+        return {s["codec_type"]: float(s["duration"]) for s in json.loads(out)["streams"]}
+
+    film_source = tmp_path / "film-source.mp4"
+    make(film_source, 20, "1080x1920", 24)
+    clip = tmp_path / "clip.mp4"
+    # Short of the eight seconds the caller will claim, but inside the
+    # half-second the old warning tolerated.
+    make(clip, 7.6, "640x360", 30)
+
+    film = tmp_path / "film.mp4"
+    film.write_bytes(film_source.read_bytes())
+    played = single_car_short.prepend_engine_clip(film, clip, 8.0)
+
+    sizes = streams(film)
+    # The one thing that must never happen: a picture shorter than its sound.
+    assert abs(sizes["video"] - sizes["audio"]) < 0.3, sizes
+    # And what it reports is what is really on the front.
+    assert played < 7.6, played
+
+
+def test_the_hand_drawn_boxes_actually_reach_the_build():
+    """Both of these were written, tested and shipped doing nothing,
+    because the tests called the functions directly and the call sites
+    never passed the value.
+
+    prepend_engine_clip grew a `blur` parameter that build_short never
+    filled in, and gather_manual_media read its boxes off photo_urls --
+    a dict rebuilt from five named slots a hundred lines earlier, so a
+    sixth key never survived the trip.
+    """
+    import inspect
+
+    import single_car_short
+
+    source = Path(single_car_short.__file__).read_text()
+    # The clip's box.
+    # Not split on ")" -- the first one is inside engine_clip.get("crop").
+    call = source.split("played = prepend_engine_clip(")[1][:300]
+    assert "crop=engine_clip.get(\"crop\")" in call
+    assert "blur=engine_clip.get(\"blur\")" in call, "the clip's blur box is not passed"
+    # The five main slots' boxes, carried beside the urls rather than in them.
+    assert "manual_plate_boxes = photos.get(\"blur\")" in source
+    assert "plate_boxes=manual_plate_boxes" in source
+    assert "plate_boxes" in str(inspect.signature(single_car_short.gather_manual_media))
+    body = inspect.getsource(single_car_short.gather_manual_media)
+    assert "blur_box(path, (plate_boxes or {}).get(field))" in body

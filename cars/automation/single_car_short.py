@@ -3744,7 +3744,7 @@ def _facing_direction_for_photo(path, entry):
         return "unclear"
 
 
-def gather_manual_media(photo_urls, images_dir, entry):
+def gather_manual_media(photo_urls, images_dir, entry, plate_boxes=None):
     """Build the media list straight from user-pasted photo URLs instead of
     searching/scraping Cars & Bids -- the whole point is to skip the slow
     Puppeteer search+review pass when the user already has the exact
@@ -3766,7 +3766,11 @@ def gather_manual_media(photo_urls, images_dir, entry):
         # A box drawn by hand first, then the automatic pass -- which can
         # still find a second plate the hand missed, and costs nothing when
         # there is none.
-        if blur_box(path, ((photo_urls or {}).get("blur") or {}).get(field)):
+        # Passed in rather than read off photo_urls: that dict is rebuilt
+        # from the five named slots before it gets here, so a sixth key
+        # smuggled into it is dropped on the way -- which is exactly how
+        # the Super Snake's rear photo went out with its plate readable.
+        if blur_box(path, (plate_boxes or {}).get(field)):
             print(f"[single-car] Blurred the box drawn on the {field} photo.")
         blur_license_plates(path)
         if shot_type == "exterior":
@@ -3879,7 +3883,7 @@ def _pasted_photos_are_enough(manual_urls, auction_url):
     return all(manual_urls.get(field) for field in MANUAL_PHOTO_FIELDS)
 
 
-def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None, auction_url=None, manual_photo_urls=None, extra_photos=None):
+def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=None, auction_url=None, manual_photo_urls=None, extra_photos=None, plate_boxes=None):
     search_hint = " ".join(value for value in [make, model, trim] if value).strip()
     if start_year or end_year:
         first, last = start_year or end_year, end_year or start_year
@@ -3914,7 +3918,7 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
     # slot there is nothing left for the listing to supply, so it is not
     # fetched.
     if (manual_urls or nested) and _pasted_photos_are_enough(manual_urls, auction_url):
-        media = gather_manual_media(manual_urls, images_dir, entry)
+        media = gather_manual_media(manual_urls, images_dir, entry, plate_boxes)
         media.extend(gather_extra_media(extra_photos, images_dir, entry))
         if not media:
             raise RuntimeError("None of the provided photo URLs could be downloaded.")
@@ -3977,7 +3981,7 @@ def gather_media(make, model, trim, start_year, end_year, images_dir, scenes=Non
         # A manual link alongside a listing overrides just that one
         # category -- the rest of the listing's own gallery still fills
         # in whatever wasn't manually given.
-        media = _apply_manual_photo_overrides(media, gather_manual_media(manual_urls, images_dir, entry))
+        media = _apply_manual_photo_overrides(media, gather_manual_media(manual_urls, images_dir, entry, plate_boxes))
     media.extend(gather_extra_media(extra_photos, images_dir, entry))
     if not media:
         raise RuntimeError("No approved exterior, engine, detail, or wheel images were found.")
@@ -4358,6 +4362,7 @@ def fetch_engine_clip(clip, dest):
 
 def _cut_engine_clip(source, offset, length, dest, start):
     """The chosen seconds out of an openable source, normalised."""
+    length_asked = length
     # Two ways of asking, because the first one came back silent.
     #
     # Seeking before -i is the cheap way: on an HLS manifest it skips
@@ -4408,12 +4413,20 @@ def _cut_engine_clip(source, offset, length, dest, start):
               "could not open. The build carries on without a clip.")
         return None
     actual = _media_duration(dest)
-    if actual and actual < length - 0.5:
+    # Clamped whatever the gap, and only talked about when it is big. The
+    # half-second of quiet tolerance here is what shipped the Super Snake:
+    # eight seconds were asked for, 7.6 arrived, nothing was said because
+    # 7.6 is inside the tolerance, and the length went downstream as 8.0.
+    # xfade then put its transition at 7.65 -- past the end of the clip --
+    # and silently truncated the whole film's video to 47 seconds against
+    # 55 seconds of audio. The picture froze and the narration kept going.
+    if actual:
+        length = min(length, actual)
+    if actual and actual < length_asked - 0.5:
         # Asking for 12s-17s of a video that ends at 14s gets two seconds,
         # and the gap has to match what there is to play, not what was typed.
-        print(f"[single-car] The engine clip is {actual:.1f}s, not the {length:.1f}s asked for; "
-              "using what is there.")
-        length = actual
+        print(f"[single-car] The engine clip is {actual:.1f}s, not the {length_asked:.1f}s asked "
+              "for; using what is there.")
     print(f"[single-car] Engine clip: {length:.1f}s from {start:.1f}s of the listing video.")
     return dest, length
 
@@ -4561,6 +4574,14 @@ def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop
     video_path, clip_path = Path(video_path), Path(clip_path)
     joined = video_path.with_name(f"{video_path.stem}-engine{video_path.suffix}")
     width, height = (int(round(v)) for v in size)
+    # Never ask for more clip than the file holds. xfade puts its
+    # transition at `length - fade`, and an offset past the end of the
+    # first input does not stretch it -- it truncates the SECOND input,
+    # so the narrated film loses however many seconds the clip was short
+    # and the picture freezes while the narration plays on.
+    on_disk = _media_duration(clip_path)
+    if on_disk:
+        length = min(length, on_disk)
     # A clip too short to give the crossfade its seconds gets a shorter
     # one rather than an offset that lands before the clip begins.
     fade = max(0.0, min(ENGINE_CLIP_CROSSFADE_SECONDS, length / 3))
@@ -4936,6 +4957,9 @@ def build_short(args):
         "engine": args.photo_engine or photos.get("engine"),
         "interior": args.photo_interior or photos.get("interior"),
     }
+    # The hand-drawn plate boxes for those five slots, kept apart from the
+    # urls because that dict is rebuilt above and would lose them.
+    manual_plate_boxes = photos.get("blur") if isinstance(photos, dict) else None
     args.photo_rival = args.photo_rival or photos.get("rival") or None
     # Asked now rather than after the research. A pasted photo that will not
     # download is already fatal -- a video built from photos nobody chose is
@@ -5075,6 +5099,7 @@ def build_short(args):
     media, selected_auction = gather_media(
         args.make, args.model, args.trim, media_start_year, media_end_year, images_dir, package["scenes"],
         auction_url=args.auction_url, manual_photo_urls=manual_photo_urls, extra_photos=extra_photos,
+        plate_boxes=manual_plate_boxes,
     )
     # Captured before order_media_for_scenes/apply_rival_photos reshuffle
     # `media` into one pick per scene -- this needs the whole gathered pool
@@ -5274,7 +5299,8 @@ def build_short(args):
     # timing it was built with and they all simply start later.
     if engine_clip_path:
         played = prepend_engine_clip(video_path, engine_clip_path, engine_clip_length,
-                                     crop=engine_clip.get("crop"))
+                                     crop=engine_clip.get("crop"),
+                                     blur=engine_clip.get("blur"))
         if played:
             # Recorded so a build that shipped with a clip can be told apart
             # from one that asked for a clip and did not get it.
