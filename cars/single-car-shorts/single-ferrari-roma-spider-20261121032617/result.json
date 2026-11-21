@@ -1,0 +1,2866 @@
+{
+  "car": {
+    "make": "Ferrari",
+    "model": "Roma Spider",
+    "trim": null
+  },
+  "build_inputs": {
+    "make": "Ferrari",
+    "model": "Roma Spider",
+    "script_style": "classic",
+    "query": "",
+    "start_year": 2024,
+    "end_year": "",
+    "voice": "onyx",
+    "auction_url": "https://carsandbids.com/auctions/92QzgJD6/2024-ferrari-roma-spider?ss_id=32a46908-e168-4076-9d0d-ba3c726358e0&ref=pr_1_4",
+    "photo_front": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/9004500a220bf3a3d455d15ee052cf8c332606f8/photos/9aYZJMko-wyWpcrg/edit/MkeHx.jpg?t=175708346953",
+    "photo_side": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-Or6W5l_.jpg?t=175579956509",
+    "photo_rear": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9aYZJMko-BkGHilJ/edit/GiuHY.jpg?t=175699436025",
+    "photo_engine": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-zAeW8EP.jpg?t=175579956509",
+    "photo_interior": "https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9aYZJMko-enPryFk/edit/m_3Mn.jpg?t=175699458487",
+    "photo_rival": "",
+    "rival_car": "",
+    "photo_race": "",
+    "photo_race_flip": "",
+    "photo_rival_flip": "",
+    "disable_comparison": "true",
+    "angles": "",
+    "notes_count": 0,
+    "current_price": "",
+    "extra_photos": "[{\"id\":\"closeup-1795231312322-0\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9aYZJMko-VjKZ5o1/edit/5PaEf.jpg?t=175699451800\",\"slot\":\"front\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231338483-1\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/c51905b0000b639a185eeb080dd879bf007f5604/photos/9aYZJMko-t4q96eK/edit/GhktC.jpg?t=175699454130\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231378992-2\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-Kb5Vhz_.jpg?t=175579956509\",\"slot\":\"front\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231394355-3\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-Dv9hq9s.jpg?t=175579956509\",\"slot\":\"side\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231407151-4\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-KggH4VO.jpg?t=175579956509\",\"slot\":\"side\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231419003-5\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-wLLW85c.jpg?t=175579956509\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231470998-6\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-RGLRj93.jpg?t=175579956509\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231492481-7\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-5O75L6r.jpg?t=175579956509\",\"slot\":\"interior\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231534480-8\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-d7TFVza.jpg?t=175579956509\",\"slot\":\"engine\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231549629-9\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-EZDRnOV.jpg?t=175579956509\",\"slot\":\"engine\",\"note\":\"\",\"describe\":false},{\"id\":\"closeup-1795231571734-10\",\"label\":\"\",\"url\":\"https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/51c631a0dca23442971c36491dd2834b266601c9/photos/9aYZJMko-RL2fruv.jpg?t=175579956509\",\"slot\":\"rear\",\"note\":\"\",\"describe\":false}]",
+    "engine_clip": null
+  },
+  "title": "Ferrari Roma Spider",
+  "youtube_title": "Soft Top, 60 In 3.3 \ud83d\udd25",
+  "youtube_title_options": [
+    "Soft Top, 60 In 3.3 \ud83d\udd25",
+    "Roof Down In 13.5 Seconds \ud83d\udd25",
+    "Would You Go Soft Top? \ud83d\udd25",
+    "Who Needs A Folding Hardtop? \ud83d\udd25"
+  ],
+  "key_specs": {
+    "horsepower": "612 hp",
+    "torque": "561 lb-ft",
+    "zero_to_sixty": "3.3 sec",
+    "redline": "7,500 rpm",
+    "engine": "3.9L twin-turbo V8",
+    "price": "~$270K new and used"
+  },
+  "history": {
+    "year": 2023,
+    "fact": "In 2023 Ferrari put a fabric roof back on a front-engined model for the first time since the Daytona Spider."
+  },
+  "start_year": 2024,
+  "end_year": 2026,
+  "scenes": [
+    {
+      "media_type": "exterior",
+      "headline": "Soft Top, Fast Launch",
+      "photo_label": null,
+      "narration": "The soft top disappears in 13.5 seconds, and this thing can hit sixty in 3.3 seconds. That's the Ferrari Roma Spider.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Roof Opening",
+      "stat_value": "13.5s",
+      "stat_label_2": "0 - 60",
+      "stat_value_2": "3.3s"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Fabric Roof Returns",
+      "photo_label": null,
+      "narration": "In 2023 Ferrari put a fabric roof back on a front-engined model for the first time since the Daytona Spider.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Debut",
+      "stat_value": "2023",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Cooling The V8",
+      "photo_label": "exterior front",
+      "narration": "Ferrari opened up only as much grille as it needed to cool a twin-turbo V8 with 612 horsepower and 561 pound-feet of torque.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Horsepower",
+      "stat_value": "612 hp",
+      "stat_label_2": "Torque",
+      "stat_value_2": "561 lb-ft"
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Scuderia Shields",
+      "photo_label": "exterior side",
+      "narration": "The launch car skipped the fender shields as a nod to the Ferrari road cars of the fifties.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "Active Rear Spoiler",
+      "photo_label": "exterior rear",
+      "narration": "Brake hard enough and the rear spoiler automatically tilts into its highest downforce setting.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "engine",
+      "headline": "Reverse Gear Returns",
+      "photo_label": "engine bay",
+      "narration": "The eight-speed dual-clutch sends power to the rear wheels and adds a reverse gear the SF90 Stradale does without.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Gearbox",
+      "stat_value": "8-speed DCT",
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "interior",
+      "headline": "The Touch Starter",
+      "photo_label": "interior",
+      "narration": "Reviewers griped about the touch starter and the Amalfi Spider brought back a button you can actually press.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": null,
+      "stat_value": null,
+      "stat_label_2": null,
+      "stat_value_2": null
+    },
+    {
+      "media_type": "exterior",
+      "headline": "$270K New Or Used",
+      "photo_label": null,
+      "narration": "It started at about $270,000 new and that's still roughly what they go for today.",
+      "rival_make": null,
+      "rival_model": null,
+      "main_horsepower": null,
+      "rival_horsepower": null,
+      "main_quarter_mile_seconds": null,
+      "rival_quarter_mile_seconds": null,
+      "stat_label": "Value",
+      "stat_value": "~$270K new and used",
+      "stat_label_2": null,
+      "stat_value_2": null
+    }
+  ],
+  "sources": [
+    "https://cdn.ferrari.com/cms/network/media/pdf/CS_Ferrari_Roma_Spider_final_GBR_rev.pdf",
+    "https://www.motortrend.com/features/2024-ferrari-roma-spider-first-drive-review",
+    "https://carsandbids.com/auctions/92QzgJD6/2024-ferrari-roma-spider",
+    "https://www.topgear.com/car-reviews/ferrari/roma-spider/interior",
+    "https://www.ferraribeverlyhills.com/articles/introducing-the-amalfi-spider",
+    "https://bringatrailer.com/wp-content/uploads/2025/12/2024_ferrari_roma-spider_2024_ferrari_roma-spider_2024_ferrari_roma-spider_image001-7-50511-usm8yj-85554-80447.jpg?w=620",
+    "https://bringatrailer.com/listing/2024-ferrari-roma-spider-4-2/",
+    "https://sothebysmotorsport.com/auction/2024-ferrari-romaspider-12524",
+    "https://www.garagescout.ai/listings/2024-ferrari-roma-spider-31c05f25",
+    "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49781",
+    "https://cdn.ferrari.com/cms/network/media/pdf/2026_02_10%20-%20Ferrari%20-%20FY%202025%20Results%20Presentation.pdf"
+  ],
+  "script": "The soft top disappears in 13.5 seconds, and this thing can hit sixty in 3.3 seconds. That's the Ferrari Roma Spider. In 2023 Ferrari put a fabric roof back on a front-engined model for the first time since the Daytona Spider. Ferrari opened up only as much grille as it needed to cool a twin-turbo V8 with 612 horsepower and 561 pound-feet of torque. The launch car skipped the fender shields as a nod to the Ferrari road cars of the fifties. Brake hard enough and the rear spoiler automatically tilts into its highest downforce setting. The eight-speed dual-clutch sends power to the rear wheels and adds a reverse gear the SF90 Stradale does without. Reviewers griped about the touch starter and the Amalfi Spider brought back a button you can actually press. It started at about $270,000 new and that's still roughly what they go for today.",
+  "word_count": 151,
+  "_engine_clip": false,
+  "rule_violations": [
+    "your last scene does not end on a question -- it was \"It started at about $270,000 new and that's still roughly what they go for today.\". It must ask the viewer something that calls back to the hook.",
+    "every sentence is about the same length (5-23 words) and it reads flat. Break at least two of them into something short -- four or five words, landing after a long one. This is rhythm, not word count: the total is unchanged."
+  ],
+  "voice_preset": "onyx",
+  "tts_speed": null,
+  "narration": {
+    "engine": "gpt-audio",
+    "model": "gpt-audio",
+    "voice": "echo",
+    "pitch": {
+      "measured_hz": 150.9433962264151,
+      "result_hz": 150.9433962264151
+    },
+    "tts_speed": null
+  },
+  "target_duration_seconds": 55.0,
+  "normalized_audio_duration_seconds": 53.301,
+  "audio_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ferrari-roma-spider-20261121032617/narration.mp3",
+  "duration_seconds": 53.37,
+  "mouth_timeline": [
+    {
+      "start": 0.0,
+      "end": 0.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.45,
+      "end": 0.54,
+      "mouth": "small"
+    },
+    {
+      "start": 0.54,
+      "end": 0.72,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.72,
+      "end": 0.81,
+      "mouth": "small"
+    },
+    {
+      "start": 0.81,
+      "end": 0.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 0.9,
+      "end": 0.99,
+      "mouth": "wide"
+    },
+    {
+      "start": 0.99,
+      "end": 2.88,
+      "mouth": "small"
+    },
+    {
+      "start": 2.88,
+      "end": 3.15,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.15,
+      "end": 3.33,
+      "mouth": "small"
+    },
+    {
+      "start": 3.33,
+      "end": 3.42,
+      "mouth": "wide"
+    },
+    {
+      "start": 3.42,
+      "end": 3.87,
+      "mouth": "small"
+    },
+    {
+      "start": 3.87,
+      "end": 3.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 3.96,
+      "end": 4.14,
+      "mouth": "small"
+    },
+    {
+      "start": 4.14,
+      "end": 4.23,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.23,
+      "end": 4.5,
+      "mouth": "small"
+    },
+    {
+      "start": 4.5,
+      "end": 4.59,
+      "mouth": "closed"
+    },
+    {
+      "start": 4.59,
+      "end": 4.95,
+      "mouth": "small"
+    },
+    {
+      "start": 4.95,
+      "end": 5.04,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.04,
+      "end": 5.4,
+      "mouth": "small"
+    },
+    {
+      "start": 5.4,
+      "end": 5.85,
+      "mouth": "closed"
+    },
+    {
+      "start": 5.85,
+      "end": 6.57,
+      "mouth": "small"
+    },
+    {
+      "start": 6.57,
+      "end": 6.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 6.75,
+      "end": 6.93,
+      "mouth": "small"
+    },
+    {
+      "start": 6.93,
+      "end": 7.02,
+      "mouth": "wide"
+    },
+    {
+      "start": 7.02,
+      "end": 7.47,
+      "mouth": "small"
+    },
+    {
+      "start": 7.47,
+      "end": 8.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 8.01,
+      "end": 8.28,
+      "mouth": "small"
+    },
+    {
+      "start": 8.28,
+      "end": 8.37,
+      "mouth": "wide"
+    },
+    {
+      "start": 8.37,
+      "end": 9.54,
+      "mouth": "small"
+    },
+    {
+      "start": 9.54,
+      "end": 9.63,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.63,
+      "end": 9.81,
+      "mouth": "small"
+    },
+    {
+      "start": 9.81,
+      "end": 9.9,
+      "mouth": "closed"
+    },
+    {
+      "start": 9.9,
+      "end": 10.26,
+      "mouth": "small"
+    },
+    {
+      "start": 10.26,
+      "end": 10.35,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.35,
+      "end": 10.53,
+      "mouth": "small"
+    },
+    {
+      "start": 10.53,
+      "end": 10.62,
+      "mouth": "closed"
+    },
+    {
+      "start": 10.62,
+      "end": 11.16,
+      "mouth": "small"
+    },
+    {
+      "start": 11.16,
+      "end": 11.25,
+      "mouth": "closed"
+    },
+    {
+      "start": 11.25,
+      "end": 12.33,
+      "mouth": "small"
+    },
+    {
+      "start": 12.33,
+      "end": 12.51,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.51,
+      "end": 12.78,
+      "mouth": "small"
+    },
+    {
+      "start": 12.78,
+      "end": 12.87,
+      "mouth": "closed"
+    },
+    {
+      "start": 12.87,
+      "end": 12.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 12.96,
+      "end": 14.58,
+      "mouth": "small"
+    },
+    {
+      "start": 14.58,
+      "end": 15.21,
+      "mouth": "closed"
+    },
+    {
+      "start": 15.21,
+      "end": 15.3,
+      "mouth": "small"
+    },
+    {
+      "start": 15.3,
+      "end": 15.57,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.57,
+      "end": 15.66,
+      "mouth": "small"
+    },
+    {
+      "start": 15.66,
+      "end": 15.75,
+      "mouth": "wide"
+    },
+    {
+      "start": 15.75,
+      "end": 16.02,
+      "mouth": "small"
+    },
+    {
+      "start": 16.02,
+      "end": 16.2,
+      "mouth": "closed"
+    },
+    {
+      "start": 16.2,
+      "end": 16.29,
+      "mouth": "wide"
+    },
+    {
+      "start": 16.29,
+      "end": 16.83,
+      "mouth": "small"
+    },
+    {
+      "start": 16.83,
+      "end": 17.01,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.01,
+      "end": 17.37,
+      "mouth": "small"
+    },
+    {
+      "start": 17.37,
+      "end": 17.46,
+      "mouth": "closed"
+    },
+    {
+      "start": 17.46,
+      "end": 17.73,
+      "mouth": "small"
+    },
+    {
+      "start": 17.73,
+      "end": 18.0,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.0,
+      "end": 18.09,
+      "mouth": "small"
+    },
+    {
+      "start": 18.09,
+      "end": 18.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 18.18,
+      "end": 19.17,
+      "mouth": "small"
+    },
+    {
+      "start": 19.17,
+      "end": 19.26,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.26,
+      "end": 19.62,
+      "mouth": "small"
+    },
+    {
+      "start": 19.62,
+      "end": 19.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 19.89,
+      "end": 20.16,
+      "mouth": "small"
+    },
+    {
+      "start": 20.16,
+      "end": 20.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.25,
+      "end": 20.7,
+      "mouth": "small"
+    },
+    {
+      "start": 20.7,
+      "end": 20.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 20.79,
+      "end": 21.51,
+      "mouth": "small"
+    },
+    {
+      "start": 21.51,
+      "end": 21.69,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.69,
+      "end": 21.87,
+      "mouth": "small"
+    },
+    {
+      "start": 21.87,
+      "end": 21.96,
+      "mouth": "closed"
+    },
+    {
+      "start": 21.96,
+      "end": 22.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 22.14,
+      "end": 23.04,
+      "mouth": "small"
+    },
+    {
+      "start": 23.04,
+      "end": 23.13,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.13,
+      "end": 23.67,
+      "mouth": "small"
+    },
+    {
+      "start": 23.67,
+      "end": 23.76,
+      "mouth": "closed"
+    },
+    {
+      "start": 23.76,
+      "end": 23.85,
+      "mouth": "small"
+    },
+    {
+      "start": 23.85,
+      "end": 24.57,
+      "mouth": "closed"
+    },
+    {
+      "start": 24.57,
+      "end": 24.75,
+      "mouth": "small"
+    },
+    {
+      "start": 24.75,
+      "end": 24.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 24.93,
+      "end": 25.02,
+      "mouth": "small"
+    },
+    {
+      "start": 25.02,
+      "end": 25.11,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.11,
+      "end": 25.2,
+      "mouth": "wide"
+    },
+    {
+      "start": 25.2,
+      "end": 25.56,
+      "mouth": "small"
+    },
+    {
+      "start": 25.56,
+      "end": 25.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 25.65,
+      "end": 26.19,
+      "mouth": "small"
+    },
+    {
+      "start": 26.19,
+      "end": 26.28,
+      "mouth": "wide"
+    },
+    {
+      "start": 26.28,
+      "end": 26.37,
+      "mouth": "small"
+    },
+    {
+      "start": 26.37,
+      "end": 26.64,
+      "mouth": "closed"
+    },
+    {
+      "start": 26.64,
+      "end": 26.91,
+      "mouth": "small"
+    },
+    {
+      "start": 26.91,
+      "end": 27.18,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.18,
+      "end": 27.36,
+      "mouth": "small"
+    },
+    {
+      "start": 27.36,
+      "end": 27.45,
+      "mouth": "closed"
+    },
+    {
+      "start": 27.45,
+      "end": 27.63,
+      "mouth": "small"
+    },
+    {
+      "start": 27.63,
+      "end": 27.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 27.81,
+      "end": 27.99,
+      "mouth": "small"
+    },
+    {
+      "start": 27.99,
+      "end": 28.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.08,
+      "end": 28.26,
+      "mouth": "small"
+    },
+    {
+      "start": 28.26,
+      "end": 28.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 28.35,
+      "end": 28.62,
+      "mouth": "small"
+    },
+    {
+      "start": 28.62,
+      "end": 28.71,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.71,
+      "end": 28.8,
+      "mouth": "small"
+    },
+    {
+      "start": 28.8,
+      "end": 28.98,
+      "mouth": "closed"
+    },
+    {
+      "start": 28.98,
+      "end": 29.07,
+      "mouth": "small"
+    },
+    {
+      "start": 29.07,
+      "end": 29.43,
+      "mouth": "closed"
+    },
+    {
+      "start": 29.43,
+      "end": 29.52,
+      "mouth": "small"
+    },
+    {
+      "start": 29.52,
+      "end": 29.61,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.61,
+      "end": 29.79,
+      "mouth": "small"
+    },
+    {
+      "start": 29.79,
+      "end": 29.88,
+      "mouth": "wide"
+    },
+    {
+      "start": 29.88,
+      "end": 30.15,
+      "mouth": "small"
+    },
+    {
+      "start": 30.15,
+      "end": 30.42,
+      "mouth": "closed"
+    },
+    {
+      "start": 30.42,
+      "end": 30.78,
+      "mouth": "small"
+    },
+    {
+      "start": 30.78,
+      "end": 30.96,
+      "mouth": "wide"
+    },
+    {
+      "start": 30.96,
+      "end": 31.05,
+      "mouth": "small"
+    },
+    {
+      "start": 31.05,
+      "end": 31.14,
+      "mouth": "closed"
+    },
+    {
+      "start": 31.14,
+      "end": 31.41,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.41,
+      "end": 31.59,
+      "mouth": "small"
+    },
+    {
+      "start": 31.59,
+      "end": 31.77,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.77,
+      "end": 31.86,
+      "mouth": "small"
+    },
+    {
+      "start": 31.86,
+      "end": 31.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 31.95,
+      "end": 32.85,
+      "mouth": "small"
+    },
+    {
+      "start": 32.85,
+      "end": 33.03,
+      "mouth": "closed"
+    },
+    {
+      "start": 33.03,
+      "end": 33.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.3,
+      "end": 33.39,
+      "mouth": "small"
+    },
+    {
+      "start": 33.39,
+      "end": 33.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 33.48,
+      "end": 34.11,
+      "mouth": "small"
+    },
+    {
+      "start": 34.11,
+      "end": 34.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.65,
+      "end": 34.74,
+      "mouth": "small"
+    },
+    {
+      "start": 34.74,
+      "end": 34.83,
+      "mouth": "closed"
+    },
+    {
+      "start": 34.83,
+      "end": 35.1,
+      "mouth": "small"
+    },
+    {
+      "start": 35.1,
+      "end": 35.19,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.19,
+      "end": 35.46,
+      "mouth": "small"
+    },
+    {
+      "start": 35.46,
+      "end": 35.64,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.64,
+      "end": 35.73,
+      "mouth": "closed"
+    },
+    {
+      "start": 35.73,
+      "end": 35.82,
+      "mouth": "small"
+    },
+    {
+      "start": 35.82,
+      "end": 35.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 35.91,
+      "end": 36.0,
+      "mouth": "small"
+    },
+    {
+      "start": 36.0,
+      "end": 36.18,
+      "mouth": "closed"
+    },
+    {
+      "start": 36.18,
+      "end": 36.27,
+      "mouth": "small"
+    },
+    {
+      "start": 36.27,
+      "end": 36.36,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.36,
+      "end": 36.63,
+      "mouth": "small"
+    },
+    {
+      "start": 36.63,
+      "end": 36.81,
+      "mouth": "wide"
+    },
+    {
+      "start": 36.81,
+      "end": 37.17,
+      "mouth": "small"
+    },
+    {
+      "start": 37.17,
+      "end": 37.26,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.26,
+      "end": 37.44,
+      "mouth": "small"
+    },
+    {
+      "start": 37.44,
+      "end": 37.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 37.53,
+      "end": 37.71,
+      "mouth": "small"
+    },
+    {
+      "start": 37.71,
+      "end": 37.89,
+      "mouth": "closed"
+    },
+    {
+      "start": 37.89,
+      "end": 37.98,
+      "mouth": "small"
+    },
+    {
+      "start": 37.98,
+      "end": 38.07,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.07,
+      "end": 38.16,
+      "mouth": "small"
+    },
+    {
+      "start": 38.16,
+      "end": 38.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.25,
+      "end": 38.52,
+      "mouth": "small"
+    },
+    {
+      "start": 38.52,
+      "end": 38.61,
+      "mouth": "closed"
+    },
+    {
+      "start": 38.61,
+      "end": 38.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 38.79,
+      "end": 38.97,
+      "mouth": "small"
+    },
+    {
+      "start": 38.97,
+      "end": 39.06,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.06,
+      "end": 39.33,
+      "mouth": "small"
+    },
+    {
+      "start": 39.33,
+      "end": 39.6,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.6,
+      "end": 39.69,
+      "mouth": "small"
+    },
+    {
+      "start": 39.69,
+      "end": 39.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 39.78,
+      "end": 40.05,
+      "mouth": "small"
+    },
+    {
+      "start": 40.05,
+      "end": 40.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.14,
+      "end": 40.23,
+      "mouth": "small"
+    },
+    {
+      "start": 40.23,
+      "end": 40.5,
+      "mouth": "wide"
+    },
+    {
+      "start": 40.5,
+      "end": 41.04,
+      "mouth": "small"
+    },
+    {
+      "start": 41.04,
+      "end": 41.58,
+      "mouth": "closed"
+    },
+    {
+      "start": 41.58,
+      "end": 41.85,
+      "mouth": "small"
+    },
+    {
+      "start": 41.85,
+      "end": 42.03,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.03,
+      "end": 42.21,
+      "mouth": "small"
+    },
+    {
+      "start": 42.21,
+      "end": 42.3,
+      "mouth": "wide"
+    },
+    {
+      "start": 42.3,
+      "end": 43.11,
+      "mouth": "small"
+    },
+    {
+      "start": 43.11,
+      "end": 43.38,
+      "mouth": "wide"
+    },
+    {
+      "start": 43.38,
+      "end": 43.47,
+      "mouth": "small"
+    },
+    {
+      "start": 43.47,
+      "end": 43.65,
+      "mouth": "closed"
+    },
+    {
+      "start": 43.65,
+      "end": 44.01,
+      "mouth": "small"
+    },
+    {
+      "start": 44.01,
+      "end": 44.1,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.1,
+      "end": 44.46,
+      "mouth": "small"
+    },
+    {
+      "start": 44.46,
+      "end": 44.55,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.55,
+      "end": 44.64,
+      "mouth": "small"
+    },
+    {
+      "start": 44.64,
+      "end": 44.73,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.73,
+      "end": 44.82,
+      "mouth": "closed"
+    },
+    {
+      "start": 44.82,
+      "end": 44.91,
+      "mouth": "wide"
+    },
+    {
+      "start": 44.91,
+      "end": 45.45,
+      "mouth": "small"
+    },
+    {
+      "start": 45.45,
+      "end": 45.54,
+      "mouth": "wide"
+    },
+    {
+      "start": 45.54,
+      "end": 45.99,
+      "mouth": "small"
+    },
+    {
+      "start": 45.99,
+      "end": 46.08,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.08,
+      "end": 46.26,
+      "mouth": "small"
+    },
+    {
+      "start": 46.26,
+      "end": 46.35,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.35,
+      "end": 46.44,
+      "mouth": "small"
+    },
+    {
+      "start": 46.44,
+      "end": 46.53,
+      "mouth": "wide"
+    },
+    {
+      "start": 46.53,
+      "end": 46.8,
+      "mouth": "small"
+    },
+    {
+      "start": 46.8,
+      "end": 47.16,
+      "mouth": "closed"
+    },
+    {
+      "start": 47.16,
+      "end": 47.25,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.25,
+      "end": 47.43,
+      "mouth": "small"
+    },
+    {
+      "start": 47.43,
+      "end": 47.79,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.79,
+      "end": 47.88,
+      "mouth": "small"
+    },
+    {
+      "start": 47.88,
+      "end": 47.97,
+      "mouth": "wide"
+    },
+    {
+      "start": 47.97,
+      "end": 48.15,
+      "mouth": "small"
+    },
+    {
+      "start": 48.15,
+      "end": 48.51,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.51,
+      "end": 48.69,
+      "mouth": "small"
+    },
+    {
+      "start": 48.69,
+      "end": 48.78,
+      "mouth": "wide"
+    },
+    {
+      "start": 48.78,
+      "end": 48.96,
+      "mouth": "small"
+    },
+    {
+      "start": 48.96,
+      "end": 49.14,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.14,
+      "end": 49.23,
+      "mouth": "small"
+    },
+    {
+      "start": 49.23,
+      "end": 49.59,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.59,
+      "end": 49.77,
+      "mouth": "small"
+    },
+    {
+      "start": 49.77,
+      "end": 49.95,
+      "mouth": "wide"
+    },
+    {
+      "start": 49.95,
+      "end": 50.22,
+      "mouth": "closed"
+    },
+    {
+      "start": 50.22,
+      "end": 50.31,
+      "mouth": "small"
+    },
+    {
+      "start": 50.31,
+      "end": 50.49,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.49,
+      "end": 50.76,
+      "mouth": "small"
+    },
+    {
+      "start": 50.76,
+      "end": 50.94,
+      "mouth": "wide"
+    },
+    {
+      "start": 50.94,
+      "end": 51.12,
+      "mouth": "small"
+    },
+    {
+      "start": 51.12,
+      "end": 51.21,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.21,
+      "end": 51.3,
+      "mouth": "closed"
+    },
+    {
+      "start": 51.3,
+      "end": 51.48,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.48,
+      "end": 51.57,
+      "mouth": "small"
+    },
+    {
+      "start": 51.57,
+      "end": 51.66,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.66,
+      "end": 51.75,
+      "mouth": "small"
+    },
+    {
+      "start": 51.75,
+      "end": 51.93,
+      "mouth": "wide"
+    },
+    {
+      "start": 51.93,
+      "end": 52.02,
+      "mouth": "small"
+    },
+    {
+      "start": 52.02,
+      "end": 52.11,
+      "mouth": "wide"
+    },
+    {
+      "start": 52.11,
+      "end": 52.47,
+      "mouth": "small"
+    },
+    {
+      "start": 52.47,
+      "end": 53.37,
+      "mouth": "closed"
+    }
+  ],
+  "word_timeline": [
+    {
+      "word": "The",
+      "start": 0.0,
+      "end": 0.5600000023841858
+    },
+    {
+      "word": "soft",
+      "start": 0.5600000023841858,
+      "end": 0.8600000143051147
+    },
+    {
+      "word": "top",
+      "start": 0.8600000143051147,
+      "end": 1.159999966621399
+    },
+    {
+      "word": "disappears",
+      "start": 1.159999966621399,
+      "end": 1.5800000429153442
+    },
+    {
+      "word": "in",
+      "start": 1.5800000429153442,
+      "end": 1.8200000524520874
+    },
+    {
+      "word": "13",
+      "start": 1.8200000524520874,
+      "end": 2.2200000286102295
+    },
+    {
+      "word": "5",
+      "start": 2.2200000286102295,
+      "end": 2.759999990463257
+    },
+    {
+      "word": "seconds",
+      "start": 2.759999990463257,
+      "end": 3.059999942779541
+    },
+    {
+      "word": "and",
+      "start": 3.200000047683716,
+      "end": 3.319999933242798
+    },
+    {
+      "word": "this",
+      "start": 3.319999933242798,
+      "end": 3.5
+    },
+    {
+      "word": "thing",
+      "start": 3.5,
+      "end": 3.619999885559082
+    },
+    {
+      "word": "can",
+      "start": 3.619999885559082,
+      "end": 3.8399999141693115
+    },
+    {
+      "word": "hit",
+      "start": 3.8399999141693115,
+      "end": 3.9600000381469727
+    },
+    {
+      "word": "60",
+      "start": 3.9600000381469727,
+      "end": 4.380000114440918
+    },
+    {
+      "word": "in",
+      "start": 4.380000114440918,
+      "end": 4.5
+    },
+    {
+      "word": "3",
+      "start": 4.5,
+      "end": 4.840000152587891
+    },
+    {
+      "word": "3",
+      "start": 4.840000152587891,
+      "end": 5.28000020980835
+    },
+    {
+      "word": "seconds",
+      "start": 5.28000020980835,
+      "end": 5.579999923706055
+    },
+    {
+      "word": "That's",
+      "start": 6.019999980926514,
+      "end": 6.179999828338623
+    },
+    {
+      "word": "the",
+      "start": 6.179999828338623,
+      "end": 6.420000076293945
+    },
+    {
+      "word": "Ferrari",
+      "start": 6.420000076293945,
+      "end": 6.78000020980835
+    },
+    {
+      "word": "Roma",
+      "start": 6.78000020980835,
+      "end": 7.239999771118164
+    },
+    {
+      "word": "Spyder",
+      "start": 7.239999771118164,
+      "end": 7.960000038146973
+    },
+    {
+      "word": "In",
+      "start": 8.180000305175781,
+      "end": 8.180000305175781
+    },
+    {
+      "word": "2023",
+      "start": 8.180000305175781,
+      "end": 9.039999961853027
+    },
+    {
+      "word": "Ferrari",
+      "start": 9.380000114440918,
+      "end": 9.380000114440918
+    },
+    {
+      "word": "put",
+      "start": 9.380000114440918,
+      "end": 9.720000267028809
+    },
+    {
+      "word": "a",
+      "start": 9.720000267028809,
+      "end": 9.9399995803833
+    },
+    {
+      "word": "fabric",
+      "start": 9.9399995803833,
+      "end": 10.319999694824219
+    },
+    {
+      "word": "roof",
+      "start": 10.319999694824219,
+      "end": 10.600000381469727
+    },
+    {
+      "word": "back",
+      "start": 10.600000381469727,
+      "end": 10.9399995803833
+    },
+    {
+      "word": "on",
+      "start": 10.9399995803833,
+      "end": 11.0600004196167
+    },
+    {
+      "word": "a",
+      "start": 11.0600004196167,
+      "end": 11.279999732971191
+    },
+    {
+      "word": "front",
+      "start": 11.279999732971191,
+      "end": 11.5600004196167
+    },
+    {
+      "word": "engined",
+      "start": 11.5600004196167,
+      "end": 11.979999542236328
+    },
+    {
+      "word": "model",
+      "start": 11.979999542236328,
+      "end": 12.239999771118164
+    },
+    {
+      "word": "for",
+      "start": 12.239999771118164,
+      "end": 12.640000343322754
+    },
+    {
+      "word": "the",
+      "start": 12.640000343322754,
+      "end": 12.880000114440918
+    },
+    {
+      "word": "first",
+      "start": 12.880000114440918,
+      "end": 13.140000343322754
+    },
+    {
+      "word": "time",
+      "start": 13.140000343322754,
+      "end": 13.5
+    },
+    {
+      "word": "since",
+      "start": 13.5,
+      "end": 13.699999809265137
+    },
+    {
+      "word": "the",
+      "start": 13.699999809265137,
+      "end": 14.0
+    },
+    {
+      "word": "Daytona",
+      "start": 14.0,
+      "end": 14.380000114440918
+    },
+    {
+      "word": "Spyder",
+      "start": 14.380000114440918,
+      "end": 14.739999771118164
+    },
+    {
+      "word": "Ferrari",
+      "start": 15.579999923706055,
+      "end": 15.579999923706055
+    },
+    {
+      "word": "opened",
+      "start": 15.579999923706055,
+      "end": 15.920000076293945
+    },
+    {
+      "word": "up",
+      "start": 15.920000076293945,
+      "end": 16.219999313354492
+    },
+    {
+      "word": "only",
+      "start": 16.219999313354492,
+      "end": 16.459999084472656
+    },
+    {
+      "word": "as",
+      "start": 16.459999084472656,
+      "end": 16.760000228881836
+    },
+    {
+      "word": "much",
+      "start": 16.760000228881836,
+      "end": 16.979999542236328
+    },
+    {
+      "word": "grille",
+      "start": 16.979999542236328,
+      "end": 17.18000030517578
+    },
+    {
+      "word": "as",
+      "start": 17.18000030517578,
+      "end": 17.34000015258789
+    },
+    {
+      "word": "it",
+      "start": 17.34000015258789,
+      "end": 17.579999923706055
+    },
+    {
+      "word": "needed",
+      "start": 17.579999923706055,
+      "end": 17.739999771118164
+    },
+    {
+      "word": "to",
+      "start": 17.739999771118164,
+      "end": 18.18000030517578
+    },
+    {
+      "word": "cool",
+      "start": 18.18000030517578,
+      "end": 18.34000015258789
+    },
+    {
+      "word": "a",
+      "start": 18.34000015258789,
+      "end": 18.559999465942383
+    },
+    {
+      "word": "twin",
+      "start": 18.559999465942383,
+      "end": 18.84000015258789
+    },
+    {
+      "word": "turbo",
+      "start": 18.84000015258789,
+      "end": 19.15999984741211
+    },
+    {
+      "word": "V8",
+      "start": 19.15999984741211,
+      "end": 19.65999984741211
+    },
+    {
+      "word": "with",
+      "start": 19.65999984741211,
+      "end": 20.100000381469727
+    },
+    {
+      "word": "612",
+      "start": 20.100000381469727,
+      "end": 20.8799991607666
+    },
+    {
+      "word": "horsepower",
+      "start": 20.8799991607666,
+      "end": 21.440000534057617
+    },
+    {
+      "word": "and",
+      "start": 21.440000534057617,
+      "end": 21.979999542236328
+    },
+    {
+      "word": "561",
+      "start": 21.979999542236328,
+      "end": 23.100000381469727
+    },
+    {
+      "word": "pound",
+      "start": 23.100000381469727,
+      "end": 23.559999465942383
+    },
+    {
+      "word": "feet",
+      "start": 23.559999465942383,
+      "end": 23.559999465942383
+    },
+    {
+      "word": "of",
+      "start": 23.559999465942383,
+      "end": 24.0
+    },
+    {
+      "word": "torque",
+      "start": 24.0,
+      "end": 24.020000457763672
+    },
+    {
+      "word": "The",
+      "start": 24.440000534057617,
+      "end": 24.760000228881836
+    },
+    {
+      "word": "launch",
+      "start": 24.760000228881836,
+      "end": 25.020000457763672
+    },
+    {
+      "word": "car",
+      "start": 25.020000457763672,
+      "end": 25.34000015258789
+    },
+    {
+      "word": "skipped",
+      "start": 25.34000015258789,
+      "end": 25.579999923706055
+    },
+    {
+      "word": "the",
+      "start": 25.579999923706055,
+      "end": 25.8799991607666
+    },
+    {
+      "word": "fender",
+      "start": 25.8799991607666,
+      "end": 26.079999923706055
+    },
+    {
+      "word": "shields",
+      "start": 26.079999923706055,
+      "end": 26.360000610351562
+    },
+    {
+      "word": "as",
+      "start": 26.360000610351562,
+      "end": 26.780000686645508
+    },
+    {
+      "word": "a",
+      "start": 26.780000686645508,
+      "end": 27.15999984741211
+    },
+    {
+      "word": "nod",
+      "start": 27.15999984741211,
+      "end": 27.15999984741211
+    },
+    {
+      "word": "to",
+      "start": 27.15999984741211,
+      "end": 27.31999969482422
+    },
+    {
+      "word": "the",
+      "start": 27.31999969482422,
+      "end": 27.540000915527344
+    },
+    {
+      "word": "Ferrari",
+      "start": 27.540000915527344,
+      "end": 27.81999969482422
+    },
+    {
+      "word": "road",
+      "start": 27.81999969482422,
+      "end": 28.239999771118164
+    },
+    {
+      "word": "cars",
+      "start": 28.239999771118164,
+      "end": 28.3799991607666
+    },
+    {
+      "word": "of",
+      "start": 28.3799991607666,
+      "end": 28.559999465942383
+    },
+    {
+      "word": "the",
+      "start": 28.559999465942383,
+      "end": 28.81999969482422
+    },
+    {
+      "word": "50s",
+      "start": 28.81999969482422,
+      "end": 29.059999465942383
+    },
+    {
+      "word": "Brake",
+      "start": 29.059999465942383,
+      "end": 29.719999313354492
+    },
+    {
+      "word": "hard",
+      "start": 29.719999313354492,
+      "end": 29.979999542236328
+    },
+    {
+      "word": "enough",
+      "start": 29.979999542236328,
+      "end": 30.219999313354492
+    },
+    {
+      "word": "and",
+      "start": 30.540000915527344,
+      "end": 30.6200008392334
+    },
+    {
+      "word": "the",
+      "start": 30.6200008392334,
+      "end": 30.81999969482422
+    },
+    {
+      "word": "rear",
+      "start": 30.81999969482422,
+      "end": 31.040000915527344
+    },
+    {
+      "word": "spoiler",
+      "start": 31.040000915527344,
+      "end": 31.420000076293945
+    },
+    {
+      "word": "automatically",
+      "start": 31.420000076293945,
+      "end": 32.220001220703125
+    },
+    {
+      "word": "tilts",
+      "start": 32.220001220703125,
+      "end": 32.540000915527344
+    },
+    {
+      "word": "into",
+      "start": 32.540000915527344,
+      "end": 32.779998779296875
+    },
+    {
+      "word": "its",
+      "start": 32.779998779296875,
+      "end": 33.0
+    },
+    {
+      "word": "highest",
+      "start": 33.0,
+      "end": 33.31999969482422
+    },
+    {
+      "word": "downforce",
+      "start": 33.31999969482422,
+      "end": 33.880001068115234
+    },
+    {
+      "word": "setting",
+      "start": 33.880001068115234,
+      "end": 34.36000061035156
+    },
+    {
+      "word": "The",
+      "start": 34.7599983215332,
+      "end": 34.81999969482422
+    },
+    {
+      "word": "8",
+      "start": 34.81999969482422,
+      "end": 35.20000076293945
+    },
+    {
+      "word": "speed",
+      "start": 35.20000076293945,
+      "end": 35.380001068115234
+    },
+    {
+      "word": "dual",
+      "start": 35.380001068115234,
+      "end": 35.7400016784668
+    },
+    {
+      "word": "clutch",
+      "start": 35.7400016784668,
+      "end": 35.97999954223633
+    },
+    {
+      "word": "sends",
+      "start": 35.97999954223633,
+      "end": 36.439998626708984
+    },
+    {
+      "word": "power",
+      "start": 36.439998626708984,
+      "end": 36.779998779296875
+    },
+    {
+      "word": "to",
+      "start": 36.779998779296875,
+      "end": 36.939998626708984
+    },
+    {
+      "word": "the",
+      "start": 36.939998626708984,
+      "end": 37.220001220703125
+    },
+    {
+      "word": "rear",
+      "start": 37.220001220703125,
+      "end": 37.34000015258789
+    },
+    {
+      "word": "wheels",
+      "start": 37.34000015258789,
+      "end": 37.63999938964844
+    },
+    {
+      "word": "and",
+      "start": 37.63999938964844,
+      "end": 38.08000183105469
+    },
+    {
+      "word": "adds",
+      "start": 38.08000183105469,
+      "end": 38.31999969482422
+    },
+    {
+      "word": "a",
+      "start": 38.31999969482422,
+      "end": 38.540000915527344
+    },
+    {
+      "word": "reverse",
+      "start": 38.540000915527344,
+      "end": 38.81999969482422
+    },
+    {
+      "word": "gear",
+      "start": 38.81999969482422,
+      "end": 39.08000183105469
+    },
+    {
+      "word": "the",
+      "start": 39.08000183105469,
+      "end": 39.41999816894531
+    },
+    {
+      "word": "SF90",
+      "start": 39.41999816894531,
+      "end": 39.97999954223633
+    },
+    {
+      "word": "Stradale",
+      "start": 39.97999954223633,
+      "end": 40.439998626708984
+    },
+    {
+      "word": "does",
+      "start": 40.439998626708984,
+      "end": 40.7400016784668
+    },
+    {
+      "word": "without",
+      "start": 40.7400016784668,
+      "end": 41.31999969482422
+    },
+    {
+      "word": "Reviewers",
+      "start": 41.900001525878906,
+      "end": 42.13999938964844
+    },
+    {
+      "word": "griped",
+      "start": 42.13999938964844,
+      "end": 42.380001068115234
+    },
+    {
+      "word": "about",
+      "start": 42.380001068115234,
+      "end": 42.65999984741211
+    },
+    {
+      "word": "the",
+      "start": 42.65999984741211,
+      "end": 42.79999923706055
+    },
+    {
+      "word": "touch",
+      "start": 42.79999923706055,
+      "end": 43.099998474121094
+    },
+    {
+      "word": "starter",
+      "start": 43.099998474121094,
+      "end": 43.36000061035156
+    },
+    {
+      "word": "and",
+      "start": 43.68000030517578,
+      "end": 43.79999923706055
+    },
+    {
+      "word": "the",
+      "start": 43.79999923706055,
+      "end": 43.97999954223633
+    },
+    {
+      "word": "Amalfi",
+      "start": 43.97999954223633,
+      "end": 44.36000061035156
+    },
+    {
+      "word": "Spyder",
+      "start": 44.36000061035156,
+      "end": 44.70000076293945
+    },
+    {
+      "word": "brought",
+      "start": 44.70000076293945,
+      "end": 45.0
+    },
+    {
+      "word": "back",
+      "start": 45.0,
+      "end": 45.2599983215332
+    },
+    {
+      "word": "a",
+      "start": 45.2599983215332,
+      "end": 45.619998931884766
+    },
+    {
+      "word": "button",
+      "start": 45.619998931884766,
+      "end": 45.619998931884766
+    },
+    {
+      "word": "you",
+      "start": 45.619998931884766,
+      "end": 45.779998779296875
+    },
+    {
+      "word": "can",
+      "start": 45.779998779296875,
+      "end": 45.959999084472656
+    },
+    {
+      "word": "actually",
+      "start": 45.959999084472656,
+      "end": 46.439998626708984
+    },
+    {
+      "word": "press",
+      "start": 46.439998626708984,
+      "end": 46.70000076293945
+    },
+    {
+      "word": "It",
+      "start": 47.099998474121094,
+      "end": 47.400001525878906
+    },
+    {
+      "word": "started",
+      "start": 47.400001525878906,
+      "end": 47.68000030517578
+    },
+    {
+      "word": "at",
+      "start": 47.68000030517578,
+      "end": 47.84000015258789
+    },
+    {
+      "word": "about",
+      "start": 47.84000015258789,
+      "end": 48.18000030517578
+    },
+    {
+      "word": "270",
+      "start": 48.18000030517578,
+      "end": 48.959999084472656
+    },
+    {
+      "word": "000",
+      "start": 48.959999084472656,
+      "end": 49.220001220703125
+    },
+    {
+      "word": "new",
+      "start": 49.220001220703125,
+      "end": 49.959999084472656
+    },
+    {
+      "word": "and",
+      "start": 50.060001373291016,
+      "end": 50.36000061035156
+    },
+    {
+      "word": "that's",
+      "start": 50.36000061035156,
+      "end": 50.63999938964844
+    },
+    {
+      "word": "still",
+      "start": 50.63999938964844,
+      "end": 51.13999938964844
+    },
+    {
+      "word": "roughly",
+      "start": 51.13999938964844,
+      "end": 51.380001068115234
+    },
+    {
+      "word": "what",
+      "start": 51.380001068115234,
+      "end": 51.58000183105469
+    },
+    {
+      "word": "they",
+      "start": 51.58000183105469,
+      "end": 51.70000076293945
+    },
+    {
+      "word": "go",
+      "start": 51.70000076293945,
+      "end": 51.939998626708984
+    },
+    {
+      "word": "for",
+      "start": 51.939998626708984,
+      "end": 52.15999984741211
+    },
+    {
+      "word": "today",
+      "start": 52.15999984741211,
+      "end": 52.47999954223633
+    }
+  ],
+  "word_alignment_failed": null,
+  "media": [
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    },
+    {
+      "path": "images/manual/side-nobg.png",
+      "type": "exterior",
+      "category": "exterior_side",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/rear-nobg.png",
+      "type": "exterior",
+      "category": "exterior_rear",
+      "facing_direction": "right"
+    },
+    {
+      "path": "images/manual/engine.jpg",
+      "type": "engine",
+      "category": "engine_bay",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/interior.jpg",
+      "type": "interior",
+      "category": "interior",
+      "facing_direction": "unclear"
+    },
+    {
+      "path": "images/manual/front-nobg.png",
+      "type": "exterior",
+      "category": "exterior_front",
+      "facing_direction": "left"
+    }
+  ],
+  "photo_sections": [
+    {
+      "id": "front",
+      "label": "Front",
+      "hero": {
+        "path": "images/manual/front-nobg.png",
+        "type": "exterior",
+        "category": "exterior_front",
+        "facing_direction": "left"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/0-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front close-up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1795231312322-0-0",
+          "cue_label": "[front-closeup-1795231312322-0-0] Front close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/2-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Front close-up",
+          "slot": "front",
+          "role": "detail",
+          "photo_id": "front-closeup-1795231378992-2-2",
+          "cue_label": "[front-closeup-1795231378992-2-2] Front close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "side",
+      "label": "Side",
+      "hero": {
+        "path": "images/manual/side-nobg.png",
+        "type": "exterior",
+        "category": "exterior_side",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/3-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1795231394355-3-3",
+          "cue_label": "[side-closeup-1795231394355-3-3] Side close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/4-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Side close-up",
+          "slot": "side",
+          "role": "detail",
+          "photo_id": "side-closeup-1795231407151-4-4",
+          "cue_label": "[side-closeup-1795231407151-4-4] Side close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rear",
+      "label": "Rear",
+      "hero": {
+        "path": "images/manual/rear-nobg.png",
+        "type": "exterior",
+        "category": "exterior_rear",
+        "facing_direction": "right"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/1-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1795231338483-1-1",
+          "cue_label": "[rear-closeup-1795231338483-1-1] Rear close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/5-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1795231419003-5-5",
+          "cue_label": "[rear-closeup-1795231419003-5-5] Rear close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/10-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Rear close-up",
+          "slot": "rear",
+          "role": "detail",
+          "photo_id": "rear-closeup-1795231571734-10-10",
+          "cue_label": "[rear-closeup-1795231571734-10-10] Rear close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "label": "Engine bay",
+      "hero": {
+        "path": "images/manual/engine.jpg",
+        "type": "engine",
+        "category": "engine_bay",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/8-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Engine bay close-up",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-1795231534480-8-8",
+          "cue_label": "[engine-closeup-1795231534480-8-8] Engine bay close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/9-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Engine bay close-up",
+          "slot": "engine",
+          "role": "detail",
+          "photo_id": "engine-closeup-1795231549629-9-9",
+          "cue_label": "[engine-closeup-1795231549629-9-9] Engine bay close-up",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "label": "Interior",
+      "hero": {
+        "path": "images/manual/interior.jpg",
+        "type": "interior",
+        "category": "interior",
+        "facing_direction": "unclear"
+      },
+      "photos": [
+        {
+          "path": "images/manual-extra/6-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1795231470998-6-6",
+          "cue_label": "[interior-closeup-1795231470998-6-6] Interior close-up",
+          "note": ""
+        },
+        {
+          "path": "images/manual-extra/7-photo.jpg",
+          "type": "detail",
+          "category": "other_detail",
+          "facing_direction": "unclear",
+          "label": "Interior close-up",
+          "slot": "interior",
+          "role": "detail",
+          "photo_id": "interior-closeup-1795231492481-7-7",
+          "cue_label": "[interior-closeup-1795231492481-7-7] Interior close-up",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "selected_auction": {},
+  "listing_facts": {
+    "auction_url": "https://carsandbids.com/auctions/92QzgJD6/2024-ferrari-roma-spider?ss_id=32a46908-e168-4076-9d0d-ba3c726358e0&ref=pr_1_4",
+    "title": "2024 Ferrari Roma Spider",
+    "price_text": "Bid to $263,000",
+    "auction_state": "bidding",
+    "facts": {
+      "Make": "Ferrari",
+      "Engine": "3.9L Turbocharged V8",
+      "Model": "Roma",
+      "Drivetrain": "Rear-wheel drive",
+      "Transmission": "Automatic (8-Speed)",
+      "Body Style": "Convertible"
+    },
+    "sections": {
+      "Highlights": "THIS... is a 2024 Ferrari Roma Spider, finished in red with a black soft top and a black interior. The attached Carfax history report lists no accidents in this Roma's past. A window sticker is provided in the photo gallery, and a partial list of notable equipment reported by the selling dealer includes carbon ceramic brakes, a power-folding soft top, and a 16-inch digital instrument cluster. The selling dealer reports no notable modifications. Ferrari introduced the Roma in 2020 with a front mid-mounted twin-turbo V8, rear-wheel drive, fantastic technology, and beautiful styling. As a luxurious 2+2 with legitimate supercar performance chops, the Roma is arguably one of the most desirable exotic GT cars of the past decade. Power comes from a 3.9-liter twin-turbocharged V8, rated at 612 horsepower and 561 lb-ft of torque. Output is sent to the rear wheels via an 8-speed automatic transmission.",
+      "Equipment": "A window sticker is provided in the photo gallery, and a partial list of notable equipment reported by the selling dealer includes: Carbon ceramic brakes 20-inch wheels Active rear spoiler Power-folding soft top Neck warmer 16-inch digital instrument cluster Carbon fiber interior trim",
+      "Seller Notes": "There is a loan on this vehicle, and sale proceeds will be used to satisfy the loan. We recommend handling the loan payoff securely through Cars & Bids SafePay if agreed to by both the buyer and the seller. Please note that the title may only be available after the loan has been paid off. The selling dealer states that paint protection film has been applied to the front end."
+    }
+  },
+  "market_value": {
+    "count": 2,
+    "median": 180000,
+    "low": 170000,
+    "high": 180000,
+    "examples": [
+      {
+        "title": "2021 Ferrari Roma",
+        "price": 184500,
+        "ended": "3/12/26"
+      },
+      {
+        "title": "2021 Ferrari Roma",
+        "price": 166500,
+        "ended": "3/10/25"
+      }
+    ]
+  },
+  "voice_auditions": {
+    "onyx": "single-ferrari-roma-spider-20261121032617/voice_auditions/onyx.mp3",
+    "british_narrator": "single-ferrari-roma-spider-20261121032617/voice_auditions/british_narrator.mp3",
+    "british_dry_wit": "single-ferrari-roma-spider-20261121032617/voice_auditions/british_dry_wit.mp3",
+    "british_energetic": "single-ferrari-roma-spider-20261121032617/voice_auditions/british_energetic.mp3",
+    "british_deep_narrator": "single-ferrari-roma-spider-20261121032617/voice_auditions/british_deep_narrator.mp3"
+  },
+  "side_profile_media_path": "/home/runner/work/AI-horror-stories/AI-horror-stories/cars/single-car-shorts/single-ferrari-roma-spider-20261121032617/images/manual/side-nobg.png",
+  "side_profile_facing_direction": "right",
+  "narrator_render": {
+    "version": "v21",
+    "fps": 24,
+    "shots": [
+      {
+        "start": 0.0,
+        "layout": "bottom-right",
+        "framing": "full"
+      },
+      {
+        "start": 7.480000257492065,
+        "layout": "bottom-center",
+        "framing": "half"
+      },
+      {
+        "start": 14.980000019073486,
+        "layout": "close-right",
+        "framing": "bust"
+      },
+      {
+        "start": 24.0,
+        "layout": "bottom-center",
+        "framing": "full"
+      },
+      {
+        "start": 29.059999465942383,
+        "layout": "bottom-right",
+        "framing": "half"
+      },
+      {
+        "start": 41.170000076293945,
+        "layout": "bottom-center",
+        "framing": "half"
+      }
+    ],
+    "gestures": [
+      {
+        "start": 0.65,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 2.1,
+        "pose": "rest"
+      },
+      {
+        "start": 4.05,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 5.5,
+        "pose": "rest"
+      },
+      {
+        "start": 8.63,
+        "pose": "open"
+      },
+      {
+        "start": 10.08,
+        "pose": "rest"
+      },
+      {
+        "start": 12.03,
+        "pose": "chest"
+      },
+      {
+        "start": 13.48,
+        "pose": "rest"
+      },
+      {
+        "start": 16.13,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 17.58,
+        "pose": "rest"
+      },
+      {
+        "start": 19.53,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 20.98,
+        "pose": "rest"
+      },
+      {
+        "start": 22.93,
+        "pose": "open"
+      },
+      {
+        "start": 24.38,
+        "pose": "rest"
+      },
+      {
+        "start": 26.33,
+        "pose": "chest"
+      },
+      {
+        "start": 27.78,
+        "pose": "rest"
+      },
+      {
+        "start": 30.209999,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 31.659999,
+        "pose": "rest"
+      },
+      {
+        "start": 33.609999,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 35.059999,
+        "pose": "rest"
+      },
+      {
+        "start": 37.009999,
+        "pose": "open"
+      },
+      {
+        "start": 38.459999,
+        "pose": "rest"
+      },
+      {
+        "start": 40.409999,
+        "pose": "chest"
+      },
+      {
+        "start": 41.859999,
+        "pose": "rest"
+      },
+      {
+        "start": 43.809999,
+        "pose": "leftTalk"
+      },
+      {
+        "start": 45.259999,
+        "pose": "rest"
+      },
+      {
+        "start": 47.209999,
+        "pose": "rightTalk"
+      },
+      {
+        "start": 48.659999,
+        "pose": "rest"
+      },
+      {
+        "start": 50.609999,
+        "pose": "open"
+      },
+      {
+        "start": 52.059999,
+        "pose": "rest"
+      }
+    ],
+    "safe_top": 0.65,
+    "continuous_motion": true
+  },
+  "photo_presentation": {
+    "version": 2,
+    "cues": [
+      {
+        "start": 0.0,
+        "end": 7.480000257492065,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1795231312322-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1795231378992-2-2"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 14.980000019073486
+      },
+      {
+        "start": 7.480000257492065,
+        "end": 14.980000019073486,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1795231312322-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1795231378992-2-2"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 0.0,
+        "chapter_end": 14.980000019073486
+      },
+      {
+        "start": 14.980000019073486,
+        "end": 24.0,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/3-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1795231394355-3-3"
+          },
+          {
+            "path": "images/manual-extra/4-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1795231407151-4-4"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 14.980000019073486,
+        "chapter_end": 29.059999465942383
+      },
+      {
+        "start": 24.0,
+        "end": 29.059999465942383,
+        "slot": "side",
+        "label": "Side",
+        "hero": "images/manual/side-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/3-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1795231394355-3-3"
+          },
+          {
+            "path": "images/manual-extra/4-photo.jpg",
+            "label": "Side close-up",
+            "photo_id": "side-closeup-1795231407151-4-4"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 14.980000019073486,
+        "chapter_end": 29.059999465942383
+      },
+      {
+        "start": 29.059999465942383,
+        "end": 34.55999946594238,
+        "slot": "rear",
+        "label": "Rear",
+        "hero": "images/manual/rear-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/1-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1795231338483-1-1"
+          },
+          {
+            "path": "images/manual-extra/5-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1795231419003-5-5"
+          },
+          {
+            "path": "images/manual-extra/10-photo.jpg",
+            "label": "Rear close-up",
+            "photo_id": "rear-closeup-1795231571734-10-10"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 29.059999465942383,
+        "chapter_end": 34.55999946594238
+      },
+      {
+        "start": 34.55999946594238,
+        "end": 41.170000076293945,
+        "slot": "engine",
+        "label": "Engine bay",
+        "hero": "images/manual/engine.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/8-photo.jpg",
+            "label": "Engine bay close-up",
+            "photo_id": "engine-closeup-1795231534480-8-8"
+          },
+          {
+            "path": "images/manual-extra/9-photo.jpg",
+            "label": "Engine bay close-up",
+            "photo_id": "engine-closeup-1795231549629-9-9"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 34.55999946594238,
+        "chapter_end": 41.170000076293945
+      },
+      {
+        "start": 41.170000076293945,
+        "end": 46.89999961853027,
+        "slot": "interior",
+        "label": "Interior",
+        "hero": "images/manual/interior.jpg",
+        "closeups": [
+          {
+            "path": "images/manual-extra/6-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1795231470998-6-6"
+          },
+          {
+            "path": "images/manual-extra/7-photo.jpg",
+            "label": "Interior close-up",
+            "photo_id": "interior-closeup-1795231492481-7-7"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 41.170000076293945,
+        "chapter_end": 46.89999961853027
+      },
+      {
+        "start": 46.89999961853027,
+        "end": 53.38,
+        "slot": "front",
+        "label": "Front",
+        "hero": "images/manual/front-nobg.png",
+        "closeups": [
+          {
+            "path": "images/manual-extra/0-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1795231312322-0-0"
+          },
+          {
+            "path": "images/manual-extra/2-photo.jpg",
+            "label": "Front close-up",
+            "photo_id": "front-closeup-1795231378992-2-2"
+          }
+        ],
+        "active": null,
+        "active_index": null,
+        "chapter_start": 46.89999961853027,
+        "chapter_end": 53.38
+      }
+    ],
+    "chapters": [
+      {
+        "scene": 0,
+        "start": 0.0,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1795231312322-0-0",
+          "front-closeup-1795231378992-2-2"
+        ],
+        "active": null
+      },
+      {
+        "scene": 1,
+        "start": 7.480000257492065,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1795231312322-0-0",
+          "front-closeup-1795231378992-2-2"
+        ],
+        "active": null
+      },
+      {
+        "scene": 2,
+        "start": 14.980000019073486,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-1795231394355-3-3",
+          "side-closeup-1795231407151-4-4"
+        ],
+        "active": null
+      },
+      {
+        "scene": 3,
+        "start": 24.0,
+        "slot": "side",
+        "closeups": [
+          "side-closeup-1795231394355-3-3",
+          "side-closeup-1795231407151-4-4"
+        ],
+        "active": null
+      },
+      {
+        "scene": 4,
+        "start": 29.059999465942383,
+        "slot": "rear",
+        "closeups": [
+          "rear-closeup-1795231338483-1-1",
+          "rear-closeup-1795231419003-5-5",
+          "rear-closeup-1795231571734-10-10"
+        ],
+        "active": null
+      },
+      {
+        "scene": 5,
+        "start": 34.55999946594238,
+        "slot": "engine",
+        "closeups": [
+          "engine-closeup-1795231534480-8-8",
+          "engine-closeup-1795231549629-9-9"
+        ],
+        "active": null
+      },
+      {
+        "scene": 6,
+        "start": 41.170000076293945,
+        "slot": "interior",
+        "closeups": [
+          "interior-closeup-1795231470998-6-6",
+          "interior-closeup-1795231492481-7-7"
+        ],
+        "active": null
+      },
+      {
+        "scene": 7,
+        "start": 46.89999961853027,
+        "slot": "front",
+        "closeups": [
+          "front-closeup-1795231312322-0-0",
+          "front-closeup-1795231378992-2-2"
+        ],
+        "active": null
+      }
+    ],
+    "layout": "main-photo-over-closeup-tiles"
+  },
+  "video": "single_car_short.mp4"
+}
