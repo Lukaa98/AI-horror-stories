@@ -1,0 +1,67 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/3qlExmmn/1991-lamborghini-diablo?ss_id=79139979-803a-4fbb-b953-910b292efc84&ref=pr_1_2",
+  "scrape_ok": true,
+  "video_count": 6,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a83c254e44fb5f46448cfa916",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a83c254e44fb5f46448cfa916026b4d3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/a83c254e44fb5f46448cfa916026b4d3/manifest/video.m3u8",
+      "duration_seconds": 38.09,
+      "poster": "poster-1.jpg",
+      "audio": "aac, 44 kHz"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ae3e2bda763fceffba168116a",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ae3e2bda763fceffba168116ade98368/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/ae3e2bda763fceffba168116ade98368/manifest/video.m3u8",
+      "duration_seconds": 76.7,
+      "poster": "poster-2.jpg",
+      "audio": "aac, 44 kHz"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e8c733f5ff86016a07326fda9",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e8c733f5ff86016a07326fda9bc0f61a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/e8c733f5ff86016a07326fda9bc0f61a/manifest/video.m3u8",
+      "duration_seconds": 61.0,
+      "poster": "poster-3.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 4,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b3b2e5bf4eaf3ed5eb9c6bcbf",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b3b2e5bf4eaf3ed5eb9c6bcbfe2e57f3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/b3b2e5bf4eaf3ed5eb9c6bcbfe2e57f3/manifest/video.m3u8",
+      "duration_seconds": 202.89,
+      "poster": "poster-4.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 5,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9a45b883aac0632cdf3bc8a19",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9a45b883aac0632cdf3bc8a19eb822dd/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/9a45b883aac0632cdf3bc8a19eb822dd/manifest/video.m3u8",
+      "duration_seconds": 15.1,
+      "poster": "poster-5.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 6,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c6a18aae56df435aca2279f00",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c6a18aae56df435aca2279f000e9eb10/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/c6a18aae56df435aca2279f000e9eb10/manifest/video.m3u8",
+      "duration_seconds": 42.59,
+      "poster": "poster-6.jpg",
+      "audio": "aac, 48 kHz"
+    }
+  ]
+}
