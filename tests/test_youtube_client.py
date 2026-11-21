@@ -1,6 +1,7 @@
 """Which credentials the client builds, and from what."""
 import sys
 import types
+from pathlib import Path
 
 import pytest
 
@@ -95,3 +96,41 @@ def test_without_a_refresh_token_it_falls_back_to_the_browser_path(monkeypatch):
 
     youtube_client.get_authenticated_service()
     assert used["via"] == "browser"
+
+
+def test_a_live_code_survives_a_page_reload():
+    """Four auth runs in a row were cancelled while their codes were being
+    typed into Google.
+
+    The state that disables the button lives in the page, so a reload put
+    "Re-authorise YouTube" back on screen. Pressing it dispatched a second
+    run, and the workflow's cancel-in-progress killed the first -- the one
+    polling for the code already open at google.com/device. Google then
+    says "Device connected" and no run is listening, which is impossible
+    to tell apart from a failure without reading the Actions log.
+    """
+    panel = (Path(__file__).resolve().parents[1] / "web/src/YouTubePanel.jsx").read_text()
+
+    # On mount, a code that has not expired resumes the wait...
+    mount = panel.split("// Read on mount so the expiry survives")[1].split("const poll")[0]
+    assert 'payload?.status === "waiting"' in mount
+    assert "until > Date.now()" in mount
+    assert 'setState("waiting")' in mount
+    assert "setInterval(poll, POLL_MS)" in mount
+    # ...and the button that would cancel it is disabled by that state.
+    assert 'disabled={!ready || state === "starting" || state === "waiting"}' in panel
+
+    # And the code says when it dies, so a page that is working does not
+    # look frozen.
+    assert "This code only works until" in panel
+    assert "approving an older code does nothing" in panel
+
+
+def test_the_auth_workflow_still_cancels_an_older_run():
+    """Kept deliberately: a run nobody approved should not block the next
+    attempt for its full thirty-two minutes. The page is what stops a
+    second run being started while a code is live, not the workflow."""
+    workflow = (Path(__file__).resolve().parents[1]
+                / ".github/workflows/youtube-auth.yml").read_text()
+    assert "cancel-in-progress: true" in workflow
+    assert "group: youtube-auth" in workflow

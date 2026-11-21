@@ -169,7 +169,26 @@ export default function YouTubePanel({ settings }) {
     let live = true;
     readJson(settings, CODE_PATH)
       .then((payload) => {
-        if (live && payload?.status === "stored") setTokenInfo(payload);
+        if (!live) return;
+        if (payload?.status === "stored") { setTokenInfo(payload); return; }
+        // A code still live on the branch means a run is polling for it
+        // right now. Offering the button here is what cost four runs in a
+        // row: the state that disables it lives in this page, so a reload
+        // put "Re-authorise" back, pressing it dispatched a second run,
+        // and the workflow's cancel-in-progress killed the first -- the
+        // one whose code was already being typed into Google. Google then
+        // says "Device connected" and nothing is listening.
+        const until = Number(payload?.expires_at || 0) * 1000;
+        if (payload?.status === "waiting" && until > Date.now()) {
+          // Before this code was issued, so poll() does not dismiss it as
+          // a leftover from an earlier run.
+          startedAt.current = until - GIVE_UP_MS;
+          sawCode.current = true;
+          setCode(payload);
+          setState("waiting");
+          stop();
+          timer.current = setInterval(poll, POLL_MS);
+        }
       })
       .catch(() => {});
     return () => { live = false; };
@@ -359,6 +378,19 @@ export default function YouTubePanel({ settings }) {
             {code.verification_url}</a> and sign in as the channel.</p>
           <p className="yt-step">2. Enter this code:</p>
           <p className="yt-code">{code.user_code}</p>
+          {/* The deadline, because "Waiting for approval…" on its own
+              reads as frozen, and a page that looks frozen gets the
+              button pressed again -- which cancels the run this code
+              belongs to. */}
+          {Number(code.expires_at || 0) > 0 && (
+            <p className="yt-note">
+              This code only works until{" "}
+              <strong>{new Date(Number(code.expires_at) * 1000).toLocaleTimeString([], {
+                hour: "numeric", minute: "2-digit",
+              })}</strong>, and only this one — approving an older code does nothing.
+              The run is listening the whole time, so leave this page alone until it says Done.
+            </p>
+          )}
           <p className="yt-note">
             You'll see an "unverified app" warning — that's expected. Choose Advanced, then continue.
           </p>
