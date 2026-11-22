@@ -1,0 +1,80 @@
+{
+  "provider": "cars_and_bids",
+  "created_at": "2026-11-22T23:37:51.510Z",
+  "query": "",
+  "visual_highlight": null,
+  "search_url": null,
+  "search_result_count": 1,
+  "auctions_considered": [
+    {
+      "url": "https://carsandbids.com/auctions/9QLNq1Mx/2023-porsche-911-carrera-t-coupe",
+      "title": "",
+      "text": "",
+      "titleYear": null,
+      "score": 100
+    }
+  ],
+  "auctions_used": [],
+  "selected_auction": {
+    "url": "https://carsandbids.com/auctions/9QLNq1Mx/2023-porsche-911-carrera-t-coupe",
+    "title": "",
+    "text": "",
+    "titleYear": null,
+    "score": 100
+  },
+  "downloaded_images": [],
+  "videos": [
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eb53eac9354c6293032ecd335d395d2a/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eb53eac9354c6293032ecd335d395d2a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eb53eac9354c6293032ecd335d395d2a/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9QLNq1Mx/2023-porsche-911-carrera-t-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eb53eac9354c6293032ecd335d395d2a/manifest/video.m3u8",
+      "auction_title": "2023 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/21776fd0d826d47423228b920f09bd32/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/21776fd0d826d47423228b920f09bd32/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/21776fd0d826d47423228b920f09bd32/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9QLNq1Mx/2023-porsche-911-carrera-t-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/21776fd0d826d47423228b920f09bd32/manifest/video.m3u8",
+      "auction_title": "2023 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/64cbbeb9e1dde32719d2a85679c083e3/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/64cbbeb9e1dde32719d2a85679c083e3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/64cbbeb9e1dde32719d2a85679c083e3/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9QLNq1Mx/2023-porsche-911-carrera-t-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/64cbbeb9e1dde32719d2a85679c083e3/manifest/video.m3u8",
+      "auction_title": "2023 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    },
+    {
+      "url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf14fcaa9ec8e095e24088379d519961/thumbnails/thumbnail.jpg",
+      "context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf14fcaa9ec8e095e24088379d519961/thumbnails/thumbnail.jpg",
+      "section": "",
+      "title": "2023 Porsche 911 Carrera T Coupe",
+      "thumbnail_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf14fcaa9ec8e095e24088379d519961/thumbnails/thumbnail.jpg",
+      "type": "video",
+      "auction_url": "https://carsandbids.com/auctions/9QLNq1Mx/2023-porsche-911-carrera-t-coupe",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf14fcaa9ec8e095e24088379d519961/manifest/video.m3u8",
+      "auction_title": "2023 Porsche 911 Carrera T Coupe",
+      "auction_year": null,
+      "search_score": 100
+    }
+  ]
+}

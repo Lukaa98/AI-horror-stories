@@ -1,0 +1,47 @@
+{
+  "auction_url": "https://carsandbids.com/auctions/9QLNq1Mx/2023-porsche-911-carrera-t-coupe",
+  "scrape_ok": true,
+  "video_count": 4,
+  "videos": [
+    {
+      "index": 1,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eb53eac9354c6293032ecd335",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eb53eac9354c6293032ecd335d395d2a/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/eb53eac9354c6293032ecd335d395d2a/manifest/video.m3u8",
+      "duration_seconds": 104.7,
+      "poster": "poster-1.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 2,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/21776fd0d826d47423228b920",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/21776fd0d826d47423228b920f09bd32/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/21776fd0d826d47423228b920f09bd32/manifest/video.m3u8",
+      "duration_seconds": 62.16,
+      "poster": "poster-2.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 3,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/64cbbeb9e1dde32719d2a8567",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/64cbbeb9e1dde32719d2a85679c083e3/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/64cbbeb9e1dde32719d2a85679c083e3/manifest/video.m3u8",
+      "duration_seconds": 14.19,
+      "poster": "poster-3.jpg",
+      "audio": "aac, 48 kHz"
+    },
+    {
+      "index": 4,
+      "label": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf14fcaa9ec8e095e24088379",
+      "raw_context": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf14fcaa9ec8e095e24088379d519961/thumbnails/thumbnail.jpg",
+      "section": "",
+      "playback_url": "https://customer-cuf69xprmkaqooxd.cloudflarestream.com/cf14fcaa9ec8e095e24088379d519961/manifest/video.m3u8",
+      "duration_seconds": 14.62,
+      "poster": "poster-4.jpg",
+      "audio": "aac, 48 kHz"
+    }
+  ]
+}
