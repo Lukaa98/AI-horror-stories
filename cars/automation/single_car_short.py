@@ -4242,6 +4242,25 @@ ENGINE_CLIP_LUFS = -14.0
 # which may be what you want, but it is a choice rather than free.
 ENGINE_CLIP_CROSSFADE_SECONDS = NARRATION_LEAD_IN_SECONDS
 
+# How far the joined file's picture and sound may disagree about their own
+# length before the join is thrown away and the rendered film goes out
+# instead.
+#
+# Twice now a build has shipped with the two out of step, and both times
+# the file said so plainly and nothing asked it. The Super Snake went out
+# with 55.3s of picture under 62.9s of sound, because xfade was handed an
+# offset past the end of its first input and truncated its second. The Audi
+# went out with 52.4s of picture under 54.7s of sound, because the clip's
+# picture was dropped by a trim and its sound was not. Different causes,
+# one signature, and one check that catches either -- and any third cause
+# nobody has thought of yet, which is the point of checking the artifact
+# rather than the arithmetic that produced it.
+#
+# Half a second is far wider than any honest encode: a correct join lands
+# inside two frames, because the two streams end on their own frame and
+# sample boundaries. Both failures above were off by seconds.
+ENGINE_CLIP_SYNC_TOLERANCE = 0.5
+
 
 # A listing's start-up is not always hosted by the listing. Cars & Bids
 # sellers often embed a YouTube video instead, which the probe cannot see
@@ -4465,6 +4484,25 @@ def _media_duration(path):
         return None
 
 
+def _stream_duration(path, stream):
+    """Length of one stream ("v:0", "a:0") in seconds, or None.
+
+    Not _media_duration: that reads format=duration, which is the longest
+    stream in the container. A file whose picture and sound disagree
+    reports the longer of the two and looks fine, which is exactly the
+    case this is here to see.
+    """
+    try:
+        probe = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", stream,
+             "-show_entries", "stream=duration", "-of", "default=nw=1:nk=1", str(path)],
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        return float(probe.stdout.strip().splitlines()[0])
+    except Exception:  # noqa: BLE001 - the caller treats "cannot say" as "do not block"
+        return None
+
+
 def engine_clip_crop(crop):
     """The chosen part of the clip's frame, as an ffmpeg crop, or "".
 
@@ -4600,10 +4638,26 @@ def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop
              # Trimmed to what was asked for rather than what the file
              # happens to be: a seek into an HLS manifest does not land
              # exactly, so a five-second ask can come back as 5.2.
-             f"trim=0:{length:.3f},setpts=PTS-STARTPTS,"
+             #
+             # The timestamps are zeroed BEFORE the trim, not after. A trim
+             # window is read against the timestamps the stream actually
+             # carries, and a clip cut from an HLS master playlist does not
+             # start at zero -- worse, its picture and its sound need not
+             # start at the SAME place, because the audio is a separate
+             # rendition with a timeline of its own. ffmpeg zeroes the
+             # container against the earlier of the two, so the later one
+             # keeps the difference. The Audi shipped with its video
+             # starting 2.9s after its audio: trim=0:3 selected no picture
+             # at all while atrim=0:3 still found sound, and the join came
+             # out with 2.65s of engine on the soundtrack and not one frame
+             # of it in the picture -- every word after that landed 2.65s
+             # from the mouth that was speaking it. Zeroing first makes the
+             # window mean "the first N seconds of this stream", which is
+             # what it was always meant to mean.
+             f"setpts=PTS-STARTPTS,trim=0:{length:.3f},setpts=PTS-STARTPTS,"
              f"setsar=1,fps={fps},format=yuv420p[clipv];"
              f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo,"
-             f"atrim=0:{length:.3f},asetpts=PTS-STARTPTS,"
+             f"asetpts=PTS-STARTPTS,atrim=0:{length:.3f},asetpts=PTS-STARTPTS,"
              # A phone recording of an engine and a studio voice arrive at
              # completely different levels. The second aformat is not a
              # duplicate: loudnorm resamples to 192kHz internally and hands
@@ -4628,6 +4682,20 @@ def prepend_engine_clip(video_path, clip_path, length, size=CANVAS, fps=24, crop
         detail = getattr(error, "stderr", "") or str(error)
         print(f"[single-car] Could not put the engine clip on the front "
               f"({str(detail)[-400:]}); the video goes out as it was rendered.")
+        return 0.0
+    # Measured on the file that was just written, not inferred from the
+    # numbers that were put in. Everything above can succeed -- ffmpeg
+    # exits 0, the file is there, the arithmetic all agrees -- and still
+    # produce a join whose picture and sound are different lengths, which
+    # means every word after the clip lands away from the mouth saying it.
+    # There is no version of that worth shipping over the film that was
+    # already rendered correctly, so the film wins.
+    picture, sound = _stream_duration(joined, "v:0"), _stream_duration(joined, "a:0")
+    if picture and sound and abs(picture - sound) > ENGINE_CLIP_SYNC_TOLERANCE:
+        print(f"[single-car] The engine clip joined out of step -- {picture:.1f}s of "
+              f"picture against {sound:.1f}s of sound. Dropping the clip; the video "
+              f"goes out as it was rendered.")
+        joined.unlink(missing_ok=True)
         return 0.0
     joined.replace(video_path)
     # The crossfade is taken out of the clip, so what plays before the

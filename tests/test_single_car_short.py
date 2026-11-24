@@ -5749,3 +5749,121 @@ def test_the_hand_drawn_boxes_actually_reach_the_build():
     assert "plate_boxes" in str(inspect.signature(single_car_short.gather_manual_media))
     body = inspect.getsource(single_car_short.gather_manual_media)
     assert "blur_box(path, (plate_boxes or {}).get(field))" in body
+
+
+def test_a_clip_whose_picture_and_sound_start_at_different_times_still_lands(tmp_path):
+    """The Audi RS6 went out with its engine on the soundtrack and not one
+    frame of it in the picture.
+
+    The clip is cut from an HLS master playlist, which keeps its audio in a
+    separate rendition with a timeline of its own, so the two streams need
+    not start at the same timestamp. ffmpeg zeroes the container against
+    the earlier of them and the later one keeps the difference -- the Audi's
+    picture started 2.9s after its sound.
+
+    The join then read its window off those raw timestamps: `trim=0:3` found
+    no picture at all while `atrim=0:3` still found sound. ffmpeg exited 0,
+    the log said the clip was on the front, and the file that shipped had
+    52.4s of picture under 54.7s of sound. Every word after the clip landed
+    2.65s away from the mouth saying it.
+
+    Both halves are asserted, because either alone would have passed while
+    the Audi was broken: the clip has to actually be on the front, AND the
+    two streams have to come out the same length.
+    """
+    import json
+    import subprocess
+
+    import single_car_short
+
+    def probe(path, stream):
+        out = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", stream,
+             "-show_entries", "stream=duration", "-of", "default=nw=1:nk=1", str(path)],
+            capture_output=True, text=True, check=True).stdout
+        return float(out.strip().splitlines()[0])
+
+    film = tmp_path / "film.mp4"
+    subprocess.run(
+        ["ffmpeg", "-y", "-v", "error",
+         "-f", "lavfi", "-i", "testsrc2=size=1080x1920:rate=24:duration=10",
+         "-f", "lavfi", "-i", "sine=frequency=200:duration=10",
+         "-t", "10", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac",
+         str(film)], check=True, capture_output=True)
+
+    picture_only = tmp_path / "v.mp4"
+    sound_only = tmp_path / "a.m4a"
+    subprocess.run(
+        ["ffmpeg", "-y", "-v", "error", "-f", "lavfi",
+         "-i", "testsrc2=size=640x480:rate=30:duration=6",
+         "-c:v", "libx264", "-pix_fmt", "yuv420p", str(picture_only)],
+        check=True, capture_output=True)
+    subprocess.run(
+        ["ffmpeg", "-y", "-v", "error", "-f", "lavfi",
+         "-i", "sine=frequency=800:duration=6", "-c:a", "aac", str(sound_only)],
+        check=True, capture_output=True)
+
+    # The shape the Audi arrived in: the picture starts well past the end of
+    # the window being asked for, the sound starts just inside it.
+    clip = tmp_path / "clip.mp4"
+    subprocess.run(
+        ["ffmpeg", "-y", "-v", "error", "-itsoffset", "3.2", "-i", str(picture_only),
+         "-itsoffset", "0.34", "-i", str(sound_only),
+         "-map", "0:v", "-map", "1:a", "-c", "copy", str(clip)],
+        check=True, capture_output=True)
+    starts = [subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", s, "-show_entries",
+         "stream=start_time", "-of", "default=nw=1:nk=1", str(clip)],
+        capture_output=True, text=True, check=True).stdout.strip() for s in ("v:0", "a:0")]
+    assert float(starts[0]) - float(starts[1]) > 2.5, starts
+
+    before = probe(film, "v:0")
+    played = single_car_short.prepend_engine_clip(film, clip, 3.0)
+
+    picture, sound = probe(film, "v:0"), probe(film, "a:0")
+    # The signature that shipped: sound grew, picture did not.
+    assert abs(picture - sound) < single_car_short.ENGINE_CLIP_SYNC_TOLERANCE, (picture, sound)
+    # And the clip is genuinely on the front rather than quietly dropped.
+    assert played > 2.0, played
+    assert picture > before + 2.0, (before, picture)
+
+
+def test_an_out_of_step_join_is_thrown_away_rather_than_shipped(tmp_path):
+    """The last line of defence, for the cause nobody has found yet.
+
+    Two builds have now gone out with their picture and sound different
+    lengths, from two unrelated causes. Both files said so plainly the
+    moment anybody measured them. This checks the measurement actually
+    runs and the film survives it: whatever the join produces, a video
+    whose sound outlasts its picture by seconds never reaches the disk.
+    """
+    import inspect
+
+    import single_car_short
+
+    source = inspect.getsource(single_car_short.prepend_engine_clip)
+    # Measured on the written file, before it replaces the rendered film.
+    assert source.index("_stream_duration") < source.index("joined.replace")
+    assert "ENGINE_CLIP_SYNC_TOLERANCE" in source
+    # And the rendered film is what survives: the join is removed, not kept.
+    guard = source[source.index("_stream_duration"):source.index("joined.replace")]
+    assert "joined.unlink" in guard and "return 0.0" in guard, guard
+
+
+def test_the_clip_window_is_measured_from_the_clips_own_start(tmp_path):
+    """Zeroing the timestamps has to happen BEFORE the trim, not after.
+
+    This is the whole Audi bug in one assertion. `trim=0:3,setpts=PTS-STARTPTS`
+    reads the window off whatever timeline the file happens to carry and
+    then zeroes what survived; `setpts=PTS-STARTPTS,trim=0:3` zeroes first,
+    so the window means "the first three seconds of this stream" whatever
+    the source called them. The two differ only when a stream does not
+    start at zero, which is every clip cut from an HLS manifest.
+    """
+    import inspect
+
+    import single_car_short
+
+    source = inspect.getsource(single_car_short.prepend_engine_clip)
+    assert "setpts=PTS-STARTPTS,trim=0:" in source, "video window is read off raw timestamps"
+    assert "asetpts=PTS-STARTPTS,atrim=0:" in source, "audio window is read off raw timestamps"
