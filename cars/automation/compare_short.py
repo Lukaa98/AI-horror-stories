@@ -84,8 +84,16 @@ def parse_cars(raw):
         cars = json.loads(raw) if isinstance(raw, str) else raw
     except (TypeError, json.JSONDecodeError) as error:
         raise SystemExit(f"[compare] --cars is not valid JSON: {error}")
+    # {"theme": ..., "cars": [...]} as well as a bare list, because the
+    # theme has to travel inside this payload rather than beside it:
+    # workflow_dispatch takes 25 inputs in total and the research workflow
+    # has had all 25 since before this mode existed. An input of its own
+    # for the theme would not have failed this mode -- it would have
+    # stopped every mode from being dispatched at all.
+    if isinstance(cars, dict):
+        cars = cars.get("cars")
     if not isinstance(cars, list):
-        raise SystemExit("[compare] --cars must be a list of cars.")
+        raise SystemExit("[compare] --cars must be a list of cars, or {theme, cars: [...]}.")
     if len(cars) not in COMPARE_STYLES:
         raise SystemExit(
             f"[compare] A countdown takes two or three cars; {len(cars)} were given. "
@@ -110,6 +118,19 @@ def parse_cars(raw):
                 "Every car in a countdown needs one or the other.")
         cleaned.append(entry)
     return cleaned
+
+
+def theme_in(raw):
+    """The theme carried inside the --cars payload, or "".
+
+    Travels with the cars for the reason parse_cars gives: there is no
+    input left on the workflow to give it one of its own.
+    """
+    try:
+        payload = json.loads(raw) if isinstance(raw, str) else raw
+    except (TypeError, json.JSONDecodeError):
+        return ""
+    return (payload.get("theme") or "").strip() if isinstance(payload, dict) else ""
 
 
 def _compare_schema(car_count, max_scenes):
@@ -496,7 +517,11 @@ def build_compare(args):
 
     print(f"[compare] A {len(cars)}-car countdown: "
           + ", ".join(car["label"] or car["url"] for car in cars))
-    package = research_countdown(cars, theme_hint=args.theme or "")
+    # --theme wins when it is given, which is how a local run says it; the
+    # workflow has no input left to spend on one, so it rides in the
+    # payload instead.
+    theme = (args.theme or "").strip() or theme_in(args.cars)
+    package = research_countdown(cars, theme_hint=theme)
     scenes = package["scenes"]
     ranking = package["ranking"]
     winner = ranking[-1]
@@ -552,7 +577,7 @@ def build_compare(args):
             "ranking": ranking,
             "theme": package.get("theme", ""),
         },
-        "build_inputs": {"cars": args.cars, "theme": args.theme or "", "voice": args.voice},
+        "build_inputs": {"cars": args.cars, "theme": theme, "voice": args.voice},
         "title": package.get("theme", "Countdown"),
         "youtube_title": package.get("youtube_title", package.get("theme", "")),
         **{k: v for k, v in package.items() if k not in ("ranking",)},

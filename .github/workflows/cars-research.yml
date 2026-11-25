@@ -57,7 +57,11 @@ on:
         required: false
         type: string
       cars:
-        description: "Battle mode: JSON array of {make, model, year}, 3-5 cars"
+        description: >-
+          battle mode: JSON array of {make, model, year}, 3-5 cars. compare mode: either a
+          JSON list of 2 or 3 cars, each {url, label, worth, notes, photos, engine_clip}, or
+          {theme, cars:[...]} to say what makes them one list. Shared because the two modes
+          never run together and workflow_dispatch takes only 25 inputs in total
         required: false
         type: string
       base_make:
@@ -111,19 +115,6 @@ on:
           ever used, and the way to cut length without touching code
         required: false
         default: "classic"
-        type: string
-      compare_cars:
-        description: >-
-          compare mode: JSON list of 2 or 3 cars, each {url, label, worth, notes,
-          photos:{front,side,rear,engine,interior,blur}, engine_clip}. The countdown is
-          built from these and the order is worked out from the theme, not from this list
-        required: false
-        type: string
-      theme:
-        description: >-
-          compare mode: what makes these one list, e.g. "the cheapest ways into a V8 AMG".
-          Left empty, the script works it out from the cars themselves
-        required: false
         type: string
       reuse_script:
         description: >-
@@ -361,23 +352,19 @@ jobs:
           # end the shell's own quoting early and hand the script a pile of
           # separate words. Three single-car videos already shipped wrong
           # that way before the same lesson was written down above.
-          COMPARE_CARS: ${{ inputs.compare_cars }}
-          THEME: ${{ inputs.theme }}
+          COMPARE_CARS: ${{ inputs.cars }}
           # The live rig, as everywhere else: the pre-rendered sprite sets
           # cannot carry the build's own car on the hoodie.
           NARRATOR_RENDERER: v21
         run: |
           if [ -z "$COMPARE_CARS" ]; then
-            echo "::error::compare mode needs compare_cars: a JSON list of two or three cars."
+            echo "::error::compare mode needs cars: a JSON list of two or three cars."
             exit 1
           fi
-          ARGS=()
-          if [ -n "$THEME" ]; then ARGS+=(--theme "$THEME"); fi
           python cars/automation/compare_short.py \
             --cars "$COMPARE_CARS" \
             --short-id "${{ inputs.draft_id }}" \
-            --voice "${{ inputs.voice || 'onyx' }}" \
-            "${ARGS[@]}"
+            --voice "${{ inputs.voice || 'onyx' }}"
 
       - name: Run engine audition
         if: ${{ inputs.mode == 'voice_audition' && startsWith(inputs.query, 'engines') }}

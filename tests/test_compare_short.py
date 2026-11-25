@@ -290,3 +290,41 @@ def test_public_text_never_carries_an_em_dash():
     for field in ("title", "description", "comment"):
         assert "—" not in meta[field], (field, meta[field])
     assert not any("—" in tag for tag in meta["tags"])
+
+
+def test_the_theme_can_travel_inside_the_cars_payload():
+    """There is no workflow input left to give the theme one of its own.
+    The research workflow has had all 25 of them since before this mode
+    existed, and a 26th would not have broken the countdown -- it would
+    have stopped every mode on that workflow from dispatching at all."""
+    payload = json.dumps({"theme": "the cheapest ways into a V8 AMG", "cars": _cars(3)})
+    assert len(compare.parse_cars(payload)) == 3
+    assert compare.theme_in(payload) == "the cheapest ways into a V8 AMG"
+    # A bare list still works, and simply has no theme in it.
+    bare = json.dumps(_cars(2))
+    assert len(compare.parse_cars(bare)) == 2
+    assert compare.theme_in(bare) == ""
+    assert compare.theme_in("not json at all") == ""
+
+
+def test_the_research_workflow_still_fits_its_input_budget():
+    """workflow_dispatch takes 25 inputs and this workflow has used all 25
+    since before the countdown existed. Adding one is not a change that
+    fails loudly in this mode -- it stops the single-car build, the battle,
+    the rival suggestion and everything else from being dispatched."""
+    import re
+    text = (ROOT / ".github" / "workflows" / "cars-research.yml").read_text()
+    lines = text.split("\n")
+    start = next(i for i, line in enumerate(lines) if line.strip() == "inputs:")
+    names = []
+    for line in lines[start + 1:]:
+        if line.strip() and not line.startswith("      "):
+            break
+        found = re.match(r"^      ([a-z_]+):$", line)
+        if found:
+            names.append(found.group(1))
+    assert len(names) <= 25, f"{len(names)} inputs, over the 25 workflow_dispatch allows: {names}"
+    assert len(names) == len(set(names)), f"duplicate input names: {names}"
+    # compare mode shares battle mode's input rather than adding one.
+    assert "cars" in names
+    assert "compare_cars" not in names
