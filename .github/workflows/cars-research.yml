@@ -104,8 +104,10 @@ on:
         type: string
       script_style:
         description: >-
-          single_car mode: "classic" is how every video so far was written. "dense" is
-          shorter sentences, more of them, one argument instead of a tour
+          single_car mode: "classic" is how every video so far was written, 55s in 7 beats.
+          "dense" is 63s, shorter sentences, more of them, one argument instead of a tour.
+          "medium" is 45s in 5 beats, "short" is 35s in 4 -- both already built, neither
+          ever used, and the way to cut length without touching code
         required: false
         default: "classic"
         type: string
