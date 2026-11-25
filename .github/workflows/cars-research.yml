@@ -22,7 +22,7 @@ on:
         required: true
         type: string
       mode:
-        description: "Full ranking research, video test, startup battle, rival suggestion, narrator preview, single-car short, or voice audition"
+        description: "Full ranking research, video test, startup battle, rival suggestion, narrator preview, single-car short, two/three-car countdown, or voice audition"
         required: false
         type: choice
         default: research
@@ -33,6 +33,7 @@ on:
           - suggest_rivals
           - narrator_preview
           - single_car
+          - compare
           - voice_audition
           - listing_videos
       make:
@@ -110,6 +111,19 @@ on:
           ever used, and the way to cut length without touching code
         required: false
         default: "classic"
+        type: string
+      compare_cars:
+        description: >-
+          compare mode: JSON list of 2 or 3 cars, each {url, label, worth, notes,
+          photos:{front,side,rear,engine,interior,blur}, engine_clip}. The countdown is
+          built from these and the order is worked out from the theme, not from this list
+        required: false
+        type: string
+      theme:
+        description: >-
+          compare mode: what makes these one list, e.g. "the cheapest ways into a V8 AMG".
+          Left empty, the script works it out from the cars themselves
+        required: false
         type: string
       reuse_script:
         description: >-
@@ -337,6 +351,34 @@ jobs:
             --voice "${{ inputs.voice || 'onyx' }}" \
             "${YEAR_ARGS[@]}"
 
+      - name: Build two or three car countdown
+        if: ${{ inputs.mode == 'compare' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # Through env vars, never interpolated into the command line.
+          # COMPARE_CARS is a JSON list full of double quotes and THEME is
+          # free text somebody typed -- an apostrophe in either is enough to
+          # end the shell's own quoting early and hand the script a pile of
+          # separate words. Three single-car videos already shipped wrong
+          # that way before the same lesson was written down above.
+          COMPARE_CARS: ${{ inputs.compare_cars }}
+          THEME: ${{ inputs.theme }}
+          # The live rig, as everywhere else: the pre-rendered sprite sets
+          # cannot carry the build's own car on the hoodie.
+          NARRATOR_RENDERER: v21
+        run: |
+          if [ -z "$COMPARE_CARS" ]; then
+            echo "::error::compare mode needs compare_cars: a JSON list of two or three cars."
+            exit 1
+          fi
+          ARGS=()
+          if [ -n "$THEME" ]; then ARGS+=(--theme "$THEME"); fi
+          python cars/automation/compare_short.py \
+            --cars "$COMPARE_CARS" \
+            --short-id "${{ inputs.draft_id }}" \
+            --voice "${{ inputs.voice || 'onyx' }}" \
+            "${ARGS[@]}"
+
       - name: Run engine audition
         if: ${{ inputs.mode == 'voice_audition' && startsWith(inputs.query, 'engines') }}
         env:
@@ -546,7 +588,7 @@ jobs:
           exit 1
 
       - name: Commit single-car short
-        if: ${{ inputs.mode == 'single_car' }}
+        if: ${{ inputs.mode == 'single_car' || inputs.mode == 'compare' }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"

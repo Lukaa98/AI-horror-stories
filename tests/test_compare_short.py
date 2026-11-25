@@ -246,3 +246,47 @@ def test_the_prompt_names_every_car_and_its_notes():
     # The structure the format depends on.
     assert "catch" in prompt.lower()
     assert "car_index" in prompt
+
+
+def test_the_description_lists_every_car_counting_down():
+    """youtube_metadata reads one make and one model off the manifest, so a
+    countdown run through it would have described three cars with two
+    blanks and no list at all."""
+    cars = compare.parse_cars(json.dumps([
+        {"label": "Mercedes C63 AMG W204", "url": "https://carsandbids.com/auctions/a/c63",
+         "worth": "under 20k", "photos": {"front": "u"}},
+        {"label": "Mercedes E55 AMG W211", "worth": "from 8k", "photos": {"front": "u"}},
+        {"label": "Mercedes SL55 AMG", "worth": "under 8k", "photos": {"front": "u"}},
+    ]))
+    meta = compare.compare_metadata(
+        {"theme": "the three cheapest ways into a V8 AMG",
+         "youtube_title": "THE CHEAPEST WAY INTO A V8 AMG"}, cars, [0, 1, 2])
+    body = meta["description"]
+    for label in ("C63 AMG W204", "E55 AMG W211", "SL55 AMG"):
+        assert label in body, body
+    # Counted down, so the reader's list matches the one they just heard.
+    assert body.index("3. ") < body.index("2. ") < body.index("1. ")
+    assert "Photos via Cars & Bids" in body
+    # The climax is the car the first comment asks about.
+    assert "SL55" in meta["comment"]
+
+
+def test_the_ranking_decides_the_order_the_description_lists():
+    cars = compare.parse_cars(json.dumps(_cars(3)))
+    meta = compare.compare_metadata({"theme": "t", "youtube_title": "T"}, cars, [2, 0, 1])
+    body = meta["description"]
+    assert body.index("3. Car 3") < body.index("2. Car 1") < body.index("1. Car 2"), body
+    assert "Car 2" in meta["comment"]
+
+
+def test_public_text_never_carries_an_em_dash():
+    """Every description, title, tag and comment on this channel uses a
+    plain hyphen -- an em dash is a mark almost nobody types on a phone, so
+    a feed of them reads as machine-written whatever the words say."""
+    cars = compare.parse_cars(json.dumps(_cars(3)))
+    cars[0]["worth"] = "under 20k — maybe less"
+    meta = compare.compare_metadata(
+        {"theme": "cheap V8s — all of them", "youtube_title": "A — B"}, cars, [0, 1, 2])
+    for field in ("title", "description", "comment"):
+        assert "—" not in meta[field], (field, meta[field])
+    assert not any("—" in tag for tag in meta["tags"])

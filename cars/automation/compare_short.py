@@ -38,7 +38,8 @@ from openai_models import with_text_model
 from openai_retry import credits_available, with_openai_retry
 from photo_story import collect_photo_sections
 from thumbnail import build_thumbnail
-from youtube_metadata import build_metadata as build_youtube_metadata
+from youtube_metadata import (DESCRIPTION_LIMIT, FIXED_TAGS, TAGS_TOTAL_LIMIT, TITLE_LIMIT,
+                              fix_name, photo_credit, plain_dashes)
 from single_car_short import (FAST_TTS_SPEED, OUTPUT_ROOT, _plain_dashes_everywhere,
                               _strip_citations, add_narration_lead_in, fetch_engine_clip,
                               gather_manual_media, normalize_audio_duration, pad_tail_silence,
@@ -417,6 +418,68 @@ def order_media_for_countdown(scenes, media):
     return ordered
 
 
+def compare_metadata(manifest, cars, ranking):
+    """Title, description, tags and first comment for a countdown.
+
+    Its own rather than youtube_metadata's, which reads one make and one
+    model off the manifest and would have described a three-car countdown
+    with two blanks and no list. The house shape is kept -- the written
+    title, the spec line, subscribe, hashtags, the photo credit -- because
+    that is what the channel's other descriptions look like and a countdown
+    is not a reason to look like a different channel.
+    """
+    theme = (manifest.get("theme") or "").strip()
+    title = (manifest.get("youtube_title") or theme or "Which one would you take?").strip()
+    # Counted down the way the video says them: the climax is last here too,
+    # so a reader's list matches the one they just heard.
+    ordered = [cars[index] for index in ranking]
+    lines = [title[:TITLE_LIMIT], ""]
+    if theme:
+        lines.append(f"Counting down {theme}. 💨")
+        lines.append("")
+    for position, car in enumerate(ordered):
+        rank = len(ordered) - position
+        label = fix_name(car["label"]) or car["url"]
+        worth = f" - {car['worth']}" if car["worth"] else ""
+        lines.append(f"{rank}. {label}{worth}")
+    lines += ["", "Subscribe for more fire car content. 🔥", ""]
+    hashtags = []
+    for car in ordered:
+        for word in re.split(r"[\s\-]+", car["label"] or ""):
+            tag = re.sub(r"[^A-Za-z0-9]", "", word)
+            if len(tag) > 1 and f"#{tag}" not in hashtags:
+                hashtags.append(f"#{tag}")
+    hashtags += ["#CarTok", "#Cars", "#performancecars"]
+    lines.append(" ".join(hashtags))
+    credit = photo_credit(next((car["url"] for car in cars if car["url"]), ""))
+    if credit:
+        lines += ["", f"Photos via {credit}"]
+
+    candidates = []
+    for car in ordered:
+        label = fix_name(car["label"])
+        if label:
+            candidates.append(label)
+            candidates += [w for w in re.split(r"[\s\-]+", label) if len(w) > 1]
+    candidates += list(FIXED_TAGS)
+    tags, used = [], 0
+    for tag in dict.fromkeys(t.strip() for t in candidates if t and t.strip()):
+        if used + len(tag) + 1 > TAGS_TOTAL_LIMIT:
+            continue
+        tags.append(tag)
+        used += len(tag) + 1
+
+    winner = fix_name(ordered[-1]["label"]) if ordered else ""
+    comment = (f"Would you take the {winner}, or is one of the other two the smarter buy? 👇"
+               if winner else "Which one would you actually buy? 👇")
+    return {
+        "title": plain_dashes(title[:TITLE_LIMIT]),
+        "description": plain_dashes("\n".join(lines)[:DESCRIPTION_LIMIT]),
+        "tags": [plain_dashes(tag) for tag in tags],
+        "comment": plain_dashes(comment),
+    }
+
+
 def build_compare(args):
     """Research, narrate and render one countdown."""
     funded, reason = credits_available()
@@ -518,7 +581,25 @@ def build_compare(args):
         if played:
             manifest["engine_clip"] = {**engine_clip, "played_seconds": round(played, 2)}
             manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-    print(f"[compare] Wrote {video_path}")
+
+    # The channel still, from the same photos. A thumbnail that will not
+    # draw must never lose a video that is already rendered.
+    thumbnail_name = None
+    try:
+        thumbnail_name = build_thumbnail(manifest, output_dir, output_dir / "thumbnail.jpg").name
+    except Exception as error:  # noqa: BLE001 - a thumbnail is not worth the build
+        print(f"[compare] Thumbnail failed ({error}); the video is unaffected.")
+
+    upload_path = output_dir / "upload.json"
+    upload_path.write_text(json.dumps({
+        **compare_metadata(manifest, cars, ranking),
+        "video": video_path.name,
+        "thumbnail": thumbnail_name,
+        "privacy": "private",
+        "status": "ready",
+    }, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"[compare] Wrote {video_path.name}, {upload_path.name}"
+          + (f" and {thumbnail_name}" if thumbnail_name else ""))
     return manifest
 
 
