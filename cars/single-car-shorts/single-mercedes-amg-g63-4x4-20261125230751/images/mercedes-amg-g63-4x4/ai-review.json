@@ -1,0 +1,247 @@
+{
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "review_count": 9,
+  "reviews": [
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "AMG",
+      "detected_generation_or_year": "2022-2023",
+      "detected_variant_or_engine": "V8 Biturbo",
+      "visible_match_evidence": [
+        "AMG badge",
+        "V8 Biturbo label"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 7,
+      "composition_score": 6,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "detail-04.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "AMG",
+      "detected_generation_or_year": "2022-2023",
+      "detected_variant_or_engine": "G63 4x4",
+      "visible_match_evidence": [
+        "Distinct front grille with AMG badge",
+        "Large wheel arches and aggressive stance",
+        "Specific body proportions",
+        "Signature headlight design"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front_3q",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "engine-01.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "AMG",
+      "detected_generation_or_year": "2022-2023",
+      "detected_variant_or_engine": "G63 4x4",
+      "visible_match_evidence": [
+        "Interior design aligns with G63",
+        "Green accents match AMG styling",
+        "Seat layout consistent with luxury specifications"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "highlight-03.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "mercedes",
+      "detected_model": "amg",
+      "detected_generation_or_year": "2022-2023",
+      "detected_variant_or_engine": "G63 4x4",
+      "visible_match_evidence": [
+        "steering wheel design",
+        "interior layout",
+        "carbon fiber accents"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-02.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "AMG",
+      "detected_generation_or_year": "2022-2023",
+      "detected_variant_or_engine": "G63 4x4",
+      "visible_match_evidence": [
+        "Mercedes badge",
+        "Distinctive AMG grille",
+        "LED light bar on roof",
+        "Body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "front",
+      "scene_fit_tags": [
+        "hero",
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-05.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "AMG",
+      "detected_generation_or_year": "2022-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Body style matches Mercedes G-Class",
+        "Distinctive AMG features",
+        "Year range corresponds to 2022-2023"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "side",
+      "scene_fit_tags": [
+        "exterior",
+        "front"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-06.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "AMG",
+      "detected_generation_or_year": "2022-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "Distinct G-Class body shape",
+        "AMG badging",
+        "4x4\u00b2 spare tire cover"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 7,
+      "shot_type": "rear_3q",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-07.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "AMG",
+      "detected_generation_or_year": "2022-2023",
+      "detected_variant_or_engine": "G63 4x4",
+      "visible_match_evidence": [
+        "specific model identifier (G63)",
+        "4x4\u00b2 badge",
+        "updated tail lights",
+        "body proportions"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 8,
+      "shot_type": "rear",
+      "scene_fit_tags": [
+        "exterior",
+        "rear",
+        "hero"
+      ],
+      "quality_score": 9,
+      "composition_score": 8,
+      "target_match_confidence": 9,
+      "reject": false,
+      "reason": "",
+      "path": "interior-08.jpg",
+      "provider": "openai"
+    },
+    {
+      "is_target_vehicle": true,
+      "detected_make": "Mercedes",
+      "detected_model": "AMG",
+      "detected_generation_or_year": "2022-2023",
+      "detected_variant_or_engine": null,
+      "visible_match_evidence": [
+        "interior design",
+        "green accents",
+        "genuine AMG seats"
+      ],
+      "generation_match_confidence": 9,
+      "variant_match_confidence": 5,
+      "shot_type": "interior",
+      "scene_fit_tags": [
+        "interior",
+        "detail"
+      ],
+      "quality_score": 8,
+      "composition_score": 7,
+      "target_match_confidence": 8,
+      "reject": false,
+      "reason": "",
+      "path": "interior-09.jpg",
+      "provider": "openai"
+    }
+  ]
+}
