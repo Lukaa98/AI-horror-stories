@@ -6,6 +6,8 @@ import UploadPanel from "./UploadPanel";
 import YouTubePanel from "./YouTubePanel";
 import ResearchPanel from "./ResearchPanel";
 import { dispatchWorkflow, DEFAULT_BRANCH } from "./githubDispatch";
+import CompareCars from "./CompareCars.jsx";
+import { comparePayload, compareProblem, emptyCompareCars } from "./compareCars.js";
 import TempoTester from "./TempoTester";
 import { SLOTS, parseExtraPhotos, serializePhotos, blurFractions } from "./photoSections";
 import { splitAngles } from "./angles";
@@ -78,6 +80,11 @@ const WORKFLOW_OPTIONS = [
     id: "single_car",
     label: "Single Car Story",
     description: "Build a fast 55-60 second narrated Short about one car using exterior, engine, interior, wheel, and detail stills with animated captions and our character.",
+  },
+  {
+    id: "compare",
+    label: "Compare 2 or 3 Cars",
+    description: "Count two or three cars down against one theme -- the cheapest way into a V8, the fastest wagon -- each with its engine, its real numbers and what it costs, ending on the catch that takes the winner back.",
   },
   {
     id: "voice_audition",
@@ -1068,6 +1075,12 @@ export default function App() {
   // keeps the existing behavior: a pasted comparison-car URL forces that
   // exact car as the rival, no URL leaves it to the AI script. Unchecked
   // disables the rival scene (and its drag race) outright.
+  // The two- or three-car countdown. Three cars are always held, so
+  // switching from three to two and back does not lose what was typed into
+  // the third tab -- only `compareCount` of them are read.
+  const [compareCount, setCompareCount] = useState(3);
+  const [compareCars, setCompareCars] = useState(() => emptyCompareCars(3));
+  const [compareTheme, setCompareTheme] = useState("");
   const [compareEnabled, setCompareEnabled] = useState(true);
   // "Start from a previous build": the list is fetched once, lazily, the
   // first time the dropdown is opened -- the create form should not pay for
@@ -1659,6 +1672,67 @@ export default function App() {
       setError(String(err.message || err));
       setStage("error");
       setStatusDetail("Single-car Short failed - open the build log for details");
+    }
+  }
+
+  async function handleCompareShort() {
+    if (!repoOk) return;
+    // Said here rather than discovered by the build. compare_short checks
+    // the same things, but it checks them after the credits probe, the
+    // research and the script -- and a car with no photo is not a thing to
+    // find out fifteen minutes in.
+    const problem = compareProblem(compareCars, compareCount);
+    if (problem) {
+      setError(problem);
+      return;
+    }
+    const payload = comparePayload(compareCars, compareCount, compareTheme);
+    setError(null);
+    setSingleCarResult(null);
+    const first = compareCars[0];
+    const id = makeDraftId(`compare-${(first.label || first.url || "cars").slice(0, 24)}`);
+    setSingleCarId(id);
+    setStage("single-car-building");
+    setStatusDetail(`Researching and building a ${compareCount}-car countdown...`);
+    abortRef.current = new AbortController();
+    try {
+      const startedAt = Date.now();
+      await dispatchWorkflow({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        token: settings.token,
+        workflow: "cars-research.yml",
+        inputs: {
+          request: `${compareCount}-car countdown: `
+            + payload.cars.map((entry) => entry.label || entry.url).join(" vs "),
+          draft_id: id,
+          mode: "compare",
+          voice,
+          // Battle mode's input, shared. The two modes never run together
+          // and workflow_dispatch allows only 25 inputs in total, all of
+          // which this workflow has already spent -- so the theme rides
+          // inside this payload rather than taking a 26th.
+          cars: JSON.stringify(payload),
+        },
+      });
+      const workflowRun = beginRunTracking("cars-research.yml", startedAt, abortRef.current.signal);
+      const resultFile = pollForFile({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: OUTPUT_BRANCH,
+        path: `cars/single-car-shorts/${id}/result.json`,
+        signal: abortRef.current.signal,
+        timeoutMs: SINGLE_CAR_TIMEOUT_MS,
+      });
+      const response = await Promise.race([resultFile, workflowRun.then(() => resultFile)]);
+      setSingleCarResult(await response.json());
+      setStage("single-car-done");
+      setStatusDetail(`${compareCount}-car countdown complete`);
+    } catch (err) {
+      setError(String(err.message || err));
+      setStage("error");
+      setStatusDetail("Countdown failed - open the build log for details");
     }
   }
 
@@ -2872,7 +2946,40 @@ export default function App() {
             ))}
           </div>
 
-          {workflow === "battle" ? (
+          {workflow === "compare" ? (
+            <div className="compare-build">
+              <div className="compare-count">
+                <span>How many cars</span>
+                {[2, 3].map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    className={`compare-count-pick${compareCount === n ? " active" : ""}`}
+                    onClick={() => setCompareCount(n)}
+                    disabled={stage === "single-car-building"}
+                  >
+                    {n} cars
+                  </button>
+                ))}
+              </div>
+              <label className="compare-field">
+                <span>Theme</span>
+                <input
+                  type="text"
+                  value={compareTheme}
+                  placeholder="What makes these one list, e.g. the cheapest ways into a V8 AMG (optional)"
+                  onChange={(event) => setCompareTheme(event.target.value)}
+                  disabled={stage === "single-car-building"}
+                />
+              </label>
+              <CompareCars
+                cars={compareCars}
+                count={compareCount}
+                onChange={setCompareCars}
+                disabled={stage === "single-car-building"}
+              />
+            </div>
+          ) : workflow === "battle" ? (
             <div className="battle-cars">
               {battleCars.map((car, index) => {
                 const disabled = stage === "researching" || stage === "generating";
@@ -3768,6 +3875,19 @@ export default function App() {
               }
             >
               {stage === "single-car-building" ? "Building One-Minute Short..." : "Build Single-Car Short"}
+            </button>
+          ) : workflow === "compare" ? (
+            <button
+              onClick={handleCompareShort}
+              disabled={
+                !repoOk || stage === "single-car-building"
+                || Boolean(compareProblem(compareCars, compareCount))
+              }
+              title={compareProblem(compareCars, compareCount) || ""}
+            >
+              {stage === "single-car-building"
+                ? `Building ${compareCount}-Car Countdown...`
+                : `Build ${compareCount}-Car Countdown`}
             </button>
           ) : workflow === "voice_audition" ? (
             <button
